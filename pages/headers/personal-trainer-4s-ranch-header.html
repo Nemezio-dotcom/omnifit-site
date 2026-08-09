@@ -2,19 +2,9 @@
   Paste into /personal-trainer-4s-ranch → Page Settings → Advanced →
   Page Header Code Injection, replacing the old block entirely.
 
-  Built against the Aug 2026 canonical pricing doc and the patched page copy.
-  - FAQPage answers mirror the PATCHED on-page FAQ (canonical rates, no
-    Executive Hybrid, no lbs-in-timeframe claims, ACE CES, LopezPerez)
-  - LocalBusiness is REFERENCED by @id (defined in the homepage header),
-    not duplicated — one entity, one graph
-  - Reviews: 190 · No stale $50/$75 travel-fee figures (see PATCH 14 note)
-
-  PATCH 14 (add to your Claude Code run): the on-page service-area FAQ still
-  says "A per-session travel fee applies for in-home visits ($50 for nearer
-  neighborhoods, $75 for farther ones)". Those figures are from the retired
-  pricing era and are not in the canonical doc. Replace that sentence with:
-  "In-home rates for each area are published on the training rates page."
-  The schema below already uses the corrected wording.
+  FAQPage mirrors the patched on-page FAQ verbatim (tags stripped), in page
+  order. LocalBusiness is referenced by @id from the homepage header, never
+  redefined here. Pricing answer is byte-identical across all ten pages.
 -->
 <script type="application/ld+json">
 {
@@ -26,16 +16,30 @@
       "url": "https://www.omnifittraining.com/personal-trainer-4s-ranch",
       "name": "Personal Trainer 4S Ranch | In-Home & Studio | OmniFit Performance",
       "description": "Premium personal training in 4S Ranch for professionals 30+. Corrective exercise, joint-friendly strength coaching, and in-home training. NASM Elite Trainer with 190+ five-star reviews.",
-      "about": { "@id": "https://www.omnifittraining.com/#localbusiness-of" },
-      "breadcrumb": { "@id": "https://www.omnifittraining.com/personal-trainer-4s-ranch#breadcrumb" },
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "breadcrumb": {
+        "@id": "https://www.omnifittraining.com/personal-trainer-4s-ranch#breadcrumb"
+      },
       "inLanguage": "en-US"
     },
     {
       "@type": "BreadcrumbList",
       "@id": "https://www.omnifittraining.com/personal-trainer-4s-ranch#breadcrumb",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.omnifittraining.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Personal Trainer 4S Ranch", "item": "https://www.omnifittraining.com/personal-trainer-4s-ranch" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Personal Trainer 4S Ranch",
+          "item": "https://www.omnifittraining.com/personal-trainer-4s-ranch"
+        }
       ]
     },
     {
@@ -47,7 +51,7 @@
           "name": "What makes OmniFit Performance different from other personal trainers in 4S Ranch?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OmniFit Performance specializes exclusively in busy professionals over 30 who need joint-friendly, corrective-exercise-based training with structured accountability. Every program follows the Assess, Correct, Build, Sustain methodology, includes data-driven progress tracking, and integrates behavior-change nutrition. Founder Nemezio LopezPerez holds NASM CPT, CES, PES, BCS, and CNC certifications plus an ACE Corrective Exercise Specialist credential. OmniFit operates at Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch that requires credentialed professionals, reinforcing the premium, medical-adjacent environment."
+            "text": "OmniFit Performance specializes exclusively in busy professionals over 30 who need joint-friendly, corrective-exercise-based training with structured accountability. Every program follows the Assess, Correct, Build, Sustain methodology, includes data-driven progress tracking, and integrates behavior-change nutrition. Founder Nemezio LopezPerez holds NASM CPT, CES, PES, BCS, and CNC certifications plus an ACE Corrective Exercise Specialist credential, not just a basic personal training certification. OmniFit operates inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch that requires credentialed professionals, reinforcing the premium, medical-adjacent environment."
           }
         },
         {
@@ -55,7 +59,7 @@
           "name": "How much does personal training at OmniFit Performance in 4S Ranch cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OmniFit Performance publishes its rates in full. One-on-one coaching at Teqneeq runs $250 to $1,395 per month on a 3-month program depending on tier (Essential, Momentum, Performance, or Peak), or $290 to $1,625 month-to-month. In-home coaching across San Diego County starts at $335 per month on a 3-month program. Couples training starts at $325 per month. Session packs run $135 to $175 per session depending on pack size and location; single sessions are $165 at Teqneeq or $195 in-home. The fully virtual Executive Reset program runs $449 to $995 per month for coached tiers, with an async programming tier at $175 per month. Every client starts with a $110 Performance Diagnostic, credited in full toward a 3-month package. Momentum tier and above requires a Teqneeq membership ($119 per month, paid to Teqneeq); Essential and session-pack clients train on sponsored guest passes."
+            "text": "OmniFit Performance publishes its rates in full. One-on-one coaching at Teqneeq runs $250 to $1,395 per month on a 3-month program depending on tier (Essential, Momentum, Performance, or Peak), or $290 to $1,625 month-to-month. In-home coaching across San Diego County starts at $335 per month on a 3-month program. Couples training starts at $325 per month. Session packs run $135 to $175 per session depending on pack size and location; single sessions are $165 at Teqneeq or $195 in-home. The fully virtual Executive Reset program runs $449 to $995 per month for coached tiers, with an async programming tier at $175 per month. Every client starts with a $110 Performance Diagnostic, credited in full toward a 3-month package. Note: Momentum tier and above requires a Teqneeq membership ($119 per month, paid to Teqneeq); Essential and session-pack clients train on sponsored guest passes. Full tables on the training rates page."
           }
         },
         {
@@ -87,7 +91,7 @@
           "name": "Can I train with OmniFit if I travel frequently?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. OmniFit offers hybrid coaching that transitions between in-person sessions at Teqneeq FHC and virtual training via the app. The fully virtual 30-Minute Executive Reset is specifically designed for executives who travel, with hotel-gym-friendly workouts and weekly check-ins regardless of location."
+            "text": "Yes. OmniFit offers hybrid coaching that transitions between in-studio sessions at Teqneeq FHC and virtual training via the Trainerize app. The 30-Minute Executive Reset is specifically designed for executives who travel, with hotel-gym-friendly workouts and weekly video check-ins regardless of location."
           }
         },
         {
@@ -95,7 +99,7 @@
           "name": "How does OmniFit track progress?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OmniFit uses a structured data-driven system tracking 12 objective metrics, including quarterly posture comparison photographs, monthly body measurements, BodyStat 1500 MDD body-composition analysis, progressive strength benchmarks logged over time, weekly adherence and habit compliance scores, and regular movement re-assessments, with formal 30-day progress reports."
+            "text": "OmniFit uses a structured data-driven system including quarterly posture comparison photographs, monthly body measurements and composition estimates, progressive strength benchmarks logged over time, weekly adherence and habit compliance scores via the Trainerize app, and regular movement re-assessments. See our full tracking system →"
           }
         },
         {
@@ -103,7 +107,7 @@
           "name": "How is OmniFit different from F45, Orangetheory, or big-box gyms?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "F45 and Orangetheory are group fitness classes with generic programming. OmniFit Performance is 1-on-1 private coaching designed around your specific injury history, posture, and goals. OmniFit clients train with corrective exercise, progressive strength work, and individualized nutrition inside a private facility, not random daily group workouts in a crowded gym."
+            "text": "F45 and Orangetheory are group fitness classes with generic programming. OmniFit Performance is 1-on-1 private coaching designed around your specific injury history, posture, and goals. There is no one-size-fits-all workout. OmniFit clients train with corrective exercise, progressive strength, and individualized nutrition inside a private facility, not random daily group workouts in a crowded gym."
           }
         },
         {
@@ -111,7 +115,7 @@
           "name": "What results can I expect in 90 days?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Results vary by starting point and adherence, so OmniFit measures every client against their own baseline rather than a promise. Compliant clients typically see posture and movement-quality improvements first, followed by measurable body composition change tracked through BodyStat analysis and monthly measurements. Progress is documented across 12 objective metrics with formal 30-day reports, and OmniFit's published case studies show real client outcomes and the timelines behind them."
+            "text": "Results vary by starting point and adherence, so OmniFit measures every client against their own baseline rather than a promise. Compliant clients typically see posture and movement-quality improvements first, followed by measurable body composition change tracked through BodyStat analysis and monthly measurements. Progress is documented across 12 objective metrics with formal 30-day reports, and the documented case studies show real client outcomes and the timelines behind them."
           }
         },
         {
@@ -119,7 +123,7 @@
           "name": "What areas does OmniFit serve, and how far will you travel for in-home training?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OmniFit Performance is based at Teqneeq FHC, 10772 Thornmint Rd in 4S Ranch, San Diego. In-home personal training is available throughout North County, including 4S Ranch, Rancho Bernardo, Del Sur, Santaluz, Poway, Carmel Valley, Rancho Santa Fe, and Fairbanks Ranch, and along the coast as far south as La Jolla, including Del Mar, Solana Beach, Encinitas, and Carlsbad. In-home rates for each area are published on the training rates page. Clients outside this area can train at Teqneeq or use hybrid and fully virtual coaching."
+            "text": "OmniFit Performance's studio is inside Teqneeq FHC at 10772 Thornmint Rd in 4S Ranch, San Diego. In-home personal training is available throughout North County, including 4S Ranch, Rancho Bernardo, Del Sur, Santaluz, Poway, Carmel Valley, Rancho Santa Fe, and Fairbanks Ranch. Coverage extends along the coast as far south as La Jolla, including Del Mar, Solana Beach, Encinitas, and Carlsbad. In-home rates for each area are published on the training rates page. Clients who travel frequently or live outside this area can train at the 4S Ranch studio or use hybrid and fully virtual coaching."
           }
         }
       ]
