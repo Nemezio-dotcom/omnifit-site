@@ -1,0 +1,439 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-lajolla {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-30: rgba(255,255,255,0.3);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px;
+    --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--white);
+    background: var(--navy);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; padding: 0;
+  }
+  #omni-lajolla *, #omni-lajolla *::before, #omni-lajolla *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* HERO */
+  #omni-lajolla .lj-hero { padding: 80px 28px 48px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
+  #omni-lajolla .lj-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-lajolla .lj-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-lajolla .lj-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-lajolla .lj-hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-lajolla .lj-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+
+  /* CTA ROW */
+  #omni-lajolla .lj-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; position: relative; }
+  #omni-lajolla .lj-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  #omni-lajolla a.lj-btn,
+  #omni-lajolla a.lj-btn:link,
+  #omni-lajolla a.lj-btn:visited { text-decoration: none; }
+  #omni-lajolla .lj-btn-primary,
+  #omni-lajolla a.lj-btn-primary,
+  #omni-lajolla a.lj-btn-primary:link,
+  #omni-lajolla a.lj-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
+  #omni-lajolla .lj-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-lajolla .lj-btn-ghost,
+  #omni-lajolla a.lj-btn-ghost,
+  #omni-lajolla a.lj-btn-ghost:link,
+  #omni-lajolla a.lj-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
+  #omni-lajolla .lj-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); color: var(--white) !important; }
+
+  /* SECTION STRUCTURE */
+  #omni-lajolla .lj-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
+  #omni-lajolla .lj-section-head { text-align: center; margin-bottom: 40px; }
+  #omni-lajolla .lj-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  #omni-lajolla .lj-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
+  #omni-lajolla h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-lajolla h2 em { font-style: italic; color: var(--gold); }
+  #omni-lajolla h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-lajolla p { font-family: 'Montserrat', sans-serif !important; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+
+  /* QUOTABLE */
+  #omni-lajolla .lj-quotable { background: var(--navy-mid); border-left: 3px solid var(--gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 24px 28px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-lajolla .lj-quotable p { font-family: 'Playfair Display', serif !important; font-size: 17px; font-style: italic; color: var(--white-90); line-height: 1.7; margin: 0; }
+
+  /* SPACERS */
+  #omni-lajolla .lj-spacer { height: 56px; }
+  #omni-lajolla .lj-spacer-sm { height: 32px; }
+
+  /* GRID */
+  #omni-lajolla .lj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+
+  /* CARD */
+  #omni-lajolla .lj-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 24px 28px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; min-height: 0; }
+  #omni-lajolla .lj-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-lajolla .lj-card-icon { font-size: 28px; margin-bottom: 16px; display: block; line-height: 1; }
+  #omni-lajolla .lj-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); line-height: 1.3; }
+  #omni-lajolla .lj-card p { font-size: 14px; color: var(--white-50); margin-bottom: 18px; line-height: 1.65; }
+  #omni-lajolla .lj-card-features { list-style: none; margin: 0 0 20px; padding: 0; flex: 1 1 auto; }
+  #omni-lajolla .lj-card-features li { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); padding: 5px 0 5px 20px; position: relative; line-height: 1.5; }
+  #omni-lajolla .lj-card-features li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 11px; }
+  #omni-lajolla .lj-card-link { font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 700; color: var(--gold) !important; text-decoration: none; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s; margin-top: auto; flex-shrink: 0; padding-top: 4px; }
+  #omni-lajolla .lj-card-link:hover { color: var(--gold-light) !important; gap: 10px; }
+  #omni-lajolla .lj-card-link span { transition: transform 0.3s; }
+  #omni-lajolla .lj-card:hover .lj-card-link span { transform: translateX(3px); }
+
+  /* TWO COLUMN */
+  #omni-lajolla .lj-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 56px; }
+  #omni-lajolla .lj-two-col p { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+
+  /* STATS */
+  #omni-lajolla .lj-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  #omni-lajolla .lj-stat { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
+  #omni-lajolla .lj-stat-num { font-family: 'Playfair Display', serif !important; font-size: 36px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  #omni-lajolla .lj-stat-label { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); font-weight: 500; }
+
+  /* FAQ */
+  #omni-lajolla .lj-faq details { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; }
+  #omni-lajolla .lj-faq summary { padding: 20px 28px; font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 600; color: var(--white-90); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+  #omni-lajolla .lj-faq summary:hover { background: var(--white-05); }
+  #omni-lajolla .lj-faq summary::-webkit-details-marker { display: none; }
+  #omni-lajolla .lj-faq summary::after { content: '+'; color: var(--gold); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-left: 16px; }
+  #omni-lajolla .lj-faq details[open] summary::after { content: '−'; }
+  #omni-lajolla .lj-faq .lj-faq-body { padding: 0 28px 24px; font-size: 14px; color: var(--white-70); line-height: 1.7; }
+  #omni-lajolla .lj-faq .lj-faq-body a,
+  #omni-lajolla .lj-faq .lj-faq-body a:link,
+  #omni-lajolla .lj-faq .lj-faq-body a:visited { color: var(--gold) !important; text-decoration: underline; }
+
+  /* NEIGHBORHOOD GRID */
+  #omni-lajolla .lj-hood-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 56px; }
+  #omni-lajolla .lj-hood-item,
+  #omni-lajolla a.lj-hood-item,
+  #omni-lajolla a.lj-hood-item:link,
+  #omni-lajolla a.lj-hood-item:visited { display: block; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 14px 18px; font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 600; color: var(--white-70) !important; text-decoration: none; transition: all 0.25s; text-align: center; }
+  #omni-lajolla a.lj-hood-item:hover { border-color: var(--gold); color: var(--gold) !important; background: var(--gold-dim); }
+
+  /* HUB LINKS */
+  #omni-lajolla .lj-hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 56px; }
+  #omni-lajolla .lj-hub-link,
+  #omni-lajolla a.lj-hub-link,
+  #omni-lajolla a.lj-hub-link:link,
+  #omni-lajolla a.lj-hub-link:visited { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 500; color: var(--white-70) !important; text-decoration: none; transition: all 0.25s; }
+  #omni-lajolla a.lj-hub-link:hover { border-color: var(--gold); color: var(--gold) !important; }
+  #omni-lajolla .lj-hub-link::before { content: '→'; color: var(--gold); font-size: 14px; flex-shrink: 0; }
+
+  /* BOTTOM CTA */
+  #omni-lajolla .lj-bottom { background: var(--navy-mid); border-radius: var(--radius-lg); padding: 44px 36px; text-align: center; max-width: 1120px; margin: 0 auto 0; }
+  #omni-lajolla .lj-bottom h2 { margin-bottom: 12px; }
+  #omni-lajolla .lj-bottom p { max-width: 560px; margin: 0 auto 28px; font-size: 15px; }
+  #omni-lajolla .lj-bottom-note { display: block; margin-top: 14px; font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); }
+
+  /* TRUST BAR */
+  #omni-lajolla .lj-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 48px auto 0; max-width: 700px; padding: 0 20px; }
+  #omni-lajolla .lj-trust-item { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+  #omni-lajolla .lj-trust-item span { font-size: 14px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 980px) {
+    #omni-lajolla .lj-grid { grid-template-columns: repeat(2, 1fr); }
+    #omni-lajolla .lj-two-col { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 768px) {
+    #omni-lajolla .lj-hero { padding: 56px 20px 36px; }
+    #omni-lajolla .lj-section { padding: 0 20px; }
+    #omni-lajolla .lj-quotable { margin-left: 20px; margin-right: 20px; }
+    #omni-lajolla .lj-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; }
+  }
+  @media (max-width: 640px) {
+    #omni-lajolla .lj-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
+    #omni-lajolla .lj-hood-grid { grid-template-columns: 1fr 1fr; }
+    #omni-lajolla .lj-hub-grid { grid-template-columns: 1fr; }
+    #omni-lajolla .lj-cta-row { flex-direction: column; align-items: center; }
+    #omni-lajolla .lj-btn { width: 100%; max-width: 300px; text-align: center; }
+  }
+</style>
+
+<div id="omni-lajolla">
+
+  <!-- HERO -->
+  <section class="lj-hero">
+    <span class="lj-badge">Personal Training · La Jolla</span>
+    <h1>Personal Trainer in<br><em>La Jolla</em></h1>
+    <p class="lj-hero-sub">Diagnostic-led, corrective-first personal training for La Jolla professionals and executives over 30. Concierge in-home sessions at your La Jolla residence, private studio training at Teqneeq FHC in 4S Ranch, or hybrid coaching that combines both.</p>
+
+    <div class="lj-cta-row">
+      <a class="lj-btn lj-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="lj-btn lj-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
+    </div>
+  </section>
+
+  <!-- QUOTABLE -->
+  <div style="padding: 0 28px;">
+    <blockquote class="lj-quotable">
+      <p>"OmniFit Performance provides concierge in-home personal training throughout La Jolla and studio-based training at Teqneeq FHC in 4S Ranch, San Diego — beginning every program with a $90 BodyStat body composition assessment and a corrective-first methodology that addresses pain, posture, and movement dysfunction before building strength and performance."</p>
+    </blockquote>
+  </div>
+
+  <!-- SERVICES AVAILABLE -->
+  <div class="lj-section">
+    <div class="lj-section-head">
+      <span class="lj-label">Services in La Jolla</span>
+      <hr class="lj-divider">
+      <h2>How We Train in <em>La Jolla</em></h2>
+    </div>
+
+    <div class="lj-grid">
+
+      <article class="lj-card">
+        <span class="lj-card-icon">🏠</span>
+        <h3>In-Home Personal Training</h3>
+        <p>We bring all equipment to your La Jolla home — dumbbells, bands, suspension trainers, mats. Fully programmed sessions, zero commute.</p>
+        <ul class="lj-card-features">
+          <li>All equipment provided</li>
+          <li>Garage, patio, or living room</li>
+          <li>Same corrective-first methodology</li>
+        </ul>
+        <a class="lj-card-link" href="/in-home-personal-trainer-san-diego">Explore In-Home Training <span>→</span></a>
+      </article>
+
+      <article class="lj-card">
+        <span class="lj-card-icon">🏋️</span>
+        <h3>Private Studio Sessions</h3>
+        <p>Train 1:1 inside Teqneeq FHC — a members-only functional health and performance lab in 4S Ranch. Professional-grade equipment, zero crowds, full privacy.</p>
+        <ul class="lj-card-features">
+          <li>Credentialed access only — no walk-ins</li>
+          <li>Professional-grade equipment</li>
+          <li>10772 Thornmint Rd, San Diego 92127</li>
+        </ul>
+        <a class="lj-card-link" href="/personal-trainer-4s-ranch">See the 4S Ranch Studio <span>→</span></a>
+      </article>
+
+      <article class="lj-card">
+        <span class="lj-card-icon">🔧</span>
+        <h3>Corrective Exercise</h3>
+        <p>NASM-CES certified programming for La Jolla clients dealing with shoulder pain, lower back issues, or post-rehab recovery.</p>
+        <ul class="lj-card-features">
+          <li>Overhead squat assessment</li>
+          <li>3/10 pain ceiling protocol</li>
+          <li>Bridge from PT to performance</li>
+        </ul>
+        <a class="lj-card-link" href="/corrective-exercise-post-rehab">See Corrective Training <span>→</span></a>
+      </article>
+
+      <article class="lj-card">
+        <span class="lj-card-icon">📊</span>
+        <h3>BodyStat Diagnostics</h3>
+        <p>Every program starts with a $90 BodyStat 1500 MDD body composition assessment — lab-grade bioimpedance data, not a bathroom scale guess.</p>
+        <ul class="lj-card-features">
+          <li>Body composition &amp; hydration data</li>
+          <li>Objective baseline before training</li>
+          <li>Rescans track real progress</li>
+        </ul>
+        <a class="lj-card-link" href="/how-we-measure-your-progress">See How We Measure Progress <span>→</span></a>
+      </article>
+
+      <article class="lj-card">
+        <span class="lj-card-icon">💪</span>
+        <h3>Strength Training</h3>
+        <p>Periodized strength programming built on corrective foundations. Designed for sustainable gains without injury risk.</p>
+        <ul class="lj-card-features">
+          <li>4-week periodized blocks</li>
+          <li>Squat, hinge, press progressions</li>
+          <li>Monthly strength benchmarks</li>
+        </ul>
+        <a class="lj-card-link" href="/strength-training-1">See Strength Programs <span>→</span></a>
+      </article>
+
+      <article class="lj-card">
+        <span class="lj-card-icon">📉</span>
+        <h3>Weight Loss Coaching</h3>
+        <p>Sustainable fat loss for La Jolla professionals — progressive training, Precision Nutrition habits, body composition tracking.</p>
+        <ul class="lj-card-features">
+          <li>20–30+ lbs in 4–6 months</li>
+          <li>Habit-based nutrition coaching</li>
+          <li>Weekly accountability check-ins</li>
+        </ul>
+        <a class="lj-card-link" href="/weight-loss">Start Your Fat-Loss Plan <span>→</span></a>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- THE METHOD + STATS -->
+  <div class="lj-section">
+    <div class="lj-section-head">
+      <span class="lj-label">Our Approach</span>
+      <hr class="lj-divider">
+      <h2>The OmniFit <em>Method</em></h2>
+    </div>
+
+    <div class="lj-two-col">
+      <div>
+        <p>Every La Jolla client follows the same four-phase methodology: <strong style="color:var(--white);">Assess, Correct, Build, Sustain.</strong> Your program starts with a BodyStat body composition assessment and a comprehensive movement screening that maps your body's compensations, restrictions, and asymmetries — objective data before a single rep is programmed.</p>
+        <p>We address dysfunction before adding load. This is the phase most trainers skip — and it's the reason most professionals get injured or plateau. Whether you're dealing with desk-related posture issues, recovering from surgery, or returning to training after years away, the method adapts to your body.</p>
+        <p>La Jolla clients especially benefit from the in-home format: no commute time, sessions that fit between meetings, and training in a comfortable, private environment. We bring the expertise — you just show up.</p>
+      </div>
+      <div>
+        <div class="lj-stats">
+          <div class="lj-stat"><div class="lj-stat-num">190+</div><div class="lj-stat-label">5-Star Reviews</div></div>
+          <div class="lj-stat"><div class="lj-stat-num">12</div><div class="lj-stat-label">Certifications Held</div></div>
+          <div class="lj-stat"><div class="lj-stat-num">NASM</div><div class="lj-stat-label">CPT · CES · PES · BCS · CNC</div></div>
+          <div class="lj-stat"><div class="lj-stat-num">4</div><div class="lj-stat-label">Phase Methodology</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY LA JOLLA CLIENTS CHOOSE OMNIFIT -->
+  <div class="lj-section">
+    <div class="lj-section-head">
+      <span class="lj-label">Why OmniFit</span>
+      <hr class="lj-divider">
+      <h2>Why La Jolla Professionals Choose <em>OmniFit</em></h2>
+    </div>
+
+    <div class="lj-grid">
+
+      <article class="lj-card">
+        <span class="lj-card-icon">🎯</span>
+        <h3>Assessment-Driven, Not Template-Based</h3>
+        <p>Every exercise is selected based on data from your BodyStat assessment and movement screen — not pulled from a generic template. Your program evolves as you do.</p>
+      </article>
+
+      <article class="lj-card">
+        <span class="lj-card-icon">🩺</span>
+        <h3>Corrective-First Philosophy</h3>
+        <p>We fix what's broken before building on top of it. Most La Jolla clients present with desk-related dysfunction — forward head posture, hip flexor tightness, shoulder impingement. We address these first.</p>
+      </article>
+
+      <article class="lj-card">
+        <span class="lj-card-icon">🕐</span>
+        <h3>Built for Busy Schedules</h3>
+        <p>In-home sessions eliminate commute time. Flexible scheduling from early morning through evening. Virtual options for travel weeks. Your training fits your calendar.</p>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="lj-section">
+    <div class="lj-section-head">
+      <span class="lj-label">Frequently Asked</span>
+      <hr class="lj-divider">
+      <h2>Questions About Training in <em>La Jolla</em></h2>
+    </div>
+
+    <div class="lj-faq">
+
+      <details>
+        <summary>How does in-home personal training work in La Jolla?</summary>
+        <div class="lj-faq-body"><p>We bring all necessary equipment to your La Jolla home — adjustable dumbbells, resistance bands, suspension trainers, and mats. Sessions are 45–60 minutes, fully programmed in advance based on your assessment data. All you need is about 8×8 feet of clear space: garage, patio, living room, or backyard all work. A per-session travel fee may apply depending on location.</p></div>
+      </details>
+
+      <details>
+        <summary>What does a personal trainer in La Jolla cost?</summary>
+        <div class="lj-faq-body"><p>Every OmniFit program begins with a $90 BodyStat body composition assessment. In-home training in La Jolla is offered as four named monthly packages tiered by frequency — Essential, Momentum, Performance, and Peak — starting at $275/month with a 3-month commitment, with month-to-month options available. Studio training at Teqneeq FHC in 4S Ranch starts at $225/month. Every program includes assessment, custom programming, nutrition coaching, and weekly accountability, with no activation fees. A travel fee may apply for in-home sessions depending on location. Current rates for every package are maintained on the <a href="/training-rates-san-diego">Training Rates</a> page.</p></div>
+      </details>
+
+      <details>
+        <summary>Do you train only in La Jolla?</summary>
+        <div class="lj-faq-body"><p>No. La Jolla marks the southern edge of our concierge in-home territory — we also serve Del Mar, Solana Beach, Encinitas, Carlsbad, Carmel Valley, Rancho Santa Fe, and 4S Ranch. Studio sessions are available inside <a href="/personal-trainer-4s-ranch">Teqneeq FHC</a>, a members-only functional health and performance lab at 10772 Thornmint Rd in 4S Ranch, San Diego — about 30 minutes from La Jolla.</p></div>
+      </details>
+
+      <details>
+        <summary>What is the BodyStat assessment?</summary>
+        <div class="lj-faq-body"><p>The OmniFit Performance Assessment ($90) uses the BodyStat 1500 MDD — a medical-grade bioimpedance device — to establish your body composition baseline: fat mass, lean mass, and hydration markers. Combined with a 9-point movement screen, it gives us objective data to build your program from and to measure real progress against at rescans. If you continue into a training package, the assessment fee is credited toward your program.</p></div>
+      </details>
+
+      <details>
+        <summary>What certifications does your trainer hold?</summary>
+        <div class="lj-faq-body"><p>OmniFit's founder Nemezio Lopez Perez holds NASM-CPT (Certified Personal Trainer), NASM-CES (Corrective Exercise Specialist), NASM-PES (Performance Enhancement Specialist), NASM-BCS (Behavior Change Specialist), NASM-CNC (Certified Nutrition Coach), and the ACE Orthopedic Exercise Specialist credential, plus Precision Nutrition certifications. All programming is evidence-based and assessment-driven.</p></div>
+      </details>
+
+      <details>
+        <summary>How is OmniFit different from a big-box gym or boutique fitness studio?</summary>
+        <div class="lj-faq-body"><p>OmniFit is fully individualized, one-on-one training — not group workouts. Every session is programmed for your specific body, goals, and assessment data. There are no templates, no shared attention, and no competition element. See our full <a href="/omnifit-vs-competitors">comparison with F45, Orangetheory, and big-box gyms</a>.</p></div>
+      </details>
+
+      <details>
+        <summary>What if I have chronic pain or a past injury?</summary>
+        <div class="lj-faq-body"><p>This is exactly what our corrective-first approach is designed for. We begin every program with a comprehensive movement assessment that identifies pain patterns, compensations, and restrictions. We follow a strict 3/10 pain ceiling protocol and build programming around your limitations — not in spite of them. Learn more about our <a href="/corrective-exercise-post-rehab">corrective exercise and post-rehab</a> programming.</p></div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="lj-spacer"></div>
+
+  <!-- NEIGHBORHOODS SERVED -->
+  <div class="lj-section">
+    <div class="lj-section-head">
+      <span class="lj-label">Neighborhoods We Serve</span>
+      <hr class="lj-divider">
+      <h2>Training Across <em>North County &amp; Coastal San Diego</em></h2>
+    </div>
+
+    <div class="lj-hood-grid">
+      <a class="lj-hood-item" href="/personal-trainer-4s-ranch">4S Ranch · Studio</a>
+      <a class="lj-hood-item" href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a>
+      <a class="lj-hood-item" href="/personal-trainer-fairbanks-ranch">Fairbanks Ranch</a>
+      <a class="lj-hood-item" href="/personal-trainer-santaluz">Santaluz</a>
+      <a class="lj-hood-item" href="/personal-trainer-carmel-valley">Carmel Valley</a>
+      <a class="lj-hood-item" href="/personal-trainer-del-mar">Del Mar</a>
+      <a class="lj-hood-item" href="/personal-trainer-solana-beach">Solana Beach</a>
+      <a class="lj-hood-item" href="/personal-trainer-encinitas">Encinitas</a>
+      <a class="lj-hood-item" href="/personal-trainer-carlsbad">Carlsbad</a>
+    </div>
+  </div>
+
+  <!-- HUB LINKS -->
+  <div class="lj-section">
+    <div class="lj-section-head">
+      <span class="lj-label">Explore More</span>
+      <hr class="lj-divider">
+      <h2>Related <em>Pages</em></h2>
+    </div>
+
+    <div class="lj-hub-grid">
+      <a class="lj-hub-link" href="/personal-training-services">All Services</a>
+      <a class="lj-hub-link" href="/in-home-personal-trainer-san-diego">In-Home Training</a>
+      <a class="lj-hub-link" href="/corrective-exercise-post-rehab">Corrective Exercise</a>
+      <a class="lj-hub-link" href="/strength-training-1">Strength Training</a>
+      <a class="lj-hub-link" href="/hiit-personal-trainer-san-diego">HIIT Training</a>
+      <a class="lj-hub-link" href="/executive-hybrid-coaching">Hybrid Coaching</a>
+      <a class="lj-hub-link" href="/training-rates-san-diego">Training Rates</a>
+      <a class="lj-hub-link" href="/the-omnifit-method">The OmniFit Method</a>
+      <a class="lj-hub-link" href="/how-we-measure-your-progress">How We Measure Progress</a>
+      <a class="lj-hub-link" href="/how-it-works-pricing">Pricing &amp; Process</a>
+      <a class="lj-hub-link" href="/case-studies">Case Studies</a>
+      <a class="lj-hub-link" href="/faqs">FAQs</a>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div style="padding: 0 28px;">
+    <div class="lj-bottom">
+      <h2>Train Smarter in <em>La Jolla</em></h2>
+      <p>Book a 45-minute consultation. We'll discuss your goals, movement history, and schedule — and build a plan that fits your life in La Jolla.</p>
+      <a class="lj-btn lj-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="lj-bottom-note">Free 45-minute consultation · Fully refundable $30 deposit reserves your time · Honest assessment of fit</span>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="lj-trust">
+    <div class="lj-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
+    <div class="lj-trust-item"><span>🏅</span> NASM CPT · CES · PES · BCS · CNC</div>
+    <div class="lj-trust-item"><span>📍</span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
+    <div class="lj-trust-item"><span>🌍</span> Serving La Jolla &amp; Coastal North County</div>
+  </div>
+
+</div>
