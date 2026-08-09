@@ -644,3 +644,138 @@ intended.
 - 12 drive-time claims remain unverified against the Teqneeq FHC location.
 - `corrective-exercise-post-rehab` at repo root is still unpatched, per CANON.md
   Batch 3.
+
+---
+
+# Batch 3, page 1 — corrective-exercise-post-rehab
+
+Two rulings closed first, then the page. Run governed by `CANON.md`.
+
+## Rulings applied
+
+- **Ruling 1.** CANON.md left clean; no preamble prepended.
+- **Ruling 2.** `$90 assessment = confirmed same product as the $110 Performance
+  Diagnostic; rename settled.` added to the CANON.md pricing section. The item is
+  closed and no longer carried forward.
+
+## Violations fixed
+
+The earlier report counted 11 from a narrower grep. The real count was **12 on the
+banned-string list, plus 3 more `ACE Orthopedic` variants** that the earlier grep
+missed because they did not contain the exact string "Orthopedic Exercise"
+(`ACE Orthopedic corrective exercise` in the deploy comment, `ACE Orthopedic
+certified` in a hero pill, `ACE Orthopedic Certified` in an h3).
+
+| What | Where | Fix |
+|---|---|---|
+| ACE credential, 11 occurrences | lines 11, 509, 513, 532, 551, 722, 723, 726, 822, 862, 888 | ACE Corrective Exercise Specialist |
+| `Nemezio Lopez Perez`, 2 | 509, 862 | Nemezio LopezPerez |
+| `$90` diagnostic + `$225 to $1,275/mo` | 826 | replaced with the canonical pricing answer verbatim |
+| `seven standardized metrics` / `7-metric`, 3 | 532, 666, 735 | twelve / 12 |
+| em-dashes in prose, 22 | throughout | period, comma, or colon per sentence |
+
+The five `cx-who-list` items were **kept** as em-dashes: they are
+`<li><strong>Label</strong> — descriptor</li>`, which is CANON's structured-list
+exception with a tag-wrapped label.
+
+## Sections added
+
+Placed to extend the existing structure, not reorder it. Final order: Hero,
+**Why Imbalances Form**, What We Address, The Process, **Client Journey**,
+What Makes OmniFit Different, **Meet Your Trainer**, Near-Me, **Scope of
+Practice**, PT Coordination, **Use Cases**, FAQ, Bottom CTA, Trust Bar, Hub Links.
+
+- **Why Sitting Creates Muscle Imbalances.** Opposing-pair mechanism at pattern
+  level: what shortens, what lengthens, how joint resting position shifts, how load
+  redistributes during movement. Closes with an explicit "education, not diagnosis"
+  callout and a referral line. No diagnosis language, no medical claims, no
+  conditions named as diagnoses.
+- **What the Journey Looks Like From Your Side.** The same Assess, Correct, Build,
+  Sustain arc from the client's perspective. No outcome or timeframe promises.
+- **Meet Nemezio LopezPerez.** Reuses the canonical credentials body verbatim.
+- **DPT, CES, DC, and CPT: Who Does What.** Four-row scope-of-practice table with a
+  closing callout placing OmniFit in the CES column only, never a substitute for
+  medical care, with referral back to the DPT or physician column.
+- **What People Come to Corrective Training For.** Four adjacent-query use cases per
+  CANON: long-term transformation, fat loss without crash protocols, desk-worker
+  posture and mobility, data-driven hybrid. Situation and approach only.
+
+## File move and header
+
+`corrective-exercise-post-rehab` → `pages/corrective-exercise-post-rehab.html` via
+`git mv`; header generated at
+`pages/headers/corrective-exercise-post-rehab-header.html`, 12 FAQ nodes derived
+mechanically from the on-page FAQ, JSON validated, LocalBusiness referenced by
+`@id`. Repo root now holds only `CANON.md` and `REPORT.md`.
+
+## Certification — 22 files
+
+All 14 banned strings clean. `$50`/`$75` as travel fees clean. Em-dashes in
+rendered prose: zero violations. `$150`/`$175`: 50 occurrences, all legal, zero
+violations.
+
+| Invariant | Hash | Scope |
+|---|---|---|
+| page pricing answer | `ae388d31c0b6149e` | 11 pages |
+| header pricing answer | `7e5de5984b133663` | 11 headers |
+| credentials body | `6492e3ca1545dc26` | 10 pages (was 9) |
+| archetypes | `6b1b0f4efbd4a72c` | 10 pages |
+| 9-point screen | `bd73ea51bc9ec5eb` | 10 pages |
+
+The credentials invariant legitimately widened from 9 pages to 10 because this run
+added the canonical body to the corrective page, as CANON.md's instruction to reuse
+it directed. CANON.md was updated to match.
+
+### Two tooling corrections worth recording
+
+1. **A certification run passed vacuously and was caught.** The script was invoked
+   from the scratchpad directory, so its glob matched **0 files** and every check
+   reported clean. It was re-run from the repo root against the real 22 files. Any
+   future run should treat a file count of 0 in the header line as a failure, not a
+   pass.
+2. **A tag-balance error was real, not cosmetic.** One insertion dropped a closing
+   `</section>`, leaving 3 unclosed elements. It initially looked like a parser
+   artifact from `<hr />`; correcting the parser to handle self-closing void
+   elements showed the pre-patch original balanced cleanly and the patched file did
+   not. Fixed, re-verified.
+
+## Judgment calls
+
+**1. The pricing FAQ answer was replaced with the canonical answer verbatim.**
+The question is corrective-specific ("How much does corrective exercise training
+cost in San Diego?") but the old answer carried two banned figures. Using the
+canonical answer keeps the byte-identical invariant. **Wrong if** this page was
+meant to carry a corrective-specific pricing answer, in which case the invariant
+would need a documented exception.
+
+**2. `seven standardized metrics` changed to twelve, in three places.** Not on the
+banned-string list. CANON's Batch 3 line states 12 metrics, not 7, which makes 7 a
+known-stale figure that I would otherwise have certified as clean. **Wrong if** 7
+is correct for corrective reports specifically and 12 applies only to
+the-omnifit-method.
+
+**3. ~11 lines of scoped CSS added for the comparison table.** The page had no table
+styles. Earlier runs banned new CSS; that instruction was not restated here, and a
+scope table is clearer as a table than as cards. The block is scoped to
+`#omni-corrective`, appended, and commented with its date. **Wrong if** the no-new-CSS
+rule was meant to carry forward, in which case the table should become four cards.
+
+**4. The client-journey section overlaps the existing process section.** The page
+already had a four-phase process section. Rather than restructure what ranks, the
+new section is explicitly client-POV and cross-references the method one. **Wrong if**
+the intent was to replace the existing process section rather than complement it,
+in which case delete the older one.
+
+**5. The use-cases section is titled "What People Come to Corrective Training For",
+not "Who This Is For".** The page already has "Who Corrective Exercise Training Is
+For"; two near-identical headings would compete. CANON permits the "Use Cases"
+naming. **Wrong if** the exact heading text mattered for a target query.
+
+**6. Heading em-dashes became colons** ("Near Me: San Diego & North County",
+"In-Person: Teqneeq FHC", "Virtual: Anywhere"). Headings are rendered prose and
+carry no CANON exception. **Wrong if** heading dashes were intended as exempt.
+
+## Carried forward
+
+- 12 drive-time claims on territory pages remain unverified.
+- `$90` → `$110` item is now **closed** by Ruling 2.

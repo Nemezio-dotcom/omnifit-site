@@ -1,9 +1,9 @@
 ═══ OMNIFIT SITE — CANONICAL BRIEF (Aug 2026) ═══
 
 REPO STATE
-- main = paste source: 10 territory pages + 10 headers + REPORT.md, all
-  certified. Root file corrective-exercise-post-rehab is UNPATCHED
-  (Batch 3). Never resurrect pre-patch originals from history.
+- main = paste source: 10 territory pages + corrective-exercise-post-rehab,
+  each with a header, plus REPORT.md, all certified. Everything lives under
+  pages/ and pages/headers/. Never resurrect pre-patch originals from history.
 
 WORKFLOW RULES
 - Repo-only. Never publish anywhere; the human pastes approved output
@@ -32,7 +32,9 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   Fitness, Peptide Fundamentals, GLP-1 Nutrition (clinical collaboration
   framing). Experience: "10+ Years Coaching" — never "in San Diego".
 - Pricing: Diagnostic $110 credited in full toward a 3-month package
-  ($90 is the retired name-era price). Deposit $30 refundable.
+  ($90 is the retired name-era price). $90 assessment = confirmed same
+  product as the $110 Performance Diagnostic; rename settled. Deposit
+  $30 refundable.
   Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
   Performance 950/1100, Peak 1395/1625. In-home from 335/mo. Couples
   from 325/mo. Packs 135–175/session; singles 165 studio, 195 in-home.
@@ -62,8 +64,11 @@ EM-DASH RULES (voice)
 - Legal exceptions: HTML comments; alt attributes; en-dashes in numeric
   ranges; "— Name, Title" testimonial attributions; and "Name — one-line
   descriptor" separators inside structured list items (e.g. the 9-point
-  movement screen). Certification tooling must carve out these
-  exceptions by rule, not by hardcoded line numbers.
+  movement screen), including when the label is tag-wrapped such as
+  <li><strong>Label</strong> — descriptor</li>; and CSS comments inside
+  <style>. Certification tooling must carve out these exceptions by rule,
+  not by hardcoded line numbers, and must be negative-tested so a prose
+  em-dash placed inside a list item is still caught.
 
 CERTIFICATION GREP (zero hits expected)
 "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
@@ -77,9 +82,11 @@ $175/mo". $175 anywhere else is a violation.
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash ae388d31c0b6149e, header hash 7e5de5984b133663).
-- Credentials block body: byte-identical on 9 territory pages (6492e3ca,
-  630 bytes). 4S Ranch keeps its own Meet Nemezio.
+  (page hash ae388d31c0b6149e, header hash 7e5de5984b133663). Currently 11
+  pages and 11 headers.
+- Credentials block body: byte-identical on 10 pages (6492e3ca, 630 bytes)
+  — the 9 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
+  its own Meet Nemezio section instead.
 - Archetype card bodies (Section A): byte-identical × 10 pages
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
@@ -104,9 +111,7 @@ NEXT RUNS
   section targeting adjacent queries (long-term transformation, no-crash
   fat loss, desk-worker posture and mobility, data-driven hybrid) —
   situation and approach language only, compliance screen applies.
-- BATCH 3: corrective-exercise-post-rehab (P2: client-journey
-  Assess→Correct→Build→Sustain, explicit muscle-imbalance mechanism
-  paragraph, credentials section, DPT-vs-CES-vs-DC-vs-CPT table) ·
+- BATCH 3: corrective-exercise-post-rehab DONE (Aug 2026) ·
   the-omnifit-method (12 metrics, not 7) · how-we-measure-your-progress ·
   omnifit-vs-competitors · weight-loss · strength-training-1 ·
   hiit-personal-trainer-san-diego · personal-training-services ·
