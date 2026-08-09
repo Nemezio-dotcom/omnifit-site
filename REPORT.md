@@ -328,3 +328,154 @@ pages/personal-trainer-solana-beach.html:285
 
 Nothing in this run was published to Squarespace. This repo is the source of
 truth; approved output is pasted by hand.
+
+---
+
+# Final run — credentials block, RSF intake, close-out
+
+Run immediately before hand-off to Squarespace. Scope: verify the two
+hand-committed Rancho Santa Fe files, add a "Meet Your Trainer" credentials
+section to the nine territory pages, re-certify, and merge to `main`.
+
+## RSF intake verification
+
+Both files were committed **without the `.html` extension**, so nothing existed at
+the paths given (`pages/personal-trainer-rancho-santa-fe.html`,
+`pages/headers/personal-trainer-rancho-santa-fe-header.html`). Content was
+certified **before** any change and passed every check; the files were then
+renamed with `git mv` in commit `bea9dec`. **Content is byte-for-byte unchanged.**
+This was a naming slip, not a certification failure, so the run continued.
+
+| Check | Result |
+|---|---|
+| All 14 banned strings, page + header | clean, zero hits |
+| Pricing FAQ answer byte-identical to other nine | yes, `ae388d31c0b6149e` |
+| Header JSON valid | yes |
+| `about` references homepage `#localbusiness-of`, no `LocalBusiness` redefined | yes |
+| FAQPage matches page questions in count, order, text | yes, 6 of 6 |
+| Hybrid & Virtual Coaching card present | yes |
+
+**Structural note:** RSF carries **6** FAQs where the other eight territory pages
+carry 7. Its schema matches its page exactly, so this is not a defect, but it
+means RSF has no "Do you only serve X" territory-scope FAQ. Its six questions:
+
+```
+pages/personal-trainer-rancho-santa-fe.html:320  How does in-home personal training work in Rancho Santa Fe?
+pages/personal-trainer-rancho-santa-fe.html:325  What does a personal trainer in Rancho Santa Fe cost?
+pages/personal-trainer-rancho-santa-fe.html:330  Do I need a fully equipped home gym?
+pages/personal-trainer-rancho-santa-fe.html:335  What certifications does your trainer hold?
+pages/personal-trainer-rancho-santa-fe.html:340  I split time between San Diego and another city. Can this work?
+pages/personal-trainer-rancho-santa-fe.html:345  How is this different from other in-home trainers in Rancho Santa Fe?
+```
+
+## Credentials block additions
+
+Added to nine pages, placed after the services grid and before the FAQ section.
+4S Ranch was left untouched — it already has its own Meet Nemezio section with a
+portrait.
+
+Markup uses each page's own `XX-section`, `XX-section-head`, `XX-label`,
+`XX-divider`, `XX-card`, `XX-card-link`, and `XX-spacer` classes. **No CSS was
+added and no inline styles were used.** The card sits as a direct child of the
+section rather than inside `XX-grid`, because `XX-grid` is a fixed three-column
+layout and a lone card would render at one-third width.
+
+| Page | Prefix | Inserted before line | Order verified |
+|---|---|---|---|
+| carlsbad | `cb` | 202 | grid < coach < FAQ |
+| carmel-valley | `cv` | 274 | grid < coach < FAQ |
+| del-mar | `dm` | 310 | grid < coach < FAQ |
+| encinitas | `en` | 200 | grid < coach < FAQ |
+| fairbanks-ranch | `fb` | 274 | grid < coach < FAQ |
+| la-jolla | `lj` | 327 | grid < coach < FAQ |
+| rancho-santa-fe | `rs` | 295 | grid < coach < FAQ |
+| santaluz | `sz` | 202 | grid < coach < FAQ |
+| solana-beach | `sb` | 274 | grid < coach < FAQ |
+
+Body text sha256 — **one hash across all nine**:
+
+```
+6492e3ca1545dc260e88d05f10a9c40d93cee90bd800283c71ef063e6c014477   (630 bytes)
+```
+
+Zero em-dashes in the new content. All ten pages pass HTML tag-balance parsing
+with no unclosed tags and no mismatches. Header files were not touched in this
+part, since the credentials section is not an FAQ and FAQPage schema is unchanged.
+
+## Final certification grep — 20 files
+
+`pages/**` and `pages/headers/**`, all ten pages and all ten headers.
+
+| Term | Result |
+|---|---|
+| `OmniFit Personal Fitness Training` | clean |
+| `Pacific Beach` | clean |
+| `ACE OES` | clean |
+| `Orthopedic Exercise` | clean |
+| `Executive Hybrid` | clean |
+| `Lopez Perez` | clean |
+| `180+` | clean |
+| `free consultation` | clean |
+| `$90 ` | clean |
+| `$225` | clean |
+| `$275` | clean |
+| `$299` | clean |
+| `$500/mo` | clean |
+| `$599` | clean |
+
+**Total banned-string hits: 0.**
+
+### `$150` / `$175`
+
+`$150` — zero hits. `$175` — 46 occurrences: **40 inside the canonical pricing
+answer** (two per answer across 10 pages and 10 headers), **6 outside it**.
+
+```
+pages/personal-trainer-4s-ranch.html:658
+pages/personal-trainer-carlsbad.html:141
+pages/personal-trainer-carmel-valley.html:197
+pages/personal-trainer-fairbanks-ranch.html:197
+pages/personal-trainer-rancho-santa-fe.html:218
+pages/personal-trainer-santaluz.html:141
+```
+
+**Reported, not removed.** All six are the identical Hybrid & Virtual Coaching
+card bullet **"Fully virtual Executive Reset from $175/mo"**, which is the exact
+string specified in patch-sheet item 1 and agrees with the canonical answer's
+"async programming tier at $175 per month". Read strictly, the Part 3 rule
+("legal only inside the canonical pricing FAQ answer") would flag them; read
+against item 1, they are required. This is a rule conflict, not a stale-era
+violation, so nothing was deleted. **Decide which rule wins before paste.**
+
+### Other invariants
+
+- Page pricing answer: one hash, `ae388d31c0b6149e`, across all 10 pages.
+- Header pricing answer: one hash, `7e5de5984b133663`, across all 10 headers.
+- All 10 headers parse under `json.loads`.
+
+## Judgment calls in this run
+
+**1. Renamed the RSF files rather than stopping.** The stop condition was a
+certification failure; content passed everything. A missing file extension is a
+naming slip with a deterministic fix, and stopping the final run over it would
+have blocked hand-off. The rename is its own commit and is reported here rather
+than folded into another change.
+
+**2. Credentials card placed outside `XX-grid`.** See above — a single card in a
+fixed three-column grid renders at one-third width. Placing it directly in the
+section gives a full-width card using only existing classes.
+
+**3. Omitted a card icon and `h3` sub-heading.** The card pattern on these pages
+normally carries `XX-card-icon` and an `h3`. The content spec listed only a label,
+heading, body, and link, so nothing extra was invented.
+
+**4. The six `$175` card bullets were left in place.** See the rule conflict above.
+
+## Carried forward, still unresolved
+
+- **`$90` → `$110 Performance Diagnostic`** rename across eight pages rests on the
+  inference that the retired $90 BodyStat assessment and the canonical $110
+  Performance Diagnostic are the same product. Unverified.
+- **12 drive-time claims** remain unverified against the Teqneeq FHC location.
+- **`corrective-exercise-post-rehab`** at repo root is still unpatched and still
+  violates the canon (8× "Orthopedic Exercise", 2× "Lopez Perez", 1× `$225`).
