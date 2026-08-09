@@ -1,0 +1,405 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-rsf {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-30: rgba(255,255,255,0.3);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px;
+    --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--white);
+    background: var(--navy);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; padding: 0;
+  }
+  #omni-rsf *, #omni-rsf *::before, #omni-rsf *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #omni-rsf .rs-hero { padding: 80px 28px 48px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
+  #omni-rsf .rs-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-rsf .rs-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-rsf .rs-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-rsf .rs-hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-rsf .rs-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+
+  #omni-rsf .rs-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; position: relative; }
+  #omni-rsf .rs-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  #omni-rsf a.rs-btn, #omni-rsf a.rs-btn:link, #omni-rsf a.rs-btn:visited { text-decoration: none; }
+  #omni-rsf .rs-btn-primary, #omni-rsf a.rs-btn-primary, #omni-rsf a.rs-btn-primary:link, #omni-rsf a.rs-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
+  #omni-rsf .rs-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-rsf .rs-btn-ghost, #omni-rsf a.rs-btn-ghost, #omni-rsf a.rs-btn-ghost:link, #omni-rsf a.rs-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
+  #omni-rsf .rs-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); color: var(--white) !important; }
+
+  #omni-rsf .rs-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
+  #omni-rsf .rs-section-head { text-align: center; margin-bottom: 40px; }
+  #omni-rsf .rs-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  #omni-rsf .rs-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
+  #omni-rsf h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-rsf h2 em { font-style: italic; color: var(--gold); }
+  #omni-rsf h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-rsf p { font-family: 'Montserrat', sans-serif !important; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+
+  #omni-rsf .rs-quotable { background: var(--navy-mid); border-left: 3px solid var(--gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 24px 28px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rsf .rs-quotable p { font-family: 'Playfair Display', serif !important; font-size: 17px; font-style: italic; color: var(--white-90); line-height: 1.7; margin: 0; }
+
+  #omni-rsf .rs-spacer { height: 56px; }
+
+  #omni-rsf .rs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+
+  #omni-rsf .rs-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 24px 28px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; min-height: 0; }
+  #omni-rsf .rs-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-rsf .rs-card-icon { font-size: 28px; margin-bottom: 16px; display: block; line-height: 1; }
+  #omni-rsf .rs-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); line-height: 1.3; }
+  #omni-rsf .rs-card p { font-size: 14px; color: var(--white-50); margin-bottom: 18px; line-height: 1.65; }
+  #omni-rsf .rs-card-features { list-style: none; margin: 0 0 20px; padding: 0; flex: 1 1 auto; }
+  #omni-rsf .rs-card-features li { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); padding: 5px 0 5px 20px; position: relative; line-height: 1.5; }
+  #omni-rsf .rs-card-features li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 11px; }
+  #omni-rsf .rs-card-link { font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 700; color: var(--gold) !important; text-decoration: none; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s; margin-top: auto; flex-shrink: 0; padding-top: 4px; }
+  #omni-rsf .rs-card-link:hover { color: var(--gold-light) !important; gap: 10px; }
+  #omni-rsf .rs-card-link span { transition: transform 0.3s; }
+  #omni-rsf .rs-card:hover .rs-card-link span { transform: translateX(3px); }
+
+  #omni-rsf .rs-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 56px; }
+  #omni-rsf .rs-two-col p { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+
+  #omni-rsf .rs-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  #omni-rsf .rs-stat { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
+  #omni-rsf .rs-stat-num { font-family: 'Playfair Display', serif !important; font-size: 36px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  #omni-rsf .rs-stat-label { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); font-weight: 500; }
+
+  #omni-rsf .rs-faq details { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; }
+  #omni-rsf .rs-faq summary { padding: 20px 28px; font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 600; color: var(--white-90); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+  #omni-rsf .rs-faq summary:hover { background: var(--white-05); }
+  #omni-rsf .rs-faq summary::-webkit-details-marker { display: none; }
+  #omni-rsf .rs-faq summary::after { content: '+'; color: var(--gold); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-left: 16px; }
+  #omni-rsf .rs-faq details[open] summary::after { content: '−'; }
+  #omni-rsf .rs-faq .rs-faq-body { padding: 0 28px 24px; font-size: 14px; color: var(--white-70); line-height: 1.7; }
+  #omni-rsf .rs-faq .rs-faq-body a, #omni-rsf .rs-faq .rs-faq-body a:link, #omni-rsf .rs-faq .rs-faq-body a:visited { color: var(--gold) !important; text-decoration: underline; }
+
+  #omni-rsf .rs-hood-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 56px; }
+  #omni-rsf .rs-hood-item, #omni-rsf a.rs-hood-item, #omni-rsf a.rs-hood-item:link, #omni-rsf a.rs-hood-item:visited { display: block; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 14px 18px; font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 600; color: var(--white-70) !important; text-decoration: none; transition: all 0.25s; text-align: center; }
+  #omni-rsf a.rs-hood-item:hover { border-color: var(--gold); color: var(--gold) !important; background: var(--gold-dim); }
+
+  #omni-rsf .rs-hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 56px; }
+  #omni-rsf .rs-hub-link, #omni-rsf a.rs-hub-link, #omni-rsf a.rs-hub-link:link, #omni-rsf a.rs-hub-link:visited { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 500; color: var(--white-70) !important; text-decoration: none; transition: all 0.25s; }
+  #omni-rsf a.rs-hub-link:hover { border-color: var(--gold); color: var(--gold) !important; }
+  #omni-rsf .rs-hub-link::before { content: '→'; color: var(--gold); font-size: 14px; flex-shrink: 0; }
+
+  #omni-rsf .rs-bottom { background: var(--navy-mid); border-radius: var(--radius-lg); padding: 44px 36px; text-align: center; max-width: 1120px; margin: 0 auto 0; }
+  #omni-rsf .rs-bottom h2 { margin-bottom: 12px; }
+  #omni-rsf .rs-bottom p { max-width: 560px; margin: 0 auto 28px; font-size: 15px; }
+  #omni-rsf .rs-bottom-note { display: block; margin-top: 14px; font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); }
+
+  #omni-rsf .rs-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 48px auto 0; max-width: 700px; padding: 0 20px; }
+  #omni-rsf .rs-trust-item { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+  #omni-rsf .rs-trust-item span { font-size: 14px; }
+
+  @media (max-width: 980px) {
+    #omni-rsf .rs-grid { grid-template-columns: repeat(2, 1fr); }
+    #omni-rsf .rs-two-col { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 768px) {
+    #omni-rsf .rs-hero { padding: 56px 20px 36px; }
+    #omni-rsf .rs-section { padding: 0 20px; }
+    #omni-rsf .rs-quotable { margin-left: 20px; margin-right: 20px; }
+    #omni-rsf .rs-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; }
+  }
+  @media (max-width: 640px) {
+    #omni-rsf .rs-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
+    #omni-rsf .rs-hood-grid { grid-template-columns: 1fr 1fr; }
+    #omni-rsf .rs-hub-grid { grid-template-columns: 1fr; }
+    #omni-rsf .rs-cta-row { flex-direction: column; align-items: center; }
+    #omni-rsf .rs-btn { width: 100%; max-width: 300px; text-align: center; }
+  }
+</style>
+
+<div id="omni-rsf">
+
+  <!-- HERO -->
+  <section class="rs-hero">
+    <span class="rs-badge">Personal Training · Rancho Santa Fe</span>
+    <h1>Personal Trainer in<br><em>Rancho Santa Fe</em></h1>
+    <p class="rs-hero-sub">Elite, corrective-first personal training for Rancho Santa Fe executives and professionals. Private in-home sessions at your estate, studio training in nearby Pacific Beach, or hybrid coaching built around your schedule and travel demands.</p>
+
+    <div class="rs-cta-row">
+      <a class="rs-btn rs-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="rs-btn rs-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
+    </div>
+  </section>
+
+  <!-- QUOTABLE -->
+  <div style="padding: 0 28px;">
+    <blockquote class="rs-quotable">
+      <p>"OmniFit provides private in-home personal training for Rancho Santa Fe executives — using a corrective-first methodology that addresses chronic pain, posture dysfunction, and movement limitations before building strength, conditioning, and sustainable body composition changes."</p>
+    </blockquote>
+  </div>
+
+  <!-- SERVICES AVAILABLE -->
+  <div class="rs-section">
+    <div class="rs-section-head">
+      <span class="rs-label">Services in Rancho Santa Fe</span>
+      <hr class="rs-divider">
+      <h2>How We Train in <em>Rancho Santa Fe</em></h2>
+    </div>
+
+    <div class="rs-grid">
+
+      <article class="rs-card">
+        <span class="rs-card-icon">🏠</span>
+        <h3>In-Home Personal Training</h3>
+        <p>We train at your Rancho Santa Fe estate using your home gym equipment. Fully programmed sessions, complete privacy, zero commute — the most popular format for RSF clients.</p>
+        <ul class="rs-card-features">
+          <li>Your home gym, our programming</li>
+          <li>All sessions pre-planned from assessment</li>
+          <li>Corrective-first methodology</li>
+        </ul>
+        <a class="rs-card-link" href="/in-home-personal-trainer-san-diego">Explore In-Home Training <span>→</span></a>
+      </article>
+
+      <article class="rs-card">
+        <span class="rs-card-icon">🏋️</span>
+        <h3>Private Studio Sessions</h3>
+        <p>Train 1:1 at our private Pacific Beach studio — fully equipped, zero crowds, complete privacy. A focused option for clients who prefer a dedicated training environment.</p>
+        <ul class="rs-card-features">
+          <li>Private boutique facility</li>
+          <li>Commercial-grade equipment</li>
+          <li>20–25 minutes from RSF</li>
+        </ul>
+        <a class="rs-card-link" href="/personal-trainer-in-pacific-beach">See the PB Studio <span>→</span></a>
+      </article>
+
+      <article class="rs-card">
+        <span class="rs-card-icon">🔧</span>
+        <h3>Corrective Exercise</h3>
+        <p>NASM-CES certified programming for RSF clients managing shoulder pain, lower back issues, post-surgical recovery, or years of accumulated desk posture dysfunction.</p>
+        <ul class="rs-card-features">
+          <li>9-point movement screening</li>
+          <li>3/10 pain ceiling protocol</li>
+          <li>Bridge from PT discharge to performance</li>
+        </ul>
+        <a class="rs-card-link" href="/corrective-exercise-post-rehab">See Corrective Training <span>→</span></a>
+      </article>
+
+      <article class="rs-card">
+        <span class="rs-card-icon">💪</span>
+        <h3>Strength Training</h3>
+        <p>Periodized strength programming designed for sustainable gains. Built on corrective foundations so you get stronger without aggravating old injuries or creating new ones.</p>
+        <ul class="rs-card-features">
+          <li>4-week periodized blocks</li>
+          <li>Compound lift progressions</li>
+          <li>Monthly strength benchmarks</li>
+        </ul>
+        <a class="rs-card-link" href="/strength-training-1">See Strength Programs <span>→</span></a>
+      </article>
+
+      <article class="rs-card">
+        <span class="rs-card-icon">🖥️</span>
+        <h3>Executive Hybrid Coaching</h3>
+        <p>In-person sessions combined with virtual programming and direct trainer access — built for RSF executives who split time between San Diego, travel, and second residences.</p>
+        <ul class="rs-card-features">
+          <li>Weekly in-person + virtual sessions</li>
+          <li>Custom app-based programming</li>
+          <li>$500/month · 12 weeks</li>
+        </ul>
+        <a class="rs-card-link" href="/executive-hybrid-coaching">Explore Hybrid Coaching <span>→</span></a>
+      </article>
+
+      <article class="rs-card">
+        <span class="rs-card-icon">📉</span>
+        <h3>Weight Loss Coaching</h3>
+        <p>Sustainable fat loss — not crash dieting. Progressive training paired with Precision Nutrition habits, body composition tracking, and weekly executive-level accountability.</p>
+        <ul class="rs-card-features">
+          <li>20–30+ lbs in 4–6 months</li>
+          <li>Custom macros &amp; meal frameworks</li>
+          <li>Travel &amp; dining strategies</li>
+        </ul>
+        <a class="rs-card-link" href="/weight-loss">Start Your Fat-Loss Plan <span>→</span></a>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- THE METHOD + STATS -->
+  <div class="rs-section">
+    <div class="rs-section-head">
+      <span class="rs-label">Our Approach</span>
+      <hr class="rs-divider">
+      <h2>The OmniFit <em>Method</em></h2>
+    </div>
+
+    <div class="rs-two-col">
+      <div>
+        <p>Every Rancho Santa Fe client follows the same four-phase methodology: <strong style="color:var(--white);">Assess, Correct, Build, Sustain.</strong> Your first session is a comprehensive movement screening — not a workout. We map your compensations, restrictions, and asymmetries before designing a single exercise.</p>
+        <p>RSF clients typically present with a pattern we see across high-performing executives: decades of desk work and travel have created significant hip flexor tightness, thoracic rounding, and shoulder dysfunction — layered on top of old sports injuries that were never properly rehabilitated. We address all of it systematically.</p>
+        <p>In-home training is the dominant format in Rancho Santa Fe. Most clients have invested in excellent home gyms — our job is to turn that equipment into a structured, progressive program with expert coaching and real accountability.</p>
+      </div>
+      <div>
+        <div class="rs-stats">
+          <div class="rs-stat"><div class="rs-stat-num">180+</div><div class="rs-stat-label">5-Star Reviews</div></div>
+          <div class="rs-stat"><div class="rs-stat-num">9+</div><div class="rs-stat-label">Years in San Diego</div></div>
+          <div class="rs-stat"><div class="rs-stat-num">NASM</div><div class="rs-stat-label">CES · CPT · PES · BCS</div></div>
+          <div class="rs-stat"><div class="rs-stat-num">4</div><div class="rs-stat-label">Phase Methodology</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY RSF CLIENTS CHOOSE OMNIFIT -->
+  <div class="rs-section">
+    <div class="rs-section-head">
+      <span class="rs-label">Why OmniFit</span>
+      <hr class="rs-divider">
+      <h2>Why Rancho Santa Fe Executives Choose <em>OmniFit</em></h2>
+    </div>
+
+    <div class="rs-grid">
+
+      <article class="rs-card">
+        <span class="rs-card-icon">🔒</span>
+        <h3>Complete Privacy &amp; Discretion</h3>
+        <p>No gym crowds. No social media. Training happens at your home, on your terms. OmniFit serves high-profile clients who value confidentiality as much as results.</p>
+      </article>
+
+      <article class="rs-card">
+        <span class="rs-card-icon">🎯</span>
+        <h3>Assessment-Driven, Not Template-Based</h3>
+        <p>Your program is built entirely from your movement screening data. Every exercise selection, progression, and corrective protocol is specific to your body — not pulled from a generic plan.</p>
+      </article>
+
+      <article class="rs-card">
+        <span class="rs-card-icon">✈️</span>
+        <h3>Built for Complex Schedules</h3>
+        <p>Many RSF clients manage multiple residences, frequent travel, and demanding business calendars. Our hybrid coaching keeps your training consistent regardless of where you are that week.</p>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="rs-section">
+    <div class="rs-section-head">
+      <span class="rs-label">Frequently Asked</span>
+      <hr class="rs-divider">
+      <h2>Questions About Training in <em>Rancho Santa Fe</em></h2>
+    </div>
+
+    <div class="rs-faq">
+
+      <details>
+        <summary>How does in-home personal training work in Rancho Santa Fe?</summary>
+        <div class="rs-faq-body"><p>We come to your Rancho Santa Fe home and train using your existing gym equipment. Sessions are 45–60 minutes, fully programmed in advance based on your movement assessment data. We handle all programming, progression, and accountability — you just show up in your own space. A $75 travel fee per session applies for RSF locations. See full details on our <a href="/in-home-personal-trainer-san-diego">in-home training page</a>.</p></div>
+      </details>
+
+      <details>
+        <summary>What does a personal trainer in Rancho Santa Fe cost?</summary>
+        <div class="rs-faq-body"><p>In-home sessions in Rancho Santa Fe are $225–250 per session ($150–175 base rate + $75 travel fee). Executive Hybrid Coaching is $500/month for a 12-week engagement. Visit our <a href="/training-rates-san-diego">training rates page</a> for the full breakdown by plan length and frequency.</p></div>
+      </details>
+
+      <details>
+        <summary>Do I need a fully equipped home gym?</summary>
+        <div class="rs-faq-body"><p>At minimum, you need adjustable dumbbells (5–50+ lbs), an adjustable bench, resistance bands, and about 8×8 feet of open space. Most RSF clients have more extensive setups — power racks, cable machines, cardio equipment — and we design your program around whatever you have. During your consultation, send photos and we'll assess.</p></div>
+      </details>
+
+      <details>
+        <summary>What certifications does your trainer hold?</summary>
+        <div class="rs-faq-body"><p>OmniFit's founder Nemezio Lopez Perez holds NASM-CPT, NASM-CES (Corrective Exercise Specialist), NASM-PES (Performance Enhancement Specialist), NASM-BCS (Behavior Change Specialist), and NASM-CNC (Certified Nutrition Coach). Every program follows evidence-based, assessment-driven protocols.</p></div>
+      </details>
+
+      <details>
+        <summary>I split time between San Diego and another city. Can this work?</summary>
+        <div class="rs-faq-body"><p>This is one of the most common scenarios among RSF clients. Our <a href="/executive-hybrid-coaching">Executive Hybrid Coaching</a> combines in-person sessions when you're in San Diego with virtual programming and hotel/travel gym workouts when you're elsewhere. You maintain consistent progress regardless of location.</p></div>
+      </details>
+
+      <details>
+        <summary>How is this different from other in-home trainers in Rancho Santa Fe?</summary>
+        <div class="rs-faq-body"><p>Most mobile trainers bring portable equipment and deliver generic workouts. OmniFit delivers a complete training program using your own equipment — 9-point movement assessment, corrective exercise protocols, periodized strength programming, nutrition coaching, and monthly data-driven progress reports. It's the same methodology used in our <a href="/personal-trainer-in-pacific-beach">Pacific Beach studio</a>, delivered in your home.</p></div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="rs-spacer"></div>
+
+  <!-- NEIGHBORHOODS SERVED -->
+  <div class="rs-section">
+    <div class="rs-section-head">
+      <span class="rs-label">Neighborhoods We Serve</span>
+      <hr class="rs-divider">
+      <h2>Training Across <em>San Diego</em></h2>
+    </div>
+
+    <div class="rs-hood-grid">
+      <a class="rs-hood-item" href="/personal-trainer-in-pacific-beach">Pacific Beach</a>
+      <a class="rs-hood-item" href="/personal-trainer-la-jolla">La Jolla</a>
+      <a class="rs-hood-item" href="/personal-trainer-del-mar">Del Mar</a>
+      <a class="rs-hood-item" href="/personal-trainer-fairbanks-ranch">Fairbanks Ranch</a>
+      <a class="rs-hood-item" href="/personal-trainer-carmel-valley">Carmel Valley</a>
+      <a class="rs-hood-item" href="/personal-trainer-solana-beach">Solana Beach</a>
+      <a class="rs-hood-item" href="/personal-trainer-encinitas">Encinitas</a>
+      <a class="rs-hood-item" href="/personal-trainer-carlsbad">Carlsbad</a>
+      <a class="rs-hood-item" href="/personal-trainer-santaluz">Santaluz</a>
+      <a class="rs-hood-item" href="/personal-trainer-4s-ranch">4S Ranch</a>
+      <a class="rs-hood-item" href="/personal-trainer-point-loma">Point Loma</a>
+      <a class="rs-hood-item" href="/personal-trainer-mission-hills">Mission Hills</a>
+    </div>
+  </div>
+
+  <!-- HUB LINKS -->
+  <div class="rs-section">
+    <div class="rs-section-head">
+      <span class="rs-label">Explore More</span>
+      <hr class="rs-divider">
+      <h2>Related <em>Pages</em></h2>
+    </div>
+
+    <div class="rs-hub-grid">
+      <a class="rs-hub-link" href="/personal-training-services">All Services</a>
+      <a class="rs-hub-link" href="/in-home-personal-trainer-san-diego">In-Home Training</a>
+      <a class="rs-hub-link" href="/corrective-exercise-post-rehab">Corrective Exercise</a>
+      <a class="rs-hub-link" href="/strength-training-1">Strength Training</a>
+      <a class="rs-hub-link" href="/hiit-personal-trainer-san-diego">HIIT Training</a>
+      <a class="rs-hub-link" href="/executive-hybrid-coaching">Hybrid Coaching</a>
+      <a class="rs-hub-link" href="/the-30-minute-executive-reset">Executive Reset</a>
+      <a class="rs-hub-link" href="/training-rates-san-diego">Training Rates</a>
+      <a class="rs-hub-link" href="/the-omnifit-method">The OmniFit Method</a>
+      <a class="rs-hub-link" href="/how-it-works-pricing">Pricing &amp; Process</a>
+      <a class="rs-hub-link" href="/case-studies">Case Studies</a>
+      <a class="rs-hub-link" href="/faqs">FAQs</a>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div style="padding: 0 28px;">
+    <div class="rs-bottom">
+      <h2>Train at the Highest Level in <em>Rancho Santa Fe</em></h2>
+      <p>Book a 45-minute consultation. We'll discuss your goals, review your home gym, and design a program that matches the standards you hold in every other area of your life.</p>
+      <a class="rs-btn rs-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="rs-bottom-note">Free 45-minute consultation (refundable deposit required) · Limited in-home availability · Honest assessment of fit</span>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="rs-trust">
+    <div class="rs-trust-item"><span>⭐</span> 5.0 · 180+ Reviews</div>
+    <div class="rs-trust-item"><span>🏅</span> NASM CES · CPT · PES · BCS</div>
+    <div class="rs-trust-item"><span>📍</span> Serving Rancho Santa Fe &amp; San Diego</div>
+    <div class="rs-trust-item"><span>🌍</span> Virtual Coaching Worldwide</div>
+  </div>
+
+</div>
