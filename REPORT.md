@@ -8,6 +8,10 @@
 > repository on any branch, though every other page links to
 > `/personal-trainer-rancho-santa-fe`. It was never patched because there is no
 > file to patch. Push it and it can receive an identical pass.
+>
+> **RESOLVED in the Final run below.** Rancho Santa Fe was hand-committed and
+> verified. Sections 1 to 6 describe the propagation run as it stood at the time;
+> the Final run section is the current state of the repo.
 
 ---
 
@@ -24,7 +28,7 @@
 | `pages/personal-trainer-santaluz.html` | 1, 2, 4, 5, 7, 11, 12 | Y |
 | `pages/personal-trainer-solana-beach.html` | 1, 2, 4, 5, 7, 11, 12 | Y |
 | `pages/personal-trainer-4s-ranch.html` (reference) | A1–A3 + deploy-comment cleanup | Y |
-| `rancho-santa-fe` | **none — file absent from repo** | **N** |
+| `rancho-santa-fe` | **none — file absent from repo at the time of this run; see Final run** | **N at the time; Y now** |
 
 ### Rules that were no-ops on every territory page
 
@@ -297,6 +301,8 @@ pages/personal-trainer-solana-beach.html:285
 
 ## 6. Repo file tree
 
+> Superseded by the Final run. Current state is shown at the end of this document.
+
 ```
 .
 ├── REPORT.md
@@ -479,3 +485,37 @@ heading, body, and link, so nothing extra was invented.
 - **12 drive-time claims** remain unverified against the Teqneeq FHC location.
 - **`corrective-exercise-post-rehab`** at repo root is still unpatched and still
   violates the canon (8× "Orthopedic Exercise", 2× "Lopez Perez", 1× `$225`).
+
+## Repo file tree — current
+
+```
+.
+├── REPORT.md
+├── corrective-exercise-post-rehab          # out of scope, unpatched
+└── pages
+    ├── personal-trainer-4s-ranch.html
+    ├── personal-trainer-carlsbad.html
+    ├── personal-trainer-carmel-valley.html
+    ├── personal-trainer-del-mar.html
+    ├── personal-trainer-encinitas.html
+    ├── personal-trainer-fairbanks-ranch.html
+    ├── personal-trainer-la-jolla.html
+    ├── personal-trainer-rancho-santa-fe.html
+    ├── personal-trainer-santaluz.html
+    ├── personal-trainer-solana-beach.html
+    └── headers
+        ├── personal-trainer-4s-ranch-header.html
+        ├── personal-trainer-carlsbad-header.html
+        ├── personal-trainer-carmel-valley-header.html
+        ├── personal-trainer-del-mar-header.html
+        ├── personal-trainer-encinitas-header.html
+        ├── personal-trainer-fairbanks-ranch-header.html
+        ├── personal-trainer-la-jolla-header.html
+        ├── personal-trainer-rancho-santa-fe-header.html
+        ├── personal-trainer-santaluz-header.html
+        └── personal-trainer-solana-beach-header.html
+```
+
+10 page files, 10 header files, REPORT.md. The only remaining root file is
+`corrective-exercise-post-rehab`, which was never in scope. The pre-patch
+originals that lived at repo root are gone; their content is in git history.
