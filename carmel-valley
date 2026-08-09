@@ -1,0 +1,386 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-cv {
+    --navy: #0a1628; --navy-mid: #0f1f3a; --navy-light: #152a4a; --navy-surface: #1a3158;
+    --white: #ffffff; --white-90: rgba(255,255,255,0.9); --white-70: rgba(255,255,255,0.7); --white-50: rgba(255,255,255,0.5); --white-30: rgba(255,255,255,0.3); --white-20: rgba(255,255,255,0.2); --white-10: rgba(255,255,255,0.1); --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c; --gold-light: #e0c872; --gold-dim: rgba(201,168,76,0.15); --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px; --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important; color: var(--white); background: var(--navy); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin: 0; padding: 0;
+  }
+  #omni-cv *, #omni-cv *::before, #omni-cv *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #omni-cv .cv-hero { padding: 80px 28px 48px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
+  #omni-cv .cv-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-cv .cv-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-cv .cv-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-cv .cv-hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-cv .cv-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+
+  #omni-cv .cv-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; position: relative; }
+  #omni-cv .cv-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  #omni-cv a.cv-btn, #omni-cv a.cv-btn:link, #omni-cv a.cv-btn:visited { text-decoration: none; }
+  #omni-cv .cv-btn-primary, #omni-cv a.cv-btn-primary, #omni-cv a.cv-btn-primary:link, #omni-cv a.cv-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
+  #omni-cv .cv-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-cv .cv-btn-ghost, #omni-cv a.cv-btn-ghost, #omni-cv a.cv-btn-ghost:link, #omni-cv a.cv-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
+  #omni-cv .cv-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); color: var(--white) !important; }
+
+  #omni-cv .cv-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
+  #omni-cv .cv-section-head { text-align: center; margin-bottom: 40px; }
+  #omni-cv .cv-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  #omni-cv .cv-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
+  #omni-cv h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-cv h2 em { font-style: italic; color: var(--gold); }
+  #omni-cv h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-cv p { font-family: 'Montserrat', sans-serif !important; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+
+  #omni-cv .cv-quotable { background: var(--navy-mid); border-left: 3px solid var(--gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 24px 28px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-cv .cv-quotable p { font-family: 'Playfair Display', serif !important; font-size: 17px; font-style: italic; color: var(--white-90); line-height: 1.7; margin: 0; }
+
+  #omni-cv .cv-spacer { height: 56px; }
+
+  #omni-cv .cv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+
+  #omni-cv .cv-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 24px 28px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; min-height: 0; }
+  #omni-cv .cv-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-cv .cv-card-icon { font-size: 28px; margin-bottom: 16px; display: block; line-height: 1; }
+  #omni-cv .cv-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); line-height: 1.3; }
+  #omni-cv .cv-card p { font-size: 14px; color: var(--white-50); margin-bottom: 18px; line-height: 1.65; }
+  #omni-cv .cv-card-features { list-style: none; margin: 0 0 20px; padding: 0; flex: 1 1 auto; }
+  #omni-cv .cv-card-features li { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); padding: 5px 0 5px 20px; position: relative; line-height: 1.5; }
+  #omni-cv .cv-card-features li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 11px; }
+  #omni-cv .cv-card-link { font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 700; color: var(--gold) !important; text-decoration: none; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s; margin-top: auto; flex-shrink: 0; padding-top: 4px; }
+  #omni-cv .cv-card-link:hover { color: var(--gold-light) !important; gap: 10px; }
+  #omni-cv .cv-card-link span { transition: transform 0.3s; }
+  #omni-cv .cv-card:hover .cv-card-link span { transform: translateX(3px); }
+
+  #omni-cv .cv-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 56px; }
+  #omni-cv .cv-two-col p { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+
+  #omni-cv .cv-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  #omni-cv .cv-stat { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
+  #omni-cv .cv-stat-num { font-family: 'Playfair Display', serif !important; font-size: 36px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  #omni-cv .cv-stat-label { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); font-weight: 500; }
+
+  #omni-cv .cv-faq details { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; }
+  #omni-cv .cv-faq summary { padding: 20px 28px; font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 600; color: var(--white-90); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+  #omni-cv .cv-faq summary:hover { background: var(--white-05); }
+  #omni-cv .cv-faq summary::-webkit-details-marker { display: none; }
+  #omni-cv .cv-faq summary::after { content: '+'; color: var(--gold); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-left: 16px; }
+  #omni-cv .cv-faq details[open] summary::after { content: '−'; }
+  #omni-cv .cv-faq .cv-faq-body { padding: 0 28px 24px; font-size: 14px; color: var(--white-70); line-height: 1.7; }
+  #omni-cv .cv-faq .cv-faq-body a, #omni-cv .cv-faq .cv-faq-body a:link, #omni-cv .cv-faq .cv-faq-body a:visited { color: var(--gold) !important; text-decoration: underline; }
+
+  #omni-cv .cv-hood-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 56px; }
+  #omni-cv .cv-hood-item, #omni-cv a.cv-hood-item, #omni-cv a.cv-hood-item:link, #omni-cv a.cv-hood-item:visited { display: block; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 14px 18px; font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 600; color: var(--white-70) !important; text-decoration: none; transition: all 0.25s; text-align: center; }
+  #omni-cv a.cv-hood-item:hover { border-color: var(--gold); color: var(--gold) !important; background: var(--gold-dim); }
+
+  #omni-cv .cv-hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 56px; }
+  #omni-cv .cv-hub-link, #omni-cv a.cv-hub-link, #omni-cv a.cv-hub-link:link, #omni-cv a.cv-hub-link:visited { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 500; color: var(--white-70) !important; text-decoration: none; transition: all 0.25s; }
+  #omni-cv a.cv-hub-link:hover { border-color: var(--gold); color: var(--gold) !important; }
+  #omni-cv .cv-hub-link::before { content: '→'; color: var(--gold); font-size: 14px; flex-shrink: 0; }
+
+  #omni-cv .cv-bottom { background: var(--navy-mid); border-radius: var(--radius-lg); padding: 44px 36px; text-align: center; max-width: 1120px; margin: 0 auto 0; }
+  #omni-cv .cv-bottom h2 { margin-bottom: 12px; }
+  #omni-cv .cv-bottom p { max-width: 560px; margin: 0 auto 28px; font-size: 15px; }
+  #omni-cv .cv-bottom-note { display: block; margin-top: 14px; font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); }
+
+  #omni-cv .cv-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 48px auto 0; max-width: 700px; padding: 0 20px; }
+  #omni-cv .cv-trust-item { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+  #omni-cv .cv-trust-item span { font-size: 14px; }
+
+  @media (max-width: 980px) {
+    #omni-cv .cv-grid { grid-template-columns: repeat(2, 1fr); }
+    #omni-cv .cv-two-col { grid-template-columns: 1fr; gap: 28px; }
+  }
+  @media (max-width: 768px) {
+    #omni-cv .cv-hero { padding: 56px 20px 36px; }
+    #omni-cv .cv-section { padding: 0 20px; }
+    #omni-cv .cv-quotable { margin-left: 20px; margin-right: 20px; }
+    #omni-cv .cv-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; }
+  }
+  @media (max-width: 640px) {
+    #omni-cv .cv-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 48px; }
+    #omni-cv .cv-hood-grid { grid-template-columns: 1fr 1fr; }
+    #omni-cv .cv-hub-grid { grid-template-columns: 1fr; }
+    #omni-cv .cv-cta-row { flex-direction: column; align-items: center; }
+    #omni-cv .cv-btn { width: 100%; max-width: 300px; text-align: center; }
+  }
+</style>
+
+<div id="omni-cv">
+
+  <!-- HERO -->
+  <section class="cv-hero">
+    <span class="cv-badge">Personal Training · Carmel Valley</span>
+    <h1>Personal Trainer in<br><em>Carmel Valley</em></h1>
+    <p class="cv-hero-sub">Diagnostic-led personal training for Carmel Valley professionals and families. Concierge in-home sessions at your residence, private studio training at Teqneeq FHC in 4S Ranch, or hybrid coaching that keeps you progressing through busy weeks and business travel.</p>
+
+    <div class="cv-cta-row">
+      <a class="cv-btn cv-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="cv-btn cv-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
+    </div>
+  </section>
+
+  <!-- QUOTABLE -->
+  <div style="padding: 0 28px;">
+    <blockquote class="cv-quotable">
+      <p>"OmniFit Performance provides concierge in-home personal training throughout Carmel Valley and studio-based training at Teqneeq FHC in 4S Ranch, San Diego — beginning every program with a $90 BodyStat body composition assessment and a corrective-first methodology that fixes posture dysfunction, resolves chronic pain, and builds sustainable strength for adults over 30 managing demanding careers and active families."</p>
+    </blockquote>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="cv-section">
+    <div class="cv-section-head">
+      <span class="cv-label">Services in Carmel Valley</span>
+      <hr class="cv-divider">
+      <h2>How We Train in <em>Carmel Valley</em></h2>
+    </div>
+
+    <div class="cv-grid">
+
+      <article class="cv-card">
+        <span class="cv-card-icon">🏠</span>
+        <h3>In-Home Personal Training</h3>
+        <p>Full-service training at your Carmel Valley home. We bring professional-grade equipment and a fully programmed session — or build your program around your existing home gym. Zero commute, maximum efficiency.</p>
+        <ul class="cv-card-features">
+          <li>All equipment provided</li>
+          <li>Assessment-driven sessions</li>
+          <li>Corrective-first methodology</li>
+        </ul>
+        <a class="cv-card-link" href="/in-home-personal-trainer-san-diego">Explore In-Home Training <span>→</span></a>
+      </article>
+
+      <article class="cv-card">
+        <span class="cv-card-icon">🏋️</span>
+        <h3>Private Studio Sessions</h3>
+        <p>Train 1:1 inside Teqneeq FHC — a members-only functional health and performance lab in 4S Ranch, a quick drive up the 56. Professional-grade equipment, zero crowds.</p>
+        <ul class="cv-card-features">
+          <li>Credentialed access only — no walk-ins</li>
+          <li>Professional-grade equipment</li>
+          <li>10772 Thornmint Rd, San Diego 92127</li>
+        </ul>
+        <a class="cv-card-link" href="/personal-trainer-4s-ranch">See the 4S Ranch Studio <span>→</span></a>
+      </article>
+
+      <article class="cv-card">
+        <span class="cv-card-icon">🔧</span>
+        <h3>Corrective Exercise</h3>
+        <p>NASM-CES certified programming for Carmel Valley clients with desk-related pain, post-surgical recovery, or chronic movement dysfunction that's been ignored too long.</p>
+        <ul class="cv-card-features">
+          <li>9-point movement screening</li>
+          <li>3/10 pain ceiling protocol</li>
+          <li>Bridge from PT to performance</li>
+        </ul>
+        <a class="cv-card-link" href="/corrective-exercise-post-rehab">See Corrective Training <span>→</span></a>
+      </article>
+
+      <article class="cv-card">
+        <span class="cv-card-icon">📊</span>
+        <h3>BodyStat Diagnostics</h3>
+        <p>Every program starts with a $90 BodyStat 1500 MDD body composition assessment — lab-grade bioimpedance data, not a bathroom scale guess.</p>
+        <ul class="cv-card-features">
+          <li>Body composition &amp; hydration data</li>
+          <li>Objective baseline before training</li>
+          <li>Rescans track real progress</li>
+        </ul>
+        <a class="cv-card-link" href="/how-we-measure-your-progress">See How We Measure Progress <span>→</span></a>
+      </article>
+
+      <article class="cv-card">
+        <span class="cv-card-icon">🖥️</span>
+        <h3>Executive Hybrid Coaching</h3>
+        <p>In-person sessions combined with virtual programming — perfect for Carmel Valley tech and biotech professionals with unpredictable meeting schedules and periodic travel.</p>
+        <ul class="cv-card-features">
+          <li>In-person + virtual sessions</li>
+          <li>Custom app-based programming</li>
+          <li>Travel-week programming included</li>
+        </ul>
+        <a class="cv-card-link" href="/executive-hybrid-coaching">Explore Hybrid Coaching <span>→</span></a>
+      </article>
+
+      <article class="cv-card">
+        <span class="cv-card-icon">📉</span>
+        <h3>Weight Loss Coaching</h3>
+        <p>Lose 20–30+ lbs sustainably. Progressive training, Precision Nutrition habits, and weekly accountability — designed for professionals who've tried everything else.</p>
+        <ul class="cv-card-features">
+          <li>Body composition tracking</li>
+          <li>Habit-based nutrition coaching</li>
+          <li>Structured weekly goals</li>
+        </ul>
+        <a class="cv-card-link" href="/weight-loss">Start Your Fat-Loss Plan <span>→</span></a>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- METHOD + STATS -->
+  <div class="cv-section">
+    <div class="cv-section-head">
+      <span class="cv-label">Our Approach</span>
+      <hr class="cv-divider">
+      <h2>The OmniFit <em>Method</em></h2>
+    </div>
+
+    <div class="cv-two-col">
+      <div>
+        <p>Every Carmel Valley client follows the same four-phase methodology: <strong style="color:var(--white);">Assess, Correct, Build, Sustain.</strong> Your program starts with a BodyStat body composition assessment and a comprehensive movement screening — not a workout. We identify exactly what your body needs before programming a single exercise.</p>
+        <p>Carmel Valley's tech and biotech professionals are some of the most driven people we work with — but that drive often means years of ignoring physical warning signs. Tight hips from 10-hour desk days. Rounded shoulders from laptop posture. Lower back stiffness that gets managed with ibuprofen instead of corrective work.</p>
+        <p>Our corrective-first approach breaks that cycle. We fix the root cause, then build strength on a stable foundation. The result is training that actually lasts — not short-term motivation that fades after a few weeks.</p>
+      </div>
+      <div>
+        <div class="cv-stats">
+          <div class="cv-stat"><div class="cv-stat-num">190+</div><div class="cv-stat-label">5-Star Reviews</div></div>
+          <div class="cv-stat"><div class="cv-stat-num">12</div><div class="cv-stat-label">Certifications Held</div></div>
+          <div class="cv-stat"><div class="cv-stat-num">NASM</div><div class="cv-stat-label">CPT · CES · PES · BCS · CNC</div></div>
+          <div class="cv-stat"><div class="cv-stat-num">4</div><div class="cv-stat-label">Phase Methodology</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY OMNIFIT -->
+  <div class="cv-section">
+    <div class="cv-section-head">
+      <span class="cv-label">Why OmniFit</span>
+      <hr class="cv-divider">
+      <h2>Why Carmel Valley Professionals Choose <em>OmniFit</em></h2>
+    </div>
+
+    <div class="cv-grid">
+
+      <article class="cv-card">
+        <span class="cv-card-icon">⏱️</span>
+        <h3>Efficiency for Busy Schedules</h3>
+        <p>In-home sessions eliminate commute time. Early morning, lunch break, or post-work — sessions fit around your calendar, not the other way around. No wasted time driving to a gym.</p>
+      </article>
+
+      <article class="cv-card">
+        <span class="cv-card-icon">🎯</span>
+        <h3>Data-Driven Programming</h3>
+        <p>Every exercise is selected from your BodyStat assessment and movement screening data. Monthly progress reports track posture, strength, body composition, and adherence — so you always know exactly where you stand.</p>
+      </article>
+
+      <article class="cv-card">
+        <span class="cv-card-icon">🧠</span>
+        <h3>More Than Physical Training</h3>
+        <p>Nutrition coaching, habit systems, stress management strategies, and sleep optimization are built into every Carmel Valley program. Fitness doesn't exist in a vacuum — and we don't treat it that way.</p>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="cv-section">
+    <div class="cv-section-head">
+      <span class="cv-label">Frequently Asked</span>
+      <hr class="cv-divider">
+      <h2>Questions About Training in <em>Carmel Valley</em></h2>
+    </div>
+
+    <div class="cv-faq">
+
+      <details>
+        <summary>How does in-home personal training work in Carmel Valley?</summary>
+        <div class="cv-faq-body"><p>We bring all necessary equipment to your Carmel Valley home — adjustable dumbbells, resistance bands, suspension trainers, and mats — or build your program around your existing home gym. Sessions are 45–60 minutes, fully programmed from your assessment data, and all you need is about 8×8 feet of clear space. A per-session travel fee may apply depending on location. Full details on our <a href="/in-home-personal-trainer-san-diego">in-home training page</a>.</p></div>
+      </details>
+
+      <details>
+        <summary>What does a personal trainer in Carmel Valley cost?</summary>
+        <div class="cv-faq-body"><p>Every OmniFit program begins with a $90 BodyStat body composition assessment. In-home training in Carmel Valley is offered as four named monthly packages tiered by frequency — Essential, Momentum, Performance, and Peak — starting at $275/month with a 3-month commitment, with month-to-month options available. Studio training at Teqneeq FHC in 4S Ranch starts at $225/month. Every program includes assessment, custom programming, nutrition coaching, and weekly accountability, with no activation fees. A travel fee may apply for in-home sessions depending on location. Current rates for every package are maintained on the <a href="/training-rates-san-diego">Training Rates</a> page.</p></div>
+      </details>
+
+      <details>
+        <summary>Do you only serve Carmel Valley?</summary>
+        <div class="cv-faq-body"><p>No. Carmel Valley sits in the middle of our concierge territory — we also serve Del Mar, Solana Beach, Encinitas, Carlsbad, La Jolla, Rancho Santa Fe, and 4S Ranch. Studio sessions are available inside <a href="/personal-trainer-4s-ranch">Teqneeq FHC</a>, a members-only functional health and performance lab at 10772 Thornmint Rd in 4S Ranch, San Diego — about 15 minutes from most Carmel Valley locations via the 56.</p></div>
+      </details>
+
+      <details>
+        <summary>What is the BodyStat assessment?</summary>
+        <div class="cv-faq-body"><p>The OmniFit Performance Assessment ($90) uses the BodyStat 1500 MDD — a medical-grade bioimpedance device — to establish your body composition baseline: fat mass, lean mass, and hydration markers. Combined with a 9-point movement screen, it gives us objective data to build your program from and to measure real progress against at rescans. If you continue into a training package, the assessment fee is credited toward your program.</p></div>
+      </details>
+
+      <details>
+        <summary>What certifications does your trainer hold?</summary>
+        <div class="cv-faq-body"><p>Nemezio Lopez Perez holds NASM-CPT, NASM-CES (Corrective Exercise Specialist), NASM-PES (Performance Enhancement Specialist), NASM-BCS (Behavior Change Specialist), NASM-CNC (Certified Nutrition Coach), and the ACE Orthopedic Exercise Specialist credential, plus Precision Nutrition certifications. All programming is evidence-based and assessment-driven.</p></div>
+      </details>
+
+      <details>
+        <summary>I sit at a desk all day and have chronic back and neck pain. Can you help?</summary>
+        <div class="cv-faq-body"><p>This is one of the most common issues we address — especially among Carmel Valley's tech and biotech professionals. Our corrective-first methodology starts with a movement assessment that identifies the specific postural dysfunctions causing your pain. We then systematically correct them using the NASM corrective exercise continuum: inhibit, lengthen, activate, integrate. Most clients see measurable improvement within 4–6 sessions. See our <a href="/corrective-exercise-post-rehab">corrective exercise page</a> for details.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I combine in-person sessions with virtual coaching?</summary>
+        <div class="cv-faq-body"><p>Absolutely. Many Carmel Valley clients use our <a href="/executive-hybrid-coaching">Executive Hybrid Coaching</a> — 1–2 in-person sessions per week for hands-on coaching plus app-guided programming for independent days. This is especially effective if your schedule varies week to week or you travel periodically.</p></div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="cv-spacer"></div>
+
+  <!-- NEIGHBORHOODS -->
+  <div class="cv-section">
+    <div class="cv-section-head">
+      <span class="cv-label">Neighborhoods We Serve</span>
+      <hr class="cv-divider">
+      <h2>Training Across <em>North County &amp; Coastal San Diego</em></h2>
+    </div>
+
+    <div class="cv-hood-grid">
+      <a class="cv-hood-item" href="/personal-trainer-4s-ranch">4S Ranch · Studio</a>
+      <a class="cv-hood-item" href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a>
+      <a class="cv-hood-item" href="/personal-trainer-fairbanks-ranch">Fairbanks Ranch</a>
+      <a class="cv-hood-item" href="/personal-trainer-santaluz">Santaluz</a>
+      <a class="cv-hood-item" href="/personal-trainer-del-mar">Del Mar</a>
+      <a class="cv-hood-item" href="/personal-trainer-solana-beach">Solana Beach</a>
+      <a class="cv-hood-item" href="/personal-trainer-encinitas">Encinitas</a>
+      <a class="cv-hood-item" href="/personal-trainer-carlsbad">Carlsbad</a>
+      <a class="cv-hood-item" href="/personal-trainer-la-jolla">La Jolla</a>
+    </div>
+  </div>
+
+  <!-- HUB LINKS -->
+  <div class="cv-section">
+    <div class="cv-section-head">
+      <span class="cv-label">Explore More</span>
+      <hr class="cv-divider">
+      <h2>Related <em>Pages</em></h2>
+    </div>
+
+    <div class="cv-hub-grid">
+      <a class="cv-hub-link" href="/personal-training-services">All Services</a>
+      <a class="cv-hub-link" href="/in-home-personal-trainer-san-diego">In-Home Training</a>
+      <a class="cv-hub-link" href="/corrective-exercise-post-rehab">Corrective Exercise</a>
+      <a class="cv-hub-link" href="/strength-training-1">Strength Training</a>
+      <a class="cv-hub-link" href="/hiit-personal-trainer-san-diego">HIIT Training</a>
+      <a class="cv-hub-link" href="/executive-hybrid-coaching">Hybrid Coaching</a>
+      <a class="cv-hub-link" href="/training-rates-san-diego">Training Rates</a>
+      <a class="cv-hub-link" href="/the-omnifit-method">The OmniFit Method</a>
+      <a class="cv-hub-link" href="/how-we-measure-your-progress">How We Measure Progress</a>
+      <a class="cv-hub-link" href="/how-it-works-pricing">Pricing &amp; Process</a>
+      <a class="cv-hub-link" href="/case-studies">Case Studies</a>
+      <a class="cv-hub-link" href="/faqs">FAQs</a>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div style="padding: 0 28px;">
+    <div class="cv-bottom">
+      <h2>Train Smarter in <em>Carmel Valley</em></h2>
+      <p>Book a 45-minute consultation. We'll discuss your goals, movement history, and schedule — and build a program that fits your Carmel Valley lifestyle.</p>
+      <a class="cv-btn cv-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="cv-bottom-note">Free 45-minute consultation · Fully refundable $30 deposit reserves your time · Honest assessment of fit</span>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="cv-trust">
+    <div class="cv-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
+    <div class="cv-trust-item"><span>🏅</span> NASM CPT · CES · PES · BCS · CNC</div>
+    <div class="cv-trust-item"><span>📍</span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
+    <div class="cv-trust-item"><span>🌍</span> Serving Carmel Valley &amp; Coastal North County</div>
+  </div>
+
+</div>
