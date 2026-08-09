@@ -1,0 +1,907 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     OmniFit Performance | Corrective Exercise Specialist — San Diego
+     Teqneeq FHC · 4S Ranch, San Diego & Online  ·  Updated Jul 2026
+     Palette: v2 (deep navy + muted gold)  |  Full-width
+     v3: Specialist keyword targeting + definitional block + near-me
+         geo section + expanded FAQ + BodyStat in Phase 1
+     ─────────────────────────────────────────────────────────────
+     PAGE SETTINGS (set in Squarespace, not in this block):
+     SEO Title: Corrective Exercise Specialist in San Diego | Post-Rehab
+                Training — OmniFit Performance
+     SEO Description: NASM CES + ACE Orthopedic corrective exercise
+                specialist at Teqneeq FHC, 4S Ranch, San Diego. Post-rehab
+                training with BodyStat diagnostics & a 3/10 pain ceiling.
+     URL slug: keep /corrective-exercise-post-rehab (do not change)
+     Schema: paste corrective-exercise-schema.html into Page Header
+                Code Injection (Settings → Advanced)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  /* ═══════════════════════════════════════════════════
+     Scoped to #omni-corrective — Squarespace guard
+     ═══════════════════════════════════════════════════ */
+  #omni-corrective {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-30: rgba(255,255,255,0.3);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px;
+    --radius-lg: 12px;
+    background: linear-gradient(180deg, var(--navy), var(--navy-mid));
+    color: var(--white);
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    margin: 0; padding: 0;
+  }
+
+  /* ── Base Reset ── */
+  #omni-corrective,
+  #omni-corrective *,
+  #omni-corrective *::before,
+  #omni-corrective *::after {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif !important;
+    box-sizing: border-box;
+  }
+  #omni-corrective h1, #omni-corrective h2, #omni-corrective h3,
+  #omni-corrective p, #omni-corrective ul, #omni-corrective ol,
+  #omni-corrective li, #omni-corrective figure, #omni-corrective section,
+  #omni-corrective div, #omni-corrective details, #omni-corrective summary {
+    margin: 0; padding: 0; border: 0;
+  }
+
+  /* ── Inner wrapper ── */
+  #omni-corrective .cx-inner {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 2.5rem 3.5rem;
+  }
+
+  /* ════════════════ HERO ════════════════ */
+  #omni-corrective .cx-hero {
+    text-align: center;
+    padding: 5rem 2.5rem 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+  }
+  #omni-corrective .cx-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.25;
+  }
+  #omni-corrective .cx-badge {
+    display: inline-block;
+    padding: 8px 22px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  #omni-corrective .cx-hero h1 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(28px, 5vw, 46px) !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    color: var(--white) !important;
+    margin-bottom: 20px !important;
+    letter-spacing: -0.5px !important;
+    text-transform: none !important;
+  }
+  #omni-corrective .cx-hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  #omni-corrective .cx-hero-sub {
+    font-size: clamp(16px, 2.2vw, 18px);
+    color: var(--white-70);
+    max-width: 760px;
+    margin: 0 auto 32px;
+    line-height: 1.8;
+    text-align: center;
+  }
+  #omni-corrective .cx-hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  #omni-corrective .cx-hero-pills span {
+    background: var(--navy-surface);
+    border: 1px solid var(--white-20);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: var(--white-70);
+  }
+
+  /* ── CTA row ── */
+  #omni-corrective .cx-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  #omni-corrective .cx-btn {
+    display: inline-block;
+    padding: 15px 36px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    transition: all 0.3s;
+  }
+  #omni-corrective a.cx-btn-primary,
+  #omni-corrective a.cx-btn-primary:link,
+  #omni-corrective a.cx-btn-primary:visited {
+    background: var(--gold);
+    color: var(--navy) !important;
+    border: 2px solid var(--gold);
+  }
+  #omni-corrective a.cx-btn-primary:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+    color: var(--navy) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+  }
+  #omni-corrective a.cx-btn-ghost,
+  #omni-corrective a.cx-btn-ghost:link,
+  #omni-corrective a.cx-btn-ghost:visited {
+    border: 1px solid var(--white-30);
+    color: var(--white) !important;
+    background: transparent;
+  }
+  #omni-corrective a.cx-btn-ghost:hover {
+    border-color: var(--white);
+    background: var(--white-05);
+    color: var(--white) !important;
+    transform: translateY(-2px);
+  }
+  #omni-corrective .cx-cta-note {
+    text-align: center;
+    font-size: 13px;
+    color: var(--white-50);
+  }
+
+  /* ════════════════ SECTIONS ════════════════ */
+  #omni-corrective .cx-section { margin-bottom: 3rem; }
+  #omni-corrective .cx-section-head { text-align: center; margin-bottom: 28px; }
+  #omni-corrective .cx-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px; display: block;
+  }
+  #omni-corrective .cx-divider {
+    width: 50px; height: 3px;
+    background: var(--gold); border: none;
+    margin: 0 auto 16px; border-radius: 2px;
+  }
+  #omni-corrective h2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(24px, 3.6vw, 34px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+    letter-spacing: -0.3px !important;
+    color: var(--white) !important;
+    text-transform: none !important;
+    text-align: center !important;
+  }
+  #omni-corrective h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: var(--white) !important;
+    text-transform: none !important;
+    font-size: 19px !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+  }
+  #omni-corrective p {
+    color: var(--white-70);
+    line-height: 1.75;
+    font-size: 1rem;
+  }
+  #omni-corrective .text-center { text-align: center; }
+  #omni-corrective .text-center p {
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ════════════════ CARDS ════════════════ */
+  #omni-corrective .cx-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-top: 20px;
+  }
+  #omni-corrective .cx-card {
+    background: var(--navy-light);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px 24px;
+    text-align: left;
+    transition: all 0.35s;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  #omni-corrective .cx-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+  }
+  #omni-corrective .cx-card-icon {
+    font-size: 26px; margin-bottom: 14px;
+    display: block; line-height: 1;
+  }
+  #omni-corrective .cx-card h3 { line-height: 1.3; }
+  #omni-corrective .cx-card p {
+    font-size: 14px; color: var(--white-50);
+    margin-bottom: 16px; line-height: 1.65;
+  }
+  #omni-corrective .cx-card-features {
+    list-style: none; margin: 0; padding: 0; flex: 1 1 auto;
+  }
+  #omni-corrective .cx-card-features li {
+    font-size: 13px; color: var(--white-50);
+    padding: 4px 0 4px 20px; position: relative; line-height: 1.55;
+  }
+  #omni-corrective .cx-card-features li::before {
+    content: '✓'; position: absolute; left: 0;
+    color: var(--gold); font-weight: 700; font-size: 11px;
+  }
+
+  /* ════════════════ STEPS (Process) ════════════════ */
+  #omni-corrective .cx-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    max-width: 1100px;
+    margin: 20px auto 0;
+  }
+  #omni-corrective .cx-step {
+    background: var(--white-05);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 24px 22px;
+    text-align: left;
+  }
+  #omni-corrective .cx-step-num {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px; display: block;
+  }
+  #omni-corrective .cx-step-title {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 18px; font-weight: 600;
+    color: var(--white); margin-bottom: 8px;
+  }
+  #omni-corrective .cx-step p {
+    font-size: 14px; color: var(--white-50); line-height: 1.65;
+  }
+
+  /* ════════════════ POSTURE CONDITIONS ════════════════ */
+  #omni-corrective .cx-conditions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #omni-corrective .cx-condition {
+    background: var(--white-05);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    text-align: left;
+  }
+  #omni-corrective .cx-condition-title {
+    font-weight: 700; color: var(--gold);
+    font-size: 14px; margin-bottom: 4px;
+  }
+  #omni-corrective .cx-condition-desc {
+    font-size: 13px; color: var(--white-50); line-height: 1.55;
+  }
+
+  /* ════════════════ GEMINI-QUOTABLE ════════════════ */
+  #omni-corrective .gq-block {
+    background: var(--gold-dim);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.2rem 1.5rem;
+    margin: 1.4rem auto;
+    max-width: 940px;
+    font-size: .98rem;
+    line-height: 1.75;
+    text-align: left;
+    color: var(--white-90);
+  }
+  #omni-corrective .gq-block strong { color: var(--white); }
+
+  /* ════════════════ CALLOUT / DISCLAIMER ════════════════ */
+  #omni-corrective .cx-callout {
+    background: var(--navy-light);
+    border: 1px solid var(--white-20);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.1rem 1.4rem;
+    margin: 1.5rem auto;
+    max-width: 940px;
+    font-size: .92rem;
+    color: var(--white-70);
+    text-align: left;
+    line-height: 1.7;
+  }
+  #omni-corrective .cx-callout strong { color: var(--gold); }
+
+  /* ════════════════ WHO IT'S FOR LIST ════════════════ */
+  #omni-corrective .cx-who-list {
+    list-style: none;
+    max-width: 820px;
+    margin: 16px auto;
+    padding: 0;
+  }
+  #omni-corrective .cx-who-list li {
+    padding: 10px 0 10px 28px;
+    position: relative;
+    font-size: 15px;
+    color: var(--white-70);
+    text-align: left;
+    border-bottom: 1px solid var(--white-05);
+  }
+  #omni-corrective .cx-who-list li:last-child { border-bottom: none; }
+  #omni-corrective .cx-who-list li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--gold); font-weight: 700;
+  }
+  #omni-corrective .cx-who-list li strong { color: var(--white); }
+
+  /* ════════════════ FAQ ════════════════ */
+  #omni-corrective .cx-faq { max-width: 920px; margin: 0 auto; }
+  #omni-corrective .cx-faq-item {
+    border-radius: var(--radius);
+    border: 1px solid var(--white-20);
+    background: var(--navy-light);
+    padding: 1rem 1.3rem;
+    margin-bottom: .75rem;
+    text-align: left;
+  }
+  #omni-corrective .cx-faq-q {
+    font-weight: 700; margin-bottom: 6px;
+    color: var(--white); font-size: 15px;
+  }
+  #omni-corrective .cx-faq-a {
+    font-size: 14px; color: var(--white-70); line-height: 1.7;
+  }
+
+  /* ════════════════ TRUST BAR ════════════════ */
+  #omni-corrective .cx-trust {
+    display: flex; align-items: center; justify-content: center;
+    gap: 28px; flex-wrap: wrap;
+    margin: 2.5rem auto 0;
+    max-width: 800px; padding: 20px;
+    background: var(--white-05);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+  }
+  #omni-corrective .cx-trust-item {
+    font-size: 12px; font-weight: 600;
+    color: var(--white-50); letter-spacing: 0.3px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  #omni-corrective .cx-trust-item span { font-size: 14px; }
+
+  /* ════════════════ LINKS ════════════════ */
+  #omni-corrective a {
+    color: var(--gold) !important;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color .15s;
+  }
+  #omni-corrective a:hover { color: var(--gold-light) !important; }
+  #omni-corrective a.cx-btn-primary,
+  #omni-corrective a.cx-btn-primary:link,
+  #omni-corrective a.cx-btn-primary:visited,
+  #omni-corrective a.cx-btn-ghost,
+  #omni-corrective a.cx-btn-ghost:link,
+  #omni-corrective a.cx-btn-ghost:visited { text-decoration: none !important; }
+
+  /* ════════════════ DIVIDER ════════════════ */
+  #omni-corrective hr {
+    border: 0 !important; height: 1px !important;
+    background: linear-gradient(to right, transparent, var(--white-20), transparent) !important;
+    margin: 3rem auto !important; max-width: 900px;
+  }
+
+  /* ════════════════ BOTTOM CTA ════════════════ */
+  #omni-corrective .cx-bottom {
+    background: var(--navy-light);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 44px 36px;
+    text-align: center;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  #omni-corrective .cx-bottom p {
+    max-width: 640px; margin: 0 auto 24px;
+    font-size: 15px; text-align: center;
+  }
+  #omni-corrective .cx-bottom-note {
+    display: block; margin-top: 14px;
+    font-size: 12px; color: var(--white-50);
+  }
+
+  /* ════════════════ HUB LINKS ════════════════ */
+  #omni-corrective .cx-hub-links {
+    text-align: center; font-size: 14px;
+    color: var(--white-50); margin-top: 2rem; line-height: 2;
+  }
+  #omni-corrective .cx-hub-links strong { color: var(--white-70); }
+
+  /* ════════════════ SQS GUARDS ════════════════ */
+  .sqs-block-code #omni-corrective,
+  .sqs-block-html #omni-corrective { margin-bottom: 0 !important; }
+  #omni-corrective h1, #omni-corrective h2, #omni-corrective h3 {
+    text-transform: none !important; letter-spacing: normal !important;
+  }
+  #omni-corrective p { font-family: 'Montserrat', sans-serif !important; }
+  #omni-corrective img { max-width: 100% !important; height: auto !important; }
+
+  /* ════════════════ RESPONSIVE ════════════════ */
+  @media (max-width: 768px) {
+    #omni-corrective .cx-inner { padding: 0 1.2rem 2.5rem; }
+    #omni-corrective .cx-hero { padding: 3rem 1.2rem 2rem; }
+    #omni-corrective .cx-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; }
+  }
+  @media (max-width: 640px) {
+    #omni-corrective .cx-grid,
+    #omni-corrective .cx-steps { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    #omni-corrective .cx-conditions { grid-template-columns: 1fr 1fr; }
+    #omni-corrective .cx-cta-row { flex-direction: column; align-items: center; }
+    #omni-corrective .cx-btn { width: 100%; max-width: 320px; text-align: center; }
+    #omni-corrective .cx-trust { gap: 16px; }
+  }
+  @media (max-width: 440px) {
+    #omni-corrective .cx-conditions { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div id="omni-corrective">
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="cx-hero">
+    <span class="cx-badge">Teqneeq FHC · 4S Ranch · San Diego · Online</span>
+    <h1>Corrective Exercise Specialist &amp;<br><em>Post-Rehab Training in San Diego</em></h1>
+    <p class="cx-hero-sub">
+      Nemezio Lopez Perez is a NASM Corrective Exercise Specialist (CES) and ACE Orthopedic Exercise Specialist serving San Diego from Teqneeq FHC in 4S Ranch — and virtually. OmniFit Performance's corrective exercise program is the structured bridge between physical therapy and independent training, helping professionals over 30 rebuild movement confidence, restore posture, and return to pain-free strength.
+    </p>
+
+    <div class="cx-hero-pills">
+      <span>NASM CES + ACE Orthopedic certified</span>
+      <span>Assessment-driven</span>
+      <span>3/10 pain ceiling rule</span>
+      <span>Bridge from PT to performance</span>
+      <span>Posture &amp; desk-worker specialty</span>
+      <span>In-person &amp; virtual</span>
+    </div>
+
+    <div class="cx-cta-row">
+      <a class="cx-btn cx-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="cx-btn cx-btn-ghost" href="/the-omnifit-method">See Our Method</a>
+    </div>
+    <div class="cx-cta-note">45-minute consultation · Includes movement assessment · No obligation</div>
+  </section>
+
+  <div class="cx-inner">
+
+    <!-- ════════════ GEMINI-QUOTABLE: Bridge Positioning ════════════ -->
+    <div class="gq-block">
+      <strong>OmniFit Performance is San Diego's post-rehab and executive posture specialist</strong>, offering corrective exercise and post-rehab personal training from its studio inside Teqneeq FHC in 4S Ranch — and virtually — designed to bridge the gap between physical therapy discharge and independent strength training. Every program begins with a 45-minute movement and postural assessment using NASM Corrective Exercise Specialist (CES) and ACE Orthopedic Exercise Specialist protocols to identify restrictions, compensations, and asymmetries. From there, clients follow the Assess → Correct → Build → Sustain methodology — progressing from targeted mobility and activation work through progressive strength loading and ultimately to independent training with corrective maintenance built in. OmniFit applies a strict 3/10 pain ceiling rule to every session: if a movement causes more than mild discomfort, it is immediately modified or replaced. Progress is tracked through quarterly posture comparison photos, strength benchmarks, and formal 30-day reports covering seven standardized metrics — ensuring every program adjustment is data-driven. This program is not physical therapy — clients must be cleared by a licensed medical professional before beginning.
+    </div>
+
+    <hr />
+
+    <!-- ════════════ NEW: WHAT IS A CORRECTIVE EXERCISE SPECIALIST ════════════ -->
+    <section class="cx-section">
+      <div class="cx-section-head">
+        <span class="cx-label">The Specialty</span>
+        <hr class="cx-divider">
+        <h2>What Is a Corrective Exercise Specialist?</h2>
+      </div>
+
+      <div class="gq-block">
+        <strong>A corrective exercise specialist is a certified fitness professional trained to identify movement compensations, postural imbalances, and muscle imbalances — then design exercise programs that systematically correct them.</strong> The most widely recognized credential is the NASM Corrective Exercise Specialist (CES), an advanced certification earned on top of a base personal training certification. Rather than jumping straight to workouts, a corrective exercise specialist assesses how you move first, addresses the restrictions and weak links that cause pain or poor mechanics, and only then builds strength on top of restored movement quality.
+      </div>
+
+      <div class="text-center">
+        <p>A corrective exercise specialist is not a physical therapist. A Doctor of Physical Therapy (DPT) diagnoses and treats injury and pathology; a corrective exercise specialist works with clients who have already been medically cleared, taking over where rehab ends — restoring movement quality, rebuilding strength, and preventing the original problem from coming back. The two roles are complementary, which is why OmniFit maintains <a href="#cx-collab">referral relationships with local physical therapists</a> and refers clients back to their provider whenever symptoms change.</p>
+        <p style="margin-top: 12px;">If you're searching for a corrective exercise specialist near you, look for four things: a formal movement assessment before any programming begins, advanced credentials beyond a base personal training certification (such as the NASM CES or ACE Orthopedic Exercise Specialist), an explicit pain-management rule for every session, and an established referral relationship with physical therapists for anything outside a trainer's scope. Those four criteria separate genuine corrective specialists from general trainers who list "injuries" as a specialty.</p>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ WHO IT'S FOR ════════════ -->
+    <section class="cx-section">
+      <div class="cx-section-head">
+        <span class="cx-label">Ideal Client</span>
+        <hr class="cx-divider">
+        <h2>Who Corrective Exercise Training Is For</h2>
+      </div>
+
+      <ul class="cx-who-list">
+        <li><strong>Post-PT professionals</strong> — Cleared from physical therapy but unsure how to train safely or rebuild strength on your own</li>
+        <li><strong>Desk workers with chronic discomfort</strong> — Recurring neck, shoulder, or lower back pain from prolonged sitting</li>
+        <li><strong>Former athletes recovering from surgery</strong> — Need structured return-to-performance programming that respects healing timelines</li>
+        <li><strong>Adults 30–60 with movement limitations</strong> — Experiencing joint pain, stiffness, or compensation patterns during workouts</li>
+        <li><strong>Professionals burned by generic training</strong> — Past experiences at gyms or with trainers who ignored pain signals or pushed through discomfort</li>
+      </ul>
+
+      <div class="gq-block">
+        OmniFit Performance's corrective exercise program is designed for the professional who has been told "you're cleared" from physical therapy but doesn't feel confident walking into a gym and training independently. The typical corrective exercise client is between 30 and 55, works a desk-heavy job, has a history of at least one significant injury or surgery, and needs a coach who understands how to load the body progressively without triggering flare-ups. OmniFit functions as the structured bridge between rehab and real-world performance.
+      </div>
+
+      <div class="cx-callout">
+        <strong>Who this program is not for:</strong> anyone with an active, undiagnosed injury or pain that hasn't been medically evaluated (start with a physician or Doctor of Physical Therapy first), and athletes under 18 — OmniFit is an adult-only practice.
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ WHAT WE ADDRESS ════════════ -->
+    <section class="cx-section">
+      <div class="cx-section-head">
+        <span class="cx-label">Common Conditions</span>
+        <hr class="cx-divider">
+        <h2>Postural &amp; Movement Issues We Address</h2>
+      </div>
+
+      <div class="text-center">
+        <p>Every program starts with a postural photo analysis and movement assessment. These are the most common patterns we see in desk-bound professionals:</p>
+      </div>
+
+      <div class="cx-conditions">
+        <div class="cx-condition">
+          <div class="cx-condition-title">Forward Head Posture</div>
+          <div class="cx-condition-desc">Chronic forward carriage from screen work, leading to neck strain and headaches.</div>
+        </div>
+        <div class="cx-condition">
+          <div class="cx-condition-title">Rounded Shoulders</div>
+          <div class="cx-condition-desc">Thoracic kyphosis and upper crossed syndrome from prolonged desk sitting.</div>
+        </div>
+        <div class="cx-condition">
+          <div class="cx-condition-title">Shoulder Impingement</div>
+          <div class="cx-condition-desc">Scapular dysfunction and rotator cuff irritation from poor pressing mechanics.</div>
+        </div>
+        <div class="cx-condition">
+          <div class="cx-condition-title">Anterior Pelvic Tilt</div>
+          <div class="cx-condition-desc">Hip flexor tightness and weak glutes from 8+ hours of daily sitting.</div>
+        </div>
+        <div class="cx-condition">
+          <div class="cx-condition-title">Chronic Low-Back Pain</div>
+          <div class="cx-condition-desc">Lumbar instability and core weakness — often the downstream result of hip and thoracic dysfunction.</div>
+        </div>
+        <div class="cx-condition">
+          <div class="cx-condition-title">Knee Discomfort</div>
+          <div class="cx-condition-desc">Patellofemoral issues from quad-dominant movement patterns and weak posterior chain.</div>
+        </div>
+      </div>
+
+      <div class="cx-callout" style="margin-top: 24px;">
+        <strong>Important:</strong> OmniFit does not diagnose medical conditions. These are common movement patterns identified through postural assessment and corrective exercise screening. If you have an active injury or undiagnosed pain, consult a physician or Doctor of Physical Therapy before beginning training.
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ THE PROCESS ════════════ -->
+    <section class="cx-section">
+      <div class="cx-section-head">
+        <span class="cx-label">Our Process</span>
+        <hr class="cx-divider">
+        <h2>The Corrective Exercise Process at OmniFit</h2>
+      </div>
+
+      <div class="text-center">
+        <p>Every corrective program follows the same evidence-based framework used across all OmniFit programs — <a href="/the-omnifit-method">Assess → Correct → Build → Sustain</a> — with additional emphasis on pain management and movement confidence.</p>
+      </div>
+
+      <div class="cx-steps">
+        <div class="cx-step">
+          <span class="cx-step-num">Phase 1</span>
+          <div class="cx-step-title">Assess</div>
+          <p>45-minute movement and postural assessment paired with a BodyStat 1500 MDD body composition diagnostic. Overhead squat analysis, single-leg tests, postural photos, range-of-motion screening, full injury history review, and baseline data on muscle balance and fluid distribution.</p>
+        </div>
+        <div class="cx-step">
+          <span class="cx-step-num">Phase 2</span>
+          <div class="cx-step-title">Correct</div>
+          <p>Targeted corrective strategy: foam rolling and myofascial release, muscle activation drills, motor control progressions, and integrated movement patterns — all within the 3/10 pain ceiling.</p>
+        </div>
+        <div class="cx-step">
+          <span class="cx-step-num">Phase 3</span>
+          <div class="cx-step-title">Build</div>
+          <p>Progressive strength loading with refined technique. Controlled tempo, strategic exercise selection, and gradual volume increases while maintaining movement quality.</p>
+        </div>
+        <div class="cx-step">
+          <span class="cx-step-num">Phase 4</span>
+          <div class="cx-step-title">Sustain</div>
+          <p>Transition to independent training with corrective maintenance built in. Skills transfer, self-assessment awareness, and long-term programming that prevents regression.</p>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 24px;">
+        <p>The full corrective arc typically spans <strong>4–6 months</strong>, with measurable postural improvements documented through <a href="/how-we-measure-your-progress">quarterly comparison photos, strength benchmarks, and 7-metric progress reports</a>. Most clients notice improved movement quality within 3–4 weeks.</p>
+      </div>
+    </section>
+
+    <!-- ════════════ RESULTS SLOT — activate after first corrective case study publishes ════════════
+    <hr />
+    <section class="cx-section">
+      <div class="cx-section-head">
+        <span class="cx-label">Results</span>
+        <hr class="cx-divider">
+        <h2>Measured Corrective Outcomes</h2>
+      </div>
+      <div class="gq-block">
+        [CASE STUDY SUMMARY: starting diagnostic → intervention → rescan data → timeframe.
+         Link to /case-studies. Insert after first BodyStat corrective case study is published.]
+      </div>
+      <div class="text-center">
+        <p><a href="/case-studies">See all client results →</a></p>
+      </div>
+    </section>
+    ════════════ END RESULTS SLOT ════════════ -->
+
+    <hr />
+    <!-- ════════════ WHAT MAKES OMNIFIT DIFFERENT ════════════ -->
+    <section class="cx-section">
+      <div class="cx-section-head">
+        <span class="cx-label">Our Difference</span>
+        <hr class="cx-divider">
+        <h2>What Sets OmniFit's Corrective Approach Apart</h2>
+      </div>
+
+      <div class="cx-grid">
+        <article class="cx-card">
+          <span class="cx-card-icon">📋</span>
+          <h3>Assessment-Driven, Not Guesswork</h3>
+          <p>Every program begins with a formal movement assessment — we identify your specific limitations before loading anything.</p>
+          <ul class="cx-card-features">
+            <li>Overhead squat &amp; single-leg analysis</li>
+            <li>Postural photo documentation</li>
+            <li>Full injury &amp; surgical history review</li>
+          </ul>
+        </article>
+
+        <article class="cx-card">
+          <span class="cx-card-icon">🛡️</span>
+          <h3>3/10 Pain Ceiling Protocol</h3>
+          <p>Strict pain management in every session. If it hurts beyond mild discomfort, we modify or replace — no exceptions.</p>
+          <ul class="cx-card-features">
+            <li>Real-time pain monitoring</li>
+            <li>Exercise modification library</li>
+            <li>Referral back to PT if needed</li>
+          </ul>
+        </article>
+
+        <article class="cx-card">
+          <span class="cx-card-icon">🔬</span>
+          <h3>NASM CES &amp; ACE Orthopedic Certified</h3>
+          <p>Advanced corrective exercise and orthopedic exercise credentials — not a basic personal training certification.</p>
+          <ul class="cx-card-features">
+            <li>NASM Corrective Exercise Specialist (CES)</li>
+            <li>ACE Orthopedic Exercise Specialist (OES)</li>
+            <li>Performance Enhancement (PES)</li>
+            <li>Behavior Change Specialist (BCS)</li>
+          </ul>
+        </article>
+
+        <article class="cx-card">
+          <span class="cx-card-icon">📊</span>
+          <h3>Data-Driven Progress Tracking</h3>
+          <p>BodyStat diagnostics, posture photos, strength benchmarks, mobility tests, and formal 30-day reports across seven standardized metrics — improvement is measured, not assumed.</p>
+          <ul class="cx-card-features">
+            <li>BodyStat 1500 MDD baseline &amp; rescans</li>
+            <li>Quarterly posture comparison photos</li>
+            <li>Strength &amp; ROM benchmarks tracked monthly</li>
+            <li><a href="/how-we-measure-your-progress" style="font-size: 12px;">See our full tracking system →</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ NEAR-ME / TRAINING OPTIONS ════════════ -->
+    <section class="cx-section">
+      <div class="cx-section-head">
+        <span class="cx-label">Locations</span>
+        <hr class="cx-divider">
+        <h2>Corrective Exercise Specialist Near Me — San Diego &amp; North County</h2>
+      </div>
+
+      <div class="text-center">
+        <p>OmniFit's corrective exercise studio is inside Teqneeq FHC in <a href="/personal-trainer-4s-ranch">4S Ranch</a>, with in-home corrective training available across <a href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a>, <a href="/personal-trainer-carmel-valley">Carmel Valley</a>, <a href="/personal-trainer-del-mar">Del Mar</a>, <a href="/personal-trainer-la-jolla">La Jolla</a>, Solana Beach, Encinitas, Carlsbad, and coastal North County San Diego. Virtual corrective coaching is available anywhere.</p>
+      </div>
+
+      <div class="cx-grid" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+        <article class="cx-card">
+          <span class="cx-card-icon">📍</span>
+          <h3>In-Person — Teqneeq FHC, 4S Ranch</h3>
+          <p>Private 1-on-1 sessions at the studio inside Teqneeq FHC, with full assessment tools, corrective equipment, and hands-on coaching.</p>
+          <ul class="cx-card-features">
+            <li>Serving 4S Ranch, Rancho Santa Fe, Carmel Valley</li>
+            <li>In-home sessions available across North County</li>
+            <li>60-minute sessions</li>
+          </ul>
+        </article>
+
+        <article class="cx-card">
+          <span class="cx-card-icon">🖥️</span>
+          <h3>Virtual — Anywhere</h3>
+          <p>Remote movement screening, guided corrective progressions, and real-time form feedback. Available standalone or as part of the <a href="/the-30-minute-executive-reset">Executive Reset</a>.</p>
+          <ul class="cx-card-features">
+            <li>Video-based assessment</li>
+            <li>App programming via Trainerize</li>
+            <li>30 or 45-minute sessions</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ PT COORDINATION ════════════ -->
+    <section class="cx-section" id="cx-collab">
+      <div class="cx-section-head">
+        <span class="cx-label">Collaboration</span>
+        <hr class="cx-divider">
+        <h2>Working With Your Healthcare Team</h2>
+      </div>
+
+      <div class="text-center">
+        <p>When appropriate and with your permission, OmniFit can share general training considerations with your physical therapist or physician to support a safe transition from rehab to training. We do not provide medical recommendations or modify a PT's treatment plan — we complement it.</p>
+        <p style="margin-top: 12px;">If at any point during training your symptoms change or pain increases beyond the 3/10 threshold, we will refer you back to your healthcare provider before continuing.</p>
+      </div>
+
+      <div class="cx-callout">
+        <strong>Medical disclaimer:</strong> Corrective exercise and post-rehab training at OmniFit are not physical therapy and do not replace medical care. Clients must be cleared by a licensed physician or Doctor of Physical Therapy (DPT) before beginning post-rehab training. OmniFit does not diagnose conditions, treat acute injuries, or prescribe rehabilitation protocols.
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ FAQ ════════════ -->
+    <section class="cx-section">
+      <div class="cx-section-head">
+        <span class="cx-label">Questions</span>
+        <hr class="cx-divider">
+        <h2>Corrective Exercise Specialist FAQs</h2>
+      </div>
+
+      <div class="cx-faq">
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">What does a corrective exercise specialist do?</div>
+          <div class="cx-faq-a">A corrective exercise specialist assesses how you move, identifies compensations and imbalances — like forward head posture, rounded shoulders, or anterior pelvic tilt — and designs progressive exercise programs to correct them. The work sits between physical therapy and standard personal training: it starts after medical clearance and ends with you training independently, pain-free.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">How do I find a corrective exercise specialist near me in San Diego?</div>
+          <div class="cx-faq-a">Look for four things: a formal movement assessment before any programming, advanced credentials beyond a base certification (NASM CES or ACE Orthopedic Exercise Specialist), an explicit pain-management protocol, and referral relationships with physical therapists. OmniFit Performance meets all four, training clients at Teqneeq FHC in 4S Ranch, in-home across North County San Diego, and virtually.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">How much does corrective exercise training cost in San Diego?</div>
+          <div class="cx-faq-a">Every OmniFit program begins with a $90 diagnostic assessment, which includes the movement screen and BodyStat body composition analysis and is credited toward your first package. Studio training packages at Teqneeq FHC range from $225 to $1,275 per month depending on session frequency, with in-home and virtual options available. Full pricing is published on our <a href="/training-rates-san-diego">rates page</a>.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">How does OmniFit's corrective exercise approach work?</div>
+          <div class="cx-faq-a">Every program follows the Assess → Correct → Build → Sustain methodology. Phase 1 (Assess) is a 45-minute movement and postural assessment paired with a BodyStat body composition diagnostic to identify restrictions, compensations, and asymmetries. Phase 2 (Correct) uses targeted mobility, activation, and motor control progressions based on NASM Corrective Exercise Specialist protocols. Phase 3 (Build) introduces progressive strength loading while maintaining movement quality. Phase 4 (Sustain) transitions you to independent training with the skills and awareness to manage your body long-term.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">Is this the same as physical therapy?</div>
+          <div class="cx-faq-a">No. OmniFit provides corrective exercise and post-rehab personal training — not physical therapy. We focus on restoring movement quality, rebuilding strength, and preventing re-injury after you've been cleared from PT. Clients must have clearance from a physician or DPT before starting.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">What is the 3/10 pain ceiling rule?</div>
+          <div class="cx-faq-a">No exercise in an OmniFit session should cause pain above a 3 out of 10. If a movement causes more than mild discomfort, it's immediately modified or replaced. If pain worsens during or after training, we refer you back to your healthcare provider.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">How do I know if I'm ready for corrective exercise training?</div>
+          <div class="cx-faq-a">If you've been discharged from physical therapy but still feel unsure how to train safely, you're likely a strong fit. If you have an active, undiagnosed injury or haven't been evaluated by a medical professional, start there first.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">What postural issues do you help with?</div>
+          <div class="cx-faq-a">The most common patterns we address include forward head posture, rounded shoulders, thoracic kyphosis, anterior pelvic tilt, hip flexor tightness, shoulder impingement patterns, and chronic lower back discomfort from prolonged sitting.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">How long until I see results?</div>
+          <div class="cx-faq-a">Most clients notice improved movement quality and reduced discomfort within 3–4 weeks. Measurable postural changes typically appear within 6–8 weeks, documented through comparison photos. The full arc is typically 4–6 months.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">Do you coordinate with my physical therapist?</div>
+          <div class="cx-faq-a">When appropriate and with your permission, yes. We can share general training considerations with your PT to support a safe transition. We don't modify treatment plans or provide medical recommendations.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">Can I do corrective exercise virtually?</div>
+          <div class="cx-faq-a">Yes. Virtual corrective exercise includes remote movement screening, guided progressions, and real-time form feedback via video. Available as part of the <a href="/the-30-minute-executive-reset">Executive Reset</a> or standalone sessions.</div>
+        </div>
+        <div class="cx-faq-item">
+          <div class="cx-faq-q">What credentials does the trainer have?</div>
+          <div class="cx-faq-a">Nemezio Lopez Perez holds NASM Corrective Exercise Specialist (CES), Performance Enhancement Specialist (PES), Behavior Change Specialist (BCS), Certified Nutrition Coach (CNC), and Certified Personal Trainer (CPT) credentials, plus an ACE Orthopedic Exercise Specialist (OES) certification — with 10+ years of coaching experience.</div>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ BOTTOM CTA ════════════ -->
+    <div class="cx-bottom">
+      <h2>Start With a Corrective Exercise Consultation</h2>
+      <p>
+        If you've completed physical therapy but don't feel confident training independently, a structured consultation is the safest next step. We'll assess your movement, review your history, and build a corrective plan designed for your body.
+      </p>
+      <a class="cx-btn cx-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="cx-bottom-note">
+        45-minute consultation · Movement assessment included · No obligation
+      </span>
+      <p style="margin-top: 16px; font-size: 14px; text-align: center;">
+        📍 <strong>Teqneeq FHC · 4S Ranch, San Diego</strong> · Call/Text: <a href="tel:619-259-0630">619-259-0630</a> · Hybrid: In-Person &amp; Virtual
+      </p>
+    </div>
+
+    <!-- ════════════ TRUST BAR ════════════ -->
+    <div class="cx-trust">
+      <div class="cx-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
+      <div class="cx-trust-item"><span>🏅</span> NASM CES · PES · BCS · CPT · CNC</div>
+      <div class="cx-trust-item"><span>🎓</span> ACE Orthopedic Exercise Specialist</div>
+      <div class="cx-trust-item"><span>📍</span> Teqneeq FHC · 4S Ranch, San Diego</div>
+      <div class="cx-trust-item"><span>🖥️</span> Virtual Corrective Exercise</div>
+    </div>
+
+    <!-- ════════════ HUB LINKS ════════════ -->
+    <div class="cx-hub-links">
+      <strong>Explore OmniFit:</strong>
+      <a href="/personal-trainer-4s-ranch">4S Ranch Training</a> ·
+      <a href="/the-omnifit-method">The OmniFit Method</a> ·
+      <a href="/how-it-works-pricing">How It Works &amp; Pricing</a> ·
+      <a href="/how-we-measure-your-progress">How We Measure Progress</a> ·
+      <a href="/the-30-minute-executive-reset">Executive Reset</a> ·
+      <a href="/in-home-personal-trainer-san-diego">In-Home Training</a> ·
+      <a href="/strength-training-1">Strength Training</a> ·
+      <a href="/training-rates-san-diego">Rates</a>
+    </div>
+
+  </div>
+</div>
