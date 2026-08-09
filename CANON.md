@@ -80,10 +80,12 @@ legitimately changes an invariant, and say so in REPORT.md)
   (page hash ae388d31c0b6149e, header hash 7e5de5984b133663).
 - Credentials block body: byte-identical on 9 territory pages (6492e3ca,
   630 bytes). 4S Ranch keeps its own Meet Nemezio.
-- Archetype card bodies (Section A): byte-identical × 10 pages —
-  hash added by the Section A/B run.
-- 9-point screen section body (Section B): byte-identical × 10 pages —
-  hash added by the Section A/B run.
+- Archetype card bodies (Section A): byte-identical × 10 pages
+  (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
+  page order, set by the Section A/B run).
+- 9-point screen section body (Section B): byte-identical × 10 pages
+  (hash bd73ea51bc9ec5eb; intro + nine <li> items + closing line, set by
+  the Section A/B run).
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".

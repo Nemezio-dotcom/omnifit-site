@@ -519,3 +519,128 @@ heading, body, and link, so nothing extra was invented.
 10 page files, 10 header files, REPORT.md. The only remaining root file is
 `corrective-exercise-post-rehab`, which was never in scope. The pre-patch
 originals that lived at repo root are gone; their content is in git history.
+
+---
+
+# Section A/B run — Who We Coach + 9-Point Movement Screen
+
+First run governed by `CANON.md`, which was committed to the repo root at the
+start of this run (`7c9f514`). Scope: add two sections to **all ten** territory
+pages, 4S Ranch included.
+
+## What was added
+
+**Section A — Who We Coach.** Placed directly after each page's credentials block,
+and after the Meet Nemezio section on 4S Ranch. Section head plus a three-card
+grid using each page's own `XX-section`, `XX-section-head`, `XX-label`,
+`XX-divider`, and `XX-grid`/`XX-card` classes. Intro line varies only by
+neighborhood. The three archetypes are The Desk-Bound Executive, The Post-Rehab
+Professional, and The 50+ Professional.
+
+Compliance: each card was machine-checked for outcome numbers before insertion.
+No pounds, percentages, or timeframes appear in any card. Situation and approach
+only, as specified.
+
+**Section B — The 9-Point Movement Screen.** Placed directly after Section A and
+before the FAQ. Section head plus a full-width `XX-card` holding a
+`XX-card-features` list of nine items and the closing line. The intro names the
+45-minute consultation and the $110 Performance Diagnostic credited in full
+toward a 3-month package, matching CANON pricing.
+
+| Page | Section A | Section B | Inserted before line | Certification |
+|---|---|---|---|---|
+| `personal-trainer-4s-ranch.html` | Y | Y | 1012 | pass |
+| `personal-trainer-carlsbad.html` | Y | Y | 217 | pass |
+| `personal-trainer-carmel-valley.html` | Y | Y | 289 | pass |
+| `personal-trainer-del-mar.html` | Y | Y | 325 | pass |
+| `personal-trainer-encinitas.html` | Y | Y | 215 | pass |
+| `personal-trainer-fairbanks-ranch.html` | Y | Y | 289 | pass |
+| `personal-trainer-la-jolla.html` | Y | Y | 342 | pass |
+| `personal-trainer-rancho-santa-fe.html` | Y | Y | 310 | pass |
+| `personal-trainer-santaluz.html` | Y | Y | 217 | pass |
+| `personal-trainer-solana-beach.html` | Y | Y | 289 | pass |
+
+Ordering was verified programmatically on every page as
+`credentials block < Section A < Section B < FAQ`. All ten pages parse with no
+unclosed or mismatched tags. All ten header files were left untouched, since
+neither section is an FAQ.
+
+## CANON.md invariants updated
+
+Two hashes were previously placeholders and are now set. This is a legitimate
+first-time population, not a change to an existing invariant.
+
+| Invariant | Hash | Scope |
+|---|---|---|
+| Archetype card bodies (Section A) | `6b1b0f4efbd4a72c` | 10 pages |
+| 9-point screen body (Section B) | `bd73ea51bc9ec5eb` | 10 pages |
+
+The definition of each hash was recorded alongside it in CANON.md, since
+"byte-identical body" is ambiguous without saying which bytes: Section A hashes
+the concatenation of the three card paragraph bodies in page order; Section B
+hashes the intro plus the nine list items plus the closing line.
+
+Pre-existing invariants re-verified and still holding: page pricing answer
+`ae388d31c0b6149e` (10 pages), header pricing answer `7e5de5984b133663`
+(10 headers), credentials body `6492e3ca1545dc26` (9 pages).
+
+## Certification — 20 files, per CANON.md
+
+All fourteen banned strings: **zero hits**. `$50`/`$75` as travel fees: **zero**.
+Em-dashes in rendered prose: **zero violations**.
+
+`$150`/`$175`: 46 occurrences, **all legal, zero violations**. 40 sit inside the
+canonical pricing answer and 6 are the approved card bullet "Fully virtual
+Executive Reset from $175/mo". CANON.md's exception (b) resolves the rule
+conflict flagged in the previous run, and those six bullets are now certified
+rather than merely reported.
+
+### Em-dash tooling
+
+CANON.md requires the exceptions be carved out by rule, not by line number. The
+checker strips HTML comments and `alt` attributes, then permits an em-dash only
+when it is a `-tcard-name` attribution or matches
+`<li>Name — descriptor</li>` with a capitalised name of 3 to 60 characters
+before the separator. It was negative-tested against six fixtures: the four legal
+forms pass, a prose em-dash is caught, and — importantly — a prose em-dash placed
+inside an `<li>` is still caught, so the new exception cannot be used to smuggle
+prose dashes into list items.
+
+## Judgment calls
+
+**1. CANON.md excludes the two-sentence instruction preamble.** The message said
+to commit it verbatim; the file begins at the `═══ OMNIFIT SITE` banner. The
+preamble ("Commit this entire message verbatim… then proceed with the pending
+Section A/B run") is a cover note for one run, and CANON.md is read by every
+future run before touching anything. Left in, a later run would read "proceed
+with the pending Section A/B run" as a live instruction and could redo this work.
+**Wrong if** the preamble was intended as part of the permanent record, in which
+case prepend it; everything from the banner down is byte-identical to the message.
+
+**2. Section heads carry the intro paragraph.** Territory `XX-section-head` blocks
+previously held only label, divider, and h2. Both intros were placed inside the
+section head so they inherit its centering without an inline style, matching the
+approach used for the credentials block. **Wrong if** the intros were meant to sit
+full-width as body copy rather than centered under the heading.
+
+**3. Section B renders as one full-width card, not a nine-card grid.** `XX-grid`
+is a fixed three-column layout, so nine short items would have produced three
+ragged rows. A single `XX-card` holding a `XX-card-features` list gives the
+existing check-mark list styling. **Wrong if** the nine points were meant to read
+as individual cards.
+
+**4. Section labels were chosen, not specified.** The spec gave section names,
+intro copy, and card content but not the small `XX-label` eyebrow text. "Who We
+Coach" and "The Diagnostic" were used. **Wrong if** specific eyebrow text was
+intended.
+
+## Carried forward, still unresolved
+
+- `$90` → `$110 Performance Diagnostic` rename across eight pages still rests on
+  the inference that the retired $90 BodyStat assessment and the $110 Performance
+  Diagnostic are the same product. CANON.md now states "$90 is the retired
+  name-era price", which supports the inference but does not independently
+  confirm it.
+- 12 drive-time claims remain unverified against the Teqneeq FHC location.
+- `corrective-exercise-post-rehab` at repo root is still unpatched, per CANON.md
+  Batch 3.
