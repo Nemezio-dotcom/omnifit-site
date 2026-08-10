@@ -1,0 +1,567 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  /* ═══ OMNIFIT STANDARD FRAMEWORK v1.0 — #omni-private ═══ */
+  #omni-private { --navy:#0a1628; --navy-mid:#0f1f3a; --navy-light:#152a4a; --navy-surface:#1a3158; --white:#fff; --white-90:rgba(255,255,255,0.9); --white-70:rgba(255,255,255,0.7); --white-50:rgba(255,255,255,0.5); --white-30:rgba(255,255,255,0.3); --white-20:rgba(255,255,255,0.2); --white-10:rgba(255,255,255,0.1); --white-05:rgba(255,255,255,0.05); --gold:#c9a84c; --gold-light:#e0c872; --gold-dim:rgba(201,168,76,0.15); --gold-glow:rgba(201,168,76,0.25); --green:#2e7d32; --green-dim:rgba(46,125,50,0.12); --red:#c0392b; --red-dim:rgba(192,57,43,0.10); --radius:8px; --radius-lg:12px; font-family:'Montserrat',sans-serif!important; color:var(--white); background:var(--navy); line-height:1.7; font-size:16px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; margin:0; padding:0; }
+  #omni-private *, #omni-private *::before, #omni-private *::after { box-sizing:border-box; margin:0; padding:0; }
+
+  /* HERO */
+  #omni-private .of-hero { padding:80px 28px 48px; max-width:880px; margin:0 auto; text-align:center; position:relative; }
+  #omni-private .of-hero::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:500px; height:500px; background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%); pointer-events:none; opacity:0.3; }
+  #omni-private .of-badge { display:inline-block; padding:8px 22px; border:1px solid var(--gold); color:var(--gold); border-radius:100px; font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:32px; position:relative; }
+  #omni-private .of-hero h1 { font-family:'Playfair Display',serif!important; font-size:clamp(32px,5vw,52px); font-weight:700; line-height:1.15; color:var(--white); margin-bottom:24px; letter-spacing:-0.5px; position:relative; text-transform:none; }
+  #omni-private .of-hero h1 em { font-style:italic; color:var(--gold); }
+  #omni-private .of-hero-sub { font-family:'Montserrat',sans-serif!important; font-size:17px; color:var(--white-70); max-width:660px; margin:0 auto 36px; line-height:1.8; font-weight:400; }
+
+  /* CTA */
+  #omni-private .of-cta-row { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:40px; position:relative; }
+  #omni-private .of-btn { display:inline-block; padding:15px 36px; border-radius:var(--radius); font-family:'Montserrat',sans-serif!important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; transition:all 0.3s; }
+  #omni-private a.of-btn, #omni-private a.of-btn:link, #omni-private a.of-btn:visited { text-decoration:none; }
+  #omni-private .of-btn-primary, #omni-private a.of-btn-primary, #omni-private a.of-btn-primary:link, #omni-private a.of-btn-primary:visited { background:var(--gold); color:var(--navy)!important; }
+  #omni-private .of-btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.3); color:var(--navy)!important; }
+  #omni-private .of-btn-ghost, #omni-private a.of-btn-ghost, #omni-private a.of-btn-ghost:link, #omni-private a.of-btn-ghost:visited { border:1px solid var(--white-30); color:var(--white)!important; background:transparent; }
+  #omni-private .of-btn-ghost:hover { border-color:var(--white); background:var(--white-05); transform:translateY(-2px); color:var(--white)!important; }
+
+  /* QUICK LINKS */
+  #omni-private .of-quick { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:860px; margin:0 auto 56px; position:relative; padding:0 20px; }
+  #omni-private .of-quick a, #omni-private .of-quick a:link, #omni-private .of-quick a:visited { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:600; padding:7px 16px; border-radius:100px; background:var(--white-05); border:1px solid var(--white-10); color:var(--white-50)!important; text-decoration:none; transition:all 0.3s; letter-spacing:0.3px; }
+  #omni-private .of-quick a:hover { background:var(--gold-dim); border-color:var(--gold); color:var(--gold)!important; }
+
+  /* SECTIONS */
+  #omni-private .of-section { padding:0 28px; max-width:1120px; margin:0 auto; }
+  #omni-private .of-band { background:var(--navy-mid); padding:56px 28px; }
+  #omni-private .of-band-inner { max-width:1120px; margin:0 auto; }
+  #omni-private .of-section-head { text-align:center; margin-bottom:40px; }
+  #omni-private .of-label { font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; }
+  #omni-private .of-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 20px; border-radius:2px; }
+
+  /* TYPOGRAPHY */
+  #omni-private h2 { font-family:'Playfair Display',serif!important; font-size:clamp(26px,4vw,36px); font-weight:700; line-height:1.2; margin-bottom:12px; letter-spacing:-0.3px; color:var(--white); text-transform:none; }
+  #omni-private h3 { font-family:'Playfair Display',serif!important; color:var(--white); text-transform:none; }
+  #omni-private p { font-family:'Montserrat',sans-serif!important; color:var(--white-70); font-weight:400; line-height:1.7; }
+  #omni-private .of-body { font-size:15px; color:var(--white-70); margin-bottom:16px; line-height:1.7; max-width:760px; }
+  #omni-private .of-body-sm { font-size:14px; color:var(--white-50); line-height:1.65; margin-bottom:8px; }
+  #omni-private .of-body-center { text-align:center; max-width:660px; margin-left:auto; margin-right:auto; }
+
+  /* GRIDS */
+  #omni-private .of-grid { display:grid; gap:20px; margin-bottom:56px; }
+  #omni-private .of-grid-2 { grid-template-columns:repeat(2,1fr); }
+  #omni-private .of-grid-3 { grid-template-columns:repeat(3,1fr); }
+  #omni-private .of-grid-4 { grid-template-columns:repeat(4,1fr); }
+
+  /* CARDS */
+  #omni-private .of-card { background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:32px 24px 28px; text-align:left; transition:all 0.4s; position:relative; display:flex; flex-direction:column; min-height:0; }
+  #omni-private .of-card:hover { border-color:var(--gold); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.3); }
+  #omni-private .of-card-icon { font-size:28px; margin-bottom:16px; display:block; line-height:1; }
+  #omni-private .of-card h3 { font-size:19px; font-weight:600; margin-bottom:10px; color:var(--white); line-height:1.3; }
+  #omni-private .of-card p { font-size:14px; color:var(--white-50); margin-bottom:18px; line-height:1.65; }
+  #omni-private .of-card-features { list-style:none; margin:0 0 20px; padding:0; flex:1 1 auto; }
+  #omni-private .of-card-features li { font-family:'Montserrat',sans-serif!important; font-size:13px; color:var(--white-50); padding:5px 0 5px 20px; position:relative; line-height:1.5; }
+  #omni-private .of-card-features li::before { content:'✓'; position:absolute; left:0; color:var(--gold); font-weight:700; font-size:11px; }
+  #omni-private .of-card-link { font-family:'Montserrat',sans-serif!important; font-size:12px; font-weight:700; color:var(--gold)!important; text-decoration:none; letter-spacing:0.5px; display:inline-flex; align-items:center; gap:6px; transition:all 0.3s; margin-top:auto; flex-shrink:0; padding-top:4px; }
+  #omni-private .of-card-link:hover { color:var(--gold-light)!important; gap:10px; }
+  #omni-private .of-card-link span { transition:transform 0.3s; }
+  #omni-private .of-card:hover .of-card-link span { transform:translateX(3px); }
+  #omni-private .of-card-num { font-family:'Playfair Display',serif!important; font-size:28px; font-weight:700; color:var(--gold); margin-bottom:12px; display:block; }
+  #omni-private .of-card-center { text-align:center; }
+  #omni-private .of-card-gold { border-color:var(--gold)!important; background:var(--gold-dim)!important; }
+  #omni-private .of-icon-x { font-size:24px; color:var(--red); margin-bottom:12px; display:block; }
+  #omni-private .of-icon-check { font-size:24px; color:var(--gold); margin-bottom:12px; display:block; }
+
+  /* QUOTE BLOCK */
+  #omni-private .of-quote-block { background:var(--navy-light); border-left:3px solid var(--gold); padding:28px 32px; border-radius:0 var(--radius-lg) var(--radius-lg) 0; max-width:900px; margin:0 auto; }
+  #omni-private .of-quote-block p { font-size:15px; color:var(--white-70); line-height:1.8; margin:0; }
+
+  /* COMPARISON TABLE */
+  #omni-private .of-table { border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--white-10); margin-bottom:40px; }
+  #omni-private .of-table-row { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; border-bottom:1px solid var(--white-10); }
+  #omni-private .of-table-row:last-child { border-bottom:none; }
+  #omni-private .of-table-header { background:var(--navy-light); }
+  #omni-private .of-table-cell { padding:14px 16px; font-family:'Montserrat',sans-serif!important; font-size:13px; color:var(--white-70); text-align:center; }
+  #omni-private .of-table-label { text-align:left; font-weight:500; color:var(--white-90); }
+  #omni-private .of-table-highlight { background:var(--gold-dim); color:var(--gold)!important; font-weight:600; }
+  #omni-private .of-table-header .of-table-cell { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--white-50); }
+  #omni-private .of-table-header .of-table-highlight { color:var(--gold)!important; }
+
+  /* FIT / NOT FIT */
+  #omni-private .of-fit-yes { background:var(--green-dim); border:1px solid rgba(46,125,50,0.25); border-radius:var(--radius-lg); padding:32px 28px; }
+  #omni-private .of-fit-no { background:var(--red-dim); border:1px solid rgba(192,57,43,0.2); border-radius:var(--radius-lg); padding:32px 28px; }
+  #omni-private .of-fit-list { list-style:none; padding:0; margin:16px 0 0; }
+  #omni-private .of-fit-list li { font-family:'Montserrat',sans-serif!important; font-size:14px; color:var(--white-70); padding:8px 0; display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
+  #omni-private .of-fit-yes .of-fit-icon { color:#66bb6a; font-weight:700; flex-shrink:0; }
+  #omni-private .of-fit-no .of-fit-icon { color:#e57373; font-weight:700; flex-shrink:0; }
+
+  /* PRICING */
+  #omni-private .of-price-card { background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:36px 28px; text-align:center; position:relative; }
+  #omni-private .of-price-card.featured { border-color:var(--gold); background:var(--gold-dim); }
+  #omni-private .of-price-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--gold); color:var(--navy); font-family:'Montserrat',sans-serif!important; font-size:9px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:3px 14px; border-radius:100px; white-space:nowrap; }
+  #omni-private .of-price { font-family:'Playfair Display',serif!important; font-size:42px; font-weight:700; color:var(--gold); margin:12px 0 4px; }
+  #omni-private .of-price-per { font-size:16px; font-weight:400; color:var(--white-50); }
+  #omni-private .of-price-total { font-family:'Montserrat',sans-serif!important; font-size:13px; color:var(--white-50); margin-bottom:20px; }
+  #omni-private .of-price-label { font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--white-50); margin-bottom:12px; display:block; }
+
+  /* FAQ */
+  #omni-private .of-faq-list { max-width:800px; margin:0 auto; }
+  #omni-private .of-faq { border-bottom:1px solid var(--white-10); }
+  #omni-private .of-faq summary { font-family:'Montserrat',sans-serif!important; font-size:15px; font-weight:600; color:var(--white-90); padding:20px 0; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+  #omni-private .of-faq summary::-webkit-details-marker { display:none; }
+  #omni-private .of-faq summary::after { content:'+'; font-size:20px; color:var(--gold); font-weight:300; transition:transform 0.3s; }
+  #omni-private .of-faq[open] summary::after { content:'−'; }
+  #omni-private .of-faq-a { font-family:'Montserrat',sans-serif!important; font-size:14px; color:var(--white-70); padding:0 0 20px; line-height:1.7; }
+  #omni-private .of-faq-a a { color:var(--gold); text-decoration:underline; text-underline-offset:3px; }
+
+  /* HUB LINKS */
+  #omni-private .of-hub-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+  #omni-private .of-hub-link { display:block; background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:16px 20px; font-family:'Montserrat',sans-serif!important; font-size:13px; font-weight:500; color:var(--gold)!important; text-decoration:none; transition:all 0.2s; }
+  #omni-private .of-hub-link:hover { border-color:var(--gold); background:var(--gold-dim); }
+
+  /* BOTTOM CTA */
+  #omni-private .of-bottom { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 36px; text-align:center; max-width:1120px; margin:0 auto; }
+  #omni-private .of-bottom h2 { margin-bottom:12px; }
+  #omni-private .of-bottom p { max-width:560px; margin:0 auto 28px; font-size:15px; }
+  #omni-private .of-bottom .of-btn { margin:0; }
+  #omni-private .of-bottom-note { display:block; margin-top:14px; font-family:'Montserrat',sans-serif!important; font-size:11px; color:var(--white-50); }
+
+  /* TRUST BAR */
+  #omni-private .of-trust { display:flex; align-items:center; justify-content:center; gap:28px; flex-wrap:wrap; margin:48px auto 0; max-width:700px; padding:0 20px; }
+  #omni-private .of-trust-item { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:600; color:var(--white-50); letter-spacing:0.5px; display:flex; align-items:center; gap:6px; }
+  #omni-private .of-trust-item span { font-size:14px; }
+
+  /* LINKS */
+  #omni-private .of-link { color:var(--gold); text-decoration:underline; text-underline-offset:3px; }
+  #omni-private .of-link:hover { color:var(--gold-light); }
+
+  /* RESPONSIVE */
+  @media(max-width:980px) {
+    #omni-private .of-grid-3 { grid-template-columns:repeat(2,1fr); }
+    #omni-private .of-grid-4 { grid-template-columns:repeat(2,1fr); }
+    #omni-private .of-hub-grid { grid-template-columns:repeat(2,1fr); }
+    #omni-private .of-table-row { grid-template-columns:1.5fr 1fr 1fr 1fr; }
+    #omni-private .of-table-cell { padding:10px 10px; font-size:12px; }
+  }
+  @media(max-width:768px) {
+    #omni-private .of-hero { padding:56px 20px 36px; }
+    #omni-private .of-section { padding:0 20px; }
+    #omni-private .of-band { padding:56px 20px; }
+    #omni-private .of-bottom { padding:32px 24px; margin-left:20px; margin-right:20px; }
+    #omni-private .of-grid-2 { grid-template-columns:1fr; }
+  }
+  @media(max-width:640px) {
+    #omni-private .of-grid-2, #omni-private .of-grid-3, #omni-private .of-grid-4, #omni-private .of-hub-grid { grid-template-columns:1fr; max-width:400px; margin-left:auto; margin-right:auto; }
+    #omni-private .of-cta-row { flex-direction:column; align-items:center; }
+    #omni-private .of-btn { width:100%; max-width:300px; text-align:center; }
+    #omni-private .of-table { overflow-x:auto; }
+    #omni-private .of-table-row { min-width:500px; }
+  }
+</style>
+
+<div id="omni-private">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="of-hero">
+    <span class="of-badge">Teqneeq FHC · 4S Ranch · San Diego</span>
+    <h1>Private Personal Trainer<br><em>in San Diego</em></h1>
+    <p class="of-hero-sub">1:1 coaching with undivided attention — no shared sessions, no group classes, no commercial-gym chaos. Structured programming for professionals 30+ who want real results without the spectacle.</p>
+
+    <div class="of-cta-row">
+      <a class="of-btn of-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="of-btn of-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
+    </div>
+
+    <div class="of-quick">
+      <a href="/personal-training-services">All Services</a>
+      <a href="/personal-trainer-4s-ranch">4S Ranch Studio</a>
+      <a href="/in-home-personal-trainer-san-diego">In-Home Training</a>
+      <a href="/executive-hybrid-coaching">Hybrid Coaching</a>
+      <a href="/corrective-exercise-post-rehab">Corrective / Post-Rehab</a>
+      <a href="/how-it-works-pricing">Pricing &amp; Process</a>
+      <a href="/case-studies">Case Studies</a>
+    </div>
+  </section>
+
+  <!-- ═══ GEMINI QUOTABLE #1 ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-quote-block">
+      <p>OmniFit Performance offers private, 1:1 personal training in San Diego for professionals and executives over 30. Sessions are conducted at the studio inside Teqneeq FHC — a members-only functional health and performance lab at 10772 Thornmint Rd in 4S Ranch — with undivided 1:1 coaching attention, no group classes, and no commercial-gym distractions. Every program is individually designed by a NASM Elite Trainer with corrective exercise (CES) and ACE orthopedic exercise (OES) credentials, following a structured Assess → Correct → Build → Sustain methodology that begins with a $90 BodyStat body composition assessment. OmniFit specializes in joint-friendly strength training, desk posture correction, sustainable fat loss, and post-rehab bridge programming for clients who have been cleared by physical therapy but need structured progression back to full performance.</p>
+    </div>
+  </div>
+
+  <!-- ═══ WHAT PRIVATE MEANS HERE ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">What "Private" Actually Means</span>
+      <hr class="of-divider">
+      <h2>This Isn't a Gym With a Trainer. It's a Different Model.</h2>
+    </div>
+    <p class="of-body of-body-center" style="margin-bottom:36px;">Most "personal training" in San Diego means a trainer who splits attention with the gym floor around them — other clients, waiting for equipment, music you didn't choose. OmniFit operates differently: dedicated 1:1 coaching inside a credentialed, members-only facility.</p>
+
+    <div class="of-grid of-grid-3">
+      <article class="of-card of-card-center">
+        <span class="of-icon-x">✗</span>
+        <h3>Commercial Gym + Trainer</h3>
+        <p>Crowded floor, shared equipment, background noise. Your trainer's attention is split between you and the chaos around you. Generic programs, minimal assessment.</p>
+      </article>
+      <article class="of-card of-card-center">
+        <span class="of-icon-x">✗</span>
+        <h3>Group &amp; Bootcamp Studios</h3>
+        <p>One coach, many clients, one workout for everyone. No individual assessment, no corrective work, no program built for your body or your injury history.</p>
+      </article>
+      <article class="of-card of-card-center of-card-gold">
+        <span class="of-icon-check">✓</span>
+        <h3>OmniFit Private Coaching</h3>
+        <p>One client, one coach, full attention — inside Teqneeq FHC, a credentialed-only performance lab. No group classes, no crowds. A program built entirely around your assessment.</p>
+      </article>
+    </div>
+  </div>
+
+  <!-- ═══ WHAT'S INCLUDED ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">What You Get</span>
+        <hr class="of-divider">
+        <h2>Every Session. Every Program. Built for You.</h2>
+      </div>
+
+      <div class="of-grid of-grid-3" style="margin-bottom:0;">
+        <article class="of-card">
+          <span class="of-card-num">01</span>
+          <h3>BodyStat Assessment &amp; Movement Screening</h3>
+          <p>Every client starts with a $90 BodyStat 1500 MDD body composition assessment and a 9-point movement screen. We establish objective baselines — body composition, posture imbalances, mobility restrictions, compensations — before writing a single workout.</p>
+          <ul class="of-card-features">
+            <li>BodyStat body composition baseline</li>
+            <li>Overhead squat assessment</li>
+            <li>Shoulder, hip, and ankle mobility</li>
+            <li>Posture analysis (anterior/posterior)</li>
+            <li>Pain mapping (3/10 ceiling protocol)</li>
+          </ul>
+        </article>
+        <article class="of-card">
+          <span class="of-card-num">02</span>
+          <h3>Individually Programmed Training</h3>
+          <p>No templates. No recycled plans from another client. Your program is built around your assessment results, your goals, your schedule, and your equipment access.</p>
+          <ul class="of-card-features">
+            <li>Periodized 4-week training blocks</li>
+            <li>Corrective exercise integration</li>
+            <li>Progressive overload tracking</li>
+            <li>Travel and home-gym variations</li>
+          </ul>
+        </article>
+        <article class="of-card">
+          <span class="of-card-num">03</span>
+          <h3>Nutrition &amp; Accountability</h3>
+          <p>Training alone doesn't produce the results most executives want. Nutrition guidance, habit coaching, and structured check-ins close the gap.</p>
+          <ul class="of-card-features">
+            <li>Custom macros and meal frameworks</li>
+            <li>Travel and dining strategies</li>
+            <li>Weekly accountability messaging</li>
+            <li>Monthly progress reports with data</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TRAINING FORMATS ═══ -->
+  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">Training Options</span>
+      <hr class="of-divider">
+      <h2>Three Ways to Train Privately in San Diego</h2>
+    </div>
+
+    <div class="of-grid of-grid-3">
+      <article class="of-card">
+        <span class="of-card-icon">🏋️</span>
+        <h3>In-Studio — Teqneeq FHC, 4S Ranch</h3>
+        <p>Our primary training location. Professional-grade equipment in a credentialed, members-only performance lab — dedicated 1:1 coaching, no group classes.</p>
+        <ul class="of-card-features">
+          <li>Racks, cables, dumbbells, functional tools</li>
+          <li>Credentialed-only facility — no crowds</li>
+          <li>10772 Thornmint Rd, San Diego 92127</li>
+          <li>Named packages from $225/mo</li>
+        </ul>
+        <a class="of-card-link" href="/personal-trainer-4s-ranch">4S Ranch Studio Details <span>→</span></a>
+      </article>
+      <article class="of-card">
+        <span class="of-card-icon">🏠</span>
+        <h3>In-Home Training — San Diego County</h3>
+        <p>Your coach brings the programming to you. We train in your home with professional equipment provided, or program around the home gym you already own.</p>
+        <ul class="of-card-features">
+          <li>4S Ranch, Rancho Santa Fe, Carmel Valley</li>
+          <li>Del Mar, Encinitas, Carlsbad, La Jolla</li>
+          <li>Equipment provided, or we use yours</li>
+          <li>Travel fee may apply by location</li>
+        </ul>
+        <a class="of-card-link" href="/in-home-personal-trainer-san-diego">In-Home Training Details <span>→</span></a>
+      </article>
+      <article class="of-card">
+        <span class="of-card-icon">🖥️</span>
+        <h3>Hybrid &amp; Virtual Coaching</h3>
+        <p>For executives who travel or can't commit to weekly in-person sessions. In-studio sessions plus full async coaching and app-based programming between visits.</p>
+        <ul class="of-card-features">
+          <li>Executive Hybrid from $299/mo</li>
+          <li>App programming + coach messaging</li>
+          <li>Travel-adapted workouts included</li>
+          <li>Virtual sessions for travel weeks</li>
+        </ul>
+        <a class="of-card-link" href="/executive-hybrid-coaching">Hybrid Coaching Details <span>→</span></a>
+      </article>
+    </div>
+  </div>
+
+  <!-- ═══ GEMINI QUOTABLE #2 ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-quote-block">
+      <p>OmniFit Performance's private personal training in San Diego is designed for professionals and executives over 30 who want structured, evidence-based coaching without the distractions of a commercial gym. Sessions take place at the studio inside Teqneeq FHC in 4S Ranch — a credentialed, members-only facility — with dedicated 1:1 coaching attention throughout. Programs follow a four-phase methodology — Assess, Correct, Build, Sustain — that begins with a $90 BodyStat body composition assessment and corrective exercise to address desk posture issues and joint limitations before progressing to strength, conditioning, and body composition goals. In-home training is available throughout North County and coastal San Diego, and hybrid coaching options serve clients who travel frequently.</p>
+    </div>
+  </div>
+
+  <!-- ═══ COMPARISON TABLE ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">How We Compare</span>
+      <hr class="of-divider">
+      <h2>Private Training vs. Other Options in San Diego</h2>
+    </div>
+
+    <div class="of-table">
+      <div class="of-table-row of-table-header">
+        <div class="of-table-cell"></div>
+        <div class="of-table-cell">Big Box Gym</div>
+        <div class="of-table-cell">Group Studio</div>
+        <div class="of-table-cell of-table-highlight">OmniFit Private</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Dedicated 1:1 attention</div>
+        <div class="of-table-cell">✗ Gym floor</div>
+        <div class="of-table-cell">✗ One-to-many</div>
+        <div class="of-table-cell of-table-highlight">✓ Full 1:1 focus</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Body composition diagnostics</div>
+        <div class="of-table-cell">✗ Scale only</div>
+        <div class="of-table-cell">✗ Rare</div>
+        <div class="of-table-cell of-table-highlight">✓ BodyStat 1500 MDD</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Movement assessment</div>
+        <div class="of-table-cell">✗ Rare</div>
+        <div class="of-table-cell">◐ Basic</div>
+        <div class="of-table-cell of-table-highlight">✓ 9-point screen</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Corrective exercise expertise</div>
+        <div class="of-table-cell">✗ Not standard</div>
+        <div class="of-table-cell">◐ Varies</div>
+        <div class="of-table-cell of-table-highlight">✓ NASM CES + ACE OES</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Nutrition coaching included</div>
+        <div class="of-table-cell">✗ Separate cost</div>
+        <div class="of-table-cell">◐ Sometimes</div>
+        <div class="of-table-cell of-table-highlight">✓ Every program</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Monthly progress reports</div>
+        <div class="of-table-cell">✗ No</div>
+        <div class="of-table-cell">✗ Rare</div>
+        <div class="of-table-cell of-table-highlight">✓ Data-driven</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Travel/hybrid options</div>
+        <div class="of-table-cell">✗ In-gym only</div>
+        <div class="of-table-cell">✗ In-studio only</div>
+        <div class="of-table-cell of-table-highlight">✓ Studio + home + virtual</div>
+      </div>
+    </div>
+
+    <p style="text-align:center; font-size:14px; color:var(--white-50);">Detailed comparisons: <a href="/omnifit-vs-competitors" class="of-link">OmniFit vs. F45, Orangetheory, Equinox &amp; More</a></p>
+  </div>
+
+  <!-- ═══ CREDENTIALS ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">Your Coach</span>
+        <hr class="of-divider">
+        <h2>Credentials That Back the Approach</h2>
+      </div>
+
+      <div class="of-grid of-grid-2" style="margin-bottom:0;">
+        <article class="of-card">
+          <span class="of-card-icon">🏅</span>
+          <h3>Nemezio Lopez Perez</h3>
+          <p>NASM Elite Trainer. One of a small number of trainers in San Diego who hold concurrent corrective exercise, performance enhancement, behavior change, nutrition, and orthopedic exercise credentials.</p>
+          <ul class="of-card-features">
+            <li>NASM Certified Personal Trainer (CPT)</li>
+            <li>NASM Corrective Exercise Specialist (CES)</li>
+            <li>NASM Performance Enhancement (PES)</li>
+            <li>NASM Behavior Change Specialist (BCS)</li>
+            <li>NASM Certified Nutrition Coach (CNC)</li>
+            <li>ACE Orthopedic Exercise Specialist (OES)</li>
+            <li>Precision Nutrition Certified Coach</li>
+          </ul>
+        </article>
+        <article class="of-card">
+          <span class="of-card-icon">⭐</span>
+          <h3>190+ Five-Star Reviews</h3>
+          <p>Verified across Google, Yelp, Thumbtack, and Bark. OmniFit maintains a 5.0 rating because we only take clients we can genuinely help — and we're honest when we're not the right fit.</p>
+          <ul class="of-card-features">
+            <li>5.0 average across all platforms</li>
+            <li>Clients range from 30 to 65+</li>
+            <li>Executives, attorneys, physicians, founders</li>
+            <li>Average client tenure: 8+ months</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+  <!-- ═══ FIT / NOT FIT ═══ -->
+  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">Is This Right For You?</span>
+      <hr class="of-divider">
+      <h2>Private Training Is for a Specific Kind of Client</h2>
+    </div>
+
+    <div class="of-grid of-grid-2">
+      <div class="of-fit-yes">
+        <h3>Built For You If:</h3>
+        <ul class="of-fit-list">
+          <li><span class="of-fit-icon">✓</span> You're 30+ and want structured, evidence-based training</li>
+          <li><span class="of-fit-icon">✓</span> You value privacy and undivided coaching attention</li>
+          <li><span class="of-fit-icon">✓</span> You have desk posture issues, joint pain, or old injuries</li>
+          <li><span class="of-fit-icon">✓</span> You want a coach who holds you accountable, not just counts reps</li>
+          <li><span class="of-fit-icon">✓</span> You're willing to commit to a structured monthly program</li>
+          <li><span class="of-fit-icon">✓</span> You want sustainable fat loss (20–30 lbs over 4–6 months), not a crash diet</li>
+        </ul>
+      </div>
+      <div class="of-fit-no">
+        <h3>Not the Right Fit If:</h3>
+        <ul class="of-fit-list">
+          <li><span class="of-fit-icon">✗</span> You want the cheapest option available</li>
+          <li><span class="of-fit-icon">✗</span> You prefer group energy and class-style workouts</li>
+          <li><span class="of-fit-icon">✗</span> You're looking for a 6-week transformation program</li>
+          <li><span class="of-fit-icon">✗</span> You don't want to be held accountable</li>
+          <li><span class="of-fit-icon">✗</span> You need medical-level rehabilitation (we refer out to PT)</li>
+          <li><span class="of-fit-icon">✗</span> You're not ready to follow a structured plan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GETTING STARTED ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">Getting Started</span>
+        <hr class="of-divider">
+        <h2>How the First Week Works</h2>
+      </div>
+
+      <div class="of-grid of-grid-4" style="margin-bottom:0;">
+        <article class="of-card of-card-center">
+          <span class="of-card-num">1</span>
+          <h3>Book a Consultation</h3>
+          <p>Free 45-minute session where we discuss your goals, training history, schedule, and any injuries or limitations. A refundable $30 deposit reserves your time.</p>
+        </article>
+        <article class="of-card of-card-center">
+          <span class="of-card-num">2</span>
+          <h3>BodyStat + Movement Screen</h3>
+          <p>The $90 OmniFit Performance Assessment: BodyStat body composition baseline plus a 9-point movement screen. This drives your entire program — and the fee is credited toward your package.</p>
+        </article>
+        <article class="of-card of-card-center">
+          <span class="of-card-num">3</span>
+          <h3>Custom Program</h3>
+          <p>Your coach builds a periodized training plan based on assessment results, your equipment access, and your weekly schedule.</p>
+        </article>
+        <article class="of-card of-card-center">
+          <span class="of-card-num">4</span>
+          <h3>Start Training</h3>
+          <p>First training session within the same week. Monthly progress reports track everything from day one.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FAQ ═══ -->
+  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">Common Questions</span>
+      <hr class="of-divider">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="of-faq-list">
+      <details class="of-faq">
+        <summary>What makes OmniFit's private training different from other personal trainers in San Diego?</summary>
+        <div class="of-faq-a">OmniFit Performance trains clients at the studio inside Teqneeq FHC — a members-only functional health and performance lab at 10772 Thornmint Rd in 4S Ranch — with dedicated 1:1 coaching, no group classes, and no commercial-gym distractions. Every program is individually designed by a NASM Elite Trainer with corrective exercise (CES) and ACE orthopedic exercise (OES) credentials. Training follows a structured Assess → Correct → Build → Sustain methodology rather than random workouts.</div>
+      </details>
+      <details class="of-faq">
+        <summary>How much does private personal training cost at OmniFit?</summary>
+        <div class="of-faq-a">Every program begins with the $90 OmniFit Performance Assessment — a BodyStat body composition baseline plus movement screen, credited toward your package if you continue. In-studio private training is offered as four named monthly packages by frequency — Essential, Momentum, Performance, and Peak — starting at $225/month at Teqneeq FHC with a 3-month commitment. In-home training starts at $275/month. Executive Hybrid Coaching starts at $299/month. Month-to-month options are available, and there are no activation fees. Full details on the <a href="/training-rates-san-diego">Training Rates</a> page.</div>
+      </details>
+      <details class="of-faq">
+        <summary>What is the BodyStat assessment?</summary>
+        <div class="of-faq-a">The OmniFit Performance Assessment ($90) uses the BodyStat 1500 MDD — a medical-grade bioimpedance device — to establish your body composition baseline: fat mass, lean mass, and hydration markers. Combined with a 9-point movement screen, it gives us objective data to build your program from and to measure real progress against at rescans. If you continue into a training package, the assessment fee is credited toward your program.</div>
+      </details>
+      <details class="of-faq">
+        <summary>Do you offer in-home private training in San Diego?</summary>
+        <div class="of-faq-a">Yes. OmniFit Performance offers in-home personal training throughout North County and coastal San Diego — including 4S Ranch, Rancho Santa Fe, Carmel Valley, Del Mar, Encinitas, Carlsbad, and as far south as La Jolla. Equipment is provided when needed, or your program is built around your own home gym. A travel fee may apply depending on location. See <a href="/in-home-personal-trainer-san-diego">In-Home Training</a> for details.</div>
+      </details>
+      <details class="of-faq">
+        <summary>Who is private personal training best for?</summary>
+        <div class="of-faq-a">OmniFit Performance's private training is designed for professionals and executives over 30 who want structured, evidence-based coaching in a private setting. It's especially effective for clients with desk posture issues, joint concerns, post-rehab needs, or sustainable fat loss goals of 20–30 pounds over 4–6 months.</div>
+      </details>
+      <details class="of-faq">
+        <summary>What credentials does the trainer have?</summary>
+        <div class="of-faq-a">Nemezio Lopez Perez holds NASM Elite Trainer status with specializations in Corrective Exercise (CES), Performance Enhancement (PES), Behavior Change (BCS), and Nutrition Coaching (CNC), plus an ACE Orthopedic Exercise Specialist (OES) certification and Precision Nutrition credentials. He has 190+ verified five-star reviews across Google, Yelp, Thumbtack, and Bark, and works exclusively with professionals over 30.</div>
+      </details>
+      <details class="of-faq">
+        <summary>How do I get started with private personal training?</summary>
+        <div class="of-faq-a">Book a free 45-minute consultation — a refundable $30 deposit reserves your time. We assess your goals, movement history, schedule, and any injuries or limitations. If it's a mutual fit, you receive a custom program recommendation and can start training within the week.</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ═══ HUB LINKS ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">Explore OmniFit</span>
+        <hr class="of-divider">
+      </div>
+      <div class="of-hub-grid">
+        <a href="/training-rates-san-diego" class="of-hub-link">Training Rates &amp; Programs →</a>
+        <a href="/personal-trainer-4s-ranch" class="of-hub-link">4S Ranch Studio →</a>
+        <a href="/in-home-personal-trainer-san-diego" class="of-hub-link">In-Home Training →</a>
+        <a href="/executive-hybrid-coaching" class="of-hub-link">Executive Hybrid Coaching →</a>
+        <a href="/how-we-measure-your-progress" class="of-hub-link">How We Measure Progress →</a>
+        <a href="/corrective-exercise-post-rehab" class="of-hub-link">Corrective Exercise →</a>
+        <a href="/omnifit-vs-competitors" class="of-hub-link">How OmniFit Compares →</a>
+        <a href="/case-studies" class="of-hub-link">Client Case Studies →</a>
+        <a href="/faqs" class="of-hub-link">FAQs →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BOTTOM CTA ═══ -->
+  <div style="padding: 56px 28px 0;">
+    <div class="of-bottom">
+      <h2>Ready for Private, Structured Training?</h2>
+      <p>Book a 45-minute consultation. We'll assess your goals, movement history, and schedule — and tell you honestly whether OmniFit is the right fit.</p>
+      <a class="of-btn of-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="of-bottom-note">Free 45-minute consultation · Fully refundable $30 deposit reserves your time · Honest assessment of fit</span>
+    </div>
+  </div>
+
+  <!-- ═══ TRUST BAR ═══ -->
+  <div class="of-trust" style="padding-bottom:48px;">
+    <div class="of-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
+    <div class="of-trust-item"><span>🏅</span> NASM CPT · CES · PES · BCS · CNC</div>
+    <div class="of-trust-item"><span>📍</span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
+    <div class="of-trust-item"><span>🌍</span> Virtual &amp; Hybrid Available</div>
+  </div>
+
+</div>
