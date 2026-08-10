@@ -1,0 +1,190 @@
+<!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->
+<!-- Changelog v3: Locations card — studio line + in-home service areas now link
+     to their location pages (internal-link task, Q3 strategy). Coronado left
+     unlinked (no page exists). Copyright line: removed hardcoded "2026"
+     (was rendering doubled year alongside the JS-injected span). -->
+<!-- Changelog v2: removed footer-badges block (NASM / ACE / BNI) and its CSS;
+     replaced legacy "OmniFit Personal Fitness Training" Pacific Beach GBP link
+     with current-listing Maps link. See note on swapping in your GBP review
+     short link (g.page/r/.../review) for a direct write-a-review prompt. -->
+<style>
+  #omnifit-footer{
+    --omni-navy:#0a1628;
+    --omni-navy-deep:#0B2B4A;
+    --omni-gold:#DAA520;
+    --omni-gold-hover:#f1c34b;
+    --omni-text:#f5f7fb;
+    --omni-muted:#c7d2e0;
+    --body-font:'Montserrat', system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+    background:linear-gradient(180deg, var(--omni-navy), var(--omni-navy-deep));
+    color:var(--omni-text);
+    font-family:var(--body-font);
+    font-size:16px;
+    contain:layout style;
+  }
+  #omnifit-footer a{color:var(--omni-gold);text-decoration:none;}
+  #omnifit-footer a:hover,
+  #omnifit-footer a:focus{color:var(--omni-gold-hover);text-decoration:underline;}
+  #omnifit-footer .wrap{max-width:1200px;margin:0 auto;padding:40px 20px;}
+
+  /* ===== CTA ===== */
+  .footer-cta{
+    display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;margin-bottom:36px;
+  }
+  .footer-cta h3{
+    margin:0;
+    font-family:'Playfair Display','Times New Roman',serif;
+    font-size:clamp(20px,3.6vw,28px);
+    font-weight:700;
+    color:var(--omni-gold);
+  }
+  .footer-cta p{margin:0;color:var(--omni-muted);}
+  .footer-cta .btn{
+    display:inline-block;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:700;
+    background:var(--omni-gold);
+    color:var(--omni-navy) !important;
+    text-decoration:none;
+    transition:background .25s ease, transform .1s ease;
+  }
+  .footer-cta .btn:hover{background:var(--omni-gold-hover);transform:translateY(-1px);text-decoration:none;}
+
+  /* ===== Grid ===== */
+  .footer-grid{
+    display:grid;gap:28px;align-items:flex-start;
+    grid-template-columns:1.1fr 1fr 1fr;
+  }
+  .footer-card h4{
+    margin:0 0 10px;
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:.3px;
+    color:var(--omni-gold);
+  }
+  .footer-card p{margin:6px 0;color:var(--omni-muted);}
+  .footer-card ul{list-style:none;padding:0;margin:8px 0;}
+  .footer-card li{margin:8px 0;display:flex;align-items:center;gap:10px;}
+  .footer-card svg{height:20px;width:20px;fill:var(--omni-gold);transition:fill .2s ease;}
+  .footer-card a:hover svg{fill:var(--omni-gold-hover);}
+  .footer-card a span{color:var(--omni-gold);}
+  .footer-card a:hover span{color:var(--omni-gold-hover);}
+
+  /* ===== Copyright ===== */
+  .footer-copy{
+    margin-top:28px;
+    text-align:center;
+    color:var(--omni-muted);
+    font-size:14px;
+  }
+
+  @media(max-width:800px){
+    .footer-grid{grid-template-columns:1fr;gap:32px;}
+    .footer-cta h3{font-size:22px;}
+  }
+</style>
+
+<footer id="omnifit-footer">
+  <div class="wrap">
+
+    <div class="footer-cta">
+      <h3>Start Your Transformation Today</h3>
+      <p>Book your 45-minute consultation and experience OmniFit Performance's premium coaching.</p>
+      <a class="btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+    </div>
+
+    <div class="footer-grid">
+
+      <!-- About -->
+      <div class="footer-card">
+        <h4>About OmniFit Performance</h4>
+        <p>OmniFit Performance is a fitness and wellness consulting practice serving San Diego's executive community. Clinical-grade diagnostics, evidence-based programming, and structured accountability for professionals 30+.</p>
+        <ul>
+          <li><a href="/terms-and-conditions"><span>Terms &amp; Conditions</span></a></li>
+          <li><a href="/privacy-policy"><span>Privacy Policy</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div class="footer-card">
+        <h4>Connect</h4>
+        <ul>
+          <li>
+            <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.8-.9a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"/></svg>
+              <span>@omnifit_sd</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3A2 2 0 0121 5V19A2 2 0 0119 21H5A2 2 0 013 19V5A2 2 0 015 3H19M8.34 17.34V10.8H5.67V17.34H8.34M7 9.67A1.53 1.53 0 007 6.61A1.53 1.53 0 007 9.67M18.33 17.34V13.6C18.33 11.44 17.14 10.37 15.4 10.37A2.49 2.49 0 0013 11.75H12.96V10.8H10.29V17.34H12.96V13.97C12.96 13 13.21 12.11 14.34 12.11C15.46 12.11 15.49 13.15 15.49 14.03V17.34H18.33Z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
+                 from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
+            <a href="https://g.page/r/CcePeMjnbDe9EBM/review" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A7 7 0 005 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 119.5 9 2.5 2.5 0 0112 11.5z"/></svg>
+              <span>Google Reviews</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:omnifittraining@gmail.com">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5L4 8V6l8 5 8-5v2z"/></svg>
+              <span>Email</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Location -->
+      <div class="footer-card">
+        <h4>Locations</h4>
+        <p>Studio: <a href="/personal-trainer-4s-ranch">Teqneeq · 4S Ranch, San Diego</a></p>
+        <p style="font-size:13px; color:var(--omni-muted); opacity:0.85;">In-home:
+          <a href="/personal-trainer-la-jolla">La Jolla</a> •
+          <a href="/personal-trainer-del-mar">Del Mar</a> •
+          <a href="/personal-trainer-carmel-valley">Carmel Valley</a> •
+          <a href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a>
+          <a href="/personal-trainer-4s-ranch">4S Ranch</a>
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A7 7 0 005 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 119.5 9 2.5 2.5 0 0112 11.5z"/></svg>
+              <span>Get Directions</span>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+16192590630">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.56.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17.5 17.5 0 013.5 6a1 1 0 011-1H8a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.24 1.01l-2.71 2.22z"/></svg>
+              <span>(619) 259-0630</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v13a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 15H5V9h14v10z"/></svg>
+              <span>Book Your Consultation</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-copy">
+      © <span id="omnifit-year"></span> OmniFit Performance · Fitness &amp; Wellness Consulting · All Rights Reserved
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var y=document.getElementById('omnifit-year');
+    if(y){ y.textContent=new Date().getFullYear(); }
+  })();
+</script>
