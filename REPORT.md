@@ -976,13 +976,19 @@ accepted exception until scheduled.
 > never being flagged. The entry matters for when that page is unblocked and enters
 > scope, at which point the exception must be honoured until the pass is scheduled.
 
-## DEFERRED-02 · ACTIVE CONSTRAINT · Statutory cap exposure on prepaid tiers
+## RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED
 
-*Superseded the narrower "couples in-home Performance" version logged earlier the
-same session; counsel's open question and a second OVER row were added.*
+*Logged as DEFERRED-02, an ACTIVE CONSTRAINT, then resolved in the same session.
+Retained in full because the reasoning is worth keeping; the constraint itself is
+lifted.*
 
-Not a tolerated violation. This is a restriction to honour when publishing, and
-breaking it is a real error.
+> **CLOSED.** Counsel (Andrew Flores) confirmed the current pricing is acceptable.
+> The interim month-to-month-only rule is **lifted**: in-home Performance and Peak,
+> individual and couples, may be sold and published as 3-month prepaid commitments.
+> The attached condition is a **workflow rule, not a pricing cap** — contact counsel
+> before filing a client on a contract exceeding $4,400. It now lives under CANON's
+> WORKFLOW RULES as the CONTRACT VALUE CHECK, with the totals kept as a
+> pricing-change checklist under RESOLVED ITEMS.
 
 **Cal. Civ. Code 1812.86** caps a single health studio services contract at
 **$4,400**. OmniFit's own Couples Prepaid Program Agreement cites this cap and
@@ -1033,3 +1039,58 @@ checks before publishing.
 The in-home **individual** ladder is now partly known and recorded: Performance
 $1,250/mo and Peak $1,860/mo, alongside the existing "from $335". Momentum in-home
 has not been supplied. CANON previously carried only the "from $335" entry point.
+
+---
+
+# CANON updates — counsel clearance and completed in-home ladder
+
+## 1. RESOLVED-02 · cap exposure closed
+
+Counsel (Andrew Flores) confirmed current pricing is acceptable. Applied:
+
+- **Interim rule lifted.** In-home Performance and Peak, individual and couples, may
+  now be sold and published as 3-month prepaid commitments. The
+  "month-to-month ONLY" line is removed from CANON's couples block.
+- **Counsel's condition recorded as a workflow rule, not a pricing constraint.** It
+  sits under WORKFLOW RULES as the **CONTRACT VALUE CHECK**: contact counsel before
+  filing a client on a contract exceeding $4,400. It restricts nothing about what may
+  be published or sold.
+- **Entry moved, not deleted.** DEFERRED-02 became RESOLVED-02 under a new
+  RESOLVED ITEMS section, carrying the original 1812.86 reasoning and the open
+  question about in-home versus facility-based scope. KNOWN DEFERRED ITEMS now holds
+  DEFERRED-01 alone.
+- **Headroom figures kept live** as a PRICING-CHANGE CHECKLIST.
+
+## 2. In-home individual ladder completed
+
+| Tier | 3-month | M2M | Upfront (3×) |
+|---|---|---|---|
+| Essential | $335 | $390 | $1,005 |
+| Momentum | $650 | $755 | $1,950 |
+| Performance | $1,250 | $1,425 | $3,750 |
+| Peak | from $1,860 | $2,150 | $5,580 |
+
+CANON previously held only "from $335". Momentum was the missing rung.
+
+## Which offers now trip the CONTRACT VALUE CHECK
+
+Recomputed across the completed ladder. **Two of eleven**, both in-home:
+
+| Offer | 3-month total | Status |
+|---|---|---|
+| In-home Peak individual | $5,580 | triggers counsel call |
+| In-home couples Performance | $5,175 | triggers counsel call |
+| Teqneeq Peak individual | $4,185 | under, $215 clear |
+| everything else | ≤ $3,750 | under |
+
+**One number is worth remembering instead of the table:** the break point is the same
+for every offer, since the total is always 3 × the monthly rate. **Any 3-month monthly
+rate above $1,466 produces a total over $4,400.** Teqneeq Peak at $1,395 is the closest
+under it. In-home Peak's $1,860 is a floor, so its total can only rise.
+
+## Effect on published pages
+
+None. No certified page publishes an in-home Peak or in-home Performance prepaid
+figure, so lifting the restriction changes nothing that is live. The pages are now
+*permitted* to carry those figures where previously they were not, which matters
+whenever the rates page enters scope.
