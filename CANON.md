@@ -111,6 +111,38 @@ legitimately changes an invariant, and say so in REPORT.md)
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
 
+KNOWN DEFERRED ITEMS (approved, scheduled for a later pass — certification
+runs must NOT flag these as violations while listed here)
+
+DEFERRED-01 · Executive Reset guarantee wording (rates page)
+- File: pages/training-rates-san-diego.html, plus its header file.
+  NOTE: that header file does not exist yet. The page's schema is still
+  body-embedded (line 822), so the third instance currently lives in the
+  body block and moves with the schema when it is extracted.
+- Three instances, verified Aug 2026:
+  · line 664 — body callout inside the Executive Reset section
+  · line 767 — "Does OmniFit offer a money-back guarantee?" FAQ answer
+  · line 880 — the same answer inside the FAQPage schema
+- Current text promises an outcome ("feel clearly stronger, more energized,
+  and more in control") and conditions the refund on undefined "full
+  compliance" of a "remaining program balance".
+- Two problems: (1) CANON bans outcome guarantees; this is named a guarantee
+  and promises a result. (2) "Full compliance" and "remaining balance" are
+  undefined terms in a refund promise under an upfront billing model.
+- Approved replacement, to apply in a future cleanup pass:
+  Callout heading: "30-Day Fit Guarantee"
+  Callout body: "If after your first 30 days you decide the Executive Reset
+  isn't the right fit, you can stop and I'll refund the unused balance of
+  your program. You keep the first month and everything you've learned.
+  No compliance test, no negotiation."
+  FAQ answer: "Yes, on the Executive Reset. It includes a 30-Day Fit
+  Guarantee: if after your first 30 days you decide it isn't the right fit,
+  you can cancel and receive a refund of the unused balance of your program.
+  You keep the first month and everything you've learned. There is no
+  compliance test to pass and nothing to negotiate."
+- Status: approved, not yet applied. Deliberately deferred by Nemezio.
+  Known, accepted exception until scheduled.
+
 NEXT RUNS
 - BATCH 2 DONE (Aug 2026): FAQs · how-it-works-pricing (converted to
   monthly tiers) · in-home-personal-trainer-san-diego (P3 depth spec) ·

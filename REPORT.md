@@ -912,3 +912,66 @@ same compliance strike removed from three in-scope pages.
   needs moving to a header file.
 - 12 drive-time claims on territory pages remain unverified.
 - `footer.html` and `the-30-minute-executive-reset.html` need a pass.
+
+---
+
+# Deferred / future cleanup
+
+Approved items that are deliberately **not** applied yet. Certification runs must
+not flag these as violations while they remain listed here and in CANON.md's
+KNOWN DEFERRED ITEMS section.
+
+## DEFERRED-01 · Executive Reset guarantee wording (rates page)
+
+**File:** `pages/training-rates-san-diego.html`, plus its header file.
+
+> **Note on the header file:** it does not exist yet. That page's schema is still
+> body-embedded at line 822, so the third instance currently sits in the body block
+> and will move with the schema whenever it is extracted into
+> `pages/headers/training-rates-san-diego-header.html`.
+
+**Three instances, verified this session:**
+
+| Location | Where |
+|---|---|
+| `pages/training-rates-san-diego.html:664` | Body callout inside the Executive Reset section |
+| `pages/training-rates-san-diego.html:767` | "Does OmniFit offer a money-back guarantee?" FAQ answer |
+| `pages/training-rates-san-diego.html:880` | The same answer inside the FAQPage schema |
+
+**Current text** promises an outcome ("feel clearly stronger, more energized, and
+more in control") and conditions the refund on undefined "full compliance" of a
+"remaining program balance."
+
+**Two problems:**
+
+1. CANON bans outcome guarantees. This is named a guarantee and promises a result.
+2. "Full compliance" and "remaining balance" are undefined terms in a refund promise
+   under an upfront billing model.
+
+**Approved replacement, to apply in a future cleanup pass:**
+
+*Callout heading:*
+
+> 30-Day Fit Guarantee
+
+*Callout body:*
+
+> If after your first 30 days you decide the Executive Reset isn't the right fit,
+> you can stop and I'll refund the unused balance of your program. You keep the
+> first month and everything you've learned. No compliance test, no negotiation.
+
+*FAQ answer:*
+
+> Yes, on the Executive Reset. It includes a 30-Day Fit Guarantee: if after your
+> first 30 days you decide it isn't the right fit, you can cancel and receive a
+> refund of the unused balance of your program. You keep the first month and
+> everything you've learned. There is no compliance test to pass and nothing to
+> negotiate.
+
+**Status:** approved, not yet applied. Deliberately deferred by Nemezio. Known,
+accepted exception until scheduled.
+
+> **Why nothing broke by deferring it:** `training-rates-san-diego.html` is already
+> on the uncertified list and excluded from certification runs, so this wording was
+> never being flagged. The entry matters for when that page is unblocked and enters
+> scope, at which point the exception must be honoured until the pass is scheduled.
