@@ -44,8 +44,7 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
   Performance 950/1100, Peak 1395/1625. Upfront on a 3-month program =
   3 × the 3-month monthly rate, no discount: 750 / 1,425 / 2,850 / 4,185.
-  In-home from 335/mo (1,005 upfront). Couples from 325/mo (975 upfront),
-  monthly only — no per-person figures. Packs: 5 @ 175/session ($875),
+  In-home from 335/mo (1,005 upfront). Packs: 5 @ 175/session ($875),
   10 @ 150 ($1,500), 20 @ 135 ($2,700), one ladder regardless of location.
   Singles 165 studio, 195 in-home.
   Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
@@ -53,6 +52,21 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   requires Teqneeq membership $119/mo paid to Teqneeq; Essential and
   packs use sponsored guest passes. Travel fee: "may apply" language OK,
   never a dollar figure.
+- Couples pricing (monthly; both partners train in one session). Supersedes
+  the earlier "from 325/mo, monthly only" line:
+    Studio  3-mo: Essential 325 · Momentum 625 · Performance 1,250
+    Studio  M2M : Essential 370 · Momentum 700 · Performance 1,400
+    In-home 3-mo: Essential 455 · Momentum 875 · Performance 1,725
+    In-home M2M : Essential 510 · Momentum 975 · Performance 1,950
+    Single couples session: 235 studio · 250 in-home
+  Peak is ad-hoc only at both venues and is NOT offered as a prepaid couples
+  commitment.
+  Derived per-session figures exist (studio 150/144/144, in-home 210/202/199
+  by tier) but are NOT to be published as the primary rate. Note that the
+  studio Essential derivation is $150, which the certification rule treats as
+  a violation outside the approved contexts, so publishing it would fail
+  certification as well as contradict this line.
+  IN-HOME PERFORMANCE (1,725/mo) is month-to-month ONLY. See DEFERRED-02.
 - Case-study figures (captions/alt text; verbatim client quotes are
   untouchable): Vincent 59, 8% body fat. Alo +18 lbs. Mark −17 lbs
   (248→231, 4mo). Dave −27 (225→198, 6mo). Isaac −21 (181→160, 8→20
@@ -111,10 +125,14 @@ legitimately changes an invariant, and say so in REPORT.md)
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
 
-KNOWN DEFERRED ITEMS (approved, scheduled for a later pass — certification
-runs must NOT flag these as violations while listed here)
+KNOWN DEFERRED ITEMS
+Two kinds live here and they behave differently:
+  · ACCEPTED EXCEPTION — an existing violation deliberately tolerated.
+    Certification must NOT flag it while listed.
+  · ACTIVE CONSTRAINT — a restriction that must be HONOURED when publishing.
+    Not a tolerated violation; breaking it is a real error.
 
-DEFERRED-01 · Executive Reset guarantee wording (rates page)
+DEFERRED-01 · ACCEPTED EXCEPTION · Executive Reset guarantee wording (rates page)
 - File: pages/training-rates-san-diego.html, plus its header file.
   NOTE: that header file does not exist yet. The page's schema is still
   body-embedded (line 822), so the third instance currently lives in the
@@ -142,6 +160,23 @@ DEFERRED-01 · Executive Reset guarantee wording (rates page)
   compliance test to pass and nothing to negotiate."
 - Status: approved, not yet applied. Deliberately deferred by Nemezio.
   Known, accepted exception until scheduled.
+
+DEFERRED-02 · ACTIVE CONSTRAINT · Couples in-home Performance prepay cap
+- Constraint: couples in-home Performance at $1,725/mo must be offered
+  MONTH-TO-MONTH ONLY. Do not publish it as a 3-month prepaid commitment
+  and do not show a 3-month upfront total for it.
+- Reason: 3 x $1,725 = $5,175, which exceeds the $4,400 California Civil
+  Code 1812.86 cap cited in OmniFit's own signed agreement.
+- Status: month-to-month only, pending legal confirmation. This is a
+  restriction to honour, not a violation to tolerate.
+- Cap check against every other published upfront total (all clear):
+    individual Essential 750 · Momentum 1,425 · Performance 2,850 ·
+    Peak 4,185 (only $215 of headroom, closest to the cap)
+    couples studio 975 / 1,875 / 3,750 · couples in-home 1,365 / 2,625
+    20-session pack 2,700
+  Any future rate rise on individual Peak crosses the cap: $1,467/mo is the
+  break point at 3 x monthly. Check before repricing.
+
 
 NEXT RUNS
 - BATCH 2 DONE (Aug 2026): FAQs · how-it-works-pricing (converted to
