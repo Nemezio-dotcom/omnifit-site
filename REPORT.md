@@ -976,58 +976,60 @@ accepted exception until scheduled.
 > never being flagged. The entry matters for when that page is unblocked and enters
 > scope, at which point the exception must be honoured until the pass is scheduled.
 
-## DEFERRED-02 · ACTIVE CONSTRAINT · Couples in-home Performance prepay cap
+## DEFERRED-02 · ACTIVE CONSTRAINT · Statutory cap exposure on prepaid tiers
 
-Logged alongside canonical couples pricing supplied this session. Unlike
-DEFERRED-01, this is **not** a tolerated violation. It is a restriction to honour
-when publishing, and breaking it is a real error.
+*Superseded the narrower "couples in-home Performance" version logged earlier the
+same session; counsel's open question and a second OVER row were added.*
 
-**Constraint:** couples in-home Performance at `$1,725/mo` is **month-to-month
-only**. Do not publish it as a 3-month prepaid commitment and do not show a
-3-month upfront total for it.
+Not a tolerated violation. This is a restriction to honour when publishing, and
+breaking it is a real error.
 
-**Reason:** 3 × $1,725 = **$5,175**, exceeding the **$4,400** California Civil Code
-1812.86 cap cited in OmniFit's own signed agreement.
+**Cal. Civ. Code 1812.86** caps a single health studio services contract at
+**$4,400**. OmniFit's own Couples Prepaid Program Agreement cites this cap and
+excludes in-home Performance and Peak couples on that basis.
 
-**Status:** month-to-month only, pending legal confirmation.
+### Prepaid 3-month totals against the cap
 
-### Cap check against every upfront total already published
-
-Run because the same 3 × monthly rule now governs figures live on
-`how-it-works-pricing.html`.
-
-| Offer | Upfront | vs $4,400 cap |
+| Offer | 3-month total | vs $4,400 |
 |---|---|---|
-| Individual Essential | $750 | clear |
-| Individual Momentum | $1,425 | clear |
-| Individual Performance | $2,850 | clear |
-| **Individual Peak** | **$4,185** | **clear, $215 headroom** |
-| Couples studio Essential / Momentum / Performance | $975 / $1,875 / $3,750 | clear |
-| Couples in-home Essential / Momentum | $1,365 / $2,625 | clear |
-| **Couples in-home Performance** | **$5,175** | **EXCEEDS — hence this item** |
-| 20-session pack | $2,700 | clear |
+| Teqneeq Peak individual | $1,395 × 3 = **$4,185** | under, by **$215** |
+| In-home Performance individual | $1,250 × 3 = $3,750 | under |
+| Studio couples Performance | $1,250 × 3 = $3,750 | under |
+| In-home couples Momentum | $875 × 3 = $2,625 | under |
+| **In-home couples Performance** | **$1,725 × 3 = $5,175** | **OVER by $775** |
+| **In-home Peak individual** | **$1,860 × 3 = $5,580** | **OVER by $1,180** (floor) |
 
-**Nothing currently published breaches the cap.** Individual Peak is the closest at
-$215 of headroom, so **any rate rise on Peak past $1,466/mo crosses it** at 3 ×
-monthly. That break point is recorded in CANON so a future repricing run checks
-before publishing.
+### Open question for counsel
 
-### Couples pricing recorded
+Whether 1812.86 reaches **in-home** personal training or only facility-based
+services. That answer determines whether the two OVER rows are a real problem or a
+non-issue. Both OVER rows are in-home; every facility-based offer clears.
 
-The full grid now sits in CANON's canonical-truth block and supersedes the earlier
-"Couples from $325/mo, monthly only" line. Two notes carried with it:
+### Interim rule
 
-- **Peak is ad-hoc only** at both venues, not a prepaid couples commitment.
-- **Derived per-session figures are not to be published as the primary rate.**
-  Worth flagging that the studio Essential derivation is exactly `$150`, which the
-  certification rule already treats as a violation outside the approved pack and
-  Bronze contexts. Publishing it would fail certification as well as contradict the
-  instruction, so the two rules agree here rather than conflict.
+Do not publish or sell **in-home couples Performance** or **in-home Peak** as
+3-month prepaid commitments. Month-to-month only. Couples Peak is already ad-hoc
+only at both venues, so the in-home Peak restriction lands on the **individual**
+tier.
 
-### Effect on already-published couples copy
+**Status:** awaiting legal confirmation. Not a certification violation while listed.
 
-`how-it-works-pricing.html` shows couples as a single card, "from $325/mo, $975
-upfront". That is the studio Essential 3-month rate and remains correct. It is now
-**incomplete** rather than wrong: the page shows neither the tier ladder nor the
-venue split. No page currently publishes any in-home couples figure, so
-DEFERRED-02 is not breached anywhere today.
+### Verified against the repo
+
+No certified page publishes in-home Peak or in-home Performance as a prepaid 3-month
+commitment. The only repo hits are in `training-rates-san-diego.html:445` and `:552`,
+which is uncertified, excluded from certification runs, and marked do-not-paste.
+**Nothing live breaches the interim rule.**
+
+### Headroom, worth watching
+
+Teqneeq Peak individual clears by **$215**. Any rise past **$1,466/mo** crosses the
+cap at 3 × monthly. In-home Peak at $1,860 is described as a **floor**, so its
+overage can only grow. Both break points are recorded in CANON so a repricing run
+checks before publishing.
+
+### Also learned
+
+The in-home **individual** ladder is now partly known and recorded: Performance
+$1,250/mo and Peak $1,860/mo, alongside the existing "from $335". Momentum in-home
+has not been supplied. CANON previously carried only the "from $335" entry point.
