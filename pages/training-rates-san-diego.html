@@ -1,0 +1,917 @@
+<!-- ===== OMNIFIT PERFORMANCE RATES PAGE — V8 (TUNE-UP · NO HYBRID · NO CARD FEE · JULY 2026) ===== -->
+<!-- SLUG: /training-rates-san-diego -->
+<!-- SQUARESPACE: Paste into a Code Block (Display Source OFF) on a blank page -->
+<!-- V8 CHANGES: Executive Hybrid removed (both venues + FAQ + schema) · 2.9% card fee removed everywhere · Monthly Tune-Up added after Session Packages · Tune-Up FAQ + schema added -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-rates {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-30: rgba(255,255,255,0.3);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px;
+    --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--white);
+    background: var(--navy);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; padding: 0;
+  }
+  #omni-rates *, #omni-rates *::before, #omni-rates *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ===== HERO ===== */
+  #omni-rates .rt-hero { padding: 80px 28px 48px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
+  #omni-rates .rt-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-rates .rt-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-rates .rt-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-rates .rt-hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-rates .rt-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+
+  /* ===== CTA ROW ===== */
+  #omni-rates .rt-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; position: relative; }
+  #omni-rates .rt-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; }
+  #omni-rates a.rt-btn, #omni-rates a.rt-btn:link, #omni-rates a.rt-btn:visited { text-decoration: none; }
+  #omni-rates .rt-btn-primary, #omni-rates a.rt-btn-primary, #omni-rates a.rt-btn-primary:link, #omni-rates a.rt-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
+  #omni-rates .rt-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-rates .rt-btn-ghost, #omni-rates a.rt-btn-ghost, #omni-rates a.rt-btn-ghost:link, #omni-rates a.rt-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
+  #omni-rates .rt-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); color: var(--white) !important; }
+  #omni-rates .rt-btn-secondary, #omni-rates a.rt-btn-secondary, #omni-rates a.rt-btn-secondary:link, #omni-rates a.rt-btn-secondary:visited { border: 1px solid var(--gold); color: var(--gold) !important; background: transparent; }
+  #omni-rates .rt-btn-secondary:hover { background: var(--gold-dim); transform: translateY(-2px); color: var(--gold) !important; }
+
+  /* ===== SECTION STRUCTURE ===== */
+  #omni-rates .rt-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
+  #omni-rates .rt-section-head { text-align: center; margin-bottom: 40px; }
+  #omni-rates .rt-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  #omni-rates .rt-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
+  #omni-rates h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-rates h2 em { font-style: italic; color: var(--gold); }
+  #omni-rates h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-rates p { font-family: 'Montserrat', sans-serif !important; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+
+  /* ===== QUOTABLE ===== */
+  #omni-rates .rt-quotable { background: var(--navy-mid); border-left: 3px solid var(--gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 24px 28px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rates .rt-quotable p { font-family: 'Playfair Display', serif !important; font-size: 17px; font-style: italic; color: var(--white-90); line-height: 1.7; margin: 0; }
+
+  /* ===== SPACERS ===== */
+  #omni-rates .rt-spacer { height: 56px; }
+  #omni-rates .rt-spacer-sm { height: 32px; }
+
+  /* ===== INCLUDES STRIP ===== */
+  #omni-rates .rt-includes { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 28px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rates .rt-includes-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; text-align: center; display: block; }
+  #omni-rates .rt-includes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  #omni-rates .rt-includes-item { display: flex; gap: 10px; align-items: flex-start; font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.6; color: var(--white-90); }
+  #omni-rates .rt-includes-item::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+
+  /* ===== ASSESSMENT HIGHLIGHT ===== */
+  #omni-rates .rt-assess { background: var(--navy-light); border: 2px solid var(--gold); border-radius: var(--radius-lg); padding: 32px 28px; max-width: 1120px; margin: 0 auto 56px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  #omni-rates .rt-assess-content { flex: 1; }
+  #omni-rates .rt-assess-price { background: var(--gold); color: var(--navy); font-family: 'Playfair Display', serif !important; font-size: 36px; font-weight: 700; border-radius: var(--radius); padding: 16px 28px; flex-shrink: 0; text-align: center; line-height: 1; }
+  #omni-rates .rt-assess-price span { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
+
+  /* ===== FIT / NOT FIT ===== */
+  #omni-rates .rt-fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rates .rt-fit-col { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px; }
+  #omni-rates .rt-fit-col.not-for { background: var(--white-05); border-color: var(--white-05); }
+  #omni-rates .rt-fit-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  #omni-rates .rt-fit-col.built-for .rt-fit-label { color: var(--gold); }
+  #omni-rates .rt-fit-col.not-for .rt-fit-label { color: var(--white-50); }
+  #omni-rates .rt-fit-list { list-style: none; padding: 0; display: grid; gap: 10px; }
+  #omni-rates .rt-fit-list li { display: flex; gap: 10px; align-items: flex-start; font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.65; color: var(--white-70); }
+  #omni-rates .rt-fit-col.built-for .rt-fit-list li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 12px; flex-shrink: 0; }
+  #omni-rates .rt-fit-col.not-for .rt-fit-list li::before { content: '✕'; color: var(--white-50); font-weight: 700; font-size: 12px; flex-shrink: 0; }
+
+  /* ===== PRICING CARDS (4-col for named packages) ===== */
+  #omni-rates .rt-pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 40px; }
+  #omni-rates .rt-pricing-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rates .rt-price-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 20px 24px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; }
+  #omni-rates .rt-price-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-rates .rt-price-card.featured { border-color: rgba(201,168,76,0.5); box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
+  #omni-rates .rt-price-card.featured:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
+
+  #omni-rates .rt-price-name { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  #omni-rates .rt-price-freq { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-70); margin-bottom: 16px; }
+  #omni-rates .rt-price-value { font-family: 'Playfair Display', serif !important; font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 4px; }
+  #omni-rates .rt-price-value span { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); font-weight: 400; }
+  #omni-rates .rt-price-upfront { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); margin-bottom: 2px; }
+  #omni-rates .rt-price-m2m { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); margin-bottom: 16px; }
+  #omni-rates .rt-price-unit { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); margin-bottom: 14px; }
+  #omni-rates .rt-price-bestfor { font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.6; color: var(--white-90); margin-bottom: 16px; }
+  #omni-rates .rt-price-bestfor strong { color: var(--white); }
+
+  #omni-rates .rt-price-features { list-style: none; padding: 0; display: grid; gap: 8px; margin-bottom: 18px; flex: 1; }
+  #omni-rates .rt-price-features li { display: flex; gap: 10px; align-items: flex-start; font-family: 'Montserrat', sans-serif !important; font-size: 13px; line-height: 1.6; color: var(--white-70); }
+  #omni-rates .rt-price-features li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 11px; flex-shrink: 0; margin-top: 2px; }
+
+  #omni-rates .rt-price-note { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); line-height: 1.6; margin-bottom: 16px; }
+  #omni-rates .rt-price-note strong { color: var(--white-70); }
+  #omni-rates .rt-price-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; }
+  #omni-rates .rt-price-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  #omni-rates .rt-price-title { font-family: 'Montserrat', sans-serif !important; font-size: 18px; font-weight: 700; color: var(--white); line-height: 1.25; }
+  #omni-rates .rt-price-tag { display: inline-block; padding: 6px 14px; border: 1px solid var(--gold); color: var(--gold); background: var(--gold-dim); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; }
+
+  /* ===== FEATURE BAND ===== */
+  #omni-rates .rt-feature { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 28px; max-width: 1120px; margin: 0 auto 20px; }
+  #omni-rates .rt-feature-grid { display: grid; grid-template-columns: 1.1fr 1.9fr; gap: 28px; align-items: start; }
+  #omni-rates .rt-feature-title { font-family: 'Playfair Display', serif !important; font-size: clamp(22px, 3vw, 28px); font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+  #omni-rates .rt-feature-price { font-family: 'Playfair Display', serif !important; font-size: clamp(22px, 3vw, 28px); font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  #omni-rates .rt-feature-price span { font-family: 'Montserrat', sans-serif !important; font-size: 14px; color: var(--white-50); font-weight: 400; }
+  #omni-rates .rt-feature-note { font-family: 'Montserrat', sans-serif !important; font-size: 14px; color: var(--white-70); line-height: 1.7; margin-bottom: 16px; }
+  #omni-rates .rt-feature-list { list-style: none; padding: 0; display: grid; gap: 10px; }
+  #omni-rates .rt-feature-list li { font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.65; color: var(--white-70); padding-left: 20px; position: relative; }
+  #omni-rates .rt-feature-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 12px; }
+  #omni-rates .rt-feature-list li strong { color: var(--white); }
+
+  /* ===== GUARANTEE ===== */
+  #omni-rates .rt-guarantee { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px 28px; margin-top: 24px; }
+  #omni-rates .rt-guarantee h4 { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+  #omni-rates .rt-guarantee p { font-size: 14px; line-height: 1.7; color: var(--white-90); }
+
+  /* ===== ADD-ONS ===== */
+  #omni-rates .rt-addons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rates .rt-addon { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; transition: all 0.3s; }
+  #omni-rates .rt-addon:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+  #omni-rates .rt-addon h4 { font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  #omni-rates .rt-addon-price { font-family: 'Playfair Display', serif !important; font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+  #omni-rates .rt-addon p { font-size: 13px; color: var(--white-50); line-height: 1.65; }
+
+  /* ===== SESSION PACKS TABLE ===== */
+  #omni-rates .rt-packs { max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rates .rt-packs-table { width: 100%; border-collapse: collapse; }
+  #omni-rates .rt-packs-table th { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--white-10); }
+  #omni-rates .rt-packs-table td { font-family: 'Montserrat', sans-serif !important; font-size: 14px; color: var(--white-70); padding: 14px 16px; border-bottom: 1px solid var(--white-05); }
+  #omni-rates .rt-packs-table td:first-child { font-weight: 700; color: var(--white); }
+  #omni-rates .rt-packs-table td:last-child { color: var(--white-50); font-size: 12px; }
+
+  /* ===== POLICIES ===== */
+  #omni-rates .rt-policies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rates .rt-policy { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
+  #omni-rates .rt-policy-icon { font-size: 24px; margin-bottom: 10px; }
+  #omni-rates .rt-policy h5 { font-family: 'Montserrat', sans-serif !important; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  #omni-rates .rt-policy p { font-size: 13px; color: var(--white-50); line-height: 1.6; }
+
+  /* ===== FAQ ===== */
+  #omni-rates .rt-faq details { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; }
+  #omni-rates .rt-faq summary { padding: 20px 28px; font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 600; color: var(--white-90); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+  #omni-rates .rt-faq summary:hover { background: var(--white-05); }
+  #omni-rates .rt-faq summary::-webkit-details-marker { display: none; }
+  #omni-rates .rt-faq summary::after { content: '+'; color: var(--gold); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-left: 16px; }
+  #omni-rates .rt-faq details[open] summary::after { content: '−'; }
+  #omni-rates .rt-faq .rt-faq-body { padding: 0 28px 24px; font-size: 14px; color: var(--white-70); line-height: 1.7; }
+  #omni-rates .rt-faq .rt-faq-body a, #omni-rates .rt-faq .rt-faq-body a:link, #omni-rates .rt-faq .rt-faq-body a:visited { color: var(--gold) !important; text-decoration: underline; }
+
+  /* ===== SURCHARGE ===== */
+  #omni-rates .rt-surcharge { max-width: 900px; margin: 0 auto; text-align: center; font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); line-height: 1.7; }
+
+  /* ===== BOTTOM CTA ===== */
+  #omni-rates .rt-bottom { background: var(--navy-mid); border-radius: var(--radius-lg); padding: 44px 36px; text-align: center; max-width: 1120px; margin: 0 auto; }
+  #omni-rates .rt-bottom h2 { margin-bottom: 12px; }
+  #omni-rates .rt-bottom p { max-width: 560px; margin: 0 auto 28px; font-size: 15px; }
+  #omni-rates .rt-bottom-note { display: block; margin-top: 14px; font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); }
+
+  /* ===== TRUST BAR ===== */
+  #omni-rates .rt-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 48px auto 0; max-width: 700px; padding: 0 20px; }
+  #omni-rates .rt-trust-item { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+  #omni-rates .rt-trust-item span { font-size: 14px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 980px) {
+    #omni-rates .rt-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    #omni-rates .rt-pricing-grid-2 { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
+    #omni-rates .rt-feature-grid { grid-template-columns: 1fr; gap: 20px; }
+    #omni-rates .rt-fit-grid { grid-template-columns: 1fr; }
+    #omni-rates .rt-addons-grid { grid-template-columns: repeat(2, 1fr); }
+    #omni-rates .rt-assess { flex-direction: column; text-align: center; }
+  }
+  @media (max-width: 768px) {
+    #omni-rates .rt-hero { padding: 56px 20px 36px; }
+    #omni-rates .rt-section { padding: 0 20px; }
+    #omni-rates .rt-includes { margin-left: 20px; margin-right: 20px; }
+    #omni-rates .rt-fit-grid { margin-left: 20px; margin-right: 20px; }
+    #omni-rates .rt-pricing-grid { grid-template-columns: 1fr 1fr; padding: 0 20px; }
+    #omni-rates .rt-feature { margin-left: 20px; margin-right: 20px; }
+    #omni-rates .rt-addons-grid { grid-template-columns: 1fr; padding: 0 20px; }
+    #omni-rates .rt-policies { grid-template-columns: 1fr; padding: 0 20px; }
+    #omni-rates .rt-bottom { margin-left: 20px; margin-right: 20px; padding: 32px 24px; }
+    #omni-rates .rt-includes-grid { grid-template-columns: 1fr; }
+    #omni-rates .rt-assess { margin-left: 20px; margin-right: 20px; }
+    #omni-rates .rt-packs { padding: 0 20px; }
+  }
+  @media (max-width: 640px) {
+    #omni-rates .rt-pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    #omni-rates .rt-cta-row { flex-direction: column; align-items: center; }
+    #omni-rates .rt-btn { width: 100%; max-width: 300px; text-align: center; }
+    #omni-rates .rt-price-cta { flex-direction: column; }
+    #omni-rates .rt-price-cta .rt-btn { width: 100%; text-align: center; }
+  }
+</style>
+
+<div id="omni-rates">
+
+  <!-- HERO -->
+  <section class="rt-hero">
+    <span class="rt-badge">Fitness &amp; Wellness Consulting · San Diego</span>
+    <h1>OmniFit Performance <em>Programs</em></h1>
+    <p class="rt-hero-sub">Structured coaching programs for busy professionals 30+ — in-studio, in-home, or virtual. Flexible billing. No activation fees. Train with purpose. Get results you keep.</p>
+    <div class="rt-cta-row">
+      <a class="rt-btn rt-btn-primary" href="/contactform">Book Your Assessment</a>
+      <a class="rt-btn rt-btn-ghost" href="#rt-faq">View FAQs</a>
+    </div>
+  </section>
+
+  <!-- QUOTABLE -->
+  <div style="padding: 0 28px;">
+    <blockquote class="rt-quotable">
+      <p>"Every OmniFit Performance program includes a monthly clinical-grade body composition assessment, custom programming built on the OmniFit 4-phase methodology, nutrition guidance, and weekly accountability — not just the hour in the gym."</p>
+    </blockquote>
+  </div>
+
+  <!-- ASSESSMENT HIGHLIGHT -->
+  <div style="padding: 0 28px;">
+    <div class="rt-assess">
+      <div class="rt-assess-content">
+        <span class="rt-label">Start Here</span>
+        <h3 style="font-size: clamp(22px, 3vw, 28px); margin-bottom: 8px;">OmniFit Performance <em>Assessment</em></h3>
+        <p style="font-size: 14px; margin-bottom: 0;">Clinical-grade body composition analysis (BodyStat 1500 MDD), movement screening, blood pressure, SpO2, and grip strength. Available in-studio at Teqneeq FHC or in your home. Introductory launch pricing.</p>
+      </div>
+      <div class="rt-assess-price">$90<span>Launch Price</span></div>
+    </div>
+  </div>
+
+  <!-- WHAT EVERY PLAN INCLUDES -->
+  <div style="padding: 0 28px;">
+    <div class="rt-includes">
+      <span class="rt-includes-label">Included in Every Program</span>
+      <div class="rt-includes-grid">
+        <div class="rt-includes-item">Monthly OmniFit Performance Assessment with clinical diagnostics</div>
+        <div class="rt-includes-item">Custom programming based on OmniFit 4-phase methodology</div>
+        <div class="rt-includes-item">Nutrition guidance &amp; macro framework</div>
+        <div class="rt-includes-item">Full app access for workout tracking and logging</div>
+        <div class="rt-includes-item">Weekly accountability and progress tracking</div>
+        <div class="rt-includes-item">Direct trainer access via text/email</div>
+        <div class="rt-includes-item">Corrective exercise and movement screening</div>
+        <div class="rt-includes-item">Program pause for travel (up to 2 weeks per 3-month term)</div>
+        <div class="rt-includes-item">Hybrid flexibility — train in-person, virtual, or both</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUILT FOR / NOT THE RIGHT FIT -->
+  <div style="padding: 0 28px;">
+    <div class="rt-fit-grid">
+      <div class="rt-fit-col built-for">
+        <span class="rt-fit-label">Built For</span>
+        <ul class="rt-fit-list">
+          <li>Professionals 30+ managing demanding schedules</li>
+          <li>People with joint issues or injury history who need corrective-first training</li>
+          <li>Executives who want structured accountability, not random workouts</li>
+          <li>Anyone ready to commit to consistent, measurable progress</li>
+          <li>Travelers who need a program that works anywhere</li>
+        </ul>
+      </div>
+      <div class="rt-fit-col not-for">
+        <span class="rt-fit-label">Not the Right Fit</span>
+        <ul class="rt-fit-list">
+          <li>Looking for drop-in classes or group workouts</li>
+          <li>Want the cheapest option available</li>
+          <li>Prefer to train without coaching feedback or accountability</li>
+          <li>Looking for a 6-week quick fix or crash program</li>
+          <li>Not willing to follow a structured plan between sessions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ TEQNEEQ IN-STUDIO ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">In-Studio Training</span>
+      <hr class="rt-divider">
+      <h2>Teqneeq FHC <em>Programs</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Private functional health center · 10772 Thornmint Rd, San Diego 92127. Clients pay $119/mo facility membership to Teqneeq FHC. 3-month programs are paid in full upfront; month-to-month programs are billed monthly via auto-pay.</p>
+    </div>
+  </div>
+
+  <!-- NAMED PACKAGES — TEQNEEQ -->
+  <div class="rt-pricing-grid" style="padding:0 28px;">
+
+    <article class="rt-price-card">
+      <div class="rt-price-name">Essential</div>
+      <div class="rt-price-freq">1 session every 2 weeks</div>
+      <div class="rt-price-value">$225 <span>/mo</span></div>
+      <div class="rt-price-upfront">$675 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $275/mo</div>
+      <ul class="rt-price-features">
+        <li>Ideal for maintaining a baseline</li>
+        <li>Assessment-driven programming</li>
+        <li>Full program inclusions</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+      <div class="rt-price-name">Momentum</div>
+      <div class="rt-price-freq">1 session per week</div>
+      <div class="rt-price-value">$425 <span>/mo</span></div>
+      <div class="rt-price-upfront">$1,275 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $525/mo</div>
+      <ul class="rt-price-features">
+        <li>Building consistent habits</li>
+        <li>Weekly coaching touchpoint</li>
+        <li>Full program inclusions</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card featured">
+      <div class="rt-price-name">Performance</div>
+      <div class="rt-price-freq">2 sessions per week</div>
+      <div class="rt-price-value">$850 <span>/mo</span></div>
+      <div class="rt-price-upfront">$2,550 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $1,050/mo</div>
+      <ul class="rt-price-features">
+        <li>Accelerated results</li>
+        <li>Optimal training frequency</li>
+        <li>Full program inclusions</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+      <div class="rt-price-name">Peak</div>
+      <div class="rt-price-freq">3 sessions per week</div>
+      <div class="rt-price-value">$1,275 <span>/mo</span></div>
+      <div class="rt-price-upfront">$3,825 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $1,575/mo</div>
+      <ul class="rt-price-features">
+        <li>Full transformation program</li>
+        <li>Maximum coaching frequency</li>
+        <li>Full program inclusions</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+    <p style="font-size:12px; color:var(--white-50); text-align:center;">3-month commitment rates shown (paid upfront). Extra session add-on: $105 · Guest add-on: $50/session · Single session: $150</p>
+  </div>
+
+  <div class="rt-spacer-sm"></div>
+
+  <!-- COUPLES — TEQNEEQ -->
+  <div style="padding: 0 28px;">
+    <div class="rt-feature">
+      <div class="rt-feature-grid">
+        <div>
+          <h3 class="rt-feature-title">Couples Training</h3>
+          <div class="rt-feature-price">$150 <span>/session · 3-month</span></div>
+          <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$170 <span>/session · month-to-month</span></div>
+          <p class="rt-feature-note">Train with a partner, spouse, or friend at Teqneeq FHC. Customized programming for both. Everything included in every program applies to both partners.</p>
+          <a class="rt-btn rt-btn-primary" href="/contactform">Book Couples Consult</a>
+        </div>
+        <div>
+          <ul class="rt-feature-list">
+            <li><strong>Individualized coaching for both partners</strong> — different fitness levels, different cues, shared session</li>
+            <li><strong>Custom programming</strong> for both people's goals and limitations</li>
+            <li><strong>All program inclusions</strong> — assessments, nutrition, accountability for both</li>
+            <li><strong>Built for consistency</strong> — training with someone you know increases adherence</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rt-spacer"></div>
+
+  <!-- ═══════ IN-HOME TRAINING ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">In-Home Training</span>
+      <hr class="rt-divider">
+      <h2>Train at <em>Home</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Premium training in the comfort of your home. 4S Ranch, Rancho Santa Fe, Carmel Valley, Del Mar, Solana Beach, Encinitas, Carlsbad, and as far south as La Jolla. All equipment provided — no home gym required.</p>
+    </div>
+  </div>
+
+  <!-- NAMED PACKAGES — IN-HOME -->
+  <div class="rt-pricing-grid" style="padding:0 28px;">
+
+    <article class="rt-price-card">
+      <div class="rt-price-name">Essential</div>
+      <div class="rt-price-freq">1 session every 2 weeks</div>
+      <div class="rt-price-value">$275 <span>/mo</span></div>
+      <div class="rt-price-upfront">$825 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $325/mo</div>
+      <ul class="rt-price-features">
+        <li>Ideal for maintaining a baseline</li>
+        <li>Assessment-driven programming</li>
+        <li>All equipment provided</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+      <div class="rt-price-name">Momentum</div>
+      <div class="rt-price-freq">1 session per week</div>
+      <div class="rt-price-value">$575 <span>/mo</span></div>
+      <div class="rt-price-upfront">$1,725 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $650/mo</div>
+      <ul class="rt-price-features">
+        <li>Building consistent habits</li>
+        <li>Weekly coaching touchpoint</li>
+        <li>All equipment provided</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card featured">
+      <div class="rt-price-name">Performance</div>
+      <div class="rt-price-freq">2 sessions per week</div>
+      <div class="rt-price-value">$1,125 <span>/mo</span></div>
+      <div class="rt-price-upfront">$3,375 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $1,275/mo</div>
+      <ul class="rt-price-features">
+        <li>Accelerated results</li>
+        <li>Optimal training frequency</li>
+        <li>All equipment provided</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+      <div class="rt-price-name">Peak</div>
+      <div class="rt-price-freq">3 sessions per week</div>
+      <div class="rt-price-value">$1,675 <span>/mo</span></div>
+      <div class="rt-price-upfront">$5,025 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $1,925/mo</div>
+      <ul class="rt-price-features">
+        <li>Full transformation program</li>
+        <li>Maximum coaching frequency</li>
+        <li>All equipment provided</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+    <p style="font-size:12px; color:var(--white-50); text-align:center;">3-month commitment rates shown (paid upfront). Extra session add-on: $140 · Guest add-on: $50/session · Single session: $175</p>
+  </div>
+
+  <div class="rt-spacer-sm"></div>
+
+  <!-- COUPLES — IN-HOME -->
+  <div style="padding: 0 28px;">
+    <div class="rt-feature">
+      <div class="rt-feature-grid">
+        <div>
+          <h3 class="rt-feature-title">Couples Training — In-Home</h3>
+          <div class="rt-feature-price">$180 <span>/session · 3-month</span></div>
+          <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$200 <span>/session · month-to-month</span></div>
+          <p class="rt-feature-note">Train together at home. All equipment provided. Everything included in every program applies to both partners.</p>
+          <a class="rt-btn rt-btn-primary" href="/contactform">Book Couples Consult</a>
+        </div>
+        <div>
+          <ul class="rt-feature-list">
+            <li><strong>Individualized coaching for both partners</strong> — tailored to each person's level</li>
+            <li><strong>All equipment provided</strong> — no home gym required</li>
+            <li><strong>Full BodyStat clinical diagnostics</strong> for both partners monthly</li>
+            <li><strong>Built for consistency</strong> — training with someone you know increases adherence</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rt-spacer"></div>
+
+  <!-- ═══════ SESSION PACKAGES ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">Prepaid Flexibility</span>
+      <hr class="rt-divider">
+      <h2>Session <em>Packages</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Prepaid session packs for clients who want flexibility without a monthly commitment. Monthly performance assessment included. Teqneeq FHC packages include guest pass — no facility membership required. Maximum 2 sessions per week.</p>
+    </div>
+  </div>
+
+  <div style="padding: 0 28px;">
+    <div class="rt-packs">
+      <table class="rt-packs-table">
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>Teqneeq FHC</th>
+            <th>In-Home</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5-Pack</td>
+            <td>$130/session ($650)</td>
+            <td>$155/session ($775)</td>
+            <td>Expires in 10 weeks</td>
+          </tr>
+          <tr>
+            <td>10-Pack</td>
+            <td>$125/session ($1,250)</td>
+            <td>$150/session ($1,500)</td>
+            <td>Expires in 20 weeks</td>
+          </tr>
+          <tr>
+            <td>20-Pack</td>
+            <td>$120/session ($2,400)</td>
+            <td>$145/session ($2,900)</td>
+            <td>Expires in 30 weeks</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="rt-spacer-sm"></div>
+
+  <!-- ═══════ MONTHLY TUNE-UP — GRADUATES ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">For Program Graduates</span>
+      <hr class="rt-divider">
+      <h2>Monthly <em>Tune-Up</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Finished a 3-month program? Stay in orbit without re-committing. Month-to-month, cancel anytime.</p>
+    </div>
+  </div>
+
+  <div style="padding: 0 28px;">
+    <div class="rt-feature">
+      <div class="rt-feature-grid">
+        <div>
+          <h3 class="rt-feature-title">Monthly Tune-Up</h3>
+          <div class="rt-feature-price">$179 <span>/mo · Teqneeq members</span></div>
+          <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$225 <span>/mo · non-members (guest pass included)</span></div>
+          <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$265 <span>/mo · in-home</span></div>
+          <p class="rt-feature-note">Exclusively for graduates of any 3-month OmniFit program. Month-to-month billing via auto-pay — cancel with 30 days notice.</p>
+          <a class="rt-btn rt-btn-primary" href="/contactform">Stay in the Program</a>
+        </div>
+        <div>
+          <ul class="rt-feature-list">
+            <li><strong>One private tune-up session each month</strong> — form checks, program updates, and a fresh look at your data</li>
+            <li><strong>Asynchronous coaching</strong> between sessions</li>
+            <li><strong>Ongoing nutrition support</strong> to hold the results you built</li>
+            <li><strong>Direct text access</strong> to your coach</li>
+            <li><strong>Non-members:</strong> Teqneeq guest passes included — no facility membership required</li>
+          </ul>
+          <p style="font-size:12px; color:var(--white-50); margin-top:14px; line-height:1.6;">Sessions do not roll over month to month. Rejoining after a lapse of 60+ days requires a current $90 Performance Assessment — we don't program without current data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rt-spacer"></div>
+
+  <!-- ═══════ VIRTUAL COACHING ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">Virtual Coaching</span>
+      <hr class="rt-divider">
+      <h2>Remote <em>Programs</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:560px; margin:8px auto 0;">Results-driven remote coaching with full programming and accountability. Available nationwide.</p>
+    </div>
+  </div>
+
+  <!-- BRONZE — ASYNC -->
+  <div style="padding: 0 28px;">
+    <div class="rt-feature">
+      <div class="rt-feature-grid">
+        <div>
+          <h3 class="rt-feature-title">Bronze — Async Training</h3>
+          <div class="rt-feature-price">$150 <span>/month</span></div>
+          <p class="rt-feature-note">Custom programming delivered via app. Train on your own schedule with professional guidance. No live sessions — pure flexibility.</p>
+          <a class="rt-btn rt-btn-primary" href="/contactform">Start Async Training</a>
+        </div>
+        <div>
+          <ul class="rt-feature-list">
+            <li><strong>Custom programming</strong> updated monthly based on your goals</li>
+            <li><strong>Full app access</strong> for workout tracking and logging</li>
+            <li><strong>No live sessions</strong> — train on your own schedule, anywhere</li>
+            <li><strong>Ideal for:</strong> self-motivated professionals who want expert programming without scheduled sessions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rt-spacer-sm"></div>
+
+  <!-- EXECUTIVE RESET TIERS -->
+  <div style="padding: 0 28px;">
+    <div class="rt-feature">
+      <div class="rt-feature-grid">
+        <div>
+          <h3 class="rt-feature-title">The Executive Reset</h3>
+          <div class="rt-feature-price">$399–$899 <span>/month</span></div>
+          <p style="font-family:'Montserrat',sans-serif !important; font-size:13px; color:var(--white-50); margin-bottom:12px;">Gold 1×/week ($399) · Platinum 2×/week ($599) · Black 3×/week ($899)</p>
+          <p class="rt-feature-note">High-accountability 30-minute live virtual coaching for executives and high-performing professionals. Custom training, nutrition, and habit coaching built around your schedule.</p>
+          <a class="rt-btn rt-btn-primary" href="/contactform">Book Executive Reset Consultation</a>
+        </div>
+        <div>
+          <ul class="rt-feature-list">
+            <li><strong>Live 1:1 Sessions</strong> — 30-minute virtual coaching 1–3× per week</li>
+            <li><strong>Custom Programming</strong> updated monthly for non-session days</li>
+            <li><strong>Nutrition Guidance</strong> — macros and food guidelines for your lifestyle</li>
+            <li><strong>Weekly Async Coaching</strong> — habit and accountability check-ins</li>
+            <li><strong>Platinum &amp; Black:</strong> bi-weekly progress assessments, priority scheduling</li>
+            <li><strong>Black tier:</strong> direct messaging access, monthly body composition reporting</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rt-guarantee">
+        <h4>30-Day Executive Performance Guarantee</h4>
+        <p>If after your first 30 days of showing up for your scheduled live sessions and following the agreed plan you don't feel clearly more energized, stronger, and more in control of your training — you can stop, and I'll refund the remaining balance of your program. You keep the first month and everything you've learned.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="rt-spacer"></div>
+
+  <!-- ═══════ ADD-ONS ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">Additional Options</span>
+      <hr class="rt-divider">
+      <h2>Add-On <em>Services</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:560px; margin:8px auto 0;">Available to all active clients.</p>
+    </div>
+  </div>
+
+  <div class="rt-addons-grid" style="padding:0 28px;">
+    <div class="rt-addon">
+      <h4>Extra Session</h4>
+      <div class="rt-addon-price">$105 studio · $140 home</div>
+      <p>Add an extra session beyond your program — before a vacation, event, or when you're on a roll.</p>
+    </div>
+    <div class="rt-addon">
+      <h4>Guest Add-On</h4>
+      <div class="rt-addon-price">$50 /session</div>
+      <p>Bring a guest to train with you during any session. Available to all clients on named packages.</p>
+    </div>
+    <div class="rt-addon">
+      <h4>Single Session</h4>
+      <div class="rt-addon-price">$150 studio · $175 home</div>
+      <p>One-off session with no package or commitment. Performance Assessment available separately ($90).</p>
+    </div>
+    <div class="rt-addon">
+      <h4>Referral Credit</h4>
+      <div class="rt-addon-price">$50 off your next month</div>
+      <p>When someone you refer books an assessment and starts a program, you get $50 off your next billing cycle.</p>
+    </div>
+  </div>
+
+  <!-- POLICIES -->
+  <div class="rt-policies" style="padding:0 28px;">
+    <div class="rt-policy">
+      <div class="rt-policy-icon">⏸</div>
+      <h5>Program Pause</h5>
+      <p>Up to 2 weeks per 3-month term. Your commitment extends by the same duration. No charge. Month-to-month clients can cancel with 30 days notice.</p>
+    </div>
+    <div class="rt-policy">
+      <div class="rt-policy-icon">💳</div>
+      <h5>Billing</h5>
+      <p>3-month commitment programs are paid in full upfront at signup. Month-to-month programs are billed monthly via auto-pay and can be cancelled with 30 days notice. No activation fees.</p>
+    </div>
+    <div class="rt-policy">
+      <div class="rt-policy-icon">📋</div>
+      <h5>24-Hour Policy</h5>
+      <p>Sessions cancelled with less than 24 hours notice are forfeited. Consistency is part of the program — and the results.</p>
+    </div>
+  </div>
+
+  <div class="rt-spacer"></div>
+
+  <!-- FAQ -->
+  <div class="rt-section" id="rt-faq">
+    <div class="rt-section-head">
+      <span class="rt-label">Frequently Asked</span>
+      <hr class="rt-divider">
+      <h2>Questions About <em>Programs</em></h2>
+    </div>
+
+    <div class="rt-faq">
+
+      <details>
+        <summary>How much does personal training cost in San Diego?</summary>
+        <div class="rt-faq-body"><p>Personal training rates in San Diego range from $60–$200 per session depending on trainer certifications, session format, and program structure. OmniFit Performance offers structured monthly programs starting at $225/month (Essential, 1 session every 2 weeks) for in-studio training at Teqneeq FHC, and $275/month for in-home training. Every program includes monthly clinical-grade body composition assessments, custom programming, nutrition guidance, and weekly accountability.</p></div>
+      </details>
+
+      <details>
+        <summary>What's included in OmniFit Performance programs?</summary>
+        <div class="rt-faq-body"><p>Every program includes a monthly OmniFit Performance Assessment with clinical-grade BodyStat diagnostics, custom programming based on the OmniFit 4-phase methodology (Assess, Correct, Build, Sustain), nutrition guidance and macro framework, full app access for workout tracking, weekly accountability check-ins, and direct trainer access. In-home programs include all equipment — no home gym required.</p></div>
+      </details>
+
+      <details>
+        <summary>How does billing work?</summary>
+        <div class="rt-faq-body"><p>3-month commitment programs are paid in full upfront at signup and lock in the lower per-month rate. Month-to-month programs are billed monthly via auto-pay at a higher rate and can be cancelled with 30 days written notice. There are no activation fees.</p></div>
+      </details>
+
+      <details>
+        <summary>What are the program tiers?</summary>
+        <div class="rt-faq-body"><p>OmniFit Performance offers four named programs: Essential (1 session every 2 weeks), Momentum (1 session per week), Performance (2 sessions per week), and Peak (3 sessions per week). Each tier is available for both Teqneeq FHC in-studio and in-home training, with 3-month commitment and month-to-month pricing options. All tiers include the same comprehensive inclusions — the difference is training frequency.</p></div>
+      </details>
+
+      <details>
+        <summary>Do you offer online or virtual personal training?</summary>
+        <div class="rt-faq-body"><p>Yes. The Executive Reset delivers live 1:1 virtual coaching — Gold at $399/month (1 session per week), Platinum at $599/month (2 per week), and Black at $899/month (3 per week). Async-only programming (Bronze) is available at $150/month. Virtual coaching is available nationwide.</p></div>
+      </details>
+
+      <details>
+        <summary>What happens after I finish my 3-month program?</summary>
+        <div class="rt-faq-body"><p>Graduates of any 3-month OmniFit program can continue with the Monthly Tune-Up — one private session per month plus asynchronous coaching, ongoing nutrition support, and direct text access to your coach. Pricing is $179/month for Teqneeq members, $225/month for non-members (guest passes included — no facility membership required), or $265/month in-home. Billing is month-to-month with no long-term commitment; cancel with 30 days notice.</p></div>
+      </details>
+
+      <details>
+        <summary>Does OmniFit offer a money-back guarantee?</summary>
+        <div class="rt-faq-body"><p>The Executive Reset includes a 30-Day Performance Guarantee: if after 30 days of full compliance you don't feel clearly stronger, more energized, and more in control, you can cancel and receive a full refund of the remaining program balance. You keep the first month and everything you've learned.</p></div>
+      </details>
+
+      <details>
+        <summary>What is the OmniFit Performance Assessment?</summary>
+        <div class="rt-faq-body"><p>The OmniFit Performance Assessment is a clinical-grade diagnostic session using the BodyStat 1500 MDD (Class IIa medical device) for body composition analysis, plus blood pressure, SpO2, movement screening, and grip strength testing. It's available in-studio at Teqneeq FHC or in your home at an introductory price of $90. The assessment is included monthly in all training programs at no additional cost.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I bring a guest to my training session?</summary>
+        <div class="rt-faq-body"><p>Yes. Clients on any named package (Essential through Peak) can bring a guest for $50 per session. This is a great way for a spouse, friend, or colleague to experience OmniFit before committing to their own program.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I pause my program if I travel?</summary>
+        <div class="rt-faq-body"><p>Yes. 3-month commitment programs include a pause option of up to 2 weeks per term. Your commitment extends by the same duration at no additional cost. Many clients also use the virtual option to continue training during travel instead of pausing.</p></div>
+      </details>
+
+      <details>
+        <summary>Where does in-home training take place?</summary>
+        <div class="rt-faq-body"><p>OmniFit Performance serves 4S Ranch, Rancho Santa Fe, Carmel Valley, Del Mar, Solana Beach, Encinitas, Carlsbad, and as far south as La Jolla. All equipment is provided — no home gym required. In-home programs start at $275/month (Essential) with a 3-month commitment.</p></div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="rt-spacer-sm"></div>
+
+  <!-- PRICING NOTE -->
+  <div style="padding: 0 28px;">
+    <p class="rt-surcharge">Program pricing and availability are subject to change. Contact us for the most current rates.</p>
+  </div>
+
+  <div class="rt-spacer"></div>
+
+  <!-- BOTTOM CTA -->
+  <div style="padding: 0 28px;">
+    <div class="rt-bottom">
+      <h2>Ready to Start <em>Training</em>?</h2>
+      <p>Book your OmniFit Performance Assessment. We'll analyze your baseline, discuss your goals, and recommend the right program for your life.</p>
+      <a class="rt-btn rt-btn-primary" href="/contactform">Book Your $90 Assessment</a>
+      <span class="rt-bottom-note">In-studio at Teqneeq FHC or in your home · No commitment · Honest assessment of fit</span>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="rt-trust">
+    <div class="rt-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
+    <div class="rt-trust-item"><span>🏅</span> NASM CES · CPT · PES · BCS · CNC</div>
+    <div class="rt-trust-item"><span>📍</span> Teqneeq FHC · 4S Ranch, San Diego</div>
+    <div class="rt-trust-item"><span>🌍</span> Virtual Coaching Nationwide</div>
+  </div>
+
+</div>
+<!-- ===== FAQ SCHEMA (JSON-LD) ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does personal training cost in San Diego?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Personal training rates in San Diego range from $60 to $200 per session. OmniFit Performance offers structured monthly programs starting at $225 per month for in-studio training at Teqneeq FHC and $275 per month for in-home training. Every program includes monthly clinical-grade body composition assessments, custom programming, nutrition guidance, and weekly accountability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is included in OmniFit Performance programs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every OmniFit Performance program includes a monthly clinical-grade BodyStat body composition assessment, custom programming based on the OmniFit 4-phase methodology, nutrition guidance and macro framework, full app access for workout tracking, weekly accountability check-ins, and direct trainer access. In-home programs include all equipment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does OmniFit Performance billing work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "3-month commitment programs are paid in full upfront at signup and lock in the lower per-month rate. Month-to-month programs are billed monthly via auto-pay at a higher rate and can be cancelled with 30 days written notice. There are no activation fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the OmniFit Performance program tiers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "OmniFit Performance offers four named programs: Essential (1 session every 2 weeks), Momentum (1 session per week), Performance (2 sessions per week), and Peak (3 sessions per week). Each tier is available for both in-studio and in-home training with 3-month commitment and month-to-month pricing. All tiers include the same comprehensive inclusions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does OmniFit Performance offer online or virtual personal training?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Executive Reset offers live one-on-one virtual coaching from $399 to $899 per month depending on session frequency. Async-only programming is available at $150 per month. Virtual coaching is available nationwide."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens after I finish a 3-month OmniFit program?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Graduates can continue with the Monthly Tune-Up: one private session per month plus asynchronous coaching, ongoing nutrition support, and direct text access to your coach. Pricing is $179 per month for Teqneeq members, $225 per month for non-members with guest passes included, or $265 per month in-home. Billing is month-to-month with no long-term commitment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does OmniFit Performance offer a money-back guarantee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Executive Reset includes a 30-Day Performance Guarantee. If after 30 days of full compliance you do not feel clearly stronger and more in control, you can cancel and receive a full refund of the remaining program balance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the OmniFit Performance Assessment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The OmniFit Performance Assessment is a clinical-grade diagnostic session using the BodyStat 1500 MDD for body composition analysis, plus blood pressure, SpO2, movement screening, and grip strength testing. Available in-studio or in-home at an introductory price of $90. Included monthly in all training programs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I bring a guest to my OmniFit training session?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Clients on any named package can bring a guest for $50 per session. This is a great way for a spouse, friend, or colleague to experience OmniFit before committing to their own program."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I pause my OmniFit Performance program if I travel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. 3-month commitment programs include a pause option of up to 2 weeks per term. The commitment extends by the same duration at no additional cost. Clients can also use virtual training during travel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does OmniFit Performance offer in-home training in San Diego?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "OmniFit Performance serves 4S Ranch, Rancho Santa Fe, Carmel Valley, Del Mar, Solana Beach, Encinitas, Carlsbad, and as far south as La Jolla. All equipment is provided. In-home programs start at $275 per month with a 3-month commitment."
+      }
+    }
+  ]
+}
+</script>
