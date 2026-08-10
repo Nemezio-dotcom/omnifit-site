@@ -1,9 +1,15 @@
 ═══ OMNIFIT SITE — CANONICAL BRIEF (Aug 2026) ═══
 
 REPO STATE
-- main = paste source: 10 territory pages + corrective-exercise-post-rehab,
-  each with a header, plus REPORT.md, all certified. Everything lives under
-  pages/ and pages/headers/. Never resurrect pre-patch originals from history.
+- main = paste source. Certified: 10 territory pages,
+  corrective-exercise-post-rehab, FAQs, how-it-works-pricing,
+  in-home-personal-trainer-san-diego, private-personal-trainer-san-diego,
+  each with a header under pages/headers/<slug>-header.html.
+  NOT YET CERTIFIED, do not paste: training-rates-san-diego.html (still the
+  July V8 stale generation), the-30-minute-executive-reset.html, footer.html.
+  Never resurrect pre-patch originals from history.
+- Header naming is standardised: pages/headers/<slug>-header.html, no
+  exceptions.
 
 WORKFLOW RULES
 - Repo-only. Never publish anywhere; the human pastes approved output
@@ -36,8 +42,12 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   product as the $110 Performance Diagnostic; rename settled. Deposit
   $30 refundable.
   Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
-  Performance 950/1100, Peak 1395/1625. In-home from 335/mo. Couples
-  from 325/mo. Packs 135–175/session; singles 165 studio, 195 in-home.
+  Performance 950/1100, Peak 1395/1625. Upfront on a 3-month program =
+  3 × the 3-month monthly rate, no discount: 750 / 1,425 / 2,850 / 4,185.
+  In-home from 335/mo (1,005 upfront). Couples from 325/mo (975 upfront),
+  monthly only — no per-person figures. Packs: 5 @ 175/session ($875),
+  10 @ 150 ($1,500), 20 @ 135 ($2,700), one ladder regardless of location.
+  Singles 165 studio, 195 in-home.
   Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
   Monthly Tune-Up (graduates): 199/250/295. Facility rule: Momentum+
   requires Teqneeq membership $119/mo paid to Teqneeq; Essential and
@@ -76,8 +86,12 @@ CERTIFICATION GREP (zero hits expected)
 "free consultation" (any case) · "$90 " · "$225" · "$275" · "$299" ·
 "$500/mo" · "$599" · "$50"/"$75" as travel fees
 Exceptions: $150/$175 legal ONLY inside (a) the canonical pricing FAQ
-answer and (b) the card bullet "Fully virtual Executive Reset from
-$175/mo". $175 anywhere else is a violation.
+answer, (b) the card bullet "Fully virtual Executive Reset from
+$175/mo", (c) the canonical session-pack rungs confirmed Aug 2026
+($175/session for a 5-pack, $150 for a 10-pack, $135 for a 20-pack, with
+totals $875/$1,500/$2,700), and (d) the Executive Reset Bronze async
+tier at $175/mo. $150 or $175 used as a STUDIO PER-SESSION RATE is the
+retired era and remains a violation.
 
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
@@ -98,7 +112,10 @@ legitimately changes an invariant, and say so in REPORT.md)
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
 
 NEXT RUNS
-- BATCH 2 (awaiting human's pull into repo): training-rates-san-diego —
+- BATCH 2 DONE (Aug 2026): FAQs · how-it-works-pricing (converted to
+  monthly tiers) · in-home-personal-trainer-san-diego (P3 depth spec) ·
+  private-personal-trainer-san-diego.
+  BATCH 2 REMAINING: training-rates-san-diego —
   ADD market-context section around existing tables (what drives SD
   trainer cost; tier framing, OmniFit = specialist tier; no competitor
   promotion), do NOT rebuild tables · how-it-works-pricing ·
@@ -106,7 +123,7 @@ NEXT RUNS
   in-home-personal-trainer-san-diego (P3: 9-point screen + RHR/BP, "why
   we assess", desk-posture protocol, hedged genuinely-coached conditions
   only, comparison table with pricing-structure row) ·
-  private-personal-trainer-san-diego ($150–175 era) · faqs.
+  the-30-minute-executive-reset.
   Batch 2 and 3 offer pages ALSO get a "Who This Is For / Use Cases"
   section targeting adjacent queries (long-term transformation, no-crash
   fat loss, desk-worker posture and mobility, data-driven hybrid) —
