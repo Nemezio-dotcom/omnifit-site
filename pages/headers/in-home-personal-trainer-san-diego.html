@@ -1,0 +1,83 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     OMNIFIT PERFORMANCE — IN-HOME PERSONAL TRAINING SERVICE PAGE SCHEMA
+     Paste into: Squarespace > Pages > In-Home Personal Trainer SD >
+                 Settings > Advanced > Page Header Code Injection
+     Page: /in-home-personal-trainer-san-diego  ·  Updated July 2026 (v2)
+     Changelog v2:
+       - All price fields removed (pricing defers to /training-rates-san-diego,
+         matching visible page content per Google structured-data guidelines)
+       - Service description: price removed; equipment language matches page
+       - FAQ answers aligned to visible page FAQs (cost, equipment, session
+         length 45–60 min, results window 4–12 months)
+       - "Who is in-home best for" question removed (not in visible FAQ)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<!-- Breadcrumb -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.omnifittraining.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Personal Training Services", "item": "https://www.omnifittraining.com/personal-training-services" },
+    { "@type": "ListItem", "position": 3, "name": "In-Home Personal Trainer San Diego", "item": "https://www.omnifittraining.com/in-home-personal-trainer-san-diego" }
+  ]
+}
+</script>
+
+<!-- Service -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "In-Home Personal Training in San Diego",
+  "provider": { "@id": "https://www.omnifittraining.com/#business" },
+  "description": "OmniFit Performance provides private in-home personal training for professionals and executives over 30 throughout North County and coastal San Diego. A NASM Elite Trainer with corrective exercise and orthopedic exercise credentials trains clients in their own home using a structured Assess, Correct, Build, Sustain methodology. Equipment is provided when needed, or programs are built around the client's existing home gym. Service areas include 4S Ranch, Rancho Bernardo, Del Sur, Santaluz, Poway, Carmel Valley, Rancho Santa Fe, Fairbanks Ranch, Del Mar, Solana Beach, Encinitas, Carlsbad, and as far south as La Jolla. In-home training is offered as four named monthly packages tiered by training frequency, with current rates published on the OmniFit Training Rates page; a travel fee may apply depending on location.",
+  "url": "https://www.omnifittraining.com/in-home-personal-trainer-san-diego",
+  "areaServed": [
+    { "@type": "Place", "name": "4S Ranch, San Diego, CA" },
+    { "@type": "Place", "name": "Rancho Bernardo, San Diego, CA" },
+    { "@type": "Place", "name": "Del Sur, San Diego, CA" },
+    { "@type": "Place", "name": "Santaluz, San Diego, CA" },
+    { "@type": "Place", "name": "Poway, CA" },
+    { "@type": "Place", "name": "Carmel Valley, San Diego, CA" },
+    { "@type": "Place", "name": "Rancho Santa Fe, CA" },
+    { "@type": "Place", "name": "Fairbanks Ranch, CA" },
+    { "@type": "Place", "name": "Del Mar, CA" },
+    { "@type": "Place", "name": "Solana Beach, CA" },
+    { "@type": "Place", "name": "Encinitas, CA" },
+    { "@type": "Place", "name": "Carlsbad, CA" },
+    { "@type": "Place", "name": "La Jolla, San Diego, CA" }
+  ],
+  "audience": { "@type": "Audience", "audienceType": "Professionals and executives over 30" },
+  "serviceType": "In-Home Personal Training",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "In-Home Personal Training (named monthly packages; current rates on the Training Rates page; a travel fee may apply depending on location)",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Home — Essential (1 session every 2 weeks)" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Home — Momentum (1 session per week)" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Home — Performance (2 sessions per week)" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Home — Peak (3 sessions per week)" } }
+    ]
+  }
+}
+</script>
+
+<!-- FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How much does an in-home personal trainer cost in San Diego?", "acceptedAnswer": { "@type": "Answer", "text": "OmniFit Performance in-home training is offered as four named monthly packages tiered by training frequency — Essential (one session every two weeks), Momentum (weekly), Performance (twice weekly), and Peak (three times weekly) — with 3-month commitment and month-to-month options. Every program includes a full movement assessment, custom programming, nutrition guidance, weekly accountability, and monthly progress reports, with equipment provided when needed. A travel fee may apply depending on location. Current rates for every package are maintained on the OmniFit Training Rates page." } },
+    { "@type": "Question", "name": "What areas do you serve for in-home training?", "acceptedAnswer": { "@type": "Answer", "text": "OmniFit Performance serves North County and coastal San Diego from its 4S Ranch base, including 4S Ranch, Rancho Bernardo, Del Sur, Santaluz, Poway, Carmel Valley, Rancho Santa Fe, and Fairbanks Ranch, and along the coast as far south as La Jolla, including Del Mar, Solana Beach, Encinitas, and Carlsbad. A travel fee may apply depending on location." } },
+    { "@type": "Question", "name": "Do I need a home gym or my own equipment?", "acceptedAnswer": { "@type": "Answer", "text": "No. OmniFit Performance brings professional-grade portable equipment for a full session — all you need is about 8 by 8 feet of open floor space. If you already own a home gym, your program is built around your equipment instead, with recommendations for additions only when they would genuinely help. During your consultation you can send photos of your space and we will plan accordingly." } },
+    { "@type": "Question", "name": "How is OmniFit different from a mobile trainer?", "acceptedAnswer": { "@type": "Answer", "text": "Mobile trainers typically bring a bag of bands and deliver a generic one-off workout. OmniFit Performance delivers a full, structured personal training program. You receive the same 9-point movement assessment, custom periodized programming, corrective exercise protocols, and accountability system used in the studio at Teqneeq FHC in 4S Ranch. The methodology is identical; only the location changes." } },
+    { "@type": "Question", "name": "What does a typical in-home session look like?", "acceptedAnswer": { "@type": "Answer", "text": "Sessions are 45 to 60 minutes. Each begins with a targeted warm-up and corrective activation sequence based on your assessment. The main training block focuses on compound strength movements, progressed systematically each week. Sessions end with mobility work addressing your specific desk posture issues. Everything is logged in the Trainerize app for tracking." } },
+    { "@type": "Question", "name": "Can I combine in-home training with virtual coaching?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Many clients use a hybrid approach: in-home sessions for hands-on coaching and heavy lifts, plus app-guided programming for independent training days. This is especially effective for clients who travel. In-home sessions focus on corrective work and compound strength, while app sessions maintain consistency from hotel gyms or on the road." } },
+    { "@type": "Question", "name": "What results can I expect in 3 to 6 months?", "acceptedAnswer": { "@type": "Answer", "text": "Typical results for committed clients training twice per week include measurable posture improvement within 4 to 6 weeks and noticeable body composition changes by month 2 to 3, with full 20 to 30 pound fat-loss transformations typically unfolding over 4 to 12 months. Strength benchmarks improve significantly. Monthly progress reports track posture photos, strength data, body composition, and adherence." } },
+    { "@type": "Question", "name": "Do I need prior training experience?", "acceptedAnswer": { "@type": "Answer", "text": "No. OmniFit Performance works with clients at every starting point, from complete beginners who have never touched a weight to experienced lifters who need corrective work after injuries. The 9-point movement assessment establishes your exact baseline, and your program is built from there. Every exercise is coached in person, progressed systematically, and tracked." } }
+  ]
+}
+</script>
