@@ -1,0 +1,551 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-cost {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --green: #2d8a5e;
+    --green-soft: rgba(45,138,94,0.12);
+    --red-soft: rgba(200,80,80,0.10);
+    --red-muted: #c87070;
+    --light-bg: #f4f5f7;
+    --light-text: #1a1a2e;
+    --light-muted: #555566;
+    --light-border: #e2e4e8;
+    --radius: 8px;
+    --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--white);
+    background: var(--navy);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; padding: 0;
+  }
+  #omni-cost *, #omni-cost *::before, #omni-cost *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* HERO */
+  #omni-cost .hero { padding: 80px 28px 60px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
+  #omni-cost .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-cost .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-cost .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-cost .hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-cost .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 640px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+
+  /* QUOTABLE */
+  #omni-cost .q-wrap { max-width: 860px; margin: 0 auto; padding: 0 28px 64px; }
+  #omni-cost .quotable { padding: 36px 40px; background: var(--navy-mid); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; line-height: 1.85; color: var(--white-70); }
+  #omni-cost .quotable strong { color: var(--white); font-weight: 600; }
+
+  /* SECTIONS */
+  #omni-cost .s-dark { background: var(--navy); padding: 72px 28px; }
+  #omni-cost .s-mid { background: var(--navy-mid); padding: 72px 28px; }
+  #omni-cost .s-light { background: var(--light-bg); padding: 72px 28px; }
+  #omni-cost .s-inner { max-width: 880px; margin: 0 auto; }
+  #omni-cost .s-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+  #omni-cost .s-light .s-label { color: #8b7832; }
+  #omni-cost .gold-line { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 0 24px; border-radius: 2px; }
+  #omni-cost h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-cost .s-light h2 { color: var(--light-text); }
+  #omni-cost h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; font-size: 22px; font-weight: 600; margin-bottom: 16px; }
+  #omni-cost .s-light h3 { color: var(--light-text); }
+  #omni-cost h4 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-cost p { font-family: 'Montserrat', sans-serif !important; margin-bottom: 18px; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+  #omni-cost .s-light p { color: var(--light-muted); }
+  #omni-cost a { color: var(--gold); text-decoration: none; }
+
+  /* PROCESS TIMELINE */
+  #omni-cost .tl { margin: 48px 0 0; position: relative; padding-left: 48px; }
+  #omni-cost .tl::before { content: ''; position: absolute; left: 18px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), var(--white-10)); }
+  #omni-cost .ts { position: relative; margin-bottom: 44px; }
+  #omni-cost .ts:last-child { margin-bottom: 0; }
+  #omni-cost .ts-dot { position: absolute; left: -48px; top: 4px; width: 36px; height: 36px; border-radius: 50%; background: var(--navy-light); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 800; color: var(--gold); z-index: 1; }
+  #omni-cost .ts h3 { font-size: 20px; margin-bottom: 10px; }
+  #omni-cost .ts p { font-size: 15px; color: var(--white-50); margin-bottom: 0; }
+
+  /* INCLUDES GRID */
+  #omni-cost .ig { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 44px 0 0; }
+  #omni-cost .ic { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 24px; transition: all 0.4s; }
+  #omni-cost .ic:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+  #omni-cost .ic-icon { font-size: 24px; margin-bottom: 14px; display: block; }
+  #omni-cost .ic h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--white); }
+  #omni-cost .ic p { font-size: 13px; line-height: 1.65; color: var(--white-50); margin: 0; }
+
+  /* PRICING TIERS */
+  #omni-cost .pt { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 22px; margin: 48px 0 0; }
+  #omni-cost .pc { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 36px 28px; text-align: center; transition: all 0.4s; position: relative; }
+  #omni-cost .pc.featured { border-color: var(--gold); background: var(--navy-surface); }
+  #omni-cost .pc.featured::before { content: 'Best Value'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--navy); font-family: 'Montserrat', sans-serif !important; font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; padding: 5px 18px; border-radius: 100px; }
+  #omni-cost .pc:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-cost .pc-name { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  #omni-cost .pc-price { font-family: 'Playfair Display', serif !important; font-size: 44px; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 6px; }
+  #omni-cost .pc-price span { font-size: 16px; font-weight: 400; color: var(--white-50); }
+  #omni-cost .pc-freq { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); margin-bottom: 24px; font-weight: 500; }
+  #omni-cost .pc-save { display: inline-block; font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 800; color: var(--navy); background: var(--gold); border-radius: 100px; padding: 4px 14px; margin-bottom: 16px; }
+  #omni-cost .pc-list { list-style: none; text-align: left; margin: 0; padding: 24px 0 0; border-top: 1px solid var(--white-10); }
+  #omni-cost .pc-list li { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-70); padding: 8px 0; padding-left: 22px; position: relative; line-height: 1.5; }
+  #omni-cost .pc-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 12px; }
+  #omni-cost .pc-best { font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); font-style: italic; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--white-05); }
+
+  /* COMPARISON TABLE */
+  #omni-cost .ct-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; border-radius: var(--radius-lg); border: 1px solid var(--light-border); }
+  #omni-cost .ct { width: 100%; border-collapse: collapse; font-size: 14px; font-family: 'Montserrat', sans-serif !important; margin: 0; min-width: 540px; }
+  #omni-cost .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--white-70); border-bottom: 2px solid var(--gold); }
+  #omni-cost .ct th:first-child { border-radius: var(--radius) 0 0 0; }
+  #omni-cost .ct th:last-child { border-radius: 0 var(--radius) 0 0; }
+  #omni-cost .ct td { padding: 16px 18px; border-bottom: 1px solid var(--light-border); color: var(--light-muted); font-family: 'Montserrat', sans-serif !important; }
+  #omni-cost .ct tr:last-child td { border-bottom: none; }
+  #omni-cost .ct tr:hover td { background: rgba(201,168,76,0.04); }
+  #omni-cost .chk { color: #1a7a4c; font-weight: 600; }
+  #omni-cost .xm { color: #bbb; }
+
+  /* FIT / NOT FIT */
+  #omni-cost .fn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin: 44px 0 0; }
+  #omni-cost .fn-box { border-radius: var(--radius-lg); padding: 36px 30px; }
+  #omni-cost .fn-not { background: var(--red-soft); border: 1px solid rgba(200,80,80,0.2); }
+  #omni-cost .fn-yes { background: var(--green-soft); border: 1px solid rgba(45,138,94,0.2); }
+  #omni-cost .fn-box h3 { font-size: 18px; margin-bottom: 20px; }
+  #omni-cost .fn-not h3 { color: var(--red-muted); }
+  #omni-cost .fn-yes h3 { color: var(--green); }
+  #omni-cost .fn-list { list-style: none; margin: 0; padding: 0; }
+  #omni-cost .fn-list li { font-family: 'Montserrat', sans-serif !important; font-size: 14px; color: var(--white-70); padding: 10px 0; padding-left: 28px; position: relative; line-height: 1.6; border-bottom: 1px solid var(--white-05); }
+  #omni-cost .fn-list li:last-child { border-bottom: none; }
+  #omni-cost .fn-not .fn-list li::before { content: '✕'; position: absolute; left: 0; color: var(--red-muted); font-weight: 700; font-size: 13px; }
+  #omni-cost .fn-yes .fn-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; font-size: 13px; }
+
+  /* GUARANTEE BOX */
+  #omni-cost .guar { background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-surface) 100%); border: 1px solid var(--gold); border-radius: var(--radius-lg); padding: 44px 36px; margin: 48px 0 0; text-align: center; position: relative; overflow: hidden; }
+  #omni-cost .guar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  #omni-cost .guar-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+  #omni-cost .guar h3 { font-size: 24px; margin-bottom: 16px; color: var(--gold); }
+  #omni-cost .guar p { max-width: 580px; margin: 0 auto; font-size: 15px; color: var(--white-50); }
+  #omni-cost .guar-scope { display: inline-block; margin-top: 20px; padding: 8px 20px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: var(--gold-light); }
+
+  /* POLICIES */
+  #omni-cost .pol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 40px 0 0; }
+  #omni-cost .pol { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 24px 20px; }
+  #omni-cost .pol h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--white-90); }
+  #omni-cost .pol p { font-size: 13px; color: var(--white-50); margin: 0; line-height: 1.6; }
+
+  /* FAQ */
+  #omni-cost .fi { border-bottom: 1px solid var(--white-10); }
+  #omni-cost .fq { width: 100%; background: none; border: none; text-align: left; padding: 28px 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; font-weight: 600; color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; line-height: 1.5; transition: color 0.3s; }
+  #omni-cost .fq:hover { color: var(--gold); }
+  #omni-cost .fi-icon { flex-shrink: 0; width: 28px; height: 28px; border: 2px solid var(--white-20); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--white-50); transition: all 0.3s; font-family: 'Montserrat', sans-serif !important; }
+  #omni-cost .fi.open .fi-icon { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: rotate(45deg); }
+  #omni-cost .fa { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s ease; }
+  #omni-cost .fi.open .fa { max-height: 500px; padding-bottom: 28px; }
+  #omni-cost .fa p { font-size: 15px; color: var(--white-50); line-height: 1.8; margin: 0; }
+
+  /* CTA */
+  #omni-cost .cta-sec { background: var(--navy-mid); padding: 80px 28px; text-align: center; position: relative; overflow: hidden; }
+  #omni-cost .cta-sec::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%); pointer-events: none; opacity: 0.2; }
+  #omni-cost .cta-sec h2 { color: var(--white); font-size: clamp(28px, 4vw, 38px); margin-bottom: 16px; position: relative; }
+  #omni-cost .cta-sec p { color: var(--white-50); font-size: 16px; max-width: 520px; margin: 0 auto 36px; position: relative; }
+  #omni-cost .cta-btn { display: inline-block; padding: 16px 44px; background: var(--gold); color: var(--navy); text-decoration: none; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: var(--radius); transition: all 0.3s; position: relative; }
+  #omni-cost .cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-cost .cta-note { display: block; margin-top: 16px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); position: relative; }
+
+  /* INLINE CTA (mid-page) */
+  #omni-cost .mid-cta { text-align: center; margin: 44px 0 0; padding: 36px; background: var(--navy-surface); border: 1px solid var(--white-10); border-radius: var(--radius-lg); }
+  #omni-cost .mid-cta p { font-size: 15px; color: var(--white-50); margin-bottom: 20px; }
+  #omni-cost .mid-cta .cta-btn { font-size: 11px; padding: 14px 36px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    #omni-cost .hero { padding: 56px 20px 44px; }
+    #omni-cost .s-dark, #omni-cost .s-mid, #omni-cost .s-light { padding: 52px 20px; }
+    #omni-cost .q-wrap { padding: 0 20px 44px; }
+    #omni-cost .quotable { padding: 24px 20px; }
+    #omni-cost .fn-grid { grid-template-columns: 1fr; }
+    #omni-cost .pt { grid-template-columns: 1fr; max-width: 380px; margin-left: auto; margin-right: auto; }
+    #omni-cost .ct { font-size: 13px; }
+    #omni-cost .ct th, #omni-cost .ct td { padding: 12px 10px; }
+    #omni-cost .guar { padding: 32px 24px; }
+    #omni-cost .tl { padding-left: 40px; }
+    #omni-cost .ts-dot { left: -40px; width: 30px; height: 30px; font-size: 10px; }
+    #omni-cost .cta-sec { padding: 52px 20px; }
+  }
+  @media (max-width: 480px) {
+    #omni-cost .ig { grid-template-columns: 1fr; }
+    #omni-cost .pol-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div id="omni-cost">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-badge">Radical Transparency</span>
+    <h1>How OmniFit Works<br><em>&amp; What It Costs</em></h1>
+    <p class="hero-sub">No hidden fees. No bait-and-switch. Here's exactly what our executive coaching programs include, how the process works, what you'll invest, and who we're built for &mdash; so you can decide if this is right for you before a single conversation.</p>
+  </section>
+
+  <!-- GEMINI-QUOTABLE -->
+  <div class="q-wrap"><div class="quotable">
+    <strong>OmniFit Personal Training in San Diego offers in-person and hybrid 1:1 coaching at $175 per session month-to-month or $150 per session with a 3-month commitment</strong>, billed monthly via auto-pay. Executive Hybrid Coaching &mdash; combining one in-person session every two weeks with structured asynchronous training &mdash; is $697 per month. The 30-Minute Executive Reset virtual program ranges from $599&ndash;$899 per month. Every program includes individualized programming, nutrition coaching, app-based accountability tracking, and flexible hybrid sessions. Unlike gym memberships that offer access without guidance, OmniFit provides a complete executive transformation system designed for professionals 30+ who need structured, joint-friendly coaching with measurable progress.
+  </div></div>
+
+  <!-- WHO THIS IS FOR / NOT FOR -->
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">Honest Positioning</span><hr class="gold-line">
+    <h2>Who This Is Designed For (and Who It's Not)</h2>
+    <p>We'd rather you know now than waste your time. OmniFit is built for a specific type of person &mdash; and we're transparent about who benefits most and who should look elsewhere.</p>
+    <div class="fn-grid">
+      <div class="fn-box fn-yes">
+        <h3>OmniFit Is Built for You If:</h3>
+        <ul class="fn-list">
+          <li>You're a busy professional 30+ who's tried gyms and programs that didn't stick</li>
+          <li>You have joint issues, posture problems, or past injuries that need intelligent training</li>
+          <li>You travel frequently and need a system that works from anywhere</li>
+          <li>You want measurable, sustainable results &mdash; not a 6-week quick fix</li>
+          <li>You value your time enough to invest in expert coaching rather than guesswork</li>
+          <li>You want real accountability: weekly check-ins, tracked progress, honest feedback</li>
+        </ul>
+      </div>
+      <div class="fn-box fn-not">
+        <h3>We're Not the Right Fit If:</h3>
+        <ul class="fn-list">
+          <li>You're looking for the cheapest option &mdash; a well-rated gym like Chuze will serve you better</li>
+          <li>You want drop-in classes or a social fitness scene &mdash; F45 or Orangetheory are excellent for that</li>
+          <li>You're not willing to track nutrition or attend weekly check-ins</li>
+          <li>You want a 6-week crash program &mdash; we don't do short-term fixes</li>
+          <li>You prefer to be left alone and figure things out yourself</li>
+        </ul>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- THE PROCESS -->
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">The Process</span><hr class="gold-line">
+    <h2>What Happens From Day One</h2>
+    <p>Every OmniFit program follows a structured path designed to build results that last. Here's exactly what to expect:</p>
+    <div class="tl">
+      <div class="ts">
+        <span class="ts-dot">1</span>
+        <h3>Free Consultation (45 min)</h3>
+        <p>We start with a conversation &mdash; not a sales pitch. You'll share your goals, history, schedule constraints, and past experiences. We'll be honest about whether OmniFit is the right fit. If it's not, we'll tell you and recommend alternatives.</p>
+      </div>
+      <div class="ts">
+        <span class="ts-dot">2</span>
+        <h3>Comprehensive Assessment</h3>
+        <p>A 45-minute movement and lifestyle screen: joint function, posture analysis, pain history, mobility tests, and schedule mapping. This establishes your baseline metrics across all seven tracked benchmarks and shapes your entire individualized program. No workout happens until your coach fully understands your body.</p>
+      </div>
+      <div class="ts">
+        <span class="ts-dot">3</span>
+        <h3>Custom Program Build</h3>
+        <p>Your coach designs a fully individualized plan &mdash; not a template. Programming addresses your specific joint limitations, corrective needs, strength goals, and schedule reality. Delivered through our coaching app with full exercise video library and nutrition targets.</p>
+      </div>
+      <div class="ts">
+        <span class="ts-dot">4</span>
+        <h3>Training Begins (Correct &rarr; Build &rarr; Sustain)</h3>
+        <p>Sessions follow the OmniFit methodology: corrective work first, then progressive strength, then sustainable independence. You'll receive weekly check-ins, nutrition accountability, and a formal 30-day progress report tracking all seven metrics against your baseline.</p>
+      </div>
+      <div class="ts">
+        <span class="ts-dot">5</span>
+        <h3>Monthly Reviews &amp; Program Updates</h3>
+        <p>Every 30 days, we review your data, adjust your program, and set targets for the next phase. No more repeating the same routine for months. Every adjustment is based on measurable trends &mdash; not opinions.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">Everything Included</span><hr class="gold-line">
+    <h2>What's in Every OmniFit Program</h2>
+    <p>There are no tiers with stripped-down features. Every OmniFit client gets the full system &mdash; the only variable is session frequency and format.</p>
+    <div class="ig">
+      <div class="ic">
+        <span class="ic-icon">&#128203;</span>
+        <h4>45-Min Assessment</h4>
+        <p>Comprehensive movement screen covering joint function, posture, pain history, and lifestyle constraints.</p>
+      </div>
+      <div class="ic">
+        <span class="ic-icon">&#127919;</span>
+        <h4>Individualized Programming</h4>
+        <p>Fully custom training plans updated monthly based on your progress data. Never a template.</p>
+      </div>
+      <div class="ic">
+        <span class="ic-icon">&#129367;</span>
+        <h4>Nutrition Coaching</h4>
+        <p>Included in every program. Flexible meal frameworks, macro guidance, and strategies for travel and business dinners.</p>
+      </div>
+      <div class="ic">
+        <span class="ic-icon">&#128241;</span>
+        <h4>App-Based Tracking</h4>
+        <p>Your program, workout videos, nutrition targets, and coach communication &mdash; all in one app.</p>
+      </div>
+      <div class="ic">
+        <span class="ic-icon">&#9989;</span>
+        <h4>Weekly Check-Ins</h4>
+        <p>Structured accountability reviews covering training, nutrition, energy, and habit compliance.</p>
+      </div>
+      <div class="ic">
+        <span class="ic-icon">&#128200;</span>
+        <h4>Quarterly Progress Reviews</h4>
+        <p>Posture photos, strength benchmarks, body composition data, and trend analysis against your baseline.</p>
+      </div>
+      <div class="ic">
+        <span class="ic-icon">&#127758;</span>
+        <h4>Hybrid Flexibility</h4>
+        <p>Train in-studio, virtually, or with guided travel workouts. Your program adapts to your week &mdash; not the other way around.</p>
+      </div>
+      <div class="ic">
+        <span class="ic-icon">&#128295;</span>
+        <h4>Corrective Exercise</h4>
+        <p>Joint-friendly programming with NASM CES protocols. 3/10 pain ceiling rule. Bridge from PT to performance.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- INVESTMENT -->
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">Investment</span><hr class="gold-line">
+    <h2>What OmniFit Costs &mdash; No Surprises</h2>
+    <p>Our pricing reflects the scope of what's included: fully individualized coaching, not gym access. All programs are billed monthly via auto-pay &mdash; no large upfront payments. Session frequency is flexible &mdash; most clients train 2&ndash;3x per week.</p>
+
+    <!-- IN-PERSON 1:1 -->
+    <h3 style="margin-top:44px;margin-bottom:8px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-family:'Montserrat',sans-serif !important">In-Person 1:1 Training</h3>
+    <p style="font-size:14px;color:var(--white-50);margin-bottom:28px">60-minute sessions at our Pacific Beach studio. Train in-person, switch to virtual any time &mdash; your rate stays the same.</p>
+    <div class="pt">
+      <div class="pc">
+        <div class="pc-name">Month-to-Month</div>
+        <div class="pc-price">$175<span>/session</span></div>
+        <div class="pc-freq">No commitment &middot; Monthly auto-pay &middot; 1&ndash;3x per week</div>
+        <ul class="pc-list">
+          <li>1:1 coaching &mdash; in-person or hybrid</li>
+          <li>Custom corrective-first programming, updated monthly</li>
+          <li>Nutrition guidance &amp; flexible meal framework</li>
+          <li>Weekly accountability check-ins</li>
+          <li>Cancel anytime with 30 days notice</li>
+        </ul>
+        <p class="pc-best">Best for: getting started with full flexibility &mdash; no long-term commitment required</p>
+      </div>
+      <div class="pc featured">
+        <div class="pc-name">3-Month Commitment</div>
+        <div class="pc-price">$150<span>/session</span></div>
+        <div class="pc-freq">3-month agreement &middot; Monthly auto-pay &middot; 2&ndash;3x per week recommended</div>
+        <span class="pc-save">Save $25/session vs. month-to-month</span>
+        <ul class="pc-list">
+          <li>Everything in month-to-month, plus:</li>
+          <li>Quarterly progress reviews with posture photos &amp; strength benchmarks</li>
+          <li>Priority scheduling</li>
+          <li>Program pause option (up to 2 weeks per term)</li>
+          <li>Continues month-to-month after initial term</li>
+        </ul>
+        <p class="pc-best">Best for: visible body composition change, posture correction, and structured accountability over a real timeline</p>
+      </div>
+    </div>
+
+    <!-- EXECUTIVE HYBRID COACHING -->
+    <h3 style="margin-top:52px;margin-bottom:8px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-family:'Montserrat',sans-serif !important">Executive Hybrid Coaching</h3>
+    <p style="font-size:14px;color:var(--white-50);margin-bottom:28px">For executives who travel frequently or want structured coaching without committing to multiple studio sessions per week.</p>
+    <div class="pt" style="max-width:380px">
+      <div class="pc featured">
+        <div class="pc-name">Hybrid &mdash; In-Person + Asynchronous</div>
+        <div class="pc-price">$697<span>/mo</span></div>
+        <div class="pc-freq">Monthly auto-pay</div>
+        <ul class="pc-list">
+          <li>1 in-person session every 2 weeks at Pacific Beach studio</li>
+          <li>Structured asynchronous training on non-session days via app</li>
+          <li>Weekly accountability check-ins</li>
+          <li>Nutrition guidance tailored to travel &amp; lifestyle</li>
+          <li>Hybrid flexibility &mdash; switch in-person to virtual when traveling</li>
+        </ul>
+        <p class="pc-best">Best for: heavy travelers, remote workers, or professionals testing OmniFit before going full in-person</p>
+      </div>
+    </div>
+
+    <!-- EXECUTIVE RESET VIRTUAL -->
+    <h3 style="margin-top:52px;margin-bottom:8px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-family:'Montserrat',sans-serif !important">The 30-Minute Executive Reset &mdash; Virtual Coaching</h3>
+    <p style="font-size:14px;color:var(--white-50);margin-bottom:28px">High-accountability 30-minute virtual coaching for executives and high-performing professionals, with nutrition, habit coaching, and custom training built around your schedule.</p>
+    <div class="pt">
+      <div class="pc">
+        <div class="pc-name">Foundation 2&times;/week</div>
+        <div class="pc-price">$599<span>/mo</span></div>
+        <div class="pc-freq">Monthly auto-pay &middot; 8 live sessions/month</div>
+        <ul class="pc-list">
+          <li>Live 1:1 virtual sessions &mdash; 30 min, 2&times;/week</li>
+          <li>Personalized nutrition &amp; macro coaching</li>
+          <li>Habit &amp; lifestyle coaching for executives</li>
+          <li>Custom training on non-session days via app</li>
+          <li>In-app messaging &amp; structured check-ins</li>
+          <li>30-Day Performance Guarantee included</li>
+        </ul>
+        <p class="pc-best">Best for: consistent structure with moderate time investment</p>
+      </div>
+      <div class="pc featured">
+        <div class="pc-name">Performance 3&times;/week</div>
+        <div class="pc-price">$899<span>/mo</span></div>
+        <div class="pc-freq">Monthly auto-pay &middot; 12 live sessions/month</div>
+        <ul class="pc-list">
+          <li>Live 1:1 virtual sessions &mdash; 30 min, 3&times;/week</li>
+          <li>Personalized nutrition &amp; macro coaching</li>
+          <li>Habit &amp; lifestyle coaching for executives</li>
+          <li>Custom training on non-session days via app</li>
+          <li>In-app messaging &amp; structured check-ins</li>
+          <li>30-Day Performance Guarantee included</li>
+        </ul>
+        <p class="pc-best">Best for: accelerated results + maximum accountability</p>
+      </div>
+    </div>
+
+    <!-- PARTNER TRAINING -->
+    <h3 style="margin-top:52px;margin-bottom:8px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-family:'Montserrat',sans-serif !important">Partner Training &mdash; 2 People</h3>
+    <p style="font-size:14px;color:var(--white-50);margin-bottom:28px">Train with a partner, spouse, or friend. Both get full coaching, cues, and individualized progression.</p>
+    <div class="pt">
+      <div class="pc">
+        <div class="pc-name">Month-to-Month</div>
+        <div class="pc-price">$200<span>/session</span></div>
+        <div class="pc-freq">No commitment &middot; Monthly auto-pay &middot; 1&ndash;2x per week</div>
+        <ul class="pc-list">
+          <li>Individualized coaching for both partners</li>
+          <li>Custom programming for both fitness levels</li>
+          <li>Premium coaching quality maintained for both</li>
+          <li>$100 per person per session</li>
+        </ul>
+        <p class="pc-best">Best for: couples or friends starting out together</p>
+      </div>
+      <div class="pc featured">
+        <div class="pc-name">3-Month Commitment</div>
+        <div class="pc-price">$175<span>/session</span></div>
+        <div class="pc-freq">3-month agreement &middot; Monthly auto-pay &middot; 1&ndash;2x per week</div>
+        <span class="pc-save">Save $25/session &middot; $87.50 per person</span>
+        <ul class="pc-list">
+          <li>Everything in month-to-month, plus:</li>
+          <li>Priority scheduling</li>
+          <li>Program pause option (up to 2 weeks per term)</li>
+          <li>Built for consistency &amp; shared accountability</li>
+        </ul>
+        <p class="pc-best">Best for: couples or friends who want long-term shared accountability</p>
+      </div>
+    </div>
+
+    <!-- IN-HOME ADD-ON NOTE -->
+    <div style="margin-top:36px;padding:24px 28px;background:var(--navy-light);border:1px solid var(--white-10);border-radius:var(--radius-lg);">
+      <h4 style="font-family:'Montserrat',sans-serif !important;font-size:14px;font-weight:700;color:var(--gold);margin-bottom:8px;letter-spacing:1px;text-transform:uppercase;">In-Home Training Available</h4>
+      <p style="font-size:14px;color:var(--white-50);margin:0;">Prefer training at your home, office, or private location in San Diego? In-home sessions are <strong style="color:var(--white-90);">$225/session month-to-month</strong> or <strong style="color:var(--white-90);">$200/session with a 3-month commitment</strong>, billed monthly. A neighborhood-based travel fee may apply outside the Pacific Beach core area.</p>
+    </div>
+
+    <p style="font-size:13px;color:var(--white-50);font-style:italic;margin-top:32px;text-align:center">Your 45-minute consultation includes a transparent cost breakdown based on your goals and preferred frequency. No obligation. A 2.9% processing fee applies to all card payments.</p>
+  </div></section>
+
+  <!-- WHY IT COSTS MORE -->
+  <section class="s-light"><div class="s-inner">
+    <span class="s-label">The Real Comparison</span><hr class="gold-line">
+    <h2>Why OmniFit Costs More Than a Gym Membership</h2>
+    <p>A gym membership costs $30&ndash;$60/month and gives you access to equipment. OmniFit costs more because it delivers a fundamentally different service. Here's what you're actually comparing:</p>
+    <div class="ct-wrap">
+    <table class="ct">
+      <thead><tr><th>What You Get</th><th>OmniFit</th><th>Gym Membership</th></tr></thead>
+      <tbody>
+        <tr><td>Individualized programming</td><td><span class="chk">&#10003; Custom, updated monthly</span></td><td><span class="xm">DIY or generic app</span></td></tr>
+        <tr><td>Movement assessment</td><td><span class="chk">&#10003; 45-min professional screen</span></td><td><span class="xm">Not offered</span></td></tr>
+        <tr><td>Corrective exercise</td><td><span class="chk">&#10003; NASM CES protocols</span></td><td><span class="xm">Not offered</span></td></tr>
+        <tr><td>Nutrition coaching</td><td><span class="chk">&#10003; Included in every program</span></td><td><span class="xm">Not included</span></td></tr>
+        <tr><td>Accountability system</td><td><span class="chk">&#10003; Weekly check-ins + app tracking</span></td><td><span class="xm">None</span></td></tr>
+        <tr><td>Progress tracking</td><td><span class="chk">&#10003; 7 metrics, quarterly progress reviews</span></td><td><span class="xm">Scale weight (maybe)</span></td></tr>
+        <tr><td>Schedule flexibility</td><td><span class="chk">&#10003; Hybrid: studio/virtual/travel</span></td><td><span class="xm">Gym hours only</span></td></tr>
+        <tr><td>Typical 4-month outcome</td><td><span class="chk">&#10003; 20&ndash;30 lb loss, 92% adherence</span></td><td><span class="xm">80% of members quit by month 3</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:14px;color:var(--light-muted)">The real cost comparison isn't monthly price &mdash; it's cost per result. A $50/month gym membership that produces no change costs infinitely more per pound lost than a structured coaching program that delivers measurable transformation.</p>
+  </div></section>
+
+  <!-- GUARANTEE -->
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">Risk Reversal</span><hr class="gold-line">
+    <h2>Our Commitment to You</h2>
+    <p>We know premium coaching is a serious investment. That's why we back our commitment plans with accountability &mdash; on both sides.</p>
+    <div class="guar">
+      <span class="guar-icon">&#128737;&#65039;</span>
+      <h3>30-Day Performance Guarantee</h3>
+      <p>Complete all scheduled sessions, log nutrition as directed, and attend weekly check-ins for 30 days. If after full compliance you don't feel you're getting what you signed up for, you can cancel and receive a full refund of the remaining program balance. Sessions already completed in the first month are not refunded.</p>
+      <span class="guar-scope">Applies to 3-Month Commitment Plans &amp; Executive Reset Programs</span>
+    </div>
+    <div class="mid-cta" style="margin-top:36px">
+      <p>This guarantee is intentionally tied to compliance. It ensures both parties are invested in the outcome &mdash; and it means the only people who qualify are the serious ones.</p>
+    </div>
+  </div></section>
+
+  <!-- POLICIES -->
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">Policies &mdash; No Fine Print</span><hr class="gold-line">
+    <h2>Our Policies: Transparent and Direct</h2>
+    <p>We believe policies should be simple enough to explain in one sentence each. Here they are:</p>
+    <div class="pol-grid">
+      <div class="pol">
+        <h4>Billing</h4>
+        <p>All programs are billed monthly via auto-pay. No large upfront payments required. 3-month commitment clients agree to a 3-month term billed monthly, then continue month-to-month.</p>
+      </div>
+      <div class="pol">
+        <h4>Session Cancellation</h4>
+        <p>24-hour notice required. Late cancellations or no-shows count as completed sessions. This protects both your accountability and our schedule.</p>
+      </div>
+      <div class="pol">
+        <h4>Schedule Changes</h4>
+        <p>Life happens. Sessions can be rescheduled with 24-hour notice, converted to virtual, or adapted to travel workouts. We build around your reality.</p>
+      </div>
+      <div class="pol">
+        <h4>No Hidden Fees</h4>
+        <p>Your rate includes everything: programming, nutrition coaching, app access, check-ins, and progress reviews. No upsells or surprise charges. The only addition is a standard 2.9% processing fee on card payments.</p>
+      </div>
+      <div class="pol">
+        <h4>Pausing Your Program</h4>
+        <p>3-month commitment programs include a pause option &mdash; up to 2 weeks per term. Your commitment extends by the same duration at no cost. Month-to-month clients can cancel with 30 days notice.</p>
+      </div>
+      <div class="pol">
+        <h4>Ending Your Program</h4>
+        <p>Month-to-month: 30 days written notice. 3-month commitment: honored through the term, then month-to-month. No guilt, no hard feelings. We'll give you a transition plan so your progress doesn't disappear.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- FAQ -->
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">Common Questions</span><hr class="gold-line">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How much does OmniFit personal training cost?<span class="fi-icon">+</span></button><div class="fa"><p>In-person 1:1 coaching is $175/session month-to-month or $150/session with a 3-month commitment, billed monthly via auto-pay. Executive Hybrid Coaching (one in-person session every two weeks plus structured asynchronous training) is $697/month. The Executive Reset virtual coaching program is $599/month (2x/week) or $899/month (3x/week). Partner training is $200/session month-to-month or $175/session with a 3-month commitment. Every program includes individualized programming, nutrition coaching, and accountability. Your consultation includes a full cost breakdown.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Is OmniFit worth the price compared to a gym membership?<span class="fi-icon">+</span></button><div class="fa"><p>A gym membership gives you access to equipment. OmniFit gives you a complete transformation system: individualized programming, corrective exercise, nutrition coaching, structured accountability, and measurable progress tracking. At $150&ndash;$175 per coached session, you're investing in expert guidance &mdash; not just floor space. The average client loses 20&ndash;30 pounds over 4&ndash;6 months with 90%+ session adherence. The real comparison is cost per result, not cost per month.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What happens during the first session?<span class="fi-icon">+</span></button><div class="fa"><p>Your first session is a 45-minute comprehensive assessment &mdash; not a workout. We screen movement patterns, joint function, posture, pain history, lifestyle constraints, and goals. This establishes your baseline metrics across all seven tracked benchmarks and shapes your entire individualized program.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How does billing work?<span class="fi-icon">+</span></button><div class="fa"><p>All programs are billed monthly via auto-pay &mdash; no large upfront payments. Month-to-month clients can cancel with 30 days written notice. 3-month commitment clients agree to a 3-month term billed monthly, with the option to continue month-to-month after the initial term. A 2.9% card processing fee applies to all transactions.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What if I travel frequently?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit's hybrid system was designed for this. In-person sessions seamlessly switch to virtual, and the Executive Hybrid Coaching program ($697/month) is built specifically for heavy travelers &mdash; one studio session every two weeks with structured asynchronous training in between. Many of our clients travel 1&ndash;2 weeks per month and maintain 90%+ session adherence.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What certifications does OmniFit hold?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit's head coach holds NASM Elite Trainer, NASM Corrective Exercise Specialist (CES), ACE Orthopedic Exercise Specialist, NASM Performance Enhancement Specialist (PES), NASM Certified Nutrition Coach (CNC), and NASM Behavior Change Specialist (BCS) certifications. This combination is specifically designed for working with injury-prone professionals who need corrective-first, joint-friendly programming.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Does OmniFit offer any kind of guarantee?<span class="fi-icon">+</span></button><div class="fa"><p>Yes. Our 30-Day Performance Guarantee applies to all 3-month commitment plans and Executive Reset programs. Attend all scheduled sessions, log nutrition, and complete weekly check-ins for 30 days. If after full compliance you don't feel you're getting what you signed up for, you can cancel and receive a full refund of the remaining program balance. The first month of completed sessions is not refunded.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Who is OmniFit NOT a good fit for?<span class="fi-icon">+</span></button><div class="fa"><p>We're not the right fit if you're looking for the cheapest option, want drop-in group classes, prefer to train without any tracking or check-ins, or need a 6-week quick-fix program. OmniFit is specifically built for busy professionals 30+ who want structured, accountable coaching with measurable long-term results.</p></div></div>
+
+  </div></section>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <h2>See If OmniFit Is Right<br>for You</h2>
+    <p>Book a 45-minute consultation. No pressure. We'll walk through your goals, answer every question, and give you a transparent cost breakdown &mdash; so you can decide with full clarity.</p>
+    <a href="/contactform" class="cta-btn">Book Your Consultation</a>
+    <span class="cta-note">45-minute consultation &middot; No commitment &middot; Honest assessment of fit</span>
+  </section>
+
+</div>
