@@ -975,3 +975,59 @@ accepted exception until scheduled.
 > on the uncertified list and excluded from certification runs, so this wording was
 > never being flagged. The entry matters for when that page is unblocked and enters
 > scope, at which point the exception must be honoured until the pass is scheduled.
+
+## DEFERRED-02 · ACTIVE CONSTRAINT · Couples in-home Performance prepay cap
+
+Logged alongside canonical couples pricing supplied this session. Unlike
+DEFERRED-01, this is **not** a tolerated violation. It is a restriction to honour
+when publishing, and breaking it is a real error.
+
+**Constraint:** couples in-home Performance at `$1,725/mo` is **month-to-month
+only**. Do not publish it as a 3-month prepaid commitment and do not show a
+3-month upfront total for it.
+
+**Reason:** 3 × $1,725 = **$5,175**, exceeding the **$4,400** California Civil Code
+1812.86 cap cited in OmniFit's own signed agreement.
+
+**Status:** month-to-month only, pending legal confirmation.
+
+### Cap check against every upfront total already published
+
+Run because the same 3 × monthly rule now governs figures live on
+`how-it-works-pricing.html`.
+
+| Offer | Upfront | vs $4,400 cap |
+|---|---|---|
+| Individual Essential | $750 | clear |
+| Individual Momentum | $1,425 | clear |
+| Individual Performance | $2,850 | clear |
+| **Individual Peak** | **$4,185** | **clear, $215 headroom** |
+| Couples studio Essential / Momentum / Performance | $975 / $1,875 / $3,750 | clear |
+| Couples in-home Essential / Momentum | $1,365 / $2,625 | clear |
+| **Couples in-home Performance** | **$5,175** | **EXCEEDS — hence this item** |
+| 20-session pack | $2,700 | clear |
+
+**Nothing currently published breaches the cap.** Individual Peak is the closest at
+$215 of headroom, so **any rate rise on Peak past $1,466/mo crosses it** at 3 ×
+monthly. That break point is recorded in CANON so a future repricing run checks
+before publishing.
+
+### Couples pricing recorded
+
+The full grid now sits in CANON's canonical-truth block and supersedes the earlier
+"Couples from $325/mo, monthly only" line. Two notes carried with it:
+
+- **Peak is ad-hoc only** at both venues, not a prepaid couples commitment.
+- **Derived per-session figures are not to be published as the primary rate.**
+  Worth flagging that the studio Essential derivation is exactly `$150`, which the
+  certification rule already treats as a violation outside the approved pack and
+  Bronze contexts. Publishing it would fail certification as well as contradict the
+  instruction, so the two rules agree here rather than conflict.
+
+### Effect on already-published couples copy
+
+`how-it-works-pricing.html` shows couples as a single card, "from $325/mo, $975
+upfront". That is the studio Essential 3-month rate and remains correct. It is now
+**incomplete** rather than wrong: the page shows neither the tier ladder nor the
+venue split. No page currently publishes any in-home couples figure, so
+DEFERRED-02 is not breached anywhere today.
