@@ -779,3 +779,136 @@ carry no CANON exception. **Wrong if** heading dashes were intended as exempt.
 
 - 12 drive-time claims on territory pages remain unverified.
 - `$90` → `$110` item is now **closed** by Ruling 2.
+
+---
+
+# Batch 2 run — FAQs, how-it-works-pricing, in-home, private
+
+Ran after five rulings unblocked the pricing question. `training-rates-san-diego.html`
+was designated as the pricing reference but is still the July V8 stale generation,
+so every figure below comes from CANON plus the rulings, not from that page.
+
+## Rulings applied
+
+| Ruling | Decision |
+|---|---|
+| Upfront totals | 3 × the 3-month monthly rate, no discount. Every tier shows 3-month and month-to-month |
+| Pack ladder | 5 @ $175 ($875), 10 @ $150 ($1,500), 20 @ $135 ($2,700), one ladder regardless of location |
+| Couples | Monthly only, from $325/mo ($975 upfront). Per-person figures dropped |
+| $697 Hybrid slot | Deleted. Virtual is the Reset: Bronze $175 async, Gold $449, Platinum $675, Black $995 |
+| how-it-works-pricing | Converted from per-session cards to monthly tiers |
+| Header naming | Standardised on `<slug>-header.html` |
+
+The 10-pack total independently corroborates the ladder: 10 × $150 = $1,500, matching
+the `$150/session ($1,500)` line on the old rates page.
+
+## Per page
+
+| Page | Canon fixes | Added | Header |
+|---|---|---|---|
+| `FAQs.html` | brand, Pacific Beach ×4, 180+, ACE, hyphenated Lopez-Perez, Hybrid FAQ deleted, pricing prose renumbered, deposit $50 → $30 | — | 14 nodes |
+| `private-personal-trainer-san-diego.html` | LopezPerez, ACE ×4, $90 → $110, $225 → $250, Hybrid card and tile, paid consultation ×3 | Use Cases | 7 nodes |
+| `in-home-personal-trainer-san-diego.html` | LopezPerez, ACE ×3, Hybrid tile, paid consultation | Why We Assess (9-point + RHR/BP), Desk-Posture Protocol, Conditions We Coach Around, Use Cases, pricing-structure table row | 8 nodes |
+| `how-it-works-pricing.html` | Pacific Beach, Hybrid deleted throughout, 7 → 12 metrics, paid consultation, 2.9% card fee, renamed to .html | Full monthly-tier rebuild: 4 tiers, packs, Reset, couples, in-home note | 8 nodes |
+
+Use Cases bodies are byte-identical across private and in-home
+(sha256 `9f5c0770…`). They are **not** byte-identical to the corrective page's
+version, which was written page-specific and shipped earlier.
+
+## Compliance strikes found and removed
+
+Five, none of which were on the banned-string list, so the grep alone would have
+passed them:
+
+```
+FAQs.html:158                     30-Day Performance Guarantee (Reset description)
+FAQs.html:248                     "20-30 pounds ... over 4-6 months" outcome claim
+in-home:513                       30-Day Performance Guarantee (policy card)
+how-it-works-pricing:533,592      30-Day Performance Guarantee (section + FAQ)
+how-it-works-pricing:582          "The average client loses 20-30 pounds over 4-6 months"
+```
+
+The guarantee is renamed a 30-Day Fit Commitment with the outcome framing dropped;
+the refund mechanics stay, since those are a commercial policy rather than a
+results promise.
+
+## Certification — 31 files in scope
+
+All 14 banned strings clean. `$50`/`$75` as travel fees clean. Em-dashes in rendered
+prose: zero. `$150`/`$175`: 75 occurrences, all legal, zero violations.
+
+| Invariant | Hash | Scope |
+|---|---|---|
+| page pricing answer | `ae388d31c0b6149e` | 11 pages |
+| header pricing answer | `7e5de5984b133663` | 11 headers |
+| credentials body | `6492e3ca1545dc26` | 10 pages |
+| archetypes | `6b1b0f4efbd4a72c` | 10 pages |
+| 9-point screen | `bd73ea51bc9ec5eb` | 10 pages |
+
+### Three uncertified files, deliberately excluded
+
+Listed by the tooling on every run rather than silently skipped:
+
+- **`training-rates-san-diego.html`** — the July V8 stale generation. Carries `$90`,
+  `$225`, `$275`, `$599`, Executive Hybrid, the retired tier ladders, and
+  body-embedded JSON-LD at line 822 that still needs moving to a header file. Blocked
+  pending the hand-patched version.
+- **`the-30-minute-executive-reset.html`** — Executive Hybrid at line 26. Batch 2 but
+  not among the four.
+- **`footer.html`** — `OmniFit Personal Fitness Training` and `Pacific Beach` at
+  line 7. Site-wide, in no batch.
+
+### Two tooling failures caught this run
+
+1. **The checker crashed** on `&mdash;` entities, because the list-item exception
+   looked up a literal em-dash character that was not present. Earlier sweeps had
+   only ever seen the character form, so `&mdash;` had been passing unexamined on
+   how-it-works-pricing. Fixed, and 22 entity-form em-dashes were then swept.
+2. **The header-pricing invariant was over-matching.** It compared any FAQ answer
+   whose question mentioned "cost", which pulled in four page-specific pricing
+   answers and reported a false mismatch across five hashes. It now matches only
+   answers beginning with the canonical sentence, which is what the invariant
+   actually covers.
+
+The zero-file guard added after last run's vacuous pass fired correctly when the
+script was invoked from the wrong directory.
+
+## Judgment calls
+
+**1. CANON's `$150/$175` rule was widened.** The rungs you gave make `$175` and
+`$150` canonical pack rates, which the old rule would have flagged. The exception now
+covers the pack rungs and the Reset Bronze tier, and the checker judges by the
+enclosing pricing card's name rather than the line. `$150` or `$175` as a **studio
+per-session rate** remains a violation. **Wrong if** the intent was that those two
+figures disappear entirely.
+
+**2. The 2.9% card processing fee was removed** from two places on
+how-it-works-pricing. It is not on the banned list, but the rates page's own V8
+changelog reads "2.9% card fee removed everywhere", and the surrounding copy claims
+"no surprise charges". **Wrong if** the fee is still charged.
+
+**3. Billing copy was inverted.** The page said "billed monthly via auto-pay, no
+large upfront payments", which contradicts Ruling 1. It now states that 3-month
+programs are paid in full upfront. **Wrong if** monthly billing on 3-month plans is
+still offered alongside the upfront option.
+
+**4. The refund guarantee was reframed rather than deleted.** CANON strikes outcome
+guarantees on sight, but the refund itself is a real commercial term I cannot verify
+as retired. The promise language is gone; the mechanics remain. **Wrong if** the
+refund policy no longer exists at all.
+
+**5. Executive Hybrid nav tiles were removed, not retargeted,** on FAQs, private and
+in-home. Retargeting each to `/the-30-minute-executive-reset` would have duplicated
+an Executive Reset tile already present in the same grid. Same precedent as the
+territory pages.
+
+**6. The Reset's `30-Day Performance Guarantee` remains live** on
+`the-30-minute-executive-reset.html`, which is out of scope for this run. It is the
+same compliance strike removed from three in-scope pages.
+
+## Carried forward
+
+- `training-rates-san-diego.html` still blocked, and its body-embedded schema still
+  needs moving to a header file.
+- 12 drive-time claims on territory pages remain unverified.
+- `footer.html` and `the-30-minute-executive-reset.html` need a pass.

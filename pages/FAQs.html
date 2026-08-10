@@ -1,0 +1,313 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     OmniFit | Frequently Asked Questions
+     SLUG: /faqs
+     Framework: OmniFit Standard v1.0
+     Page ID: #omni-faqs
+     SEO: FAQPage schema (15 questions)
+     ═══════════════════════════════════════════════════════════════ -->
+
+
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  /* ═══ OMNIFIT STANDARD FRAMEWORK v1.0 — #omni-faqs ═══ */
+  #omni-faqs { --navy:#0a1628; --navy-mid:#0f1f3a; --navy-light:#152a4a; --navy-surface:#1a3158; --white:#fff; --white-90:rgba(255,255,255,0.9); --white-70:rgba(255,255,255,0.7); --white-50:rgba(255,255,255,0.5); --white-30:rgba(255,255,255,0.3); --white-20:rgba(255,255,255,0.2); --white-10:rgba(255,255,255,0.1); --white-05:rgba(255,255,255,0.05); --gold:#c9a84c; --gold-light:#e0c872; --gold-dim:rgba(201,168,76,0.15); --gold-glow:rgba(201,168,76,0.25); --green:#2e7d32; --green-dim:rgba(46,125,50,0.12); --red:#c0392b; --red-dim:rgba(192,57,43,0.10); --radius:8px; --radius-lg:12px; font-family:'Montserrat',sans-serif!important; color:var(--white); background:var(--navy); line-height:1.7; font-size:16px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; margin:0; padding:0; }
+  #omni-faqs *, #omni-faqs *::before, #omni-faqs *::after { box-sizing:border-box; margin:0; padding:0; }
+
+  /* HERO */
+  #omni-faqs .of-hero { padding:80px 28px 48px; max-width:880px; margin:0 auto; text-align:center; position:relative; }
+  #omni-faqs .of-hero::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:500px; height:500px; background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%); pointer-events:none; opacity:0.3; }
+  #omni-faqs .of-badge { display:inline-block; padding:8px 22px; border:1px solid var(--gold); color:var(--gold); border-radius:100px; font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:32px; position:relative; }
+  #omni-faqs .of-hero h1 { font-family:'Playfair Display',serif!important; font-size:clamp(32px,5vw,52px); font-weight:700; line-height:1.15; color:var(--white); margin-bottom:24px; letter-spacing:-0.5px; position:relative; text-transform:none; }
+  #omni-faqs .of-hero h1 em { font-style:italic; color:var(--gold); }
+  #omni-faqs .of-hero-sub { font-family:'Montserrat',sans-serif!important; font-size:17px; color:var(--white-70); max-width:660px; margin:0 auto 36px; line-height:1.8; font-weight:400; }
+
+  /* CTA */
+  #omni-faqs .of-cta-row { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:40px; position:relative; }
+  #omni-faqs .of-btn { display:inline-block; padding:15px 36px; border-radius:var(--radius); font-family:'Montserrat',sans-serif!important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; transition:all 0.3s; }
+  #omni-faqs a.of-btn, #omni-faqs a.of-btn:link, #omni-faqs a.of-btn:visited { text-decoration:none; }
+  #omni-faqs .of-btn-primary, #omni-faqs a.of-btn-primary, #omni-faqs a.of-btn-primary:link, #omni-faqs a.of-btn-primary:visited { background:var(--gold); color:var(--navy)!important; }
+  #omni-faqs .of-btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.3); color:var(--navy)!important; }
+  #omni-faqs .of-btn-ghost, #omni-faqs a.of-btn-ghost, #omni-faqs a.of-btn-ghost:link, #omni-faqs a.of-btn-ghost:visited { border:1px solid var(--white-30); color:var(--white)!important; background:transparent; }
+  #omni-faqs .of-btn-ghost:hover { border-color:var(--white); background:var(--white-05); transform:translateY(-2px); color:var(--white)!important; }
+
+  /* QUICK LINKS */
+  #omni-faqs .of-quick { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:860px; margin:0 auto 56px; position:relative; padding:0 20px; }
+  #omni-faqs .of-quick a, #omni-faqs .of-quick a:link, #omni-faqs .of-quick a:visited { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:600; padding:7px 16px; border-radius:100px; background:var(--white-05); border:1px solid var(--white-10); color:var(--white-50)!important; text-decoration:none; transition:all 0.3s; letter-spacing:0.3px; }
+  #omni-faqs .of-quick a:hover { background:var(--gold-dim); border-color:var(--gold); color:var(--gold)!important; }
+
+  /* SECTIONS */
+  #omni-faqs .of-section { padding:0 28px; max-width:1120px; margin:0 auto; }
+  #omni-faqs .of-band { background:var(--navy-mid); padding:56px 28px; }
+  #omni-faqs .of-band-inner { max-width:1120px; margin:0 auto; }
+  #omni-faqs .of-section-head { text-align:center; margin-bottom:40px; }
+  #omni-faqs .of-label { font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; }
+  #omni-faqs .of-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 20px; border-radius:2px; }
+
+  /* TYPOGRAPHY */
+  #omni-faqs h2 { font-family:'Playfair Display',serif!important; font-size:clamp(26px,4vw,36px); font-weight:700; line-height:1.2; margin-bottom:12px; letter-spacing:-0.3px; color:var(--white); text-transform:none; }
+  #omni-faqs h3 { font-family:'Playfair Display',serif!important; color:var(--white); text-transform:none; }
+  #omni-faqs p { font-family:'Montserrat',sans-serif!important; color:var(--white-70); font-weight:400; line-height:1.7; }
+  #omni-faqs .of-body { font-size:15px; color:var(--white-70); margin-bottom:16px; line-height:1.7; max-width:760px; }
+  #omni-faqs .of-body-center { text-align:center; max-width:660px; margin-left:auto; margin-right:auto; }
+
+  /* QUOTE BLOCK */
+  #omni-faqs .of-quote-block { background:var(--navy-light); border-left:3px solid var(--gold); padding:28px 32px; border-radius:0 var(--radius-lg) var(--radius-lg) 0; max-width:900px; margin:0 auto; }
+  #omni-faqs .of-quote-block p { font-size:15px; color:var(--white-70); line-height:1.8; margin:0; }
+
+  /* FAQ — GROUPED */
+  #omni-faqs .of-faq-group { max-width:800px; margin:0 auto 56px; }
+  #omni-faqs .of-faq-group-head { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--white-10); }
+  #omni-faqs .of-faq-list { max-width:800px; margin:0 auto; }
+  #omni-faqs .of-faq { border-bottom:1px solid var(--white-10); }
+  #omni-faqs .of-faq summary { font-family:'Montserrat',sans-serif!important; font-size:15px; font-weight:600; color:var(--white-90); padding:20px 0; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+  #omni-faqs .of-faq summary::-webkit-details-marker { display:none; }
+  #omni-faqs .of-faq summary::after { content:'+'; font-size:20px; color:var(--gold); font-weight:300; transition:transform 0.3s; }
+  #omni-faqs .of-faq[open] summary::after { content:'−'; }
+  #omni-faqs .of-faq-a { font-family:'Montserrat',sans-serif!important; font-size:14px; color:var(--white-70); padding:0 0 20px; line-height:1.7; }
+  #omni-faqs .of-faq-a a { color:var(--gold); text-decoration:underline; text-underline-offset:3px; }
+
+  /* JUMP NAV */
+  #omni-faqs .of-jump-nav { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:800px; margin:0 auto 48px; }
+  #omni-faqs .of-jump-nav a, #omni-faqs .of-jump-nav a:link, #omni-faqs .of-jump-nav a:visited { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:600; padding:7px 16px; border-radius:100px; background:var(--navy-light); border:1px solid var(--white-10); color:var(--white-50)!important; text-decoration:none; transition:all 0.3s; letter-spacing:0.3px; }
+  #omni-faqs .of-jump-nav a:hover { background:var(--gold-dim); border-color:var(--gold); color:var(--gold)!important; }
+
+  /* HUB LINKS */
+  #omni-faqs .of-hub-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+  #omni-faqs .of-hub-link { display:block; background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:16px 20px; font-family:'Montserrat',sans-serif!important; font-size:13px; font-weight:500; color:var(--gold)!important; text-decoration:none; transition:all 0.2s; }
+  #omni-faqs .of-hub-link:hover { border-color:var(--gold); background:var(--gold-dim); }
+
+  /* BOTTOM CTA */
+  #omni-faqs .of-bottom { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 36px; text-align:center; max-width:1120px; margin:0 auto; }
+  #omni-faqs .of-bottom h2 { margin-bottom:12px; }
+  #omni-faqs .of-bottom p { max-width:560px; margin:0 auto 28px; font-size:15px; }
+  #omni-faqs .of-bottom .of-btn { margin:0; }
+  #omni-faqs .of-bottom-note { display:block; margin-top:14px; font-family:'Montserrat',sans-serif!important; font-size:11px; color:var(--white-50); }
+
+  /* TRUST BAR */
+  #omni-faqs .of-trust { display:flex; align-items:center; justify-content:center; gap:28px; flex-wrap:wrap; margin:48px auto 0; max-width:700px; padding:0 20px; }
+  #omni-faqs .of-trust-item { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:600; color:var(--white-50); letter-spacing:0.5px; display:flex; align-items:center; gap:6px; }
+  #omni-faqs .of-trust-item span { font-size:14px; }
+
+  /* LINKS */
+  #omni-faqs .of-link { color:var(--gold); text-decoration:underline; text-underline-offset:3px; }
+  #omni-faqs .of-link:hover { color:var(--gold-light); }
+
+  /* RESPONSIVE */
+  @media(max-width:980px) { #omni-faqs .of-hub-grid { grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:768px) { #omni-faqs .of-hero { padding:56px 20px 36px; } #omni-faqs .of-section { padding:0 20px; } #omni-faqs .of-band { padding:56px 20px; } #omni-faqs .of-bottom { padding:32px 24px; margin-left:20px; margin-right:20px; } }
+  @media(max-width:640px) { #omni-faqs .of-hub-grid { grid-template-columns:1fr; max-width:400px; margin-left:auto; margin-right:auto; } #omni-faqs .of-cta-row { flex-direction:column; align-items:center; } #omni-faqs .of-btn { width:100%; max-width:300px; text-align:center; } }
+</style>
+
+<div id="omni-faqs">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="of-hero">
+    <span class="of-badge">San Diego &amp; Online</span>
+    <h1>Frequently Asked<br><em>Questions</em></h1>
+    <p class="of-hero-sub">Straight answers about OmniFit's personal training programs, pricing, policies, and what to expect, for professionals 30+ in San Diego and online.</p>
+
+    <div class="of-cta-row">
+      <a class="of-btn of-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="of-btn of-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
+    </div>
+
+    <div class="of-quick">
+      <a href="/personal-training-services">All Services</a>
+      <a href="/how-it-works-pricing">Pricing &amp; Process</a>
+      <a href="/the-omnifit-method">Our Method</a>
+      <a href="/how-we-measure-your-progress">Progress Tracking</a>
+      <a href="/the-30-minute-executive-reset">Hybrid Coaching</a>
+      <a href="/the-30-minute-executive-reset">Executive Reset</a>
+    </div>
+  </section>
+
+  <!-- ═══ JUMP NAV ═══ -->
+  <div class="of-section" style="margin-bottom:16px;">
+    <div class="of-jump-nav">
+      <a href="#faq-programs">Programs &amp; Services</a>
+      <a href="#faq-pricing">Pricing &amp; Payments</a>
+      <a href="#faq-getting-started">Getting Started</a>
+      <a href="#faq-training">Training &amp; Travel</a>
+      <a href="#faq-results">Results &amp; Nutrition</a>
+      <a href="#faq-policies">Policies</a>
+    </div>
+  </div>
+
+  <!-- ═══ GEMINI QUOTABLE ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-quote-block">
+      <p>OmniFit Performance provides private, 1:1 coaching for professionals and executives over 30 in San Diego and online. Programs include in-studio personal training at Teqneeq FHC in 4S Ranch, in-home training throughout San Diego County, and the 30-Minute Executive Reset fully virtual program. All programs follow a structured Assess → Correct → Build → Sustain methodology and include nutrition guidance, progress tracking, and accountability systems. OmniFit Performance holds a 5.0 rating across 190+ verified reviews.</p>
+    </div>
+  </div>
+
+  <!-- ═══ PROGRAMS & SERVICES ═══ -->
+  <div class="of-section" id="faq-programs">
+    <div class="of-faq-group">
+      <div class="of-faq-group-head">Programs &amp; Services</div>
+      <div class="of-faq-list">
+
+        <details class="of-faq">
+          <summary>What kind of personal training does OmniFit offer?</summary>
+          <div class="of-faq-a">OmniFit Performance offers three training formats, all designed for professionals and executives 30+. <strong>In-studio private training</strong> at Teqneeq FHC in 4S Ranch, fully private, one client at a time. <strong>In-home training</strong> throughout San Diego County (La Jolla, Del Mar, Rancho Santa Fe, Carmel Valley, Encinitas). And the <strong>30-Minute Executive Reset</strong>, a fully virtual program with live sessions 2–3×/week. Every program follows our <a href="/the-omnifit-method">Assess → Correct → Build → Sustain</a> methodology.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>What is the 30-Minute Executive Reset?</summary>
+          <div class="of-faq-a">The <a href="/the-30-minute-executive-reset">Executive Reset</a> is a high-frequency virtual coaching program with live 30-minute sessions 2–3 times per week via video. It includes app-based programming, nutrition coaching, and habit systems. Designed for executives who want daily structure and accountability from anywhere: home, office, or hotel room.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>Do you offer in-home personal training in San Diego?</summary>
+          <div class="of-faq-a">Yes. <a href="/in-home-personal-trainer-san-diego">In-home training</a> is available throughout San Diego County including La Jolla, Del Mar, Rancho Santa Fe, Carmel Valley, and Encinitas. A per-session travel fee may apply depending on location. Your coach brings all necessary equipment. Programming is identical to our studio sessions, fully individualized, assessment-driven, with monthly progress reports.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>How is OmniFit different from F45, Orangetheory, or Equinox personal training?</summary>
+          <div class="of-faq-a">OmniFit Performance is a private 1:1 coaching practice, not a gym and not a group fitness studio. There are no classes, no shared sessions, and no rotating trainers. Your program is individually designed around your movement assessment, not adapted from a class template. OmniFit specializes in corrective exercise and executive scheduling flexibility, which group formats and large-gym personal training departments cannot accommodate. See <a href="/omnifit-vs-competitors">How OmniFit Compares</a> for detailed breakdowns.</div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PRICING & PAYMENTS ═══ -->
+  <div class="of-section" id="faq-pricing">
+    <div class="of-faq-group">
+      <div class="of-faq-group-head">Pricing &amp; Payments</div>
+      <div class="of-faq-list">
+
+        <details class="of-faq">
+          <summary>How much does personal training cost at OmniFit?</summary>
+          <div class="of-faq-a"><strong>In-studio coaching at Teqneeq:</strong> $250 to $1,395 per month on a 3-month program depending on tier (Essential, Momentum, Performance, or Peak), or $290 to $1,625 month-to-month. <strong>Session packs:</strong> $175 per session for 5, $150 for 10, $135 for 20. <strong>Single sessions:</strong> $165 at Teqneeq, $195 in-home. <strong>In-home coaching:</strong> from $335 per month on a 3-month program, with a per-session travel fee that may apply depending on location. <strong>30-Minute Executive Reset:</strong> from $175 per month for the async tier, with coached tiers at $449, $675, and $995. Every client starts with a $110 Performance Diagnostic, credited in full toward a 3-month package. All programs start with a 45-minute paid consultation. Full details on the <a href="/training-rates-san-diego">Training Rates</a> page.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>Do you accept insurance or HSA/FSA?</summary>
+          <div class="of-faq-a">OmniFit does not bill insurance directly. Some clients use HSA or FSA funds for eligible wellness services, though you'll need to confirm with your benefits administrator. We can provide invoices and documentation if needed for reimbursement.</div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GETTING STARTED ═══ -->
+  <div class="of-section" id="faq-getting-started">
+    <div class="of-faq-group">
+      <div class="of-faq-group-head">Getting Started</div>
+      <div class="of-faq-list">
+
+        <details class="of-faq">
+          <summary>How do I get started?</summary>
+          <div class="of-faq-a">Book a <strong>45-minute paid consultation</strong> ($30 refundable deposit). We'll discuss your goals, movement history, schedule, and any injuries or limitations. If it's a mutual fit, the deposit applies to your first month and you can start training within the week. If it's not a fit, we'll tell you honestly and refund the deposit. <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book here</a>.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>What credentials does the trainer have?</summary>
+          <div class="of-faq-a">Nemezio LopezPerez holds <strong>NASM Elite Trainer</strong> status with specializations in Corrective Exercise (CES), Performance Enhancement (PES), and Behavior Change (BCS), plus an <strong>ACE Corrective Exercise Specialist</strong> credential. He holds twelve certifications in total across movement, nutrition, and metabolic health, has 190+ verified five-star reviews, and works exclusively with professionals over 30.</div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TRAINING & TRAVEL ═══ -->
+  <div class="of-section" id="faq-training">
+    <div class="of-faq-group">
+      <div class="of-faq-group-head">Training &amp; Travel</div>
+      <div class="of-faq-list">
+
+        <details class="of-faq">
+          <summary>What if I travel frequently for work?</summary>
+          <div class="of-faq-a">Travel-adapted programming is built into every OmniFit Performance program. In-studio and in-home clients receive hotel and home gym workout variations through the app between sessions. Executive Reset clients train live via video from anywhere. In-person clients can add virtual sessions during travel weeks. No one loses momentum because of a flight.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>What equipment do I need for virtual or hybrid sessions?</summary>
+          <div class="of-faq-a">Minimal equipment works: a pair of dumbbells, a resistance band, and a mat. For hotel rooms, we program bodyweight-only and band-based workouts requiring zero equipment. For home gyms, we scale to whatever you have. Every program includes equipment-adaptive variations so you never miss a workout due to access limitations.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>I have old injuries or joint pain. Can I still train?</summary>
+          <div class="of-faq-a">Yes. OmniFit Performance specializes in joint-friendly, corrective-first training. Your coach holds NASM Corrective Exercise (CES) and ACE Corrective Exercise Specialist credentials. Every program begins with a 9-point movement screen and follows a 3/10 pain ceiling protocol, meaning we never push through pain above a 3 out of 10. OmniFit is not a medical provider, but we serve as a structured bridge between physical therapy discharge and full performance training. When appropriate, we coordinate with your PT or physician.</div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RESULTS & NUTRITION ═══ -->
+  <div class="of-section" id="faq-results">
+    <div class="of-faq-group">
+      <div class="of-faq-group-head">Results &amp; Nutrition</div>
+      <div class="of-faq-list">
+
+        <details class="of-faq">
+          <summary>What results can I expect?</summary>
+          <div class="of-faq-a">Results vary by starting point and adherence, so OmniFit Performance measures every client against their own baseline rather than a promise. Compliant clients typically see movement quality and posture improve first, followed by measurable body composition change, strength increases, and better energy and sleep. OmniFit tracks progress with <a href="/how-we-measure-your-progress">monthly data reports</a> including body composition, strength benchmarks, posture photos, adherence metrics, and well-being scores. We don't promise miracles. We show you the data.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>Is nutrition coaching included?</summary>
+          <div class="of-faq-a">Yes. Every OmniFit Performance program includes nutrition guidance. You'll receive custom macros, simple meal frameworks, travel and dining strategies, and weekly accountability check-ins. We use a Precision Nutrition-informed approach focused on sustainable habit change rather than restrictive diets. For clients who want deeper nutrition support, dedicated <a href="/nutritional-coaching-pacific-beach">nutrition coaching</a> add-ons are available.</div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ POLICIES ═══ -->
+  <div class="of-section" id="faq-policies" style="margin-bottom:56px;">
+    <div class="of-faq-group" style="margin-bottom:0;">
+      <div class="of-faq-group-head">Policies</div>
+      <div class="of-faq-list">
+
+        <details class="of-faq">
+          <summary>What's your cancellation and rescheduling policy?</summary>
+          <div class="of-faq-a">All sessions require <strong>24 hours' advance notice</strong> to reschedule. Late cancellations and no-shows are forfeited. This policy exists to maintain consistency and respect both your time and your coach's schedule. In-person training is billed via monthly auto-pay with no long-term contracts beyond the agreed commitment period.</div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ HUB LINKS ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">Explore OmniFit</span>
+        <hr class="of-divider">
+      </div>
+      <div class="of-hub-grid">
+        <a href="/personal-training-services" class="of-hub-link">All Services →</a>
+        <a href="/training-rates-san-diego" class="of-hub-link">Training Rates →</a>
+        <a href="/how-it-works-pricing" class="of-hub-link">Pricing &amp; Process →</a>
+        <a href="/the-omnifit-method" class="of-hub-link">The OmniFit Method →</a>
+        <a href="/how-we-measure-your-progress" class="of-hub-link">How We Measure Progress →</a>
+        <a href="/the-30-minute-executive-reset" class="of-hub-link">30-Minute Executive Reset →</a>
+        <a href="/corrective-exercise-post-rehab" class="of-hub-link">Corrective Exercise →</a>
+        <a href="/case-studies" class="of-hub-link">Client Case Studies →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BOTTOM CTA ═══ -->
+  <div style="padding: 56px 28px 0;">
+    <div class="of-bottom">
+      <h2>Still Have Questions?</h2>
+      <p>Book a 45-minute consultation. We'll answer everything in detail, assess your goals, and tell you honestly whether OmniFit is the right fit.</p>
+      <a class="of-btn of-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="of-bottom-note">$30 refundable deposit · No commitment · Honest assessment of fit</span>
+    </div>
+  </div>
+
+  <!-- ═══ TRUST BAR ═══ -->
+  <div class="of-trust" style="padding-bottom:48px;">
+    <div class="of-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
+    <div class="of-trust-item"><span>🏅</span> NASM CES · CPT · PES · BCS</div>
+    <div class="of-trust-item"><span>📍</span> Teqneeq FHC · 4S Ranch, San Diego</div>
+    <div class="of-trust-item"><span>🌍</span> Virtual Coaching Worldwide</div>
+  </div>
+
+</div>
