@@ -21,6 +21,13 @@ WORKFLOW RULES
   reported with the condition under which it would be wrong.
 - Every run ends with: certification grep, invariant hashes, REPORT.md
   update, per-file commits, summary table.
+- CONTRACT VALUE CHECK (counsel condition, Andrew Flores, Aug 2026):
+  before filing a client on any contract whose total exceeds $4,400,
+  contact counsel first. This is a workflow step, not a pricing cap, and it
+  does not restrict what may be published or sold. Offers that currently
+  trip it on a 3-month prepaid: in-home Peak individual (5,580) and in-home
+  couples Performance (5,175). Teqneeq Peak individual sits closest to the
+  line at 4,185, $215 clear.
 
 CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
 - Brand: "OmniFit Performance" everywhere. Never "OmniFit Personal
@@ -44,9 +51,10 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
   Performance 950/1100, Peak 1395/1625. Upfront on a 3-month program =
   3 × the 3-month monthly rate, no discount: 750 / 1,425 / 2,850 / 4,185.
-  In-home individual: from 335/mo (1,005 upfront). Known tiers:
-  Performance 1,250/mo, Peak 1,860/mo (floor, may be higher). Momentum
-  in-home not yet supplied. Packs: 5 @ 175/session ($875),
+  In-home individual monthly (3-mo/M2M), complete ladder: Essential 335/390,
+  Momentum 650/755, Performance 1,250/1,425, Peak from 1,860/2,150. Upfront
+  on a 3-month program = 3 x the 3-month rate: 1,005 / 1,950 / 3,750 / 5,580.
+  Packs: 5 @ 175/session ($875),
   10 @ 150 ($1,500), 20 @ 135 ($2,700), one ladder regardless of location.
   Singles 165 studio, 195 in-home.
   Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
@@ -68,7 +76,9 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   studio Essential derivation is $150, which the certification rule treats as
   a violation outside the approved contexts, so publishing it would fail
   certification as well as contradict this line.
-  IN-HOME PERFORMANCE (1,725/mo) is month-to-month ONLY. See DEFERRED-02.
+  In-home couples Performance (1,725/mo) MAY be sold and published as a
+  3-month prepaid commitment (5,175 upfront). The earlier month-to-month-only
+  restriction is lifted. See RESOLVED-02 for the counsel workflow rule.
 - Case-study figures (captions/alt text; verbatim client quotes are
   untouchable): Vincent 59, 8% body fat. Alo +18 lbs. Mark −17 lbs
   (248→231, 4mo). Dave −27 (225→198, 6mo). Isaac −21 (181→160, 8→20
@@ -163,32 +173,40 @@ DEFERRED-01 · ACCEPTED EXCEPTION · Executive Reset guarantee wording (rates pa
 - Status: approved, not yet applied. Deliberately deferred by Nemezio.
   Known, accepted exception until scheduled.
 
-DEFERRED-02 · ACTIVE CONSTRAINT · Statutory cap exposure on prepaid tiers
-- Cal. Civ. Code 1812.86 caps a single health studio services contract at
-  $4,400. OmniFit's own Couples Prepaid Program Agreement cites this cap and
-  excludes in-home Performance and Peak couples on that basis.
-- Prepaid 3-month totals against the cap:
-    Teqneeq Peak individual      1,395 x 3 = 4,185   under, by 215
-    In-home Performance indiv.   1,250 x 3 = 3,750   under
-    Studio couples Performance   1,250 x 3 = 3,750   under
-    In-home couples Momentum       875 x 3 = 2,625   under
-    In-home couples Performance  1,725 x 3 = 5,175   OVER by 775
-    In-home Peak individual      1,860 x 3 = 5,580   OVER by 1,180 (floor)
-- OPEN QUESTION FOR COUNSEL: whether 1812.86 reaches in-home personal
-  training or only facility-based services. That answer determines whether
-  the two OVER rows are a real problem or a non-issue.
-- INTERIM RULE: do not publish or sell in-home couples Performance or
-  in-home Peak as 3-month prepaid commitments. Month-to-month only.
-  (Couples Peak is already ad-hoc only at both venues, so the in-home Peak
-  restriction lands on the individual tier.)
-- Status: awaiting legal confirmation. NOT a certification violation while
-  listed here.
-- Headroom note: Teqneeq Peak individual clears by only $215. Any rise past
-  1,466/mo crosses the cap at 3 x monthly. In-home Peak at 1,860 is a floor,
-  so its overage can only grow. Check before repricing either.
-- Verified Aug 2026: no certified page publishes in-home Peak or in-home
-  Performance as a prepaid 3-month commitment. The only repo hits sit in
-  training-rates-san-diego.html, which is uncertified and marked do-not-paste.
+RESOLVED ITEMS (kept so the reasoning survives; no longer constraints)
+
+RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
+- Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved by counsel (Andrew
+  Flores), who confirmed the current pricing is acceptable.
+- Outcome: the interim month-to-month-only rule is LIFTED. In-home
+  Performance and Peak, individual and couples, may be sold and published
+  as 3-month prepaid commitments.
+- The condition attached to that clearance is not a pricing limit. It is the
+  CONTRACT VALUE CHECK recorded under WORKFLOW RULES: contact counsel before
+  filing a client on a contract exceeding $4,400.
+- Original reasoning, retained: Cal. Civ. Code 1812.86 caps a single health
+  studio services contract at $4,400, and OmniFit's own Couples Prepaid
+  Program Agreement cites that cap. The open question was whether 1812.86
+  reaches in-home personal training or only facility-based services. Both
+  exposed rows were in-home; every facility-based offer cleared. Counsel's
+  clearance settles it without the site needing to answer that question.
+
+PRICING-CHANGE CHECKLIST (kept live from the above; consult before repricing)
+- 3-month prepaid total = 3 x the 3-month monthly rate. Anything over $4,400
+  triggers the CONTRACT VALUE CHECK before a client is filed.
+- Current totals, highest first:
+    In-home Peak individual      1,860 x 3 = 5,580   over
+    In-home couples Performance  1,725 x 3 = 5,175   over
+    Teqneeq Peak individual      1,395 x 3 = 4,185   under by 215
+    In-home Performance indiv.   1,250 x 3 = 3,750   under by 650
+    Studio couples Performance   1,250 x 3 = 3,750   under by 650
+    Teqneeq Performance          950 x 3   = 2,850   under by 1,550
+    In-home couples Momentum     875 x 3   = 2,625   under by 1,775
+    In-home Momentum individual  650 x 3   = 1,950   under by 2,450
+- Break point is the same for every offer: any 3-month monthly rate above
+  $1,466 produces a total over $4,400 (4,400 / 3 = 1,466.67). Teqneeq Peak at
+  1,395 is the closest under it. In-home Peak's 1,860 is a FLOOR, so its
+  total can only rise.
 
 NEXT RUNS
 - BATCH 2 DONE (Aug 2026): FAQs · how-it-works-pricing (converted to
