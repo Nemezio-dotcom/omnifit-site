@@ -1094,3 +1094,89 @@ None. No certified page publishes an in-home Peak or in-home Performance prepaid
 figure, so lifting the restriction changes nothing that is live. The pages are now
 *permitted* to carry those figures where previously they were not, which matters
 whenever the rates page enters scope.
+
+---
+
+# Tooling hardening run — em-dash re-audit and shape-based patterns
+
+Three judgment calls confirmed and recorded in CANON with the signed Prepaid
+Program Agreement as provenance: the widened `$150`/`$175` rule, removal of the
+2.9% card fee (no processing fees are added to stated prices), and the upfront
+billing inversion (the total is paid in a single upfront payment at signing).
+
+## Certification now FAILS — 9 hits, none auto-fixed
+
+Reported, not repaired, per instruction and CANON's report-and-stop rule.
+
+### Em-dash, 4 hits, all `pages/how-it-works-pricing.html`
+
+```
+:215   You want measurable, sustainable results &mdash; not a 6-week quick fix
+:223   You're looking for the cheapest option &mdash; a well-rated gym like Chuze…
+:224   You want drop-in classes or a social fitness scene &mdash; F45 or Orangetheory…
+:226   You want a 6-week crash program &mdash; we don't do short-term fixes
+```
+
+### lbs within 15 words of a timeframe, 5 hits
+
+```
+pages/in-home-personal-trainer-san-diego.html                   "20–30 pound"  near "4–6 weeks"
+pages/headers/in-home-personal-trainer-san-diego-header.html    "20–30 pound"  near "4–6 weeks"
+pages/private-personal-trainer-san-diego.html                   "20–30 lbs"    near "4–6 months"
+pages/private-personal-trainer-san-diego.html                   "20–30 pounds" near "4–6 months"
+pages/headers/private-personal-trainer-san-diego-header.html    "20–30 pounds" near "4–6 months"
+```
+
+These are the exact pattern CANON's compliance screen bans. **They survived Batch 2
+on pages I certified as clean**, because the literal grep has no entry for them. The
+header hits are the page text carried into FAQPage schema, so each page and its
+header must be fixed together.
+
+### Guarantee near an outcome promise: 0 in certified files
+
+One hit on the excluded rates page, correctly exempted as DEFERRED-01.
+
+## Why the em-dash re-audit needed two attempts
+
+The first pass reported **zero**, which was wrong. Investigating the raw counts
+showed 4 `&mdash;` present in a certified file, so the checker was clearing them.
+
+The list-item exception was too permissive: it accepted any item starting with a
+capital. `<li>You want X &mdash; not Y</li>` starts with a capital, so it passed as
+a "Label — descriptor" item.
+
+**First fix was also wrong.** Requiring Title Case caught the four, but then flagged
+17 genuine labels — "Resting heart rate", "Desk-related posture patterns", "Acute
+injury" — which are sentence-cased noun phrases.
+
+**The working discriminator is grammatical, not typographic:** a label is a noun
+phrase; the four violations are sentences beginning with a subject pronoun. The rule
+now rejects items starting with `you / we / this / that / it / they / there / if /
+when …` and accepts everything else that starts with a capital, plus anything
+tag-wrapped in `<strong>`.
+
+Also added: `&#8212;` and `&#x2014;` are now recognised alongside the literal
+character and `&mdash;`. Both are currently zero across the repo, so this closes a
+gap rather than fixing a hit.
+
+## Rule tests
+
+26 fixtures, both directions, all passing. Notably they now pin the cases that broke
+each earlier attempt:
+
+- genuine labels pass: `Grip Strength`, `BodyStat Body Composition`,
+  `<strong>Post-PT professionals</strong>`, `Resting heart rate`,
+  `Desk-related posture patterns`, `Trend, not diagnosis`, `Acute injury`
+- prose is caught: `You want …`, `You're looking …`, `This is what we do …`,
+  lowercase continuation, plain `<p>` prose
+- `30-Day Fit Commitment` passes; `30-Day Performance Guarantee … stronger` is caught
+- `20-30 lbs sustainably` passes; `20-30 pounds over 4-6 months` and
+  `Dropped 27 lbs in 6 months` are caught; `Alo gained 18 lbs of lean muscle` passes
+
+## What this says about earlier runs
+
+Both shape classes existed in Batch 2 output and were reported as certified. The
+literal grep is necessary but not sufficient: it catches known bad strings, never
+bad *shapes*. Two of the five compliance strikes I found by eye during Batch 2 were
+of exactly these classes, which is why the patterns were worth adding rather than
+relying on manual reading.

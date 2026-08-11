@@ -62,6 +62,12 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   requires Teqneeq membership $119/mo paid to Teqneeq; Essential and
   packs use sponsored guest passes. Travel fee: "may apply" language OK,
   never a dollar figure.
+  CONFIRMED Aug 2026, source = signed Prepaid Program Agreement:
+  · No processing fees are added to stated prices. The 2.9% card fee is
+    retired everywhere; never reintroduce it.
+  · The total is paid in a SINGLE UPFRONT PAYMENT at signing on 3-month
+    programs. Copy must not say "billed monthly, no large upfront payments".
+  · The widened $150/$175 exception (pack rungs + Reset Bronze) is approved.
 - Couples pricing (monthly; both partners train in one session). Supersedes
   the earlier "from 325/mo, monthly only" line:
     Studio  3-mo: Essential 325 · Momentum 625 · Performance 1,250
@@ -102,15 +108,29 @@ EM-DASH RULES (voice)
   descriptor" separators inside structured list items (e.g. the 9-point
   movement screen), including when the label is tag-wrapped such as
   <li><strong>Label</strong> — descriptor</li>; and CSS comments inside
-  <style>. Certification tooling must carve out these exceptions by rule,
-  not by hardcoded line numbers, and must be negative-tested so a prose
-  em-dash placed inside a list item is still caught.
+  <style>. A LABEL is a noun phrase, not a sentence: an item beginning with
+  a subject pronoun ("You want X — not Y", "This is Y — every time") is
+  PROSE and is a violation even though it starts with a capital. Tooling
+  must recognise every em-dash encoding: the literal character, &mdash;,
+  &#8212; and &#x2014;. Carve exceptions out by rule, never by hardcoded
+  line numbers, and negative-test both directions so genuine labels pass
+  and prose inside a list item is still caught.
 
 CERTIFICATION GREP (zero hits expected)
 "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
 "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
 "free consultation" (any case) · "$90 " · "$225" · "$275" · "$299" ·
 "$500/mo" · "$599" · "$50"/"$75" as travel fees
+SHAPE-BASED COMPLIANCE PATTERNS (literal strings are not enough; both of
+these classes slipped past the grep in Batch 2)
+- GUARANTEE NEAR OUTCOME: any form of "guarantee" within ~30 words of an
+  outcome promise (stronger, leaner, energized, more in control, lose,
+  fat loss, transformation, results, pounds, lbs, body fat, inches).
+  DEFERRED-01 is exempt while listed.
+- LBS NEAR TIMEFRAME: any number followed by lbs/pounds within ~15 words of
+  a timeframe (day/week/month/year). Persona language with NO timeframe
+  stays legal, e.g. "needs to lose 20-30 lbs sustainably".
+
 Exceptions: $150/$175 legal ONLY inside (a) the canonical pricing FAQ
 answer, (b) the card bullet "Fully virtual Executive Reset from
 $175/mo", (c) the canonical session-pack rungs confirmed Aug 2026
