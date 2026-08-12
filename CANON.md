@@ -5,8 +5,13 @@ REPO STATE
   corrective-exercise-post-rehab, FAQs, how-it-works-pricing,
   in-home-personal-trainer-san-diego, private-personal-trainer-san-diego,
   each with a header under pages/headers/<slug>-header.html.
-  NOT YET CERTIFIED, do not paste: training-rates-san-diego.html (still the
-  July V8 stale generation), the-30-minute-executive-reset.html, footer.html.
+  NOT YET CERTIFIED, do not paste:
+  · training-rates-san-diego.html and the-30-minute-executive-reset.html —
+    the REPO COPIES ARE STALE RELATIVE TO PRODUCTION. The live versions on
+    the domain are ahead of these files. They need REFRESHING FROM LIVE, not
+    patching: any run that patches the repo copy would be editing a version
+    the site has already moved past. Deferred from Batch 3 on that basis.
+  · footer.html — site-wide, in no batch.
   Never resurrect pre-patch originals from history.
 - Header naming is standardised: pages/headers/<slug>-header.html, no
   exceptions.

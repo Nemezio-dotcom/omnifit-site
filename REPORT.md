@@ -1220,3 +1220,61 @@ compliance 0 · stale canon 0 · structure 0   →  PASSED
 
 30 files certified. Four remain uncertified: `training-rates-san-diego.html`,
 `the-30-minute-executive-reset.html` and its header, and `footer.html`.
+
+---
+
+# Batch 3 — BLOCKED, not started
+
+## All nine pages are absent from the repo
+
+```
+the-omnifit-method              ABSENT     weight-loss                      ABSENT
+how-we-measure-your-progress    ABSENT     strength-training-1              ABSENT
+omnifit-vs-competitors          ABSENT     hiit-personal-trainer-san-diego  ABSENT
+personal-training-services      ABSENT     body-composition-testing         ABSENT
+partners                        ABSENT
+```
+
+Your instruction was to list which are missing and proceed with the rest. **There is
+no rest** — it is nine of nine, so no page-level work was possible.
+
+Verified rather than assumed:
+
+- Not on `main`, not on the working branch, and **never committed on any branch** —
+  checked with `git log --all --diff-filter=A` per slug, zero results each.
+- Only two refs exist on the remote, both pointing at commits that contain none of
+  the nine.
+- Pulling them in myself is not possible: this environment's egress proxy refuses
+  all outbound hosts, re-verified this run (`CONNECT tunnel failed, response 403`).
+  Files can only reach the repo by your push.
+
+Nothing was invented, and no placeholder pages were created.
+
+## Deferred: two repo copies are stale relative to production
+
+`pages/training-rates-san-diego.html` and `pages/the-30-minute-executive-reset.html`
+are excluded from scope and will stay excluded. The important distinction, now
+recorded in CANON:
+
+> These are **not** simply unpatched. The live versions on the domain are **ahead of
+> the repo copies**. They need refreshing from live, not patching. A run that
+> patched the repo copy would be carefully editing a version the site has already
+> moved past, and could regress live content when pasted back.
+
+This changes the fix from "apply the canon pass" to "replace the file from
+production, then apply the canon pass". CANON's repo-state block now says so, so no
+future run treats them as ordinary unpatched pages.
+
+## Certification
+
+Unchanged from the last run, since no page content was touched:
+
+```
+compliance 0 · stale canon 0 · structure 0   →  PASSED   (30 files)
+```
+
+## To unblock
+
+Push or paste the nine pages. Everything else is ready: the canon pass, the Who This
+Is For sections, header generation, and the shape-based compliance patterns, which
+will be active from the first edit rather than retrofitted.
