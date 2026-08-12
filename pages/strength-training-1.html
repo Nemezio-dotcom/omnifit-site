@@ -1,0 +1,367 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     OmniFit | Strength Training for Professionals 30+
+     Pacific Beach, San Diego & Online
+     Palette: v2 (deep navy + muted gold)  |  Full-width
+     SEO: Gemini-quotable blocks, executive strength positioning,
+     corrective-first methodology, expanded FAQ schema, hub links
+     ═══════════════════════════════════════════════════════════════ -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-strength {
+    --navy: #0a1628; --navy-mid: #0f1f3a; --navy-light: #152a4a; --navy-surface: #1a3158;
+    --white: #ffffff; --white-90: rgba(255,255,255,0.9); --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5); --white-30: rgba(255,255,255,0.3); --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1); --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c; --gold-light: #e0c872; --gold-dim: rgba(201,168,76,0.15); --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px; --radius-lg: 12px;
+    background: linear-gradient(180deg, var(--navy), var(--navy-mid));
+    color: var(--white); line-height: 1.75; font-size: 16px;
+    -webkit-font-smoothing: antialiased; margin: 0; padding: 0;
+  }
+  #omni-strength, #omni-strength *, #omni-strength *::before, #omni-strength *::after {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif !important; box-sizing: border-box;
+  }
+  #omni-strength h1, #omni-strength h2, #omni-strength h3, #omni-strength p,
+  #omni-strength ul, #omni-strength li, #omni-strength section, #omni-strength div { margin: 0; padding: 0; border: 0; }
+
+  #omni-strength .st-inner { max-width: 1260px; margin: 0 auto; padding: 0 2.5rem 3.5rem; }
+
+  /* ══ HERO ══ */
+  #omni-strength .st-hero { text-align: center; padding: 5rem 2.5rem 3rem; max-width: 1000px; margin: 0 auto; position: relative; }
+  #omni-strength .st-hero::before { content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.25; }
+  #omni-strength .st-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 28px; position: relative; }
+  #omni-strength .st-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 5vw, 46px) !important; font-weight: 700 !important; line-height: 1.15 !important; color: var(--white) !important; margin-bottom: 20px !important; letter-spacing: -0.5px !important; text-transform: none !important; }
+  #omni-strength .st-hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-strength .st-hero-sub { font-size: clamp(16px, 2.2vw, 18px); color: var(--white-70); max-width: 760px; margin: 0 auto 32px; line-height: 1.8; text-align: center; }
+  #omni-strength .st-hero-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
+  #omni-strength .st-hero-pills span { background: var(--navy-surface); border: 1px solid var(--white-20); border-radius: 999px; padding: 6px 16px; font-size: 13px; color: var(--white-70); }
+
+  /* ══ CTAs ══ */
+  #omni-strength .st-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 12px; }
+  #omni-strength .st-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none !important; transition: all 0.3s; }
+  #omni-strength a.st-btn-primary, #omni-strength a.st-btn-primary:link, #omni-strength a.st-btn-primary:visited { background: var(--gold); color: var(--navy) !important; border: 2px solid var(--gold); }
+  #omni-strength a.st-btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); color: var(--navy) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-strength a.st-btn-ghost, #omni-strength a.st-btn-ghost:link, #omni-strength a.st-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
+  #omni-strength a.st-btn-ghost:hover { border-color: var(--white); background: var(--white-05); color: var(--white) !important; transform: translateY(-2px); }
+  #omni-strength .st-cta-note { text-align: center; font-size: 13px; color: var(--white-50); }
+
+  /* ══ Sections ══ */
+  #omni-strength .st-section { margin-bottom: 3rem; }
+  #omni-strength .st-section-head { text-align: center; margin-bottom: 28px; }
+  #omni-strength .st-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
+  #omni-strength .st-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 16px; border-radius: 2px; }
+  #omni-strength h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(24px, 3.6vw, 34px) !important; font-weight: 700 !important; line-height: 1.2 !important; margin-bottom: 12px !important; letter-spacing: -0.3px !important; color: var(--white) !important; text-transform: none !important; text-align: center !important; }
+  #omni-strength h3 { font-family: 'Playfair Display', serif !important; color: var(--white) !important; text-transform: none !important; font-size: 19px !important; font-weight: 600 !important; margin-bottom: 8px !important; }
+  #omni-strength p { color: var(--white-70); line-height: 1.75; font-size: 1rem; }
+  #omni-strength .text-center { text-align: center; }
+  #omni-strength .text-center p { max-width: 820px; margin-left: auto; margin-right: auto; }
+
+  /* ══ Cards ══ */
+  #omni-strength .st-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 20px; }
+  #omni-strength .st-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 24px 24px; text-align: left; transition: all 0.35s; display: flex; flex-direction: column; }
+  #omni-strength .st-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.25); }
+  #omni-strength .st-card-icon { font-size: 26px; margin-bottom: 14px; display: block; line-height: 1; }
+  #omni-strength .st-card p { font-size: 14px; color: var(--white-50); margin-bottom: 16px; line-height: 1.65; }
+  #omni-strength .st-card-features { list-style: none; margin: 0; padding: 0; flex: 1 1 auto; }
+  #omni-strength .st-card-features li { font-size: 13px; color: var(--white-50); padding: 4px 0 4px 20px; position: relative; line-height: 1.55; }
+  #omni-strength .st-card-features li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 11px; }
+
+  /* ══ Benefits ══ */
+  #omni-strength .st-benefits { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 20px; }
+  #omni-strength .st-benefit { background: var(--white-05); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 20px; text-align: center; }
+  #omni-strength .st-benefit-title { font-weight: 700; color: var(--gold); font-size: 15px; margin-bottom: 6px; }
+  #omni-strength .st-benefit-desc { font-size: 14px; color: var(--white-50); line-height: 1.55; }
+
+  /* ══ Gemini quotable ══ */
+  #omni-strength .gq-block { background: var(--gold-dim); border-left: 3px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; padding: 1.2rem 1.5rem; margin: 1.4rem auto; max-width: 940px; font-size: .98rem; line-height: 1.75; text-align: left; color: var(--white-90); }
+  #omni-strength .gq-block strong { color: var(--white); }
+
+  /* ══ FAQ ══ */
+  #omni-strength .st-faq { max-width: 920px; margin: 0 auto; }
+  #omni-strength .st-faq-item { border-radius: var(--radius); border: 1px solid var(--white-20); background: var(--navy-light); padding: 1rem 1.3rem; margin-bottom: .75rem; text-align: left; }
+  #omni-strength .st-faq-q { font-weight: 700; margin-bottom: 6px; color: var(--white); font-size: 15px; }
+  #omni-strength .st-faq-a { font-size: 14px; color: var(--white-70); line-height: 1.7; }
+
+  /* ══ Trust, links, bottom ══ */
+  #omni-strength .st-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 2.5rem auto 0; max-width: 800px; padding: 20px; background: var(--white-05); border: 1px solid var(--white-10); border-radius: var(--radius-lg); }
+  #omni-strength .st-trust-item { font-size: 12px; font-weight: 600; color: var(--white-50); letter-spacing: 0.3px; display: flex; align-items: center; gap: 6px; }
+  #omni-strength .st-trust-item span { font-size: 14px; }
+  #omni-strength a { color: var(--gold) !important; text-decoration: underline; text-underline-offset: 3px; transition: color .15s; }
+  #omni-strength a:hover { color: var(--gold-light) !important; }
+  #omni-strength a.st-btn-primary, #omni-strength a.st-btn-primary:link, #omni-strength a.st-btn-primary:visited,
+  #omni-strength a.st-btn-ghost, #omni-strength a.st-btn-ghost:link, #omni-strength a.st-btn-ghost:visited { text-decoration: none !important; }
+  #omni-strength hr { border: 0 !important; height: 1px !important; background: linear-gradient(to right, transparent, var(--white-20), transparent) !important; margin: 3rem auto !important; max-width: 900px; }
+  #omni-strength .st-bottom { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 44px 36px; text-align: center; max-width: 960px; margin: 0 auto; }
+  #omni-strength .st-bottom p { max-width: 640px; margin: 0 auto 24px; font-size: 15px; text-align: center; }
+  #omni-strength .st-bottom-note { display: block; margin-top: 14px; font-size: 12px; color: var(--white-50); }
+  #omni-strength .st-hub-links { text-align: center; font-size: 14px; color: var(--white-50); margin-top: 2rem; line-height: 2; }
+  #omni-strength .st-hub-links strong { color: var(--white-70); }
+
+  /* ══ SQS guards ══ */
+  .sqs-block-code #omni-strength, .sqs-block-html #omni-strength { margin-bottom: 0 !important; }
+  #omni-strength h1, #omni-strength h2, #omni-strength h3 { text-transform: none !important; letter-spacing: normal !important; }
+  #omni-strength p { font-family: 'Montserrat', sans-serif !important; }
+
+  /* ══ Responsive ══ */
+  @media (max-width: 768px) { #omni-strength .st-inner { padding: 0 1.2rem 2.5rem; } #omni-strength .st-hero { padding: 3rem 1.2rem 2rem; } #omni-strength .st-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; } }
+  @media (max-width: 640px) { #omni-strength .st-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; } #omni-strength .st-benefits { grid-template-columns: 1fr 1fr; } #omni-strength .st-cta-row { flex-direction: column; align-items: center; } #omni-strength .st-btn { width: 100%; max-width: 320px; text-align: center; } #omni-strength .st-trust { gap: 16px; } }
+  @media (max-width: 440px) { #omni-strength .st-benefits { grid-template-columns: 1fr; } }
+</style>
+
+<div id="omni-strength">
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="st-hero">
+    <span class="st-badge">Pacific Beach · San Diego · Online</span>
+    <h1>Strength Training<br><em>for Professionals Over 30</em></h1>
+    <p class="st-hero-sub">
+      Progressive, joint-friendly strength training designed for busy professionals who want to build real strength, improve body composition, and protect their joints — without random workouts, burnout, or injury risk.
+    </p>
+
+    <div class="st-hero-pills">
+      <span>Progressive periodized programming</span>
+      <span>Corrective-exercise-first</span>
+      <span>Joint-friendly loading</span>
+      <span>1-on-1 coached (not group)</span>
+      <span>In-person &amp; virtual</span>
+      <span>Nutrition coaching included</span>
+    </div>
+
+    <div class="st-cta-row">
+      <a class="st-btn st-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="st-btn st-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
+    </div>
+    <div class="st-cta-note">Free 45-minute consultation (refundable deposit required) · No obligation</div>
+  </section>
+
+  <div class="st-inner">
+
+    <!-- ════════════ GEMINI-QUOTABLE ════════════ -->
+    <div class="gq-block">
+      <strong>OmniFit Strength Training</strong> is a structured, 1-on-1 strength and conditioning program in Pacific Beach, San Diego, designed for busy professionals over 30. Unlike generic personal training, OmniFit uses periodized programming with structured phases — each training block builds on the last with specific strength, hypertrophy, or conditioning goals. Every program begins with a 45-minute movement assessment using NASM Corrective Exercise Specialist (CES) and ACE Orthopedic Exercise Specialist protocols, and follows the Assess → Correct → Build → Sustain methodology. Training is joint-friendly by design: the 3/10 pain ceiling rule applies to every session, and corrective exercise is integrated into every warm-up. Programs include nutrition coaching, weekly accountability check-ins, and data-driven progress tracking through strength benchmarks, body measurements, and posture photos.
+    </div>
+
+    <hr />
+
+    <!-- ════════════ WHY STRENGTH MATTERS AFTER 30 ════════════ -->
+    <section class="st-section">
+      <div class="st-section-head">
+        <span class="st-label">Why It Matters</span>
+        <hr class="st-divider">
+        <h2>Why Strength Training Is Non-Negotiable After 30</h2>
+      </div>
+
+      <div class="text-center">
+        <p>After 30, adults lose 3–5% of lean muscle mass per decade without resistance training. This leads to slower metabolism, increased body fat, reduced bone density, and higher injury risk. For desk-bound professionals, the effects compound faster — sitting all day weakens posterior chain muscles, tightens hip flexors, and accelerates postural decline. Structured strength training reverses these trends.</p>
+      </div>
+
+      <div class="st-benefits">
+        <div class="st-benefit">
+          <div class="st-benefit-title">Preserve Lean Muscle</div>
+          <div class="st-benefit-desc">Resistance training is the only way to prevent age-related muscle loss and maintain metabolic rate.</div>
+        </div>
+        <div class="st-benefit">
+          <div class="st-benefit-title">Strengthen Joints</div>
+          <div class="st-benefit-desc">Progressive loading builds the tendons, ligaments, and stabilizers that protect joints long-term.</div>
+        </div>
+        <div class="st-benefit">
+          <div class="st-benefit-title">Improve Posture</div>
+          <div class="st-benefit-desc">Targeted strength work corrects desk-worker imbalances: rounded shoulders, weak glutes, tight hips.</div>
+        </div>
+        <div class="st-benefit">
+          <div class="st-benefit-title">Build Functional Capacity</div>
+          <div class="st-benefit-desc">Real-world strength that transfers to carrying, lifting, playing with kids, and performing at your best.</div>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ WHAT MAKES OMNIFIT DIFFERENT ════════════ -->
+    <section class="st-section">
+      <div class="st-section-head">
+        <span class="st-label">Our Approach</span>
+        <hr class="st-divider">
+        <h2>How OmniFit Strength Training Works</h2>
+      </div>
+
+      <div class="st-grid">
+        <article class="st-card">
+          <span class="st-card-icon">📋</span>
+          <h3>Assessment-First Programming</h3>
+          <p>Every program begins with a 45-minute movement and postural assessment. We identify limitations before we load anything.</p>
+          <ul class="st-card-features">
+            <li>Overhead squat &amp; single-leg analysis</li>
+            <li>Postural photo baseline</li>
+            <li>Full injury history review</li>
+          </ul>
+        </article>
+
+        <article class="st-card">
+          <span class="st-card-icon">📈</span>
+          <h3>Periodized Progression</h3>
+          <p>Structured 4–6 week training blocks with specific goals — not random workouts that change every session.</p>
+          <ul class="st-card-features">
+            <li>Phase-based programming</li>
+            <li>Progressive overload tracking</li>
+            <li>Deload weeks built in</li>
+          </ul>
+        </article>
+
+        <article class="st-card">
+          <span class="st-card-icon">🛡️</span>
+          <h3>Joint-Friendly by Design</h3>
+          <p>Corrective exercise warm-ups, 3/10 pain ceiling, and exercise selection that respects your body's history.</p>
+          <ul class="st-card-features">
+            <li>NASM CES &amp; ACE Orthopedic certified</li>
+            <li>Corrective warm-up every session</li>
+            <li>Pain-aware modifications</li>
+          </ul>
+        </article>
+
+        <article class="st-card">
+          <span class="st-card-icon">🥗</span>
+          <h3>Nutrition &amp; Recovery</h3>
+          <p>Strength gains require the right fuel. Calorie and protein targets are built into every program.</p>
+          <ul class="st-card-features">
+            <li>Custom calorie &amp; protein targets</li>
+            <li>Muscle-building nutrition framework</li>
+            <li>Sleep &amp; recovery coaching</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ WHO IT'S FOR ════════════ -->
+    <section class="st-section">
+      <div class="st-section-head">
+        <span class="st-label">Ideal Client</span>
+        <hr class="st-divider">
+        <h2>Who OmniFit Strength Training Is For</h2>
+      </div>
+
+      <div class="gq-block">
+        OmniFit strength training is designed for busy professionals between 30 and 55 who want to build or rebuild strength without the injury risk of random gym workouts or group classes. The typical client works a demanding desk job, may have old injuries or chronic joint discomfort, and needs a progressive program that respects their body while pushing them to improve. OmniFit is not a bodybuilding gym, a CrossFit box, or a bootcamp — it is structured, coached, corrective-first strength training for people who value their long-term health as much as their short-term results.
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ TRAINING OPTIONS ════════════ -->
+    <section class="st-section">
+      <div class="st-section-head">
+        <span class="st-label">Options</span>
+        <hr class="st-divider">
+        <h2>Strength Training in San Diego &amp; Online</h2>
+      </div>
+
+      <div class="st-grid" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+        <article class="st-card">
+          <span class="st-card-icon">📍</span>
+          <h3>In-Person — Pacific Beach</h3>
+          <p>Private 1-on-1 sessions at the Garnet Ave studio with full strength equipment — racks, cables, dumbbells, and specialty bars.</p>
+          <ul class="st-card-features">
+            <li>45–60 minute sessions</li>
+            <li>Outdoor sessions available</li>
+            <li>Serving PB, Mission Bay, OB, La Jolla</li>
+          </ul>
+        </article>
+
+        <article class="st-card">
+          <span class="st-card-icon">🖥️</span>
+          <h3>Virtual — Anywhere</h3>
+          <p>Live coached sessions via video with progressive programming adapted for your equipment. Part of the <a href="/the-30-minute-executive-reset">Executive Reset</a> or standalone.</p>
+          <ul class="st-card-features">
+            <li>Home gym, hotel, or minimal setup</li>
+            <li>Trainerize app programming</li>
+            <li>30 or 45-minute sessions</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ FAQ ════════════ -->
+    <section class="st-section">
+      <div class="st-section-head">
+        <span class="st-label">Questions</span>
+        <hr class="st-divider">
+        <h2>Strength Training FAQs</h2>
+      </div>
+
+      <div class="st-faq">
+        <div class="st-faq-item">
+          <div class="st-faq-q">How is OmniFit different from a regular personal trainer?</div>
+          <div class="st-faq-a">Most trainers design random workouts. OmniFit uses periodized programming with structured phases — each block builds on the last with specific goals. Every program includes a movement assessment, corrective exercise, nutrition coaching, and data-driven progress tracking.</div>
+        </div>
+        <div class="st-faq-item">
+          <div class="st-faq-q">Is this safe if I have old injuries or joint problems?</div>
+          <div class="st-faq-a">Yes. Every program begins with a movement assessment, and all training follows the 3/10 pain ceiling rule. As a NASM CES and ACE Orthopedic Exercise Specialist, Nemezio designs programming to build strength around limitations, not through them.</div>
+        </div>
+        <div class="st-faq-item">
+          <div class="st-faq-q">How often should I train?</div>
+          <div class="st-faq-a">Most clients train 2–3 times per week. This allows for progressive overload while providing adequate recovery — increasingly important after 30. Your frequency is set during consultation based on your goals and capacity.</div>
+        </div>
+        <div class="st-faq-item">
+          <div class="st-faq-q">Will strength training help me lose fat?</div>
+          <div class="st-faq-a">Yes. Strength training builds and preserves lean muscle, which increases metabolic rate. Combined with OmniFit's nutrition coaching, most clients see significant body composition changes within 8–12 weeks. See our dedicated <a href="/weight-loss">fat loss program</a> for more.</div>
+        </div>
+        <div class="st-faq-item">
+          <div class="st-faq-q">Is this the same as CrossFit or bodybuilding?</div>
+          <div class="st-faq-a">No. CrossFit prioritizes high-intensity, competition-driven workouts that can be hard on joints. Bodybuilding focuses on aesthetics and hypertrophy. OmniFit strength training is performance and function-focused — progressive, joint-friendly, and corrective-first.</div>
+        </div>
+        <div class="st-faq-item">
+          <div class="st-faq-q">Can I train virtually?</div>
+          <div class="st-faq-a">Yes. Virtual strength training includes live video sessions, progressive programming through Trainerize, and weekly accountability check-ins. Programs adapt to your equipment — home gym, hotel gym, or minimal setup.</div>
+        </div>
+        <div class="st-faq-item">
+          <div class="st-faq-q">What results can I expect?</div>
+          <div class="st-faq-a">Over 4–6 months: measurable increases in all major lifts, improved posture, reduced chronic pain, visible body composition changes, better energy, and the skills to train independently. Progress is tracked through <a href="/how-we-measure-your-progress">strength benchmarks, measurements, and photos</a>.</div>
+        </div>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- ════════════ BOTTOM CTA ════════════ -->
+    <div class="st-bottom">
+      <h2>Start Strength Training in San Diego</h2>
+      <p>
+        Book a 45-minute consultation and we'll assess your movement, review your training history, and build a strength program designed for your body, your goals, and your schedule.
+      </p>
+      <a class="st-btn st-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="st-bottom-note">Free 45-minute consultation (refundable deposit required) · No obligation</span>
+      <p style="margin-top: 16px; font-size: 14px; text-align: center;">
+        📍 <strong>Garnet Ave, Pacific Beach</strong> · Call/Text: <a href="tel:619-259-0630">619-259-0630</a> · In-Person &amp; Virtual
+      </p>
+    </div>
+
+    <!-- ════════════ TRUST BAR ════════════ -->
+    <div class="st-trust">
+      <div class="st-trust-item"><span>⭐</span> 5.0 · 133+ Reviews</div>
+      <div class="st-trust-item"><span>🏅</span> NASM CPT · CES · PES · BCS</div>
+      <div class="st-trust-item"><span>🎓</span> ACE Orthopedic Exercise Specialist</div>
+      <div class="st-trust-item"><span>📍</span> Pacific Beach, San Diego</div>
+      <div class="st-trust-item"><span>🖥️</span> Virtual Nationwide</div>
+    </div>
+
+    <!-- ════════════ HUB LINKS ════════════ -->
+    <div class="st-hub-links">
+      <strong>Explore OmniFit:</strong>
+      <a href="/personal-trainer-in-pacific-beach">Pacific Beach Training</a> ·
+      <a href="/the-omnifit-method">The OmniFit Method</a> ·
+      <a href="/how-it-works-pricing">How It Works &amp; Pricing</a> ·
+      <a href="/how-we-measure-your-progress">How We Measure Progress</a> ·
+      <a href="/the-30-minute-executive-reset">Executive Reset</a> ·
+      <a href="/corrective-exercise-post-rehab">Corrective / Post-Rehab</a> ·
+      <a href="/hiit-personal-trainer-san-diego">HIIT Training</a> ·
+      <a href="/weight-loss">Weight Loss</a> ·
+      <a href="/training-rates-san-diego">Rates</a>
+    </div>
+
+  </div>
+</div>
