@@ -1278,3 +1278,303 @@ compliance 0 · stale canon 0 · structure 0   →  PASSED   (30 files)
 Push or paste the nine pages. Everything else is ready: the canon pass, the Who This
 Is For sections, header generation, and the shape-based compliance patterns, which
 will be active from the first edit rather than retrofitted.
+
+---
+
+# Batch 3 — nine pages, full pass (August 2026)
+
+Branch `claude/omnfit-4s-ranch-location-mxek1x`. Nine pages: the-omnifit-method,
+how-we-measure-your-progress, omnifit-vs-competitors, weight-loss,
+strength-training-1, hiit-personal-trainer-san-diego, personal-training-services,
+body-composition-testing, partners.
+
+## Certification
+
+```
+### SCOPE: 48 certified, 4 not yet certified
+### (a) COMPLIANCE STRIKES   none
+### (b) STALE CANON          none
+### (c) BROKEN STRUCTURE     none
+### RESULT: PASSED  (compliance 0 · stale canon 0 · structure 0)
+```
+
+Invariants recomputed from the files (not cached), all matching CANON:
+
+```
+9-point          10 files   1 hash   bd73ea51bc9ec5eb   matches
+archetypes       10 files   1 hash   6b1b0f4efbd4a72c   matches
+credentials      10 files   1 hash   6492e3ca1545dc26   matches
+header pricing   11 files   1 hash   7e5de5984b133663   matches
+page pricing     11 files   1 hash   ae388d31c0b6149e   matches
+```
+
+## STOPPED — two items needing your decision
+
+### STOP-01 · The metric count cannot be reconciled without inventing product detail
+
+CANON says 12 metrics. `how-we-measure-your-progress.html` is the page that
+*enumerates* them, and it enumerates seven:
+
+```
+pages/how-we-measure-your-progress.html:168   "OmniFit tracks seven core progress metrics"
+pages/how-we-measure-your-progress.html:182   "the same seven standardized metrics"
+pages/how-we-measure-your-progress.html:184-190   Metric 01 … Metric 07  (seven cards)
+pages/how-we-measure-your-progress.html:251   "We track seven standardized metrics: …"
+```
+
+while the same page already says twelve in four other places (lines 197, 237, 255,
+256), and `the-omnifit-method.html:268` says *"across twelve metrics"* and then lists
+the same **seven** categories.
+
+The seven categories are: body composition, strength benchmarks, posture, mobility
+and joint function, session adherence, nutrition compliance, subjective well-being.
+
+I did not resolve this, because both available moves are wrong:
+
+- Changing "seven" to "twelve" leaves a page claiming twelve and showing seven cards.
+- Adding five metric cards means **inventing five products** you may not measure.
+- Reverting to "seven" everywhere contradicts CANON and five other certified pages.
+
+The likely explanation is that 12 counts individual *measures* and 7 counts
+*categories* (body composition alone covers weight, body-fat %, and circumference).
+If that's right, the fix is one sentence from you: either the list of 12, or
+confirmation that the pages should say "twelve metrics across seven categories".
+
+**Condition under which stopping was wrong:** if you consider the twelve already
+settled and enumerable from the existing seven, this cost you a round trip.
+
+### STOP-02 · `partners.html` offers a free training week that exists in no price list
+
+```
+pages/partners.html:1406   "Book Your Free Performance Week"
+```
+
+CANON's pricing has no free week, and the compliance screen bans free-consultation
+framing. This is a bigger giveaway than the framing that was banned. I left it
+exactly as-is rather than delete a promotion that might be real.
+
+It is the only instance in the repo. Tell me whether it is a live offer, and I will
+either keep it or replace the CTA with the canonical paid consultation.
+
+## Compliance: 22 strikes cleared
+
+All were the banned lbs-with-timeframe shape except one guarantee. The established
+Batch 2 precedent was applied throughout: **the pounds figure survives as a goal
+descriptor, the outcome timeframe is removed.**
+
+| Page | Strikes |
+|---|---|
+| the-omnifit-method | 1 |
+| how-we-measure-your-progress | 3 |
+| omnifit-vs-competitors | 8 |
+| weight-loss | 10 (9 lbs + 1 guarantee) |
+
+Representative pairs:
+
+```
+- typically produces sustainable 20–30 lb fat loss … over 4–6 months
++ built for busy professionals 30+ … working toward sustainable fat loss of 20–30 lbs
+
+- Realistic timeline … aiming for 20-30 lb fat loss:
+  • Weeks 5-8: First measurable fat loss (4-6 lbs)
+  • Weeks 9-16: Consistent 1-1.5 lbs/week fat loss
++ What the progression looks like … working toward sustainable fat loss:
+  • Weeks 5-8: First measurable change in body composition
+  • Weeks 9-16: Consistent downward trend in body composition
+
+- Lose 20–30 pounds in 4–6 months through structured training …   (hero H1 subhead)
++ Sustainable fat loss through structured training …
+
+- Programs that don't teach you … guarantee you'll need them forever
++ Programs that don't teach you … leave you needing them forever
+```
+
+The last one was a `guarantee` describing *competitors*, not an OmniFit promise, but
+the word sat inside a fat-loss block where no reader-side parser can tell the
+difference. Rewording cost nothing.
+
+`we treat` on how-we-measure was rewritten as instructed:
+
+```
+- At OmniFit, we treat your program like a performance system.
++ At OmniFit Performance, we approach your program like a performance system.
+```
+
+## Stale canon: 4 real pricing errors found, 14 false positives ruled out
+
+Two were caught by the rules; **two were found only by sweeping every dollar figure
+on all nine pages against CANON**, which I did because the targeted rules only know
+the specific tokens they were written for.
+
+```
+personal-training-services:337   $150–$175/session      → $165 studio · $195 in-home
+omnifit-vs-competitors:785       $600-1200/month        → $250–$1,625/month
+omnifit-vs-competitors:788       12-16 sessions (30 min) → 2-13 private 60-minute sessions
+omnifit-vs-competitors:896       $1200/month ÷ 16 sessions → Performance tier, $950 ÷ ~9
+```
+
+The session-length error is worth flagging: **30 minutes is the virtual Executive
+Reset format**, not in-person 1:1, which `corrective-exercise-post-rehab.html:859`
+already establishes as 60 minutes.
+
+Ruled out as legitimate: ten competitor figures inside `comp-value` blocks (F45,
+Equinox, big-box PT) and four third-party device costs on body-composition-testing
+(DEXA $100–200, gym scales $0–50, consumer devices $30–200).
+
+`$90 → $110` on body-composition-testing ran to 11 instances, not the 10 expected.
+Alongside it, per CANON's "rename settled": *OmniFit Performance Assessment* →
+**Performance Diagnostic**, and the credit scope tightened from "any training
+package" to "in full toward a 3-month package". I also removed *"making the
+assessment effectively free for clients who train with us"* — a full credit is not
+the same claim as free, and free-offer framing on a consultation-class product is
+what the screen exists to stop.
+
+## Structure
+
+Document-wrapper stripping, exactly what was removed:
+
+**omnifit-vs-competitors.html** — `<!DOCTYPE html>`, `<html lang="en">`, `<head>`,
+`<meta charset>`, `<meta viewport>`, `<title>`, `<meta description>`, fonts
+`<link>`, `</head>`, `<body>`, `</body>`, `</html>`.
+
+**partners.html** — the same, plus `<link rel="canonical">`, and the `<body>` tag
+carried `style="margin:0;padding:0;background:#0a1628"`.
+
+Two things were preserved rather than dropped:
+
+- On vs-competitors the **entire 423-line `<style>` block lived inside `<head>`**. A
+  naive head-strip deletes all the page CSS. My first attempt did exactly that and
+  crashed before writing (the fragment then had no `<style>` to anchor to), which is
+  the only reason it was caught. The style block is now re-emitted at the top of the
+  fragment.
+- Both pages loaded fonts via a `<head>` `<link>`, which cannot survive in a Code
+  Block. Each is now an `@import` at the top of the style block, matching every other
+  certified page.
+- The dropped `<body>` background on partners changes nothing: `#omnifit-partners`
+  already sets `background: var(--navy-deepest) !important`, the same `#0a1628`.
+
+SEO title, description, and canonical are preserved as `SQUARESPACE PAGE SETTINGS`
+comments at the top of each fragment, since they belong in page settings, not the
+Code Block.
+
+Schema extraction: **8 inline `ld+json` blocks** removed from page bodies —
+weight-loss 1, hiit 1, partners 6 — each page now carries a comment saying where the
+markup went.
+
+The partners `HealthAndBeautyBusiness` node was **not** carried into the header: it
+redefined the business (`@id …/#organization`, and on the wrong host — no `www`),
+which CANON forbids in a page header. The header references the homepage
+`#localbusiness-of` like every other page. The two `Person` nodes **were** carried
+over; they are partner facts that exist nowhere else.
+
+Partner details verified against the page body, nothing invented: Dr. Damien
+Jackson-Ricketts, DPT, OCS, of Stoke Physical Therapy, and Celeste Esposito, LMT, of
+Serenity Massage. Schema and prose agree.
+
+## Headers
+
+Nine generated. FAQ counts: method 6, how-we-measure 6, vs-competitors 7,
+weight-loss 8, strength 7, hiit 5, body-composition 8, partners 6.
+`personal-training-services` has **no FAQ section at all**, so its header carries
+WebPage and BreadcrumbList only — no empty FAQPage.
+
+Three pages' FAQs were invisible to the old extractor, which knew three markup
+patterns and needed five. vs-competitors uses `faq-question` divs and partners uses
+`op-faq-q` buttons; both reported **zero FAQs** before I checked the markup directly.
+Had I trusted the count, two headers would have shipped with their FAQs silently
+missing. The new extractor was regression-tested against **all 16 existing headers**
+and still mirrors every one.
+
+## Use Cases
+
+Added to all nine. The four card bodies are byte-identical to the private and
+in-home pages — sha256 `9f5c077075371e0d…`, matching the recorded invariant. Only
+the surrounding markup varies, because these pages use four different CSS
+conventions (`fl`/`st`/`hiit`/`sv`/`bc` standard framework, `s-mid`+`dg`/`mg` on the
+two dark pages, `comparison-grid` on vs-competitors, `op-*` on partners). Heading is
+"What People Come to Coaching For" rather than the private-page "…Private Coaching…".
+
+Verified against real CSS rather than assumed: only `bc` defines `-grid-2`, so the
+others use their base grid class; `op-partners-grid` is a plain container, not a
+grid, so the cards stack as the partner cards do.
+
+## HIIT
+
+Option 1 completed. Beyond the venue removals already reported, four residual
+outdoor references were still live and are now gone:
+
+```
+:561  "…in 4S Ranch, outdoors, or virtually"      → "…in your home across North County, or virtually"
+:569  "Studio, outdoor, or virtual"               → "Studio, in-home, or virtual"
+:663  "Studio or outdoor"                         → "Studio or in-home"
+:773  "What should I bring to an outdoor HIIT session?" → "…in-home HIIT session?"
+:659  <!-- PACIFIC BEACH LOCATIONS -->            → <!-- WHERE HIIT SESSIONS HAPPEN -->
+```
+
+The Pacific Beach comment banner is the notable one: the *content* under it had been
+replaced, but the banner survived and would have shipped a Pacific Beach reference
+into a file CANON says must have zero.
+
+## Judgment calls, each with the condition that makes it wrong
+
+1. **Kept the pounds figure, dropped the timeframe.** Follows Batch 2 precedent.
+   *Wrong if* you wanted pounds gone entirely from modality pages.
+
+2. **Rewrote the sample progress report** on how-we-measure rather than deleting it.
+   "Month 3 typically looks like… 225 → 204 lbs" is the strongest implied promise on
+   the page. It is now a labelled sample layout, with the two lbs rows showing what
+   is reported ("Weight & body-fat %", "Estimated 1RM") instead of a delta.
+   *Wrong if* those were real, defensible figures you wanted shown.
+
+3. **Removed "21.5 Pounds Lost"** from the client-outcomes block and dropped "at 4
+   Months" from its heading, replacing the stat with "12 Metrics Tracked Monthly".
+   *Wrong if* you have documentation for that average and want it public.
+
+4. **Renamed the assessment to Performance Diagnostic** on body-composition-testing.
+   CANON says "rename settled", but your instruction only said $90→$110.
+   *Wrong if* the rename is not meant to reach this page yet.
+
+5. **Derived the $110/session equivalent** on vs-competitors from the Performance
+   tier ($950 ÷ ~9 sessions/month at 2/week). *Wrong if* you count sessions per
+   month differently, which would shift the figure by a few dollars.
+
+6. **Left four outcome claims that carry a timeframe but no pounds**, because the
+   written screen bans lbs-with-timeframe specifically and I am not widening a rule
+   past what CANON says:
+   ```
+   how-we-measure:168        "achieves sustainable body recomposition results within 4–6 months"
+   how-we-measure:188/220    "90%+ session adherence", "87% Pain Reduction"
+   strength-training-1:323   "Over 4–6 months: measurable increases in all major lifts"
+   omnifit-vs-competitors:886 "measurable body composition changes within 6-8 weeks"
+   ```
+   `87% Pain Reduction` is the one I would look at hardest: it is an outcome stat in
+   the shape of a clinical result, published by a non-clinician. *Wrong if* you want
+   the screen read by intent rather than by letter, in which case say so and I will
+   widen it.
+
+## Certification rules changed this run
+
+Four changes, each negative-tested in both directions before use.
+
+1. **Timeframes must be quantified.** `years of inactivity` was firing the
+   lbs-with-timeframe rule against legitimate persona copy. A timeframe now counts
+   only when numerically bounded (`4-6 months`, `Weeks 5-8`, `Month 3`) or rate-framed
+   (`per week`, `/week`).
+
+2. **Contrastive timeframes are exempt.** `lose 20–30 pounds … Unlike 6-week
+   challenges` describes what OmniFit is *not*. The marker must sit within two words
+   of the timeframe, and **every other timeframe in the window is still checked** — so
+   `Lose 20-30 lbs in 6 months, not a 6-week challenge` still flags. That fixture is
+   in the suite specifically to prove the exemption cannot fail open.
+
+3. **Travel-fee rule tightened** from "`$50`/`$75` anywhere on a line mentioning
+   travel" to the figure being adjacent to the word. It was firing on
+   `$50-80/session … no travel support`.
+
+4. **`comp-value` blocks exempted** from the `$150`/`$175` check — competitor pricing
+   on a comparison page is not OmniFit pricing. Deliberately *not* a
+   range-based exemption, which would have hidden the real
+   `In-studio $150–$175/session` error on personal-training-services.
+
+Changes 2–4 all *narrow* the rules, which is the direction that risks failing open,
+so each carries a fixture proving a real violation in the same shape still flags.
