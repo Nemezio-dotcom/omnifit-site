@@ -1180,3 +1180,43 @@ literal grep is necessary but not sufficient: it catches known bad strings, neve
 bad *shapes*. Two of the five compliance strikes I found by eye during Batch 2 were
 of exactly these classes, which is why the patterns were worth adding rather than
 relying on manual reading.
+
+---
+
+# Certification simplified to three categories
+
+Em-dashes downgraded to a silent voice preference: no longer scanned, flagged, or
+reported. The four in `how-it-works-pricing.html` stay as they are. **DEFERRED-03
+was never created** — it was only ever proposed in conversation, so there was
+nothing to remove from CANON.
+
+Certification now reports exactly (a) compliance strikes, (b) stale canon,
+(c) broken structure. Anything else is a judgment call or handled silently.
+
+Three compliance shapes added beyond the two already present: free-consultation
+framing, prenatal/postpartum content, and uncertified specialty claims (asserting
+OmniFit diagnoses, treats, prescribes, cures, rehabilitates, or provides physical
+therapy or chiropractic). Negations and referral language are legal, so
+"OmniFit does not diagnose conditions" and "we refer you back to your physical
+therapist" both pass.
+
+Category (c) also gained two checks that were previously done by hand: HTML
+tag-balance, and header FAQPage mirroring the page FAQ in count, order and text.
+
+**19 compliance rule fixtures pass in both directions.** Two bugs were caught by
+those fixtures rather than in production:
+
+1. Negation sitting *inside* a match was missed, because the context window
+   excludes the match itself. "OmniFit does not diagnose" read as a claim.
+2. `NEGATED` lacked word boundaries, so the bare alternative `no` matched inside
+   **diag-no-se**, silently exempting every genuine "we diagnose" claim. A rule that
+   fails open is worse than no rule; the fixtures are what surfaced it.
+
+## Certification result
+
+```
+compliance 0 · stale canon 0 · structure 0   →  PASSED
+```
+
+30 files certified. Four remain uncertified: `training-rates-san-diego.html`,
+`the-30-minute-executive-reset.html` and its header, and `footer.html`.

@@ -101,43 +101,47 @@ COMPLIANCE SCREEN (attorney: strike on sight, any wave)
   refundable deposit.
 - No prenatal/postpartum content (uncertified). No Groupon/deal content.
 
-EM-DASH RULES (voice)
-- No em-dashes in rendered prose copy.
-- Legal exceptions: HTML comments; alt attributes; en-dashes in numeric
-  ranges; "— Name, Title" testimonial attributions; and "Name — one-line
-  descriptor" separators inside structured list items (e.g. the 9-point
-  movement screen), including when the label is tag-wrapped such as
-  <li><strong>Label</strong> — descriptor</li>; and CSS comments inside
-  <style>. A LABEL is a noun phrase, not a sentence: an item beginning with
-  a subject pronoun ("You want X — not Y", "This is Y — every time") is
-  PROSE and is a violation even though it starts with a capital. Tooling
-  must recognise every em-dash encoding: the literal character, &mdash;,
-  &#8212; and &#x2014;. Carve exceptions out by rule, never by hardcoded
-  line numbers, and negative-test both directions so genuine labels pass
-  and prose inside a list item is still caught.
+EM-DASH RULES (voice preference, NOT a compliance issue)
+- Do not scan for em-dashes. Do not flag them. Do not include them in
+  certification results. They are a house-style preference, not a finding.
+- Keep the sweep active only when already editing a page: new copy written
+  by a run should not contain em-dashes in prose. Existing ones stay.
+- The four in how-it-works-pricing.html stay as they are, by decision.
 
-CERTIFICATION GREP (zero hits expected)
-"OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
-"Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
-"free consultation" (any case) · "$90 " · "$225" · "$275" · "$299" ·
-"$500/mo" · "$599" · "$50"/"$75" as travel fees
-SHAPE-BASED COMPLIANCE PATTERNS (literal strings are not enough; both of
-these classes slipped past the grep in Batch 2)
-- GUARANTEE NEAR OUTCOME: any form of "guarantee" within ~30 words of an
-  outcome promise (stronger, leaner, energized, more in control, lose,
-  fat loss, transformation, results, pounds, lbs, body fat, inches).
-  DEFERRED-01 is exempt while listed.
-- LBS NEAR TIMEFRAME: any number followed by lbs/pounds within ~15 words of
-  a timeframe (day/week/month/year). Persona language with NO timeframe
-  stays legal, e.g. "needs to lose 20-30 lbs sustainably".
+CERTIFICATION — REPORTS EXACTLY THREE CATEGORIES, NOTHING ELSE
+A run reports (a) compliance strikes, (b) stale canon, (c) broken structure.
+Anything outside these is NOT a certification finding: report it as a
+judgment call if it needs a human decision, otherwise handle it silently.
 
-Exceptions: $150/$175 legal ONLY inside (a) the canonical pricing FAQ
-answer, (b) the card bullet "Fully virtual Executive Reset from
-$175/mo", (c) the canonical session-pack rungs confirmed Aug 2026
-($175/session for a 5-pack, $150 for a 10-pack, $135 for a 20-pack, with
-totals $875/$1,500/$2,700), and (d) the Executive Reset Bronze async
-tier at $175/mo. $150 or $175 used as a STUDIO PER-SESSION RATE is the
-retired era and remains a violation.
+(a) COMPLIANCE STRIKES — shape-based, not just literal strings
+  · outcome guarantees: any form of "guarantee" within ~30 words of an
+    outcome promise (stronger, leaner, energized, more in control, lose,
+    fat loss, transformation, results, pounds, lbs, body fat, inches)
+  · lbs/pounds within ~15 words of a timeframe (day/week/month/year).
+    Persona language with NO timeframe stays legal
+  · free-consultation framing: "free" within ~6 words of "consultation"
+  · prenatal / postpartum content, unless it is an explicit out-of-scope
+    disclaimer
+  · uncertified specialty claims: asserting OmniFit diagnoses, treats,
+    prescribes, cures, rehabilitates, or provides physical therapy or
+    chiropractic. Negations and referral language are legal
+  DEFERRED-01 is exempt while listed under KNOWN DEFERRED ITEMS.
+
+(b) STALE CANON
+  "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
+  "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
+  "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
+  "$50"/"$75" as travel fees.
+  $150/$175 legal ONLY inside (a) the canonical pricing FAQ answer,
+  (b) the card bullet "Fully virtual Executive Reset from $175/mo",
+  (c) the canonical pack rungs (5 @ $175, 10 @ $150, 20 @ $135, totals
+  $875/$1,500/$2,700), and (d) the Reset Bronze async tier at $175/mo.
+  $150 or $175 as a STUDIO PER-SESSION RATE is retired and a violation.
+
+(c) BROKEN STRUCTURE
+  invalid JSON · header FAQPage not mirroring the page FAQ in count, order
+  and text · invariant hash mismatch · HTML tag-balance failure ·
+  LocalBusiness redefined in a page header instead of referenced by @id.
 
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
