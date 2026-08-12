@@ -1,0 +1,266 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-progress {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --light-bg: #f4f5f7;
+    --light-text: #1a1a2e;
+    --light-muted: #555566;
+    --light-border: #e2e4e8;
+    --radius: 8px;
+    --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--white);
+    background: var(--navy);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+  }
+  #omni-progress *, #omni-progress *::before, #omni-progress *::after {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+
+  /* HERO */
+  #omni-progress .hero { padding: 80px 28px 60px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
+  #omni-progress .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-progress .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-progress .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-progress .hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-progress .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 620px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+  #omni-progress .creds { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
+  #omni-progress .cred { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid var(--white-20); border-radius: 100px; color: var(--white-50); letter-spacing: 0.8px; background: transparent; }
+
+  /* QUOTABLE */
+  #omni-progress .q-wrap { max-width: 860px; margin: 0 auto; padding: 0 28px 64px; }
+  #omni-progress .quotable { padding: 36px 40px; background: var(--navy-mid); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; line-height: 1.85; color: var(--white-70); }
+  #omni-progress .quotable strong { color: var(--white); font-weight: 600; }
+
+  /* SECTIONS */
+  #omni-progress .s-dark { background: var(--navy); padding: 72px 28px; }
+  #omni-progress .s-mid { background: var(--navy-mid); padding: 72px 28px; }
+  #omni-progress .s-light { background: var(--light-bg); padding: 72px 28px; }
+  #omni-progress .s-inner { max-width: 880px; margin: 0 auto; }
+  #omni-progress .s-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+  #omni-progress .s-light .s-label { color: #8b7832; }
+  #omni-progress .gold-line { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 0 24px; border-radius: 2px; }
+  #omni-progress h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-progress .s-light h2 { color: var(--light-text); }
+  #omni-progress p { font-family: 'Montserrat', sans-serif !important; margin-bottom: 18px; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+  #omni-progress .s-light p { color: var(--light-muted); }
+  #omni-progress h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-progress h4 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-progress a { color: var(--gold); text-decoration: none; }
+
+  /* METRICS GRID */
+  #omni-progress .mg { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 18px; margin: 44px 0 0; }
+  #omni-progress .mc { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 30px 26px; transition: all 0.4s; position: relative; overflow: hidden; }
+  #omni-progress .mc::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); opacity: 0; transition: opacity 0.4s; }
+  #omni-progress .mc:hover { border-color: var(--gold); background: var(--navy-surface); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-progress .mc:hover::after { opacity: 1; }
+  #omni-progress .mc-num { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  #omni-progress .mc h4 { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); }
+  #omni-progress .mc p { font-size: 14px; line-height: 1.7; color: var(--white-50); margin: 0; }
+
+  /* OUTCOMES */
+  #omni-progress .ob { background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-surface) 100%); border: 1px solid var(--white-10); padding: 52px 36px; margin: 48px 0 0; border-radius: var(--radius-lg); }
+  #omni-progress .ob h3 { color: var(--white); text-align: center; font-family: 'Playfair Display', serif !important; font-size: 24px; margin-bottom: 36px; }
+  #omni-progress .og { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 28px; max-width: 700px; margin: 0 auto; }
+  #omni-progress .os { text-align: center; }
+  #omni-progress .os .num { font-family: 'Playfair Display', serif !important; font-size: 42px; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 8px; }
+  #omni-progress .os .lbl { font-family: 'Montserrat', sans-serif !important; font-size: 10px; color: var(--white-50); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+  #omni-progress .ob-note { text-align: center; font-size: 12px; color: var(--white-50); margin-top: 28px; font-style: italic; }
+
+  /* REPORT MOCKUP */
+  #omni-progress .rm { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 36px; margin: 40px 0 0; }
+  #omni-progress .rm-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid var(--white-10); margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  #omni-progress .rm-head h4 { font-family: 'Playfair Display', serif !important; font-size: 20px; font-weight: 600; color: var(--white); }
+  #omni-progress .rm-badge { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 5px 14px; background: var(--gold-dim); color: var(--gold); border-radius: 100px; letter-spacing: 0.5px; }
+  #omni-progress .rr { display: flex; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--white-05); gap: 16px; flex-wrap: wrap; }
+  #omni-progress .rr:last-child { border-bottom: none; }
+  #omni-progress .rr-name { flex: 1; min-width: 140px; font-family: 'Montserrat', sans-serif !important; font-weight: 600; font-size: 14px; color: var(--white-90); }
+  #omni-progress .rr-bar { flex: 2; min-width: 160px; height: 6px; background: var(--white-10); border-radius: 100px; overflow: hidden; }
+  #omni-progress .rr-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  #omni-progress .rr-val { flex: 0 0 130px; text-align: right; font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); font-weight: 500; }
+  #omni-progress .rr-val .cur { font-weight: 700; color: var(--gold); }
+
+  /* COMPARISON TABLE */
+  #omni-progress .ct-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; border-radius: var(--radius-lg); border: 1px solid var(--light-border); }
+  #omni-progress .ct { width: 100%; border-collapse: collapse; font-size: 14px; font-family: 'Montserrat', sans-serif !important; margin: 0; min-width: 540px; }
+  #omni-progress .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--white-70); border-bottom: 2px solid var(--gold); }
+  #omni-progress .ct th:first-child { border-radius: var(--radius) 0 0 0; }
+  #omni-progress .ct th:last-child { border-radius: 0 var(--radius) 0 0; }
+  #omni-progress .ct td { padding: 16px 18px; border-bottom: 1px solid var(--light-border); color: var(--light-muted); font-family: 'Montserrat', sans-serif !important; }
+  #omni-progress .ct tr:last-child td { border-bottom: none; }
+  #omni-progress .ct tr:hover td { background: rgba(201,168,76,0.04); }
+  #omni-progress .chk { color: #1a7a4c; font-weight: 600; }
+  #omni-progress .xm { color: #bbb; }
+
+  /* FAQ */
+  #omni-progress .fi { border-bottom: 1px solid var(--white-10); }
+  #omni-progress .fq { width: 100%; background: none; border: none; text-align: left; padding: 28px 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; font-weight: 600; color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; line-height: 1.5; transition: color 0.3s; }
+  #omni-progress .fq:hover { color: var(--gold); }
+  #omni-progress .fi-icon { flex-shrink: 0; width: 28px; height: 28px; border: 2px solid var(--white-20); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--white-50); transition: all 0.3s; font-family: 'Montserrat', sans-serif !important; }
+  #omni-progress .fi.open .fi-icon { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: rotate(45deg); }
+  #omni-progress .fa { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s ease; }
+  #omni-progress .fi.open .fa { max-height: 400px; padding-bottom: 28px; }
+  #omni-progress .fa p { font-size: 15px; color: var(--white-50); line-height: 1.8; margin: 0; }
+
+  /* CTA */
+  #omni-progress .cta { background: var(--navy-mid); padding: 80px 28px; text-align: center; position: relative; overflow: hidden; }
+  #omni-progress .cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%); pointer-events: none; opacity: 0.2; }
+  #omni-progress .cta h2 { color: var(--white); font-size: clamp(28px, 4vw, 38px); margin-bottom: 16px; position: relative; }
+  #omni-progress .cta p { color: var(--white-50); font-size: 16px; max-width: 520px; margin: 0 auto 36px; position: relative; }
+  #omni-progress .cta-btn { display: inline-block; padding: 16px 44px; background: var(--gold); color: var(--navy); text-decoration: none; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: var(--radius); transition: all 0.3s; position: relative; }
+  #omni-progress .cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-progress .cta-note { display: block; margin-top: 16px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); position: relative; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    #omni-progress .hero { padding: 56px 20px 44px; }
+    #omni-progress .s-dark, #omni-progress .s-mid, #omni-progress .s-light { padding: 52px 20px; }
+    #omni-progress .q-wrap { padding: 0 20px 44px; }
+    #omni-progress .quotable { padding: 24px 20px; }
+    #omni-progress .rm { padding: 24px 20px; }
+    #omni-progress .rr { flex-direction: column; align-items: flex-start; }
+    #omni-progress .rr-val { text-align: left; flex: none; }
+    #omni-progress .rr-bar { width: 100%; }
+    #omni-progress .og { grid-template-columns: repeat(2, 1fr); }
+    #omni-progress .ct { font-size: 13px; }
+    #omni-progress .ct th, #omni-progress .ct td { padding: 12px 10px; }
+    #omni-progress .cta { padding: 52px 20px; }
+  }
+  @media (max-width: 480px) {
+    #omni-progress .mg { grid-template-columns: 1fr; }
+    #omni-progress .og { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  }
+</style>
+
+<div id="omni-progress">
+
+  <section class="hero">
+    <span class="hero-badge">Data-Driven Personal Training</span>
+    <h1>How We Measure<br><em>Your Progress</em></h1>
+    <p class="hero-sub">Every OmniFit program is built on measurable data — not guesswork. Here's the framework we use to track, evaluate, and optimize results for busy professionals 30+ in San Diego.</p>
+    <div class="creds">
+      <span class="cred">NASM CPT</span><span class="cred">NASM CES</span><span class="cred">NASM PES</span><span class="cred">NASM CNC</span><span class="cred">NASM BCS</span><span class="cred">ACE CES</span>
+    </div>
+  </section>
+
+  <div class="q-wrap"><div class="quotable">
+    <strong>OmniFit tracks seven core progress metrics for every client</strong>, including body composition changes, strength benchmarks, posture assessment scores, mobility function tests, session adherence rate, nutrition compliance, and subjective well-being — with formal progress reports delivered every 30 days. This data-driven approach ensures no guesswork: each program adjustment is based on measurable trends rather than subjective impressions. The average OmniFit client — typically a busy professional aged 30–55 — achieves sustainable body recomposition results within 4–6 months while maintaining a 90%+ session adherence rate through the hybrid coaching system.
+  </div></div>
+
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">The Problem</span><hr class="gold-line">
+    <h2>Why Most Personal Training Fails: The Measurement Gap</h2>
+    <p>Most personal trainers operate on feel. Sessions are "tough," you're told you're "making progress," and the scale becomes the only benchmark. But scale weight alone misses the real picture — and without structured data, neither you nor your trainer can tell whether the program is actually working or needs adjustment.</p>
+    <p>At OmniFit, we treat your program like a performance system. Every metric has a baseline, a target, and a 30-day trend. If something stalls, we see it in the data before you feel it — and we adjust the program before you waste a single week.</p>
+    <p>This is what separates structured coaching from random workouts. And it's why our clients see sustainable 20–30 lb fat loss in 4–6 months while other programs produce short bursts of progress followed by rebounds.</p>
+  </div></section>
+
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">The Framework</span><hr class="gold-line">
+    <h2>The 7 Metrics We Track for Every Client</h2>
+    <p>Whether you train in-person at our Pacific Beach studio or through Executive Hybrid Coaching, every OmniFit client is evaluated across the same seven standardized metrics.</p>
+    <div class="mg">
+      <div class="mc"><div class="mc-num">Metric 01</div><h4>Body Composition</h4><p>Tape measurements at 7 sites, body fat estimates, and circumference tracking. We never rely on scale weight alone — because gaining muscle while losing fat doesn't always show on the scale.</p></div>
+      <div class="mc"><div class="mc-num">Metric 02</div><h4>Strength Benchmarks</h4><p>Key compound lift performance (deadlift, squat, press, row), grip strength, and relative strength ratios. Tracked monthly to ensure progressive overload is actually happening.</p></div>
+      <div class="mc"><div class="mc-num">Metric 03</div><h4>Posture Assessment</h4><p>Quarterly posture photos with structured scoring for upper cross syndrome, anterior pelvic tilt, and thoracic kyphosis. Critical for desk-bound professionals with chronic pain.</p></div>
+      <div class="mc"><div class="mc-num">Metric 04</div><h4>Mobility &amp; Joint Function</h4><p>Active range of motion tests for shoulders, hips, ankles, and thoracic spine. Tracked to ensure corrective exercise produces real, functional improvement.</p></div>
+      <div class="mc"><div class="mc-num">Metric 05</div><h4>Session Adherence</h4><p>Percentage of scheduled sessions completed each month — including virtual and travel sessions. The #1 predictor of results. Our average client maintains 90%+ adherence.</p></div>
+      <div class="mc"><div class="mc-num">Metric 06</div><h4>Nutrition Compliance</h4><p>Weekly tracking of agreed-upon nutrition habits — protein intake, meal frequency, hydration, and behavior-change targets. Measured as percentage of weekly goals hit.</p></div>
+      <div class="mc"><div class="mc-num">Metric 07</div><h4>Subjective Well-Being</h4><p>Self-reported energy, sleep quality, stress levels, and confidence — rated weekly. This captures what numbers can't and flags overtraining before it derails progress.</p></div>
+    </div>
+  </div></section>
+
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">Example</span><hr class="gold-line">
+    <h2>What a 90-Day Progress Report Looks Like</h2>
+    <p>Every 30 days, you receive a formal progress report with trend data across all seven metrics. Here's what Month 3 typically looks like for an executive client:</p>
+    <div class="rm">
+      <div class="rm-head"><h4>OmniFit Progress Report — Month 3</h4><span class="rm-badge">Executive, 42 · Goal: Recomposition</span></div>
+      <div class="rr"><span class="rr-name">Body Composition</span><div class="rr-bar"><div class="rr-fill" style="width:78%"></div></div><span class="rr-val">225 → <span class="cur">204 lbs</span></span></div>
+      <div class="rr"><span class="rr-name">Deadlift (1RM est.)</span><div class="rr-bar"><div class="rr-fill" style="width:85%"></div></div><span class="rr-val">135 → <span class="cur">225 lbs</span></span></div>
+      <div class="rr"><span class="rr-name">Posture Score</span><div class="rr-bar"><div class="rr-fill" style="width:75%"></div></div><span class="rr-val">4/10 → <span class="cur">7.5/10</span></span></div>
+      <div class="rr"><span class="rr-name">Shoulder ROM</span><div class="rr-bar"><div class="rr-fill" style="width:70%"></div></div><span class="rr-val">140° → <span class="cur">168°</span></span></div>
+      <div class="rr"><span class="rr-name">Session Adherence</span><div class="rr-bar"><div class="rr-fill" style="width:94%"></div></div><span class="rr-val"><span class="cur">94%</span></span></div>
+      <div class="rr"><span class="rr-name">Nutrition Compliance</span><div class="rr-bar"><div class="rr-fill" style="width:87%"></div></div><span class="rr-val"><span class="cur">87%</span></span></div>
+      <div class="rr"><span class="rr-name">Energy / Well-Being</span><div class="rr-bar"><div class="rr-fill" style="width:82%"></div></div><span class="rr-val">4/10 → <span class="cur">8/10</span></span></div>
+    </div>
+    <p style="font-size:13px;color:var(--white-50);font-style:italic;margin-top:20px">Sample based on anonymized aggregate client data. Individual results vary based on adherence, starting point, and lifestyle factors.</p>
+  </div></section>
+
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">Results</span><hr class="gold-line">
+    <h2>How Our Clients Progress</h2>
+    <p>Anonymized averages across OmniFit clients who completed 4+ months of structured coaching.</p>
+    <div class="ob">
+      <h3>Average Client Outcomes at 4 Months</h3>
+      <div class="og">
+        <div class="os"><span class="num">21.5</span><span class="lbl">Pounds Lost</span></div>
+        <div class="os"><span class="num">92%</span><span class="lbl">Session Adherence</span></div>
+        <div class="os"><span class="num">+65%</span><span class="lbl">Strength Gains</span></div>
+        <div class="os"><span class="num">87%</span><span class="lbl">Pain Reduction</span></div>
+        <div class="os"><span class="num">4.9</span><span class="lbl">Client Rating / 5.0</span></div>
+      </div>
+      <p class="ob-note">Based on clients completing 4+ month programs. Individual results vary.</p>
+    </div>
+  </div></section>
+
+  <section class="s-light"><div class="s-inner">
+    <span class="s-label">The Difference</span><hr class="gold-line">
+    <h2>Data-Driven vs. Random Training</h2>
+    <p>Most personal training follows a pattern: show up, do a workout, repeat. Here's how OmniFit compares:</p>
+    <div class="ct-wrap">
+    <table class="ct">
+      <thead><tr><th>Element</th><th>OmniFit</th><th>Typical Trainer</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline assessment</td><td><span class="chk">✓ 45-min movement + lifestyle screen</span></td><td><span class="xm">Brief or skipped</span></td></tr>
+        <tr><td>Standardized metrics</td><td><span class="chk">✓ 7 metrics tracked monthly</span></td><td><span class="xm">Scale weight only</span></td></tr>
+        <tr><td>Progress reports</td><td><span class="chk">✓ Formal 30-day reports with trends</span></td><td><span class="xm">Verbal ("you look great")</span></td></tr>
+        <tr><td>Program adjustments</td><td><span class="chk">✓ Data-driven every 4 weeks</span></td><td><span class="xm">When client complains</span></td></tr>
+        <tr><td>Posture tracking</td><td><span class="chk">✓ Quarterly scored photos</span></td><td><span class="xm">Not measured</span></td></tr>
+        <tr><td>Adherence monitoring</td><td><span class="chk">✓ Session + nutrition + habit %</span></td><td><span class="xm">No system</span></td></tr>
+        <tr><td>Well-being tracking</td><td><span class="chk">✓ Weekly energy/sleep/stress ratings</span></td><td><span class="xm">"How do you feel?"</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div></section>
+
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">Common Questions</span><hr class="gold-line">
+    <h2>Frequently Asked Questions</h2>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How does OmniFit track client progress?<span class="fi-icon">+</span></button><div class="fa"><p>We track seven standardized metrics: body composition, strength benchmarks, posture scores, mobility function, session adherence, nutrition compliance, and subjective well-being. Formal progress reports are delivered every 30 days with trend analysis and program recommendations.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How often do I get a progress report?<span class="fi-icon">+</span></button><div class="fa"><p>Every 30 days. Each report includes your current metrics, trend data compared to your baseline, and specific recommendations for the next training phase. You also receive weekly check-in summaries through the OmniFit app.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Do I need to log everything myself?<span class="fi-icon">+</span></button><div class="fa"><p>We keep it simple. Your coach handles most tracking during sessions. Your main responsibility is weekly nutrition habit check-ins (takes 2–3 minutes) and honest well-being ratings. We designed the system for busy professionals — not data analysts.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What if I'm not making progress on a metric?<span class="fi-icon">+</span></button><div class="fa"><p>That's exactly why we measure. If a metric stalls, we identify the cause in the 30-day review — training volume, recovery, nutrition, sleep, or stress — and adjust the program before you waste another month on something that isn't working.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How is this different from what I'd get with another trainer?<span class="fi-icon">+</span></button><div class="fa"><p>Most trainers use subjective assessment or scale weight as their only benchmark. OmniFit's seven-metric framework captures body composition, performance, structural health, adherence, and well-being. Every program adjustment is based on trend data, not opinions.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Can virtual/hybrid clients get the same level of tracking?<span class="fi-icon">+</span></button><div class="fa"><p>Yes. Executive Hybrid Coaching clients follow the same seven-metric framework. Body composition is tracked via self-measurement with video guidance, posture photos are submitted through the app, and all other metrics are managed through our coaching platform.</p></div></div>
+  </div></section>
+
+  <section class="cta">
+    <h2>See What Your Progress<br>Report Could Look Like</h2>
+    <p>Book a free 45-minute assessment and get your baseline metrics. No commitment. Just clarity on where you stand.</p>
+    <a href="https://calendly.com/nemezio-omnifittraining/45min" class="cta-btn">Book Your Free Assessment</a>
+    <span class="cta-note">45-minute consultation · No commitment · Personalized plan discussion</span>
+  </section>
+
+</div>
