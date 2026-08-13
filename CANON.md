@@ -105,6 +105,21 @@ COMPLIANCE SCREEN (attorney: strike on sight, any wave)
 - No free-consultation framing. Consultation = 45 minutes, $30
   refundable deposit.
 - No prenatal/postpartum content (uncertified). No Groupon/deal content.
+- No quantified clinical-shaped outcome statistics. A percentage or figure
+  attached to a clinical result — pain, injury, recovery, healing,
+  rehabilitation, range of motion presented as a health outcome — is banned
+  whether or not it carries a timeframe, and whether or not it is averaged
+  or disclaimed ("87% Pain Reduction", "reduced chronic pain in 90% of
+  clients"). A non-clinician publishing a clinical result rate is the
+  exposure, not the timeframe. Behavioural and business stats are NOT
+  clinical and stay: session adherence, nutrition compliance, client
+  rating, review count, retention. Performance stats (strength, body
+  composition) stay only WITHOUT a timeframe.
+- No outcome claims that pair a result with a promised window, in any
+  units. The lbs-with-timeframe rule is the specific case; the general
+  rule is that the result must be framed against the client's own
+  baseline, never against a calendar ("measurable body composition
+  changes within 6-8 weeks", "Over 4-6 months: measurable increases").
 
 EM-DASH RULES (voice preference, NOT a compliance issue)
 - Do not scan for em-dashes. Do not flag them. Do not include them in
