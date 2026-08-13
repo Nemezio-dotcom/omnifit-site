@@ -4,7 +4,12 @@ REPO STATE
 - main = paste source. Certified: 10 territory pages,
   corrective-exercise-post-rehab, FAQs, how-it-works-pricing,
   in-home-personal-trainer-san-diego, private-personal-trainer-san-diego,
+  and the 9 Batch 3 pages — the-omnifit-method,
+  how-we-measure-your-progress, omnifit-vs-competitors, weight-loss,
+  strength-training-1, hiit-personal-trainer-san-diego,
+  personal-training-services, body-composition-testing, partners —
   each with a header under pages/headers/<slug>-header.html.
+  25 page/header pairs in total.
   NOT YET CERTIFIED, do not paste:
   · training-rates-san-diego.html and the-30-minute-executive-reset.html —
     the REPO COPIES ARE STALE RELATIVE TO PRODUCTION. The live versions on
