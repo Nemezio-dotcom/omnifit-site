@@ -31,6 +31,13 @@ WORKFLOW RULES
   reported with the condition under which it would be wrong.
 - Every run ends with: certification grep, invariant hashes, REPORT.md
   update, per-file commits, summary table.
+- The rules in this brief are ENCODED IN tools/ (certify.py, faq.py,
+  mkheaders.py, README.md). Run `python3 tools/certify.py` from the repo
+  root; do not rebuild the rules from scratch. If a rule is wrong, fix it
+  in tools/ and update this brief in the same commit so the two stay in
+  step. tools/README.md records the three checks that have reported
+  success while not actually looking — negative-test every rule change in
+  both directions before trusting it.
 - CONTRACT VALUE CHECK (counsel condition, Andrew Flores, Aug 2026):
   before filing a client on any contract whose total exceeds $4,400,
   contact counsel first. This is a workflow step, not a pricing cap, and it

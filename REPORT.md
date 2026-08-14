@@ -1578,3 +1578,168 @@ Four changes, each negative-tested in both directions before use.
 
 Changes 2–4 all *narrow* the rules, which is the direction that risks failing open,
 so each carries a fixture proving a real violation in the same shape still flags.
+
+---
+
+# Consultation correction + rule gap (August 2026)
+
+Triggered by a human correction, not by a certification failure. That is the
+finding: **the strike had already passed my own certification that morning.**
+
+## The three checks that reported success while not looking
+
+Recorded here because it is now a pattern, not an incident. All three are closed,
+and `tools/README.md` carries the lesson forward.
+
+| # | Check | Reported | Actually true |
+|---|---|---|---|
+| 1 | Header regression | "every header mirrors its page" | Compared **questions only**, never answers |
+| 2 | Header re-mirror | "7 answers re-mirrored" | Wrote `null` over all 7, destroying the canonical pricing block |
+| 3 | Free-framing rule | how-we-measure **certified clean** | Page said `free 45-minute assessment`; rule only knew the literal word `consultation` |
+
+**#2 is the most serious**: a script I wrote silently replaced seven real answers
+with `null`, including the canonical pricing block that is a hash-verified
+invariant. It was caught by reading the diff, not by any check. The cause was the
+FAQ extractor missing the `-faq-body` answer pattern used by every territory page
+— a missing pattern does not raise, it yields a question with no answer. Reverted
+from git; `qa_strict()` now refuses to emit a null answer at all.
+
+**#3 is the reason for this run.** A literal-string rule is only as wide as the
+vocabulary someone happened to think of. The page did not say "consultation", so
+nothing fired.
+
+The shared shape: a green result is worth nothing until the check has been seen to
+fail on purpose. Every rule touched in this run was negative-tested in both
+directions, and the new answer-mirror check was verified by deliberately
+tampering with a header answer and confirming it was caught.
+
+## TASK 1 — the strike
+
+`pages/how-we-measure-your-progress.html`, inside `<section class="cta">`:
+
+```
+- Book a free 45-minute assessment and get your baseline metrics. No commitment. Just clarity on where you stand.
++ Book a paid 45-minute consultation, by video or phone. A $30 refundable deposit reserves your time. No commitment beyond that, just clarity on where you stand.
+- Book Your Assessment          (anchor text; href unchanged)
++ Book Your Consultation
+```
+
+Two faults in one sentence: free-framing, and conflating the consultation with
+the $110 Performance Diagnostic.
+
+**Correction to the task's premise, verified rather than assumed:** that header
+*does* carry a FAQPage (6 Q/A pairs). The stated reason for skipping the
+re-mirror was wrong, but the conclusion holds — the header contains neither
+`free` (0 occurrences) nor `Book Your Assessment` (0), because the CTA is not
+part of the FAQ. No re-mirror required.
+
+## TASK 2 — the widened rule
+
+CANON (a) free-framing now reads: `free` within ~6 words of **consultation ·
+assessment · screen · screening · session · diagnostic · call · intake**.
+
+Negative-tested both directions. The old string flags; the replacement passes.
+Two exemptions were needed once the rule met real copy, each tested:
+
+- `feel free` — idiom, exempt only when "feel" immediately precedes, so
+  `Book a free session` still flags.
+- **hyphenated compound adjectives** — `distraction-free`, `injury-free`,
+  `pain-free`. A real offer is written unhyphenated.
+
+### Sweep across all files
+
+The user reported exactly one instance, found by grep from outside the repo. My
+sweep found **two more**, and both were rule defects rather than content:
+
+```
+pages/personal-trainer-4s-ranch.html:839   "every session happens in a private, distraction-free space"
+pages/personal-trainer-carlsbad.html:210   "...and injury-free. Assessment-Driven Precision"
+```
+
+Neither is an offer. **No content was changed on either page** — the rule was
+corrected instead. Hits in `CANON.md` and `REPORT.md` are the rule text and this
+report describing themselves; documentation is not in certification scope.
+
+After the TASK 1 fix: **0 free-framing hits across all 52 page/header files.**
+
+## TASK 3 — consultation delivery mode
+
+CANON now records: 45 minutes, always video or phone, never in person, preceded
+by a client intake form, $30 refundable deposit, and **not** the movement screen.
+
+`pages/corrective-exercise-post-rehab.html`, three edits. Neither CTA note sits
+inside a FAQ answer and the header contains none of the strings, so **no
+re-mirror was required** — verified, not assumed.
+
+```
+- 45-minute consultation · Includes movement assessment · No obligation        (:534)
+- 45-minute consultation · Movement assessment included · No obligation        (:1063)
++ 45-minute consultation by video or phone · Movement screen booked separately · No obligation
+```
+
+Third edit, one line above the second CTA note, the same conflation in prose:
+
+```
+- We'll assess your movement, review your history, and build a corrective plan designed for your body.
++ We'll review your history and goals, and map out the corrective plan; the in-person movement screen is booked separately as part of the $110 Performance Diagnostic.
+```
+
+## STOPPED — the same conflation is inside a hash-verified invariant
+
+Not fixed. Reporting and stopping, per workflow rules.
+
+The credentials block contains:
+
+> "Every program he builds starts with a **45-minute movement assessment** and
+> follows the Assess, Correct, Build, Sustain framework..."
+
+The 45 minutes belongs to the virtual consultation; the movement assessment is
+the separate in-person Diagnostic. This is exactly what the new CANON line bans,
+and it is **inside the 630-byte credentials invariant, hash `6492e3ca1545dc26`**.
+
+14 pages carry the string; 10 of those are the invariant block:
+
+```
+inside credentials invariant (10):
+  pages/corrective-exercise-post-rehab.html:830
+  pages/personal-trainer-carlsbad.html:210        pages/personal-trainer-carmel-valley.html:282
+  pages/personal-trainer-del-mar.html:318         pages/personal-trainer-encinitas.html:208
+  pages/personal-trainer-fairbanks-ranch.html:282 pages/personal-trainer-la-jolla.html:335
+  pages/personal-trainer-rancho-santa-fe.html:303 pages/personal-trainer-santaluz.html:210
+  pages/personal-trainer-solana-beach.html:282
+outside the invariant (4):
+  pages/omnifit-vs-competitors.html:843,927       pages/personal-trainer-4s-ranch.html:690
+  pages/strength-training-1.html:142              pages/the-30-minute-executive-reset.html:454
+```
+
+Fixing it means editing 14 pages, re-hashing the credentials invariant, and
+updating CANON in the same commit — and it would put all 10 territory pages back
+on the re-paste list. That is a decision, not a cleanup.
+
+## Where intake-form copy would belong
+
+Flagged only, not added, as instructed. The natural homes are the pages that
+already describe booking: `how-it-works-pricing` (the process section),
+`FAQs` (a "what happens after I book" answer), `the-omnifit-method` (Step 1, the
+45-minute video consultation), and the CTA notes on the territory pages. The
+territory-page CTA notes are the highest-value spot and the highest-cost, since
+they would re-paste all ten.
+
+## TASK 4 — tooling versioned
+
+`tools/certify.py`, `tools/faq.py`, `tools/mkheaders.py`, `tools/README.md`.
+CANON WORKFLOW RULES now points runs at it.
+
+Two defects fixed in the move, both of which had been masked by monkeypatching:
+
+- `certify.py` carried its **own three-pattern** FAQ extractor and was being
+  patched at runtime to use the six-pattern one. It now imports `faq.py`, so
+  certification and header generation cannot disagree about what a page's FAQ is.
+- The mirror check compared **questions only**. CANON (c) requires "count, order
+  **and text**", so answers were never checked — the same blind spot as incident
+  #1, sitting in the certification tool itself. Answers are now compared, with
+  whitespace normalised before punctuation (stripping `<a>` tags leaves a space
+  before the period; that is an extraction artifact, not a mirroring failure).
+
+Verified by tampering with one answer in the del-mar header and confirming
+`[FAQPage answers do not mirror page] differing index=[1]`, then restoring.
