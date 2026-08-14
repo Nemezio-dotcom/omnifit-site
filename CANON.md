@@ -58,6 +58,12 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   ($90 is the retired name-era price). $90 assessment = confirmed same
   product as the $110 Performance Diagnostic; rename settled. Deposit
   $30 refundable.
+- Consultation: 45 minutes, ALWAYS by video or phone, never in person.
+  Preceded by a client intake form. $30 refundable deposit. The
+  consultation is NOT the movement screen: the $110 Performance
+  Diagnostic is a separate in-person session, credited in full toward a
+  3-month package. Copy must not describe the consultation as producing
+  baseline metrics, body composition, or a movement assessment.
   Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
   Performance 950/1100, Peak 1395/1625. Upfront on a 3-month program =
   3 × the 3-month monthly rate, no discount: 750 / 1,425 / 2,850 / 4,185.
@@ -144,7 +150,9 @@ judgment call if it needs a human decision, otherwise handle it silently.
     fat loss, transformation, results, pounds, lbs, body fat, inches)
   · lbs/pounds within ~15 words of a timeframe (day/week/month/year).
     Persona language with NO timeframe stays legal
-  · free-consultation framing: "free" within ~6 words of "consultation"
+  · free-consultation framing: "free" within ~6 words of any of
+    consultation · assessment · screen · screening · session ·
+    diagnostic · call · intake
   · prenatal / postpartum content, unless it is an explicit out-of-scope
     disclaimer
   · uncertified specialty claims: asserting OmniFit diagnoses, treats,
