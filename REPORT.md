@@ -1743,3 +1743,236 @@ Two defects fixed in the move, both of which had been masked by monkeypatching:
 
 Verified by tampering with one answer in the del-mar header and confirming
 `[FAQPage answers do not mirror page] differing index=[1]`, then restoring.
+
+---
+
+# Rates Page Correction + Canon Pack Fix (August 2026)
+
+`training-rates-san-diego.html` corrected and certified in. CANON's session-pack
+line — wrong, not the live page — fixed first, since TASK 1 explicitly said so.
+
+## TASK 1 — CANON's pack line was the error, not the page
+
+CANON had a single ladder (5 @ $175, 10 @ $150, 20 @ $135) that turned out to be
+a mangled merge: the in-home 5-pack rung and the studio 20-pack rung, with the
+other four lost. The live page uses two ladders by venue:
+
+```
+Studio  — 5 @ 145/session (725) · 10 @ 140 (1,400) · 20 @ 135 (2,700)
+In-home — 5 @ 175/session (875) · 10 @ 170 (1,700) · 20 @ 165 (3,300)
+```
+
+CANON's (b) exception list updated to match, and `$150` is now retired as a pack
+rung outright — it belongs to neither ladder.
+
+### The corrected rule immediately exposed a live pricing error
+
+Widening the $150/$175 check to the real two-ladder structure surfaced **8
+instances of the old single ladder on three other, already-certified,
+already-pasted pages** — not touched by this run, since it was scoped to
+`training-rates-san-diego.html` only, but too serious to fix silently or ignore.
+
+```
+pages/FAQs.html:183                                       FAQ answer text
+pages/headers/FAQs-header.html:86                          schema mirror
+pages/how-it-works-pricing.html:200                        quotable block
+pages/how-it-works-pricing.html:399   <div class="pc-price">$150<span>/session</span></div>
+pages/how-it-works-pricing.html:580                        FAQ answer text
+pages/headers/how-it-works-pricing-header.html:54           schema mirror
+pages/private-personal-trainer-san-diego.html:535           FAQ answer text
+pages/headers/private-personal-trainer-san-diego-header.html:62  schema mirror
+```
+
+**`how-it-works-pricing.html:399` is not a mention — it is a rendered price
+card.** The "10 Sessions" pack card on that live page currently displays
+`$150/session` as the actual price, for a rung that exists in neither ladder
+(studio 10-pack is $140, in-home is $170). This has very likely been showing an
+incorrect price to real visitors since the page was pasted. **Reported here,
+not fixed** — outside this run's scope, and a decision for a human, not
+something to fix as a side effect of a documentation correction.
+
+### Rule change, negative-tested
+
+`$150` now gets no exemption beyond competitor pricing (`comp-value` divs) —
+never via markers, cards, or the new packs-table context. `$175` gained a
+`<table class="...packs...">` context for the in-home pack column. Eight
+fixtures, both directions: the in-home $175 pack rung passes; a hypothetical
+$150 inside the *same* packs table still flags, proving the new exemption
+cannot be walked back onto the retired figure; legacy `pc-name` card and
+`Bronze` marker regressions still pass; a bare unattributed $175 studio claim
+still flags as the retired violation CANON already named.
+
+## TASK 2 — guest add-on $50 → $75
+
+Three named places, plus a fourth found and fixed as a judgment call (below).
+Travel-fee rule checked against the corrected text — no false positive, since
+the word "travel" never shares a line with the guest-addon price anywhere on
+this page. No rule change needed.
+
+```
+pages/training-rates-san-diego.html
+  :382   studio footnote        "Guest add-on: $50/session" → "$75/session"
+  :492   in-home footnote       "Guest add-on: $50/session" → "$75/session"
+  :689   add-ons grid card      "$50 /session" → "$75 /session"
+  :777   FAQ answer (4th)       "guest for $50 per session" → "$75 per session"
+pages/headers/training-rates-san-diego-header.html
+  :395   FAQPage answer mirror  same change, to keep the header mirroring the page
+```
+
+**Judgment call — the fourth instance.** TASK 2 named three places; the FAQ
+answer "Can I bring a guest to my training session?" states the same $50 price
+a fourth time and is not one of them. Left alone, the page would say $75 in
+three places and $50 in a fourth, on the same page, about the same thing.
+Fixed it, and mirrored the header FAQPage answer to match, since leaving the
+header at $50 would have broken the count/order/text mirror the moment the
+page changed. **Wrong if** the FAQ price was meant to stay a legacy/grandfathered
+rate distinct from the named-package guest add-on — nothing in the task or
+CANON suggests that, but it's the reading under which this call fails.
+
+The referral credit card ("$50 off your next month") is a **different, separate
+offer** and was correctly left untouched — confirmed by content, not by line
+number, since the two $50 figures sit four lines apart in the add-ons grid.
+
+## TASK 3 — add-on prices recorded in CANON
+
+```
+Add-ons: extra session 115 studio / 155 in-home · guest add-on 75/session
+Referral credit: 50 off next month — UNVERIFIED, not yet confirmed
+```
+
+The referral credit is recorded but not applied to anything — it was already
+published at $50 and nothing about it needed changing; it is flagged so a
+future run does not treat it as silently confirmed.
+
+## TASK 4 — DEFERRED-01 applied verbatim, then resolved
+
+**Correction to the task's premise, verified rather than assumed:** CANON said
+the page's schema was "still body-embedded" with the third instance living in
+the body block. It was not — the schema had already been extracted to
+`pages/headers/training-rates-san-diego.html` (the live refresh landed it
+there). All three instances located by content, since line numbers from the
+old copy were stale as warned:
+
+```
+pages/training-rates-san-diego.html
+  :663-664   body callout, heading + body    Executive Section
+  :767       "Does OmniFit offer a money-back guarantee?" FAQ answer
+pages/headers/training-rates-san-diego-header.html
+  :379       the same FAQ answer, mirrored in the header's FAQPage schema
+             (not "the body-embedded schema" — already in the header)
+```
+
+CANON's approved text applied exactly, no re-drafting. Callout heading became
+"30-Day Fit Guarantee". Verified negative and positive: the old wording, tested
+in isolation, still trips `guarantee_near_outcome` ('Guarantee' near
+'stronger'); the resolved text produces zero hits on its own — it does not pair
+"guarantee" with an outcome word, so it needs no exemption at all.
+
+DEFERRED-01 moved to RESOLVED ITEMS with the full history retained. The
+`DEFERRED-01 is exempt` line removed from (a), and the matching `DEFERRED_01`
+regex and carve-out removed from `tools/certify.py` — an orphaned exemption for
+an item that no longer needs one is a latent blind spot for whatever text
+happens to match the pattern next.
+
+## TASK 5 — "Class IIa medical device" removed
+
+One instance, in the FAQ answer describing the Performance Assessment, mirrored
+in the header. Both removed; surrounding "clinical-grade diagnostic session ...
+using the BodyStat 1500 MDD for body composition analysis" reads cleanly
+without the parenthetical.
+
+**Count correction:** the task said "clinical-grade" appears four times; the
+actual count is **five** (lines 242, 252, 737, 742, 772). Reported, not silently
+corrected in the task text. Per instruction, none of the five were touched —
+only the Class IIa descriptor.
+
+**Judgment call.** Removed the regulatory-shaped claim exactly as instructed
+and nothing more. **Wrong if** "clinical-grade" itself should also be reduced
+given the corrected count is higher than assumed — that's explicitly a separate
+decision per the task, not made here.
+
+## TASK 6 — certified in, header renamed, two more premise corrections
+
+**Correction #1.** TASK 6 said the page's schema "is still body-embedded" and
+asked me not to extract it — same stale premise as TASK 4. There was nothing to
+extract; it already lives in the header. No schema-extraction work was done or
+skipped, because none was needed.
+
+**Correction #2.** While updating CANON's REPO STATE for the sibling stale-page
+entry (`the-30-minute-executive-reset.html`), checked rather than assumed: a
+header file *already exists* for it
+(`pages/headers/the-30-minute-executive-reset-header.html`, v1 August 2026,
+complete WebPage/BreadcrumbList/FAQPage graph) — not "no header file yet" as
+CANON previously read. Corrected that line while touching it; did not otherwise
+investigate or change that file, per the explicit DO NOT.
+
+**Naming fix sequencing, seen firsthand.** Brought the page into certification
+scope, then ran certification *before* renaming the header — deliberately, to
+test whether CANON's "fix naming after content certifies" rule is doing real
+work. It is: with the header still named `training-rates-san-diego.html` (no
+`-header` suffix), the header/page mirror check computed the wrong slug and
+reported a **false structural error** — `[no matching page
+pages/training-rates-san-diego.html.html]` — even though compliance and stale
+canon were already clean. Renamed the header, re-ran: zero structural findings.
+Fixing the name first would have hidden that check behind a filename bug
+instead of a real pass.
+
+**Additional fix, found by bringing the page into scope, not asked for
+directly.** A leftover build-changelog comment at the top of the page named the
+retired "Executive Hybrid" product ("V8 CHANGES: Executive Hybrid removed...").
+It documented its own removal, not a reintroduction, but no other certified
+page in the repo carries this style of dev-changelog comment, and Batch 3's
+canon pass established precedent for scrubbing "Executive Hybrid" from
+comments, not just rendered copy. Replaced with a one-line dated note.
+**Judgment call — wrong if** that build history was wanted for internal
+reference despite naming the retired product.
+
+**Two rule gaps found and fixed, not content reworded.** Bringing the page in
+exposed two `$175` instances the existing exemptions didn't recognise:
+
+- `pages/training-rates-san-diego.html:619` — the Reset Bronze feature price
+  sits one line below its `<h3>Bronze — Async Training</h3>` title, not on the
+  same line. The marker check was same-line only. Widened to a 2-line lookback
+  (`_marker_nearby`), which also correctly still flags a `$175` three lines
+  after an unrelated "Bronze" mention, and still flags a `$150` sitting next to
+  "Bronze" — proving the widened window doesn't accidentally rehabilitate the
+  retired figure.
+- `pages/headers/training-rates-san-diego-header.html:17` — the page's meta
+  description says "virtual from $175/month", accurately describing the
+  canonical Bronze tier, but matches no existing marker phrase. Added
+  `"virtual from $175"` as a literal marker, consistent with the existing
+  approach of specific marker phrases rather than a broader heuristic.
+
+Both changes negative-tested; six fixtures, all passing in both directions.
+
+`OUT_OF_SCOPE` in `tools/certify.py` updated to drop `training-rates-san-diego`.
+
+## Certification
+
+```
+### SCOPE: 50 certified, 3 not yet certified
+   not certified: pages/footer.html
+   not certified: pages/headers/the-30-minute-executive-reset-header.html
+   not certified: pages/the-30-minute-executive-reset.html
+
+### (a) COMPLIANCE STRIKES   none
+### (b) STALE CANON          8 hit(s) — all three pre-existing pages above,
+                              none on training-rates-san-diego
+### (c) BROKEN STRUCTURE     none
+### RESULT: FAILED  (compliance 0 · stale canon 8 · structure 0)
+```
+
+Isolated: `pages/training-rates-san-diego.html` and its header individually
+report **zero** compliance strikes and **zero** banned-string hits.
+
+Invariants — unaffected by this run, training-rates-san-diego carries none of
+the five shared blocks (it's the standalone rates table, not a territory page
+or the summarized pricing FAQ):
+
+```
+9-point          10 files   1 hash   bd73ea51bc9ec5eb   matches CANON
+archetypes       10 files   1 hash   6b1b0f4efbd4a72c   matches CANON
+credentials      10 files   1 hash   6492e3ca1545dc26   matches CANON
+header pricing   11 files   1 hash   7e5de5984b133663   matches CANON
+page pricing     11 files   1 hash   ae388d31c0b6149e   matches CANON
+```
