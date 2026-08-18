@@ -7,15 +7,19 @@ REPO STATE
   and the 9 Batch 3 pages — the-omnifit-method,
   how-we-measure-your-progress, omnifit-vs-competitors, weight-loss,
   strength-training-1, hiit-personal-trainer-san-diego,
-  personal-training-services, body-composition-testing, partners —
+  personal-training-services, body-composition-testing, partners, and
+  training-rates-san-diego (refreshed from live and corrected, Aug 2026:
+  two-ladder session packs, guest add-on, DEFERRED-01 applied) —
   each with a header under pages/headers/<slug>-header.html.
-  25 page/header pairs in total.
+  26 page/header pairs in total.
   NOT YET CERTIFIED, do not paste:
-  · training-rates-san-diego.html and the-30-minute-executive-reset.html —
-    the REPO COPIES ARE STALE RELATIVE TO PRODUCTION. The live versions on
-    the domain are ahead of these files. They need REFRESHING FROM LIVE, not
-    patching: any run that patches the repo copy would be editing a version
-    the site has already moved past. Deferred from Batch 3 on that basis.
+  · the-30-minute-executive-reset.html — the REPO COPY IS STALE RELATIVE TO
+    PRODUCTION. The live version on the domain is ahead of this file. It
+    needs REFRESHING FROM LIVE, not patching: any run that patches the repo
+    copy would be editing a version the site has already moved past.
+    Deferred from Batch 3 on that basis. A header file already exists
+    (pages/headers/the-30-minute-executive-reset-header.html) but has not
+    been verified against a refreshed page.
   · footer.html — site-wide, in no batch.
   Never resurrect pre-patch originals from history.
 - Header naming is standardised: pages/headers/<slug>-header.html, no
@@ -77,9 +81,16 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   In-home individual monthly (3-mo/M2M), complete ladder: Essential 335/390,
   Momentum 650/755, Performance 1,250/1,425, Peak from 1,860/2,150. Upfront
   on a 3-month program = 3 x the 3-month rate: 1,005 / 1,950 / 3,750 / 5,580.
-  Packs: 5 @ 175/session ($875),
-  10 @ 150 ($1,500), 20 @ 135 ($2,700), one ladder regardless of location.
+  Packs, two ladders by venue, max 2 sessions/week:
+    Studio  — 5 @ 145/session (725) · 10 @ 140 (1,400) · 20 @ 135 (2,700)
+    In-home — 5 @ 175/session (875) · 10 @ 170 (1,700) · 20 @ 165 (3,300)
+    Expiry: 5-pack 10 weeks · 10-pack 20 weeks · 20-pack 30 weeks
   Singles 165 studio, 195 in-home.
+  Add-ons, confirmed Aug 2026: extra session 115 studio / 155 in-home ·
+  guest add-on 75/session (was $50, corrected in the Rates Page Correction
+  run — three named-package instances plus one FAQ mention).
+  Referral credit: 50 off next month — UNVERIFIED, not yet confirmed by
+  Nemezio. Left as published; do not treat as canonical until confirmed.
   Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
   Monthly Tune-Up (graduates): 199/250/295. Facility rule: Momentum+
   requires Teqneeq membership $119/mo paid to Teqneeq; Essential and
@@ -165,7 +176,6 @@ judgment call if it needs a human decision, otherwise handle it silently.
   · uncertified specialty claims: asserting OmniFit diagnoses, treats,
     prescribes, cures, rehabilitates, or provides physical therapy or
     chiropractic. Negations and referral language are legal
-  DEFERRED-01 is exempt while listed under KNOWN DEFERRED ITEMS.
 
 (b) STALE CANON
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
@@ -174,8 +184,12 @@ judgment call if it needs a human decision, otherwise handle it silently.
   "$50"/"$75" as travel fees.
   $150/$175 legal ONLY inside (a) the canonical pricing FAQ answer,
   (b) the card bullet "Fully virtual Executive Reset from $175/mo",
-  (c) the canonical pack rungs (5 @ $175, 10 @ $150, 20 @ $135, totals
-  $875/$1,500/$2,700), and (d) the Reset Bronze async tier at $175/mo.
+  (c) the canonical pack rungs (studio 5 @ $145/10 @ $140/20 @ $135,
+  totals $725/$1,400/$2,700; in-home 5 @ $175/10 @ $170/20 @ $165, totals
+  $875/$1,700/$3,300), (d) the Reset Bronze async tier at $175/mo, and (e)
+  "virtual from $175" describing that same Bronze tier in a meta
+  description. $150 as a pack rung is retired — it belonged to neither
+  ladder, a mangled merge of the studio and in-home figures.
   $150 or $175 as a STUDIO PER-SESSION RATE is retired and a violation.
 
 (c) BROKEN STRUCTURE
@@ -208,22 +222,23 @@ Two kinds live here and they behave differently:
   · ACTIVE CONSTRAINT — a restriction that must be HONOURED when publishing.
     Not a tolerated violation; breaking it is a real error.
 
-DEFERRED-01 · ACCEPTED EXCEPTION · Executive Reset guarantee wording (rates page)
-- File: pages/training-rates-san-diego.html, plus its header file.
-  NOTE: that header file does not exist yet. The page's schema is still
-  body-embedded (line 822), so the third instance currently lives in the
-  body block and moves with the schema when it is extracted.
-- Three instances, verified Aug 2026:
-  · line 664 — body callout inside the Executive Reset section
-  · line 767 — "Does OmniFit offer a money-back guarantee?" FAQ answer
-  · line 880 — the same answer inside the FAQPage schema
-- Current text promises an outcome ("feel clearly stronger, more energized,
-  and more in control") and conditions the refund on undefined "full
-  compliance" of a "remaining program balance".
-- Two problems: (1) CANON bans outcome guarantees; this is named a guarantee
-  and promises a result. (2) "Full compliance" and "remaining balance" are
-  undefined terms in a refund promise under an upfront billing model.
-- Approved replacement, to apply in a future cleanup pass:
+RESOLVED ITEMS (kept so the reasoning survives; no longer constraints)
+
+DEFERRED-01 · Executive Reset guarantee wording (rates page) · CLOSED Aug 2026
+- Was an ACCEPTED EXCEPTION. Applied in the Rates Page Correction run.
+- File: pages/training-rates-san-diego.html and pages/headers/
+  training-rates-san-diego-header.html. Three instances, located by content
+  since the page had been refreshed from live and prior line numbers were
+  stale: the body callout inside the Executive Reset section, the "Does
+  OmniFit offer a money-back guarantee?" FAQ answer, and the same answer
+  mirrored in the header's FAQPage schema (the page's schema was already
+  extracted to the header by the time of this run, ahead of the older note
+  that it was still body-embedded).
+- Original text promised an outcome ("feel clearly stronger, more energized,
+  and more in control") and conditioned the refund on undefined "full
+  compliance" of a "remaining program balance" — banned as a named outcome
+  guarantee, and vague as a refund term under an upfront billing model.
+- Applied verbatim, exactly as previously approved:
   Callout heading: "30-Day Fit Guarantee"
   Callout body: "If after your first 30 days you decide the Executive Reset
   isn't the right fit, you can stop and I'll refund the unused balance of
@@ -234,10 +249,9 @@ DEFERRED-01 · ACCEPTED EXCEPTION · Executive Reset guarantee wording (rates pa
   you can cancel and receive a refund of the unused balance of your program.
   You keep the first month and everything you've learned. There is no
   compliance test to pass and nothing to negotiate."
-- Status: approved, not yet applied. Deliberately deferred by Nemezio.
-  Known, accepted exception until scheduled.
-
-RESOLVED ITEMS (kept so the reasoning survives; no longer constraints)
+- The (a) COMPLIANCE STRIKES exemption for this item is removed. The
+  resolved text does not pair "guarantee" with an outcome word and needs no
+  exemption; tools/certify.py no longer carries a DEFERRED_01 carve-out.
 
 RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
 - Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved by counsel (Andrew
