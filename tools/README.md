@@ -25,6 +25,16 @@ check fail on purpose.**
 | Header regression | "every header mirrors its page" | It compared **questions only**, never answers |
 | Header re-mirror | 7 answers "re-mirrored" | It wrote `null` over all 7, destroying the canonical pricing block |
 | Free-framing rule | how-we-measure certified clean | Page said `free 45-minute assessment`; rule only knew `consultation` |
+| Session-pack rule | CANON authorised `10 @ $150` as a pack rung | $150 belonged to neither venue's ladder — a mangled merge of the studio and in-home figures |
+
+The pack-rule incident is the odd one out: CANON itself was wrong, not the tool.
+Widening `certify.py`'s $150/$175 check to match the corrected CANON immediately
+surfaced 8 pre-existing hits on three *other*, already-certified, already-pasted
+pages (FAQs, how-it-works-pricing, private-personal-trainer-san-diego) — a
+customer-facing pricing error (a rendered `$150/session` price card) that had been
+live and certifying clean the whole time. Fixing a rule can expose a violation the
+old rule was never written to see; that is a finding to report, not a bug in the
+new rule.
 
 Before trusting a new rule, negative-test it in **both** directions: confirm it
 flags a real violation, and confirm it passes the legitimate copy next to it.
@@ -104,6 +114,25 @@ is. They previously did.
   calendar. Negation is checked on the **preceding** words only, so a trailing
   "…and we don't cut corners" cannot exempt a real promise.
 
+## Stale-canon rules (b)
+
+- **$150 is retired everywhere.** Neither ladder uses it (studio 5/10/20 @
+  $145/$140/$135; in-home @ $175/$170/$165). The only exemption is competitor
+  pricing on the comparison page (`comp-value` divs) — there is no packs-table,
+  marker, or card exemption for $150, by design, so it can never be
+  grandfathered back in through a context meant for $175.
+- **$175 is legal** inside: the canonical pricing FAQ answer, a marker phrase
+  on the same line or within 2 lines above (`_marker_nearby`, covers a title
+  and its price sitting on adjacent lines — e.g. a `<h3>Bronze</h3>` line
+  followed by the price div), a `pc-name` card lookback matching a canonical
+  card name, or inside a `<table class="...packs...">` block
+  (`_inside_packs_table` — the in-home pack column).
+- **DEFERRED-01 is resolved**, not exempted. There is no `DEFERRED_01`
+  carve-out in `certify.py` any more — the approved replacement text does not
+  pair "guarantee" with an outcome word, so it passes `guarantee_near_outcome`
+  on its own merit. If the old banned wording ever reappears anywhere, it now
+  flags like any other violation.
+
 ## Invariants
 
 Five, all recomputed from the files each run and compared against the hashes
@@ -115,8 +144,13 @@ ten and updating the hash in CANON.md in the same commit.
 
 ## Scope
 
-`certify.py` skips `training-rates-san-diego`, `the-30-minute-executive-reset`
-and `footer` (see CANON REPO STATE). Everything else under `pages/` is in scope.
+`certify.py` skips `the-30-minute-executive-reset` and `footer` (see CANON
+REPO STATE). `training-rates-san-diego` entered scope in the Rates Page
+Correction run (Aug 2026) once its content certified; the naming fix (its
+header lacked the `-header.html` suffix) was applied *after* content passed,
+per CANON's naming-fix rule — doing it first would have hidden a real
+structural check behind a filename mismatch instead of a genuine pass.
+Everything else under `pages/` is in scope.
 There is an assertion that the glob matched a non-zero number of files — an
 earlier run passed vacuously because it was executed from the wrong directory
 and matched nothing.

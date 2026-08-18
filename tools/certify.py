@@ -6,7 +6,7 @@ import re, glob, json, hashlib, html, html.parser, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import faq
 
-OUT_OF_SCOPE = ("training-rates-san-diego", "the-30-minute-executive-reset", "footer")
+OUT_OF_SCOPE = ("the-30-minute-executive-reset", "footer")
 
 # ─── (a) compliance shapes ─────────────────────────────────────────
 OUTCOME = (r'stronger|leaner|energized|energised|more in control|lose|losing|lost|fat loss|'
@@ -155,15 +155,36 @@ def result_near_timeframe(text, window=12):
 COMPLIANCE = [guarantee_near_outcome, lbs_near_timeframe, free_consultation,
               prenatal_postpartum, uncertified_claims, clinical_stat,
               result_near_timeframe]
-DEFERRED_01 = re.compile(r'30-Day (?:Performance|Fit) Guarantee', re.I)
 
 # ─── (b) stale canon ───────────────────────────────────────────────
 BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES", "Orthopedic Exercise",
           "Executive Hybrid", "Lopez Perez", "180+", "$90 ", "$225", "$275", "$299",
           "$500/mo", "$599"]
 CANON_MARKERS = ("Session packs run", "async programming tier", "Session packs:",
-                 "$175 per session for 5", "Paid upfront", "Executive Reset from $175/mo", "Bronze")
+                 "$175 per session for 5", "Paid upfront", "Executive Reset from $175/mo", "Bronze",
+                 "virtual from $175")
 CANON_CARDS = ("5 Sessions", "10 Sessions", "20 Sessions", "Bronze")
+
+def _marker_nearby(L, i, window=2):
+    """A marker on the line itself, or in the `window` lines immediately before
+    it — covers a title/price split across adjacent lines (e.g. a Bronze card's
+    <h3> title one line above its <div class="...-price">), without the
+    same-line requirement missing legitimate multi-line card layouts."""
+    lo = max(0, i - 1 - window)
+    return any(k in ln for ln in L[lo:i] for k in CANON_MARKERS)
+
+def _inside_packs_table(L, i):
+    """True if line i (1-indexed) sits inside <table class="...packs...">...</table>.
+    Scans backward from the line before i; a </table> reached before any <table>
+    means we are not inside one. Used ONLY to exempt $175 (in-home pack rungs);
+    $150 is retired as a pack rung and gets no exemption from this helper."""
+    for j in range(i - 2, -1, -1):
+        if '</table>' in L[j]:
+            return False
+        m = re.search(r'<table[^>]*class="([^"]*)"', L[j])
+        if m:
+            return 'pack' in m.group(1).lower()
+    return False
 
 # ─── (c) structure ─────────────────────────────────────────────────
 class _P(html.parser.HTMLParser):
@@ -202,7 +223,6 @@ def run():
         t = open(f).read()
         for fn in COMPLIANCE:
             for kind, what, ctx in fn(t):
-                if DEFERRED_01.search(ctx): continue          # accepted exception
                 print(f"   {f}\n      [{kind}] {what}\n      …{ctx[:130]}…"); A+=1
     print("   none" if not A else f"   {A} strike(s)")
 
@@ -222,10 +242,14 @@ def run():
                 if tok in l:
                     # competitor pricing on the comparison page is not OmniFit pricing
                     ok = '<div class="comp-value">' in l
-                    ok = ok or any(k in l for k in CANON_MARKERS)
-                    if not ok:
-                        nm = re.findall(r'<div class="pc-name">([^<]*)</div>', "".join(L[max(0,i-12):i]))
-                        ok = bool(nm) and nm[-1].strip() in CANON_CARDS
+                    # $175 is a legal in-home pack rung and Reset Bronze tier; $150 is
+                    # retired from BOTH ladders and gets no further exemption below
+                    if tok == "$175":
+                        ok = ok or _marker_nearby(L, i)
+                        if not ok:
+                            nm = re.findall(r'<div class="pc-name">([^<]*)</div>', "".join(L[max(0,i-12):i]))
+                            ok = bool(nm) and nm[-1].strip() in CANON_CARDS
+                        ok = ok or _inside_packs_table(L, i)
                     if not ok:
                         print(f"   {f}:{i}  [{tok} outside canonical context]  …{l.strip()[:90]}…"); B+=1
     print("   none" if not B else f"   {B} hit(s)")
