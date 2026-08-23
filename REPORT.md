@@ -1976,3 +1976,58 @@ credentials      10 files   1 hash   6492e3ca1545dc26   matches CANON
 header pricing   11 files   1 hash   7e5de5984b133663   matches CANON
 page pricing     11 files   1 hash   ae388d31c0b6149e   matches CANON
 ```
+
+## Correction pass — TASK 5's Class IIa removal reverted
+
+The reissued task list withdrew the old TASK 5 outright and added it to
+DO NOT: "Do not remove 'Class IIa medical device' from this or any page. It
+is a factual device classification and stays." It had already been removed
+by the run above. Restored verbatim in both places it was mirrored:
+
+```
+pages/training-rates-san-diego.html:769                    FAQ answer
+pages/headers/training-rates-san-diego-header.html:387     schema mirror
+```
+
+Text now reads "...using the BodyStat 1500 MDD (Class IIa medical device)
+for body composition analysis..." on both files again, byte-identical
+between page and header as the mirroring invariant requires. Recorded as a
+permanent rule in CANON's CANONICAL TRUTH section so it isn't stripped
+again as a "regulatory-shaped" edit.
+
+**Verification pass on the rest of the run, not just the Class IIa item.**
+Re-checked TASKs 1-4 and the certification result against this REPORT's own
+record and `tools/README.md` before touching anything, since a `git log`
+inspection of this branch turned up the whole Rates Page Correction run as
+already committed and wanted a second look before trusting it:
+
+- Confirmed the pack-ladder fix, the three-instance guest add-on change, the
+  CANON add-on additions, and the verbatim DEFERRED-01 application all still
+  stand exactly as documented above — nothing else needed touching.
+- **Almost re-broke the $150 exemption.** Before finding this REPORT.md
+  section and `tools/README.md`'s "Why this exists" table, nearly added a
+  same-line exemption re-admitting `$150` inside the canonical pricing FAQ
+  answer, on the assumption that CANON's exception-list wording ("$150/$175
+  legal ONLY inside (a) the canonical pricing FAQ answer...") meant $150 was
+  still meant to be grandfathered there. It was not — this run's own record
+  says plainly that $150 gets "no packs-table, marker, or card exemption...
+  by design" and that the 8 hits (all 7 FAQ-text mentions plus the rendered
+  price card) were meant to stay flagged, reported to a human, not
+  suppressed. Reverted the `tools/certify.py` edit before committing it and
+  fixed the actual bug instead: CANON.md's own exception-list wording still
+  grouped `$150` in with `$175` across all five contexts, contradicting both
+  this REPORT and `tools/README.md`. Reworded that paragraph so CANON no
+  longer contradicts its own tooling and run history, and added a NEXT RUNS
+  entry naming the still-open $150 defect so it isn't lost track of again.
+- Re-ran `python3 tools/certify.py`: identical result to the one recorded
+  above — `FAILED (compliance 0 · stale canon 8 · structure 0)`, same 8
+  file:line hits, all outside `training-rates-san-diego`. Re-verified the
+  page and header in isolation still certify clean on their own, and all
+  five invariant hashes still match CANON with a single hash each across
+  their full file counts.
+
+**Judgment call.** Editing CANON's exception-list prose instead of leaving
+it as found. **Wrong if** exception (a) was intended to be reworded some
+other way (e.g. splitting it into a $175-only clause without touching the
+surrounding "$150 is retired" sentence) — the substance (no $150 exemption
+anywhere) is unchanged either way, only the wording of how it's grouped.

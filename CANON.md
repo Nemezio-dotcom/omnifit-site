@@ -69,6 +69,11 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   ($90 is the retired name-era price). $90 assessment = confirmed same
   product as the $110 Performance Diagnostic; rename settled. Deposit
   $30 refundable.
+- BodyStat 1500 MDD is a Class IIa medical device. This descriptor is a
+  factual device classification, not a claim, and stays wherever the
+  device is named. Never remove it as a "regulatory-shaped" edit — it was
+  mistakenly stripped once (Rates Page Correction run, since reverted) and
+  must not recur.
 - Consultation: 45 minutes, ALWAYS by video or phone, never in person.
   Preceded by a client intake form. $30 refundable deposit. The
   consultation is NOT the movement screen: the $110 Performance
@@ -182,15 +187,20 @@ judgment call if it needs a human decision, otherwise handle it silently.
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
   "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
   "$50"/"$75" as travel fees.
-  $150/$175 legal ONLY inside (a) the canonical pricing FAQ answer,
-  (b) the card bullet "Fully virtual Executive Reset from $175/mo",
-  (c) the canonical pack rungs (studio 5 @ $145/10 @ $140/20 @ $135,
-  totals $725/$1,400/$2,700; in-home 5 @ $175/10 @ $170/20 @ $165, totals
+  $175 legal ONLY inside (a) the canonical pricing FAQ answer, (b) the card
+  bullet "Fully virtual Executive Reset from $175/mo", (c) the canonical
+  pack rungs (studio 5 @ $145/10 @ $140/20 @ $135, totals
+  $725/$1,400/$2,700; in-home 5 @ $175/10 @ $170/20 @ $165, totals
   $875/$1,700/$3,300), (d) the Reset Bronze async tier at $175/mo, and (e)
   "virtual from $175" describing that same Bronze tier in a meta
-  description. $150 as a pack rung is retired — it belonged to neither
-  ladder, a mangled merge of the studio and in-home figures.
-  $150 or $175 as a STUDIO PER-SESSION RATE is retired and a violation.
+  description. $150 is retired everywhere, full stop — it belonged to
+  neither ladder, a mangled merge of the studio and in-home figures, and
+  gets no exemption of any kind (not even inside the canonical pricing FAQ
+  answer, which still reads the stale single-ladder text on FAQs.html,
+  how-it-works-pricing.html, and private-personal-trainer-san-diego.html —
+  see REPORT.md's Rates Page Correction run and the carried-forward item
+  below). $150 or $175 as a STUDIO PER-SESSION RATE is retired and a
+  violation.
 
 (c) BROKEN STRUCTURE
   invalid JSON · header FAQPage not mirroring the page FAQ in count, order
@@ -287,6 +297,19 @@ PRICING-CHANGE CHECKLIST (kept live from the above; consult before repricing)
   total can only rise.
 
 NEXT RUNS
+- PRIORITY, carried forward from the Rates Page Correction run: the retired
+  single-ladder pack line ("$175 per session for 5, $150 for 10, and $135
+  for 20") is still live in the shared canonical pricing FAQ answer on
+  FAQs.html, how-it-works-pricing.html, and private-personal-trainer-san-diego.html
+  (plus their headers) — 7 text mentions. Separately, and more urgently,
+  how-it-works-pricing.html:399 renders this as an actual price card
+  ("10 Sessions" at $150/session, $1,500 total) that has likely been shown
+  to real visitors. `python3 tools/certify.py` reports these 8 hits and
+  FAILS on them by design — see tools/README.md and REPORT.md's Rates Page
+  Correction run. Needs a human decision on replacement wording (does this
+  FAQ answer adopt the two-ladder split, or state a range?) before a fix
+  run touches it; not resolved by this run, which was scoped to
+  training-rates-san-diego only.
 - BATCH 2 DONE (Aug 2026): FAQs · how-it-works-pricing (converted to
   monthly tiers) · in-home-personal-trainer-san-diego (P3 depth spec) ·
   private-personal-trainer-san-diego.
