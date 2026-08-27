@@ -1976,3 +1976,158 @@ credentials      10 files   1 hash   6492e3ca1545dc26   matches CANON
 header pricing   11 files   1 hash   7e5de5984b133663   matches CANON
 page pricing     11 files   1 hash   ae388d31c0b6149e   matches CANON
 ```
+
+---
+
+# Guest Add-On Verification Run — Report
+
+**Branch:** `claude/guest-addon-60-verification-m1d1dv`
+**Trigger:** Nemezio confirmed Aug 2026 that the guest add-on is $60/session
+and the live site already shows $60 — the $75 figure from the Rates Page
+Correction run (TASK 2 above, "guest add-on $50 → $75") is superseded.
+
+## What the sweep found
+
+Grepped the whole repo, case-insensitive, for `guest`, `$75`, and `$50` in
+guest context. Result: **every rendered guest add-on price in the repo
+already read $60** at the start of this run — a prior, undocumented edit had
+applied it (the pages themselves carry `V9`/`V2` changelog comments recording
+"Guest add-on corrected $50 → $60", but no matching REPORT.md entry exists for
+that edit). The only stale figure left anywhere was in **CANON.md itself**,
+which still recorded `guest add-on 75/session` as canonical — the documentation
+had not caught up to the site.
+
+**Five live instances, all already $60, verified one by one:**
+
+```
+pages/training-rates-san-diego.html
+  :383   studio footnote        "Guest add-on: $60/session"
+  :493   in-home footnote       "Guest add-on: $60/session"
+  :690   add-ons grid card      "$60 /session"
+  :778-779  FAQ answer          "...bring a guest for $60 per session..."
+pages/headers/training-rates-san-diego-header.html
+  :397   FAQPage answer mirror  "...bring a guest for $60 per session..."
+```
+
+No other file in the repo carries a guest add-on dollar figure. Other `guest`
+hits are all unrelated: 10 territory pages + headers and
+corrective-exercise-post-rehab (+header) mention "sponsored guest passes" with
+no attached price; `how-it-works-pricing.html:335` likewise ("Trains on a
+sponsored guest pass"). The training-rates page's own "Referral Credit" card
+("$50 off your next month") is a **different, separate offer**, correctly
+untouched — confirmed by content, not line proximity.
+
+## Files touched, and why
+
+```
+CANON.md            pricing line: guest add-on 75/session -> 60/session,
+                     with the supersession history (was $75, was $50 before
+                     that). Retired-list bullet: added "$50/$75 as the guest
+                     add-on price" alongside the pre-existing "$50/$75 travel
+                     fees" entry — same numbers, different context, kept
+                     separate so a future reader doesn't conflate them.
+                     STALE CANON (b) section: documented the new certify.py
+                     rule below, and noted the referral credit's own "$50" is
+                     not this and stays legal.
+tools/certify.py     new stale-canon check: $50 or $75 within 4 lines of
+                     "guest" (comment-stripped) is flagged, mirroring the
+                     existing travel-fee rule's shape for a different keyword.
+tools/README.md      documented the new rule under "Stale-canon rules (b)".
+```
+
+No page or header content changed — the $60 figure was already live
+everywhere it appears. This run corrects the canon and adds the check that
+was missing, not the price.
+
+## Rule added: guest add-on $50/$75, negative-tested both directions
+
+Before this run, `certify.py` had no rule at all for stale guest add-on
+prices — the travel-fee regex only fires next to the word "travel", so a
+reintroduced `$75` in guest context would have certified clean. Added a check
+matching the travel-fee rule's shape: `$50` or `$75` within a 4-line lookback
+of "guest", with a `referral` exclusion so the unrelated referral-credit card
+is never caught by proximity.
+
+**First pass false-positived** on the page's own changelog comments (`<!--
+V9 CHANGES: Guest add-on corrected $50 → $60... -->` and the header's `V2
+CHANGES: guest add-on FAQ answer corrected $50 -> $60...`) — both document the
+fix, not a live price, but contain `$50` within a few lines of `guest`. Fixed
+by adding `_strip_comments_keep_lines()`, which blanks HTML comment content
+while preserving newlines (so line numbers stay aligned) and running the
+guest-add-on check against that instead of the raw line. Re-ran clean.
+
+Six fixtures, both directions, via a standalone harness importing
+`tools/certify.py` (not committed — ad hoc, matches this run's "negative-test
+every rule change in both directions" requirement):
+
+| Fixture | Expected | Got |
+|---|---|---|
+| Same-line stale footnote, `$75` | flag | flag |
+| Same-line canonical footnote, `$60` | pass | pass |
+| Label/price split across two lines (card layout), `$75` | flag | flag |
+| Changelog comment documenting `$50 -> $60` | pass | pass |
+| Referral-credit card in-window near an unrelated "Guest Add-On" heading | pass | pass |
+| Multi-line HTML comment containing a stale `$75` | pass | pass |
+
+Also live-tested against the repo itself: temporarily changed the add-ons
+grid card to `$75 /session`, confirmed `certify.py` flagged
+`pages/training-rates-san-diego.html:690 [stale guest add-on price]`, then
+reverted with `git checkout --` and confirmed clean again. `git diff --stat`
+showed zero residual change from the test.
+
+## Certification
+
+```
+### (a) COMPLIANCE STRIKES   50 strike(s) — unchanged by this run
+### (b) STALE CANON           9 hit(s) — unchanged by this run; zero from the
+                               new guest add-on rule, zero elsewhere caused by
+                               this run's edits
+### (c) BROKEN STRUCTURE     none
+### RESULT: FAILED  (compliance 50 · stale canon 9 · structure 0)
+```
+
+Identical strike/hit count before and after this run's edits — confirmed by
+running `certify.py` prior to touching anything. **Both categories are
+pre-existing and out of scope for this task**, reported here per CANON's
+"on certification failure... report file:line" rule rather than fixed
+silently:
+
+- **(a) 50 compliance strikes**, two groups, neither guest-add-on-related:
+  - `pages/case-studies.html` — repeated `lbs near timeframe` strikes (e.g.
+    "148 lbs" near "3 months", "11 lbs" near "6-month"). This file is not in
+    CANON's REPO STATE certified-page list and appears never to have been
+    brought into scope.
+  - `pages/training-rates-san-diego.html` and its header — `outcome
+    guarantee` strikes on the Executive Reset money-back guarantee text
+    ("Guarantee" near "stronger" / "energized"). **This is a discrepancy worth
+    flagging directly:** DEFERRED-01 (closed Aug 2026, this same file) records
+    the approved replacement text as "30-Day Fit Guarantee" / "...you can
+    cancel and receive a refund..." with no outcome word nearby. The text
+    currently live reads "30-Day Executive Performance Guarantee" / "30-Day
+    Performance Guarantee: if after 30 days of..." — different wording than
+    what CANON says was applied, and it re-trips the compliance rule
+    DEFERRED-01 was closed to satisfy. Not touched — outside this run's scope
+    and not something to fix as a side effect of a pricing-documentation
+    correction — but it should not wait for the next unrelated run to surface
+    it again.
+- **(b) 9 stale-canon hits**, all pre-existing `$150 outside canonical
+  context` findings (FAQs, how-it-works-pricing, private-personal-trainer-san-diego,
+  and their headers) plus the one pre-existing `Executive Hybrid` changelog-comment
+  hit on `training-rates-san-diego.html:4`, carried over unchanged from every
+  prior run's baseline.
+
+## Summary table
+
+| File | Change |
+|---|---|
+| `CANON.md` | Guest add-on pricing line: $75 → $60/session, with supersession history. Retired-list bullet added. STALE CANON (b) documentation updated. |
+| `tools/certify.py` | New stale-canon rule: `$50`/`$75` near "guest" (comment-aware), with `referral` exclusion. Negative-tested, six fixtures + one live repo round-trip. |
+| `tools/README.md` | New rule documented under "Stale-canon rules (b)". |
+| `pages/training-rates-san-diego.html` | **No change** — all 4 guest add-on instances already read $60. |
+| `pages/headers/training-rates-san-diego-header.html` | **No change** — the FAQPage mirror already read $60. |
+
+**Judgment call — flagging the DEFERRED-01 wording drift above instead of
+silently ignoring it.** Wrong if that guarantee text was intentionally revised
+after DEFERRED-01 closed and CANON simply wasn't updated to match — nothing
+in CANON records such a revision, so the reading here is that it drifted
+unintentionally, but a human should confirm which happened.

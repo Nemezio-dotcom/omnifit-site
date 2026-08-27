@@ -132,6 +132,12 @@ is. They previously did.
   pair "guarantee" with an outcome word, so it passes `guarantee_near_outcome`
   on its own merit. If the old banned wording ever reappears anywhere, it now
   flags like any other violation.
+- **Guest add-on is $60/session** (confirmed by Nemezio, Aug 2026). `$50` or
+  `$75` within 4 lines of "guest" is flagged as a retired price, checked
+  against comment-stripped text (`_strip_comments_keep_lines`) so a
+  dev-changelog note like "corrected $50 -> $60" — documenting the fix, not
+  asserting the stale price — doesn't trip it. The separate referral-credit
+  card ("$50 off your next month") is excluded by name, not just distance.
 
 ## Invariants
 

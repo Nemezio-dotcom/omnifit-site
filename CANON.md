@@ -87,8 +87,13 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     Expiry: 5-pack 10 weeks · 10-pack 20 weeks · 20-pack 30 weeks
   Singles 165 studio, 195 in-home.
   Add-ons, confirmed Aug 2026: extra session 115 studio / 155 in-home ·
-  guest add-on 75/session (was $50, corrected in the Rates Page Correction
-  run — three named-package instances plus one FAQ mention).
+  guest add-on 60/session (confirmed by Nemezio, Aug 2026, in the Guest
+  Add-On Verification run — supersedes the $75/session figure from the
+  earlier Rates Page Correction run, which itself superseded the original
+  $50. Five instances on the rates page and its header: studio footnote,
+  in-home footnote, add-ons grid card, guest FAQ answer, and the FAQ
+  schema mirror in the page header. All five already read $60 at the
+  start of the Guest Add-On Verification run).
   Referral credit: 50 off next month — UNVERIFIED, not yet confirmed by
   Nemezio. Left as published; do not treat as canonical until confirmed.
   Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
@@ -125,7 +130,8 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   pull-ups, 6mo). Annie −14 (162→148, 3mo). Ken −11 fat/+6 muscle.
 - Retired forever: Executive Hybrid (product, name, slug, $299/$500),
   $175/$150/$225/$200-session era, $225–275/mo era, $599–899 Reset era,
-  $50/$75 travel fees, Foundation/VIP packages.
+  $50/$75 travel fees, $50/$75 as the guest add-on price (superseded by
+  $60/session, Aug 2026), Foundation/VIP packages.
 
 COMPLIANCE SCREEN (attorney: strike on sight, any wave)
 - No outcome guarantees. No lbs-with-timeframe claims ("20–30 lbs in
@@ -181,7 +187,9 @@ judgment call if it needs a human decision, otherwise handle it silently.
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
   "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
-  "$50"/"$75" as travel fees.
+  "$50"/"$75" as travel fees · "$50"/"$75" as the guest add-on price
+  (canonical is $60/session; the referral credit's separate "$50 off your
+  next month" is not this and stays legal).
   $150/$175 legal ONLY inside (a) the canonical pricing FAQ answer,
   (b) the card bullet "Fully virtual Executive Reset from $175/mo",
   (c) the canonical pack rungs (studio 5 @ $145/10 @ $140/20 @ $135,

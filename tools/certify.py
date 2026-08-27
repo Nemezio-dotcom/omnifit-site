@@ -165,6 +165,14 @@ CANON_MARKERS = ("Session packs run", "async programming tier", "Session packs:"
                  "virtual from $175")
 CANON_CARDS = ("5 Sessions", "10 Sessions", "20 Sessions", "Bronze")
 
+def _strip_comments_keep_lines(text):
+    """Blanks out HTML comment content while preserving every newline, so line
+    numbers computed against the result still line up with the original file.
+    Used to keep dev-changelog comments (e.g. "corrected $50 -> $60", itself
+    documenting a fix rather than asserting a stale price) from tripping a
+    rule that scans for a retired figure sitting near a keyword."""
+    return re.sub(r'<!--.*?-->', lambda m: re.sub(r'[^\n]', ' ', m.group(0)), text, flags=re.S)
+
 def _marker_nearby(L, i, window=2):
     """A marker on the line itself, or in the `window` lines immediately before
     it — covers a title/price split across adjacent lines (e.g. a Bronze card's
@@ -234,10 +242,27 @@ def run():
                     print(f"   {f}:{i}  [{term}]"); B+=1
     for f in files:
         L=open(f).readlines()
+        Lnc=_strip_comments_keep_lines(open(f).read()).split('\n')  # for the guest-add-on check only
         for i,l in enumerate(L,1):
             # a travel FEE, not any dollar figure sharing a line with the word travel
             if re.search(r'travel[^.<]{0,30}\$(?:50|75)\b|\$(?:50|75)\b[^.<]{0,30}travel', l, re.I):
                 print(f"   {f}:{i}  [travel fee dollar figure]"); B+=1
+            # guest add-on: canonical is $60/session. $50 and $75 are both
+            # retired prior prices. Checked against comment-stripped text, so
+            # a dev-changelog note like "corrected $50 -> $60" (documenting
+            # the fix, not asserting the stale price) doesn't trip this. The
+            # card layout splits the "Guest Add-On" label and its price div
+            # across adjacent lines, so look back a few lines rather than
+            # requiring same-line co-occurrence — but exclude "referral", so
+            # the separate "$50 off your next month" referral-credit card
+            # (which sits far enough away in every known layout not to fall
+            # in this window, but is excluded defensively) is never mistaken
+            # for a guest add-on price.
+            ncl = Lnc[i-1] if i-1 < len(Lnc) else l
+            if re.search(r'\$(?:50|75)\b', ncl):
+                gwin = ''.join(Lnc[max(0, i - 4):i])
+                if re.search(r'guest', gwin, re.I) and 'referral' not in gwin.lower():
+                    print(f"   {f}:{i}  [stale guest add-on price]"); B+=1
             for tok in ("$150","$175"):
                 if tok in l:
                     # competitor pricing on the comparison page is not OmniFit pricing
