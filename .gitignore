@@ -1,2 +1,12 @@
 __pycache__/
 *.pyc
+
+# fix-radar app
+fix-radar/backend/.venv/
+fix-radar/backend/*.db
+fix-radar/backend/.env
+fix-radar/backend/.pytest_cache/
+fix-radar/frontend/node_modules/
+fix-radar/frontend/dist/
+fix-radar/frontend/*.tsbuildinfo
+

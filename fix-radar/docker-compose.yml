@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - fixradar_data:/app/data
+      - ../pages:/site-pages:ro
+    environment:
+      - DATABASE_URL=sqlite:////app/data/fixradar.db
+      - CORS_ORIGINS=http://localhost:5173
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_PROXY_TARGET=http://backend:8000
+    depends_on:
+      - backend
+
+volumes:
+  fixradar_data:
