@@ -2,7 +2,12 @@
 import re, html
 
 QPATS = [
-    r'<summary>(.*?)</summary>',
+    # `<summary ...>` with attributes as well as bare. hsa-fsa-personal-training
+    # writes `<summary class="hsa-faq-q">`; the bare-tag-only version yielded
+    # ZERO questions for that page, which reads downstream as "the page has no
+    # FAQ" rather than "the extractor does not know this markup" — the same
+    # silent-miss shape as the answer-pattern incident in tools/README.md.
+    r'<summary[^>]*>(.*?)</summary>',
     r'<div class="[a-z-]*faq-q">(.*?)</div>',
     r'<button class="fq"[^>]*>(.*?)<span',
     r'<div class="faq-question">(.*?)</div>',

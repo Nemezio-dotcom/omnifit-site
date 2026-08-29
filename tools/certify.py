@@ -6,7 +6,60 @@ import re, glob, json, hashlib, html, html.parser, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import faq
 
-OUT_OF_SCOPE = ("the-30-minute-executive-reset", "footer")
+OUT_OF_SCOPE = ("the-30-minute-executive-reset", "footer",
+                # not a page: a retired llms.txt body kept as an HTML artifact.
+                # CANON's REPO STATE has never listed it and no run has certified
+                # it. It carries the retired brand name, Pacific Beach, the old
+                # hello@ address and the JJ4E LLC line, all reported in REPORT.md
+                # rather than certified or corrected. If it is ever meant to be a
+                # live page, delete this entry — that is the condition under
+                # which excluding it is wrong.
+                "llms-txt-page-retired")
+
+# ─── structural facts the tooling has to know (CANON: STRUCTURAL EXCEPTIONS) ──
+# Headers whose page is built from Squarespace blocks: there is no Code Block to
+# retrieve, so no pages/<slug>.html will ever exist. Known orphans, not missing
+# files, and NOT to be deleted.
+KNOWN_ORPHAN_HEADERS = ("bodybuilding", "energy-protocol-waitlist-form")
+
+# Pages that carry their JSON-LD in the page body and have NO header file at
+# all. The header-mirror check must not report these as missing a header.
+BODY_EMBEDDED_SCHEMA = ("case-studies", "home-3")
+
+# The homepage ships as five separate Code Blocks, home-1 … home-5, not one
+# page. pages/headers/home-header.html is the header for all five, so its FAQ
+# mirror is checked against the five bodies concatenated in slug order.
+HEADER_PAGES = {"home": ["home-1", "home-2", "home-3", "home-4", "home-5"]}
+
+# LocalBusiness is DEFINED on the homepage and referenced by @id everywhere
+# else. CANON (c) bans redefinition "in a page header" — the homepage header is
+# the definition site, not a redefinition.
+LOCALBUSINESS_DEFINER = ("home",)
+
+# Node types that stand in for WebPage in a header's @graph.
+WEBPAGE_TYPES = ("WebPage", "AboutPage", "ContactPage", "CollectionPage", "ItemPage")
+
+# ─── named accepted exceptions (CANON: KNOWN DEFERRED ITEMS) ──────────────────
+# An ACCEPTED EXCEPTION is an existing violation deliberately tolerated;
+# certification must not flag it while listed. Each entry is (slug, rule kind,
+# exact phrase). All three must match, and the phrase is matched against the
+# flattened source, so an exemption can never swallow a different violation of
+# the same shape elsewhere on the same page.
+ACCEPTED = [
+    ("hsa-fsa-personal-training", "result promised within a window",
+     "FSA funds are typically use-it-or-lose-it within the plan year, so timing "
+     "matters more than it does with an HSA"),
+    ("hsa-fsa-personal-training", "uncertified specialty claim",
+     "does not determine eligibility, issue Letters of Medical Necessity, "
+     "diagnose conditions, or provide medical or tax advice"),
+]
+
+def _accepted(path, kind, flat, pos, span=400):
+    """True if this hit is a listed accepted exception. Matched on the slug, the
+    rule kind AND the exact phrase in the surrounding flattened text."""
+    slug = re.sub(r'(-header)?\.html$', '', path.split('/')[-1])
+    near = flat[max(0, pos - span):pos + span]
+    return any(s == slug and k == kind and p in near for s, k, p in ACCEPTED)
 
 # ─── (a) compliance shapes ─────────────────────────────────────────
 OUTCOME = (r'stronger|leaner|energized|energised|more in control|lose|losing|lost|fat loss|'
@@ -30,6 +83,38 @@ def _flat(t):
     t = re.sub(r'<!--.*?-->', ' ', t, flags=re.S)
     return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', t)).strip()
 
+def _flatmap(t):
+    """_flat(t), plus a source offset for every surviving character, so a hit in
+    the flattened text can be reported as file:line. Asserted equal to _flat()
+    on every file each run — the two must never drift, or the line numbers would
+    point somewhere the rule never looked."""
+    buf, off, i, n = [], [], 0, len(t)
+    while i < n:
+        if t.startswith('<!--', i):                     # comment -> single space
+            j = t.find('-->', i)
+            buf.append(' '); off.append(i); i = n if j < 0 else j + 3
+        elif t[i] == '<' and t.find('>', i) > i + 1:    # <[^>]+> -> single space
+            j = t.find('>', i)
+            buf.append(' '); off.append(i); i = j + 1
+        else:
+            buf.append(t[i]); off.append(i); i += 1
+    out, oo, k = [], [], 0                              # collapse \s+ -> ' '
+    while k < len(buf):
+        if buf[k].isspace():
+            out.append(' '); oo.append(off[k])
+            while k < len(buf) and buf[k].isspace(): k += 1
+        else:
+            out.append(buf[k]); oo.append(off[k]); k += 1
+    lo, hi = 0, len(out)                                # .strip()
+    while lo < hi and out[lo] == ' ': lo += 1
+    while hi > lo and out[hi - 1] == ' ': hi -= 1
+    return ''.join(out[lo:hi]), oo[lo:hi]
+
+def _line(src, off, pos):
+    """1-indexed source line of flattened-text position `pos`."""
+    if not off: return 0
+    return src.count('\n', 0, off[min(pos, len(off) - 1)]) + 1
+
 def _near(t, m, window):
     return ' '.join(t[:m.start()].split()[-window:] + t[m.end():].split()[:window])
 
@@ -38,7 +123,7 @@ def guarantee_near_outcome(text, window=30):
     for m in re.finditer(r'guarantee[ds]?', t, re.I):
         o = re.search(OUTCOME, _near(t, m, window), re.I)
         if o: out.append(("outcome guarantee", f"'{m.group(0)}' near '{o.group(0)}'",
-                          t[max(0, m.start()-100):m.end()+140].strip()))
+                          t[max(0, m.start()-100):m.end()+140].strip(), m.start()))
     return out
 
 def lbs_near_timeframe(text, window=15):
@@ -48,7 +133,7 @@ def lbs_near_timeframe(text, window=15):
         for tf in re.finditer(TIMEFRAME, w, re.I):
             if re.search(CONTRAST, w[:tf.start()], re.I): continue
             out.append(("lbs near timeframe", f"'{m.group(0).strip()}' near '{tf.group(0)}'",
-                        t[max(0, m.start()-100):m.end()+140].strip()))
+                        t[max(0, m.start()-100):m.end()+140].strip(), m.start()))
             break
     return out
 
@@ -71,7 +156,7 @@ def free_consultation(text, window=6):
         b = re.search(BOOKABLE, _near(t, m, window), re.I)
         if b:
             out.append(("free-consultation framing", f"'free' near '{b.group(0)}'",
-                        t[max(0, m.start()-100):m.end()+140].strip()))
+                        t[max(0, m.start()-100):m.end()+140].strip(), m.start()))
     return out
 
 def prenatal_postpartum(text, window=10):
@@ -85,7 +170,7 @@ def prenatal_postpartum(text, window=10):
         if re.search(NEGATED, _near(t, m, window), re.I): continue
         if m.group(0).lower().replace('-','') in {a.replace('-','') for a in attributed}: continue
         out.append(("prenatal/postpartum content", m.group(0),
-                    t[max(0, m.start()-100):m.end()+140].strip()))
+                    t[max(0, m.start()-100):m.end()+140].strip(), m.start()))
     return out
 
 def uncertified_claims(text, window=8):
@@ -97,13 +182,13 @@ def uncertified_claims(text, window=8):
         # negation may sit inside the match ("OmniFit does not diagnose") or beside it
         if re.search(NEGATED, m.group(0) + ' ' + _near(t, m, 4), re.I): continue
         out.append(("uncertified specialty claim", m.group(0).strip(),
-                    t[max(0, m.start()-100):m.end()+140].strip()))
+                    t[max(0, m.start()-100):m.end()+140].strip(), m.start()))
     for m in re.finditer(r'\b(?:we|omnifit(?: performance)?)\s+(?:\w+\s+){0,2}?'
                          r'(?:provide|provides|offer|offers|deliver|delivers|perform|performs|do|does)\s+'
                          r'(?:\w+\s+){0,2}?(physical therapy|chiropractic)\b', t, re.I):
         if re.search(NEGATED, m.group(0) + ' ' + _near(t, m, 6), re.I): continue
         out.append(("uncertified specialty claim", m.group(0).strip(),
-                    t[max(0, m.start()-100):m.end()+140].strip()))
+                    t[max(0, m.start()-100):m.end()+140].strip(), m.start()))
     return out
 
 # negation incl. contractions, checked only on the PRECEDING words so a trailing
@@ -127,7 +212,7 @@ def clinical_stat(text, window=8):
         f = re.search(OUTCOME_FRAME, near, re.I)
         if c and f:
             out.append(("quantified clinical outcome statistic", f"'{m.group(0).strip()}' near '{c.group(0)}'",
-                        t[max(0, m.start()-100):m.end()+140].strip()))
+                        t[max(0, m.start()-100):m.end()+140].strip(), m.start()))
     return out
 
 RESULT = (r'(?:measurable|visible|noticeable|significant|dramatic)\s+\w*\s*'
@@ -148,7 +233,7 @@ def result_near_timeframe(text, window=12):
         for tf in re.finditer(TIMEFRAME, w, re.I):
             if re.search(CONTRAST, w[:tf.start()], re.I): continue
             out.append(("result promised within a window", f"'{m.group(0).strip()}' near '{tf.group(0).strip()}'",
-                        t[max(0, m.start()-100):m.end()+140].strip()))
+                        t[max(0, m.start()-100):m.end()+140].strip(), m.start()))
             break
     return out
 
@@ -209,6 +294,32 @@ def _norm(x):
     artifact of extraction, not a mirroring failure."""
     return re.sub(r'\s+([.,;:])', r'\1', re.sub(r'\s+', ' ', x or '')).strip()
 
+def ld_nodes(s):
+    """Every JSON-LD node in a file, from EVERY <script> block, whether the block
+    is an @graph or a bare object. The single-block, @graph-only reader this
+    replaces crashed with KeyError on the first hand-built header it met
+    (about-header: an @graph with AboutPage and no WebPage) and would silently
+    have missed desk-worker's FAQPage, which lives in a second block. Returns
+    (nodes, errors)."""
+    nodes, errs = [], []
+    blocks = re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', s, re.S)
+    if not blocks:
+        return nodes, ["no ld+json block"]
+    for i, b in enumerate(blocks):
+        try:
+            doc = json.loads(b)
+        except Exception as e:
+            errs.append(f"invalid JSON in block {i + 1}: {e}"); continue
+        nodes.extend(doc["@graph"] if isinstance(doc, dict) and "@graph" in doc
+                     else doc if isinstance(doc, list) else [doc])
+    return nodes, errs
+
+def faq_pairs(nodes):
+    """(question, answer) pairs from every FAQPage node, in document order."""
+    return [(q.get("name"), (q.get("acceptedAnswer") or {}).get("text"))
+            for n in nodes if n.get("@type") == "FAQPage"
+            for q in n.get("mainEntity", [])]
+
 def run():
     ALL = sorted(glob.glob('pages/**/*.html', recursive=True))
     files = [f for f in ALL if not any(k in f for k in OUT_OF_SCOPE)]
@@ -219,12 +330,22 @@ def run():
     for k in skipped: print(f"   not certified: {k}")
 
     print("\n### (a) COMPLIANCE STRIKES")
+    excused = []
     for f in files:
         t = open(f).read()
+        flat, off = _flatmap(t)
+        assert flat == _flat(t), f"flatten drift in {f}"
         for fn in COMPLIANCE:
-            for kind, what, ctx in fn(t):
-                print(f"   {f}\n      [{kind}] {what}\n      …{ctx[:130]}…"); A+=1
+            for kind, what, ctx, pos in fn(t):
+                ln = _line(t, off, pos)
+                if _accepted(f, kind, flat, pos):
+                    excused.append(f"   {f}:{ln}  [{kind}] {what}  (accepted exception)")
+                    continue
+                print(f"   {f}:{ln}\n      [{kind}] {what}\n      …{ctx[:130]}…"); A+=1
     print("   none" if not A else f"   {A} strike(s)")
+    if excused:
+        print(f"   ({len(excused)} accepted exception(s) not counted, listed below)")
+        for e in excused: print(e)
 
     print("\n### (b) STALE CANON")
     for term in BANNED:
@@ -262,32 +383,54 @@ def run():
         if p.st or p.err:
             print(f"   {f}  [tag balance] unclosed={p.st} errors={p.err[:3]}"); C+=1
         if '/headers/' in f:
-            m=re.search(r'<script type="application/ld\+json">\s*(.*?)\s*</script>',s,re.S)
-            if not m: print(f"   {f}  [no ld+json block]"); C+=1; continue
-            try: doc=json.loads(m.group(1))
-            except Exception as e: print(f"   {f}  [invalid JSON] {e}"); C+=1; continue
-            n={x["@type"]:x for x in doc["@graph"]}
-            if "LocalBusiness" in n: print(f"   {f}  [LocalBusiness redefined]"); C+=1
-            if not n["WebPage"]["about"]["@id"].endswith("#localbusiness-of"):
-                print(f"   {f}  [about not referencing homepage LocalBusiness]"); C+=1
             slug=re.sub(r'-header\.html$','',f.split('/')[-1])
-            pg=f"pages/{slug}.html"
-            try: pq=page_questions(open(pg).read())
-            except FileNotFoundError: print(f"   {f}  [no matching page {pg}]"); C+=1; continue
-            sq=[q["name"] for x in doc["@graph"] if x["@type"]=="FAQPage" for q in x["mainEntity"]]
+            nodes,errs=ld_nodes(s)
+            for e in errs: print(f"   {f}  [{e}]"); C+=1
+            if not nodes: continue
+            types={x.get("@type") for x in nodes}
+            # the homepage header is where LocalBusiness is DEFINED; CANON (c)
+            # bans REdefinition in a page header, not the definition itself
+            if "LocalBusiness" in types and slug not in LOCALBUSINESS_DEFINER:
+                print(f"   {f}  [LocalBusiness redefined]"); C+=1
+            wp=next((x for x in nodes if x.get("@type") in WEBPAGE_TYPES), None)
+            # only a header that carries a WebPage-shaped node makes a claim about
+            # `about`; one that carries only a Service or FAQPage makes none, and
+            # inventing a finding there would be a new rule, not this one
+            if wp is not None:
+                ref=((wp.get("about") or {}).get("@id") or "")
+                if not ref.endswith("#localbusiness-of"):
+                    print(f"   {f}  [about not referencing homepage LocalBusiness] {ref or 'absent'}"); C+=1
+            # KNOWN ORPHAN: the page is built from Squarespace blocks, so there is
+            # no Code Block to retrieve and pages/<slug>.html will never exist.
+            # Not a missing file, and not to be deleted.
+            if slug in KNOWN_ORPHAN_HEADERS:
+                print(f"   (known orphan header, no page to mirror: {f})")
+                continue
+            pgs=[f"pages/{p}.html" for p in HEADER_PAGES.get(slug,[slug])]
+            missing=[p for p in pgs if not os.path.exists(p)]
+            if missing: print(f"   {f}  [no matching page {', '.join(missing)}]"); C+=1; continue
+            body="".join(open(p).read() for p in pgs)
+            pq=page_questions(body)
+            sq=[q for q,_ in faq_pairs(nodes)]
             if pq!=sq:
                 print(f"   {f}  [FAQPage questions do not mirror page] page={len(pq)} schema={len(sq)}"); C+=1
             # CANON (c) requires count, order AND text: answers are part of the mirror.
-            pa=[a for _,a in faq.qa(open(pg).read())]
-            sa=[q["acceptedAnswer"]["text"] for x in doc["@graph"] if x["@type"]=="FAQPage"
-                for q in x["mainEntity"]]
+            pa=[a for _,a in faq.qa(body)]
+            sa=[a for _,a in faq_pairs(nodes)]
             if len(pa)!=len(sa) or any(_norm(a)!=_norm(b) for a,b in zip(pa,sa)):
                 d=[i for i,(a,b) in enumerate(zip(pa,sa)) if _norm(a)!=_norm(b)]
                 print(f"   {f}  [FAQPage answers do not mirror page] differing index={d}"); C+=1
-            a=[q["acceptedAnswer"]["text"] for x in doc["@graph"] if x["@type"]=="FAQPage"
-               for q in x["mainEntity"] if q["acceptedAnswer"]["text"].startswith("OmniFit Performance publishes its rates in full.")]
+            a=[x for _,x in faq_pairs(nodes)
+               if (x or "").startswith("OmniFit Performance publishes its rates in full.")]
             if a: inv.setdefault("header pricing",set()).add(hashlib.sha256(a[0].encode()).hexdigest()[:16])
             continue
+        # a page must have a header, unless it carries its schema in the body and
+        # has none by design, or a shared header already covers it
+        pslug=re.sub(r'\.html$','',f.split('/')[-1])
+        if (pslug not in BODY_EMBEDDED_SCHEMA
+                and not any(pslug in v for v in HEADER_PAGES.values())
+                and not os.path.exists(f"pages/headers/{pslug}-header.html")):
+            print(f"   {f}  [no header file pages/headers/{pslug}-header.html]"); C+=1
         for key,rx,grp in [
             ("page pricing", r'-faq-(?:body"><p>|a">)(OmniFit Performance publishes its rates in full\..*?)(?:</p>|</div>)', 1),
             ("credentials",  r'MEET YOUR TRAINER.*?<article class="[a-z]+-card">\s*<p>(.*?)</p>', 1)]:
@@ -300,6 +443,15 @@ def run():
     for k,v in inv.items():
         if len(v)!=1: print(f"   [invariant mismatch] {k}: {v}"); C+=1
     print("   none" if not C else f"   {C} problem(s)")
+
+    # Printed every run, not only on mismatch: a run has to be able to quote the
+    # five hashes back, and a silent invariant is how a check reports success
+    # without looking.
+    print("\n### INVARIANT HASHES")
+    for k in ("page pricing","header pricing","credentials","archetypes","9-point"):
+        v=inv.get(k)
+        print(f"   {k:<16} {'  '.join(sorted(v)) if v else 'NOT COMPUTED - no file matched'}"
+              f"{'' if v and len(v)==1 else '   <-- MISMATCH' if v else ''}")
     print(f"\n### RESULT: {'PASSED' if not (A or B or C) else 'FAILED'}"
           f"  (compliance {A} · stale canon {B} · structure {C})")
     return A,B,C
