@@ -1,0 +1,589 @@
+
+  
+    <style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  /* ═══ OMNIFIT STANDARD FRAMEWORK v1.0 — #omni-hybrid ═══ */
+  #omni-hybrid { --navy:#0a1628; --navy-mid:#0f1f3a; --navy-light:#152a4a; --navy-surface:#1a3158; --white:#fff; --white-90:rgba(255,255,255,0.9); --white-70:rgba(255,255,255,0.7); --white-50:rgba(255,255,255,0.5); --white-30:rgba(255,255,255,0.3); --white-20:rgba(255,255,255,0.2); --white-10:rgba(255,255,255,0.1); --white-05:rgba(255,255,255,0.05); --gold:#c9a84c; --gold-light:#e0c872; --gold-dim:rgba(201,168,76,0.15); --gold-glow:rgba(201,168,76,0.25); --green:#2e7d32; --green-dim:rgba(46,125,50,0.12); --red:#c0392b; --red-dim:rgba(192,57,43,0.10); --radius:8px; --radius-lg:12px; font-family:'Montserrat',sans-serif!important; color:var(--white); background:var(--navy); line-height:1.7; font-size:16px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; margin:0; padding:0; }
+  #omni-hybrid *, #omni-hybrid *::before, #omni-hybrid *::after { box-sizing:border-box; margin:0; padding:0; }
+
+  /* HERO */
+  #omni-hybrid .of-hero { padding:80px 28px 48px; max-width:880px; margin:0 auto; text-align:center; position:relative; }
+  #omni-hybrid .of-hero::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:500px; height:500px; background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%); pointer-events:none; opacity:0.3; }
+  #omni-hybrid .of-badge { display:inline-block; padding:8px 22px; border:1px solid var(--gold); color:var(--gold); border-radius:100px; font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:32px; position:relative; }
+  #omni-hybrid .of-hero h1 { font-family:'Playfair Display',serif!important; font-size:clamp(32px,5vw,52px); font-weight:700; line-height:1.15; color:var(--white); margin-bottom:24px; letter-spacing:-0.5px; position:relative; text-transform:none; }
+  #omni-hybrid .of-hero h1 em { font-style:italic; color:var(--gold); }
+  #omni-hybrid .of-hero-sub { font-family:'Montserrat',sans-serif!important; font-size:17px; color:var(--white-70); max-width:660px; margin:0 auto 36px; line-height:1.8; font-weight:400; }
+
+  /* CTA */
+  #omni-hybrid .of-cta-row { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:40px; position:relative; }
+  #omni-hybrid .of-btn { display:inline-block; padding:15px 36px; border-radius:var(--radius); font-family:'Montserrat',sans-serif!important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; transition:all 0.3s; }
+  #omni-hybrid a.of-btn, #omni-hybrid a.of-btn:link, #omni-hybrid a.of-btn:visited { text-decoration:none; }
+  #omni-hybrid .of-btn-primary, #omni-hybrid a.of-btn-primary, #omni-hybrid a.of-btn-primary:link, #omni-hybrid a.of-btn-primary:visited { background:var(--gold); color:var(--navy)!important; }
+  #omni-hybrid .of-btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.3); color:var(--navy)!important; }
+  #omni-hybrid .of-btn-ghost, #omni-hybrid a.of-btn-ghost, #omni-hybrid a.of-btn-ghost:link, #omni-hybrid a.of-btn-ghost:visited { border:1px solid var(--white-30); color:var(--white)!important; background:transparent; }
+  #omni-hybrid .of-btn-ghost:hover { border-color:var(--white); background:var(--white-05); transform:translateY(-2px); color:var(--white)!important; }
+
+  /* QUICK LINKS */
+  #omni-hybrid .of-quick { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:860px; margin:0 auto 56px; position:relative; padding:0 20px; }
+  #omni-hybrid .of-quick a, #omni-hybrid .of-quick a:link, #omni-hybrid .of-quick a:visited { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:600; padding:7px 16px; border-radius:100px; background:var(--white-05); border:1px solid var(--white-10); color:var(--white-50)!important; text-decoration:none; transition:all 0.3s; letter-spacing:0.3px; }
+  #omni-hybrid .of-quick a:hover { background:var(--gold-dim); border-color:var(--gold); color:var(--gold)!important; }
+
+  /* SECTIONS */
+  #omni-hybrid .of-section { padding:0 28px; max-width:1120px; margin:0 auto; }
+  #omni-hybrid .of-band { background:var(--navy-mid); padding:56px 28px; }
+  #omni-hybrid .of-band-inner { max-width:1120px; margin:0 auto; }
+  #omni-hybrid .of-section-head { text-align:center; margin-bottom:40px; }
+  #omni-hybrid .of-label { font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; }
+  #omni-hybrid .of-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 20px; border-radius:2px; }
+
+  /* TYPOGRAPHY */
+  #omni-hybrid h2 { font-family:'Playfair Display',serif!important; font-size:clamp(26px,4vw,36px); font-weight:700; line-height:1.2; margin-bottom:12px; letter-spacing:-0.3px; color:var(--white); text-transform:none; }
+  #omni-hybrid h3 { font-family:'Playfair Display',serif!important; color:var(--white); text-transform:none; }
+  #omni-hybrid p { font-family:'Montserrat',sans-serif!important; color:var(--white-70); font-weight:400; line-height:1.7; }
+  #omni-hybrid .of-body { font-size:15px; color:var(--white-70); margin-bottom:16px; line-height:1.7; max-width:760px; }
+  #omni-hybrid .of-body-sm { font-size:14px; color:var(--white-50); line-height:1.65; margin-bottom:8px; }
+  #omni-hybrid .of-body-center { text-align:center; max-width:660px; margin-left:auto; margin-right:auto; }
+
+  /* GRIDS */
+  #omni-hybrid .of-grid { display:grid; gap:20px; margin-bottom:56px; }
+  #omni-hybrid .of-grid-2 { grid-template-columns:repeat(2,1fr); }
+  #omni-hybrid .of-grid-3 { grid-template-columns:repeat(3,1fr); }
+  #omni-hybrid .of-grid-4 { grid-template-columns:repeat(4,1fr); }
+
+  /* CARDS */
+  #omni-hybrid .of-card { background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:32px 24px 28px; text-align:left; transition:all 0.4s; position:relative; display:flex; flex-direction:column; min-height:0; }
+  #omni-hybrid .of-card:hover { border-color:var(--gold); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.3); }
+  #omni-hybrid .of-card-icon { font-size:28px; margin-bottom:16px; display:block; line-height:1; }
+  #omni-hybrid .of-card h3 { font-size:19px; font-weight:600; margin-bottom:10px; color:var(--white); line-height:1.3; }
+  #omni-hybrid .of-card p { font-size:14px; color:var(--white-50); margin-bottom:18px; line-height:1.65; }
+  #omni-hybrid .of-card-features { list-style:none; margin:0 0 20px; padding:0; flex:1 1 auto; }
+  #omni-hybrid .of-card-features li { font-family:'Montserrat',sans-serif!important; font-size:13px; color:var(--white-50); padding:5px 0 5px 20px; position:relative; line-height:1.5; }
+  #omni-hybrid .of-card-features li::before { content:'✓'; position:absolute; left:0; color:var(--gold); font-weight:700; font-size:11px; }
+  #omni-hybrid .of-card-link { font-family:'Montserrat',sans-serif!important; font-size:12px; font-weight:700; color:var(--gold)!important; text-decoration:none; letter-spacing:0.5px; display:inline-flex; align-items:center; gap:6px; transition:all 0.3s; margin-top:auto; flex-shrink:0; padding-top:4px; }
+  #omni-hybrid .of-card-link:hover { color:var(--gold-light)!important; gap:10px; }
+  #omni-hybrid .of-card-link span { transition:transform 0.3s; }
+  #omni-hybrid .of-card:hover .of-card-link span { transform:translateX(3px); }
+  #omni-hybrid .of-card.featured { border-color:var(--gold-dim); background:linear-gradient(135deg,var(--navy-light) 0%,var(--navy-surface) 100%); }
+  #omni-hybrid .of-card-num { font-family:'Playfair Display',serif!important; font-size:28px; font-weight:700; color:var(--gold); margin-bottom:12px; display:block; }
+  #omni-hybrid .of-card-center { text-align:center; }
+  #omni-hybrid .of-card-gold { border-color:var(--gold)!important; background:var(--gold-dim)!important; }
+  #omni-hybrid .of-icon-x { font-size:24px; color:var(--red); margin-bottom:12px; display:block; }
+  #omni-hybrid .of-icon-check { font-size:24px; color:var(--gold); margin-bottom:12px; display:block; }
+
+  /* QUOTE BLOCK */
+  #omni-hybrid .of-quote-block { background:var(--navy-light); border-left:3px solid var(--gold); padding:28px 32px; border-radius:0 var(--radius-lg) var(--radius-lg) 0; max-width:900px; margin:0 auto; }
+  #omni-hybrid .of-quote-block p { font-size:15px; color:var(--white-70); line-height:1.8; margin:0; }
+
+  /* COMPARISON TABLE */
+  #omni-hybrid .of-table { border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--white-10); margin-bottom:40px; }
+  #omni-hybrid .of-table-row { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; border-bottom:1px solid var(--white-10); }
+  #omni-hybrid .of-table-row:last-child { border-bottom:none; }
+  #omni-hybrid .of-table-header { background:var(--navy-light); }
+  #omni-hybrid .of-table-cell { padding:14px 16px; font-family:'Montserrat',sans-serif!important; font-size:13px; color:var(--white-70); text-align:center; }
+  #omni-hybrid .of-table-label { text-align:left; font-weight:500; color:var(--white-90); }
+  #omni-hybrid .of-table-highlight { background:var(--gold-dim); color:var(--gold)!important; font-weight:600; }
+  #omni-hybrid .of-table-header .of-table-cell { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--white-50); }
+  #omni-hybrid .of-table-header .of-table-highlight { color:var(--gold)!important; }
+
+  /* FIT / NOT FIT */
+  #omni-hybrid .of-fit-yes { background:var(--green-dim); border:1px solid rgba(46,125,50,0.25); border-radius:var(--radius-lg); padding:32px 28px; }
+  #omni-hybrid .of-fit-no { background:var(--red-dim); border:1px solid rgba(192,57,43,0.2); border-radius:var(--radius-lg); padding:32px 28px; }
+  #omni-hybrid .of-fit-list { list-style:none; padding:0; margin:16px 0 0; }
+  #omni-hybrid .of-fit-list li { font-family:'Montserrat',sans-serif!important; font-size:14px; color:var(--white-70); padding:8px 0; display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
+  #omni-hybrid .of-fit-yes .of-fit-icon { color:#66bb6a; font-weight:700; flex-shrink:0; }
+  #omni-hybrid .of-fit-no .of-fit-icon { color:#e57373; font-weight:700; flex-shrink:0; }
+
+  /* PRICING */
+  #omni-hybrid .of-price-card { background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:36px 28px; text-align:center; position:relative; }
+  #omni-hybrid .of-price-card.featured { border-color:var(--gold); background:var(--gold-dim); }
+  #omni-hybrid .of-price-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--gold); color:var(--navy); font-family:'Montserrat',sans-serif!important; font-size:9px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:3px 14px; border-radius:100px; white-space:nowrap; }
+  #omni-hybrid .of-price { font-family:'Playfair Display',serif!important; font-size:42px; font-weight:700; color:var(--gold); margin:12px 0 4px; }
+  #omni-hybrid .of-price-per { font-size:16px; font-weight:400; color:var(--white-50); }
+  #omni-hybrid .of-price-total { font-family:'Montserrat',sans-serif!important; font-size:13px; color:var(--white-50); margin-bottom:20px; }
+  #omni-hybrid .of-price-label { font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--white-50); margin-bottom:12px; display:block; }
+  #omni-hybrid .of-addon-grid { max-width:480px; margin:0 auto; }
+  #omni-hybrid .of-addon-item { display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid var(--white-10); font-family:'Montserrat',sans-serif!important; }
+  #omni-hybrid .of-addon-item:last-child { border-bottom:none; }
+  #omni-hybrid .of-addon-name { font-size:14px; color:var(--white-70); }
+  #omni-hybrid .of-addon-price { font-size:14px; font-weight:600; color:var(--gold); }
+
+  /* FAQ */
+  #omni-hybrid .of-faq-list { max-width:800px; margin:0 auto; }
+  #omni-hybrid .of-faq { border-bottom:1px solid var(--white-10); }
+  #omni-hybrid .of-faq summary { font-family:'Montserrat',sans-serif!important; font-size:15px; font-weight:600; color:var(--white-90); padding:20px 0; cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+  #omni-hybrid .of-faq summary::-webkit-details-marker { display:none; }
+  #omni-hybrid .of-faq summary::after { content:'+'; font-size:20px; color:var(--gold); font-weight:300; transition:transform 0.3s; }
+  #omni-hybrid .of-faq[open] summary::after { content:'−'; }
+  #omni-hybrid .of-faq-a { font-family:'Montserrat',sans-serif!important; font-size:14px; color:var(--white-70); padding:0 0 20px; line-height:1.7; }
+  #omni-hybrid .of-faq-a a { color:var(--gold); text-decoration:underline; text-underline-offset:3px; }
+
+  /* HUB LINKS */
+  #omni-hybrid .of-hub-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+  #omni-hybrid .of-hub-link { display:block; background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:16px 20px; font-family:'Montserrat',sans-serif!important; font-size:13px; font-weight:500; color:var(--gold)!important; text-decoration:none; transition:all 0.2s; }
+  #omni-hybrid .of-hub-link:hover { border-color:var(--gold); background:var(--gold-dim); }
+
+  /* BOTTOM CTA */
+  #omni-hybrid .of-bottom { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 36px; text-align:center; max-width:1120px; margin:0 auto; }
+  #omni-hybrid .of-bottom h2 { margin-bottom:12px; }
+  #omni-hybrid .of-bottom p { max-width:560px; margin:0 auto 28px; font-size:15px; }
+  #omni-hybrid .of-bottom .of-btn { margin:0; }
+  #omni-hybrid .of-bottom-note { display:block; margin-top:14px; font-family:'Montserrat',sans-serif!important; font-size:11px; color:var(--white-50); }
+
+  /* TRUST BAR */
+  #omni-hybrid .of-trust { display:flex; align-items:center; justify-content:center; gap:28px; flex-wrap:wrap; margin:48px auto 0; max-width:700px; padding:0 20px; }
+  #omni-hybrid .of-trust-item { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:600; color:var(--white-50); letter-spacing:0.5px; display:flex; align-items:center; gap:6px; }
+  #omni-hybrid .of-trust-item span { font-size:14px; }
+
+  /* LINKS */
+  #omni-hybrid .of-link { color:var(--gold); text-decoration:underline; text-underline-offset:3px; }
+  #omni-hybrid .of-link:hover { color:var(--gold-light); }
+
+  /* WEEK / CYCLE */
+  #omni-hybrid .of-cycle-block { background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:28px 24px; margin-bottom:24px; }
+  #omni-hybrid .of-cycle-block h3 { font-size:17px; margin-bottom:20px; }
+  #omni-hybrid .of-week-day { background:var(--navy-mid); border:1px solid var(--white-10); border-radius:var(--radius); padding:20px 16px; }
+  #omni-hybrid .of-week-label { font-family:'Montserrat',sans-serif!important; font-size:12px; font-weight:700; color:var(--white-90); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+  #omni-hybrid .of-tag { display:inline-block; font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:4px 10px; border-radius:20px; margin-bottom:10px; }
+  #omni-hybrid .of-tag-studio { background:var(--gold-dim); color:var(--gold); }
+  #omni-hybrid .of-tag-app { background:rgba(156,39,176,0.15); color:#ce93d8; }
+  #omni-hybrid .of-tag-travel { background:var(--green-dim); color:#66bb6a; }
+  #omni-hybrid .of-tag-check { background:var(--white-05); color:var(--white-50); }
+
+  /* RESPONSIVE */
+  @media(max-width:980px) {
+    #omni-hybrid .of-grid-3 { grid-template-columns:repeat(2,1fr); }
+    #omni-hybrid .of-grid-4 { grid-template-columns:repeat(2,1fr); }
+    #omni-hybrid .of-hub-grid { grid-template-columns:repeat(2,1fr); }
+    #omni-hybrid .of-table-row { grid-template-columns:1.5fr 1fr 1fr 1fr; }
+    #omni-hybrid .of-table-cell { padding:10px 10px; font-size:12px; }
+  }
+  @media(max-width:768px) {
+    #omni-hybrid .of-hero { padding:56px 20px 36px; }
+    #omni-hybrid .of-section { padding:0 20px; }
+    #omni-hybrid .of-band { padding:56px 20px; }
+    #omni-hybrid .of-bottom { padding:32px 24px; margin-left:20px; margin-right:20px; }
+    #omni-hybrid .of-grid-2 { grid-template-columns:1fr; }
+  }
+  @media(max-width:640px) {
+    #omni-hybrid .of-grid-2, #omni-hybrid .of-grid-3, #omni-hybrid .of-grid-4, #omni-hybrid .of-hub-grid { grid-template-columns:1fr; max-width:400px; margin-left:auto; margin-right:auto; }
+    #omni-hybrid .of-cta-row { flex-direction:column; align-items:center; }
+    #omni-hybrid .of-btn { width:100%; max-width:300px; text-align:center; }
+    #omni-hybrid .of-table { overflow-x:auto; }
+    #omni-hybrid .of-table-row { min-width:500px; }
+  }
+</style>
+
+<div id="omni-hybrid">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="of-hero">
+    <span class="of-badge">12-Week Performance Program</span>
+    <h1>Executive Hybrid Coaching<br><em>Your Training Travels With You</em></h1>
+    <p class="of-hero-sub">One 60-minute in-person session every two weeks. Full async coaching in between — custom programming, travel workouts, nutrition guidance, and direct coach access. Built for professionals 30+ who execute independently but want expert oversight.</p>
+
+    <div class="of-cta-row">
+      <a class="of-btn of-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="of-btn of-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
+    </div>
+
+    <div class="of-quick">
+      <a href="/personal-training-services">All Services</a>
+      <a href="/the-30-minute-executive-reset">Executive Reset</a>
+      <a href="/corrective-exercise-post-rehab">Corrective / Post-Rehab</a>
+      <a href="/how-we-measure-your-progress">Progress Tracking</a>
+      <a href="/omnifit-vs-competitors">How We Compare</a>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/faqs">FAQs</a>
+    </div>
+  </section>
+
+  <!-- ═══ GEMINI QUOTABLE #1 ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-quote-block">
+      <p>OmniFit's Executive Hybrid Coaching is a 12-week performance consulting program for San Diego professionals 30+ who want expert in-person coaching without daily gym commitments. Clients train in-studio for one 60-minute session every two weeks with a NASM-certified coach who holds corrective exercise (CES) and orthopedic exercise credentials. Between sessions, clients receive custom app programming, travel-adapted workouts for hotel and home gyms, form review videos, nutrition guidance, and direct messaging access to their coach. The program is designed for self-directed executives who execute independently but want structured expert oversight, periodic hands-on assessment, and full accountability.</p>
+    </div>
+  </div>
+
+  <!-- ═══ THE PROBLEM ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">The Problem</span>
+      <hr class="of-divider">
+      <h2>You Don't Need a Daily Trainer. You Need an Expert System.</h2>
+    </div>
+    <p class="of-body of-body-center" style="margin-bottom:16px;">You're disciplined enough to work out on your own. What you don't have is the right program, the right corrections, and someone qualified enough to see what you can't feel.</p>
+    <p class="of-body of-body-center" style="margin-bottom:36px;">Most personal training is sold as access — more sessions, more time, more money. But for self-directed executives, more sessions isn't the answer. Better programming is.</p>
+
+    <div class="of-grid of-grid-3">
+      <article class="of-card of-card-center">
+        <span class="of-icon-x">✗</span>
+        <h3>3×/Week Training</h3>
+        <p>Effective but expensive and time-intensive. Hard to sustain with travel, meetings, and running a business. Cancellations stack up.</p>
+      </article>
+      <article class="of-card of-card-center">
+        <span class="of-icon-x">✗</span>
+        <h3>App-Only Programs</h3>
+        <p>Cheap templates with no live coaching. No one watching your form. No one adjusting when your shoulder flares up.</p>
+      </article>
+      <article class="of-card of-card-center of-card-gold">
+        <span class="of-icon-check">✓</span>
+        <h3>OmniFit Hybrid</h3>
+        <p>One deep session every two weeks with full hands-on coaching. Custom programming you execute independently. Expert oversight without the time tax.</p>
+      </article>
+    </div>
+  </div>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">How It Works</span>
+        <hr class="of-divider">
+        <h2>Two Touchpoints. One Integrated System.</h2>
+      </div>
+      <p class="of-body of-body-center" style="margin-bottom:36px;">Your program operates on two layers: deep in-person sessions every two weeks, and continuous async coaching in between. The sessions build your foundation. The async layer keeps you progressing daily.</p>
+
+      <div class="of-grid of-grid-2" style="margin-bottom:0;">
+        <article class="of-card">
+          <span class="of-card-num">01</span>
+          <h3>In-Person Sessions (Every 2 Weeks)</h3>
+          <p>60 minutes, 1:1 at our Pacific Beach studio. Your coach assesses movement quality, corrects form hands-on, tests strength benchmarks, and builds your next two-week training block.</p>
+          <ul class="of-card-features">
+            <li>Movement screening and posture assessment</li>
+            <li>Hands-on manual cueing and corrections</li>
+            <li>Strength and mobility benchmarking</li>
+            <li>Next-phase programming built live</li>
+            <li>60-minute deep session, no shortcuts</li>
+          </ul>
+        </article>
+        <article class="of-card">
+          <span class="of-card-num">02</span>
+          <h3>Async Coaching (Between Sessions)</h3>
+          <p>Between visits, you execute your custom program through the Trainerize app. Your coach monitors completion, reviews form videos, and adjusts workouts for travel weeks.</p>
+          <ul class="of-card-features">
+            <li>Custom training program in the app</li>
+            <li>Travel and hotel-adapted workout variations</li>
+            <li>Form review videos with coaching notes</li>
+            <li>Nutrition guidance and meal frameworks</li>
+            <li>Direct messaging — same-day response</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 2-WEEK CYCLE ═══ -->
+  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">What This Looks Like</span>
+      <hr class="of-divider">
+      <h2>A Typical Two-Week Cycle</h2>
+    </div>
+
+    <div class="of-cycle-block">
+      <h3>Week 1 — In-Person Session Week</h3>
+      <div class="of-grid of-grid-4" style="margin-bottom:0;">
+        <div class="of-week-day">
+          <div class="of-week-label">Monday</div>
+          <span class="of-tag of-tag-studio">In-Studio</span>
+          <p class="of-body-sm">60-min session. Movement screen, strength work, hands-on corrections. Coach builds your next 2-week block.</p>
+        </div>
+        <div class="of-week-day">
+          <div class="of-week-label">Wednesday</div>
+          <span class="of-tag of-tag-app">App Workout</span>
+          <p class="of-body-sm">Custom upper-body session via Trainerize. Video demos loaded. You train independently, log results in the app.</p>
+        </div>
+        <div class="of-week-day">
+          <div class="of-week-label">Friday</div>
+          <span class="of-tag of-tag-app">App Workout</span>
+          <p class="of-body-sm">Lower body + mobility. Coach reviews your form video from Wednesday and sends notes before you start.</p>
+        </div>
+        <div class="of-week-day">
+          <div class="of-week-label">Sunday</div>
+          <span class="of-tag of-tag-check">Check-In</span>
+          <p class="of-body-sm">Message exchange: how the week felt, pain flags, travel plans for next week. Coach adjusts if needed.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="of-cycle-block">
+      <h3>Week 2 — Independent Execution Week</h3>
+      <div class="of-grid of-grid-4" style="margin-bottom:0;">
+        <div class="of-week-day">
+          <div class="of-week-label">Tuesday</div>
+          <span class="of-tag of-tag-travel">Hotel Gym</span>
+          <p class="of-body-sm">Travel week. Coach pre-loaded dumbbell circuit adapted for hotel equipment. You log completion in the app.</p>
+        </div>
+        <div class="of-week-day">
+          <div class="of-week-label">Thursday</div>
+          <span class="of-tag of-tag-app">App Workout</span>
+          <p class="of-body-sm">Bodyweight mobility flow at home. 25 minutes. Coach sent form review with corrections from Tuesday.</p>
+        </div>
+        <div class="of-week-day">
+          <div class="of-week-label">Saturday</div>
+          <span class="of-tag of-tag-app">App Workout</span>
+          <p class="of-body-sm">Full-body strength session. Program auto-progresses weights from last week's logged data.</p>
+        </div>
+        <div class="of-week-day">
+          <div class="of-week-label">Sunday</div>
+          <span class="of-tag of-tag-check">Check-In</span>
+          <p class="of-body-sm">Coach reviews the full 2-week cycle. Prepares next in-person session agenda. Updates nutrition targets.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ GEMINI QUOTABLE #2 ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-quote-block">
+      <p>OmniFit's Executive Hybrid Coaching operates on a performance consulting model rather than a traditional session-based model. Clients attend one 60-minute in-person session every two weeks for hands-on movement assessment, strength coaching, and program design, then execute their custom training plan independently using the Trainerize app between visits. The coach monitors workout completion, reviews submitted form videos, adapts programming for travel and equipment changes, and provides nutrition guidance via direct messaging. This structure is designed for self-directed professionals 30+ who have the discipline to train independently but need expert programming, periodic assessment, and structured accountability to achieve sustainable results.</p>
+    </div>
+  </div>
+
+  <!-- ═══ COMPARISON TABLE ═══ -->
+  <div class="of-section" style="margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">Why This Model Works</span>
+      <hr class="of-divider">
+      <h2>Performance Consulting vs. Traditional Training</h2>
+    </div>
+
+    <div class="of-table">
+      <div class="of-table-row of-table-header">
+        <div class="of-table-cell"></div>
+        <div class="of-table-cell">3×/Week Training</div>
+        <div class="of-table-cell">App / Online Only</div>
+        <div class="of-table-cell of-table-highlight">OmniFit Hybrid</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Hands-on assessment</div>
+        <div class="of-table-cell">✓ Every session</div>
+        <div class="of-table-cell">✗ None</div>
+        <div class="of-table-cell of-table-highlight">✓ Every 2 weeks</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Custom programming between sessions</div>
+        <div class="of-table-cell">◐ Sometimes</div>
+        <div class="of-table-cell">◐ Generic templates</div>
+        <div class="of-table-cell of-table-highlight">✓ Fully custom</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Travel-adapted workouts</div>
+        <div class="of-table-cell">✗ Training stops</div>
+        <div class="of-table-cell">◐ Static templates</div>
+        <div class="of-table-cell of-table-highlight">✓ Coach-adapted weekly</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Form review with video feedback</div>
+        <div class="of-table-cell">✗ In-gym only</div>
+        <div class="of-table-cell">✗ Not available</div>
+        <div class="of-table-cell of-table-highlight">✓ Between sessions</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Time commitment per month</div>
+        <div class="of-table-cell">12–16 hours</div>
+        <div class="of-table-cell">Self-paced</div>
+        <div class="of-table-cell of-table-highlight">2 hours coached</div>
+      </div>
+      <div class="of-table-row">
+        <div class="of-table-cell of-table-label">Monthly investment</div>
+        <div class="of-table-cell">$1,400–2,100</div>
+        <div class="of-table-cell">$50–200</div>
+        <div class="of-table-cell of-table-highlight">$697</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ACCOUNTABILITY ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">Accountability</span>
+        <hr class="of-divider">
+        <h2>Accountability That Doesn't Stop When You Board a Plane</h2>
+      </div>
+
+      <div class="of-grid of-grid-2" style="margin-bottom:0;">
+        <article class="of-card">
+          <span class="of-card-num">1</span>
+          <h3>Daily Trainerize Tracking</h3>
+          <p>Every workout is logged — sets, reps, weights, completion time. Your coach sees it all. Nothing falls through the cracks.</p>
+        </article>
+        <article class="of-card">
+          <span class="of-card-num">2</span>
+          <h3>Weekly Coach Messaging</h3>
+          <p>Scheduled review of your week: what worked, what didn't. Nutrition, sleep, stress — everything factors in.</p>
+        </article>
+        <article class="of-card">
+          <span class="of-card-num">3</span>
+          <h3>Form Review Videos</h3>
+          <p>Submit form check videos between sessions. Your coach responds with cues, corrections, and progressions — same day.</p>
+        </article>
+        <article class="of-card">
+          <span class="of-card-num">4</span>
+          <h3>30-Day Progress Reports</h3>
+          <p>Monthly data review: body composition, strength benchmarks, adherence rate, posture photos, and next-phase adjustments.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FIT / NOT FIT ═══ -->
+  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">Is This Right For You?</span>
+      <hr class="of-divider">
+      <h2>Built For Executives. Not for Everyone.</h2>
+    </div>
+
+    <div class="of-grid of-grid-2">
+      <div class="of-fit-yes">
+        <h3>This Is Built For You If:</h3>
+        <ul class="of-fit-list">
+          <li><span class="of-fit-icon">✓</span> You're 30+ and your body doesn't recover like it used to</li>
+          <li><span class="of-fit-icon">✓</span> You travel 1–2+ weeks per month for work</li>
+          <li><span class="of-fit-icon">✓</span> You've tried gym routines that fell apart after 3 weeks</li>
+          <li><span class="of-fit-icon">✓</span> You want a structured system, not random workouts</li>
+          <li><span class="of-fit-icon">✓</span> You value accountability and data over motivation speeches</li>
+          <li><span class="of-fit-icon">✓</span> You have desk posture issues, joint concerns, or old injuries</li>
+          <li><span class="of-fit-icon">✓</span> You're willing to commit 12 weeks to see real change</li>
+        </ul>
+      </div>
+      <div class="of-fit-no">
+        <h3>Not the Right Fit If:</h3>
+        <ul class="of-fit-list">
+          <li><span class="of-fit-icon">✗</span> You want a cheap app with cookie-cutter workouts</li>
+          <li><span class="of-fit-icon">✗</span> You're looking for a 6-week crash program</li>
+          <li><span class="of-fit-icon">✗</span> You don't want to be held accountable</li>
+          <li><span class="of-fit-icon">✗</span> You prefer group classes or bootcamp energy</li>
+          <li><span class="of-fit-icon">✗</span> You won't train between sessions on your own</li>
+          <li><span class="of-fit-icon">✗</span> You're not willing to invest $697/mo in your health</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PRICING ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">Investment</span>
+        <hr class="of-divider">
+        <h2>Transparent Pricing. Serious Commitment.</h2>
+      </div>
+      <p class="of-body of-body-center" style="margin-bottom:36px;">Executive Hybrid Coaching is a 12-week program paid upfront. One in-person 60-minute session every two weeks, plus full async coaching between sessions. This is a performance consulting engagement, not a drop-in service.</p>
+
+      <div style="max-width:480px; margin:0 auto 40px;">
+        <div class="of-price-card featured">
+          <div class="of-price-badge">Executive Hybrid</div>
+          <h3>12-Week Program</h3>
+          <div class="of-price">$697<span class="of-price-per">/mo</span></div>
+          <p class="of-price-total">$2,091 total · 3-month commitment · paid upfront</p>
+          <div style="text-align:left; margin-top:16px;">
+            <span class="of-price-label">What's Included</span>
+            <ul class="of-card-features">
+              <li>6 in-person 60-minute sessions (every 2 weeks)</li>
+              <li>Custom app programming between sessions</li>
+              <li>Travel-adapted workouts for hotel and home gyms</li>
+              <li>Form review videos with coaching notes</li>
+              <li>Nutrition guidance and meal frameworks</li>
+              <li>Direct messaging access to your coach</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="of-section-head" style="margin-bottom:20px;">
+        <h3 style="font-size:17px;">Available Add-Ons</h3>
+      </div>
+      <div class="of-addon-grid" style="margin-bottom:32px;">
+        <div class="of-addon-item"><span class="of-addon-name">Extra In-Person Session</span><span class="of-addon-price">$175</span></div>
+        <div class="of-addon-item"><span class="of-addon-name">Extra Live Virtual Session</span><span class="of-addon-price">$125</span></div>
+        <div class="of-addon-item"><span class="of-addon-name">Nutrition Deep-Dive</span><span class="of-addon-price">By request</span></div>
+        <div class="of-addon-item"><span class="of-addon-name">Mobility Assessment</span><span class="of-addon-price">By request</span></div>
+        <div class="of-addon-item"><span class="of-addon-name">In-Home Training (travel fee)</span><span class="of-addon-price">+$50–75/session</span></div>
+      </div>
+
+      <p style="text-align:center; font-size:14px; color:var(--white-50);">Looking for higher-frequency virtual coaching? See the <a href="/the-30-minute-executive-reset" class="of-link">30-Minute Executive Reset</a> from $599/mo. Full program comparison on the <a href="/training-rates-san-diego" class="of-link">Training Rates</a> page.</p>
+    </div>
+  </div>
+
+  <!-- ═══ FAQ ═══ -->
+  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+    <div class="of-section-head">
+      <span class="of-label">Common Questions</span>
+      <hr class="of-divider">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="of-faq-list">
+      <details class="of-faq">
+        <summary>How does OmniFit's Executive Hybrid Coaching work?</summary>
+        <div class="of-faq-a">You train in-person at our Pacific Beach studio for one 60-minute session every two weeks. Between sessions, you execute a custom training program through the Trainerize app — with travel-adapted variations, form review videos, nutrition guidance, and direct messaging access to your coach. It's a performance consulting model designed for executives who can train independently but need expert programming and periodic hands-on assessment.</div>
+      </details>
+      <details class="of-faq">
+        <summary>What equipment do I need between sessions?</summary>
+        <div class="of-faq-a">Minimal equipment works: a pair of dumbbells, a resistance band, and a mat. For hotel rooms, we program bodyweight-only and band-based workouts that require zero equipment. For home gyms, we scale to whatever you have.</div>
+      </details>
+      <details class="of-faq">
+        <summary>How is this different from the 30-Minute Executive Reset?</summary>
+        <div class="of-faq-a">The Executive Reset is high-frequency virtual coaching — 30-minute live sessions 2–3 times per week via video. Executive Hybrid is low-frequency, high-depth in-person coaching — one 60-minute hands-on session every two weeks with full async support between visits. Choose the Reset if you want daily virtual structure. Choose Hybrid if you want periodic expert assessment and prefer to execute independently.</div>
+      </details>
+      <details class="of-faq">
+        <summary>Can I add extra sessions if I want more in-person time?</summary>
+        <div class="of-faq-a">Yes. Additional in-person sessions are available at $175 each, and live virtual sessions at $125 each. Nutrition deep-dives and mobility assessments are also available by request. Add-ons are purchased per session — no package commitment required.</div>
+      </details>
+      <details class="of-faq">
+        <summary>How much does Executive Hybrid Coaching cost?</summary>
+        <div class="of-faq-a">Executive Hybrid Coaching is $697 per month for a 3-month commitment, paid upfront ($2,091 total). This includes 6 in-person sessions, full app programming, travel workouts, form review videos, nutrition guidance, and direct coach messaging. In-home sessions are available with a $50–75 travel fee per session.</div>
+      </details>
+      <details class="of-faq">
+        <summary>Who is Executive Hybrid Coaching designed for?</summary>
+        <div class="of-faq-a">Self-directed professionals 30+ who are disciplined enough to train independently but want expert programming, hands-on assessment, and structured accountability. Ideal for executives who travel frequently, have home or hotel gym access, and prefer a consulting relationship over a daily trainer. Not designed for beginners who need constant supervision or clients who won't train between sessions.</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ═══ HUB LINKS ═══ -->
+  <div class="of-band">
+    <div class="of-band-inner">
+      <div class="of-section-head">
+        <span class="of-label">Explore OmniFit</span>
+        <hr class="of-divider">
+      </div>
+      <div class="of-hub-grid">
+        <a href="/training-rates-san-diego" class="of-hub-link">Training Rates &amp; Programs →</a>
+        <a href="/the-30-minute-executive-reset" class="of-hub-link">30-Minute Executive Reset →</a>
+        <a href="/how-we-measure-your-progress" class="of-hub-link">How We Measure Progress →</a>
+        <a href="/corrective-exercise-post-rehab" class="of-hub-link">Corrective Exercise &amp; Post-Rehab →</a>
+        <a href="/case-studies" class="of-hub-link">Client Case Studies →</a>
+        <a href="/omnifit-vs-competitors" class="of-hub-link">How OmniFit Compares →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ BOTTOM CTA ═══ -->
+  <div style="padding: 56px 28px 0;">
+    <div class="of-bottom">
+      <h2>Ready to Train Without Interruption?</h2>
+      <p>Book a 45-minute consultation. We'll assess your schedule, goals, and travel patterns — then build a hybrid program that fits your life.</p>
+      <a class="of-btn of-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="of-bottom-note">45-minute consultation (refundable deposit required) · No commitment · Honest assessment of fit</span>
+    </div>
+  </div>
+
+  <!-- ═══ TRUST BAR ═══ -->
+  <div class="of-trust" style="padding-bottom:48px;">
+    <div class="of-trust-item"><span>⭐</span> 5.0 · 180+ Reviews</div>
+    <div class="of-trust-item"><span>🏅</span> NASM CES · CPT · PES · BCS</div>
+    <div class="of-trust-item"><span>📍</span> Pacific Beach, San Diego</div>
+    <div class="of-trust-item"><span>🌍</span> Async Coaching Worldwide</div>
+  </div>
+
+</div>
+  
+  
+
+
+
