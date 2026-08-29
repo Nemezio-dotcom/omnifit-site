@@ -330,12 +330,17 @@ DEFERRED-01 · Executive Reset guarantee wording (rates page) · CLOSED Aug 2026
   pages/headers/training-rates-san-diego-header.html:381 ("30-Day
   Performance Guarantee: if after 30 days of full compliance you don't feel
   clearly stronger, more energized, and more in control"). Certification
-  flags all five occurrences. Either the correction was never committed or
-  it was lost when the page was refreshed from live. This run was barred
-  from touching previously certified pages and did not fix it. DEFERRED-01's
-  status is left CLOSED here because reopening a counsel-approved item is a
-  human decision; the discrepancy is recorded so the next run cannot miss
-  it.
+  flags all five occurrences. Cause established from history: the correction
+  WAS applied (7b8f6c8 on the page, e288599 on the header) and was then
+  OVERWRITTEN on 23 Aug 2026 by 6a0fd2a and 1e3d88e, two "Update
+  training-rates-san-diego" commits that re-pasted the live version over the
+  corrected repo copy. So the approved text never reached Squarespace and
+  the live page still carries the banned wording. Fixing the repo copy alone
+  will not fix the site; the corrected text has to be pasted. This run was
+  barred from touching previously certified pages and did not fix it.
+  DEFERRED-01's status is left CLOSED here because reopening a
+  counsel-approved item is a human decision; the discrepancy is recorded so
+  the next run cannot miss it.
 
 RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
 - Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved by counsel (Andrew

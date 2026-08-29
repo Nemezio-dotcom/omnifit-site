@@ -1976,3 +1976,419 @@ credentials      10 files   1 hash   6492e3ca1545dc26   matches CANON
 header pricing   11 files   1 hash   7e5de5984b133663   matches CANON
 page pricing     11 files   1 hash   ae388d31c0b6149e   matches CANON
 ```
+
+---
+
+# Ingest Consolidation Run — Report
+
+**Branch:** `claude/consolidate-ingest-certification-njmhvr`
+**Date:** Aug 2026
+**Scope:** reconcile the repo with what is actually live — archive the retired
+pages, bring the corrected pages into certification scope, teach the tooling
+the ingest's structural exceptions, and report (not fix) every defect on the
+newly scoped files.
+
+> **This run fixed no page content.** Task 4 was explicitly report-only, and
+> CANON's workflow rule is to report `file:line` and stop. Certification
+> therefore ends **FAILED**, with a full inventory below. Nothing in `archive/`
+> was modified, no previously certified page was edited, no canonical tags were
+> added, no orphan header or changelog comment was deleted.
+
+## 1. Certification result and invariant hashes
+
+```
+### SCOPE: 67 certified, 4 not yet certified
+   not certified: pages/footer.html
+   not certified: pages/headers/the-30-minute-executive-reset-header.html
+   not certified: pages/llms-txt-page-retired.html
+   not certified: pages/the-30-minute-executive-reset.html
+
+...
+### (c) BROKEN STRUCTURE
+   (known orphan header, no page to mirror: pages/headers/bodybuilding-header.html)
+   (known orphan header, no page to mirror: pages/headers/energy-protocol-waitlist-form-header.html)
+   pages/headers/home-header.html  [FAQPage questions do not mirror page] page=11 schema=0
+   pages/headers/home-header.html  [FAQPage answers do not mirror page] differing index=[]
+   2 problem(s)
+
+### INVARIANT HASHES
+   page pricing     ae388d31c0b6149e
+   header pricing   7e5de5984b133663
+   credentials      6492e3ca1545dc26
+   archetypes       6b1b0f4efbd4a72c
+   9-point          bd73ea51bc9ec5eb
+
+### RESULT: FAILED  (compliance 97 · stale canon 22 · structure 2)
+```
+
+All five invariants recomputed from the files and **matching CANON.md** — no
+invariant was changed by this run, so no hash in CANON needed updating.
+
+| Invariant | Hash | CANON |
+|---|---|---|
+| page pricing | `ae388d31c0b6149e` | matches |
+| header pricing | `7e5de5984b133663` | matches |
+| credentials | `6492e3ca1545dc26` | matches (`6492e3ca`, 630 bytes) |
+| archetypes | `6b1b0f4efbd4a72c` | matches |
+| 9-point screen | `bd73ea51bc9ec5eb` | matches |
+
+`certify.py` now prints these every run rather than only on mismatch — a silent
+invariant is how a check reports success without looking.
+
+`python3 tools/negative_tests.py` — **27 fixtures, all passing**, each new
+exemption paired with a case proving the check it exempts still fires.
+
+## 2. Per-file table: what moved, what changed
+
+### Moved to `archive/` (contents byte-identical, sha256 verified either side)
+
+| From | To | sha256 |
+|---|---|---|
+| `pages/personal-trainer-mission-hills.html` | `archive/personal-trainer-mission-hills.html` | `6a79892d…` unchanged |
+| `pages/headers/personal-trainer-mission-hills-header.html` | `archive/headers/personal-trainer-mission-hills-header.html` | `8349b81f…` unchanged |
+| `pages/executive-hybrid-coaching.html` | `archive/executive-hybrid-coaching.html` | `612449d8…` unchanged |
+| `pages/headers/executive-hybrid-coaching-header.html` | `archive/headers/executive-hybrid-coaching-header.html` | `391cfc80…` unchanged |
+| `pages/online-training.html` | `archive/online-training.html` | `71fb7c6f…` unchanged |
+| `pages/headers/online-training-header.html` | `archive/headers/online-training-header.html` | `6509aa97…` unchanged |
+
+`online-training` and its header were present and were archived the same way.
+`archive/README.md` added.
+
+### Changed
+
+| File | Change |
+|---|---|
+| `archive/README.md` | new — retired, never certified, never pasted, never corrected, URLs redirect |
+| `CANON.md` | REPO STATE: ten pages into scope; archive recorded; `llms-txt-page-retired` recorded; "26 pairs" corrected to 25. New STRUCTURAL EXCEPTIONS section. New ACCEPTED-01/-02. DEFERRED-01 gains an OPEN DISCREPANCY note |
+| `tools/certify.py` | structural exceptions encoded; multi-block JSON-LD; `file:line` on compliance findings; invariant hashes printed; accepted-exception mechanism; new page→header presence check |
+| `tools/faq.py` | `<summary>` widened to `<summary …>` |
+| `tools/negative_tests.py` | new — 27 both-directions fixtures |
+| `tools/README.md` | two new failing-check incidents; exemption and matching rules documented |
+| `REPORT.md` | this section |
+
+**No page or header content was edited anywhere.** `git diff` over `pages/` and
+`archive/` for this run is empty apart from the six renames.
+
+## 3. Defect inventory — newly scoped files (report only, nothing fixed)
+
+105 findings. **Read the count with this caveat:** `pages/case-studies.html`
+and `pages/home-3.html` are **byte-identical** (`c82d5f32…`) — home-3 *is* the
+case-studies block, duplicated as a homepage Code Block. Their 45 findings each
+are the same 45 defects counted twice. Distinct defects: **60**.
+
+| class | count | where |
+|---|---|---|
+| (a) lbs near timeframe | 91 | case-studies 45 · home-3 45 (same file) · desk-worker 1 |
+| (a) result promised within a window | 1 | home-2 |
+| (b) stale canon | 13 | all 13 inside changelog comments — see §4 |
+| (c) broken structure | 2 | home-header |
+| accepted exceptions excused | 0 | ACCEPTED-01/-02 are dormant; neither fires |
+
+### (c) broken structure
+
+| file:line | defect | detail |
+|---|---|---|
+| `pages/headers/home-header.html` | FAQPage questions do not mirror page | page = 11 questions (home-2 × 6, home-5 × 5), header schema = 0. The homepage FAQ is not in structured data at all. |
+| `pages/headers/home-header.html` | FAQPage answers do not mirror page | same cause |
+
+Everything else structural is clean: tag balance passes on all 67 in-scope
+files, no invalid JSON, no LocalBusiness redefined outside the homepage, every
+`about` reference that exists points at `#localbusiness-of`, and every in-scope
+page has a header or a recorded reason not to.
+
+### (a) + (b), full table
+
+| file | defect class | file:line | exact string |
+|---|---|---|---|
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:20` | '17 lbs' near '40-Year' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:20` | '17 pounds' near '4 Months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:20` | '248 to 231 lbs' near '4 Months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:21` | '18 lbs' near '12 Months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:21` | '18 pounds' near '12 Months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:24` | '27 pounds' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:24` | '225 to 198 lbs' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:25` | '21 pounds' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:25` | '181 to 160 lbs' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:26` | '14 lbs' near '3 Months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:26` | '14 pounds' near '3 Months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:26` | '162 to 148 lbs' near '3 Months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:27` | '11 pounds' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:28` | '2 lbs' near '29-Year' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:28` | '6 lbs' near 'a Week' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:237` | '17 lbs' near '40-Year' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:244` | '17 lbs' near '4-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:253` | '17 lbs' near '4 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:253` | '231 lbs' near '4 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:255` | '17 pounds' near '40-year' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:268` | '18 lbs' near '12 Months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:275` | '18 lbs' near '12-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:284` | '18 lbs' near '12 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:286` | '18 pounds' near '12 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:361` | '27 lbs' near '6-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:368` | '27 lbs' near '6-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:394` | '27 lbs' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:394` | '198 lbs' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:404` | '27 pounds' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:425` | '21 lbs' near '6-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:452` | '21 lbs' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:452` | '160 lbs' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:462` | '21 pounds' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:476` | '14 lbs' near '3-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:483` | '14 lbs' near '3-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:510` | '14 lbs' near '3 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:510` | '148 lbs' near '3 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:520` | '14 pounds' near '3 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:541` | '11 lbs' near '6-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:542` | '6 lbs' near '6-month' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:578` | '11 pounds' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:578` | '6 pounds' near '6 months' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:605` | '2 lbs' near 'week 12' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:612` | '2 lb' near '12-week' |
+| `pages/case-studies.html` | (a) lbs near timeframe | `pages/case-studies.html:623` | '6 lb' near '12 weeks' |
+| `pages/desk-worker-posture-pain.html` | (a) lbs near timeframe | `pages/desk-worker-posture-pain.html:409` | '18 lbs' near '/week' |
+| `pages/headers/home-header.html` | (b) stale canon | `pages/headers/home-header.html:6` | [OmniFit Personal Fitness Training] - Brand: "OmniFit Personal Fitness Training" → "OmniFit Performance" |
+| `pages/headers/home-header.html` | (b) stale canon | `pages/headers/home-header.html:13` | [Orthopedic Exercise] - Credentials: ACE "Orthopedic Exercise Specialist" → ACE CES (confirmed); |
+| `pages/headers/home-header.html` | (b) stale canon | `pages/headers/home-header.html:16` | [Pacific Beach] - areaServed: Pacific Beach/Mission Bay → 4S Ranch + North County corridor. |
+| `pages/home-1.html` | (b) stale canon | `pages/home-1.html:7` | [$90 ] - CTA Step 1 wording cleaned; $90 Performance Diagnostic FLAGGED pending canonical pricing doc |
+| `pages/home-1.html` | (b) stale canon | `pages/home-1.html:8` | [Executive Hybrid] - Executive Hybrid CONFIRMED dead: Card 6 relinked to /the-30-minute-executive-reset; add 301 for old slug |
+| `pages/home-1.html` | (b) stale canon | `pages/home-1.html:9` | [$90 ] - PRICING (Aug 2026 canonical doc): Performance Diagnostic $90 → $110, credited in full toward a 3-month packa |
+| `pages/home-1.html` | (b) stale canon | `pages/home-1.html:15` | [$90 ] - CTA: consultation kept primary; $90 Performance Diagnostic added as Step 2 |
+| `pages/home-1.html` | (b) stale canon | `pages/home-1.html:422` | [Executive Hybrid] <!-- Executive Hybrid retired: card now links to the live Executive Reset page. 301 /executive-hybrid-coaching |
+| `pages/home-2.html` | (b) stale canon | `pages/home-2.html:10` | [$90 ] - PRICING (Aug 2026 canonical doc): Performance Diagnostic $90 → $110, credited in full toward a 3-month packa |
+| `pages/home-2.html` | (b) stale canon | `pages/home-2.html:13` | [ACE OES] - Cred chip: "ACE CES" → "ACE OES" (superseded: ACE later reissued as CES, see v3) |
+| `pages/home-2.html` | (a) result promised within a window | `pages/home-2.html:288` | 'produces measurable change' near '30 days' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:20` | '17 lbs' near '40-Year' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:20` | '17 pounds' near '4 Months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:20` | '248 to 231 lbs' near '4 Months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:21` | '18 lbs' near '12 Months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:21` | '18 pounds' near '12 Months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:24` | '27 pounds' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:24` | '225 to 198 lbs' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:25` | '21 pounds' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:25` | '181 to 160 lbs' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:26` | '14 lbs' near '3 Months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:26` | '14 pounds' near '3 Months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:26` | '162 to 148 lbs' near '3 Months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:27` | '11 pounds' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:28` | '2 lbs' near '29-Year' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:28` | '6 lbs' near 'a Week' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:237` | '17 lbs' near '40-Year' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:244` | '17 lbs' near '4-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:253` | '17 lbs' near '4 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:253` | '231 lbs' near '4 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:255` | '17 pounds' near '40-year' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:268` | '18 lbs' near '12 Months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:275` | '18 lbs' near '12-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:284` | '18 lbs' near '12 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:286` | '18 pounds' near '12 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:361` | '27 lbs' near '6-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:368` | '27 lbs' near '6-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:394` | '27 lbs' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:394` | '198 lbs' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:404` | '27 pounds' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:425` | '21 lbs' near '6-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:452` | '21 lbs' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:452` | '160 lbs' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:462` | '21 pounds' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:476` | '14 lbs' near '3-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:483` | '14 lbs' near '3-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:510` | '14 lbs' near '3 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:510` | '148 lbs' near '3 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:520` | '14 pounds' near '3 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:541` | '11 lbs' near '6-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:542` | '6 lbs' near '6-month' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:578` | '11 pounds' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:578` | '6 pounds' near '6 months' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:605` | '2 lbs' near 'week 12' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:612` | '2 lb' near '12-week' |
+| `pages/home-3.html` | (a) lbs near timeframe | `pages/home-3.html:623` | '6 lb' near '12 weeks' |
+| `pages/home-4.html` | (b) stale canon | `pages/home-4.html:11` | [180+] - Reviews: 180+ → 190+ everywhere (schema reviewCount, description, quotable, stats bar) |
+| `pages/home-4.html` | (b) stale canon | `pages/home-4.html:30` | [OmniFit Personal Fitness Training] - Business name: OmniFit Personal Fitness Training → OmniFit Performance |
+| `pages/home-4.html` | (b) stale canon | `pages/home-4.html:31` | [Pacific Beach] - Location: Pacific Beach (2123 Garnet Ave) → 4S Ranch / Teqneeq (10772 Thornmint Rd) |
+
+TOTAL ROWS: 105  (accepted: 0)
+
+## 4. Changelog comments — inventory only, nothing deleted
+
+The `v2`/`v3` comment blocks restate previously removed claims **verbatim**, and
+they ship in the production HTML source where crawlers read them. A crawler
+reading `pages/home-4.html` finds the string `OmniFit Personal Fitness Training
+→ OmniFit Performance` and `Pacific Beach (2123 Garnet Ave)` in the page source,
+which is precisely what the brand and NAP sweeps were for.
+
+**35 lines across 10 files.** Every one of the 13 stale-canon hits on the newly
+scoped files is one of these — there is not a single stale-canon hit in
+customer-visible copy on any newly scoped page.
+
+| file:line | restated removed claim(s) | verbatim comment text |
+|---|---|---|
+| `pages/footer.html:6` | BNI | `<!-- Changelog v2: removed footer-badges block (NASM / ACE / BNI) and its CSS;` |
+| `pages/footer.html:7` | OmniFit Personal Fitness Training, Pacific Beach | `replaced legacy "OmniFit Personal Fitness Training" Pacific Beach GBP link` |
+| `pages/headers/home-header.html:6` | OmniFit Personal Fitness Training | `- Brand: "OmniFit Personal Fitness Training" → "OmniFit Performance"` |
+| `pages/headers/home-header.html:8` | Garnet | `- NAP: 2123 Garnet Ave, PB 92109 → 10772 Thornmint Rd, San Diego 92127 + geo updated` |
+| `pages/headers/home-header.html:9` | 142/151 | `- Reviews: 142/151 → 190+ (aggregateRating reviewCount 190; description says 190+)` |
+| `pages/headers/home-header.html:10` | $80-$125 | `- Pricing: "$80-$125 per session" era is DEAD. priceRange + offer catalog rebuilt` |
+| `pages/headers/home-header.html:11` | Foundation Monthly | `from the Aug 2026 canonical doc. Retired product names (Foundation Monthly,` |
+| `pages/headers/home-header.html:12` | VIP 6-Month | `Performance 3-Month, VIP 6-Month) removed.` |
+| `pages/headers/home-header.html:13` | Orthopedic Exercise | `- Credentials: ACE "Orthopedic Exercise Specialist" → ACE CES (confirmed);` |
+| `pages/headers/home-header.html:16` | Pacific Beach | `- areaServed: Pacific Beach/Mission Bay → 4S Ranch + North County corridor.` |
+| `pages/headers/training-rates-san-diego-header.html:8` | $50 | `V2 CHANGES: guest add-on FAQ answer corrected $50 -> $60 per session` |
+| `pages/home-1.html:7` | $90  | `- CTA Step 1 wording cleaned; $90 Performance Diagnostic FLAGGED pending canonical pricing doc` |
+| `pages/home-1.html:8` | Executive Hybrid | `- Executive Hybrid CONFIRMED dead: Card 6 relinked to /the-30-minute-executive-reset; add 301 for old slug` |
+| `pages/home-1.html:9` | $90  | `- PRICING (Aug 2026 canonical doc): Performance Diagnostic $90 → $110, credited in full toward a 3-month package; starting-at line added ($250/mo = Teqneeq Esse` |
+| `pages/home-1.html:11` | 100+, BNI | `- Trust strip: 100+ → 190+ 5-Star Reviews; "BNI Del Mar" removed` |
+| `pages/home-1.html:15` | $90  | `- CTA: consultation kept primary; $90 Performance Diagnostic added as Step 2` |
+| `pages/home-1.html:422` | Executive Hybrid | `<!-- Executive Hybrid retired: card now links to the live Executive Reset page. 301 /executive-hybrid-coaching to /the-30-minute-executive-reset in Squarespace ` |
+| `pages/home-2.html:6` | 20–30 | `- COMPLIANCE: "20–30 lb over 4–12 months" outcome claim removed from quotable (attorney screen: no lbs-in-timeframe claims)` |
+| `pages/home-2.html:7` | free consultation | `- COMPLIANCE: all "free consultation" framing removed ($30 refundable deposit is the qualification filter, not a free offer)` |
+| `pages/home-2.html:9` | lose 25 lbs | `- "lose 25 lbs" sample goal replaced with non-numeric example` |
+| `pages/home-2.html:10` | $90  | `- PRICING (Aug 2026 canonical doc): Performance Diagnostic $90 → $110, credited in full toward a 3-month package; $30 deposit CONFIRMED` |
+| `pages/home-2.html:13` | ACE OES | `- Cred chip: "ACE CES" → "ACE OES" (superseded: ACE later reissued as CES, see v3)` |
+| `pages/home-4.html:11` | 180+ | `- Reviews: 180+ → 190+ everywhere (schema reviewCount, description, quotable, stats bar)` |
+| `pages/home-4.html:15` | 20–30 | `- COMPLIANCE: "most clients lose 20–30 pounds over 4–6 months" outcome claim removed` |
+| `pages/home-4.html:18` | 97.8% | `- Stats bar: "97.8% Client Satisfaction" REPLACED with "3/10 Pain Ceiling Rule".` |
+| `pages/home-4.html:19` | 97.8% | `(97.8% is Gemini sentiment share from Semrush, not a client satisfaction survey.` |
+| `pages/home-4.html:30` | OmniFit Personal Fitness Training | `- Business name: OmniFit Personal Fitness Training → OmniFit Performance` |
+| `pages/home-4.html:31` | Garnet, Pacific Beach | `- Location: Pacific Beach (2123 Garnet Ave) → 4S Ranch / Teqneeq (10772 Thornmint Rd)` |
+| `pages/home-5.html:5` | 20-30 | `- COMPLIANCE: "1-2 lb/week ... 20-30+ lbs in 4-6 months" results answer replaced` |
+| `pages/the-30-minute-executive-reset.html:12` | $175 | `built around travel and packed calendars. From $175/month. NASM Elite Trainer.` |
+| `pages/the-30-minute-executive-reset.html:16` | $175 | `A. TIER FREQUENCIES CONFIRMED (Aug 2026): Bronze $175 async, Gold $449 = 1 live` |
+| `pages/the-30-minute-executive-reset.html:26` | Executive Hybrid | `Executive Hybrid was retired and 301s here. Confirm the framing reads right.` |
+| `pages/training-rates-san-diego.html:4` | 2.9%, Executive Hybrid | `<!-- V8 CHANGES: Executive Hybrid removed (both venues + FAQ + schema) · 2.9% card fee removed everywhere · Monthly Tune-Up added after Session Packages · Tune-` |
+| `pages/training-rates-san-diego.html:5` | $50 | `<!-- V9 CHANGES: Guest add-on corrected $50 → $60 in 4 locations (studio footer · in-home footer · add-on card · guest FAQ). NOTE: apply same fix to FAQ JSON-LD` |
+| `pages/weight-loss.html:9` | 20-30 | `without crash dieting," "losing 20-30 lbs sustainably,"` |
+
+TOTAL LINES: 35 across 10 files
+
+Three notes on that table:
+
+- `pages/weight-loss.html:9` is **not** a defect. It restates persona language
+  ("losing 20-30 lbs sustainably") which CANON explicitly keeps legal — persona
+  language without a timeframe. Listed for completeness only.
+- `pages/training-rates-san-diego-header.html:8` and
+  `pages/training-rates-san-diego.html:5` both record the guest add-on as
+  corrected **`$50 → $60`**. CANON says the guest add-on is **$75** ("was $50,
+  corrected in the Rates Page Correction run"). The comments record a figure
+  that is in neither the old nor the current canon. Reported, not touched.
+- `pages/footer.html` and `pages/the-30-minute-executive-reset.html` are out of
+  certification scope but their comments ship all the same, so they are listed.
+
+## 5. `JJ4E LLC`
+
+One occurrence, repo-wide:
+
+```
+pages/llms-txt-page-retired.html:42
+# OmniFit Training © 2025 JJ4E LLC (DBA OmniFit Personal Fitness Training)
+```
+
+Not changed — a legal entity question, not a canon one. The same file also
+carries, at the same lines, three things a future run will want to decide on
+together with it:
+
+```
+pages/llms-txt-page-retired.html:31   Pacific Beach, Mission Bay, Kate Sessions Park…
+pages/llms-txt-page-retired.html:37   Contact: hello@omnifittraining.com   (canon: nemezio@)
+pages/llms-txt-page-retired.html:42   DBA OmniFit Personal Fitness Training
+```
+
+## 6. Pre-existing failures on previously certified pages
+
+**The previously certified pages do not currently pass.** Run in isolation over
+the 25 certified page/header pairs: structure **0**, all five invariants
+matching, but **14 findings** — every one of them present in the baseline run
+before this run changed anything, and none of them introduced by it.
+
+| file:line | class | detail |
+|---|---|---|
+| `pages/training-rates-san-diego.html:664` | (a) outcome guarantee | `'Guarantee' near 'energized'` |
+| `pages/training-rates-san-diego.html:767` | (a) outcome guarantee | `'guarantee' near 'stronger'` |
+| `pages/training-rates-san-diego.html:768` | (a) outcome guarantee | `'Guarantee' near 'stronger'` |
+| `pages/headers/training-rates-san-diego-header.html:378` | (a) outcome guarantee | `'guarantee' near 'stronger'` |
+| `pages/headers/training-rates-san-diego-header.html:381` | (a) outcome guarantee | `'Guarantee' near 'stronger'` |
+| `pages/training-rates-san-diego.html:4` | (b) Executive Hybrid | in the V8 changelog comment |
+| `pages/FAQs.html:183` | (b) $150 | pre-existing, documented in tools/README.md |
+| `pages/headers/FAQs-header.html:86` | (b) $150 | pre-existing |
+| `pages/how-it-works-pricing.html:200` | (b) $150 | pre-existing |
+| `pages/how-it-works-pricing.html:399` | (b) $150 | pre-existing — a rendered `$150/session` price card |
+| `pages/how-it-works-pricing.html:580` | (b) $150 | pre-existing |
+| `pages/headers/how-it-works-pricing-header.html:54` | (b) $150 | pre-existing |
+| `pages/private-personal-trainer-san-diego.html:535` | (b) $150 | pre-existing |
+| `pages/headers/private-personal-trainer-san-diego-header.html:62` | (b) $150 | pre-existing |
+
+The eight `$150` hits are the ones `tools/README.md` already records as
+surfaced-but-unfixed by the pack-rule widening.
+
+**The five guarantee strikes are new information.** CANON records DEFERRED-01 as
+CLOSED with the approved rewording applied. History says it was applied
+(`7b8f6c8` on the page, `e288599` on the header) and then **overwritten on 23
+Aug 2026** by `6a0fd2a` and `1e3d88e`, two "Update training-rates-san-diego"
+commits that re-pasted the live version over the corrected copy:
+
+```
+-  <h4>30-Day Fit Guarantee</h4>
++  <h4>30-Day Executive Performance Guarantee</h4>
+-  …you decide it isn't the right fit, you can cancel and receive a refund of
+-  the unused balance… There is no compliance test to pass…
++  …if after 30 days of full compliance you don't feel clearly stronger, more
++  energized, and more in control…
+```
+
+The implication is not repo hygiene: the approved text never reached
+Squarespace, so **the live rates page still carries the banned wording**.
+Fixing the repo copy alone will not fix the site — the corrected text has to be
+pasted. Left unfixed here because previously certified pages were out of this
+run's scope; recorded in CANON under DEFERRED-01 as an OPEN DISCREPANCY.
+
+## 7. Judgment calls, each with the condition under which it is wrong
+
+1. **Headers archived to `archive/headers/`, not flat `archive/`.** The
+   instruction said "move to `archive/`". Nesting mirrors the source layout and
+   keeps each page/header pair obvious. *Wrong if* anything downstream expects a
+   flat `archive/` directory.
+
+2. **`llms-txt-page-retired.html` put out of certification scope rather than
+   archived or certified.** It was in `certify.py`'s glob but has never been in
+   CANON's REPO STATE, so tool and brief disagreed. It is a retired `llms.txt`
+   body, not a page, and the task named it nowhere. Excluding it keeps 20-odd
+   phantom stale-canon hits out of the real inventory; its contents are reported
+   in §5 instead. *Wrong if* this is meant to be a live page — then it belongs in
+   scope and needs a brand, NAP, contact-address and entity pass.
+
+3. **The homepage FAQ mirror is reported as a structural defect, not exempted.**
+   Task 3 said `home-header.html` is the header for all five blocks, which the
+   tooling now encodes. It does not say the homepage FAQ is exempt from
+   mirroring, and 11 questions with no FAQPage in the header is a real
+   structured-data gap. *Wrong if* the homepage FAQ is deliberately unmarked-up,
+   in which case `home` belongs in a mirror-exempt list next to the orphans.
+
+4. **A new page→header presence check was added.** Task 3 required the tooling
+   to know that `case-studies` and `home-3` are not missing headers. Nothing
+   checked page→header at all, so the exemption had nothing to attach to; the
+   check gives it meaning and is negative-tested. It flags nothing else in the
+   repo. *Wrong if* headerless pages are common and intended, in which case the
+   check produces noise rather than signal.
+
+5. **The two hsa-fsa accepted exceptions were recorded but are dormant.** Under
+   the rules as they stand, neither string fires: `RESULT` does not match "so
+   timing matters", and the `diagnose` pattern requires a subject within two
+   words and treats the negation as legal already. They are recorded as
+   instructed so a future widening cannot re-flag settled copy. *Wrong if* the
+   intent was for the rules to be widened until those strings DO fire and only
+   then be excused — that would be a rule change this run was not asked to make.
+
+6. **The 91 `lbs near timeframe` hits on case-studies/home-3 are reported, not
+   excused.** CANON's CANONICAL TRUTH block lists the case-study figures *with*
+   their timeframes ("Mark −17 lbs (248→231, 4mo)") as canonical, while the
+   COMPLIANCE SCREEN bans lbs-with-timeframe outright. The page publishes them
+   as "Dropped 17 lbs (248 → 231 lbs) in 4 months". **CANON contradicts itself
+   here and this run did not resolve it** — that is an attorney question, not a
+   tooling one. *Wrong if* documented historical client results are considered
+   outside the screen, in which case case-studies needs a named accepted
+   exception rather than 45 open findings.
+
+7. **The ingest was described as 20 files; 24 were found** outside certification
+   scope (14 pages, 10 headers, counting `llms-txt-page-retired` and the two
+   orphan headers). All 24 are accounted for above. *Wrong if* a specific
+   20-file manifest exists that this run should have reconciled against instead
+   of the repo's own contents.
