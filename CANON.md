@@ -11,7 +11,16 @@ REPO STATE
   training-rates-san-diego (refreshed from live and corrected, Aug 2026:
   two-ladder session packs, guest add-on, DEFERRED-01 applied) —
   each with a header under pages/headers/<slug>-header.html.
-  26 page/header pairs in total.
+  25 page/header pairs (this line said 26; the list under it has always had
+  25 entries, corrected in the Ingest Consolidation run, Aug 2026).
+  IN CERTIFICATION SCOPE as of the Ingest Consolidation run (Aug 2026) —
+  live, corrected and byte-verified against the site, but certification
+  currently REPORTS DEFECTS on them; the run was report-only by instruction
+  and fixed nothing. See REPORT.md for the per-file inventory:
+    about · desk-worker-posture-pain · hsa-fsa-personal-training ·
+    case-studies · home-1 · home-2 · home-3 · home-4 · home-5 · contactform
+  Headers for them: about · desk-worker-posture-pain ·
+  hsa-fsa-personal-training · home · contactform.
   NOT YET CERTIFIED, do not paste:
   · the-30-minute-executive-reset.html — the REPO COPY IS STALE RELATIVE TO
     PRODUCTION. The live version on the domain is ahead of this file. It
@@ -21,9 +30,44 @@ REPO STATE
     (pages/headers/the-30-minute-executive-reset-header.html) but has not
     been verified against a refreshed page.
   · footer.html — site-wide, in no batch.
+  · llms-txt-page-retired.html — a retired llms.txt body kept as an HTML
+    artifact, not a page. Never certified, never in this list before. Carries
+    the retired brand name, Pacific Beach, the old hello@ address and the
+    JJ4E LLC line. Out of certification scope in tools/certify.py.
   Never resurrect pre-patch originals from history.
 - Header naming is standardised: pages/headers/<slug>-header.html, no
   exceptions.
+- archive/ holds RETIRED pages: personal-trainer-mission-hills,
+  executive-hybrid-coaching, online-training, each with its header under
+  archive/headers/. Their URLs 301 elsewhere via Squarespace URL Mappings.
+  They are historical records: never certified, never pasted, never
+  corrected, never deleted. They carry retired pricing, the Garnet Ave
+  address and the retired brand name, and that is expected. archive/ sits
+  outside certify.py's pages/**/*.html glob, so it is out of scope by
+  construction rather than by an exemption list. See archive/README.md.
+
+STRUCTURAL EXCEPTIONS (encoded in tools/certify.py, negative-tested in
+tools/negative_tests.py — these are facts about the site, not tolerated
+violations)
+- case-studies and home-3 carry body-embedded JSON-LD and have NO header
+  file. The header-mirror check must not report them as missing a header.
+  The two files are byte-identical: home-3 IS the case-studies block,
+  duplicated as a homepage Code Block, so every finding on one is the same
+  finding on the other and the counts double.
+- The homepage is FIVE separate Code Blocks, home-1 … home-5, not one page.
+  pages/headers/home-header.html is the header for all five, and its FAQ
+  mirror is checked against the five bodies concatenated in slug order.
+  home-header is also where LocalBusiness is DEFINED; CANON (c) bans
+  REdefinition in a page header, which still applies everywhere else.
+- pages/headers/bodybuilding-header.html and
+  pages/headers/energy-protocol-waitlist-form-header.html are KNOWN ORPHAN
+  HEADERS: their pages are built from Squarespace blocks and have no Code
+  Block to retrieve, so no pages/<slug>.html will ever exist. Noted by
+  certification, never flagged as a missing page, and NOT to be deleted.
+- The ingested headers do not share the shape mkheaders.py produces: some
+  carry several ld+json blocks, some an @graph without a WebPage node, some
+  a bare Service object. certify.py reads every block and only checks the
+  `about` reference where a WebPage-shaped node actually exists.
 
 WORKFLOW RULES
 - Repo-only. Never publish anywhere; the human pastes approved output
@@ -39,9 +83,10 @@ WORKFLOW RULES
   mkheaders.py, README.md). Run `python3 tools/certify.py` from the repo
   root; do not rebuild the rules from scratch. If a rule is wrong, fix it
   in tools/ and update this brief in the same commit so the two stay in
-  step. tools/README.md records the three checks that have reported
-  success while not actually looking — negative-test every rule change in
-  both directions before trusting it.
+  step. tools/README.md records the checks that have reported success while
+  not actually looking — negative-test every rule change in both directions
+  before trusting it. `python3 tools/negative_tests.py` holds those tests;
+  run it after any rule change, and add a fixture for every new exemption.
 - CONTRACT VALUE CHECK (counsel condition, Andrew Flores, Aug 2026):
   before filing a client on any contract whose total exceeds $4,400,
   contact counsel first. This is a workflow step, not a pricing cap, and it
@@ -222,6 +267,30 @@ Two kinds live here and they behave differently:
   · ACTIVE CONSTRAINT — a restriction that must be HONOURED when publishing.
     Not a tolerated violation; breaking it is a real error.
 
+ACCEPTED-01 · hsa-fsa-personal-training, FSA plan-year line · Aug 2026
+- ACCEPTED EXCEPTION. Certification must not flag it while listed.
+- File: pages/hsa-fsa-personal-training.html:187, mirrored in
+  pages/headers/hsa-fsa-personal-training-header.html:70.
+- Text: "FSA funds are typically use-it-or-lose-it within the plan year, so
+  timing matters more than it does with an HSA."
+- Trips RESULT + WINDOW in shape. It describes how FSA accounts work — a
+  statutory feature of the account, not a promised outcome against a
+  calendar. Accepted.
+
+ACCEPTED-02 · hsa-fsa-personal-training, scope disclaimer · Aug 2026
+- ACCEPTED EXCEPTION. Certification must not flag it while listed.
+- File: pages/hsa-fsa-personal-training.html:168.
+- Text: "does not determine eligibility, issue Letters of Medical Necessity,
+  diagnose conditions, or provide medical or tax advice".
+- Trips the uncertified-specialty rule on `diagnose`. It is a negation and a
+  scope disclaimer — the exact shape CANON already calls legal. Accepted.
+- Both are encoded in certify.py's ACCEPTED list, matched on slug AND rule
+  AND exact phrase, so neither can swallow a different violation of the same
+  shape on the same page. Note: under the rules as they stand NEITHER
+  currently fires, so both exemptions are dormant. They are recorded so a
+  future widening of RESULT/TIMEFRAME or of the specialty-claim pattern
+  cannot re-flag settled copy.
+
 RESOLVED ITEMS (kept so the reasoning survives; no longer constraints)
 
 DEFERRED-01 · Executive Reset guarantee wording (rates page) · CLOSED Aug 2026
@@ -252,6 +321,21 @@ DEFERRED-01 · Executive Reset guarantee wording (rates page) · CLOSED Aug 2026
 - The (a) COMPLIANCE STRIKES exemption for this item is removed. The
   resolved text does not pair "guarantee" with an outcome word and needs no
   exemption; tools/certify.py no longer carries a DEFERRED_01 carve-out.
+- OPEN DISCREPANCY, raised by the Ingest Consolidation run (Aug 2026), NOT
+  resolved by it: the repo files do not contain the approved replacement
+  text. They still carry the ORIGINAL banned wording —
+  pages/training-rates-san-diego.html:664 ("30-Day Executive Performance
+  Guarantee" + "you don't feel clearly more energized, stronger, and more in
+  control") and :768, and
+  pages/headers/training-rates-san-diego-header.html:381 ("30-Day
+  Performance Guarantee: if after 30 days of full compliance you don't feel
+  clearly stronger, more energized, and more in control"). Certification
+  flags all five occurrences. Either the correction was never committed or
+  it was lost when the page was refreshed from live. This run was barred
+  from touching previously certified pages and did not fix it. DEFERRED-01's
+  status is left CLOSED here because reopening a counsel-approved item is a
+  human decision; the discrepancy is recorded so the next run cannot miss
+  it.
 
 RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
 - Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved by counsel (Andrew

@@ -5,8 +5,9 @@ rules from scratch.** If a rule is wrong, fix it here and update CANON.md so the
 two stay in step.
 
 ```
-python3 tools/certify.py     # the three-category certification
-python3 tools/mkheaders.py   # regenerate the Batch 3 page headers
+python3 tools/certify.py         # the three-category certification
+python3 tools/mkheaders.py       # regenerate the Batch 3 page headers
+python3 tools/negative_tests.py  # both-directions tests for every exemption
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
@@ -15,7 +16,7 @@ Anything else is a judgment call for a human, not a certification finding.
 
 ## Why this exists
 
-Three separate checks have reported success while not actually looking at the
+Six separate checks have now reported success while not actually looking at the
 thing they claimed to check. Each is now closed by something in this directory.
 The pattern is the point: **a green result means nothing until you have seen the
 check fail on purpose.**
@@ -26,6 +27,8 @@ check fail on purpose.**
 | Header re-mirror | 7 answers "re-mirrored" | It wrote `null` over all 7, destroying the canonical pricing block |
 | Free-framing rule | how-we-measure certified clean | Page said `free 45-minute assessment`; rule only knew `consultation` |
 | Session-pack rule | CANON authorised `10 @ $150` as a pack rung | $150 belonged to neither venue's ladder — a mangled merge of the studio and in-home figures |
+| Header structure check | ran on every header under `pages/` | it read only the FIRST `ld+json` block and assumed an `@graph` with a `WebPage` node; the first hand-built header it met raised `KeyError: 'WebPage'` and the whole section reported nothing |
+| FAQ question extraction | hsa-fsa "has no FAQ" | `<summary>` was matched bare, so `<summary class="hsa-faq-q">` yielded ZERO of its nine questions |
 
 The pack-rule incident is the odd one out: CANON itself was wrong, not the tool.
 Widening `certify.py`'s $150/$175 check to match the corrected CANON immediately
@@ -49,7 +52,8 @@ happened.
 
 Question containers:
 
-- `<summary>…</summary>`
+- `<summary …>…</summary>` — attributes allowed; the bare-tag-only version
+  returned zero questions for `hsa-fsa-personal-training`
 - `<div class="…faq-q">…</div>`
 - `<button class="fq" …>…<span`
 - `<div class="faq-question">…</div>` — omnifit-vs-competitors
@@ -144,13 +148,57 @@ ten and updating the hash in CANON.md in the same commit.
 
 ## Scope
 
-`certify.py` skips `the-30-minute-executive-reset` and `footer` (see CANON
-REPO STATE). `training-rates-san-diego` entered scope in the Rates Page
+`certify.py` skips `the-30-minute-executive-reset`, `footer` and
+`llms-txt-page-retired` (see CANON REPO STATE). `training-rates-san-diego` entered scope in the Rates Page
 Correction run (Aug 2026) once its content certified; the naming fix (its
 header lacked the `-header.html` suffix) was applied *after* content passed,
 per CANON's naming-fix rule — doing it first would have hidden a real
 structural check behind a filename mismatch instead of a genuine pass.
-Everything else under `pages/` is in scope.
+Everything else under `pages/` is in scope. `archive/` is not under `pages/`,
+so the retired pages are out of scope by construction rather than by an
+exemption list — nothing there can be reached by widening a rule.
 There is an assertion that the glob matched a non-zero number of files — an
 earlier run passed vacuously because it was executed from the wrong directory
 and matched nothing.
+
+## Structural exceptions (Ingest Consolidation run, Aug 2026)
+
+These are facts about how the site is built, not tolerated violations. Each has
+a fixture in `negative_tests.py` proving the check it exempts still fires.
+
+- `KNOWN_ORPHAN_HEADERS` — `bodybuilding`, `energy-protocol-waitlist-form`. Their
+  pages are Squarespace blocks with no Code Block to retrieve, so no
+  `pages/<slug>.html` will ever exist. Noted, never flagged, never deleted. A
+  header with a genuinely missing page still reports `[no matching page]`.
+- `BODY_EMBEDDED_SCHEMA` — `case-studies`, `home-3` carry their JSON-LD in the
+  body and have no header. An unexempted headerless page still reports
+  `[no header file]`. The two files are byte-identical, so their findings
+  double-count by design.
+- `HEADER_PAGES` — the homepage is five Code Blocks, `home-1`…`home-5`, sharing
+  `home-header.html`. The map points the mirror check at all five bodies
+  concatenated; it does **not** switch the check off, and the check currently
+  reports the homepage FAQ (11 questions) as absent from that header's schema.
+- `LOCALBUSINESS_DEFINER` — the homepage header is where `LocalBusiness` is
+  defined. CANON (c) bans *re*definition, which still flags in any other header.
+- `WEBPAGE_TYPES` / `ld_nodes()` — every `ld+json` block is read, `@graph` or
+  bare object, and the `about` reference is only checked where a WebPage-shaped
+  node exists. Inventing a finding for a header that carries only a `Service`
+  node would be a new rule, not this one. Invalid JSON in *any* block flags.
+
+## Accepted exceptions
+
+`ACCEPTED` entries are matched on slug **and** rule kind **and** an exact phrase
+in the surrounding flattened text. All three must match, so an exemption cannot
+swallow a different violation of the same shape on the same page — there is a
+fixture for exactly that. The two hsa-fsa entries are currently **dormant**:
+neither fires under the rules as they stand. They are recorded so a future
+widening cannot re-flag settled copy, not because they are suppressing anything
+today.
+
+## file:line on compliance findings
+
+Compliance rules run on flattened text, which has no line numbers. `_flatmap()`
+returns that same flattened text plus a source offset per character; `run()`
+asserts it is byte-identical to `_flat()` on every file, every run. If the two
+ever drift the assertion fires rather than the report quietly pointing at lines
+the rule never looked at.
