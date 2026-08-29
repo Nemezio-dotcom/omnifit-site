@@ -103,11 +103,20 @@
   /* ===== PRICING CARDS (4-col for named packages) ===== */
   #omni-rates .rt-pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 40px; }
   #omni-rates .rt-pricing-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-rates .rt-pricing-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 20px; }
   #omni-rates .rt-price-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 20px 24px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; }
   #omni-rates .rt-price-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
   #omni-rates .rt-price-card.featured { border-color: rgba(201,168,76,0.5); box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
   #omni-rates .rt-price-card.featured:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
 
+  #omni-rates .rt-price-card { position: relative; }
+  #omni-rates .rt-tier-flag { display: inline-block; padding: 5px 12px; border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; border: 1px solid; white-space: nowrap; }
+  #omni-rates .rt-tier-flag.t-entry { color: var(--white-70); border-color: var(--white-20); background: var(--white-05); }
+  #omni-rates .rt-tier-flag.t-common { color: var(--gold-light); border-color: rgba(201,168,76,0.35); background: var(--gold-dim); }
+  #omni-rates .rt-tier-flag.t-popular { color: var(--navy); border-color: var(--gold); background: var(--gold); }
+  #omni-rates .rt-tier-flag.t-max { color: var(--white); border-color: var(--white-30); background: var(--navy-surface); }
+  #omni-rates .rt-bestfor { font-family: 'Montserrat', sans-serif !important; font-size: 12.5px; line-height: 1.6; color: var(--white-90); margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--white-10); }
+  #omni-rates .rt-bestfor strong { color: var(--gold-light); font-weight: 600; }
   #omni-rates .rt-price-name { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
   #omni-rates .rt-price-freq { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-70); margin-bottom: 16px; }
   #omni-rates .rt-price-value { font-family: 'Playfair Display', serif !important; font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 4px; }
@@ -154,14 +163,20 @@
   #omni-rates .rt-addon-price { font-family: 'Playfair Display', serif !important; font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
   #omni-rates .rt-addon p { font-size: 13px; color: var(--white-50); line-height: 1.65; }
 
-  /* ===== SESSION PACKS TABLE ===== */
-  #omni-rates .rt-packs { max-width: 1120px; margin: 0 auto 56px; }
-  #omni-rates .rt-packs-table { width: 100%; border-collapse: collapse; }
-  #omni-rates .rt-packs-table th { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--white-10); }
-  #omni-rates .rt-packs-table td { font-family: 'Montserrat', sans-serif !important; font-size: 14px; color: var(--white-70); padding: 14px 16px; border-bottom: 1px solid var(--white-05); }
-  #omni-rates .rt-packs-table td:first-child { font-weight: 700; color: var(--white); }
-  #omni-rates .rt-packs-table td:last-child { color: var(--white-50); font-size: 12px; }
+  /* ===== SESSION PACKS ===== */
 
+  /* ===== SESSION PACK TILES ===== */
+  #omni-rates .rt-packs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 20px; }
+  #omni-rates .rt-pack { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 22px 24px; transition: all 0.4s; display: flex; flex-direction: column; }
+  #omni-rates .rt-pack:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-rates .rt-pack-name { font-family: 'Playfair Display', serif !important; font-size: 26px; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 4px; }
+  #omni-rates .rt-pack-expiry { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--white-50); margin-bottom: 18px; }
+  #omni-rates .rt-pack-venue { border-top: 1px solid var(--white-10); padding: 14px 0 0; margin-top: 4px; }
+  #omni-rates .rt-pack-venue:first-of-type { border-top: none; padding-top: 0; }
+  #omni-rates .rt-pack-venue-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  #omni-rates .rt-pack-total { font-family: 'Playfair Display', serif !important; font-size: 24px; font-weight: 700; color: var(--white); line-height: 1.1; }
+  #omni-rates .rt-pack-per { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); margin-bottom: 14px; }
+  #omni-rates .rt-pack-cta { margin-top: auto; padding-top: 16px; }
   /* ===== POLICIES ===== */
   #omni-rates .rt-policies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 56px; }
   #omni-rates .rt-policy { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
@@ -196,6 +211,8 @@
   /* ===== RESPONSIVE ===== */
   @media (max-width: 980px) {
     #omni-rates .rt-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    #omni-rates .rt-pricing-grid-3 { grid-template-columns: repeat(2, 1fr); }
+    #omni-rates .rt-packs-grid { grid-template-columns: repeat(3, 1fr); }
     #omni-rates .rt-pricing-grid-2 { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
     #omni-rates .rt-feature-grid { grid-template-columns: 1fr; gap: 20px; }
     #omni-rates .rt-fit-grid { grid-template-columns: 1fr; }
@@ -208,16 +225,18 @@
     #omni-rates .rt-includes { margin-left: 20px; margin-right: 20px; }
     #omni-rates .rt-fit-grid { margin-left: 20px; margin-right: 20px; }
     #omni-rates .rt-pricing-grid { grid-template-columns: 1fr 1fr; padding: 0 20px; }
+    #omni-rates .rt-pricing-grid-3 { grid-template-columns: 1fr 1fr; padding: 0 20px; }
+    #omni-rates .rt-packs-grid { grid-template-columns: 1fr; padding: 0 20px; max-width: 420px; }
     #omni-rates .rt-feature { margin-left: 20px; margin-right: 20px; }
     #omni-rates .rt-addons-grid { grid-template-columns: 1fr; padding: 0 20px; }
     #omni-rates .rt-policies { grid-template-columns: 1fr; padding: 0 20px; }
     #omni-rates .rt-bottom { margin-left: 20px; margin-right: 20px; padding: 32px 24px; }
     #omni-rates .rt-includes-grid { grid-template-columns: 1fr; }
     #omni-rates .rt-assess { margin-left: 20px; margin-right: 20px; }
-    #omni-rates .rt-packs { padding: 0 20px; }
   }
   @media (max-width: 640px) {
     #omni-rates .rt-pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    #omni-rates .rt-pricing-grid-3 { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
     #omni-rates .rt-cta-row { flex-direction: column; align-items: center; }
     #omni-rates .rt-btn { width: 100%; max-width: 300px; text-align: center; }
     #omni-rates .rt-price-cta { flex-direction: column; }
@@ -315,6 +334,7 @@
   <div class="rt-pricing-grid" style="padding:0 28px;">
 
     <article class="rt-price-card">
+            <div class="rt-tier-flag t-entry">Entry Point</div>
       <div class="rt-price-name">Essential</div>
       <div class="rt-price-freq">1 session every 2 weeks</div>
       <div class="rt-price-value">$250 <span>/mo</span></div>
@@ -331,6 +351,7 @@
     </article>
 
     <article class="rt-price-card">
+            <div class="rt-tier-flag t-common">Most Common</div>
       <div class="rt-price-name">Momentum</div>
       <div class="rt-price-freq">1 session per week</div>
       <div class="rt-price-value">$475 <span>/mo</span></div>
@@ -347,6 +368,7 @@
     </article>
 
     <article class="rt-price-card featured">
+            <div class="rt-tier-flag t-popular">Most Popular</div>
       <div class="rt-price-name">Performance</div>
       <div class="rt-price-freq">2 sessions per week</div>
       <div class="rt-price-value">$950 <span>/mo</span></div>
@@ -363,6 +385,7 @@
     </article>
 
     <article class="rt-price-card">
+            <div class="rt-tier-flag t-max">Maximum Support</div>
       <div class="rt-price-name">Peak</div>
       <div class="rt-price-freq">3 sessions per week</div>
       <div class="rt-price-value">$1,395 <span>/mo</span></div>
@@ -386,27 +409,73 @@
 
   <div class="rt-spacer-sm"></div>
 
-  <!-- COUPLES — TEQNEEQ -->
-  <div style="padding: 0 28px;">
-    <div class="rt-feature">
-      <div class="rt-feature-grid">
-        <div>
-          <h3 class="rt-feature-title">Couples Training</h3>
-          <div class="rt-feature-price">$325–$1,250 <span>/month · 3-month plan</span></div>
-          <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$370–$1,400 <span>/month · month-to-month</span></div>
-          <p class="rt-feature-note">Train with a partner, spouse, or friend at Teqneeq FHC. Customized programming for both. Everything included in every program applies to both partners. Essential (1 session every 2 weeks) $325/mo, Momentum (1 per week) $625/mo, Performance (2 per week) $1,250/mo on a 3-month plan. Single session without a commitment: $235. Teqneeq membership required for both partners at Momentum and above.</p>
-          <a class="rt-btn rt-btn-primary" href="/contactform">Book Couples Consult</a>
-        </div>
-        <div>
-          <ul class="rt-feature-list">
-            <li><strong>Individualized coaching for both partners</strong> — different fitness levels, different cues, shared session</li>
-            <li><strong>Custom programming</strong> for both people's goals and limitations</li>
-            <li><strong>All program inclusions</strong> — assessments, nutrition, accountability for both</li>
-            <li><strong>Built for consistency</strong> — training with someone you know increases adherence</li>
-          </ul>
-        </div>
-      </div>
+  <!-- ═══════ COUPLES — TEQNEEQ ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">Couples Training</span>
+      <hr class="rt-divider">
+      <h2>Teqneeq FHC <em>Couples Programs</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Train with a partner, spouse, or friend at Teqneeq FHC. One session, both of you, with programming set individually. Rates are per couple, not per person. Teqneeq membership required for both partners at Momentum and above.</p>
     </div>
+  </div>
+
+  <div class="rt-pricing-grid-3" style="padding:0 28px;">
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-entry">Entry Point</div>
+      <div class="rt-price-name">Essential</div>
+      <div class="rt-price-freq">1 session every 2 weeks</div>
+      <div class="rt-price-value">$325 <span>/mo per couple</span></div>
+      <div class="rt-price-upfront">$975 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $370/mo</div>
+      <ul class="rt-price-features">
+        <li>Individualized coaching for both</li>
+        <li>Both partners assessed separately</li>
+        <li>Full program inclusions for both</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-common">Most Common</div>
+      <div class="rt-price-name">Momentum</div>
+      <div class="rt-price-freq">1 session per week</div>
+      <div class="rt-price-value">$625 <span>/mo per couple</span></div>
+      <div class="rt-price-upfront">$1,875 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $700/mo</div>
+      <ul class="rt-price-features">
+        <li>Individualized coaching for both</li>
+        <li>Both partners assessed separately</li>
+        <li>Full program inclusions for both</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card featured">
+      <div class="rt-tier-flag t-popular">Most Popular</div>
+      <div class="rt-price-name">Performance</div>
+      <div class="rt-price-freq">2 sessions per week</div>
+      <div class="rt-price-value">$1,250 <span>/mo per couple</span></div>
+      <div class="rt-price-upfront">$3,750 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $1,400/mo</div>
+      <ul class="rt-price-features">
+        <li>Individualized coaching for both</li>
+        <li>Both partners assessed separately</li>
+        <li>Full program inclusions for both</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+    <p style="font-size:12px; color:var(--white-50); text-align:center;">Rates are per couple, per month. Single couples session without a commitment: $235 · Extra guest add-on: $75/session · Peak is available to couples on an ad hoc basis and is not offered as a prepaid couples program.</p>
   </div>
 
   <div class="rt-spacer"></div>
@@ -425,6 +494,7 @@
   <div class="rt-pricing-grid" style="padding:0 28px;">
 
     <article class="rt-price-card">
+            <div class="rt-tier-flag t-entry">Entry Point</div>
       <div class="rt-price-name">Essential</div>
       <div class="rt-price-freq">1 session every 2 weeks</div>
       <div class="rt-price-value">$335 <span>/mo</span></div>
@@ -441,6 +511,7 @@
     </article>
 
     <article class="rt-price-card">
+            <div class="rt-tier-flag t-common">Most Common</div>
       <div class="rt-price-name">Momentum</div>
       <div class="rt-price-freq">1 session per week</div>
       <div class="rt-price-value">$650 <span>/mo</span></div>
@@ -457,6 +528,7 @@
     </article>
 
     <article class="rt-price-card featured">
+      <div class="rt-tier-flag t-popular">Most Popular</div>
       <div class="rt-price-name">Performance</div>
       <div class="rt-price-freq">2 sessions per week</div>
       <div class="rt-price-value">$1,250 <span>/mo</span></div>
@@ -473,6 +545,7 @@
     </article>
 
     <article class="rt-price-card">
+            <div class="rt-tier-flag t-max">Maximum Support</div>
       <div class="rt-price-name">Peak</div>
       <div class="rt-price-freq">3 sessions per week</div>
       <div class="rt-price-value">From $1,860 <span>/mo</span></div>
@@ -496,27 +569,73 @@
 
   <div class="rt-spacer-sm"></div>
 
-  <!-- COUPLES — IN-HOME -->
-  <div style="padding: 0 28px;">
-    <div class="rt-feature">
-      <div class="rt-feature-grid">
-        <div>
-          <h3 class="rt-feature-title">Couples Training — In-Home</h3>
-          <div class="rt-feature-price">$455–$1,725 <span>/month · 3-month plan</span></div>
-          <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$510–$1,950 <span>/month · month-to-month</span></div>
-          <p class="rt-feature-note">Train together at home. All equipment provided. Everything included in every program applies to both partners. Essential (1 session every 2 weeks) $455/mo, Momentum (1 per week) $875/mo, Performance (2 per week) $1,725/mo on a 3-month plan. Single session without a commitment: $250. No facility membership required.</p>
-          <a class="rt-btn rt-btn-primary" href="/contactform">Book Couples Consult</a>
-        </div>
-        <div>
-          <ul class="rt-feature-list">
-            <li><strong>Individualized coaching for both partners</strong> — tailored to each person's level</li>
-            <li><strong>All equipment provided</strong> — no home gym required</li>
-            <li><strong>Full BodyStat clinical diagnostics</strong> for both partners monthly</li>
-            <li><strong>Built for consistency</strong> — training with someone you know increases adherence</li>
-          </ul>
-        </div>
-      </div>
+  <!-- ═══════ COUPLES — IN-HOME ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">Couples Training</span>
+      <hr class="rt-divider">
+      <h2>In-Home <em>Couples Programs</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Train together at home across North County San Diego. All equipment provided, no home gym required, no facility membership. Rates are per couple, not per person.</p>
     </div>
+  </div>
+
+  <div class="rt-pricing-grid-3" style="padding:0 28px;">
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-entry">Entry Point</div>
+      <div class="rt-price-name">Essential</div>
+      <div class="rt-price-freq">1 session every 2 weeks</div>
+      <div class="rt-price-value">$455 <span>/mo per couple</span></div>
+      <div class="rt-price-upfront">$1,365 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $510/mo</div>
+      <ul class="rt-price-features">
+        <li>Individualized coaching for both</li>
+        <li>Both partners assessed separately</li>
+        <li>All equipment provided</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-common">Most Common</div>
+      <div class="rt-price-name">Momentum</div>
+      <div class="rt-price-freq">1 session per week</div>
+      <div class="rt-price-value">$875 <span>/mo per couple</span></div>
+      <div class="rt-price-upfront">$2,625 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $975/mo</div>
+      <ul class="rt-price-features">
+        <li>Individualized coaching for both</li>
+        <li>Both partners assessed separately</li>
+        <li>All equipment provided</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card featured">
+            <div class="rt-tier-flag t-popular">Most Popular</div>
+      <div class="rt-price-name">Performance</div>
+      <div class="rt-price-freq">2 sessions per week</div>
+      <div class="rt-price-value">$1,725 <span>/mo per couple</span></div>
+      <div class="rt-price-upfront">$5,175 paid upfront · 3-month plan</div>
+      <div class="rt-price-m2m">Month-to-month: $1,950/mo</div>
+      <ul class="rt-price-features">
+        <li>Individualized coaching for both</li>
+        <li>Both partners assessed separately</li>
+        <li>All equipment provided</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+    <p style="font-size:12px; color:var(--white-50); text-align:center;">Rates are per couple, per month. Single couples session without a commitment: $250 · Extra guest add-on: $75/session · A travel fee may apply depending on location. Peak is available to couples on an ad hoc basis and is not offered as a prepaid couples program.</p>
   </div>
 
   <div class="rt-spacer"></div>
@@ -531,39 +650,69 @@
     </div>
   </div>
 
-  <div style="padding: 0 28px;">
-    <div class="rt-packs">
-      <table class="rt-packs-table">
-        <thead>
-          <tr>
-            <th>Package</th>
-            <th>Teqneeq FHC</th>
-            <th>In-Home</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>5-Pack</td>
-            <td>$145/session ($725)</td>
-            <td>$175/session ($875)</td>
-            <td>Expires in 10 weeks</td>
-          </tr>
-          <tr>
-            <td>10-Pack</td>
-            <td>$140/session ($1,400)</td>
-            <td>$170/session ($1,700)</td>
-            <td>Expires in 20 weeks</td>
-          </tr>
-          <tr>
-            <td>20-Pack</td>
-            <td>$135/session ($2,700)</td>
-            <td>$165/session ($3,300)</td>
-            <td>Expires in 30 weeks</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="rt-packs-grid" style="padding:0 28px;">
+
+    <article class="rt-pack">
+      <div class="rt-tier-flag t-entry">Try It Out</div>
+      <div class="rt-pack-name">5-Pack</div>
+      <div class="rt-pack-expiry">Expires in 10 weeks</div>
+      <div class="rt-pack-venue">
+        <div class="rt-pack-venue-label">Teqneeq FHC</div>
+        <div class="rt-pack-total">$725</div>
+        <div class="rt-pack-per">$145 per session</div>
+      </div>
+      <div class="rt-pack-venue">
+        <div class="rt-pack-venue-label">In-Home</div>
+        <div class="rt-pack-total">$875</div>
+        <div class="rt-pack-per">$175 per session</div>
+      </div>
+      <div class="rt-pack-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-pack">
+      <div class="rt-tier-flag t-common">Best Balance</div>
+      <div class="rt-pack-name">10-Pack</div>
+      <div class="rt-pack-expiry">Expires in 20 weeks</div>
+      <div class="rt-pack-venue">
+        <div class="rt-pack-venue-label">Teqneeq FHC</div>
+        <div class="rt-pack-total">$1,400</div>
+        <div class="rt-pack-per">$140 per session</div>
+      </div>
+      <div class="rt-pack-venue">
+        <div class="rt-pack-venue-label">In-Home</div>
+        <div class="rt-pack-total">$1,700</div>
+        <div class="rt-pack-per">$170 per session</div>
+      </div>
+      <div class="rt-pack-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-pack">
+      <div class="rt-tier-flag t-popular">Best Value</div>
+      <div class="rt-pack-name">20-Pack</div>
+      <div class="rt-pack-expiry">Expires in 30 weeks</div>
+      <div class="rt-pack-venue">
+        <div class="rt-pack-venue-label">Teqneeq FHC</div>
+        <div class="rt-pack-total">$2,700</div>
+        <div class="rt-pack-per">$135 per session</div>
+      </div>
+      <div class="rt-pack-venue">
+        <div class="rt-pack-venue-label">In-Home</div>
+        <div class="rt-pack-total">$3,300</div>
+        <div class="rt-pack-per">$165 per session</div>
+      </div>
+      <div class="rt-pack-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+    <p style="font-size:12px; color:var(--white-50); text-align:center;">Monthly performance assessment included with every pack. Teqneeq FHC packs include a guest pass, so no facility membership is required. Maximum 2 sessions per calendar week.</p>
   </div>
 
   <div class="rt-spacer-sm"></div>
@@ -615,60 +764,98 @@
     </div>
   </div>
 
-  <!-- BRONZE — ASYNC -->
-  <div style="padding: 0 28px;">
-    <div class="rt-feature">
-      <div class="rt-feature-grid">
-        <div>
-          <h3 class="rt-feature-title">Bronze — Async Training</h3>
-          <div class="rt-feature-price">$175 <span>/month</span></div>
-          <p class="rt-feature-note">Custom programming delivered via app. Train on your own schedule with professional guidance. No live sessions — pure flexibility.</p>
-          <a class="rt-btn rt-btn-primary" href="/contactform">Start Async Training</a>
-        </div>
-        <div>
-          <ul class="rt-feature-list">
-            <li><strong>Custom programming</strong> updated monthly based on your goals</li>
-            <li><strong>Full app access</strong> for workout tracking and logging</li>
-            <li><strong>No live sessions</strong> — train on your own schedule, anywhere</li>
-            <li><strong>Ideal for:</strong> self-motivated professionals who want expert programming without scheduled sessions</li>
-          </ul>
-        </div>
-      </div>
+  <!-- ═══════ EXECUTIVE RESET TIERS ═══════ -->
+  <div class="rt-section">
+    <div class="rt-section-head">
+      <span class="rt-label">Virtual Coaching</span>
+      <hr class="rt-divider">
+      <h2>The Executive <em>Reset</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:680px; margin:8px auto 0;">Live 30-minute virtual coaching for executives and high-performing professionals. Custom training, nutrition, and habit coaching built around your schedule. Available nationwide.</p>
     </div>
   </div>
 
-  <div class="rt-spacer-sm"></div>
+  <div class="rt-pricing-grid" style="padding:0 28px;">
 
-  <!-- EXECUTIVE RESET TIERS -->
-  <div style="padding: 0 28px;">
-    <div class="rt-feature">
-      <div class="rt-feature-grid">
-        <div>
-          <h3 class="rt-feature-title">The Executive Reset</h3>
-          <div class="rt-feature-price">$449–$995 <span>/month</span></div>
-          <p style="font-family:'Montserrat',sans-serif !important; font-size:13px; color:var(--white-50); margin-bottom:12px;">Gold 1×/week ($449) · Platinum 2×/week ($675) · Black 3×/week ($995)</p>
-          <p class="rt-feature-note">High-accountability 30-minute live virtual coaching for executives and high-performing professionals. Custom training, nutrition, and habit coaching built around your schedule.</p>
-          <a class="rt-btn rt-btn-primary" href="/contactform">Book Executive Reset Consultation</a>
-        </div>
-        <div>
-          <ul class="rt-feature-list">
-            <li><strong>Live 1:1 Sessions</strong> — 30-minute virtual coaching 1–3× per week</li>
-            <li><strong>Custom Programming</strong> updated monthly for non-session days</li>
-            <li><strong>Nutrition Guidance</strong> — macros and food guidelines for your lifestyle</li>
-            <li><strong>Weekly Async Coaching</strong> — habit and accountability check-ins</li>
-            <li><strong>Platinum &amp; Black:</strong> bi-weekly progress assessments, priority scheduling</li>
-            <li><strong>Black tier:</strong> direct messaging access, monthly body composition reporting</li>
-          </ul>
-        </div>
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-entry">Entry Point</div>
+      <div class="rt-price-name">Bronze</div>
+      <div class="rt-price-freq">Async only, no live sessions</div>
+      <div class="rt-price-value">$175 <span>/mo</span></div>
+      <div class="rt-price-m2m">Month-to-month · cancel with 30 days notice</div>
+      <ul class="rt-price-features">
+        <li>Custom programming updated monthly</li>
+        <li>Full app access for tracking</li>
+        <li>Train on your own schedule, anywhere</li>
+        <li>Ideal for self-directed professionals</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
       </div>
-      <div class="rt-guarantee">
-        <h4>30-Day Fit Guarantee</h4>
-        <p>If after your first 30 days you decide the Executive Reset isn't the right fit, you can stop and I'll refund the unused balance of your program. You keep the first month and everything you've learned. No compliance test, no negotiation.</p>
+    </article>
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-common">Most Common</div>
+      <div class="rt-price-name">Gold</div>
+      <div class="rt-price-freq">1 live session per week</div>
+      <div class="rt-price-value">$449 <span>/mo</span></div>
+      <div class="rt-price-m2m">Month-to-month · cancel with 30 days notice</div>
+      <ul class="rt-price-features">
+        <li>30-minute live 1:1 coaching</li>
+        <li>Custom programming for non-session days</li>
+        <li>Nutrition guidance and macros</li>
+        <li>Weekly async accountability check-ins</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
       </div>
-    </div>
+    </article>
+
+    <article class="rt-price-card featured">
+            <div class="rt-tier-flag t-popular">Most Popular</div>
+      <div class="rt-price-name">Platinum</div>
+      <div class="rt-price-freq">2 live sessions per week</div>
+      <div class="rt-price-value">$675 <span>/mo</span></div>
+      <div class="rt-price-m2m">Month-to-month · cancel with 30 days notice</div>
+      <ul class="rt-price-features">
+        <li>Everything in Gold</li>
+        <li>Bi-weekly progress assessments</li>
+        <li>Priority scheduling</li>
+        <li>Higher-touch weekly coaching</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-max">Maximum Support</div>
+      <div class="rt-price-name">Black</div>
+      <div class="rt-price-freq">3 live sessions per week</div>
+      <div class="rt-price-value">$995 <span>/mo</span></div>
+      <div class="rt-price-m2m">Month-to-month · cancel with 30 days notice</div>
+      <ul class="rt-price-features">
+        <li>Everything in Platinum</li>
+        <li>Direct messaging access</li>
+        <li>Monthly body composition reporting</li>
+        <li>Maximum coaching frequency</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
   </div>
 
-  <div class="rt-spacer"></div>
+  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+    <p style="font-size:12px; color:var(--white-50); text-align:center;">All Executive Reset tiers are billed month-to-month via auto-pay. Bronze is asynchronous programming only and includes no live sessions. <a href="/the-30-minute-executive-reset" style="color:var(--gold);">Full Executive Reset details →</a></p>
+  </div>
+
+  <div style="padding: 0 28px; max-width:1120px; margin:0 auto 56px;">
+    <div class="rt-guarantee">
+      <h4>30-Day Fit Guarantee</h4>
+      <p>If after your first 30 days you decide the Executive Reset isn't the right fit, you can stop and I'll refund the unused balance of your program. You keep the first month and everything you've learned. No compliance test, no negotiation.</p>
+    </div>
+  </div>
 
   <!-- ═══════ ADD-ONS ═══════ -->
   <div class="rt-section">
