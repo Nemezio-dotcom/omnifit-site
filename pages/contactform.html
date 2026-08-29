@@ -1,0 +1,554 @@
+
+  
+    <!-- OmniFit Consultation Landing Page — V3 FULL VIEWPORT -->
+<!-- SLUG: /consultation -->
+<!-- SQUARESPACE: Paste into a Code Block (Display Source OFF) on a blank page -->
+<!-- NOTE: In Squarespace, set the page section to FULL WIDTH / NO PADDING for best results -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+#omni-consultation {
+  --navy: #0a1628;
+  --navy-mid: #0f1f3a;
+  --navy-light: #152a4a;
+  --navy-surface: #1a3158;
+  --gold: #c9a84c;
+  --gold-light: #d4b96a;
+  --gold-dim: rgba(201,168,76,0.15);
+  --white: #ffffff;
+  --white-90: rgba(255,255,255,0.9);
+  --white-70: rgba(255,255,255,0.7);
+  --white-50: rgba(255,255,255,0.5);
+  --white-20: rgba(255,255,255,0.2);
+  --white-10: rgba(255,255,255,0.1);
+  --green: #4caf50;
+  --radius: 16px;
+
+  font-family: 'Montserrat', sans-serif !important;
+  background: var(--navy) !important;
+  color: var(--white) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  line-height: 1.6 !important;
+  position: relative !important;
+
+  /* Break out of Squarespace container */
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+  width: 100vw !important;
+}
+
+#omni-consultation *, #omni-consultation *::before, #omni-consultation *::after {
+  box-sizing: border-box !important;
+}
+
+/* ── HERO SECTION ── */
+#omni-consultation .consult-hero {
+  text-align: center !important;
+  padding: 80px 24px 72px !important;
+  background: linear-gradient(180deg, #0a1628 0%, #0f1f3a 100%) !important;
+  border-bottom: 1px solid var(--white-10) !important;
+}
+
+#omni-consultation .consult-eyebrow {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 5px !important;
+  text-transform: uppercase !important;
+  color: var(--gold) !important;
+  margin-bottom: 24px !important;
+}
+
+#omni-consultation .consult-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  color: var(--white) !important;
+  line-height: 1.2 !important;
+  margin-bottom: 24px !important;
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#omni-consultation .consult-subtitle {
+  font-size: 17px !important;
+  color: var(--white-70) !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  line-height: 1.8 !important;
+}
+
+/* ── WHAT TO EXPECT SECTION ── */
+#omni-consultation .expect-section {
+  padding: 72px 24px !important;
+  background: var(--navy) !important;
+  border-bottom: 1px solid var(--white-10) !important;
+}
+
+#omni-consultation .expect-inner {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+#omni-consultation .expect-label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  color: var(--gold) !important;
+  margin-bottom: 40px !important;
+  text-align: center !important;
+}
+
+#omni-consultation .expect-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+#omni-consultation .expect-card {
+  background: var(--navy-mid) !important;
+  border: 1px solid var(--white-10) !important;
+  border-radius: var(--radius) !important;
+  padding: 36px !important;
+  display: flex !important;
+  gap: 24px !important;
+  align-items: flex-start !important;
+}
+
+#omni-consultation .expect-icon {
+  width: 60px !important;
+  height: 60px !important;
+  min-width: 60px !important;
+  background: var(--gold-dim) !important;
+  border-radius: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 24px !important;
+  color: var(--gold) !important;
+  font-weight: 700 !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+}
+
+#omni-consultation .expect-content h3 {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--white) !important;
+  margin: 0 0 10px !important;
+}
+
+#omni-consultation .expect-content p {
+  font-size: 15px !important;
+  color: var(--white-70) !important;
+  margin: 0 !important;
+  line-height: 1.75 !important;
+}
+
+/* ── TRUST SECTION ── */
+#omni-consultation .trust-section {
+  padding: 56px 24px !important;
+  background: var(--navy-mid) !important;
+  border-bottom: 1px solid var(--white-10) !important;
+}
+
+#omni-consultation .trust-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 48px !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+
+#omni-consultation .trust-item {
+  text-align: center !important;
+}
+
+#omni-consultation .trust-value {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  color: var(--gold) !important;
+  display: block !important;
+  margin-bottom: 6px !important;
+}
+
+#omni-consultation .trust-label {
+  font-size: 13px !important;
+  color: var(--white-50) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  font-weight: 500 !important;
+}
+
+/* ── FORM SECTION ── */
+#omni-consultation .form-section {
+  padding: 72px 24px 80px !important;
+  background: var(--navy) !important;
+}
+
+#omni-consultation .form-container {
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  background: var(--navy-mid) !important;
+  border: 1px solid var(--white-10) !important;
+  border-radius: var(--radius) !important;
+  padding: 48px 36px !important;
+}
+
+#omni-consultation .form-heading {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 30px !important;
+  font-weight: 600 !important;
+  color: var(--white) !important;
+  text-align: center !important;
+  margin-bottom: 10px !important;
+}
+
+#omni-consultation .form-sub {
+  font-size: 16px !important;
+  color: var(--white-50) !important;
+  text-align: center !important;
+  margin-bottom: 36px !important;
+}
+
+/* ── HUBSPOT FORM CONTAINER ── */
+#omni-consultation .hs-form-frame {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 36px !important;
+}
+
+/* ── DEPOSIT NOTE ── */
+#omni-consultation .deposit-note {
+  text-align: center !important;
+  margin-top: 28px !important;
+  padding: 24px 28px !important;
+  background: var(--gold-dim) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+}
+
+#omni-consultation .deposit-note p {
+  font-size: 15px !important;
+  color: var(--white-70) !important;
+  margin: 0 !important;
+  line-height: 1.7 !important;
+}
+
+#omni-consultation .deposit-note strong {
+  color: var(--gold) !important;
+}
+
+/* ── BOTTOM NOTE ── */
+#omni-consultation .bottom-section {
+  padding: 48px 24px 64px !important;
+  text-align: center !important;
+  background: var(--navy-mid) !important;
+}
+
+#omni-consultation .bottom-note {
+  font-size: 16px !important;
+  color: var(--white-50) !important;
+  line-height: 2 !important;
+}
+
+#omni-consultation .bottom-note a {
+  color: var(--gold) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(201,168,76,0.3) !important;
+}
+
+/* ══════════════════════════════════════ */
+/* ── DESKTOP ── */
+/* ══════════════════════════════════════ */
+@media (min-width: 768px) {
+  #omni-consultation .consult-hero {
+    padding: 120px 48px 100px !important;
+  }
+  #omni-consultation .consult-eyebrow {
+    font-size: 15px !important;
+    letter-spacing: 6px !important;
+    margin-bottom: 28px !important;
+  }
+  #omni-consultation .consult-title {
+    font-size: 56px !important;
+    margin-bottom: 28px !important;
+  }
+  #omni-consultation .consult-subtitle {
+    font-size: 20px !important;
+  }
+
+  #omni-consultation .expect-section {
+    padding: 96px 48px !important;
+  }
+  #omni-consultation .expect-label {
+    font-size: 15px !important;
+    margin-bottom: 48px !important;
+  }
+  #omni-consultation .expect-grid {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 28px !important;
+  }
+  #omni-consultation .expect-card {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+    padding: 48px 32px !important;
+  }
+  #omni-consultation .expect-icon {
+    width: 72px !important;
+    height: 72px !important;
+    min-width: 72px !important;
+    font-size: 28px !important;
+    margin-bottom: 8px !important;
+  }
+  #omni-consultation .expect-content h3 {
+    font-size: 20px !important;
+  }
+  #omni-consultation .expect-content p {
+    font-size: 16px !important;
+  }
+
+  #omni-consultation .trust-section {
+    padding: 72px 48px !important;
+  }
+  #omni-consultation .trust-row {
+    gap: 80px !important;
+  }
+  #omni-consultation .trust-value {
+    font-size: 52px !important;
+  }
+  #omni-consultation .trust-label {
+    font-size: 14px !important;
+    letter-spacing: 2.5px !important;
+  }
+
+  #omni-consultation .form-section {
+    padding: 96px 48px 104px !important;
+  }
+  #omni-consultation .form-container {
+    max-width: 780px !important;
+    padding: 64px 56px !important;
+  }
+  #omni-consultation .form-heading {
+    font-size: 38px !important;
+  }
+  #omni-consultation .form-sub {
+    font-size: 18px !important;
+    margin-bottom: 40px !important;
+  }
+  #omni-consultation .hs-form-frame {
+    padding: 44px !important;
+  }
+  #omni-consultation .deposit-note {
+    padding: 28px 32px !important;
+  }
+  #omni-consultation .deposit-note p {
+    font-size: 16px !important;
+  }
+
+  #omni-consultation .bottom-section {
+    padding: 64px 48px 80px !important;
+  }
+  #omni-consultation .bottom-note {
+    font-size: 17px !important;
+  }
+}
+
+/* ══════════════════════════════════════ */
+/* ── LARGE DESKTOP (1200px+) ── */
+/* ══════════════════════════════════════ */
+@media (min-width: 1200px) {
+  #omni-consultation .consult-hero {
+    padding: 140px 80px 120px !important;
+  }
+  #omni-consultation .consult-title {
+    font-size: 64px !important;
+  }
+  #omni-consultation .consult-subtitle {
+    font-size: 22px !important;
+    max-width: 740px !important;
+  }
+  #omni-consultation .expect-section {
+    padding: 108px 80px !important;
+  }
+  #omni-consultation .expect-grid {
+    gap: 36px !important;
+    max-width: 1300px !important;
+    margin: 0 auto !important;
+  }
+  #omni-consultation .expect-card {
+    padding: 56px 36px !important;
+  }
+  #omni-consultation .trust-section {
+    padding: 80px 80px !important;
+  }
+  #omni-consultation .trust-value {
+    font-size: 60px !important;
+  }
+  #omni-consultation .form-section {
+    padding: 108px 80px 120px !important;
+  }
+  #omni-consultation .form-container {
+    max-width: 840px !important;
+    padding: 72px 64px !important;
+  }
+  #omni-consultation .form-heading {
+    font-size: 42px !important;
+  }
+}
+
+/* ══════════════════════════════════════ */
+/* ── MOBILE ── */
+/* ══════════════════════════════════════ */
+@media (max-width: 600px) {
+  #omni-consultation {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+  #omni-consultation .consult-hero {
+    padding: 56px 20px 48px !important;
+  }
+  #omni-consultation .consult-title {
+    font-size: 28px !important;
+  }
+  #omni-consultation .consult-subtitle {
+    font-size: 15px !important;
+  }
+  #omni-consultation .expect-section {
+    padding: 48px 16px !important;
+  }
+  #omni-consultation .expect-card {
+    padding: 24px !important;
+  }
+  #omni-consultation .trust-section {
+    padding: 40px 16px !important;
+  }
+  #omni-consultation .trust-row {
+    gap: 24px !important;
+  }
+  #omni-consultation .trust-value {
+    font-size: 28px !important;
+  }
+  #omni-consultation .form-section {
+    padding: 48px 16px 56px !important;
+  }
+  #omni-consultation .form-container {
+    padding: 28px 20px !important;
+  }
+  #omni-consultation .form-heading {
+    font-size: 24px !important;
+  }
+  #omni-consultation .hs-form-frame {
+    padding: 20px !important;
+  }
+  #omni-consultation .bottom-section {
+    padding: 36px 16px 48px !important;
+  }
+}
+</style>
+
+<div id="omni-consultation">
+
+  <!-- HERO -->
+  <div class="consult-hero">
+    <div class="consult-eyebrow">Book Your Consultation</div>
+    <div class="consult-title">Let's See If OmniFit<br>Is Right For You</div>
+    <div class="consult-subtitle">A 45-minute session to assess your movement, map your goals, and confirm the right program — with zero obligation to sign up.</div>
+  </div>
+
+  <!-- WHAT TO EXPECT -->
+  <div class="expect-section">
+    <div class="expect-inner">
+      <div class="expect-label">What Happens in Your Consultation</div>
+      <div class="expect-grid">
+
+        <div class="expect-card">
+          <div class="expect-icon">1</div>
+          <div class="expect-content">
+            <h3>Goals &amp; History</h3>
+            <p>We talk about what you want to achieve, what you've tried before, and what your typical week looks like. The more honest you are, the better I can help.</p>
+          </div>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon">2</div>
+          <div class="expect-content">
+            <h3>Movement Screen</h3>
+            <p>A quick assessment of how you move — where you're compensating, what's tight, what's strong. This tells me more than any questionnaire. Wear comfortable clothes.</p>
+          </div>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon">3</div>
+          <div class="expect-content">
+            <h3>Honest Recommendation</h3>
+            <p>I'll tell you what I think your biggest priorities are, which program fits, and what realistic results look like. If we're not the right match, I'll tell you directly.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST BADGES -->
+  <div class="trust-section">
+    <div class="trust-row">
+      <div class="trust-item">
+        <span class="trust-value">190+</span>
+        <span class="trust-label">5-Star Reviews</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">6</span>
+        <span class="trust-label">NASM/ACE Certs</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">10+</span>
+        <span class="trust-label">Years Experience</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">$30</span>
+        <span class="trust-label">Fully Refundable</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM SECTION -->
+  <div class="form-section">
+    <div class="form-container">
+      <div class="form-heading">Request Your Consultation</div>
+      <div class="form-sub">Fill this out and I'll reach out within 24 hours to schedule.</div>
+
+      <!-- HUBSPOT FORM EMBED -->
+      <script src="https://js-na2.hsforms.net/forms/embed/244441037.js" defer=""></script>
+      <div class="hs-form-frame" data-region="na2" data-form-id="a34ea6d0-e63f-46d1-83d4-c675a27d64bb" data-portal-id="244441037"></div>
+
+      <div class="deposit-note">
+        <p><strong>$30 refundable deposit</strong> to hold your consultation spot. It's applied to your program if you join. If you don't, you get it back — no questions asked.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom-section">
+    <div class="bottom-note">
+      Not sure yet? Take the <a href="/is-omnifit-right-for-you">2-minute Fit Assessment</a> first.<br>
+      Or email me directly: <a href="mailto:nemezio@omnifittraining.com">nemezio@omnifittraining.com</a>
+    </div>
+  </div>
+
+</div>
+  
+  
+
+
+

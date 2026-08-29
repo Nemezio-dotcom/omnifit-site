@@ -1,0 +1,285 @@
+
+  
+    <style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-mh {
+    --navy: #0a1628; --navy-mid: #0f1f3a; --navy-light: #152a4a; --navy-surface: #1a3158;
+    --white: #ffffff; --white-90: rgba(255,255,255,0.9); --white-70: rgba(255,255,255,0.7); --white-50: rgba(255,255,255,0.5); --white-30: rgba(255,255,255,0.3); --white-20: rgba(255,255,255,0.2); --white-10: rgba(255,255,255,0.1); --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c; --gold-light: #e0c872; --gold-dim: rgba(201,168,76,0.15); --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px; --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important; color: var(--white); background: var(--navy); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin: 0; padding: 0;
+  }
+  #omni-mh *, #omni-mh *::before, #omni-mh *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  #omni-mh .mh-hero { padding: 80px 28px 48px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
+  #omni-mh .mh-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-mh .mh-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-mh .mh-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-mh .mh-hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-mh .mh-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+  #omni-mh .mh-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; position: relative; }
+  #omni-mh .mh-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  #omni-mh a.mh-btn, #omni-mh a.mh-btn:link, #omni-mh a.mh-btn:visited { text-decoration: none; }
+  #omni-mh .mh-btn-primary, #omni-mh a.mh-btn-primary, #omni-mh a.mh-btn-primary:link, #omni-mh a.mh-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
+  #omni-mh .mh-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-mh .mh-btn-ghost, #omni-mh a.mh-btn-ghost, #omni-mh a.mh-btn-ghost:link, #omni-mh a.mh-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
+  #omni-mh .mh-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); color: var(--white) !important; }
+  #omni-mh .mh-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
+  #omni-mh .mh-section-head { text-align: center; margin-bottom: 40px; }
+  #omni-mh .mh-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  #omni-mh .mh-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
+  #omni-mh h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-mh h2 em { font-style: italic; color: var(--gold); }
+  #omni-mh h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-mh p { font-family: 'Montserrat', sans-serif !important; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+  #omni-mh .mh-quotable { background: var(--navy-mid); border-left: 3px solid var(--gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 24px 28px; max-width: 1120px; margin: 0 auto 56px; }
+  #omni-mh .mh-quotable p { font-family: 'Playfair Display', serif !important; font-size: 17px; font-style: italic; color: var(--white-90); line-height: 1.7; margin: 0; }
+  #omni-mh .mh-spacer { height: 56px; }
+  #omni-mh .mh-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+  #omni-mh .mh-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 24px 28px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; min-height: 0; }
+  #omni-mh .mh-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-mh .mh-card-icon { font-size: 28px; margin-bottom: 16px; display: block; line-height: 1; }
+  #omni-mh .mh-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); line-height: 1.3; }
+  #omni-mh .mh-card p { font-size: 14px; color: var(--white-50); margin-bottom: 18px; line-height: 1.65; }
+  #omni-mh .mh-card-features { list-style: none; margin: 0 0 20px; padding: 0; flex: 1 1 auto; }
+  #omni-mh .mh-card-features li { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); padding: 5px 0 5px 20px; position: relative; line-height: 1.5; }
+  #omni-mh .mh-card-features li::before { content: '¹3'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 11px; }
+  #omni-mh .mh-card-link { font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 700; color: var(--gold) !important; text-decoration: none; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.3s; margin-top: auto; flex-shrink: 0; padding-top: 4px; }
+  #omni-mh .mh-card-link:hover { color: var(--gold-light) !important; gap: 10px; }
+  #omni-mh .mh-card-link span { transition: transform 0.3s; }
+  #omni-mh .mh-card:hover .mh-card-link span { transform: translateX(3px); }
+  #omni-mh .mh-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-bottom: 56px; }
+  #omni-mh .mh-two-col p { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  #omni-mh .mh-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  #omni-mh .mh-stat { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
+  #omni-mh .mh-stat-num { font-family: 'Playfair Display', serif !important; font-size: 36px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+  #omni-mh .mh-stat-label { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); font-weight: 500; }
+  #omni-mh .mh-faq details { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; }
+  #omni-mh .mh-faq summary { padding: 20px 28px; font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 600; color: var(--white-90); cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s; }
+  #omni-mh .mh-faq summary:hover { background: var(--white-05); }
+  #omni-mh .mh-faq summary::-webkit-details-marker { display: none; }
+  #omni-mh .mh-faq summary::after { content: '+'; color: var(--gold); font-size: 20px; font-weight: 300; flex-shrink: 0; margin-left: 16px; }
+  #omni-mh .mh-faq details[open] summary::after { content: '2'; }
+  #omni-mh .mh-faq .mh-faq-body { padding: 0 28px 24px; font-size: 14px; color: var(--white-70); line-height: 1.7; }
+  #omni-mh .mh-faq .mh-faq-body a, #omni-mh .mh-faq .mh-faq-body a:link, #omni-mh .mh-faq .mh-faq-body a:visited { color: var(--gold) !important; text-decoration: underline; }
+  #omni-mh .mh-hood-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 56px; }
+  #omni-mh .mh-hood-item, #omni-mh a.mh-hood-item, #omni-mh a.mh-hood-item:link, #omni-mh a.mh-hood-item:visited { display: block; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 14px 18px; font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 600; color: var(--white-70) !important; text-decoration: none; transition: all 0.25s; text-align: center; }
+  #omni-mh a.mh-hood-item:hover { border-color: var(--gold); color: var(--gold) !important; background: var(--gold-dim); }
+  #omni-mh .mh-hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 56px; }
+  #omni-mh .mh-hub-link, #omni-mh a.mh-hub-link, #omni-mh a.mh-hub-link:link, #omni-mh a.mh-hub-link:visited { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 500; color: var(--white-70) !important; text-decoration: none; transition: all 0.25s; }
+  #omni-mh a.mh-hub-link:hover { border-color: var(--gold); color: var(--gold) !important; }
+  #omni-mh .mh-hub-link::before { content: '92'; color: var(--gold); font-size: 14px; flex-shrink: 0; }
+  #omni-mh .mh-bottom { background: var(--navy-mid); border-radius: var(--radius-lg); padding: 44px 36px; text-align: center; max-width: 1120px; margin: 0 auto 0; }
+  #omni-mh .mh-bottom h2 { margin-bottom: 12px; }
+  #omni-mh .mh-bottom p { max-width: 560px; margin: 0 auto 28px; font-size: 15px; }
+  #omni-mh .mh-bottom-note { display: block; margin-top: 14px; font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); }
+  #omni-mh .mh-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 48px auto 0; max-width: 700px; padding: 0 20px; }
+  #omni-mh .mh-trust-item { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+  #omni-mh .mh-trust-item span { font-size: 14px; }
+  @media (max-width: 980px) { #omni-mh .mh-grid { grid-template-columns: repeat(2, 1fr); } #omni-mh .mh-two-col { grid-template-columns: 1fr; gap: 28px; } }
+  @media (max-width: 768px) { #omni-mh .mh-hero { padding: 56px 20px 36px; } #omni-mh .mh-section { padding: 0 20px; } #omni-mh .mh-quotable { margin-left: 20px; margin-right: 20px; } #omni-mh .mh-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; } }
+  @media (max-width: 640px) { #omni-mh .mh-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 48px; } #omni-mh .mh-hood-grid { grid-template-columns: 1fr 1fr; } #omni-mh .mh-hub-grid { grid-template-columns: 1fr; } #omni-mh .mh-cta-row { flex-direction: column; align-items: center; } #omni-mh .mh-btn { width: 100%; max-width: 300px; text-align: center; } }
+</style>
+
+<div id="omni-mh">
+
+  <section class="mh-hero">
+    <span class="mh-badge">Personal Training · Mission Hills</span>
+    <h1>Personal Trainer in<br><em>Mission Hills</em></h1>
+    <p class="mh-hero-sub">Premium personal training for Mission Hills professionals over 30. In-home sessions at your residence, private studio training just minutes away in Pacific Beach, or hybrid coaching that fits around your downtown commute and urban lifestyle.</p>
+    <div class="mh-cta-row">
+      <a class="mh-btn mh-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <a class="mh-btn mh-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
+    </div>
+  </section>
+
+  <div style="padding: 0 28px;">
+    <blockquote class="mh-quotable">
+      <p>“OmniFit provides in-home and studio-based personal training for Mission Hills professionals — combining corrective exercise, periodized strength programming, and nutrition coaching for established adults over 30 who want evidence-based results in a structured, private format.”</p>
+    </blockquote>
+  </div>
+
+  <div class="mh-section">
+    <div class="mh-section-head">
+      <span class="mh-label">Services in Mission Hills</span>
+      <hr class="mh-divider">
+      <h2>How We Train in <em>Mission Hills</em></h2>
+    </div>
+    <div class="mh-grid">
+      <article class="mh-card">
+        <span class="mh-card-icon">🏠</span>
+        <h3>In-Home Personal Training</h3>
+        <p>We come to your Mission Hills home with a fully programmed session. Whether you have a garage setup, a spare room, or a patio — we design around your space and equipment.</p>
+        <ul class="mh-card-features"><li>Close proximity to PB studio</li><li>$50 travel fee (lowest tier)</li><li>Corrective-first methodology</li></ul>
+        <a class="mh-card-link" href="/in-home-personal-trainer-san-diego">Explore In-Home Training <span>→</span></a>
+      </article>
+      <article class="mh-card">
+        <span class="mh-card-icon">🏋️</span>
+        <h3>Private Studio Sessions</h3>
+        <p>Train 1:1 at our private Pacific Beach studio — just 10 minutes from Mission Hills via W. Washington or the 8. Commercial-grade equipment, zero crowds.</p>
+        <ul class="mh-card-features"><li>Private boutique facility</li><li>Professional-grade equipment</li><li>10 minutes from Mission Hills</li></ul>
+        <a class="mh-card-link" href="/personal-trainer-in-pacific-beach">See the PB Studio <span>→</span></a>
+      </article>
+      <article class="mh-card">
+        <span class="mh-card-icon">🔧</span>
+        <h3>Corrective Exercise</h3>
+        <p>NASM-CES certified programming for Mission Hills clients with chronic pain, desk posture dysfunction, or injuries that have been accommodated rather than resolved.</p>
+        <ul class="mh-card-features"><li>9-point movement screening</li><li>3/10 pain ceiling protocol</li><li>Bridge from PT to performance</li></ul>
+        <a class="mh-card-link" href="/corrective-exercise-post-rehab">See Corrective Training <span>→</span></a>
+      </article>
+      <article class="mh-card">
+        <span class="mh-card-icon">💪</span>
+        <h3>Strength Training</h3>
+        <p>Periodized strength programming built on corrective foundations. Joint-friendly, progressive, and designed for professionals who want to stay strong through their 30s, 40s, and beyond.</p>
+        <ul class="mh-card-features"><li>4-week periodized blocks</li><li>Compound lift progressions</li><li>Monthly strength benchmarks</li></ul>
+        <a class="mh-card-link" href="/strength-training-1">See Strength Programs <span>→</span></a>
+      </article>
+      <article class="mh-card">
+        <span class="mh-card-icon">⚡</span>
+        <h3>HIIT Training</h3>
+        <p>Efficient high-intensity sessions for Mission Hills professionals who want maximum conditioning in minimum time. Studio, park, or in-home options.</p>
+        <ul class="mh-card-features"><li>30–45 minute sessions</li><li>Coached intensity + mobility</li><li>Pioneer Park &amp; Presidio nearby</li></ul>
+        <a class="mh-card-link" href="/hiit-personal-trainer-san-diego">Explore HIIT Training <span>→</span></a>
+      </article>
+      <article class="mh-card">
+        <span class="mh-card-icon">📉</span>
+        <h3>Weight Loss Coaching</h3>
+        <p>Sustainable fat loss through progressive training, Precision Nutrition habits, and weekly accountability. Designed for busy urban professionals who’ve tried commercial gyms without lasting results.</p>
+        <ul class="mh-card-features"><li>20–30+ lbs in 4–6 months</li><li>Habit-based nutrition coaching</li><li>Body composition tracking</li></ul>
+        <a class="mh-card-link" href="/weight-loss">Start Your Fat-Loss Plan <span>→</span></a>
+      </article>
+    </div>
+  </div>
+
+  <div class="mh-section">
+    <div class="mh-section-head">
+      <span class="mh-label">Our Approach</span>
+      <hr class="mh-divider">
+      <h2>The OmniFit <em>Method</em></h2>
+    </div>
+    <div class="mh-two-col">
+      <div>
+        <p>Every Mission Hills client follows the same four-phase methodology: <strong style="color:var(--white);">Assess, Correct, Build, Sustain.</strong> Your first session is a comprehensive movement screening that maps compensations, restrictions, and asymmetries before we program a single exercise.</p>
+        <p>Mission Hills professionals are typically established in their careers — attorneys, physicians, executives, business owners — commuting to downtown offices and managing high-stress workloads. The physical toll is predictable: forward head posture from years of screen time, tight hip flexors from extended sitting, lower back stiffness that gets worse every year, and the gradual loss of strength and energy that comes with a sedentary career pattern.</p>
+        <p>Our corrective-first approach breaks that cycle. We don’t just give you workouts — we identify the specific dysfunction your lifestyle has created, resolve it systematically, and build functional strength that carries into your workday, your weekends, and your long-term health.</p>
+      </div>
+      <div>
+        <div class="mh-stats">
+          <div class="mh-stat"><div class="mh-stat-num">180+</div><div class="mh-stat-label">5-Star Reviews</div></div>
+          <div class="mh-stat"><div class="mh-stat-num">9+</div><div class="mh-stat-label">Years in San Diego</div></div>
+          <div class="mh-stat"><div class="mh-stat-num">NASM</div><div class="mh-stat-label">CES · CPT · PES · BCS</div></div>
+          <div class="mh-stat"><div class="mh-stat-num">4</div><div class="mh-stat-label">Phase Methodology</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mh-section">
+    <div class="mh-section-head">
+      <span class="mh-label">Why OmniFit</span>
+      <hr class="mh-divider">
+      <h2>Why Mission Hills Professionals Choose <em>OmniFit</em></h2>
+    </div>
+    <div class="mh-grid">
+      <article class="mh-card">
+        <span class="mh-card-icon">📍</span>
+        <h3>Minutes from Our Studio</h3>
+        <p>Mission Hills is one of the closest neighborhoods to our Pacific Beach facility — 10 minutes via W. Washington or the 8. Easy access to a private, commercial-grade studio without the hassle of a big-box gym.</p>
+      </article>
+      <article class="mh-card">
+        <span class="mh-card-icon">🏢</span>
+        <h3>Built for Downtown Commuters</h3>
+        <p>Many Mission Hills residents commute to downtown offices. Early morning sessions before work, evening sessions after — at home or at the studio. Training that respects your professional schedule.</p>
+      </article>
+      <article class="mh-card">
+        <span class="mh-card-icon">🎯</span>
+        <h3>Assessment-Driven Precision</h3>
+        <p>No generic workouts. Your program is built from a 9-point movement screening that identifies the specific compensations and restrictions in your body. Every exercise has a reason.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="mh-section">
+    <div class="mh-section-head">
+      <span class="mh-label">Frequently Asked</span>
+      <hr class="mh-divider">
+      <h2>Questions About Training in <em>Mission Hills</em></h2>
+    </div>
+    <div class="mh-faq">
+      <details><summary>How does in-home personal training work in Mission Hills?</summary><div class="mh-faq-body"><p>We come to your Mission Hills home and train using your existing equipment or a minimal setup. Sessions are 45–60 minutes, fully programmed from your movement assessment. A $50 travel fee per session applies. Full details on our <a href="/in-home-personal-trainer-san-diego">in-home training page</a>.</p></div></details>
+      <details><summary>What does a personal trainer in Mission Hills cost?</summary><div class="mh-faq-body"><p>In-home sessions in Mission Hills are $200–225 per session ($150–175 base rate + $50 travel fee). Studio sessions at our Pacific Beach facility — 10 minutes away — start at $150/session with no travel fee. Executive Hybrid Coaching is $500/month for 12 weeks. See our <a href="/training-rates-san-diego">training rates page</a> for full details.</p></div></details>
+      <details><summary>My Mission Hills home doesn’t have a gym. Can I still do in-home training?</summary><div class="mh-faq-body"><p>It depends on your space. At minimum you need adjustable dumbbells, a bench, resistance bands, and about 8×8 feet of clear space — a spare room, garage, or covered patio works. If your space is limited, our Pacific Beach studio is just 10 minutes away and is the more practical option. We’ll help you assess during your consultation.</p></div></details>
+      <details><summary>What certifications does your trainer hold?</summary><div class="mh-faq-body"><p>Nemezio Lopez Perez holds NASM-CPT, NASM-CES (Corrective Exercise Specialist), NASM-PES (Performance Enhancement Specialist), NASM-BCS (Behavior Change Specialist), and NASM-CNC (Certified Nutrition Coach). All programming is evidence-based and assessment-driven.</p></div></details>
+      <details><summary>I sit at a desk all day downtown and come home with back and neck pain. Can you help?</summary><div class="mh-faq-body"><p>This is the most common issue we address among Mission Hills professionals. Hours of seated desk work create predictable postural dysfunction — forward head posture, thoracic kyphosis, hip flexor tightness, and core instability. Our <a href="/corrective-exercise-post-rehab">corrective-first approach</a> identifies exactly which patterns are causing your pain and resolves them systematically. Most clients see measurable improvement within 4–6 sessions.</p></div></details>
+      <details><summary>Can I train before or after work to fit my downtown commute?</summary><div class="mh-faq-body"><p>Absolutely. Many Mission Hills clients train early morning (6–7am) before heading downtown or evening (6–8pm) after returning. In-home sessions eliminate any additional commute. Studio sessions at our PB facility take 10 minutes each way. We build your schedule around your work life, not the other way around.</p></div></details>
+    </div>
+  </div>
+
+  <div class="mh-spacer"></div>
+
+  <div class="mh-section">
+    <div class="mh-section-head">
+      <span class="mh-label">Neighborhoods We Serve</span>
+      <hr class="mh-divider">
+      <h2>Training Across <em>San Diego</em></h2>
+    </div>
+    <div class="mh-hood-grid">
+      <a class="mh-hood-item" href="/personal-trainer-in-pacific-beach">Pacific Beach</a>
+      <a class="mh-hood-item" href="/personal-trainer-la-jolla">La Jolla</a>
+      <a class="mh-hood-item" href="/personal-trainer-del-mar">Del Mar</a>
+      <a class="mh-hood-item" href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a>
+      <a class="mh-hood-item" href="/personal-trainer-fairbanks-ranch">Fairbanks Ranch</a>
+      <a class="mh-hood-item" href="/personal-trainer-carmel-valley">Carmel Valley</a>
+      <a class="mh-hood-item" href="/personal-trainer-solana-beach">Solana Beach</a>
+      <a class="mh-hood-item" href="/personal-trainer-encinitas">Encinitas</a>
+      <a class="mh-hood-item" href="/personal-trainer-carlsbad">Carlsbad</a>
+      <a class="mh-hood-item" href="/personal-trainer-santaluz">Santaluz</a>
+      <a class="mh-hood-item" href="/personal-trainer-4s-ranch">4S Ranch</a>
+      <a class="mh-hood-item" href="/personal-trainer-point-loma">Point Loma</a>
+    </div>
+  </div>
+
+  <div class="mh-section">
+    <div class="mh-section-head">
+      <span class="mh-label">Explore More</span>
+      <hr class="mh-divider">
+      <h2>Related <em>Pages</em></h2>
+    </div>
+    <div class="mh-hub-grid">
+      <a class="mh-hub-link" href="/personal-training-services">All Services</a>
+      <a class="mh-hub-link" href="/in-home-personal-trainer-san-diego">In-Home Training</a>
+      <a class="mh-hub-link" href="/corrective-exercise-post-rehab">Corrective Exercise</a>
+      <a class="mh-hub-link" href="/strength-training-1">Strength Training</a>
+      <a class="mh-hub-link" href="/hiit-personal-trainer-san-diego">HIIT Training</a>
+      <a class="mh-hub-link" href="/executive-hybrid-coaching">Hybrid Coaching</a>
+      <a class="mh-hub-link" href="/the-30-minute-executive-reset">Executive Reset</a>
+      <a class="mh-hub-link" href="/training-rates-san-diego">Training Rates</a>
+      <a class="mh-hub-link" href="/the-omnifit-method">The OmniFit Method</a>
+      <a class="mh-hub-link" href="/how-it-works-pricing">Pricing &amp; Process</a>
+      <a class="mh-hub-link" href="/case-studies">Case Studies</a>
+      <a class="mh-hub-link" href="/faqs">FAQs</a>
+    </div>
+  </div>
+
+  <div style="padding: 0 28px;">
+    <div class="mh-bottom">
+      <h2>Train Smarter in <em>Mission Hills</em></h2>
+      <p>Book a 45-minute consultation. We’ll discuss your goals, your commute schedule, and whether studio or in-home training is the right fit for your Mission Hills lifestyle.</p>
+      <a class="mh-btn mh-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+      <span class="mh-bottom-note">Free 45-minute consultation (refundable deposit required) · No commitment · Honest assessment of fit</span>
+    </div>
+  </div>
+
+  <div class="mh-trust">
+    <div class="mh-trust-item"><span>⭐</span> 5.0 · 180+ Reviews</div>
+    <div class="mh-trust-item"><span>🏅</span> NASM CES · CPT · PES · BCS</div>
+    <div class="mh-trust-item"><span>📍</span> Serving Mission Hills &amp; San Diego</div>
+    <div class="mh-trust-item"><span>🌍</span> Virtual Coaching Worldwide</div>
+  </div>
+
+</div>
+  
+  
+
+
+

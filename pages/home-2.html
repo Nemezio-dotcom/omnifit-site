@@ -1,0 +1,371 @@
+
+  
+    <!-- =========================
+OMNIFIT HOMEPAGE: Methodology Block · v3 AUG 2026
+Changelog v3 (canonical + compliance pass):
+  - COMPLIANCE: "20–30 lb over 4–12 months" outcome claim removed from quotable (attorney screen: no lbs-in-timeframe claims)
+  - COMPLIANCE: all "free consultation" framing removed ($30 refundable deposit is the qualification filter, not a free offer)
+  - Em-dashes removed from all client-facing copy (voice rule)
+  - "lose 25 lbs" sample goal replaced with non-numeric example
+  - PRICING (Aug 2026 canonical doc): Performance Diagnostic $90 → $110, credited in full toward a 3-month package; $30 deposit CONFIRMED
+  - ACE credential CONFIRMED as CES (ACE reissued the original OES as CES); chip updated
+Changelog v2:
+  - Cred chip: "ACE CES" → "ACE OES" (superseded: ACE later reissued as CES, see v3)
+  - Quotable + FAQ + Body Composition card: BodyStat 1500 MDD flagship diagnostic added
+  - Fat-loss claim window aligned to homepage: 4–6 → 4–12 months
+  - Progress metrics: 7 → 12 (Build card + comparison table)
+  - Pain-rule icon: 🛡️ emoji → gold line-SVG shield
+  - CTA: mirrors homepage Step 1 / Step 2 framing
+  - FAQ buttons: aria-expanded added
+========================== -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-method {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --light-bg: #f4f5f7;
+    --light-text: #1a1a2e;
+    --light-muted: #555566;
+    --light-border: #e2e4e8;
+    --radius: 8px;
+    --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--white);
+    background: var(--navy);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; padding: 0;
+  }
+  #omni-method *, #omni-method *::before, #omni-method *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* HERO */
+  #omni-method .hero { padding: 80px 28px 60px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
+  #omni-method .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-method .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-method .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-method .hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-method .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 640px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+  #omni-method .creds { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
+  #omni-method .cred { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid var(--white-20); border-radius: 100px; color: var(--white-50); letter-spacing: 0.8px; background: transparent; }
+
+  /* QUOTABLE */
+  #omni-method .q-wrap { max-width: 860px; margin: 0 auto; padding: 0 28px 64px; }
+  #omni-method .quotable { padding: 36px 40px; background: var(--navy-mid); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; line-height: 1.85; color: var(--white-70); }
+  #omni-method .quotable strong { color: var(--white); font-weight: 600; }
+
+  /* SECTIONS */
+  #omni-method .s-dark { background: var(--navy); padding: 72px 28px; }
+  #omni-method .s-mid { background: var(--navy-mid); padding: 72px 28px; }
+  #omni-method .s-light { background: var(--light-bg); padding: 72px 28px; }
+  #omni-method .s-inner { max-width: 880px; margin: 0 auto; }
+  #omni-method .s-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+  #omni-method .s-light .s-label { color: #8b7832; }
+  #omni-method .gold-line { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 0 24px; border-radius: 2px; }
+  #omni-method h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-method .s-light h2 { color: var(--light-text); }
+  #omni-method h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; font-size: 22px; font-weight: 600; margin-bottom: 16px; }
+  #omni-method .s-light h3 { color: var(--light-text); }
+  #omni-method h4 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-method p { font-family: 'Montserrat', sans-serif !important; margin-bottom: 18px; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+  #omni-method .s-light p { color: var(--light-muted); }
+  #omni-method a { color: var(--gold); text-decoration: none; }
+
+  /* PHASE BLOCKS */
+  #omni-method .phase { position: relative; padding: 52px 36px; margin-bottom: 0; }
+  #omni-method .phase-num { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+  #omni-method .phase-time { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 1px; text-transform: uppercase; display: inline-block; padding: 4px 14px; border: 1px solid var(--white-10); border-radius: 100px; margin-bottom: 20px; }
+  #omni-method .phase h2 { margin-bottom: 16px; }
+  #omni-method .phase-lead { font-size: 17px; color: var(--white-70); line-height: 1.8; margin-bottom: 28px; }
+
+  /* DETAIL GRID inside phases */
+  #omni-method .dg { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin: 32px 0 0; }
+  #omni-method .dc { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 22px 20px; }
+  #omni-method .dc h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--white-90); }
+  #omni-method .dc p { font-size: 13px; color: var(--white-50); margin: 0; line-height: 1.6; }
+
+  /* PAIN RULE CALLOUT */
+  #omni-method .pain-rule { background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-surface) 100%); border: 1px solid var(--gold); border-radius: var(--radius-lg); padding: 36px 32px; margin: 36px 0 0; display: flex; align-items: flex-start; gap: 24px; }
+  #omni-method .pain-rule-icon { flex-shrink: 0; line-height: 1; display: flex; align-items: center; justify-content: center; }
+  #omni-method .pain-rule-icon svg { width: 34px; height: 34px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block; }
+  #omni-method .pain-rule h4 { font-size: 18px; margin-bottom: 8px; color: var(--gold); }
+  #omni-method .pain-rule p { font-size: 14px; color: var(--white-50); margin: 0; line-height: 1.7; }
+
+  /* VISUAL FLOW */
+  #omni-method .flow { display: flex; align-items: center; justify-content: center; gap: 0; margin: 48px auto; max-width: 740px; flex-wrap: wrap; }
+  #omni-method .flow-step { text-align: center; flex: 1; min-width: 140px; padding: 24px 12px; position: relative; }
+  #omni-method .flow-num { width: 52px; height: 52px; border-radius: 50%; background: var(--navy-light); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-family: 'Playfair Display', serif !important; font-size: 22px; font-weight: 700; color: var(--gold); }
+  #omni-method .flow-name { font-family: 'Playfair Display', serif !important; font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  #omni-method .flow-time { font-family: 'Montserrat', sans-serif !important; font-size: 10px; color: var(--white-50); letter-spacing: 0.5px; text-transform: uppercase; }
+  #omni-method .flow-arrow { color: var(--gold); font-size: 20px; flex-shrink: 0; margin: 0 -4px; padding-top: 8px; }
+
+  /* COMPARISON TABLE */
+  #omni-method .ct-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; border-radius: var(--radius-lg); border: 1px solid var(--light-border); }
+  #omni-method .ct { width: 100%; border-collapse: collapse; font-size: 14px; font-family: 'Montserrat', sans-serif !important; margin: 0; min-width: 540px; }
+  #omni-method .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--white-70); border-bottom: 2px solid var(--gold); }
+  #omni-method .ct th:first-child { border-radius: var(--radius) 0 0 0; }
+  #omni-method .ct th:last-child { border-radius: 0 var(--radius) 0 0; }
+  #omni-method .ct td { padding: 16px 18px; border-bottom: 1px solid var(--light-border); color: var(--light-muted); font-family: 'Montserrat', sans-serif !important; }
+  #omni-method .ct tr:last-child td { border-bottom: none; }
+  #omni-method .ct tr:hover td { background: rgba(201,168,76,0.04); }
+  #omni-method .chk { color: #1a7a4c; font-weight: 600; }
+  #omni-method .xm { color: #bbb; }
+
+  /* FAQ */
+  #omni-method .fi { border-bottom: 1px solid var(--white-10); }
+  #omni-method .fq { width: 100%; background: none; border: none; text-align: left; padding: 28px 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; font-weight: 600; color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; line-height: 1.5; transition: color 0.3s; }
+  #omni-method .fq:hover { color: var(--gold); }
+  #omni-method .fi-icon { flex-shrink: 0; width: 28px; height: 28px; border: 2px solid var(--white-20); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--white-50); transition: all 0.3s; font-family: 'Montserrat', sans-serif !important; }
+  #omni-method .fi.open .fi-icon { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: rotate(45deg); }
+  #omni-method .fa { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s ease; }
+  #omni-method .fi.open .fa { max-height: 500px; padding-bottom: 28px; }
+  #omni-method .fa p { font-size: 15px; color: var(--white-50); line-height: 1.8; margin: 0; }
+
+  /* CTA */
+  #omni-method .cta-sec { background: var(--navy-mid); padding: 80px 28px; text-align: center; position: relative; overflow: hidden; }
+  #omni-method .cta-sec::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%); pointer-events: none; opacity: 0.2; }
+  #omni-method .cta-sec h2 { color: var(--white); font-size: clamp(28px, 4vw, 38px); margin-bottom: 16px; position: relative; }
+  #omni-method .cta-sec p { color: var(--white-50); font-size: 16px; max-width: 560px; margin: 0 auto 36px; position: relative; }
+  #omni-method .cta-btn { display: inline-block; padding: 16px 44px; background: var(--gold); color: var(--navy); text-decoration: none; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: var(--radius); transition: all 0.3s; position: relative; }
+  #omni-method .cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-method .cta-steps { display: block; margin-top: 20px; font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-70); position: relative; }
+  #omni-method .cta-steps strong { color: var(--gold-light); font-weight: 700; }
+  #omni-method .cta-note { display: block; margin-top: 10px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); position: relative; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    #omni-method .hero { padding: 56px 20px 44px; }
+    #omni-method .s-dark, #omni-method .s-mid, #omni-method .s-light { padding: 52px 20px; }
+    #omni-method .phase { padding: 40px 20px; }
+    #omni-method .q-wrap { padding: 0 20px 44px; }
+    #omni-method .quotable { padding: 24px 20px; }
+    #omni-method .pain-rule { flex-direction: column; gap: 16px; padding: 28px 20px; }
+    #omni-method .flow { gap: 8px; }
+    #omni-method .flow-step { min-width: 100px; padding: 16px 6px; }
+    #omni-method .flow-arrow { font-size: 16px; }
+    #omni-method .ct { font-size: 13px; }
+    #omni-method .ct th, #omni-method .ct td { padding: 12px 10px; }
+    #omni-method .cta-sec { padding: 52px 20px; }
+  }
+  @media (max-width: 480px) {
+    #omni-method .dg { grid-template-columns: 1fr; }
+    #omni-method .flow-arrow { display: none; }
+    #omni-method .flow { flex-direction: column; gap: 4px; }
+    #omni-method .flow-step { min-width: auto; }
+  }
+</style>
+
+<div id="omni-method">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="hero-badge">Our Methodology</span>
+    <h1>Assess. Correct.<br><em>Build. Sustain.</em></h1>
+    <p class="hero-sub">This isn't random workouts. OmniFit follows a structured four-phase methodology designed to fix what's broken, build what matters, and make results last, for busy professionals 30+ with real injuries, real schedules, and real skepticism.</p>
+    <div class="creds">
+      <!-- ACE CES confirmed (ACE reissued OES as CES) -->
+      <span class="cred">NASM CPT</span><span class="cred">NASM CES</span><span class="cred">NASM PES</span><span class="cred">NASM CNC</span><span class="cred">NASM BCS</span><span class="cred">ACE CES</span>
+    </div>
+  </section>
+
+  <!-- GEMINI-QUOTABLE -->
+  <div class="q-wrap"><div class="quotable">
+    <strong>OmniFit uses a four-phase methodology, Assess, Correct, Build, Sustain,</strong> that begins with a 45-minute consultation followed by a comprehensive in-person Performance Diagnostic: BodyStat 1500 MDD medical-grade body-composition analysis plus a nine-point movement screening covering overhead squat assessment, posture photos, and joint range of motion testing. The corrective-first approach addresses mobility and joint issues before adding training load, following a strict 3/10 pain ceiling rule. Progress is documented against 12 objective metrics with formal 30-day reports, built for busy professionals 30+ in San Diego who need joint-friendly training and measurable results.
+  </div></div>
+
+  <!-- VISUAL FLOW -->
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">The Four Phases</span><hr class="gold-line">
+    <h2>A Structured Path, Not Random Workouts</h2>
+    <p>Every OmniFit program follows the same four-phase framework. What changes is how it's customized for your body, your limitations, and your goals.</p>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-name">Assess</div>
+        <div class="flow-time">Consultation + Day 1</div>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-name">Correct</div>
+        <div class="flow-time">Weeks 1–8</div>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-name">Build</div>
+        <div class="flow-time">Months 2–6</div>
+      </div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-name">Sustain</div>
+        <div class="flow-time">Ongoing</div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- PHASE 1: ASSESS -->
+  <section class="s-dark"><div class="s-inner phase">
+    <span class="phase-num">Phase 1</span>
+    <span class="phase-time">Consultation + First Session</span>
+    <h2>Assess: Understand Before We Program</h2>
+    <p class="phase-lead">Most trainers start with a workout. We start with questions. The Assess phase has two parts: a video consultation to evaluate fit, and an in-person Performance Diagnostic to map your body's baseline and movement patterns.</p>
+
+    <h3 style="font-size:18px;margin-top:32px;margin-bottom:8px;color:var(--gold)">Step 1: The 45-Minute Video Consultation</h3>
+    <p>This is a conversation, not a sales pitch. A fully refundable $30 deposit reserves your time. Before we design anything, we need to understand who you are:</p>
+    <div class="dg">
+      <div class="dc"><h4>Fit Evaluation</h4><p>We determine whether OmniFit's coaching model matches your goals, schedule, and expectations, and we're honest if it doesn't.</p></div>
+      <div class="dc"><h4>Medical History</h4><p>Past injuries, surgeries, chronic pain, medications, and conditions that affect how you should train. Nothing gets ignored.</p></div>
+      <div class="dc"><h4>Behavioral Assessment</h4><p>Eating patterns, stress levels, sleep quality, energy fluctuations. The lifestyle factors that determine whether a program works or fails.</p></div>
+      <div class="dc"><h4>Goals &amp; Needs</h4><p>Specific, measurable targets. Not "get in shape" but "fix my posture, drop a waist size, fit my training around 50% travel."</p></div>
+    </div>
+
+    <h3 style="font-size:18px;margin-top:40px;margin-bottom:8px;color:var(--gold)">Step 2: The Performance Diagnostic</h3>
+    <p>If we're aligned after the consultation, your first session is our flagship diagnostic assessment, not a workout. The $110 Performance Diagnostic is credited in full toward a 3-month package. This is where we collect the data that shapes your entire program:</p>
+    <div class="dg">
+      <div class="dc"><h4>Overhead Squat Assessment</h4><p>Reveals compensations in ankles, knees, hips, and shoulders during a loaded movement pattern.</p></div>
+      <div class="dc"><h4>Single-Leg Squat</h4><p>Tests unilateral stability, hip strength, and knee tracking, common failure points for desk-bound professionals.</p></div>
+      <div class="dc"><h4>Push &amp; Pull Patterns</h4><p>Upper body movement quality: shoulder mechanics, scapular stability, and thoracic mobility under load.</p></div>
+      <div class="dc"><h4>Posture Photos</h4><p>Front, side, and back photos documenting your current posture. These become your scored baseline for quarterly comparison.</p></div>
+      <div class="dc"><h4>Joint ROM Testing</h4><p>Range of motion measurements for shoulders, hips, ankles, and thoracic spine, identifying restrictions that cause pain.</p></div>
+      <div class="dc"><h4>Grip Strength</h4><p>A reliable indicator of overall functional strength and a baseline metric we track monthly.</p></div>
+      <div class="dc"><h4>BodyStat Body Composition</h4><p>Medical-grade bioimpedance analysis via the BodyStat 1500 MDD: lean mass, fat mass, and hydration, plus circumference tracking. The scale alone tells an incomplete story; this doesn't.</p></div>
+      <div class="dc"><h4>Core Stability</h4><p>Plank tests and anti-rotation assessments to evaluate trunk stability, the foundation of safe, heavy lifting.</p></div>
+      <div class="dc"><h4>Gait Analysis</h4><p>Walking mechanics that reveal asymmetries, compensations, and patterns that contribute to chronic pain.</p></div>
+    </div>
+    <p style="font-size:14px;color:var(--white-50);font-style:italic;margin-top:24px">Every finding from this diagnostic directly informs your program. Nothing is generic. Nothing is guessed.</p>
+  </div></section>
+
+  <!-- PHASE 2: CORRECT -->
+  <section class="s-mid"><div class="s-inner phase">
+    <span class="phase-num">Phase 2</span>
+    <span class="phase-time">Typically 4–8 Weeks</span>
+    <h2>Correct: Fix the Foundation First</h2>
+    <p class="phase-lead">Before we add load, we fix what the assessment found. This is the phase most trainers skip, and it's the reason most professionals get hurt or plateau. Depending on your assessment, the Correct phase may be a dedicated block or blended into your strength work from day one.</p>
+    <p>The Correct phase draws from a full corrective toolbox, applied based on your individual assessment findings:</p>
+    <div class="dg">
+      <div class="dc"><h4>Foam Rolling &amp; SMR</h4><p>Self-myofascial release to reduce tissue tension and restore muscle quality before movement work begins.</p></div>
+      <div class="dc"><h4>Corrective Exercise Circuits</h4><p>Targeted activation and stabilization sequences addressing the specific compensations your screening revealed.</p></div>
+      <div class="dc"><h4>Light Strength with Modified ROM</h4><p>Controlled strength work within a pain-free range of motion, building load tolerance without aggravating existing issues.</p></div>
+      <div class="dc"><h4>Joint-Specific Mobility Drills</h4><p>Focused mobility work for restricted joints (shoulders, hips, ankles, thoracic spine) based on your ROM testing.</p></div>
+      <div class="dc"><h4>Posture-Specific Activation</h4><p>Targeted strengthening of weak, inhibited muscles (deep neck flexors, lower traps, glutes) to reverse desk-posture damage.</p></div>
+    </div>
+
+    <div class="pain-rule">
+      <span class="pain-rule-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l8 3.5v5.5c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5.5L12 2z"></path><path d="M8.5 12l2.5 2.5 4.5-4.5"></path></svg>
+      </span>
+      <div>
+        <h4>The 3/10 Pain Ceiling Rule</h4>
+        <p>No exercise should cause pain above a 3 out of 10. If it does, the movement is modified, regressed, or replaced immediately. This rule governs every session, every phase. It's non-negotiable because professionals with chronic pain or post-rehab needs cannot afford setbacks. Joint health comes first, always.</p>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--white-50);font-style:italic;margin-top:24px">For some clients, the Correct phase is a pure 4–8 week block before any heavy lifting. For others with fewer restrictions, corrective work blends into strength training from day one. Your assessment determines the approach, not a generic timeline.</p>
+  </div></section>
+
+  <!-- PHASE 3: BUILD -->
+  <section class="s-dark"><div class="s-inner phase">
+    <span class="phase-num">Phase 3</span>
+    <span class="phase-time">Typically 3–6 Months</span>
+    <h2>Build: Structured Strength and Body Recomposition</h2>
+    <p class="phase-lead">Once the foundation is corrected, we build. This is where the visible transformation happens: progressive strength training, body recomposition, and the integration of nutrition and lifestyle habits into a system that produces measurable change every 30 days.</p>
+    <div class="dg">
+      <div class="dc"><h4>Progressive Overload</h4><p>Structured increases in load, volume, and complexity, programmed in 4-week blocks, not random daily workouts.</p></div>
+      <div class="dc"><h4>Joint-Smart Programming</h4><p>Heavy lifting doesn't mean reckless lifting. Every exercise is selected and modified around your joint health profile.</p></div>
+      <div class="dc"><h4>Nutrition Integration</h4><p>Calorie and macro targets tailored to your schedule, with food guidelines that work with work dinners, travel, and family life.</p></div>
+      <div class="dc"><h4>Behavior Change Systems</h4><p>Habit stacking, stress management strategies, and sleep optimization, because results depend on what happens outside the gym.</p></div>
+      <div class="dc"><h4>Weekly Accountability</h4><p>Structured check-ins reviewing training adherence, nutrition compliance, energy levels, and any emerging issues.</p></div>
+      <div class="dc"><h4>30-Day Progress Reports</h4><p>Formal data reviews across the 12 objective metrics we track: body composition, strength, posture, mobility, adherence, nutrition, and more.</p></div>
+    </div>
+    <p style="margin-top:28px">Corrective work doesn't stop in this phase. It becomes maintenance. Every session includes warm-up protocols drawn from your Correct phase to protect the progress you've made.</p>
+  </div></section>
+
+  <!-- PHASE 4: SUSTAIN -->
+  <section class="s-mid"><div class="s-inner phase">
+    <span class="phase-num">Phase 4</span>
+    <span class="phase-time">Ongoing, Tailored to You</span>
+    <h2>Sustain: Independence, Not Dependence</h2>
+    <p class="phase-lead">The goal of OmniFit is not lifelong dependency on a trainer. It's to build you into someone who understands their body, knows how to train, and has the habits to maintain results independently, with support available when you want it.</p>
+    <p>What Sustain looks like depends on you. Some clients continue with reduced-frequency sessions. Some move to periodic check-ins. Others graduate with a self-guided program and return for quarterly tune-ups. The format adapts to your life:</p>
+    <div class="dg">
+      <div class="dc"><h4>Reduced-Frequency Sessions</h4><p>Drop from 3x to 1–2x per week while maintaining your programming and check-in structure.</p></div>
+      <div class="dc"><h4>Monthly Tune-Up Sessions</h4><p>A graduates-only session from $199 to review progress, update programming, and troubleshoot any emerging issues.</p></div>
+      <div class="dc"><h4>Self-Guided Programming</h4><p>A full training plan delivered through the app with video demonstrations, so you can train independently with confidence.</p></div>
+      <div class="dc"><h4>Quarterly Reassessments</h4><p>Reassessment sessions to compare current metrics to your baseline, catch regressions early, and set new targets.</p></div>
+    </div>
+    <p style="margin-top:28px">The benchmark for success isn't whether you keep paying us. It's whether you keep your results.</p>
+  </div></section>
+
+  <!-- OMNIFIT vs TEMPLATE -->
+  <section class="s-light"><div class="s-inner">
+    <span class="s-label">The Difference</span><hr class="gold-line">
+    <h2>Structured Methodology vs. Random Workouts</h2>
+    <p>Most personal training has no system. Here's what a structured methodology actually changes:</p>
+    <div class="ct-wrap">
+    <table class="ct">
+      <thead><tr><th>Element</th><th>OmniFit Method</th><th>Typical Trainer</th></tr></thead>
+      <tbody>
+        <tr><td>Day 1</td><td><span class="chk">✓ Consultation + Performance Diagnostic (BodyStat + 9-point movement screen)</span></td><td><span class="xm">"Let's do a workout"</span></td></tr>
+        <tr><td>Programming basis</td><td><span class="chk">✓ Assessment data + 4-week blocks</span></td><td><span class="xm">Whatever feels right that day</span></td></tr>
+        <tr><td>Corrective work</td><td><span class="chk">✓ Dedicated phase based on findings</span></td><td><span class="xm">Skipped or generic stretching</span></td></tr>
+        <tr><td>Pain management</td><td><span class="chk">✓ 3/10 ceiling, modify immediately</span></td><td><span class="xm">"Push through it"</span></td></tr>
+        <tr><td>Nutrition</td><td><span class="chk">✓ Integrated coaching + habit systems</span></td><td><span class="xm">"Eat clean" or not addressed</span></td></tr>
+        <tr><td>Progress measurement</td><td><span class="chk">✓ 12 metrics, formal 30-day reports</span></td><td><span class="xm">Scale weight, if anything</span></td></tr>
+        <tr><td>Program updates</td><td><span class="chk">✓ Data-driven every 4 weeks</span></td><td><span class="xm">When client complains</span></td></tr>
+        <tr><td>End goal</td><td><span class="chk">✓ Client independence + lasting results</span></td><td><span class="xm">Ongoing sessions forever</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div></section>
+
+  <!-- FAQ -->
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">Common Questions</span><hr class="gold-line">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">What is OmniFit's training methodology?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit uses a four-phase method: Assess, Correct, Build, Sustain. It starts with a consultation and in-person Performance Diagnostic, then progresses through corrective exercise, progressive strength training, and ultimately builds client independence. Every program is individualized based on assessment findings.</p></div></div>
+
+    <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">What does the assessment include?<span class="fi-icon">+</span></button><div class="fa"><p>The assessment is a two-step process. First, a 45-minute video consultation covering medical history, behavioral habits, nutrition, goals, and schedule. A fully refundable $30 deposit reserves your time. Then, the $110 Performance Diagnostic, credited in full toward a 3-month package: BodyStat 1500 MDD medical-grade body-composition analysis plus a movement screening covering overhead squat, single-leg squat, push/pull patterns, posture photos, joint ROM testing, grip strength, core stability, and gait analysis.</p></div></div>
+
+    <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">What is the 3/10 pain ceiling rule?<span class="fi-icon">+</span></button><div class="fa"><p>No exercise should cause pain above a 3 out of 10. If it does, the movement is modified, regressed, or replaced immediately. This protects clients with chronic pain or post-rehab needs and ensures joint-friendly progression throughout every phase of training.</p></div></div>
+
+    <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">How long does each phase take?<span class="fi-icon">+</span></button><div class="fa"><p>Typical timelines: the Assess phase takes the consultation plus your first session. The Correct phase runs 4–8 weeks. The Build phase runs 3–6 months. The Sustain phase is ongoing and adapts to your preferences. Timelines vary based on individual assessment findings, not a fixed schedule.</p></div></div>
+
+    <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">Is this just for people with injuries?<span class="fi-icon">+</span></button><div class="fa"><p>No. The methodology applies to everyone, including healthy professionals who want to build strength safely and sustainably. The Correct phase is shorter for clients without significant restrictions. The framework ensures that even injury-free clients don't develop problems by training without assessment.</p></div></div>
+
+    <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">How is this different from what every trainer claims?<span class="fi-icon">+</span></button><div class="fa"><p>Most trainers don't run a medical-grade diagnostic and 9-point physical screening on day one. They don't follow a named methodology with distinct phases. They don't use a pain ceiling rule. And they don't deliver formal 30-day progress reports with data-driven program adjustments. The difference isn't the claim. It's the system behind it.</p></div></div>
+
+  </div></section>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <h2>Start With a Conversation.<br>Build From a Baseline.</h2>
+    <p>Book your 45-minute consultation, Zoom or phone, no pressure. A fully refundable $30 deposit reserves your time. If we're aligned, your $110 Performance Diagnostic sets the baseline your entire program is built on, credited in full toward a 3-month package.</p>
+    <a href="https://calendly.com/nemezio-omnifittraining/45min" class="cta-btn">Book Your Consultation</a>
+    <span class="cta-steps"><strong>Step 1:</strong> 45-minute consultation, Zoom or phone &nbsp;·&nbsp; <strong>Step 2:</strong> $110 Performance Diagnostic if we're aligned, credited toward a 3-month package</span>
+    <span class="cta-note">Fully refundable deposit · No commitment · Honest evaluation of fit</span>
+  </section>
+
+</div>
+  
+  
+
+
+

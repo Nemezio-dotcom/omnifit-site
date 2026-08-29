@@ -1,0 +1,689 @@
+
+  
+    <!-- 
+  OmniFit Performance: Trainer Bio — Nemezio LopezPerez · v3 AUGUST 2026
+  SQUARESPACE CODE BLOCK — paste into Code Block with "Display Source" OFF
+  URL slug: /about
+  
+  SCHEMA: paste the <script> block into Page Settings → Advanced → Page Header Code Injection
+  
+  === v3 CANONICAL TRUTH PASS (Aug 2026) ===
+  - Reviews: 180+ → 190+ everywhere (schema reviewCount, description, quotable, stats bar)
+  - ENTITY FIX: "executive personal training studio" → "personal training practice of
+    Nemezio LopezPerez, based at Teqneeq" (Nemezio is a trainer AT Teqneeq, not a
+    studio-within-a-studio) — schema description + quotable
+  - COMPLIANCE: "most clients lose 20–30 pounds over 4–6 months" outcome claim removed
+    from bio text and quotable (attorney screen: no lbs-in-timeframe claims)
+  - Em-dashes removed from all client-facing copy (voice rule)
+  - Stats bar: "97.8% Client Satisfaction" REPLACED with "3/10 Pain Ceiling Rule".
+    (97.8% is Gemini sentiment share from Semrush, not a client satisfaction survey.
+    Presenting it as client satisfaction fails the truth screen. Restore only with a
+    real survey source.)
+  - Philosophy card: "Seven metrics" → twelve (aligns with methodology page v2+)
+  - NASM Elite Trainer status CONFIRMED active by Nemezio (Aug 2026); retained in
+    hero and schema jobTitle.
+
+  - ACE credential CONFIRMED as CES (ACE reissued the original OES as CES).
+
+
+  === v2 REBRAND UPDATE ===
+  - Business name: OmniFit Personal Fitness Training → OmniFit Performance
+  - Location: Pacific Beach (2123 Garnet Ave) → 4S Ranch / Teqneeq (10772 Thornmint Rd)
+  - Credentials: Added Precision Nutrition (L1, SSR, NMH) + Eden collaboration
+-->
+
+<!-- SCHEMA — paste into Page Header Code Injection -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Nemezio LopezPerez","jobTitle":"Founder & NASM Elite Trainer","worksFor":{"@type":"LocalBusiness","name":"OmniFit Performance","url":"https://omnifittraining.com","address":{"@type":"PostalAddress","streetAddress":"10772 Thornmint Rd","addressLocality":"San Diego","addressRegion":"CA","postalCode":"92127","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":33.0178026,"longitude":-117.1021946},"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"190"}},"description":"Nemezio LopezPerez is the founder of OmniFit Performance, his personal training practice based at Teqneeq, a members-only functional health and performance lab in 4S Ranch, San Diego that integrates training with an on-site physical therapy clinic. He holds twelve advanced certifications across movement, nutrition, and metabolic health, including NASM CPT, CES, PES, CNC, BCS, ACE Corrective Exercise Specialist, three Precision Nutrition credentials (Level 1, Sleep Stress & Recovery, Nutrition for Metabolic Health), and three Eden certifications through a metabolic health network collaboration. 190+ five-star reviews across Google, Yelp, and Thumbtack.","hasCredential":[{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"NASM Certified Personal Trainer (CPT)"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"NASM Corrective Exercise Specialist (CES)"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"NASM Performance Enhancement Specialist (PES)"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"NASM Certified Nutrition Coach (CNC)"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"NASM Behavior Change Specialist (BCS)"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"ACE Corrective Exercise Specialist (CES)"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"Precision Nutrition Level 1"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"Precision Nutrition Sleep, Stress & Recovery"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"Precision Nutrition Nutrition for Metabolic Health"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"Eden GLP-1 Fitness Certification"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"Eden Peptide Fundamentals Certification"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Professional Certification","name":"Eden GLP-1 Nutrition Certification"}],"knowsAbout":["Executive Personal Training","Corrective Exercise","Joint-Friendly Strength Training","Nutrition Coaching","Post-Rehab Training","Hybrid Virtual Coaching","GLP-1 Fitness Protocols","Metabolic Health Coaching","Peptide-Informed Training"],"sameAs":["https://www.instagram.com/eziogetsfit","https://www.linkedin.com/in/nemeziolp/"]}
+</script>
+
+<!-- Preload the LCP hero image -->
+<link rel="preload" as="image" href="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/70f5f089-2d48-4304-9be7-48226ae22ed8/Work+Portrait+Photo.jpg?format=750w" fetchpriority="high">
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&display=swap');
+
+  /* ===== Brand Design System ===== */
+  #omni-bio{
+    --navy:#0a1628;
+    --navy-mid:#0f2038;
+    --navy-light:#162a45;
+    --gold:#c9a84c;
+    --gold-light:#e8c974;
+    --gold-hover:#d4b65e;
+    --white:#ffffff;
+    --white-90:rgba(255,255,255,.90);
+    --white-70:rgba(255,255,255,.70);
+    --white-50:rgba(255,255,255,.50);
+    --white-20:rgba(255,255,255,.20);
+    --white-10:rgba(255,255,255,.10);
+    --white-05:rgba(255,255,255,.05);
+    --radius:14px;
+    --shadow:0 4px 20px rgba(0,0,0,.3);
+  }
+
+  /* ===== Reset & Base ===== */
+  #omni-bio{
+    background:var(--navy);
+    color:var(--white-90);
+    font-family:'Montserrat',sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  #omni-bio *{box-sizing:border-box;margin:0;padding:0;}
+  #omni-bio img{max-width:100%;height:auto;display:block;}
+  #omni-bio a{text-decoration:none;}
+
+  /* ===== Section Patterns ===== */
+  #omni-bio .s-dark{background:var(--navy);padding:72px 24px;}
+  #omni-bio .s-mid{background:var(--navy-mid);padding:72px 24px;}
+  #omni-bio .s-light{background:var(--navy-light);padding:72px 24px;}
+  #omni-bio .s-inner{max-width:1080px;margin:0 auto;}
+
+  /* ===== Decorative Elements ===== */
+  #omni-bio .s-label{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  #omni-bio .gold-line{
+    border:none;
+    height:2px;
+    width:60px;
+    background:var(--gold);
+    margin:0 0 24px;
+  }
+
+  /* ===== Typography ===== */
+  #omni-bio h1,#omni-bio h2,#omni-bio h3{
+    font-family:'Playfair Display',serif;
+    color:var(--white);
+    line-height:1.15;
+  }
+  #omni-bio h1{font-size:clamp(32px,5vw,48px);font-weight:900;margin-bottom:12px;}
+  #omni-bio h2{font-size:clamp(26px,4vw,38px);font-weight:800;margin-bottom:16px;}
+  #omni-bio h3{font-size:clamp(18px,2.5vw,22px);font-weight:700;margin-bottom:10px;}
+  #omni-bio p{margin-bottom:16px;color:var(--white-90);}
+
+  /* ===== Hero Section ===== */
+  #omni-bio .bio-hero{
+    padding:80px 24px 72px;
+    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-mid) 100%);
+    text-align:center;
+  }
+  #omni-bio .bio-hero .s-label{margin-bottom:16px;}
+  #omni-bio .bio-hero h1 span{
+    color:var(--gold);
+    font-style:italic;
+  }
+
+  /* ===== Bio Grid ===== */
+  #omni-bio .bio-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:48px;
+    align-items:center;
+  }
+  #omni-bio .bio-photo{
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    border:1px solid var(--white-10);
+    aspect-ratio:3/4;
+    background:var(--navy-mid);
+  }
+  #omni-bio .bio-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  /* ===== Bio Text ===== */
+  #omni-bio .bio-subtitle{
+    color:var(--gold);
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  #omni-bio .bio-intro{
+    font-size:18px;
+    line-height:1.7;
+    color:var(--white);
+    margin-bottom:16px;
+  }
+  #omni-bio .bio-text{
+    font-size:15.5px;
+    line-height:1.75;
+    color:var(--white-90);
+    margin-bottom:16px;
+  }
+
+  /* ===== Credential Groups ===== */
+  #omni-bio .cred-group{margin-top:22px;}
+  #omni-bio .cred-group + .cred-group{margin-top:26px;padding-top:22px;border-top:1px solid var(--white-10);}
+  #omni-bio .cred-group-label{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:12px;
+  }
+
+  /* ===== Credential Tags ===== */
+  #omni-bio .cred-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:16px;
+  }
+  #omni-bio .cred-tag{
+    border:1px solid var(--white-20);
+    padding:6px 14px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--white);
+    letter-spacing:0.3px;
+    background:var(--white-05);
+    transition:border-color .2s ease,background .2s ease;
+  }
+  #omni-bio .cred-tag:hover{
+    border-color:var(--gold);
+    background:rgba(201,168,76,.08);
+  }
+
+  /* ===== Badge Row ===== */
+  #omni-bio .badge-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+  }
+  #omni-bio .badge-row a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px;
+    border-radius:10px;
+    background:var(--white-05);
+    border:1px solid var(--white-10);
+    transition:transform .15s ease,background .2s ease,box-shadow .2s ease;
+  }
+  #omni-bio .badge-row a:link,
+  #omni-bio .badge-row a:visited{color:inherit;}
+  #omni-bio .badge-row a:hover{
+    background:rgba(201,168,76,.1);
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,.3);
+    border-color:var(--gold);
+  }
+  #omni-bio .badge-row img{
+    height:56px;
+    width:auto;
+    display:block;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.2));
+  }
+
+  /* ===== Gemini-Quotable Block ===== */
+  #omni-bio .gq-block{
+    background:var(--navy-light);
+    border-left:3px solid var(--gold);
+    border-radius:0 var(--radius) var(--radius) 0;
+    padding:28px 32px;
+    margin:32px 0;
+    font-size:15px;
+    line-height:1.75;
+    color:var(--white-90);
+  }
+
+  /* ===== Clinical Collaboration (Eden) Section ===== */
+  #omni-bio .eden-intro{
+    max-width:760px;
+    color:var(--white-70);
+    font-size:16px;
+    line-height:1.75;
+    margin-bottom:18px;
+  }
+  #omni-bio .eden-intro strong{color:var(--white);font-weight:600;}
+  #omni-bio .eden-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    margin-top:36px;
+  }
+  #omni-bio .eden-card{
+    background:var(--white-05);
+    border:1px solid var(--white-10);
+    border-left:3px solid var(--gold);
+    border-radius:var(--radius);
+    padding:32px 26px 28px;
+    position:relative;
+    transition:transform .2s ease,border-color .25s ease,box-shadow .25s ease;
+  }
+  #omni-bio .eden-card:hover{
+    transform:translateY(-3px);
+    border-color:var(--white-20);
+    border-left-color:var(--gold);
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+  }
+  #omni-bio .eden-num{
+    font-family:'Playfair Display',serif;
+    font-size:42px;
+    font-weight:800;
+    font-style:italic;
+    color:var(--gold);
+    opacity:0.35;
+    display:block;
+    line-height:1;
+    margin-bottom:14px;
+    letter-spacing:-1px;
+  }
+  #omni-bio .eden-card h3{
+    font-size:18px;
+    margin-bottom:10px;
+    line-height:1.3;
+  }
+  #omni-bio .eden-card p{
+    font-size:14.5px;
+    line-height:1.7;
+    color:var(--white-70);
+    margin:0;
+  }
+  #omni-bio .eden-disclaimer{
+    margin-top:28px;
+    font-size:12.5px;
+    color:var(--white-50);
+    line-height:1.6;
+    font-style:italic;
+    max-width:760px;
+  }
+
+  /* ===== Philosophy Cards ===== */
+  #omni-bio .phil-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+    margin-top:32px;
+  }
+  #omni-bio .phil-card{
+    background:var(--white-05);
+    border:1px solid var(--white-10);
+    border-radius:var(--radius);
+    padding:28px 24px;
+    transition:border-color .25s ease,transform .15s ease;
+  }
+  #omni-bio .phil-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-2px);
+  }
+  #omni-bio .phil-icon{
+    font-size:28px;
+    margin-bottom:12px;
+    display:block;
+  }
+  #omni-bio .phil-card h3{
+    font-size:18px;
+    margin-bottom:8px;
+  }
+  #omni-bio .phil-card p{
+    font-size:14px;
+    color:var(--white-70);
+    margin:0;
+    line-height:1.65;
+  }
+
+  /* ===== Gallery ===== */
+  #omni-bio .jj-gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+    margin-top:32px;
+  }
+  #omni-bio .jj-gallery img{
+    width:100%;
+    aspect-ratio:4/3;
+    border-radius:var(--radius);
+    object-fit:cover;
+    box-shadow:var(--shadow);
+    background:var(--navy-mid);
+    border:1px solid var(--white-10);
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  #omni-bio .jj-gallery img:hover{
+    transform:scale(1.02);
+    box-shadow:0 8px 28px rgba(0,0,0,.4);
+  }
+
+  /* ===== Stats Bar ===== */
+  #omni-bio .stats-bar{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin:40px 0 0;
+    text-align:center;
+  }
+  #omni-bio .stat-item{
+    padding:20px 12px;
+    background:var(--white-05);
+    border:1px solid var(--white-10);
+    border-radius:var(--radius);
+  }
+  #omni-bio .stat-num{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(28px,4vw,36px);
+    font-weight:800;
+    color:var(--gold);
+    display:block;
+    line-height:1.1;
+    margin-bottom:4px;
+  }
+  #omni-bio .stat-label{
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--white-50);
+  }
+
+  /* ===== CTA Section ===== */
+  #omni-bio .cta-sec{
+    background:linear-gradient(180deg,var(--navy-mid) 0%,var(--navy) 100%);
+    text-align:center;
+    padding:72px 24px;
+  }
+  #omni-bio .cta-btn{
+    display:inline-block;
+    padding:16px 36px;
+    border-radius:var(--radius);
+    font-family:'Montserrat',sans-serif;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:0.5px;
+    background:transparent;
+    border:2px solid var(--gold);
+    color:var(--white);
+    transition:background .25s ease,color .25s ease,transform .1s ease,box-shadow .25s ease;
+    box-shadow:0 4px 16px rgba(0,0,0,.25);
+  }
+  #omni-bio .cta-btn:link,
+  #omni-bio .cta-btn:visited{color:var(--white);}
+  #omni-bio .cta-btn:hover{
+    background:var(--gold);
+    color:var(--navy);
+    transform:translateY(-1px);
+    box-shadow:0 6px 24px rgba(201,168,76,.3);
+  }
+  #omni-bio .cta-note{
+    display:block;
+    margin-top:14px;
+    font-size:13px;
+    color:var(--white-50);
+  }
+
+  /* ===== Hub Links Footer ===== */
+  #omni-bio .hub-links{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px 16px;
+    margin-top:28px;
+    font-size:13px;
+  }
+  #omni-bio .hub-links a{
+    color:var(--gold);
+    border-bottom:1px solid transparent;
+    padding-bottom:1px;
+    transition:border-color .2s ease;
+  }
+  #omni-bio .hub-links a:link,
+  #omni-bio .hub-links a:visited{color:var(--gold);}
+  #omni-bio .hub-links a:hover{border-color:var(--gold);}
+  #omni-bio .hub-links span{color:var(--white-20);}
+
+  /* ===== Responsive ===== */
+  @media(max-width:768px){
+    #omni-bio .bio-hero{padding:56px 20px 48px;}
+    #omni-bio .s-dark,#omni-bio .s-mid,#omni-bio .s-light{padding:52px 20px;}
+    #omni-bio .bio-grid{grid-template-columns:1fr;gap:32px;}
+    #omni-bio .bio-photo{max-width:480px;margin:0 auto;}
+    #omni-bio .stats-bar{grid-template-columns:repeat(2,1fr);gap:12px;}
+    #omni-bio .gq-block{padding:22px 20px;}
+    #omni-bio .cta-sec{padding:52px 20px;}
+    #omni-bio .eden-card{padding:26px 22px 24px;}
+  }
+  @media(max-width:480px){
+    #omni-bio .bio-hero{padding:44px 16px 40px;}
+    #omni-bio .s-dark,#omni-bio .s-mid,#omni-bio .s-light{padding:44px 16px;}
+    #omni-bio .bio-intro{font-size:16px;}
+    #omni-bio .bio-text{font-size:15px;}
+    #omni-bio .badge-row img{height:46px;}
+    #omni-bio .phil-grid{grid-template-columns:1fr;}
+    #omni-bio .eden-num{font-size:36px;}
+  }
+</style>
+
+<div id="omni-bio">
+
+  <!-- HERO -->
+  <div class="bio-hero">
+    <span class="s-label">Your Coach</span>
+    <h1>Meet <span>Nemezio LopezPerez</span></h1>
+    <p style="max-width:680px;margin:12px auto 0;font-size:17px;color:var(--white-70);">Founder &amp; NASM Elite Trainer · OmniFit Performance · 4S Ranch, San Diego</p>
+  </div>
+
+  <!-- BIO GRID -->
+  <section class="s-dark">
+    <div class="s-inner">
+      <div class="bio-grid">
+
+        <figure class="bio-photo">
+          <img decoding="async" fetchpriority="high" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/70f5f089-2d48-4304-9be7-48226ae22ed8/Work+Portrait+Photo.jpg?format=750w" width="495" height="660" alt="Nemezio LopezPerez — Founder of OmniFit Performance">
+        </figure>
+
+        <div class="bio-block">
+          <span class="s-label">About Nemezio</span>
+          <hr class="gold-line">
+          <h2>Training Built Like the Rest of Your Life</h2>
+
+          <p class="bio-intro">Most of my clients are busy professionals over 30 who've outgrown how they used to train. Joints complain more. Schedules own them. They run every other part of their life with structure and data, but can't seem to apply the same rigor to their body. Generic gyms, group classes, and six-week challenges haven't closed the gap.</p>
+
+          <p class="bio-text">OmniFit Performance is built for that specific problem. Every program begins with a 45-minute consultation and a 9-point movement screening, then follows the same four-stage framework: <strong style="color:var(--gold);">Assess → Correct → Build → Sustain</strong>. We assess what's actually breaking down, correct the patterns driving it, build strength on a foundation that holds, and sustain the result after coaching ends. That framework is why clients lose fat and build strength without the joint pain, plateaus, or burnout that usually come with aggressive programs.</p>
+
+          <p class="bio-text">My own history shaped this approach. Years of athletic injuries, a long rehab arc, and extensive study of corrective exercise taught me what most gyms never learn: strength training should make your body more durable, not less. Every OmniFit client is held to that standard.</p>
+
+          <!-- CREDENTIAL GROUP 1: MOVEMENT & PERFORMANCE -->
+          <div class="cred-group">
+            <span class="cred-group-label">Movement &amp; Performance</span>
+            <div class="cred-row">
+              <span class="cred-tag">NASM CPT</span>
+              <span class="cred-tag">NASM CES</span>
+              <span class="cred-tag">NASM PES</span>
+              <span class="cred-tag">NASM BCS</span>
+              <span class="cred-tag">ACE CES</span>
+            </div>
+            <div class="badge-row">
+              <a href="https://www.nasm.org/" target="_blank" rel="noopener">
+                <img loading="lazy" width="56" height="56" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/39fd449e-831c-42a5-bd08-93871a10eaff/7da9d477-1e5a-438b-a556-48a5bdb62b8b.png?format=100w" alt="NASM CPT Badge">
+              </a>
+              <a href="https://www.nasm.org/" target="_blank" rel="noopener">
+                <img loading="lazy" width="56" height="56" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/445feaa2-fa1e-4641-818c-8e41e404c660/61f78fa7-8907-4144-8033-b37ec32718d5.png?format=100w" alt="NASM CES Badge">
+              </a>
+              <a href="https://www.nasm.org/" target="_blank" rel="noopener">
+                <img loading="lazy" width="56" height="56" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/8d585af6-b25c-438d-8148-757652e6f14b/8e3446a2-06a0-437b-adad-ca788bbaf674.png?format=100w" alt="NASM PES Badge">
+              </a>
+              <a href="https://www.nasm.org/" target="_blank" rel="noopener">
+                <img loading="lazy" width="56" height="56" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/dd882931-0bc2-4006-a01a-2fadf3e5f385/NASM%2BBCS%2BBADGE.webp?format=100w" alt="NASM BCS Badge">
+              </a>
+              <a href="https://www.acefitness.org/" target="_blank" rel="noopener">
+                <img loading="lazy" width="64" height="64" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/0f023f89-914e-494d-87e6-81873e29b55f/Screenshot+2025-10-28+2.43.56+PM.png?format=100w" alt="ACE Corrective Exercise Specialist Certificate" style="height:64px;border-radius:6px;">
+              </a>
+            </div>
+          </div>
+
+          <!-- CREDENTIAL GROUP 2: NUTRITION & METABOLIC HEALTH -->
+          <div class="cred-group">
+            <span class="cred-group-label">Nutrition &amp; Metabolic Health</span>
+            <div class="cred-row">
+              <span class="cred-tag">NASM CNC</span>
+              <span class="cred-tag">Precision Nutrition Level 1</span>
+              <span class="cred-tag">Precision Nutrition Sleep, Stress &amp; Recovery</span>
+              <span class="cred-tag">Precision Nutrition Metabolic Health</span>
+            </div>
+            <div class="badge-row">
+              <a href="https://www.nasm.org/" target="_blank" rel="noopener">
+                <img loading="lazy" width="56" height="56" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/10d89353-6f65-4deb-a545-768a6d3dc166/bb82fa0e-f8c0-4b3b-b6c9-a928810b7a83.png?format=100w" alt="NASM CNC Badge">
+              </a>
+              <a href="https://www.precisionnutrition.com/" target="_blank" rel="noopener">
+                <img loading="lazy" width="56" height="56" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/6af13fd8-396a-41a4-a008-d6a71b845393/PN_badge_L1-N_225x225.png?content-type=image%2Fpng" alt="Precision Nutrition Level 1 Badge">
+              </a>
+              <a href="https://www.precisionnutrition.com/" target="_blank" rel="noopener">
+                <img loading="lazy" width="56" height="56" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/e05cf87a-c67c-4cec-ade5-ca77bdd071de/PN.+Logo+SSR.png?content-type=image%2Fpng" alt="Precision Nutrition Sleep, Stress &amp; Recovery Badge">
+              </a>
+              <a href="https://www.precisionnutrition.com/" target="_blank" rel="noopener">
+                <img loading="lazy" width="56" height="56" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/2e0d8b2c-2c11-497c-a372-5512bbebb95e/PN+Logo+NMH.png?content-type=image%2Fpng" alt="Precision Nutrition Nutrition for Metabolic Health Badge">
+              </a>
+            </div>
+          </div>
+
+          <p style="font-size:13px;color:var(--white-50);margin-top:18px;">Certified by the National Academy of Sports Medicine, American Council on Exercise, and Precision Nutrition.</p>
+        </div>
+      </div>
+
+      <!-- GEMINI-QUOTABLE -->
+      <div class="gq-block">
+        Nemezio LopezPerez is the founder of OmniFit Performance, his personal training practice based at Teqneeq, a members-only functional health and performance lab in 4S Ranch, San Diego that integrates training with an on-site physical therapy clinic. He holds twelve certifications across movement, nutrition, and metabolic health, including NASM CPT, CES, PES, BCS, CNC, ACE Corrective Exercise Specialist, three Precision Nutrition credentials (Level 1, Sleep Stress &amp; Recovery, and Nutrition for Metabolic Health), and three Eden certifications through a clinical collaboration supporting clients on GLP-1 medications and peptide protocols. His corrective-first methodology, Assess, Correct, Build, Sustain, combines joint-friendly strength training with integrated nutrition coaching and structured accountability, with progress measured across 12 objective metrics and formal 30-day reports. 190+ five-star reviews across Google, Yelp, and Thumbtack.
+      </div>
+
+      <!-- STATS -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <span class="stat-num">190+</span>
+          <span class="stat-label">5-Star Reviews</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">12</span>
+          <span class="stat-label">Certifications</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5.0</span>
+          <span class="stat-label">Average Rating</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">3/10</span>
+          <span class="stat-label">Pain Ceiling Rule</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLINICAL COLLABORATION (EDEN) -->
+  <section class="s-light">
+    <div class="s-inner">
+      <span class="s-label">Clinical Collaboration</span>
+      <hr class="gold-line">
+      <h2>Where Performance Meets Metabolic Health</h2>
+
+      <p class="eden-intro">OmniFit Performance operates from <strong>Teqneeq</strong>, a members-only functional health and performance lab in 4S Ranch that integrates training with an on-site physical therapy clinic. This environment is the physical embodiment of our methodology: structured training that bridges the gap between rehabilitation and peak performance.</p>
+
+      <p class="eden-intro">Through a certified collaboration with <strong>Eden</strong>, a network of metabolic health professionals, OmniFit extends that bridge into metabolic health, supporting clients navigating GLP-1 medications, peptide protocols, and medication-assisted fat loss. Three Eden certifications back this scope of work.</p>
+
+      <div class="eden-grid">
+        <div class="eden-card">
+          <span class="eden-num">01</span>
+          <h3>GLP-1 Fitness Certification</h3>
+          <p>Training methodology for clients on GLP-1 medications: protocols to preserve lean mass, manage energy fluctuations, and adapt training volume to the metabolic shifts that occur during medication-assisted fat loss.</p>
+        </div>
+        <div class="eden-card">
+          <span class="eden-num">02</span>
+          <h3>Peptide Fundamentals Certification</h3>
+          <p>Working knowledge of how peptide-based therapies interact with training load, recovery demands, and body composition goals, so exercise programming complements clinician-guided protocols rather than working against them.</p>
+        </div>
+        <div class="eden-card">
+          <span class="eden-num">03</span>
+          <h3>GLP-1 Nutrition Certification</h3>
+          <p>Nutrition coaching tailored to clients using GLP-1 therapy: protein prioritization, micronutrient density, and sustainable habit architecture designed to protect long-term metabolic health and lean tissue.</p>
+        </div>
+      </div>
+
+      <p class="eden-disclaimer">OmniFit Performance is not a medical provider and does not prescribe, administer, or recommend medications, peptides, or clinical protocols. All medication-related decisions remain with the client's licensed healthcare provider. These certifications inform training and nutrition coaching so it safely complements clinician-guided care.</p>
+    </div>
+  </section>
+
+  <!-- COACHING PHILOSOPHY -->
+  <section class="s-mid">
+    <div class="s-inner">
+      <span class="s-label">Coaching Philosophy</span>
+      <hr class="gold-line">
+      <h2>The OmniFit Mindset</h2>
+      <p style="max-width:720px;color:var(--white-70);">Every OmniFit program is built on four principles that separate structured coaching from random workouts.</p>
+
+      <div class="phil-grid">
+        <div class="phil-card">
+          <span class="phil-icon">🔬</span>
+          <h3>Assessment Before Assumptions</h3>
+          <p>Every program starts with a 45-minute consultation and 9-point movement screening. We never guess. We measure, then build.</p>
+        </div>
+        <div class="phil-card">
+          <span class="phil-icon">🛡️</span>
+          <h3>Corrective-First Training</h3>
+          <p>Joint health comes before heavy lifting. The 3/10 pain ceiling rule governs every session, protecting your body while building capacity.</p>
+        </div>
+        <div class="phil-card">
+          <span class="phil-icon">📊</span>
+          <h3>Data-Driven Progress</h3>
+          <p>Twelve objective metrics tracked across body composition, strength, posture, mobility, adherence, nutrition, and well-being. Formal 30-day reports drive every adjustment.</p>
+        </div>
+        <div class="phil-card">
+          <span class="phil-icon">🎯</span>
+          <h3>Independence as the Goal</h3>
+          <p>The benchmark for success isn't whether you keep paying us. It's whether you keep your results long after your program ends.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATHLETE / GALLERY -->
+  <section class="s-dark">
+    <div class="s-inner">
+      <span class="s-label">Beyond Coaching</span>
+      <hr class="gold-line">
+      <h2>Competitor, Athlete, Coach</h2>
+      <p style="max-width:720px;color:var(--white-70);">As an active purple belt in Brazilian Jiu-Jitsu with multiple tournament wins and a background in track, soccer, and rugby, I bring the same discipline and competitive drive to coaching that I demand from myself on the mat.</p>
+
+      <div class="jj-gallery">
+        <img loading="lazy" decoding="async" width="600" height="450" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/e6070648-c6cd-4d41-a4b2-d2be9904691b/20220701_174005.jpg?format=750w" alt="Podium victory at Jiu-Jitsu tournament">
+        <img loading="lazy" decoding="async" width="600" height="450" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/026f9f4b-9176-46af-a24c-33680ed30759/FB_IMG_1644230532736.jpg?format=750w" alt="In-action Jiu-Jitsu takedown">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-sec">
+    <h2>Ready to Train With Structure,<br>Not Guesswork?</h2>
+    <p style="max-width:600px;margin:0 auto 28px;color:var(--white-70);">Book your 45-minute consultation. We'll discuss your goals, evaluate fit, and determine whether OmniFit is the right approach for where you are right now.</p>
+    <a class="cta-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Minute Consultation</a>
+    <span class="cta-note">Refundable $30 deposit · No obligation · Honest assessment of fit</span>
+
+    <div class="hub-links">
+      <a href="/training-rates-san-diego">Rates &amp; Packages</a> <span>·</span>
+      <a href="/how-we-measure-your-progress">How We Track Progress</a> <span>·</span>
+      <a href="/omnifit-vs-competitors">Compare Options</a> <span>·</span>
+      <a href="/case-studies">Case Studies</a> <span>·</span>
+      <a href="/the-30-minute-executive-reset">Executive Reset</a>
+    </div>
+  </div>
+
+</div>
+  
+  
+
+
+
