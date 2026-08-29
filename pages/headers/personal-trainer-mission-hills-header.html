@@ -1,0 +1,88 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     OMNIFIT — MISSION HILLS LOCATION PAGE SCHEMA (JSON-LD)
+     Paste into: Squarespace > Pages > Personal Trainer Mission Hills >
+                 Settings > Advanced > Page Header Code Injection
+     Page: /personal-trainer-mission-hills
+     ═══════════════════════════════════════════════════════════════ -->
+
+<!-- Breadcrumb -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.omnifittraining.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Personal Training Services", "item": "https://www.omnifittraining.com/personal-training-services" },
+    { "@type": "ListItem", "position": 3, "name": "Personal Trainer Mission Hills", "item": "https://www.omnifittraining.com/personal-trainer-mission-hills" }
+  ]
+}
+</script>
+
+<!-- LocalBusiness — Mission Hills service area -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "OmniFit Personal Trainer — Mission Hills, San Diego",
+  "url": "https://www.omnifittraining.com/personal-trainer-mission-hills",
+  "telephone": "+1-619-259-0630",
+  "email": "nemezio@omnifittraining.com",
+  "image": "https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w",
+  "description": "Private in-home and studio-based personal training for Mission Hills professionals over 30. NASM-certified corrective exercise specialist. Minutes from our Pacific Beach studio. Assessment-driven programming for downtown commuters and established professionals.",
+  "priceRange": "$$$$",
+  "address": { "@type": "PostalAddress", "streetAddress": "2123 Garnet Ave", "addressLocality": "San Diego", "addressRegion": "CA", "postalCode": "92109", "addressCountry": "US" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 32.801727, "longitude": -117.2310292 },
+  "areaServed": [
+    { "@type": "Place", "name": "Mission Hills, San Diego, CA" },
+    { "@type": "Place", "name": "Hillcrest, San Diego, CA" },
+    { "@type": "Place", "name": "University Heights, San Diego, CA" },
+    { "@type": "Place", "name": "Bankers Hill, San Diego, CA" }
+  ],
+  "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Mission Hills Personal Training Services",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "In-Home Personal Training (Mission Hills)",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Home Session — Mission Hills (Month-to-Month)" }, "price": "225.00", "priceCurrency": "USD" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "In-Home Session — Mission Hills (3-Month Commitment)" }, "price": "200.00", "priceCurrency": "USD" }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "In-Studio Personal Training",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "1:1 Studio Session (Month-to-Month)" }, "price": "175.00", "priceCurrency": "USD" },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "1:1 Studio Session (3-Month Commitment)" }, "price": "150.00", "priceCurrency": "USD" }
+        ]
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": { "@type": "Service", "name": "Executive Hybrid Coaching" },
+        "price": "500.00",
+        "priceCurrency": "USD",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "500.00", "priceCurrency": "USD", "billingDuration": { "@type": "QuantitativeValue", "value": 1, "unitCode": "MON" } }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How does in-home personal training work in Mission Hills?", "acceptedAnswer": { "@type": "Answer", "text": "We come to your Mission Hills home and train using your existing equipment or a minimal setup. Sessions are 60 minutes, fully programmed from your movement assessment. A $50 travel fee per session applies." } },
+    { "@type": "Question", "name": "What does a personal trainer in Mission Hills cost?", "acceptedAnswer": { "@type": "Answer", "text": "In-home sessions in Mission Hills are $200–$225 per session ($150–$175 base rate + $50 travel fee) depending on commitment length. In-studio 1:1 training is $175/session month-to-month or $150/session with a 3-month commitment. Executive Hybrid Coaching is $500/month. The 30-Minute Executive Reset starts at $599/month for virtual coaching." } },
+    { "@type": "Question", "name": "My Mission Hills home doesn't have a gym. Can I still do in-home training?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on your space. At minimum you need adjustable dumbbells, a bench, resistance bands, and about 8x8 feet of clear space. If space is limited, our Pacific Beach studio is just 10 minutes away and is the more practical option." } },
+    { "@type": "Question", "name": "What certifications does your trainer hold?", "acceptedAnswer": { "@type": "Answer", "text": "Nemezio Lopez Perez holds NASM-CPT, NASM-CES (Corrective Exercise Specialist), NASM-PES (Performance Enhancement Specialist), NASM-BCS (Behavior Change Specialist), and NASM-CNC (Certified Nutrition Coach)." } },
+    { "@type": "Question", "name": "I sit at a desk all day downtown and come home with back and neck pain. Can you help?", "acceptedAnswer": { "@type": "Answer", "text": "This is the most common issue we address among Mission Hills professionals. Hours of seated desk work create predictable postural dysfunction. Our corrective-first approach identifies exactly which patterns are causing your pain and resolves them systematically. Most clients see measurable improvement within 4–6 sessions." } },
+    { "@type": "Question", "name": "Can I train before or after work to fit my downtown commute?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Many Mission Hills clients train early morning (6–7am) before heading downtown or evening (6–8pm) after returning. In-home sessions eliminate any additional commute. Studio sessions take 10 minutes each way." } }
+  ]
+}
+</script>
