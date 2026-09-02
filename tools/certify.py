@@ -41,12 +41,74 @@ def guarantee_near_outcome(text, window=30):
                           t[max(0, m.start()-100):m.end()+140].strip()))
     return out
 
+# ─── DOCUMENTED CASE-STUDY EXCEPTION (Andrew Flores, Sept 2026) ────
+# CANON's CANONICAL TRUTH records documented client figures WITH timeframes as
+# canonical fact while the COMPLIANCE SCREEN banned lbs-near-timeframe outright.
+# Resolution: an individual, attributed, documented client outcome with
+# substantiation on file is a different object from a claim about what a
+# PROSPECTIVE client can expect. The first is a fact about a named person; the
+# second is a projection, and only the projection is what these two rules exist
+# to prevent. Exempts lbs_near_timeframe and result_near_timeframe ONLY.
+#
+# Keyed off the disclaimer TEXT PRESENT ON THE PAGE, never off the filename:
+# that is what makes condition 2 enforceable rather than decorative. The same
+# figure on a page without the disclaimer is still a strike.
+DISCLAIMER_VARIES = (r'\b(?:vary|varies|varied|depends?|depending|'
+                     r'not a projection|not projections|not typical)\b')
+
+def _has_results_disclaimer(text, window=40):
+    """The individual-results disclaimer: the phrase 'individual result(s)'
+    carrying a statement that outcomes vary or depend on the individual. A bare
+    mention of the words is not a disclaimer."""
+    t = _flat(text)
+    for m in re.finditer(r'\bindividual results?\b', t, re.I):
+        if re.search(DISCLAIMER_VARIES, ' '.join(t[m.end():].split()[:window]), re.I):
+            return True
+    return False
+
+# Condition 1: attributed to a specific individual - a named client beside a
+# role/profile, or an explicit anonymisation that still states a profile.
+# A role/profile noun is required after the name. Without it, "San Diego, lost
+# 27 pounds" would read as an attribution and condition 1 would be decorative.
+ROLE = (r'(?:\d{1,2}-year-old|owner|founder|co-founder|CEO|CTO|CFO|COO|chief|'
+        r'executive|director|manager|officer|board member|business owner|'
+        r'nurse|RN|auditor|Marine|veteran|engineer|physician|therapist|attorney|'
+        r'lawyer|teacher|realtor|entrepreneur|consultant|accountant|bookkeeper|'
+        r'professional|client|mother|father|mom|dad|retiree|athlete|'
+        r'(?:his|her|their) \d{2}s)')
+NAMED_ATTRIB = (r'\b[A-Z][a-z]{2,}(?:\s+[A-Z][a-z]+)?\s*(?:·|&middot;|&#183;)'   # "Mark ·", "Dave Rendo ·"
+                r'|\b[A-Z][a-z]{2,}(?:\s+[A-Z][a-z]+)?,\s+(?:an?|the)?\s*'
+                r'(?:\w+[\s-]+){0,2}?' + ROLE + r'\b'                             # "Annie, a registered nurse"
+                r'|\b[A-Z][a-z]{2,}\s+(?:is|was|runs|ran|came|started|joined)\s+an?\b')
+PROFILE = r'\b(?:male|female|man|woman|\d{2}-year|\d{2}\s*,\s*\d|aged?)\b'
+# Aggregate or typical-results framing is NEVER exempt, on any page.
+AGGREGATE = (r'\b(?:typical|typically|average|averages|averaged|'
+             r'most clients|our clients|every client|everyone|anyone|'
+             r'clients\s+(?:lose|gain|drop|see|can|will)|'
+             r'you\s+(?:\w+\s+){0,2}?(?:lose|gain|drop|expect|see|will|can)|'
+             r"you'll|expect to|up to)\b")
+
+def _case_study_exempt(t, m, page_disclaimed, window=45):
+    """True when this match is a documented individual case-study figure on a
+    page carrying the individual-results disclaimer. Fails CLOSED: anything the
+    attribution test cannot confirm stays a strike."""
+    if not page_disclaimed:                       # condition 2
+        return False
+    w = ' '.join(t[:m.start()].split()[-window:] + t[m.end():].split()[:window])
+    if re.search(AGGREGATE, w, re.I):             # never exempt, on any page
+        return False
+    if re.search(r'\banonymi[sz]ed\b', w, re.I):  # condition 1, anonymised form
+        return bool(re.search(PROFILE, w, re.I))  #   ... with a stated profile
+    return bool(re.search(NAMED_ATTRIB, w))       # condition 1, named form
+
 def lbs_near_timeframe(text, window=15):
     t = _flat(text); out = []
+    disclaimed = _has_results_disclaimer(text)
     for m in re.finditer(r'\d[\d,]*(?:\s*(?:–|-|&ndash;|to)\s*\d[\d,]*)?\s*(?:lbs?|pounds?)', t, re.I):
         w = _near(t, m, window)
         for tf in re.finditer(TIMEFRAME, w, re.I):
             if re.search(CONTRAST, w[:tf.start()], re.I): continue
+            if _case_study_exempt(t, m, disclaimed): break
             out.append(("lbs near timeframe", f"'{m.group(0).strip()}' near '{tf.group(0)}'",
                         t[max(0, m.start()-100):m.end()+140].strip()))
             break
@@ -139,6 +201,7 @@ def result_near_timeframe(text, window=12):
     """A result paired with a promised window, in any units. The lbs rule is the
     specific case; results must be framed against the client's own baseline."""
     t = _flat(text); out = []
+    disclaimed = _has_results_disclaimer(text)
     for m in re.finditer(RESULT, t, re.I):
         # a result stated as absent ("produces no change", "don't have ... producing
         # visible results") promises nothing
@@ -147,6 +210,7 @@ def result_near_timeframe(text, window=12):
         w = _near(t, m, window)
         for tf in re.finditer(TIMEFRAME, w, re.I):
             if re.search(CONTRAST, w[:tf.start()], re.I): continue
+            if _case_study_exempt(t, m, disclaimed): break
             out.append(("result promised within a window", f"'{m.group(0).strip()}' near '{tf.group(0).strip()}'",
                         t[max(0, m.start()-100):m.end()+140].strip()))
             break
@@ -255,7 +319,7 @@ def run():
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
-    inv={}
+    inv={}; notrun=[]
     for f in files:
         s=open(f).read()
         p=_P(); p.feed(s)
@@ -266,26 +330,49 @@ def run():
             if not m: print(f"   {f}  [no ld+json block]"); C+=1; continue
             try: doc=json.loads(m.group(1))
             except Exception as e: print(f"   {f}  [invalid JSON] {e}"); C+=1; continue
-            n={x["@type"]:x for x in doc["@graph"]}
-            if "LocalBusiness" in n: print(f"   {f}  [LocalBusiness redefined]"); C+=1
-            if not n["WebPage"]["about"]["@id"].endswith("#localbusiness-of"):
-                print(f"   {f}  [about not referencing homepage LocalBusiness]"); C+=1
+            # Not every header in the repo is a Batch-3-shaped @graph document
+            # (the homepage header IS the LocalBusiness definition, and several
+            # uploaded headers are a single bare node). A check that cannot be
+            # applied is recorded as NOT RUN, never silently skipped: the shape
+            # is outside what CANON specifies for page headers, so calling it a
+            # violation would be inventing a rule, and calling it a pass is how
+            # three earlier checks came to report success without looking.
+            graph = doc["@graph"] if isinstance(doc, dict) and "@graph" in doc else [doc]
+            n={x["@type"]:x for x in graph if isinstance(x, dict) and "@type" in x}
+            if "@graph" not in doc:
+                notrun.append(f"{f}  ld+json is a single bare node, not an @graph document"
+                              f" - LocalBusiness/about checks not applicable")
+            else:
+                if "LocalBusiness" in n: print(f"   {f}  [LocalBusiness redefined]"); C+=1
+                if "WebPage" not in n:
+                    notrun.append(f"{f}  @graph has no WebPage node ({sorted(n)}) - "
+                                  f"about-references-homepage-LocalBusiness check could not run")
+                elif not n["WebPage"].get("about",{}).get("@id","").endswith("#localbusiness-of"):
+                    print(f"   {f}  [about not referencing homepage LocalBusiness]"); C+=1
             slug=re.sub(r'-header\.html$','',f.split('/')[-1])
             pg=f"pages/{slug}.html"
-            try: pq=page_questions(open(pg).read())
+            sq=[q["name"] for x in graph if x.get("@type")=="FAQPage" for q in x["mainEntity"]]
+            sa=[q["acceptedAnswer"]["text"] for x in graph if x.get("@type")=="FAQPage"
+                for q in x["mainEntity"]]
+            try: pagesrc=open(pg).read()
             except FileNotFoundError: print(f"   {f}  [no matching page {pg}]"); C+=1; continue
-            sq=[q["name"] for x in doc["@graph"] if x["@type"]=="FAQPage" for q in x["mainEntity"]]
+            # An extractor that cannot read the page's FAQ has not verified the
+            # mirror; it has declined to look. Never let that count as a pass.
+            try: pairs=faq.qa(pagesrc)
+            except faq.ExtractorFailure as e:
+                notrun.append(f"{f}  FAQ mirror NOT VERIFIED - extractor failed on {pg}: {e}")
+                continue
+            pq=[q for q,_ in pairs]; pa=[a for _,a in pairs]
+            if not pq and not sq:
+                notrun.append(f"{f}  no FAQ found on either side (page 0, schema 0) - "
+                              f"mirror check compared nothing")
             if pq!=sq:
                 print(f"   {f}  [FAQPage questions do not mirror page] page={len(pq)} schema={len(sq)}"); C+=1
             # CANON (c) requires count, order AND text: answers are part of the mirror.
-            pa=[a for _,a in faq.qa(open(pg).read())]
-            sa=[q["acceptedAnswer"]["text"] for x in doc["@graph"] if x["@type"]=="FAQPage"
-                for q in x["mainEntity"]]
             if len(pa)!=len(sa) or any(_norm(a)!=_norm(b) for a,b in zip(pa,sa)):
                 d=[i for i,(a,b) in enumerate(zip(pa,sa)) if _norm(a)!=_norm(b)]
                 print(f"   {f}  [FAQPage answers do not mirror page] differing index={d}"); C+=1
-            a=[q["acceptedAnswer"]["text"] for x in doc["@graph"] if x["@type"]=="FAQPage"
-               for q in x["mainEntity"] if q["acceptedAnswer"]["text"].startswith("OmniFit Performance publishes its rates in full.")]
+            a=[x for x in sa if x.startswith("OmniFit Performance publishes its rates in full.")]
             if a: inv.setdefault("header pricing",set()).add(hashlib.sha256(a[0].encode()).hexdigest()[:16])
             continue
         for key,rx,grp in [
@@ -300,8 +387,22 @@ def run():
     for k,v in inv.items():
         if len(v)!=1: print(f"   [invariant mismatch] {k}: {v}"); C+=1
     print("   none" if not C else f"   {C} problem(s)")
-    print(f"\n### RESULT: {'PASSED' if not (A or B or C) else 'FAILED'}"
-          f"  (compliance {A} · stale canon {B} · structure {C})")
+
+    print("\n### INVARIANT HASHES (CANON.md records these; five expected)")
+    for k in ("page pricing","header pricing","credentials","archetypes","9-point"):
+        v=inv.get(k)
+        print(f"   {k:16} {'MISSING - not found on any file' if not v else ' '.join(sorted(v))}")
+        if not v: notrun.append(f"invariant '{k}' matched no file - hash not verified")
+
+    # NOT a fourth certification category: these are checks that could not be
+    # applied, reported so a green result can never mean "nothing was looked at".
+    print("\n### CHECKS THAT COULD NOT RUN")
+    for x in notrun: print(f"   {x}")
+    print("   none" if not notrun else f"   {len(notrun)} check(s) not verified")
+
+    result = "FAILED" if (A or B or C) else ("INCOMPLETE" if notrun else "PASSED")
+    print(f"\n### RESULT: {result}"
+          f"  (compliance {A} · stale canon {B} · structure {C} · not-run {len(notrun)})")
     return A,B,C
 
 if __name__ == "__main__":
