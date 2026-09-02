@@ -48,7 +48,9 @@ def build(slug):
             if d.get("@type") == kind:
                 d.pop("@context", None)
                 graph.append(d)
-    pairs = faq.qa(page)
+    # qa_strict, not qa: this result is WRITTEN TO A FILE. A None answer here is
+    # how the header re-mirror incident wrote null over the canonical pricing block.
+    pairs = faq.qa_strict(page)
     if pairs:
         graph.append({"@type": "FAQPage", "@id": f"{BASE}/{slug}#faq",
           "mainEntity": [{"@type": "Question", "name": q,
