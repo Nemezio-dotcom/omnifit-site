@@ -78,7 +78,8 @@
   /* CARD */
   #omni-services .sv-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 24px 28px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; min-height: 0; }
   #omni-services .sv-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-  #omni-services .sv-card-icon { font-size: 28px; margin-bottom: 16px; display: block; line-height: 1; }
+  #omni-services .sv-card-icon { margin-bottom: 18px; display: block; line-height: 1; }
+  #omni-services .sv-card-icon svg { width: 28px; height: 28px; stroke: var(--gold-light); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block; }
   #omni-services .sv-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); line-height: 1.3; }
   #omni-services .sv-card p { font-size: 14px; color: var(--white-50); margin-bottom: 18px; line-height: 1.65; }
   #omni-services .sv-card-features { list-style: none; margin: 0 0 20px; padding: 0; flex: 1 1 auto; }
@@ -146,7 +147,7 @@
   /* TRUST BAR */
   #omni-services .sv-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 48px auto 0; max-width: 700px; padding: 0 20px; }
   #omni-services .sv-trust-item { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
-  #omni-services .sv-trust-item span { font-size: 14px; }
+  #omni-services .sv-trust-item svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
   /* RESPONSIVE */
   @media (max-width: 980px) {
@@ -210,7 +211,7 @@
     <div class="sv-grid">
 
       <article class="sv-card">
-        <span class="sv-card-icon">🏋️</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 8v8"/><path d="M4 9.5v5"/><path d="M17.5 8v8"/><path d="M20 9.5v5"/><path d="M6.5 12h11"/></svg></span>
         <h3>Personal Trainer — 4S Ranch</h3>
         <p>1:1 coaching at our private studio inside Teqneeq FHC in 4S Ranch with individualized programming, form coaching, and structured progression.</p>
         <ul class="sv-card-features">
@@ -222,7 +223,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">🏠</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg></span>
         <h3>In-Home Personal Training</h3>
         <p>Full-service personal training at your San Diego residence. We bring all equipment, programming, and NASM-certified expertise to your door.</p>
         <ul class="sv-card-features">
@@ -234,7 +235,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">⚡</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span>
         <h3>HIIT Training — 4S Ranch</h3>
         <p>Efficient conditioning sessions built for busy professionals — coached intensity, real results, minimal time.</p>
         <ul class="sv-card-features">
@@ -246,7 +247,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">🔧</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M8.5 6h7"/><path d="M8 10.5h8"/><path d="M8.5 15h7"/><path d="M9.5 19h5"/></svg></span>
         <h3>Corrective Exercise / Post-Rehab</h3>
         <p>For clients cleared from PT who need a structured bridge back to strength, movement confidence, and performance.</p>
         <ul class="sv-card-features">
@@ -258,7 +259,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">📉</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6l6.5 6.5 4-4L21 16"/><path d="M21 11.5V16h-4.5"/></svg></span>
         <h3>Weight Loss Coaching</h3>
         <p>Lose 20–30+ lbs sustainably — no crash diets. Progressive training, Precision Nutrition habits, and accountability.</p>
         <ul class="sv-card-features">
@@ -270,7 +271,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">💪</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6"/><path d="M6 6.5v11"/><path d="M18 6.5v11"/><path d="M21 9v6"/><path d="M6 12h12"/></svg></span>
         <h3>Strength Training</h3>
         <p>Build muscle and performance with evidence-based, periodized programming designed around joint health.</p>
         <ul class="sv-card-features">
@@ -282,7 +283,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">🥗</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 21c0-6.5 3.5-13.5 14-15-1 8.5-5.5 13.5-14 15z"/><path d="M6 21c2.5-5 6.5-9.5 11-12.5"/></svg></span>
         <h3>Nutritional Coaching</h3>
         <p>Sustainable nutrition tailored to your lifestyle — macros, meal structure, and behavioral strategies that stick.</p>
         <ul class="sv-card-features">
@@ -294,7 +295,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">🖥️</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 5h18v11H3z"/><path d="M9 20h6"/><path d="M12 16v4"/></svg></span>
         <h3>Online Training &amp; Programming</h3>
         <p>Remote 1:1 coaching for clients who train from anywhere — live virtual sessions, custom app-based programming, and accountability built around your schedule.</p>
         <ul class="sv-card-features">
@@ -306,7 +307,7 @@
       </article>
 
       <article class="sv-card featured">
-        <span class="sv-card-icon">⚡</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 8h13v8H4z"/><path d="M20 10.5v3"/><path d="M10.5 9.5L8 12.5h3.5L9.5 15.5"/></svg></span>
         <h3>The Energy Protocol</h3>
         <p>A measured 1:1 executive health coaching program built around one outcome — sustained energy. Launching 2027. Founding cohort places are limited.</p>
         <ul class="sv-card-features">
@@ -318,7 +319,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">🏢</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 21V5.5L13 3v18"/><path d="M13 9h7v12"/><path d="M7.5 8v.01"/><path d="M9.5 12v.01"/><path d="M7.5 16v.01"/><path d="M16.5 13v.01"/></svg></span>
         <h3>Training Facility</h3>
         <p>Private, boutique environment inside Teqneeq FHC in 4S Ranch — professional equipment, calm atmosphere, zero crowds.</p>
         <ul class="sv-card-features">
@@ -330,7 +331,7 @@
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon">💰</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.5 3H21v8.5l-9 9L3.5 12z"/><path d="M17 7v.01"/></svg></span>
         <h3>Rates &amp; Next Steps</h3>
         <p>Transparent pricing, clear policies, and everything you need to make an informed decision.</p>
         <ul class="sv-card-features">
@@ -355,7 +356,7 @@
     <div class="sv-grid-authority">
 
       <article class="sv-card featured">
-        <span class="sv-card-icon">📋</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2V5a1 1 0 0 1 1-1z"/><path d="M9 4v3h6V4"/><path d="M8.5 13l2 2 4-4"/></svg></span>
         <h3>The OmniFit Method</h3>
         <p>The four-phase Assess → Correct → Build → Sustain framework that drives every OmniFit program — and why it works.</p>
         <ul class="sv-card-features">
@@ -368,7 +369,7 @@
       </article>
 
       <article class="sv-card featured">
-        <span class="sv-card-icon">💲</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 8h6"/><path d="M9 12h6"/></svg></span>
         <h3>How It Works &amp; What It Costs</h3>
         <p>Transparent pricing, what's included, and who OmniFit is (and isn't) built for.</p>
         <ul class="sv-card-features">
@@ -381,7 +382,7 @@
       </article>
 
       <article class="sv-card featured">
-        <span class="sv-card-icon">📊</span>
+        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M6 21V13"/><path d="M12 21V7"/><path d="M18 21V10"/><path d="M4 8l5-4 4 3 6-5"/></svg></span>
         <h3>How We Measure Your Progress</h3>
         <p>The 12-metric framework we use to track every client — body composition, strength, posture, mobility, adherence, nutrition, and well-being.</p>
         <ul class="sv-card-features">
@@ -428,22 +429,22 @@
       </div>
       <div class="sv-grid">
         <article class="sv-card">
-          <span class="sv-card-icon">🧭</span>
+          <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
           <h3>Long-Term Transformation</h3>
           <p>You want a body that holds up for years rather than a twelve-week push that unravels. The work is built to be repeatable: a plan you can still follow in month nine, progressions tied to what your body tolerates, and a coach who adjusts the plan rather than restarting it.</p>
         </article>
         <article class="sv-card">
-          <span class="sv-card-icon">📉</span>
+          <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6l6.5 6.5 4-4L21 16"/><path d="M21 11.5V16h-4.5"/></svg></span>
           <h3>Fat Loss Without Crash Protocols</h3>
           <p>Aggressive plans usually fail on the joints or the schedule before they fail on willpower. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p>
         </article>
         <article class="sv-card">
-          <span class="sv-card-icon">🪑</span>
+          <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3h8v8H8z"/><path d="M9.5 11v4.5h5V11"/><path d="M12 15.5V21"/><path d="M8.5 21h7"/></svg></span>
           <h3>Desk-Worker Posture and Mobility</h3>
           <p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets the specific patterns desk work creates, with corrective work built into every session rather than bolted on as a warm-up.</p>
         </article>
         <article class="sv-card">
-          <span class="sv-card-icon">📊</span>
+          <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4h13v10H3z"/><path d="M6 11V8"/><path d="M9.5 11V6.5"/><path d="M13 11V9"/><path d="M19 8h2v12h-2z"/><path d="M6 18h7"/></svg></span>
           <h3>Data-Driven Hybrid Coaching</h3>
           <p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, and the same benchmarks are tracked either way so nothing is guessed between visits.</p>
         </article>
@@ -462,10 +463,10 @@
 
   <!-- TRUST BAR -->
   <div class="sv-trust">
-    <div class="sv-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
-    <div class="sv-trust-item"><span>🏅</span> NASM CPT·CES·PES·BCS·CNC</div>
-    <div class="sv-trust-item"><span>📍</span> Teqneeq FHC · 4S Ranch</div>
-    <div class="sv-trust-item"><span>🌍</span> Virtual Coaching Worldwide</div>
+    <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> 5.0 · 190+ Reviews</div>
+    <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><path d="M8.5 9.5L6 3h12l-2.5 6.5"/></svg> NASM CPT·CES·PES·BCS·CNC</div>
+    <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Teqneeq FHC · 4S Ranch</div>
+    <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg> Virtual Coaching Worldwide</div>
   </div>
 
 </div>
