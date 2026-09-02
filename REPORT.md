@@ -1976,3 +1976,289 @@ credentials      10 files   1 hash   6492e3ca1545dc26   matches CANON
 header pricing   11 files   1 hash   7e5de5984b133663   matches CANON
 page pricing     11 files   1 hash   ae388d31c0b6149e   matches CANON
 ```
+
+---
+
+# Case-Study Exception + FAQ Extractor Run — Sept 2026
+
+**Branch:** `claude/case-study-exception-extractor-ff1l85`
+**Scope:** resolve the CANON case-study contradiction and encode the approved
+exception; close the FAQ extractor gaps. **No page content was edited in this
+run** — the only files touched are `CANON.md`, `tools/certify.py`,
+`tools/faq.py`, `tools/README.md` and this report.
+
+## 0. Certification was not running at all
+
+Before anything else: `python3 tools/certify.py` **aborted part-way through
+category (c)** with `KeyError: 'WebPage'` on
+`pages/headers/about-header.html`, and had been doing so since the page uploads
+that followed commit `4b3f5f7`. Categories (a) and (b) printed; the header
+mirror check, the invariant hashes and the `RESULT:` line never ran. Verified
+by checking out `4b3f5f7` into a worktree, where the same script completes.
+
+`certify.py` assumed every header is a Batch-3-shaped `@graph` document. Nine
+of the uploaded headers are not — `home-header.html` *is* the homepage
+LocalBusiness definition, and several others are a single bare node. That shape
+is outside what CANON specifies for page headers, so calling it a violation
+would be inventing a rule and calling it a pass is the failure this repo keeps
+hitting. It is now reported under a new **CHECKS THAT COULD NOT RUN** block:
+not a fourth category, and not counted in the three, but a run with zero
+findings and a non-empty block prints `RESULT: INCOMPLETE`, never `PASSED`.
+
+## 1. TASK 1 — the case-study contradiction
+
+CANON's CANONICAL TRUTH recorded documented client figures with timeframes
+("Mark −17 lbs, 248→231, 4mo") as canonical fact while the COMPLIANCE SCREEN
+banned lbs-near-timeframe outright. Both could not hold. Resolved per Andrew
+Flores, Sept 2026: the case studies are the exception, not the violation.
+
+The approved EXCEPTION block is recorded in `CANON.md` under CERTIFICATION (a),
+with the reasoning: an individual, attributed, documented client outcome with
+substantiation on file is a fact about a named person; a claim about what a
+prospective client can expect is a projection, and only the projection is what
+the rule exists to prevent. Pointers added on the two COMPLIANCE SCREEN bullets
+it modifies.
+
+Encoded in `tools/certify.py` as `_case_study_exempt()`, applied to
+`lbs_near_timeframe` and `result_near_timeframe` **only**. Three gates:
+
+1. **Attribution** — a named client beside a role noun (`Mark ·`,
+   `Annie, a registered nurse`, `Dave Rendo, owner of…`), or an explicit
+   anonymisation *with a stated profile* (`Anonymized client · Male, 29`).
+2. **Page disclaimer** — the phrase "individual result(s)" plus a variation
+   clause within 40 words. **Keyed off the disclaimer text present on the page,
+   never off the filename.** That is what makes condition 2 enforceable rather
+   than decorative: the same figure on a page without the disclaimer is a strike.
+3. **Not aggregate** — `typical`, `average`, `most clients`, `you can expect`
+   and friends in the window are never exempt, on any page.
+
+The rule **fails closed**: anything the attribution test cannot confirm stays a
+strike. CANON's condition 3 (substantiation on file) is not machine-checkable
+and remains a human warranty.
+
+### Finding count, by rule
+
+| Rule | Before | After |
+|---|---|---|
+| lbs near timeframe | 91 | 1 |
+| free-consultation framing | 5 | 5 |
+| result promised within a window | 3 | 3 |
+| uncertified specialty claim | 1 | 1 |
+| **total (a)** | **100** | **10** |
+
+By file: `case-studies.html` 45 → 0, `home-3.html` 45 → 0 (it is a
+byte-identical duplicate of `case-studies.html`), everything else unchanged.
+The one surviving lbs strike is `desk-worker-posture-pain.html` — `'18 lbs'
+near '/week'`, on a page that carries no disclaimer, correctly still flagged.
+No finding anywhere in the repo was newly created by the change.
+
+### Negative tests — all four required directions, plus four more
+
+| # | Fixture | Expected | Got |
+|---|---|---|---|
+| 1 | case-study figure, page **with** disclaimer | clean | clean |
+| 1b | anonymised + stated profile, with disclaimer | clean | clean |
+| 2 | **same** figure, page **without** disclaimer | FLAG | FLAG |
+| 2b | same anonymised figure, without disclaimer | FLAG | FLAG |
+| 3 | "typical clients lose 20-30 lbs in 4-6 months", **with** disclaimer | FLAG | FLAG |
+| 3b | that aggregate line on the same page as a real case study | FLAG | FLAG |
+| 4 | ordinary marketing lbs claim, with disclaimer | FLAG | FLAG |
+| 4b | ordinary marketing lbs claim, no disclaimer | FLAG | FLAG |
+| 5 | result-in-window, case study with disclaimer | clean | clean |
+| 6 | result-in-window, marketing copy with disclaimer | FLAG | FLAG |
+| 7 | "anonymized client" with **no** stated profile | FLAG | FLAG |
+| 8 | weak "Individual results shown below" (no variation clause) | FLAG | FLAG |
+
+Fixture 3b is the important one: an aggregate sentence placed near a real case
+study un-exempts the case study too. That is the conservative direction.
+
+## 2. TASK 2 — FAQ extractor
+
+**The stated premise did not hold.** `of-faq-a` was already covered by the
+existing `<div class="[a-z-]*faq-a">` pattern, and
+`in-home-personal-trainer-san-diego` was extracting 8 questions with 8 answers
+and mirroring its header correctly. Verified rather than assumed: dropping that
+pattern breaks `FAQs`, `in-home-personal-trainer-san-diego`,
+`private-personal-trainer-san-diego` and `online-training`, so the coverage is
+load-bearing and proven. No redundant duplicate pattern was added.
+
+**The same failure shape was real elsewhere.** The sweep found three genuine
+gaps:
+
+| Missing pattern | Kind | Page | Effect |
+|---|---|---|---|
+| `<summary class="…">` | question | `hsa-fsa-personal-training` | only attribute-less `<summary>` matched; 9 questions read as **0** |
+| `<button class="…faq-q">` | question | `online-training` | 7 questions read as **0** |
+| `<div class="answer">` | answer | `home-5` | 5 questions, **0** answers |
+
+`online-training` is the fourth blind spot, and the exact shape described: its
+page has 7 real FAQs, its header has no FAQPage at all, the extractor read 0
+questions, and the mirror check compared `[]` to `[]` and **reported PASS**.
+
+A fourth defect was introduced and caught by the same negative testing:
+widening the button pattern made it match `op-faq-q` as well, so `partners`
+yielded 12 questions instead of 6 with 6 unanswered. `_hits()` now deduplicates
+containers on start offset, shortest match winning.
+
+### Guard
+
+`faq.qa()` now raises `faq.ExtractorFailure` when a page yields questions and
+*not one* extractable answer. That combination is always an unknown
+answer-container class, never a page that legitimately has no answers.
+`certify.py` catches it and records the pair as an unverified mirror.
+Negative-tested both ways: an unknown container raises; `of-faq-a` beside it
+returns the pair; a page with no FAQ at all stays quiet.
+
+### Patterns found across the repo vs supported
+
+Every FAQ question and answer container in `pages/` is now matched. The single
+unmatched class is `hsa-answer`, which is **not** an FAQ container — it is a
+page-level callout above the FAQ section on `hsa-fsa-personal-training`.
+
+Answer containers, all supported: `of-faq-a`, `faq-a`, `cx-faq-a`, `bc-faq-a`,
+`fl-faq-a`, `st-faq-a`, `hiit-faq-a`, `op-faq-a`, `op-faq-a-inner`,
+`faq-answer`, `fa`, `answer`, and the `…faq-body` family (`fr-`, `lj-`, `cb-`,
+`cv-`, `dm-`, `en-`, `fb-`, `mh-`, `rs-`, `sb-`, `sz-`, `rt-`, `er-`, `hsa-`).
+Question containers, all supported: `<summary>` with or without a class,
+`…faq-q` on `div`, `button class="fq"`, `button class="…faq-q"`,
+`faq-question`, `op-faq-q`.
+
+Per-page extraction after the fix: 32 pages with FAQs, **0 questions with a
+missing answer**, up from 3 pages broken before.
+
+### Header mirror, before vs after — report only, nothing fixed
+
+| Header | Before | After |
+|---|---|---|
+| `online-training-header` | **PASS (vacuous, 0 vs 0)** | **FAIL — page 7, schema 0** |
+| `hsa-fsa-personal-training-header` | FAIL — page 0, schema 9 | PASS — 9 vs 9 |
+
+`online-training` is the only pair that now fails and previously passed. Its
+page carries 7 FAQs that its header's JSON-LD does not mirror at all. **Not
+fixed in this run**, as instructed.
+
+Three pairs failed before and still fail, unchanged by this run:
+`desk-worker-posture-pain-header` (page 6, schema 0),
+`executive-hybrid-coaching-header` (page 6, schema 0),
+`personal-trainer-mission-hills-header` (page 6, schema 0).
+
+Three pairs compare nothing on either side and are now reported as unverified
+rather than counted as passes: `about-header`, `contactform-header`,
+`personal-training-services-header`.
+
+## 3. Certification — before and after
+
+Before (aborted mid-run, no result line produced):
+
+```
+### (a) COMPLIANCE STRIKES   100 strike(s)
+### (b) STALE CANON           97 hit(s)
+### (c) BROKEN STRUCTURE      Traceback: KeyError: 'WebPage'
+### RESULT                    never printed
+```
+
+After:
+
+```
+### SCOPE: 74 certified, 3 not yet certified
+### (a) COMPLIANCE STRIKES    10 strike(s)
+### (b) STALE CANON           97 hit(s)
+### (c) BROKEN STRUCTURE      11 problem(s)
+### CHECKS THAT COULD NOT RUN 12
+### RESULT: FAILED  (compliance 10 · stale canon 97 · structure 11 · not-run 12)
+```
+
+Category (b) is unchanged at 97 and category (c) had no baseline, because the
+run never reached it. Both are dominated by pages CANON's REPO STATE does not
+list as certified at all — see the scope note in §5.
+
+### Invariant hashes — all five, unchanged
+
+No page content was edited, so before and after are identical. All five match
+the hashes recorded in CANON.md:
+
+```
+9-point          10 files   1 hash   bd73ea51bc9ec5eb   matches CANON
+archetypes       10 files   1 hash   6b1b0f4efbd4a72c   matches CANON
+credentials      10 files   1 hash   6492e3ca1545dc26   matches CANON
+header pricing   11 files   1 hash   7e5de5984b133663   matches CANON
+page pricing     11 files   1 hash   ae388d31c0b6149e   matches CANON
+```
+
+`certify.py` now prints all five every run rather than only on mismatch, and
+reports an invariant that matched no file as unverified.
+
+## 4. Blind spot #4, recorded alongside the other three
+
+| Incident | What it reported | What was true |
+|---|---|---|
+| Header regression | "every header mirrors its page" | compared questions only, never answers |
+| Header re-mirror | 7 answers "re-mirrored" | wrote `null` over all 7 |
+| Free-framing rule | how-we-measure certified clean | rule only knew `consultation` |
+| **FAQ extractor coverage** | **`online-training` header mirrors its page** | **page uses `<button class="faq-q">`; extractor read 0 questions, schema had 0 entries, `[] == []` passed** |
+
+Same shape three times over: a check reporting success because it was not
+looking. Now closed three ways — the missing patterns are added, the
+zero-answer case raises instead of returning empty, and a mirror that compared
+nothing on both sides is reported as unverified rather than counted as a pass.
+
+A fifth variant surfaced in this run and is worth naming separately: a check
+that **crashes** is not louder than one that lies, because everything after it
+silently stops running. `certify.py` had been aborting rather than certifying
+for several commits and nothing said so.
+
+## 5. Judgment calls, each with the condition that would make it wrong
+
+**Certification now prints INCOMPLETE, a third outcome.** CANON says a run
+reports exactly three categories, so unrunnable checks are not counted as
+findings — but a green result while checks were skipped is the exact failure
+this repo keeps hitting. **Wrong if** a downstream consumer parses the
+`RESULT:` line and treats any value other than `FAILED` as a pass.
+
+**Non-`@graph` headers are reported as not-applicable, not as violations.**
+CANON's (c) list does not cover them, and `home-header.html` legitimately *is*
+the LocalBusiness definition. **Wrong if** those headers were meant to be
+Batch-3-shaped and their current form is itself the defect.
+
+**Attribution is tested against a role-noun vocabulary.** A named client must
+sit beside a recognised role word; without it, `San Diego, lost 27 pounds`
+would read as an attribution and condition 1 would be decorative. **Wrong if**
+a future case study uses a role outside the list — the finding then stays a
+strike (fails closed, so the cost is a false positive, never a false pass).
+
+**The disclaimer test accepts any "individual results … vary/depend" sentence
+anywhere on the page.** That is what "the page carries the individual-results
+disclaimer" says. It means `how-we-measure-your-progress` also counts as
+disclaimered on the strength of a chart caption. **Wrong if** the exception was
+meant to require a prominent, page-level disclaimer rather than any occurrence
+of the sentence.
+
+**Scope was left exactly as it was.** `certify.py` skips only
+`the-30-minute-executive-reset` and `footer`, so the 15 pages uploaded to
+`main` after commit `4b3f5f7` — `case-studies`, `home-1` to `home-5`, `about`,
+`online-training`, `executive-hybrid-coaching`, `personal-trainer-mission-hills`,
+`hsa-fsa-personal-training`, `desk-worker-posture-pain`,
+`llms-txt-page-retired` and their headers — are all in scope and generate most
+of the 97 stale-canon hits and all 11 structural findings. CANON's REPO STATE
+still lists 26 certified pairs and names only two exclusions; it no longer
+describes the repository. **This is a scope decision for a human and was not
+made here.** `home-3.html` is a byte-identical copy of `case-studies.html` and
+is double-counting every finding on it. **Wrong if** those pages were expected
+to be out of scope, in which case the real (b) figure is 8, matching the last
+recorded run.
+
+**`mkheaders.py` switched from `faq.qa()` to `faq.qa_strict()`.** It writes
+headers to disk while calling the variant that can return a `None` answer —
+which is exactly how the recorded header re-mirror incident wrote `null` over
+the canonical pricing block. `tools/README.md` already documented `qa_strict`
+as the one to use when the result gets written to a file; the code did not
+follow its own rule. Verified safe: all nine slugs it generates extract with
+`qa_strict` cleanly. Not asked for in this run, and no headers were
+regenerated. **Wrong if** a header is ever meant to be generated for a page
+whose FAQ the extractor cannot fully read, in which case generation now raises
+instead of writing a partial header.
+
+**`op-faq-q…<svg` and `op-faq-a-inner` are now redundant** — subsumed by the
+generic prefixed patterns — and were kept rather than deleted. **Wrong if**
+dead patterns in the list are worse than the risk of removing them; removing
+them changes no output.
