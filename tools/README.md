@@ -10,8 +10,11 @@ python3 tools/mkheaders.py   # regenerate the Batch 3 page headers
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
-(b) stale canon, (c) broken structure — and exits after printing PASSED/FAILED.
+(b) stale canon, (c) broken structure — then the five invariant hashes, then
+the checks that could not run, then `PASSED` / `FAILED` / `INCOMPLETE`.
 Anything else is a judgment call for a human, not a certification finding.
+`INCOMPLETE` means no findings but at least one check was not applied; it is
+never reported as a pass.
 
 ## Why this exists
 
@@ -26,6 +29,7 @@ check fail on purpose.**
 | Header re-mirror | 7 answers "re-mirrored" | It wrote `null` over all 7, destroying the canonical pricing block |
 | Free-framing rule | how-we-measure certified clean | Page said `free 45-minute assessment`; rule only knew `consultation` |
 | Session-pack rule | CANON authorised `10 @ $150` as a pack rung | $150 belonged to neither venue's ladder — a mangled merge of the studio and in-home figures |
+| FAQ extractor coverage | `online-training` header mirrored its page | Page FAQ uses `<button class="faq-q">`; extractor read **0 questions**, schema had 0 FAQ entries, so the check compared `[]` to `[]` and passed |
 
 The pack-rule incident is the odd one out: CANON itself was wrong, not the tool.
 Widening `certify.py`'s $150/$175 check to match the corrected CANON immediately
@@ -43,32 +47,77 @@ a fixture proving a real violation in the same shape still flags.
 
 ## FAQ extraction (`faq.py`)
 
-Pages use six different answer-container patterns. Missing one does not raise —
-it silently yields a question with no answer, which is how the `null` overwrite
-happened.
+Pages use six question-container patterns and six answer-container patterns.
+A missing question pattern yields no question at all; a missing answer pattern
+yields a question with no answer. Neither used to raise, which is how the `null`
+overwrite happened and how `online-training` passed a mirror check against a
+header with no FAQPage at all.
 
 Question containers:
 
-- `<summary>…</summary>`
-- `<div class="…faq-q">…</div>`
-- `<button class="fq" …>…<span`
+- `<summary …>…</summary>` — with or without a class attribute. The
+  attribute-less form matched only the territory pages; `hsa-fsa` uses
+  `<summary class="hsa-faq-q">` and read as zero questions.
+- `<div class="…faq-q">…</div>` — cx / fl / st / hiit / desk-worker
+- `<button class="fq" …>…<span` — how-it-works-pricing, the-omnifit-method
+- `<button class="…faq-q" …>…</button>` — online-training
 - `<div class="faq-question">…</div>` — omnifit-vs-competitors
-- `<button class="op-faq-q" …>…<svg` — partners
+- `<button class="op-faq-q" …>…<svg` — partners (now subsumed by the generic
+  `…faq-q` button pattern; kept as documentation)
 
 Answer containers:
 
-1. `<div class="…faq-a" …>…</div>`
-2. `<div class="fa"><p>…</p></div>`
-3. `<div class="faq-answer">…</div></div>`
-4. `<div class="op-faq-a-inner">…</div>`
-5. `<div class="…faq-body" …>…</div></details>` — **the territory pages**, the
-   one that was missing
-6. (questions and answers are paired by document position, so a new question
-   pattern needs its answer pattern added at the same time)
+1. `<div class="…faq-a" …>…</div>` — covers `faq-a`, `of-faq-a`, `cx-faq-a`,
+   `bc-faq-a`, `fl-faq-a`, `st-faq-a`, `hiit-faq-a`, `op-faq-a`
+2. `<div class="…faq-body" …>…</div></details>` — the territory pages, plus
+   `hsa-faq-body`, `rt-faq-body`, `er-faq-body`, `sz-faq-body`
+3. `<div class="fa"><p>…</p></div>`
+4. `<div class="faq-answer">…</div></div>`
+5. `<div class="op-faq-a-inner">…</div>` (subsumed by 1; kept)
+6. `<div class="answer" …>…</div>` — home-5, the only container with no `faq`
+   in its class name at all
+
+Questions and answers are paired by document position, so a new question
+pattern needs its answer pattern added at the same time.
 
 `qa()` returns ordered `(question, answer)` pairs. `qa_strict()` is the same but
 **asserts no answer is None** — use it anywhere the result gets written to a
 file. `questions()` returns questions only.
+
+### The zero-answer guard (Sept 2026)
+
+`qa()` now **raises `faq.ExtractorFailure`** when a page yields questions and
+*not one* extractable answer. That combination is always an unknown
+answer-container class, never a page that legitimately has no answers, and
+returning the pairs anyway is what let a mirror check compare `[]` to `[]` and
+report success. `certify.py` catches it and records the pair under CHECKS THAT
+COULD NOT RUN — an unverified mirror, never a pass. Negative-tested both ways:
+an unknown container raises, `of-faq-a` next to it returns the pair.
+
+### Patterns added Sept 2026
+
+| Pattern | Kind | Page it was missing on | Was |
+|---|---|---|---|
+| `<summary class="…">` | question | hsa-fsa-personal-training | only attribute-less `<summary>` matched — 9 questions read as 0 |
+| `<button class="[a-z-]*faq-q">` | question | online-training | 7 questions read as 0, mirror passed vacuously |
+| `<div class="answer">` | answer | home-5 | 5 questions, 0 answers |
+
+`of-faq-a` was **already covered** by `<div class="[a-z-]*faq-a">`, which also
+covers `faq-a`, `cx-faq-a`, `bc-faq-a`, `fl-faq-a`, `st-faq-a` and `hiit-faq-a`.
+It was verified rather than added: dropping that pattern breaks FAQs,
+in-home-personal-trainer-san-diego, private-personal-trainer-san-diego and
+online-training, so the coverage is load-bearing and proven, not assumed.
+
+`_hits()` now deduplicates containers on their **start offset, shortest match
+wins**. Two patterns can read the same element — `op-faq-q` matches both the
+`<svg` pattern and the generic `</button>` one — and without dedup that one
+container yields two questions and the pairing walks off by one for the rest of
+the page (it did, on `partners`: 6 questions became 12 with 6 unanswered).
+
+Every pattern is negative-tested for load-bearing: removing it must break a
+named page. Two are now subsumed by the generic prefixed patterns
+(`op-faq-q…<svg`, `op-faq-a-inner`) and are kept as documentation of the shape;
+removing them changes nothing.
 
 ## Header mirroring
 
@@ -113,6 +162,32 @@ is. They previously did.
   any units. Results must be framed against the client's own baseline, never a
   calendar. Negation is checked on the **preceding** words only, so a trailing
   "…and we don't cut corners" cannot exempt a real promise.
+- **DOCUMENTED CASE-STUDY EXCEPTION** (Andrew Flores, Sept 2026) — the only
+  exemption on `lbs_near_timeframe` and `result_near_timeframe`. CANON's
+  CANONICAL TRUTH recorded documented client figures *with* timeframes as
+  canonical fact while the compliance screen banned that shape outright; both
+  could not hold. An attributed, documented individual outcome is a fact about
+  a named person; a claim about what a prospective client can expect is a
+  projection, and only the projection is what the rule prevents.
+  Three gates, all in `_case_study_exempt()`:
+  1. **attribution** — a named client beside a role noun (`Mark ·`,
+     `Annie, a registered nurse`, `Dave Rendo, owner of…`), or an explicit
+     anonymisation *with a stated profile* (`Anonymized client · Male, 29`).
+     Bare "anonymized client" is not enough. The role noun is required: without
+     it, `San Diego, lost 27 pounds` would read as an attribution and condition
+     1 would be decorative.
+  2. **page disclaimer** — `_has_results_disclaimer()` requires the phrase
+     "individual result(s)" *plus* a variation clause (vary / depend / not a
+     projection) within 40 words. **Keyed off the disclaimer text on the page,
+     never off the filename** — that is what makes condition 2 enforceable.
+     The same figure on a page without the disclaimer is still a strike.
+  3. **not aggregate** — `typical`, `average`, `most clients`, `you can expect`
+     and friends within the window are never exempt, on any page.
+  Condition 3 of CANON's exception (substantiation on file) is not
+  machine-checkable and remains a human warranty.
+  Fails **closed**: anything the attribution test cannot confirm stays a strike.
+  Negative-tested in all four required directions plus four more — see the
+  Sept 2026 entry in REPORT.md.
 
 ## Stale-canon rules (b)
 
@@ -137,10 +212,34 @@ is. They previously did.
 
 Five, all recomputed from the files each run and compared against the hashes
 recorded in CANON.md: page pricing, header pricing, credentials, archetypes,
-9-point screen. A mismatch is a category (c) finding.
+9-point screen. A mismatch is a category (c) finding. All five are now
+**printed every run**, not only on mismatch, and an invariant that matched no
+file at all is reported as not-verified rather than silently absent.
 
 The credentials block is 630 bytes across 10 pages. Editing it means editing all
 ten and updating the hash in CANON.md in the same commit.
+
+## CHECKS THAT COULD NOT RUN
+
+Not a fourth category — CANON says a run reports exactly three. This block
+lists checks that were **not applied**, so a green result can never mean
+"nothing was looked at". A run with zero findings but a non-empty block prints
+`RESULT: INCOMPLETE`, not `PASSED`.
+
+What lands here: a header whose ld+json is a single bare node rather than an
+`@graph` document (the homepage header *is* the LocalBusiness definition, and
+several uploaded headers are one bare node — that shape is outside what CANON
+specifies for page headers, so calling it a violation would be inventing a
+rule and calling it a pass is how three earlier checks came to report success
+without looking); an `@graph` with no `WebPage` node; a page whose FAQ the
+extractor could not read; a header/page pair where both sides have zero FAQ
+entries so the mirror compared nothing; an invariant that matched no file.
+
+Before Sept 2026 the first of these did not report anything at all — it raised
+`KeyError: 'WebPage'` and killed the run part-way through category (c), so no
+mirror check, no invariant hash and no result line was produced. Certification
+had been aborting rather than certifying since the uploads that followed commit
+`4b3f5f7`.
 
 ## Scope
 
