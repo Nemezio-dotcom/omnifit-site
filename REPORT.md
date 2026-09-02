@@ -2504,3 +2504,205 @@ certified or archived.** They carry live, published content and their
 JSON-LD is body-embedded rather than in a header file. **Wrong if** they were
 expected to be brought to certified status in this run — that needs a content
 pass, which this run was told not to do.
+
+---
+
+# Link Graph Repair Run — Sept 2026
+
+**Branch:** `claude/case-study-exception-extractor-ff1l85` (continued)
+**Scope:** links only, plus one checker fix (TASK 4). Merged `origin/main`
+first, which brought `couples-personal-training-san-diego` and its header.
+
+## Certification
+
+```
+### RESULT: FAILED  (compliance 2 · stale canon 25 · structure 3 · not-run 9)
+```
+
+Structure **5 → 3**: both `desk-worker-posture-pain-header` findings were the
+checker's, not the file's (TASK 4). Compliance unchanged at 2. Stale canon 25 —
+one more than last run, entirely the newly merged couples page, and that one is
+a checker false positive (below). Invariants, all five, unchanged and matching
+CANON:
+
+```
+page pricing     ae388d31c0b6149e      archetypes   6b1b0f4efbd4a72c
+header pricing   7e5de5984b133663      9-point      bd73ea51bc9ec5eb
+credentials      6492e3ca1545dc26
+```
+
+## Per-file diff summary
+
+| File | Change |
+|---|---|
+| `pages/personal-training-services.html` | 4 retired-target links repaired (2 × `/online-training` → `/the-30-minute-executive-reset`, 2 × `/nutritional-coaching-pacific-beach` → `/weight-loss`); 2 entries added to `.sv-quick` |
+| `pages/FAQs.html` | `/nutritional-coaching-pacific-beach` → `/weight-loss`; 1 entry added to `.of-hub-grid` |
+| `pages/corrective-exercise-post-rehab.html` | 2 entries added to `.cx-hub-links`, desk-worker first |
+| `pages/personal-trainer-4s-ranch.html` | 3 entries added to `.fr-hub-grid` after the corrective-exercise entry |
+| `pages/in-home-personal-trainer-san-diego.html` | 3 entries added to `.of-hub-grid` |
+| `pages/training-rates-san-diego.html` | HSA sentence appended to the Billing policy card |
+| `pages/how-it-works-pricing.html` | HSA sentence added as its own paragraph in the Billing policy card |
+| `tools/certify.py` | header parser reads every ld+json block, not only the first |
+
+## Inbound links, before → after
+
+| Target | Before | After | Sources added |
+|---|---|---|---|
+| `/desk-worker-posture-pain` | 1 | **4** | corrective-exercise, 4s-ranch, in-home |
+| `/personal-trainer-over-50-san-diego` | 1 | **5** | corrective-exercise, 4s-ranch, in-home, personal-training-services |
+| `/couples-personal-training-san-diego` | 0 | **4** | in-home, 4s-ranch, FAQs, personal-training-services |
+| `/hsa-fsa-personal-training` | 0 | **2** | training-rates, how-it-works-pricing |
+
+Over-50 exceeds its target of 3 because TASK 3's `.sv-quick` entry adds a
+fourth on top of the pre-existing link from the couples page.
+
+## Links to archived pages
+
+**None remain in `pages/`**, page bodies and headers alike. Swept for all four
+archived slugs (`online-training`, `executive-hybrid-coaching`,
+`personal-trainer-mission-hills`, `llms-txt-page-retired`); the five repaired
+in TASK 1 were the last of them.
+
+## TASK 4 — a checker defect, confirmed
+
+`certify.py` used `re.search` for the ld+json block, so it read **only the
+first**. `desk-worker-posture-pain-header.html` carries two blocks: `Service`,
+then a `FAQPage` with 6 questions. The checker saw block 1, found no FAQPage,
+and reported `page=6 schema=0` — blaming the header for the checker's own
+blindness, for two runs.
+
+Fixed: every block is read and its nodes merged (flattening `@graph` where
+present) before any structural check. Invalid JSON now names which block.
+Negative-tested both ways — a second-block FAQPage that matches the page
+mirrors, an altered one still flags.
+
+**Exactly one pair changed status**, verified by running the old and new
+readers side by side across all 34 headers:
+
+| Header | Blocks | Old reader | New reader |
+|---|---|---|---|
+| `desk-worker-posture-pain-header` | 2 | FAIL — page 6, schema 0 | **PASS — 6 vs 6** |
+
+It was the only multi-block header in the repo. Every other header has one
+block and read identically under both. **No other pair changed, and none was
+fixed.** There are now zero true mirror failures among headers that have a
+page; the remainder are three vacuous 0-vs-0 comparisons (`about`,
+`contactform`, `personal-training-services`) and three orphan headers, all
+already recorded.
+
+## Reported and STOPPED — three things not touched
+
+**1. The Online Training service card, for your rewrite.** As instructed, the
+link was repaired and the card body left alone. Current text, verbatim:
+
+> **Online Training &amp; Programming**
+>
+> Remote 1:1 coaching for clients who train from anywhere — live virtual
+> sessions, custom app-based programming, and accountability built around your
+> schedule.
+>
+> - Live 1:1 virtual sessions
+> - App-based programming &amp; tracking
+> - Train from home, travel, or office
+
+The `<h3>` still names the retired product, and the link beneath it now reads
+"Explore Virtual Coaching", so heading and CTA disagree until you supply
+wording.
+
+**2. `couples-personal-training-san-diego` is blocked three ways.** Its header
+arrived from `main` at `pages/headers /COUPLES-PERSONAL-TRAINING-SAN-DIEGO.HTML`
+— a stray directory with a **trailing space**, an uppercase filename, an
+uppercase `.HTML` extension, and no `-header` suffix. `certify.py` globs
+`pages/**/*.html`, so **the header is invisible to certification entirely**: it
+is neither checked nor reported missing. Read by hand it looks correct — one
+`@graph` with WebPage, BreadcrumbList, Service and an 8-question FAQPage, and
+the page has 8 FAQ pairs, so it would very likely mirror.
+
+Not renamed, because CANON allows a naming fix only *after* the content
+certifies, and the page currently carries a stale-canon hit — see below. Two
+instructions unblock it: fix the rule, then rename.
+
+**3. That stale-canon hit is a checker false positive.**
+`couples-personal-training-san-diego.html:274` reads:
+
+> Single couples session without a commitment: $250 · Extra guest add-on:
+> $75/session · A travel fee may apply depending on location.
+
+The rule is `\$(?:50|75)\b[^.<]{0,30}travel`. The `$75` is the canonical guest
+add-on (CANON: "guest add-on 75/session") and the travel sentence carries **no
+dollar figure**, which CANON explicitly permits ("Travel fee: 'may apply'
+language OK, never a dollar figure"). Two unrelated facts either side of a `·`
+are being read as one claim. The page copy is correct; the rule is wrong. The
+fix is to require the figure and the word *travel* inside the same
+`·`-delimited clause. Recorded in `tools/README.md` under Known checker
+defects; **not fixed**, as this run is scoped to links.
+
+**4. A CANON contradiction in copy, found while placing the HSA link.**
+`pages/how-it-works-pricing.html:550` says:
+
+> All programs are billed monthly via auto-pay. No large upfront payments
+> required.
+
+CANON, confirmed against the signed Prepaid Program Agreement, says the total
+is paid in a **single upfront payment at signing** on 3-month programs and that
+"copy must not say 'billed monthly, no large upfront payments'". No `(b)` rule
+catches it because it is not a banned string. `training-rates-san-diego` states
+the correct policy in its equivalent card. Reported, not changed — this is
+copy. It is why the HSA sentence there was added as its **own paragraph**
+rather than appended to that one: a rewrite of the offending sentence should
+not carry the new link away with it.
+
+## Judgment calls, each with the condition that would make it wrong
+
+**`.of-hub-grid` entries were written to match the surrounding markup, not the
+literal snippet.** Every existing sibling is
+`<a href="…" class="of-hub-link">Label →</a>` — href first, trailing arrow —
+while the brief's snippet was `<a class="of-hub-link" href="…">Label</a>`. The
+brief also said "match the surrounding markup exactly", and a chip without the
+arrow renders visibly unlike every neighbour, so the surrounding convention
+won. Written exactly as:
+
+```
+<a href="/desk-worker-posture-pain" class="of-hub-link">Desk Worker Posture →</a>
+<a href="/personal-trainer-over-50-san-diego" class="of-hub-link">Training After 50 →</a>
+<a href="/couples-personal-training-san-diego" class="of-hub-link">Couples Training →</a>
+```
+
+**Wrong if** the snippet was literal and the arrow was deliberately dropped.
+`.fr-hub-grid` and `.cx-hub-links` had no such conflict; their snippets match
+their neighbours as given.
+
+**Unspecified insertion points were placed with the topical links.** Only
+desk-worker had a stated position (`.cx-hub-links` first; `.fr-hub-grid` after
+corrective-exercise). The rest went immediately after that anchor, so the new
+links sit with the other service topics rather than after `FAQs` or after the
+territory-page list. In `.cx-hub-links` both new entries went at the top, which
+is what makes the supplied trailing `·` correct — appending them at the end
+would have required editing the previous entry's separator. **Wrong if** hub
+ordering carries weight I can't see, e.g. deliberate priority order.
+
+**`.sv-quick` now links `/weight-loss` twice**, once as "Weight Loss" and once
+as "Nutrition Coaching" — a direct consequence of the specified redirect
+target. **Wrong if** you wanted the nutrition chip removed rather than
+repointed; it is one line to delete.
+
+**The HSA sentence on `how-it-works-pricing` is its own paragraph**, not
+appended to the Billing paragraph, for the reason in point 4 above. **Wrong if**
+you wanted it inside that paragraph, in which case the Billing copy rewrite and
+this link move together.
+
+**Neither HSA sentence promises eligibility.** Both use "may be" / "some
+clients pay with", and both point at the page that carries the scope language.
+**Wrong if** even conditional framing on a pricing page is more than counsel
+wants next to a rate table.
+
+## Full service cards for the new pages — recommended, not built
+
+Both warrant one. `.sv-quick` is a chip row; the `.sv-card` grid is what the
+page actually presents as its service inventory, and a service absent from it
+reads as not offered. `couples-personal-training-san-diego` is a distinct
+product with its own pricing ladder in CANON, and
+`personal-trainer-over-50-san-diego` targets a query set no existing card
+covers. Two cards, matching the existing `<article class="sv-card">` shape
+(icon, `h3`, one-sentence body, three `sv-card-features`, `sv-card-link`). Not
+built — this run adds links only.
