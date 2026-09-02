@@ -363,10 +363,25 @@ def run():
         if p.st or p.err:
             print(f"   {f}  [tag balance] unclosed={p.st} errors={p.err[:3]}"); C+=1
         if '/headers/' in f:
-            m=re.search(r'<script type="application/ld\+json">\s*(.*?)\s*</script>',s,re.S)
-            if not m: print(f"   {f}  [no ld+json block]"); C+=1; continue
-            try: doc=json.loads(m.group(1))
-            except Exception as e: print(f"   {f}  [invalid JSON] {e}"); C+=1; continue
+            # EVERY ld+json block, not just the first. A header may carry its
+            # nodes across several <script> blocks - desk-worker-posture-pain
+            # puts Service in block 1 and its 6-question FAQPage in block 2 -
+            # and re.search stopped at block 1, so the mirror check compared 6
+            # page questions against 0 schema questions and called the HEADER
+            # broken. That was the checker not looking, reported as a defect in
+            # the file it failed to read.
+            blocks=re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>',s,re.S)
+            if not blocks: print(f"   {f}  [no ld+json block]"); C+=1; continue
+            graph=[]; graphed=False; bad=False
+            for i,b in enumerate(blocks,1):
+                try: doc=json.loads(b)
+                except Exception as e:
+                    print(f"   {f}  [invalid JSON in ld+json block {i} of {len(blocks)}] {e}"); C+=1; bad=True; break
+                if isinstance(doc, dict) and "@graph" in doc:
+                    graph.extend(doc["@graph"]); graphed=True
+                else:
+                    graph.append(doc)
+            if bad: continue
             # Not every header in the repo is a Batch-3-shaped @graph document
             # (the homepage header IS the LocalBusiness definition, and several
             # uploaded headers are a single bare node). A check that cannot be
@@ -374,10 +389,9 @@ def run():
             # is outside what CANON specifies for page headers, so calling it a
             # violation would be inventing a rule, and calling it a pass is how
             # three earlier checks came to report success without looking.
-            graph = doc["@graph"] if isinstance(doc, dict) and "@graph" in doc else [doc]
             n={x["@type"]:x for x in graph if isinstance(x, dict) and "@type" in x}
-            if "@graph" not in doc:
-                notrun.append(f"{f}  ld+json is a single bare node, not an @graph document"
+            if not graphed:
+                notrun.append(f"{f}  ld+json is {len(blocks)} bare node(s), not an @graph document"
                               f" - LocalBusiness/about checks not applicable")
             else:
                 if "LocalBusiness" in n: print(f"   {f}  [LocalBusiness redefined]"); C+=1
