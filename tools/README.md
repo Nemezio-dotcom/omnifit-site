@@ -16,6 +16,18 @@ Anything else is a judgment call for a human, not a certification finding.
 `INCOMPLETE` means no findings but at least one check was not applied; it is
 never reported as a pass.
 
+## The standing rule
+
+**Every check must fail loudly rather than return empty, and any run that does
+not print a `RESULT:` line is an incomplete run, not a pass.** Four incidents
+in this repo share one shape — the null overwrite, the questions-only
+regression, the literal-string free-framing miss, and the `KeyError` abort that
+killed the run before its result line. In each, something reported success, or
+reported nothing, while not actually looking. A check that cannot look must say
+so: raise, or record itself under CHECKS THAT COULD NOT RUN. Silence and an
+empty comparison are the two failure modes that have actually bitten, and
+neither of them is green.
+
 ## Why this exists
 
 Three separate checks have reported success while not actually looking at the
@@ -176,11 +188,18 @@ is. They previously did.
      Bare "anonymized client" is not enough. The role noun is required: without
      it, `San Diego, lost 27 pounds` would read as an attribution and condition
      1 would be decorative.
-  2. **page disclaimer** — `_has_results_disclaimer()` requires the phrase
-     "individual result(s)" *plus* a variation clause (vary / depend / not a
-     projection) within 40 words. **Keyed off the disclaimer text on the page,
-     never off the filename** — that is what makes condition 2 enforceable.
-     The same figure on a page without the disclaimer is still a strike.
+  2. **page disclaimer** — `_has_results_disclaimer()` requires a **dedicated
+     block** (`p` / `div` / `aside` / `section` / `blockquote`) whose text
+     *opens* with "individual result(s)" and carries a variation clause
+     (vary / depend / not a projection) within 40 words. **Keyed off the
+     disclaimer text on the page, never off the filename** — that is what makes
+     condition 2 enforceable. The same figure on a page without the disclaimer
+     is still a strike. Tightened Sept 2026: the first version accepted the
+     phrase anywhere, so a chart caption on how-we-measure-your-progress
+     ("Sample layout only… individual results vary") qualified the whole page.
+     `li`, `td`, `th`, `caption`, `figcaption` and `small` are excluded by not
+     being on the block list; a phrase appearing partway through a sentence is
+     excluded by the opens-with test. Fourteen fixtures, both directions.
   3. **not aggregate** — `typical`, `average`, `most clients`, `you can expect`
      and friends within the window are never exempt, on any page.
   Condition 3 of CANON's exception (substantiation on file) is not
@@ -207,6 +226,19 @@ is. They previously did.
   pair "guarantee" with an outcome word, so it passes `guarantee_near_outcome`
   on its own merit. If the old banned wording ever reappears anywhere, it now
   flags like any other violation.
+
+## Byte-identical duplicates
+
+Where two in-scope files are byte-identical, `certify.py` certifies one and
+references the other: it sha256-hashes every in-scope file, keeps the
+alphabetically first of each identical group so the choice is deterministic,
+and **prints the pairing** in the SCOPE block rather than applying it silently.
+`pages/home-3.html` is the `case-studies` block pasted into the homepage
+(sha256 `c82d5f32…`); certifying both double-counted every finding on it. It is
+the only such pair in `pages/` as of Sept 2026.
+
+`archive/` never enters the glob, and an assertion enforces that: retired pages
+keep their retired pricing, old address and unmirrored headers on purpose.
 
 ## Invariants
 
