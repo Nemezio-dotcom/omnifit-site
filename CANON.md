@@ -131,6 +131,9 @@ COMPLIANCE SCREEN (attorney: strike on sight, any wave)
 - No outcome guarantees. No lbs-with-timeframe claims ("20–30 lbs in
   4–6 months"). Persona language WITHOUT timeframe ("needs to lose
   20–30 lbs sustainably") is legal and stays.
+  Documented individual case studies are the named exception, not a
+  violation: see EXCEPTION - DOCUMENTED CASE STUDIES under CERTIFICATION
+  (a). Approved by Andrew Flores, Sept 2026.
 - No free-consultation framing. Consultation = 45 minutes, $30
   refundable deposit.
 - No prenatal/postpartum content (uncertified). No Groupon/deal content.
@@ -149,6 +152,7 @@ COMPLIANCE SCREEN (attorney: strike on sight, any wave)
   rule is that the result must be framed against the client's own
   baseline, never against a calendar ("measurable body composition
   changes within 6-8 weeks", "Over 4-6 months: measurable increases").
+  Same case-study exception applies, on the same three conditions.
 
 EM-DASH RULES (voice preference, NOT a compliance issue)
 - Do not scan for em-dashes. Do not flag them. Do not include them in
@@ -168,6 +172,33 @@ judgment call if it needs a human decision, otherwise handle it silently.
     fat loss, transformation, results, pounds, lbs, body fat, inches)
   · lbs/pounds within ~15 words of a timeframe (day/week/month/year).
     Persona language with NO timeframe stays legal
+
+    EXCEPTION - DOCUMENTED CASE STUDIES
+    Individual client results carrying a timeframe are exempt from
+    lbs-near-timeframe and result-paired-with-window WHEN ALL of the
+    following hold:
+      1. the result is attributed to a specific individual (named, or
+         explicitly anonymised with a stated profile), AND
+      2. the page carries the individual-results disclaimer, AND
+      3. substantiation exists on file (training records, scan printouts,
+         or before/after photography).
+    The exemption is page-scoped, not site-wide. A case-study figure quoted
+    on a page WITHOUT the disclaimer is still a strike.
+    Aggregate or typical-results framing is NEVER exempt, on any page.
+    Approved by Andrew Flores, Sept 2026.
+
+    Reasoning, recorded so it survives: an individual, attributed,
+    documented client outcome with substantiation on file is a different
+    object from a claim about what a prospective client can expect. The
+    first is a fact about a named person. The second is a projection. Only
+    the second is what the rule exists to prevent. This resolves the
+    contradiction between CANONICAL TRUTH (which records "Mark -17 lbs,
+    248->231, 4mo" as canonical fact) and this screen (which banned
+    lbs-near-timeframe outright); both could not hold.
+    Encoded in tools/certify.py, keyed off the DISCLAIMER TEXT PRESENT ON
+    THE PAGE, never off the filename - that is what makes condition 2
+    enforceable rather than decorative. Condition 3 is not machine-
+    checkable and remains a human warranty.
   · free-consultation framing: "free" within ~6 words of any of
     consultation · assessment · screen · screening · session ·
     diagnostic · call · intake
