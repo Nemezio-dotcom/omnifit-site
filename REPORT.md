@@ -2262,3 +2262,245 @@ instead of writing a partial header.
 generic prefixed patterns — and were kept rather than deleted. **Wrong if**
 dead patterns in the list are worse than the risk of removing them; removing
 them changes no output.
+
+---
+
+# Scope Reconciliation Run — Sept 2026
+
+**Branch:** `claude/case-study-exception-extractor-ff1l85` (continued)
+**Scope:** answer the scope question the previous run refused to answer alone.
+**No page copy was changed.** Every file that moved moved byte-identically;
+every finding that disappeared disappeared because the file left scope, not
+because its content changed.
+
+Merged `origin/main` first: it had advanced with
+`personal-trainer-over-50-san-diego` (page + header), plus `footer.html` and
+`personal-training-services.html` updates. No conflicts.
+
+## 1. Certification — before and after
+
+Before is measured on the merged tree, so the over-50 page is in both columns
+and the delta is scope alone.
+
+| | Before | After | Delta |
+|---|---|---|---|
+| (a) compliance | 10 | **2** | −8 |
+| (b) stale canon | 97 | **24** | −73 |
+| (c) structure | 12 | **5** | −7 |
+| checks not run | 12 | **9** | −3 |
+| scope | 76 files | 68 files + 1 duplicate | |
+| RESULT | `FAILED (10 · 97 · 12 · 12)` | `FAILED (2 · 24 · 5 · 9)` | |
+
+### Invariant hashes — all five, unchanged
+
+No page content was edited, so before and after are identical, and all five
+match the hashes recorded in CANON.md:
+
+```
+page pricing     ae388d31c0b6149e   matches CANON
+header pricing   7e5de5984b133663   matches CANON
+credentials      6492e3ca1545dc26   matches CANON
+archetypes       6b1b0f4efbd4a72c   matches CANON
+9-point          bd73ea51bc9ec5eb   matches CANON
+```
+
+## 2. Delta: scope versus content
+
+**All of it is scope. None of it is content.** Attributed file by file:
+
+| Category | Before | Archived | Duplicate | Naming fix | After | Content |
+|---|---|---|---|---|---|---|
+| (a) compliance | 10 | −8 | 0 | 0 | 2 | **0** |
+| (b) stale canon | 97 | −73 | 0 | 0 | 24 | **0** |
+| (c) structure | 12 | −6 | 0 | −1 | 5 | **0** |
+| not-run | 12 | −3 | 0 | 0 | 9 | **0** |
+
+The 8 compliance strikes removed: `executive-hybrid-coaching` 2
+(result-in-window), `online-training` 5 (4 free-framing + 1 uncertified
+specialty claim), `personal-trainer-mission-hills` 1 (free-framing).
+
+The 73 stale-canon hits removed: `executive-hybrid-coaching` 19 + its header
+13, `personal-trainer-mission-hills` 15 + its header 12, `online-training` 12,
+`llms-txt-page-retired` 2.
+
+The 6 structural findings removed: the three archived headers, two findings
+each (questions and answers do not mirror). The 7th is the over-50 header
+naming fix, below.
+
+`home-3` contributed **0** to every category once the case-study exception
+landed in the previous run, so excluding it changed no count — but it would
+have doubled every future finding on `case-studies`, which is why the rule is
+in place rather than the removal.
+
+## 3. What moved to `archive/`
+
+Seven files, all sha256-verified identical before and after the move. `archive/`
+did not exist before this run, so nothing was already archived and nothing was
+skipped as a duplicate move.
+
+| File | sha256 (unchanged) |
+|---|---|
+| `archive/online-training.html` | `71fb7c6f63217793…` |
+| `archive/headers/online-training-header.html` | `6509aa977ca3f4e4…` |
+| `archive/executive-hybrid-coaching.html` | `612449d8b30735bd…` |
+| `archive/headers/executive-hybrid-coaching-header.html` | `391cfc80bd3009b8…` |
+| `archive/personal-trainer-mission-hills.html` | `6a79892dac2d08bd…` |
+| `archive/headers/personal-trainer-mission-hills-header.html` | `8349b81fef98ff0d…` |
+| `archive/llms-txt-page-retired.html` | `a35fa3c6addc88a9…` |
+
+`llms-txt-page-retired` has **no header file** and never did — reported and
+skipped, not fabricated.
+
+Their retired pricing, Garnet Ave address, retired brand name and unmirrored
+headers are preserved untouched. `certify.py` now carries an assertion that no
+`archive/` path can enter its glob, so this cannot be undone by a future glob
+change.
+
+The `online-training-header` mirror failure reported last run (page 7, schema
+0) is resolved by this move. It was never a defect to fix — the page 301s away
+and does not exist.
+
+## 4. The rewritten REPO STATE
+
+Rewritten in `CANON.md` against the actual disk contents. In summary:
+
+- **Certified — 27 page/header pairs**: the 10 territory pages,
+  `corrective-exercise-post-rehab`, `FAQs`, `how-it-works-pricing`,
+  `in-home-personal-trainer-san-diego`,
+  `private-personal-trainer-san-diego`, the 9 Batch 3 pages,
+  `training-rates-san-diego`, and **`personal-trainer-over-50-san-diego`**
+  (new, live Sept 2026, certified in this run).
+- **In scope, not yet certified**: `about`, `contactform`,
+  `desk-worker-posture-pain`, `hsa-fsa-personal-training` (each has a header);
+  `home-1`, `home-2`, `home-4`, `home-5` (homepage fragments, no headers,
+  carrying the retired brand name, Pacific Beach, ACE OES, Executive Hybrid,
+  `$90` and `180+`); `case-studies` and `home-3`.
+- **Body-embedded JSON-LD, no header file, and none missing**: `case-studies`
+  and `home-3`. The mirror check iterates headers, so it does not and must not
+  flag these.
+- **Known duplicate**: `home-3.html` ≡ `case-studies.html`, sha256
+  `c82d5f32dc869381…`. Certified via its source, excluded from the count.
+- **Not yet certified, do not paste**: `the-30-minute-executive-reset` (repo
+  copy stale relative to production — needs refreshing from live, not
+  patching) and `footer.html`.
+- **Orphan headers** — real, deployed, no page in the repo:
+  `bodybuilding-header` (5 FAQ entries) and
+  `energy-protocol-waitlist-form-header` (no FAQPage). Both pages are
+  Squarespace block-built with no Code Block to retrieve, so the pages will
+  never exist here. `home-header` is a third case of the same shape and is
+  recorded alongside them: it is the site's LocalBusiness definition, and the
+  homepage lives here only as the `home-1`..`home-5` fragments.
+- **Archive**: the four retired pages above, never certified, never corrected.
+- **Duplicate rule, stated generally**: where two in-scope files are
+  byte-identical, certify one and reference the other.
+
+### Naming slip corrected, with disclosure
+
+The over-50 header arrived from `main` as
+`pages/headers/personal-trainer-over-50-san-diego.html` — no `-header` suffix,
+against CANON's "no exceptions" naming rule. Per CANON, the content was
+certified **first** (zero compliance strikes, zero stale-canon hits), and only
+then renamed to `personal-trainer-over-50-san-diego-header.html`, contents
+byte-identical (`c7bcfd52066af260…`). Its mirror then verified at 7 questions
+vs 7 schema entries. Doing the rename first would have hidden a real mirror
+check behind a filename mismatch — the same trap `training-rates-san-diego`
+walked into in the Rates Page Correction run.
+
+## 5. Other byte-identical page pairs
+
+**One, the known one.** Hashing all 76 in-scope files plus headers found
+exactly one identical group:
+
+```
+c82d5f32dc869381…   pages/case-studies.html  ==  pages/home-3.html
+```
+
+No other duplicates exist in `pages/`, headers included.
+
+## 6. Pages that changed exemption status
+
+The disclaimer test now requires a dedicated block — a `p` / `div` / `aside` /
+`section` / `blockquote` whose text *opens* with "individual result(s)".
+`li`, `td`, `th`, `caption`, `figcaption` and `small` are excluded by not being
+on the block list; a phrase appearing partway through a sentence is excluded by
+the opens-with test.
+
+| Page | Before | After | Why |
+|---|---|---|---|
+| `case-studies` | exempt | **exempt** | `<div class="results-disclaimer"><p>Individual results. Outcomes depend…` |
+| `home-3` | exempt | **exempt** | byte-identical to the above |
+| `personal-trainer-over-50-san-diego` | exempt | **exempt** | `<p class="ov-disclaimer">Individual results. Outcomes depend…` |
+| `how-we-measure-your-progress` | exempt | **not exempt** | only mentions are a chart caption ("Sample layout only… individual results vary") and a chart note ("Based on anonymized client averages. Individual results vary.") |
+| `desk-worker-posture-pain` | exempt | **not exempt** | disclaimer sits at the tail of a body paragraph: "…while maintaining his CTO role. Individual result, measured against his own baseline; outcomes vary between clients." |
+
+The two required must-stay-exempt pages both stay exempt, so there was no
+reason to stop.
+
+**No finding changed status as a result.** `how-we-measure-your-progress` has
+no lbs or result-in-window match at all, and `desk-worker-posture-pain`'s single
+strike (`'18 lbs' near '/week'`) was already un-exempt on **attribution**
+grounds before this change — its case study is introduced as "Alo — Chief
+Technology Officer" with an em-dash, which matches no attribution shape, so the
+rule was already failing closed there. Worth naming: the tightening was correct
+and had zero blast radius, which is exactly what you want from a rule that
+narrows scope, but it also means the two pages that lost the exemption were
+never relying on it.
+
+Fourteen fixtures, both directions, all passing; the twelve case-study
+exception fixtures from the previous run still pass unchanged.
+
+## 7. Every remaining mirror failure
+
+One true failure, three vacuous comparisons, three orphans:
+
+| Header | Page FAQ | Schema FAQ | Status |
+|---|---|---|---|
+| `desk-worker-posture-pain-header` | 6 | 0 | **FAIL** — header carries no FAQPage at all |
+| `about-header` | 0 | 0 | compared nothing — reported unverified |
+| `contactform-header` | 0 | 0 | compared nothing — reported unverified |
+| `personal-training-services-header` | 0 | 0 | compared nothing — reported unverified |
+| `bodybuilding-header` | — | 5 | no page in repo (Squarespace block-built) |
+| `energy-protocol-waitlist-form-header` | — | 0 | no page in repo (Squarespace block-built) |
+| `home-header` | — | 0 | no `pages/home.html`; homepage is `home-1`..`home-5` |
+
+All 27 certified pairs mirror cleanly, `personal-trainer-over-50-san-diego`
+(7 vs 7) included. **Reported, not fixed**, as instructed.
+
+## 8. Judgment calls, each with the condition that would make it wrong
+
+**Merged `origin/main` rather than working from the stale base.** The over-50
+page the brief asks me to certify only exists on `main`. **Wrong if** the
+branch was meant to stay off `main` and the over-50 files were expected to be
+created here.
+
+**The duplicate rule keeps the alphabetically first file.** `case-studies` <
+`home-3` happens to put the source first, but alphabetical order is not a
+general guarantee that the kept file is the original. It is deterministic and
+the pairing is printed every run, so a wrong choice is visible rather than
+silent. **Wrong if** a future duplicate pair has the copy sorting first and
+someone reads the SCOPE line as "this is the source".
+
+**Orphan headers stay as reported structural findings.** They are recorded in
+REPO STATE as expected, but I did not add scope exclusions to suppress them —
+recording them was asked for, silencing them was not. Three findings persist
+because of this (`bodybuilding`, `energy-protocol-waitlist-form`, `home`).
+**Wrong if** the intent was for a reconciled REPO STATE to make those findings
+go away; that is a one-line `OUT_OF_SCOPE` change if you want it.
+
+**`home-header` was grouped with the orphans on my own reading.** The brief
+named two; `home-header` has the same shape for a different reason (the
+homepage exists here only as fragments). **Wrong if** `pages/home.html` is
+meant to exist and its absence is the real defect.
+
+**The disclaimer block list is `p`/`div`/`aside`/`section`/`blockquote`, and
+the block must *open* with the phrase.** That is a structural proxy for
+"dedicated". **Wrong if** a legitimate disclaimer is ever written as
+`<p class="disclaimer">Results are individual. Outcomes vary…</p>` — it opens
+with the wrong words and would be rejected. Fails closed: the cost is a false
+positive, never a false pass.
+
+**`case-studies` and `home-3` are left in scope, uncertified, rather than
+certified or archived.** They carry live, published content and their
+JSON-LD is body-embedded rather than in a header file. **Wrong if** they were
+expected to be brought to certified status in this run — that needs a content
+pass, which this run was told not to do.
