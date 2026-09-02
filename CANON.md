@@ -1,29 +1,90 @@
-═══ OMNIFIT SITE — CANONICAL BRIEF (Aug 2026) ═══
+═══ OMNIFIT SITE — CANONICAL BRIEF (Aug 2026, REPO STATE reconciled Sept 2026) ═══
 
-REPO STATE
-- main = paste source. Certified: 10 territory pages,
-  corrective-exercise-post-rehab, FAQs, how-it-works-pricing,
-  in-home-personal-trainer-san-diego, private-personal-trainer-san-diego,
-  and the 9 Batch 3 pages — the-omnifit-method,
-  how-we-measure-your-progress, omnifit-vs-competitors, weight-loss,
-  strength-training-1, hiit-personal-trainer-san-diego,
-  personal-training-services, body-composition-testing, partners, and
-  training-rates-san-diego (refreshed from live and corrected, Aug 2026:
-  two-ladder session packs, guest add-on, DEFERRED-01 applied) —
-  each with a header under pages/headers/<slug>-header.html.
-  26 page/header pairs in total.
-  NOT YET CERTIFIED, do not paste:
-  · the-30-minute-executive-reset.html — the REPO COPY IS STALE RELATIVE TO
-    PRODUCTION. The live version on the domain is ahead of this file. It
-    needs REFRESHING FROM LIVE, not patching: any run that patches the repo
-    copy would be editing a version the site has already moved past.
-    Deferred from Batch 3 on that basis. A header file already exists
-    (pages/headers/the-30-minute-executive-reset-header.html) but has not
-    been verified against a refreshed page.
-  · footer.html — site-wide, in no batch.
-  Never resurrect pre-patch originals from history.
+REPO STATE (reconciled with disk, Sept 2026)
+- main = paste source. Every file under pages/ is IN CERTIFICATION SCOPE unless
+  listed as not-yet-certified below. archive/ is NEVER in scope.
 - Header naming is standardised: pages/headers/<slug>-header.html, no
-  exceptions.
+  exceptions. Naming slips are corrected AFTER the content certifies, with
+  disclosure, never before - fixing the name first hides a real structural
+  check behind a filename mismatch.
+
+  CERTIFIED - 27 page/header pairs
+    10 territory pages: personal-trainer-4s-ranch, -carlsbad,
+      -carmel-valley, -del-mar, -encinitas, -fairbanks-ranch, -la-jolla,
+      -rancho-santa-fe, -santaluz, -solana-beach
+    corrective-exercise-post-rehab · FAQs · how-it-works-pricing ·
+      in-home-personal-trainer-san-diego · private-personal-trainer-san-diego
+    the 9 Batch 3 pages: the-omnifit-method, how-we-measure-your-progress,
+      omnifit-vs-competitors, weight-loss, strength-training-1,
+      hiit-personal-trainer-san-diego, personal-training-services,
+      body-composition-testing, partners
+    training-rates-san-diego (refreshed from live and corrected, Aug 2026:
+      two-ladder session packs, guest add-on, DEFERRED-01 applied)
+    personal-trainer-over-50-san-diego - NEW, live as of Sept 2026, certified
+      in the Scope Reconciliation run. Its header arrived misnamed
+      (no -header suffix); renamed after its content certified clean.
+
+  IN SCOPE, NOT YET CERTIFIED - carry real findings, do not paste
+    · about, contactform, desk-worker-posture-pain, hsa-fsa-personal-training
+      - each has a header. desk-worker's header carries no FAQPage while its
+      page has 6 FAQs: a real, reported mirror failure, not fixed.
+    · home-1, home-2, home-4, home-5 - homepage section fragments, no headers.
+      Carry retired brand name, Pacific Beach, ACE OES, Executive Hybrid, $90
+      and 180+. BATCH 4 or later.
+    · case-studies - JSON-LD is BODY-EMBEDDED, there is no header file and
+      none is missing. The mirror check iterates headers, so it does not and
+      must not flag this.
+    · home-3 - KNOWN DUPLICATE, byte-identical to case-studies.html
+      (sha256 c82d5f32dc869381...). It IS the case-studies block pasted into
+      the homepage. Certified via its source, not independently, and excluded
+      from the finding count. Also body-embedded JSON-LD, no header.
+
+  NOT YET CERTIFIED, do not paste
+    · the-30-minute-executive-reset.html - the REPO COPY IS STALE RELATIVE TO
+      PRODUCTION. The live version on the domain is ahead of this file. It
+      needs REFRESHING FROM LIVE, not patching: any run that patches the repo
+      copy would be editing a version the site has already moved past.
+      Deferred from Batch 3 on that basis. A header file already exists
+      (pages/headers/the-30-minute-executive-reset-header.html) but has not
+      been verified against a refreshed page.
+    · footer.html - site-wide, in no batch.
+
+  ORPHAN HEADERS - a header with no page in the repo
+    · bodybuilding-header.html (5 FAQ entries)
+    · energy-protocol-waitlist-form-header.html (no FAQPage)
+      Both pages are Squarespace block-built: there is no Code Block to
+      retrieve, so the page will never exist here. The headers are real and
+      deployed. Certification reports each as "no matching page" - expected,
+      and left visible rather than suppressed.
+    · home-header.html - the homepage header, and the site's LocalBusiness
+      definition (the one place it is legitimately defined, referenced
+      everywhere else by @id). The homepage itself lives in this repo only as
+      the home-1..home-5 fragments, so there is no pages/home.html and the
+      same "no matching page" finding applies. It also carries retired brand
+      name, Pacific Beach and Orthopedic Exercise.
+
+  DUPLICATE RULE, general: where two IN-SCOPE files are byte-identical,
+  certify one and reference the other. certify.py hashes every in-scope file,
+  keeps the alphabetically first of each identical group, and PRINTS the
+  pairing in the SCOPE block. Certifying both double-counts every finding.
+
+ARCHIVE - archive/ and archive/headers/, NEVER certified, NEVER corrected
+- These pages are RETIRED from the live site. Each URL 301s elsewhere via
+  Squarespace URL Mappings. They are historical records and they contain
+  retired pricing, the Garnet Ave address, the retired brand name and
+  unmirrored headers. That is EXPECTED and must be preserved. Do not correct
+  them, and never bring them back into certification scope. certify.py
+  asserts that no archive/ path can enter its glob.
+    online-training                 -> 301 /the-30-minute-executive-reset
+    executive-hybrid-coaching       -> 301 /the-30-minute-executive-reset
+    personal-trainer-mission-hills  -> 301 /in-home-personal-trainer-san-diego
+    llms-txt-page-retired           -> superseded by Squarespace's native
+                                       LLMS.txt field (no header ever existed)
+  Archived in the Scope Reconciliation run, Sept 2026, byte-identical, with
+  their headers where one existed. The online-training-header mirror failure
+  reported in the previous run (page 7, schema 0) is resolved by this move:
+  it was not a defect to fix, the page does not exist.
+- Never resurrect pre-patch originals from history.
 
 WORKFLOW RULES
 - Repo-only. Never publish anywhere; the human pastes approved output
@@ -179,7 +240,10 @@ judgment call if it needs a human decision, otherwise handle it silently.
     following hold:
       1. the result is attributed to a specific individual (named, or
          explicitly anonymised with a stated profile), AND
-      2. the page carries the individual-results disclaimer, AND
+      2. the page carries the individual-results disclaimer IN A DEDICATED
+         BLOCK - its own paragraph or container, opening with the phrase.
+         A mention embedded in a caption, list item, table cell, or the tail
+         of a body paragraph does NOT qualify, AND
       3. substantiation exists on file (training records, scan printouts,
          or before/after photography).
     The exemption is page-scoped, not site-wide. A case-study figure quoted
@@ -199,6 +263,15 @@ judgment call if it needs a human decision, otherwise handle it silently.
     THE PAGE, never off the filename - that is what makes condition 2
     enforceable rather than decorative. Condition 3 is not machine-
     checkable and remains a human warranty.
+    Condition 2 tightened Sept 2026: the first encoding accepted the phrase
+    anywhere on the page, which let how-we-measure-your-progress qualify off
+    a chart caption ("Sample layout only... individual results vary"). It now
+    requires a dedicated block. Pages carrying a qualifying disclaimer today:
+    case-studies (and its duplicate home-3) and
+    personal-trainer-over-50-san-diego. desk-worker-posture-pain no longer
+    qualifies - its disclaimer sits at the tail of a body paragraph. That
+    changed no finding, because the figure beside it was already a strike on
+    attribution grounds.
   · free-consultation framing: "free" within ~6 words of any of
     consultation · assessment · screen · screening · session ·
     diagnostic · call · intake
