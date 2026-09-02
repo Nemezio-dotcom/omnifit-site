@@ -56,13 +56,33 @@ def guarantee_near_outcome(text, window=30):
 DISCLAIMER_VARIES = (r'\b(?:vary|varies|varied|depends?|depending|'
                      r'not a projection|not projections|not typical)\b')
 
+# The disclaimer must be the POINT of its own block, not an aside inside another
+# one. Tightened Sept 2026: the loose version accepted any occurrence anywhere on
+# the page, so how-we-measure-your-progress qualified off a chart caption
+# ("Sample layout only. The values shown are illustrative, and individual results
+# vary..."). Two conditions, both structural:
+#   · the containing element is a block that can hold a disclaimer on its own -
+#     p / div / aside / section / blockquote. li, td, th, caption, figcaption and
+#     small are excluded by not being on this list, which is what "not a caption,
+#     list item, or table cell" means mechanically.
+#   · the block's text STARTS with the phrase. A note that merely mentions
+#     individual results partway through a sentence about something else is a
+#     caption, whatever element it sits in.
+DISCLAIMER_BLOCK = re.compile(
+    r'<(p|div|aside|section|blockquote)\b[^>]*>\s*'
+    r'(?:<(?:strong|em|b|i|span|small)\b[^>]*>\s*)?'      # a lead-in inline wrapper is fine
+    r'individual results?\b', re.I)
+
 def _has_results_disclaimer(text, window=40):
-    """The individual-results disclaimer: the phrase 'individual result(s)'
-    carrying a statement that outcomes vary or depend on the individual. A bare
-    mention of the words is not a disclaimer."""
-    t = _flat(text)
-    for m in re.finditer(r'\bindividual results?\b', t, re.I):
-        if re.search(DISCLAIMER_VARIES, ' '.join(t[m.end():].split()[:window]), re.I):
+    """The individual-results disclaimer: a dedicated block whose text opens with
+    'individual result(s)' and carries a statement that outcomes vary or depend on
+    the individual. A bare mention of the words is not a disclaimer, and neither
+    is one embedded in a caption, list item or table cell."""
+    for m in DISCLAIMER_BLOCK.finditer(text):
+        tag = m.group(1)
+        end = text.lower().find(f'</{tag}>', m.end())
+        block = _flat(text[m.start():end if end != -1 else m.end() + 800])
+        if re.search(DISCLAIMER_VARIES, ' '.join(block.split()[:window]), re.I):
             return True
     return False
 
@@ -274,13 +294,30 @@ def _norm(x):
     return re.sub(r'\s+([.,;:])', r'\1', re.sub(r'\s+', ' ', x or '')).strip()
 
 def run():
+    # archive/ is retired content kept as a historical record - never globbed,
+    # never certified, never corrected. See CANON REPO STATE.
     ALL = sorted(glob.glob('pages/**/*.html', recursive=True))
+    assert not any(f.startswith('archive/') for f in ALL), "archive/ must never enter scope"
     files = [f for f in ALL if not any(k in f for k in OUT_OF_SCOPE)]
     skipped = [f for f in ALL if f not in files]
     assert files, "GLOB MATCHED ZERO FILES - run from repo root"
+    # Where two in-scope files are BYTE-IDENTICAL, certify one and reference the
+    # other: home-3.html is the case-studies block pasted into the homepage, and
+    # certifying both double-counted every finding on it. The kept file is the
+    # alphabetically first, so the choice is deterministic, and the pairing is
+    # printed rather than silently applied.
+    seen, dup = {}, {}
+    for f in files:
+        h = hashlib.sha256(open(f, 'rb').read()).hexdigest()
+        if h in seen: dup[f] = (seen[h], h)
+        else: seen[h] = f
+    files = [f for f in files if f not in dup]
     A=B=C=0
-    print(f"### SCOPE: {len(files)} certified, {len(skipped)} not yet certified")
+    print(f"### SCOPE: {len(files)} certified, {len(skipped)} not yet certified, "
+          f"{len(dup)} byte-identical duplicate(s)")
     for k in skipped: print(f"   not certified: {k}")
+    for k, (src, h) in sorted(dup.items()):
+        print(f"   duplicate: {k}  ==  {src}  (sha256 {h[:16]}…) - certified via source")
 
     print("\n### (a) COMPLIANCE STRIKES")
     for f in files:
