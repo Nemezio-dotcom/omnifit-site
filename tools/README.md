@@ -142,6 +142,18 @@ before the period — an extraction artifact, not a mirroring failure.
 so certification and header generation cannot disagree about what a page's FAQ
 is. They previously did.
 
+**Every `<script type="application/ld+json">` block is read, not just the
+first.** A header may spread its nodes across several blocks:
+`desk-worker-posture-pain-header` carries `Service` in block 1 and its
+6-question `FAQPage` in block 2. `re.search` stopped at block 1, so the mirror
+compared 6 page questions against 0 schema questions and reported the **header**
+broken — the checker not looking, blamed on the file it failed to read. Nodes
+from all blocks are now merged (flattening `@graph` where present) before any
+structural check runs, and invalid JSON names which block it was in. It was the
+only multi-block header in the repo; fixing it changed exactly one pair's status
+and no others. Negative-tested both ways: a matching second-block FAQPage
+mirrors, an altered one still flags.
+
 ## Compliance rules (a)
 
 - **outcome guarantees** — "guarantee" within ~30 words of an outcome promise.
@@ -226,6 +238,16 @@ is. They previously did.
   pair "guarantee" with an outcome word, so it passes `guarantee_near_outcome`
   on its own merit. If the old banned wording ever reappears anywhere, it now
   flags like any other violation.
+
+## Known checker defects, unfixed
+
+- **travel-fee rule, `$75` adjacency.** `travel[^.<]{0,30}\$(?:50|75)` fires on
+  `…Extra guest add-on: $75/session · A travel fee may apply…`
+  (`couples-personal-training-san-diego.html:274`). The `$75` is the canonical
+  guest add-on and the travel sentence carries no figure, which CANON
+  explicitly permits. Two unrelated facts sitting either side of a `·` are read
+  as one claim. Reported, not fixed — the fix is to require the dollar figure
+  and the word *travel* inside the same `·`-delimited clause.
 
 ## Byte-identical duplicates
 

@@ -25,6 +25,19 @@ REPO STATE (reconciled with disk, Sept 2026)
       (no -header suffix); renamed after its content certified clean.
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings, do not paste
+    · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
+      NOT certified and BLOCKED on three things, all reported in the Link Graph
+      Repair run and none fixed there:
+        1. its header is at "pages/headers /COUPLES-PERSONAL-TRAINING-SAN-DIEGO.HTML"
+           - a stray directory with a TRAILING SPACE, an uppercase filename, an
+           uppercase .HTML extension and no -header suffix. certify.py globs
+           pages/**/*.html, so the header is invisible to certification
+           entirely: it is neither checked nor reported missing.
+        2. one stale-canon hit at line 274, which is a CHECKER false positive,
+           not a content defect - see tools/README, Known checker defects.
+        3. the naming cannot be fixed until its content certifies, per the
+           naming rule above.
+      The page itself is live and is now linked from four hub pages.
     · about, contactform, desk-worker-posture-pain, hsa-fsa-personal-training
       - each has a header. desk-worker's header carries no FAQPage while its
       page has 6 FAQs: a real, reported mirror failure, not fixed.
@@ -318,6 +331,10 @@ legitimately changes an invariant, and say so in REPORT.md)
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
+  A header may carry its nodes across SEVERAL ld+json blocks rather than one
+  @graph (desk-worker-posture-pain puts Service in block 1 and its FAQPage in
+  block 2). certify.py reads every block and merges the nodes; a checker that
+  read only the first reported that header as broken for two runs.
 
 KNOWN DEFERRED ITEMS
 Two kinds live here and they behave differently:
