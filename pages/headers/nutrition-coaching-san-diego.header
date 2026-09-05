@@ -1,0 +1,146 @@
+<!-- NUTRITION-COACHING-SAN-DIEGO HEADER JSON-LD · SEPT 2026
+  Page Settings → Advanced → Page Header Code Injection. Replace any previous block.
+  LocalBusiness referenced by @id from the homepage, never redefined here.
+  FAQPage mirrors the on-page FAQ verbatim, in page order, tags stripped.
+  Scope boundary (coaching, not medical nutrition therapy) is stated in the Service description.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/nutrition-coaching-san-diego#webpage",
+      "url": "https://www.omnifittraining.com/nutrition-coaching-san-diego",
+      "name": "Nutrition Coaching San Diego | Habit-Based, Not a Meal Plan You Abandon",
+      "description": "Behaviour-based nutrition coaching for professionals 30+ in San Diego. Macro targets, structured meal frameworks, and AI photo logging in the OmniFit app. Included in every training program.",
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "breadcrumb": {
+        "@id": "https://www.omnifittraining.com/nutrition-coaching-san-diego#breadcrumb"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.omnifittraining.com/nutrition-coaching-san-diego#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Personal Training Services",
+          "item": "https://www.omnifittraining.com/personal-training-services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Nutrition Coaching",
+          "item": "https://www.omnifittraining.com/nutrition-coaching-san-diego"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.omnifittraining.com/nutrition-coaching-san-diego#service",
+      "url": "https://www.omnifittraining.com/nutrition-coaching-san-diego",
+      "name": "Behaviour-Based Nutrition Coaching",
+      "serviceType": "Nutrition Coaching",
+      "provider": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "description": "Nutrition coaching for healthy adults over 30 in San Diego, built on a four-phase behavioural framework adapted from Precision Nutrition: awareness, regulation, adaptation, identification. Includes macro targeting, structured meal frameworks, and AI photo logging through the OmniFit app which returns full macros with automated feedback. Included in every training tier. OmniFit Performance provides nutrition coaching, not medical nutrition therapy; clients managing a chronic disease are referred to a registered dietitian.",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "San Diego"
+        },
+        {
+          "@type": "Neighborhood",
+          "name": "4S Ranch"
+        },
+        {
+          "@type": "Place",
+          "name": "North County San Diego"
+        }
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Healthy adults over 30 seeking sustainable nutrition change"
+      },
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "target": "https://www.omnifittraining.com/contactform"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.omnifittraining.com/nutrition-coaching-san-diego#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you give me a meal plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You get meal frameworks built around your goals and your starting point, not a fixed daily menu. The difference matters: a menu works until the week you travel or a dinner runs late, and then it stops working entirely. A framework tells you how to build a meal in any situation, which is what survives contact with a real schedule."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is nutrition coaching included or is it extra?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Included in every tier from Essential upward, at no additional cost. What varies is depth: at Essential it is asynchronous guidance with macro targets, meal frameworks and app-based photo logging, reviewed at your monthly assessment. At Performance and Peak there is dedicated coaching time on it within your sessions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the AI meal photo analysis work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You photograph a meal in the OmniFit app and FitMetrics AI returns full macros along with automated feedback. It exists because the reason most people stop tracking is friction, not motivation. Weighing and logging every ingredient is sustainable for about ten days. Photographing a plate takes two seconds, and it means the coaching conversation starts from what you actually ate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I hate dieting and tracking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Then the framework is built for you specifically. The awareness phase exists to establish a baseline, not to make tracking permanent. The end state is identification, where the decisions are automatic and you are not logging anything. Tracking is a diagnostic tool with a defined lifespan, not the product."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you a dietitian?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Nemezio LopezPerez is a NASM Certified Nutrition Coach with Precision Nutrition Level 1 and Precision Nutrition's Nutrition for Metabolic Health certification. Those cover nutrition coaching for healthy adults. Medical nutrition therapy is a registered dietitian's scope of practice, and clients managing a chronic disease are referred rather than coached around it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will you put me on a crash diet to hit a deadline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, at any tier and for any reason. Aggressive restriction produces a number on a scale and loses muscle doing it, and the behaviour it teaches is the behaviour that put most people here in the first place. If you have an event and a short window, the honest answer is that the timeline does not suit this approach."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I do nutrition coaching without training?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nutrition is included in every training program rather than sold separately. The framework is designed to run alongside the training method, and the macro targets are set against your training load. If you want nutrition guidance on its own, say so on the consultation and I will tell you honestly whether this is the right fit."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
