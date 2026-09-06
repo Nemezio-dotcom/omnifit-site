@@ -96,7 +96,7 @@
           "name": "Is nutrition coaching included or is it extra?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Included in every tier from Essential upward, at no additional cost. What varies is depth: at Essential it is asynchronous guidance with macro targets, meal frameworks and app-based photo logging, reviewed at your monthly assessment. At Performance and Peak there is dedicated coaching time on it within your sessions."
+            "text": "Included in every tier at no additional cost, and it is the same coaching at every tier. Macro targets, meal frameworks, photo logging with full macro breakdowns, and the behavioural framework are identical whether you are on Essential or Peak. The only practical difference is that clients who train more often have more moments where nutrition comes up inside a session. Nothing is held back for higher tiers."
           }
         },
         {
@@ -104,7 +104,7 @@
           "name": "How does the AI meal photo analysis work?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "You photograph a meal in the OmniFit app and FitMetrics AI returns full macros along with automated feedback. It exists because the reason most people stop tracking is friction, not motivation. Weighing and logging every ingredient is sustainable for about ten days. Photographing a plate takes two seconds, and it means the coaching conversation starts from what you actually ate."
+            "text": "You photograph a plate in the OmniFit app and FitMetrics AI returns a full macro breakdown of it. You can add a short description to help the AI read what it is looking at, and save meals you eat regularly so a repeat lunch takes one tap rather than a fresh entry. It exists because the reason most people stop tracking is friction, not motivation. Weighing and logging every ingredient is sustainable for about ten days; photographing a plate takes two seconds, and the coaching conversation starts from what you actually ate."
           }
         },
         {
