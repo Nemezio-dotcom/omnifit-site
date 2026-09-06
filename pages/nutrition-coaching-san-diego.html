@@ -49,9 +49,10 @@
   #omni-nutrition p:last-child { margin-bottom:0; }
   #omni-nutrition p strong { color:var(--white); font-weight:600; }
 
-  #omni-nutrition .nu-phase { display:grid; grid-template-columns:70px 1fr; gap:20px; padding:26px 0; border-bottom:1px solid var(--white-10); align-items:start; }
+  #omni-nutrition .nu-phase { display:grid; grid-template-columns:118px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--white-10); align-items:start; }
   #omni-nutrition .nu-phase:last-child { border-bottom:none; }
-  #omni-nutrition .nu-phase-num { font-family:'Playfair Display',serif !important; font-size:15px; font-weight:700; color:var(--gold); line-height:1.2; letter-spacing:1px; text-transform:uppercase; }
+  #omni-nutrition .nu-phase-num { font-family:'Playfair Display',serif !important; font-size:26px; font-weight:700; color:var(--gold); line-height:1; }
+  #omni-nutrition .nu-phase-num em { display:block; font-family:'Montserrat',sans-serif !important; font-style:normal; font-size:10px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; color:var(--white-50); margin-top:8px; line-height:1.4; }
   #omni-nutrition .nu-phase p { font-size:15px; color:var(--white-70); margin:0; }
 
   #omni-nutrition .nu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:26px; }
@@ -61,11 +62,6 @@
   #omni-nutrition .nu-card-icon { margin-bottom:16px; display:block; line-height:1; }
   #omni-nutrition .nu-card-icon svg { width:28px; height:28px; stroke:var(--gold-light); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; display:block; }
 
-  #omni-nutrition .nu-tiers { border:1px solid var(--white-10); border-radius:var(--radius-lg); overflow:hidden; margin-top:26px; }
-  #omni-nutrition .nu-tier { display:grid; grid-template-columns:150px 1fr; gap:18px; padding:20px 24px; border-bottom:1px solid var(--white-10); align-items:start; }
-  #omni-nutrition .nu-tier:last-child { border-bottom:none; }
-  #omni-nutrition .nu-tier-name { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); }
-  #omni-nutrition .nu-tier p { font-size:14.5px; color:var(--white-70); margin:0; }
 
   #omni-nutrition .nu-list { list-style:none; margin-top:10px; }
   #omni-nutrition .nu-list li { font-size:15.5px; color:var(--white-70); padding:9px 0 9px 26px; position:relative; line-height:1.7; }
@@ -96,7 +92,9 @@
     #omni-nutrition .nu-hero { padding:56px 20px 34px; }
     #omni-nutrition .nu-sec { padding-left:20px; padding-right:20px; }
     #omni-nutrition .nu-answer, #omni-nutrition .nu-cta { margin-left:20px; margin-right:20px; padding:24px 20px; }
-    #omni-nutrition .nu-phase, #omni-nutrition .nu-tier { grid-template-columns:1fr; gap:8px; }
+    #omni-nutrition .nu-phase { grid-template-columns:1fr; gap:10px; }
+    #omni-nutrition .nu-phase-num { display:flex; align-items:baseline; gap:10px; }
+    #omni-nutrition .nu-phase-num em { margin-top:0; }
   }
   .sqs-block-code #omni-nutrition, .sqs-block-html #omni-nutrition { margin-bottom:0 !important; }
   #omni-nutrition h1, #omni-nutrition h2, #omni-nutrition h3 { letter-spacing:normal !important; }
@@ -119,28 +117,28 @@
     <p>The training method runs Assess, Correct, Build, Sustain. Nutrition runs a behavioural cousin of it, because the problem is the same shape: you cannot fix what you have not measured, and you cannot sustain what you have not made automatic.</p>
     <div>
       <div class="nu-phase">
-        <div class="nu-phase-num">01<br>Awareness</div>
+        <div class="nu-phase-num">01<em>Awareness</em></div>
         <div>
           <h3>Find out what is actually happening</h3>
-          <p>Before anything changes, we establish what you are genuinely eating rather than what you think you are eating. Photo logging in the OmniFit app makes this take seconds instead of minutes, and the gap between the two is usually the whole conversation.</p>
+          <p>Before anything changes, we establish what you are genuinely eating rather than what you think you are eating. Photo logging in the OmniFit app makes this take seconds instead of minutes, and your regular meals get saved so it stays that quick. The gap between what you think you eat and what the log shows is usually the whole conversation.</p>
         </div>
       </div>
       <div class="nu-phase">
-        <div class="nu-phase-num">02<br>Regulation</div>
+        <div class="nu-phase-num">02<em>Regulation</em></div>
         <div>
           <h3>Put structure on it</h3>
           <p>Macro targets set against your training load and your goal, plus meal frameworks built for how you actually eat. Not a prescriptive daily menu. A repeatable structure you can apply to a work lunch, a hotel breakfast, or your own kitchen.</p>
         </div>
       </div>
       <div class="nu-phase">
-        <div class="nu-phase-num">03<br>Adaptation</div>
+        <div class="nu-phase-num">03<em>Adaptation</em></div>
         <div>
           <h3>Make it survive real life</h3>
           <p>Travel weeks, client dinners, the quarter that goes sideways. This is the phase most programs skip, and it is the one that decides whether anything holds. The targets flex; the structure does not disappear.</p>
         </div>
       </div>
       <div class="nu-phase">
-        <div class="nu-phase-num">04<br>Identification</div>
+        <div class="nu-phase-num">04<em>Identification</em></div>
         <div>
           <h3>Stop following a plan and start being someone who eats this way</h3>
           <p>The goal is not compliance. It is the point where the decisions are automatic and you no longer need a coach to make them. That is what long-term means, and it is why the framework is behavioural rather than prescriptive.</p>
@@ -162,7 +160,7 @@
       <div class="nu-card">
         <span class="nu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="12" cy="12" r="3.5"/><path d="M8 5l1.5-2h5L16 5"/></svg></span>
         <h3>AI photo logging</h3>
-        <p>Photograph a meal in the OmniFit app and FitMetrics AI returns full macros with automated feedback. It removes the friction that makes people stop tracking by week two, and it means the coaching conversation starts from data rather than recall.</p>
+        <p>Photograph a plate in the OmniFit app and FitMetrics AI returns a full macro breakdown of it. You can add a description to help the AI read the meal, and save the ones you eat often so a repeat lunch takes one tap. It removes the friction that makes people stop tracking by week two, and the coaching conversation starts from data rather than recall.</p>
       </div>
       <div class="nu-card">
         <span class="nu-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2V5a1 1 0 0 1 1-1z"/><path d="M9 4v3h6V4"/><path d="M8.5 13l2 2 4-4"/></svg></span>
@@ -173,25 +171,12 @@
   </div>
 
   <div class="nu-sec">
-    <span class="nu-label">By Tier</span>
+    <span class="nu-label">Included</span>
     <hr class="nu-divider">
-    <h2>Every Program Includes Nutrition. The <em>Depth Varies</em></h2>
-    <p>Nutrition is not an upsell or an add-on package. It is in every tier from Essential upward. What changes between tiers is how much of it is coached live versus handled asynchronously.</p>
-    <div class="nu-tiers">
-      <div class="nu-tier">
-        <div class="nu-tier-name">Essential</div>
-        <div><p>Macro targets, meal frameworks, and photo logging with automated feedback in the app. Asynchronous guidance, reviewed at your monthly assessment.</p></div>
-      </div>
-      <div class="nu-tier">
-        <div class="nu-tier-name">Momentum</div>
-        <div><p>Everything above, with nutrition reviewed as part of your coached sessions rather than only at the monthly assessment.</p></div>
-      </div>
-      <div class="nu-tier">
-        <div class="nu-tier-name">Performance &amp; Peak</div>
-        <div><p>Everything above, with dedicated coaching time on nutrition. Targets and structure adjusted continuously against training load, travel, and how the week actually went.</p></div>
-      </div>
-    </div>
-    <p style="margin-top:22px;">Full tier pricing is on the <a href="/training-rates-san-diego">training rates page</a>.</p>
+    <h2>Every Client Gets the <em>Same Nutrition Coaching</em></h2>
+    <p>Nutrition is not an upsell, an add-on package, or something that scales with what you spend. Every client gets the same thing: macro targets set against their training load, meal frameworks built for their goals, photo logging with full macro breakdowns in the app, and the four-phase behavioural work that runs underneath all of it.</p>
+    <p><strong>What changes between tiers is how often we speak, not what you get.</strong> A client training twice a week has more moments where nutrition comes up inside a session than a client training once a fortnight. The coaching itself is identical, and so is the app access, the targets, and the framework.</p>
+    <p>That is deliberate. Nutrition is where most of the result actually comes from, and rationing it by price would mean deliberately underserving the clients who need the structure most. Full tier pricing is on the <a href="/training-rates-san-diego">training rates page</a>.</p>
   </div>
 
   <div class="nu-sec">
@@ -228,11 +213,11 @@
       </details>
       <details>
         <summary>Is nutrition coaching included or is it extra?</summary>
-        <div class="nu-faq-a"><p>Included in every tier from Essential upward, at no additional cost. What varies is depth: at Essential it is asynchronous guidance with macro targets, meal frameworks and app-based photo logging, reviewed at your monthly assessment. At Performance and Peak there is dedicated coaching time on it within your sessions.</p></div>
+        <div class="nu-faq-a"><p>Included in every tier at no additional cost, and it is the same coaching at every tier. Macro targets, meal frameworks, photo logging with full macro breakdowns, and the behavioural framework are identical whether you are on Essential or Peak. The only practical difference is that clients who train more often have more moments where nutrition comes up inside a session. Nothing is held back for higher tiers.</p></div>
       </details>
       <details>
         <summary>How does the AI meal photo analysis work?</summary>
-        <div class="nu-faq-a"><p>You photograph a meal in the OmniFit app and FitMetrics AI returns full macros along with automated feedback. It exists because the reason most people stop tracking is friction, not motivation. Weighing and logging every ingredient is sustainable for about ten days. Photographing a plate takes two seconds, and it means the coaching conversation starts from what you actually ate.</p></div>
+        <div class="nu-faq-a"><p>You photograph a plate in the OmniFit app and FitMetrics AI returns a full macro breakdown of it. You can add a short description to help the AI read what it is looking at, and save meals you eat regularly so a repeat lunch takes one tap rather than a fresh entry. It exists because the reason most people stop tracking is friction, not motivation. Weighing and logging every ingredient is sustainable for about ten days; photographing a plate takes two seconds, and the coaching conversation starts from what you actually ate.</p></div>
       </details>
       <details>
         <summary>What if I hate dieting and tracking?</summary>
