@@ -266,12 +266,62 @@ keep their retired pricing, old address and unmirrored headers on purpose.
 
 Five, all recomputed from the files each run and compared against the hashes
 recorded in CANON.md: page pricing, header pricing, credentials, archetypes,
-9-point screen. A mismatch is a category (c) finding. All five are now
-**printed every run**, not only on mismatch, and an invariant that matched no
-file at all is reported as not-verified rather than silently absent.
+9-point screen. All five are now **printed every run**, not only on mismatch,
+and an invariant that matched no file at all is reported as not-verified rather
+than silently absent.
+
+### Two mismatch classes, both category (c)
+
+Until Sept 2026 this section described a comparison that did not happen. The
+check only asserted that the files carrying an invariant agreed with **each
+other**; it never opened CANON.md. An invariant edited consistently across all
+its pages therefore passed in silence while CANON still recorded the old hash —
+the null overwrite again, a comparison reporting success without looking at the
+thing it claimed to check. The hashes are now parsed out of CANON's INVARIANTS
+block and compared, and the two failures are reported as two classes because
+they mean different things:
+
+| Finding | What is true |
+|---|---|
+| `[invariant mismatch]` | the files carrying the invariant disagree with **each other** |
+| `[canon hash stale]` | the files agree, and what they agree on is **not what CANON.md records** |
+
+Files agreeing with one another proves only that an edit was applied
+consistently. The Device Swap run is the case in point: retiring the 1500 MDD
+rewrote the Body Composition `<li>` on every territory page at once, so the
+9-point hash moved from `bd73ea51bc9ec5eb` to `ba590a09107ffda0` with all pages
+still in perfect agreement. Under the old check that was indistinguishable from
+no change at all.
+
+The recorded hashes are **parsed, never hard-coded** — a copy in `certify.py`
+would be a second place to forget to update, and CANON being the single
+recorded source is the whole point. Each invariant's bullet anchor and hash
+pattern are matched inside **one `- ` bullet** of the INVARIANTS block. The
+first version searched the whole block with `.*?` under `re.S`, which let a
+blanked hash match forward into the *next* bullet and report a neighbouring
+invariant's value as its own — a parser failing open, in the exact shape the
+check exists to close. It was caught by negative-testing a blanked archetypes
+hash, which "parsed" as the 9-point value.
+
+Fails loudly, never open. An unreadable CANON.md, a missing INVARIANTS block,
+or a block where not one hash parses raises `certify.CanonParseFailure`;
+`run()` catches it and records the run under CHECKS THAT COULD NOT RUN, so an
+invariant that was never compared can never read as one that matched. A single
+unparseable hash is reported per-invariant the same way. Both paths are
+negative-tested, and so is the parse of a live CANON.md.
+
+Negative-tested in both directions, as every rule here must be: altering the
+recorded 9-point hash in CANON.md fires
+`[canon hash stale] 9-point: files agree on …, CANON.md records …` and moves
+the structure count; reverted, all five read `ok` and the count returns.
 
 The credentials block is 630 bytes across 10 pages. Editing it means editing all
-ten and updating the hash in CANON.md in the same commit.
+ten and updating the hash in CANON.md in the same commit. CANON recorded this
+one truncated to 8 hex while the others were 16, so comparison is on the
+**recorded prefix** — a shorter recorded value is a weaker check, not a
+mismatch. The entry was widened to the full `6492e3ca1545dc26` in the Device
+Swap merge, closing that weakness; the prefix rule stays, with an 8-hex floor,
+because nothing stops a future entry being written short again.
 
 ## CHECKS THAT COULD NOT RUN
 
