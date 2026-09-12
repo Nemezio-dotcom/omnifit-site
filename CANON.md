@@ -197,6 +197,26 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   untouchable): Vincent 59, 8% body fat. Alo +18 lbs. Mark −17 lbs
   (248→231, 4mo). Dave −27 (225→198, 6mo). Isaac −21 (181→160, 8→20
   pull-ups, 6mo). Annie −14 (162→148, 3mo). Ken −11 fat/+6 muscle.
+- DEVICE (confirmed by owner, Sept 2026; supersedes the Bodystat 1500 MDD
+  everywhere the site describes what a client will receive):
+  the body composition device is the "Bodystat QuadScan 4000". Brand casing
+  is "Bodystat", never "BodyStat" — Bodystat's own materials use the former.
+  VERIFIED FACTUAL CLAIM, same standing the 1500 MDD designation held: the
+  QuadScan 4000 holds CE certification as a Class IIa medical device under
+  MDD 93/42/EEC and has FDA clearance. Existing "Class IIa medical device"
+  copy therefore stays as written; only the model name changes beside it.
+  Capability, recorded but NOT yet written into copy (see NEXT RUNS): four
+  frequencies (5/50/100/200 kHz) against the 1500 MDD's single 50 kHz;
+  separates intracellular from extracellular water; Phase Angle;
+  Prediction Marker (ECW/TBW); Body Cell Mass, FFMI, BFMI, segmental
+  analysis. Practically: a weight change can be attributed to muscle, fat
+  or fluid rather than inferred.
+  THE 1500 MDD IS NOT RETIRED FROM THE RECORD. Scans that happened on it
+  happened on it. Every 1500 MDD reference inside pages/case-studies.html
+  and its byte-identical duplicate pages/home-3.html is a factual record of
+  a past measurement and must be left exactly as written; changing it would
+  falsify the record. The same reasoning protects the v2 changelog entry at
+  pages/home-2.html:14, which records what a past edit added.
 - Retired forever: Executive Hybrid (product, name, slug, $299/$500),
   $175/$150/$225/$200-session era, $225–275/mo era, $599–899 Reset era,
   $50/$75 travel fees, Foundation/VIP packages.
@@ -326,8 +346,12 @@ legitimately changes an invariant, and say so in REPORT.md)
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
 - 9-point screen section body (Section B): byte-identical × 10 pages
-  (hash bd73ea51bc9ec5eb; intro + nine <li> items + closing line, set by
-  the Section A/B run).
+  (hash ba590a09107ffda0; intro + nine <li> items + closing line, set by
+  the Section A/B run). Hash changed legitimately in the Device Swap run
+  (Sept 2026): the Body Composition <li> names the device, so retiring the
+  1500 MDD rewrote the same bytes on all ten pages. Previous value
+  bd73ea51bc9ec5eb. All ten pages still agree; certify.py reported no
+  invariant mismatch.
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
