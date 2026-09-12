@@ -339,7 +339,8 @@ legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
   (page hash ae388d31c0b6149e, header hash 7e5de5984b133663). Currently 11
   pages and 11 headers.
-- Credentials block body: byte-identical on 10 pages (6492e3ca, 630 bytes)
+- Credentials block body: byte-identical on 10 pages (6492e3ca1545dc26,
+  630 bytes)
   — the 9 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
   its own Meet Nemezio section instead.
 - Archetype card bodies (Section A): byte-identical × 10 pages
