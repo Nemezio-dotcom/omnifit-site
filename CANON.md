@@ -137,10 +137,12 @@ WORKFLOW RULES
   step. tools/README.md records the three checks that have reported
   success while not actually looking — negative-test every rule change in
   both directions before trusting it.
-- CONTRACT VALUE CHECK (counsel condition, Andrew Flores, Aug 2026):
-  before filing a client on any contract whose total exceeds $4,400,
-  contact counsel first. This is a workflow step, not a pricing cap, and it
-  does not restrict what may be published or sold. Offers that currently
+- CONTRACT VALUE CHECK (counsel condition, Aug 2026; the counsel who set it
+  is no longer engaged, so OWNER APPROVAL is the live gate):
+  before filing a client on any contract whose total exceeds $4,400, obtain
+  owner approval first, and re-engage counsel if the owner wants the
+  statutory question answered rather than managed. This is a workflow step,
+  not a pricing cap, and it does not restrict what may be published or sold. Offers that currently
   trip it on a 3-month prepaid: in-home Peak individual (5,580) and in-home
   couples Performance (5,175). Teqneeq Peak individual sits closest to the
   line at 4,185, $215 clear.
@@ -242,32 +244,103 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   $175/$150/$225/$200-session era, $225–275/mo era, $599–899 Reset era,
   $50/$75 travel fees, Foundation/VIP packages.
 
-COMPLIANCE SCREEN (attorney: strike on sight, any wave)
-- No outcome guarantees. No lbs-with-timeframe claims ("20–30 lbs in
-  4–6 months"). Persona language WITHOUT timeframe ("needs to lose
-  20–30 lbs sustainably") is legal and stays.
-  Documented individual case studies are the named exception, not a
-  violation: see EXCEPTION - DOCUMENTED CASE STUDIES under CERTIFICATION
-  (a). Approved by Andrew Flores, Sept 2026.
-- No free-consultation framing. Consultation = 45 minutes, $30
-  refundable deposit.
-- No prenatal/postpartum content (uncertified). No Groupon/deal content.
-- No quantified clinical-shaped outcome statistics. A percentage or figure
-  attached to a clinical result — pain, injury, recovery, healing,
-  rehabilitation, range of motion presented as a health outcome — is banned
-  whether or not it carries a timeframe, and whether or not it is averaged
-  or disclaimed ("87% Pain Reduction", "reduced chronic pain in 90% of
-  clients"). A non-clinician publishing a clinical result rate is the
-  exposure, not the timeframe. Behavioural and business stats are NOT
-  clinical and stay: session adherence, nutrition compliance, client
-  rating, review count, retention. Performance stats (strength, body
-  composition) stay only WITHOUT a timeframe.
-- No outcome claims that pair a result with a promised window, in any
-  units. The lbs-with-timeframe rule is the specific case; the general
-  rule is that the result must be framed against the client's own
-  baseline, never against a calendar ("measurable body composition
-  changes within 6-8 weeks", "Over 4-6 months: measurable increases").
-  Same case-study exception applies, on the same three conditions.
+COMPLIANCE SCREEN — TWO TIERS (owner approval; Sept 2026)
+Rewritten by the owner (Nemezio), who is now the sole compliance
+decision-maker. The previous screen was written to outside counsel's
+standard and stripped true measured metrics along with the projections it
+was aimed at; the owner has judged that a mistake. Measured facts with
+their method shown are no longer treated as claims. What replaced them is
+not a weaker screen but a differently aimed one: TIER 1 is absolute, and
+TIER 2 is conditional rather than banned.
+
+The distinction that runs through both tiers: a PROJECTION of what a
+prospective client can expect is the exposure. A MEASUREMENT that has
+already happened, published with its method, is not.
+
+TIER 1 — HARD BANS. No exception. No approver, owner included, can clear
+one of these; they are removed on sight, and a run that finds one reports
+it and STOPS rather than weighing context.
+  1. Outcome guarantees of any kind, including conditional and
+     compliance-tied guarantees, until a separately approved wording
+     exists. DEFERRED-01 (the Executive Reset guarantee wording) STAYS
+     DEFERRED and is not that approved wording. See the note under
+     DEFERRED-01 in RESOLVED ITEMS: its replacement text is currently LIVE
+     on training-rates-san-diego, which this tier makes a violation.
+  2. Pounds, inches, or body-fat percentage paired with a timeframe AS AN
+     EXPECTED OR TYPICAL RESULT ("20-30 lbs in 4-6 months"). This is the
+     projection case. It is not the attributed-individual case, which is
+     TIER 2 item 2, and not the persona case, which is TIER 2 item 3.
+  3. Any statement that OmniFit diagnoses, treats, assesses, or manages a
+     MEDICAL CONDITION, or that a device is used to do so. "Assesses" is
+     new to this tier and is scoped to a medical condition: assessing
+     MOVEMENT is what OmniFit does and stays legal. Negations and referral
+     language stay legal and are the recommended form.
+  4. "Free consultation" framing, under any name for the first session.
+     The consultation is paid: 45 minutes, $30 refundable deposit.
+  5. A client's PHASE ANGLE value, its change over time, or any improvement
+     rate for it, presented as evidence of health. Phase angle may be NAMED
+     as a tracked marker and DESCRIBED as what the device measures; it may
+     not be REPORTED AS A RESULT. The line is description versus outcome,
+     not mention versus silence.
+  6. Population-level clinical claims attributed to OmniFit training
+     ("reduces blood pressure", "reverses insulin resistance"). A clinical
+     result rate published by a non-clinician is the exposure, and no
+     method note, sample size or disclaimer clears it. This is the one part
+     of the old clinical-statistic rule that survives intact, and it is the
+     reason TIER 2 item 1 does not simply permit every percentage.
+
+TIER 2 — PERMITTED WITH CONDITIONS. Not exceptions to a ban: these are
+legal, and become findings only when a stated condition is MISSING. A run
+reports the missing condition, never the content.
+  1. AGGREGATE MEASURED METRICS — adherence %, median strength change,
+     client rating, review count — are permitted when all three of these
+     are present ON THE SAME SURFACE as the figure:
+       (a) a stated METHOD: what was measured, sample size, period;
+       (b) the COMPANY-REPORTED / NOT-INDEPENDENTLY-AUDITED note;
+       (c) the INDIVIDUAL-RESULTS disclaimer.
+     REFERENCE FORM: the Results section of
+     how-we-measure-your-progress.html — each figure carries its own
+     method line, and one note block carries both (b) and (c). Copy that
+     shape rather than inventing another.
+     TIER 1 item 6 still governs: a clinical result rate is never an
+     aggregate measured metric, however well conditioned.
+  2. ATTRIBUTED INDIVIDUAL OUTCOMES in case studies are permitted with the
+     individual-results disclaimer ON THE SAME PAGE. Attribution is still
+     required - a named individual beside a role noun, or an explicit
+     anonymisation with a stated profile - and aggregate framing is still
+     never exempt. What is RELAXED against the old screen: the disclaimer
+     no longer has to sit in a dedicated block opening with the phrase.
+     That dedicated-block test was written to counsel's standard and is
+     withdrawn for this item.
+     FROZEN RECORDS: pages/case-studies.html and its byte-identical
+     duplicate pages/home-3.html are historical records, exempt from
+     re-screening entirely. They record measurements that happened.
+  3. PERSONA LANGUAGE without a timeframe ("sustainable fat loss of
+     20-30 lbs") is permitted, unchanged from the old screen.
+  4. DEVICE CAPABILITY LANGUAGE is permitted: what the Bodystat QuadScan
+     4000 measures - multi-frequency BIA, ICW/ECW separation, phase angle,
+     segmental analysis. Describing a capability is not claiming a clinical
+     result, and TIER 1 item 5 draws that line for phase angle
+     specifically.
+     The "Class IIa medical device" statement is a VERIFIED FACT and stays
+     BYTE-IDENTICAL wherever it appears, ALWAYS accompanied by the
+     not-a-medical-provider note. Both halves are conditions, and both are
+     checkable: a second, shorter wording of the fact is a finding even
+     though the fact is true, and the fact standing without its note is a
+     finding even though the wording is right.
+  5. ILLUSTRATIVE SAMPLE DATA is permitted when labelled "illustrative,
+     not client data" on the same surface. Unlabelled sample figures read
+     as measurements and are a finding.
+
+CARRIED OVER, NOT RE-TIERED
+- No Groupon/deal content.
+- No prenatal/postpartum content (uncertified). The owner's TIER 1 list did
+  not name this and the rewrite did not ask for it to go; it is kept under
+  TIER 1 item 3 as an uncertified-scope claim rather than dropped silently,
+  because dropping a live protection is not something a rewrite should do
+  by omission. This is a judgment call and it is WRONG IF the owner intends
+  prenatal/postpartum content to be publishable now - in which case item 3
+  should say so and the rule retires.
 
 EM-DASH RULES (voice preference, NOT a compliance issue)
 - Do not scan for em-dashes. Do not flag them. Do not include them in
@@ -281,59 +354,97 @@ A run reports (a) compliance strikes, (b) stale canon, (c) broken structure.
 Anything outside these is NOT a certification finding: report it as a
 judgment call if it needs a human decision, otherwise handle it silently.
 
-(a) COMPLIANCE STRIKES — shape-based, not just literal strings
-  · outcome guarantees: any form of "guarantee" within ~30 words of an
-    outcome promise (stronger, leaner, energized, more in control, lose,
-    fat loss, transformation, results, pounds, lbs, body fat, inches)
-  · lbs/pounds within ~15 words of a timeframe (day/week/month/year).
-    Persona language with NO timeframe stays legal
+(a) COMPLIANCE STRIKES — shape-based, not just literal strings.
+Every rule below names the tier it encodes. TIER 1 rules report a
+violation. TIER 2 rules report a MISSING CONDITION, and are written to
+check for the condition rather than to ban the content - a rule that flags
+conditioned Tier 2 copy is a defect in the rule, not a finding.
 
-    EXCEPTION - DOCUMENTED CASE STUDIES
-    Individual client results carrying a timeframe are exempt from
-    lbs-near-timeframe and result-paired-with-window WHEN ALL of the
-    following hold:
-      1. the result is attributed to a specific individual (named, or
-         explicitly anonymised with a stated profile), AND
-      2. the page carries the individual-results disclaimer IN A DEDICATED
-         BLOCK - its own paragraph or container, opening with the phrase.
-         A mention embedded in a caption, list item, table cell, or the tail
-         of a body paragraph does NOT qualify, AND
-      3. substantiation exists on file (training records, scan printouts,
-         or before/after photography).
-    The exemption is page-scoped, not site-wide. A case-study figure quoted
-    on a page WITHOUT the disclaimer is still a strike.
-    Aggregate or typical-results framing is NEVER exempt, on any page.
-    Approved by Andrew Flores, Sept 2026.
+  TIER 1 RULES
+  · guarantee_any (T1-1) - any form of "guarantee" in page copy. Widened
+    from the old "guarantee within ~30 words of an outcome word": Tier 1
+    bans guarantees of any kind, so proximity to an outcome word is no
+    longer what makes one. A guarantee stated as ABSENT ("no guarantee",
+    "reimbursement is not guaranteed") is the opposite of the banned shape
+    and is exempt on the preceding words only. <style> and <script> bodies
+    are not copy and are excluded.
+  · lbs_near_timeframe (T1-2) - pounds, inches or body-fat % within ~15
+    words of a quantified timeframe. Inches and body-fat % are new to this
+    rule. Exempt: TIER 2 item 2 (attributed individual, page disclaimer),
+    TIER 2 item 3 (no timeframe at all never matches), frozen records.
+  · uncertified_claims (T1-3) - asserting OmniFit diagnoses, treats,
+    prescribes, cures or rehabilitates; provides physical therapy or
+    chiropractic; ASSESSES OR MANAGES A MEDICAL CONDITION; or that a DEVICE
+    is used for any of those. The medical-condition object is REQUIRED on
+    the assess/manage shape, which is what keeps "we assess your movement"
+    legal. Negations and referral language are legal.
+  · prenatal_postpartum (T1-3, carried over) - unless an explicit
+    out-of-scope disclaimer or attributed to a partner via knowsAbout.
+  · free_consultation (T1-4) - "free" within ~6 words of any bookable first
+    session: consultation · assessment · screen · screening · session ·
+    diagnostic · call · intake. Unchanged.
+  · phase_angle_result (T1-5) - NEW. A phase angle value, delta or
+    improvement rate presented as evidence of health. Naming and describing
+    the marker is legal, which is why the rule keys off a NUMBER or a
+    change/improvement word beside "phase angle", not on the phrase.
+  · population_clinical_claim (T1-6) - NEW. A clinical outcome verb applied
+    to a clinical condition at population scope, attributed to OmniFit
+    training. Never clearable by a method note, sample size or disclaimer -
+    this is the part of the old clinical-statistic rule that survives.
 
-    Reasoning, recorded so it survives: an individual, attributed,
-    documented client outcome with substantiation on file is a different
-    object from a claim about what a prospective client can expect. The
-    first is a fact about a named person. The second is a projection. Only
-    the second is what the rule exists to prevent. This resolves the
-    contradiction between CANONICAL TRUTH (which records "Mark -17 lbs,
-    248->231, 4mo" as canonical fact) and this screen (which banned
-    lbs-near-timeframe outright); both could not hold.
-    Encoded in tools/certify.py, keyed off the DISCLAIMER TEXT PRESENT ON
-    THE PAGE, never off the filename - that is what makes condition 2
-    enforceable rather than decorative. Condition 3 is not machine-
-    checkable and remains a human warranty.
-    Condition 2 tightened Sept 2026: the first encoding accepted the phrase
-    anywhere on the page, which let how-we-measure-your-progress qualify off
-    a chart caption ("Sample layout only... individual results vary"). It now
-    requires a dedicated block. Pages carrying a qualifying disclaimer today:
-    case-studies (and its duplicate home-3) and
-    personal-trainer-over-50-san-diego. desk-worker-posture-pain no longer
-    qualifies - its disclaimer sits at the tail of a body paragraph. That
-    changed no finding, because the figure beside it was already a strike on
-    attribution grounds.
-  · free-consultation framing: "free" within ~6 words of any of
-    consultation · assessment · screen · screening · session ·
-    diagnostic · call · intake
-  · prenatal / postpartum content, unless it is an explicit out-of-scope
-    disclaimer
-  · uncertified specialty claims: asserting OmniFit diagnoses, treats,
-    prescribes, cures, rehabilitates, or provides physical therapy or
-    chiropractic. Negations and referral language are legal
+  TIER 2 CONDITION RULES
+  · aggregate_metric_conditions (T2-1) - REPLACES the old blanket
+    clinical_stat ban for non-clinical measured metrics. A percentage or
+    measured figure presented as an aggregate is a finding ONLY when the
+    surface is missing a method line, the not-independently-audited note,
+    or the individual-results disclaimer. The finding NAMES THE MISSING
+    CONDITION. Surface = the enclosing <section>, falling back to the page.
+  · class_iia_conditions (T2-4) - NEW. Every "Class IIa medical device"
+    instance must be byte-identical to the canonical wording AND carry the
+    not-a-medical-provider note on the same surface. Two separate findings.
+  · illustrative_label (T2-5) - NEW. Sample or example figures presented
+    without an "illustrative, not client data" label on the same surface.
+
+  WITHDRAWN WITH THE OLD SCREEN
+  · The DEDICATED-BLOCK disclaimer test for case studies. It required the
+    disclaimer to open its own p/div/aside/section/blockquote. TIER 2 item
+    2 asks only that the disclaimer be on the same page, so the test is
+    withdrawn for that item. It is NOT withdrawn from TIER 2 item 1, which
+    states its own three conditions.
+    Consequence recorded so it is not rediscovered as a surprise:
+    how-we-measure-your-progress and desk-worker-posture-pain both failed
+    the dedicated-block test and now pass the same-page test. Neither gains
+    an exemption from it on its own, because TIER 2 item 2 also requires
+    ATTRIBUTION, and both fail that independently.
+  · clinical_stat as a blanket ban on quantified figures near a clinical
+    word. Split: the population-scope clinical case is T1-6 and is
+    unchanged in force; everything else is T2-1 and is conditional.
+  · result_near_timeframe as an unconditional rule. It now exempts a
+    surface carrying the full TIER 2 item 1 conditions, because a measured
+    aggregate reported with its period IS a measurement with its method,
+    which is the thing this screen stopped treating as a claim.
+
+  EXCEPTION - ATTRIBUTED INDIVIDUAL OUTCOMES (TIER 2 item 2)
+  Individual client results carrying a timeframe are exempt from
+  lbs_near_timeframe and result_near_timeframe when:
+    1. the result is attributed to a specific individual (named beside a
+       role noun, or explicitly anonymised WITH a stated profile), AND
+    2. the page carries the individual-results disclaimer ANYWHERE on the
+       page. Relaxed Sept 2026 from a dedicated block, per TIER 2 item 2.
+    3. substantiation exists on file. Not machine-checkable; a human
+       warranty, unchanged.
+  Page-scoped, not site-wide. Aggregate or typical-results framing is NEVER
+  exempt, on any page. Fails CLOSED: anything the attribution test cannot
+  confirm stays a strike.
+  FROZEN: case-studies.html and home-3.html are exempt from re-screening.
+
+  Reasoning, recorded so it survives: an individual, attributed, documented
+  client outcome is a fact about a named person; a claim about what a
+  prospective client can expect is a projection. Only the projection is
+  what these rules exist to prevent. The same distinction is what moved
+  aggregate measured metrics from banned to conditional - a median with its
+  sample size and period is a record of what happened, and the conditions
+  are there to keep it readable as one.
 
 (b) STALE CANON
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
@@ -420,15 +531,30 @@ DEFERRED-01 · Executive Reset guarantee wording (rates page) · CLOSED Aug 2026
 - The (a) COMPLIANCE STRIKES exemption for this item is removed. The
   resolved text does not pair "guarantee" with an outcome word and needs no
   exemption; tools/certify.py no longer carries a DEFERRED_01 carve-out.
+- RE-OPENED Sept 2026 by the two-tier screen. TIER 1 item 1 bans outcome
+  guarantees OF ANY KIND, conditional and compliance-tied included, until a
+  separately approved wording exists, and names DEFERRED-01 as still
+  deferred. The wording above was cleared under the previous screen by
+  counsel who is no longer engaged; it is not owner-approved.
+  This entry stays in RESOLVED ITEMS because the RECORD of what was applied
+  in Aug 2026 is accurate and must not be rewritten. What changed is its
+  STANDING, not its history. The text is currently LIVE at
+  training-rates-san-diego.html:866 (callout), :967 (FAQ answer) and
+  training-rates-san-diego-header.html (the same answer in FAQPage), and
+  under the new tier all three are violations awaiting owner-approved
+  replacement wording. Reported by the Compliance Re-tier run, not fixed
+  there - that run was scoped to rules, not pages.
 
 RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
-- Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved by counsel (Andrew
-  Flores), who confirmed the current pricing is acceptable.
+- Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved Aug 2026 by the counsel
+  then engaged (no longer engaged), who confirmed the current pricing is
+  acceptable. Kept as the historical record of what actually cleared it;
+  the live gate for any new exposure is OWNER APPROVAL.
 - Outcome: the interim month-to-month-only rule is LIFTED. In-home
   Performance and Peak, individual and couples, may be sold and published
   as 3-month prepaid commitments.
 - The condition attached to that clearance is not a pricing limit. It is the
-  CONTRACT VALUE CHECK recorded under WORKFLOW RULES: contact counsel before
+  CONTRACT VALUE CHECK recorded under WORKFLOW RULES: owner approval before
   filing a client on a contract exceeding $4,400.
 - Original reasoning, retained: Cal. Civ. Code 1812.86 caps a single health
   studio services contract at $4,400, and OmniFit's own Couples Prepaid
@@ -439,7 +565,7 @@ RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
 
 PRICING-CHANGE CHECKLIST (kept live from the above; consult before repricing)
 - 3-month prepaid total = 3 x the 3-month monthly rate. Anything over $4,400
-  triggers the CONTRACT VALUE CHECK before a client is filed.
+  triggers the CONTRACT VALUE CHECK (owner approval) before a client is filed.
 - Current totals, highest first:
     In-home Peak individual      1,860 x 3 = 5,580   over
     In-home couples Performance  1,725 x 3 = 5,175   over
