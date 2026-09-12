@@ -8,10 +8,10 @@ REPO STATE (reconciled with disk, Sept 2026)
   disclosure, never before - fixing the name first hides a real structural
   check behind a filename mismatch.
 
-  CERTIFIED - 27 page/header pairs
-    10 territory pages: personal-trainer-4s-ranch, -carlsbad,
+  CERTIFIED - 28 page/header pairs
+    11 territory pages: personal-trainer-4s-ranch, -carlsbad,
       -carmel-valley, -del-mar, -encinitas, -fairbanks-ranch, -la-jolla,
-      -rancho-santa-fe, -santaluz, -solana-beach
+      -rancho-bernardo, -rancho-santa-fe, -santaluz, -solana-beach
     corrective-exercise-post-rehab · FAQs · how-it-works-pricing ·
       in-home-personal-trainer-san-diego · private-personal-trainer-san-diego
     the 9 Batch 3 pages: the-omnifit-method, how-we-measure-your-progress,
@@ -23,6 +23,16 @@ REPO STATE (reconciled with disk, Sept 2026)
     personal-trainer-over-50-san-diego - NEW, live as of Sept 2026, certified
       in the Scope Reconciliation run. Its header arrived misnamed
       (no -header suffix); renamed after its content certified clean.
+    glp-1-personal-training-san-diego - NEW, arrived on main in the paste-source
+      run (Sept 2026). Header is correctly named, is inside certify.py's glob,
+      carries WebPage/BreadcrumbList/Service/FAQPage, and its 7-question FAQPage
+      mirrors the page in count, order and text. Zero findings. Certified in the
+      Compliance Re-tier run.
+    personal-trainer-rancho-bernardo - NEW, arrived on main in the paste-source
+      run (Sept 2026), renamed from personal-trainer-in-rancho-bernardo. Carries
+      all four page invariants and its 7-question FAQPage mirrors. Zero findings.
+      It is the ELEVENTH territory page, which is why every invariant count in
+      this brief was one low until the Compliance Re-tier run.
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings, do not paste
     · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
@@ -38,6 +48,17 @@ REPO STATE (reconciled with disk, Sept 2026)
         3. the naming cannot be fixed until its content certifies, per the
            naming rule above.
       The page itself is live and is now linked from four hub pages.
+    · nutrition-coaching-san-diego - NEW, arrived on main in the paste-source
+      run (Sept 2026). The PAGE is clean and its FAQ mirrors its header exactly
+      (7 vs 7, count, order and text, verified by hand with tools/faq.py). It is
+      NOT certified for one reason only: its header is at
+      "pages/headers/nutrition-coaching-san-diego.header" - the extension is
+      .header, not .html, so certify.py's pages/**/*.html glob never sees it.
+      The pair is neither checked nor reported missing, exactly the couples
+      header's failure shape in a second form. Per the naming rule above the
+      rename waits until the content certifies - which it cannot, while the
+      file is invisible. Breaking that deadlock needs an owner decision, and
+      is reported, not taken, by this run.
     · about, contactform, desk-worker-posture-pain, hsa-fsa-personal-training
       - each has a header. desk-worker's header carries no FAQPage while its
       page has 6 FAQs: a real, reported mirror failure, not fixed.
@@ -337,22 +358,23 @@ judgment call if it needs a human decision, otherwise handle it silently.
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash ae388d31c0b6149e, header hash 7e5de5984b133663). Currently 11
-  pages and 11 headers.
-- Credentials block body: byte-identical on 10 pages (6492e3ca1545dc26,
+  (page hash ae388d31c0b6149e, header hash 7e5de5984b133663). Currently 12
+  pages and 12 headers.
+- Credentials block body: byte-identical on 11 pages (6492e3ca1545dc26,
   630 bytes)
-  — the 9 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
+  — the 10 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
   its own Meet Nemezio section instead.
-- Archetype card bodies (Section A): byte-identical × 10 pages
+- Archetype card bodies (Section A): byte-identical × 11 pages
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
-- 9-point screen section body (Section B): byte-identical × 10 pages
+- 9-point screen section body (Section B): byte-identical × 11 pages
   (hash ba590a09107ffda0; intro + nine <li> items + closing line, set by
   the Section A/B run). Hash changed legitimately in the Device Swap run
   (Sept 2026): the Body Composition <li> names the device, so retiring the
-  1500 MDD rewrote the same bytes on all ten pages. Previous value
-  bd73ea51bc9ec5eb. All ten pages still agree; certify.py reported no
-  invariant mismatch.
+  1500 MDD rewrote the same bytes on all eleven pages. Previous value
+  bd73ea51bc9ec5eb. All eleven pages still agree; certify.py reported no
+  invariant mismatch. (That run recorded "ten"; rancho-bernardo was already
+  on main and carrying the invariant, so the count was one low even then.)
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
