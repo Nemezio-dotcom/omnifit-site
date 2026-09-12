@@ -2706,3 +2706,304 @@ product with its own pricing ladder in CANON, and
 covers. Two cards, matching the existing `<article class="sv-card">` shape
 (icon, `h3`, one-sentence body, three `sv-card-features`, `sv-card-link`). Not
 built — this run adds links only.
+
+---
+
+# Device Swap Run — Bodystat 1500 MDD → Bodystat QuadScan 4000 (FUTURE-01)
+
+**Branch:** `claude/practical-pascal-k0qkjg`
+**Scope:** `pages/` and `pages/headers/`. `archive/` untouched.
+**Governing rule:** service descriptions change; historical measurements do not.
+
+## 1. Certification — before and after
+
+Identical in every category. The swap introduced no finding and resolved none.
+
+| | Before | After |
+|---|---|---|
+| (a) compliance strikes | 2 | 2 |
+| (b) stale canon | 25 | 25 |
+| (c) broken structure | 3 | 3 |
+| checks that could not run | 9 | 9 |
+| RESULT | `FAILED (2 · 25 · 3 · 9)` | `FAILED (2 · 25 · 3 · 9)` |
+
+All pre-existing and all on files outside this run's scope of change
+(`home-1`, `home-2`, `home-4`, `desk-worker-posture-pain`, `FAQs`,
+`how-it-works-pricing`, `private-personal-trainer-san-diego` `$150`,
+`training-rates-san-diego` `$175`/travel-fee, the three orphan headers, and the
+`couples` travel-fee false positive documented in `tools/README.md`).
+
+### Invariant hashes
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | `ae388d31c0b6149e` | `ae388d31c0b6149e` |
+| header pricing | `7e5de5984b133663` | `7e5de5984b133663` |
+| credentials | `6492e3ca1545dc26` | `6492e3ca1545dc26` |
+| archetypes | `6b1b0f4efbd4a72c` | `6b1b0f4efbd4a72c` |
+| 9-point screen | `bd73ea51bc9ec5eb` | **`ba590a09107ffda0`** |
+
+The 9-point screen hash changed **legitimately**. Its Body Composition `<li>`
+names the device:
+
+```
+<li>Bodystat Body Composition — medical-grade bioimpedance via the
+Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>
+```
+
+Ten pages carry that block byte-identically and all ten were rewritten the same
+way, so `certify.py` reported **no invariant mismatch** — the set it compares is
+still size 1. CANON.md's recorded hash is updated in the same commit, per the
+INVARIANTS rule.
+
+> **Checker gap, reported not fixed.** `tools/README.md` says the five
+> invariants are "compared against the hashes recorded in CANON.md".
+> `certify.py` does not read CANON.md at all (`tools/certify.py:437-446`): it
+> checks that every file agrees with every other file, then prints the hash. An
+> invariant edited *consistently* across all its files, with CANON left stale,
+> would pass silently. That is the repo's own documented failure shape — a check
+> that claims to compare and does not. Not fixed here on purpose: changing the
+> checker mid-run would mean the before and after hashes in the table above came
+> from two different checkers. **Wrong if** you would rather the tool fix landed
+> first and this run re-baselined against it.
+
+## 2. Replacements made, per file
+
+`BodyStat 1500 MDD` → `Bodystat QuadScan 4000` (64 instances, 33 files) and the
+remaining brand-casing corrections `BodyStat` → `Bodystat` (45 more).
+`BodyStat 1500 MDD Assessment` is covered by the same rule — the single instance
+(`body-composition-testing.html:124`) now reads
+`Bodystat QuadScan 4000 Assessment`.
+
+| File | Model swaps | Casing only |
+|---|---|---|
+| `pages/body-composition-testing.html` | 6 | 6 |
+| `pages/corrective-exercise-post-rehab.html` | 2 | 5 |
+| `pages/couples-personal-training-san-diego.html` | 0 | 1 |
+| `pages/home-2.html` | 3 | 2 |
+| `pages/in-home-personal-trainer-san-diego.html` | 1 | 1 |
+| `pages/personal-trainer-4s-ranch.html` | 1 | 4 |
+| `pages/personal-trainer-carlsbad.html` | 3 | 2 |
+| `pages/personal-trainer-carmel-valley.html` | 3 | 1 |
+| `pages/personal-trainer-del-mar.html` | 3 | 1 |
+| `pages/personal-trainer-encinitas.html` | 3 | 2 |
+| `pages/personal-trainer-fairbanks-ranch.html` | 3 | 2 |
+| `pages/personal-trainer-la-jolla.html` | 3 | 1 |
+| `pages/personal-trainer-rancho-bernardo.html` | 3 | 1 |
+| `pages/personal-trainer-rancho-santa-fe.html` | 1 | 2 |
+| `pages/personal-trainer-santaluz.html` | 3 | 2 |
+| `pages/personal-trainer-solana-beach.html` | 3 | 1 |
+| `pages/private-personal-trainer-san-diego.html` | 3 | 5 |
+| `pages/training-rates-san-diego.html` | 2 | 1 |
+| `pages/headers/body-composition-testing-header.html` | 5 | 1 |
+| `pages/headers/corrective-exercise-post-rehab-header.html` | 0 | 1 |
+| `pages/headers/home-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-4s-ranch-header.html` | 0 | 1 |
+| `pages/headers/personal-trainer-carlsbad-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-carmel-valley-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-del-mar-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-encinitas-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-fairbanks-ranch-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-la-jolla-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-rancho-bernardo-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-santaluz-header.html` | 1 | 0 |
+| `pages/headers/personal-trainer-solana-beach-header.html` | 1 | 0 |
+| `pages/headers/private-personal-trainer-san-diego-header.html` | 1 | 1 |
+| `pages/headers/training-rates-san-diego-header.html` | 2 | 1 |
+| **Total (33 files)** | **64** | **45** |
+
+**Casing: 109 `BodyStat` → `Bodystat` in total** (the 64 inside a model swap plus
+the 45 standing alone). Every occurrence in the repo used the same `BodyStat`
+spelling; there were no other variants to normalise.
+
+**`1500 MDD` standing alone, with no `BodyStat` prefix: zero instances.** The
+third replacement rule had nothing to act on anywhere in `pages/`. Verified by
+scanning for `1500 MDD` after the paired swap had run.
+
+## 3. Every `1500 MDD` reference left in place
+
+### Case study — intentional, do not change
+
+`pages/case-studies.html` and its byte-identical duplicate
+`pages/home-3.html` (sha256 `c82d5f32dc869381…`). Four references each, same
+line numbers in both files. Records of scans that happened on a 1500 MDD.
+Nothing was added to either file.
+
+| Line | Context |
+|---|---|
+| 28 | `ItemList` JSON-LD, Article 9 description: "Bioelectrical impedance analysis on a BodyStat 1500 MDD recorded 8.2 lbs of that gain as lean mass…" |
+| 600 | `<div class="comp-device">Bioelectrical impedance analysis<br>BodyStat 1500 MDD · baseline and week 12</div>` |
+| 619 | `<li>BodyStat 1500 MDD scans at baseline and week 12</li>` |
+| 623 | Quotable summary: "…Bioelectrical impedance analysis on a BodyStat 1500 MDD recorded 8.2 lb of that gain as lean mass — 77% of the total…" |
+
+Their brand casing was left as `BodyStat` too: the instruction was not to touch
+these two files, and a casing edit is still a touch. **Wrong if** you want the
+brand spelling corrected even inside a historical record; that is 8 further
+instances across the two files and no model name would move.
+
+### Ambiguous — needs a decision
+
+**`pages/home-2.html:14** — `- Quotable + FAQ + Body Composition card: BodyStat 1500 MDD flagship diagnostic added`
+
+A **v2 changelog entry** inside the page's build comment, recording what a past
+edit added. The body copy it describes (lines 189, 249, 345) *was* swapped; this
+line is a record of an editing event, not a service description. Left untouched
+because the same changelog demonstrably preserves superseded entries rather than
+rewriting them — two lines above it, `Cred chip: "ACE CES" → "ACE OES"` is kept
+with a `(superseded: … see v3)` annotation instead of being corrected. **Wrong
+if** you read the build comments as a live description of current page content
+rather than an append-only log; then it becomes a swap plus, ideally, a
+`(superseded: QuadScan 4000, Sept 2026)` note.
+
+**`pages/the-30-minute-executive-reset.html` (lines 18, 20, 482) and
+`pages/headers/the-30-minute-executive-reset-header.html` (line 107)** — 3 + 1
+`BodyStat` instances, 2 + 1 carrying `1500 MDD`. **Deferred, not swapped.**
+
+Three reasons, in order of weight:
+
+1. CANON REPO STATE puts this page under **"NOT YET CERTIFIED, do not paste"**
+   and is explicit that it "needs REFRESHING FROM LIVE, **not patching**: any run
+   that patches the repo copy would be editing a version the site has already
+   moved past." The header "has not been verified against a refreshed page."
+   `certify.py` skips both by name.
+2. Editing the header alone would break its FAQPage mirror against the page
+   (line 482 and header line 107 are the same answer). Editing both would be the
+   patch CANON forbids. They move together or not at all.
+3. Two of the three page instances sit inside an unresolved **RED-PEN FLAG**
+   (`B. VIRTUAL ASSESSMENT`) that asks the owner to confirm how virtual clients
+   are actually assessed. The device sentence there is a question to Nemezio, not
+   copy.
+
+**Wrong if** you intended the brief's "21 pages and 16 headers" as an
+instruction overriding CANON's carve-out for this file. It is one command to
+include it — say so and it lands, page and header together, in one commit.
+
+## 4. Class IIa — confirmed and carried over
+
+Two instances in the repo, and they are a mirrored pair:
+
+- `pages/training-rates-san-diego.html:972`
+- `pages/headers/training-rates-san-diego-header.html:389`
+
+Both now read "…a clinical-grade diagnostic session using the **Bodystat
+QuadScan 4000 (Class IIa medical device)** for body composition analysis…". The
+model name moved; the classification statement is byte-identical to before. No
+Class IIa statement was removed anywhere.
+
+Recorded in CANON.md under CANONICAL TRUTH as a verified factual claim with the
+same standing the 1500 MDD designation held: CE certification as a Class IIa
+medical device under MDD 93/42/EEC, plus FDA clearance, owner-confirmed
+Sept 2026.
+
+## 5. Header mirror verification — all 16
+
+Verified two ways: `certify.py`'s own mirror check (count, order **and** answer
+text, every `ld+json` block merged), and an independent re-check built on
+`tools/faq.py` run against each header's parsed FAQPage.
+
+| Header | FAQ pairs | Mirror | Device in header |
+|---|---|---|---|
+| `body-composition-testing` | 8 | OK | QuadScan 4000 |
+| `corrective-exercise-post-rehab` | 12 | OK | Bodystat, no model named |
+| `home` | — | **no page in repo** (orphan, pre-existing) | QuadScan 4000 |
+| `personal-trainer-4s-ranch` | 10 | OK | Bodystat, no model named |
+| `personal-trainer-carlsbad` | 7 | OK | QuadScan 4000 |
+| `personal-trainer-carmel-valley` | 7 | OK | QuadScan 4000 |
+| `personal-trainer-del-mar` | 7 | OK | QuadScan 4000 |
+| `personal-trainer-encinitas` | 7 | OK | QuadScan 4000 |
+| `personal-trainer-fairbanks-ranch` | 7 | OK | QuadScan 4000 |
+| `personal-trainer-la-jolla` | 7 | OK | QuadScan 4000 |
+| `personal-trainer-rancho-bernardo` | 7 | OK | QuadScan 4000 |
+| `personal-trainer-santaluz` | 7 | OK | QuadScan 4000 |
+| `personal-trainer-solana-beach` | 7 | OK | QuadScan 4000 |
+| `private-personal-trainer-san-diego` | 7 | OK | QuadScan 4000 |
+| `the-30-minute-executive-reset` | 8 | OK | 1500 MDD (deferred, see §3) |
+| `training-rates-san-diego` | 11 | OK | QuadScan 4000 |
+
+`home-header.html` has no `pages/home.html` to mirror — the homepage exists in
+this repo only as the `home-1..home-5` fragments. That is the pre-existing
+"no matching page" finding, unchanged by this run. Its device reference (a
+`Service` description at line 140) was swapped.
+
+The `the-30-minute-executive-reset` pair mirrors **because** both sides were left
+alone — which is the empirical form of reason 2 in §3.
+
+**The verifier was negative-tested.** Altering one word of one answer in
+`personal-trainer-del-mar.html` produced `MISMATCH: answers differ at [3]`. A
+green mirror row here means the check looked.
+
+## 6. TASK 4 — where the capability upgrade needs writing up
+
+Report only. No new copy was written and no capability or benefit copy was
+rewritten.
+
+The gap: the QuadScan is four-frequency (5/50/100/200 kHz) against the 1500 MDD's
+single 50 kHz, and it separates intracellular from extracellular water, reports
+Phase Angle, Prediction Marker (ECW/TBW), Body Cell Mass, FFMI, BFMI and
+segmental analysis. Practically, a weight change can now be **attributed** to
+muscle, fat or fluid rather than inferred. Current copy nowhere says this.
+
+### Primary — a capability description exists and is now understated
+
+**`pages/body-composition-testing.html`** — the page whose entire job is this.
+Six locations, quoted as they now stand:
+
+- **L136** (definitional lede): "OmniFit Performance provides body composition testing in San Diego using the Bodystat QuadScan 4000, a medical-grade bioimpedance device, at the studio inside Teqneeq FHC … The $110 Performance Diagnostic **measures fat mass, lean mass, and hydration markers**, and includes a 9-point movement screen. … Follow-up rescans every 4–8 weeks track whether weight change is coming from fat or muscle — including for clients on GLP-1 medications."
+  The last sentence is the QuadScan's actual selling point and is currently
+  written as an aspiration the 1500 MDD could only approximate.
+- **L147**: "The scale reports one number and hides everything that matters. … The Bodystat separates the signal from the noise."
+- **L179 / L185** (comparison table): heading "Bodystat vs. DEXA vs. Gym Scales"; highlighted column "Bodystat QuadScan 4000". The table's feature rows are where four-frequency, ICW/ECW and Phase Angle would earn their place against DEXA.
+- **L233**: "DEXA remains the research gold standard for a single snapshot. Where the Bodystat wins is consistency and context: the same calibrated device, the same protocol, interpreted by the same coach who writes your program — every 4–8 weeks."
+- **L310** (FAQ): "The Performance Diagnostic is $110 and includes the Bodystat QuadScan 4000 body composition scan, a 9-point movement screen, and expert interpretation of your results."
+- **L313–314** (FAQ, the definitional answer): "**What is the Bodystat QuadScan 4000?**" — "…a medical-grade bioelectrical impedance analysis (BIA) device that measures body composition by passing a safe, imperceptible electrical signal through the body. It reports fat mass, lean mass, total body water, **intracellular and extracellular water balance, and phase angle — a cellular health marker**. It's the same class of device used in clinical and research settings, not a consumer gym kiosk."
+- **L318** (FAQ, vs DEXA): "The Bodystat uses bioimpedance — no radiation — and **adds hydration and cellular data DEXA doesn't measure**."
+
+> **Flag worth the owner's attention.** L314 and L318 already claim ICW/ECW
+> separation and Phase Angle. A single-frequency 50 kHz 1500 MDD cannot produce
+> either. That copy was ahead of the device it named; the QuadScan makes it true.
+> Nothing to fix — but it means the rewrite is a promotion of existing claims to
+> the front of the page, not the introduction of new ones, and any competitor
+> comparison built on it is now defensible where it previously was not.
+
+**`pages/how-we-measure-your-progress.html`** — names **no device at all**, and
+its body-composition metric is the weakest line on the page:
+
+- **L184**, Category 01 of 12: "**Body Composition** — Tape measurements at 7 sites, body fat estimates, and circumference tracking. We never rely on scale weight alone — because gaining muscle while losing fat doesn't always move the number."
+  "Tape measurements and body fat estimates" describes a caliper-and-tape
+  workflow, not a Class IIa BIA device. This is the single highest-value rewrite
+  on the list.
+- **L168**: "OmniFit tracks twelve measures across seven categories for every client: body composition, strength benchmarks, posture assessment scores, mobility function tests, session adherence rate, nutrition compliance, and subjective well-being."
+- **L200** (sample progress report row): `Body Composition` / "Weight & body-fat %" — the report layout has one row where the QuadScan supports several.
+- **L237** (comparison table): "Standardized metrics — ✓ 12 metrics tracked monthly" vs "Scale weight only".
+
+### Secondary — shorter capability lines, same understatement
+
+| File | Line | Current wording |
+|---|---|---|
+| `pages/the-omnifit-method.html` | 224 | "**Body Composition** — Tape measurements, body fat estimates, and circumference tracking — because the scale alone tells an incomplete story." (same tape-and-calipers framing as `how-we-measure`) |
+| `pages/home-2.html` | 249 | "**Bodystat Body Composition** — Medical-grade bioimpedance analysis via the Bodystat QuadScan 4000: lean mass, fat mass, and hydration, plus circumference tracking. The scale alone tells an incomplete story; this doesn't." |
+| `pages/glp-1-personal-training-san-diego.html` | 195 | "Bioelectrical impedance analysis separates fat mass from lean mass. On a GLP-1 that distinction is the entire point, and a bathroom scale cannot make it." — names no device; the GLP-1 muscle-sparing argument is exactly what four-frequency ICW/ECW data supports |
+| `pages/corrective-exercise-post-rehab.html` | 676, 807, 809 | "45-minute movement and postural assessment paired with a Bodystat QuadScan 4000 body composition diagnostic"; "Bodystat diagnostics, posture photos, strength benchmarks…"; "`<li>Bodystat QuadScan 4000 baseline & rescans</li>`" |
+| `pages/training-rates-san-diego.html` | 284 | "Clinical-grade body composition analysis (Bodystat QuadScan 4000), movement screening, blood pressure, SpO2, and grip strength." |
+| 10 territory pages + `in-home-personal-trainer-san-diego` | the 9-point screen `<li>` | "Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration" — **this is an invariant block**; rewriting it means rewriting all ten identically and updating the 9-point hash in CANON.md in the same commit |
+| 9 territory pages | the "What is the Performance Diagnostic?" FAQ | "…uses the Bodystat QuadScan 4000, a medical-grade bioimpedance device, to establish your body composition baseline: fat mass, lean mass, and hydration markers." — **mirrored into 9 headers**; page and header must move together |
+| `pages/private-personal-trainer-san-diego.html` | 345 | comparison-table cell "✓ Bodystat QuadScan 4000" |
+
+### Two structural constraints on whoever writes the replacements
+
+1. **The 9-point screen `<li>` is a five-invariant item.** Ten pages carry it
+   byte-identically. Any capability rewrite touching it is a ten-file edit plus a
+   CANON hash update, or it fails certification.
+2. **Nine territory FAQ answers are mirrored into nine headers**, as is
+   `body-composition-testing` (8 pairs), `training-rates-san-diego` (11) and
+   `private-personal-trainer-san-diego` (7). Page and header are one edit.
+
+### Compliance note for the rewrite, not a finding here
+
+Phase Angle is marketed as a "cellular health / membrane integrity" marker.
+Under CANON's COMPLIANCE SCREEN, **a figure or percentage attached to a
+clinical result is banned outright** — "a non-clinician publishing a clinical
+result rate is the exposure, not the timeframe". Describing what the device
+measures is safe. Publishing a client's phase angle as evidence of improved
+health, or any phase-angle improvement rate, would not be. Worth settling before
+copy is commissioned rather than after.
