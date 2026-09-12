@@ -115,7 +115,7 @@ def guarantee_any(text, window=12):
                     t[max(0, m.start()-100):m.end()+140].strip()))
     return out
 
-# ─── DOCUMENTED CASE-STUDY EXCEPTION (Andrew Flores, Sept 2026) ────
+# ─── ATTRIBUTED INDIVIDUAL OUTCOMES (owner approval; CANON TIER 2 item 2) ──
 # CANON's CANONICAL TRUTH records documented client figures WITH timeframes as
 # canonical fact while the COMPLIANCE SCREEN banned lbs-near-timeframe outright.
 # Resolution: an individual, attributed, documented client outcome with

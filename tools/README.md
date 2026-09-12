@@ -154,71 +154,87 @@ only multi-block header in the repo; fixing it changed exactly one pair's status
 and no others. Negative-tested both ways: a matching second-block FAQPage
 mirrors, an altered one still flags.
 
-## Compliance rules (a)
+## Compliance rules (a) — the two tiers
 
-- **outcome guarantees** — "guarantee" within ~30 words of an outcome promise.
-- **lbs near a timeframe** — a pounds figure within ~15 words of a *quantified*
-  window. Bare duration nouns ("after years of inactivity") do not count. A
-  timeframe preceded within two words by a contrastive marker ("unlike 6-week
-  challenges") is exempt, but every other timeframe in the window is still
-  checked, so `Lose 20-30 lbs in 6 months, not a 6-week challenge` still flags.
-- **free-framing** — "free" within ~6 words of any bookable first session:
-  consultation · assessment · screen · screening · session · diagnostic ·
-  call · intake. Widened Aug 2026 after the literal `consultation`-only version
-  passed `free 45-minute assessment`. Two exemptions, both tested: `feel free`
-  (idiom, only when "feel" immediately precedes) and hyphenated compound
-  adjectives (`distraction-free`, `injury-free`, `pain-free`) — a real offer is
-  written unhyphenated.
-- **prenatal / postpartum** — exempt when attributed to a partner via
-  `knowsAbout` markup, or inside an explicit out-of-scope disclaimer.
-- **uncertified specialty claims** — asserting OmniFit diagnoses, treats,
-  prescribes, cures, rehabilitates, or provides physical therapy or
-  chiropractic. Negations and referral language are legal. Note `\b` boundaries
-  on the negation list: without them, a bare `no` matched inside "diag**no**se"
-  and exempted every genuine claim — a rule failing open.
-- **quantified clinical outcome statistics** — a percentage attached to a
-  clinical result (pain, injury, recovery, healing, rehab, range of motion)
-  *with* an outcome framing (reduced, improved, relief…). Behavioural and
-  business stats are not clinical and stay: adherence, compliance, rating,
-  reviews. Process statements ("100% of clients get an injury screen") lack the
-  outcome framing and pass.
-- **results promised within a window** — the general case of the lbs rule, in
-  any units. Results must be framed against the client's own baseline, never a
-  calendar. Negation is checked on the **preceding** words only, so a trailing
-  "…and we don't cut corners" cannot exempt a real promise.
-- **DOCUMENTED CASE-STUDY EXCEPTION** (Andrew Flores, Sept 2026) — the only
-  exemption on `lbs_near_timeframe` and `result_near_timeframe`. CANON's
-  CANONICAL TRUTH recorded documented client figures *with* timeframes as
-  canonical fact while the compliance screen banned that shape outright; both
-  could not hold. An attributed, documented individual outcome is a fact about
-  a named person; a claim about what a prospective client can expect is a
-  projection, and only the projection is what the rule prevents.
-  Three gates, all in `_case_study_exempt()`:
-  1. **attribution** — a named client beside a role noun (`Mark ·`,
-     `Annie, a registered nurse`, `Dave Rendo, owner of…`), or an explicit
-     anonymisation *with a stated profile* (`Anonymized client · Male, 29`).
-     Bare "anonymized client" is not enough. The role noun is required: without
-     it, `San Diego, lost 27 pounds` would read as an attribution and condition
-     1 would be decorative.
-  2. **page disclaimer** — `_has_results_disclaimer()` requires a **dedicated
-     block** (`p` / `div` / `aside` / `section` / `blockquote`) whose text
-     *opens* with "individual result(s)" and carries a variation clause
-     (vary / depend / not a projection) within 40 words. **Keyed off the
-     disclaimer text on the page, never off the filename** — that is what makes
-     condition 2 enforceable. The same figure on a page without the disclaimer
-     is still a strike. Tightened Sept 2026: the first version accepted the
-     phrase anywhere, so a chart caption on how-we-measure-your-progress
-     ("Sample layout only… individual results vary") qualified the whole page.
-     `li`, `td`, `th`, `caption`, `figcaption` and `small` are excluded by not
-     being on the block list; a phrase appearing partway through a sentence is
-     excluded by the opens-with test. Fourteen fixtures, both directions.
-  3. **not aggregate** — `typical`, `average`, `most clients`, `you can expect`
-     and friends within the window are never exempt, on any page.
-  Condition 3 of CANON's exception (substantiation on file) is not
-  machine-checkable and remains a human warranty.
-  Fails **closed**: anything the attribution test cannot confirm stays a strike.
-  Negative-tested in all four required directions plus four more — see the
-  Sept 2026 entry in REPORT.md.
+Rewritten Sept 2026 when outside counsel disengaged and the owner became the
+sole compliance decision-maker. The old screen was aimed at projections and
+caught measured facts in the same net; the owner judged that a mistake. See
+CANON **COMPLIANCE SCREEN — TWO TIERS**.
+
+**TIER 1 rules report a violation. TIER 2 rules report a MISSING CONDITION.**
+A Tier 2 rule that flags conditioned copy is a defect in the rule, not a
+finding — that inversion is the single most important thing to keep straight
+when editing this file.
+
+| # | Rule | Tier | Status |
+|---|---|---|---|
+| 1 | `guarantee_any` | T1-1 | **changed** — any guarantee, not just one near an outcome word |
+| 2 | `lbs_near_timeframe` | T1-2 | **changed** — inches and body-fat % added; disclaimer relaxed to same-page |
+| 3 | `result_near_timeframe` | T1-2 | **changed** — same-page disclaimer; conditioned surfaces exempt |
+| 4 | `uncertified_claims` | T1-3 | **changed** — assess/manage a medical condition, and device-used-to |
+| 5 | `prenatal_postpartum` | T1-3 | unchanged — carried over, see CANON's note |
+| 6 | `free_consultation` | T1-4 | unchanged |
+| 7 | `phase_angle_result` | T1-5 | **new** |
+| 8 | `population_clinical_claim` | T1-6 | **new** — the surviving half of `clinical_stat` |
+| 9 | `aggregate_metric_conditions` | T2-1 | **new** — replaces `clinical_stat`'s blanket ban |
+| 10 | `class_iia_note` + cross-file wording | T2-4 | **new** |
+| 11 | BANNED literal terms | (b) | unchanged — stale canon, not the compliance screen |
+| 12 | travel-fee adjacency | (b) | unchanged — and still carries its known defect, below |
+| 13 | `$150`/`$175` context | (b) | unchanged |
+| 14 | tag balance · ld+json validity | (c) | unchanged |
+| 15 | LocalBusiness `@id` · `about` reference · FAQ mirror · orphan page | (c) | unchanged |
+| 16 | invariant mismatch · canon hash stale | (c) | unchanged |
+| — | `clinical_stat` | **RETIRED** | split into 8 (hard ban, force unchanged) and 9 (conditional). Nothing is lost: the population-scope clinical case it existed for is 8. |
+| — | dedicated-block disclaimer test | **RETIRED for T2-2** | written to counsel's standard; T2-2 asks only for a same-page disclaimer. Still governs nothing else — T2-1 states its own three conditions. |
+
+### What the tiers changed, rule by rule
+
+- **`guarantee_any` (T1-1).** The old rule required an outcome word within ~30
+  words. The DEFERRED-01 replacement wording passes that test *by design* — it
+  was written not to pair "guarantee" with an outcome — and Tier 1 bans
+  guarantees of any kind. Negation is still read, on the preceding words only,
+  so `Reimbursement is not guaranteed` on hsa-fsa stays legal.
+- **`lbs_near_timeframe` (T1-2).** Inches and body-fat percentage added.
+  Condition 2 of the case-study exemption relaxed from a dedicated block to
+  anywhere on the page. Attribution and the never-exempt aggregate test are
+  untouched, which is why neither how-we-measure-your-progress nor
+  desk-worker-posture-pain gains an exemption from the relaxation — both fail
+  attribution on their own.
+- **`uncertified_claims` (T1-3).** "Assesses" and "manages" are new and are
+  **scoped to a medical condition**. Unscoped they would flag "every client
+  starts with a movement assessment" across most of the site — a rule failing
+  closed so hard it stops being read.
+- **`aggregate_metric_conditions` (T2-1).** The rule that carries the point of
+  the rewrite. A figure presented as an aggregate is a finding **only** when
+  its surface is missing a method line, the not-independently-audited note, or
+  the individual-results disclaimer, and the finding names which. Surface = the
+  innermost enclosing `<section>`, falling back to the page. The fixture is the
+  Results section of `how-we-measure-your-progress.html`: it passes with all
+  three present and flags with any one removed.
+  The machine-checkable half of "method" is sample size **and** period. "What
+  was measured" is prose beside the figure and stays a human warranty, like
+  substantiation in T2-2 — stated here so nobody later reads a green result as
+  proof the method line is good.
+- **`class_iia_note` (T2-4).** Two conditions, two findings. Per-file: the fact
+  must sit beside the not-a-medical-provider note. Cross-file: one
+  byte-identical wording everywhere, collected in `run()` the way an invariant
+  is, because that is the shape of the check.
+
+### Three defects this rewrite introduced, and how they surfaced
+
+Recorded because each is a shortcut the next editor will also reach for, and
+none was caught by reading the code.
+
+| Shortcut | What broke | Caught by |
+|---|---|---|
+| Strip `<script>` bodies as "not copy" | A header file **is** one `ld+json` block. Every header went blank and ten rules reported nothing on it — the null overwrite in a new costume | the widened guarantee rule going silent on `training-rates-san-diego-header` |
+| Add `"` as an inch unit | Every ld+json price (`"325.00"`) read as `00 inches`: 20 invented findings across three headers | running the suite and reading the output |
+| `\bmedical condition\b` | Does not match "medical condition**s**" — the device rule passed the exact sentence T1-3 names | the negative test, not the regex |
+
+Thirty-eight negative tests were run across the changed and new rules, both
+directions on each. Two failed on the first pass: the plural above (a real
+bug) and one badly written fixture (it removed one of the two audit phrases and
+expected a flag).
 
 ## Stale-canon rules (b)
 
