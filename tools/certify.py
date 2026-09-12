@@ -293,6 +293,66 @@ def _norm(x):
     artifact of extraction, not a mirroring failure."""
     return re.sub(r'\s+([.,;:])', r'\1', re.sub(r'\s+', ' ', x or '')).strip()
 
+class CanonParseFailure(Exception):
+    """CANON.md's INVARIANTS block could not be read. Raised rather than
+    returning an empty dict: an empty recorded-hash table would make every
+    comparison below vacuously true, which is the null-overwrite shape this
+    check exists to close."""
+
+# CANON.md records the five invariant hashes in prose, each on its own `- `
+# bullet of the INVARIANTS block. Parsed, never hard-coded: a copy of the
+# hashes in this file would be a second place to forget to update, and the
+# whole point of the check is that CANON is the single recorded source.
+#
+# Each entry is (bullet anchor, hash pattern) and BOTH are matched inside ONE
+# bullet. An earlier version searched the whole block with `.*?` under re.S,
+# which let a mangled hash match forward into the NEXT bullet's hash and report
+# a neighbouring invariant's value as its own - a parser failing open, exactly
+# the shape this check exists to close. Caught by negative-testing a blanked
+# archetypes hash, which "parsed" as the 9-point value.
+CANON_HASH_PATTERNS = {
+    "page pricing":   (r'Canonical pricing FAQ answer:', r'\bpage hash\s+([0-9a-f]{8,64})\b'),
+    "header pricing": (r'Canonical pricing FAQ answer:', r'\bheader hash\s+([0-9a-f]{8,64})\b'),
+    "credentials":    (r'Credentials block body:',       r'\(([0-9a-f]{8,64})\s*,'),
+    "archetypes":     (r'Archetype card bodies',         r'\(hash\s+([0-9a-f]{8,64})\s*;'),
+    "9-point":        (r'9-point screen section body',   r'\(hash\s+([0-9a-f]{8,64})\s*;'),
+}
+
+def canon_hashes(path="CANON.md"):
+    """The five invariant hashes as CANON.md records them.
+
+    Returns (hashes, problems): hashes maps invariant name -> recorded hex
+    string, problems lists the names whose recorded value could not be read.
+    A name that cannot be parsed is reported, never defaulted - an invariant
+    with no recorded hash is an UNVERIFIED invariant, not a matching one."""
+    try:
+        text = open(path).read()
+    except OSError as e:
+        raise CanonParseFailure(f"cannot read {path}: {e}")
+    m = re.search(r'^INVARIANTS\b.*?(?=^[A-Z][A-Z0-9 ,/&-]+$)', text, re.S | re.M)
+    if not m:
+        raise CanonParseFailure(f"no INVARIANTS block found in {path}")
+    bullets = re.split(r'^- ', m.group(0), flags=re.M)[1:]
+    hashes, problems = {}, []
+    for key, (anchor, rx) in CANON_HASH_PATTERNS.items():
+        owning = [b for b in bullets if re.search(anchor, b, re.I)]
+        if len(owning) != 1:
+            problems.append(key); continue      # absent, or ambiguous across bullets
+        hit = re.search(rx, owning[0], re.S | re.I)
+        if hit: hashes[key] = hit.group(1).lower()
+        else:   problems.append(key)
+    if not hashes:
+        raise CanonParseFailure(
+            f"INVARIANTS block found in {path} but not one of the five hashes parsed")
+    return hashes, problems
+
+def canon_hash_matches(recorded, computed):
+    """CANON records some hashes truncated (credentials as `6492e3ca`, the rest
+    at 16 hex). Compare on the recorded prefix: a shorter recorded value is a
+    weaker check, not a mismatch. CANON_HASH_PATTERNS requires >= 8 hex chars,
+    so the prefix is never trivially short."""
+    return computed[:len(recorded)] == recorded
+
 def run():
     # archive/ is retired content kept as a historical record - never globbed,
     # never certified, never corrected. See CANON REPO STATE.
@@ -357,6 +417,17 @@ def run():
 
     print("\n### (c) BROKEN STRUCTURE")
     inv={}; notrun=[]
+    # The hashes CANON.md records, read once per run. A parse failure is
+    # recorded, never swallowed: with no recorded table the comparison below
+    # would pass vacuously on every invariant.
+    try:
+        canon_rec, canon_unparsed = canon_hashes()
+    except CanonParseFailure as e:
+        # One loud line rather than five: it already says every invariant went
+        # uncompared, and the hash table below prints NOT RECORDED for each.
+        canon_rec, canon_unparsed = {}, []
+        notrun.append(f"CANON.md invariant hashes NOT READ - {e}; "
+                      f"no invariant was compared against its recorded value")
     for f in files:
         s=open(f).read()
         p=_P(); p.feed(s)
@@ -437,13 +508,39 @@ def run():
         if sm: inv.setdefault("9-point",set()).add(hashlib.sha256((sm.group(1)+"".join(re.findall(r'<li>(.*?)</li>',sm.group(2)))+sm.group(3)).encode()).hexdigest()[:16])
     for k,v in inv.items():
         if len(v)!=1: print(f"   [invariant mismatch] {k}: {v}"); C+=1
+    # Two distinct failures, deliberately reported as two finding classes.
+    # [invariant mismatch]  - the files carrying an invariant disagree with
+    #                         EACH OTHER.
+    # [canon hash stale]    - the files agree, and what they agree on is not
+    #                         what CANON.md records. Files agreeing with one
+    #                         another proves only that an edit was applied
+    #                         consistently; until this run, a consistently
+    #                         edited invariant sailed past with a stale CANON
+    #                         value and nothing said a word. Same shape as the
+    #                         null overwrite: a comparison that never looked at
+    #                         the thing it claimed to check.
+    for k in ("page pricing","header pricing","credentials","archetypes","9-point"):
+        v=inv.get(k); rec=canon_rec.get(k)
+        if rec is None or not v: continue     # reported under CHECKS THAT COULD NOT RUN
+        if not any(canon_hash_matches(rec, c) for c in v):
+            got = ' '.join(sorted(v))
+            how = "files agree on" if len(v)==1 else "files disagree; none of"
+            print(f"   [canon hash stale] {k}: {how} {got}, CANON.md records {rec}"); C+=1
     print("   none" if not C else f"   {C} problem(s)")
 
-    print("\n### INVARIANT HASHES (CANON.md records these; five expected)")
+    print("\n### INVARIANT HASHES (computed, vs the value recorded in CANON.md)")
     for k in ("page pricing","header pricing","credentials","archetypes","9-point"):
-        v=inv.get(k)
-        print(f"   {k:16} {'MISSING - not found on any file' if not v else ' '.join(sorted(v))}")
+        v=inv.get(k); rec=canon_rec.get(k)
+        got = 'MISSING - not found on any file' if not v else ' '.join(sorted(v))
+        if rec is None:   note = "CANON: NOT RECORDED - not compared"
+        elif not v:       note = f"CANON: {rec} - not compared"
+        elif any(canon_hash_matches(rec, c) for c in v): note = f"CANON: {rec}  ok"
+        else:             note = f"CANON: {rec}  STALE"
+        print(f"   {k:16} {got:24} {note}")
         if not v: notrun.append(f"invariant '{k}' matched no file - hash not verified")
+        if k in canon_unparsed:
+            notrun.append(f"invariant '{k}' has no parseable hash in CANON.md - "
+                          f"computed value not compared against any recorded value")
 
     # NOT a fourth certification category: these are checks that could not be
     # applied, reported so a green result can never mean "nothing was looked at".
