@@ -3007,3 +3007,238 @@ result rate is the exposure, not the timeframe". Describing what the device
 measures is safe. Publishing a client's phase angle as evidence of improved
 health, or any phase-angle improvement rate, would not be. Worth settling before
 copy is commissioned rather than after.
+
+
+# Checker hardening — CANON hash comparison (Sept 2026)
+
+**Branch:** `claude/zealous-maxwell-8zrfi5`
+**Commit:** `e59f782`
+**Scope:** `tools/certify.py` only. No page or header touched.
+
+## The gap
+
+`tools/README` stated the five invariants were "compared against the hashes
+recorded in CANON.md". They were not. `certify.py` asserted only that the files
+carrying each invariant agreed with **each other** — it never opened CANON.md.
+
+An invariant edited consistently across all its pages therefore passed in
+silence while CANON still recorded the old hash. Same shape as the null
+overwrite: a comparison reporting success without looking at the thing it
+claimed to check.
+
+## What changed
+
+The five hashes are parsed out of CANON's INVARIANTS block and compared. Two
+finding classes, both category (c), because they mean different things:
+
+| Finding | What is true |
+|---|---|
+| `[invariant mismatch]` | the files carrying the invariant disagree with each other |
+| `[canon hash stale]` | the files agree, and what they agree on is not what CANON records |
+
+Parsed, never hard-coded — a copy in the tool would be a second place to forget
+to update. Anchor and hash pattern are matched inside **one `- ` bullet**.
+
+## A defect the negative testing caught
+
+The first version searched the whole INVARIANTS block with `.*?` under `re.S`.
+A blanked hash matched forward into the **next** bullet and reported a
+neighbouring invariant's value as its own — a parser failing open, in the exact
+shape the check exists to close. Found by blanking the archetypes hash, which
+"parsed" as the 9-point value.
+
+Fails loudly: an unreadable CANON.md, a missing INVARIANTS block, or a block
+where not one hash parses raises `CanonParseFailure`; `run()` catches it and
+records the run under CHECKS THAT COULD NOT RUN, so an invariant that was never
+compared can never read as one that matched.
+
+## Certification
+
+Unchanged in every category: `FAILED (compliance 2 · stale canon 25 ·
+structure 4 · not-run 9)`. Zero canon-hash-stale findings — all five matched.
+
+Negative test, verbatim, with the recorded 9-point hash altered:
+
+```
+[canon hash stale] 9-point: files agree on bd73ea51bc9ec5eb, CANON.md records ba590a09107ffda0
+```
+
+Reverted; `git diff HEAD -- CANON.md` empty.
+
+## Reported and not fixed
+
+Structure was **4, not 3** — before this change and after. The extra finding,
+`how-we-measure-your-progress-header [FAQPage answers do not mirror page]
+differing index=[0]`, arrived with `08d314e`, one of 24 paste-source commits
+that landed after the Link Graph Repair run recorded 3. Out of scope for a
+checker commit; fixed in the next run.
+
+
+# Device Swap merge + mirror repair (Sept 2026)
+
+**Branch:** `claude/zealous-maxwell-8zrfi5`
+**Commits:** `cfe6524` (merge) · `0c3e614` (mirror) · `189320e` (generator) ·
+`ebf0cfa` (CANON) · `2e0397f` (README)
+
+## The merge
+
+`claude/practical-pascal-k0qkjg` merged in: 33 per-file device-swap commits
+(Bodystat 1500 MDD → Bodystat QuadScan 4000, `Bodystat` casing), its CANON.md
+device and 9-point hash update, and its REPORT entry.
+
+**Zero conflicts, and none were possible.** The swap branch was cut from
+`cab1555` — 23 commits into the 24-commit paste-source run — so it was *built
+on* the paste-source content rather than diverging from it. The two sides touch
+disjoint file sets. Every swapped file already carried paste-source content plus
+the swap's device naming, which is the resolution a conflict rule would have
+had to reach by hand.
+
+## Mirror repair — the seam between two runs
+
+`how-we-measure-your-progress-header` failed the answer mirror at index 0. The
+cause was two runs each doing half:
+
+- paste-source `08d314e` refreshed the **page** from live, already carrying the
+  new device wording;
+- the Device Swap branch swapped the device everywhere it looked, and never
+  touched this pair.
+
+Neither run was wrong on its own. The mirror broke in the gap between them.
+
+Regenerated with `tools/mkheaders.py` rather than hand-edited, so the header
+stays mechanically derived from the page. It rewrote exactly one answer. Page
+not edited. `faq.py`: 6 vs 6, questions, order and answers all mirroring.
+
+## A generator that would have reverted the swap
+
+The post-merge grep for `1500 MDD` and `BodyStat` covered `tools/`, not just
+`pages/` — which is how it found `tools/mkheaders.py:23-24` still carrying
+`BodyStat 1500 MDD` in the body-composition-testing title and meta description.
+That file **generates** `body-composition-testing-header.html`, so the next
+`python3 tools/mkheaders.py` would have regenerated it and silently reverted the
+swap on both strings.
+
+Not a merge regression: the swap branch never touched `tools/`, so it was missed
+there and the merge only made it visible. Fixed; the header now regenerates
+byte-identically.
+
+## Certification
+
+| | (a) | (b) | (c) | not-run |
+|---|---|---|---|---|
+| Before | 2 | 25 | 4 | 9 |
+| After | 2 | 25 | **3** | 9 |
+
+No finding moved in (a) or (b), verified by diffing full finding lists against a
+worktree at `e59f782`. The only textual change is one excerpt reading `Bodystat`
+instead of `BodyStat`.
+
+Invariants, all five ok. The credentials entry was widened from `6492e3ca` to
+the full `6492e3ca1545dc26`, closing the prefix-comparison weakness.
+
+
+# Compliance Re-tier run — two tiers, owner approval (Sept 2026)
+
+**Branch:** `claude/zealous-maxwell-8zrfi5`
+**Scope:** CANON.md and `tools/` only. **No page or header edited.**
+
+## Why
+
+Outside counsel is no longer engaged. The owner (Nemezio) is the sole
+compliance decision-maker, and has judged the previous screen wrong in a
+specific way: written to counsel's standard, it stripped true measured metrics
+along with the projections it was aimed at.
+
+The rewrite turns on one distinction. A **projection** of what a prospective
+client can expect is the exposure. A **measurement** that already happened,
+published with its method, is not.
+
+## TASK 0 — scope reconciliation
+
+Every invariant count was one low, from a single cause:
+`personal-trainer-rancho-bernardo` is an **eleventh** territory page carrying
+all four page invariants, landed by paste, never reconciled.
+
+| Line | Before | After |
+|---|---|---|
+| CERTIFIED header | 27 page/header pairs | **28** |
+| territory list | 10 territory pages | **11**, `-rancho-bernardo` named |
+| page/header pricing | 11 pages and 11 headers | **12 and 12** |
+| credentials | 10 pages, the 9 territory pages | **11 pages, the 10 territory pages** |
+| archetypes | × 10 pages | **× 11** |
+| 9-point | × 10 pages | **× 11** |
+| 9-point Device Swap note | "all ten pages" | **"all eleven pages"**, with the correction noted |
+
+The old **27 was itself wrong** — the list enumerated 26. 26 + rancho-bernardo
++ glp-1 = 28. No hash changed; all five still compute `ok`.
+
+Two pages added to REPO STATE:
+
+- `glp-1-personal-training-san-diego` → **CERTIFIED**. Correctly named header,
+  inside the glob, 7-question FAQPage mirroring in count, order and text, zero
+  findings.
+- `nutrition-coaching-san-diego` → **IN SCOPE, NOT YET CERTIFIED**, and not
+  because of its content: page and header mirror exactly (7 vs 7, verified by
+  hand with `faq.py`). Its header is `nutrition-coaching-san-diego.header` —
+  the extension is `.header`, not `.html`, so `pages/**/*.html` never sees it.
+  Neither checked nor reported missing: **the couples header's failure shape in
+  a second form.** The naming rule says rename after the content certifies, but
+  the content cannot certify while the file is invisible. That deadlock is an
+  owner decision and is reported, not taken.
+
+## TASK 1 — the screen
+
+TIER 1, six hard bans, no approver: outcome guarantees of any kind;
+lbs/inches/body-fat % with a timeframe as an expected result; diagnosing,
+treating, **assessing** or managing a medical condition (or a device used to);
+"free consultation" framing; phase angle reported as a **result**;
+population-level clinical claims.
+
+TIER 2, five permitted-with-conditions: aggregate measured metrics with method +
+audit note + disclaimer on the same surface; attributed individual outcomes with
+a same-page disclaimer; persona language without a timeframe; device capability
+language, with the Class IIa fact byte-identical and beside its
+not-a-medical-provider note; illustrative sample data, labelled.
+
+**DEFERRED-01 is RE-OPENED.** Tier 1 item 1 names it as still deferred, and its
+replacement wording — cleared under the old screen by counsel, never
+owner-approved — is LIVE on `training-rates-san-diego` and its header. Its
+RESOLVED entry stays: the record of what was applied in Aug 2026 is accurate,
+and what changed is its standing, not its history.
+
+**Prenatal/postpartum is not in the owner's Tier 1 list** and was kept anyway,
+under item 3, rather than dropped by omission. Flagged in CANON as a judgment
+call with the condition that makes it wrong.
+
+Andrew Flores removed as reviewer, approver and clearance gate in CANON.md,
+`certify.py` and `tools/README.md`. Where he appears as the approver of a *past*
+event the entry now reads "the counsel then engaged (no longer engaged)" rather
+than claiming the owner cleared something he did not. His name stays in this
+file, which is the historical record.
+
+## TASK 2 — the rules
+
+All sixteen categories mapped; `clinical_stat` and the dedicated-block
+disclaimer test retired with reasons, not deleted. Full table in
+`tools/README.md`.
+
+Three defects this rewrite introduced, all caught by negative-testing:
+
+| Shortcut | What broke |
+|---|---|
+| strip `<script>` bodies as "not copy" | a header **is** one `ld+json` block — every header went blank, ten rules reporting nothing on it |
+| add `"` as an inch unit | every ld+json price (`"325.00"`) read as `00 inches` — 20 invented findings |
+| `\bmedical condition\b` | does not match "medical condition**s**" — the device rule passed the exact sentence T1-3 names |
+
+38 negative tests, both directions on every changed and new rule.
+
+## TASK 4 — certification
+
+| | (a) | (b) | (c) | not-run |
+|---|---|---|---|---|
+| Before | 2 | 25 | 3 | 9 |
+| After | **11** | 25 | 3 | 9 |
+
+(b) and (c) are **byte-identical** to the previous run — the rule change is
+confined to (a), as intended. Nine findings appeared, none disappeared.
+
