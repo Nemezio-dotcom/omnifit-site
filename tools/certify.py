@@ -6,7 +6,10 @@ import re, glob, json, hashlib, html, html.parser, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import faq
 
-OUT_OF_SCOPE = ("the-30-minute-executive-reset", "footer")
+# the-30-minute-executive-reset left this list in the October Card run's
+# follow-up, once its content was brought to the card and its RED-PEN flags
+# closed. footer.html is site-wide and in no batch.
+OUT_OF_SCOPE = ("footer",)
 
 # ─── (a) compliance shapes ─────────────────────────────────────────
 OUTCOME = (r'stronger|leaner|energized|energised|more in control|lose|losing|lost|fat loss|'

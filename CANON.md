@@ -8,7 +8,7 @@ REPO STATE (reconciled with disk, Sept 2026)
   disclosure, never before - fixing the name first hides a real structural
   check behind a filename mismatch.
 
-  CERTIFIED - 29 page/header pairs
+  CERTIFIED - 30 page/header pairs
     11 territory pages: personal-trainer-4s-ranch, -carlsbad,
       -carmel-valley, -del-mar, -encinitas, -fairbanks-ranch, -la-jolla,
       -rancho-bernardo, -rancho-santa-fe, -santaluz, -solana-beach
@@ -41,16 +41,29 @@ REPO STATE (reconciled with disk, Sept 2026)
       had already been verified to mirror by hand, and certified unchanged on
       the first run that could see it. 7-question FAQPage, mirrors in count,
       order and text. Zero findings.
+    the-30-minute-executive-reset - certified in the Reset Refresh run (Sept
+      2026). Brought to the October card: Reset tiers $200/$500/$750/$1,100,
+      the pricing invariant block byte-identical to the other twelve pairs,
+      the device references swapped to Bodystat QuadScan 4000, and all four
+      RED-PEN FLAGS closed. Removed from certify.py's OUT_OF_SCOPE list; it
+      is the THIRTEENTH carrier of both pricing invariants.
+      CAVEAT, recorded because it is the one condition under which this
+      certification is wrong: the page was PATCHED, not refreshed from live.
+      CANON's closing procedure begins "paste the live page into the repo",
+      and that step did not happen - no run in this repo can reach the live
+      page. The content is correct against the October card and against this
+      brief. If production has diverged from the repo copy since the file was
+      last pasted, the diff must be reviewed BEFORE this page is pasted back.
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings, do not paste
     · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
       NOT certified and BLOCKED on three things, all reported in the Link Graph
       Repair run and none fixed there:
-        1. its header is at "pages/headers /COUPLES-PERSONAL-TRAINING-SAN-DIEGO.HTML"
-           - a stray directory with a TRAILING SPACE, an uppercase filename, an
-           uppercase .HTML extension and no -header suffix. certify.py globs
-           pages/**/*.html, so the header is invisible to certification
-           entirely: it is neither checked nor reported missing.
+        1. RESOLVED in the Reset Refresh run. Its header was at
+           "pages/headers /couples-personal-training-san-diego-header.html" -
+           a stray directory with a TRAILING SPACE. The directory is gone and
+           the file now sits in pages/headers/ under the standard name. The
+           glob and mkheaders.py both still find every file.
         2. one stale-canon hit at line 274, which is a CHECKER false positive,
            not a content defect - see tools/README, Known checker defects.
         3. the naming cannot be fixed until its content certifies, per the
@@ -71,25 +84,6 @@ REPO STATE (reconciled with disk, Sept 2026)
       from the finding count. Also body-embedded JSON-LD, no header.
 
   NOT YET CERTIFIED, do not paste
-    · the-30-minute-executive-reset.html - STILL DEFERRED after the October
-      Card run, and now carrying August prices as well. The run repriced the
-      whole site; this page and its header were the one exclusion, because
-      CANON's own rule for it is refresh-from-live, not patch, and no run in
-      this repo can reach the live page. Patching it would have put October
-      prices into a file the site has already moved past, which is a worse
-      defect than a stale file that is marked stale and excluded from the
-      glob. It therefore still carries the August Reset tiers, the August
-      pricing invariant block, four "BodyStat 1500 MDD" references and the
-      unresolved RED-PEN FLAG on virtual assessment.
-      TO CLOSE IT: paste the live page into the repo, then reprice and swap
-      the device names in one run. The RED-PEN resolution is already written
-      and waiting - the wording live on how-we-measure-your-progress.html.
-      - the REPO COPY IS STALE RELATIVE TO PRODUCTION. The live version on the domain is ahead of this file. It
-      needs REFRESHING FROM LIVE, not patching: any run that patches the repo
-      copy would be editing a version the site has already moved past.
-      Deferred from Batch 3 on that basis. A header file already exists
-      (pages/headers/the-30-minute-executive-reset-header.html) but has not
-      been verified against a refreshed page.
     · footer.html - site-wide, in no batch.
 
   ORPHAN HEADERS - a header with no page in the repo
@@ -559,8 +553,9 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash a6c7e65dddff4795, header hash 7af0d0049b0b7aba). Currently 12
-  pages and 12 headers. BOTH HASHES CHANGED in the October Card run: the
+  (page hash a6c7e65dddff4795, header hash 7af0d0049b0b7aba). Currently 13
+  pages and 13 headers - the-30-minute-executive-reset joined in the Reset
+  Refresh run, byte-identical to the other twelve, so neither hash moved. BOTH HASHES CHANGED in the October Card run: the
   block states the rates, so repricing rewrote the same bytes on all 24
   files. Previous values ae388d31c0b6149e / 7e5de5984b133663. The
   the-30-minute-executive-reset pair also carries this block and was NOT
