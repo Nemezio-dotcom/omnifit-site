@@ -89,30 +89,46 @@ def _is_illustrative(surface):
 def _near(t, m, window):
     return ' '.join(t[:m.start()].split()[-window:] + t[m.end():].split()[:window])
 
-# ─── TIER 1 item 1 ─────────────────────────────────────────────────
-# WIDENED Sept 2026. Was "guarantee within ~30 words of an outcome word".
-# TIER 1 bans outcome guarantees OF ANY KIND, conditional and compliance-tied
-# included, so proximity to an outcome word is no longer what makes one: the
-# approved DEFERRED-01 wording passed the old rule precisely by not sitting
-# near an outcome word, and TIER 1 item 1 names DEFERRED-01 as still deferred.
-# No approver can clear a TIER 1 finding, so this rule carries no exemption
-# list - only the reading of the sentence below.
 # negation incl. contractions, checked only on the PRECEDING words so a trailing
 # "...and we don't cut corners" cannot exempt a real promise
 NEG_WIDE = (r"\b(?:not|never|no|cannot|without|n't|don'?t|doesn'?t|didn'?t|won'?t|"
             r"isn'?t|aren'?t|haven'?t|hasn'?t)\b")
 
+# ─── TIER 1 item 1 ─────────────────────────────────────────────────
+# NARROWED Sept 12 2026 by owner decision. Two draftings, both wrong once:
+#   v1  "guarantee" within ~30 words of an outcome word - missed the
+#       DEFERRED-01 wording, which was written not to sit near one.
+#   v2  any "guarantee" at all - caught that wording, and everything else,
+#       including a refund policy that promises no result whatsoever.
+# What makes a guarantee a TIER 1 violation is the RESULT it promises, not
+# that it is called a guarantee. A promise about MONEY - a refund, an exit -
+# is CANON TIER 2 item 6 and is legal. So the rule asks whether a RESULT NOUN
+# is the object of the guarantee, or sits anywhere in the same sentence.
+RESULT_NOUN = (r'\b(?:fat loss|weight loss|lose|losing|lost|drop\w*|shed\w*|'
+               r'pounds?|lbs|inches|body fat|strength|stronger|muscle|'
+               r'pain reduction|pain relief|posture|leaner|'
+               r'results?|outcomes?|transformation|gains?|'
+               r'improvement|progress)\b')
+
 def guarantee_any(text, window=12):
     t = _flat(text); out = []
     for m in re.finditer(r'\bguarantee[ds]?\b', t, re.I):
-        # A guarantee stated as ABSENT ("no guarantee", "reimbursement is not
-        # guaranteed") is the opposite of the banned shape, not an instance of
-        # it. Checked on the PRECEDING words only, so a trailing "...but
-        # nothing is guaranteed" cannot launder a real promise ahead of it.
-        before = ' '.join(t[:m.start()].split()[-4:])
-        if re.search(NEG_WIDE, before + ' ' + m.group(0), re.I): continue
-        out.append(("outcome guarantee (T1-1)", f"'{m.group(0)}'",
-                    t[max(0, m.start()-100):m.end()+140].strip()))
+        # A guarantee stated as ABSENT ("reimbursement is not guaranteed") is
+        # the opposite of the banned shape. Preceding words only, so a trailing
+        # "...but nothing is guaranteed" cannot launder a promise ahead of it.
+        if re.search(NEG_WIDE, ' '.join(t[:m.start()].split()[-4:]) + ' ' + m.group(0), re.I):
+            continue
+        # The SENTENCE the guarantee sits in, not a word window: "guarantee"
+        # and the result it promises can sit either side of a comma or colon
+        # ("30-Day Fit Guarantee: you will be stronger"), and a fixed window
+        # either clips the promise or reaches into the next sentence.
+        lo = max((t.rfind(c, 0, m.start()) for c in '.!?'), default=-1) + 1
+        hi = min((x for x in (t.find(c, m.end()) for c in '.!?') if x != -1), default=len(t))
+        sentence = t[lo:hi + 1]
+        r = re.search(RESULT_NOUN, sentence, re.I)
+        if r:
+            out.append(("outcome guarantee (T1-1)",
+                        f"'{m.group(0)}' promising '{r.group(0)}'", sentence.strip()))
     return out
 
 # ─── ATTRIBUTED INDIVIDUAL OUTCOMES (owner approval; CANON TIER 2 item 2) ──
