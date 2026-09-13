@@ -229,14 +229,31 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     NO 10- or 20-packs. Both are retired.
 
   EXECUTIVE RESET (virtual): Bronze async 200 · Gold 1x/wk 500 ·
-    Platinum 2x/wk 750 · Black 3x/wk 1,100.
+    Platinum 2x/wk 750 · Black 3x/wk 1,100. Billed every 4 weeks.
 
-  MONTHLY TUNE-UP (graduates): 295 member · 325 non-member · 375 in-home.
-    One monthly session - reassessment on the Bodystat QuadScan 4000 and an
+  TUNE-UP (graduates): 295 member · 325 non-member · 375 in-home.
+    One session per cycle - reassessment on the Bodystat QuadScan 4000 and an
     hour of training - with programming delivered through the OmniFit app
-    between visits. Billed monthly, 30 days' notice to cancel.
+    between visits. BILLED EVERY 4 WEEKS, 30 days' notice to cancel.
+    The product is still NAMED the "Monthly Tune-Up" in published copy. The
+    name is a product name, not a billing term; the billing is every 4 weeks
+    like everything else. If the name is to change, that is an owner decision
+    and a separate run.
 
   TERMS
+    ALL RECURRING BILLING IS EVERY 4 WEEKS. NO PRODUCT BILLS MONTHLY.
+    The Program, the Executive Reset and the Tune-Up all bill on a 4-week
+    cycle. There is no month-to-month option on any product and no monthly
+    billing anywhere on the card. "month-to-month" and "billed monthly" are
+    BANNED literal terms on public pages.
+    The one legitimate "per month" in published copy is the TEQNEEQ
+    MEMBERSHIP at $119/mo - that is Teqneeq's billing, not OmniFit's, and it
+    stays. Cadence language ("monthly progress reports", "tracked monthly")
+    describes how often something happens, not how it is billed, and stays.
+    The LEGACY PRICING block below is exempt: it records the August card,
+    which did have month-to-month rates. certify.py globs pages/**/*.html and
+    never reads this file, so the exemption needs no rule - but it is stated
+    here so nobody "fixes" the legacy block into being wrong.
     No contract exceeds $4,400. No exit fees. Round numbers only.
     Travel fee: "may apply" language OK, never a dollar figure.
     No processing fees are added to stated prices; the 2.9% card fee stays
