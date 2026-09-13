@@ -3453,3 +3453,104 @@ Mirrored, so page and header moved together in one commit.
 
 Both files edited in T3 screened clean against all ten tier rules.
 
+
+# October 2026 Card run — site-wide repricing (Sept 2026)
+
+**Branch:** `claude/zealous-maxwell-8zrfi5`
+**Scope:** CANON, the tooling, and every in-scope page and header.
+
+## Certification
+
+| | (a) | (b) | (c) | not-run |
+|---|---|---|---|---|
+| Before | 0 | 25 | 3 | 9 |
+| Peak, after the rules inverted | 0 | **354** | 3 | 9 |
+| After | **0** | **0** | 3 | 9 |
+
+The 354 is the honest size of the repricing: it is what appeared the moment
+August prices stopped being canonical and started being the stale signal. The
+25 at the start were measured against the *old* card and are not comparable.
+
+## Invariant hashes
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | `ae388d31c0b6149e` | **`a6c7e65dddff4795`** |
+| header pricing | `7e5de5984b133663` | **`7af0d0049b0b7aba`** |
+| credentials | `6492e3ca1545dc26` | unchanged |
+| archetypes | `6b1b0f4efbd4a72c` | unchanged |
+| 9-point | `ba590a09107ffda0` | **`4c720960dec5a809`** |
+
+The two pricing hashes were expected to move — the block states the rates.
+
+**The 9-point hash moved and was not supposed to.** The invariant spans intro +
+nine `<li>` items + closing line, and the INTRO carried "$110 Performance
+Diagnostic, credited in full toward a 3-month package". All nine `<li>` items
+and the closing line are byte-identical across the change, verified item by
+item; only the intro sentence moved, identically on all eleven pages. Leaving a
+retired price live on eleven territory pages to protect a hash is the wrong way
+round — the hash records the block, it does not license its contents.
+
+## Two forced deviations
+
+1. **The assessment paragraph** on training-rates was to stay byte-identical.
+   It read "$110, credited in full toward a 3-month package" — a retired price
+   and a product that no longer exists. Byte-identical and repriced cannot both
+   hold. Exactly that clause changed; "clinical-grade diagnostic session" and
+   the Class IIa block are untouched and verified by string match.
+2. **The 9-point intro**, above.
+
+## The Reset page — excluded, deliberately
+
+`the-30-minute-executive-reset` and its header were the one exclusion. CANON's
+rule for that file is refresh-from-live, not patch, and no run in this repo can
+reach the live page. Patching it would have put October prices into a file the
+site has already moved past. It still carries the August Reset tiers, the
+August pricing invariant block, four `BodyStat 1500 MDD` references and the
+open RED-PEN FLAG. The closing procedure is recorded in CANON.
+
+## Rule changes (Task 5)
+
+The stale-canon signal **inverted**. Three figures changed sides and had to be
+removed from `BANNED` rather than added: `$90`, `$275`, `$500/mo`. Sixteen
+figures collide between the two cards; the safe set was computed by
+differencing the CANON blocks rather than read off by eye.
+
+Two matching defects, both found by negative tests in this run:
+
+| Defect | Symptom |
+|---|---|
+| figures matched as plain substrings | `$50` fired inside `$500`, `$75` inside `$750` — both October Reset tiers |
+| no range exemption | `$50-80/session` and `$150-250/month` on the comparison page are competitor rates |
+
+New: `BANNED_TIERS` (Essential), `fee_language` (sentence-scoped, Foundation
+policy exempt), `assessment_as_session_rate` (checks the meaning, since $150 is
+now canonical). Retired with a note: `_marker_nearby`, `_inside_packs_table`,
+`CANON_MARKERS`, `CANON_CARDS`.
+
+## Mirrors
+
+All 32 page/header pairs verified after every edit batch. Two broke mid-run and
+both were caught by the check rather than by reading:
+
+- `omnifit-vs-competitors-header` — a `git checkout` used to undo a bad edit
+  silently also undid the global assessment pass on that one file.
+- `FAQs` — page and header drifted apart in wording during a long rewrite. The
+  header answer was regenerated from the page's own extracted text via
+  `faq.py`, which is the only reliable way to re-converge after a rewrite that
+  long.
+
+## The generator
+
+`tools/mkheaders.py` META still said "$110 Performance Diagnostic". Found by
+regenerating all nine generated headers and diffing: regeneration REVERTED
+`body-composition-testing-header` to the August wording. Same shape as the
+BodyStat 1500 MDD miss two runs ago. Fixed; regeneration is now a no-op.
+
+## Batch 4 brand sweep, pulled forward
+
+Seven findings on four files, all inside changelog comment blocks. Each line
+recorded a past correction as "old -> new", so the retired term was present as
+the left-hand side of its own fix; each was rewritten to state the current
+value rather than the transition. `home-3` stays frozen.
+
