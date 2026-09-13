@@ -736,10 +736,19 @@ def run():
     print("   none" if not A else f"   {A} strike(s)")
 
     print("\n### (b) STALE CANON")
+    # A banned FIGURE must not match inside a longer one. Plain substring
+    # matching made "$50" fire inside "$500" and "$75" inside "$750" - both
+    # October Reset tiers - so the rule reported correct copy as stale on the
+    # first run after the ban list was inverted. Figures are matched with a
+    # right boundary (no digit or comma-digit may follow); word terms keep
+    # plain substring matching, which is what catches "Pacific Beach" inside a
+    # longer sentence.
     for term in BANNED:
+        rx = (re.compile(re.escape(term) + r'(?![\d,]*\d)') if term.startswith('$')
+              else re.compile(re.escape(term), re.I))
         for f in files:
             for i,l in enumerate(open(f),1):
-                if term.lower() in l.lower():
+                if rx.search(l):
                     print(f"   {f}:{i}  [{term}]"); B+=1
     # Tier names are matched case-SENSITIVELY on the capitalised product name,
     # so "essential movement patterns" is prose and "Essential" is a tier.
