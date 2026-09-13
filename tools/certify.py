@@ -652,14 +652,21 @@ def run():
         # TIER 2 item 4, first condition: ONE byte-identical wording of the
         # Class IIa fact everywhere it appears. Cross-file, so it is collected
         # here and judged once below - the same shape as an invariant.
-        # Compare a WORD WINDOW around the phrase, not the sentence: in a header
-        # the fact sits inside ld+json, so a sentence-based split swept up
-        # `" } }, { "@type": "Question"` and made the page and its own header
-        # look like two different wordings of the same claim.
+        # Compare THE SENTENCE the fact sits in. CANON T2-4 asks the STATEMENT
+        # to be byte-identical wherever it appears; a fixed word window also
+        # compares the prose on either side of it, so three different words in
+        # the PRECEDING sentence read as three different wordings of the same
+        # claim. That is a checker reporting correct copy as a violation.
+        # A word window was used first because an earlier sentence split, run
+        # when the fact sat mid-sentence inside a header's ld+json, swept up
+        # `" } }, { "@type": "Question"`. That is no longer the shape: the
+        # canonical block is its own run of sentences on every surface, so the
+        # split lands on the statement itself.
         ft = _flat(t)
         for m in re.finditer(r'Class IIa', ft, re.I):
-            w = ' '.join(ft[:m.start()].split()[-12:] + [m.group(0)] + ft[m.end():].split()[:12])
-            ciia.setdefault(_norm(w), []).append(f)
+            lo = max((ft.rfind(c, 0, m.start()) for c in '.!?'), default=-1) + 1
+            hi = min((x for x in (ft.find(c, m.end()) for c in '.!?') if x != -1), default=len(ft))
+            ciia.setdefault(_norm(ft[lo:hi + 1]), []).append(f)
     if len(ciia) > 1:
         print(f"   [Class IIa fact not byte-identical across files (T2-4)] "
               f"{len(ciia)} distinct wordings:")
