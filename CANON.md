@@ -71,8 +71,20 @@ REPO STATE (reconciled with disk, Sept 2026)
       from the finding count. Also body-embedded JSON-LD, no header.
 
   NOT YET CERTIFIED, do not paste
-    · the-30-minute-executive-reset.html - the REPO COPY IS STALE RELATIVE TO
-      PRODUCTION. The live version on the domain is ahead of this file. It
+    · the-30-minute-executive-reset.html - STILL DEFERRED after the October
+      Card run, and now carrying August prices as well. The run repriced the
+      whole site; this page and its header were the one exclusion, because
+      CANON's own rule for it is refresh-from-live, not patch, and no run in
+      this repo can reach the live page. Patching it would have put October
+      prices into a file the site has already moved past, which is a worse
+      defect than a stale file that is marked stale and excluded from the
+      glob. It therefore still carries the August Reset tiers, the August
+      pricing invariant block, four "BodyStat 1500 MDD" references and the
+      unresolved RED-PEN FLAG on virtual assessment.
+      TO CLOSE IT: paste the live page into the repo, then reprice and swap
+      the device names in one run. The RED-PEN resolution is already written
+      and waiting - the wording live on how-we-measure-your-progress.html.
+      - the REPO COPY IS STALE RELATIVE TO PRODUCTION. The live version on the domain is ahead of this file. It
       needs REFRESHING FROM LIVE, not patching: any run that patches the repo
       copy would be editing a version the site has already moved past.
       Deferred from Batch 3 on that basis. A header file already exists

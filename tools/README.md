@@ -262,6 +262,47 @@ expected a flag).
 
 ## Stale-canon rules (b)
 
+**The signal inverted on 13 Sept 2026.** August prices were canonical; they are
+now the stale-canon marker, and the October card's figures are canonical. Three
+figures changed sides and had to be REMOVED from `BANNED`, not added to it:
+`$90` (was the retired name-era assessment price, now the guest add-on), `$275`
+(was an August month-to-month rate, now the in-home single) and `$500/mo` (was
+Executive Hybrid, and Reset Gold is now $500).
+
+Banning a bare figure is only safe when it appears in **no** October product.
+The safe set was computed by differencing the two CANON blocks, not read off by
+eye: sixteen figures collide, and each would have been a false positive on
+correct copy.
+
+Two matching rules exist because both were learned the hard way in one run:
+
+- **Figures need a right boundary.** Plain substring matching fired `$50` inside
+  `$500` and `$75` inside `$750`, both October Reset tiers.
+- **A hyphenated range is third-party pricing.** `$50-80/session` and
+  `$150-250/month` are competitor rates on the comparison page. The card's rule
+  is round numbers only, so every OmniFit figure is a single number — which
+  gives the same exemption the August `$150` rule carried as a `comp-value`
+  class whitelist, without needing to know the class names.
+
+`assessment_as_session_rate` replaces the August `$150`/`$175` context rule.
+`$150` is now canonical — it is the Performance Assessment — so the rule checks
+the **meaning** rather than the number: `$150` published as a per-session rate
+is the October equivalent of the old mangled pack rung.
+
+`BANNED_TIERS` holds `Essential`, unlisted on the card, matched
+case-sensitively so "essential movement patterns" stays prose.
+`fee_language` flags `exit fee`, `cancellation fee` and `non-refundable`
+**scoped to the sentence**, with the Foundation policy sentence as the single
+exemption and the negative test.
+
+Retired with the August card, kept as a note rather than code: `_marker_nearby`,
+`_inside_packs_table`, `CANON_MARKERS`, `CANON_CARDS`. All four carved `$175`
+out as a legal pack rung; it appears in no October product and is a plain
+banned literal now. A dormant exemption is how a retired figure gets
+grandfathered back in through a context nobody re-reads.
+
+### The old $150/$175 rules
+
 - **$150 is retired everywhere.** Neither ladder uses it (studio 5/10/20 @
   $145/$140/$135; in-home @ $175/$170/$165). The only exemption is competitor
   pricing on the comparison page (`comp-value` divs) — there is no packs-table,
