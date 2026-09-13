@@ -8,10 +8,10 @@ REPO STATE (reconciled with disk, Sept 2026)
   disclosure, never before - fixing the name first hides a real structural
   check behind a filename mismatch.
 
-  CERTIFIED - 27 page/header pairs
-    10 territory pages: personal-trainer-4s-ranch, -carlsbad,
+  CERTIFIED - 29 page/header pairs
+    11 territory pages: personal-trainer-4s-ranch, -carlsbad,
       -carmel-valley, -del-mar, -encinitas, -fairbanks-ranch, -la-jolla,
-      -rancho-santa-fe, -santaluz, -solana-beach
+      -rancho-bernardo, -rancho-santa-fe, -santaluz, -solana-beach
     corrective-exercise-post-rehab · FAQs · how-it-works-pricing ·
       in-home-personal-trainer-san-diego · private-personal-trainer-san-diego
     the 9 Batch 3 pages: the-omnifit-method, how-we-measure-your-progress,
@@ -23,6 +23,24 @@ REPO STATE (reconciled with disk, Sept 2026)
     personal-trainer-over-50-san-diego - NEW, live as of Sept 2026, certified
       in the Scope Reconciliation run. Its header arrived misnamed
       (no -header suffix); renamed after its content certified clean.
+    glp-1-personal-training-san-diego - NEW, arrived on main in the paste-source
+      run (Sept 2026). Header is correctly named, is inside certify.py's glob,
+      carries WebPage/BreadcrumbList/Service/FAQPage, and its 7-question FAQPage
+      mirrors the page in count, order and text. Zero findings. Certified in the
+      Compliance Re-tier run.
+    personal-trainer-rancho-bernardo - NEW, arrived on main in the paste-source
+      run (Sept 2026), renamed from personal-trainer-in-rancho-bernardo. Carries
+      all four page invariants and its 7-question FAQPage mirrors. Zero findings.
+      It is the ELEVENTH territory page, which is why every invariant count in
+      this brief was one low until the Compliance Re-tier run.
+    nutrition-coaching-san-diego - certified in the Enforcement run (Sept 2026)
+      once its header entered the glob. The header arrived as
+      "nutrition-coaching-san-diego.header" - extension .header, not .html - so
+      pages/**/*.html never saw it and the pair was neither checked nor
+      reported missing. Renamed to the standard <slug>-header.html; the content
+      had already been verified to mirror by hand, and certified unchanged on
+      the first run that could see it. 7-question FAQPage, mirrors in count,
+      order and text. Zero findings.
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings, do not paste
     · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
@@ -53,8 +71,20 @@ REPO STATE (reconciled with disk, Sept 2026)
       from the finding count. Also body-embedded JSON-LD, no header.
 
   NOT YET CERTIFIED, do not paste
-    · the-30-minute-executive-reset.html - the REPO COPY IS STALE RELATIVE TO
-      PRODUCTION. The live version on the domain is ahead of this file. It
+    · the-30-minute-executive-reset.html - STILL DEFERRED after the October
+      Card run, and now carrying August prices as well. The run repriced the
+      whole site; this page and its header were the one exclusion, because
+      CANON's own rule for it is refresh-from-live, not patch, and no run in
+      this repo can reach the live page. Patching it would have put October
+      prices into a file the site has already moved past, which is a worse
+      defect than a stale file that is marked stale and excluded from the
+      glob. It therefore still carries the August Reset tiers, the August
+      pricing invariant block, four "BodyStat 1500 MDD" references and the
+      unresolved RED-PEN FLAG on virtual assessment.
+      TO CLOSE IT: paste the live page into the repo, then reprice and swap
+      the device names in one run. The RED-PEN resolution is already written
+      and waiting - the wording live on how-we-measure-your-progress.html.
+      - the REPO COPY IS STALE RELATIVE TO PRODUCTION. The live version on the domain is ahead of this file. It
       needs REFRESHING FROM LIVE, not patching: any run that patches the repo
       copy would be editing a version the site has already moved past.
       Deferred from Batch 3 on that basis. A header file already exists
@@ -116,10 +146,19 @@ WORKFLOW RULES
   step. tools/README.md records the three checks that have reported
   success while not actually looking — negative-test every rule change in
   both directions before trusting it.
-- CONTRACT VALUE CHECK (counsel condition, Andrew Flores, Aug 2026):
-  before filing a client on any contract whose total exceeds $4,400,
-  contact counsel first. This is a workflow step, not a pricing cap, and it
-  does not restrict what may be published or sold. Offers that currently
+- CONTRACT VALUE CHECK (counsel condition, Aug 2026; the counsel who set it
+  is no longer engaged, so OWNER APPROVAL is the live gate):
+  before filing a client on any contract whose total exceeds $4,400, obtain
+  owner approval first, and re-engage counsel if the owner wants the
+  statutory question answered rather than managed. This is a workflow step,
+  not a pricing cap, and it does not restrict what may be published or sold.
+  AS OF THE OCTOBER 2026 CARD THIS CHECK NO LONGER TRIPS BY CONSTRUCTION.
+  The card's rule is "no contract exceeds $4,400", and the largest committed
+  total on it is the in-home couples Momentum Foundation at $3,750 - $650
+  clear. The Program bills every 4 weeks with 30-day notice to cancel, so it
+  commits no total at all. The check stays live because it governs any
+  bespoke arrangement (in-home Peak "from $2,600", Couples Peak "by
+  arrangement") priced off-card. Offers that currently
   trip it on a 3-month prepaid: in-home Peak individual (5,580) and in-home
   couples Performance (5,175). Teqneeq Peak individual sits closest to the
   line at 4,185, $215 clear.
@@ -139,94 +178,257 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   Sleep Stress & Recovery, Nutrition for Metabolic Health; Eden GLP-1
   Fitness, Peptide Fundamentals, GLP-1 Nutrition (clinical collaboration
   framing). Experience: "10+ Years Coaching" — never "in San Diego".
-- Pricing: Diagnostic $110 credited in full toward a 3-month package
-  ($90 is the retired name-era price). $90 assessment = confirmed same
-  product as the $110 Performance Diagnostic; rename settled. Deposit
-  $30 refundable.
-- Consultation: 45 minutes, ALWAYS by video or phone, never in person.
-  Preceded by a client intake form. $30 refundable deposit. The
-  consultation is NOT the movement screen: the $110 Performance
-  Diagnostic is a separate in-person session, credited in full toward a
-  3-month package. Copy must not describe the consultation as producing
-  baseline metrics, body composition, or a movement assessment.
-  Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
-  Performance 950/1100, Peak 1395/1625. Upfront on a 3-month program =
-  3 × the 3-month monthly rate, no discount: 750 / 1,425 / 2,850 / 4,185.
-  In-home individual monthly (3-mo/M2M), complete ladder: Essential 335/390,
-  Momentum 650/755, Performance 1,250/1,425, Peak from 1,860/2,150. Upfront
-  on a 3-month program = 3 x the 3-month rate: 1,005 / 1,950 / 3,750 / 5,580.
-  Packs, two ladders by venue, max 2 sessions/week:
-    Studio  — 5 @ 145/session (725) · 10 @ 140 (1,400) · 20 @ 135 (2,700)
-    In-home — 5 @ 175/session (875) · 10 @ 170 (1,700) · 20 @ 165 (3,300)
-    Expiry: 5-pack 10 weeks · 10-pack 20 weeks · 20-pack 30 weeks
-  Singles 165 studio, 195 in-home.
-  Add-ons, confirmed Aug 2026: extra session 115 studio / 155 in-home ·
-  guest add-on 75/session (was $50, corrected in the Rates Page Correction
-  run — three named-package instances plus one FAQ mention).
-  Referral credit: 50 off next month — UNVERIFIED, not yet confirmed by
-  Nemezio. Left as published; do not treat as canonical until confirmed.
-  Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
-  Monthly Tune-Up (graduates): 199/250/295. Facility rule: Momentum+
-  requires Teqneeq membership $119/mo paid to Teqneeq; Essential and
-  packs use sponsored guest passes. Travel fee: "may apply" language OK,
-  never a dollar figure.
-  CONFIRMED Aug 2026, source = signed Prepaid Program Agreement:
-  · No processing fees are added to stated prices. The 2.9% card fee is
-    retired everywhere; never reintroduce it.
-  · The total is paid in a SINGLE UPFRONT PAYMENT at signing on 3-month
-    programs. Copy must not say "billed monthly, no large upfront payments".
-  · The widened $150/$175 exception (pack rungs + Reset Bronze) is approved.
-- Couples pricing (monthly; both partners train in one session). Supersedes
-  the earlier "from 325/mo, monthly only" line:
-    Studio  3-mo: Essential 325 · Momentum 625 · Performance 1,250
-    Studio  M2M : Essential 370 · Momentum 700 · Performance 1,400
-    In-home 3-mo: Essential 455 · Momentum 875 · Performance 1,725
-    In-home M2M : Essential 510 · Momentum 975 · Performance 1,950
-    Single couples session: 235 studio · 250 in-home
-  Peak is ad-hoc only at both venues and is NOT offered as a prepaid couples
-  commitment.
-  Derived per-session figures exist (studio 150/144/144, in-home 210/202/199
-  by tier) but are NOT to be published as the primary rate. Note that the
-  studio Essential derivation is $150, which the certification rule treats as
-  a violation outside the approved contexts, so publishing it would fail
-  certification as well as contradict this line.
-  In-home couples Performance (1,725/mo) MAY be sold and published as a
-  3-month prepaid commitment (5,175 upfront). The earlier month-to-month-only
-  restriction is lifted. See RESOLVED-02 for the counsel workflow rule.
+- PRICING — OCTOBER 2026 CARD (owner-confirmed Sept 13 2026). This card
+  SUPERSEDES the August 2026 ladders entirely. The August figures are not
+  deleted: they move to LEGACY PRICING below, because existing clients are
+  still on them. Published copy uses THIS card and nothing else.
+
+  ASSESSMENT
+    Performance Assessment $150, credited toward the first cycle.
+    Consultation deposit $30, refundable. NEVER "free" - the consultation is
+    45 minutes, by video or phone, and is NOT the assessment.
+
+  THE FOUNDATION - new clients only. Three consecutive 4-week cycles, paid
+  in full at enrolment, discounted for that reason.
+    Studio Momentum (1x/wk)       560/cycle    1,680 total
+    Studio Performance (2x/wk)    1,100/cycle  3,300 total
+    In-home Momentum              800/cycle    2,400 total
+    Studio couples Momentum       850/cycle    2,550 total
+    In-home couples Momentum      1,250/cycle  3,750 total
+    NOT offered on the Foundation: Peak (either setting), in-home
+    Performance, Performance couples. Those start on The Program.
+    A new client with prior training experience MAY start directly on The
+    Program at any tier; the Foundation is then no longer available to them.
+    The Foundation is a ONE-TIME ENTRY, never a step back.
+    Foundation policy: non-refundable; the 30-Day Fit Guarantee is the only
+    exit; two pause weeks across the course with notice, extending the end
+    date; sessions OmniFit cancels are credited.
+
+  THE PROGRAM - continuation after the Foundation, or direct entry.
+  Billed every 4 weeks.
+    Studio Momentum (1x/wk)        640
+    Studio Performance (2x/wk)     1,250
+    Studio Peak (3x/wk)            1,800
+    In-home Momentum               900
+    In-home Performance            1,800
+    In-home Peak                   from 2,600
+    Studio couples Momentum        1,000
+    Studio couples Performance     2,000
+    In-home couples Momentum       1,450
+    In-home couples Performance    2,900
+    Couples Peak: by arrangement.
+    Studio programs require a Teqneeq membership ($119/mo, billed by
+    Teqneeq); facility access on non-training days included.
+    Program terms (PUBLISH ON THE PAGE): 6 pause weeks per 12 months with
+    2 weeks' notice, credited against the next cycle; 30-day notice to
+    cancel, remaining credit applied to the final cycle; 24-hour reschedule
+    within the same cycle; sessions OmniFit cancels are credited.
+
+  SESSIONS WITHOUT A PROGRAM
+                            Studio member  Studio non-member  In-home
+    Single session          205            235                275
+    5-pack                  180/session    210/session        250/session
+    Extra session (program) 160            -                  215
+    Guest add-on            90             90                 90
+    Studio non-member prices include the Teqneeq day pass.
+    Singles expire 30 days from purchase; 5-packs 8 weeks.
+    NO 10- or 20-packs. Both are retired.
+
+  EXECUTIVE RESET (virtual): Bronze async 200 · Gold 1x/wk 500 ·
+    Platinum 2x/wk 750 · Black 3x/wk 1,100.
+
+  MONTHLY TUNE-UP (graduates): 295 member · 325 non-member · 375 in-home.
+    One monthly session - reassessment on the Bodystat QuadScan 4000 and an
+    hour of training - with programming delivered through the OmniFit app
+    between visits. Billed monthly, 30 days' notice to cancel.
+
+  TERMS
+    No contract exceeds $4,400. No exit fees. Round numbers only.
+    Travel fee: "may apply" language OK, never a dollar figure.
+    No processing fees are added to stated prices; the 2.9% card fee stays
+    retired.
+    The 30-Day Fit Guarantee wording stays BYTE-IDENTICAL (CANON TIER 2
+    item 6). The assessment paragraph on training-rates-san-diego.html
+    stays BYTE-IDENTICAL, including "clinical-grade diagnostic session" and
+    the Class IIa block.
+
+  NOT ON THE CARD - do not publish
+    Essential tier: unlisted. Graduates / case by case only. "Essential" is
+      a banned tier name on public pages.
+    Continuing-client discount 10-15%: case by case, NEVER published.
+    Executive Hybrid: stays dead.
+
+LEGACY PRICING - AUGUST 2026, CLOSED (existing clients only; never publish)
+  Retained because clients enrolled on these rates are still on them, and
+  because the reasoning behind the couples and cap decisions is load-bearing
+  for RESOLVED-02. NOTHING in this block may appear in published copy; every
+  figure in it that does not also appear on the October card is a
+  stale-canon violation.
+  - Diagnostic $110 credited in full toward a 3-month package ($90 was the
+    retired name-era price; $90 is now the OCTOBER guest add-on and is
+    canonical again in that meaning only).
+  - Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
+    Performance 950/1100, Peak 1395/1625. Upfront = 3 x the 3-month rate:
+    750 / 1,425 / 2,850 / 4,185.
+  - In-home individual monthly (3-mo/M2M): Essential 335/390, Momentum
+    650/755, Performance 1,250/1,425, Peak from 1,860/2,150. Upfront:
+    1,005 / 1,950 / 3,750 / 5,580.
+  - Packs by venue: Studio 5 @ 145 (725) · 10 @ 140 (1,400) · 20 @ 135
+    (2,700). In-home 5 @ 175 (875) · 10 @ 170 (1,700) · 20 @ 165 (3,300).
+    Expiry 10 / 20 / 30 weeks. Singles 165 studio, 195 in-home.
+  - Add-ons: extra session 115 studio / 155 in-home · guest add-on 75.
+  - Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
+  - Monthly Tune-Up: 199/250/295.
+  - Couples monthly. Studio 3-mo: Essential 325 · Momentum 625 ·
+    Performance 1,250. Studio M2M: 370 · 700 · 1,400. In-home 3-mo: 455 ·
+    875 · 1,725. In-home M2M: 510 · 975 · 1,950. Single couples session 235
+    studio · 250 in-home. Peak ad-hoc only.
+    Derived per-session figures (studio 150/144/144, in-home 210/202/199)
+    were never to be published as the primary rate.
+  - Referral credit: 50 off next month - UNVERIFIED, never confirmed by
+    Nemezio. Carried here as legacy; do not publish.
+  - GRANDFATHERED CLIENTS: unchanged. A client enrolled on an August rate
+    stays on it until they choose to move. Moving is a new enrolment on the
+    October card, not a re-price of the old one.
+
 - Case-study figures (captions/alt text; verbatim client quotes are
   untouchable): Vincent 59, 8% body fat. Alo +18 lbs. Mark −17 lbs
   (248→231, 4mo). Dave −27 (225→198, 6mo). Isaac −21 (181→160, 8→20
   pull-ups, 6mo). Annie −14 (162→148, 3mo). Ken −11 fat/+6 muscle.
+- DEVICE (confirmed by owner, Sept 2026; supersedes the Bodystat 1500 MDD
+  everywhere the site describes what a client will receive):
+  the body composition device is the "Bodystat QuadScan 4000". Brand casing
+  is "Bodystat", never "BodyStat" — Bodystat's own materials use the former.
+  VERIFIED FACTUAL CLAIM, same standing the 1500 MDD designation held: the
+  QuadScan 4000 holds CE certification as a Class IIa medical device under
+  MDD 93/42/EEC and has FDA clearance. Existing "Class IIa medical device"
+  copy therefore stays as written; only the model name changes beside it.
+  Capability, recorded but NOT yet written into copy (see NEXT RUNS): four
+  frequencies (5/50/100/200 kHz) against the 1500 MDD's single 50 kHz;
+  separates intracellular from extracellular water; Phase Angle;
+  Prediction Marker (ECW/TBW); Body Cell Mass, FFMI, BFMI, segmental
+  analysis. Practically: a weight change can be attributed to muscle, fat
+  or fluid rather than inferred.
+  THE 1500 MDD IS NOT RETIRED FROM THE RECORD. Scans that happened on it
+  happened on it. Every 1500 MDD reference inside pages/case-studies.html
+  and its byte-identical duplicate pages/home-3.html is a factual record of
+  a past measurement and must be left exactly as written; changing it would
+  falsify the record. The same reasoning protects the v2 changelog entry at
+  pages/home-2.html:14, which records what a past edit added.
 - Retired forever: Executive Hybrid (product, name, slug, $299/$500),
   $175/$150/$225/$200-session era, $225–275/mo era, $599–899 Reset era,
   $50/$75 travel fees, Foundation/VIP packages.
 
-COMPLIANCE SCREEN (attorney: strike on sight, any wave)
-- No outcome guarantees. No lbs-with-timeframe claims ("20–30 lbs in
-  4–6 months"). Persona language WITHOUT timeframe ("needs to lose
-  20–30 lbs sustainably") is legal and stays.
-  Documented individual case studies are the named exception, not a
-  violation: see EXCEPTION - DOCUMENTED CASE STUDIES under CERTIFICATION
-  (a). Approved by Andrew Flores, Sept 2026.
-- No free-consultation framing. Consultation = 45 minutes, $30
-  refundable deposit.
-- No prenatal/postpartum content (uncertified). No Groupon/deal content.
-- No quantified clinical-shaped outcome statistics. A percentage or figure
-  attached to a clinical result — pain, injury, recovery, healing,
-  rehabilitation, range of motion presented as a health outcome — is banned
-  whether or not it carries a timeframe, and whether or not it is averaged
-  or disclaimed ("87% Pain Reduction", "reduced chronic pain in 90% of
-  clients"). A non-clinician publishing a clinical result rate is the
-  exposure, not the timeframe. Behavioural and business stats are NOT
-  clinical and stay: session adherence, nutrition compliance, client
-  rating, review count, retention. Performance stats (strength, body
-  composition) stay only WITHOUT a timeframe.
-- No outcome claims that pair a result with a promised window, in any
-  units. The lbs-with-timeframe rule is the specific case; the general
-  rule is that the result must be framed against the client's own
-  baseline, never against a calendar ("measurable body composition
-  changes within 6-8 weeks", "Over 4-6 months: measurable increases").
-  Same case-study exception applies, on the same three conditions.
+COMPLIANCE SCREEN — TWO TIERS (owner approval; Sept 2026)
+Rewritten by the owner (Nemezio), who is now the sole compliance
+decision-maker. The previous screen was written to outside counsel's
+standard and stripped true measured metrics along with the projections it
+was aimed at; the owner has judged that a mistake. Measured facts with
+their method shown are no longer treated as claims. What replaced them is
+not a weaker screen but a differently aimed one: TIER 1 is absolute, and
+TIER 2 is conditional rather than banned.
+
+The distinction that runs through both tiers: a PROJECTION of what a
+prospective client can expect is the exposure. A MEASUREMENT that has
+already happened, published with its method, is not.
+
+TIER 1 — HARD BANS. No exception. No approver, owner included, can clear
+one of these; they are removed on sight, and a run that finds one reports
+it and STOPS rather than weighing context.
+  1. OUTCOME GUARANTEES - any promise, conditional or not, that a client
+     will ACHIEVE A RESULT (fat loss, strength, pain reduction, posture
+     change) - are banned.
+     Narrowed by owner decision, Sept 12 2026: the first drafting banned
+     the WORD, not the promise, and swept in a refund policy that promises
+     no result at all. What makes a guarantee a TIER 1 violation is the
+     RESULT it promises, not that it is called a guarantee. A promise about
+     money - a refund, an exit - is TIER 2 item 6.
+  2. Pounds, inches, or body-fat percentage paired with a timeframe AS AN
+     EXPECTED OR TYPICAL RESULT ("20-30 lbs in 4-6 months"). This is the
+     projection case. It is not the attributed-individual case, which is
+     TIER 2 item 2, and not the persona case, which is TIER 2 item 3.
+  3. Any statement that OmniFit diagnoses, treats, assesses, or manages a
+     MEDICAL CONDITION, or that a device is used to do so. "Assesses" is
+     new to this tier and is scoped to a medical condition: assessing
+     MOVEMENT is what OmniFit does and stays legal. Negations and referral
+     language stay legal and are the recommended form.
+  4. "Free consultation" framing, under any name for the first session.
+     The consultation is paid: 45 minutes, $30 refundable deposit.
+  5. A client's PHASE ANGLE value, its change over time, or any improvement
+     rate for it, presented as evidence of health. Phase angle may be NAMED
+     as a tracked marker and DESCRIBED as what the device measures; it may
+     not be REPORTED AS A RESULT. The line is description versus outcome,
+     not mention versus silence.
+  6. Population-level clinical claims attributed to OmniFit training
+     ("reduces blood pressure", "reverses insulin resistance"). A clinical
+     result rate published by a non-clinician is the exposure, and no
+     method note, sample size or disclaimer clears it. This is the one part
+     of the old clinical-statistic rule that survives intact, and it is the
+     reason TIER 2 item 1 does not simply permit every percentage.
+
+TIER 2 — PERMITTED WITH CONDITIONS. Not exceptions to a ban: these are
+legal, and become findings only when a stated condition is MISSING. A run
+reports the missing condition, never the content.
+  1. AGGREGATE MEASURED METRICS — adherence %, median strength change,
+     client rating, review count — are permitted when all three of these
+     are present ON THE SAME SURFACE as the figure:
+       (a) a stated METHOD: what was measured, sample size, period;
+       (b) the COMPANY-REPORTED / NOT-INDEPENDENTLY-AUDITED note;
+       (c) the INDIVIDUAL-RESULTS disclaimer.
+     REFERENCE FORM: the Results section of
+     how-we-measure-your-progress.html — each figure carries its own
+     method line, and one note block carries both (b) and (c). Copy that
+     shape rather than inventing another.
+     TIER 1 item 6 still governs: a clinical result rate is never an
+     aggregate measured metric, however well conditioned.
+  2. ATTRIBUTED INDIVIDUAL OUTCOMES in case studies are permitted with the
+     individual-results disclaimer ON THE SAME PAGE. Attribution is still
+     required - a named individual beside a role noun, or an explicit
+     anonymisation with a stated profile - and aggregate framing is still
+     never exempt. What is RELAXED against the old screen: the disclaimer
+     no longer has to sit in a dedicated block opening with the phrase.
+     That dedicated-block test was written to counsel's standard and is
+     withdrawn for this item.
+     FROZEN RECORDS: pages/case-studies.html and its byte-identical
+     duplicate pages/home-3.html are historical records, exempt from
+     re-screening entirely. They record measurements that happened.
+  3. PERSONA LANGUAGE without a timeframe ("sustainable fat loss of
+     20-30 lbs") is permitted, unchanged from the old screen.
+  4. DEVICE CAPABILITY LANGUAGE is permitted: what the Bodystat QuadScan
+     4000 measures - multi-frequency BIA, ICW/ECW separation, phase angle,
+     segmental analysis. Describing a capability is not claiming a clinical
+     result, and TIER 1 item 5 draws that line for phase angle
+     specifically.
+     The "Class IIa medical device" statement is a VERIFIED FACT and stays
+     BYTE-IDENTICAL wherever it appears, ALWAYS accompanied by the
+     not-a-medical-provider note. Both halves are conditions, and both are
+     checkable: a second, shorter wording of the fact is a finding even
+     though the fact is true, and the fact standing without its note is a
+     finding even though the wording is right.
+  5. ILLUSTRATIVE SAMPLE DATA is permitted when labelled "illustrative,
+     not client data" on the same surface. Unlabelled sample figures read
+     as measurements and are a finding.
+  6. A FIT OR SATISFACTION REFUND POLICY - the 30-Day Fit Guarantee,
+     DEFERRED-01, CLOSED Aug 2026 with approved wording - is permitted
+     PROVIDED IT PROMISES ONLY A REFUND OR AN EXIT, NEVER A RESULT.
+     The distinction TIER 1 item 1 now turns on: "we guarantee you will
+     lose 20 lbs" promises an outcome and is banned at TIER 1; "if it isn't
+     the right fit, stop and I'll refund the unused balance" promises only
+     money back and is legal here. The approved wording pairs no outcome
+     word with the guarantee, which is what makes it clear the tier.
+     WORDING CHANGES REQUIRE OWNER APPROVAL. The text is not a template to
+     paraphrase: a rewrite that reintroduces a result promise moves the
+     item back to TIER 1 without anyone editing this brief.
+
+CARRIED OVER, NOT RE-TIERED
+- No Groupon/deal content.
+- No prenatal/postpartum content (uncertified). The owner's TIER 1 list did
+  not name this and the rewrite did not ask for it to go; it is kept under
+  TIER 1 item 3 as an uncertified-scope claim rather than dropped silently,
+  because dropping a live protection is not something a rewrite should do
+  by omission. This is a judgment call and it is WRONG IF the owner intends
+  prenatal/postpartum content to be publishable now - in which case item 3
+  should say so and the rule retires.
 
 EM-DASH RULES (voice preference, NOT a compliance issue)
 - Do not scan for em-dashes. Do not flag them. Do not include them in
@@ -240,59 +442,99 @@ A run reports (a) compliance strikes, (b) stale canon, (c) broken structure.
 Anything outside these is NOT a certification finding: report it as a
 judgment call if it needs a human decision, otherwise handle it silently.
 
-(a) COMPLIANCE STRIKES — shape-based, not just literal strings
-  · outcome guarantees: any form of "guarantee" within ~30 words of an
-    outcome promise (stronger, leaner, energized, more in control, lose,
-    fat loss, transformation, results, pounds, lbs, body fat, inches)
-  · lbs/pounds within ~15 words of a timeframe (day/week/month/year).
-    Persona language with NO timeframe stays legal
+(a) COMPLIANCE STRIKES — shape-based, not just literal strings.
+Every rule below names the tier it encodes. TIER 1 rules report a
+violation. TIER 2 rules report a MISSING CONDITION, and are written to
+check for the condition rather than to ban the content - a rule that flags
+conditioned Tier 2 copy is a defect in the rule, not a finding.
 
-    EXCEPTION - DOCUMENTED CASE STUDIES
-    Individual client results carrying a timeframe are exempt from
-    lbs-near-timeframe and result-paired-with-window WHEN ALL of the
-    following hold:
-      1. the result is attributed to a specific individual (named, or
-         explicitly anonymised with a stated profile), AND
-      2. the page carries the individual-results disclaimer IN A DEDICATED
-         BLOCK - its own paragraph or container, opening with the phrase.
-         A mention embedded in a caption, list item, table cell, or the tail
-         of a body paragraph does NOT qualify, AND
-      3. substantiation exists on file (training records, scan printouts,
-         or before/after photography).
-    The exemption is page-scoped, not site-wide. A case-study figure quoted
-    on a page WITHOUT the disclaimer is still a strike.
-    Aggregate or typical-results framing is NEVER exempt, on any page.
-    Approved by Andrew Flores, Sept 2026.
+  TIER 1 RULES
+  · guarantee_any (T1-1) - "guarantee" with a RESULT NOUN as its object or
+    anywhere in the same sentence. Narrowed Sept 12 2026 by owner decision:
+    the first drafting flagged the word, which made a refund policy that
+    promises no result read as an outcome guarantee. A guarantee stated as
+    ABSENT ("reimbursement is not guaranteed") is exempt on the preceding
+    words only. <style> and executable <script> bodies are not copy and are
+    excluded; ld+json IS copy. Negative test is the approved 30-Day Fit
+    Guarantee wording (TIER 2 item 6), which must pass, against
+    "guarantee you'll lose 20 lbs", which must fire.
+  · lbs_near_timeframe (T1-2) - pounds, inches or body-fat % within ~15
+    words of a quantified timeframe. Inches and body-fat % are new to this
+    rule. Exempt: TIER 2 item 2 (attributed individual, page disclaimer),
+    TIER 2 item 3 (no timeframe at all never matches), frozen records.
+  · uncertified_claims (T1-3) - asserting OmniFit diagnoses, treats,
+    prescribes, cures or rehabilitates; provides physical therapy or
+    chiropractic; ASSESSES OR MANAGES A MEDICAL CONDITION; or that a DEVICE
+    is used for any of those. The medical-condition object is REQUIRED on
+    the assess/manage shape, which is what keeps "we assess your movement"
+    legal. Negations and referral language are legal.
+  · prenatal_postpartum (T1-3, carried over) - unless an explicit
+    out-of-scope disclaimer or attributed to a partner via knowsAbout.
+  · free_consultation (T1-4) - "free" within ~6 words of any bookable first
+    session: consultation · assessment · screen · screening · session ·
+    diagnostic · call · intake. Unchanged.
+  · phase_angle_result (T1-5) - NEW. A phase angle value, delta or
+    improvement rate presented as evidence of health. Naming and describing
+    the marker is legal, which is why the rule keys off a NUMBER or a
+    change/improvement word beside "phase angle", not on the phrase.
+  · population_clinical_claim (T1-6) - NEW. A clinical outcome verb applied
+    to a clinical condition at population scope, attributed to OmniFit
+    training. Never clearable by a method note, sample size or disclaimer -
+    this is the part of the old clinical-statistic rule that survives.
 
-    Reasoning, recorded so it survives: an individual, attributed,
-    documented client outcome with substantiation on file is a different
-    object from a claim about what a prospective client can expect. The
-    first is a fact about a named person. The second is a projection. Only
-    the second is what the rule exists to prevent. This resolves the
-    contradiction between CANONICAL TRUTH (which records "Mark -17 lbs,
-    248->231, 4mo" as canonical fact) and this screen (which banned
-    lbs-near-timeframe outright); both could not hold.
-    Encoded in tools/certify.py, keyed off the DISCLAIMER TEXT PRESENT ON
-    THE PAGE, never off the filename - that is what makes condition 2
-    enforceable rather than decorative. Condition 3 is not machine-
-    checkable and remains a human warranty.
-    Condition 2 tightened Sept 2026: the first encoding accepted the phrase
-    anywhere on the page, which let how-we-measure-your-progress qualify off
-    a chart caption ("Sample layout only... individual results vary"). It now
-    requires a dedicated block. Pages carrying a qualifying disclaimer today:
-    case-studies (and its duplicate home-3) and
-    personal-trainer-over-50-san-diego. desk-worker-posture-pain no longer
-    qualifies - its disclaimer sits at the tail of a body paragraph. That
-    changed no finding, because the figure beside it was already a strike on
-    attribution grounds.
-  · free-consultation framing: "free" within ~6 words of any of
-    consultation · assessment · screen · screening · session ·
-    diagnostic · call · intake
-  · prenatal / postpartum content, unless it is an explicit out-of-scope
-    disclaimer
-  · uncertified specialty claims: asserting OmniFit diagnoses, treats,
-    prescribes, cures, rehabilitates, or provides physical therapy or
-    chiropractic. Negations and referral language are legal
+  TIER 2 CONDITION RULES
+  · aggregate_metric_conditions (T2-1) - REPLACES the old blanket
+    clinical_stat ban for non-clinical measured metrics. A percentage or
+    measured figure presented as an aggregate is a finding ONLY when the
+    surface is missing a method line, the not-independently-audited note,
+    or the individual-results disclaimer. The finding NAMES THE MISSING
+    CONDITION. Surface = the enclosing <section>, falling back to the page.
+  · class_iia_conditions (T2-4) - NEW. Every "Class IIa medical device"
+    instance must be byte-identical to the canonical wording AND carry the
+    not-a-medical-provider note on the same surface. Two separate findings.
+  · illustrative_label (T2-5) - NEW. Sample or example figures presented
+    without an "illustrative, not client data" label on the same surface.
+
+  WITHDRAWN WITH THE OLD SCREEN
+  · The DEDICATED-BLOCK disclaimer test for case studies. It required the
+    disclaimer to open its own p/div/aside/section/blockquote. TIER 2 item
+    2 asks only that the disclaimer be on the same page, so the test is
+    withdrawn for that item. It is NOT withdrawn from TIER 2 item 1, which
+    states its own three conditions.
+    Consequence recorded so it is not rediscovered as a surprise:
+    how-we-measure-your-progress and desk-worker-posture-pain both failed
+    the dedicated-block test and now pass the same-page test. Neither gains
+    an exemption from it on its own, because TIER 2 item 2 also requires
+    ATTRIBUTION, and both fail that independently.
+  · clinical_stat as a blanket ban on quantified figures near a clinical
+    word. Split: the population-scope clinical case is T1-6 and is
+    unchanged in force; everything else is T2-1 and is conditional.
+  · result_near_timeframe as an unconditional rule. It now exempts a
+    surface carrying the full TIER 2 item 1 conditions, because a measured
+    aggregate reported with its period IS a measurement with its method,
+    which is the thing this screen stopped treating as a claim.
+
+  EXCEPTION - ATTRIBUTED INDIVIDUAL OUTCOMES (TIER 2 item 2)
+  Individual client results carrying a timeframe are exempt from
+  lbs_near_timeframe and result_near_timeframe when:
+    1. the result is attributed to a specific individual (named beside a
+       role noun, or explicitly anonymised WITH a stated profile), AND
+    2. the page carries the individual-results disclaimer ANYWHERE on the
+       page. Relaxed Sept 2026 from a dedicated block, per TIER 2 item 2.
+    3. substantiation exists on file. Not machine-checkable; a human
+       warranty, unchanged.
+  Page-scoped, not site-wide. Aggregate or typical-results framing is NEVER
+  exempt, on any page. Fails CLOSED: anything the attribution test cannot
+  confirm stays a strike.
+  FROZEN: case-studies.html and home-3.html are exempt from re-screening.
+
+  Reasoning, recorded so it survives: an individual, attributed, documented
+  client outcome is a fact about a named person; a claim about what a
+  prospective client can expect is a projection. Only the projection is
+  what these rules exist to prevent. The same distinction is what moved
+  aggregate measured metrics from banned to conditional - a median with its
+  sample size and period is a record of what happened, and the conditions
+  are there to keep it readable as one.
 
 (b) STALE CANON
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
@@ -317,17 +559,36 @@ judgment call if it needs a human decision, otherwise handle it silently.
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash ae388d31c0b6149e, header hash 7e5de5984b133663). Currently 11
-  pages and 11 headers.
-- Credentials block body: byte-identical on 10 pages (6492e3ca, 630 bytes)
-  — the 9 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
+  (page hash a6c7e65dddff4795, header hash 7af0d0049b0b7aba). Currently 12
+  pages and 12 headers. BOTH HASHES CHANGED in the October Card run: the
+  block states the rates, so repricing rewrote the same bytes on all 24
+  files. Previous values ae388d31c0b6149e / 7e5de5984b133663. The
+  the-30-minute-executive-reset pair also carries this block and was NOT
+  rewritten - it is out of certification scope and on the do-not-paste list,
+  so it still carries the August wording and does not enter either hash.
+- Credentials block body: byte-identical on 11 pages (6492e3ca1545dc26,
+  630 bytes)
+  — the 10 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
   its own Meet Nemezio section instead.
-- Archetype card bodies (Section A): byte-identical × 10 pages
+- Archetype card bodies (Section A): byte-identical × 11 pages
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
-- 9-point screen section body (Section B): byte-identical × 10 pages
-  (hash bd73ea51bc9ec5eb; intro + nine <li> items + closing line, set by
-  the Section A/B run).
+- 9-point screen section body (Section B): byte-identical × 11 pages
+  (hash 4c720960dec5a809; intro + nine <li> items + closing line, set by
+  the Section A/B run). Hash changed legitimately in the Device Swap run
+  (Sept 2026): the Body Composition <li> names the device, so retiring the
+  1500 MDD rewrote the same bytes on all eleven pages. Previous value
+  bd73ea51bc9ec5eb. All eleven pages still agree; certify.py reported no
+  invariant mismatch. (That run recorded "ten"; rancho-bernardo was already
+  on main and carrying the invariant, so the count was one low even then.)
+  CHANGED AGAIN in the October Card run: ba590a09107ffda0 -> 4c720960dec5a809.
+  The invariant spans intro + nine <li> items + closing line, and the INTRO
+  carried the retired "$110 Performance Diagnostic, credited in full toward a
+  3-month package". All NINE <li> ITEMS AND THE CLOSING LINE ARE BYTE-IDENTICAL
+  across the change, verified item by item; only the intro sentence moved, and
+  identically on all eleven pages. The alternative was leaving a retired price
+  live on eleven territory pages to protect a hash, which is the wrong way
+  round: the hash records the block, it does not license its contents.
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
@@ -373,15 +634,24 @@ DEFERRED-01 · Executive Reset guarantee wording (rates page) · CLOSED Aug 2026
 - The (a) COMPLIANCE STRIKES exemption for this item is removed. The
   resolved text does not pair "guarantee" with an outcome word and needs no
   exemption; tools/certify.py no longer carries a DEFERRED_01 carve-out.
+- STATUS: CLOSED, Aug 2026, with the approved wording above. It was briefly
+  re-opened by the first drafting of TIER 1 item 1, which banned the word
+  "guarantee" rather than the promise of a result; that drafting was
+  narrowed by owner decision on Sept 12 2026 and the item is CLOSED again.
+  The approved wording is now covered by TIER 2 item 6: it promises a
+  refund and an exit, never a result. Wording changes require owner
+  approval.
 
 RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
-- Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved by counsel (Andrew
-  Flores), who confirmed the current pricing is acceptable.
+- Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved Aug 2026 by the counsel
+  then engaged (no longer engaged), who confirmed the current pricing is
+  acceptable. Kept as the historical record of what actually cleared it;
+  the live gate for any new exposure is OWNER APPROVAL.
 - Outcome: the interim month-to-month-only rule is LIFTED. In-home
   Performance and Peak, individual and couples, may be sold and published
   as 3-month prepaid commitments.
 - The condition attached to that clearance is not a pricing limit. It is the
-  CONTRACT VALUE CHECK recorded under WORKFLOW RULES: contact counsel before
+  CONTRACT VALUE CHECK recorded under WORKFLOW RULES: owner approval before
   filing a client on a contract exceeding $4,400.
 - Original reasoning, retained: Cal. Civ. Code 1812.86 caps a single health
   studio services contract at $4,400, and OmniFit's own Couples Prepaid
@@ -391,21 +661,26 @@ RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
   clearance settles it without the site needing to answer that question.
 
 PRICING-CHANGE CHECKLIST (kept live from the above; consult before repricing)
-- 3-month prepaid total = 3 x the 3-month monthly rate. Anything over $4,400
-  triggers the CONTRACT VALUE CHECK before a client is filed.
-- Current totals, highest first:
-    In-home Peak individual      1,860 x 3 = 5,580   over
-    In-home couples Performance  1,725 x 3 = 5,175   over
-    Teqneeq Peak individual      1,395 x 3 = 4,185   under by 215
-    In-home Performance indiv.   1,250 x 3 = 3,750   under by 650
-    Studio couples Performance   1,250 x 3 = 3,750   under by 650
-    Teqneeq Performance          950 x 3   = 2,850   under by 1,550
-    In-home couples Momentum     875 x 3   = 2,625   under by 1,775
-    In-home Momentum individual  650 x 3   = 1,950   under by 2,450
-- Break point is the same for every offer: any 3-month monthly rate above
-  $1,466 produces a total over $4,400 (4,400 / 3 = 1,466.67). Teqneeq Peak at
-  1,395 is the closest under it. In-home Peak's 1,860 is a FLOOR, so its
-  total can only rise.
+- Every published figure comes from the OCTOBER 2026 CARD. Anything from the
+  LEGACY block in published copy is a stale-canon violation, not a variant.
+- Round numbers only. No contract exceeds $4,400.
+- Committed totals on the card, highest first - the only figures the CONTRACT
+  VALUE CHECK can reach, because The Program commits no total:
+    In-home couples Momentum Foundation   1,250 x 3 = 3,750   clear by 650
+    Studio Performance Foundation         1,100 x 3 = 3,300   clear by 1,100
+    Studio couples Momentum Foundation      850 x 3 = 2,550   clear by 1,850
+    In-home Momentum Foundation             800 x 3 = 2,400   clear by 2,000
+    Studio Momentum Foundation              560 x 3 = 1,680   clear by 2,720
+  Those five are the whole list: the Foundation is the only committed total
+  on the card. The Program, the Reset and the Tune-Up all bill per cycle or
+  per month with notice, so none of them commits a total to check.
+- Break point for a THREE-CYCLE Foundation: any per-cycle rate above $1,466
+  produces a total over $4,400 (4,400 / 3 = 1,466.67). In-home couples
+  Momentum at 1,250 is the closest under it. No Foundation tier may be
+  introduced above that rate without the CONTRACT VALUE CHECK.
+- Off-card arrangements (in-home Peak "from $2,600", Couples Peak "by
+  arrangement") are the only route to a contract that can exceed $4,400, and
+  they take owner approval before a client is filed.
 
 NEXT RUNS
 - BATCH 2 DONE (Aug 2026): FAQs · how-it-works-pricing (converted to

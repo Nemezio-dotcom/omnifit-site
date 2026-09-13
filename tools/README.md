@@ -154,73 +154,154 @@ only multi-block header in the repo; fixing it changed exactly one pair's status
 and no others. Negative-tested both ways: a matching second-block FAQPage
 mirrors, an altered one still flags.
 
-## Compliance rules (a)
+## Compliance rules (a) — the two tiers
 
-- **outcome guarantees** — "guarantee" within ~30 words of an outcome promise.
-- **lbs near a timeframe** — a pounds figure within ~15 words of a *quantified*
-  window. Bare duration nouns ("after years of inactivity") do not count. A
-  timeframe preceded within two words by a contrastive marker ("unlike 6-week
-  challenges") is exempt, but every other timeframe in the window is still
-  checked, so `Lose 20-30 lbs in 6 months, not a 6-week challenge` still flags.
-- **free-framing** — "free" within ~6 words of any bookable first session:
-  consultation · assessment · screen · screening · session · diagnostic ·
-  call · intake. Widened Aug 2026 after the literal `consultation`-only version
-  passed `free 45-minute assessment`. Two exemptions, both tested: `feel free`
-  (idiom, only when "feel" immediately precedes) and hyphenated compound
-  adjectives (`distraction-free`, `injury-free`, `pain-free`) — a real offer is
-  written unhyphenated.
-- **prenatal / postpartum** — exempt when attributed to a partner via
-  `knowsAbout` markup, or inside an explicit out-of-scope disclaimer.
-- **uncertified specialty claims** — asserting OmniFit diagnoses, treats,
-  prescribes, cures, rehabilitates, or provides physical therapy or
-  chiropractic. Negations and referral language are legal. Note `\b` boundaries
-  on the negation list: without them, a bare `no` matched inside "diag**no**se"
-  and exempted every genuine claim — a rule failing open.
-- **quantified clinical outcome statistics** — a percentage attached to a
-  clinical result (pain, injury, recovery, healing, rehab, range of motion)
-  *with* an outcome framing (reduced, improved, relief…). Behavioural and
-  business stats are not clinical and stay: adherence, compliance, rating,
-  reviews. Process statements ("100% of clients get an injury screen") lack the
-  outcome framing and pass.
-- **results promised within a window** — the general case of the lbs rule, in
-  any units. Results must be framed against the client's own baseline, never a
-  calendar. Negation is checked on the **preceding** words only, so a trailing
-  "…and we don't cut corners" cannot exempt a real promise.
-- **DOCUMENTED CASE-STUDY EXCEPTION** (Andrew Flores, Sept 2026) — the only
-  exemption on `lbs_near_timeframe` and `result_near_timeframe`. CANON's
-  CANONICAL TRUTH recorded documented client figures *with* timeframes as
-  canonical fact while the compliance screen banned that shape outright; both
-  could not hold. An attributed, documented individual outcome is a fact about
-  a named person; a claim about what a prospective client can expect is a
-  projection, and only the projection is what the rule prevents.
-  Three gates, all in `_case_study_exempt()`:
-  1. **attribution** — a named client beside a role noun (`Mark ·`,
-     `Annie, a registered nurse`, `Dave Rendo, owner of…`), or an explicit
-     anonymisation *with a stated profile* (`Anonymized client · Male, 29`).
-     Bare "anonymized client" is not enough. The role noun is required: without
-     it, `San Diego, lost 27 pounds` would read as an attribution and condition
-     1 would be decorative.
-  2. **page disclaimer** — `_has_results_disclaimer()` requires a **dedicated
-     block** (`p` / `div` / `aside` / `section` / `blockquote`) whose text
-     *opens* with "individual result(s)" and carries a variation clause
-     (vary / depend / not a projection) within 40 words. **Keyed off the
-     disclaimer text on the page, never off the filename** — that is what makes
-     condition 2 enforceable. The same figure on a page without the disclaimer
-     is still a strike. Tightened Sept 2026: the first version accepted the
-     phrase anywhere, so a chart caption on how-we-measure-your-progress
-     ("Sample layout only… individual results vary") qualified the whole page.
-     `li`, `td`, `th`, `caption`, `figcaption` and `small` are excluded by not
-     being on the block list; a phrase appearing partway through a sentence is
-     excluded by the opens-with test. Fourteen fixtures, both directions.
-  3. **not aggregate** — `typical`, `average`, `most clients`, `you can expect`
-     and friends within the window are never exempt, on any page.
-  Condition 3 of CANON's exception (substantiation on file) is not
-  machine-checkable and remains a human warranty.
-  Fails **closed**: anything the attribution test cannot confirm stays a strike.
-  Negative-tested in all four required directions plus four more — see the
-  Sept 2026 entry in REPORT.md.
+Rewritten Sept 2026 when outside counsel disengaged and the owner became the
+sole compliance decision-maker. The old screen was aimed at projections and
+caught measured facts in the same net; the owner judged that a mistake. See
+CANON **COMPLIANCE SCREEN — TWO TIERS**.
+
+**TIER 1 rules report a violation. TIER 2 rules report a MISSING CONDITION.**
+A Tier 2 rule that flags conditioned copy is a defect in the rule, not a
+finding — that inversion is the single most important thing to keep straight
+when editing this file.
+
+| # | Rule | Tier | Status |
+|---|---|---|---|
+| 1 | `guarantee_any` | T1-1 | **changed** — "guarantee" with a result noun in the same sentence (narrowed Sept 12; see below) |
+| 2 | `lbs_near_timeframe` | T1-2 | **changed** — inches and body-fat % added; disclaimer relaxed to same-page |
+| 3 | `result_near_timeframe` | T1-2 | **changed** — same-page disclaimer; conditioned surfaces exempt |
+| 4 | `uncertified_claims` | T1-3 | **changed** — assess/manage a medical condition, and device-used-to |
+| 5 | `prenatal_postpartum` | T1-3 | unchanged — carried over, see CANON's note |
+| 6 | `free_consultation` | T1-4 | unchanged |
+| 7 | `phase_angle_result` | T1-5 | **new** |
+| 8 | `population_clinical_claim` | T1-6 | **new** — the surviving half of `clinical_stat` |
+| 9 | `aggregate_metric_conditions` | T2-1 | **new** — replaces `clinical_stat`'s blanket ban |
+| 10 | `class_iia_note` + cross-file wording | T2-4 | **new** |
+| 11 | BANNED literal terms | (b) | unchanged — stale canon, not the compliance screen |
+| 12 | travel-fee adjacency | (b) | unchanged — and still carries its known defect, below |
+| 13 | `$150`/`$175` context | (b) | unchanged |
+| 14 | tag balance · ld+json validity | (c) | unchanged |
+| 15 | LocalBusiness `@id` · `about` reference · FAQ mirror · orphan page | (c) | unchanged |
+| 16 | invariant mismatch · canon hash stale | (c) | unchanged |
+| — | `clinical_stat` | **RETIRED** | split into 8 (hard ban, force unchanged) and 9 (conditional). Nothing is lost: the population-scope clinical case it existed for is 8. |
+| — | dedicated-block disclaimer test | **RETIRED for T2-2** | written to counsel's standard; T2-2 asks only for a same-page disclaimer. Still governs nothing else — T2-1 states its own three conditions. |
+
+### What the tiers changed, rule by rule
+
+- **`guarantee_any` (T1-1).** Two draftings, each wrong once, and the pair is
+  worth keeping as a lesson in what the rule is actually for:
+  **v1** flagged "guarantee" within ~30 words of an outcome word, and missed
+  the DEFERRED-01 wording, which was written not to sit near one.
+  **v2** flagged the word itself, and caught that wording along with
+  everything else — including a refund policy that promises no result at all.
+  **v3 (Sept 12, owner decision)** asks whether a RESULT NOUN is the object of
+  the guarantee or sits in the same sentence. What makes a guarantee a Tier 1
+  violation is the result it promises, not that it is called a guarantee; a
+  promise about money is CANON Tier 2 item 6 and is legal.
+  The window is the **sentence**, not a word count: "guarantee" and its promise
+  sit either side of a colon in `30-Day Guarantee: you will be stronger`, and a
+  fixed window either clips the promise or reaches into the next sentence.
+  Negation still reads the preceding words only, so `Reimbursement is not
+  guaranteed` on hsa-fsa stays legal.
+  Fixture both ways: the approved 30-Day Fit Guarantee callout and FAQ answer
+  must pass; `guarantee you'll lose 20 lbs` must fire.
+- **`lbs_near_timeframe` (T1-2).** Inches and body-fat percentage added.
+  Condition 2 of the case-study exemption relaxed from a dedicated block to
+  anywhere on the page. Attribution and the never-exempt aggregate test are
+  untouched, which is why neither how-we-measure-your-progress nor
+  desk-worker-posture-pain gains an exemption from the relaxation — both fail
+  attribution on their own.
+- **`uncertified_claims` (T1-3).** "Assesses" and "manages" are new and are
+  **scoped to a medical condition**. Unscoped they would flag "every client
+  starts with a movement assessment" across most of the site — a rule failing
+  closed so hard it stops being read.
+- **`aggregate_metric_conditions` (T2-1).** The rule that carries the point of
+  the rewrite. A figure presented as an aggregate is a finding **only** when
+  its surface is missing a method line, the not-independently-audited note, or
+  the individual-results disclaimer, and the finding names which. Surface = the
+  innermost enclosing `<section>`, falling back to the page. The fixture is the
+  Results section of `how-we-measure-your-progress.html`: it passes with all
+  three present and flags with any one removed.
+  The machine-checkable half of "method" is sample size **and** period. "What
+  was measured" is prose beside the figure and stays a human warranty, like
+  substantiation in T2-2 — stated here so nobody later reads a green result as
+  proof the method line is good.
+- **`class_iia_note` (T2-4).** Two conditions, two findings. Per-file: the fact
+  must sit beside the not-a-medical-provider note. Cross-file: one
+  byte-identical wording everywhere, collected in `run()` the way an invariant
+  is, because that is the shape of the check.
+  The cross-file comparison is on **the sentence** the fact sits in. It was a
+  12-word window first, and that window also compared the prose on either side:
+  once the canonical block was appended correctly to a second page, three
+  different words in the *preceding* sentence (`no additional cost.` against
+  `a population average.`) read as two different wordings of an identical
+  claim. A checker reporting correct copy as a violation — the Tier 2 inversion
+  this file warns about, arriving in the one rule written to be exact.
+  The window existed because an earlier sentence split, run while the fact sat
+  mid-sentence inside a header's `ld+json`, swept up `" } }, { "@type":
+  "Question"`. That is no longer the shape. Negative-tested: changing one word
+  *inside* the block (`certification` → `approval` on one of three surfaces)
+  still fires and names the odd file out.
+
+### Three defects this rewrite introduced, and how they surfaced
+
+Recorded because each is a shortcut the next editor will also reach for, and
+none was caught by reading the code.
+
+| Shortcut | What broke | Caught by |
+|---|---|---|
+| Strip `<script>` bodies as "not copy" | A header file **is** one `ld+json` block. Every header went blank and ten rules reported nothing on it — the null overwrite in a new costume | the widened guarantee rule going silent on `training-rates-san-diego-header` |
+| Add `"` as an inch unit | Every ld+json price (`"325.00"`) read as `00 inches`: 20 invented findings across three headers | running the suite and reading the output |
+| `\bmedical condition\b` | Does not match "medical condition**s**" — the device rule passed the exact sentence T1-3 names | the negative test, not the regex |
+
+Thirty-eight negative tests were run across the changed and new rules, both
+directions on each. Two failed on the first pass: the plural above (a real
+bug) and one badly written fixture (it removed one of the two audit phrases and
+expected a flag).
 
 ## Stale-canon rules (b)
+
+**The signal inverted on 13 Sept 2026.** August prices were canonical; they are
+now the stale-canon marker, and the October card's figures are canonical. Three
+figures changed sides and had to be REMOVED from `BANNED`, not added to it:
+`$90` (was the retired name-era assessment price, now the guest add-on), `$275`
+(was an August month-to-month rate, now the in-home single) and `$500/mo` (was
+Executive Hybrid, and Reset Gold is now $500).
+
+Banning a bare figure is only safe when it appears in **no** October product.
+The safe set was computed by differencing the two CANON blocks, not read off by
+eye: sixteen figures collide, and each would have been a false positive on
+correct copy.
+
+Two matching rules exist because both were learned the hard way in one run:
+
+- **Figures need a right boundary.** Plain substring matching fired `$50` inside
+  `$500` and `$75` inside `$750`, both October Reset tiers.
+- **A hyphenated range is third-party pricing.** `$50-80/session` and
+  `$150-250/month` are competitor rates on the comparison page. The card's rule
+  is round numbers only, so every OmniFit figure is a single number — which
+  gives the same exemption the August `$150` rule carried as a `comp-value`
+  class whitelist, without needing to know the class names.
+
+`assessment_as_session_rate` replaces the August `$150`/`$175` context rule.
+`$150` is now canonical — it is the Performance Assessment — so the rule checks
+the **meaning** rather than the number: `$150` published as a per-session rate
+is the October equivalent of the old mangled pack rung.
+
+`BANNED_TIERS` holds `Essential`, unlisted on the card, matched
+case-sensitively so "essential movement patterns" stays prose.
+`fee_language` flags `exit fee`, `cancellation fee` and `non-refundable`
+**scoped to the sentence**, with the Foundation policy sentence as the single
+exemption and the negative test.
+
+Retired with the August card, kept as a note rather than code: `_marker_nearby`,
+`_inside_packs_table`, `CANON_MARKERS`, `CANON_CARDS`. All four carved `$175`
+out as a legal pack rung; it appears in no October product and is a plain
+banned literal now. A dormant exemption is how a retired figure gets
+grandfathered back in through a context nobody re-reads.
+
+### The old $150/$175 rules
 
 - **$150 is retired everywhere.** Neither ladder uses it (studio 5/10/20 @
   $145/$140/$135; in-home @ $175/$170/$165). The only exemption is competitor
@@ -266,12 +347,62 @@ keep their retired pricing, old address and unmirrored headers on purpose.
 
 Five, all recomputed from the files each run and compared against the hashes
 recorded in CANON.md: page pricing, header pricing, credentials, archetypes,
-9-point screen. A mismatch is a category (c) finding. All five are now
-**printed every run**, not only on mismatch, and an invariant that matched no
-file at all is reported as not-verified rather than silently absent.
+9-point screen. All five are now **printed every run**, not only on mismatch,
+and an invariant that matched no file at all is reported as not-verified rather
+than silently absent.
+
+### Two mismatch classes, both category (c)
+
+Until Sept 2026 this section described a comparison that did not happen. The
+check only asserted that the files carrying an invariant agreed with **each
+other**; it never opened CANON.md. An invariant edited consistently across all
+its pages therefore passed in silence while CANON still recorded the old hash —
+the null overwrite again, a comparison reporting success without looking at the
+thing it claimed to check. The hashes are now parsed out of CANON's INVARIANTS
+block and compared, and the two failures are reported as two classes because
+they mean different things:
+
+| Finding | What is true |
+|---|---|
+| `[invariant mismatch]` | the files carrying the invariant disagree with **each other** |
+| `[canon hash stale]` | the files agree, and what they agree on is **not what CANON.md records** |
+
+Files agreeing with one another proves only that an edit was applied
+consistently. The Device Swap run is the case in point: retiring the 1500 MDD
+rewrote the Body Composition `<li>` on every territory page at once, so the
+9-point hash moved from `bd73ea51bc9ec5eb` to `ba590a09107ffda0` with all pages
+still in perfect agreement. Under the old check that was indistinguishable from
+no change at all.
+
+The recorded hashes are **parsed, never hard-coded** — a copy in `certify.py`
+would be a second place to forget to update, and CANON being the single
+recorded source is the whole point. Each invariant's bullet anchor and hash
+pattern are matched inside **one `- ` bullet** of the INVARIANTS block. The
+first version searched the whole block with `.*?` under `re.S`, which let a
+blanked hash match forward into the *next* bullet and report a neighbouring
+invariant's value as its own — a parser failing open, in the exact shape the
+check exists to close. It was caught by negative-testing a blanked archetypes
+hash, which "parsed" as the 9-point value.
+
+Fails loudly, never open. An unreadable CANON.md, a missing INVARIANTS block,
+or a block where not one hash parses raises `certify.CanonParseFailure`;
+`run()` catches it and records the run under CHECKS THAT COULD NOT RUN, so an
+invariant that was never compared can never read as one that matched. A single
+unparseable hash is reported per-invariant the same way. Both paths are
+negative-tested, and so is the parse of a live CANON.md.
+
+Negative-tested in both directions, as every rule here must be: altering the
+recorded 9-point hash in CANON.md fires
+`[canon hash stale] 9-point: files agree on …, CANON.md records …` and moves
+the structure count; reverted, all five read `ok` and the count returns.
 
 The credentials block is 630 bytes across 10 pages. Editing it means editing all
-ten and updating the hash in CANON.md in the same commit.
+ten and updating the hash in CANON.md in the same commit. CANON recorded this
+one truncated to 8 hex while the others were 16, so comparison is on the
+**recorded prefix** — a shorter recorded value is a weaker check, not a
+mismatch. The entry was widened to the full `6492e3ca1545dc26` in the Device
+Swap merge, closing that weakness; the prefix rule stays, with an 8-hex floor,
+because nothing stops a future entry being written short again.
 
 ## CHECKS THAT COULD NOT RUN
 
