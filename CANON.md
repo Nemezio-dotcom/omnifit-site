@@ -8,7 +8,7 @@ REPO STATE (reconciled with disk, Sept 2026)
   disclosure, never before - fixing the name first hides a real structural
   check behind a filename mismatch.
 
-  CERTIFIED - 28 page/header pairs
+  CERTIFIED - 29 page/header pairs
     11 territory pages: personal-trainer-4s-ranch, -carlsbad,
       -carmel-valley, -del-mar, -encinitas, -fairbanks-ranch, -la-jolla,
       -rancho-bernardo, -rancho-santa-fe, -santaluz, -solana-beach
@@ -33,6 +33,14 @@ REPO STATE (reconciled with disk, Sept 2026)
       all four page invariants and its 7-question FAQPage mirrors. Zero findings.
       It is the ELEVENTH territory page, which is why every invariant count in
       this brief was one low until the Compliance Re-tier run.
+    nutrition-coaching-san-diego - certified in the Enforcement run (Sept 2026)
+      once its header entered the glob. The header arrived as
+      "nutrition-coaching-san-diego.header" - extension .header, not .html - so
+      pages/**/*.html never saw it and the pair was neither checked nor
+      reported missing. Renamed to the standard <slug>-header.html; the content
+      had already been verified to mirror by hand, and certified unchanged on
+      the first run that could see it. 7-question FAQPage, mirrors in count,
+      order and text. Zero findings.
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings, do not paste
     · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
@@ -48,17 +56,6 @@ REPO STATE (reconciled with disk, Sept 2026)
         3. the naming cannot be fixed until its content certifies, per the
            naming rule above.
       The page itself is live and is now linked from four hub pages.
-    · nutrition-coaching-san-diego - NEW, arrived on main in the paste-source
-      run (Sept 2026). The PAGE is clean and its FAQ mirrors its header exactly
-      (7 vs 7, count, order and text, verified by hand with tools/faq.py). It is
-      NOT certified for one reason only: its header is at
-      "pages/headers/nutrition-coaching-san-diego.header" - the extension is
-      .header, not .html, so certify.py's pages/**/*.html glob never sees it.
-      The pair is neither checked nor reported missing, exactly the couples
-      header's failure shape in a second form. Per the naming rule above the
-      rename waits until the content certifies - which it cannot, while the
-      file is invisible. Breaking that deadlock needs an owner decision, and
-      is reported, not taken, by this run.
     · about, contactform, desk-worker-posture-pain, hsa-fsa-personal-training
       - each has a header. desk-worker's header carries no FAQPage while its
       page has 6 FAQs: a real, reported mirror failure, not fixed.
