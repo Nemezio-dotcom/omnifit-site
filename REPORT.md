@@ -3584,3 +3584,43 @@ All five invariant hashes unchanged — the string sat in none of the blocks.
 
 Certification: **0 · 0 · 3 · 9**, unchanged.
 
+
+# Reset Refresh run — the last deferred page (Sept 2026)
+
+**Branch:** `main`
+
+`the-30-minute-executive-reset` and its header brought to the October card and
+removed from `certify.py`'s `OUT_OF_SCOPE` list. It certifies for the first
+time.
+
+| | |
+|---|---|
+| Reset tiers | Bronze $200 · Gold $500 · Platinum $750 · Black $1,100, billed every 4 weeks |
+| Pricing invariant | installed **byte-identical** to the other twelve pairs — copied from a live carrier, not retyped, verified by hash |
+| Device | every `BodyStat 1500 MDD` gone, page and header |
+| RED-PEN | all four flags closed |
+
+**RED-PEN B** — the one actually open — is resolved with the wording already
+live on `how-we-measure-your-progress.html`: the QuadScan is a physical device
+and is **not claimed for virtual clients**. Virtual clients track body
+composition via self-measurement with video guidance, submit posture photos
+through the app, and have every other metric managed through the coaching
+platform. San Diego clients can add an in-person scan. Mirrored answer, written
+to page and header together; `faq.py` verifies 8 vs 8.
+
+**The caveat.** CANON's closing procedure begins "paste the live page into the
+repo". That step did not happen — no run in this repo can reach the live page.
+This is the content patch, not the refresh. The page is correct against the
+card and against the brief; if production has diverged since the file was last
+pasted, **the diff must be reviewed before this page is pasted back**. Recorded
+in CANON beside the page's CERTIFIED entry, not only here.
+
+**Stray directory resolved.** `pages/headers /` — with the trailing space — is
+gone; the couples header now sits in `pages/headers/` under the standard name.
+The glob matches 80 files with none under a stray path, and `mkheaders`
+regeneration is a no-op across all nine generated headers.
+
+CANON: certified pairs 29 → 30, invariant carriers 12 → 13 pages and headers.
+
+Certification: **0 · 0 · 3 · 9**, all five hashes unchanged.
+
