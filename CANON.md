@@ -547,8 +547,13 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash ae388d31c0b6149e, header hash 7e5de5984b133663). Currently 12
-  pages and 12 headers.
+  (page hash a6c7e65dddff4795, header hash 7af0d0049b0b7aba). Currently 12
+  pages and 12 headers. BOTH HASHES CHANGED in the October Card run: the
+  block states the rates, so repricing rewrote the same bytes on all 24
+  files. Previous values ae388d31c0b6149e / 7e5de5984b133663. The
+  the-30-minute-executive-reset pair also carries this block and was NOT
+  rewritten - it is out of certification scope and on the do-not-paste list,
+  so it still carries the August wording and does not enter either hash.
 - Credentials block body: byte-identical on 11 pages (6492e3ca1545dc26,
   630 bytes)
   — the 10 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
