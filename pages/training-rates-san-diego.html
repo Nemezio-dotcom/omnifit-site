@@ -101,7 +101,8 @@
   #omni-rates .rt-fit-col.not-for .rt-fit-list li::before { content: '✕'; color: var(--white-50); font-weight: 700; font-size: 12px; flex-shrink: 0; }
 
   /* ===== PRICING CARDS (4-col for named packages) ===== */
-  #omni-rates .rt-pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 40px; }
+  #omni-rates .rt-pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; max-width: 1120px; margin: 0 auto 24px; }
+  #omni-rates .rt-pricing-grid > .rt-price-card { flex: 0 1 268px; width: 268px; max-width: 268px; }
   #omni-rates .rt-pricing-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1120px; margin: 0 auto 56px; }
   #omni-rates .rt-pricing-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 20px; }
   #omni-rates .rt-price-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 20px 24px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; }
@@ -188,6 +189,8 @@
   #omni-rates .rt-policy-icon { font-size: 24px; margin-bottom: 10px; }
   #omni-rates .rt-policy h5 { font-family: 'Montserrat', sans-serif !important; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
   #omni-rates .rt-policy p { font-size: 13px; color: var(--white-50); line-height: 1.6; }
+  #omni-rates .rt-policy a, #omni-rates .rt-policy a:link, #omni-rates .rt-policy a:visited { color: var(--gold) !important; text-decoration: underline; }
+  #omni-rates .rt-policy a:hover { color: var(--gold-light) !important; }
 
   /* ===== FAQ ===== */
   #omni-rates .rt-faq details { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); margin-bottom: 12px; overflow: hidden; }
@@ -215,7 +218,7 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 980px) {
-    #omni-rates .rt-pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    #omni-rates .rt-pricing-grid > .rt-price-card { flex-basis: 300px; width: 300px; max-width: 300px; }
     #omni-rates .rt-pricing-grid-3 { grid-template-columns: repeat(2, 1fr); }
     #omni-rates .rt-packs-grid { grid-template-columns: repeat(3, 1fr); }
     #omni-rates .rt-pricing-grid-2 { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
@@ -229,7 +232,8 @@
     #omni-rates .rt-section { padding: 0 20px; }
     #omni-rates .rt-includes { margin-left: 20px; margin-right: 20px; }
     #omni-rates .rt-fit-grid { margin-left: 20px; margin-right: 20px; }
-    #omni-rates .rt-pricing-grid { grid-template-columns: 1fr 1fr; padding: 0 20px; }
+    #omni-rates .rt-pricing-grid { padding: 0 20px; }
+    #omni-rates .rt-pricing-grid > .rt-price-card { flex-basis: 100%; width: 100%; max-width: 400px; }
     #omni-rates .rt-pricing-grid-3 { grid-template-columns: 1fr 1fr; padding: 0 20px; }
     #omni-rates .rt-packs-grid { grid-template-columns: 1fr; padding: 0 20px; max-width: 420px; }
     #omni-rates .rt-feature { margin-left: 20px; margin-right: 20px; }
@@ -240,7 +244,7 @@
     #omni-rates .rt-assess { margin-left: 20px; margin-right: 20px; }
   }
   @media (max-width: 640px) {
-    #omni-rates .rt-pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    #omni-rates .rt-pricing-grid > .rt-price-card { max-width: 100%; }
     #omni-rates .rt-pricing-grid-3 { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
     #omni-rates .rt-cta-row { flex-direction: column; align-items: center; }
     #omni-rates .rt-btn { width: 100%; max-width: 300px; text-align: center; }
@@ -264,7 +268,7 @@
 
   <div class="rt-notice">
     <div class="rt-notice-inner">
-      <p><strong>Currently at capacity, accepting applications for October.</strong> Rates below are under review and are current as of August 2026. Confirmed pricing is provided at consultation.</p>
+      <p><strong>Currently at capacity, accepting applications for October.</strong> Rates current as of October 2026. Confirmed pricing is provided at consultation.</p>
     </div>
   </div>
 
@@ -299,7 +303,7 @@
         <div class="rt-includes-item">Weekly accountability and progress tracking</div>
         <div class="rt-includes-item">Direct trainer access via text/email</div>
         <div class="rt-includes-item">Corrective exercise and movement screening</div>
-        <div class="rt-includes-item">Program pause for travel (up to 2 weeks per 3-month term)</div>
+        <div class="rt-includes-item">Program pause for travel (see Program terms)</div>
         <div class="rt-includes-item">Hybrid flexibility — train in-person, virtual, or both</div>
       </div>
     </div>
@@ -447,6 +451,73 @@
   <div class="rt-pricing-grid" style="padding:0 28px;">
 
     <article class="rt-price-card">
+            <div class="rt-tier-flag t-common">Couples</div>
+      <div class="rt-price-name">Studio Couples Momentum</div>
+      <div class="rt-price-freq">1 session per week, both partners</div>
+      <div class="rt-price-value">$1,000 <span>/4 weeks</span></div>
+      <div class="rt-price-upfront">Billed every 4 weeks</div>
+      <ul class="rt-price-features">
+        <li>Rates are per couple, not per person</li>
+        <li>Teqneeq membership required for both</li>
+        <li>Programming set individually</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-popular">Couples</div>
+      <div class="rt-price-name">Studio Couples Performance</div>
+      <div class="rt-price-freq">2 sessions per week, both partners</div>
+      <div class="rt-price-value">$2,000 <span>/4 weeks</span></div>
+      <div class="rt-price-upfront">Billed every 4 weeks</div>
+      <ul class="rt-price-features">
+        <li>Direct entry only, not on the Foundation</li>
+        <li>Teqneeq membership required for both</li>
+        <li>Programming set individually</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-common">Couples</div>
+      <div class="rt-price-name">In-Home Couples Momentum</div>
+      <div class="rt-price-freq">1 session per week, both partners</div>
+      <div class="rt-price-value">$1,450 <span>/4 weeks</span></div>
+      <div class="rt-price-upfront">Billed every 4 weeks</div>
+      <ul class="rt-price-features">
+        <li>Rates are per couple, not per person</li>
+        <li>We bring the equipment</li>
+        <li>Programming set individually</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+
+    <article class="rt-price-card">
+            <div class="rt-tier-flag t-max">Couples</div>
+      <div class="rt-price-name">In-Home Couples Performance</div>
+      <div class="rt-price-freq">2 sessions per week, both partners</div>
+      <div class="rt-price-value">$2,900 <span>/4 weeks</span></div>
+      <div class="rt-price-upfront">Billed every 4 weeks</div>
+      <ul class="rt-price-features">
+        <li>Direct entry only, not on the Foundation</li>
+        <li>We bring the equipment</li>
+        <li>Programming set individually</li>
+      </ul>
+      <div class="rt-price-cta">
+        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      </div>
+    </article>
+  </div>
+
+  <div class="rt-pricing-grid" style="padding:0 28px;">
+
+    <article class="rt-price-card">
             <div class="rt-tier-flag t-entry">Studio</div>
       <div class="rt-price-name">Studio Momentum</div>
       <div class="rt-price-freq">1 session per week</div>
@@ -546,73 +617,6 @@
     </article>
   </div>
 
-  <div class="rt-pricing-grid" style="padding:0 28px;">
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">Couples</div>
-      <div class="rt-price-name">Studio Couples Momentum</div>
-      <div class="rt-price-freq">1 session per week, both partners</div>
-      <div class="rt-price-value">$1,000 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Rates are per couple, not per person</li>
-        <li>Teqneeq membership required for both</li>
-        <li>Programming set individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-popular">Couples</div>
-      <div class="rt-price-name">Studio Couples Performance</div>
-      <div class="rt-price-freq">2 sessions per week, both partners</div>
-      <div class="rt-price-value">$2,000 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Direct entry only, not on the Foundation</li>
-        <li>Teqneeq membership required for both</li>
-        <li>Programming set individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">Couples</div>
-      <div class="rt-price-name">In-Home Couples Momentum</div>
-      <div class="rt-price-freq">1 session per week, both partners</div>
-      <div class="rt-price-value">$1,450 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Rates are per couple, not per person</li>
-        <li>We bring the equipment</li>
-        <li>Programming set individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-max">Couples</div>
-      <div class="rt-price-name">In-Home Couples Performance</div>
-      <div class="rt-price-freq">2 sessions per week, both partners</div>
-      <div class="rt-price-value">$2,900 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Direct entry only, not on the Foundation</li>
-        <li>We bring the equipment</li>
-        <li>Programming set individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-  </div>
-
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
     <p style="font-size:13px; color:var(--white-50); text-align:center; max-width:760px; margin:0 auto;">Couples Peak is arranged individually at either setting.</p>
     <p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:12px auto 0;"><strong>Program terms.</strong> Six pause weeks are available per twelve months with two weeks' notice, credited against the next cycle. Cancel with thirty days' notice; remaining credit is applied to the final cycle. Reschedule with twenty-four hours' notice within the same cycle. Sessions OmniFit cancels are credited.</p>
@@ -683,7 +687,7 @@
   </div>
 
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
-    <p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:0 auto;">Sessions without a program. Studio non-member prices include the Teqneeq day pass, so no facility membership is required. Guest add-on $90 per session at either setting.</p>
+    <p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:0 auto;">Prepaid sessions for clients who want flexibility without a program. Studio non-member prices include the Teqneeq day pass, so no facility membership is required.</p>
   </div>
 
 
@@ -695,7 +699,7 @@
       <span class="rt-label">For Program Graduates</span>
       <hr class="rt-divider">
       <h2>Monthly <em>Tune-Up</em></h2>
-      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Finished a 3-month program? Stay in orbit without re-committing. Month-to-month, cancel anytime.</p>
+      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Finished your program? Stay in orbit without re-committing. Billed monthly, cancel with 30 days' notice.</p>
     </div>
   </div>
 
@@ -705,9 +709,9 @@
         <div>
           <h3 class="rt-feature-title">Monthly Tune-Up</h3>
           <div class="rt-feature-price">$295 <span>/mo · Teqneeq members</span></div>
-          <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$250 <span>/mo · non-members (guest pass included)</span></div>
+          <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$325 <span>/mo · non-members (day pass included)</span></div>
           <div class="rt-feature-price" style="font-size:clamp(18px,2.5vw,22px); color:var(--gold-light);">$295 <span>/mo · in-home</span></div>
-          <p class="rt-feature-note">Exclusively for graduates of any 3-month OmniFit program. Month-to-month billing via auto-pay — cancel with 30 days notice.</p>
+          <p class="rt-feature-note">Exclusively for graduates of an OmniFit program. Month-to-month billing via auto-pay — cancel with 30 days notice.</p>
           <a class="rt-btn rt-btn-primary" href="/contactform">Stay in the Program</a>
         </div>
         <div>
@@ -867,12 +871,12 @@
     <div class="rt-policy">
       <div class="rt-policy-icon">⏸</div>
       <h5>Program Pause</h5>
-      <p>Up to 2 weeks per 3-month term. Your commitment extends by the same duration. No charge. Month-to-month clients can cancel with 30 days notice.</p>
+      <p>The Foundation includes two pause weeks across the course with notice, extending the end date. The Program includes six pause weeks per twelve months with two weeks' notice, credited against the next cycle.</p>
     </div>
     <div class="rt-policy">
       <div class="rt-policy-icon">💳</div>
       <h5>Billing</h5>
-      <p>3-month commitment programs are paid in full upfront at signup. Month-to-month programs are billed monthly via auto-pay and can be cancelled with 30 days notice. No activation fees. Some clients pay with HSA or FSA funds. See how <a href="/hsa-fsa-personal-training">HSA and FSA eligibility</a> works.</p>
+      <p>The Foundation is paid in full at enrolment. The Program is billed every 4 weeks via auto-pay and can be cancelled with 30 days' notice; remaining credit is applied to the final cycle. No activation fees. Some clients pay with HSA or FSA funds. See how <a href="/hsa-fsa-personal-training">HSA and FSA eligibility</a> works.</p>
     </div>
     <div class="rt-policy">
       <div class="rt-policy-icon">📋</div>
@@ -905,7 +909,7 @@
 
       <details>
         <summary>How does billing work?</summary>
-        <div class="rt-faq-body"><p>3-month commitment programs are paid in full upfront at signup and lock in the lower per-month rate. Month-to-month programs are billed monthly via auto-pay at a higher rate and can be cancelled with 30 days written notice. There are no activation fees.</p></div>
+        <div class="rt-faq-body"><p>New clients start on The Foundation: three consecutive 4-week cycles, paid in full at enrolment and discounted for that reason. The Program bills every 4 weeks via auto-pay and can be cancelled with 30 days' written notice, with remaining credit applied to the final cycle. There are no activation fees.</p></div>
       </details>
 
       <details>
@@ -919,7 +923,7 @@
       </details>
 
       <details>
-        <summary>What happens after I finish my 3-month program?</summary>
+        <summary>What happens after I finish my program?</summary>
         <div class="rt-faq-body"><p>Graduates of an OmniFit program can continue with the Monthly Tune-Up — one monthly session, a reassessment on the Bodystat QuadScan 4000 and an hour of training, with programming delivered through the OmniFit app between visits. Pricing is $295 per month for Teqneeq members, $325 for non-members (day pass included, no facility membership required), or $375 in-home. Billing is month-to-month with no long-term commitment; cancel with 30 days notice.</p></div>
       </details>
 
@@ -940,7 +944,7 @@
 
       <details>
         <summary>Can I pause my program if I travel?</summary>
-        <div class="rt-faq-body"><p>Yes. 3-month commitment programs include a pause option of up to 2 weeks per term. Your commitment extends by the same duration at no additional cost. Many clients also use the virtual option to continue training during travel instead of pausing.</p></div>
+        <div class="rt-faq-body"><p>Yes. The Foundation includes two pause weeks across the course with notice, extending the end date. The Program includes six pause weeks per twelve months with two weeks' notice, credited against the next cycle. Many clients also use the virtual option to continue training during travel instead of pausing.</p></div>
       </details>
 
       <details>
