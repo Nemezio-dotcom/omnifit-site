@@ -3360,3 +3360,96 @@ Phase 1-4 paragraph sharing the opening clause. Checked before editing.
   together; not in scope here.
 - The cross-file Class IIa checker artifact, above.
 
+
+# Checker-window fix and device naming (Sept 2026)
+
+**Branch:** `claude/zealous-maxwell-8zrfi5`
+**Scope:** `tools/certify.py`, `tools/README.md`, and one mirrored FAQ pair.
+
+## Certification
+
+| | (a) | (b) | (c) | not-run |
+|---|---|---|---|---|
+| Before | 1 | 25 | 3 | 9 |
+| After | **0** | 25 | 3 | 9 |
+
+(b) and (c) byte-identical to the baseline run. All five invariant hashes
+unchanged and `ok`; 9-point is `ba590a09107ffda0` before and after.
+
+**Compliance is now zero.** The remaining `FAILED` is 25 stale-canon hits and 3
+orphan headers, all long-standing and recorded elsewhere.
+
+## T1 — the Class IIa cross-file comparison
+
+CANON T2-4 asks the **statement** to be byte-identical wherever it appears. The
+check compared a 12-word window, which also compares the prose on either side of
+it. Once the canonical block was appended correctly to `training-rates`, three
+different words in the *preceding* sentence — `no additional cost.` against
+`a population average.` — read as two different wordings of an identical claim.
+
+A checker reporting correct copy as a violation: the Tier 2 inversion
+`tools/README` warns about, arriving in the one rule written to be exact.
+
+Changed to the sentence boundary. The word window existed because an earlier
+sentence split, run while the fact still sat mid-sentence inside a header's
+`ld+json`, swept up `" } }, { "@type": "Question"`. That is no longer the
+shape — the canonical block is its own run of sentences on every surface.
+
+Negative test, one word changed *inside* the block on one of three surfaces:
+
+```
+[Class IIa fact not byte-identical across files (T2-4)] 2 distinct wordings:
+   2x  …-header.html, …how-we-measure-your-progress.html
+      …holds CE certification as a Class IIa medical device under MDD 93/42/EEC…
+   1x  pages/training-rates-san-diego.html
+      …holds CE approval as a Class IIa medical device under MDD 93/42/EEC…
+```
+
+It fires and names the odd file out. Reverted; compliance back to 0.
+
+## T2 — no instances remain, and the inventory that said otherwise is stale
+
+`"Tape measurements at 7 sites, body fat estimates"` appears **nowhere** in the
+repo — not in the body, not in JSON-LD, not in a meta tag, not in the header.
+Swept for `tape`, `Tape` and `body fat estimate` across `pages/` and `tools/`:
+one hit, `how-we-measure-your-progress.html:204`, and it already reads the
+corrected wording.
+
+It was replaced by paste-source commit `08d314e`, which moved the line from
+L184 to L204:
+
+> **before** `Tape measurements at 7 sites, body fat estimates, and circumference tracking. We never rely on scale weight alone…`
+> **after** `Bioimpedance analysis on the Bodystat QuadScan 4000, plus tape measurements at 7 sites and circumference tracking. Scale weight alone cannot tell you whether a change is muscle, fat or fluid. The QuadScan can.`
+
+**No edit was made.** Every other body-composition mention on the pair already
+names the QuadScan (page L188, L204, L218, L225, L284; header L53, L85, L93).
+
+**Correction to the record:** the Device Swap run's capability inventory
+(§6, "Primary") quotes the old L184 wording and calls it "the single
+highest-value rewrite on the list". That entry was written before `08d314e` and
+has been stale since. The Enforcement run's "left in place" note repeated it,
+because it was read from the inventory rather than from the file. Both are
+superseded by this entry — there is nothing there to rewrite.
+
+## T3 — model name in the corrective-exercise mirrored FAQ
+
+`"How does OmniFit's corrective exercise approach work?"` said `a Bodystat body
+composition diagnostic` — brand without model, the one place on that page where
+the device was named incompletely.
+
+| File:line | Before | After |
+|---|---|---|
+| `pages/corrective-exercise-post-rehab.html:1016` | `a Bodystat body composition diagnostic` | `a Bodystat QuadScan 4000 body composition diagnostic` |
+| `pages/headers/corrective-exercise-post-rehab-header.html:78` | same | same |
+
+Mirrored, so page and header moved together in one commit.
+
+## Mirror verification
+
+| Pair | Result |
+|---|---|
+| `corrective-exercise-post-rehab` | 12 vs 12, questions, order and answers, no differing index |
+| `how-we-measure-your-progress` | 6 vs 6, questions, order and answers, no differing index |
+
+Both files edited in T3 screened clean against all ten tier rules.
+
