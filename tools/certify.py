@@ -500,34 +500,94 @@ COMPLIANCE = [
 FROZEN = ("case-studies.html", "home-3.html")
 
 # ─── (b) stale canon ───────────────────────────────────────────────
-BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES", "Orthopedic Exercise",
-          "Executive Hybrid", "Lopez Perez", "180+", "$90 ", "$225", "$275", "$299",
-          "$500/mo", "$599"]
-CANON_MARKERS = ("Session packs run", "async programming tier", "Session packs:",
-                 "$175 per session for 5", "Paid upfront", "Executive Reset from $175/mo", "Bronze",
-                 "virtual from $175")
-CANON_CARDS = ("5 Sessions", "10 Sessions", "20 Sessions", "Bronze")
+# ─── (b) stale canon, OCTOBER 2026 CARD ────────────────────────────
+# The signal INVERTED on Sept 13 2026. August prices were canonical; they are
+# now the stale-canon marker, and October prices are canonical. Two figures
+# changed sides and had to be REMOVED from this list rather than added to it:
+#   $90   was the retired name-era assessment price. It is now the October
+#         guest add-on, canonical in that meaning.
+#   $275  was an August month-to-month rate. It is now the October in-home
+#         single session.
+# $500/mo was banned as Executive Hybrid; the Reset Gold tier is now $500, so
+# the figure is dropped here and Executive Hybrid stays caught by its name.
+# Banning a bare figure is only safe when it appears in NO October product.
+# The safe set was computed by differencing the two blocks in CANON, not by
+# reading them - the collision list ($150 $160 $200 $210 $235 $250 $275 $295
+# $325 $500 $750 $90 $1,100 $1,250 $3,300 $3,750) is too easy to get wrong by
+# eye, and every entry on it would have been a false positive on live copy.
+BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES",
+          "Orthopedic Exercise", "Executive Hybrid", "Lopez Perez", "180+",
+          "$225", "$299", "$599",
+          # August 2026 ladders - retired by the October card
+          "$110", "$115", "$135", "$140", "$145", "$155", "$165", "$170",
+          "$175", "$195", "$199", "$290", "$335", "$370", "$390", "$449", "$455",
+          "$475", "$510", "$550", "$625", "$650", "$675", "$700", "$725",
+          "$755", "$875", "$950", "$975", "$995",
+          # August add-ons: guest 75 (now 90), referral credit 50
+          "$50", "$75",
+          "$1,005", "$1,395", "$1,400", "$1,425", "$1,625", "$1,700",
+          "$1,725", "$1,860", "$1,950", "$2,150", "$2,700", "$2,850",
+          "$4,185", "$5,175", "$5,580"]
 
-def _marker_nearby(L, i, window=2):
-    """A marker on the line itself, or in the `window` lines immediately before
-    it — covers a title/price split across adjacent lines (e.g. a Bronze card's
-    <h3> title one line above its <div class="...-price">), without the
-    same-line requirement missing legitimate multi-line card layouts."""
-    lo = max(0, i - 1 - window)
-    return any(k in ln for ln in L[lo:i] for k in CANON_MARKERS)
+# TIER NAMES. "Essential" is unlisted on the October card - graduates and case
+# by case only - so it must not appear in public copy. Matched with word
+# boundaries and case-sensitively on the capitalised tier name, so "essential"
+# as an ordinary adjective ("essential movement patterns") is not a finding.
+BANNED_TIERS = ["Essential"]
 
-def _inside_packs_table(L, i):
-    """True if line i (1-indexed) sits inside <table class="...packs...">...</table>.
-    Scans backward from the line before i; a </table> reached before any <table>
-    means we are not inside one. Used ONLY to exempt $175 (in-home pack rungs);
-    $150 is retired as a pack rung and gets no exemption from this helper."""
-    for j in range(i - 2, -1, -1):
-        if '</table>' in L[j]:
-            return False
-        m = re.search(r'<table[^>]*class="([^"]*)"', L[j])
-        if m:
-            return 'pack' in m.group(1).lower()
-    return False
+# CANCELLATION LANGUAGE. The card's rule is "no exit fees". "non-refundable"
+# is the one exception and only in its own place: the Foundation policy
+# sentence, which says the Foundation is non-refundable and names the 30-Day
+# Fit Guarantee as the only exit. That sentence is the negative test.
+FEE_TERMS = ["exit fee", "exit fees", "cancellation fee", "cancellation fees",
+             "non-refundable", "nonrefundable"]
+FOUNDATION_POLICY = re.compile(
+    r'non-?refundable[^.]{0,200}?30-Day Fit Guarantee'
+    r'|30-Day Fit Guarantee[^.]{0,200}?non-?refundable'
+    r'|Foundation[^.]{0,120}?non-?refundable', re.I)
+
+def fee_language(text):
+    """'exit fee', 'cancellation fee' and 'non-refundable' are flagged EXCEPT
+    inside the Foundation policy sentence. Scoped to the sentence, not the
+    page: a Foundation policy elsewhere on the page must not license an exit
+    fee in the terms block."""
+    t = _flat(text); out = []
+    for term in FEE_TERMS:
+        for m in re.finditer(re.escape(term), t, re.I):
+            lo = max((t.rfind(c, 0, m.start()) for c in '.!?'), default=-1) + 1
+            hi = min((x for x in (t.find(c, m.end()) for c in '.!?') if x != -1), default=len(t))
+            sentence = t[lo:hi + 1]
+            if FOUNDATION_POLICY.search(sentence): continue
+            out.append((term, sentence.strip()))
+    return out
+
+# RETIRED with the October card: _marker_nearby, _inside_packs_table and the
+# CANON_MARKERS / CANON_CARDS tables. All four existed to carve $175 out of the
+# retired-rate rule as a legal in-home pack rung and Reset Bronze tier. The
+# October card has neither: $175 appears in no product, so it is a plain
+# BANNED literal now and needs no context at all. Kept as a note rather than
+# code, because a dormant exemption is how a retired figure gets grandfathered
+# back in through a context nobody re-reads.
+
+# The October per-session figures. These are canonical AS SESSION RATES:
+#   5-pack   180 studio member · 210 studio non-member · 250 in-home
+#   single   205 studio member · 235 studio non-member · 275 in-home
+#   extra    160 studio · 215 in-home     guest add-on 90
+# $150 is the ASSESSMENT, not a session rate. Publishing it as a per-session
+# price would be the October equivalent of the old mangled pack rung, so it is
+# the one figure this rule still checks for context.
+_SESSION_RATE = r'(?:per|a|each|/)\s*session|/\s*session|\bsession\b'
+
+def assessment_as_session_rate(text):
+    """$150 presented as a per-session rate. The figure itself is canonical -
+    it is the Performance Assessment - so this rule checks the MEANING, not the
+    number, which is the opposite shape to the August $150 rule it replaces."""
+    t = _flat(text); out = []
+    for m in re.finditer(r'\$150\b', t):
+        after = ' '.join(t[m.end():].split()[:4])
+        if re.search(_SESSION_RATE, after, re.I):
+            out.append(t[max(0, m.start()-90):m.end()+90].strip())
+    return out
 
 # ─── (c) structure ─────────────────────────────────────────────────
 class _P(html.parser.HTMLParser):
@@ -681,26 +741,23 @@ def run():
             for i,l in enumerate(open(f),1):
                 if term.lower() in l.lower():
                     print(f"   {f}:{i}  [{term}]"); B+=1
+    # Tier names are matched case-SENSITIVELY on the capitalised product name,
+    # so "essential movement patterns" is prose and "Essential" is a tier.
+    for term in BANNED_TIERS:
+        for f in files:
+            for i,l in enumerate(open(f),1):
+                if re.search(r'\b'+re.escape(term)+r'\b', l):
+                    print(f"   {f}:{i}  [{term} is unlisted on the October card]"); B+=1
     for f in files:
-        L=open(f).readlines()
+        src=open(f).read(); L=src.splitlines(True)
+        for term, sentence in fee_language(src):
+            print(f"   {f}  [{term} outside the Foundation policy]  …{sentence[:90]}…"); B+=1
+        for ctx in assessment_as_session_rate(src):
+            print(f"   {f}  [$150 published as a session rate - it is the assessment]  …{ctx[:90]}…"); B+=1
         for i,l in enumerate(L,1):
             # a travel FEE, not any dollar figure sharing a line with the word travel
             if re.search(r'travel[^.<]{0,30}\$(?:50|75)\b|\$(?:50|75)\b[^.<]{0,30}travel', l, re.I):
                 print(f"   {f}:{i}  [travel fee dollar figure]"); B+=1
-            for tok in ("$150","$175"):
-                if tok in l:
-                    # competitor pricing on the comparison page is not OmniFit pricing
-                    ok = '<div class="comp-value">' in l
-                    # $175 is a legal in-home pack rung and Reset Bronze tier; $150 is
-                    # retired from BOTH ladders and gets no further exemption below
-                    if tok == "$175":
-                        ok = ok or _marker_nearby(L, i)
-                        if not ok:
-                            nm = re.findall(r'<div class="pc-name">([^<]*)</div>', "".join(L[max(0,i-12):i]))
-                            ok = bool(nm) and nm[-1].strip() in CANON_CARDS
-                        ok = ok or _inside_packs_table(L, i)
-                    if not ok:
-                        print(f"   {f}:{i}  [{tok} outside canonical context]  …{l.strip()[:90]}…"); B+=1
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
