@@ -3242,3 +3242,121 @@ Three defects this rewrite introduced, all caught by negative-testing:
 (b) and (c) are **byte-identical** to the previous run — the rule change is
 confined to (a), as intended. Nine findings appeared, none disappeared.
 
+
+# Enforcement run — two-tier screen applied to the pages (Sept 2026)
+
+**Branch:** `claude/zealous-maxwell-8zrfi5`
+**Scope:** CANON Part A correction, mechanical cleanup, compliance fixes, and
+the capability copy pass. `the-30-minute-executive-reset` and its header
+untouched; the RED-PEN FLAG stays open.
+
+## Certification
+
+| | (a) | (b) | (c) | not-run |
+|---|---|---|---|---|
+| Before | 11 | 25 | 3 | 9 |
+| After | **1** | 25 | 3 | 9 |
+
+(b) and (c) unchanged. All five invariant hashes unchanged and `ok`; the
+9-point hash is `ba590a09107ffda0` before and after — no page carrying the
+Section B block was touched.
+
+## PART A — TIER 1 item 1, narrowed
+
+The first drafting banned outcome guarantees "of any kind" and named
+DEFERRED-01 as still deferred. It banned the **word**, not the promise, and
+swept in a refund policy that promises no result at all.
+
+  **T1-1** now: any promise, conditional or not, that a client will ACHIEVE A
+  RESULT (fat loss, strength, pain reduction, posture change).
+  **T2-6** new: a fit or satisfaction refund policy is permitted provided it
+  promises only a refund or an exit, never a result. Wording changes require
+  owner approval.
+
+**DEFERRED-01: CLOSED.** The RE-OPENED note is removed. The status line records
+that it was briefly re-opened by the v1 drafting and closed by this correction
+— that it moved is worth keeping; the claim that its live text is a violation
+is not.
+
+`guarantee_any` is on its third drafting, and all three are recorded in the
+code because each was wrong in an instructive direction:
+
+| | Rule | Missed / caught wrongly |
+|---|---|---|
+| v1 | "guarantee" within ~30 words of an outcome word | missed the DEFERRED-01 wording, written not to sit near one |
+| v2 | any "guarantee" at all | caught a refund policy that promises no result |
+| v3 | a RESULT NOUN as object or in the same sentence | — |
+
+The window is the **sentence**, not a word count: "guarantee" and its promise
+sit either side of a colon in `30-Day Guarantee: you will be stronger`.
+
+## PART B — mechanical
+
+- **B1.** Eight `BodyStat` → `Bodystat` across `case-studies.html` and
+  `home-3.html` (four each). `1500 MDD` left exactly as written in all eight
+  places — these are records of scans that happened on that device. Files
+  verified still byte-identical to each other.
+- **B2.** `home-2.html:14` changelog line kept and appended with
+  `(superseded Sept 2026 — device now Bodystat QuadScan 4000, see v3)`.
+- **B3.** `nutrition-coaching-san-diego.header` renamed into the glob. Scope
+  75 → 76 files; the pair certified unchanged on the first run that could see
+  it. REPO STATE updated, pair count 28 → 29.
+- **B4.** `the-30-minute-executive-reset` untouched.
+
+## PART C — compliance
+
+| Finding | Edit that cleared it |
+|---|---|
+| `guarantee_any` ×5 on training-rates + header | Part A (rule narrowed; copy unchanged) |
+| `class_iia_note` on training-rates | C1 — canonical block appended |
+| `class_iia_note` on training-rates-header | C1 — same edit, mirrored pair |
+| `aggregate_metric_conditions` on how-we-measure | C2 — unconditioned aggregate removed |
+| `lbs_near_timeframe` on desk-worker | C3a — reframed against baseline |
+| `result_near_timeframe` on home-2 | C3b — calendar removed |
+
+**Survives: the cross-file Class IIa wording finding.** The three-sentence block
+is now byte-identical on all three surfaces, verified. What still differs is the
+three words of the *preceding* sentence that the checker's 12-word window sweeps
+in — `no additional cost.` against `a population average.` That is neighbouring
+prose, not the statement CANON asks to be identical. Fixing it means changing
+the comparison window to the sentence, which is a rule change outside this run's
+Part A scope. Reported, not taken.
+
+## PART D — capability pass
+
+Ten locations across seven files, plus the generated header. Every rewritten
+paragraph screened against all ten tier rules: clean. Phase angle is named and
+described everywhere it appears and reported as a result nowhere — no client
+value, delta or improvement rate (TIER 1 item 5).
+
+The 9-point screen Body Composition `<li>` was **not touched**: a ten-file
+invariant whose hash is recorded in CANON.
+
+## Mirror pairs touched
+
+| Pair | Result |
+|---|---|
+| `training-rates-san-diego` | 11 vs 11 ✓ (C1, page + header one edit) |
+| `body-composition-testing` | 8 vs 8 ✓ (D, page edited, header regenerated) |
+| `corrective-exercise-post-rehab` | 12 vs 12 ✓ (D, body copy only — see below) |
+| `the-omnifit-method` | 6 vs 6 ✓ (regenerates byte-identical) |
+| `glp-1-personal-training-san-diego` | 7 vs 7 ✓ |
+| `private-personal-trainer-san-diego` | 7 vs 7 ✓ |
+| `how-we-measure-your-progress` | 6 vs 6 ✓ |
+| `nutrition-coaching-san-diego` | 7 vs 7 ✓ (first run inside the glob) |
+
+`corrective-exercise-post-rehab` L676 **looked** mirrored and is not: the page's
+"How does OmniFit's corrective exercise approach work?" answer is a separate
+Phase 1-4 paragraph sharing the opening clause. Checked before editing.
+
+## Left in place, deliberately
+
+- `how-we-measure-your-progress.html:184` — Category 01 still reads "Tape
+  measurements at 7 sites, body fat estimates". The REPORT inventory calls it
+  "the single highest-value rewrite on the list" and it was **not** in this
+  run's Part D list. Not taken on initiative.
+- `corrective-exercise-post-rehab-header` FAQ answer says "a Bodystat body
+  composition diagnostic" with no model name. Mirrored, so page and header move
+  together; not in scope here.
+- The cross-file Class IIa checker artifact, above.
+
