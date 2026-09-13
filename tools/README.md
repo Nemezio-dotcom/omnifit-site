@@ -231,6 +231,18 @@ when editing this file.
   must sit beside the not-a-medical-provider note. Cross-file: one
   byte-identical wording everywhere, collected in `run()` the way an invariant
   is, because that is the shape of the check.
+  The cross-file comparison is on **the sentence** the fact sits in. It was a
+  12-word window first, and that window also compared the prose on either side:
+  once the canonical block was appended correctly to a second page, three
+  different words in the *preceding* sentence (`no additional cost.` against
+  `a population average.`) read as two different wordings of an identical
+  claim. A checker reporting correct copy as a violation — the Tier 2 inversion
+  this file warns about, arriving in the one rule written to be exact.
+  The window existed because an earlier sentence split, run while the fact sat
+  mid-sentence inside a header's `ld+json`, swept up `" } }, { "@type":
+  "Question"`. That is no longer the shape. Negative-tested: changing one word
+  *inside* the block (`certification` → `approval` on one of three surfaces)
+  still fires and names the odd file out.
 
 ### Three defects this rewrite introduced, and how they surfaced
 
