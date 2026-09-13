@@ -518,6 +518,11 @@ FROZEN = ("case-studies.html", "home-3.html")
 BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES",
           "Orthopedic Exercise", "Executive Hybrid", "Lopez Perez", "180+",
           "$225", "$299", "$599",
+          # RETIRED PRODUCT NAME. The October card calls it the Performance
+          # ASSESSMENT; "Performance Diagnostic" was the August name and was
+          # left behind on ~28 files by the repricing, which changed figures
+          # without touching the product name. Banned so it cannot come back.
+          "Performance Diagnostic",
           # August 2026 ladders - retired by the October card
           "$110", "$115", "$135", "$140", "$145", "$155", "$165", "$170",
           "$175", "$195", "$199", "$290", "$335", "$370", "$390", "$449", "$455",
