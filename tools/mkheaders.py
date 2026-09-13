@@ -21,7 +21,7 @@ META = {
  "personal-training-services": ("Personal Training Services for Professionals 30+ | OmniFit Performance San Diego", "Personal Training Services",
    "OmniFit Performance's personal training services in San Diego: private studio sessions at Teqneeq FHC in 4S Ranch, in-home training across North County, and virtual coaching for professionals 30+."),
  "body-composition-testing": ("Body Composition Testing in San Diego | Bodystat QuadScan 4000 | OmniFit Performance", "Body Composition Testing",
-   "Medical-grade Bodystat QuadScan 4000 body composition testing in San Diego at Teqneeq FHC in 4S Ranch. The $110 Performance Diagnostic includes a 9-point movement screen and expert interpretation."),
+   "Medical-grade Bodystat QuadScan 4000 body composition testing in San Diego at Teqneeq FHC in 4S Ranch. The $150 Performance Assessment includes a 9-point movement screen and expert interpretation."),
  "partners": ("Trusted Clinical Partners | OmniFit Performance — San Diego", "Clinical Partners",
    "OmniFit Performance partners with board-certified physical therapists and licensed massage therapists in San Diego to bridge rehabilitation, recovery, and corrective strength training for busy professionals 30+."),
 }
