@@ -260,12 +260,14 @@ already happened, published with its method, is not.
 TIER 1 — HARD BANS. No exception. No approver, owner included, can clear
 one of these; they are removed on sight, and a run that finds one reports
 it and STOPS rather than weighing context.
-  1. Outcome guarantees of any kind, including conditional and
-     compliance-tied guarantees, until a separately approved wording
-     exists. DEFERRED-01 (the Executive Reset guarantee wording) STAYS
-     DEFERRED and is not that approved wording. See the note under
-     DEFERRED-01 in RESOLVED ITEMS: its replacement text is currently LIVE
-     on training-rates-san-diego, which this tier makes a violation.
+  1. OUTCOME GUARANTEES - any promise, conditional or not, that a client
+     will ACHIEVE A RESULT (fat loss, strength, pain reduction, posture
+     change) - are banned.
+     Narrowed by owner decision, Sept 12 2026: the first drafting banned
+     the WORD, not the promise, and swept in a refund policy that promises
+     no result at all. What makes a guarantee a TIER 1 violation is the
+     RESULT it promises, not that it is called a guarantee. A promise about
+     money - a refund, an exit - is TIER 2 item 6.
   2. Pounds, inches, or body-fat percentage paired with a timeframe AS AN
      EXPECTED OR TYPICAL RESULT ("20-30 lbs in 4-6 months"). This is the
      projection case. It is not the attributed-individual case, which is
@@ -331,6 +333,17 @@ reports the missing condition, never the content.
   5. ILLUSTRATIVE SAMPLE DATA is permitted when labelled "illustrative,
      not client data" on the same surface. Unlabelled sample figures read
      as measurements and are a finding.
+  6. A FIT OR SATISFACTION REFUND POLICY - the 30-Day Fit Guarantee,
+     DEFERRED-01, CLOSED Aug 2026 with approved wording - is permitted
+     PROVIDED IT PROMISES ONLY A REFUND OR AN EXIT, NEVER A RESULT.
+     The distinction TIER 1 item 1 now turns on: "we guarantee you will
+     lose 20 lbs" promises an outcome and is banned at TIER 1; "if it isn't
+     the right fit, stop and I'll refund the unused balance" promises only
+     money back and is legal here. The approved wording pairs no outcome
+     word with the guarantee, which is what makes it clear the tier.
+     WORDING CHANGES REQUIRE OWNER APPROVAL. The text is not a template to
+     paraphrase: a rewrite that reintroduces a result promise moves the
+     item back to TIER 1 without anyone editing this brief.
 
 CARRIED OVER, NOT RE-TIERED
 - No Groupon/deal content.
@@ -361,13 +374,15 @@ check for the condition rather than to ban the content - a rule that flags
 conditioned Tier 2 copy is a defect in the rule, not a finding.
 
   TIER 1 RULES
-  · guarantee_any (T1-1) - any form of "guarantee" in page copy. Widened
-    from the old "guarantee within ~30 words of an outcome word": Tier 1
-    bans guarantees of any kind, so proximity to an outcome word is no
-    longer what makes one. A guarantee stated as ABSENT ("no guarantee",
-    "reimbursement is not guaranteed") is the opposite of the banned shape
-    and is exempt on the preceding words only. <style> and <script> bodies
-    are not copy and are excluded.
+  · guarantee_any (T1-1) - "guarantee" with a RESULT NOUN as its object or
+    anywhere in the same sentence. Narrowed Sept 12 2026 by owner decision:
+    the first drafting flagged the word, which made a refund policy that
+    promises no result read as an outcome guarantee. A guarantee stated as
+    ABSENT ("reimbursement is not guaranteed") is exempt on the preceding
+    words only. <style> and executable <script> bodies are not copy and are
+    excluded; ld+json IS copy. Negative test is the approved 30-Day Fit
+    Guarantee wording (TIER 2 item 6), which must pass, against
+    "guarantee you'll lose 20 lbs", which must fire.
   · lbs_near_timeframe (T1-2) - pounds, inches or body-fat % within ~15
     words of a quantified timeframe. Inches and body-fat % are new to this
     rule. Exempt: TIER 2 item 2 (attributed individual, page disclaimer),
@@ -531,19 +546,13 @@ DEFERRED-01 · Executive Reset guarantee wording (rates page) · CLOSED Aug 2026
 - The (a) COMPLIANCE STRIKES exemption for this item is removed. The
   resolved text does not pair "guarantee" with an outcome word and needs no
   exemption; tools/certify.py no longer carries a DEFERRED_01 carve-out.
-- RE-OPENED Sept 2026 by the two-tier screen. TIER 1 item 1 bans outcome
-  guarantees OF ANY KIND, conditional and compliance-tied included, until a
-  separately approved wording exists, and names DEFERRED-01 as still
-  deferred. The wording above was cleared under the previous screen by
-  counsel who is no longer engaged; it is not owner-approved.
-  This entry stays in RESOLVED ITEMS because the RECORD of what was applied
-  in Aug 2026 is accurate and must not be rewritten. What changed is its
-  STANDING, not its history. The text is currently LIVE at
-  training-rates-san-diego.html:866 (callout), :967 (FAQ answer) and
-  training-rates-san-diego-header.html (the same answer in FAQPage), and
-  under the new tier all three are violations awaiting owner-approved
-  replacement wording. Reported by the Compliance Re-tier run, not fixed
-  there - that run was scoped to rules, not pages.
+- STATUS: CLOSED, Aug 2026, with the approved wording above. It was briefly
+  re-opened by the first drafting of TIER 1 item 1, which banned the word
+  "guarantee" rather than the promise of a result; that drafting was
+  narrowed by owner decision on Sept 12 2026 and the item is CLOSED again.
+  The approved wording is now covered by TIER 2 item 6: it promises a
+  refund and an exit, never a result. Wording changes require owner
+  approval.
 
 RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
 - Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved Aug 2026 by the counsel
