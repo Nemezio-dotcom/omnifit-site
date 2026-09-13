@@ -168,7 +168,7 @@ when editing this file.
 
 | # | Rule | Tier | Status |
 |---|---|---|---|
-| 1 | `guarantee_any` | T1-1 | **changed** — any guarantee, not just one near an outcome word |
+| 1 | `guarantee_any` | T1-1 | **changed** — "guarantee" with a result noun in the same sentence (narrowed Sept 12; see below) |
 | 2 | `lbs_near_timeframe` | T1-2 | **changed** — inches and body-fat % added; disclaimer relaxed to same-page |
 | 3 | `result_near_timeframe` | T1-2 | **changed** — same-page disclaimer; conditioned surfaces exempt |
 | 4 | `uncertified_claims` | T1-3 | **changed** — assess/manage a medical condition, and device-used-to |
@@ -189,11 +189,23 @@ when editing this file.
 
 ### What the tiers changed, rule by rule
 
-- **`guarantee_any` (T1-1).** The old rule required an outcome word within ~30
-  words. The DEFERRED-01 replacement wording passes that test *by design* — it
-  was written not to pair "guarantee" with an outcome — and Tier 1 bans
-  guarantees of any kind. Negation is still read, on the preceding words only,
-  so `Reimbursement is not guaranteed` on hsa-fsa stays legal.
+- **`guarantee_any` (T1-1).** Two draftings, each wrong once, and the pair is
+  worth keeping as a lesson in what the rule is actually for:
+  **v1** flagged "guarantee" within ~30 words of an outcome word, and missed
+  the DEFERRED-01 wording, which was written not to sit near one.
+  **v2** flagged the word itself, and caught that wording along with
+  everything else — including a refund policy that promises no result at all.
+  **v3 (Sept 12, owner decision)** asks whether a RESULT NOUN is the object of
+  the guarantee or sits in the same sentence. What makes a guarantee a Tier 1
+  violation is the result it promises, not that it is called a guarantee; a
+  promise about money is CANON Tier 2 item 6 and is legal.
+  The window is the **sentence**, not a word count: "guarantee" and its promise
+  sit either side of a colon in `30-Day Guarantee: you will be stronger`, and a
+  fixed window either clips the promise or reaches into the next sentence.
+  Negation still reads the preceding words only, so `Reimbursement is not
+  guaranteed` on hsa-fsa stays legal.
+  Fixture both ways: the approved 30-Day Fit Guarantee callout and FAQ answer
+  must pass; `guarantee you'll lose 20 lbs` must fire.
 - **`lbs_near_timeframe` (T1-2).** Inches and body-fat percentage added.
   Condition 2 of the case-study exemption relaxed from a dedicated block to
   anywhere on the page. Attribution and the never-exempt aggregate test are
