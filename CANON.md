@@ -139,7 +139,14 @@ WORKFLOW RULES
   before filing a client on any contract whose total exceeds $4,400, obtain
   owner approval first, and re-engage counsel if the owner wants the
   statutory question answered rather than managed. This is a workflow step,
-  not a pricing cap, and it does not restrict what may be published or sold. Offers that currently
+  not a pricing cap, and it does not restrict what may be published or sold.
+  AS OF THE OCTOBER 2026 CARD THIS CHECK NO LONGER TRIPS BY CONSTRUCTION.
+  The card's rule is "no contract exceeds $4,400", and the largest committed
+  total on it is the in-home couples Momentum Foundation at $3,750 - $650
+  clear. The Program bills every 4 weeks with 30-day notice to cancel, so it
+  commits no total at all. The check stays live because it governs any
+  bespoke arrangement (in-home Peak "from $2,600", Couples Peak "by
+  arrangement") priced off-card. Offers that currently
   trip it on a 3-month prepaid: in-home Peak individual (5,580) and in-home
   couples Performance (5,175). Teqneeq Peak individual sits closest to the
   line at 4,185, $215 clear.
@@ -159,60 +166,119 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   Sleep Stress & Recovery, Nutrition for Metabolic Health; Eden GLP-1
   Fitness, Peptide Fundamentals, GLP-1 Nutrition (clinical collaboration
   framing). Experience: "10+ Years Coaching" — never "in San Diego".
-- Pricing: Diagnostic $110 credited in full toward a 3-month package
-  ($90 is the retired name-era price). $90 assessment = confirmed same
-  product as the $110 Performance Diagnostic; rename settled. Deposit
-  $30 refundable.
-- Consultation: 45 minutes, ALWAYS by video or phone, never in person.
-  Preceded by a client intake form. $30 refundable deposit. The
-  consultation is NOT the movement screen: the $110 Performance
-  Diagnostic is a separate in-person session, credited in full toward a
-  3-month package. Copy must not describe the consultation as producing
-  baseline metrics, body composition, or a movement assessment.
-  Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
-  Performance 950/1100, Peak 1395/1625. Upfront on a 3-month program =
-  3 × the 3-month monthly rate, no discount: 750 / 1,425 / 2,850 / 4,185.
-  In-home individual monthly (3-mo/M2M), complete ladder: Essential 335/390,
-  Momentum 650/755, Performance 1,250/1,425, Peak from 1,860/2,150. Upfront
-  on a 3-month program = 3 x the 3-month rate: 1,005 / 1,950 / 3,750 / 5,580.
-  Packs, two ladders by venue, max 2 sessions/week:
-    Studio  — 5 @ 145/session (725) · 10 @ 140 (1,400) · 20 @ 135 (2,700)
-    In-home — 5 @ 175/session (875) · 10 @ 170 (1,700) · 20 @ 165 (3,300)
-    Expiry: 5-pack 10 weeks · 10-pack 20 weeks · 20-pack 30 weeks
-  Singles 165 studio, 195 in-home.
-  Add-ons, confirmed Aug 2026: extra session 115 studio / 155 in-home ·
-  guest add-on 75/session (was $50, corrected in the Rates Page Correction
-  run — three named-package instances plus one FAQ mention).
-  Referral credit: 50 off next month — UNVERIFIED, not yet confirmed by
-  Nemezio. Left as published; do not treat as canonical until confirmed.
-  Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
-  Monthly Tune-Up (graduates): 199/250/295. Facility rule: Momentum+
-  requires Teqneeq membership $119/mo paid to Teqneeq; Essential and
-  packs use sponsored guest passes. Travel fee: "may apply" language OK,
-  never a dollar figure.
-  CONFIRMED Aug 2026, source = signed Prepaid Program Agreement:
-  · No processing fees are added to stated prices. The 2.9% card fee is
-    retired everywhere; never reintroduce it.
-  · The total is paid in a SINGLE UPFRONT PAYMENT at signing on 3-month
-    programs. Copy must not say "billed monthly, no large upfront payments".
-  · The widened $150/$175 exception (pack rungs + Reset Bronze) is approved.
-- Couples pricing (monthly; both partners train in one session). Supersedes
-  the earlier "from 325/mo, monthly only" line:
-    Studio  3-mo: Essential 325 · Momentum 625 · Performance 1,250
-    Studio  M2M : Essential 370 · Momentum 700 · Performance 1,400
-    In-home 3-mo: Essential 455 · Momentum 875 · Performance 1,725
-    In-home M2M : Essential 510 · Momentum 975 · Performance 1,950
-    Single couples session: 235 studio · 250 in-home
-  Peak is ad-hoc only at both venues and is NOT offered as a prepaid couples
-  commitment.
-  Derived per-session figures exist (studio 150/144/144, in-home 210/202/199
-  by tier) but are NOT to be published as the primary rate. Note that the
-  studio Essential derivation is $150, which the certification rule treats as
-  a violation outside the approved contexts, so publishing it would fail
-  certification as well as contradict this line.
-  In-home couples Performance (1,725/mo) MAY be sold and published as a
-  3-month prepaid commitment (5,175 upfront). The earlier month-to-month-only
-  restriction is lifted. See RESOLVED-02 for the counsel workflow rule.
+- PRICING — OCTOBER 2026 CARD (owner-confirmed Sept 13 2026). This card
+  SUPERSEDES the August 2026 ladders entirely. The August figures are not
+  deleted: they move to LEGACY PRICING below, because existing clients are
+  still on them. Published copy uses THIS card and nothing else.
+
+  ASSESSMENT
+    Performance Assessment $150, credited toward the first cycle.
+    Consultation deposit $30, refundable. NEVER "free" - the consultation is
+    45 minutes, by video or phone, and is NOT the assessment.
+
+  THE FOUNDATION - new clients only. Three consecutive 4-week cycles, paid
+  in full at enrolment, discounted for that reason.
+    Studio Momentum (1x/wk)       560/cycle    1,680 total
+    Studio Performance (2x/wk)    1,100/cycle  3,300 total
+    In-home Momentum              800/cycle    2,400 total
+    Studio couples Momentum       850/cycle    2,550 total
+    In-home couples Momentum      1,250/cycle  3,750 total
+    NOT offered on the Foundation: Peak (either setting), in-home
+    Performance, Performance couples. Those start on The Program.
+    A new client with prior training experience MAY start directly on The
+    Program at any tier; the Foundation is then no longer available to them.
+    The Foundation is a ONE-TIME ENTRY, never a step back.
+    Foundation policy: non-refundable; the 30-Day Fit Guarantee is the only
+    exit; two pause weeks across the course with notice, extending the end
+    date; sessions OmniFit cancels are credited.
+
+  THE PROGRAM - continuation after the Foundation, or direct entry.
+  Billed every 4 weeks.
+    Studio Momentum (1x/wk)        640
+    Studio Performance (2x/wk)     1,250
+    Studio Peak (3x/wk)            1,800
+    In-home Momentum               900
+    In-home Performance            1,800
+    In-home Peak                   from 2,600
+    Studio couples Momentum        1,000
+    Studio couples Performance     2,000
+    In-home couples Momentum       1,450
+    In-home couples Performance    2,900
+    Couples Peak: by arrangement.
+    Studio programs require a Teqneeq membership ($119/mo, billed by
+    Teqneeq); facility access on non-training days included.
+    Program terms (PUBLISH ON THE PAGE): 6 pause weeks per 12 months with
+    2 weeks' notice, credited against the next cycle; 30-day notice to
+    cancel, remaining credit applied to the final cycle; 24-hour reschedule
+    within the same cycle; sessions OmniFit cancels are credited.
+
+  SESSIONS WITHOUT A PROGRAM
+                            Studio member  Studio non-member  In-home
+    Single session          205            235                275
+    5-pack                  180/session    210/session        250/session
+    Extra session (program) 160            -                  215
+    Guest add-on            90             90                 90
+    Studio non-member prices include the Teqneeq day pass.
+    Singles expire 30 days from purchase; 5-packs 8 weeks.
+    NO 10- or 20-packs. Both are retired.
+
+  EXECUTIVE RESET (virtual): Bronze async 200 · Gold 1x/wk 500 ·
+    Platinum 2x/wk 750 · Black 3x/wk 1,100.
+
+  MONTHLY TUNE-UP (graduates): 295 member · 325 non-member · 375 in-home.
+    One monthly session - reassessment on the Bodystat QuadScan 4000 and an
+    hour of training - with programming delivered through the OmniFit app
+    between visits. Billed monthly, 30 days' notice to cancel.
+
+  TERMS
+    No contract exceeds $4,400. No exit fees. Round numbers only.
+    Travel fee: "may apply" language OK, never a dollar figure.
+    No processing fees are added to stated prices; the 2.9% card fee stays
+    retired.
+    The 30-Day Fit Guarantee wording stays BYTE-IDENTICAL (CANON TIER 2
+    item 6). The assessment paragraph on training-rates-san-diego.html
+    stays BYTE-IDENTICAL, including "clinical-grade diagnostic session" and
+    the Class IIa block.
+
+  NOT ON THE CARD - do not publish
+    Essential tier: unlisted. Graduates / case by case only. "Essential" is
+      a banned tier name on public pages.
+    Continuing-client discount 10-15%: case by case, NEVER published.
+    Executive Hybrid: stays dead.
+
+LEGACY PRICING - AUGUST 2026, CLOSED (existing clients only; never publish)
+  Retained because clients enrolled on these rates are still on them, and
+  because the reasoning behind the couples and cap decisions is load-bearing
+  for RESOLVED-02. NOTHING in this block may appear in published copy; every
+  figure in it that does not also appear on the October card is a
+  stale-canon violation.
+  - Diagnostic $110 credited in full toward a 3-month package ($90 was the
+    retired name-era price; $90 is now the OCTOBER guest add-on and is
+    canonical again in that meaning only).
+  - Teqneeq 1:1 monthly (3-mo/M2M): Essential 250/290, Momentum 475/550,
+    Performance 950/1100, Peak 1395/1625. Upfront = 3 x the 3-month rate:
+    750 / 1,425 / 2,850 / 4,185.
+  - In-home individual monthly (3-mo/M2M): Essential 335/390, Momentum
+    650/755, Performance 1,250/1,425, Peak from 1,860/2,150. Upfront:
+    1,005 / 1,950 / 3,750 / 5,580.
+  - Packs by venue: Studio 5 @ 145 (725) · 10 @ 140 (1,400) · 20 @ 135
+    (2,700). In-home 5 @ 175 (875) · 10 @ 170 (1,700) · 20 @ 165 (3,300).
+    Expiry 10 / 20 / 30 weeks. Singles 165 studio, 195 in-home.
+  - Add-ons: extra session 115 studio / 155 in-home · guest add-on 75.
+  - Executive Reset: Bronze async 175, Gold 449, Platinum 675, Black 995.
+  - Monthly Tune-Up: 199/250/295.
+  - Couples monthly. Studio 3-mo: Essential 325 · Momentum 625 ·
+    Performance 1,250. Studio M2M: 370 · 700 · 1,400. In-home 3-mo: 455 ·
+    875 · 1,725. In-home M2M: 510 · 975 · 1,950. Single couples session 235
+    studio · 250 in-home. Peak ad-hoc only.
+    Derived per-session figures (studio 150/144/144, in-home 210/202/199)
+    were never to be published as the primary rate.
+  - Referral credit: 50 off next month - UNVERIFIED, never confirmed by
+    Nemezio. Carried here as legacy; do not publish.
+  - GRANDFATHERED CLIENTS: unchanged. A client enrolled on an August rate
+    stays on it until they choose to move. Moving is a new enrolment on the
+    October card, not a re-price of the old one.
+
 - Case-study figures (captions/alt text; verbatim client quotes are
   untouchable): Vincent 59, 8% body fat. Alo +18 lbs. Mark −17 lbs
   (248→231, 4mo). Dave −27 (225→198, 6mo). Isaac −21 (181→160, 8→20
@@ -570,21 +636,26 @@ RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
   clearance settles it without the site needing to answer that question.
 
 PRICING-CHANGE CHECKLIST (kept live from the above; consult before repricing)
-- 3-month prepaid total = 3 x the 3-month monthly rate. Anything over $4,400
-  triggers the CONTRACT VALUE CHECK (owner approval) before a client is filed.
-- Current totals, highest first:
-    In-home Peak individual      1,860 x 3 = 5,580   over
-    In-home couples Performance  1,725 x 3 = 5,175   over
-    Teqneeq Peak individual      1,395 x 3 = 4,185   under by 215
-    In-home Performance indiv.   1,250 x 3 = 3,750   under by 650
-    Studio couples Performance   1,250 x 3 = 3,750   under by 650
-    Teqneeq Performance          950 x 3   = 2,850   under by 1,550
-    In-home couples Momentum     875 x 3   = 2,625   under by 1,775
-    In-home Momentum individual  650 x 3   = 1,950   under by 2,450
-- Break point is the same for every offer: any 3-month monthly rate above
-  $1,466 produces a total over $4,400 (4,400 / 3 = 1,466.67). Teqneeq Peak at
-  1,395 is the closest under it. In-home Peak's 1,860 is a FLOOR, so its
-  total can only rise.
+- Every published figure comes from the OCTOBER 2026 CARD. Anything from the
+  LEGACY block in published copy is a stale-canon violation, not a variant.
+- Round numbers only. No contract exceeds $4,400.
+- Committed totals on the card, highest first - the only figures the CONTRACT
+  VALUE CHECK can reach, because The Program commits no total:
+    In-home couples Momentum Foundation   1,250 x 3 = 3,750   clear by 650
+    Studio Performance Foundation         1,100 x 3 = 3,300   clear by 1,100
+    Studio couples Momentum Foundation      850 x 3 = 2,550   clear by 1,850
+    In-home Momentum Foundation             800 x 3 = 2,400   clear by 2,000
+    Studio Momentum Foundation              560 x 3 = 1,680   clear by 2,720
+  Those five are the whole list: the Foundation is the only committed total
+  on the card. The Program, the Reset and the Tune-Up all bill per cycle or
+  per month with notice, so none of them commits a total to check.
+- Break point for a THREE-CYCLE Foundation: any per-cycle rate above $1,466
+  produces a total over $4,400 (4,400 / 3 = 1,466.67). In-home couples
+  Momentum at 1,250 is the closest under it. No Foundation tier may be
+  introduced above that rate without the CONTRACT VALUE CHECK.
+- Off-card arrangements (in-home Peak "from $2,600", Couples Peak "by
+  arrangement") are the only route to a contract that can exceed $4,400, and
+  they take owner approval before a client is filed.
 
 NEXT RUNS
 - BATCH 2 DONE (Aug 2026): FAQs · how-it-works-pricing (converted to
