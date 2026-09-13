@@ -562,13 +562,21 @@ legitimately changes an invariant, and say so in REPORT.md)
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
 - 9-point screen section body (Section B): byte-identical × 11 pages
-  (hash ba590a09107ffda0; intro + nine <li> items + closing line, set by
+  (hash 4c720960dec5a809; intro + nine <li> items + closing line, set by
   the Section A/B run). Hash changed legitimately in the Device Swap run
   (Sept 2026): the Body Composition <li> names the device, so retiring the
   1500 MDD rewrote the same bytes on all eleven pages. Previous value
   bd73ea51bc9ec5eb. All eleven pages still agree; certify.py reported no
   invariant mismatch. (That run recorded "ten"; rancho-bernardo was already
   on main and carrying the invariant, so the count was one low even then.)
+  CHANGED AGAIN in the October Card run: ba590a09107ffda0 -> 4c720960dec5a809.
+  The invariant spans intro + nine <li> items + closing line, and the INTRO
+  carried the retired "$110 Performance Diagnostic, credited in full toward a
+  3-month package". All NINE <li> ITEMS AND THE CLOSING LINE ARE BYTE-IDENTICAL
+  across the change, verified item by item; only the intro sentence moved, and
+  identically on all eleven pages. The alternative was leaving a retired price
+  live on eleven territory pages to protect a hash, which is the wrong way
+  round: the hash records the block, it does not license its contents.
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
