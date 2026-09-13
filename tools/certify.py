@@ -584,6 +584,12 @@ def assessment_as_session_rate(text):
     number, which is the opposite shape to the August $150 rule it replaces."""
     t = _flat(text); out = []
     for m in re.finditer(r'\$150\b', t):
+        # A RANGE is third-party pricing, not an OmniFit rate. The card's rule
+        # is "round numbers only", so every OmniFit figure is a single number;
+        # "$150-250/month" and "$150-200/session" are market ranges on the
+        # comparison page. This restores, in a form that needs no class-name
+        # whitelist, the competitor exemption the August $150 rule carried.
+        if re.match(r'\s*[-–]\s*\d', t[m.end():]): continue
         after = ' '.join(t[m.end():].split()[:4])
         if re.search(_SESSION_RATE, after, re.I):
             out.append(t[max(0, m.start()-90):m.end()+90].strip())
@@ -744,7 +750,12 @@ def run():
     # plain substring matching, which is what catches "Pacific Beach" inside a
     # longer sentence.
     for term in BANNED:
-        rx = (re.compile(re.escape(term) + r'(?![\d,]*\d)') if term.startswith('$')
+        # A hyphenated RANGE ("$50-80/session", "$150-250/month") is
+        # third-party pricing: the card's rule is round numbers only, so every
+        # OmniFit figure is a single number. Same reasoning as the $150 rule,
+        # and it is what lets the comparison page quote competitor rates
+        # without a class-name whitelist.
+        rx = (re.compile(re.escape(term) + r'(?![\d,]*\d)(?!\s*[-–]\s*\d)') if term.startswith('$')
               else re.compile(re.escape(term), re.I))
         for f in files:
             for i,l in enumerate(open(f),1):
