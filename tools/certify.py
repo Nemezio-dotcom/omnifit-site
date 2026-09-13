@@ -536,6 +536,10 @@ BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES",
           # cadence, not a billing term. Banning the bare words would flag
           # roughly 150 correct lines.
           "month-to-month", "billed monthly",
+          # RETIRED PRODUCT NAME. The product is the "Tune-Up". The old name
+          # asserted monthly billing that no longer exists. The LEGACY block in
+          # CANON still carries it correctly and is out of this glob's reach.
+          "Monthly Tune-Up",
           # August 2026 ladders - retired by the October card
           "$110", "$115", "$135", "$140", "$145", "$155", "$165", "$170",
           "$175", "$195", "$199", "$290", "$335", "$370", "$390", "$449", "$455",

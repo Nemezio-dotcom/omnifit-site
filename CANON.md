@@ -235,10 +235,14 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     One session per cycle - reassessment on the Bodystat QuadScan 4000 and an
     hour of training - with programming delivered through the OmniFit app
     between visits. BILLED EVERY 4 WEEKS, 30 days' notice to cancel.
-    The product is still NAMED the "Monthly Tune-Up" in published copy. The
-    name is a product name, not a billing term; the billing is every 4 weeks
-    like everything else. If the name is to change, that is an owner decision
-    and a separate run.
+    RENAMED Sept 2026: the product is the "TUNE-UP", not the "Monthly
+    Tune-Up". The old name said monthly while the billing is every 4 weeks,
+    which is the contradiction this rename closes. "Monthly Tune-Up" is a
+    BANNED literal term on public pages.
+    The LEGACY PRICING block below still reads "Monthly Tune-Up: 199/250/295"
+    and that is CORRECT - it records the August card, where the product was
+    both named and billed monthly. certify.py never reads this file, so the
+    banned term cannot fire there; do not "fix" it.
 
   TERMS
     ALL RECURRING BILLING IS EVERY 4 WEEKS. NO PRODUCT BILLS MONTHLY.
