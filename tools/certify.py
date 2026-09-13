@@ -526,6 +526,16 @@ BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES",
           # left behind on ~28 files by the repricing, which changed figures
           # without touching the product name. Banned so it cannot come back.
           "Performance Diagnostic",
+          # BILLING CADENCE. Every OmniFit product bills every 4 weeks - the
+          # Program, the Executive Reset and the Tune-Up alike. Nothing bills
+          # monthly and there is no month-to-month option, so both phrases are
+          # retired from public copy. CANON TERMS carries the rule.
+          # NOT banned, deliberately: "per month" and "monthly" on their own.
+          # The Teqneeq membership genuinely is $119 per month (Teqneeq's
+          # billing, not OmniFit's), and "monthly progress reports" is a
+          # cadence, not a billing term. Banning the bare words would flag
+          # roughly 150 correct lines.
+          "month-to-month", "billed monthly",
           # August 2026 ladders - retired by the October card
           "$110", "$115", "$135", "$140", "$145", "$155", "$165", "$170",
           "$175", "$195", "$199", "$290", "$335", "$370", "$390", "$449", "$455",
