@@ -3554,3 +3554,33 @@ recorded a past correction as "old -> new", so the retired term was present as
 the left-hand side of its own fix; each was rewritten to state the current
 value rather than the transition. `home-3` stays frozen.
 
+
+# Product rename — Performance Assessment (Sept 2026)
+
+**Branch:** `main`
+**Scope:** the product name only. No price, no invariant, no rule beyond one
+added literal.
+
+The October card names it the Performance **Assessment**. The repricing run
+left "Performance Diagnostic" on 28 files because it changed *figures* without
+touching the *product name* — so sentences read "$150 Performance Diagnostic"
+and certified clean, since the rules banned `$110` and not the old name. 121
+occurrences already said Assessment against 50 that still said Diagnostic.
+
+47 straight renames across 27 files, page and header in one sweep so mirrored
+copy could not drift. All 32 pairs re-verified.
+
+**Four changelog lines were reworded rather than renamed.** On home-1 and
+home-2 each records a past decision as `$90 Performance Diagnostic FLAGGED…` or
+`Performance Diagnostic $90 → $150`. Renaming inside them would produce a
+product name that did not exist at the price attached to it — falsifying the
+record those blocks exist to keep. They now state the current fact.
+
+`"Performance Diagnostic"` added to BANNED. Negative-tested: reintroducing it
+on about.html fires and takes stale canon to 1; reverted, back to 0.
+
+All five invariant hashes unchanged — the string sat in none of the blocks.
+`mkheaders.py` META held no occurrence; regeneration is a no-op.
+
+Certification: **0 · 0 · 3 · 9**, unchanged.
+
