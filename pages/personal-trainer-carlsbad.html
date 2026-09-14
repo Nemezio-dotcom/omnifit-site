@@ -36,7 +36,9 @@
   #omni-cbd .cb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
   #omni-cbd .cb-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 24px 28px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; min-height: 0; }
   #omni-cbd .cb-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-  #omni-cbd .cb-card-icon { font-size: 28px; margin-bottom: 16px; display: block; line-height: 1; }
+  #omni-cbd .cb-card-icon { display: block; margin-bottom: 16px; line-height: 1; }
+  #omni-cbd .cb-card-icon svg, #omni-cbd .cb-hub-card-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block; }
+  #omni-cbd .cb-trust-item svg { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
   #omni-cbd .cb-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); line-height: 1.3; }
   #omni-cbd .cb-card p { font-size: 14px; color: var(--white-50); margin-bottom: 18px; line-height: 1.65; }
   #omni-cbd .cb-card-features { list-style: none; margin: 0 0 20px; padding: 0; flex: 1 1 auto; }
@@ -105,35 +107,35 @@
     </div>
     <div class="cb-grid">
       <article class="cb-card">
-        <span class="cb-card-icon">🏠</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></svg></span>
         <h3>In-Home Personal Training</h3>
         <p>We come to your Carlsbad or La Costa home with all equipment and a fully programmed session, or build your program around your existing home gym. Complete privacy, structured programming, zero commute.</p>
         <ul class="cb-card-features"><li>Carlsbad &amp; La Costa served</li><li>All equipment provided</li><li>Corrective-first methodology</li></ul>
         <a class="cb-card-link" href="/in-home-personal-trainer-san-diego">Explore In-Home Training <span>→</span></a>
       </article>
       <article class="cb-card">
-        <span class="cb-card-icon">🏋️</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M19 12h2"/><rect x="5" y="8" width="3" height="8" rx="1"/><rect x="16" y="8" width="3" height="8" rx="1"/><path d="M8 12h8"/></svg></span>
         <h3>Private Studio Sessions</h3>
         <p>Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch. Professional-grade equipment, zero crowds, full privacy in a focused training environment.</p>
         <ul class="cb-card-features"><li>Credentialed access only: no walk-ins</li><li>Professional-grade equipment</li><li>10772 Thornmint Rd, San Diego 92127</li></ul>
         <a class="cb-card-link" href="/personal-trainer-4s-ranch">See the 4S Ranch Studio <span>→</span></a>
       </article>
       <article class="cb-card">
-        <span class="cb-card-icon">🔧</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l6-6"/><path d="M13 11l7-7"/><circle cx="16" cy="8" r="3.5"/><path d="M8.5 15.5l-2-2"/></svg></span>
         <h3>Corrective Exercise</h3>
         <p>NASM-CES certified programming for Carlsbad clients managing chronic pain, golf injuries, post-surgical recovery, or desk posture dysfunction from years of office work.</p>
         <ul class="cb-card-features"><li>9-point movement screening</li><li>3/10 pain ceiling protocol</li><li>Bridge from PT to performance</li></ul>
         <a class="cb-card-link" href="/corrective-exercise-post-rehab">See Corrective Training <span>→</span></a>
       </article>
       <article class="cb-card">
-        <span class="cb-card-icon">📊</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"/><rect x="6" y="11" width="3" height="8"/><rect x="11" y="7" width="3" height="12"/><rect x="16" y="13" width="3" height="6"/></svg></span>
         <h3>Performance Assessment</h3>
         <p>Every program starts with a $150 Performance Assessment on the Bodystat QuadScan 4000: lab-grade bioimpedance data, not a bathroom scale guess.</p>
         <ul class="cb-card-features"><li>Body composition &amp; hydration data</li><li>Objective baseline before training</li><li>Rescans track real progress</li></ul>
         <a class="cb-card-link" href="/how-we-measure-your-progress">See How We Measure Progress <span>→</span></a>
       </article>
       <article class="cb-card">
-        <span class="cb-card-icon">🖥️</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
         <h3>Hybrid &amp; Virtual Coaching</h3>
         <p>In-person sessions plus virtual programming, ideal for Carlsbad professionals juggling work, family, and periodic business travel.</p>
         <ul class="cb-card-features"><li>Studio + virtual session mix</li>
@@ -142,7 +144,7 @@
         <a class="cb-card-link" href="/the-30-minute-executive-reset">Explore Virtual Coaching <span>→</span></a>
       </article>
       <article class="cb-card">
-        <span class="cb-card-icon">📉</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M4 19V5"/><path d="M7 9l4 5 3-3 5 6"/></svg></span>
         <h3>Weight Loss Coaching</h3>
         <p>Sustainable fat loss for Carlsbad professionals. Progressive training, Precision Nutrition habits, and weekly accountability, no crash diets, no extreme protocols.</p>
         <ul class="cb-card-features"><li>20–30+ lbs in 4–6 months</li><li>Habit-based nutrition coaching</li><li>Body composition tracking</li></ul>
@@ -182,17 +184,17 @@
     </div>
     <div class="cb-grid">
       <article class="cb-card">
-        <span class="cb-card-icon">⛳</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21V4"/><path d="M8 4l9 3-9 3"/><path d="M4 21h9"/></svg></span>
         <h3>Performance Beyond the Gym</h3>
         <p>Many Carlsbad clients are recreational golfers, hikers, or weekend athletes. Our programming builds the mobility, stability, and rotational strength that makes those activities better, and injury-free.</p>
       </article>
       <article class="cb-card">
-        <span class="cb-card-icon">🎯</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span>
         <h3>Assessment-Driven Precision</h3>
         <p>No generic workouts. Your program is built from your Bodystat assessment and a 9-point movement screening that identifies the specific compensations, imbalances, and restrictions unique to your body.</p>
       </article>
       <article class="cb-card">
-        <span class="cb-card-icon">👪</span>
+        <span class="cb-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.2 0 4 1.8 4 4"/></svg></span>
         <h3>Designed for Busy Families</h3>
         <p>Carlsbad is a family town. In-home sessions eliminate gym commutes, fit between school runs and work calls, and happen in your own space on your own schedule.</p>
       </article>
@@ -312,7 +314,6 @@
       <a class="cb-hub-link" href="/personal-training-services">All Services</a>
       <a class="cb-hub-link" href="/in-home-personal-trainer-san-diego">In-Home Training</a>
       <a class="cb-hub-link" href="/corrective-exercise-post-rehab">Corrective Exercise</a>
-      <a class="cb-hub-link" href="/strength-training-1">Strength Training</a>
       <a class="cb-hub-link" href="/hiit-personal-trainer-san-diego">HIIT Training</a>
       <a class="cb-hub-link" href="/the-30-minute-executive-reset">Virtual Coaching</a>
       <a class="cb-hub-link" href="/training-rates-san-diego">Training Rates</a>
@@ -334,10 +335,10 @@
   </div>
 
   <div class="cb-trust">
-    <div class="cb-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
-    <div class="cb-trust-item"><span>🏅</span> NASM CPT · CES · PES · BCS · CNC</div>
-    <div class="cb-trust-item"><span>📍</span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
-    <div class="cb-trust-item"><span>🌍</span> Serving Carlsbad &amp; La Costa</div>
+    <div class="cb-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> 5.0 · 190+ Reviews</div>
+    <div class="cb-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg> NASM CPT · CES · PES · BCS · CNC</div>
+    <div class="cb-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A7 7 0 0 0 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
+    <div class="cb-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg> Serving Carlsbad &amp; La Costa</div>
   </div>
 
 </div>
