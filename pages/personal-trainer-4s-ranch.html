@@ -167,7 +167,9 @@
     border-color: var(--gold); transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(0,0,0,0.3);
   }
-  #omni-4sr .fr-card-icon { font-size: 28px; margin-bottom: 16px; display: block; line-height: 1; }
+  #omni-4sr .fr-card-icon { display: block; margin-bottom: 16px; line-height: 1; }
+  #omni-4sr .fr-card-icon svg, #omni-4sr .fr-hub-card-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block; }
+  #omni-4sr .fr-trust-item svg { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
   #omni-4sr .fr-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); line-height: 1.3; }
   #omni-4sr .fr-card p { font-size: 14px; color: var(--white-50); margin-bottom: 18px; line-height: 1.65; }
   #omni-4sr .fr-card-features { list-style: none; margin: 0 0 20px; padding: 0; flex: 1 1 auto; }
@@ -565,17 +567,17 @@
     </div>
     <div class="fr-hub-nav">
       <a href="/the-omnifit-method" class="fr-hub-card omni-cta" data-cta-id="hub-method" data-cta-location="4SR Hub Nav" data-track="click-hub-method">
-        <div class="fr-hub-card-icon">🧬</div>
+        <div class="fr-hub-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4c0 5 10 5 10 10s-10 5-10 10"/><path d="M17 4c0 5-10 5-10 10s10 5 10 10"/><path d="M8 9h8M8 15h8"/></svg></div>
         <div class="fr-hub-card-title">The OmniFit Method</div>
         <div class="fr-hub-card-desc">Assess → Correct → Build → Sustain. Our four-phase framework for lasting transformation.</div>
       </a>
       <a href="/how-it-works-pricing" class="fr-hub-card omni-cta" data-cta-id="hub-pricing" data-cta-location="4SR Hub Nav" data-track="click-hub-pricing">
-        <div class="fr-hub-card-icon">💰</div>
+        <div class="fr-hub-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 0 0 3h4"/></svg></div>
         <div class="fr-hub-card-title">How It Works &amp; Pricing</div>
         <div class="fr-hub-card-desc">Transparent program structures, what's included, and investment ranges. No hidden fees.</div>
       </a>
       <a href="/how-we-measure-your-progress" class="fr-hub-card omni-cta" data-cta-id="hub-progress" data-cta-location="4SR Hub Nav" data-track="click-hub-progress">
-        <div class="fr-hub-card-icon">📊</div>
+        <div class="fr-hub-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"/><rect x="6" y="11" width="3" height="8"/><rect x="11" y="7" width="3" height="12"/><rect x="16" y="13" width="3" height="6"/></svg></div>
         <div class="fr-hub-card-title">How We Measure Progress</div>
         <div class="fr-hub-card-desc">Posture photos, strength benchmarks, body measurements, and adherence tracking. Data you can see.</div>
       </a>
@@ -631,42 +633,42 @@
     </div>
     <div class="fr-grid">
       <article class="fr-card">
-        <span class="fr-card-icon">🏋️</span>
+        <span class="fr-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M19 12h2"/><rect x="5" y="8" width="3" height="8" rx="1"/><rect x="16" y="8" width="3" height="8" rx="1"/><path d="M8 12h8"/></svg></span>
         <h3>1-on-1 Executive Training</h3>
         <p>Private sessions inside Teqneeq FHC: professional-grade equipment, zero crowds, credentialed professionals only. Designed for executives 30+ who need efficient, joint-friendly training with weekly accountability.</p>
         <ul class="fr-card-features"><li>Private studio environment</li><li>Assessment-driven programming</li><li>Corrective-first methodology</li></ul>
         <a class="fr-card-link" href="/personal-training-services">See All Services <span>→</span></a>
       </article>
       <article class="fr-card">
-        <span class="fr-card-icon">🔧</span>
+        <span class="fr-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l6-6"/><path d="M13 11l7-7"/><circle cx="16" cy="8" r="3.5"/><path d="M8.5 15.5l-2-2"/></svg></span>
         <h3>Corrective Exercise &amp; Post-Rehab</h3>
         <p>NASM-CES certified programming for clients with desk-related pain, past injuries, or recent PT discharge. We bridge the gap between rehab and independent training, safely rebuilding strength and mobility.</p>
         <ul class="fr-card-features"><li>9-point movement screening</li><li>3/10 pain ceiling protocol</li><li>Bridge from PT to performance</li></ul>
         <a class="fr-card-link" href="/corrective-exercise-post-rehab">See Corrective Training <span>→</span></a>
       </article>
       <article class="fr-card">
-        <span class="fr-card-icon">📉</span>
+        <span class="fr-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M4 19V5"/><path d="M7 9l4 5 3-3 5 6"/></svg></span>
         <h3>Sustainable Fat Loss</h3>
         <p>Structured body recomposition over a 4–6 month arc, preserving muscle, protecting joints, and building habits you keep for life. No crash diets, no excessive cardio.</p>
         <ul class="fr-card-features"><li>Bodystat-tracked body recomposition</li><li>Behavior-change nutrition</li><li>Body composition tracking</li></ul>
         <a class="fr-card-link" href="/weight-loss">Start Your Fat-Loss Plan <span>→</span></a>
       </article>
       <article class="fr-card">
-        <span class="fr-card-icon">🖥️</span>
+        <span class="fr-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span>
         <h3>Hybrid &amp; Virtual Coaching</h3>
         <p>In-person sessions at Teqneeq plus virtual programming and live online coaching. Built for professionals juggling careers, travel, and the need to stay consistent regardless of schedule chaos.</p>
         <ul class="fr-card-features"><li>Studio + virtual session mix</li><li>Custom app-based programming</li><li>Fully virtual Executive Reset from $200 per 4 weeks</li></ul>
         <a class="fr-card-link" href="/the-30-minute-executive-reset">Explore Virtual Coaching <span>→</span></a>
       </article>
       <article class="fr-card">
-        <span class="fr-card-icon">💪</span>
+        <span class="fr-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M19 12h2"/><rect x="5" y="8" width="3" height="8" rx="1"/><rect x="16" y="8" width="3" height="8" rx="1"/><path d="M8 12h8"/></svg></span>
         <h3>Strength &amp; Muscle Building</h3>
         <p>Progressive resistance training to build lean muscle, functional strength, and balance, programmed around joint health and injury prevention for professionals 30+.</p>
         <ul class="fr-card-features"><li>4-week periodized blocks</li><li>Compound lift progressions</li><li>Monthly strength benchmarks</li></ul>
-        <a class="fr-card-link" href="/strength-training-1">See Strength Programs <span>→</span></a>
+        <a class="fr-card-link" href="/private-personal-trainer-san-diego">See Strength Programs <span>→</span></a>
       </article>
       <article class="fr-card">
-        <span class="fr-card-icon">🏠</span>
+        <span class="fr-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></svg></span>
         <h3>In-Home Training</h3>
         <p>We come to your home throughout North County and coastal San Diego: fully programmed sessions using your equipment. Perfect for clients in Rancho Santa Fe, Carmel Valley, Del Mar, and La Jolla.</p>
         <ul class="fr-card-features"><li>Your equipment, our programming</li><li>Travel fee varies by location</li><li>Same methodology as studio</li></ul>
@@ -1142,7 +1144,6 @@
       <a class="fr-hub-link" href="/couples-personal-training-san-diego">Couples Training</a>
       <a class="fr-hub-link" href="/nutrition-coaching-san-diego">Nutrition Coaching</a>
       <a class="fr-hub-link" href="/personal-trainer-rancho-bernardo">Rancho Bernardo</a>
-      <a class="fr-hub-link" href="/strength-training-1">Strength Training</a>
       <a class="fr-hub-link" href="/hiit-personal-trainer-san-diego">HIIT Training</a>
       <a class="fr-hub-link" href="/the-30-minute-executive-reset">Virtual Coaching</a>
       <a class="fr-hub-link" href="/training-rates-san-diego">Training Rates</a>
@@ -1165,10 +1166,10 @@
   </div>
 
   <div class="fr-trust">
-    <div class="fr-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
-    <div class="fr-trust-item"><span>🏅</span> NASM CPT·CES·PES·BCS·CNC</div>
-    <div class="fr-trust-item"><span>📍</span> Teqneeq FHC · 4S Ranch</div>
-    <div class="fr-trust-item"><span>🌍</span> Virtual Coaching Worldwide</div>
+    <div class="fr-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> 5.0 · 190+ Reviews</div>
+    <div class="fr-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg> NASM CPT·CES·PES·BCS·CNC</div>
+    <div class="fr-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A7 7 0 0 0 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Teqneeq FHC · 4S Ranch</div>
+    <div class="fr-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg> Virtual Coaching Nationwide</div>
   </div>
 
 </div>
@@ -1176,7 +1177,7 @@
 <!-- ═══ Sticky Mobile Bar ═══ -->
 <nav class="sticky-bar-4sr" aria-label="Quick Actions">
   <div class="sticky-inner">
-    <a class="sticky-btn call omni-cta" href="tel:619-259-0630" data-cta-id="sticky-call" data-cta-location="4SR Sticky" data-track="sticky-call" data-no-delay="1">📞 Call</a>
+    <a class="sticky-btn call omni-cta" href="tel:619-259-0630" data-cta-id="sticky-call" data-cta-location="4SR Sticky" data-track="sticky-call" data-no-delay="1">Call</a>
     <a class="sticky-btn book omni-cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener" data-cta-id="sticky-book" data-cta-location="4SR Sticky" data-track="sticky-book">Book 45-Min Consult</a>
   </div>
 </nav>
