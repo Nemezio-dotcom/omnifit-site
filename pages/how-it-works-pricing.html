@@ -81,7 +81,8 @@
   #omni-cost .ig { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin: 44px 0 0; }
   #omni-cost .ic { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 24px; transition: all 0.4s; }
   #omni-cost .ic:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
-  #omni-cost .ic-icon { font-size: 24px; margin-bottom: 14px; display: block; }
+  #omni-cost .ic-icon { display: block; margin-bottom: 14px; }
+  #omni-cost .ic-icon svg, #omni-cost .guar-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: inline-block; }
   #omni-cost .ic h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--white); }
   #omni-cost .ic p { font-size: 13px; line-height: 1.65; color: var(--white-50); margin: 0; }
 
@@ -130,7 +131,8 @@
   /* GUARANTEE BOX */
   #omni-cost .guar { background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-surface) 100%); border: 1px solid var(--gold); border-radius: var(--radius-lg); padding: 44px 36px; margin: 48px 0 0; text-align: center; position: relative; overflow: hidden; }
   #omni-cost .guar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-  #omni-cost .guar-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+  #omni-cost .guar-icon { display: block; margin-bottom: 16px; }
+  #omni-cost .guar-icon svg { width: 40px; height: 40px; }
   #omni-cost .guar h3 { font-size: 24px; margin-bottom: 16px; color: var(--gold); }
   #omni-cost .guar p { max-width: 580px; margin: 0 auto; font-size: 15px; color: var(--white-50); }
   #omni-cost .guar-scope { display: inline-block; margin-top: 20px; padding: 8px 20px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: var(--gold-light); }
@@ -271,42 +273,42 @@
     <p>There are no tiers with stripped-down features. Every OmniFit client gets the full system, and the only variable is session frequency and format.</p>
     <div class="ig">
       <div class="ic">
-        <span class="ic-icon">&#128203;</span>
+        <span class="ic-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6"/></svg></span>
         <h4>45-Min Assessment</h4>
         <p>Comprehensive movement screen covering joint function, posture, pain history, and lifestyle constraints.</p>
       </div>
       <div class="ic">
-        <span class="ic-icon">&#127919;</span>
+        <span class="ic-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span>
         <h4>Individualized Programming</h4>
         <p>Fully custom training plans updated monthly based on your progress data. Never a template.</p>
       </div>
       <div class="ic">
-        <span class="ic-icon">&#129367;</span>
+        <span class="ic-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-7 4-12 14-13-1 10-6 14-13 14"/><path d="M5 19c3-4 6-6 10-9"/></svg></span>
         <h4>Nutrition Coaching</h4>
         <p>Included in every program. Flexible meal frameworks, macro guidance, and strategies for travel and business dinners.</p>
       </div>
       <div class="ic">
-        <span class="ic-icon">&#128241;</span>
+        <span class="ic-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 17h2"/></svg></span>
         <h4>App-Based Tracking</h4>
         <p>Your program, workout videos, nutrition targets, and coach communication, all in one app.</p>
       </div>
       <div class="ic">
-        <span class="ic-icon">&#9989;</span>
+        <span class="ic-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span>
         <h4>Weekly Check-Ins</h4>
         <p>Structured accountability reviews covering training, nutrition, energy, and habit compliance.</p>
       </div>
       <div class="ic">
-        <span class="ic-icon">&#128200;</span>
+        <span class="ic-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M4 19V5"/><path d="M7 15l4-5 3 3 5-6"/></svg></span>
         <h4>Quarterly Progress Reviews</h4>
         <p>Posture photos, strength benchmarks, body composition data, and trend analysis against your baseline.</p>
       </div>
       <div class="ic">
-        <span class="ic-icon">&#127758;</span>
+        <span class="ic-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg></span>
         <h4>Hybrid Flexibility</h4>
         <p>Train in-studio, virtually, or with guided travel workouts. Your program adapts to your week, not the other way around.</p>
       </div>
       <div class="ic">
-        <span class="ic-icon">&#128295;</span>
+        <span class="ic-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l6-6"/><path d="M13 11l7-7"/><circle cx="16" cy="8" r="3.5"/><path d="M8.5 15.5l-2-2"/></svg></span>
         <h4>Corrective Exercise</h4>
         <p>Joint-friendly programming with NASM CES protocols. 3/10 pain ceiling rule. Bridge from PT to performance.</p>
       </div>
@@ -328,11 +330,11 @@
         <div class="pc-freq">1 session per week &middot; billed every 4 weeks</div>
         <span class="pc-save">$560/cycle on the Foundation</span>
         <ul class="pc-list">
-          <li>Foundation frequency for steady progress</li>
+          <li>Weekly frequency for steady progress</li>
           <li>Custom corrective-first programming</li>
           <li>Nutrition guidance &amp; meal framework</li>
           <li>Weekly accountability check-ins</li>
-          <li>Trains on a sponsored guest pass</li>
+          <li>Requires Teqneeq membership ($119/mo, paid to Teqneeq)</li>
         </ul>
         <p class="pc-best">Best for: building the habit before increasing frequency</p>
       </div>
@@ -342,7 +344,7 @@
         <div class="pc-freq">2 sessions per week &middot; billed every 4 weeks</div>
         <span class="pc-save">$1,100/cycle on the Foundation</span>
         <ul class="pc-list">
-          <li>Weekly hands-on coaching</li>
+          <li>Twice-weekly hands-on coaching</li>
           <li>Programming updated every 4 weeks</li>
           <li>Nutrition guidance &amp; meal framework</li>
           <li>Monthly progress report across 12 metrics</li>
@@ -356,7 +358,7 @@
         <div class="pc-freq">3 sessions per week &middot; billed every 4 weeks</div>
         <span class="pc-save">Direct entry, not on the Foundation</span>
         <ul class="pc-list">
-          <li>Twice-weekly hands-on coaching</li>
+          <li>Three sessions a week of hands-on coaching</li>
           <li>Periodized 4-week training blocks</li>
           <li>Nutrition coaching with individualized macros</li>
           <li>Monthly progress report across 12 metrics</li>
@@ -375,7 +377,7 @@
         <div class="pc-freq">Studio member &middot; $900 total &middot; expires 8 weeks</div>
         <ul class="pc-list">
           <li>Full assessment-driven programming</li>
-          <li>No monthly commitment</li>
+          <li>No program commitment</li>
           <li>Sessions do not roll over</li>
         </ul>
         <p class="pc-best">Best for: trying the format before committing</p>
@@ -387,7 +389,7 @@
         <span class="pc-save">Teqneeq day pass included</span>
         <ul class="pc-list">
           <li>Full assessment-driven programming</li>
-          <li>No monthly commitment</li>
+          <li>No program commitment</li>
           <li>Sessions do not roll over</li>
         </ul>
         <p class="pc-best">Best for: a defined block of work with a set budget</p>
@@ -513,15 +515,15 @@
   <section class="s-dark"><div class="s-inner">
     <span class="s-label">Risk Reversal</span><hr class="gold-line">
     <h2>Our Commitment to You</h2>
-    <p>We know premium coaching is a serious investment. That's why we back our 3-month plans with accountability on both sides.</p>
+    <p>We know premium coaching is a serious investment. That's why every program comes with a clear way out if it isn't the right fit.</p>
     <div class="guar">
-      <span class="guar-icon">&#128737;&#65039;</span>
-      <h3>30-Day Fit Commitment</h3>
-      <p>Complete all scheduled sessions, log nutrition as directed, and attend weekly check-ins for 30 days. If after full compliance you decide OmniFit Performance is not the right fit, you can cancel and receive a full refund of the remaining program balance. Sessions already completed in the first month are not refunded.</p>
-      <span class="guar-scope">Applies to 3-Month Commitment Plans &amp; Executive Reset Programs</span>
+      <span class="guar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <h3>30-Day Fit Guarantee</h3>
+      <p>If after your first 30 days you decide OmniFit Performance isn't the right fit, you can cancel and receive a refund of the unused balance of your program. You keep the first month and everything you've learned. There is no compliance test to pass and nothing to negotiate.</p>
+      <span class="guar-scope">Applies to The Foundation, The Program &amp; the Executive Reset</span>
     </div>
     <div class="mid-cta" style="margin-top:36px">
-      <p>The commitment is intentionally tied to compliance. It keeps both sides accountable, and it means the people who qualify are the ones who actually showed up.</p>
+      <p>Thirty days is enough to know whether the coaching fits your life. If it doesn't, you shouldn't be paying for it.</p>
     </div>
   </div></section>
 
@@ -576,7 +578,7 @@
 
     <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What certifications does OmniFit hold?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit's head coach holds NASM Elite Trainer, NASM Corrective Exercise Specialist (CES), ACE Corrective Exercise Specialist, NASM Performance Enhancement Specialist (PES), NASM Certified Nutrition Coach (CNC), and NASM Behavior Change Specialist (BCS) certifications. This combination is specifically designed for working with injury-prone professionals who need corrective-first, joint-friendly programming.</p></div></div>
 
-    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Does OmniFit offer any kind of refund commitment?<span class="fi-icon">+</span></button><div class="fa"><p>Yes. Our 30-Day Fit Commitment applies to all 3-month plans and Executive Reset programs. Attend all scheduled sessions, log nutrition, and complete weekly check-ins for 30 days. If after full compliance you decide it is not the right fit, you can cancel and receive a full refund of the remaining program balance. The first month of completed sessions is not refunded.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Does OmniFit offer a money-back guarantee?<span class="fi-icon">+</span></button><div class="fa"><p>Yes. Every program includes a 30-Day Fit Guarantee: if after your first 30 days you decide it isn't the right fit, you can cancel and receive a refund of the unused balance of your program. You keep the first month and everything you've learned. There is no compliance test to pass and nothing to negotiate.</p></div></div>
 
     <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Who is OmniFit NOT a good fit for?<span class="fi-icon">+</span></button><div class="fa"><p>We're not the right fit if you're looking for the cheapest option, want drop-in group classes, prefer to train without any tracking or check-ins, or need a 6-week quick-fix program. OmniFit is specifically built for busy professionals 30+ who want structured, accountable coaching with measurable long-term results.</p></div></div>
 
