@@ -1,8 +1,10 @@
-<!-- COUPLES-PERSONAL-TRAINING-SAN-DIEGO HEADER JSON-LD · OCT 2026
-  Page Settings → Advanced → Page Header Code Injection. Replace any previous block.
-  LocalBusiness referenced by @id from the homepage, never redefined here.
-  FAQPage mirrors the on-page FAQ verbatim, in page order, tags stripped.
-  OfferCatalog carries the six canonical couples rates, per couple per 4 weeks.
+<!-- FAQS PAGE HEADER JSON-LD · v3 OCTOBER 2026
+  Paste into /FAQs → Page Settings → Advanced →
+  Page Header Code Injection, replacing the old block entirely.
+
+  FAQPage mirrors the patched on-page FAQ verbatim (tags stripped), in page
+  order. LocalBusiness is referenced by @id from the homepage header, never
+  redefined here.
 -->
 <script type="application/ld+json">
 {
@@ -10,21 +12,21 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.omnifittraining.com/couples-personal-training-san-diego#webpage",
-      "url": "https://www.omnifittraining.com/couples-personal-training-san-diego",
-      "name": "Couples Personal Training San Diego | Train Together, Programmed Separately",
-      "description": "Private couples and partner training in 4S Ranch and in-home across North County San Diego. One session, two programs, individual loads. Rates are per couple.",
+      "@id": "https://www.omnifittraining.com/FAQs#webpage",
+      "url": "https://www.omnifittraining.com/FAQs",
+      "name": "OmniFit Performance FAQs | Personal Training in San Diego",
+      "description": "Answers on OmniFit Performance's private personal training programs, pricing, policies, and what to expect, for professionals 30+ in San Diego and online. NASM Elite Trainer with 190+ five-star reviews.",
       "about": {
         "@id": "https://www.omnifittraining.com/#localbusiness-of"
       },
       "breadcrumb": {
-        "@id": "https://www.omnifittraining.com/couples-personal-training-san-diego#breadcrumb"
+        "@id": "https://www.omnifittraining.com/FAQs#breadcrumb"
       },
       "inLanguage": "en-US"
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.omnifittraining.com/couples-personal-training-san-diego#breadcrumb",
+      "@id": "https://www.omnifittraining.com/FAQs#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -35,204 +37,125 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Personal Training Services",
-          "item": "https://www.omnifittraining.com/personal-training-services"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Couples Personal Training",
-          "item": "https://www.omnifittraining.com/couples-personal-training-san-diego"
+          "name": "FAQs",
+          "item": "https://www.omnifittraining.com/FAQs"
         }
       ]
     },
     {
-      "@type": "Service",
-      "@id": "https://www.omnifittraining.com/couples-personal-training-san-diego#service",
-      "url": "https://www.omnifittraining.com/couples-personal-training-san-diego",
-      "name": "Couples and Partner Personal Training",
-      "serviceType": "Couples Personal Training",
-      "provider": {
-        "@id": "https://www.omnifittraining.com/#localbusiness-of"
-      },
-      "description": "One coached session with both partners in it, screened separately and programmed separately. Where goals or physical capacity differ the session is split, with partners alternating through different movements. Both partners log their own loads and reps in the OmniFit app and receive separate baselines, benchmarks and progress reports. Available at Teqneeq Functional Health Center in 4S Ranch and in-home across North County San Diego. Rates are per couple, not per person.",
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "San Diego"
-        },
-        {
-          "@type": "Neighborhood",
-          "name": "4S Ranch"
-        },
-        {
-          "@type": "Place",
-          "name": "North County San Diego"
-        }
-      ],
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Couples, spouses, business partners, and parent-and-adult-child pairs aged 30+"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Couples Training Programs",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Couples Momentum at Teqneeq FHC",
-              "description": "One session per week on The Program, billed every 4 weeks. Also offered on The Foundation for new clients."
-            },
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "1000.00",
-              "priceCurrency": "USD",
-              "unitText": "per couple per 4 weeks"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Couples Performance at Teqneeq FHC",
-              "description": "Two sessions per week on The Program, billed every 4 weeks. Direct entry only."
-            },
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "2000.00",
-              "priceCurrency": "USD",
-              "unitText": "per couple per 4 weeks"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Couples Peak at Teqneeq FHC",
-              "description": "Three sessions per week, arranged individually."
-            },
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "priceCurrency": "USD",
-              "unitText": "per couple per 4 weeks"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Couples Momentum In-Home",
-              "description": "One session per week on The Program, billed every 4 weeks, equipment provided. Also offered on The Foundation for new clients."
-            },
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "1450.00",
-              "priceCurrency": "USD",
-              "unitText": "per couple per 4 weeks"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Couples Performance In-Home",
-              "description": "Two sessions per week on The Program, billed every 4 weeks, equipment provided. Direct entry only."
-            },
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "2900.00",
-              "priceCurrency": "USD",
-              "unitText": "per couple per 4 weeks"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Couples Peak In-Home",
-              "description": "Three sessions per week, arranged individually, equipment provided."
-            },
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "priceCurrency": "USD",
-              "unitText": "per couple per 4 weeks"
-            }
-          }
-        ]
-      },
-      "potentialAction": {
-        "@type": "ReserveAction",
-        "target": "https://www.omnifittraining.com/contactform"
-      }
-    },
-    {
       "@type": "FAQPage",
-      "@id": "https://www.omnifittraining.com/couples-personal-training-san-diego#faq",
+      "@id": "https://www.omnifittraining.com/FAQs#faq",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Do both of us do the same workout?",
+          "name": "What kind of personal training does OmniFit offer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Usually not. Both partners are screened separately and get their own program, and where goals or physical capacity differ the session is split so you work through different movements on an alternating rhythm. Sharing an hour does not mean sharing a plan. If your goals and capacities happen to line up closely, more of the session overlaps, but that is an outcome of the screens rather than the starting assumption."
+            "text": "OmniFit Performance offers three training formats, all designed for professionals and executives 30+. In-studio private training at Teqneeq FHC in 4S Ranch, fully private, one client at a time. In-home training throughout San Diego County (La Jolla, Del Mar, Rancho Santa Fe, Carmel Valley, Encinitas). And the 30-Minute Executive Reset, a fully virtual program with live sessions 1–3×/week. Every program follows our Assess → Correct → Build → Sustain methodology."
           }
         },
         {
           "@type": "Question",
-          "name": "What if we are at completely different fitness levels?",
+          "name": "What is the 30-Minute Executive Reset?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A moderate gap is normal and the split-session format handles it well. A very wide gap does not work, and that is the main reason a couple gets turned down. If one partner is returning from surgery while the other is training for performance, the hour cannot serve both properly. The honest recommendation there is one to one for at least the first block, then revisit duo once you are closer."
+            "text": "The Executive Reset is a virtual coaching program with live 30-minute sessions 1–3 times per week via video, depending on tier. It includes app-based programming, nutrition coaching, and habit systems. Designed for executives who want structure and accountability from anywhere: home, office, or hotel room."
           }
         },
         {
           "@type": "Question",
-          "name": "How much does couples personal training cost in San Diego?",
+          "name": "Do you offer in-home personal training in San Diego?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OmniFit Performance couples rates are per couple, not per person. At Teqneeq Functional Health Center in 4S Ranch, The Program runs $1,000 per 4 weeks for Momentum and $2,000 for Performance. In-home runs $1,450 and $2,900. New couples start on The Foundation: three consecutive 4-week cycles at $850 per cycle studio, $1,250 in-home. Teqneeq membership at $119 per month is required for both partners at Momentum and above."
+            "text": "Yes. In-home training is available throughout San Diego County including La Jolla, Del Mar, Rancho Santa Fe, Carmel Valley, and Encinitas. A per-session travel fee may apply depending on location. Your coach brings all necessary equipment. Programming is identical to our studio sessions, fully individualized, assessment-driven, with monthly progress reports."
           }
         },
         {
           "@type": "Question",
-          "name": "Do we each get our own assessment?",
+          "name": "How is OmniFit different from F45, Orangetheory, or Equinox personal training?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Each partner completes their own Performance Assessment: a movement screen, resting heart rate and blood pressure, girth measurements and body composition. Two baselines, two sets of benchmarks, two progress reports. The sessions are shared, the measurement is not."
+            "text": "OmniFit Performance is a private 1:1 coaching practice, not a gym and not a group fitness studio. There are no classes, no shared sessions, and no rotating trainers. Your program is individually designed around your movement assessment, not adapted from a class template. OmniFit specializes in corrective exercise and executive scheduling flexibility, which group formats and large-gym personal training departments cannot accommodate. See How OmniFit Compares for detailed breakdowns."
           }
         },
         {
           "@type": "Question",
-          "name": "Why do we log our own weights and reps?",
+          "name": "How much does personal training cost at OmniFit?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Both partners track loads and reps in the OmniFit app during the session. In a duo, one coach recording two people's numbers from across the room produces a worse record than each person entering their own as they go. It also means each of you owns your progression and can see it directly rather than being told about it afterward."
+            "text": "In-studio coaching at Teqneeq: $640 to $1,800 per 4 weeks on The Program depending on tier (Momentum, Performance, or Peak). New clients: The Foundation, three consecutive 4-week cycles paid in full at enrolment, $560 per cycle for Momentum and $1,100 for Performance. Sessions without a program: singles at $205 for studio members, $235 for non-members with the day pass included, or $275 in-home; 5-packs at $180, $210 and $250 per session. In-home coaching: from $900 per 4 weeks, or $800 per cycle on the Foundation, with a per-session travel fee that may apply depending on location. Executive Reset: from $200 per 4 weeks for the async tier, with coached tiers at $500, $750, and $1,100. Every client starts with a $150 Performance Assessment, credited toward your first cycle. All programs start with a 45-minute paid consultation. Full details on the Training Rates page."
           }
         },
         {
           "@type": "Question",
-          "name": "Can we bring a third person?",
+          "name": "Do you accept insurance or HSA/FSA?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "An extra guest can join any session for $90. That works for an occasional friend or family member. If three people want to train together regularly, that is a different conversation and worth raising on the consultation, since the split-session format has a practical limit."
+            "text": "OmniFit does not bill insurance directly. Some clients use HSA or FSA funds for eligible wellness services, though you'll need to confirm with your benefits administrator. We can provide invoices and documentation if needed for reimbursement."
           }
         },
         {
           "@type": "Question",
-          "name": "What if one of us has to miss a session?",
+          "name": "How do I get started?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The session runs. Whoever is there trains, and it counts as that session for the program. Sessions cancelled with less than 24 hours notice are forfeited, which applies to duos the same way it applies to individual clients."
+            "text": "Book a 45-minute paid consultation ($30 refundable deposit). We'll discuss your goals, movement history, schedule, and any injuries or limitations. If it's a mutual fit, the deposit applies to your first cycle and you can start training within the week. If it's not a fit, we'll tell you honestly and refund the deposit. Book here."
           }
         },
         {
           "@type": "Question",
-          "name": "Where does couples training take place?",
+          "name": "What credentials does the trainer have?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "At Teqneeq Functional Health Center in 4S Ranch, a members-only functional health facility rather than a commercial gym floor, or in your home across North County San Diego with all equipment provided. Studio and in-home rates differ; both are listed above."
+            "text": "Nemezio LopezPerez holds NASM Elite Trainer status with specializations in Corrective Exercise (CES), Performance Enhancement (PES), and Behavior Change (BCS), plus an ACE Corrective Exercise Specialist credential. He holds twelve certifications in total across movement, nutrition, and metabolic health, has 190+ verified five-star reviews, and works exclusively with professionals over 30."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I travel frequently for work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Travel-adapted programming is built into every OmniFit Performance program. In-studio and in-home clients receive hotel and home gym workout variations through the app between sessions. Executive Reset clients train live via video from anywhere. In-person clients can add virtual sessions during travel weeks. No one loses momentum because of a flight."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What equipment do I need for virtual or hybrid sessions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Minimal equipment works: a pair of dumbbells, a resistance band, and a mat. For hotel rooms, we program bodyweight-only and band-based workouts requiring zero equipment. For home gyms, we scale to whatever you have. Every program includes equipment-adaptive variations so you never miss a workout due to access limitations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I have old injuries or joint pain. Can I still train?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. OmniFit Performance specializes in joint-friendly, corrective-first training. Your coach holds NASM Corrective Exercise (CES) and ACE Corrective Exercise Specialist credentials. Every program begins with a 9-point movement screen and follows a 3/10 pain ceiling protocol, meaning we never push through pain above a 3 out of 10. OmniFit is not a medical provider, but we serve as a structured bridge between physical therapy discharge and full performance training. When appropriate, we coordinate with your PT or physician."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What results can I expect?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Results vary by starting point and adherence, so OmniFit Performance measures every client against their own baseline rather than a promise. Compliant clients typically see movement quality and posture improve first, followed by measurable body composition change, strength increases, and better energy and sleep. OmniFit tracks progress with monthly data reports including body composition, strength benchmarks, posture photos, adherence metrics, and well-being scores. We don't promise miracles. We show you the data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is nutrition coaching included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every OmniFit Performance program includes nutrition guidance. You'll receive custom macros, simple meal frameworks, travel and dining strategies, and weekly accountability check-ins. We use a Precision Nutrition-informed approach focused on sustainable habit change rather than restrictive diets. For clients who want deeper nutrition support, dedicated nutrition coaching add-ons are available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's your cancellation and rescheduling policy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All sessions require 24 hours' advance notice to reschedule. Late cancellations and no-shows are forfeited. This policy exists to maintain consistency and respect both your time and your coach's schedule. The Foundation is paid in full at enrolment; The Program is billed every 4 weeks via auto-pay and can be cancelled with 30 days' notice."
           }
         }
       ]
