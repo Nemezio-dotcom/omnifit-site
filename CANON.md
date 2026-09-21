@@ -106,7 +106,8 @@ REPO STATE (reconciled with disk, Sept 2026)
       with 5 credentials, "Nemezio Lopez Perez", Pacific Beach maps link) is
       GONE; contactform-header and energy-protocol-waitlist-form-header were
       re-pointed from #business to #localbusiness-of the same day (paste both).
-      No page can match it: "no matching page" is expected. LIVE as of
+      certify.py exempts it from the page-matching check (it returns before
+      that check), so it emits no "no matching page" finding. LIVE as of
       2026-09-20.
     · home-header.html - the homepage PAGE header. v4 (Sept 20, 2026):
       page-level nodes only — WebPage #webpage (name = the homepage SEO Title
