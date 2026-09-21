@@ -852,7 +852,18 @@ def run():
                 notrun.append(f"{f}  ld+json is {len(blocks)} bare node(s), not an @graph document"
                               f" - LocalBusiness/about checks not applicable")
             else:
-                if "LocalBusiness" in n: print(f"   {f}  [LocalBusiness redefined]"); C+=1
+                # Sept 20, 2026: the entity graph (Organization / Person /
+                # LocalBusiness / WebSite) is defined ONCE, in the site-wide
+                # header injection recorded as pages/headers/site-header.html.
+                # That file is the only header allowed to carry LocalBusiness;
+                # every other header (the homepage page-header included)
+                # references it by @id.
+                if "LocalBusiness" in n and not f.endswith("/site-header.html"):
+                    print(f"   {f}  [LocalBusiness redefined]"); C+=1
+                if f.endswith("/site-header.html"):
+                    if not n.get("LocalBusiness",{}).get("@id","").endswith("#localbusiness-of"):
+                        print(f"   {f}  [site-header LocalBusiness must carry @id #localbusiness-of]"); C+=1
+                    continue
                 if "WebPage" not in n:
                     notrun.append(f"{f}  @graph has no WebPage node ({sorted(n)}) - "
                                   f"about-references-homepage-LocalBusiness check could not run")

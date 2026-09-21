@@ -3624,3 +3624,31 @@ CANON: certified pairs 29 → 30, invariant carriers 12 → 13 pages and headers
 
 Certification: **0 · 0 · 3 · 9**, all five hashes unchanged.
 
+
+---
+
+## Entity Consolidation + Batch 4 Terms run — Sept 20, 2026
+
+**Branch:** main (direct; everything here was pasted LIVE the same day, so the repo is being brought up to the live site, not the other way round)
+
+### What changed
+| File | Change |
+|---|---|
+| `pages/headers/site-header.html` | NEW. The site-wide header injection (Clarity/HubSpot deferral, GTM, geo meta, entity graph). Single definition of Organization `#organization`, Person `#founder`, LocalBusiness `#localbusiness-of`, WebSite `#website`. Replaces the old site-wide graph whose LocalBusiness was `#business` (5 credentials, "Nemezio Lopez Perez", `legalName` without LLC, Pacific Beach maps link, `priceRange` "$$$$"). |
+| `pages/headers/home-header.html` | v3 → v4. No longer defines the LocalBusiness. Now WebPage + FAQPage (mirrors `home-5.html`). WebPage.name = live SEO Title. |
+| `pages/home-6.html` | NEW. Homepage Partner & Duo section. Replaces an August-card block that was live but never in the repo. States no prices; routes to the couples page. |
+| `pages/terms-and-conditions.html` + header | NEW (Batch 4). Terms of Service rewritten to OmniFit Performance LLC and the October card. |
+| `pages/headers/contactform-header.html`, `pages/headers/energy-protocol-waitlist-form-header.html` | `provider.@id` re-pointed `#business` → `#localbusiness-of`. **Both must be re-pasted** or their provider reference dangles. No other change; contactform still owes its brand sweep. |
+| `tools/certify.py` | LocalBusiness-redefinition rule now permits exactly one carrier, `site-header.html`, and requires its `@id` to be `#localbusiness-of`. |
+| `CANON.md` | REPO STATE and BATCH notes updated (site-header, home-header v4, home-6, Batch 4 terms, HSA/FSA SEO description, aggregateRating/self-serving note). |
+
+### Why
+Every page header references the business by `@id` (`about: #localbusiness-of`) and never redefines it — correct per CANON. But the definition lived only in the homepage page-header, and Google resolves `@id` per page, so on every other page the reference pointed at nothing while a *different* site-wide entity (`#business`) sat alongside it. Result: two competing business entities, one of them a ghost, on 30+ pages. Moving the one definition to the site-wide injection keeps CANON's single-definition rule and makes it true on every page.
+
+### Certification
+`python3 tools/certify.py` → compliance 0 · stale canon 1 · structure 5 · not-run 9.
+All five structure findings and the one stale-canon hit are **pre-existing and unchanged** by this run: the three expected orphan headers (bodybuilding, energy-protocol, home), the `private-personal-trainer-san-diego` FAQ mirror failure (page 11 / schema 7), and the `in-home-personal-trainer-san-diego.html:7` "Essential" hit, which is inside that file's changelog comment, not its body. Invariant hashes all match. New files introduced zero findings.
+
+### Still human-side
+- Re-paste `contactform-header.html` and `energy-protocol-waitlist-form-header.html` (one-line `@id` change each).
+- Rich Results Test on `/in-home-personal-trainer-san-diego` after the site-wide paste: expect one LocalBusiness, no unresolved `@id`.

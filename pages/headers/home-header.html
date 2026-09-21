@@ -1,236 +1,85 @@
-<!-- OMNIFIT HOMEPAGE HEADER JSON-LD · v3 OCTOBER 2026 (October card: offer catalog, areaServed, knowsAbout)
+<!-- OMNIFIT HOMEPAGE PAGE HEADER · v4 SEPT 2026
   Paste into homepage Page Settings → Advanced → Page Header Code Injection,
   replacing the old block entirely.
 
-  === CANONICAL TRUTH PASS (what changed and why) ===
-  - Brand: retired trading name → "OmniFit Performance"
-    ("OmniFit Training" kept as alternateName: matches the domain string)
-  - NAP: 2123 Garnet Ave, PB 92109 → 10772 Thornmint Rd, San Diego 92127 + geo updated
-  - Reviews: 142/151 → 190+ (aggregateRating reviewCount 190; description says 190+)
-  - Pricing: "$80-$125 per session" era is DEAD. priceRange + offer catalog rebuilt
-    from the Aug 2026 canonical doc. Retired product names (Foundation Monthly,
-    Performance 3-Month, VIP 6-Month) removed.
-  - Credentials: ACE Corrective Exercise Specialist (ACE CES), confirmed;
-    full 12-credential set now matches the About page schema exactly.
-  - sameAs: Instagram typo fixed (omnift_sd → omnifit_sd); LinkedIn moved to founder.
-  - areaServed: 4S Ranch + North County corridor (Teqneeq FHC, 10772 Thornmint Rd).
-
-  === STATUS (Aug 2026) ===
-  - GBP sameAs: resolved to g.page/r/CcePeMjnbDe9EBM (from site footer review link).
-  - Email nemezio@omnifittraining.com CONFIRMED canonical. Phone confirmed vs footer.
-  - fitnesstrainer.com profile: freshly updated but URL unavailable (their site is
-    glitching). ADD to sameAs when retrievable; it carries the homepage-keyword
-    AI presence, so it is the highest-value citation on this list.
-  - Thumbtack + Bark URLs kept as-is (real profiles, old slugs still resolve).
-    Their NAP updates are on the citation-audit list.
-  - Site footer shows omnifittraining@gmail.com; swap to canonical email in the
-    site-wide sweep.
+  === WHAT CHANGED (v3 → v4) ===
+  - The LocalBusiness entity (#localbusiness-of) is NO LONGER defined here.
+    It moved to the SITE-WIDE header (Settings → Advanced → Code Injection →
+    Header), repo copy at pages/headers/site-header.html, so that every page's
+    "about": {"@id": "#localbusiness-of"} reference resolves on that page.
+    Google does not resolve @id across pages; a homepage-only definition left
+    every service page pointing at nothing.
+  - This file now carries page-level nodes only: WebPage + FAQPage.
+  - FAQPage mirrors the on-page homepage FAQ (pages/home-5.html), verbatim,
+    in page order.
+  - WebPage.name = the homepage Squarespace SEO Title, verbatim.
 -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://www.omnifittraining.com/#localbusiness-of",
-  "name": "OmniFit Performance",
-  "alternateName": "OmniFit Training",
-  "url": "https://www.omnifittraining.com",
-  "description": "OmniFit Performance is the personal training practice of Nemezio LopezPerez, based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across San Diego County and live virtual coaching nationwide. Specializing in joint-friendly strength training, corrective exercise, and structured coaching for busy professionals 30+. NASM Elite Trainer with 190+ five-star reviews across Google, Yelp, and Thumbtack.",
-  "telephone": "+1-619-259-0630",
-  "email": "nemezio@omnifittraining.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "10772 Thornmint Rd",
-    "addressLocality": "San Diego",
-    "addressRegion": "CA",
-    "postalCode": "92127",
-    "addressCountry": "US"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 33.0178026,
-    "longitude": -117.1021946
-  },
-  "containedInPlace": {
-    "@type": "Place",
-    "name": "Teqneeq Functional Health Center"
-  },
-  "areaServed": [
+  "@graph": [
     {
-      "@type": "City",
-      "name": "San Diego",
-      "sameAs": "https://en.wikipedia.org/wiki/San_Diego"
-    },
-    { "@type": "Neighborhood", "name": "4S Ranch" },
-    { "@type": "Place", "name": "Rancho Santa Fe" },
-    { "@type": "Place", "name": "Del Mar" },
-    { "@type": "Place", "name": "Carmel Valley" },
-    { "@type": "Place", "name": "La Jolla" },
-    { "@type": "Place", "name": "Fairbanks Ranch" },
-    { "@type": "Place", "name": "Santaluz" },
-    { "@type": "Place", "name": "Solana Beach" },
-    { "@type": "Place", "name": "Encinitas" },
-    { "@type": "Place", "name": "Carlsbad" },
-    { "@type": "Place", "name": "Rancho Bernardo" },
-    { "@type": "Place", "name": "Poway" },
-    {
-      "@type": "Country",
-      "name": "US",
-      "description": "Live virtual coaching available nationwide"
-    }
-  ],
-  "priceRange": "$640-$2,900 per 4 weeks",
-  "currenciesAccepted": "USD",
-  "paymentAccepted": "Credit Card, Debit Card, Affirm, Klarna",
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-      "opens": "06:00",
-      "closes": "20:00"
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": "Saturday",
-      "opens": "08:00",
-      "closes": "14:00"
-    }
-  ],
-  "founder": {
-    "@type": "Person",
-    "name": "Nemezio LopezPerez",
-    "jobTitle": "Founder & NASM Elite Trainer",
-    "sameAs": [
-      "https://www.instagram.com/eziogetsfit",
-      "https://www.linkedin.com/in/nemeziolp/"
-    ],
-    "hasCredential": [
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Elite Trainer" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Certified Personal Trainer (CPT)" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Corrective Exercise Specialist (CES)" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Performance Enhancement Specialist (PES)" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Certified Nutrition Coach (CNC)" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Behavior Change Specialist (BCS)" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "ACE Corrective Exercise Specialist (CES)" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 1" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Sleep, Stress & Recovery" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden Peptide Fundamentals Certification" },
-      { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Nutrition Certification" }
-    ]
-  },
-  "knowsAbout": [
-    "Executive Personal Training",
-    "Corrective Exercise",
-    "Joint-Friendly Strength Training",
-    "Post-Rehab Training",
-    "In-Home Personal Training",
-    "Nutrition Coaching",
-    "Virtual Coaching"
-  ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "5.0",
-    "reviewCount": "190",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Training Programs",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Performance Assessment",
-          "description": "In-person baseline assessment: Bodystat QuadScan 4000 body-composition analysis plus a 9-point movement screening. Credited toward your first cycle."
-        },
-        "price": "150.00",
-        "priceCurrency": "USD"
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "1:1 Personal Training at Teqneeq",
-          "description": "Private coaching at Teqneeq Functional Health Center in 4S Ranch. Tiers from Momentum to Peak; a three-cycle Foundation for new clients, then The Program billed every 4 weeks."
-        },
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "640.00",
-          "maxPrice": "1800.00",
-          "priceCurrency": "USD",
-          "unitText": "per 4 weeks"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "In-Home Personal Training",
-          "description": "The same assessment-first coaching system delivered in your home across San Diego County."
-        },
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "900.00",
-          "maxPrice": "2600.00",
-          "priceCurrency": "USD",
-          "unitText": "per 4 weeks"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Couples Training",
-          "description": "Train together at Teqneeq or in-home, one coached session with separate programming for each partner. Rates are per couple."
-        },
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "1000.00",
-          "maxPrice": "2900.00",
-          "priceCurrency": "USD",
-          "unitText": "per 4 weeks"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Session Packs",
-          "description": "5-session packs at Teqneeq or in-home for clients who prefer per-session pricing without a program; studio non-member packs include the Teqneeq day pass."
-        },
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "180.00",
-          "maxPrice": "250.00",
-          "priceCurrency": "USD",
-          "unitText": "per session"
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Executive Reset Virtual Coaching",
-          "description": "Live virtual and app-based coaching for professionals anywhere in the US, from async programming to fully coached tiers."
-        },
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "200.00",
-          "maxPrice": "1100.00",
-          "priceCurrency": "USD",
-          "unitText": "per 4 weeks"
-        }
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/#webpage",
+      "url": "https://www.omnifittraining.com/",
+      "name": "Personal Trainer San Diego | Diagnostic-Led Coaching",
+      "description": "Diagnostic-led personal training for busy professionals 30+ in San Diego. Bodystat QuadScan 4000 body composition, 9-point movement screen, corrective-first strength, in-studio at Teqneeq in 4S Ranch, in-home across North County, and virtual nationwide. NASM Elite Trainer with 190+ five-star reviews.",
+      "inLanguage": "en-US",
+      "isPartOf": { "@id": "https://www.omnifittraining.com/#website" },
+      "about": { "@id": "https://www.omnifittraining.com/#localbusiness-of" },
+      "publisher": { "@id": "https://www.omnifittraining.com/#organization" },
+      "mainEntity": { "@id": "https://www.omnifittraining.com/#localbusiness-of" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w"
       }
-    ]
-  },
-  "sameAs": [
-    "https://www.instagram.com/omnifit_sd/",
-    "https://www.thumbtack.com/ca/san-diego/personal-trainers/omnifit-personal-fitness-training/service/455913312050044943",
-    "https://www.bark.com/en/us/company/omnifit-personal-fitness-training/kDKNA/",
-    "https://g.page/r/CcePeMjnbDe9EBM"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.omnifittraining.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you offer virtual personal training in San Diego?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We coach clients locally and remotely via live video plus the OmniFit app. Many busy professionals combine online coaching with 1:1 sessions as schedules allow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What equipment do I need for online sessions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Minimal gear works: a pair of dumbbells, a mat, and optional suspension straps. We'll tailor the plan to your home, office, or hotel setup. No gym required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you include nutrition guidance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Custom nutrition guidance is built in. We'll set calories, protein targets, and simple meal frameworks that fit your schedule. Weekly check-ins keep you on track."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often do we meet and what does accountability look like?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most clients train 2–3x/week. You'll also get weekly progress reviews, in-app messaging, and habit tracking. Accountability is the difference-maker at OmniFit. See options on Rates & Packages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What results can I expect in 3–6 months?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Results vary by starting point and adherence, so we measure you against your own baseline instead of a promise. Every client is tracked across 12 objective metrics, including body composition, strength benchmarks, and posture photos, with formal 30-day progress reports. The documented case studies show real client outcomes and the timelines behind them."
+          }
+        }
+      ]
+    }
   ]
 }
 </script>

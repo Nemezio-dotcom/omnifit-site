@@ -93,12 +93,37 @@ REPO STATE (reconciled with disk, Sept 2026)
       retrieve, so the page will never exist here. The headers are real and
       deployed. Certification reports each as "no matching page" - expected,
       and left visible rather than suppressed.
-    · home-header.html - the homepage header, and the site's LocalBusiness
-      definition (the one place it is legitimately defined, referenced
-      everywhere else by @id). The homepage itself lives in this repo only as
-      the home-1..home-5 fragments, so there is no pages/home.html and the
-      same "no matching page" finding applies. It also carries retired brand
-      name, Pacific Beach and Orthopedic Exercise.
+    · site-header.html - NEW Sept 20, 2026. The SITE-WIDE header injection
+      (Squarespace Settings → Advanced → Code Injection → Header): Clarity +
+      HubSpot deferral, GTM, geo meta, and the site's ENTITY GRAPH —
+      Organization #organization · Person #founder · LocalBusiness
+      #localbusiness-of · WebSite #website. This is now the ONE place the
+      LocalBusiness is defined; every page header references it by @id. It
+      moved here from the homepage page-header because Google does not
+      resolve @id across pages: a homepage-only definition left every service
+      page's "about": {"@id": "#localbusiness-of"} pointing at nothing. The
+      retired site-wide entity "#business" (Organization/LocalBusiness pair
+      with 5 credentials, "Nemezio Lopez Perez", Pacific Beach maps link) is
+      GONE; contactform-header and energy-protocol-waitlist-form-header were
+      re-pointed from #business to #localbusiness-of the same day (paste both).
+      No page can match it: "no matching page" is expected. LIVE as of
+      2026-09-20.
+    · home-header.html - the homepage PAGE header. v4 (Sept 20, 2026):
+      page-level nodes only — WebPage #webpage (name = the homepage SEO Title
+      "Personal Trainer San Diego | Diagnostic-Led Coaching") + FAQPage
+      mirroring pages/home-5.html verbatim. It no longer defines the
+      LocalBusiness (see site-header.html). The homepage itself lives in this
+      repo only as the home-1..home-6 fragments, so there is no pages/home.html
+      and the "no matching page" finding applies. LIVE as of 2026-09-20.
+      The mirror check should be read against home-5.html, not a home.html.
+    · home-6.html - NEW Sept 20, 2026: the homepage Partner & Duo section
+      (Code Block, after the programs section, before the FAQ). Replaces an
+      August-card block that was live but never in the repo (it carried the
+      Essential tier, 3-month / month-to-month couples tables, "per month",
+      and a lede that contradicted the couples page). home-6 states NO prices
+      by design — it routes to /couples-personal-training-san-diego and the
+      rates page. Framing is lifted from the couples page (two screens, split
+      session, separate progress). LIVE as of 2026-09-20.
 
   DUPLICATE RULE, general: where two IN-SCOPE files are byte-identical,
   certify one and reference the other. certify.py hashes every in-scope file,
@@ -720,7 +745,23 @@ NEXT RUNS
   omnifit-vs-competitors · weight-loss · strength-training-1 ·
   hiit-personal-trainer-san-diego · personal-training-services ·
   body-composition-testing · partners.
-- BATCH 4: terms-and-conditions, contactform (brand sweep only).
+- BATCH 4: terms-and-conditions DONE (Sept 20, 2026 — pages/terms-and-conditions.html
+  + header, rewritten to the October card and OmniFit Performance LLC, live;
+  the live page is a Squarespace text page, the repo file records its content)
+  · contactform (brand sweep only — header still carries "Executive
+  Transformation Program" and 7-metric wording; only its provider @id was
+  re-pointed on Sept 20, 2026).
+- Human-side, done Sept 20, 2026: /hsa-fsa-personal-training Squarespace SEO
+  Description set ("Personal training is HSA and FSA eligible with a letter of
+  medical necessity. OmniFit Performance partners with Truemed so eligible San
+  Diego clients can pay for training with pre-tax funds."). Terms page SEO
+  Title "Terms of Service", SEO Description per its header comment.
+- NOTE on aggregateRating (Sept 20, 2026): the 190 rating lives on
+  #localbusiness-of site-wide and therefore on every page. Google does not
+  show star snippets for a business rating its own site (self-serving
+  LocalBusiness/Organization reviews, since 2019); Semrush's "add aggregate
+  rating via Product/ItemList markup" ideas are a policy violation and are
+  to be ignored. The rating is for entity understanding and AI readers only.
 - Human-side, not repo: per-page SEO meta descriptions (190+), 301
   /executive-hybrid-coaching → /the-30-minute-executive-reset then
   delete page, Search Console recrawl of ALL changed URLs as one batch
