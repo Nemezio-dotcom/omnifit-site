@@ -1,0 +1,308 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+  #omni-outcomes {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --light-bg: #f4f5f7;
+    --light-text: #1a1a2e;
+    --light-muted: #555566;
+    --light-border: #e2e4e8;
+    --radius: 8px;
+    --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--white);
+    background: var(--navy);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+  }
+  #omni-outcomes *, #omni-outcomes *::before, #omni-outcomes *::after {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+
+  /* HERO */
+  #omni-outcomes .hero { padding: 80px 28px 60px; max-width: 880px; margin: 0 auto; text-align: center; position: relative;  overflow-x: hidden;}
+  #omni-outcomes .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-outcomes .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-outcomes .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-outcomes .hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-outcomes .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 620px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+  #omni-outcomes .creds { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
+  #omni-outcomes .cred { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid var(--white-20); border-radius: 100px; color: var(--white-50); letter-spacing: 0.8px; background: transparent; }
+
+  /* QUOTABLE */
+  #omni-outcomes .q-wrap { max-width: 860px; margin: 0 auto; padding: 0 28px 64px; }
+  #omni-outcomes .quotable { padding: 36px 40px; background: var(--navy-mid); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; line-height: 1.85; color: var(--white-70); }
+  #omni-outcomes .quotable strong { color: var(--white); font-weight: 600; }
+
+  /* SECTIONS */
+  #omni-outcomes .s-dark { background: var(--navy); padding: 72px 28px; }
+  #omni-outcomes .s-mid { background: var(--navy-mid); padding: 72px 28px; }
+  #omni-outcomes .s-light { background: var(--light-bg); padding: 72px 28px; }
+  #omni-outcomes .s-inner { max-width: 880px; margin: 0 auto; min-width: 0; }
+  #omni-outcomes .s-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+  #omni-outcomes .s-light .s-label { color: #8b7832; }
+  #omni-outcomes .gold-line { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 0 24px; border-radius: 2px; }
+  #omni-outcomes h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-outcomes .s-light h2 { color: var(--light-text); }
+  #omni-outcomes p { font-family: 'Montserrat', sans-serif !important; margin-bottom: 18px; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+  #omni-outcomes .s-light p { color: var(--light-muted); }
+  #omni-outcomes h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-outcomes h4 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-outcomes a { color: var(--gold); text-decoration: none; }
+
+  /* METRICS GRID */
+  #omni-outcomes .mg { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 18px; margin: 44px 0 0; }
+  #omni-outcomes .mc { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 30px 26px; transition: all 0.4s; position: relative; overflow: hidden; }
+  #omni-outcomes .mc::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); opacity: 0; transition: opacity 0.4s; }
+  #omni-outcomes .mc:hover { border-color: var(--gold); background: var(--navy-surface); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-outcomes .mc:hover::after { opacity: 1; }
+  #omni-outcomes .mc-num { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  #omni-outcomes .mc h4 { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); }
+  #omni-outcomes .mc p { font-size: 14px; line-height: 1.7; color: var(--white-50); margin: 0; }
+
+  /* OUTCOMES */
+  #omni-outcomes .ob { background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-surface) 100%); border: 1px solid var(--white-10); padding: 52px 36px; margin: 48px 0 0; border-radius: var(--radius-lg); }
+  #omni-outcomes .ob h3 { color: var(--white); text-align: center; font-family: 'Playfair Display', serif !important; font-size: 24px; margin-bottom: 36px; }
+  #omni-outcomes .og { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 860px; margin: 0 auto; align-items: start; }
+  #omni-outcomes .os { text-align: center; padding: 0 4px; }
+  #omni-outcomes .os .num { font-family: 'Playfair Display', serif !important; font-size: 42px; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 8px; }
+  #omni-outcomes .os .lbl { font-family: 'Montserrat', sans-serif !important; font-size: 10px; color: var(--white-50); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+  #omni-outcomes .ob-note { text-align: center; font-size: 12px; color: rgba(255,255,255,.62); margin-top: 28px; font-style: italic; }
+
+  /* REPORT MOCKUP */
+  #omni-outcomes .rm { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 36px; margin: 40px 0 0; }
+  #omni-outcomes .rm-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid var(--white-10); margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  #omni-outcomes .rm-head h4 { font-family: 'Playfair Display', serif !important; font-size: 20px; font-weight: 600; color: var(--white); }
+  #omni-outcomes .rm-badge { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 5px 14px; background: var(--gold-dim); color: var(--gold); border-radius: 100px; letter-spacing: 0.5px; }
+  #omni-outcomes .rr { display: flex; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--white-05); gap: 16px; flex-wrap: wrap; }
+  #omni-outcomes .rr:last-child { border-bottom: none; }
+  #omni-outcomes .rr-name { flex: 1; min-width: 140px; font-family: 'Montserrat', sans-serif !important; font-weight: 600; font-size: 14px; color: var(--white-90); }
+  #omni-outcomes .rr-bar { flex: 2; min-width: 160px; height: 6px; background: var(--white-10); border-radius: 100px; overflow: hidden; }
+  #omni-outcomes .rr-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  #omni-outcomes .rr-val { flex: 0 0 130px; text-align: right; font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); font-weight: 500; }
+  #omni-outcomes .rr-val .cur { font-weight: 700; color: var(--gold); }
+
+  /* COMPARISON TABLE */
+  #omni-outcomes .ct-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; border-radius: var(--radius-lg); border: 1px solid var(--light-border); max-width: 100%; }
+  #omni-outcomes .ct { width: 100%; border-collapse: collapse; font-size: 14px; font-family: 'Montserrat', sans-serif !important; margin: 0; min-width: 540px; }
+  #omni-outcomes .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--white-70); border-bottom: 2px solid var(--gold); }
+  #omni-outcomes .ct th:first-child { border-radius: var(--radius) 0 0 0; }
+  #omni-outcomes .ct th:last-child { border-radius: 0 var(--radius) 0 0; }
+  #omni-outcomes .ct td { padding: 16px 18px; border-bottom: 1px solid var(--light-border); color: var(--light-muted); font-family: 'Montserrat', sans-serif !important; }
+  #omni-outcomes .ct tr:last-child td { border-bottom: none; }
+  #omni-outcomes .ct tr:hover td { background: rgba(201,168,76,0.04); }
+  #omni-outcomes .chk { color: #1a7a4c; font-weight: 600; }
+  #omni-outcomes .xm { color: #bbb; }
+
+  /* FAQ */
+  #omni-outcomes .fi { border-bottom: 1px solid var(--white-10); }
+  #omni-outcomes .fq { width: 100%; background: none; border: none; text-align: left; padding: 28px 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; font-weight: 600; color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; line-height: 1.5; transition: color 0.3s; }
+  #omni-outcomes .fq:hover { color: var(--gold); }
+  #omni-outcomes .fi-icon { flex-shrink: 0; width: 28px; height: 28px; border: 2px solid var(--white-20); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--white-50); transition: all 0.3s; font-family: 'Montserrat', sans-serif !important; }
+  #omni-outcomes .fi.open .fi-icon { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: rotate(45deg); }
+  #omni-outcomes .fa { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s ease; }
+  #omni-outcomes .fi.open .fa { max-height: 1200px; padding-bottom: 28px; }
+  #omni-outcomes .fa p { font-size: 15px; color: var(--white-50); line-height: 1.8; margin: 0; }
+
+  /* CTA */
+  #omni-outcomes .cta { background: var(--navy-mid); padding: 80px 28px; text-align: center; position: relative; overflow: hidden; }
+  #omni-outcomes .cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%); pointer-events: none; opacity: 0.2; }
+  #omni-outcomes .cta h2 { color: var(--white); font-size: clamp(28px, 4vw, 38px); margin-bottom: 16px; position: relative; }
+  #omni-outcomes .cta p { color: var(--white-50); font-size: 16px; max-width: 520px; margin: 0 auto 36px; position: relative; }
+  #omni-outcomes .cta-btn { display: inline-block; padding: 16px 44px; background: var(--gold); color: var(--navy); text-decoration: none; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: var(--radius); transition: all 0.3s; position: relative; }
+  #omni-outcomes .cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-outcomes .cta-note { display: block; margin-top: 16px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); position: relative; }
+
+  /* RESPONSIVE */
+    #omni-outcomes .os .meth { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 10.5px; line-height: 1.55; color: rgba(255,255,255,.62); margin-top: 10px; font-style: normal; letter-spacing: 0; text-transform: none; }
+
+      #omni-outcomes .qg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 26px; }
+    #omni-outcomes .qc { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 22px 20px; }
+    #omni-outcomes .qc-h { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--gold); margin-bottom: 9px; }
+    #omni-outcomes .qc p { font-size: 13.5px; line-height: 1.65; color: var(--white-70); margin: 0; }
+    @media (max-width: 980px) {
+      #omni-outcomes .og { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; max-width: 560px; }
+      #omni-outcomes .ob { padding: 44px 28px; }
+    }
+    @media (max-width: 768px) {
+      #omni-outcomes .hero { padding: 56px 20px 44px; }
+      #omni-outcomes .s-dark, #omni-outcomes .s-mid, #omni-outcomes .s-light { padding: 52px 20px; }
+      #omni-outcomes .q-wrap { padding: 0 20px 44px; }
+      #omni-outcomes .quotable { padding: 24px 20px; }
+      #omni-outcomes .rm { padding: 24px 20px; }
+      #omni-outcomes .rr { flex-direction: column; align-items: flex-start; }
+      #omni-outcomes .rr-val { text-align: left; flex: none; }
+      #omni-outcomes .rr-bar { width: 100%; }
+      #omni-outcomes .ob { padding: 36px 22px; margin-top: 40px; }
+      #omni-outcomes .ct { font-size: 13px; min-width: 480px; }
+      #omni-outcomes .ct th, #omni-outcomes .ct td { padding: 12px 10px; }
+      #omni-outcomes .cta { padding: 52px 20px; }
+    }
+    @media (max-width: 640px) {
+      #omni-outcomes .mg { grid-template-columns: 1fr; }
+      #omni-outcomes .qg { grid-template-columns: 1fr; }
+      #omni-outcomes .og { grid-template-columns: 1fr; gap: 0; max-width: 400px; }
+      #omni-outcomes .os { text-align: left; padding: 20px 0; border-bottom: 1px solid var(--white-10); }
+      #omni-outcomes .os:last-child { border-bottom: none; padding-bottom: 0; }
+      #omni-outcomes .os:first-child { padding-top: 0; }
+      #omni-outcomes .os .num { display: inline-block; margin-right: 10px; vertical-align: baseline; }
+      #omni-outcomes .os .lbl { display: inline; }
+      #omni-outcomes .os .meth { display: block; margin-top: 8px; font-size: 11px; line-height: 1.6; }
+      #omni-outcomes .ob-note { font-size: 11.5px; line-height: 1.65; }
+      #omni-outcomes .ct { min-width: 440px; font-size: 12.5px; }
+      #omni-outcomes .ct th, #omni-outcomes .ct td { padding: 11px 9px; }
+    }
+
+  #omni-outcomes .meta-line { font-size: 12px; color: var(--white-50); letter-spacing: 0.5px; margin-top: 8px; position: relative; }
+  #omni-outcomes .s-light .ct td strong { color: var(--light-text); }
+  #omni-outcomes .ct tr.tot td { font-weight: 700; color: var(--light-text); background: rgba(201,168,76,0.08); }
+  #omni-outcomes .lede { font-size: 17px; color: var(--white-90); }
+  #omni-outcomes .s-light .lede { color: var(--light-text); }
+  #omni-outcomes .disc { font-size: 13px; font-style: italic; color: var(--light-muted); margin-top: 6px; }
+  #omni-outcomes .mlist { list-style: none; margin: 24px 0 0; }
+  #omni-outcomes .mlist li { padding: 14px 0; border-bottom: 1px solid var(--white-10); color: var(--white-70); font-size: 15px; line-height: 1.7; }
+  #omni-outcomes .mlist li strong { color: var(--white); }
+  #omni-outcomes .jn { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; padding: 0 20px 40px; }
+  #omni-outcomes .jn a { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white-70); border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  #omni-outcomes .jn a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  #omni-outcomes section[id] { scroll-margin-top: 90px; }
+  #omni-outcomes .hub { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 14px; padding: 36px 28px 56px; background: var(--navy); font-size: 13px; }
+  #omni-outcomes .hub a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+  #omni-outcomes .hub span { color: var(--white-20); }
+  #omni-outcomes .s-light a { color: #8b7832; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+
+<div id="omni-outcomes">
+
+  <section class="hero">
+    <span class="hero-badge">Measured Outcomes</span>
+    <h1>How OmniFit Clients<br><em>Actually Progress</em></h1>
+    <p class="hero-sub">Results from all qualifying clients in the analysis period, not a handful of selected transformations. Every figure states its sample size and method, and the clients who did not reach their goal are counted alongside those who did.</p>
+    <p class="meta-line">Last updated October 1, 2026 &middot; 72 clients &middot; January 2023 to September 2026</p>
+    <p class="meta-line" style="margin-top:14px">Want to see how these outcomes are measured? <a href="/how-we-measure-your-progress">How We Measure Your Progress &rarr;</a></p>
+  </section>
+
+
+  <nav class="jn" aria-label="Page sections"><a href="#overview">Overview</a><a href="#goals">Goals</a><a href="#strength">Strength</a><a href="#retention">Training Duration</a><a href="#profiles">Client Profiles</a><a href="#method">Method</a></nav>
+  <div class="q-wrap" id="overview"><div class="quotable">
+    <strong>OmniFit Performance client outcomes:</strong> Between January 2023 and September 2026, OmniFit Performance's records contain 72 clients who meet the inclusion criteria for this analysis, representing 2,768 scheduled one-on-one coaching sessions. 87% fully or partly achieved their primary goal (55 of 63 rated clients). Among 38 clients with lifts tracked over time, median estimated strength increased 13.7%, and 28 of 38 improved on most of their lifts. Of clients who started at least a year ago, 34% had recorded training spanning 12 months or longer.
+  </div></div>
+
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">At a Glance</span><hr class="gold-line">
+    <h2>The Headline Figures</h2>
+    <div class="ob" style="margin-top:28px">
+      <div class="og">
+        <div class="os"><span class="num">87%</span><span class="lbl">Made Progress Toward Their Goal</span><span class="meth">55 of 63 rated clients fully or partly achieved their primary goal; 62% fully achieved it</span></div>
+        <div class="os"><span class="num">74%</span><span class="lbl">Measurably Stronger</span><span class="meth">On most tracked lifts: 28 of 38 clients</span></div>
+        <div class="os"><span class="num">+13.7%</span><span class="lbl">Median Strength Change</span><span class="meth">Estimated one-rep max across 430 tracked lifts, 38 clients</span></div>
+        <div class="os"><span class="num">34%</span><span class="lbl">12+ Months of Recorded Training</span><span class="meth">18 of 53 clients who started at least a year ago</span></div>
+      </div>
+      <p class="ob-note">Company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history.</p>
+    </div>
+  </div></section>
+
+  <section class="s-light"><div class="s-inner">
+    <span class="s-label">Who They Are</span><hr class="gold-line">
+    <h2>Professionals and Executives, Mostly 30+</h2>
+    <p class="lede">Based on occupation recorded at intake, all 63 clients in the goal analysis were classified as professionals or executives. Among clients with age recorded, four in five were 30 or older.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Profile</th><th>Clients</th><th>Share</th></tr></thead><tbody><tr><td>Age 20s</td><td>12</td><td>20%</td></tr><tr><td>Age 30s</td><td>29</td><td>48%</td></tr><tr><td>Age 40s</td><td>6</td><td>10%</td></tr><tr><td>Age 50s</td><td>7</td><td>11%</td></tr><tr><td>Age 60+</td><td>7</td><td>11%</td></tr><tr><td>Executives</td><td>21</td><td>33%</td></tr><tr><td>Other professionals</td><td>42</td><td>67%</td></tr><tr><td>Trained in studio</td><td>57</td><td>90%</td></tr><tr><td>Trained in-home or online</td><td>6</td><td>10%</td></tr></tbody></table></div><p class="disc">Age was not recorded for 2 clients.</p>
+  </div></section>
+
+  <section id="goals" class="s-light"><div class="s-inner">
+    <span class="s-label">Goal Outcomes</span><hr class="gold-line">
+    <h2>87% Fully or Partly Achieved Their Goal</h2>
+    <p class="lede">Among 48 clients coached for at least three months, 33 fully achieved their primary goal (69%) and 44 fully or partly achieved it (92%).</p><p>Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist. Active clients were rated on progress to date and may later move categories.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Primary goal</th><th>Clients</th><th>Achieved</th><th>Partly</th><th>Not achieved</th></tr></thead><tbody><tr><td>Strength</td><td>20</td><td>14</td><td>4</td><td>2</td></tr><tr><td>Body recomposition</td><td>14</td><td>8</td><td>3</td><td>3</td></tr><tr><td>Fat loss</td><td>13</td><td>8</td><td>3</td><td>2</td></tr><tr><td>Athletic performance</td><td>7</td><td>4</td><td>2</td><td>1</td></tr><tr><td>Muscle gain</td><td>6</td><td>3</td><td>3</td><td>0</td></tr><tr><td>Health, rehab and longevity</td><td>3</td><td>2</td><td>1</td><td>0</td></tr><tr class="tot"><td>All goals</td><td>63</td><td>39 (62%)</td><td>16 (25%)</td><td>8 (13%)</td></tr></tbody></table></div><p>13% of clients did not reach their goal. They are reported here alongside everyone else.</p><p>Goals are coached through both tracks of the <a href="/the-omnifit-method">OmniFit Method</a>: the training program and the habits around it, through <a href="/behavior-change-coaching">behavior change coaching</a>.</p>
+  </div></section>
+
+  <section id="strength" class="s-light"><div class="s-inner">
+    <span class="s-label">Strength</span><hr class="gold-line">
+    <h2>Median Estimated Strength Increased 13.7%</h2>
+    <p class="lede">430 lifts were tracked across 38 clients, comparing the best result from each client's first two sessions on a lift with the best result from their latest two. Each client counts once, as the median across their lifts.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Group</th><th>Clients</th><th>Median strength change</th><th>Middle half of clients</th></tr></thead><tbody><tr><td>All clients with tracked lifts</td><td>38</td><td>+13.7%</td><td>0% to +27%</td></tr><tr><td>Trained 3+ months</td><td>33</td><td>+12.6%</td><td>&mdash;</td></tr><tr><td>Trained 6+ months</td><td>20</td><td>+14.6%</td><td>&mdash;</td></tr><tr><td>Trained 12+ months</td><td>14</td><td>+11.8%</td><td>&mdash;</td></tr></tbody></table></div><p>Measured on working load instead, the median client lifted 32% more on their tracked lifts, comparing the first session with weeks 10 to 16 (37 clients). The smaller percentage among long-term clients may partly reflect shifts toward maintenance, joint-friendly exercise variations and new movements over time, which can interrupt direct lift-to-lift comparisons. Measured at each client's best sustained level (defined in the method below), the median is +13.4%, nearly the same. A quarter of clients show no gain or a decline on most lifts; they are included.</p>
+  </div></section>
+
+  <section id="retention" class="s-light"><div class="s-inner">
+    <span class="s-label">Training Duration</span><hr class="gold-line">
+    <h2>One in Three Had Recorded Training Spanning 12+ Months</h2>
+    <p class="lede">Each rate counts only clients who started long enough ago to reach that milestone, so recent clients do not distort the figures.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Milestone</th><th>Clients who started long enough ago</th><th>Reached it</th><th>Rate</th></tr></thead><tbody><tr><td>3 months</td><td>65</td><td>48</td><td>74%</td></tr><tr><td>6 months</td><td>60</td><td>29</td><td>48%</td></tr><tr><td>12 months</td><td>53</td><td>18</td><td>34%</td></tr><tr><td>24 months</td><td>30</td><td>5</td><td>17%</td></tr></tbody></table></div><p>The longest current client relationship is over four years. 48 clients had 10 or more scheduled sessions.</p>
+  </div></section>
+
+  <section id="profiles" class="s-light"><div class="s-inner">
+    <span class="s-label">Client Profiles</span><hr class="gold-line">
+    <h2>Individual Results, Measured by OmniFit</h2>
+    <p class="lede">Five individual client profiles illustrating body-composition and long-term strength outcomes, shown with each client's written permission.</p>
+    <h3 style="font-size:21px;color:var(--light-text);margin:36px 0 4px">Body-composition profiles</h3>
+    <div class="ct-wrap"><table class="ct"><thead><tr><th>Client</th><th>Goal</th><th>Measured</th><th>Body fat</th><th>Lean mass</th><th>Waist</th><th>Weight</th></tr></thead><tbody><tr><td>Isaac M.</td><td>Fat loss</td><td>Jul 2025 to Sep 2026</td><td>28.2% to 19.8%</td><td>+6.1 lb</td><td>&minus;5.0 in</td><td>&minus;11.1 lb</td></tr><tr><td>Egor B.</td><td>Fat loss</td><td>Aug 2025 to Aug 2026</td><td>&mdash;</td><td>&mdash;</td><td>&minus;6.5 in</td><td>&minus;21.9 lb</td></tr><tr><td>Chad C.</td><td>Muscle gain</td><td>Jul 2025 to Jul 2026</td><td>23.8% to 22.8%</td><td>+11.7 lb</td><td>&mdash;</td><td>+12.9 lb</td></tr></tbody></table></div>
+    <p class="disc">Egor's first Bodystat reading was in July 2026, so his body fat and lean mass are not shown; his waist and weight were measured in session.</p>
+    <p class="disc">Individual result, measured by OmniFit; see aggregate outcomes above.</p>
+    <h3 style="font-size:21px;color:var(--light-text);margin:36px 0 10px">Long-term training profiles</h3>
+    <p>Alo S. has trained with OmniFit for over four years, from September 2022 to September 2026. His estimated bench press rose from about 53 lb to about 161 lb over that time, and his body weight rose 10.8 lb.</p>
+    <p>Mark M. trained with OmniFit for two and a half years, from June 2023 to December 2025, logging 188 workouts. His working bench press rose from 235 lb to 275 lb by December 2024, and his seated dumbbell shoulder press from 55 lb to 100 lb by July 2025. Between April and August 2024 his body weight fell from 248 lb to 229.6 lb; it later settled back in the low 240s. He finished training when he relocated to Hawaii.</p>
+    <p class="disc">Individual result, measured by OmniFit; see aggregate outcomes above.</p>
+  </div></section>
+
+  <section class="s-light"><div class="s-inner">
+    <span class="s-label">Evidence Pools</span><hr class="gold-line">
+    <h2>What Each Figure Is Based On</h2>
+    <p class="lede">Each figure draws on a defined group of clients. The groups differ in size by design: a client appears in a measure only when the data supports it.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Evidence pool</th><th>Clients</th><th>What it shows</th></tr></thead><tbody><tr><td>Public reviews (Google, Yelp, Thumbtack, Bark)</td><td>190+ reviews</td><td>Client experience and reputation</td></tr><tr><td>Paying clients in the main payment account, Aug 2022 onward</td><td>90</td><td>A minimum count of clients served</td></tr><tr><td>Outcomes analysis (2+ sessions or logged workouts)</td><td>72</td><td>Primary analysis cohort; training duration</td></tr><tr><td>&nbsp;&nbsp;with a coach-rated goal</td><td>63</td><td>Goal outcomes</td></tr><tr><td>&nbsp;&nbsp;with repeated weigh-ins</td><td>47</td><td>Weight change</td></tr><tr><td>&nbsp;&nbsp;with repeated strength data</td><td>38</td><td>Strength change</td></tr><tr><td>&nbsp;&nbsp;with repeated Bodystat measurements</td><td>3</td><td>Client profiles</td></tr></tbody></table></div>
+  </div></section>
+
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">Reputation</span><hr class="gold-line">
+    <h2>Client Feedback</h2>
+    <p>OmniFit holds a 4.98 average across 190+ reviews on Google, Yelp, Thumbtack and Bark. Reviews show how clients experience the coaching; the figures above come from coaching records. The two are separate evidence pools and do not describe the same group of people.</p>
+  </div></section>
+
+  <section id="method" class="s-dark"><div class="s-inner">
+    <span class="s-label">Method</span><hr class="gold-line">
+    <h2>How These Figures Were Calculated</h2>
+    <p>Every figure comes from OmniFit's own client records, pulled on October 1, 2026. No client who met the eligibility criteria for a figure was removed because of their outcome.</p>
+    <ul class="mlist">
+      <li><strong>Sources.</strong> Session schedules and workout logs from the OmniFit coaching app (Trainerize); payment history from Stripe.</li>
+      <li><strong>Who is counted.</strong> Anyone with two or more scheduled sessions or logged workouts. Family members billed to one card are counted separately when each has their own training record.</li>
+      <li><strong>Sessions.</strong> Scheduled sessions. Attendance was not recorded before October 2026, so a small number may have been cancelled or missed.</li>
+      <li><strong>Training duration.</strong> Days between a client's first and last session or logged workout. A milestone rate counts only clients whose first session was at least that long before October 1, 2026. It reflects recorded training activity, not a contract term.</li>
+      <li><strong>Strength.</strong> For each lift logged at least four times over at least four weeks, estimated one-rep max from logged weight and reps (Epley formula, sets of 12 reps or fewer). Change compares the best of the latest two sessions with the best of the first two. Each client's result is the median across their lifts. Best sustained level is the highest average of any two consecutive sessions on a lift after the first two. Bodyweight exercises such as pull-ups are excluded.</li>
+      <li><strong>Working load.</strong> Heaviest logged weight on each lift in the first session versus the heaviest between weeks 10 and 16.</li>
+      <li><strong>Weight.</strong> First and latest logged body weight at least four weeks apart, from in-session scales and clients' own synced scales.</li>
+      <li><strong>Body composition.</strong> Bodystat QuadScan 4000 bioimpedance readings taken in session at Teqneeq Functional Health Center, available only for clients who started training there.</li>
+      <li><strong>Goal achievement.</strong> Coach assessments against the goal set at intake, not client-reported results. Client-confirmed ratings begin with clients starting in October 2026.</li>
+      <li><strong>Limits.</strong> There is no comparison group, so these figures describe what OmniFit observed, not how much of the change OmniFit caused versus what clients would have achieved otherwise. Sample sizes vary by measure and are stated beside each figure; the body-composition group is small.</li>
+    </ul>
+  </div></section>
+
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">Common Questions</span><hr class="gold-line">
+    <h2>Frequently Asked Questions</h2>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Are these all of OmniFit's clients?<span class="fi-icon">+</span></button><div class="fa"><p>No. The analysis covers 72 clients with two or more scheduled sessions or logged workouts between January 2023 and September 2026. Clients served before 2023, or paid through other channels, are not represented. No client who met the eligibility criteria for a figure was removed because of their outcome.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Who measured these results?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit, from its own session schedules, workout logs and in-session measurements. The figures are company-reported and have not been independently audited. The full method is on this page.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Will I get the same results?<span class="fi-icon">+</span></button><div class="fa"><p>Nobody can promise that. Results depend on starting point, consistency, sleep, stress, nutrition and medical history. These figures describe what OmniFit has recorded, not what any prospective client will achieve.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How often is this page updated?<span class="fi-icon">+</span></button><div class="fa"><p>The page is refreshed as new data comes in. The date at the top shows when the figures were last calculated.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Is this medical data?<span class="fi-icon">+</span></button><div class="fa"><p>No. These are training and body-composition records from a fitness practice. OmniFit Performance does not diagnose or treat medical conditions.</p></div></div>
+    <p class="ob-note" style="margin-top:36px">These are aggregate results from OmniFit's past clients, reported as measured. They are not a guarantee or prediction of any individual's results. OmniFit Performance provides fitness coaching and does not diagnose or treat medical conditions.</p>
+  </div></section>
+
+  <nav class="hub" aria-label="Related pages"><a href="/the-omnifit-method">The OmniFit Method</a> <span>&middot;</span> <a href="/behavior-change-coaching">Behavior Change Coaching</a> <span>&middot;</span> <a href="/how-we-measure-your-progress">How We Measure Progress</a> <span>&middot;</span> <a href="/training-rates-san-diego">Rates</a> <span>&middot;</span> <a href="/case-studies">Case Studies</a></nav>
+
+  <section class="cta">
+    <h2>See Where You<br>Would Start</h2>
+    <p>Book a paid 45-minute consultation, by video or phone. A $30 refundable deposit reserves your time. No commitment beyond that, just clarity on where you stand.</p>
+    <a href="https://calendly.com/nemezio-omnifittraining/45min" class="cta-btn">Book Your Consultation</a>
+    <span class="cta-note">How we measure every client: <a href="/how-we-measure-your-progress">How We Measure Your Progress</a></span>
+  </section>
+
+</div>
