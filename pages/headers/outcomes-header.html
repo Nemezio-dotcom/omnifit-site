@@ -1,0 +1,127 @@
+<!-- OUTCOMES PAGE HEADER JSON-LD · OCT 1 2026
+  Paste into /outcomes → Page Settings → Advanced → Page Header Code Injection.
+  LocalBusiness and Organization are referenced by @id from the site-wide header, never redefined here.
+  FAQPage mirrors the on-page FAQ verbatim.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/outcomes#webpage",
+      "url": "https://www.omnifittraining.com/outcomes",
+      "name": "Client Outcomes | OmniFit Performance San Diego",
+      "description": "Measured outcomes from 72 OmniFit Performance clients in San Diego, January 2023 to September 2026, with sample sizes and full method.",
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "mainEntity": {
+        "@id": "https://www.omnifittraining.com/outcomes#dataset"
+      },
+      "breadcrumb": {
+        "@id": "https://www.omnifittraining.com/outcomes#breadcrumb"
+      },
+      "dateModified": "2026-10-01",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.omnifittraining.com/outcomes#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Client Outcomes",
+          "item": "https://www.omnifittraining.com/outcomes"
+        }
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://www.omnifittraining.com/outcomes#dataset",
+      "name": "OmniFit Performance Client Outcomes, 2023 to 2026",
+      "description": "Between January 2023 and September 2026, OmniFit Performance's records contain 72 clients who meet the inclusion criteria for this analysis, representing 2,768 scheduled one-on-one coaching sessions. 87% fully or partly achieved their primary goal (55 of 63 rated clients). Among 38 clients with lifts tracked over time, median estimated strength increased 13.7%, and 28 of 38 improved on most of their lifts. Of clients who started at least a year ago, 34% had recorded training spanning 12 months or longer. Figures are company-reported and not independently audited.",
+      "url": "https://www.omnifittraining.com/outcomes",
+      "creator": {
+        "@id": "https://www.omnifittraining.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://www.omnifittraining.com/#organization"
+      },
+      "dateModified": "2026-10-01",
+      "temporalCoverage": "2023-01/2026-09",
+      "spatialCoverage": {
+        "@type": "Place",
+        "name": "San Diego, California"
+      },
+      "isAccessibleForFree": true,
+      "measurementTechnique": [
+        "Scheduled-session records",
+        "Logged training loads with Epley estimated one-rep max",
+        "Bodystat QuadScan 4000 bioimpedance",
+        "Coach-assessed goal achievement"
+      ],
+      "variableMeasured": [
+        "Primary goal achievement",
+        "Estimated strength change",
+        "Working load change, first session vs. weeks 10 to 16",
+        "Recorded training duration at 3, 6, 12 and 24 months",
+        "Body weight change"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.omnifittraining.com/outcomes#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are these all of OmniFit's clients?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The analysis covers 72 clients with two or more scheduled sessions or logged workouts between January 2023 and September 2026. Clients served before 2023, or paid through other channels, are not represented. No client who met the eligibility criteria for a figure was removed because of their outcome."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who measured these results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OmniFit, from its own session schedules, workout logs and in-session measurements. The figures are company-reported and have not been independently audited. The full method is on this page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I get the same results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nobody can promise that. Results depend on starting point, consistency, sleep, stress, nutrition and medical history. These figures describe what OmniFit has recorded, not what any prospective client will achieve."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often is this page updated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The page is refreshed as new data comes in. The date at the top shows when the figures were last calculated."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this medical data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. These are training and body-composition records from a fitness practice. OmniFit Performance does not diagnose or treat medical conditions."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
