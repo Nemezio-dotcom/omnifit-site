@@ -120,7 +120,7 @@
   #omni-progress .fi-icon { flex-shrink: 0; width: 28px; height: 28px; border: 2px solid var(--white-20); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--white-50); transition: all 0.3s; font-family: 'Montserrat', sans-serif !important; }
   #omni-progress .fi.open .fi-icon { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: rotate(45deg); }
   #omni-progress .fa { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s ease; }
-  #omni-progress .fi.open .fa { max-height: 400px; padding-bottom: 28px; }
+  #omni-progress .fi.open .fa { max-height: 1200px; padding-bottom: 28px; }
   #omni-progress .fa p { font-size: 15px; color: var(--white-50); line-height: 1.8; margin: 0; }
 
   /* CTA */
@@ -245,17 +245,19 @@
   <section class="s-dark"><div class="s-inner">
     <span class="s-label">Results</span><hr class="gold-line">
     <h2>How Our Clients Progress</h2>
-    <p>Anonymized averages drawn from over 100 OmniFit clients across three months of structured coaching. Methodology stated below each figure, because a number without a method is a slogan.</p>
+    <p>Measured results from 72 OmniFit clients coached between January 2023 and September 2026, drawn from session schedules and training logs in the OmniFit app. Each figure states its own method and sample size, because a number without a method is a slogan. Clients who did not improve are counted, not removed.</p>
     <div class="ob">
-      <h3>What We Measure Across Our Client Base</h3>
+      <h3>Measured Outcomes, 2023 to 2026</h3>
       <div class="og">
-          <div class="os"><span class="num">12</span><span class="lbl">Metrics Tracked Monthly</span><span class="meth">Across 7 categories, reviewed in a formal 30-day report</span></div>
-          <div class="os"><span class="num">92%</span><span class="lbl">Session Adherence</span><span class="meth">Sessions attended against sessions scheduled, 100+ clients, 3 months</span></div>
-          <div class="os"><span class="num">+65%</span><span class="lbl">Strength Gains</span><span class="meth">Median increase in recorded working load on primary lifts, from training logs in the OmniFit app</span></div>
-          <div class="os"><span class="num">4.9</span><span class="lbl">Client Rating / 5.0</span><span class="meth">Verified Google reviews, 190+</span></div>
+          <div class="os"><span class="num">87%</span><span class="lbl">Reached Their Goal</span><span class="meth">Fully or partly achieved their primary goal: 55 of 63 clients (62% fully). Coach-assessed against the goal set at intake</span></div>
+          <div class="os"><span class="num">74%</span><span class="lbl">Measurably Stronger</span><span class="meth">Stronger on most tracked lifts: 28 of 38 clients with each lift logged 4+ times over 4+ weeks</span></div>
+          <div class="os"><span class="num">+32%</span><span class="lbl">Working Load at 12 Weeks</span><span class="meth">Median change in heaviest logged working weight per lift, first session vs. weeks 10 to 16: 37 clients</span></div>
+          <div class="os"><span class="num">34%</span><span class="lbl">Training at 12 Months</span><span class="meth">Still training a year after starting: 18 of 53 clients who began at least 12 months ago</span></div>
         </div>
-      <p class="ob-note">Figures are company-reported and internally measured, not independently audited. Drawn from anonymized averages across 100+ OmniFit clients over a three-month period. Individual results vary with starting point, adherence, sleep, stress and medical history. These describe what has been recorded, not what any prospective client will achieve.</p>
+      <p class="ob-note">Figures are company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history. These describe what has been recorded, not what any prospective client will achieve.</p>
     </div>
+    <p style="font-size:13px;color:var(--white-50);margin-top:28px;text-align:center">Client reviews are a separate measure: a 4.98 average across 190+ reviews on Google, Yelp, Thumbtack and Bark.</p>
+    <div class="fi" style="margin-top:32px;border-top:1px solid var(--white-10)"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How these figures were calculated<span class="fi-icon">+</span></button><div class="fa"><p><strong style="color:var(--white-70)">Source.</strong> Session schedules and workout logs from the OmniFit app (Trainerize), pulled October 1, 2026. A client is counted if they had two or more scheduled sessions or logged workouts. No client was excluded for a poor result.<br><br><strong style="color:var(--white-70)">Strength.</strong> For each lift logged at least four times over at least four weeks, estimated one-rep max is calculated from weight and reps (Epley formula, sets of 12 reps or fewer). The best of a client's first two sessions is compared with the best of their latest two, and each client's result is the median across their lifts. Bodyweight exercises are excluded.<br><br><strong style="color:var(--white-70)">Working load.</strong> Heaviest logged weight on each lift in the first session versus the heaviest between weeks 10 and 16.<br><br><strong style="color:var(--white-70)">Retention.</strong> Time from first to last session or logged workout. The 12-month rate counts only clients who started at least 12 months before October 1, 2026.<br><br><strong style="color:var(--white-70)">Goals.</strong> Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist.<br><br><strong style="color:var(--white-70)">Limits.</strong> Sessions are scheduled sessions; attendance was not recorded before October 2026. There is no comparison group, so these figures describe what happened, not how much of it OmniFit caused.</p></div></div>
   </div></section>
 
   <section class="s-light"><div class="s-inner">
