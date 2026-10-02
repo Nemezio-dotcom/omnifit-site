@@ -86,7 +86,7 @@
   #omni-progress .os { text-align: center; padding: 0 4px; }
   #omni-progress .os .num { font-family: 'Playfair Display', serif !important; font-size: 42px; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 8px; }
   #omni-progress .os .lbl { font-family: 'Montserrat', sans-serif !important; font-size: 10px; color: var(--white-50); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
-  #omni-progress .ob-note { text-align: center; font-size: 12px; color: var(--white-50); margin-top: 28px; font-style: italic; }
+  #omni-progress .ob-note { text-align: center; font-size: 12px; color: rgba(255,255,255,.62); margin-top: 28px; font-style: italic; }
 
   /* REPORT MOCKUP */
   #omni-progress .rm { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 36px; margin: 40px 0 0; }
@@ -133,7 +133,7 @@
   #omni-progress .cta-note { display: block; margin-top: 16px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); position: relative; }
 
   /* RESPONSIVE */
-    #omni-progress .os .meth { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 10.5px; line-height: 1.55; color: rgba(255,255,255,.42); margin-top: 10px; font-style: normal; letter-spacing: 0; text-transform: none; }
+    #omni-progress .os .meth { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 10.5px; line-height: 1.55; color: rgba(255,255,255,.62); margin-top: 10px; font-style: normal; letter-spacing: 0; text-transform: none; }
 
       #omni-progress .qg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 26px; }
     #omni-progress .qc { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 22px 20px; }
@@ -171,6 +171,14 @@
       #omni-progress .ct { min-width: 440px; font-size: 12.5px; }
       #omni-progress .ct th, #omni-progress .ct td { padding: 11px 9px; }
     }
+    #omni-progress .ml { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 32px; margin-top: 18px; }
+    #omni-progress .ml li { display: flex; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--white-10); color: var(--white-70); font-size: 14.5px; line-height: 1.5; }
+    #omni-progress .ml-n { flex: 0 0 34px; color: var(--gold); font-weight: 700; font-size: 12px; letter-spacing: 1px; }
+    @media (max-width: 640px) { #omni-progress .ml { grid-template-columns: 1fr; } }
+  #omni-progress .hub { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 14px; padding: 36px 28px 56px; background: var(--navy); font-size: 13px; }
+  #omni-progress .hub a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+  #omni-progress .hub span { color: var(--white-20); }
+  #omni-progress .s-light a { color: #8b7832; text-decoration: underline; text-underline-offset: 3px; }
 </style>
 
 <div id="omni-progress">
@@ -185,42 +193,45 @@
   </section>
 
   <div class="q-wrap"><div class="quotable">
-    <strong>OmniFit tracks twelve measures across seven categories for every client</strong>: body composition measured on a Bodystat QuadScan 4000 multi-frequency bioimpedance analyser for in-studio clients, strength benchmarks, posture assessment scores, mobility function tests, session adherence rate, nutrition compliance, and subjective well-being — with formal progress reports delivered every 30 days. This data-driven approach ensures no guesswork: each program adjustment is based on measurable trends rather than subjective impressions. Progress is judged against your own baseline rather than an average, so the same framework works whether you are starting from a long layoff or returning to structured training.
+    <strong>OmniFit tracks every client through the same seven-category framework, with measurement methods adapted to coaching format</strong>: body composition measured on a Bodystat QuadScan 4000 multi-frequency bioimpedance analyser for in-studio clients, strength benchmarks, posture assessment scores, mobility function tests, session adherence rate, nutrition compliance, and subjective well-being — with formal progress reports delivered every 30 days. This data-driven approach ensures no guesswork: each program adjustment is based on measurable trends rather than subjective impressions. Progress is judged against your own baseline rather than an average, so the same framework works whether you are starting from a long layoff or returning to structured training.
   </div></div>
 
   <section class="s-mid"><div class="s-inner">
     <span class="s-label">The Problem</span><hr class="gold-line">
-    <h2>Why Most Personal Training Fails: The Measurement Gap</h2>
-    <p>Most personal trainers operate on feel. Sessions are "tough," you're told you're "making progress," and the scale becomes the only benchmark. But scale weight alone misses the real picture — and without structured data, neither you nor your trainer can tell whether the program is actually working or needs adjustment.</p>
-    <p>At OmniFit Performance, we approach your program like a performance system. Every metric has a baseline, a target, and a 30-day trend. If something stalls, we see it in the data before you feel it — and we adjust the program before you waste a single week.</p>
-    <p>This is what separates structured coaching from random workouts. And it's why we track sustainable fat loss of 20–30 lbs as a trend, rather than chasing the short bursts of progress and rebounds that other programs produce.</p>
+    <h2>The Measurement Gap</h2>
+    <p>Without structured data, training gets judged by feel. Sessions are "tough," progress is described rather than measured, and the scale becomes the only benchmark. But scale weight alone misses the real picture — and without structured data, neither you nor your trainer can tell whether the program is actually working or needs adjustment.</p>
+    <p>At OmniFit Performance, we approach your program like a performance system. Every metric has a baseline and a defined reassessment cadence, with results reviewed in the 30-day progress report. If something stalls, the data can reveal the trend early so we can adjust before months are lost to an ineffective approach.</p>
+    <p>This is what separates structured coaching from a series of workouts. For clients pursuing substantial fat loss, we evaluate the trend over months rather than judging success from short-term scale changes.</p>
   </div></section>
 
   <section class="s-dark"><div class="s-inner">
     <span class="s-label">The Framework</span><hr class="gold-line">
     <h2>The 12 Metrics We Track for Every Client</h2>
-    <p>Whether you train in-person at the studio inside Teqneeq FHC in 4S Ranch or through Hybrid and Virtual Coaching, every OmniFit client is evaluated across the same twelve standardized measures, grouped into seven categories.</p>
+    <p>Whether you train in-person at the studio inside Teqneeq FHC in 4S Ranch or through Hybrid and Virtual Coaching, every OmniFit client is tracked through the same seven-category framework. Body composition is measured on the QuadScan for studio clients and by guided self-measurement for virtual clients.</p>
     <div class="mg">
-      <div class="mc"><div class="mc-num">Category 01</div><h4>Body Composition</h4><p>Bioimpedance analysis on the Bodystat QuadScan 4000, plus tape measurements at 7 sites and circumference tracking. Scale weight alone cannot tell you whether a change is muscle, fat or fluid. The QuadScan can.</p></div>
+      <div class="mc"><div class="mc-num">Category 01</div><h4>Body Composition</h4><p>Bioimpedance analysis on the Bodystat QuadScan 4000, plus tape measurements at 7 sites and circumference tracking. Scale weight alone cannot tell you whether a change is muscle, fat or fluid. The QuadScan helps separate them.</p></div>
       <div class="mc"><div class="mc-num">Category 02</div><h4>Strength Benchmarks</h4><p>Key compound lift performance (deadlift, squat, press, row), grip strength, and relative strength ratios. Tracked monthly to ensure progressive overload is actually happening.</p></div>
-      <div class="mc"><div class="mc-num">Category 03</div><h4>Posture Assessment</h4><p>Quarterly posture photos with structured scoring for upper cross syndrome, anterior pelvic tilt, and thoracic kyphosis. Critical for desk-bound professionals with chronic pain.</p></div>
-      <div class="mc"><div class="mc-num">Category 04</div><h4>Mobility &amp; Joint Function</h4><p>Active range of motion tests for shoulders, hips, ankles, and thoracic spine. Tracked to ensure corrective exercise produces real, functional improvement.</p></div>
-      <div class="mc"><div class="mc-num">Category 05</div><h4>Session Adherence</h4><p>Percentage of scheduled sessions completed each month — including virtual and travel sessions. The #1 predictor of results.</p></div>
-      <div class="mc"><div class="mc-num">Category 06</div><h4>Nutrition Compliance</h4><p>Weekly tracking of agreed-upon nutrition habits — protein intake, meal frequency, hydration, and behavior-change targets. Measured as percentage of weekly goals hit.</p></div>
-      <div class="mc"><div class="mc-num">Category 07</div><h4>Subjective Well-Being</h4><p>Self-reported energy, sleep quality, stress levels, and confidence — rated weekly. This captures what numbers can't and flags overtraining before it derails progress.</p></div>
+      <div class="mc"><div class="mc-num">Category 03</div><h4>Posture Assessment</h4><p>Quarterly posture photos with structured scoring of common desk-posture patterns: rounded shoulders, forward head position, pelvic tilt and upper-back rounding. Built for desk-bound professionals.</p></div>
+      <div class="mc"><div class="mc-num">Category 04</div><h4>Mobility &amp; Joint Function</h4><p>Active range of motion tests for shoulders, hips, ankles, and thoracic spine. Tracked to determine whether mobility and corrective work is producing measurable functional change.</p></div>
+      <div class="mc"><div class="mc-num">Category 05</div><h4>Session Adherence</h4><p>Percentage of scheduled sessions completed each month — including virtual and travel sessions. One of the strongest practical drivers of results.</p></div>
+      <div class="mc"><div class="mc-num">Category 06</div><h4>Nutrition Compliance</h4><p>Weekly tracking of agreed-upon nutrition habits — protein intake, meal frequency, hydration, and behavior-change targets from <a href="/behavior-change-coaching">behavior change coaching</a>. Measured as percentage of weekly goals hit.</p></div>
+      <div class="mc"><div class="mc-num">Category 07</div><h4>Subjective Well-Being</h4><p>Self-reported energy, sleep quality and stress levels — rated weekly. This captures what numbers can't and shows when recovery is falling behind training.</p></div>
     </div>
+    <h3 style="font-size:22px;margin:48px 0 6px">The Twelve Measures</h3>
+    <p style="margin-bottom:0">The seven categories above break down into these twelve measures:</p>
+    <ol class="ml"><li><span class="ml-n">01</span>Body composition (Bodystat QuadScan 4000 for studio clients)</li><li><span class="ml-n">02</span>Circumference (tape measurements at 7 sites)</li><li><span class="ml-n">03</span>Compound lift strength (deadlift, squat, press, row)</li><li><span class="ml-n">04</span>Grip strength</li><li><span class="ml-n">05</span>Relative strength ratios</li><li><span class="ml-n">06</span>Posture score (quarterly scored photos)</li><li><span class="ml-n">07</span>Range of motion (shoulders, hips, ankles, thoracic spine)</li><li><span class="ml-n">08</span>Session adherence</li><li><span class="ml-n">09</span>Nutrition compliance</li><li><span class="ml-n">10</span>Energy</li><li><span class="ml-n">11</span>Sleep quality</li><li><span class="ml-n">12</span>Stress</li></ol>
   </div></section>
 
   
   <section class="s-mid"><div class="s-inner">
       <span class="s-label">The Instrument</span><hr class="gold-line">
-      <h2>Measured, Not Estimated</h2>
+      <h2>Measured Consistently, Not Guessed</h2>
       <p>Body composition is the metric most often guessed at and most often wrong. A bathroom scale reports one number and hides three. OmniFit measures it on a <strong>Bodystat QuadScan 4000</strong>, a multi-frequency bioelectrical impedance analyser used in clinical and research settings.</p>
       <div class="qg">
-        <div class="qc"><div class="qc-h">Four frequencies</div><p>5, 50, 100 and 200 kHz. Low frequencies pass around cells, high frequencies pass through them. Reading both is what separates the compartments.</p></div>
-        <div class="qc"><div class="qc-h">Water, split properly</div><p>Intracellular and extracellular water reported separately rather than as one total. A weight change can be attributed to muscle, fat or fluid instead of inferred.</p></div>
-        <div class="qc"><div class="qc-h">Phase angle</div><p>A measurement at 50 kHz relating to cell membrane integrity. Tracked over time as a cellular health marker rather than interpreted as a diagnosis.</p></div>
-        <div class="qc"><div class="qc-h">Same device, same protocol</div><p>Every scan taken on the same calibrated unit, under the same conditions, and read against your own previous readings rather than a population average.</p></div>
+        <div class="qc"><div class="qc-h">Four frequencies</div><p>5, 50, 100 and 200 kHz. Lower-frequency measurements primarily reflect extracellular fluid, while higher-frequency measurements provide additional information used to estimate total and intracellular water. Multi-frequency impedance data supports separate estimates of intracellular and extracellular water.</p></div>
+        <div class="qc"><div class="qc-h">Water, split properly</div><p>Intracellular and extracellular water reported separately rather than as one total. That helps show whether a weight change is more consistent with muscle, fat or fluid than scale weight alone can.</p></div>
+        <div class="qc"><div class="qc-h">Phase angle</div><p>A 50 kHz measurement associated with cellular condition and hydration status. Tracked as a trend over time; it is not interpreted diagnostically.</p></div>
+        <div class="qc"><div class="qc-h">Same device, same protocol</div><p>Every scan taken on the same device under standardized conditions, with calibration routinely verified, and read against your own previous readings rather than a population average.</p></div>
       </div>
       <p class="ob-note" style="margin-top:22px">The Bodystat QuadScan 4000 holds CE certification as a Class IIa medical device under MDD 93/42/EEC and has FDA clearance. OmniFit Performance uses it to measure body composition. It is not used to diagnose, treat or assess any medical condition, and OmniFit is not a medical provider.</p>
   </div></section>
@@ -245,36 +256,37 @@
   <section class="s-dark"><div class="s-inner">
     <span class="s-label">Results</span><hr class="gold-line">
     <h2>How Our Clients Progress</h2>
-    <p>Measured results from 72 OmniFit clients coached between January 2023 and September 2026, drawn from session schedules and training logs in the OmniFit app. Each figure states its own method and sample size, because a number without a method is a slogan. Clients who did not improve are counted, not removed.</p>
+    <p>Measured results from 72 OmniFit clients coached between January 2023 and September 2026, drawn from session schedules and training logs in the OmniFit app. Each figure states its own method and sample size, because a number without a method is a slogan. No client who met the eligibility criteria for a figure was removed because of their outcome.</p>
     <div class="ob">
       <h3>Measured Outcomes, 2023 to 2026</h3>
       <div class="og">
-          <div class="os"><span class="num">87%</span><span class="lbl">Reached Their Goal</span><span class="meth">Fully or partly achieved their primary goal: 55 of 63 clients (62% fully). Coach-assessed against the goal set at intake</span></div>
+          <div class="os"><span class="num">87%</span><span class="lbl">Made Progress Toward Their Goal</span><span class="meth">55 of 63 clients fully or partly achieved their primary goal; 62% fully achieved it. Coach-assessed against the goal set at intake</span></div>
           <div class="os"><span class="num">74%</span><span class="lbl">Measurably Stronger</span><span class="meth">Stronger on most tracked lifts: 28 of 38 clients with each lift logged 4+ times over 4+ weeks</span></div>
-          <div class="os"><span class="num">+32%</span><span class="lbl">Working Load at 12 Weeks</span><span class="meth">Median change in heaviest logged working weight per lift, first session vs. weeks 10 to 16: 37 clients</span></div>
-          <div class="os"><span class="num">34%</span><span class="lbl">Training at 12 Months</span><span class="meth">Still training a year after starting: 18 of 53 clients who began at least 12 months ago</span></div>
+          <div class="os"><span class="num">+32%</span><span class="lbl">Median Working Load Change</span><span class="meth">Heaviest logged working weight per lift, first session vs. weeks 10 to 16: 37 clients</span></div>
+          <div class="os"><span class="num">34%</span><span class="lbl">12+ Months of Recorded Training</span><span class="meth">18 of 53 clients who started at least 12 months ago, measured from first to last recorded session</span></div>
         </div>
       <p class="ob-note">Figures are company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history. These describe what has been recorded, not what any prospective client will achieve.</p>
     </div>
-    <p style="font-size:13px;color:var(--white-50);margin-top:28px;text-align:center">Client reviews are a separate measure: a 4.98 average across 190+ reviews on Google, Yelp, Thumbtack and Bark.</p>
-    <div class="fi" style="margin-top:32px;border-top:1px solid var(--white-10)"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How these figures were calculated<span class="fi-icon">+</span></button><div class="fa"><p><strong style="color:var(--white-70)">Source.</strong> Session schedules and workout logs from the OmniFit app (Trainerize), pulled October 1, 2026. A client is counted if they had two or more scheduled sessions or logged workouts. No client was excluded for a poor result.<br><br><strong style="color:var(--white-70)">Strength.</strong> For each lift logged at least four times over at least four weeks, estimated one-rep max is calculated from weight and reps (Epley formula, sets of 12 reps or fewer). The best of a client's first two sessions is compared with the best of their latest two, and each client's result is the median across their lifts. Bodyweight exercises are excluded.<br><br><strong style="color:var(--white-70)">Working load.</strong> Heaviest logged weight on each lift in the first session versus the heaviest between weeks 10 and 16.<br><br><strong style="color:var(--white-70)">Retention.</strong> Time from first to last session or logged workout. The 12-month rate counts only clients who started at least 12 months before October 1, 2026.<br><br><strong style="color:var(--white-70)">Goals.</strong> Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist.<br><br><strong style="color:var(--white-70)">Limits.</strong> Sessions are scheduled sessions; attendance was not recorded before October 2026. There is no comparison group, so these figures describe what happened, not how much of it OmniFit caused.</p></div></div>
+    <p style="text-align:center;margin-top:28px"><a href="/outcomes">Read the full Client Outcomes report &rarr;</a></p>
+    <p style="font-size:13px;color:var(--white-50);margin-top:12px;text-align:center">Client reviews are a separate measure: a 4.98 average across 190+ reviews on Google, Yelp, Thumbtack and Bark.</p>
+    <div class="fi" style="margin-top:32px;border-top:1px solid var(--white-10)"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How these figures were calculated<span class="fi-icon">+</span></button><div class="fa"><p><strong style="color:var(--white-70)">Source.</strong> Session schedules and workout logs from the OmniFit app (Trainerize), pulled October 1, 2026. A client is counted if they had two or more scheduled sessions or logged workouts. No client who met the eligibility criteria for a figure was removed because of their outcome.<br><br><strong style="color:var(--white-70)">Strength.</strong> For each lift logged at least four times over at least four weeks, estimated one-rep max is calculated from weight and reps (Epley formula, sets of 12 reps or fewer). The best of a client's first two sessions is compared with the best of their latest two, and each client's result is the median across their lifts. Bodyweight exercises are excluded.<br><br><strong style="color:var(--white-70)">Working load.</strong> Heaviest logged weight on each lift in the first session versus the heaviest between weeks 10 and 16.<br><br><strong style="color:var(--white-70)">Retention.</strong> Time from first to last session or logged workout. The 12-month figure counts only clients who started at least 12 months before October 1, 2026, and reflects recorded training activity rather than a contract term.<br><br><strong style="color:var(--white-70)">Goals.</strong> Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist.<br><br><strong style="color:var(--white-70)">Limits.</strong> Sessions are scheduled sessions; attendance was not recorded before October 2026. There is no comparison group, so these figures describe what happened, not how much of it OmniFit caused.</p></div></div>
   </div></section>
 
   <section class="s-light"><div class="s-inner">
     <span class="s-label">The Difference</span><hr class="gold-line">
-    <h2>Data-Driven vs. Random Training</h2>
-    <p>Most personal training follows a pattern: show up, do a workout, repeat. Here's how OmniFit compares:</p>
+    <h2>Measured Coaching vs. Session-Only Training</h2>
+    <p>Session-only training is built around the workout itself. OmniFit is built around the measurement system that surrounds it. Here is how the two formats compare. For this comparison, session-only training means supervised workouts without a standardized measurement and reporting system over time.</p>
     <div class="ct-wrap">
     <table class="ct">
-      <thead><tr><th>Element</th><th>OmniFit</th><th>Typical Trainer</th></tr></thead>
+      <thead><tr><th>Element</th><th>OmniFit</th><th>Session-Only Training</th></tr></thead>
       <tbody>
-        <tr><td>Baseline assessment</td><td><span class="chk">✓ 45-min movement + lifestyle screen</span></td><td><span class="xm">Brief or skipped</span></td></tr>
-        <tr><td>Standardized metrics</td><td><span class="chk">✓ 12 metrics tracked monthly</span></td><td><span class="xm">Scale weight only</span></td></tr>
-        <tr><td>Progress reports</td><td><span class="chk">✓ Formal 30-day reports with trends</span></td><td><span class="xm">Verbal ("you look great")</span></td></tr>
-        <tr><td>Program adjustments</td><td><span class="chk">✓ Data-driven every 4 weeks</span></td><td><span class="xm">When client complains</span></td></tr>
-        <tr><td>Posture tracking</td><td><span class="chk">✓ Quarterly scored photos</span></td><td><span class="xm">Not measured</span></td></tr>
-        <tr><td>Adherence monitoring</td><td><span class="chk">✓ Session + nutrition + habit %</span></td><td><span class="xm">No system</span></td></tr>
-        <tr><td>Well-being tracking</td><td><span class="chk">✓ Weekly energy/sleep/stress ratings</span></td><td><span class="xm">"How do you feel?"</span></td></tr>
+        <tr><td>Baseline assessment</td><td><span class="chk">✓ 45-min movement + lifestyle screen</span></td><td><span class="xm">Varies</span></td></tr>
+        <tr><td>Standardized metrics</td><td><span class="chk">✓ 12 measures tracked on defined cadences</span></td><td><span class="xm">Not part of the format</span></td></tr>
+        <tr><td>Progress reports</td><td><span class="chk">✓ Formal 30-day reports with trends</span></td><td><span class="xm">Informal check-ins</span></td></tr>
+        <tr><td>Program adjustments</td><td><span class="chk">✓ Data-driven every 4 weeks</span></td><td><span class="xm">Session to session</span></td></tr>
+        <tr><td>Posture tracking</td><td><span class="chk">✓ Quarterly scored photos</span></td><td><span class="xm">Not included</span></td></tr>
+        <tr><td>Adherence monitoring</td><td><span class="chk">✓ Session + nutrition + habit %</span></td><td><span class="xm">Attendance only</span></td></tr>
+        <tr><td>Well-being tracking</td><td><span class="chk">✓ Weekly energy/sleep/stress ratings</span></td><td><span class="xm">Not included</span></td></tr>
       </tbody>
     </table>
     </div>
@@ -286,9 +298,9 @@
     <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How does OmniFit track client progress?<span class="fi-icon">+</span></button><div class="fa"><p>We track twelve standardized measures grouped into seven categories: body composition measured on a Bodystat QuadScan 4000, strength benchmarks, posture scores, mobility function, session adherence, nutrition compliance, and subjective well-being. Formal progress reports are delivered every 30 days with trend analysis and program recommendations.</p></div></div>
     <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How often do I get a progress report?<span class="fi-icon">+</span></button><div class="fa"><p>Every 30 days. Each report includes your current metrics, trend data compared to your baseline, and specific recommendations for the next training phase. You also receive weekly check-in summaries through the OmniFit app.</p></div></div>
     <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Do I need to log everything myself?<span class="fi-icon">+</span></button><div class="fa"><p>We keep it simple. Your coach handles most tracking during sessions. Your main responsibility is weekly nutrition habit check-ins (takes 2–3 minutes) and honest well-being ratings. We designed the system for busy professionals — not data analysts.</p></div></div>
-    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What if I'm not making progress on a metric?<span class="fi-icon">+</span></button><div class="fa"><p>That's exactly why we measure. If a metric stalls, we identify the cause in the 30-day review — training volume, recovery, nutrition, sleep, or stress — and adjust the program before you waste another month on something that isn't working.</p></div></div>
-    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How is this different from what I'd get with another trainer?<span class="fi-icon">+</span></button><div class="fa"><p>Most trainers use subjective assessment or scale weight as their only benchmark. OmniFit's 12-metric framework captures body composition, performance, structural health, adherence, and well-being. Every program adjustment is based on trend data, not opinions.</p></div></div>
-    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Can virtual/hybrid clients get the same level of tracking?<span class="fi-icon">+</span></button><div class="fa"><p>Yes. Hybrid and Virtual Coaching clients follow the same 12-metric framework. Body composition is tracked via self-measurement with video guidance, posture photos are submitted through the app, and all other metrics are managed through our coaching platform.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What if I'm not making progress on a metric?<span class="fi-icon">+</span></button><div class="fa"><p>That's exactly why we measure. If a metric stalls, the 30-day review looks at likely contributors — training volume, recovery, nutrition, sleep and stress — and adjusts the program accordingly.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How is this different from what I'd get with another trainer?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit's framework covers body composition, strength, posture and mobility, adherence and well-being, reviewed in a formal report every 30 days. Every program adjustment is based on trend data from those measures.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Can virtual/hybrid clients get the same level of tracking?<span class="fi-icon">+</span></button><div class="fa"><p>Yes. Hybrid and Virtual Coaching clients follow the same seven-category, 12-measure framework, with measurement methods adapted to coaching format. Body composition is tracked via self-measurement with video guidance, posture photos are submitted through the app, and all other metrics are managed through our coaching platform.</p></div></div>
   </div></section>
 
   <!-- ═══ USE CASES ═══ -->
@@ -298,11 +310,13 @@
     <p>Coaching is rarely the goal on its own. These are the situations it usually attaches to.</p>
     <div class="mg">
       <div class="mc"><h4>Long-Term Transformation</h4><p>You want a body that holds up for years rather than a twelve-week push that unravels. The work is built to be repeatable: a plan you can still follow in month nine, progressions tied to what your body tolerates, and a coach who adjusts the plan rather than restarting it.</p></div>
-      <div class="mc"><h4>Fat Loss Without Crash Protocols</h4><p>Aggressive plans usually fail on the joints or the schedule before they fail on willpower. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p></div>
-      <div class="mc"><h4>Desk-Worker Posture and Mobility</h4><p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets the specific patterns desk work creates, with corrective work built into every session rather than bolted on as a warm-up.</p></div>
+      <div class="mc"><h4>Fat Loss Without Crash Protocols</h4><p>Aggressive plans can be difficult to sustain around demanding schedules and individual training tolerance. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p></div>
+      <div class="mc"><h4>Desk-Worker Posture and Mobility</h4><p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets common mobility and strength patterns associated with prolonged sitting, with corrective work built into every session rather than bolted on as a warm-up.</p></div>
       <div class="mc"><h4>Data-Driven Hybrid Coaching</h4><p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, and the same benchmarks are tracked either way so nothing is guessed between visits.</p></div>
     </div>
   </div></section>
+
+  <nav class="hub" aria-label="Related pages"><a href="/the-omnifit-method">The OmniFit Method</a> <span>&middot;</span> <a href="/behavior-change-coaching">Behavior Change Coaching</a> <span>&middot;</span> <a href="/outcomes">Client Outcomes</a> <span>&middot;</span> <a href="/training-rates-san-diego">Rates</a> <span>&middot;</span> <a href="/case-studies">Case Studies</a></nav>
 
   <section class="cta">
     <h2>See What Your Progress<br>Report Could Look Like</h2>
