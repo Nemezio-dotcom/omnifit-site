@@ -1,27 +1,135 @@
-<!-- OMNIFIT | HOMEPAGE HERO · v1 OCTOBER 2026
+<!-- OMNIFIT | HOMEPAGE HERO · v3 OCTOBER 2026
   Built for the static site (build.py prepends it to the homepage via
   HOME_ORDER). Not a Squarespace Code Block.
   - The only top-level heading on the homepage: home-2, home-3 and home-4 were demoted to h2.
-  - No CTA inside by design; the existing sections follow immediately.
   - Navy card with rounded corners on a white strip (the header above is
     white); ~40px side margins on desktop, flush at phone widths.
+  v3 changes (from v2):
+  - Smaller copy block: H1 58px max (was 84), subhead 18px max, tighter
+    eyebrow and buttons. Same words.
+  - On desktop the photo is anchored to the right ~64% of the card and
+    feathered into navy on its left edge (mask + gradient), so the client's
+    face sits just right of the copy instead of underneath it. --hero-inset
+    is the photo's left edge; --hero-focus picks the slice of the photo.
+  - On phones the photo fills the card, zoomed 1.2x from the bottom, so both
+    faces sit above the copy block, which is anchored to the bottom.
+  - Motion (all CSS, all off under prefers-reduced-motion): staged rise-in of
+    rule, eyebrow, H1, subhead and buttons; photo fades in and keeps a slow
+    14s settle; gold sheen across the primary button on hover; on desktop a
+    native scroll-driven parallax (photo drifts, copy lifts) that browsers
+    without animation-timeline support simply skip.
+  v2 (kept): eyebrow line, primary + secondary CTA (remove .hero-actions to
+  go back to no CTA), plain navy card if the image fails to load.
+  The photo is a repo asset (site/img/hero-trainer-coaching-kettlebell-*,
+  served from /assets/img/), a 2:3 portrait, not a Squarespace hotlink.
 -->
+<!-- Motion flag for pages/home-motion.html: set before any section paints so
+     nothing flashes visible then hidden. Only when the visitor has not asked
+     for reduced motion; without it every reveal rule is inert. -->
+<script>if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('omni-motion');}</script>
 <section id="omni-hero" aria-label="Introduction">
+  <!-- HERO IMAGE (1/2): preload so the LCP image starts before the stylesheet finishes -->
+  <link rel="preload" as="image" type="image/webp" imagesrcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" imagesizes="(max-width:768px) 100vw, 880px" fetchpriority="high">
   <style>
     #omni-hero{background:#ffffff;margin:0;padding:40px;font-family:'Montserrat',sans-serif;}
     #omni-hero *{box-sizing:border-box;}
-    #omni-hero .hero-card{background:#0a1628;border-radius:24px;padding:clamp(72px,11vw,136px) 28px;text-align:center;max-width:1360px;margin:0 auto;position:relative;overflow:hidden;}
-    #omni-hero .hero-card::before{content:'';position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(201,168,76,0.25) 0%,transparent 70%);opacity:0.35;pointer-events:none;}
-    #omni-hero h1{position:relative;font-family:'Playfair Display',serif;font-size:clamp(42px,7.2vw,92px);font-weight:700;line-height:1.06;letter-spacing:-1px;color:#ffffff;margin:0 auto 28px;max-width:15ch;text-transform:none;}
-    #omni-hero .hero-sub{position:relative;font-family:'Montserrat',sans-serif;font-weight:700;font-style:italic;font-size:clamp(16px,2vw,22px);line-height:1.5;color:#c9a84c;margin:0 auto;max-width:720px;}
+    /* overflow:clip, not hidden: hidden makes the card a scroll container, which
+       would pin the view() scroll timelines below to the card instead of the page */
+    #omni-hero .hero-card{--hero-inset:36%;--hero-focus:50% 38%;position:relative;isolation:isolate;overflow:clip;background:#0a1628;border-radius:24px;max-width:1360px;margin:0 auto;min-height:clamp(520px,70vh,760px);display:flex;align-items:center;padding:clamp(56px,8vw,104px) clamp(28px,6vw,96px);}
+    /* photo layer: anchored right, feathered into the navy on its left edge */
+    #omni-hero .hero-photo{position:absolute;top:0;bottom:0;right:0;left:var(--hero-inset);z-index:-2;display:block;overflow:hidden;
+      -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 14%,#000 32%);
+      mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 14%,#000 32%);}
+    #omni-hero .hero-bg{width:100%;height:100%;object-fit:cover;object-position:var(--hero-focus);display:block;}
+    #omni-hero .hero-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;
+      background:
+        linear-gradient(180deg,rgba(10,22,40,0.30) 0%,rgba(10,22,40,0) 28%,rgba(10,22,40,0) 70%,rgba(10,22,40,0.45) 100%),
+        linear-gradient(90deg,rgba(10,22,40,0.97) 0%,rgba(10,22,40,0.97) 30%,rgba(10,22,40,0.70) 40%,rgba(10,22,40,0.22) 52%,rgba(10,22,40,0.10) 100%);}
+    #omni-hero .hero-shade::after{content:'';position:absolute;left:-180px;top:-220px;width:620px;height:620px;background:radial-gradient(circle,rgba(201,168,76,0.20) 0%,transparent 68%);pointer-events:none;}
+    #omni-hero .hero-content{position:relative;max-width:540px;text-align:left;}
+    #omni-hero .hero-eyebrow{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e0c872;margin:0 0 16px;display:flex;align-items:center;gap:12px;white-space:nowrap;}
+    #omni-hero .hero-eyebrow::before{content:'';display:inline-block;width:30px;height:2px;background:#c9a84c;flex:none;}
+    #omni-hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,4.2vw,58px);font-weight:700;line-height:1.08;letter-spacing:-0.6px;color:#ffffff;margin:0 0 18px;max-width:14ch;text-transform:none;text-shadow:0 2px 20px rgba(10,22,40,0.45);}
+    #omni-hero .hero-sub{font-family:'Montserrat',sans-serif;font-weight:700;font-style:italic;font-size:clamp(15px,1.4vw,18px);line-height:1.5;color:#c9a84c;margin:0;max-width:460px;}
+    #omni-hero .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+    #omni-hero .hero-btn,#omni-hero .hero-btn:link,#omni-hero .hero-btn:visited{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 24px;border-radius:999px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;text-decoration:none;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;}
+    #omni-hero .hero-btn--primary,#omni-hero .hero-btn--primary:link,#omni-hero .hero-btn--primary:visited{position:relative;overflow:hidden;background:#c9a84c;color:#0a1628;border:1.5px solid #c9a84c;box-shadow:0 10px 30px rgba(201,168,76,0.18);}
+    #omni-hero .hero-btn--primary:hover,#omni-hero .hero-btn--primary:focus-visible{background:#e0c872;border-color:#e0c872;color:#0a1628;transform:translateY(-1px);box-shadow:0 14px 34px rgba(201,168,76,0.30);}
+    /* gold sheen that sweeps across the primary button on hover */
+    #omni-hero .hero-btn--primary::after{content:'';position:absolute;top:-10%;bottom:-10%;left:0;width:38%;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.55) 50%,rgba(255,255,255,0) 100%);transform:translateX(-180%) skewX(-18deg);pointer-events:none;}
+    #omni-hero .hero-btn--primary:hover::after,#omni-hero .hero-btn--primary:focus-visible::after{transition:transform .8s cubic-bezier(.22,1,.36,1);transform:translateX(380%) skewX(-18deg);}
+    #omni-hero .hero-btn--ghost,#omni-hero .hero-btn--ghost:link,#omni-hero .hero-btn--ghost:visited{background:rgba(10,22,40,0.25);color:#ffffff;border:1.5px solid rgba(255,255,255,0.5);backdrop-filter:blur(4px);transition:background-color .2s ease,color .2s ease,border-color .3s ease,box-shadow .3s ease;}
+    #omni-hero .hero-btn--ghost:hover,#omni-hero .hero-btn--ghost:focus-visible{border-color:#e0c872;color:#e0c872;box-shadow:0 0 0 4px rgba(201,168,76,0.16);}
+    #omni-hero .hero-btn:focus-visible{outline:3px solid #e0c872;outline-offset:3px;}
+
+    /* ===== Motion: a quiet reveal, then the photo keeps settling ===== */
+    @media (prefers-reduced-motion:no-preference){
+      #omni-hero .hero-photo{animation:omni-hero-photo-in 1.6s cubic-bezier(.22,1,.36,1) both;}
+      #omni-hero .hero-bg{animation:omni-hero-settle 14s cubic-bezier(.16,1,.3,1) both;}
+      #omni-hero .hero-shade::after{animation:omni-hero-glow 2.4s ease-out .3s both;}
+      #omni-hero .hero-eyebrow,#omni-hero h1,#omni-hero .hero-sub,#omni-hero .hero-actions{opacity:0;animation:omni-hero-rise 1.1s cubic-bezier(.22,1,.36,1) forwards;}
+      #omni-hero .hero-eyebrow{animation-delay:.45s;}
+      #omni-hero h1{animation-delay:.6s;}
+      #omni-hero .hero-sub{animation-delay:.8s;}
+      #omni-hero .hero-actions{animation-delay:.98s;}
+      #omni-hero .hero-eyebrow::before{transform-origin:left center;animation:omni-hero-rule 1.2s cubic-bezier(.22,1,.36,1) .5s both;}
+      @keyframes omni-hero-settle{from{transform:scale(1.07);}to{transform:scale(1);}}
+      @keyframes omni-hero-photo-in{from{opacity:0;}to{opacity:1;}}
+      @keyframes omni-hero-glow{from{opacity:0;transform:scale(.6);}to{opacity:1;transform:none;}}
+      @keyframes omni-hero-rise{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:none;}}
+      @keyframes omni-hero-rule{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+    }
+    /* Scroll parallax on desktop: the photo drifts slower than the page and the
+       copy lifts away as the hero leaves the viewport. Native scroll-driven
+       animations, no JS; browsers without support just skip it. */
+    @supports (animation-timeline:view()){
+      @media (prefers-reduced-motion:no-preference) and (min-width:769px){
+        #omni-hero .hero-photo{animation:omni-hero-photo-in 1.6s cubic-bezier(.22,1,.36,1) both,omni-hero-parallax linear both;animation-timeline:auto,view();animation-range:normal,exit 0% exit 100%;}
+        #omni-hero .hero-content{animation:omni-hero-lift linear both;animation-timeline:view();animation-range:exit 0% exit 100%;}
+        @keyframes omni-hero-parallax{from{translate:0 0;}to{translate:0 120px;}}
+        @keyframes omni-hero-lift{from{opacity:1;translate:0 0;}to{opacity:0;translate:0 -80px;}}
+      }
+    }
+    @media (max-width:1023px){
+      #omni-hero .hero-card{--hero-inset:30%;}
+    }
     @media (max-width:768px){
       #omni-hero{padding:0;}
-      #omni-hero .hero-card{border-radius:0;padding:72px 20px 64px;}
-      #omni-hero h1{letter-spacing:-0.5px;}
+      #omni-hero .hero-card{--hero-inset:0;--hero-focus:52% 100%;border-radius:0;min-height:min(92svh,800px);padding:56px 22px 36px;align-items:flex-end;}
+      /* zoom from the bottom so both faces clear the copy block */
+      #omni-hero .hero-photo{transform:scale(1.2);transform-origin:50% 100%;-webkit-mask-image:none;mask-image:none;}
+      #omni-hero .hero-shade{background:
+        linear-gradient(180deg,rgba(10,22,40,0.60) 0%,rgba(10,22,40,0.18) 22%,rgba(10,22,40,0.12) 44%,rgba(10,22,40,0.82) 60%,rgba(10,22,40,0.97) 100%);}
+      #omni-hero .hero-shade::after{display:none;}
+      #omni-hero .hero-content{max-width:none;}
+      #omni-hero h1{font-size:clamp(32px,9vw,38px);letter-spacing:-0.4px;margin-bottom:12px;}
+      #omni-hero .hero-sub{font-size:15px;max-width:none;}
+      /* shorter eyebrow on one line; secondary CTA becomes a text link so the
+         copy block stays short enough for both faces to clear it */
+      #omni-hero .hero-eyebrow{margin-bottom:12px;font-size:10.5px;letter-spacing:1.6px;gap:10px;}
+      #omni-hero .hero-eyebrow::before{width:22px;}
+      #omni-hero .hero-eyebrow__more{display:none;}
+      #omni-hero .hero-actions{margin-top:20px;gap:8px;flex-direction:column;align-items:stretch;}
+      #omni-hero .hero-btn--primary{min-height:48px;}
+      #omni-hero .hero-btn--ghost,#omni-hero .hero-btn--ghost:link,#omni-hero .hero-btn--ghost:visited{background:none;border:0;backdrop-filter:none;min-height:0;padding:10px 0 0;justify-content:center;color:#e0c872;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,200,114,0.6);}
+      #omni-hero .hero-btn--ghost:hover,#omni-hero .hero-btn--ghost:focus-visible{color:#ffffff;}
     }
   </style>
   <div class="hero-card">
-    <h1>San Diego Personal Trainer for Executives</h1>
-    <p class="hero-sub">For Professionals Over 30 Who Want Strength, Energy, and Confidence — Without Wasting Time</p>
+    <!-- HERO IMAGE (2/2): decorative, so alt is empty; the H1 carries the meaning -->
+    <picture class="hero-photo">
+      <source type="image/webp" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
+      <img class="hero-bg" src="/assets/img/hero-trainer-coaching-kettlebell-1600.jpg" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.jpg 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">NASM Elite Trainer · 4S Ranch, San Diego<span class="hero-eyebrow__more"> · Virtual Nationwide</span></p>
+      <h1>San Diego Personal Trainer for Executives</h1>
+      <p class="hero-sub">For Professionals Over 30 Who Want Strength, Energy, and Confidence — Without Wasting Time</p>
+      <div class="hero-actions">
+        <a class="hero-btn hero-btn--primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+        <a class="hero-btn hero-btn--ghost" href="/personal-training-services">See Programs</a>
+      </div>
+    </div>
   </div>
 </section>

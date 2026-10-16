@@ -13,6 +13,7 @@ Sources
   pages/footer.html                 site-wide footer (style + markup + script)
   pages/home-1..6.html              homepage sections, concatenated in HOME_ORDER
   site/layout.html, site/nav.html, site/site.css, site/site.js
+  site/img/*                        static images, copied to public/assets/img/
 
 Nothing here rewrites page copy, schema or CSS rules. The only edits made to
 page markup are structural: <style>/<link> tags are lifted out of the body into
@@ -41,12 +42,13 @@ sys.path.insert(0, str(SITE))
 import icons  # noqa: E402  (site/icons.py)
 
 # Source files under pages/ that are not standalone pages.
-NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6"}
+NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6", "home-motion"}
 
 # Homepage = these fragments, in page order. home-0 is the hero built for the
 # static site (the only h1); CANON: home-6 sits after the programs section and
-# before the FAQ.
-HOME_ORDER = ["home-0", "home-1", "home-2", "home-3", "home-4", "home-6", "home-5"]
+# before the FAQ. home-motion is the scroll-reveal layer (CSS lifted to head,
+# script runs after every section exists).
+HOME_ORDER = ["home-0", "home-1", "home-2", "home-3", "home-4", "home-6", "home-5", "home-motion"]
 
 # Repo file name -> live slug, where they differ. Squarespace slugs are
 # lower-case and every internal link in the repo uses /faqs.
@@ -286,6 +288,9 @@ def build():
     if PUBLIC.exists():
         shutil.rmtree(PUBLIC)
     (PUBLIC / "assets").mkdir(parents=True)
+    # Static images: site/img/<file> is served at /assets/img/<file>.
+    if (SITE / "img").is_dir():
+        shutil.copytree(SITE / "img", PUBLIC / "assets" / "img")
     (PUBLIC / "assets" / "site.css").write_text(
         read(SITE / "site.css").rstrip() + "\n\n/* ===== Footer (source: pages/footer.html) ===== */\n" + footer_css + "\n",
         encoding="utf-8",
