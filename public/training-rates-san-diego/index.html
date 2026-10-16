@@ -1070,6 +1070,132 @@ OmniFit | Site-wide Header Injection · Sept 2026
   #omni-rates .rt-trust-item { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
   #omni-rates .rt-trust-item span { font-size: 14px; }
 
+  /* ===== MOTION & VISUAL POLISH ===== */
+  @property --rt-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  #omni-rates { position: relative; z-index: 0; overflow: clip; }
+  #omni-rates [id^="rt-"] { scroll-margin-top: calc(var(--rt-top, 0px) + 72px); }
+
+  /* ambient gold orbs drifting behind the content */
+  #omni-rates .rt-orb { position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(201,168,76,0.22) 0%, rgba(201,168,76,0.06) 40%, transparent 70%); will-change: transform; }
+  #omni-rates .rt-orb-a { width: 640px; height: 640px; top: 6%; left: -260px; animation: rt-drift 28s ease-in-out infinite alternate; }
+  #omni-rates .rt-orb-b { width: 560px; height: 560px; top: 38%; right: -240px; animation: rt-drift 34s ease-in-out infinite alternate-reverse; }
+  #omni-rates .rt-orb-c { width: 600px; height: 600px; top: 72%; left: 18%; animation: rt-drift 40s ease-in-out infinite alternate; }
+  @keyframes rt-drift { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(70px, 50px, 0) scale(1.18); } }
+
+  /* hero: breathing glow, dot grid, staggered entrance, sheen on the italic */
+  #omni-rates .rt-hero { overflow: visible; }
+  #omni-rates .rt-hero::before { animation: rt-breathe 7s ease-in-out infinite; }
+  @keyframes rt-breathe { 0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(1); } 50% { opacity: 0.55; transform: translateX(-50%) scale(1.14); } }
+  #omni-rates .rt-hero::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1.5px); background-size: 26px 26px; -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, #000 0%, transparent 70%); mask-image: radial-gradient(ellipse 70% 80% at 50% 40%, #000 0%, transparent 70%); pointer-events: none; }
+  #omni-rates .rt-hero > * { position: relative; z-index: 1; }
+  #omni-rates .rt-hero .rt-badge, #omni-rates .rt-hero h1, #omni-rates .rt-hero .rt-hero-sub, #omni-rates .rt-hero .rt-cta-row { animation: rt-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  #omni-rates .rt-hero h1 { animation-delay: 0.12s; }
+  #omni-rates .rt-hero .rt-hero-sub { animation-delay: 0.26s; }
+  #omni-rates .rt-hero .rt-cta-row { animation-delay: 0.4s; }
+  @keyframes rt-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  @supports (-webkit-background-clip: text) or (background-clip: text) {
+    #omni-rates .rt-hero h1 em, #omni-rates h2 em { background: linear-gradient(110deg, var(--gold) 0%, var(--gold-light) 40%, #f3e3a3 50%, var(--gold-light) 60%, var(--gold) 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: rt-sheen 7s linear infinite; }
+  }
+  @keyframes rt-sheen { 0% { background-position: 120% 0; } 100% { background-position: -120% 0; } }
+
+  /* buttons: light sweep on hover */
+  #omni-rates .rt-btn { position: relative; overflow: hidden; }
+  #omni-rates .rt-btn-primary::after { content: ''; position: absolute; top: 0; left: -80%; width: 50%; height: 100%; background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%); transform: skewX(-20deg); transition: left 0.65s ease; pointer-events: none; }
+  #omni-rates .rt-btn-primary:hover::after { left: 130%; }
+
+  /* scroll reveal (only when JS has tagged the root; no JS = everything visible) */
+  #omni-rates.rt-js .rt-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); transition-delay: var(--d, 0s); }
+  #omni-rates.rt-js .rt-reveal.is-in { opacity: 1; transform: none; }
+  #omni-rates.rt-js .rt-reveal .rt-divider { transform: scaleX(0); transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s; }
+  #omni-rates.rt-js .rt-reveal.is-in .rt-divider { transform: scaleX(1); }
+  #omni-rates .rt-paths .rt-path:nth-child(2), #omni-rates .rt-ladder .rt-group:nth-child(2), #omni-rates .rt-addons-grid .rt-addon:nth-child(2), #omni-rates .rt-policies .rt-policy:nth-child(2), #omni-rates .rt-fit-grid .rt-fit-col:nth-child(2) { --d: 0.14s; }
+  #omni-rates .rt-paths .rt-path:nth-child(3), #omni-rates .rt-ladder .rt-group:nth-child(3), #omni-rates .rt-addons-grid .rt-addon:nth-child(3), #omni-rates .rt-policies .rt-policy:nth-child(3) { --d: 0.28s; }
+  #omni-rates .rt-addons-grid .rt-addon:nth-child(4) { --d: 0.42s; }
+  #omni-rates .rt-includes-item:nth-child(1) { --d: 0.05s; } #omni-rates .rt-includes-item:nth-child(2) { --d: 0.11s; } #omni-rates .rt-includes-item:nth-child(3) { --d: 0.17s; }
+  #omni-rates .rt-includes-item:nth-child(4) { --d: 0.23s; } #omni-rates .rt-includes-item:nth-child(5) { --d: 0.29s; } #omni-rates .rt-includes-item:nth-child(6) { --d: 0.35s; }
+  #omni-rates .rt-includes-item:nth-child(7) { --d: 0.41s; } #omni-rates .rt-includes-item:nth-child(8) { --d: 0.47s; } #omni-rates .rt-includes-item:nth-child(9) { --d: 0.53s; }
+  #omni-rates .rt-includes-item::before { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  #omni-rates.rt-js .rt-includes-item.rt-reveal::before { transform: scale(0); transition-delay: calc(var(--d, 0s) + 0.35s); }
+  #omni-rates.rt-js .rt-includes-item.rt-reveal.is-in::before { transform: scale(1); }
+
+  /* path tiles: icon badge, gold hairline, gradient surface */
+  #omni-rates .rt-path, #omni-rates a.rt-path, #omni-rates a.rt-path:link, #omni-rates a.rt-path:visited { position: relative; overflow: hidden; background: linear-gradient(160deg, var(--navy-surface) 0%, var(--navy-light) 65%); }
+  #omni-rates .rt-path::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+  #omni-rates .rt-path:hover::before, #omni-rates .rt-path.featured::before { transform: scaleX(1); }
+  #omni-rates .rt-path.featured, #omni-rates a.rt-path.featured { background: linear-gradient(160deg, rgba(201,168,76,0.16) 0%, var(--navy-light) 60%); }
+  #omni-rates .rt-path-who { padding-right: 56px; }
+  #omni-rates .rt-path-icon { position: absolute; top: 18px; right: 18px; width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s, box-shadow 0.3s; }
+  #omni-rates .rt-path-icon svg { width: 21px; height: 21px; fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; }
+  #omni-rates .rt-path:hover .rt-path-icon { transform: translateY(-3px) rotate(-6deg); background: var(--gold-glow); box-shadow: 0 8px 20px rgba(201,168,76,0.25); }
+  #omni-rates .rt-path-go::after { display: inline-block; margin-left: 5px; transition: transform 0.3s; }
+  #omni-rates .rt-path:hover .rt-path-go::after { transform: translateX(4px); }
+
+  /* sticky jump bar */
+  #omni-rates .rt-jump { position: sticky; top: var(--rt-top, 0px); z-index: 60; margin: 0 0 44px; padding: 10px 20px; background: rgba(10,22,40,0.82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-top: 1px solid var(--white-05); border-bottom: 1px solid var(--white-10); }
+  #omni-rates .rt-jump-inner { display: flex; gap: 8px; justify-content: center; max-width: 1120px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  #omni-rates .rt-jump-inner::-webkit-scrollbar { display: none; }
+  #omni-rates .rt-jump-label { flex: 0 0 auto; align-self: center; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white-50); margin-right: 6px; }
+  #omni-rates .rt-jump a, #omni-rates .rt-jump a:link, #omni-rates .rt-jump a:visited { flex: 0 0 auto; padding: 8px 16px; border-radius: 100px; border: 1px solid var(--white-20); color: var(--white-70) !important; font-family: 'Montserrat', sans-serif !important; font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; white-space: nowrap; transition: all 0.25s; }
+  #omni-rates .rt-jump a:hover { border-color: var(--gold); color: var(--gold) !important; transform: translateY(-1px); }
+  #omni-rates .rt-jump a.is-active { background: var(--gold); border-color: var(--gold); color: var(--navy) !important; box-shadow: 0 6px 20px rgba(201,168,76,0.3); }
+
+  /* rate ladders: gold accent bar sweeps in, featured row glows, tag shimmers */
+  #omni-rates .rt-group { transition: border-color 0.3s, box-shadow 0.3s; }
+  #omni-rates .rt-group:hover { border-color: rgba(201,168,76,0.45); box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
+  #omni-rates .rt-group-head { background: linear-gradient(90deg, var(--white-05), transparent); }
+  #omni-rates .rt-row { position: relative; transition: background 0.25s; }
+  #omni-rates .rt-row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--gold-light), var(--gold)); transform: scaleY(0); transform-origin: bottom; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+  #omni-rates .rt-row:hover { background: var(--white-05); }
+  #omni-rates .rt-row:hover::before { transform: scaleY(1); transform-origin: top; }
+  #omni-rates .rt-row-price { transition: color 0.25s, transform 0.25s; }
+  #omni-rates .rt-row:hover .rt-row-price { color: var(--gold-light); }
+  #omni-rates .rt-row.featured { background: linear-gradient(90deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05)); }
+  #omni-rates .rt-row.featured::before { transform: scaleY(1); }
+  #omni-rates .rt-row-tag { position: relative; overflow: hidden; }
+  #omni-rates .rt-row-tag::after { content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(115deg, transparent, rgba(255,255,255,0.65), transparent); transform: skewX(-20deg); animation: rt-shimmer 3.6s ease-in-out infinite; }
+  @keyframes rt-shimmer { 0%, 55% { left: -60%; } 100% { left: 140%; } }
+  #omni-rates .rt-packs-row { position: relative; transition: background 0.25s; }
+  #omni-rates .rt-packs-row:not(.head)::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--gold-light), var(--gold)); transform: scaleY(0); transform-origin: bottom; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+  #omni-rates .rt-packs-row:not(.head):hover { background: var(--white-05); }
+  #omni-rates .rt-packs-row:not(.head):hover::before { transform: scaleY(1); transform-origin: top; }
+  #omni-rates .rt-packs-price { transition: color 0.25s; }
+  #omni-rates .rt-packs-row:hover .rt-packs-price { color: var(--gold-light); }
+
+  /* assessment: rotating gold gradient border + pulsing price badge */
+  #omni-rates .rt-assess { border: 2px solid transparent; background: linear-gradient(var(--navy-light), var(--navy-light)) padding-box, conic-gradient(from var(--rt-angle), var(--gold) 0%, rgba(201,168,76,0.2) 22%, var(--gold-light) 50%, rgba(201,168,76,0.2) 78%, var(--gold) 100%) border-box; animation: rt-spin 9s linear infinite; }
+  @keyframes rt-spin { to { --rt-angle: 360deg; } }
+  #omni-rates .rt-assess-price { animation: rt-pulse 3.2s ease-out infinite; }
+  @keyframes rt-pulse { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); } 70% { box-shadow: 0 0 0 18px rgba(201,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); } }
+
+  /* feature band, guarantee, add-ons, policies, FAQ, trust */
+  #omni-rates .rt-guarantee { position: relative; overflow: hidden; }
+  #omni-rates .rt-guarantee::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--gold-light), var(--gold)); }
+  #omni-rates .rt-feature { transition: border-color 0.3s, box-shadow 0.3s; }
+  #omni-rates .rt-feature:hover { border-color: rgba(201,168,76,0.45); box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
+  #omni-rates .rt-policy { transition: border-color 0.3s, transform 0.3s; }
+  #omni-rates .rt-policy:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-3px); }
+  #omni-rates .rt-faq summary::after { transition: transform 0.3s, color 0.3s; }
+  #omni-rates .rt-faq details[open] summary::after { transform: rotate(180deg); }
+  #omni-rates .rt-faq details[open] .rt-faq-body { animation: rt-fade 0.4s ease both; }
+  @keyframes rt-fade { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  #omni-rates .rt-trust-item { transition: color 0.3s; }
+  #omni-rates .rt-trust-item:hover { color: var(--gold-light); }
+  #omni-rates .rt-bottom { position: relative; overflow: hidden; }
+  #omni-rates .rt-bottom::before { content: ''; position: absolute; top: -140px; left: 50%; transform: translateX(-50%); width: 520px; height: 420px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); opacity: 0.35; pointer-events: none; animation: rt-breathe 8s ease-in-out infinite; }
+  #omni-rates .rt-bottom > * { position: relative; }
+
+  @media (max-width: 768px) {
+    #omni-rates .rt-jump { padding: 8px 14px; margin-bottom: 36px; }
+    #omni-rates .rt-jump-inner { justify-content: flex-start; padding: 0 2px; }
+    #omni-rates .rt-jump a { padding: 7px 13px; font-size: 10px; }
+    #omni-rates .rt-path-icon { top: 14px; right: 14px; width: 38px; height: 38px; }
+    #omni-rates .rt-orb-a, #omni-rates .rt-orb-b, #omni-rates .rt-orb-c { width: 420px; height: 420px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #omni-rates *, #omni-rates *::before, #omni-rates *::after { animation: none !important; transition: none !important; }
+    #omni-rates.rt-js .rt-reveal, #omni-rates.rt-js .rt-reveal .rt-divider, #omni-rates.rt-js .rt-includes-item.rt-reveal::before { opacity: 1; transform: none; }
+  }
+
   /* ===== RESPONSIVE ===== */
   @media (max-width: 980px) {
     #omni-rates .rt-ladder { grid-template-columns: repeat(2, 1fr); }
@@ -1199,12 +1325,16 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 <!-- V8 CHANGES: retired hybrid product removed (both venues + FAQ + schema) · 2.9% card fee removed everywhere · Tune-Up added after Session Packages. -->
 <!-- V9/V10 CHANGES: guest add-on corrections. SUPERSEDED by V11. -->
 <!-- V11 CHANGES: October 2026 card. The Foundation and The Program replace the four venue ladders; the unlisted entry tier, 10- and 20-packs retired; assessment repriced; Reset, Tune-Up and add-ons retiered. Page and header rebuilt together. -->
+<!-- V12.1: motion and visual polish (ambient orbs, hero entrance, scroll reveal, path-tile icons, sticky jump bar, hover accents, reduced-motion safe). One inline script, no dependencies. -->
 <!-- V12 CHANGES: layout only, no price or FAQ changes. Path chooser added under the hero (Foundation = new clients, Program = experienced and committed, Sessions = flexibility). Per-tier cards replaced by compact rate ladders grouped by setting; session packs collapsed to one table; Reset tiers to one ladder. Built For / Not the Right Fit moved below the rates. -->
 
 
 
 
 <div id="omni-rates">
+  <span class="rt-orb rt-orb-a" aria-hidden="true"></span>
+  <span class="rt-orb rt-orb-b" aria-hidden="true"></span>
+  <span class="rt-orb rt-orb-c" aria-hidden="true"></span>
 
   <!-- HERO -->
   <section class="rt-hero">
@@ -1225,7 +1355,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- ═══════ PATH CHOOSER ═══════ -->
   <div class="rt-section" id="rt-paths">
-    <div class="rt-section-head" style="margin-bottom:28px;">
+    <div class="rt-section-head rt-reveal" style="margin-bottom:28px;">
       <span class="rt-label">Start With the Right Fit</span>
       <hr class="rt-divider">
       <h2>Which Path Is <em>Yours</em>?</h2>
@@ -1235,31 +1365,46 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <div class="rt-wrap">
     <div class="rt-paths">
-      <a class="rt-path" href="#rt-foundation">
+      <a class="rt-path rt-reveal" href="#rt-foundation">
+        <span class="rt-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></span>
         <span class="rt-path-who">New to structured training</span>
         <span class="rt-path-name">The <em>Foundation</em></span>
         <span class="rt-path-fit">Your first twelve weeks, paid in full and discounted for that reason. Learn the method, build the habit, and get your baseline data.</span>
         <span class="rt-path-meta"><span class="rt-path-from">from $560 <span>per cycle</span></span><span class="rt-path-go">See rates</span></span>
       </a>
-      <a class="rt-path featured" href="#rt-program">
+      <a class="rt-path featured rt-reveal" href="#rt-program">
+        <span class="rt-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
         <span class="rt-path-who">Experienced and committed to results</span>
         <span class="rt-path-name">The <em>Program</em></span>
         <span class="rt-path-fit">Ongoing coaching for Foundation graduates and clients with prior training experience who are committed to the work. Billed every 4 weeks.</span>
         <span class="rt-path-meta"><span class="rt-path-from">from $640 <span>per 4 weeks</span></span><span class="rt-path-go">See rates</span></span>
       </a>
-      <a class="rt-path" href="#rt-sessions">
+      <a class="rt-path rt-reveal" href="#rt-sessions">
+        <span class="rt-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
         <span class="rt-path-who">Time-crunched, need flexibility</span>
         <span class="rt-path-name">Session <em>Packages</em></span>
         <span class="rt-path-fit">Prepaid sessions with no program and no facility membership required. Train when your calendar allows.</span>
         <span class="rt-path-meta"><span class="rt-path-from">from $180 <span>per session</span></span><span class="rt-path-go">See rates</span></span>
       </a>
     </div>
-    <p class="rt-paths-also">Not in San Diego, or prefer to train remotely? <a href="#rt-reset">The Executive Reset</a> is live virtual coaching from $200 per 4 weeks. Finished a program? <a href="#rt-tuneup">The Tune-Up</a> keeps graduates in orbit from $295 per 4 weeks.</p>
+    <p class="rt-paths-also rt-reveal">Not in San Diego, or prefer to train remotely? <a href="#rt-reset">The Executive Reset</a> is live virtual coaching from $200 per 4 weeks. Finished a program? <a href="#rt-tuneup">The Tune-Up</a> keeps graduates in orbit from $295 per 4 weeks.</p>
   </div>
+
+  <!-- JUMP BAR (sticky) -->
+  <nav class="rt-jump" aria-label="Jump to rates">
+    <div class="rt-jump-inner">
+      <span class="rt-jump-label">Rates</span>
+      <a href="#rt-foundation">Foundation</a>
+      <a href="#rt-program">Program</a>
+      <a href="#rt-sessions">Sessions</a>
+      <a href="#rt-tuneup">Tune-Up</a>
+      <a href="#rt-reset">Virtual</a>
+    </div>
+  </nav>
 
   <!-- ASSESSMENT HIGHLIGHT -->
   <div style="padding: 0 28px;">
-    <div class="rt-assess">
+    <div class="rt-assess rt-reveal">
       <div class="rt-assess-content">
         <span class="rt-label">Start Here</span>
         <h3 style="font-size: clamp(22px, 3vw, 28px); margin-bottom: 8px;">OmniFit Performance <em>Assessment</em></h3>
@@ -1271,31 +1416,31 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- WHAT EVERY PLAN INCLUDES -->
   <div style="padding: 0 28px;">
-    <div class="rt-includes">
+    <div class="rt-includes rt-reveal">
       <span class="rt-includes-label">Included in Every Program</span>
       <div class="rt-includes-grid">
-        <div class="rt-includes-item">Monthly OmniFit Performance Assessment with clinical diagnostics</div>
-        <div class="rt-includes-item">Custom programming based on OmniFit 4-phase methodology</div>
-        <div class="rt-includes-item">Nutrition guidance &amp; macro framework</div>
-        <div class="rt-includes-item">Full app access for workout tracking and logging</div>
-        <div class="rt-includes-item">Weekly accountability and progress tracking</div>
-        <div class="rt-includes-item">Direct trainer access via text/email</div>
-        <div class="rt-includes-item">Corrective exercise and movement screening</div>
-        <div class="rt-includes-item">Program pause for travel (see Program terms)</div>
-        <div class="rt-includes-item">Hybrid flexibility — train in-person, virtual, or both</div>
+        <div class="rt-includes-item rt-reveal">Monthly OmniFit Performance Assessment with clinical diagnostics</div>
+        <div class="rt-includes-item rt-reveal">Custom programming based on OmniFit 4-phase methodology</div>
+        <div class="rt-includes-item rt-reveal">Nutrition guidance &amp; macro framework</div>
+        <div class="rt-includes-item rt-reveal">Full app access for workout tracking and logging</div>
+        <div class="rt-includes-item rt-reveal">Weekly accountability and progress tracking</div>
+        <div class="rt-includes-item rt-reveal">Direct trainer access via text/email</div>
+        <div class="rt-includes-item rt-reveal">Corrective exercise and movement screening</div>
+        <div class="rt-includes-item rt-reveal">Program pause for travel (see Program terms)</div>
+        <div class="rt-includes-item rt-reveal">Hybrid flexibility — train in-person, virtual, or both</div>
       </div>
     </div>
   </div>
   <!-- QUOTABLE -->
   <div style="padding: 0 28px;">
-    <blockquote class="rt-quotable">
+    <blockquote class="rt-quotable rt-reveal">
       <p>"Every OmniFit Performance program includes a monthly clinical-grade body composition assessment, custom programming built on the OmniFit 4-phase methodology, nutrition guidance, and weekly accountability — not just the hour in the gym."</p>
     </blockquote>
   </div>
 
   <!-- ═══════ THE FOUNDATION ═══════ -->
   <div class="rt-section" id="rt-foundation">
-    <div class="rt-section-head">
+    <div class="rt-section-head rt-reveal">
       <span class="rt-label">New Clients</span>
       <hr class="rt-divider">
       <h2>The <em>Foundation</em></h2>
@@ -1306,7 +1451,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   <div class="rt-wrap">
     <div class="rt-ladder">
 
-      <div class="rt-group">
+      <div class="rt-group rt-reveal">
         <div class="rt-group-head"><span class="rt-group-name">Studio</span><span class="rt-group-note">Teqneeq membership required</span></div>
         <div class="rt-row">
           <div class="rt-row-name">Momentum</div>
@@ -1322,7 +1467,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         </div>
       </div>
 
-      <div class="rt-group">
+      <div class="rt-group rt-reveal">
         <div class="rt-group-head"><span class="rt-group-name">In-Home</span><span class="rt-group-note">We bring the equipment, no membership needed</span></div>
         <div class="rt-row">
           <div class="rt-row-name">Momentum</div>
@@ -1332,7 +1477,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         </div>
       </div>
 
-      <div class="rt-group">
+      <div class="rt-group rt-reveal">
         <div class="rt-group-head"><span class="rt-group-name">Couples</span><span class="rt-group-note">Rates are per couple, not per person</span></div>
         <div class="rt-row">
           <div class="rt-row-name">Studio Momentum</div>
@@ -1351,7 +1496,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
       </div>
 
     </div>
-    <div class="rt-ladder-cta"><a class="rt-btn rt-btn-primary" href="/contactform">Start With the Foundation</a></div>
+    <div class="rt-ladder-cta rt-reveal"><a class="rt-btn rt-btn-primary" href="/contactform">Start With the Foundation</a></div>
   </div>
 
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
@@ -1364,7 +1509,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- ═══════ THE PROGRAM ═══════ -->
   <div class="rt-section" id="rt-program">
-    <div class="rt-section-head">
+    <div class="rt-section-head rt-reveal">
       <span class="rt-label">Ongoing Coaching</span>
       <hr class="rt-divider">
       <h2>The <em>Program</em></h2>
@@ -1375,7 +1520,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   <div class="rt-wrap">
     <div class="rt-ladder">
 
-      <div class="rt-group">
+      <div class="rt-group rt-reveal">
         <div class="rt-group-head"><span class="rt-group-name">Studio</span><span class="rt-group-note">Teqneeq membership required</span></div>
         <div class="rt-row">
           <div class="rt-row-name">Momentum</div>
@@ -1394,7 +1539,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         </div>
       </div>
 
-      <div class="rt-group">
+      <div class="rt-group rt-reveal">
         <div class="rt-group-head"><span class="rt-group-name">In-Home</span><span class="rt-group-note">We bring the equipment, across North County San Diego</span></div>
         <div class="rt-row">
           <div class="rt-row-name">Momentum</div>
@@ -1415,7 +1560,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         </div>
       </div>
 
-      <div class="rt-group">
+      <div class="rt-group rt-reveal">
         <div class="rt-group-head"><span class="rt-group-name">Couples</span><span class="rt-group-note">Rates are per couple, programming set individually</span></div>
         <div class="rt-row">
           <div class="rt-row-name">Studio Momentum</div>
@@ -1442,7 +1587,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
       </div>
 
     </div>
-    <div class="rt-ladder-cta"><a class="rt-btn rt-btn-primary" href="/contactform">Start The Program</a></div>
+    <div class="rt-ladder-cta rt-reveal"><a class="rt-btn rt-btn-primary" href="/contactform">Start The Program</a></div>
   </div>
 
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
@@ -1451,7 +1596,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 
   <div style="padding: 0 28px; max-width:1120px; margin:24px auto 0;">
-    <div class="rt-guarantee">
+    <div class="rt-guarantee rt-reveal">
       <h4>30-Day Fit Guarantee</h4>
       <p>If after your first 30 days you decide OmniFit isn't the right fit, you can stop and I'll refund the unused balance of your program. You keep the first month and everything you've learned. No compliance test, no negotiation. Applies to The Foundation, The Program and the Executive Reset.</p>
     </div>
@@ -1462,7 +1607,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- ═══════ SESSION PACKAGES ═══════ -->
   <div class="rt-section" id="rt-sessions">
-    <div class="rt-section-head">
+    <div class="rt-section-head rt-reveal">
       <span class="rt-label">Prepaid Flexibility</span>
       <hr class="rt-divider">
       <h2>Session <em>Packages</em></h2>
@@ -1471,7 +1616,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 
   <div class="rt-wrap">
-    <div class="rt-packs">
+    <div class="rt-packs rt-reveal">
       <div class="rt-packs-row head">
         <div class="rt-packs-h">Setting</div>
         <div class="rt-packs-h">Single Session<small>Expires 30 days from purchase</small></div>
@@ -1493,14 +1638,14 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         <div class="rt-packs-price">$1,250<small>$250 per session</small></div>
       </div>
     </div>
-    <div class="rt-ladder-cta"><a class="rt-btn rt-btn-primary" href="/contactform">Book Sessions</a></div>
+    <div class="rt-ladder-cta rt-reveal"><a class="rt-btn rt-btn-primary" href="/contactform">Book Sessions</a></div>
   </div>
 
   <div class="rt-spacer-sm"></div>
 
   <!-- ═══════ TUNE-UP — GRADUATES ═══════ -->
   <div class="rt-section" id="rt-tuneup">
-    <div class="rt-section-head">
+    <div class="rt-section-head rt-reveal">
       <span class="rt-label">For Program Graduates</span>
       <hr class="rt-divider">
       <h2>The <em>Tune-Up</em></h2>
@@ -1509,7 +1654,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 
   <div style="padding: 0 28px;">
-    <div class="rt-feature">
+    <div class="rt-feature rt-reveal">
       <div class="rt-feature-grid">
         <div>
           <h3 class="rt-feature-title">Tune-Up</h3>
@@ -1537,7 +1682,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- ═══════ EXECUTIVE RESET TIERS (VIRTUAL) ═══════ -->
   <div class="rt-section" id="rt-reset">
-    <div class="rt-section-head">
+    <div class="rt-section-head rt-reveal">
       <span class="rt-label">Virtual Coaching · Available Nationwide</span>
       <hr class="rt-divider">
       <h2>The Executive <em>Reset</em></h2>
@@ -1547,7 +1692,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <div class="rt-wrap">
     <div class="rt-ladder rt-ladder-1">
-      <div class="rt-group">
+      <div class="rt-group rt-reveal">
         <div class="rt-group-head"><span class="rt-group-name">Virtual</span><span class="rt-group-note">Billed every 4 weeks · cancel with 30 days notice</span></div>
         <div class="rt-row">
           <div class="rt-row-name">Bronze</div>
@@ -1575,7 +1720,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         </div>
       </div>
     </div>
-    <div class="rt-ladder-cta"><a class="rt-btn rt-btn-primary" href="/contactform">Start the Executive Reset</a></div>
+    <div class="rt-ladder-cta rt-reveal"><a class="rt-btn rt-btn-primary" href="/contactform">Start the Executive Reset</a></div>
   </div>
 
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
@@ -1585,7 +1730,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- ═══════ ADD-ONS ═══════ -->
   <div class="rt-section">
-    <div class="rt-section-head">
+    <div class="rt-section-head rt-reveal">
       <span class="rt-label">Additional Options</span>
       <hr class="rt-divider">
       <h2>Add-On <em>Services</em></h2>
@@ -1594,22 +1739,22 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 
   <div class="rt-addons-grid" style="padding:0 28px;">
-    <div class="rt-addon">
+    <div class="rt-addon rt-reveal">
       <h4>Extra Session</h4>
       <div class="rt-addon-price">$160 studio · $215 home</div>
       <p>Add an extra session beyond your program — before a vacation, event, or when you're on a roll.</p>
     </div>
-    <div class="rt-addon">
+    <div class="rt-addon rt-reveal">
       <h4>Guest Add-On</h4>
       <div class="rt-addon-price">$90 /session</div>
       <p>Bring a guest to train with you during any session. Available to all clients on named packages.</p>
     </div>
-    <div class="rt-addon">
+    <div class="rt-addon rt-reveal">
       <h4>Single Session</h4>
       <div class="rt-addon-price">$205 studio · $275 home</div>
       <p>One-off session with no program or commitment. Performance Assessment available separately ($150).</p>
     </div>
-    <div class="rt-addon">
+    <div class="rt-addon rt-reveal">
       <h4>Referral Credit</h4>
       <div class="rt-addon-price">Referral credit</div>
       <p>When someone you refer books an assessment and starts a program, a credit is applied to your next billing cycle. Ask for current terms.</p>
@@ -1619,7 +1764,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   <!-- BUILT FOR / NOT THE RIGHT FIT -->
   <div style="padding: 0 28px;">
     <div class="rt-fit-grid">
-      <div class="rt-fit-col built-for">
+      <div class="rt-fit-col built-for rt-reveal">
         <span class="rt-fit-label">Built For</span>
         <ul class="rt-fit-list">
           <li>Professionals 30+ managing demanding schedules</li>
@@ -1629,7 +1774,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
           <li>Travelers who need a program that works anywhere</li>
         </ul>
       </div>
-      <div class="rt-fit-col not-for">
+      <div class="rt-fit-col not-for rt-reveal">
         <span class="rt-fit-label">Not the Right Fit</span>
         <ul class="rt-fit-list">
           <li>Looking for drop-in classes or group workouts</li>
@@ -1644,17 +1789,17 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- POLICIES -->
   <div class="rt-policies" style="padding:0 28px;">
-    <div class="rt-policy">
+    <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon"><svg class="omni-icon omni-icon--pause" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
       <h5>Program Pause</h5>
       <p>The Foundation includes two pause weeks across the course with notice, extending the end date. The Program includes six pause weeks per twelve months with two weeks' notice, credited against the next cycle.</p>
     </div>
-    <div class="rt-policy">
+    <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon"><svg class="omni-icon omni-icon--card" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></div>
       <h5>Billing</h5>
       <p>The Foundation is paid in full at enrolment. The Program is billed every 4 weeks via auto-pay and can be cancelled with 30 days' notice; remaining credit is applied to the final cycle. No activation fees. Some clients pay with HSA or FSA funds. See how <a href="/hsa-fsa-personal-training">HSA and FSA eligibility</a> works.</p>
     </div>
-    <div class="rt-policy">
+    <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon"><svg class="omni-icon omni-icon--clipboard" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
       <h5>24-Hour Policy</h5>
       <p>Sessions cancelled with less than 24 hours notice are forfeited. Consistency is part of the program — and the results.</p>
@@ -1665,7 +1810,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- FAQ -->
   <div class="rt-section" id="rt-faq">
-    <div class="rt-section-head">
+    <div class="rt-section-head rt-reveal">
       <span class="rt-label">Frequently Asked</span>
       <hr class="rt-divider">
       <h2>Questions About <em>Programs</em></h2>
@@ -1742,7 +1887,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- BOTTOM CTA -->
   <div style="padding: 0 28px;">
-    <div class="rt-bottom">
+    <div class="rt-bottom rt-reveal">
       <h2>Ready to Start <em>Training</em>?</h2>
       <p>Book your OmniFit Performance Assessment. We'll analyze your baseline, discuss your goals, and recommend the right program for your life.</p>
       <a class="rt-btn rt-btn-primary" href="/contactform">Book Your $150 Assessment</a>
@@ -1751,7 +1896,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 
   <!-- TRUST BAR -->
-  <div class="rt-trust">
+  <div class="rt-trust rt-reveal">
     <div class="rt-trust-item"><span><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span> 5.0 · 190+ Reviews</div>
     <div class="rt-trust-item"><span><svg class="omni-icon omni-icon--medal" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg></span> NASM CES · CPT · PES · BCS · CNC</div>
     <div class="rt-trust-item"><span><svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span> Teqneeq FHC · 4S Ranch, San Diego</div>
@@ -1759,6 +1904,71 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 
 </div>
+
+<script>
+(function () {
+  var root = document.getElementById('omni-rates');
+  if (!root) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+  root.className += ' rt-js';
+
+  /* scroll reveal */
+  var items = root.querySelectorAll('.rt-reveal');
+  function showAll() { for (var i = 0; i < items.length; i++) items[i].className += ' is-in'; }
+  if (hasIO && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) { entries[i].target.className += ' is-in'; io.unobserve(entries[i].target); }
+      }
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    for (var j = 0; j < items.length; j++) io.observe(items[j]);
+  } else { showAll(); }
+
+  /* sticky offset under the site header (static site or Squarespace) */
+  function headerH() {
+    var h = document.querySelector('.site-header, #header, .header, header[data-controller]');
+    if (!h) return 0;
+    var cs = window.getComputedStyle(h);
+    return (cs.position === 'fixed' || cs.position === 'sticky') ? h.getBoundingClientRect().height : 0;
+  }
+  var jump = root.querySelector('.rt-jump');
+  function setTop() { root.style.setProperty('--rt-top', headerH() + 'px'); }
+  setTop(); window.addEventListener('resize', setTop); window.addEventListener('load', setTop);
+
+  /* smooth in-page scrolling with the right offset */
+  var links = root.querySelectorAll('a[href^="#"]');
+  for (var k = 0; k < links.length; k++) {
+    links[k].addEventListener('click', function (ev) {
+      var id = this.getAttribute('href').slice(1), t = document.getElementById(id);
+      if (!t) return;
+      ev.preventDefault();
+      var off = headerH() + (jump ? jump.offsetHeight : 0) + 16;
+      var y = t.getBoundingClientRect().top + window.pageYOffset - off;
+      if (window.scrollTo && reduce) window.scrollTo(0, y);
+      else if (window.scrollTo) { try { window.scrollTo({ top: y, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, y); } }
+      if (window.history && history.replaceState) history.replaceState(null, '', '#' + id);
+    });
+  }
+
+  /* active chip in the jump bar */
+  if (jump && hasIO) {
+    var chips = jump.querySelectorAll('a'), byId = {}, secs = [];
+    for (var c = 0; c < chips.length; c++) {
+      var sid = chips[c].getAttribute('href').slice(1), sec = document.getElementById(sid);
+      if (sec) { byId[sid] = chips[c]; secs.push(sec); }
+    }
+    var io2 = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (!entries[i].isIntersecting) continue;
+        for (var c = 0; c < chips.length; c++) chips[c].className = chips[c].className.replace(/\s*is-active/g, '');
+        byId[entries[i].target.id].className += ' is-active';
+      }
+    }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+    for (var m = 0; m < secs.length; m++) io2.observe(secs[m]);
+  }
+})();
+</script>
 <!-- ===== FAQ SCHEMA (JSON-LD) ===== -->
 <!-- SCHEMA MOVED: JSON-LD now lives in Page Settings > Advanced > Page Header Code Injection
      (canonical two-block pattern). See training-rates-san-diego-header.html -->
