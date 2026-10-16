@@ -42,12 +42,13 @@ sys.path.insert(0, str(SITE))
 import icons  # noqa: E402  (site/icons.py)
 
 # Source files under pages/ that are not standalone pages.
-NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6"}
+NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6", "home-motion"}
 
 # Homepage = these fragments, in page order. home-0 is the hero built for the
 # static site (the only h1); CANON: home-6 sits after the programs section and
-# before the FAQ.
-HOME_ORDER = ["home-0", "home-1", "home-2", "home-3", "home-4", "home-6", "home-5"]
+# before the FAQ. home-motion is the scroll-reveal layer (CSS lifted to head,
+# script runs after every section exists).
+HOME_ORDER = ["home-0", "home-1", "home-2", "home-3", "home-4", "home-6", "home-5", "home-motion"]
 
 # Repo file name -> live slug, where they differ. Squarespace slugs are
 # lower-case and every internal link in the repo uses /faqs.

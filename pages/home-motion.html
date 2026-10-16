@@ -1,0 +1,193 @@
+<!-- OMNIFIT | HOMEPAGE MOTION LAYER · v1 OCTOBER 2026
+  Built for the static site (build.py appends it to the homepage via
+  HOME_ORDER, after every section). Not a Squarespace Code Block.
+
+  What it does: a scroll-reveal system for the homepage sections below the
+  hero, plus a few hover touches. No section source is edited: the script
+  tags elements by selector, the CSS below animates them. The hero
+  (pages/home-0.html) carries its own motion and is not touched here.
+
+  How it degrades:
+  - The <html> class "omni-motion" is set by a one-line script at the top of
+    pages/home-0.html, only when prefers-reduced-motion is not "reduce". No
+    class means every rule below is inert: nothing is hidden, nothing moves.
+  - Elements reveal once (IntersectionObserver), then the observer lets go.
+  - Count-ups always end on the exact original text.
+
+  Vocabulary (set by the script):
+    .omni-rv            rise in (opacity + 26px lift)
+    .omni-rv--pop       scale in from 0.86 (badges, flow numbers)
+    .omni-rv--wipe      clip reveal from the bottom (photos)
+    .omni-rv--line      heading whose gold <em> gets an underline that draws in
+    --rv-d              per-element stagger delay inside a group
+    .omni-sheen         gold light sweep across a CTA on hover
+-->
+<div id="omni-motion-layer" hidden aria-hidden="true">
+  <style>
+    /* ===== Reveal primitives (inert without html.omni-motion) ===== */
+    html.omni-motion .omni-rv{opacity:0;transform:translateY(26px);transition:opacity .95s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms),transform .95s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms);will-change:opacity,transform;}
+    html.omni-motion .omni-rv--pop{transform:scale(.86) translateY(10px);}
+    html.omni-motion .omni-rv--wipe{transform:none;clip-path:inset(100% 0 0 0 round 12px);transition:opacity .6s ease var(--rv-d,0ms),clip-path 1.1s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms);}
+    html.omni-motion .omni-rv.is-in{opacity:1;transform:none;will-change:auto;}
+    html.omni-motion .omni-rv--wipe.is-in{clip-path:inset(0 0 0 0 round 12px);}
+
+    /* gold underline that draws in under the italic <em> of a revealed heading */
+    html.omni-motion .omni-rv--line em{background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0% 2px;padding-bottom:2px;transition:background-size 1s cubic-bezier(.22,1,.36,1) .45s;}
+    html.omni-motion .omni-rv--line.is-in em{background-size:100% 2px;}
+
+    /* the case-study cards fade up on load in their own CSS; hand that to the scroll reveal */
+    html.omni-motion #omnifit-cases .case-card.omni-rv{animation:none!important;transition:opacity .95s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms),transform .95s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms),border-color .35s ease,background-color .35s ease!important;}
+
+    /* ===== Playful touches ===== */
+    /* method flow: the numbered step rings pulse once as they land */
+    html.omni-motion #omni-method .flow-step.is-in .flow-num{animation:omni-ring 1.3s cubic-bezier(.22,1,.36,1) calc(var(--rv-d,0ms) + .35s) both;}
+    @keyframes omni-ring{0%{box-shadow:0 0 0 0 rgba(201,168,76,.55);}100%{box-shadow:0 0 0 22px rgba(201,168,76,0);}}
+    /* service + duo card icons tilt toward you on hover */
+    html.omni-motion #omnifit-home-services-wrapper .card-icon,html.omni-motion #omni-duo .duo-icon{transition:transform .55s cubic-bezier(.34,1.56,.64,1);}
+    html.omni-motion #omnifit-home-services-wrapper .service-card:hover .card-icon,html.omni-motion #omni-duo .duo-card:hover .duo-icon{transform:rotate(-8deg) scale(1.12);}
+    /* case-study photos ease in closer while the card is hovered */
+    html.omni-motion #omnifit-cases .case-photo-area img{transition:transform 1.4s cubic-bezier(.22,1,.36,1)!important;}
+    html.omni-motion #omnifit-cases .case-card:hover .case-photo-area img{transform:scale(1.045)!important;}
+    /* credential badges lift on hover */
+    html.omni-motion #omni-bio .badge-row a{transition:transform .45s cubic-bezier(.34,1.56,.64,1),filter .3s ease;}
+    html.omni-motion #omni-bio .badge-row a:hover{transform:translateY(-4px) scale(1.06);filter:drop-shadow(0 8px 14px rgba(201,168,76,.28));}
+    /* FAQ: the + turns into an x, the answer settles in */
+    html.omni-motion #omni-faq .icon{transition:transform .4s cubic-bezier(.22,1,.36,1),background-color .3s ease,color .3s ease;}
+    html.omni-motion #omni-faq details[open] .icon{transform:rotate(45deg);}
+    html.omni-motion #omni-faq details[open] .answer{animation:omni-faq-open .5s cubic-bezier(.22,1,.36,1) both;}
+    @keyframes omni-faq-open{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:none;}}
+    /* gold light sweep across the section CTAs on hover (same move as the hero button) */
+    html.omni-motion .omni-sheen{position:relative;overflow:hidden;}
+    html.omni-motion .omni-sheen::after{content:'';position:absolute;top:-10%;bottom:-10%;left:0;width:38%;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.5) 50%,rgba(255,255,255,0) 100%);transform:translateX(-180%) skewX(-18deg);pointer-events:none;}
+    html.omni-motion .omni-sheen:hover::after,html.omni-motion .omni-sheen:focus-visible::after{transition:transform .8s cubic-bezier(.22,1,.36,1);transform:translateX(380%) skewX(-18deg);}
+    /* count-up numbers: keep width steady while the digits run */
+    html.omni-motion .omni-count{font-variant-numeric:tabular-nums;}
+  </style>
+  <script>
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('omni-motion')) return;
+    if (!('IntersectionObserver' in window)) { root.classList.remove('omni-motion'); return; }
+
+    var EASE = function (t) { return 1 - Math.pow(1 - t, 3); };
+
+    /* ---- 1. Tag reveal targets. [selector, variant]. Elements that share a
+       parent are staggered 70ms apart (capped at 6 steps). ---- */
+    var GROUPS = [
+      /* home-1: value + services */
+      ['#omnifit-home-services-wrapper .wrap > h2', 'line'],
+      ['#omnifit-home-services-wrapper .wrap > .sub-text', ''],
+      ['#omnifit-home-services-wrapper .trust-strip', ''],
+      ['#omnifit-home-services-wrapper .section-divider', 'line'],
+      ['#omnifit-home-services-wrapper .grid-services > .service-card', ''],
+      ['#omnifit-home-services-wrapper .cta-footer', ''],
+      /* home-2: methodology */
+      ['#omni-method .hero > *', 'line'],
+      ['#omni-method .q-wrap', ''],
+      ['#omni-method .flow > .flow-step, #omni-method .flow > .flow-arrow', 'pop'],
+      ['#omni-method .phase > h2, #omni-method .phase > h3, #omni-method .phase > p', 'line'],
+      ['#omni-method .dg > .dc', ''],
+      ['#omni-method .cta-btn', ''],
+      /* home-3: case studies */
+      ['#omnifit-cases .hero > *', 'line'],
+      ['#omnifit-cases .stats-bar > .stat', 'pop'],
+      ['#omnifit-cases .results-disclaimer', ''],
+      ['#omnifit-cases .method-strip > .method-phase', ''],
+      ['#omnifit-cases .filter-section', ''],
+      ['#omnifit-cases .cases-grid > .case-card', ''],
+      /* home-4: about */
+      ['#omni-bio .bio-hero > *', 'line'],
+      ['#omni-bio .bio-photo', 'wipe'],
+      ['#omni-bio .bio-block > *', ''],
+      ['#omni-bio .cred-group', ''],
+      ['#omni-bio .badge-row > a', 'pop'],
+      ['#omni-bio .gq-block', ''],
+      ['#omni-bio .stats-bar > .stat-item', 'pop'],
+      ['#omni-bio .s-light .s-inner > h2, #omni-bio .s-light .s-inner > p', 'line'],
+      ['#omni-bio .eden-grid > .eden-card', ''],
+      ['#omni-bio .s-mid .s-inner > h2, #omni-bio .s-mid .s-inner > p', 'line'],
+      ['#omni-bio .phil-grid > .phil-card', ''],
+      ['#omni-bio .jj-gallery > img', 'wipe'],
+      ['#omni-bio .cta-sec > *', ''],
+      /* home-6: partner & duo */
+      ['#omni-duo .duo-inner > h2, #omni-duo .duo-inner > p', 'line'],
+      ['#omni-duo .duo-grid > .duo-card', ''],
+      ['#omni-duo .duo-quote', ''],
+      ['#omni-duo .duo-fits > .duo-fit', 'pop'],
+      ['#omni-duo .duo-cta-row', ''],
+      /* home-5: FAQ */
+      ['#omni-faq .wrap > h2, #omni-faq .wrap > .intro', 'line'],
+      ['#omni-faq .wrap > details', ''],
+      ['#omni-faq .cta', '']
+    ];
+
+    var targets = [];
+    GROUPS.forEach(function (g) {
+      var els = document.querySelectorAll(g[0]);
+      var byParent = new Map();
+      els.forEach(function (el) {
+        if (el.classList.contains('omni-rv')) return;
+        var n = byParent.get(el.parentNode) || 0;
+        byParent.set(el.parentNode, n + 1);
+        el.classList.add('omni-rv');
+        if (g[1] === 'pop') el.classList.add('omni-rv--pop');
+        if (g[1] === 'wipe') el.classList.add('omni-rv--wipe');
+        if (g[1] === 'line' && el.querySelector('em')) el.classList.add('omni-rv--line');
+        el.style.setProperty('--rv-d', (Math.min(n, 6) * 70) + 'ms');
+        targets.push(el);
+      });
+    });
+
+    /* ---- 2. Count-ups: a leading integer or one-decimal number, optional "+",
+       then whatever text followed. Ends on the exact original string. ---- */
+    var counters = [];
+    document.querySelectorAll('#omnifit-cases .stat-value, #omni-bio .stat-num, #omnifit-home-services-wrapper .trust-strip strong').forEach(function (el) {
+      var raw = el.textContent;
+      /* a plain number ("12", "5.0", "190+", "190+ 5-Star Reviews"); ranges
+         and ratios such as "3–12 mo", "1:1" or "3/10" stay as they are */
+      var m = /^\s*(\d+(?:\.\d)?)(\+?)(\s[\s\S]*)?$/.exec(raw);
+      if (!m || el.children.length) return;
+      m[3] = m[3] || '';
+      el.classList.add('omni-count');
+      counters.push({ el: el, raw: raw, end: parseFloat(m[1]), dec: m[1].indexOf('.') > -1 ? 1 : 0, plus: m[2], rest: m[3] });
+      el.textContent = (0).toFixed(counters[counters.length - 1].dec) + m[2] + m[3];
+    });
+    function runCounter(c) {
+      var t0 = null, dur = 1500;
+      function step(ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min(1, (ts - t0) / dur);
+        var v = c.end * EASE(p);
+        c.el.textContent = (p < 1 ? v.toFixed(c.dec) + c.plus + c.rest : c.raw);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* ---- 3. One observer for everything. ---- */
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        el.classList.add('is-in');
+        counters.forEach(function (c) { if (!c.done && el.contains(c.el)) { c.done = true; runCounter(c); } });
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    targets.forEach(function (el) { io.observe(el); });
+    /* counters that sit outside any tagged element still need a trigger */
+    counters.forEach(function (c) {
+      if (!targets.some(function (t) { return t.contains(c.el); })) { targets.push(c.el); c.el.classList.add('omni-rv'); io.observe(c.el); }
+    });
+
+    /* ---- 4. Gold sheen on the section CTAs. ---- */
+    document.querySelectorAll('#omnifit-home-services-wrapper a.cta-button, #omni-method .cta-btn, #omnifit-cases .cta-btn, #omni-bio .cta-btn, #omni-duo .duo-btn, #omni-faq a.cta').forEach(function (a) {
+      a.classList.add('omni-sheen');
+    });
+
+    /* Safety net: whatever never intersected (e.g. display:none filters) is
+       shown after a while so nothing can stay hidden. */
+    setTimeout(function () { targets.forEach(function (el) { el.classList.add('is-in'); }); }, 9000);
+  })();
+  </script>
+</div>

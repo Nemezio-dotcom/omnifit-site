@@ -23,6 +23,10 @@
   The photo is a repo asset (site/img/hero-trainer-coaching-kettlebell-*,
   served from /assets/img/), a 2:3 portrait, not a Squarespace hotlink.
 -->
+<!-- Motion flag for pages/home-motion.html: set before any section paints so
+     nothing flashes visible then hidden. Only when the visitor has not asked
+     for reduced motion; without it every reveal rule is inert. -->
+<script>if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('omni-motion');}</script>
 <section id="omni-hero" aria-label="Introduction">
   <!-- HERO IMAGE (1/2): preload so the LCP image starts before the stylesheet finishes -->
   <link rel="preload" as="image" type="image/webp" imagesrcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" imagesizes="(max-width:768px) 100vw, 880px" fetchpriority="high">
