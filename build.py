@@ -17,8 +17,9 @@ Sources
 Nothing here rewrites page copy, schema or CSS rules. The only edits made to
 page markup are structural: <style>/<link> tags are lifted out of the body into
 <head>, Google Fonts @imports are dropped in favour of the single font link in
-the layout, and the hrefs listed in LINK_FIXES (links to slugs that do not
-exist) are repointed. Standard library only.
+the layout, the hrefs listed in LINK_FIXES (links to slugs that do not exist)
+are repointed, and every emoji is swapped for a gold line SVG from
+site/icons.py. Standard library only.
 """
 import datetime
 import html
@@ -36,12 +37,16 @@ SITE = ROOT / "site"
 PUBLIC = ROOT / "public"
 BASE = "https://www.omnifittraining.com"
 
-# Source files under pages/ that are not standalone pages.
-NOT_PAGES = {"footer", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6"}
+sys.path.insert(0, str(SITE))
+import icons  # noqa: E402  (site/icons.py)
 
-# Homepage = these fragments, in page order (CANON: home-6 sits after the
-# programs section and before the FAQ).
-HOME_ORDER = ["home-1", "home-2", "home-3", "home-4", "home-6", "home-5"]
+# Source files under pages/ that are not standalone pages.
+NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6"}
+
+# Homepage = these fragments, in page order. home-0 is the hero built for the
+# static site (the only h1); CANON: home-6 sits after the programs section and
+# before the FAQ.
+HOME_ORDER = ["home-0", "home-1", "home-2", "home-3", "home-4", "home-6", "home-5"]
 
 # Repo file name -> live slug, where they differ. Squarespace slugs are
 # lower-case and every internal link in the repo uses /faqs.
@@ -195,6 +200,62 @@ def fix_links(body):
     return body
 
 
+CSS_CONTENT_EMOJI_RE = re.compile(r"content:\s*(['\"])(" + icons.EMOJI_RE.pattern + r")\1\s*;")
+
+
+def replace_emoji(body, styles, where):
+    """Emoji in markup -> inline SVG; emoji in a CSS content: string -> the
+    same icon as a background image on a 1em box. Returns the new body, the
+    new styles and {char: count}."""
+    body, counts = icons.replace(body, where)
+    new_styles = []
+    for css in styles:
+        def sub(m):
+            ch = m.group(3)
+            if ch in icons.KEEP:
+                return m.group(0)
+            counts[ch] = counts.get(ch, 0) + 1
+            return (f"content: ''; width: 1em; height: 1em; "
+                    f"background: {icons.css_data_uri(ch)} center / contain no-repeat;")
+        css = CSS_CONTENT_EMOJI_RE.sub(sub, css)
+        left = icons.find(css)
+        if left:
+            raise icons.UnmappedEmoji(f"{where}: emoji still in CSS outside a content: string: {left}")
+        new_styles.append(css)
+    return body, new_styles, counts
+
+
+def load_nav():
+    """site/nav.html with the ANNOUNCEMENT line applied.
+    Returns the nav HTML (announcement bar removed when its text is empty)."""
+    nav = read(SITE / "nav.html").strip()
+    m = re.search(r"^ANNOUNCEMENT:\s*(\{.*\})\s*$", nav, re.M)
+    if not m:
+        raise SystemExit("site/nav.html: ANNOUNCEMENT line missing")
+    ann = json.loads(m.group(1))
+    text, href = ann.get("text", "").strip(), ann.get("href", "/").strip()
+    if text:
+        nav = nav.replace("{{announce_text}}", html.escape(text, quote=True))
+        nav = nav.replace("{{announce_href}}", html.escape(href, quote=True))
+    else:
+        nav = re.sub(r'<div class="site-announce".*?</div>\s*', "", nav, count=1, flags=re.S)
+    return nav
+
+
+def mark_active(nav, url_path):
+    """aria-current on the nav link for this page; is-active on the dropdown
+    that contains it (so the trigger is underlined too)."""
+    target = f'href="{url_path}"'
+    if target not in nav:
+        return nav
+    nav = nav.replace(f"<a {target}>", f'<a {target} aria-current="page">', 1)
+    # Walk the <li class="has-menu"> blocks and flag the one holding the link.
+    def flag(m):
+        block = m.group(0)
+        return block.replace('<li class="has-menu">', '<li class="has-menu is-active">', 1) if 'aria-current="page"' in block else block
+    return re.sub(r'<li class="has-menu">.*?</ul>\s*</li>', flag, nav, flags=re.S)
+
+
 def footer_parts():
     """pages/footer.html -> (css, markup, js)."""
     text = read(PAGES / "footer.html")
@@ -218,7 +279,7 @@ def render(layout, **kw):
 
 def build():
     layout = read(SITE / "layout.html")
-    nav = read(SITE / "nav.html").strip()
+    nav = load_nav()
     site_header = read(HEADERS / "site-header.html").strip()
     footer_css, footer_html, footer_js = footer_parts()
 
@@ -235,6 +296,7 @@ def build():
     )
 
     pages = []  # (url_path, title, meta_source, lastmod)
+    emoji_report = {}  # url_path -> {char: count}
 
     def emit(slug, url_path, body_text, sources, header_path, title, desc, meta_source):
         header_text = read(header_path).strip() if header_path else ""
@@ -242,6 +304,9 @@ def build():
         header_text = re.sub(r'<link rel="canonical"[^>]*>\s*', "", header_text)
         body, styles, links = split_body(body_text)
         body = fix_links(body)
+        body, styles, counts = replace_emoji(body, styles, url_path)
+        if counts:
+            emoji_report[url_path] = counts
         canonical = BASE + ("/" if url_path == "/" else url_path)
         doc = render(
             layout,
@@ -255,7 +320,7 @@ def build():
             page_source=", ".join(str(s.relative_to(ROOT)) for s in sources),
             page_styles="\n".join(styles),
             slug=slug,
-            nav=nav,
+            nav=mark_active(nav, url_path),
             body=body.strip("\n"),
             footer=footer_html,
         )
@@ -305,7 +370,7 @@ def build():
     sm.append("</urlset>")
     (PUBLIC / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8")
 
-    return pages
+    return pages, emoji_report
 
 
 def check():
@@ -331,9 +396,12 @@ def check():
         rel = f.relative_to(PUBLIC).parent.as_posix()
         page = "/" if rel == "." else "/" + rel
         text = f.read_text(encoding="utf-8")
-        n_h1 = len(H1_RE.findall(text))
+        n_h1 = len(H1_RE.findall(re.sub(r"<!--.*?-->", "", text, flags=re.S)))
         if n_h1 != 1:
             problems.append(f"{page}: {n_h1} <h1> elements")
+        left = icons.find(text.split("<body", 1)[1])
+        if left:
+            problems.append(f"{page}: emoji still present: {' '.join(left)}")
         for i, block in enumerate(LDJSON_RE.findall(text), 1):
             try:
                 json.loads(block)
@@ -348,7 +416,7 @@ def check():
                 continue
             broken.setdefault(href, []).append(page)
     for href, on in broken.items():
-        where = "every page (footer link)" if len(on) == len(files) else ", ".join(on)
+        where = "every page (nav or footer link)" if len(on) == len(files) else ", ".join(on)
         problems.append(f"broken internal link {href} on {where}")
     return problems, notes
 
@@ -356,12 +424,17 @@ def check():
 def main():
     argv = sys.argv[1:]
     if "--check" not in argv:
-        pages = build()
+        pages, emoji_report = build()
         print(f"Built {len(pages)} pages into {PUBLIC.relative_to(ROOT)}/")
         for url_path, title, src, lastmod in sorted(pages, key=lambda r: (r[0] != "/", r[0])):
             print(f"  {url_path:45s} {title}  [{src}; lastmod {lastmod}]")
+        total = sum(sum(c.values()) for c in emoji_report.values())
+        print(f"\nEMOJI -> SVG: {total} replacements on {len(emoji_report)} pages")
+        for url_path in sorted(emoji_report, key=lambda u: (u != "/", u)):
+            items = ", ".join(f"{ch} x{n} -> {icons.ICONS[ch][0]}" for ch, n in sorted(emoji_report[url_path].items(), key=lambda kv: -kv[1]))
+            print(f"  {url_path:45s} {items}")
     problems, notes = check()
-    print("\nCHECK: internal links, one H1 per page, JSON-LD parses")
+    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji")
     for n in sorted(set(notes)):
         print("  note    ", n)
     for p in problems:

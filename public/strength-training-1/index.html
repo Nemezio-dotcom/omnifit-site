@@ -538,28 +538,83 @@ OmniFit | Site-wide Header Injection · Sept 2026
 </style>
 </head>
 <body class="page page--strength-training-1">
-<!-- ===== Site header + primary nav (source: site/nav.html) =====
-     PLACEHOLDER STRUCTURE: the Squarespace template's nav was never in this
-     repo and the live site could not be fetched from the build environment.
-     Labels, order and the CTA below should be checked against the live
-     omnifittraining.com header before launch. Design system only:
-     Bebas Neue wordmark, Montserrat links, gold CTA, navy bar. -->
+<!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
+
+ANNOUNCEMENT: {"text": "At capacity for September and October — accepting November applications at updated rates →", "href": "/training-rates-san-diego"}
+
+  ^ The one place to change the announcement bar. build.py reads this line:
+    "text" is the bar's copy, "href" is where it links. Set "text" to "" to
+    remove the bar entirely. Keep it on one line.
+
+  LOGO: this repo contains no logo image asset (no png/svg/jpg anywhere in
+  the tree; the only logo reference is the Squarespace CDN apple-touch-icon
+  URL in the JSON-LD). The header therefore shows the Bebas Neue wordmark.
+  To use the real logo, save it as public/assets/img/logo.png (or .svg) and
+  replace the <span class="site-logo__wordmark"> below with
+  <img class="site-logo__img" src="/assets/img/logo.png" alt="OmniFit Performance">.
+-->
+<div class="site-announce" id="site-announce">
+  <a class="site-announce__link" href="/training-rates-san-diego">At capacity for September and October — accepting November applications at updated rates →</a>
+  <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
 <header class="site-header" id="site-header">
   <div class="site-header__inner">
-    <a class="site-wordmark" href="/" aria-label="OmniFit Performance home">OmniFit <span>Performance</span></a>
+    <a class="site-logo" href="/" aria-label="OmniFit Performance home">
+      <span class="site-logo__wordmark">OmniFit <span>Performance</span></span>
+    </a>
     <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
-      <ul>
-        <li><a href="/personal-training-services">Services</a></li>
-        <li><a href="/training-rates-san-diego">Rates</a></li>
-        <li><a href="/the-omnifit-method">The Method</a></li>
-        <li><a href="/case-studies">Case Studies</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/faqs">FAQs</a></li>
-      </ul>
-      <a class="site-nav__cta" href="/contactform">Book a Consultation</a>
+      <div class="site-nav__rows">
+        <ul class="site-nav__row">
+          <li><a href="/">Home</a></li>
+          <li><a href="/personal-training-services">Programs</a></li>
+          <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-methodology">
+              <li><a href="/the-omnifit-method">The OmniFit Method</a></li>
+              <li><a href="/behavior-change-coaching">Behavior Change Coaching</a></li>
+            </ul>
+          </li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-results">Results <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-results">
+              <li><a href="/how-we-measure-your-progress">How We Measure Your Progress</a></li>
+              <li><a href="/case-studies">Case Studies</a></li>
+              <li><a href="/outcomes">Outcomes</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="site-nav__row">
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-more">More <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-more">
+              <li><a href="/nutrition-coaching-san-diego">Nutrition Coaching</a></li>
+              <li><a href="/glp-1-personal-training-san-diego">GLP-1 Personal Training</a></li>
+              <li><a href="/body-composition-testing">Body Composition Testing</a></li>
+              <li><a href="/partners">Partners</a></li>
+              <li><a href="/faqs">FAQs</a></li>
+            </ul>
+          </li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/is-omnifit-right-for-you">Fit Check</a></li>
+          <li><a href="/contactform">Contact</a></li>
+        </ul>
+      </div>
+      <div class="site-nav__aside">
+        <a class="site-nav__social" href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener" aria-label="OmniFit on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+        </a>
+        <a class="site-nav__social" href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener" aria-label="Nemezio LopezPerez on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+        </a>
+        <a class="site-nav__cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -652,7 +707,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
 
       <div class="st-grid">
         <article class="st-card">
-          <span class="st-card-icon">📋</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--clipboard" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></span>
           <h3>Assessment-First Programming</h3>
           <p>Every program begins with a 45-minute movement and postural assessment. We identify limitations before we load anything.</p>
           <ul class="st-card-features">
@@ -663,7 +718,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         </article>
 
         <article class="st-card">
-          <span class="st-card-icon">📈</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--trend-up" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
           <h3>Periodized Progression</h3>
           <p>Structured 4–6 week training blocks with specific goals — not random workouts that change every session.</p>
           <ul class="st-card-features">
@@ -674,7 +729,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         </article>
 
         <article class="st-card">
-          <span class="st-card-icon">🛡️</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--shield" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></span>
           <h3>Joint-Friendly by Design</h3>
           <p>Corrective exercise warm-ups, 3/10 pain ceiling, and exercise selection that respects your body's history.</p>
           <ul class="st-card-features">
@@ -685,7 +740,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         </article>
 
         <article class="st-card">
-          <span class="st-card-icon">🥗</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19C5 10 11 5 20 4c-1 9-6 15-15 15z"/><path d="M5 19c2-5 6-9 11-12"/></svg></span>
           <h3>Nutrition &amp; Recovery</h3>
           <p>Strength gains require the right fuel. Calorie and protein targets are built into every program.</p>
           <ul class="st-card-features">
@@ -724,7 +779,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
 
       <div class="st-grid" style="max-width: 800px; margin-left: auto; margin-right: auto;">
         <article class="st-card">
-          <span class="st-card-icon">📍</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
           <h3>In-Person — Teqneeq FHC, 4S Ranch</h3>
           <p>Private 1-on-1 sessions at the Teqneeq FHC studio with full strength equipment — racks, cables, dumbbells, and specialty bars.</p>
           <ul class="st-card-features">
@@ -735,7 +790,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         </article>
 
         <article class="st-card">
-          <span class="st-card-icon">🖥️</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--monitor" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
           <h3>Virtual — Anywhere</h3>
           <p>Live coached sessions via video with progressive programming adapted for your equipment. Part of the <a href="/the-30-minute-executive-reset">Executive Reset</a> or standalone.</p>
           <ul class="st-card-features">
@@ -801,22 +856,22 @@ OmniFit | Site-wide Header Injection · Sept 2026
       </div>
       <div class="st-grid">
         <article class="st-card">
-          <span class="st-card-icon">🧭</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--compass" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
           <h3>Long-Term Transformation</h3>
           <p>You want a body that holds up for years rather than a twelve-week push that unravels. The work is built to be repeatable: a plan you can still follow in month nine, progressions tied to what your body tolerates, and a coach who adjusts the plan rather than restarting it.</p>
         </article>
         <article class="st-card">
-          <span class="st-card-icon">📉</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--trend-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></svg></span>
           <h3>Fat Loss Without Crash Protocols</h3>
           <p>Aggressive plans usually fail on the joints or the schedule before they fail on willpower. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p>
         </article>
         <article class="st-card">
-          <span class="st-card-icon">🪑</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--chair" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6"/><path d="M5 11h14v3H5z"/><path d="M7 14v6M17 14v6"/></svg></span>
           <h3>Desk-Worker Posture and Mobility</h3>
           <p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets the specific patterns desk work creates, with corrective work built into every session rather than bolted on as a warm-up.</p>
         </article>
         <article class="st-card">
-          <span class="st-card-icon">📊</span>
+          <span class="st-card-icon"><svg class="omni-icon omni-icon--bar-chart" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="6" y="11" width="3" height="7" rx=".5"/><rect x="11" y="6" width="3" height="12" rx=".5"/><rect x="16" y="9" width="3" height="9" rx=".5"/></svg></span>
           <h3>Data-Driven Hybrid Coaching</h3>
           <p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, and the same benchmarks are tracked either way so nothing is guessed between visits.</p>
         </article>
@@ -832,17 +887,17 @@ OmniFit | Site-wide Header Injection · Sept 2026
       <a class="st-btn st-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
       <span class="st-bottom-note">Paid 45-minute consultation · $30 refundable deposit · No obligation</span>
       <p style="margin-top: 16px; font-size: 14px; text-align: center;">
-        📍 <strong>Teqneeq FHC · 10772 Thornmint Rd, 4S Ranch</strong> · Call/Text: <a href="tel:619-259-0630">619-259-0630</a> · In-Person &amp; Virtual
+        <svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> <strong>Teqneeq FHC · 10772 Thornmint Rd, 4S Ranch</strong> · Call/Text: <a href="tel:619-259-0630">619-259-0630</a> · In-Person &amp; Virtual
       </p>
     </div>
 
     <!-- ════════════ TRUST BAR ════════════ -->
     <div class="st-trust">
-      <div class="st-trust-item"><span>⭐</span> 5.0 · 133+ Reviews</div>
-      <div class="st-trust-item"><span>🏅</span> NASM CPT · CES · PES · BCS</div>
-      <div class="st-trust-item"><span>🎓</span> ACE Corrective Exercise Specialist</div>
-      <div class="st-trust-item"><span>📍</span> Teqneeq FHC · 4S Ranch, San Diego</div>
-      <div class="st-trust-item"><span>🖥️</span> Virtual Nationwide</div>
+      <div class="st-trust-item"><span><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span> 5.0 · 133+ Reviews</div>
+      <div class="st-trust-item"><span><svg class="omni-icon omni-icon--medal" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg></span> NASM CPT · CES · PES · BCS</div>
+      <div class="st-trust-item"><span><svg class="omni-icon omni-icon--graduation" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-4 9 4-9 4z"/><path d="M7 11v4c0 1.5 2.5 3 5 3s5-1.5 5-3v-4"/><path d="M21 9v5"/></svg></span> ACE Corrective Exercise Specialist</div>
+      <div class="st-trust-item"><span><svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span> Teqneeq FHC · 4S Ranch, San Diego</div>
+      <div class="st-trust-item"><span><svg class="omni-icon omni-icon--monitor" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span> Virtual Nationwide</div>
     </div>
 
     <!-- ════════════ HUB LINKS ════════════ -->

@@ -410,7 +410,20 @@ OmniFit | Site-wide Header Injection · Sept 2026
 </script>
 <!-- ===== End page header injection ===== -->
 <link rel="preload" as="image" href="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/70f5f089-2d48-4304-9be7-48226ae22ed8/Work+Portrait+Photo.jpg?format=750w" fetchpriority="high">
-<!-- ===== Page-scoped CSS (moved from the page body; source: pages/home-1.html, pages/home-2.html, pages/home-3.html, pages/home-4.html, pages/home-6.html, pages/home-5.html) ===== -->
+<!-- ===== Page-scoped CSS (moved from the page body; source: pages/home-0.html, pages/home-1.html, pages/home-2.html, pages/home-3.html, pages/home-4.html, pages/home-6.html, pages/home-5.html) ===== -->
+<style>
+    #omni-hero{background:#ffffff;margin:0;padding:40px;font-family:'Montserrat',sans-serif;}
+    #omni-hero *{box-sizing:border-box;}
+    #omni-hero .hero-card{background:#0a1628;border-radius:24px;padding:clamp(72px,11vw,136px) 28px;text-align:center;max-width:1360px;margin:0 auto;position:relative;overflow:hidden;}
+    #omni-hero .hero-card::before{content:'';position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(201,168,76,0.25) 0%,transparent 70%);opacity:0.35;pointer-events:none;}
+    #omni-hero h1{position:relative;font-family:'Playfair Display',serif;font-size:clamp(42px,7.2vw,92px);font-weight:700;line-height:1.06;letter-spacing:-1px;color:#ffffff;margin:0 auto 28px;max-width:15ch;text-transform:none;}
+    #omni-hero .hero-sub{position:relative;font-family:'Montserrat',sans-serif;font-weight:700;font-style:italic;font-size:clamp(16px,2vw,22px);line-height:1.5;color:#c9a84c;margin:0 auto;max-width:720px;}
+    @media (max-width:768px){
+      #omni-hero{padding:0;}
+      #omni-hero .hero-card{border-radius:0;padding:72px 20px 64px;}
+      #omni-hero h1{letter-spacing:-0.5px;}
+    }
+  </style>
 <style>
   /* ============================================
      MAXIMUM SQUARESPACE OVERRIDE
@@ -749,8 +762,8 @@ OmniFit | Site-wide Header Injection · Sept 2026
   #omni-method .hero { padding: 80px 28px 60px; max-width: 880px; margin: 0 auto; text-align: center; position: relative; }
   #omni-method .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
   #omni-method .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
-  #omni-method .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
-  #omni-method .hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-method .hero h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-method .hero h2 em { font-style: italic; color: var(--gold); }
   #omni-method .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 640px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
   #omni-method .creds { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
   #omni-method .cred { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid var(--white-20); border-radius: 100px; color: var(--white-50); letter-spacing: 0.8px; background: transparent; }
@@ -895,8 +908,8 @@ OmniFit | Site-wide Header Injection · Sept 2026
   #omnifit-cases .hero{position:relative!important;padding:100px 24px 80px!important;text-align:center!important;overflow:hidden!important}
   #omnifit-cases .hero::before{content:''!important;position:absolute!important;top:-200px!important;left:50%!important;transform:translateX(-50%)!important;width:900px!important;height:900px!important;background:radial-gradient(ellipse,rgba(201,168,76,0.06)0%,transparent 65%)!important;pointer-events:none!important}
   #omnifit-cases .hero-label{display:inline-flex!important;align-items:center!important;gap:8px!important;background:var(--gold-dim)!important;border:1px solid rgba(201,168,76,0.20)!important;border-radius:50px!important;padding:8px 22px!important;font-size:11px!important;font-weight:600!important;color:var(--gold)!important;text-transform:uppercase!important;letter-spacing:2.5px!important;margin-bottom:32px!important;position:relative!important;z-index:1!important}
-  #omnifit-cases .hero h1{font-family:'Playfair Display',serif!important;font-size:clamp(34px,5.5vw,58px)!important;font-weight:600!important;color:var(--white)!important;line-height:1.15!important;max-width:780px!important;margin:0 auto 20px!important;position:relative!important;z-index:1!important}
-  #omnifit-cases .hero h1 em{font-style:italic!important;color:var(--gold)!important}
+  #omnifit-cases .hero h2{font-family:'Playfair Display',serif!important;font-size:clamp(34px,5.5vw,58px)!important;font-weight:600!important;color:var(--white)!important;line-height:1.15!important;max-width:780px!important;margin:0 auto 20px!important;position:relative!important;z-index:1!important}
+  #omnifit-cases .hero h2 em{font-style:italic!important;color:var(--gold)!important}
   #omnifit-cases .hero-sub{font-size:clamp(15px,2vw,17px)!important;font-weight:400!important;color:var(--text-light)!important;max-width:600px!important;margin:0 auto 16px!important;line-height:1.7!important;position:relative!important;z-index:1!important}
   #omnifit-cases .seo-block{position:relative!important;z-index:1!important;max-width:700px!important;margin:24px auto 0!important;padding:20px 24px!important;background:rgba(201,168,76,0.04)!important;border-left:3px solid var(--gold)!important;border-radius:0 8px 8px 0!important;text-align:left!important}
   #omnifit-cases .seo-block p{font-size:14px!important;line-height:1.75!important;color:var(--text-light)!important;margin:0!important}
@@ -989,7 +1002,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
   @media(max-width:480px){#omnifit-cases .filter-row{gap:6px!important}#omnifit-cases .filter-btn{font-size:11px!important;padding:6px 14px!important}}
   @keyframes omnifitFadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
   #omnifit-cases .hero-label{animation:omnifitFadeUp 0.6s ease!important}
-  #omnifit-cases .hero h1{animation:omnifitFadeUp 0.6s ease 0.08s both!important}
+  #omnifit-cases .hero h2{animation:omnifitFadeUp 0.6s ease 0.08s both!important}
   #omnifit-cases .hero-sub{animation:omnifitFadeUp 0.6s ease 0.16s both!important}
   #omnifit-cases .seo-block{animation:omnifitFadeUp 0.6s ease 0.24s both!important}
   #omnifit-cases .case-card{animation:omnifitFadeUp 0.5s ease both!important}
@@ -1066,7 +1079,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
     color:var(--white);
     line-height:1.15;
   }
-  #omni-bio h1{font-size:clamp(32px,5vw,48px);font-weight:900;margin-bottom:12px;}
+  #omni-bio .bio-hero h2{font-size:clamp(32px,5vw,48px);font-weight:900;margin-bottom:12px;}
   #omni-bio h2{font-size:clamp(26px,4vw,38px);font-weight:800;margin-bottom:16px;}
   #omni-bio h3{font-size:clamp(18px,2.5vw,22px);font-weight:700;margin-bottom:10px;}
   #omni-bio p{margin-bottom:16px;color:var(--white-90);}
@@ -1078,7 +1091,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
     text-align:center;
   }
   #omni-bio .bio-hero .s-label{margin-bottom:16px;}
-  #omni-bio .bio-hero h1 span{
+  #omni-bio .bio-hero h2 span{
     color:var(--gold);
     font-style:italic;
   }
@@ -1566,32 +1579,104 @@ OmniFit | Site-wide Header Injection · Sept 2026
   </style>
 </head>
 <body class="page page--home">
-<!-- ===== Site header + primary nav (source: site/nav.html) =====
-     PLACEHOLDER STRUCTURE: the Squarespace template's nav was never in this
-     repo and the live site could not be fetched from the build environment.
-     Labels, order and the CTA below should be checked against the live
-     omnifittraining.com header before launch. Design system only:
-     Bebas Neue wordmark, Montserrat links, gold CTA, navy bar. -->
+<!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
+
+ANNOUNCEMENT: {"text": "At capacity for September and October — accepting November applications at updated rates →", "href": "/training-rates-san-diego"}
+
+  ^ The one place to change the announcement bar. build.py reads this line:
+    "text" is the bar's copy, "href" is where it links. Set "text" to "" to
+    remove the bar entirely. Keep it on one line.
+
+  LOGO: this repo contains no logo image asset (no png/svg/jpg anywhere in
+  the tree; the only logo reference is the Squarespace CDN apple-touch-icon
+  URL in the JSON-LD). The header therefore shows the Bebas Neue wordmark.
+  To use the real logo, save it as public/assets/img/logo.png (or .svg) and
+  replace the <span class="site-logo__wordmark"> below with
+  <img class="site-logo__img" src="/assets/img/logo.png" alt="OmniFit Performance">.
+-->
+<div class="site-announce" id="site-announce">
+  <a class="site-announce__link" href="/training-rates-san-diego">At capacity for September and October — accepting November applications at updated rates →</a>
+  <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
 <header class="site-header" id="site-header">
   <div class="site-header__inner">
-    <a class="site-wordmark" href="/" aria-label="OmniFit Performance home">OmniFit <span>Performance</span></a>
+    <a class="site-logo" href="/" aria-label="OmniFit Performance home">
+      <span class="site-logo__wordmark">OmniFit <span>Performance</span></span>
+    </a>
     <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
-      <ul>
-        <li><a href="/personal-training-services">Services</a></li>
-        <li><a href="/training-rates-san-diego">Rates</a></li>
-        <li><a href="/the-omnifit-method">The Method</a></li>
-        <li><a href="/case-studies">Case Studies</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/faqs">FAQs</a></li>
-      </ul>
-      <a class="site-nav__cta" href="/contactform">Book a Consultation</a>
+      <div class="site-nav__rows">
+        <ul class="site-nav__row">
+          <li><a href="/" aria-current="page">Home</a></li>
+          <li><a href="/personal-training-services">Programs</a></li>
+          <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-methodology">
+              <li><a href="/the-omnifit-method">The OmniFit Method</a></li>
+              <li><a href="/behavior-change-coaching">Behavior Change Coaching</a></li>
+            </ul>
+          </li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-results">Results <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-results">
+              <li><a href="/how-we-measure-your-progress">How We Measure Your Progress</a></li>
+              <li><a href="/case-studies">Case Studies</a></li>
+              <li><a href="/outcomes">Outcomes</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="site-nav__row">
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-more">More <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-more">
+              <li><a href="/nutrition-coaching-san-diego">Nutrition Coaching</a></li>
+              <li><a href="/glp-1-personal-training-san-diego">GLP-1 Personal Training</a></li>
+              <li><a href="/body-composition-testing">Body Composition Testing</a></li>
+              <li><a href="/partners">Partners</a></li>
+              <li><a href="/faqs">FAQs</a></li>
+            </ul>
+          </li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/is-omnifit-right-for-you">Fit Check</a></li>
+          <li><a href="/contactform">Contact</a></li>
+        </ul>
+      </div>
+      <div class="site-nav__aside">
+        <a class="site-nav__social" href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener" aria-label="OmniFit on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+        </a>
+        <a class="site-nav__social" href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener" aria-label="Nemezio LopezPerez on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+        </a>
+        <a class="site-nav__cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
     </nav>
   </div>
 </header>
 <main id="main">
+<!-- OMNIFIT | HOMEPAGE HERO · v1 OCTOBER 2026
+  Built for the static site (build.py prepends it to the homepage via
+  HOME_ORDER). Not a Squarespace Code Block.
+  - The only top-level heading on the homepage: home-2, home-3 and home-4 were demoted to h2.
+  - No CTA inside by design; the existing sections follow immediately.
+  - Navy card with rounded corners on a white strip (the header above is
+    white); ~40px side margins on desktop, flush at phone widths.
+-->
+<section id="omni-hero" aria-label="Introduction">
+  
+  <div class="hero-card">
+    <h1>San Diego Personal Trainer for Executives</h1>
+    <p class="hero-sub">For Professionals Over 30 Who Want Strength, Energy, and Confidence — Without Wasting Time</p>
+  </div>
+</section>
+
+
 <!-- =========================
 OMNIFIT HOMEPAGE: Value + Services (MAXIMUM OVERRIDE) · v3 AUG 2026
 Changelog v3 (canonical + compliance pass):
@@ -1764,7 +1849,7 @@ Changelog v2:
   - Quotable + FAQ + Body Composition card: BodyStat 1500 MDD flagship diagnostic added (superseded Sept 2026 — device now Bodystat QuadScan 4000, see v3)
   - Fat-loss claim window aligned to homepage: 4–6 → 4–12 months
   - Progress metrics: 7 → 12 (Build card + comparison table)
-  - Pain-rule icon: 🛡️ emoji → gold line-SVG shield
+  - Pain-rule icon: <svg class="omni-icon omni-icon--shield" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg> emoji → gold line-SVG shield
   - CTA: mirrors homepage Step 1 / Step 2 framing
   - FAQ buttons: aria-expanded added
 ========================== -->
@@ -1776,7 +1861,7 @@ Changelog v2:
   <!-- HERO -->
   <section class="hero">
     <span class="hero-badge">Our Methodology</span>
-    <h1>Assess. Correct.<br><em>Build. Sustain.</em></h1>
+    <h2>Assess. Correct.<br><em>Build. Sustain.</em></h2>
     <p class="hero-sub">This isn't random workouts. OmniFit follows a structured four-phase methodology designed to fix what's broken, build what matters, and make results last, for busy professionals 30+ with real injuries, real schedules, and real skepticism.</p>
     <div class="creds">
       <!-- ACE CES confirmed (ACE reissued OES as CES) -->
@@ -2005,7 +2090,7 @@ Changelog v2:
 <!-- ══════════ HERO ══════════ -->
 <section class="hero">
   <div class="hero-label">Client Case Studies</div>
-  <h1>Real Results From <em>Real Professionals</em></h1>
+  <h2>Real Results From <em>Real Professionals</em></h2>
   <p class="hero-sub">Every transformation starts with a professional who decided their body deserved the same investment as their career. These are their stories.</p>
   <div class="seo-block">
     <p>OmniFit Performance in San Diego specializes in structured, joint-friendly coaching for busy professionals over 30. Using the Assess → Correct → Build → Sustain methodology, each client’s progress is documented against their own baseline through posture photography, strength benchmarks, body measurements, and adherence tracking. The case studies below are individual results, not projections.</p>
@@ -2537,7 +2622,7 @@ Changelog v2:
   <!-- HERO -->
   <div class="bio-hero">
     <span class="s-label">Your Coach</span>
-    <h1>Meet <span>Nemezio LopezPerez</span></h1>
+    <h2>Meet <span>Nemezio LopezPerez</span></h2>
     <p style="max-width:680px;margin:12px auto 0;font-size:17px;color:var(--white-70);">Founder &amp; NASM Elite Trainer · OmniFit Performance · 4S Ranch, San Diego</p>
   </div>
 
@@ -2689,22 +2774,22 @@ Changelog v2:
 
       <div class="phil-grid">
         <div class="phil-card">
-          <span class="phil-icon">🔬</span>
+          <span class="phil-icon"><svg class="omni-icon omni-icon--microscope" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h4v7H9z"/><path d="M11 10v4"/><path d="M7 17a5 5 0 0 0 10 0"/><path d="M5 21h14"/><path d="M13 14a4 4 0 0 1 4 3"/></svg></span>
           <h3>Assessment Before Assumptions</h3>
           <p>Every program starts with a 45-minute consultation and 9-point movement screening. We never guess. We measure, then build.</p>
         </div>
         <div class="phil-card">
-          <span class="phil-icon">🛡️</span>
+          <span class="phil-icon"><svg class="omni-icon omni-icon--shield" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></span>
           <h3>Corrective-First Training</h3>
           <p>Joint health comes before heavy lifting. The 3/10 pain ceiling rule governs every session, protecting your body while building capacity.</p>
         </div>
         <div class="phil-card">
-          <span class="phil-icon">📊</span>
+          <span class="phil-icon"><svg class="omni-icon omni-icon--bar-chart" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="6" y="11" width="3" height="7" rx=".5"/><rect x="11" y="6" width="3" height="12" rx=".5"/><rect x="16" y="9" width="3" height="9" rx=".5"/></svg></span>
           <h3>Data-Driven Progress</h3>
           <p>Twelve objective metrics tracked across body composition, strength, posture, mobility, adherence, nutrition, and well-being. Formal 30-day reports drive every adjustment.</p>
         </div>
         <div class="phil-card">
-          <span class="phil-icon">🎯</span>
+          <span class="phil-icon"><svg class="omni-icon omni-icon--target" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></span>
           <h3>Independence as the Goal</h3>
           <p>The benchmark for success isn't whether you keep paying us. It's whether you keep your results long after your program ends.</p>
         </div>

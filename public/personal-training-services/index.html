@@ -543,28 +543,83 @@ OmniFit | Site-wide Header Injection · Sept 2026
 </style>
 </head>
 <body class="page page--personal-training-services">
-<!-- ===== Site header + primary nav (source: site/nav.html) =====
-     PLACEHOLDER STRUCTURE: the Squarespace template's nav was never in this
-     repo and the live site could not be fetched from the build environment.
-     Labels, order and the CTA below should be checked against the live
-     omnifittraining.com header before launch. Design system only:
-     Bebas Neue wordmark, Montserrat links, gold CTA, navy bar. -->
+<!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
+
+ANNOUNCEMENT: {"text": "At capacity for September and October — accepting November applications at updated rates →", "href": "/training-rates-san-diego"}
+
+  ^ The one place to change the announcement bar. build.py reads this line:
+    "text" is the bar's copy, "href" is where it links. Set "text" to "" to
+    remove the bar entirely. Keep it on one line.
+
+  LOGO: this repo contains no logo image asset (no png/svg/jpg anywhere in
+  the tree; the only logo reference is the Squarespace CDN apple-touch-icon
+  URL in the JSON-LD). The header therefore shows the Bebas Neue wordmark.
+  To use the real logo, save it as public/assets/img/logo.png (or .svg) and
+  replace the <span class="site-logo__wordmark"> below with
+  <img class="site-logo__img" src="/assets/img/logo.png" alt="OmniFit Performance">.
+-->
+<div class="site-announce" id="site-announce">
+  <a class="site-announce__link" href="/training-rates-san-diego">At capacity for September and October — accepting November applications at updated rates →</a>
+  <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
 <header class="site-header" id="site-header">
   <div class="site-header__inner">
-    <a class="site-wordmark" href="/" aria-label="OmniFit Performance home">OmniFit <span>Performance</span></a>
+    <a class="site-logo" href="/" aria-label="OmniFit Performance home">
+      <span class="site-logo__wordmark">OmniFit <span>Performance</span></span>
+    </a>
     <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
-      <ul>
-        <li><a href="/personal-training-services">Services</a></li>
-        <li><a href="/training-rates-san-diego">Rates</a></li>
-        <li><a href="/the-omnifit-method">The Method</a></li>
-        <li><a href="/case-studies">Case Studies</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/faqs">FAQs</a></li>
-      </ul>
-      <a class="site-nav__cta" href="/contactform">Book a Consultation</a>
+      <div class="site-nav__rows">
+        <ul class="site-nav__row">
+          <li><a href="/">Home</a></li>
+          <li><a href="/personal-training-services" aria-current="page">Programs</a></li>
+          <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-methodology">
+              <li><a href="/the-omnifit-method">The OmniFit Method</a></li>
+              <li><a href="/behavior-change-coaching">Behavior Change Coaching</a></li>
+            </ul>
+          </li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-results">Results <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-results">
+              <li><a href="/how-we-measure-your-progress">How We Measure Your Progress</a></li>
+              <li><a href="/case-studies">Case Studies</a></li>
+              <li><a href="/outcomes">Outcomes</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="site-nav__row">
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-more">More <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-more">
+              <li><a href="/nutrition-coaching-san-diego">Nutrition Coaching</a></li>
+              <li><a href="/glp-1-personal-training-san-diego">GLP-1 Personal Training</a></li>
+              <li><a href="/body-composition-testing">Body Composition Testing</a></li>
+              <li><a href="/partners">Partners</a></li>
+              <li><a href="/faqs">FAQs</a></li>
+            </ul>
+          </li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/is-omnifit-right-for-you">Fit Check</a></li>
+          <li><a href="/contactform">Contact</a></li>
+        </ul>
+      </div>
+      <div class="site-nav__aside">
+        <a class="site-nav__social" href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener" aria-label="OmniFit on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+        </a>
+        <a class="site-nav__social" href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener" aria-label="Nemezio LopezPerez on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+        </a>
+        <a class="site-nav__cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
     </nav>
   </div>
 </header>

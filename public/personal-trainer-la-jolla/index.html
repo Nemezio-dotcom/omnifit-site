@@ -598,28 +598,83 @@ OmniFit | Site-wide Header Injection · Sept 2026
 </style>
 </head>
 <body class="page page--personal-trainer-la-jolla">
-<!-- ===== Site header + primary nav (source: site/nav.html) =====
-     PLACEHOLDER STRUCTURE: the Squarespace template's nav was never in this
-     repo and the live site could not be fetched from the build environment.
-     Labels, order and the CTA below should be checked against the live
-     omnifittraining.com header before launch. Design system only:
-     Bebas Neue wordmark, Montserrat links, gold CTA, navy bar. -->
+<!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
+
+ANNOUNCEMENT: {"text": "At capacity for September and October — accepting November applications at updated rates →", "href": "/training-rates-san-diego"}
+
+  ^ The one place to change the announcement bar. build.py reads this line:
+    "text" is the bar's copy, "href" is where it links. Set "text" to "" to
+    remove the bar entirely. Keep it on one line.
+
+  LOGO: this repo contains no logo image asset (no png/svg/jpg anywhere in
+  the tree; the only logo reference is the Squarespace CDN apple-touch-icon
+  URL in the JSON-LD). The header therefore shows the Bebas Neue wordmark.
+  To use the real logo, save it as public/assets/img/logo.png (or .svg) and
+  replace the <span class="site-logo__wordmark"> below with
+  <img class="site-logo__img" src="/assets/img/logo.png" alt="OmniFit Performance">.
+-->
+<div class="site-announce" id="site-announce">
+  <a class="site-announce__link" href="/training-rates-san-diego">At capacity for September and October — accepting November applications at updated rates →</a>
+  <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
 <header class="site-header" id="site-header">
   <div class="site-header__inner">
-    <a class="site-wordmark" href="/" aria-label="OmniFit Performance home">OmniFit <span>Performance</span></a>
+    <a class="site-logo" href="/" aria-label="OmniFit Performance home">
+      <span class="site-logo__wordmark">OmniFit <span>Performance</span></span>
+    </a>
     <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
-      <ul>
-        <li><a href="/personal-training-services">Services</a></li>
-        <li><a href="/training-rates-san-diego">Rates</a></li>
-        <li><a href="/the-omnifit-method">The Method</a></li>
-        <li><a href="/case-studies">Case Studies</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/faqs">FAQs</a></li>
-      </ul>
-      <a class="site-nav__cta" href="/contactform">Book a Consultation</a>
+      <div class="site-nav__rows">
+        <ul class="site-nav__row">
+          <li><a href="/">Home</a></li>
+          <li><a href="/personal-training-services">Programs</a></li>
+          <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-methodology">
+              <li><a href="/the-omnifit-method">The OmniFit Method</a></li>
+              <li><a href="/behavior-change-coaching">Behavior Change Coaching</a></li>
+            </ul>
+          </li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-results">Results <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-results">
+              <li><a href="/how-we-measure-your-progress">How We Measure Your Progress</a></li>
+              <li><a href="/case-studies">Case Studies</a></li>
+              <li><a href="/outcomes">Outcomes</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="site-nav__row">
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-more">More <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-more">
+              <li><a href="/nutrition-coaching-san-diego">Nutrition Coaching</a></li>
+              <li><a href="/glp-1-personal-training-san-diego">GLP-1 Personal Training</a></li>
+              <li><a href="/body-composition-testing">Body Composition Testing</a></li>
+              <li><a href="/partners">Partners</a></li>
+              <li><a href="/faqs">FAQs</a></li>
+            </ul>
+          </li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/is-omnifit-right-for-you">Fit Check</a></li>
+          <li><a href="/contactform">Contact</a></li>
+        </ul>
+      </div>
+      <div class="site-nav__aside">
+        <a class="site-nav__social" href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener" aria-label="OmniFit on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+        </a>
+        <a class="site-nav__social" href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener" aria-label="Nemezio LopezPerez on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+        </a>
+        <a class="site-nav__cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -656,7 +711,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
     <div class="lj-grid">
 
       <article class="lj-card">
-        <span class="lj-card-icon">🏠</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--home" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></svg></span>
         <h3>In-Home Personal Training</h3>
         <p>We bring all equipment to your La Jolla home: dumbbells, bands, suspension trainers, mats. Fully programmed sessions, zero commute.</p>
         <ul class="lj-card-features">
@@ -668,7 +723,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">🏋️</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--dumbbell" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M19 12h2"/><rect x="5" y="8" width="3" height="8" rx="1"/><rect x="16" y="8" width="3" height="8" rx="1"/><path d="M8 12h8"/></svg></span>
         <h3>Private Studio Sessions</h3>
         <p>Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch. Professional-grade equipment, zero crowds, full privacy.</p>
         <ul class="lj-card-features">
@@ -680,7 +735,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">🔧</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--wrench" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4.5a4 4 0 0 0-4.8 5.2L4 15.4V20h4.6l5.7-5.7a4 4 0 0 0 5.2-4.8l-2.8 2.8-2.4-.6-.6-2.4z"/></svg></span>
         <h3>Corrective Exercise</h3>
         <p>NASM-CES certified programming for La Jolla clients dealing with shoulder pain, lower back issues, or post-rehab recovery.</p>
         <ul class="lj-card-features">
@@ -692,7 +747,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">📊</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--bar-chart" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="6" y="11" width="3" height="7" rx=".5"/><rect x="11" y="6" width="3" height="12" rx=".5"/><rect x="16" y="9" width="3" height="9" rx=".5"/></svg></span>
         <h3>Performance Assessment</h3>
         <p>Every program starts with a $150 Performance Assessment on the Bodystat QuadScan 4000: lab-grade bioimpedance data, not a bathroom scale guess.</p>
         <ul class="lj-card-features">
@@ -704,7 +759,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">💪</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--strength" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18L18 6"/><path d="M4 14l6 6M14 4l6 6"/><path d="M3 17l4 4M17 3l4 4"/></svg></span>
         <h3>Strength Training</h3>
         <p>Periodized strength programming built on corrective foundations. Designed for sustainable gains without injury risk.</p>
         <ul class="lj-card-features">
@@ -716,7 +771,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">📉</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--trend-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></svg></span>
         <h3>Weight Loss Coaching</h3>
         <p>Sustainable fat loss for La Jolla professionals: progressive training, Precision Nutrition habits, body composition tracking.</p>
         <ul class="lj-card-features">
@@ -766,19 +821,19 @@ OmniFit | Site-wide Header Injection · Sept 2026
     <div class="lj-grid">
 
       <article class="lj-card">
-        <span class="lj-card-icon">🎯</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--target" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></span>
         <h3>Assessment-Driven, Not Template-Based</h3>
         <p>Every exercise is selected based on data from your Performance Assessment and movement screen, not pulled from a generic template. Your program evolves as you do.</p>
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">🩺</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--stethoscope" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4v5a5 5 0 0 0 10 0V4"/><path d="M10 14v3a4 4 0 0 0 8 0v-2"/><circle cx="18" cy="12" r="2"/></svg></span>
         <h3>Corrective-First Philosophy</h3>
         <p>We fix what's broken before building on top of it. Most La Jolla clients present with desk-related dysfunction: forward head posture, hip flexor tightness, shoulder impingement. We address these first.</p>
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">🕐</span>
+        <span class="lj-card-icon"><svg class="omni-icon omni-icon--clock" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></span>
         <h3>Built for Busy Schedules</h3>
         <p>In-home sessions eliminate commute time. Flexible scheduling from early morning through evening. Virtual options for travel weeks. Your training fits your calendar.</p>
       </article>
@@ -958,10 +1013,10 @@ OmniFit | Site-wide Header Injection · Sept 2026
 
   <!-- TRUST BAR -->
   <div class="lj-trust">
-    <div class="lj-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
-    <div class="lj-trust-item"><span>🏅</span> NASM CPT · CES · PES · BCS · CNC</div>
-    <div class="lj-trust-item"><span>📍</span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
-    <div class="lj-trust-item"><span>🌍</span> Serving La Jolla &amp; Coastal North County</div>
+    <div class="lj-trust-item"><span><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span> 5.0 · 190+ Reviews</div>
+    <div class="lj-trust-item"><span><svg class="omni-icon omni-icon--medal" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg></span> NASM CPT · CES · PES · BCS · CNC</div>
+    <div class="lj-trust-item"><span><svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
+    <div class="lj-trust-item"><span><svg class="omni-icon omni-icon--globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg></span> Serving La Jolla &amp; Coastal North County</div>
   </div>
 
 </div>
