@@ -13,10 +13,12 @@ pages/headers/<slug>-header.html  page header injection (JSON-LD etc.)
 pages/headers/site-header.html    site-wide header injection (GTM, Clarity,
                                   HubSpot deferral, geo meta, entity graph)
 pages/footer.html                 site-wide footer (CSS + markup + year script)
+pages/home-0.html                 homepage hero (built for the static site; the only h1)
 pages/home-1..6.html              homepage sections
 site/layout.html                  the HTML document skeleton
-site/nav.html                     site header + primary nav (single source)
+site/nav.html                     announcement bar + site header + primary nav (single source)
 site/site.css, site/site.js       shared CSS / JS
+site/icons.py                     the gold line-SVG icon for every emoji the pages used
 build.py                          stdlib-only build + checks
 public/                           generated output (committed)
 ```
@@ -40,7 +42,7 @@ purpose: it is what guarantees the rendered result is identical, and with no
 Squarespace template to fight it is harmless. De-scoping it page by page can be
 a later pass.
 
-Only three things differ from the pasted sources, all structural:
+Only four things differ from the pasted sources, all structural:
 
 1. `<style>` / `<link>` tags lifted from body to head (see above).
 2. Internal links to slugs that exist nowhere in the repo are repointed at
@@ -53,8 +55,24 @@ Only three things differ from the pasted sources, all structural:
 3. `terms-and-conditions` was a Squarespace TEXT page with no CSS of its own,
    so it is wrapped in `<div class="omni-text-page">` and styled from
    `site.css` in the design system (Playfair headings, Montserrat body).
+4. Every emoji is swapped at build time for a gold line SVG from
+   `site/icons.py` (24x24, 1.5px gold stroke, the style of the hub-card icons
+   on the territory pages), sized at 1em so it takes the size the emoji had.
+   249 replacements on 22 pages; the build prints the full list and fails if
+   a newly pasted page carries an emoji with no icon. The `pages/` sources
+   still contain the emoji. The text symbols ✓ ✗ ✕ (table ticks and CSS list
+   bullets) are not emoji and stay as text.
 
-Two small additions in `site.css` are judgment calls, flagged here:
+Three source files were edited on purpose (the only copy-adjacent change):
+`pages/home-2.html`, `pages/home-3.html` and `pages/home-4.html` had their
+`<h1>` demoted to `<h2>` so the new hero carries the homepage's only H1. The
+hero-heading CSS selectors in each file were renamed to match, and the
+computed styles of all three headings were diffed before and after in
+Chromium at desktop and phone widths: zero differences. Note that `home-3`
+is therefore no longer byte-identical to `case-studies.html` (CANON's
+duplicate rule), which only affects how `tools/certify.py` counts findings.
+
+Small additions in `site.css` that are judgment calls, flagged here:
 
 - `#omni-faq{background:#fff}`: the homepage FAQ section (`home-5`) is
   authored in navy text with no background of its own, i.e. for a light
@@ -62,6 +80,38 @@ Two small additions in `site.css` are judgment calls, flagged here:
 - `main{overflow-x:clip}`: Squarespace clipped each section horizontally.
   Without it the decorative 500px hero glow on the territory pages and the
   step row on the 4S Ranch page produce a horizontal scrollbar at phone widths.
+- The homepage hero card sits on a white strip (`#omni-hero{background:#fff}`)
+  so its rounded corners and 40px side margins read against the white header;
+  the body background elsewhere stays navy. If the live site's page
+  background is white site-wide, that is one line in `site.css`.
+
+## Header, nav and announcement bar
+
+`site/nav.html` is the single source. Its first lines hold the one variable
+for the announcement bar:
+
+```
+ANNOUNCEMENT: {"text": "At capacity for September and October — accepting November applications at updated rates →", "href": "/training-rates-san-diego"}
+```
+
+Change the text or link there and rebuild; set `"text"` to `""` to remove the
+bar. It is maroon (`--omni-maroon: #7b1e2b`), white Montserrat, centred, with
+an X at the right that hides it for the rest of the browser session. The link
+target is a guess (the rates page); change it if the live bar links elsewhere.
+
+The header is white and sticky: wordmark at left, two Montserrat rows
+(Home, Programs, Rates, Methodology ▾, Results ▾ / More ▾, About, Fit Check,
+Contact), then Instagram and LinkedIn as gold line SVGs (URLs from the
+footer and the JSON-LD `sameAs`) and the "Book Your Consultation" text CTA to
+Calendly in a new tab. The current page's link gets a gold underline (and the
+dropdown that contains it); dropdowns open on hover on pointer devices and on
+tap/click everywhere. Below 1024px the header collapses to a hamburger and a
+full-height white drawer with the same items as accordions.
+
+**No logo asset exists in the repo** (no png/svg/jpg anywhere; the JSON-LD
+only references the Squarespace CDN apple-touch-icon), so the header shows the
+Bebas Neue wordmark. Save the real logo as `public/assets/img/logo.png` (or
+.svg) and swap the wordmark span for the `<img>` noted in `site/nav.html`.
 
 ## Cloudflare Pages settings
 
@@ -86,22 +136,20 @@ Cloudflare serves `public/<slug>/index.html` at `/<slug>` and 308-redirects
 
 1. **Create the Pages project** from `nemezio-dotcom/omnifit-site` with the
    settings above. Deploy once to the `*.pages.dev` preview and click through.
-2. **Review the nav.** The Squarespace template's header/nav was never in this
-   repo and the live site could not be fetched from the build environment, so
-   `site/nav.html` is a placeholder built in the design system (Bebas Neue
-   wordmark, Montserrat links, gold CTA). Match its labels, order, dropdowns
-   and CTA to the live header, then `python3 build.py`.
+2. **Add the logo** (see "Header, nav and announcement bar" above) and check
+   the announcement bar's link target.
 3. **Pages that live only in Squarespace** (block-built, no Code Block in the
-   repo). They are linked from the repo and need to exist before launch or the
-   links 404: `/privacy-policy` (footer, every page), `/behavior-change-coaching`
-   (how-we-measure-your-progress, outcomes), `/is-omnifit-right-for-you`
-   (contactform). Also `/bodybuilding` and `/energy-protocol-waitlist` have
-   headers in the repo but no page. Paste each live page into
-   `pages/<slug>.html` (plus its header) and rebuild, or add a redirect.
-4. **Homepage hero.** The repo holds the homepage only as the six section
-   fragments (`home-1`..`home-6`). Whatever sits above `home-1` on the live
-   homepage (Squarespace hero / H1) is not here; paste it in as `home-0` and
-   add it to `HOME_ORDER` in `build.py`.
+   repo). They are linked from every page via the nav or footer and need to
+   exist before launch or the links 404: `/privacy-policy` (footer),
+   `/behavior-change-coaching` (nav: Methodology, plus
+   how-we-measure-your-progress and outcomes), `/is-omnifit-right-for-you`
+   (nav: Fit Check, plus contactform). Also `/bodybuilding` and
+   `/energy-protocol-waitlist` have headers in the repo but no page. Paste each
+   live page into `pages/<slug>.html` (plus its header) and rebuild, or add a
+   redirect.
+4. **Homepage hero.** `pages/home-0.html` is the new hero (navy rounded card,
+   Playfair H1 "San Diego Personal Trainer for Executives", gold italic
+   subhead, no CTA). If the live hero carries anything else, edit that file.
 5. **Images are hotlinked from Squarespace.** 25 distinct
    `images.squarespace-cdn.com` URLs are referenced across 39 pages. They will
    break when the Squarespace subscription ends. Download them, put them under
@@ -131,15 +179,17 @@ Cloudflare serves `public/<slug>/index.html` at `/<slug>` and 308-redirects
 
 ## Check report (from `python3 build.py`)
 
-Every JSON-LD block on every page parses. Five findings remain, none of which
-this restructure was allowed to fix:
+Every JSON-LD block on every page parses, every page has exactly one H1
+except `/contactform`, and no emoji remains in any built page. All 39 pages
+render in Chromium at 1366px and 390px with no horizontal overflow and no
+script errors. Four findings remain, none of which this restructure was
+allowed to fix:
 
 | Finding | Where | Why it is left |
 |---|---|---|
 | `/privacy-policy` does not exist | footer link, every page | Page lives only in Squarespace (step 3) |
-| `/behavior-change-coaching` does not exist | how-we-measure-your-progress, outcomes | Same |
-| `/is-omnifit-right-for-you` does not exist | contactform | Same |
-| Homepage has 3 `<h1>` | `/` | home-2, home-3 and home-4 each carry one; needs a copy decision |
+| `/behavior-change-coaching` does not exist | nav (Methodology), how-we-measure-your-progress, outcomes | Same |
+| `/is-omnifit-right-for-you` does not exist | nav (Fit Check), contactform | Same |
 | `/contactform` has 0 `<h1>` | `/contactform` | Its heading is a styled `div`; needs a copy decision |
 
 Other things noticed, reported not changed:
@@ -147,10 +197,10 @@ Other things noticed, reported not changed:
 - `pages/private-personal-trainer-san-diego.html` is byte-identical to
   `pages/training-rates-san-diego.html`; both are published at their own
   canonical URL as they were on Squarespace.
-- Pre-existing emoji characters are in the page sources (trust strips and
-  feature lists on the territory, service and FAQ pages; roughly 11-15 per
-  territory page, 3 on FAQs). None were introduced by the build; the footer,
-  nav and every icon added here are gold line SVGs.
+- The emoji in the `pages/` sources are replaced only in the build output
+  (see "How the build works"); `python3 build.py` prints every replacement.
+  The one emoji inside a CSS rule (`.hiit-locations li::before{content:'📍'}`
+  on the HIIT page) becomes the same pin icon as a background image.
 - `pages/home-5.html` uses an older palette (`#002147`, `#DAA520`) than the
   rest of the site.
 - Titles and descriptions come from each header's `WebPage` node, else the
@@ -170,7 +220,7 @@ Compare against the live site. Source = the file(s) under `pages/`.
 
 | URL | Source | Title |
 |---|---|---|
-| https://www.omnifittraining.com/ | home-1, home-2, home-3, home-4, home-6, home-5 + headers/home-header | Personal Trainer San Diego \| Diagnostic-Led Coaching |
+| https://www.omnifittraining.com/ | home-0 (hero), home-1, home-2, home-3, home-4, home-6, home-5 + headers/home-header | Personal Trainer San Diego \| Diagnostic-Led Coaching |
 | https://www.omnifittraining.com/about | about | About Nemezio LopezPerez \| NASM Elite Trainer, San Diego |
 | https://www.omnifittraining.com/body-composition-testing | body-composition-testing | Body Composition Testing in San Diego \| Bodystat QuadScan 4000 \| OmniFit Performance |
 | https://www.omnifittraining.com/case-studies | case-studies | Client Case Studies \| Real Results From Real Professionals \| OmniFit Performance (derived) |
@@ -210,7 +260,7 @@ Compare against the live site. Source = the file(s) under `pages/`.
 | https://www.omnifittraining.com/training-rates-san-diego | training-rates-san-diego | Personal Training Rates San Diego \| Published Pricing \| OmniFit Performance |
 | https://www.omnifittraining.com/weight-loss | weight-loss | Sustainable Fat Loss for Busy Professionals 30+ \| OmniFit Performance San Diego |
 
-Not published (not pages): `pages/footer.html`, `pages/home-1..6.html`
+Not published (not pages): `pages/footer.html`, `pages/home-0..6.html`
 (homepage sections), everything under `archive/` (retired; redirected in
 `_redirects`), and the orphan headers `bodybuilding-header.html`,
 `energy-protocol-waitlist-form-header.html` (their pages exist only in

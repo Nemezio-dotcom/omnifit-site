@@ -1,0 +1,27 @@
+<!-- OMNIFIT | HOMEPAGE HERO · v1 OCTOBER 2026
+  Built for the static site (build.py prepends it to the homepage via
+  HOME_ORDER). Not a Squarespace Code Block.
+  - The only top-level heading on the homepage: home-2, home-3 and home-4 were demoted to h2.
+  - No CTA inside by design; the existing sections follow immediately.
+  - Navy card with rounded corners on a white strip (the header above is
+    white); ~40px side margins on desktop, flush at phone widths.
+-->
+<section id="omni-hero" aria-label="Introduction">
+  <style>
+    #omni-hero{background:#ffffff;margin:0;padding:40px;font-family:'Montserrat',sans-serif;}
+    #omni-hero *{box-sizing:border-box;}
+    #omni-hero .hero-card{background:#0a1628;border-radius:24px;padding:clamp(72px,11vw,136px) 28px;text-align:center;max-width:1360px;margin:0 auto;position:relative;overflow:hidden;}
+    #omni-hero .hero-card::before{content:'';position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(201,168,76,0.25) 0%,transparent 70%);opacity:0.35;pointer-events:none;}
+    #omni-hero h1{position:relative;font-family:'Playfair Display',serif;font-size:clamp(42px,7.2vw,92px);font-weight:700;line-height:1.06;letter-spacing:-1px;color:#ffffff;margin:0 auto 28px;max-width:15ch;text-transform:none;}
+    #omni-hero .hero-sub{position:relative;font-family:'Montserrat',sans-serif;font-weight:700;font-style:italic;font-size:clamp(16px,2vw,22px);line-height:1.5;color:#c9a84c;margin:0 auto;max-width:720px;}
+    @media (max-width:768px){
+      #omni-hero{padding:0;}
+      #omni-hero .hero-card{border-radius:0;padding:72px 20px 64px;}
+      #omni-hero h1{letter-spacing:-0.5px;}
+    }
+  </style>
+  <div class="hero-card">
+    <h1>San Diego Personal Trainer for Executives</h1>
+    <p class="hero-sub">For Professionals Over 30 Who Want Strength, Energy, and Confidence — Without Wasting Time</p>
+  </div>
+</section>

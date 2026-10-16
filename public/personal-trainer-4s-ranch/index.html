@@ -967,28 +967,83 @@ OmniFit | Site-wide Header Injection · Sept 2026
 </style>
 </head>
 <body class="page page--personal-trainer-4s-ranch">
-<!-- ===== Site header + primary nav (source: site/nav.html) =====
-     PLACEHOLDER STRUCTURE: the Squarespace template's nav was never in this
-     repo and the live site could not be fetched from the build environment.
-     Labels, order and the CTA below should be checked against the live
-     omnifittraining.com header before launch. Design system only:
-     Bebas Neue wordmark, Montserrat links, gold CTA, navy bar. -->
+<!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
+
+ANNOUNCEMENT: {"text": "At capacity for September and October — accepting November applications at updated rates →", "href": "/training-rates-san-diego"}
+
+  ^ The one place to change the announcement bar. build.py reads this line:
+    "text" is the bar's copy, "href" is where it links. Set "text" to "" to
+    remove the bar entirely. Keep it on one line.
+
+  LOGO: this repo contains no logo image asset (no png/svg/jpg anywhere in
+  the tree; the only logo reference is the Squarespace CDN apple-touch-icon
+  URL in the JSON-LD). The header therefore shows the Bebas Neue wordmark.
+  To use the real logo, save it as public/assets/img/logo.png (or .svg) and
+  replace the <span class="site-logo__wordmark"> below with
+  <img class="site-logo__img" src="/assets/img/logo.png" alt="OmniFit Performance">.
+-->
+<div class="site-announce" id="site-announce">
+  <a class="site-announce__link" href="/training-rates-san-diego">At capacity for September and October — accepting November applications at updated rates →</a>
+  <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
 <header class="site-header" id="site-header">
   <div class="site-header__inner">
-    <a class="site-wordmark" href="/" aria-label="OmniFit Performance home">OmniFit <span>Performance</span></a>
+    <a class="site-logo" href="/" aria-label="OmniFit Performance home">
+      <span class="site-logo__wordmark">OmniFit <span>Performance</span></span>
+    </a>
     <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Primary">
-      <ul>
-        <li><a href="/personal-training-services">Services</a></li>
-        <li><a href="/training-rates-san-diego">Rates</a></li>
-        <li><a href="/the-omnifit-method">The Method</a></li>
-        <li><a href="/case-studies">Case Studies</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/faqs">FAQs</a></li>
-      </ul>
-      <a class="site-nav__cta" href="/contactform">Book a Consultation</a>
+      <div class="site-nav__rows">
+        <ul class="site-nav__row">
+          <li><a href="/">Home</a></li>
+          <li><a href="/personal-training-services">Programs</a></li>
+          <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-methodology">
+              <li><a href="/the-omnifit-method">The OmniFit Method</a></li>
+              <li><a href="/behavior-change-coaching">Behavior Change Coaching</a></li>
+            </ul>
+          </li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-results">Results <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-results">
+              <li><a href="/how-we-measure-your-progress">How We Measure Your Progress</a></li>
+              <li><a href="/case-studies">Case Studies</a></li>
+              <li><a href="/outcomes">Outcomes</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="site-nav__row">
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-more">More <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-more">
+              <li><a href="/nutrition-coaching-san-diego">Nutrition Coaching</a></li>
+              <li><a href="/glp-1-personal-training-san-diego">GLP-1 Personal Training</a></li>
+              <li><a href="/body-composition-testing">Body Composition Testing</a></li>
+              <li><a href="/partners">Partners</a></li>
+              <li><a href="/faqs">FAQs</a></li>
+            </ul>
+          </li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/is-omnifit-right-for-you">Fit Check</a></li>
+          <li><a href="/contactform">Contact</a></li>
+        </ul>
+      </div>
+      <div class="site-nav__aside">
+        <a class="site-nav__social" href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener" aria-label="OmniFit on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+        </a>
+        <a class="site-nav__social" href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener" aria-label="Nemezio LopezPerez on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+        </a>
+        <a class="site-nav__cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -1022,7 +1077,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
     <p class="fr-hero-sub">
       OmniFit Performance operates inside <strong style="color:var(--white);">Teqneeq FHC</strong>, a members-only functional health and performance lab in 4S Ranch. Premium 1-on-1 coaching for busy professionals over 30: corrective exercise, joint-friendly strength training, sustainable fat loss, and hybrid coaching with weekly accountability.
     </p>
-    <div class="fr-hero-stars">★★★★★</div>
+    <div class="fr-hero-stars"><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></div>
     <p class="fr-hero-proof">Rated <strong>5.0</strong> from <strong>190+</strong> five-star reviews across Google, Yelp, Thumbtack &amp; Bark · NASM Elite Trainer</p>
     <div class="fr-cta-row">
       <a class="fr-btn fr-btn-primary omni-cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener" data-cta-id="hero-book" data-cta-location="4SR Hero" data-track="book-hero">Book Your 45-Min Consultation</a>
@@ -1353,17 +1408,17 @@ OmniFit | Site-wide Header Injection · Sept 2026
     </div>
     <div class="fr-testimonials">
       <div class="fr-tcard">
-        <div class="fr-tcard-stars">★ ★ ★ ★ ★</div>
+        <div class="fr-tcard-stars"><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></div>
         <p>"Training with Nemezio for the past 15 months has been the best gift I've given myself. I've gotten to the best shape of my life and achieved a physical transformation I didn't think was possible."</p>
         <div class="fr-tcard-name">— Alo S., CTO</div>
       </div>
       <div class="fr-tcard">
-        <div class="fr-tcard-stars">★ ★ ★ ★ ★</div>
+        <div class="fr-tcard-stars"><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></div>
         <p>"My experience over the last ten months has been amazing! I will be 62 in July and I can't believe my transformation. He creates an individualized plan and truly cares about your success."</p>
         <div class="fr-tcard-name">— Vincent S., RN</div>
       </div>
       <div class="fr-tcard">
-        <div class="fr-tcard-stars">★ ★ ★ ★ ★</div>
+        <div class="fr-tcard-stars"><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> <svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></div>
         <p>"Nemezio is the best! He has helped me finally lose my belly fat, and made me feel more confident in myself! I highly recommend it!"</p>
         <div class="fr-tcard-name">— Dave R., Business Owner</div>
       </div>
