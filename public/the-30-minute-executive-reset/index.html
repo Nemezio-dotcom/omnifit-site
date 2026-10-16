@@ -124,6 +124,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Behavior Change Specialist (BCS)" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "ACE Corrective Exercise Specialist (CES)" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 1" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 2 Certified Master Coach" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Sleep, Stress & Recovery" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
@@ -439,12 +440,16 @@ OmniFit | Site-wide Header Injection · Sept 2026
 
 <!-- ===== Page-scoped CSS (moved from the page body; source: pages/the-30-minute-executive-reset.html) ===== -->
 <style> to the end into a single Code Block.
-  2. Paste the separate header file into Page Settings > Advanced > Page Header Code Injection.
+  2. Header file unchanged (no FAQ text changed in v3).
   3. URL slug MUST be: /the-30-minute-executive-reset
-  4. SEO Title: 30-Minute Executive Reset | Virtual & Hybrid Coaching | OmniFit Performance
+  4. SEO Title: 30-Minute Executive Reset | Virtual & Hybrid Coaching
+     (no trailing brand: Squarespace appends the site title)
   5. Meta Desc: Live virtual and hybrid coaching for professionals 30+. 30-minute sessions
-     built around travel and packed calendars. From $200 per 4 weeks. NASM Elite Trainer.
-     190+ 5-star reviews.
+     built around travel and packed calendars. From $200 per 4 weeks.
+
+  v3 changes: emoji trust bar replaced with gold line-SVG icons; PN Level 2
+  Certified Master Coach added (thirteen certifications); behavior change
+  coaching named as included in every tier.
 
   October 2026 card: Bronze $200 async, Gold $500 = 1 live 30-min session/week,
   Platinum $750 = 2/week, Black $1,100 = 3/week. Billed every 4 weeks.
@@ -590,8 +595,9 @@ OmniFit | Site-wide Header Injection · Sept 2026
   #omni-reset .er-bottom { background: var(--navy-mid); border-radius: var(--radius-lg); padding: 44px 36px; text-align: center; max-width: 1120px; margin: 0 auto; }
   #omni-reset .er-bottom p { max-width: 560px; margin: 0 auto 28px; font-size: 15px; }
   #omni-reset .er-bottom-note { display: block; margin-top: 14px; font-size: 11px; color: var(--white-50); }
-  #omni-reset .er-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 48px auto 0; max-width: 700px; padding: 0 20px; }
-  #omni-reset .er-trust-item { font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
+  #omni-reset .er-trust { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin: 48px auto 0; max-width: 700px; padding: 0 20px 48px; }
+  #omni-reset .er-trust-item { font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+  #omni-reset .er-trust-item svg { width: 16px; height: 16px; flex-shrink: 0; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block; }
 
   /* RESPONSIVE */
   @media (max-width: 980px) {
@@ -685,7 +691,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
             </ul>
           </li>
           <li><a href="/about">About</a></li>
-          <li><a href="/is-omnifit-right-for-you">Fit Check</a></li>
+          <li><a href="/fit-check">Fit Check</a></li>
           <li><a href="/contactform">Contact</a></li>
         </ul>
       </div>
@@ -702,7 +708,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 </header>
 <main id="main">
-<!-- ===== OmniFit Performance — 30-MINUTE EXECUTIVE RESET (v2 · OCTOBER 2026) =====
+<!-- ===== OmniFit Performance — 30-MINUTE EXECUTIVE RESET (v3 · OCTOBER 2026) =====
   This slug is load-bearing: it is the 301 destination for the retired
   /executive-hybrid-coaching, and it is linked from all territory pages, the
   homepage services grid, and the site footer.
@@ -848,7 +854,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
       <span class="er-label">Program Tiers</span>
       <hr class="er-divider">
       <h2>Four Tiers, <em>Published Rates</em></h2>
-      <p style="max-width:700px; margin:0 auto;">Every tier includes app-based programming, nutrition coaching, and progress tracking. What changes is how many sessions are coached live each week.</p>
+      <p style="max-width:700px; margin:0 auto;">Every tier includes app-based programming, nutrition coaching, behavior change coaching, and progress tracking. What changes is how many sessions are coached live each week.</p>
     </div>
 
     <div class="er-tiers">
@@ -966,7 +972,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
       <h2>Meet <em>Nemezio LopezPerez</em></h2>
     </div>
     <div class="er-coach">
-      <p>Nemezio LopezPerez is a NASM Elite Trainer and the founder of OmniFit Performance. He holds twelve certifications across movement, nutrition, and metabolic health: NASM CPT, CES, PES, BCS, and CNC, an ACE Corrective Exercise Specialist credential, three Precision Nutrition certifications (Level 1, Sleep Stress and Recovery, and Nutrition for Metabolic Health), and three Eden clinical-collaboration certifications supporting clients on GLP-1 and peptide protocols. Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.</p>
+      <p>Nemezio LopezPerez is a NASM Elite Trainer and the founder of OmniFit Performance. He holds thirteen certifications across movement, nutrition, and metabolic health: NASM CPT, CES, PES, BCS, and CNC, an ACE Corrective Exercise Specialist credential, four Precision Nutrition certifications (Level 1, Level 2 Certified Master Coach, Sleep Stress and Recovery, and Nutrition for Metabolic Health), and three Eden clinical-collaboration certifications supporting clients on GLP-1 and peptide protocols. Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.</p>
       <p style="margin-bottom:0;"><a href="/about">More about Nemezio →</a></p>
     </div>
   </div>
@@ -1029,10 +1035,10 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 
   <div class="er-trust">
-    <div class="er-trust-item"><span><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span> 5.0 · 190+ Reviews</div>
-    <div class="er-trust-item"><span><svg class="omni-icon omni-icon--medal" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg></span> NASM CPT · CES · PES · BCS · CNC</div>
-    <div class="er-trust-item"><span><svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span> Teqneeq FHC · 4S Ranch, San Diego</div>
-    <div class="er-trust-item"><span><svg class="omni-icon omni-icon--globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg></span> Virtual Coaching Nationwide</div>
+    <div class="er-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg> 5.0 · 190+ Reviews</div>
+    <div class="er-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 7 5-2.5 5 2.5-1.5-7"/></svg> NASM CPT · CES · PES · BCS · CNC</div>
+    <div class="er-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Teqneeq FHC · 4S Ranch, San Diego</div>
+    <div class="er-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg> Virtual Coaching Nationwide</div>
   </div>
 
 </div>

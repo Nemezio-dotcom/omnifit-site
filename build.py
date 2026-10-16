@@ -91,6 +91,17 @@ META_FALLBACK = {
     ),
 }
 
+# Title / meta description that override whatever the header or page carries.
+# fit-check: the uploaded header's WebPage.name is the on-page question; the
+# SEO title and description set for the page in October 2026 are these.
+META_OVERRIDE = {
+    "fit-check": (
+        "OmniFit Fit Check | Are You Ready for Coaching?",
+        "Nine questions, three minutes. See if you're ready, willing, and able for OmniFit's "
+        "diagnostic-led coaching in San Diego. Instant result, nothing saved.",
+    ),
+}
+
 # Cloudflare Pages _redirects. Legacy slugs found in CANON.md, REPORT.md,
 # archive/ and the pages themselves. "/old /new 301".
 REDIRECTS = [
@@ -110,6 +121,8 @@ REDIRECTS = [
     ("/how-it-works", "/how-it-works-pricing"),
     ("/contact", "/contactform"),
     ("/hybrid-coaching", "/the-30-minute-executive-reset"),
+    ("# Fit Check moved to its own slug (October 2026)", None),
+    ("/is-omnifit-right-for-you", "/fit-check"),
     ("# Slug variants", None),
     ("/consultation", "/contactform"),
     ("/FAQs", "/faqs"),
@@ -158,6 +171,8 @@ def header_nodes(text):
 def page_meta(slug, page_text, header_text):
     """(title, description) - header WebPage node, else the page's SEO
     comments, else META_FALLBACK. Returns the source label too."""
+    if slug in META_OVERRIDE:
+        return (*META_OVERRIDE[slug], "build.py META_OVERRIDE")
     if header_text:
         for n in header_nodes(header_text):
             if n.get("@type") == "WebPage" and n.get("name"):

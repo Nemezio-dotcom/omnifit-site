@@ -124,6 +124,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Behavior Change Specialist (BCS)" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "ACE Corrective Exercise Specialist (CES)" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 1" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 2 Certified Master Coach" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Sleep, Stress & Recovery" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
@@ -344,7 +345,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
     "@type": "Offer",
     "price": "30.00",
     "priceCurrency": "USD",
-    "description": "45-minute consultation with fully refundable $30 deposit. Includes movement assessment, goal mapping, and program recommendation.",
+    "description": "45-minute consultation reserved with a fully refundable $30 deposit. Includes movement assessment, goal mapping, and program recommendation.",
     "availability": "https://schema.org/LimitedAvailability"
   },
   "hasOfferCatalog": {
@@ -355,16 +356,24 @@ OmniFit | Site-wide Header Injection · Sept 2026
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Executive Transformation Program",
-          "description": "Private 1-on-1 training with corrective exercise, nutrition coaching, weekly accountability check-ins, and 7-metric progress tracking for professionals 30+."
+          "name": "The Foundation",
+          "description": "Entry program for new clients: three consecutive 4-week cycles of 1-on-1 corrective-first strength training, nutrition and behavior change coaching, and progress tracked across 12 objective metrics."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Hybrid Coaching Program",
-          "description": "In-person training at the studio inside Teqneeq FHC in 4S Ranch, combined with app-based remote programming for professionals who travel frequently."
+          "name": "The Program",
+          "description": "Ongoing 1-on-1 personal training billed every 4 weeks, in-studio at Teqneeq Functional Health Center in 4S Ranch or in-home across north San Diego County."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "The 30-Minute Executive Reset",
+          "description": "Live virtual and hybrid coaching in 30-minute sessions for professionals who travel or have unpredictable schedules, delivered nationwide."
         }
       }
     ]
@@ -437,6 +446,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
   font-weight: 700 !important;
   color: var(--white) !important;
   line-height: 1.2 !important;
+  margin-top: 0 !important;
   margin-bottom: 24px !important;
   max-width: 800px !important;
   margin-left: auto !important;
@@ -890,7 +900,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
             </ul>
           </li>
           <li><a href="/about">About</a></li>
-          <li><a href="/is-omnifit-right-for-you">Fit Check</a></li>
+          <li><a href="/fit-check">Fit Check</a></li>
           <li><a href="/contactform" aria-current="page">Contact</a></li>
         </ul>
       </div>
@@ -907,9 +917,8 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 </header>
 <main id="main">
-  
-    <!-- OmniFit Consultation Landing Page — V3 FULL VIEWPORT -->
-<!-- SLUG: /consultation -->
+<!-- OmniFit Consultation Landing Page — V4 (Oct 2026: contact/queue framing, back-of-line rule, fit check link) -->
+<!-- SLUG: /contactform -->
 <!-- SQUARESPACE: Paste into a Code Block (Display Source OFF) on a blank page -->
 <!-- NOTE: In Squarespace, set the page section to FULL WIDTH / NO PADDING for best results -->
 
@@ -919,9 +928,9 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <!-- HERO -->
   <div class="consult-hero">
-    <div class="consult-eyebrow">Book Your Consultation</div>
-    <div class="consult-title">Let's See If OmniFit<br>Is Right For You</div>
-    <div class="consult-subtitle">A 45-minute session to assess your movement, map your goals, and confirm the right program — with zero obligation to sign up.</div>
+    <div class="consult-eyebrow">Contact OmniFit</div>
+    <h1 class="consult-title">Let's See If OmniFit<br>Is Right For You</h1>
+    <div class="consult-subtitle">OmniFit is at capacity and taking a limited number of new clients for Fall/Winter 2026. Send a message below to join the line. When a spot opens that fits your goals and location, I'll reach out to book your 45-minute consultation.</div>
   </div>
 
   <!-- WHAT TO EXPECT -->
@@ -966,8 +975,8 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         <span class="trust-label">5-Star Reviews</span>
       </div>
       <div class="trust-item">
-        <span class="trust-value">6</span>
-        <span class="trust-label">NASM/ACE Certs</span>
+        <span class="trust-value">13</span>
+        <span class="trust-label">Certifications</span>
       </div>
       <div class="trust-item">
         <span class="trust-value">10+</span>
@@ -983,15 +992,16 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   <!-- FORM SECTION -->
   <div class="form-section">
     <div class="form-container">
-      <div class="form-heading">Request Your Consultation</div>
-      <div class="form-sub">Fill this out and I'll reach out within 24 hours to schedule.</div>
+      <div class="form-heading">Send a Message</div>
+      <div class="form-sub">I read every message myself and reach out in the order they arrive. The form asks why now. Your honest answer there matters more than anything else on it.</div>
 
       <!-- HUBSPOT FORM EMBED -->
-      <script src="https://js-na2.hsforms.net/forms/embed/244441037.js" defer=""></script>
+      <script src="https://js-na2.hsforms.net/forms/embed/244441037.js" defer></script>
       <div class="hs-form-frame" data-region="na2" data-form-id="a34ea6d0-e63f-46d1-83d4-c675a27d64bb" data-portal-id="244441037"></div>
 
       <div class="deposit-note">
-        <p><strong>$30 refundable deposit</strong> to hold your consultation spot. It's applied to your program if you join. If you don't, you get it back — no questions asked.</p>
+        <p><strong>One rule keeps the line fair:</strong> when I reach out, reply. If I don't hear back, your spot goes to the next person and you move to the back of the line.</p>
+        <p style="margin-top: 12px !important;">When we book your consultation, a <strong>fully refundable $30 deposit</strong> holds the time.</p>
       </div>
     </div>
   </div>
@@ -999,14 +1009,13 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   <!-- BOTTOM -->
   <div class="bottom-section">
     <div class="bottom-note">
-      Not sure yet? Take the <a href="/is-omnifit-right-for-you">2-minute Fit Assessment</a> first.<br>
+      Not sure yet? Take the <a href="/fit-check">3-minute fit check</a> first.<br>
+      Rather not wait? <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a 45-minute Strategy Session</a>.<br>
       Or email me directly: <a href="mailto:nemezio@omnifittraining.com">nemezio@omnifittraining.com</a>
     </div>
   </div>
 
 </div>
-  
-  
 </main>
 <!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->
 <!-- Changelog v3: Locations card — studio line + in-home service areas now link

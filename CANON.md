@@ -608,10 +608,14 @@ legitimately changes an invariant, and say so in REPORT.md)
   the-30-minute-executive-reset pair also carries this block and was NOT
   rewritten - it is out of certification scope and on the do-not-paste list,
   so it still carries the August wording and does not enter either hash.
-- Credentials block body: byte-identical on 11 pages (6492e3ca1545dc26,
-  630 bytes)
+- Credentials block body: byte-identical on 11 pages (02bd9cb90a71ce69,
+  663 bytes)
   — the 10 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
-  its own Meet Nemezio section instead.
+  its own Meet Nemezio section instead. Hash changed legitimately in the
+  Thirteen Certifications run (Oct 2026): the block now reads thirteen
+  certifications and four Precision Nutrition certifications (Level 2
+  Certified Master Coach added), rewriting the same bytes on all eleven
+  pages. Previous value 6492e3ca1545dc26 (630 bytes).
 - Archetype card bodies (Section A): byte-identical × 11 pages
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
