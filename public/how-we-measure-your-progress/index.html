@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How We Measure Your Progress | OmniFit Performance San Diego</title>
+<meta name="description" content="How OmniFit Performance tracks client progress in San Diego: standardized metrics, formal 30-day progress reports, and program adjustments driven by trend data rather than guesswork.">
+<link rel="canonical" href="https://www.omnifittraining.com/how-we-measure-your-progress">
+
+<!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
+<!-- =========================
+OmniFit | Site-wide Header Injection · Sept 2026
+- Defer Clarity + HubSpot (after paint)
+- GTM (early)
+- Geo meta
+- Schema (JSON-LD): single site-wide entity definition.
+  LocalBusiness @id #localbusiness-of is referenced by every page
+  header and is NEVER redefined per page. Homepage page-header
+  JSON-LD has been removed and merged here.
+========================= -->
+
+<!-- Microsoft Clarity + HubSpot (DEFERRED) -->
+<script>
+/* OmniFit: defer non-critical scripts to reduce TBT/LCP */
+(function () {
+  function loadScript(src, attrs){
+    var s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    if (attrs){
+      for (var k in attrs) s.setAttribute(k, attrs[k]);
+    }
+    document.head.appendChild(s);
+  }
+
+  function defer(fn){
+    if ('requestIdleCallback' in window) return requestIdleCallback(fn, {timeout: 2500});
+    setTimeout(fn, 1500);
+  }
+
+  defer(function () {
+    /* Microsoft Clarity */
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ulpgsrkd98");
+
+    /* HubSpot (heavy) */
+    loadScript("https://js-na2.hs-scripts.com/244441037.js", {"id":"hs-script-loader"});
+  });
+})();
+</script>
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){
+  w[l]=w[l]||[];
+  w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),
+      dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5P4CKPT2');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Geo meta -->
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="US-CA">
+<meta name="geo.placename" content="San Diego">
+<meta name="geo.position" content="33.0178;-117.1022">
+<meta name="ICBM" content="33.0178, -117.1022">
+
+<!-- ═══════════════════════════════════════════════════════
+     SCHEMA (JSON-LD) — Site-wide entity definition · Sept 2026
+     Nodes: Organization #organization · Person #founder ·
+            LocalBusiness #localbusiness-of · WebSite #website
+     Page headers reference these by @id only.
+     ═══════════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.omnifittraining.com/#organization",
+      "name": "OmniFit Performance",
+      "legalName": "OmniFit Performance LLC",
+      "alternateName": "OmniFit Training",
+      "url": "https://www.omnifittraining.com/",
+      "email": "nemezio@omnifittraining.com",
+      "telephone": "+1-619-259-0630",
+      "logo": "https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/4af2b6a3-4f05-44b4-9bda-cf222ca07b16/apple-touch-icon.png.png?content-type=image/png",
+      "founder": { "@id": "https://www.omnifittraining.com/#founder" },
+      "sameAs": [
+        "https://www.instagram.com/omnifit_sd/",
+        "https://www.yelp.com/biz/omnifit-personal-fitness-training-san-diego",
+        "https://g.page/r/CcePeMjnbDe9EBM",
+        "https://www.thumbtack.com/ca/san-diego/personal-trainers/omnifit-personal-fitness-training/service/455913312050044943",
+        "https://www.bark.com/en/us/company/omnifit-personal-fitness-training/kDKNA/",
+        "https://www.bbb.org/us/ca/san-diego/profile/personal-trainer/omnifit-personal-fitness-training-1126-1000157801"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.omnifittraining.com/#founder",
+      "name": "Nemezio LopezPerez",
+      "jobTitle": "Founder & NASM Elite Trainer",
+      "url": "https://www.omnifittraining.com/about",
+      "worksFor": { "@id": "https://www.omnifittraining.com/#organization" },
+      "sameAs": [
+        "https://www.instagram.com/eziogetsfit",
+        "https://www.linkedin.com/in/nemeziolp/"
+      ],
+      "hasCredential": [
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Elite Trainer" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Certified Personal Trainer (CPT)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Corrective Exercise Specialist (CES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Performance Enhancement Specialist (PES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Certified Nutrition Coach (CNC)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Behavior Change Specialist (BCS)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "ACE Corrective Exercise Specialist (CES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 1" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Sleep, Stress & Recovery" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden Peptide Fundamentals Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Nutrition Certification" }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.omnifittraining.com/#localbusiness-of",
+      "name": "OmniFit Performance",
+      "alternateName": "OmniFit Training",
+      "url": "https://www.omnifittraining.com/",
+      "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
+      "founder": { "@id": "https://www.omnifittraining.com/#founder" },
+      "description": "OmniFit Performance is the personal training practice of Nemezio LopezPerez, based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. Specializing in joint-friendly strength training, corrective exercise, and structured coaching for busy professionals 30+. NASM Elite Trainer with 190+ five-star reviews across Google, Yelp, Thumbtack, and Bark.",
+      "telephone": "+1-619-259-0630",
+      "email": "nemezio@omnifittraining.com",
+      "image": "https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 33.0178026,
+        "longitude": -117.1021946
+      },
+      "containedInPlace": {
+        "@type": "Place",
+        "name": "Teqneeq Functional Health Center"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "San Diego", "sameAs": "https://en.wikipedia.org/wiki/San_Diego" },
+        { "@type": "Neighborhood", "name": "4S Ranch" },
+        { "@type": "Place", "name": "Rancho Bernardo" },
+        { "@type": "Place", "name": "Del Sur" },
+        { "@type": "Place", "name": "Santaluz" },
+        { "@type": "Place", "name": "Santa Fe Valley" },
+        { "@type": "Place", "name": "Poway" },
+        { "@type": "Place", "name": "Rancho Santa Fe" },
+        { "@type": "Place", "name": "Fairbanks Ranch" },
+        { "@type": "Place", "name": "Carmel Valley" },
+        { "@type": "Place", "name": "Del Mar" },
+        { "@type": "Place", "name": "La Jolla" },
+        { "@type": "Place", "name": "Solana Beach" },
+        { "@type": "Place", "name": "Encinitas" },
+        { "@type": "Place", "name": "Carlsbad" },
+        { "@type": "Country", "name": "US", "description": "Live virtual coaching available nationwide" }
+      ],
+      "priceRange": "$640-$2,900 per 4 weeks",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Credit Card, Debit Card, Affirm, Klarna, HSA/FSA via Truemed",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "06:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ],
+      "knowsAbout": [
+        "Executive Personal Training",
+        "Corrective Exercise",
+        "Joint-Friendly Strength Training",
+        "Post-Rehab Training",
+        "In-Home Personal Training",
+        "Body Composition Testing",
+        "Nutrition Coaching",
+        "Virtual Coaching"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "190",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Training Programs",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Performance Assessment",
+              "description": "In-person baseline assessment: Bodystat QuadScan 4000 body-composition analysis plus a 9-point movement screening. Credited toward your first cycle."
+            },
+            "price": "150.00",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "1:1 Personal Training at Teqneeq",
+              "description": "Private coaching at Teqneeq Functional Health Center in 4S Ranch. Tiers from Momentum to Peak; a three-cycle Foundation for new clients, then The Program billed every 4 weeks."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "640.00",
+              "maxPrice": "1800.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "In-Home Personal Training",
+              "description": "The same assessment-first coaching system delivered in your home across North County San Diego."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "900.00",
+              "maxPrice": "2600.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Couples Training",
+              "description": "Train together at Teqneeq or in-home, one coached session with separate programming for each partner. Rates are per couple."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "1000.00",
+              "maxPrice": "2900.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Session Packs",
+              "description": "5-session packs at Teqneeq or in-home for clients who prefer per-session pricing without a program; studio non-member packs include the Teqneeq day pass."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "180.00",
+              "maxPrice": "250.00",
+              "priceCurrency": "USD",
+              "unitText": "per session"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Executive Reset Virtual Coaching",
+              "description": "Live virtual and app-based coaching for professionals anywhere in the US, from async programming to fully coached tiers."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "200.00",
+              "maxPrice": "1100.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.omnifittraining.com/#website",
+      "name": "OmniFit Performance",
+      "url": "https://www.omnifittraining.com",
+      "publisher": { "@id": "https://www.omnifittraining.com/#organization" },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+<!-- ===== End site-wide header injection ===== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+
+<!-- ===== Page header injection (source: pages/headers/how-we-measure-your-progress-header.html) ===== -->
+<!-- HOW-WE-MEASURE-YOUR-PROGRESS PAGE HEADER JSON-LD · OCT 2 2026
+  Paste into /how-we-measure-your-progress → Page Settings → Advanced → Page Header Code Injection,
+  replacing any previous block entirely.
+  FAQPage mirrors the on-page FAQ verbatim (tags stripped), in page order.
+  LocalBusiness is referenced by @id from the site-wide header, never redefined here.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/how-we-measure-your-progress#webpage",
+      "url": "https://www.omnifittraining.com/how-we-measure-your-progress",
+      "name": "How We Measure Your Progress | OmniFit Performance San Diego",
+      "description": "How OmniFit Performance tracks client progress in San Diego: standardized metrics, formal 30-day progress reports, and program adjustments driven by trend data rather than guesswork.",
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "breadcrumb": {
+        "@id": "https://www.omnifittraining.com/how-we-measure-your-progress#breadcrumb"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.omnifittraining.com/how-we-measure-your-progress#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "How We Measure Progress",
+          "item": "https://www.omnifittraining.com/how-we-measure-your-progress"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.omnifittraining.com/how-we-measure-your-progress#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does OmniFit track client progress?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We track twelve standardized measures grouped into seven categories: body composition measured on a Bodystat QuadScan 4000, strength benchmarks, posture scores, mobility function, session adherence, nutrition compliance, and subjective well-being. Formal progress reports are delivered every 30 days with trend analysis and program recommendations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often do I get a progress report?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every 30 days. Each report includes your current metrics, trend data compared to your baseline, and specific recommendations for the next training phase. You also receive weekly check-in summaries through the OmniFit app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to log everything myself?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We keep it simple. Your coach handles most tracking during sessions. Your main responsibility is weekly nutrition habit check-ins (takes 2–3 minutes) and honest well-being ratings. We designed the system for busy professionals — not data analysts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I'm not making progress on a metric?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That's exactly why we measure. If a metric stalls, the 30-day review looks at likely contributors — training volume, recovery, nutrition, sleep and stress — and adjusts the program accordingly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is this different from what I'd get with another trainer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "OmniFit's framework covers body composition, strength, posture and mobility, adherence and well-being, reviewed in a formal report every 30 days. Every program adjustment is based on trend data from those measures."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can virtual/hybrid clients get the same level of tracking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Hybrid and Virtual Coaching clients follow the same seven-category, 12-measure framework, with measurement methods adapted to coaching format. Body composition is tracked via self-measurement with video guidance, posture photos are submitted through the app, and all other metrics are managed through our coaching platform."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- ===== End page header injection ===== -->
+
+<!-- ===== Page-scoped CSS (moved from the page body; source: pages/how-we-measure-your-progress.html) ===== -->
+<style>
+
+  #omni-progress {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --light-bg: #f4f5f7;
+    --light-text: #1a1a2e;
+    --light-muted: #555566;
+    --light-border: #e2e4e8;
+    --radius: 8px;
+    --radius-lg: 12px;
+    font-family: 'Montserrat', sans-serif !important;
+    color: var(--white);
+    background: var(--navy);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+  }
+  #omni-progress *, #omni-progress *::before, #omni-progress *::after {
+    box-sizing: border-box;
+    margin: 0; padding: 0;
+  }
+
+  /* HERO */
+  #omni-progress .hero { padding: 80px 28px 60px; max-width: 880px; margin: 0 auto; text-align: center; position: relative;  overflow-x: hidden;}
+  #omni-progress .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
+  #omni-progress .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
+  #omni-progress .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
+  #omni-progress .hero h1 em { font-style: italic; color: var(--gold); }
+  #omni-progress .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 620px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
+  #omni-progress .creds { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
+  #omni-progress .cred { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid var(--white-20); border-radius: 100px; color: var(--white-50); letter-spacing: 0.8px; background: transparent; }
+
+  /* QUOTABLE */
+  #omni-progress .q-wrap { max-width: 860px; margin: 0 auto; padding: 0 28px 64px; }
+  #omni-progress .quotable { padding: 36px 40px; background: var(--navy-mid); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; line-height: 1.85; color: var(--white-70); }
+  #omni-progress .quotable strong { color: var(--white); font-weight: 600; }
+
+  /* SECTIONS */
+  #omni-progress .s-dark { background: var(--navy); padding: 72px 28px; }
+  #omni-progress .s-mid { background: var(--navy-mid); padding: 72px 28px; }
+  #omni-progress .s-light { background: var(--light-bg); padding: 72px 28px; }
+  #omni-progress .s-inner { max-width: 880px; margin: 0 auto; min-width: 0; }
+  #omni-progress .s-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
+  #omni-progress .s-light .s-label { color: #8b7832; }
+  #omni-progress .gold-line { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 0 24px; border-radius: 2px; }
+  #omni-progress h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
+  #omni-progress .s-light h2 { color: var(--light-text); }
+  #omni-progress p { font-family: 'Montserrat', sans-serif !important; margin-bottom: 18px; color: var(--white-70); font-weight: 400; line-height: 1.7; }
+  #omni-progress .s-light p { color: var(--light-muted); }
+  #omni-progress h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-progress h4 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-progress a { color: var(--gold); text-decoration: none; }
+
+  /* METRICS GRID */
+  #omni-progress .mg { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 18px; margin: 44px 0 0; }
+  #omni-progress .mc { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 30px 26px; transition: all 0.4s; position: relative; overflow: hidden; }
+  #omni-progress .mc::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); opacity: 0; transition: opacity 0.4s; }
+  #omni-progress .mc:hover { border-color: var(--gold); background: var(--navy-surface); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-progress .mc:hover::after { opacity: 1; }
+  #omni-progress .mc-num { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+  #omni-progress .mc h4 { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); }
+  #omni-progress .mc p { font-size: 14px; line-height: 1.7; color: var(--white-50); margin: 0; }
+
+  /* OUTCOMES */
+  #omni-progress .ob { background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy-surface) 100%); border: 1px solid var(--white-10); padding: 52px 36px; margin: 48px 0 0; border-radius: var(--radius-lg); }
+  #omni-progress .ob h3 { color: var(--white); text-align: center; font-family: 'Playfair Display', serif !important; font-size: 24px; margin-bottom: 36px; }
+  #omni-progress .og { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 860px; margin: 0 auto; align-items: start; }
+  #omni-progress .os { text-align: center; padding: 0 4px; }
+  #omni-progress .os .num { font-family: 'Playfair Display', serif !important; font-size: 42px; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 8px; }
+  #omni-progress .os .lbl { font-family: 'Montserrat', sans-serif !important; font-size: 10px; color: var(--white-50); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+  #omni-progress .ob-note { text-align: center; font-size: 12px; color: rgba(255,255,255,.62); margin-top: 28px; font-style: italic; }
+
+  /* REPORT MOCKUP */
+  #omni-progress .rm { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 36px; margin: 40px 0 0; }
+  #omni-progress .rm-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid var(--white-10); margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  #omni-progress .rm-head h4 { font-family: 'Playfair Display', serif !important; font-size: 20px; font-weight: 600; color: var(--white); }
+  #omni-progress .rm-badge { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 5px 14px; background: var(--gold-dim); color: var(--gold); border-radius: 100px; letter-spacing: 0.5px; }
+  #omni-progress .rr { display: flex; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--white-05); gap: 16px; flex-wrap: wrap; }
+  #omni-progress .rr:last-child { border-bottom: none; }
+  #omni-progress .rr-name { flex: 1; min-width: 140px; font-family: 'Montserrat', sans-serif !important; font-weight: 600; font-size: 14px; color: var(--white-90); }
+  #omni-progress .rr-bar { flex: 2; min-width: 160px; height: 6px; background: var(--white-10); border-radius: 100px; overflow: hidden; }
+  #omni-progress .rr-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  #omni-progress .rr-val { flex: 0 0 130px; text-align: right; font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); font-weight: 500; }
+  #omni-progress .rr-val .cur { font-weight: 700; color: var(--gold); }
+
+  /* COMPARISON TABLE */
+  #omni-progress .ct-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; border-radius: var(--radius-lg); border: 1px solid var(--light-border); max-width: 100%; }
+  #omni-progress .ct { width: 100%; border-collapse: collapse; font-size: 14px; font-family: 'Montserrat', sans-serif !important; margin: 0; min-width: 540px; }
+  #omni-progress .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--white-70); border-bottom: 2px solid var(--gold); }
+  #omni-progress .ct th:first-child { border-radius: var(--radius) 0 0 0; }
+  #omni-progress .ct th:last-child { border-radius: 0 var(--radius) 0 0; }
+  #omni-progress .ct td { padding: 16px 18px; border-bottom: 1px solid var(--light-border); color: var(--light-muted); font-family: 'Montserrat', sans-serif !important; }
+  #omni-progress .ct tr:last-child td { border-bottom: none; }
+  #omni-progress .ct tr:hover td { background: rgba(201,168,76,0.04); }
+  #omni-progress .chk { color: #1a7a4c; font-weight: 600; }
+  #omni-progress .xm { color: #bbb; }
+
+  /* FAQ */
+  #omni-progress .fi { border-bottom: 1px solid var(--white-10); }
+  #omni-progress .fq { width: 100%; background: none; border: none; text-align: left; padding: 28px 0; font-family: 'Montserrat', sans-serif !important; font-size: 16px; font-weight: 600; color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; line-height: 1.5; transition: color 0.3s; }
+  #omni-progress .fq:hover { color: var(--gold); }
+  #omni-progress .fi-icon { flex-shrink: 0; width: 28px; height: 28px; border: 2px solid var(--white-20); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--white-50); transition: all 0.3s; font-family: 'Montserrat', sans-serif !important; }
+  #omni-progress .fi.open .fi-icon { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: rotate(45deg); }
+  #omni-progress .fa { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s ease; }
+  #omni-progress .fi.open .fa { max-height: 1200px; padding-bottom: 28px; }
+  #omni-progress .fa p { font-size: 15px; color: var(--white-50); line-height: 1.8; margin: 0; }
+
+  /* CTA */
+  #omni-progress .cta { background: var(--navy-mid); padding: 80px 28px; text-align: center; position: relative; overflow: hidden; }
+  #omni-progress .cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%); pointer-events: none; opacity: 0.2; }
+  #omni-progress .cta h2 { color: var(--white); font-size: clamp(28px, 4vw, 38px); margin-bottom: 16px; position: relative; }
+  #omni-progress .cta p { color: var(--white-50); font-size: 16px; max-width: 520px; margin: 0 auto 36px; position: relative; }
+  #omni-progress .cta-btn { display: inline-block; padding: 16px 44px; background: var(--gold); color: var(--navy); text-decoration: none; font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: var(--radius); transition: all 0.3s; position: relative; }
+  #omni-progress .cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-progress .cta-note { display: block; margin-top: 16px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); position: relative; }
+
+  /* RESPONSIVE */
+    #omni-progress .os .meth { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 10.5px; line-height: 1.55; color: rgba(255,255,255,.62); margin-top: 10px; font-style: normal; letter-spacing: 0; text-transform: none; }
+
+      #omni-progress .qg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 26px; }
+    #omni-progress .qc { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 22px 20px; }
+    #omni-progress .qc-h { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--gold); margin-bottom: 9px; }
+    #omni-progress .qc p { font-size: 13.5px; line-height: 1.65; color: var(--white-70); margin: 0; }
+    @media (max-width: 980px) {
+      #omni-progress .og { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; max-width: 560px; }
+      #omni-progress .ob { padding: 44px 28px; }
+    }
+    @media (max-width: 768px) {
+      #omni-progress .hero { padding: 56px 20px 44px; }
+      #omni-progress .s-dark, #omni-progress .s-mid, #omni-progress .s-light { padding: 52px 20px; }
+      #omni-progress .q-wrap { padding: 0 20px 44px; }
+      #omni-progress .quotable { padding: 24px 20px; }
+      #omni-progress .rm { padding: 24px 20px; }
+      #omni-progress .rr { flex-direction: column; align-items: flex-start; }
+      #omni-progress .rr-val { text-align: left; flex: none; }
+      #omni-progress .rr-bar { width: 100%; }
+      #omni-progress .ob { padding: 36px 22px; margin-top: 40px; }
+      #omni-progress .ct { font-size: 13px; min-width: 480px; }
+      #omni-progress .ct th, #omni-progress .ct td { padding: 12px 10px; }
+      #omni-progress .cta { padding: 52px 20px; }
+    }
+    @media (max-width: 640px) {
+      #omni-progress .mg { grid-template-columns: 1fr; }
+      #omni-progress .qg { grid-template-columns: 1fr; }
+      #omni-progress .og { grid-template-columns: 1fr; gap: 0; max-width: 400px; }
+      #omni-progress .os { text-align: left; padding: 20px 0; border-bottom: 1px solid var(--white-10); }
+      #omni-progress .os:last-child { border-bottom: none; padding-bottom: 0; }
+      #omni-progress .os:first-child { padding-top: 0; }
+      #omni-progress .os .num { display: inline-block; margin-right: 10px; vertical-align: baseline; }
+      #omni-progress .os .lbl { display: inline; }
+      #omni-progress .os .meth { display: block; margin-top: 8px; font-size: 11px; line-height: 1.6; }
+      #omni-progress .ob-note { font-size: 11.5px; line-height: 1.65; }
+      #omni-progress .ct { min-width: 440px; font-size: 12.5px; }
+      #omni-progress .ct th, #omni-progress .ct td { padding: 11px 9px; }
+    }
+    #omni-progress .ml { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 32px; margin-top: 18px; }
+    #omni-progress .ml li { display: flex; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--white-10); color: var(--white-70); font-size: 14.5px; line-height: 1.5; }
+    #omni-progress .ml-n { flex: 0 0 34px; color: var(--gold); font-weight: 700; font-size: 12px; letter-spacing: 1px; }
+    @media (max-width: 640px) { #omni-progress .ml { grid-template-columns: 1fr; } }
+  #omni-progress .hub { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 14px; padding: 36px 28px 56px; background: var(--navy); font-size: 13px; }
+  #omni-progress .hub a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+  #omni-progress .hub span { color: var(--white-20); }
+  #omni-progress .s-light a { color: #8b7832; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+</head>
+<body class="page page--how-we-measure-your-progress">
+<!-- ===== Site header + primary nav (source: site/nav.html) =====
+     PLACEHOLDER STRUCTURE: the Squarespace template's nav was never in this
+     repo and the live site could not be fetched from the build environment.
+     Labels, order and the CTA below should be checked against the live
+     omnifittraining.com header before launch. Design system only:
+     Bebas Neue wordmark, Montserrat links, gold CTA, navy bar. -->
+<header class="site-header" id="site-header">
+  <div class="site-header__inner">
+    <a class="site-wordmark" href="/" aria-label="OmniFit Performance home">OmniFit <span>Performance</span></a>
+    <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="/personal-training-services">Services</a></li>
+        <li><a href="/training-rates-san-diego">Rates</a></li>
+        <li><a href="/the-omnifit-method">The Method</a></li>
+        <li><a href="/case-studies">Case Studies</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/faqs">FAQs</a></li>
+      </ul>
+      <a class="site-nav__cta" href="/contactform">Book a Consultation</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div id="omni-progress">
+
+  <section class="hero">
+    <span class="hero-badge">Data-Driven Personal Training</span>
+    <h1>How We Measure<br><em>Your Progress</em></h1>
+    <p class="hero-sub">Every OmniFit program is built on measurable data — not guesswork. Here's the framework we use to track, evaluate, and optimize results for busy professionals 30+ in San Diego.</p>
+    <div class="creds">
+      <span class="cred">NASM CPT</span><span class="cred">NASM CES</span><span class="cred">NASM PES</span><span class="cred">NASM CNC</span><span class="cred">NASM BCS</span><span class="cred">ACE CES</span>
+    </div>
+  </section>
+
+  <div class="q-wrap"><div class="quotable">
+    <strong>OmniFit tracks every client through the same seven-category framework, with measurement methods adapted to coaching format</strong>: body composition measured on a Bodystat QuadScan 4000 multi-frequency bioimpedance analyser for in-studio clients, strength benchmarks, posture assessment scores, mobility function tests, session adherence rate, nutrition compliance, and subjective well-being — with formal progress reports delivered every 30 days. This data-driven approach ensures no guesswork: each program adjustment is based on measurable trends rather than subjective impressions. Progress is judged against your own baseline rather than an average, so the same framework works whether you are starting from a long layoff or returning to structured training.
+  </div></div>
+
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">The Problem</span><hr class="gold-line">
+    <h2>The Measurement Gap</h2>
+    <p>Without structured data, training gets judged by feel. Sessions are "tough," progress is described rather than measured, and the scale becomes the only benchmark. But scale weight alone misses the real picture — and without structured data, neither you nor your trainer can tell whether the program is actually working or needs adjustment.</p>
+    <p>At OmniFit Performance, we approach your program like a performance system. Every metric has a baseline and a defined reassessment cadence, with results reviewed in the 30-day progress report. If something stalls, the data can reveal the trend early so we can adjust before months are lost to an ineffective approach.</p>
+    <p>This is what separates structured coaching from a series of workouts. For clients pursuing substantial fat loss, we evaluate the trend over months rather than judging success from short-term scale changes.</p>
+  </div></section>
+
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">The Framework</span><hr class="gold-line">
+    <h2>The 12 Metrics We Track for Every Client</h2>
+    <p>Whether you train in-person at the studio inside Teqneeq FHC in 4S Ranch or through Hybrid and Virtual Coaching, every OmniFit client is tracked through the same seven-category framework. Body composition is measured on the QuadScan for studio clients and by guided self-measurement for virtual clients.</p>
+    <div class="mg">
+      <div class="mc"><div class="mc-num">Category 01</div><h4>Body Composition</h4><p>Bioimpedance analysis on the Bodystat QuadScan 4000, plus tape measurements at 7 sites and circumference tracking. Scale weight alone cannot tell you whether a change is muscle, fat or fluid. The QuadScan helps separate them.</p></div>
+      <div class="mc"><div class="mc-num">Category 02</div><h4>Strength Benchmarks</h4><p>Key compound lift performance (deadlift, squat, press, row), grip strength, and relative strength ratios. Tracked monthly to ensure progressive overload is actually happening.</p></div>
+      <div class="mc"><div class="mc-num">Category 03</div><h4>Posture Assessment</h4><p>Quarterly posture photos with structured scoring of common desk-posture patterns: rounded shoulders, forward head position, pelvic tilt and upper-back rounding. Built for desk-bound professionals.</p></div>
+      <div class="mc"><div class="mc-num">Category 04</div><h4>Mobility &amp; Joint Function</h4><p>Active range of motion tests for shoulders, hips, ankles, and thoracic spine. Tracked to determine whether mobility and corrective work is producing measurable functional change.</p></div>
+      <div class="mc"><div class="mc-num">Category 05</div><h4>Session Adherence</h4><p>Percentage of scheduled sessions completed each month — including virtual and travel sessions. One of the strongest practical drivers of results.</p></div>
+      <div class="mc"><div class="mc-num">Category 06</div><h4>Nutrition Compliance</h4><p>Weekly tracking of agreed-upon nutrition habits — protein intake, meal frequency, hydration, and behavior-change targets from <a href="/behavior-change-coaching">behavior change coaching</a>. Measured as percentage of weekly goals hit.</p></div>
+      <div class="mc"><div class="mc-num">Category 07</div><h4>Subjective Well-Being</h4><p>Self-reported energy, sleep quality and stress levels — rated weekly. This captures what numbers can't and shows when recovery is falling behind training.</p></div>
+    </div>
+    <h3 style="font-size:22px;margin:48px 0 6px">The Twelve Measures</h3>
+    <p style="margin-bottom:0">The seven categories above break down into these twelve measures:</p>
+    <ol class="ml"><li><span class="ml-n">01</span>Body composition (Bodystat QuadScan 4000 for studio clients)</li><li><span class="ml-n">02</span>Circumference (tape measurements at 7 sites)</li><li><span class="ml-n">03</span>Compound lift strength (deadlift, squat, press, row)</li><li><span class="ml-n">04</span>Grip strength</li><li><span class="ml-n">05</span>Relative strength ratios</li><li><span class="ml-n">06</span>Posture score (quarterly scored photos)</li><li><span class="ml-n">07</span>Range of motion (shoulders, hips, ankles, thoracic spine)</li><li><span class="ml-n">08</span>Session adherence</li><li><span class="ml-n">09</span>Nutrition compliance</li><li><span class="ml-n">10</span>Energy</li><li><span class="ml-n">11</span>Sleep quality</li><li><span class="ml-n">12</span>Stress</li></ol>
+  </div></section>
+
+  
+  <section class="s-mid"><div class="s-inner">
+      <span class="s-label">The Instrument</span><hr class="gold-line">
+      <h2>Measured Consistently, Not Guessed</h2>
+      <p>Body composition is the metric most often guessed at and most often wrong. A bathroom scale reports one number and hides three. OmniFit measures it on a <strong>Bodystat QuadScan 4000</strong>, a multi-frequency bioelectrical impedance analyser used in clinical and research settings.</p>
+      <div class="qg">
+        <div class="qc"><div class="qc-h">Four frequencies</div><p>5, 50, 100 and 200 kHz. Lower-frequency measurements primarily reflect extracellular fluid, while higher-frequency measurements provide additional information used to estimate total and intracellular water. Multi-frequency impedance data supports separate estimates of intracellular and extracellular water.</p></div>
+        <div class="qc"><div class="qc-h">Water, split properly</div><p>Intracellular and extracellular water reported separately rather than as one total. That helps show whether a weight change is more consistent with muscle, fat or fluid than scale weight alone can.</p></div>
+        <div class="qc"><div class="qc-h">Phase angle</div><p>A 50 kHz measurement associated with cellular condition and hydration status. Tracked as a trend over time; it is not interpreted diagnostically.</p></div>
+        <div class="qc"><div class="qc-h">Same device, same protocol</div><p>Every scan taken on the same device under standardized conditions, with calibration routinely verified, and read against your own previous readings rather than a population average.</p></div>
+      </div>
+      <p class="ob-note" style="margin-top:22px">The Bodystat QuadScan 4000 holds CE certification as a Class IIa medical device under MDD 93/42/EEC and has FDA clearance. OmniFit Performance uses it to measure body composition. It is not used to diagnose, treat or assess any medical condition, and OmniFit is not a medical provider.</p>
+  </div></section>
+
+<section class="s-mid"><div class="s-inner">
+    <span class="s-label">Example</span><hr class="gold-line">
+    <h2>What Your Progress Report Looks Like</h2>
+    <p>Every 30 days, you receive a formal progress report with trend data across all twelve metrics. Here is the layout of that report, using sample values to show how each row reads:</p>
+    <div class="rm">
+      <div class="rm-head"><h4>OmniFit Progress Report — Sample Layout</h4><span class="rm-badge">Executive, 42 · Goal: Recomposition</span></div>
+      <div class="rr"><span class="rr-name">Body Composition</span><div class="rr-bar"><div class="rr-fill" style="width:78%"></div></div><span class="rr-val"><span class="cur">Weight &amp; body-fat %</span></span></div>
+      <div class="rr"><span class="rr-name">Deadlift (1RM est.)</span><div class="rr-bar"><div class="rr-fill" style="width:85%"></div></div><span class="rr-val"><span class="cur">Estimated 1RM</span></span></div>
+      <div class="rr"><span class="rr-name">Posture Score</span><div class="rr-bar"><div class="rr-fill" style="width:75%"></div></div><span class="rr-val">4/10 → <span class="cur">7.5/10</span></span></div>
+      <div class="rr"><span class="rr-name">Shoulder ROM</span><div class="rr-bar"><div class="rr-fill" style="width:70%"></div></div><span class="rr-val">140° → <span class="cur">168°</span></span></div>
+      <div class="rr"><span class="rr-name">Session Adherence</span><div class="rr-bar"><div class="rr-fill" style="width:94%"></div></div><span class="rr-val"><span class="cur">94%</span></span></div>
+      <div class="rr"><span class="rr-name">Nutrition Compliance</span><div class="rr-bar"><div class="rr-fill" style="width:87%"></div></div><span class="rr-val"><span class="cur">87%</span></span></div>
+      <div class="rr"><span class="rr-name">Energy / Well-Being</span><div class="rr-bar"><div class="rr-fill" style="width:82%"></div></div><span class="rr-val">4/10 → <span class="cur">8/10</span></span></div>
+    </div>
+    <p style="font-size:13px;color:var(--white-50);font-style:italic;margin-top:20px"><strong style="color:var(--gold-light);font-style:normal">Illustrative example, not client data.</strong> Every number in the panel above is invented to show the report format. Real figures appear only in the Results section below.</p>
+  </div></section>
+
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">Results</span><hr class="gold-line">
+    <h2>How Our Clients Progress</h2>
+    <p>Measured results from 72 OmniFit clients coached between January 2023 and September 2026, drawn from session schedules and training logs in the OmniFit app. Each figure states its own method and sample size, because a number without a method is a slogan. No client who met the eligibility criteria for a figure was removed because of their outcome.</p>
+    <div class="ob">
+      <h3>Measured Outcomes, 2023 to 2026</h3>
+      <div class="og">
+          <div class="os"><span class="num">87%</span><span class="lbl">Made Progress Toward Their Goal</span><span class="meth">55 of 63 clients fully or partly achieved their primary goal; 62% fully achieved it. Coach-assessed against the goal set at intake</span></div>
+          <div class="os"><span class="num">74%</span><span class="lbl">Measurably Stronger</span><span class="meth">Stronger on most tracked lifts: 28 of 38 clients with each lift logged 4+ times over 4+ weeks</span></div>
+          <div class="os"><span class="num">+32%</span><span class="lbl">Median Working Load Change</span><span class="meth">Heaviest logged working weight per lift, first session vs. weeks 10 to 16: 37 clients</span></div>
+          <div class="os"><span class="num">34%</span><span class="lbl">12+ Months of Recorded Training</span><span class="meth">18 of 53 clients who started at least 12 months ago, measured from first to last recorded session</span></div>
+        </div>
+      <p class="ob-note">Figures are company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history. These describe what has been recorded, not what any prospective client will achieve.</p>
+    </div>
+    <p style="text-align:center;margin-top:28px"><a href="/outcomes">Read the full Client Outcomes report &rarr;</a></p>
+    <p style="font-size:13px;color:var(--white-50);margin-top:12px;text-align:center">Client reviews are a separate measure: a 4.98 average across 190+ reviews on Google, Yelp, Thumbtack and Bark.</p>
+    <div class="fi" style="margin-top:32px;border-top:1px solid var(--white-10)"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How these figures were calculated<span class="fi-icon">+</span></button><div class="fa"><p><strong style="color:var(--white-70)">Source.</strong> Session schedules and workout logs from the OmniFit app (Trainerize), pulled October 1, 2026. A client is counted if they had two or more scheduled sessions or logged workouts. No client who met the eligibility criteria for a figure was removed because of their outcome.<br><br><strong style="color:var(--white-70)">Strength.</strong> For each lift logged at least four times over at least four weeks, estimated one-rep max is calculated from weight and reps (Epley formula, sets of 12 reps or fewer). The best of a client's first two sessions is compared with the best of their latest two, and each client's result is the median across their lifts. Bodyweight exercises are excluded.<br><br><strong style="color:var(--white-70)">Working load.</strong> Heaviest logged weight on each lift in the first session versus the heaviest between weeks 10 and 16.<br><br><strong style="color:var(--white-70)">Retention.</strong> Time from first to last session or logged workout. The 12-month figure counts only clients who started at least 12 months before October 1, 2026, and reflects recorded training activity rather than a contract term.<br><br><strong style="color:var(--white-70)">Goals.</strong> Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist.<br><br><strong style="color:var(--white-70)">Limits.</strong> Sessions are scheduled sessions; attendance was not recorded before October 2026. There is no comparison group, so these figures describe what happened, not how much of it OmniFit caused.</p></div></div>
+  </div></section>
+
+  <section class="s-light"><div class="s-inner">
+    <span class="s-label">The Difference</span><hr class="gold-line">
+    <h2>Measured Coaching vs. Session-Only Training</h2>
+    <p>Session-only training is built around the workout itself. OmniFit is built around the measurement system that surrounds it. Here is how the two formats compare. For this comparison, session-only training means supervised workouts without a standardized measurement and reporting system over time.</p>
+    <div class="ct-wrap">
+    <table class="ct">
+      <thead><tr><th>Element</th><th>OmniFit</th><th>Session-Only Training</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline assessment</td><td><span class="chk">✓ 45-min movement + lifestyle screen</span></td><td><span class="xm">Varies</span></td></tr>
+        <tr><td>Standardized metrics</td><td><span class="chk">✓ 12 measures tracked on defined cadences</span></td><td><span class="xm">Not part of the format</span></td></tr>
+        <tr><td>Progress reports</td><td><span class="chk">✓ Formal 30-day reports with trends</span></td><td><span class="xm">Informal check-ins</span></td></tr>
+        <tr><td>Program adjustments</td><td><span class="chk">✓ Data-driven every 4 weeks</span></td><td><span class="xm">Session to session</span></td></tr>
+        <tr><td>Posture tracking</td><td><span class="chk">✓ Quarterly scored photos</span></td><td><span class="xm">Not included</span></td></tr>
+        <tr><td>Adherence monitoring</td><td><span class="chk">✓ Session + nutrition + habit %</span></td><td><span class="xm">Attendance only</span></td></tr>
+        <tr><td>Well-being tracking</td><td><span class="chk">✓ Weekly energy/sleep/stress ratings</span></td><td><span class="xm">Not included</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div></section>
+
+  <section class="s-dark"><div class="s-inner">
+    <span class="s-label">Common Questions</span><hr class="gold-line">
+    <h2>Frequently Asked Questions</h2>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How does OmniFit track client progress?<span class="fi-icon">+</span></button><div class="fa"><p>We track twelve standardized measures grouped into seven categories: body composition measured on a Bodystat QuadScan 4000, strength benchmarks, posture scores, mobility function, session adherence, nutrition compliance, and subjective well-being. Formal progress reports are delivered every 30 days with trend analysis and program recommendations.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How often do I get a progress report?<span class="fi-icon">+</span></button><div class="fa"><p>Every 30 days. Each report includes your current metrics, trend data compared to your baseline, and specific recommendations for the next training phase. You also receive weekly check-in summaries through the OmniFit app.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Do I need to log everything myself?<span class="fi-icon">+</span></button><div class="fa"><p>We keep it simple. Your coach handles most tracking during sessions. Your main responsibility is weekly nutrition habit check-ins (takes 2–3 minutes) and honest well-being ratings. We designed the system for busy professionals — not data analysts.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What if I'm not making progress on a metric?<span class="fi-icon">+</span></button><div class="fa"><p>That's exactly why we measure. If a metric stalls, the 30-day review looks at likely contributors — training volume, recovery, nutrition, sleep and stress — and adjusts the program accordingly.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How is this different from what I'd get with another trainer?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit's framework covers body composition, strength, posture and mobility, adherence and well-being, reviewed in a formal report every 30 days. Every program adjustment is based on trend data from those measures.</p></div></div>
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Can virtual/hybrid clients get the same level of tracking?<span class="fi-icon">+</span></button><div class="fa"><p>Yes. Hybrid and Virtual Coaching clients follow the same seven-category, 12-measure framework, with measurement methods adapted to coaching format. Body composition is tracked via self-measurement with video guidance, posture photos are submitted through the app, and all other metrics are managed through our coaching platform.</p></div></div>
+  </div></section>
+
+  <!-- ═══ USE CASES ═══ -->
+  <section class="s-mid"><div class="s-inner">
+    <span class="s-label">Use Cases</span><hr class="gold-line">
+    <h2>What People Come to Coaching For</h2>
+    <p>Coaching is rarely the goal on its own. These are the situations it usually attaches to.</p>
+    <div class="mg">
+      <div class="mc"><h4>Long-Term Transformation</h4><p>You want a body that holds up for years rather than a twelve-week push that unravels. The work is built to be repeatable: a plan you can still follow in month nine, progressions tied to what your body tolerates, and a coach who adjusts the plan rather than restarting it.</p></div>
+      <div class="mc"><h4>Fat Loss Without Crash Protocols</h4><p>Aggressive plans can be difficult to sustain around demanding schedules and individual training tolerance. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p></div>
+      <div class="mc"><h4>Desk-Worker Posture and Mobility</h4><p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets common mobility and strength patterns associated with prolonged sitting, with corrective work built into every session rather than bolted on as a warm-up.</p></div>
+      <div class="mc"><h4>Data-Driven Hybrid Coaching</h4><p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, and the same benchmarks are tracked either way so nothing is guessed between visits.</p></div>
+    </div>
+  </div></section>
+
+  <nav class="hub" aria-label="Related pages"><a href="/the-omnifit-method">The OmniFit Method</a> <span>&middot;</span> <a href="/behavior-change-coaching">Behavior Change Coaching</a> <span>&middot;</span> <a href="/outcomes">Client Outcomes</a> <span>&middot;</span> <a href="/training-rates-san-diego">Rates</a> <span>&middot;</span> <a href="/case-studies">Case Studies</a></nav>
+
+  <section class="cta">
+    <h2>See What Your Progress<br>Report Could Look Like</h2>
+    <p>Book a paid 45-minute consultation, by video or phone. A $30 refundable deposit reserves your time. No commitment beyond that, just clarity on where you stand.</p>
+    <a href="https://calendly.com/nemezio-omnifittraining/45min" class="cta-btn">Book Your Consultation</a>
+    <span class="cta-note">45-minute consultation · No commitment · Personalized plan discussion</span>
+  </section>
+
+</div>
+</main>
+<!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->
+<!-- Changelog v3: Locations card — studio line + in-home service areas now link
+     to their location pages (internal-link task, Q3 strategy). Coronado left
+     unlinked (no page exists). Copyright line: removed hardcoded "2026"
+     (was rendering doubled year alongside the JS-injected span). -->
+<!-- Changelog v2: removed footer-badges block (NASM / ACE / BNI) and its CSS;
+     replaced legacy "OmniFit Personal Fitness Training" Pacific Beach GBP link
+     with current-listing Maps link. See note on swapping in your GBP review
+     short link (g.page/r/.../review) for a direct write-a-review prompt. -->
+
+
+<footer id="omnifit-footer">
+  <div class="wrap">
+
+    <div class="footer-cta">
+      <h3>Start Your Transformation Today</h3>
+      <p>Book your 45-minute consultation and experience OmniFit Performance's premium coaching.</p>
+      <a class="btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+    </div>
+
+    <div class="footer-grid">
+
+      <!-- About -->
+      <div class="footer-card">
+        <h4>About OmniFit Performance</h4>
+        <p>OmniFit Performance is a private personal training and corrective exercise practice serving San Diego's executive community. Clinical-grade diagnostics, evidence-based programming, and structured accountability for professionals 30+.</p>
+        <ul>
+          <li><a href="/personal-training-services"><span>All Services</span></a></li>
+          <li><a href="/nutrition-coaching-san-diego"><span>Nutrition Coaching</span></a></li>
+          <li><a href="/glp-1-personal-training-san-diego"><span>Training on a GLP-1</span></a></li>
+          <li><a href="/personal-trainer-over-50-san-diego"><span>Training After 50</span></a></li>
+          <li><a href="/couples-personal-training-san-diego"><span>Couples Training</span></a></li>
+          <li><a href="/hsa-fsa-personal-training"><span>HSA &amp; FSA Eligibility</span></a></li>
+          <li><a href="/terms-and-conditions"><span>Terms &amp; Conditions</span></a></li>
+          <li><a href="/privacy-policy"><span>Privacy Policy</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div class="footer-card">
+        <h4>Connect</h4>
+        <ul>
+          <li>
+            <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <span>@omnifit_sd</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
+                 from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
+            <a href="https://g.page/r/CcePeMjnbDe9EBM/review" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <span>Google Reviews</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:omnifittraining@gmail.com">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <span>Email</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Location -->
+      <div class="footer-card">
+        <h4>Locations</h4>
+        <p>Studio: <a href="/personal-trainer-4s-ranch">Teqneeq · 4S Ranch, San Diego</a></p>
+        <p style="font-size:13px; color:var(--omni-muted); opacity:0.85;">In-home:
+          <a href="/personal-trainer-la-jolla">La Jolla</a> •
+          <a href="/personal-trainer-del-mar">Del Mar</a> •
+          <a href="/personal-trainer-carmel-valley">Carmel Valley</a> •
+          <a href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a> •
+          <a href="/personal-trainer-rancho-bernardo">Rancho Bernardo</a> •
+          <a href="/personal-trainer-solana-beach">Solana Beach</a> •
+          <a href="/personal-trainer-encinitas">Encinitas</a> •
+          <a href="/personal-trainer-carlsbad">Carlsbad</a> •
+          <a href="/personal-trainer-santaluz">Santaluz</a> •
+          <a href="/personal-trainer-fairbanks-ranch">Fairbanks Ranch</a> •
+          <a href="/personal-trainer-4s-ranch">4S Ranch</a>
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <span>Get Directions</span>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+16192590630">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <span>(619) 259-0630</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <span>Book Your Consultation</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-copy">
+      © <span id="omnifit-year"></span> OmniFit Performance · Personal Training &amp; Corrective Exercise · San Diego, CA
+    </div>
+
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
