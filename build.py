@@ -110,6 +110,8 @@ REDIRECTS = [
     ("/how-it-works", "/how-it-works-pricing"),
     ("/contact", "/contactform"),
     ("/hybrid-coaching", "/the-30-minute-executive-reset"),
+    ("# Fit Check moved to its own slug (October 2026)", None),
+    ("/is-omnifit-right-for-you", "/fit-check"),
     ("# Slug variants", None),
     ("/consultation", "/contactform"),
     ("/FAQs", "/faqs"),

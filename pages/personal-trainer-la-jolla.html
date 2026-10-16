@@ -80,7 +80,9 @@
   /* CARD */
   #omni-lajolla .lj-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 24px 28px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; min-height: 0; }
   #omni-lajolla .lj-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-  #omni-lajolla .lj-card-icon { font-size: 28px; margin-bottom: 16px; display: block; line-height: 1; }
+  #omni-lajolla .lj-card-icon { display: block; margin-bottom: 16px; line-height: 1; }
+  #omni-lajolla .lj-card-icon svg, #omni-lajolla .lj-hub-card-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; display: block; }
+  #omni-lajolla .lj-trust-item svg { width: 16px; height: 16px; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
   #omni-lajolla .lj-card h3 { font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); line-height: 1.3; }
   #omni-lajolla .lj-card p { font-size: 14px; color: var(--white-50); margin-bottom: 18px; line-height: 1.65; }
   #omni-lajolla .lj-card-features { list-style: none; margin: 0 0 20px; padding: 0; flex: 1 1 auto; }
@@ -193,7 +195,7 @@
     <div class="lj-grid">
 
       <article class="lj-card">
-        <span class="lj-card-icon">🏠</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/></svg></span>
         <h3>In-Home Personal Training</h3>
         <p>We bring all equipment to your La Jolla home: dumbbells, bands, suspension trainers, mats. Fully programmed sessions, zero commute.</p>
         <ul class="lj-card-features">
@@ -205,7 +207,7 @@
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">🏋️</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M19 12h2"/><rect x="5" y="8" width="3" height="8" rx="1"/><rect x="16" y="8" width="3" height="8" rx="1"/><path d="M8 12h8"/></svg></span>
         <h3>Private Studio Sessions</h3>
         <p>Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch. Professional-grade equipment, zero crowds, full privacy.</p>
         <ul class="lj-card-features">
@@ -217,7 +219,7 @@
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">🔧</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l6-6"/><path d="M13 11l7-7"/><circle cx="16" cy="8" r="3.5"/><path d="M8.5 15.5l-2-2"/></svg></span>
         <h3>Corrective Exercise</h3>
         <p>NASM-CES certified programming for La Jolla clients dealing with shoulder pain, lower back issues, or post-rehab recovery.</p>
         <ul class="lj-card-features">
@@ -229,7 +231,7 @@
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">📊</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"/><rect x="6" y="11" width="3" height="8"/><rect x="11" y="7" width="3" height="12"/><rect x="16" y="13" width="3" height="6"/></svg></span>
         <h3>Performance Assessment</h3>
         <p>Every program starts with a $150 Performance Assessment on the Bodystat QuadScan 4000: lab-grade bioimpedance data, not a bathroom scale guess.</p>
         <ul class="lj-card-features">
@@ -241,7 +243,7 @@
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">💪</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M19 12h2"/><rect x="5" y="8" width="3" height="8" rx="1"/><rect x="16" y="8" width="3" height="8" rx="1"/><path d="M8 12h8"/></svg></span>
         <h3>Strength Training</h3>
         <p>Periodized strength programming built on corrective foundations. Designed for sustainable gains without injury risk.</p>
         <ul class="lj-card-features">
@@ -249,11 +251,11 @@
           <li>Squat, hinge, press progressions</li>
           <li>Monthly strength benchmarks</li>
         </ul>
-        <a class="lj-card-link" href="/strength-training-1">See Strength Programs <span>→</span></a>
+        <a class="lj-card-link" href="/private-personal-trainer-san-diego">See Strength Programs <span>→</span></a>
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">📉</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M4 19V5"/><path d="M7 9l4 5 3-3 5 6"/></svg></span>
         <h3>Weight Loss Coaching</h3>
         <p>Sustainable fat loss for La Jolla professionals: progressive training, Precision Nutrition habits, body composition tracking.</p>
         <ul class="lj-card-features">
@@ -284,7 +286,7 @@
       <div>
         <div class="lj-stats">
           <div class="lj-stat"><div class="lj-stat-num">190+</div><div class="lj-stat-label">5-Star Reviews</div></div>
-          <div class="lj-stat"><div class="lj-stat-num">12</div><div class="lj-stat-label">Certifications Held</div></div>
+          <div class="lj-stat"><div class="lj-stat-num">13</div><div class="lj-stat-label">Certifications Held</div></div>
           <div class="lj-stat"><div class="lj-stat-num">NASM</div><div class="lj-stat-label">CPT · CES · PES · BCS · CNC</div></div>
           <div class="lj-stat"><div class="lj-stat-num">4</div><div class="lj-stat-label">Phase Methodology</div></div>
         </div>
@@ -303,19 +305,19 @@
     <div class="lj-grid">
 
       <article class="lj-card">
-        <span class="lj-card-icon">🎯</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span>
         <h3>Assessment-Driven, Not Template-Based</h3>
         <p>Every exercise is selected based on data from your Performance Assessment and movement screen, not pulled from a generic template. Your program evolves as you do.</p>
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">🩺</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v6a5 5 0 0 0 10 0V4"/><path d="M11 15v2a4 4 0 0 0 8 0v-3"/><circle cx="19" cy="12" r="2"/></svg></span>
         <h3>Corrective-First Philosophy</h3>
         <p>We fix what's broken before building on top of it. Most La Jolla clients present with desk-related dysfunction: forward head posture, hip flexor tightness, shoulder impingement. We address these first.</p>
       </article>
 
       <article class="lj-card">
-        <span class="lj-card-icon">🕐</span>
+        <span class="lj-card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></svg></span>
         <h3>Built for Busy Schedules</h3>
         <p>In-home sessions eliminate commute time. Flexible scheduling from early morning through evening. Virtual options for travel weeks. Your training fits your calendar.</p>
       </article>
@@ -332,7 +334,7 @@
       <h2>Meet <em>Nemezio LopezPerez</em></h2>
     </div>
     <article class="lj-card">
-      <p>Nemezio LopezPerez is a NASM Elite Trainer and the founder of OmniFit Performance. He holds twelve certifications across movement, nutrition, and metabolic health: NASM CPT, CES, PES, BCS, and CNC, an ACE Corrective Exercise Specialist credential, three Precision Nutrition certifications (Level 1, Sleep Stress and Recovery, and Nutrition for Metabolic Health), and three Eden clinical-collaboration certifications supporting clients on GLP-1 and peptide protocols. Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.</p>
+      <p>Nemezio LopezPerez is a NASM Elite Trainer and the founder of OmniFit Performance. He holds thirteen certifications across movement, nutrition, and metabolic health: NASM CPT, CES, PES, BCS, and CNC, an ACE Corrective Exercise Specialist credential, four Precision Nutrition certifications (Level 1, Level 2 Certified Master Coach, Sleep Stress and Recovery, and Nutrition for Metabolic Health), and three Eden clinical-collaboration certifications supporting clients on GLP-1 and peptide protocols. Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.</p>
       <a class="lj-card-link" href="/about">More about Nemezio <span>→</span></a>
     </article>
   </div>
@@ -471,7 +473,6 @@
       <a class="lj-hub-link" href="/personal-training-services">All Services</a>
       <a class="lj-hub-link" href="/in-home-personal-trainer-san-diego">In-Home Training</a>
       <a class="lj-hub-link" href="/corrective-exercise-post-rehab">Corrective Exercise</a>
-      <a class="lj-hub-link" href="/strength-training-1">Strength Training</a>
       <a class="lj-hub-link" href="/hiit-personal-trainer-san-diego">HIIT Training</a>
       <a class="lj-hub-link" href="/the-30-minute-executive-reset">Virtual Coaching</a>
       <a class="lj-hub-link" href="/training-rates-san-diego">Training Rates</a>
@@ -495,10 +496,10 @@
 
   <!-- TRUST BAR -->
   <div class="lj-trust">
-    <div class="lj-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
-    <div class="lj-trust-item"><span>🏅</span> NASM CPT · CES · PES · BCS · CNC</div>
-    <div class="lj-trust-item"><span>📍</span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
-    <div class="lj-trust-item"><span>🌍</span> Serving La Jolla &amp; Coastal North County</div>
+    <div class="lj-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> 5.0 · 190+ Reviews</div>
+    <div class="lj-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg> NASM CPT · CES · PES · BCS · CNC</div>
+    <div class="lj-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A7 7 0 0 0 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
+    <div class="lj-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg> Serving La Jolla &amp; Coastal North County</div>
   </div>
 
 </div>

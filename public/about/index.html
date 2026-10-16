@@ -124,6 +124,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Behavior Change Specialist (BCS)" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "ACE Corrective Exercise Specialist (CES)" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 1" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 2 Certified Master Coach" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Sleep, Stress & Recovery" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
@@ -329,7 +330,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
   Person is the primary entity here — this is the page that answers
   "who is Nemezio LopezPerez" for search engines and AI assistants.
   LocalBusiness is referenced by @id from the homepage, never redefined.
-  13 credentials, each with its issuing organisation.
+  14 credentials, each with its issuing organisation: the thirteen certifications plus NASM Elite Trainer status.
 -->
 <script type="application/ld+json">
 {
@@ -462,6 +463,15 @@ OmniFit | Site-wide Header Injection · Sept 2026
           "@type": "EducationalOccupationalCredential",
           "credentialCategory": "Professional Certification",
           "name": "Level 1 Nutrition Coaching",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Precision Nutrition"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Professional Certification",
+          "name": "Level 2 Certified Master Coach",
           "recognizedBy": {
             "@type": "Organization",
             "name": "Precision Nutrition"
@@ -695,7 +705,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
             </ul>
           </li>
           <li><a href="/about" aria-current="page">About</a></li>
-          <li><a href="/is-omnifit-right-for-you">Fit Check</a></li>
+          <li><a href="/fit-check">Fit Check</a></li>
           <li><a href="/contactform">Contact</a></li>
         </ul>
       </div>
@@ -810,6 +820,10 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         <div class="ab-cred-what">A habit-first system for nutrition change rather than a meal plan handed over on day one. It pairs with the behaviour change work.</div>
       </div>
       <div class="ab-cred">
+        <div class="ab-cred-name">Level 2 Certified Master Coach<span class="ab-cred-issuer">Precision Nutrition</span></div>
+        <div class="ab-cred-what">The advanced coaching credential built on Level 1, completed in October 2026. It is the training behind the behavioural track of the OmniFit Method: how habits are assessed, how friction is reduced, and how coach input is progressively withdrawn as a client learns to self-correct. <a href="https://my.precisionnutrition.com/public_credentials/nemezio-lopezperez-l2-certification" target="_blank" rel="noopener">Verify this credential on Precision Nutrition</a>.</div>
+      </div>
+      <div class="ab-cred">
         <div class="ab-cred-name">Sleep, Stress and Recovery<span class="ab-cred-issuer">Precision Nutrition</span></div>
         <div class="ab-cred-what">How poor sleep and unmanaged stress blunt everything else you are doing. This is why a first block sometimes changes your bedtime before it changes your training.</div>
       </div>
@@ -841,11 +855,11 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
         <a href="https://www.precisionnutrition.com/" target="_blank" rel="noopener"><img loading="lazy" width="60" height="60" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/e05cf87a-c67c-4cec-ade5-ca77bdd071de/PN.+Logo+SSR.png?content-type=image%2Fpng" alt="Precision Nutrition Sleep, Stress &amp; Recovery Badge"></a>
         <a href="https://www.precisionnutrition.com/" target="_blank" rel="noopener"><img loading="lazy" width="60" height="60" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/2e0d8b2c-2c11-497c-a372-5512bbebb95e/PN+Logo+NMH.png?content-type=image%2Fpng" alt="Precision Nutrition Nutrition for Metabolic Health Badge"></a>
     </div>
-    <p class="ab-badges-note">Nine of thirteen certifications carry an issuer badge. Eden GLP-1 Fitness, GLP-1 Nutrition, Peptide Fundamentals, and NASM Elite Trainer status are listed above without one.</p>
+    <p class="ab-badges-note">Nine of thirteen certifications carry an issuer badge. Precision Nutrition Level 2 Certified Master Coach, Eden GLP-1 Fitness, GLP-1 Nutrition, Peptide Fundamentals, and NASM Elite Trainer status are listed above without one.</p>
   </div>
 
   <div class="ab-quotable">
-    <p>Nemezio LopezPerez is the founder of OmniFit Performance, a private personal training practice based at Teqneeq Functional Health Center in 4S Ranch, San Diego. He holds NASM Elite Trainer status with Certified Personal Trainer, Corrective Exercise Specialist, Performance Enhancement Specialist, Behavior Change Specialist, and Certified Nutrition Coach credentials, along with the ACE Corrective Exercise Specialist Program, three Precision Nutrition certifications in nutrition coaching, sleep and recovery, and metabolic health, and three Eden certifications covering GLP-1 fitness, GLP-1 nutrition, and peptide fundamentals. He has coached for over ten years and holds 190+ five-star reviews. OmniFit Performance is a personal training practice and not a medical provider; it does not diagnose, treat, or provide physical therapy, and refers to licensed clinicians when a situation calls for one.</p>
+    <p>Nemezio LopezPerez is the founder of OmniFit Performance, a private personal training practice based at Teqneeq Functional Health Center in 4S Ranch, San Diego. He holds NASM Elite Trainer status with Certified Personal Trainer, Corrective Exercise Specialist, Performance Enhancement Specialist, Behavior Change Specialist, and Certified Nutrition Coach credentials, along with the ACE Corrective Exercise Specialist Program, four Precision Nutrition certifications in nutrition coaching (Level 1 and Level 2 Certified Master Coach), sleep and recovery, and metabolic health, and three Eden certifications covering GLP-1 fitness, GLP-1 nutrition, and peptide fundamentals. He has coached for over ten years and holds 190+ five-star reviews. OmniFit Performance is a personal training practice and not a medical provider; it does not diagnose, treat, or provide physical therapy, and refers to licensed clinicians when a situation calls for one.</p>
   </div>
 
   <div class="ab-sec">
