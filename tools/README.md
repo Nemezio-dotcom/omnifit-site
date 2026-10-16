@@ -438,3 +438,11 @@ Everything else under `pages/` is in scope.
 There is an assertion that the glob matched a non-zero number of files — an
 earlier run passed vacuously because it was executed from the wrong directory
 and matched nothing.
+
+```
+python3 tools/mkterritory.py   # regenerate the eleven territory page headers
+```
+
+`mkterritory.py` keeps each territory header's own WebPage and breadcrumb,
+mirrors the on-page FAQ verbatim (tags stripped) in page order, and asserts the
+pricing answer is byte-identical across all eleven before writing.
