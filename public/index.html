@@ -409,27 +409,30 @@ OmniFit | Site-wide Header Injection · Sept 2026
 }
 </script>
 <!-- ===== End page header injection ===== -->
-<link rel="preload" as="image" type="image/webp" imagesrcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" imagesizes="(max-width:768px) 100vw, 1360px" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" imagesizes="(max-width:768px) 100vw, 880px" fetchpriority="high">
 <link rel="preload" as="image" href="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/70f5f089-2d48-4304-9be7-48226ae22ed8/Work+Portrait+Photo.jpg?format=750w" fetchpriority="high">
 <!-- ===== Page-scoped CSS (moved from the page body; source: pages/home-0.html, pages/home-1.html, pages/home-2.html, pages/home-3.html, pages/home-4.html, pages/home-6.html, pages/home-5.html) ===== -->
 <style>
     #omni-hero{background:#ffffff;margin:0;padding:40px;font-family:'Montserrat',sans-serif;}
     #omni-hero *{box-sizing:border-box;}
-    #omni-hero .hero-card{--hero-focus:56% 34%;position:relative;isolation:isolate;overflow:hidden;background:#0a1628;border-radius:24px;max-width:1360px;margin:0 auto;min-height:clamp(520px,70vh,760px);display:flex;align-items:center;padding:clamp(64px,9vw,120px) clamp(28px,6vw,96px);}
-    #omni-hero picture{display:contents;}
-    #omni-hero .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-focus);z-index:-2;display:block;}
+    #omni-hero .hero-card{--hero-inset:36%;--hero-focus:50% 38%;position:relative;isolation:isolate;overflow:hidden;background:#0a1628;border-radius:24px;max-width:1360px;margin:0 auto;min-height:clamp(520px,70vh,760px);display:flex;align-items:center;padding:clamp(56px,8vw,104px) clamp(28px,6vw,96px);}
+    /* photo layer: anchored right, feathered into the navy on its left edge */
+    #omni-hero .hero-photo{position:absolute;top:0;bottom:0;right:0;left:var(--hero-inset);z-index:-2;display:block;overflow:hidden;
+      -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 14%,#000 32%);
+      mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 14%,#000 32%);}
+    #omni-hero .hero-bg{width:100%;height:100%;object-fit:cover;object-position:var(--hero-focus);display:block;}
     #omni-hero .hero-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;
       background:
-        linear-gradient(180deg,rgba(10,22,40,0.35) 0%,rgba(10,22,40,0) 30%,rgba(10,22,40,0) 60%,rgba(10,22,40,0.55) 100%),
-        linear-gradient(100deg,rgba(10,22,40,0.96) 0%,rgba(10,22,40,0.90) 36%,rgba(10,22,40,0.62) 60%,rgba(10,22,40,0.28) 100%);}
-    #omni-hero .hero-shade::after{content:'';position:absolute;left:-160px;top:-200px;width:640px;height:640px;background:radial-gradient(circle,rgba(201,168,76,0.22) 0%,transparent 68%);pointer-events:none;}
-    #omni-hero .hero-content{position:relative;max-width:700px;text-align:left;}
-    #omni-hero .hero-eyebrow{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#e0c872;margin:0 0 20px;display:flex;align-items:center;gap:14px;}
-    #omni-hero .hero-eyebrow::before{content:'';display:inline-block;width:36px;height:2px;background:#c9a84c;flex:none;}
-    #omni-hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,6.4vw,84px);font-weight:700;line-height:1.04;letter-spacing:-1px;color:#ffffff;margin:0 0 24px;max-width:14ch;text-transform:none;text-shadow:0 2px 24px rgba(10,22,40,0.45);}
-    #omni-hero .hero-sub{font-family:'Montserrat',sans-serif;font-weight:700;font-style:italic;font-size:clamp(16px,1.9vw,21px);line-height:1.5;color:#c9a84c;margin:0;max-width:560px;}
-    #omni-hero .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;}
-    #omni-hero .hero-btn,#omni-hero .hero-btn:link,#omni-hero .hero-btn:visited{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;}
+        linear-gradient(180deg,rgba(10,22,40,0.30) 0%,rgba(10,22,40,0) 28%,rgba(10,22,40,0) 70%,rgba(10,22,40,0.45) 100%),
+        linear-gradient(90deg,rgba(10,22,40,0.97) 0%,rgba(10,22,40,0.97) 30%,rgba(10,22,40,0.70) 40%,rgba(10,22,40,0.22) 52%,rgba(10,22,40,0.10) 100%);}
+    #omni-hero .hero-shade::after{content:'';position:absolute;left:-180px;top:-220px;width:620px;height:620px;background:radial-gradient(circle,rgba(201,168,76,0.20) 0%,transparent 68%);pointer-events:none;}
+    #omni-hero .hero-content{position:relative;max-width:540px;text-align:left;}
+    #omni-hero .hero-eyebrow{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e0c872;margin:0 0 16px;display:flex;align-items:center;gap:12px;white-space:nowrap;}
+    #omni-hero .hero-eyebrow::before{content:'';display:inline-block;width:30px;height:2px;background:#c9a84c;flex:none;}
+    #omni-hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,4.2vw,58px);font-weight:700;line-height:1.08;letter-spacing:-0.6px;color:#ffffff;margin:0 0 18px;max-width:14ch;text-transform:none;text-shadow:0 2px 20px rgba(10,22,40,0.45);}
+    #omni-hero .hero-sub{font-family:'Montserrat',sans-serif;font-weight:700;font-style:italic;font-size:clamp(15px,1.4vw,18px);line-height:1.5;color:#c9a84c;margin:0;max-width:460px;}
+    #omni-hero .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+    #omni-hero .hero-btn,#omni-hero .hero-btn:link,#omni-hero .hero-btn:visited{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 24px;border-radius:999px;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;text-decoration:none;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;}
     #omni-hero .hero-btn--primary,#omni-hero .hero-btn--primary:link,#omni-hero .hero-btn--primary:visited{background:#c9a84c;color:#0a1628;border:1.5px solid #c9a84c;}
     #omni-hero .hero-btn--primary:hover,#omni-hero .hero-btn--primary:focus-visible{background:#e0c872;border-color:#e0c872;color:#0a1628;transform:translateY(-1px);}
     #omni-hero .hero-btn--ghost,#omni-hero .hero-btn--ghost:link,#omni-hero .hero-btn--ghost:visited{background:rgba(10,22,40,0.25);color:#ffffff;border:1.5px solid rgba(255,255,255,0.5);backdrop-filter:blur(4px);}
@@ -437,18 +440,31 @@ OmniFit | Site-wide Header Injection · Sept 2026
     #omni-hero .hero-btn:focus-visible{outline:3px solid #e0c872;outline-offset:3px;}
     @media (prefers-reduced-motion:no-preference){
       #omni-hero .hero-bg{animation:omni-hero-settle 14s ease-out both;}
-      @keyframes omni-hero-settle{from{transform:scale(1.07);}to{transform:scale(1);}}
+      @keyframes omni-hero-settle{from{transform:scale(1.06);}to{transform:scale(1);}}
+    }
+    @media (max-width:1023px){
+      #omni-hero .hero-card{--hero-inset:30%;}
     }
     @media (max-width:768px){
       #omni-hero{padding:0;}
-      #omni-hero .hero-card{--hero-focus:58% 30%;border-radius:0;min-height:min(78vh,640px);padding:64px 22px 56px;align-items:flex-end;}
+      #omni-hero .hero-card{--hero-inset:0;--hero-focus:52% 100%;border-radius:0;min-height:min(92svh,800px);padding:56px 22px 36px;align-items:flex-end;}
+      /* zoom from the bottom so both faces clear the copy block */
+      #omni-hero .hero-photo{transform:scale(1.2);transform-origin:50% 100%;-webkit-mask-image:none;mask-image:none;}
       #omni-hero .hero-shade{background:
-        linear-gradient(180deg,rgba(10,22,40,0.55) 0%,rgba(10,22,40,0.30) 28%,rgba(10,22,40,0.86) 58%,rgba(10,22,40,0.97) 100%);}
+        linear-gradient(180deg,rgba(10,22,40,0.60) 0%,rgba(10,22,40,0.18) 22%,rgba(10,22,40,0.12) 44%,rgba(10,22,40,0.82) 60%,rgba(10,22,40,0.97) 100%);}
       #omni-hero .hero-shade::after{display:none;}
-      #omni-hero h1{letter-spacing:-0.5px;margin-bottom:18px;}
-      #omni-hero .hero-eyebrow{margin-bottom:16px;}
-      #omni-hero .hero-actions{margin-top:28px;gap:10px;}
-      #omni-hero .hero-btn{flex:1 1 100%;}
+      #omni-hero .hero-content{max-width:none;}
+      #omni-hero h1{font-size:clamp(32px,9vw,38px);letter-spacing:-0.4px;margin-bottom:12px;}
+      #omni-hero .hero-sub{font-size:15px;max-width:none;}
+      /* shorter eyebrow on one line; secondary CTA becomes a text link so the
+         copy block stays short enough for both faces to clear it */
+      #omni-hero .hero-eyebrow{margin-bottom:12px;font-size:10.5px;letter-spacing:1.6px;gap:10px;}
+      #omni-hero .hero-eyebrow::before{width:22px;}
+      #omni-hero .hero-eyebrow__more{display:none;}
+      #omni-hero .hero-actions{margin-top:20px;gap:8px;flex-direction:column;align-items:stretch;}
+      #omni-hero .hero-btn--primary{min-height:48px;}
+      #omni-hero .hero-btn--ghost,#omni-hero .hero-btn--ghost:link,#omni-hero .hero-btn--ghost:visited{background:none;border:0;backdrop-filter:none;min-height:0;padding:10px 0 0;justify-content:center;color:#e0c872;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(224,200,114,0.6);}
+      #omni-hero .hero-btn--ghost:hover,#omni-hero .hero-btn--ghost:focus-visible{color:#ffffff;}
     }
   </style>
 <style>
@@ -1687,26 +1703,26 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 </header>
 <main id="main">
-<!-- OMNIFIT | HOMEPAGE HERO · v2 OCTOBER 2026
+<!-- OMNIFIT | HOMEPAGE HERO · v3 OCTOBER 2026
   Built for the static site (build.py prepends it to the homepage via
   HOME_ORDER). Not a Squarespace Code Block.
   - The only top-level heading on the homepage: home-2, home-3 and home-4 were demoted to h2.
   - Navy card with rounded corners on a white strip (the header above is
     white); ~40px side margins on desktop, flush at phone widths.
-  v2 changes:
-  - Full-bleed background photo inside the card (the same image the site's
-    JSON-LD already names as the homepage ImageObject), with a navy
-    left-to-right gradient so the copy stays legible whatever the photo shows.
-    If the image fails to load the card is plain navy, as v1 was.
-  - Copy is left-aligned over the darkest part of the gradient; the photo
-    shows through on the right. Move the focal point with --hero-focus.
-  - Eyebrow line above the H1, and a primary + secondary CTA below the
-    subhead (v1 had no CTA by design; remove .hero-actions to go back).
-  - Slow settle-in zoom on the photo, off under prefers-reduced-motion.
-  - The photo is a repo asset (site/img/hero-trainer-coaching-kettlebell-*,
-    served from /assets/img/), not a Squarespace hotlink. It is a 2:3
-    portrait: the card shows a horizontal slice of it on desktop and nearly
-    all of it on phones. --hero-focus picks which slice.
+  v3 changes (from v2):
+  - Smaller copy block: H1 58px max (was 84), subhead 18px max, tighter
+    eyebrow and buttons. Same words.
+  - On desktop the photo is anchored to the right ~64% of the card and
+    feathered into navy on its left edge (mask + gradient), so the client's
+    face sits just right of the copy instead of underneath it. --hero-inset
+    is the photo's left edge; --hero-focus picks the slice of the photo.
+  - On phones the photo fills the card, zoomed 1.2x from the bottom, so both
+    faces sit above the copy block, which is anchored to the bottom.
+  v2 (kept): eyebrow line, primary + secondary CTA (remove .hero-actions to
+  go back to no CTA), slow settle-in zoom off under prefers-reduced-motion,
+  plain navy card if the image fails to load.
+  The photo is a repo asset (site/img/hero-trainer-coaching-kettlebell-*,
+  served from /assets/img/), a 2:3 portrait, not a Squarespace hotlink.
 -->
 <section id="omni-hero" aria-label="Introduction">
   <!-- HERO IMAGE (1/2): preload so the LCP image starts before the stylesheet finishes -->
@@ -1714,13 +1730,13 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   
   <div class="hero-card">
     <!-- HERO IMAGE (2/2): decorative, so alt is empty; the H1 carries the meaning -->
-    <picture>
-      <source type="image/webp" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" sizes="(max-width:768px) 100vw, 1360px">
-      <img class="hero-bg" src="/assets/img/hero-trainer-coaching-kettlebell-1600.jpg" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.jpg 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 1360px" width="1600" height="2400" alt="" fetchpriority="high" decoding="async">
+    <picture class="hero-photo">
+      <source type="image/webp" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
+      <img class="hero-bg" src="/assets/img/hero-trainer-coaching-kettlebell-1600.jpg" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.jpg 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" fetchpriority="high" decoding="async">
     </picture>
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">NASM Elite Trainer · 4S Ranch, San Diego · Virtual Nationwide</p>
+      <p class="hero-eyebrow">NASM Elite Trainer · 4S Ranch, San Diego<span class="hero-eyebrow__more"> · Virtual Nationwide</span></p>
       <h1>San Diego Personal Trainer for Executives</h1>
       <p class="hero-sub">For Professionals Over 30 Who Want Strength, Energy, and Confidence — Without Wasting Time</p>
       <div class="hero-actions">
