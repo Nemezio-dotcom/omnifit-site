@@ -956,44 +956,56 @@ OmniFit | Site-wide Header Injection · Sept 2026
   #omni-rates .rt-fit-col.built-for .rt-fit-list li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 12px; flex-shrink: 0; }
   #omni-rates .rt-fit-col.not-for .rt-fit-list li::before { content: '✕'; color: var(--white-50); font-weight: 700; font-size: 12px; flex-shrink: 0; }
 
-  /* ===== PRICING CARDS (4-col for named packages) ===== */
-  #omni-rates .rt-pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; max-width: 1120px; margin: 0 auto 24px; }
-  #omni-rates .rt-pricing-grid > .rt-price-card { flex: 0 1 268px; width: 268px; max-width: 268px; }
-  #omni-rates .rt-pricing-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1120px; margin: 0 auto 56px; }
-  #omni-rates .rt-pricing-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 20px; }
-  #omni-rates .rt-price-card { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 20px 24px; text-align: left; transition: all 0.4s; position: relative; display: flex; flex-direction: column; }
-  #omni-rates .rt-price-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-  #omni-rates .rt-price-card.featured { border-color: rgba(201,168,76,0.5); box-shadow: 0 8px 32px rgba(0,0,0,0.25); }
-  #omni-rates .rt-price-card.featured:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
 
-  #omni-rates .rt-price-card { position: relative; }
-  #omni-rates .rt-tier-flag { display: inline-block; padding: 5px 12px; border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; border: 1px solid; white-space: nowrap; }
-  #omni-rates .rt-tier-flag.t-entry { color: var(--white-70); border-color: var(--white-20); background: var(--white-05); }
-  #omni-rates .rt-tier-flag.t-common { color: var(--gold-light); border-color: rgba(201,168,76,0.35); background: var(--gold-dim); }
-  #omni-rates .rt-tier-flag.t-popular { color: var(--navy); border-color: var(--gold); background: var(--gold); }
-  #omni-rates .rt-tier-flag.t-max { color: var(--white); border-color: var(--white-30); background: var(--navy-surface); }
-  #omni-rates .rt-bestfor { font-family: 'Montserrat', sans-serif !important; font-size: 12.5px; line-height: 1.6; color: var(--white-90); margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--white-10); }
-  #omni-rates .rt-bestfor strong { color: var(--gold-light); font-weight: 600; }
-  #omni-rates .rt-price-name { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-  #omni-rates .rt-price-freq { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-70); margin-bottom: 16px; }
-  #omni-rates .rt-price-value { font-family: 'Playfair Display', serif !important; font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 4px; }
-  #omni-rates .rt-price-value span { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); font-weight: 400; }
-  #omni-rates .rt-price-upfront { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); margin-bottom: 2px; }
-  #omni-rates .rt-price-m2m { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); margin-bottom: 16px; }
-  #omni-rates .rt-price-unit { font-family: 'Montserrat', sans-serif !important; font-size: 13px; color: var(--white-50); margin-bottom: 14px; }
-  #omni-rates .rt-price-bestfor { font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.6; color: var(--white-90); margin-bottom: 16px; }
-  #omni-rates .rt-price-bestfor strong { color: var(--white); }
+  /* ===== PATH CHOOSER (who each option is for) ===== */
+  #omni-rates .rt-wrap { padding: 0 28px; }
+  #omni-rates .rt-paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1120px; margin: 0 auto 16px; }
+  #omni-rates .rt-path, #omni-rates a.rt-path, #omni-rates a.rt-path:link, #omni-rates a.rt-path:visited { display: flex; flex-direction: column; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 22px 22px 18px; text-decoration: none; color: var(--white) !important; transition: all 0.3s; }
+  #omni-rates .rt-path:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+  #omni-rates .rt-path.featured { border-color: rgba(201,168,76,0.5); }
+  #omni-rates .rt-path-who { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  #omni-rates .rt-path-name { font-family: 'Playfair Display', serif !important; font-size: 24px; font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 6px; }
+  #omni-rates .rt-path-name em { font-style: italic; color: var(--gold); }
+  #omni-rates .rt-path-fit { font-family: 'Montserrat', sans-serif !important; font-size: 13.5px; line-height: 1.6; color: var(--white-70); margin-bottom: 14px; }
+  #omni-rates .rt-path-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; border-top: 1px solid var(--white-10); padding-top: 12px; margin-top: auto; }
+  #omni-rates .rt-path-from { font-family: 'Playfair Display', serif !important; font-size: 20px; font-weight: 700; color: var(--white); line-height: 1; }
+  #omni-rates .rt-path-from span { font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); font-weight: 400; }
+  #omni-rates .rt-path-go { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+  #omni-rates .rt-path-go::after { content: ' \203A'; font-size: 14px; line-height: 0; }
+  #omni-rates .rt-paths-also { font-family: 'Montserrat', sans-serif !important; text-align: center; font-size: 13px; line-height: 1.7; color: var(--white-50); max-width: 760px; margin: 0 auto 56px; }
+  #omni-rates .rt-paths-also a, #omni-rates .rt-paths-also a:link, #omni-rates .rt-paths-also a:visited { color: var(--gold) !important; text-decoration: underline; }
 
-  #omni-rates .rt-price-features { list-style: none; padding: 0; display: grid; gap: 8px; margin-bottom: 18px; flex: 1; }
-  #omni-rates .rt-price-features li { display: flex; gap: 10px; align-items: flex-start; font-family: 'Montserrat', sans-serif !important; font-size: 13px; line-height: 1.6; color: var(--white-70); }
-  #omni-rates .rt-price-features li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 11px; flex-shrink: 0; margin-top: 2px; }
+  /* ===== RATE LADDERS (compact rows grouped by setting) ===== */
+  #omni-rates .rt-ladder { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 20px; align-items: start; }
+  #omni-rates .rt-ladder-1 { grid-template-columns: 1fr; max-width: 760px; }
+  #omni-rates .rt-group { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); overflow: hidden; }
+  #omni-rates .rt-group-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 16px 20px 12px; border-bottom: 1px solid var(--white-10); }
+  #omni-rates .rt-group-name { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
+  #omni-rates .rt-group-note { font-family: 'Montserrat', sans-serif !important; font-size: 11.5px; line-height: 1.4; color: var(--white-50); text-align: right; }
+  #omni-rates .rt-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 14px; row-gap: 2px; padding: 14px 20px; align-items: baseline; }
+  #omni-rates .rt-row + .rt-row { border-top: 1px solid var(--white-05); }
+  #omni-rates .rt-row.featured { background: var(--gold-dim); }
+  #omni-rates .rt-row-name { font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.3; }
+  #omni-rates .rt-row-tag { display: inline-block; vertical-align: middle; margin-left: 8px; padding: 3px 9px; border-radius: 100px; background: var(--gold); color: var(--navy); font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; white-space: nowrap; }
+  #omni-rates .rt-row-freq { font-family: 'Montserrat', sans-serif !important; font-size: 12.5px; color: var(--white-70); line-height: 1.5; }
+  #omni-rates .rt-row-price { font-family: 'Playfair Display', serif !important; font-size: 22px; font-weight: 700; color: var(--white); text-align: right; white-space: nowrap; line-height: 1; }
+  #omni-rates .rt-row-price span { font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); font-weight: 400; }
+  #omni-rates .rt-row-sub { font-family: 'Montserrat', sans-serif !important; font-size: 11.5px; color: var(--white-50); line-height: 1.5; }
+  #omni-rates .rt-row-freq, #omni-rates .rt-row-sub { grid-column: 1 / -1; }
+  #omni-rates .rt-row-info { grid-column: 1 / -1; font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); line-height: 1.55; margin-top: 2px; }
+  #omni-rates .rt-ladder-cta { text-align: center; max-width: 1120px; margin: 4px auto 20px; }
 
-  #omni-rates .rt-price-note { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); line-height: 1.6; margin-bottom: 16px; }
-  #omni-rates .rt-price-note strong { color: var(--white-70); }
-  #omni-rates .rt-price-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; }
-  #omni-rates .rt-price-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
-  #omni-rates .rt-price-title { font-family: 'Montserrat', sans-serif !important; font-size: 18px; font-weight: 700; color: var(--white); line-height: 1.25; }
-  #omni-rates .rt-price-tag { display: inline-block; padding: 6px 14px; border: 1px solid var(--gold); color: var(--gold); background: var(--gold-dim); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; }
+  /* ===== SESSION PACKS (one table, venues as rows) ===== */
+  #omni-rates .rt-packs { max-width: 760px; margin: 0 auto 20px; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); overflow: hidden; }
+  #omni-rates .rt-packs-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 12px; padding: 14px 20px; align-items: center; }
+  #omni-rates .rt-packs-row + .rt-packs-row { border-top: 1px solid var(--white-05); }
+  #omni-rates .rt-packs-row.head { background: var(--white-05); padding: 12px 20px; border-bottom: 1px solid var(--white-10); }
+  #omni-rates .rt-packs-h { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); }
+  #omni-rates .rt-packs-h small { display: block; font-size: 10.5px; letter-spacing: 0; text-transform: none; color: var(--white-50); font-weight: 500; margin-top: 3px; }
+  #omni-rates .rt-packs-venue { font-family: 'Montserrat', sans-serif !important; font-size: 14px; font-weight: 700; color: var(--white); line-height: 1.3; }
+  #omni-rates .rt-packs-venue small { display: block; font-size: 11.5px; color: var(--white-50); font-weight: 400; margin-top: 2px; }
+  #omni-rates .rt-packs-price { font-family: 'Playfair Display', serif !important; font-size: 20px; font-weight: 700; color: var(--white); line-height: 1; }
+  #omni-rates .rt-packs-price small { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 11px; color: var(--white-50); font-weight: 400; margin-top: 5px; }
 
   /* ===== FEATURE BAND ===== */
   #omni-rates .rt-feature { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 32px 28px; max-width: 1120px; margin: 0 auto 20px; }
@@ -1025,20 +1037,6 @@ OmniFit | Site-wide Header Injection · Sept 2026
   #omni-rates .rt-addon-price { font-family: 'Playfair Display', serif !important; font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
   #omni-rates .rt-addon p { font-size: 13px; color: var(--white-50); line-height: 1.65; }
 
-  /* ===== SESSION PACKS ===== */
-
-  /* ===== SESSION PACK TILES ===== */
-  #omni-rates .rt-packs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 20px; }
-  #omni-rates .rt-pack { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px 22px 24px; transition: all 0.4s; display: flex; flex-direction: column; }
-  #omni-rates .rt-pack:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-  #omni-rates .rt-pack-name { font-family: 'Playfair Display', serif !important; font-size: 26px; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 4px; }
-  #omni-rates .rt-pack-expiry { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--white-50); margin-bottom: 18px; }
-  #omni-rates .rt-pack-venue { border-top: 1px solid var(--white-10); padding: 14px 0 0; margin-top: 4px; }
-  #omni-rates .rt-pack-venue:first-of-type { border-top: none; padding-top: 0; }
-  #omni-rates .rt-pack-venue-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
-  #omni-rates .rt-pack-total { font-family: 'Playfair Display', serif !important; font-size: 24px; font-weight: 700; color: var(--white); line-height: 1.1; }
-  #omni-rates .rt-pack-per { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-50); margin-bottom: 14px; }
-  #omni-rates .rt-pack-cta { margin-top: auto; padding-top: 16px; }
   /* ===== POLICIES ===== */
   #omni-rates .rt-policies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 56px; }
   #omni-rates .rt-policy { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
@@ -1074,10 +1072,8 @@ OmniFit | Site-wide Header Injection · Sept 2026
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 980px) {
-    #omni-rates .rt-pricing-grid > .rt-price-card { flex-basis: 300px; width: 300px; max-width: 300px; }
-    #omni-rates .rt-pricing-grid-3 { grid-template-columns: repeat(2, 1fr); }
-    #omni-rates .rt-packs-grid { grid-template-columns: repeat(3, 1fr); }
-    #omni-rates .rt-pricing-grid-2 { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
+    #omni-rates .rt-ladder { grid-template-columns: repeat(2, 1fr); }
+    #omni-rates .rt-ladder-1 { grid-template-columns: 1fr; }
     #omni-rates .rt-feature-grid { grid-template-columns: 1fr; gap: 20px; }
     #omni-rates .rt-fit-grid { grid-template-columns: 1fr; }
     #omni-rates .rt-addons-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1086,12 +1082,18 @@ OmniFit | Site-wide Header Injection · Sept 2026
   @media (max-width: 768px) {
     #omni-rates .rt-hero { padding: 56px 20px 36px; }
     #omni-rates .rt-section { padding: 0 20px; }
+    #omni-rates .rt-wrap { padding: 0 20px; }
     #omni-rates .rt-includes { margin-left: 20px; margin-right: 20px; }
     #omni-rates .rt-fit-grid { margin-left: 20px; margin-right: 20px; }
-    #omni-rates .rt-pricing-grid { padding: 0 20px; }
-    #omni-rates .rt-pricing-grid > .rt-price-card { flex-basis: 100%; width: 100%; max-width: 400px; }
-    #omni-rates .rt-pricing-grid-3 { grid-template-columns: 1fr 1fr; padding: 0 20px; }
-    #omni-rates .rt-packs-grid { grid-template-columns: 1fr; padding: 0 20px; max-width: 420px; }
+    #omni-rates .rt-paths { grid-template-columns: 1fr; gap: 10px; }
+    #omni-rates .rt-path { padding: 18px 18px 14px; }
+    #omni-rates .rt-path-name { font-size: 21px; }
+    #omni-rates .rt-ladder { grid-template-columns: 1fr; gap: 12px; }
+    #omni-rates .rt-group-head { padding: 14px 16px 10px; }
+    #omni-rates .rt-row { padding: 12px 16px; }
+    #omni-rates .rt-row-price { font-size: 20px; }
+    #omni-rates .rt-packs-row { grid-template-columns: 1.3fr 1fr 1fr; padding: 12px 16px; gap: 8px; }
+    #omni-rates .rt-packs-price { font-size: 18px; }
     #omni-rates .rt-feature { margin-left: 20px; margin-right: 20px; }
     #omni-rates .rt-addons-grid { grid-template-columns: 1fr; padding: 0 20px; }
     #omni-rates .rt-policies { grid-template-columns: 1fr; padding: 0 20px; }
@@ -1100,12 +1102,12 @@ OmniFit | Site-wide Header Injection · Sept 2026
     #omni-rates .rt-assess { margin-left: 20px; margin-right: 20px; }
   }
   @media (max-width: 640px) {
-    #omni-rates .rt-pricing-grid > .rt-price-card { max-width: 100%; }
-    #omni-rates .rt-pricing-grid-3 { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
     #omni-rates .rt-cta-row { flex-direction: column; align-items: center; }
     #omni-rates .rt-btn { width: 100%; max-width: 300px; text-align: center; }
-    #omni-rates .rt-price-cta { flex-direction: column; }
-    #omni-rates .rt-price-cta .rt-btn { width: 100%; text-align: center; }
+    #omni-rates .rt-row { align-items: center; }
+    #omni-rates .rt-group-head { flex-direction: column; align-items: flex-start; gap: 2px; }
+    #omni-rates .rt-group-note { text-align: left; }
+    #omni-rates .rt-paths-also { font-size: 12.5px; }
   }
 </style>
 </head>
@@ -1191,12 +1193,14 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
   </div>
 </header>
 <main id="main">
-<!-- ===== OMNIFIT PERFORMANCE RATES PAGE — V11 (OCTOBER 2026 CARD) ===== -->
+<!-- ===== OMNIFIT PERFORMANCE RATES PAGE — V12 (OCTOBER 2026 CARD, LAYOUT REDESIGN) ===== -->
 <!-- SLUG: /training-rates-san-diego -->
 <!-- SQUARESPACE: Paste into a Code Block (Display Source OFF) on a blank page -->
 <!-- V8 CHANGES: retired hybrid product removed (both venues + FAQ + schema) · 2.9% card fee removed everywhere · Tune-Up added after Session Packages. -->
 <!-- V9/V10 CHANGES: guest add-on corrections. SUPERSEDED by V11. -->
 <!-- V11 CHANGES: October 2026 card. The Foundation and The Program replace the four venue ladders; the unlisted entry tier, 10- and 20-packs retired; assessment repriced; Reset, Tune-Up and add-ons retiered. Page and header rebuilt together. -->
+<!-- V12 CHANGES: layout only, no price or FAQ changes. Path chooser added under the hero (Foundation = new clients, Program = experienced and committed, Sessions = flexibility). Per-tier cards replaced by compact rate ladders grouped by setting; session packs collapsed to one table; Reset tiers to one ladder. Built For / Not the Right Fit moved below the rates. -->
+
 
 
 
@@ -1209,7 +1213,7 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
     <p class="rt-hero-sub">Structured coaching programs for busy professionals 30+, in-studio, in-home, or virtual. Every rate on this page, in full, with no activation fees and nothing added at checkout.</p>
     <div class="rt-cta-row">
       <a class="rt-btn rt-btn-primary" href="/contactform">Book Your Assessment</a>
-      <a class="rt-btn rt-btn-ghost" href="#rt-faq">View FAQs</a>
+      <a class="rt-btn rt-btn-ghost" href="#rt-paths">Compare Programs</a>
     </div>
   </section>
 
@@ -1219,11 +1223,38 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
     </div>
   </div>
 
-  <!-- QUOTABLE -->
-  <div style="padding: 0 28px;">
-    <blockquote class="rt-quotable">
-      <p>"Every OmniFit Performance program includes a monthly clinical-grade body composition assessment, custom programming built on the OmniFit 4-phase methodology, nutrition guidance, and weekly accountability — not just the hour in the gym."</p>
-    </blockquote>
+  <!-- ═══════ PATH CHOOSER ═══════ -->
+  <div class="rt-section" id="rt-paths">
+    <div class="rt-section-head" style="margin-bottom:28px;">
+      <span class="rt-label">Start With the Right Fit</span>
+      <hr class="rt-divider">
+      <h2>Which Path Is <em>Yours</em>?</h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:620px; margin:8px auto 0;">Three ways to train with OmniFit. Pick the one that matches where you are, then choose your setting and frequency below.</p>
+    </div>
+  </div>
+
+  <div class="rt-wrap">
+    <div class="rt-paths">
+      <a class="rt-path" href="#rt-foundation">
+        <span class="rt-path-who">New to structured training</span>
+        <span class="rt-path-name">The <em>Foundation</em></span>
+        <span class="rt-path-fit">Your first twelve weeks, paid in full and discounted for that reason. Learn the method, build the habit, and get your baseline data.</span>
+        <span class="rt-path-meta"><span class="rt-path-from">from $560 <span>per cycle</span></span><span class="rt-path-go">See rates</span></span>
+      </a>
+      <a class="rt-path featured" href="#rt-program">
+        <span class="rt-path-who">Experienced and committed to results</span>
+        <span class="rt-path-name">The <em>Program</em></span>
+        <span class="rt-path-fit">Ongoing coaching for Foundation graduates and clients with prior training experience who are committed to the work. Billed every 4 weeks.</span>
+        <span class="rt-path-meta"><span class="rt-path-from">from $640 <span>per 4 weeks</span></span><span class="rt-path-go">See rates</span></span>
+      </a>
+      <a class="rt-path" href="#rt-sessions">
+        <span class="rt-path-who">Time-crunched, need flexibility</span>
+        <span class="rt-path-name">Session <em>Packages</em></span>
+        <span class="rt-path-fit">Prepaid sessions with no program and no facility membership required. Train when your calendar allows.</span>
+        <span class="rt-path-meta"><span class="rt-path-from">from $180 <span>per session</span></span><span class="rt-path-go">See rates</span></span>
+      </a>
+    </div>
+    <p class="rt-paths-also">Not in San Diego, or prefer to train remotely? <a href="#rt-reset">The Executive Reset</a> is live virtual coaching from $200 per 4 weeks. Finished a program? <a href="#rt-tuneup">The Tune-Up</a> keeps graduates in orbit from $295 per 4 weeks.</p>
   </div>
 
   <!-- ASSESSMENT HIGHLIGHT -->
@@ -1255,35 +1286,15 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
       </div>
     </div>
   </div>
-
-  <!-- BUILT FOR / NOT THE RIGHT FIT -->
+  <!-- QUOTABLE -->
   <div style="padding: 0 28px;">
-    <div class="rt-fit-grid">
-      <div class="rt-fit-col built-for">
-        <span class="rt-fit-label">Built For</span>
-        <ul class="rt-fit-list">
-          <li>Professionals 30+ managing demanding schedules</li>
-          <li>People with joint issues or injury history who need corrective-first training</li>
-          <li>Executives who want structured accountability, not random workouts</li>
-          <li>Anyone ready to commit to consistent, measurable progress</li>
-          <li>Travelers who need a program that works anywhere</li>
-        </ul>
-      </div>
-      <div class="rt-fit-col not-for">
-        <span class="rt-fit-label">Not the Right Fit</span>
-        <ul class="rt-fit-list">
-          <li>Looking for drop-in classes or group workouts</li>
-          <li>Want the cheapest option available</li>
-          <li>Prefer to train without coaching feedback or accountability</li>
-          <li>Looking for a 6-week quick fix or crash program</li>
-          <li>Not willing to follow a structured plan between sessions</li>
-        </ul>
-      </div>
-    </div>
+    <blockquote class="rt-quotable">
+      <p>"Every OmniFit Performance program includes a monthly clinical-grade body composition assessment, custom programming built on the OmniFit 4-phase methodology, nutrition guidance, and weekly accountability — not just the hour in the gym."</p>
+    </blockquote>
   </div>
 
   <!-- ═══════ THE FOUNDATION ═══════ -->
-  <div class="rt-section">
+  <div class="rt-section" id="rt-foundation">
     <div class="rt-section-head">
       <span class="rt-label">New Clients</span>
       <hr class="rt-divider">
@@ -1292,90 +1303,55 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
     </div>
   </div>
 
-  <div class="rt-pricing-grid" style="padding:0 28px;">
+  <div class="rt-wrap">
+    <div class="rt-ladder">
 
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-entry">Studio</div>
-      <div class="rt-price-name">Studio Momentum</div>
-      <div class="rt-price-freq">1 session per week</div>
-      <div class="rt-price-value">$1,680 <span>paid in full</span></div>
-      <div class="rt-price-upfront">$560 per cycle — $640 on The Program</div>
-      <ul class="rt-price-features">
-        <li>Three consecutive 4-week cycles</li>
-        <li>Weekly coaching touchpoint</li>
-        <li>Teqneeq membership required</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      <div class="rt-group">
+        <div class="rt-group-head"><span class="rt-group-name">Studio</span><span class="rt-group-note">Teqneeq membership required</span></div>
+        <div class="rt-row">
+          <div class="rt-row-name">Momentum</div>
+          <div class="rt-row-price">$1,680 <span>paid in full</span></div>
+          <div class="rt-row-freq">1 session per week</div>
+          <div class="rt-row-sub">$560 per cycle · $640 on The Program</div>
+        </div>
+        <div class="rt-row featured">
+          <div class="rt-row-name">Performance <span class="rt-row-tag">Most Popular</span></div>
+          <div class="rt-row-price">$3,300 <span>paid in full</span></div>
+          <div class="rt-row-freq">2 sessions per week, optimal training frequency</div>
+          <div class="rt-row-sub">$1,100 per cycle · $1,250 on The Program</div>
+        </div>
       </div>
-    </article>
 
-    <article class="rt-price-card featured">
-            <div class="rt-tier-flag t-popular">Studio</div>
-      <div class="rt-price-name">Studio Performance</div>
-      <div class="rt-price-freq">2 sessions per week</div>
-      <div class="rt-price-value">$3,300 <span>paid in full</span></div>
-      <div class="rt-price-upfront">$1,100 per cycle — $1,250 on The Program</div>
-      <ul class="rt-price-features">
-        <li>Three consecutive 4-week cycles</li>
-        <li>Optimal training frequency</li>
-        <li>Teqneeq membership required</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      <div class="rt-group">
+        <div class="rt-group-head"><span class="rt-group-name">In-Home</span><span class="rt-group-note">We bring the equipment, no membership needed</span></div>
+        <div class="rt-row">
+          <div class="rt-row-name">Momentum</div>
+          <div class="rt-row-price">$2,400 <span>paid in full</span></div>
+          <div class="rt-row-freq">1 session per week</div>
+          <div class="rt-row-sub">$800 per cycle · $900 on The Program</div>
+        </div>
       </div>
-    </article>
 
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">In-Home</div>
-      <div class="rt-price-name">In-Home Momentum</div>
-      <div class="rt-price-freq">1 session per week</div>
-      <div class="rt-price-value">$2,400 <span>paid in full</span></div>
-      <div class="rt-price-upfront">$800 per cycle — $900 on The Program</div>
-      <ul class="rt-price-features">
-        <li>Three consecutive 4-week cycles</li>
-        <li>We bring the equipment</li>
-        <li>No facility membership needed</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      <div class="rt-group">
+        <div class="rt-group-head"><span class="rt-group-name">Couples</span><span class="rt-group-note">Rates are per couple, not per person</span></div>
+        <div class="rt-row">
+          <div class="rt-row-name">Studio Momentum</div>
+          <div class="rt-row-price">$2,550 <span>paid in full</span></div>
+          <div class="rt-row-freq">1 session per week, both partners</div>
+          <div class="rt-row-sub">$850 per cycle · $1,000 on The Program</div>
+          <div class="rt-row-info">Teqneeq membership required for both.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">In-Home Momentum</div>
+          <div class="rt-row-price">$3,750 <span>paid in full</span></div>
+          <div class="rt-row-freq">1 session per week, both partners</div>
+          <div class="rt-row-sub">$1,250 per cycle · $1,450 on The Program</div>
+          <div class="rt-row-info">We bring the equipment.</div>
+        </div>
       </div>
-    </article>
-  </div>
 
-  <div class="rt-pricing-grid" style="padding:0 28px;">
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">Couples</div>
-      <div class="rt-price-name">Studio Couples Momentum</div>
-      <div class="rt-price-freq">1 session per week, both partners</div>
-      <div class="rt-price-value">$2,550 <span>paid in full</span></div>
-      <div class="rt-price-upfront">$850 per cycle — $1,000 on The Program</div>
-      <ul class="rt-price-features">
-        <li>Three consecutive 4-week cycles</li>
-        <li>Rates are per couple, not per person</li>
-        <li>Teqneeq membership required for both</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-max">Couples</div>
-      <div class="rt-price-name">In-Home Couples Momentum</div>
-      <div class="rt-price-freq">1 session per week, both partners</div>
-      <div class="rt-price-value">$3,750 <span>paid in full</span></div>
-      <div class="rt-price-upfront">$1,250 per cycle — $1,450 on The Program</div>
-      <ul class="rt-price-features">
-        <li>Three consecutive 4-week cycles</li>
-        <li>Rates are per couple, not per person</li>
-        <li>We bring the equipment</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
+    </div>
+    <div class="rt-ladder-cta"><a class="rt-btn rt-btn-primary" href="/contactform">Start With the Foundation</a></div>
   </div>
 
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
@@ -1385,8 +1361,9 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <div class="rt-spacer-sm"></div>
 
+
   <!-- ═══════ THE PROGRAM ═══════ -->
-  <div class="rt-section">
+  <div class="rt-section" id="rt-program">
     <div class="rt-section-head">
       <span class="rt-label">Ongoing Coaching</span>
       <hr class="rt-divider">
@@ -1395,173 +1372,77 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
     </div>
   </div>
 
-  <div class="rt-pricing-grid" style="padding:0 28px;">
+  <div class="rt-wrap">
+    <div class="rt-ladder">
 
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">Couples</div>
-      <div class="rt-price-name">Studio Couples Momentum</div>
-      <div class="rt-price-freq">1 session per week, both partners</div>
-      <div class="rt-price-value">$1,000 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Rates are per couple, not per person</li>
-        <li>Teqneeq membership required for both</li>
-        <li>Programming set individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      <div class="rt-group">
+        <div class="rt-group-head"><span class="rt-group-name">Studio</span><span class="rt-group-note">Teqneeq membership required</span></div>
+        <div class="rt-row">
+          <div class="rt-row-name">Momentum</div>
+          <div class="rt-row-price">$640 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">1 session per week, weekly coaching touchpoint</div>
+        </div>
+        <div class="rt-row featured">
+          <div class="rt-row-name">Performance <span class="rt-row-tag">Most Popular</span></div>
+          <div class="rt-row-price">$1,250 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">2 sessions per week, optimal training frequency</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">Peak</div>
+          <div class="rt-row-price">$1,800 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">3 sessions per week, maximum coaching frequency</div>
+        </div>
       </div>
-    </article>
 
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-popular">Couples</div>
-      <div class="rt-price-name">Studio Couples Performance</div>
-      <div class="rt-price-freq">2 sessions per week, both partners</div>
-      <div class="rt-price-value">$2,000 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Direct entry only, not on the Foundation</li>
-        <li>Teqneeq membership required for both</li>
-        <li>Programming set individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      <div class="rt-group">
+        <div class="rt-group-head"><span class="rt-group-name">In-Home</span><span class="rt-group-note">We bring the equipment, across North County San Diego</span></div>
+        <div class="rt-row">
+          <div class="rt-row-name">Momentum</div>
+          <div class="rt-row-price">$900 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">1 session per week</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">Performance</div>
+          <div class="rt-row-price">$1,800 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">2 sessions per week</div>
+          <div class="rt-row-info">Direct entry only, not on the Foundation.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">Peak</div>
+          <div class="rt-row-price">from $2,600 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">3 sessions per week</div>
+          <div class="rt-row-info">Priced by travel and scope, arranged individually.</div>
+        </div>
       </div>
-    </article>
 
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">Couples</div>
-      <div class="rt-price-name">In-Home Couples Momentum</div>
-      <div class="rt-price-freq">1 session per week, both partners</div>
-      <div class="rt-price-value">$1,450 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Rates are per couple, not per person</li>
-        <li>We bring the equipment</li>
-        <li>Programming set individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      <div class="rt-group">
+        <div class="rt-group-head"><span class="rt-group-name">Couples</span><span class="rt-group-note">Rates are per couple, programming set individually</span></div>
+        <div class="rt-row">
+          <div class="rt-row-name">Studio Momentum</div>
+          <div class="rt-row-price">$1,000 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">1 session per week, both partners</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">Studio Performance</div>
+          <div class="rt-row-price">$2,000 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">2 sessions per week, both partners</div>
+          <div class="rt-row-info">Direct entry only, not on the Foundation. Teqneeq membership required for both.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">In-Home Momentum</div>
+          <div class="rt-row-price">$1,450 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">1 session per week, both partners</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">In-Home Performance</div>
+          <div class="rt-row-price">$2,900 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">2 sessions per week, both partners</div>
+          <div class="rt-row-info">Direct entry only, not on the Foundation.</div>
+        </div>
       </div>
-    </article>
 
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-max">Couples</div>
-      <div class="rt-price-name">In-Home Couples Performance</div>
-      <div class="rt-price-freq">2 sessions per week, both partners</div>
-      <div class="rt-price-value">$2,900 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Direct entry only, not on the Foundation</li>
-        <li>We bring the equipment</li>
-        <li>Programming set individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-  </div>
-
-  <div class="rt-pricing-grid" style="padding:0 28px;">
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-entry">Studio</div>
-      <div class="rt-price-name">Studio Momentum</div>
-      <div class="rt-price-freq">1 session per week</div>
-      <div class="rt-price-value">$640 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Weekly coaching touchpoint</li>
-        <li>Full program inclusions</li>
-        <li>Teqneeq membership required</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card featured">
-            <div class="rt-tier-flag t-popular">Studio</div>
-      <div class="rt-price-name">Studio Performance</div>
-      <div class="rt-price-freq">2 sessions per week</div>
-      <div class="rt-price-value">$1,250 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Optimal training frequency</li>
-        <li>Full program inclusions</li>
-        <li>Teqneeq membership required</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-max">Studio</div>
-      <div class="rt-price-name">Studio Peak</div>
-      <div class="rt-price-freq">3 sessions per week</div>
-      <div class="rt-price-value">$1,800 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Maximum coaching frequency</li>
-        <li>Full program inclusions</li>
-        <li>Teqneeq membership required</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-  </div>
-
-  <div class="rt-pricing-grid" style="padding:0 28px;">
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">In-Home</div>
-      <div class="rt-price-name">In-Home Momentum</div>
-      <div class="rt-price-freq">1 session per week</div>
-      <div class="rt-price-value">$900 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>We bring the equipment</li>
-        <li>Across North County San Diego</li>
-        <li>No facility membership needed</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">In-Home</div>
-      <div class="rt-price-name">In-Home Performance</div>
-      <div class="rt-price-freq">2 sessions per week</div>
-      <div class="rt-price-value">$1,800 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>We bring the equipment</li>
-        <li>Direct entry only, not on the Foundation</li>
-        <li>No facility membership needed</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-max">In-Home</div>
-      <div class="rt-price-name">In-Home Peak</div>
-      <div class="rt-price-freq">3 sessions per week</div>
-      <div class="rt-price-value">from $2,600 <span>/4 weeks</span></div>
-      <div class="rt-price-upfront">Billed every 4 weeks</div>
-      <ul class="rt-price-features">
-        <li>Priced by travel and scope</li>
-        <li>Maximum coaching frequency</li>
-        <li>Arranged individually</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
+    </div>
+    <div class="rt-ladder-cta"><a class="rt-btn rt-btn-primary" href="/contactform">Start The Program</a></div>
   </div>
 
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
@@ -1578,8 +1459,9 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <div class="rt-spacer-sm"></div>
 
+
   <!-- ═══════ SESSION PACKAGES ═══════ -->
-  <div class="rt-section">
+  <div class="rt-section" id="rt-sessions">
     <div class="rt-section-head">
       <span class="rt-label">Prepaid Flexibility</span>
       <hr class="rt-divider">
@@ -1588,63 +1470,36 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
     </div>
   </div>
 
-  <div class="rt-packs-grid" style="padding:0 28px;">
-
-    <article class="rt-pack">
-      <div class="rt-tier-flag t-entry">Single</div>
-      <div class="rt-pack-name">Single Session</div>
-      <div class="rt-pack-expiry">Expires 30 days from purchase</div>
-      <div class="rt-pack-venue">
-        <div class="rt-pack-venue-label">Studio, member</div>
-        <div class="rt-pack-total">$205</div>
-        <div class="rt-pack-per">per session</div>
+  <div class="rt-wrap">
+    <div class="rt-packs">
+      <div class="rt-packs-row head">
+        <div class="rt-packs-h">Setting</div>
+        <div class="rt-packs-h">Single Session<small>Expires 30 days from purchase</small></div>
+        <div class="rt-packs-h">5-Pack · Best Value<small>Expires 8 weeks from purchase</small></div>
       </div>
-      <div class="rt-pack-venue">
-        <div class="rt-pack-venue-label">Studio, non-member</div>
-        <div class="rt-pack-total">$235</div>
-        <div class="rt-pack-per">day pass included</div>
+      <div class="rt-packs-row">
+        <div class="rt-packs-venue">Studio, member</div>
+        <div class="rt-packs-price">$205<small>per session</small></div>
+        <div class="rt-packs-price">$900<small>$180 per session</small></div>
       </div>
-      <div class="rt-pack-venue">
-        <div class="rt-pack-venue-label">In-Home</div>
-        <div class="rt-pack-total">$275</div>
-        <div class="rt-pack-per">per session</div>
+      <div class="rt-packs-row">
+        <div class="rt-packs-venue">Studio, non-member<small>Teqneeq day pass included</small></div>
+        <div class="rt-packs-price">$235<small>per session</small></div>
+        <div class="rt-packs-price">$1,050<small>$210 per session</small></div>
       </div>
-      <div class="rt-pack-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+      <div class="rt-packs-row">
+        <div class="rt-packs-venue">In-Home<small>We bring the equipment</small></div>
+        <div class="rt-packs-price">$275<small>per session</small></div>
+        <div class="rt-packs-price">$1,250<small>$250 per session</small></div>
       </div>
-    </article>
-
-    <article class="rt-pack">
-      <div class="rt-tier-flag t-popular">Best Value</div>
-      <div class="rt-pack-name">5-Pack</div>
-      <div class="rt-pack-expiry">Expires 8 weeks from purchase</div>
-      <div class="rt-pack-venue">
-        <div class="rt-pack-venue-label">Studio, member</div>
-        <div class="rt-pack-total">$900</div>
-        <div class="rt-pack-per">$180 per session</div>
-      </div>
-      <div class="rt-pack-venue">
-        <div class="rt-pack-venue-label">Studio, non-member</div>
-        <div class="rt-pack-total">$1,050</div>
-        <div class="rt-pack-per">$210 per session</div>
-      </div>
-      <div class="rt-pack-venue">
-        <div class="rt-pack-venue-label">In-Home</div>
-        <div class="rt-pack-total">$1,250</div>
-        <div class="rt-pack-per">$250 per session</div>
-      </div>
-      <div class="rt-pack-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
+    </div>
+    <div class="rt-ladder-cta"><a class="rt-btn rt-btn-primary" href="/contactform">Book Sessions</a></div>
   </div>
-
 
   <div class="rt-spacer-sm"></div>
 
   <!-- ═══════ TUNE-UP — GRADUATES ═══════ -->
-  <div class="rt-section">
+  <div class="rt-section" id="rt-tuneup">
     <div class="rt-section-head">
       <span class="rt-label">For Program Graduates</span>
       <hr class="rt-divider">
@@ -1680,96 +1535,47 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
 
   <div class="rt-spacer"></div>
 
-  <!-- ═══════ VIRTUAL COACHING ═══════ -->
-  <div class="rt-section">
+  <!-- ═══════ EXECUTIVE RESET TIERS (VIRTUAL) ═══════ -->
+  <div class="rt-section" id="rt-reset">
     <div class="rt-section-head">
-      <span class="rt-label">Virtual Coaching</span>
-      <hr class="rt-divider">
-      <h2>Remote <em>Programs</em></h2>
-      <p style="color:var(--white-50); font-size:14px; max-width:560px; margin:8px auto 0;">Results-driven remote coaching with full programming and accountability. Available nationwide.</p>
-    </div>
-  </div>
-
-  <!-- ═══════ EXECUTIVE RESET TIERS ═══════ -->
-  <div class="rt-section">
-    <div class="rt-section-head">
-      <span class="rt-label">Virtual Coaching</span>
+      <span class="rt-label">Virtual Coaching · Available Nationwide</span>
       <hr class="rt-divider">
       <h2>The Executive <em>Reset</em></h2>
-      <p style="color:var(--white-50); font-size:14px; max-width:680px; margin:8px auto 0;">Live 30-minute virtual coaching for executives and high-performing professionals. Custom training, nutrition, and habit coaching built around your schedule. Available nationwide.</p>
+      <p style="color:var(--white-50); font-size:14px; max-width:680px; margin:8px auto 0;">Live 30-minute virtual coaching for executives and high-performing professionals. Custom training, nutrition, and habit coaching built around your schedule, with full programming and accountability. Available nationwide.</p>
     </div>
   </div>
 
-  <div class="rt-pricing-grid" style="padding:0 28px;">
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-entry">Entry Point</div>
-      <div class="rt-price-name">Bronze</div>
-      <div class="rt-price-freq">Async only, no live sessions</div>
-      <div class="rt-price-value">$200 <span>/4 weeks</span></div>
-      <div class="rt-price-m2m">Billed every 4 weeks · cancel with 30 days notice</div>
-      <ul class="rt-price-features">
-        <li>Custom programming updated monthly</li>
-        <li>Full app access for tracking</li>
-        <li>Train on your own schedule, anywhere</li>
-        <li>Ideal for self-directed professionals</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
+  <div class="rt-wrap">
+    <div class="rt-ladder rt-ladder-1">
+      <div class="rt-group">
+        <div class="rt-group-head"><span class="rt-group-name">Virtual</span><span class="rt-group-note">Billed every 4 weeks · cancel with 30 days notice</span></div>
+        <div class="rt-row">
+          <div class="rt-row-name">Bronze</div>
+          <div class="rt-row-price">$200 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">Async only, no live sessions</div>
+          <div class="rt-row-info">Custom programming updated monthly · full app access for tracking · train on your own schedule, anywhere · ideal for self-directed professionals.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">Gold</div>
+          <div class="rt-row-price">$500 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">1 live session per week</div>
+          <div class="rt-row-info">30-minute live 1:1 coaching · custom programming for non-session days · nutrition guidance and macros · weekly async accountability check-ins.</div>
+        </div>
+        <div class="rt-row featured">
+          <div class="rt-row-name">Platinum <span class="rt-row-tag">Most Popular</span></div>
+          <div class="rt-row-price">$750 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">2 live sessions per week</div>
+          <div class="rt-row-info">Everything in Gold · bi-weekly progress assessments · priority scheduling · higher-touch weekly coaching.</div>
+        </div>
+        <div class="rt-row">
+          <div class="rt-row-name">Black</div>
+          <div class="rt-row-price">$1,100 <span>/4 weeks</span></div>
+          <div class="rt-row-freq">3 live sessions per week</div>
+          <div class="rt-row-info">Everything in Platinum · direct messaging access · monthly body composition reporting · maximum coaching frequency.</div>
+        </div>
       </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-common">Most Common</div>
-      <div class="rt-price-name">Gold</div>
-      <div class="rt-price-freq">1 live session per week</div>
-      <div class="rt-price-value">$500 <span>/4 weeks</span></div>
-      <div class="rt-price-m2m">Billed every 4 weeks · cancel with 30 days notice</div>
-      <ul class="rt-price-features">
-        <li>30-minute live 1:1 coaching</li>
-        <li>Custom programming for non-session days</li>
-        <li>Nutrition guidance and macros</li>
-        <li>Weekly async accountability check-ins</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card featured">
-            <div class="rt-tier-flag t-popular">Most Popular</div>
-      <div class="rt-price-name">Platinum</div>
-      <div class="rt-price-freq">2 live sessions per week</div>
-      <div class="rt-price-value">$750 <span>/4 weeks</span></div>
-      <div class="rt-price-m2m">Billed every 4 weeks · cancel with 30 days notice</div>
-      <ul class="rt-price-features">
-        <li>Everything in Gold</li>
-        <li>Bi-weekly progress assessments</li>
-        <li>Priority scheduling</li>
-        <li>Higher-touch weekly coaching</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
-    <article class="rt-price-card">
-            <div class="rt-tier-flag t-max">Maximum Support</div>
-      <div class="rt-price-name">Black</div>
-      <div class="rt-price-freq">3 live sessions per week</div>
-      <div class="rt-price-value">$1,100 <span>/4 weeks</span></div>
-      <div class="rt-price-m2m">Billed every 4 weeks · cancel with 30 days notice</div>
-      <ul class="rt-price-features">
-        <li>Everything in Platinum</li>
-        <li>Direct messaging access</li>
-        <li>Monthly body composition reporting</li>
-        <li>Maximum coaching frequency</li>
-      </ul>
-      <div class="rt-price-cta">
-        <a class="rt-btn rt-btn-primary" href="/contactform" style="font-size:10px; padding:12px 20px;">Get Started</a>
-      </div>
-    </article>
-
+    </div>
+    <div class="rt-ladder-cta"><a class="rt-btn rt-btn-primary" href="/contactform">Start the Executive Reset</a></div>
   </div>
 
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
@@ -1807,6 +1613,32 @@ ANNOUNCEMENT: {"text": "At capacity for September and October — accepting Nove
       <h4>Referral Credit</h4>
       <div class="rt-addon-price">Referral credit</div>
       <p>When someone you refer books an assessment and starts a program, a credit is applied to your next billing cycle. Ask for current terms.</p>
+    </div>
+  </div>
+
+  <!-- BUILT FOR / NOT THE RIGHT FIT -->
+  <div style="padding: 0 28px;">
+    <div class="rt-fit-grid">
+      <div class="rt-fit-col built-for">
+        <span class="rt-fit-label">Built For</span>
+        <ul class="rt-fit-list">
+          <li>Professionals 30+ managing demanding schedules</li>
+          <li>People with joint issues or injury history who need corrective-first training</li>
+          <li>Executives who want structured accountability, not random workouts</li>
+          <li>Anyone ready to commit to consistent, measurable progress</li>
+          <li>Travelers who need a program that works anywhere</li>
+        </ul>
+      </div>
+      <div class="rt-fit-col not-for">
+        <span class="rt-fit-label">Not the Right Fit</span>
+        <ul class="rt-fit-list">
+          <li>Looking for drop-in classes or group workouts</li>
+          <li>Want the cheapest option available</li>
+          <li>Prefer to train without coaching feedback or accountability</li>
+          <li>Looking for a 6-week quick fix or crash program</li>
+          <li>Not willing to follow a structured plan between sessions</li>
+        </ul>
+      </div>
     </div>
   </div>
 
