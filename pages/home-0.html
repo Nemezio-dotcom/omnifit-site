@@ -1,27 +1,81 @@
-<!-- OMNIFIT | HOMEPAGE HERO · v1 OCTOBER 2026
+<!-- OMNIFIT | HOMEPAGE HERO · v2 OCTOBER 2026
   Built for the static site (build.py prepends it to the homepage via
   HOME_ORDER). Not a Squarespace Code Block.
   - The only top-level heading on the homepage: home-2, home-3 and home-4 were demoted to h2.
-  - No CTA inside by design; the existing sections follow immediately.
   - Navy card with rounded corners on a white strip (the header above is
     white); ~40px side margins on desktop, flush at phone widths.
+  v2 changes:
+  - Full-bleed background photo inside the card (the same image the site's
+    JSON-LD already names as the homepage ImageObject), with a navy
+    left-to-right gradient so the copy stays legible whatever the photo shows.
+    If the image fails to load the card is plain navy, as v1 was.
+  - Copy is left-aligned over the darkest part of the gradient; the photo
+    shows through on the right. Move the focal point with --hero-focus.
+  - Eyebrow line above the H1, and a primary + secondary CTA below the
+    subhead (v1 had no CTA by design; remove .hero-actions to go back).
+  - Slow settle-in zoom on the photo, off under prefers-reduced-motion.
+  - The photo is a repo asset (site/img/hero-trainer-coaching-kettlebell-*,
+    served from /assets/img/), not a Squarespace hotlink. It is a 2:3
+    portrait: the card shows a horizontal slice of it on desktop and nearly
+    all of it on phones. --hero-focus picks which slice.
 -->
 <section id="omni-hero" aria-label="Introduction">
+  <!-- HERO IMAGE (1/2): preload so the LCP image starts before the stylesheet finishes -->
+  <link rel="preload" as="image" type="image/webp" imagesrcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" imagesizes="(max-width:768px) 100vw, 1360px" fetchpriority="high">
   <style>
     #omni-hero{background:#ffffff;margin:0;padding:40px;font-family:'Montserrat',sans-serif;}
     #omni-hero *{box-sizing:border-box;}
-    #omni-hero .hero-card{background:#0a1628;border-radius:24px;padding:clamp(72px,11vw,136px) 28px;text-align:center;max-width:1360px;margin:0 auto;position:relative;overflow:hidden;}
-    #omni-hero .hero-card::before{content:'';position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:720px;height:720px;background:radial-gradient(circle,rgba(201,168,76,0.25) 0%,transparent 70%);opacity:0.35;pointer-events:none;}
-    #omni-hero h1{position:relative;font-family:'Playfair Display',serif;font-size:clamp(42px,7.2vw,92px);font-weight:700;line-height:1.06;letter-spacing:-1px;color:#ffffff;margin:0 auto 28px;max-width:15ch;text-transform:none;}
-    #omni-hero .hero-sub{position:relative;font-family:'Montserrat',sans-serif;font-weight:700;font-style:italic;font-size:clamp(16px,2vw,22px);line-height:1.5;color:#c9a84c;margin:0 auto;max-width:720px;}
+    #omni-hero .hero-card{--hero-focus:56% 34%;position:relative;isolation:isolate;overflow:hidden;background:#0a1628;border-radius:24px;max-width:1360px;margin:0 auto;min-height:clamp(520px,70vh,760px);display:flex;align-items:center;padding:clamp(64px,9vw,120px) clamp(28px,6vw,96px);}
+    #omni-hero picture{display:contents;}
+    #omni-hero .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--hero-focus);z-index:-2;display:block;}
+    #omni-hero .hero-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;
+      background:
+        linear-gradient(180deg,rgba(10,22,40,0.35) 0%,rgba(10,22,40,0) 30%,rgba(10,22,40,0) 60%,rgba(10,22,40,0.55) 100%),
+        linear-gradient(100deg,rgba(10,22,40,0.96) 0%,rgba(10,22,40,0.90) 36%,rgba(10,22,40,0.62) 60%,rgba(10,22,40,0.28) 100%);}
+    #omni-hero .hero-shade::after{content:'';position:absolute;left:-160px;top:-200px;width:640px;height:640px;background:radial-gradient(circle,rgba(201,168,76,0.22) 0%,transparent 68%);pointer-events:none;}
+    #omni-hero .hero-content{position:relative;max-width:700px;text-align:left;}
+    #omni-hero .hero-eyebrow{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#e0c872;margin:0 0 20px;display:flex;align-items:center;gap:14px;}
+    #omni-hero .hero-eyebrow::before{content:'';display:inline-block;width:36px;height:2px;background:#c9a84c;flex:none;}
+    #omni-hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,6.4vw,84px);font-weight:700;line-height:1.04;letter-spacing:-1px;color:#ffffff;margin:0 0 24px;max-width:14ch;text-transform:none;text-shadow:0 2px 24px rgba(10,22,40,0.45);}
+    #omni-hero .hero-sub{font-family:'Montserrat',sans-serif;font-weight:700;font-style:italic;font-size:clamp(16px,1.9vw,21px);line-height:1.5;color:#c9a84c;margin:0;max-width:560px;}
+    #omni-hero .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;}
+    #omni-hero .hero-btn,#omni-hero .hero-btn:link,#omni-hero .hero-btn:visited{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;text-decoration:none;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;}
+    #omni-hero .hero-btn--primary,#omni-hero .hero-btn--primary:link,#omni-hero .hero-btn--primary:visited{background:#c9a84c;color:#0a1628;border:1.5px solid #c9a84c;}
+    #omni-hero .hero-btn--primary:hover,#omni-hero .hero-btn--primary:focus-visible{background:#e0c872;border-color:#e0c872;color:#0a1628;transform:translateY(-1px);}
+    #omni-hero .hero-btn--ghost,#omni-hero .hero-btn--ghost:link,#omni-hero .hero-btn--ghost:visited{background:rgba(10,22,40,0.25);color:#ffffff;border:1.5px solid rgba(255,255,255,0.5);backdrop-filter:blur(4px);}
+    #omni-hero .hero-btn--ghost:hover,#omni-hero .hero-btn--ghost:focus-visible{border-color:#e0c872;color:#e0c872;}
+    #omni-hero .hero-btn:focus-visible{outline:3px solid #e0c872;outline-offset:3px;}
+    @media (prefers-reduced-motion:no-preference){
+      #omni-hero .hero-bg{animation:omni-hero-settle 14s ease-out both;}
+      @keyframes omni-hero-settle{from{transform:scale(1.07);}to{transform:scale(1);}}
+    }
     @media (max-width:768px){
       #omni-hero{padding:0;}
-      #omni-hero .hero-card{border-radius:0;padding:72px 20px 64px;}
-      #omni-hero h1{letter-spacing:-0.5px;}
+      #omni-hero .hero-card{--hero-focus:58% 30%;border-radius:0;min-height:min(78vh,640px);padding:64px 22px 56px;align-items:flex-end;}
+      #omni-hero .hero-shade{background:
+        linear-gradient(180deg,rgba(10,22,40,0.55) 0%,rgba(10,22,40,0.30) 28%,rgba(10,22,40,0.86) 58%,rgba(10,22,40,0.97) 100%);}
+      #omni-hero .hero-shade::after{display:none;}
+      #omni-hero h1{letter-spacing:-0.5px;margin-bottom:18px;}
+      #omni-hero .hero-eyebrow{margin-bottom:16px;}
+      #omni-hero .hero-actions{margin-top:28px;gap:10px;}
+      #omni-hero .hero-btn{flex:1 1 100%;}
     }
   </style>
   <div class="hero-card">
-    <h1>San Diego Personal Trainer for Executives</h1>
-    <p class="hero-sub">For Professionals Over 30 Who Want Strength, Energy, and Confidence — Without Wasting Time</p>
+    <!-- HERO IMAGE (2/2): decorative, so alt is empty; the H1 carries the meaning -->
+    <picture>
+      <source type="image/webp" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" sizes="(max-width:768px) 100vw, 1360px">
+      <img class="hero-bg" src="/assets/img/hero-trainer-coaching-kettlebell-1600.jpg" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.jpg 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 1360px" width="1600" height="2400" alt="" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">NASM Elite Trainer · 4S Ranch, San Diego · Virtual Nationwide</p>
+      <h1>San Diego Personal Trainer for Executives</h1>
+      <p class="hero-sub">For Professionals Over 30 Who Want Strength, Energy, and Confidence — Without Wasting Time</p>
+      <div class="hero-actions">
+        <a class="hero-btn hero-btn--primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+        <a class="hero-btn hero-btn--ghost" href="/personal-training-services">See Programs</a>
+      </div>
+    </div>
   </div>
 </section>
