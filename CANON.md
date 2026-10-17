@@ -219,9 +219,19 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   still on them. Published copy uses THIS card and nothing else.
 
   ASSESSMENT
-    Performance Assessment $150, credited toward the first cycle.
-    Consultation deposit $30, refundable. NEVER "free" - the consultation is
-    45 minutes, by video or phone, and is NOT the assessment.
+    Performance Assessment $150. CANONICAL CREDIT LINE (owner, Oct 17 2026,
+    LAUNCH DECISIONS item 2): "The $150 Performance Assessment is credited
+    toward your first purchase: a Foundation or Program cycle, an Executive
+    Reset cycle, or a 5-session pack." Short form on CTA notes: "credited
+    toward your first program, Reset cycle or 5-pack". Existing "credited
+    toward your first cycle" lines stay; the locked pricing FAQ answer
+    carries "credited toward the first cycle".
+    CONSULTATION DEPOSIT, CANONICAL (owner, Oct 17 2026, LAUNCH DECISIONS
+    item 3): "$30 deposit, refunded the same day you attend your
+    consultation". Never "fully refundable", never "the deposit applies to
+    your first cycle". NEVER "free" - the consultation is 45 minutes, by
+    video or phone, and is NOT the assessment. The movement screen happens
+    only at the assessment (item 4).
 
   THE FOUNDATION - new clients only. Three consecutive 4-week cycles, paid
   in full at enrolment, discounted for that reason.
@@ -304,7 +314,8 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     No processing fees are added to stated prices; the 2.9% card fee stays
     retired.
     The 30-Day Fit Guarantee wording stays BYTE-IDENTICAL (CANON TIER 2
-    item 6). The assessment paragraph on training-rates-san-diego.html
+    item 6; canonical text reset by owner override on Oct 17 2026, LAUNCH
+    DECISIONS item 6). The assessment paragraph on training-rates-san-diego.html
     stays BYTE-IDENTICAL, including "clinical-grade diagnostic session" and
     the Class IIa block.
 
@@ -498,7 +509,8 @@ LANGUAGE RULES (Oct 17 2026; source: Semrush read price/terms as "risky or
 rigid" and outcome claims as "self-reported")
   PRICE is framed as PROTECTING PROGRESS, always with these five facts:
     the assessment is credited toward the first cycle · the 30-Day Fit
-    Guarantee (existing wording, verbatim, TIER 2 item 6) · pause weeks ·
+    Guarantee (canonical wording, verbatim, LAUNCH DECISIONS item 6) ·
+    pause weeks ·
     sessions OmniFit cancels are credited · The Foundation is a defined
     starter block (three 4-week cycles, one payment).
   POLICIES are framed as "standards that protect your slot and your
@@ -577,6 +589,96 @@ TIER CHANGES (owner decision, Oct 17 2026)
     "$140 per session", "$140/session", "10-pack at $140" fire; $140 as a
     computed figure in the credit arithmetic (following or followed by
     "=") does not.
+
+LAUNCH DECISIONS (owner, Oct 17 2026; recorded before the launch batch applied
+them. Source: the owner's launch review. Every line here is an OWNER DECISION
+and overrides the earlier wording it replaces.)
+  1. ENTRY = CALENDLY DIRECT. The front door is the 45-minute consultation,
+     booked directly at https://calendly.com/nemezio-omnifittraining/45min.
+     Surfaces that carry it: the Rates hero "Book Your Consultation", the
+     Fit Check pass result (button "Book Your Consultation"; its lede says
+     the next step is the consultation, then the $150 Performance
+     Assessment), the announcement bar ("Limited availability for 1:1
+     coaching. Book a consultation", site/nav.html), the contact page (a
+     "The fastest way to start is to book a consultation directly." block
+     with the button above the form; the "Strategy Session" line is gone;
+     nobody waits for an opening before booking; the back-of-the-line rule
+     for people who do not reply stays), and both body-composition buttons
+     ("Book Your Consultation"; the assessment is booked after the
+     consultation). "Start training within the week" is retired: "Your start
+     date depends on current availability and is confirmed on the
+     consultation."
+  2. ASSESSMENT CREDIT, canonical: "The $150 Performance Assessment is
+     credited toward your first purchase: a Foundation or Program cycle, an
+     Executive Reset cycle, or a 5-session pack." Carried by Terms and the
+     Rates "The assessment is credited" policy line. Short form on CTA notes
+     and FAQ answers that used to say "three month program", "3-month
+     package" or "training package": "credited toward your first program,
+     Reset cycle or 5-pack". Existing "credited toward your first cycle"
+     lines stay. The locked Rates assessment paragraph is untouched.
+  3. DEPOSIT, canonical: "$30 deposit, refunded the same day you attend your
+     consultation". Replaces "fully refundable $30 deposit" and "$30
+     refundable deposit" in body copy on every non-frozen page (meta
+     descriptions unchanged; the rates header WebPage description still
+     reads "$30 refundable deposit" for that reason). The FAQ "How do I get
+     started?" no longer says the deposit applies to the first cycle or that
+     a non-fit is refunded; it states the rule. Terms match.
+  4. CONSULTATION SCOPE. The movement screen happens only at the $150
+     assessment. The contact page's step 2 keeps its heading and says so in
+     its body; the HIIT CTA notes read "Movement screen at your assessment".
+  5. NUTRITION is included in every program. There are no nutrition
+     coaching add-ons (the sentence is gone from the FAQ and its mirror).
+  6. 30-DAY FIT GUARANTEE, canonical (owner override of the byte-identical
+     lock; the Terms text): "If OmniFit isn't the right fit within your
+     first 30 days on The Foundation, The Program or the Executive Reset,
+     tell us in writing and we'll refund the unused portion of your
+     enrollment." Byte-identical on Rates (both callouts), How It Works
+     (body and FAQ answer), the How It Works header mirror and Terms. "No
+     compliance test" stays beside it. It promises a refund and an exit,
+     never a result (TIER 2 item 6).
+  7. omnifit-vs-competitors: Equinox offers its Equifit assessment and the
+     approach after that varies by trainer ("no standardized assessment or
+     methodology" is gone). The Equinox + PT comparison row states what the
+     page's own figures produce, $1,400-2,700 per month (membership + 8-12
+     sessions, estimated from the figures above), written as a range so the
+     retired-rate rule's range exemption applies. The OmniFit column carries
+     the facility line (item 9), not "Private studio".
+  8. body-composition-testing: InBody frequencies "Varies by model (2-3 on
+     common gym models)"; ECW/TBW "helps explain day-to-day weight swings;
+     read as a trend alongside how you feel and recover" (never "flags
+     inflammation").
+  9. FACILITY, canonical: "private 1:1 coaching inside Teqneeq FHC, a
+     members-only facility in 4S Ranch". Replaces every sentence claiming
+     "fully private", "zero crowds", "full privacy" or "complete privacy"
+     of the studio (FAQ answer, territory pages including 4S Ranch and
+     Rancho Bernardo on their one sentence each, services body, the
+     comparison page's OmniFit column). "Private Studio Sessions" headings
+     and the Services meta are unchanged. NEVER claim exclusive use of the
+     room. A client's own home is private; in-home copy may say so.
+  10. Reviews: 190+ everywhere ("133+" is retired).
+  11. desk-worker: "Budget is under $200 per 4 weeks, our lowest tier
+      (Executive Reset Bronze)".
+  12. Footer: nemezio@omnifittraining.com; reviews link
+      https://g.page/r/CcePeMjnbDe9EBM (no /review suffix). The founder
+      Person sameAs (@eziogetsfit) is unchanged.
+  13. public/404.html, written by build.py: title "Page Not Found | OmniFit
+      Performance", meta robots noindex, not in the sitemap, a short
+      message, links to Home and Book Your Consultation only.
+  14. public/_headers, written by build.py: the *.pages.dev preview
+      hostname carries X-Robots-Tag: noindex; the production domain stays
+      indexable. build.py --check verifies both files.
+  RETIRED LAUNCH COPY (certify.py RETIRED_LAUNCH_COPY; frozen records
+  exempt; footer swept): "fully refundable" · "applies to your first cycle"
+  · "within the week" · "zero crowds" · "fully private" · "nutrition
+  coaching add-ons" · "Strategy Session" · "133+ Reviews" · "three month
+  program" · "3-month package" · "after your first 30 days" · "no
+  standardized assessment" · "Typically single" · "flags inflammation" ·
+  "@gmail.com" · "g.page/r/CcePeMjnbDe9EBM/review" · "$250/month".
+  LOCKS THIS BATCH DID NOT TOUCH: titles, meta descriptions, headings, FAQ
+  questions, the ownership table; the in-home page beyond its deposit
+  sentence; 4S Ranch and Rancho Bernardo beyond the sentences named in
+  items 3 and 9; K10 (no new cost-anchor links); the frozen records; the
+  four hash invariants, all unchanged.
 
 COMPLIANCE SCREEN — TWO TIERS (owner approval; Sept 2026)
 Rewritten by the owner (Nemezio), who is now the sole compliance
@@ -678,6 +780,9 @@ reports the missing condition, never the content.
      WORDING CHANGES REQUIRE OWNER APPROVAL. The text is not a template to
      paraphrase: a rewrite that reintroduces a result promise moves the
      item back to TIER 1 without anyone editing this brief.
+     OWNER OVERRIDE, Oct 17 2026: the canonical wording is now the Terms
+     text recorded under LAUNCH DECISIONS item 6. It still promises only a
+     refund and an exit; the tiering is unchanged.
 
 CARRIED OVER, NOT RE-TIERED
 - No Groupon/deal content.
@@ -796,6 +901,10 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   are there to keep it readable as one.
 
 (b) STALE CANON
+  RETIRED LAUNCH COPY (LAUNCH DECISIONS, Oct 17 2026): the seventeen literal
+  phrases listed there, swept case-insensitively on the flattened copy of
+  every file in the glob, footer.html included, frozen records exempt
+  (certify.py RETIRED_LAUNCH_COPY, self-tested both ways on every run).
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
   "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
@@ -1058,6 +1167,10 @@ DEFERRED-01 · Executive Reset guarantee wording (rates page) · CLOSED Aug 2026
   The approved wording is now covered by TIER 2 item 6: it promises a
   refund and an exit, never a result. Wording changes require owner
   approval.
+- SUPERSEDED Oct 17 2026 by owner override (LAUNCH DECISIONS item 6): the
+  canonical wording is now the Terms sentence, applied byte-identically on
+  Rates (both callouts), How It Works (body and FAQ answer) and the How It
+  Works header mirror. The Aug 2026 text above is the historical record.
 
 RESOLVED-02 · Statutory cap exposure on prepaid tiers · CLOSED Aug 2026
 - Was DEFERRED-02, an ACTIVE CONSTRAINT. Resolved Aug 2026 by the counsel
