@@ -418,19 +418,19 @@ OmniFit | Site-wide Header Injection · Sept 2026
     #omni-hero *{box-sizing:border-box;}
     /* overflow:clip, not hidden: hidden makes the card a scroll container, which
        would pin the view() scroll timelines below to the card instead of the page */
-    #omni-hero .hero-card{--hero-inset:36%;--hero-focus:50% 38%;--hero-focus-b:50% 40%;--xfade-cycle:16s;--xfade-delay:3s;position:relative;isolation:isolate;overflow:clip;background:#0a1628;border-radius:24px;max-width:1360px;margin:0 auto;min-height:clamp(520px,70vh,760px);display:flex;align-items:center;padding:clamp(56px,8vw,104px) clamp(28px,6vw,96px);}
+    #omni-hero .hero-card{--hero-inset:36%;--hero-focus:50% 38%;position:relative;isolation:isolate;overflow:clip;background:#0a1628;border-radius:24px;max-width:1360px;margin:0 auto;min-height:clamp(520px,70vh,760px);display:flex;align-items:center;padding:clamp(56px,8vw,104px) clamp(28px,6vw,96px);}
     /* photo layer: anchored right, feathered into the navy on its left edge */
     #omni-hero .hero-photo{position:absolute;top:0;bottom:0;right:0;left:var(--hero-inset);z-index:-2;display:block;overflow:hidden;
       -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 14%,#000 32%);
       mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 14%,#000 32%);}
-    #omni-hero .hero-bg{width:100%;height:100%;object-fit:cover;object-position:var(--hero-focus);display:block;}
-    /* the two photo frames stack inside .hero-photo; B sits on top, invisible
-       until the crossfade runs (and forever, if B never loads) */
-    #omni-hero .hero-frame{position:absolute;inset:0;display:block;}
-    #omni-hero .hero-frame--b{opacity:0;object-position:var(--hero-focus-b);}
-    /* desktop: frame B at full height and natural width, pinned right, feathered on its own left edge */
+    #omni-hero .hero-bg{width:100%;height:100%;object-fit:cover;object-position:var(--focus,var(--hero-focus));display:block;}
+    /* the photo frames stack inside .hero-photo; only the .is-on frame is visible,
+       and the script below the card moves .is-on along the loop */
+    #omni-hero .hero-frame{position:absolute;inset:0;display:block;opacity:0;transition:opacity 1.6s linear;}
+    #omni-hero .hero-frame.is-on{opacity:1;}
+    /* desktop: portrait frames at full height and natural width, pinned right, feathered on their own left edge */
     @media (min-width:769px){
-      #omni-hero .hero-frame--b{left:auto;width:auto;
+      #omni-hero .hero-frame--portrait .hero-bg{position:absolute;top:0;right:0;left:auto;width:auto;height:100%;
         -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 18%,#000 42%);
         mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0.55) 18%,#000 42%);}
     }
@@ -459,14 +459,10 @@ OmniFit | Site-wide Header Injection · Sept 2026
     @media (prefers-reduced-motion:no-preference){
       #omni-hero .hero-photo{animation:omni-hero-photo-in 1.6s cubic-bezier(.22,1,.36,1) both;}
       #omni-hero .hero-frame--a .hero-bg{animation:omni-hero-settle 14s cubic-bezier(.16,1,.3,1) both;}
-      /* crossfade loop, armed by the script below the card once frame B has loaded.
-         B: hidden 0-40%, fades in 40-50%, on screen 50-90%, fades out 90-100%.
-         A fades out in step (B is narrower than the layer on desktop, so it must
-         not show through), drifts in while on screen and resets while hidden. */
-      #omni-hero .hero-card.is-xfade .hero-frame--a{animation:omni-hero-frame-a var(--xfade-cycle) linear var(--xfade-delay) infinite;}
-      #omni-hero .hero-card.is-xfade .hero-frame--b{animation:omni-hero-frame-b var(--xfade-cycle) linear var(--xfade-delay) infinite;}
-      @keyframes omni-hero-frame-a{0%{opacity:1;transform:scale(1) translate(0,0);}40%{opacity:1;transform:scale(1.036) translate(-0.96%,0.48%);}50%,88%{opacity:0;transform:scale(1.045) translate(-1.2%,0.6%);}89%,90%{opacity:0;transform:scale(1) translate(0,0);}100%{opacity:1;transform:scale(1) translate(0,0);}}
-      @keyframes omni-hero-frame-b{0%,40%{opacity:0;transform:scale(1);}50%{opacity:1;transform:scale(1.007);}90%{opacity:1;transform:scale(1.035);}100%{opacity:0;transform:scale(1.035);}}
+      /* each incoming frame drifts in by 4% for as long as it is up; the script adds
+         .is-drift on arrival and removes it once the frame has faded out */
+      #omni-hero .hero-frame.is-drift{animation:omni-hero-drift 11s linear forwards;}
+      @keyframes omni-hero-drift{from{transform:scale(1);}to{transform:scale(1.04);}}
       #omni-hero .hero-shade::after{animation:omni-hero-glow 2.4s ease-out .3s both;}
       #omni-hero .hero-eyebrow,#omni-hero h1,#omni-hero .hero-sub,#omni-hero .hero-actions{opacity:0;animation:omni-hero-rise 1.1s cubic-bezier(.22,1,.36,1) forwards;}
       #omni-hero .hero-eyebrow{animation-delay:.45s;}
@@ -496,11 +492,12 @@ OmniFit | Site-wide Header Injection · Sept 2026
     }
     @media (max-width:768px){
       #omni-hero{padding:0;}
-      #omni-hero .hero-card{--hero-inset:0;--hero-focus:52% 100%;--hero-focus-b:50% 50%;border-radius:0;min-height:min(92svh,800px);padding:56px 22px 36px;align-items:flex-end;}
+      #omni-hero .hero-card{--hero-inset:0;--hero-focus:52% 100%;border-radius:0;min-height:min(92svh,800px);padding:56px 22px 36px;align-items:flex-end;}
       #omni-hero .hero-photo{-webkit-mask-image:none;mask-image:none;}
       /* frame A zooms from the bottom so both faces clear the copy block; frame B
          stays at cover size (individual `scale` composes with the crossfade transform) */
       #omni-hero .hero-frame--a{scale:1.2;transform-origin:50% 100%;}
+      #omni-hero .hero-bg{object-position:var(--focus-m,var(--focus,var(--hero-focus)));}
       #omni-hero .hero-shade{background:
         linear-gradient(180deg,rgba(10,22,40,0.60) 0%,rgba(10,22,40,0.18) 22%,rgba(10,22,40,0.12) 44%,rgba(10,22,40,0.82) 60%,rgba(10,22,40,0.97) 100%);}
       #omni-hero .hero-shade::after{display:none;}
@@ -1861,33 +1858,33 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
     14s settle; gold sheen across the primary button on hover; on desktop a
     native scroll-driven parallax (photo drifts, copy lifts) that browsers
     without animation-timeline support simply skip.
-  v4 changes (from v3):
-  - Two-photo crossfade. Frame A is the kettlebell coaching photo (the LCP
-    image, preloaded, unchanged). Frame B is the executive-reset dumbbell
-    photo, the same image the homepage schema names as primaryImageOfPage.
-    After frame A has settled, the card crossfades to B and back on a 16s
-    loop: 1.6s fade, ~6.4s on each photo. B appears at its natural size and
-    drifts in by 3.5% while on screen; A drifts in a touch too, so the
-    switch reads as a slow push rather than a slideshow cut.
-  - On phones the 1.2x bottom-anchored zoom applies to frame A only (it is
-    there so both faces in the kettlebell photo clear the copy). Frame B
-    shows at plain cover size, so as much of it survives as the tall frame
-    allows. The zoom uses the individual `scale` property so it composes
-    with the crossfade transform instead of fighting it.
-  - Frame B does not take part until it has actually loaded: a 3-line script
-    below the card adds .is-xfade to the card on B's load event. If B never
-    loads (blocked CDN, missing file), nothing changes: frame A stays, just
-    as in v3. Off under prefers-reduced-motion like every other move here.
-  - Frame B is a Squarespace CDN hotlink for now, the same host the
-    case-study and badge images use. To localise it, drop the file into
-    site/img/ (build.py copies it to /assets/img/) and point the src and
-    srcset of .hero-frame--b at it; nothing else needs to change.
-  - Frame B is a portrait, so on desktop it is not cropped to the wide photo
-    layer at all: it renders at full card height and natural width, anchored
-    to the card's right edge, with its own left-edge feather into the navy
-    (a landscape file would simply overflow to the left, under the feather).
-    On phones the tall frame already shows its full height, so cover fitting
-    stays and --hero-focus-b picks the horizontal slice.
+  v5 changes (from v4):
+  - Five-photo crossfade loop. Frame A is still the kettlebell coaching photo
+    (the LCP image, preloaded, unchanged). The other four are repo assets in
+    site/img/ (served from /assets/img/), each in 1000px and full-size webp
+    with jpg fallbacks:
+      hero-coach-client-cable-pulldown   landscape 3:2
+      hero-coach-physique-portrait       portrait  5:6
+      hero-coach-client-jump-training    landscape 3:2
+      hero-coach-client-bench-pushup     portrait  2:3
+  - The loop is driven by the small script below the card: after frame A has
+    settled it moves to the next loaded frame every ~7s with a 1.6s dissolve
+    (CSS transition), and the incoming frame drifts in by 4% while it is up.
+    Frames that have not loaded (or failed) are skipped, so a missing file
+    never shows a blank card. Off under prefers-reduced-motion: the script
+    keys off the html.omni-motion flag, so those visitors get frame A only.
+  - Frames B+ carry data-src/data-srcset and are only given their real URLs
+    once frame A has loaded, so the extra photos never compete with the LCP
+    image on the wire.
+  - Orientation: landscape frames cover-fit the photo layer like frame A.
+    Portrait frames (.hero-frame--portrait) are not cropped on desktop: they
+    render at full card height and natural width, pinned to the card's right
+    edge, with their own left-edge feather into the navy. On phones every
+    frame cover-fits the tall card.
+  - Per-frame crop: --focus (desktop) and --focus-m (phone) inline on each
+    frame pick the object-position. Frame A keeps --hero-focus on the card.
+  v4 (kept): the crossfade mechanics above replace v4's two-frame CSS loop
+  and its Squarespace hotlink; nothing else from v4 remains.
   v2 (kept): eyebrow line, primary + secondary CTA (remove .hero-actions to
   go back to no CTA), plain navy card if the image fails to load.
   Frame A is a repo asset (site/img/hero-trainer-coaching-kettlebell-*,
@@ -1904,13 +1901,32 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   <div class="hero-card">
     <!-- HERO IMAGE (2/2): decorative, so alt is empty; the H1 carries the meaning -->
     <div class="hero-photo" aria-hidden="true">
-      <!-- frame A: kettlebell coaching photo, the LCP image (preloaded above) -->
-      <picture class="hero-frame hero-frame--a">
+      <!-- frame A: kettlebell coaching photo, the LCP image (preloaded above); starts visible -->
+      <picture class="hero-frame hero-frame--a is-on">
         <source type="image/webp" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" src="/assets/img/hero-trainer-coaching-kettlebell-1600.jpg" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.jpg 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" fetchpriority="high" decoding="async">
       </picture>
-      <!-- frame B: executive-reset dumbbell photo; low priority, fades in after A has settled -->
-      <img class="hero-bg hero-frame hero-frame--b" src="https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w" srcset="https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1000w 1000w, https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w 1500w" sizes="(max-width:768px) 100vw, 880px" alt="" fetchpriority="low" decoding="async">
+      <!-- frames B-E: given their URLs by the script once frame A has loaded -->
+      <!-- frame B: coach and client at the cable station, landscape -->
+      <picture class="hero-frame hero-frame--landscape" style="--focus:30% 25%;--focus-m:50% 30%">
+        <source type="image/webp" data-srcset="/assets/img/hero-coach-client-cable-pulldown-1000.webp 1000w, /assets/img/hero-coach-client-cable-pulldown-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
+        <img class="hero-bg" data-src="/assets/img/hero-coach-client-cable-pulldown-1600.jpg" data-srcset="/assets/img/hero-coach-client-cable-pulldown-1000.jpg 1000w, /assets/img/hero-coach-client-cable-pulldown-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1067" alt="" decoding="async">
+      </picture>
+      <!-- frame C: coach physique portrait -->
+      <picture class="hero-frame hero-frame--portrait" style="--focus:50% 30%;--focus-m:50% 40%">
+        <source type="image/webp" data-srcset="/assets/img/hero-coach-physique-portrait-1000.webp 1000w, /assets/img/hero-coach-physique-portrait-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
+        <img class="hero-bg" data-src="/assets/img/hero-coach-physique-portrait-1600.jpg" data-srcset="/assets/img/hero-coach-physique-portrait-1000.jpg 1000w, /assets/img/hero-coach-physique-portrait-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1916" alt="" decoding="async">
+      </picture>
+      <!-- frame D: client jump with coach, landscape -->
+      <picture class="hero-frame hero-frame--landscape" style="--focus:50% 50%;--focus-m:50% 50%">
+        <source type="image/webp" data-srcset="/assets/img/hero-coach-client-jump-training-1000.webp 1000w, /assets/img/hero-coach-client-jump-training-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
+        <img class="hero-bg" data-src="/assets/img/hero-coach-client-jump-training-1600.jpg" data-srcset="/assets/img/hero-coach-client-jump-training-1000.jpg 1000w, /assets/img/hero-coach-client-jump-training-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1067" alt="" decoding="async">
+      </picture>
+      <!-- frame E: client push-up on the bench with coach, portrait -->
+      <picture class="hero-frame hero-frame--portrait" style="--focus:50% 40%;--focus-m:55% 45%">
+        <source type="image/webp" data-srcset="/assets/img/hero-coach-client-bench-pushup-1000.webp 1000w, /assets/img/hero-coach-client-bench-pushup-1333.webp 1333w" sizes="(max-width:768px) 100vw, 880px">
+        <img class="hero-bg" data-src="/assets/img/hero-coach-client-bench-pushup-1333.jpg" data-srcset="/assets/img/hero-coach-client-bench-pushup-1000.jpg 1000w, /assets/img/hero-coach-client-bench-pushup-1333.jpg 1333w" sizes="(max-width:768px) 100vw, 880px" width="1333" height="2000" alt="" decoding="async">
+      </picture>
     </div>
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-content">
@@ -1923,9 +1939,42 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
       </div>
     </div>
   </div>
-  <!-- Arm the crossfade only once frame B has loaded; a failed or blocked
-       image leaves the card on frame A, exactly as before. -->
-  <script>(function(){var b=document.querySelector('#omni-hero .hero-frame--b');if(!b)return;var go=function(){var c=b.closest('.hero-card');if(c){c.classList.add('is-xfade');}};if(b.complete){if(b.naturalWidth>0){go();}}else{b.addEventListener('load',go,{once:true});}})();</script>
+  <!-- Crossfade loop. Hydrates frames B+ once frame A has loaded, then moves
+       .is-on to the next loaded frame every HOLD ms with a FADE ms dissolve.
+       Inert under prefers-reduced-motion (no html.omni-motion flag). -->
+  <script>
+  (function () {
+    if (!document.documentElement.classList.contains('omni-motion')) return;
+    var card = document.querySelector('#omni-hero .hero-card');
+    var frames = card ? [].slice.call(card.querySelectorAll('.hero-frame')) : [];
+    if (frames.length < 2) return;
+    var HOLD = 7000, FADE = 1600, FIRST = 9000;
+    function img(f) { return f.querySelector('img'); }
+    function ready(f) { var i = img(f); return !!i && i.complete && i.naturalWidth > 0; }
+    function hydrate() {
+      frames.slice(1).forEach(function (f) {
+        [].forEach.call(f.querySelectorAll('[data-srcset]'), function (el) { el.setAttribute('srcset', el.getAttribute('data-srcset')); el.removeAttribute('data-srcset'); });
+        var i = img(f); if (i && i.getAttribute('data-src')) { i.setAttribute('src', i.getAttribute('data-src')); i.removeAttribute('data-src'); }
+      });
+    }
+    var first = img(frames[0]);
+    if (!first || first.complete) { hydrate(); } else { first.addEventListener('load', hydrate, { once: true }); first.addEventListener('error', hydrate, { once: true }); }
+    var cur = 0;
+    function next() {
+      if (document.hidden) { setTimeout(next, HOLD); return; }
+      var n = cur, tries = 0;
+      do { n = (n + 1) % frames.length; tries++; } while (!ready(frames[n]) && tries < frames.length);
+      if (n === cur || !ready(frames[n])) { setTimeout(next, HOLD); return; }
+      var from = frames[cur], to = frames[n];
+      to.classList.add('is-on', 'is-drift');
+      from.classList.remove('is-on');
+      setTimeout(function () { from.classList.remove('is-drift'); }, FADE);
+      cur = n;
+      setTimeout(next, HOLD + FADE);
+    }
+    setTimeout(next, FIRST);
+  })();
+  </script>
 </section>
 
 
