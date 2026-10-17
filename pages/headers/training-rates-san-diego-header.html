@@ -1,11 +1,14 @@
-<!-- TRAINING RATES PAGE HEADER JSON-LD - v3 OCTOBER 2026
+<!-- TRAINING RATES PAGE HEADER JSON-LD - v4 OCTOBER 2026 (PRICING CLARITY)
   Paste into /training-rates-san-diego -> Page Settings -> Advanced ->
-  Page Header Code Injection. This field was previously EMPTY because the
-  schema was embedded in the page code block; the patched body now has that
-  block removed, so paste this here to restore structured data in the
-  canonical two-block pattern.
-  All prices canonical (Oct 2026). FAQPage mirrors the patched on-page FAQ.
-  V3: October 2026 card; guarantee scoped to every program; service area unified. -->
+  Page Header Code Injection, replacing the v3 block entirely.
+  All prices from CANON.md's October 2026 card; every schema price equals a
+  price printed on the page. One Offer per product on the page. Recurring
+  products: UnitPriceSpecification, billingDuration 4 WEE, priceType
+  Subscription. Foundation offers are one-time: price = the three-cycle
+  total, cycle price in the description. FAQPage mirrors the eight on-page
+  FAQ questions verbatim, in page order. LocalBusiness referenced by @id.
+  V4: FAQ replaced (pricing and commitment); OfferCatalog rebuilt with
+  sessions, add-ons, deposit and assessment. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -15,12 +18,15 @@
       "@id": "https://www.omnifittraining.com/training-rates-san-diego#webpage",
       "url": "https://www.omnifittraining.com/training-rates-san-diego",
       "name": "Personal Training Rates San Diego | Published Pricing | OmniFit Performance",
-      "description": "Full published personal training rates in San Diego. Studio coaching at Teqneeq FHC from $640 per 4 weeks, in-home from $900, virtual from $200. New clients start on a discounted three-cycle Foundation from $560 per cycle. $150 Performance Assessment credited toward your first cycle. No sales call required.",
+      "description": "OmniFit Performance bills in 4-week cycles. The Program from $640 per 4-week cycle, cancel with 30 days' notice. New clients start on The Foundation: three cycles in one payment from $1,680. $30 refundable deposit; $150 assessment credited.",
       "about": {
         "@id": "https://www.omnifittraining.com/#localbusiness-of"
       },
       "breadcrumb": {
         "@id": "https://www.omnifittraining.com/training-rates-san-diego#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://www.omnifittraining.com/training-rates-san-diego#rates"
       },
       "inLanguage": "en-US"
     },
@@ -45,88 +51,146 @@
     {
       "@type": "OfferCatalog",
       "@id": "https://www.omnifittraining.com/training-rates-san-diego#rates",
-      "name": "OmniFit Performance Published Training Rates",
+      "name": "OmniFit Performance Published Training Rates (October 2026)",
       "itemListElement": [
         {
           "@type": "OfferCatalog",
-          "name": "The Foundation — new clients, paid in full",
+          "name": "Getting started",
           "itemListElement": [
             {
               "@type": "Offer",
+              "name": "Consultation deposit",
+              "description": "Refundable deposit for a 45-minute consultation by video or phone. The consultation is not the assessment. No slot is held without payment.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-pay",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Studio Momentum - three 4-week cycles"
+                "name": "Consultation deposit"
               },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "1680.00",
-                "priceCurrency": "USD"
-              }
+              "price": "30.00",
+              "priceCurrency": "USD"
             },
             {
               "@type": "Offer",
+              "name": "Performance Assessment",
+              "description": "Bodystat QuadScan 4000 body composition plus movement screening; credited toward your first cycle.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-pay",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Studio Performance - three 4-week cycles"
+                "name": "Performance Assessment"
               },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "3300.00",
-                "priceCurrency": "USD"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "In-Home Momentum - three 4-week cycles"
-              },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "2400.00",
-                "priceCurrency": "USD"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Studio Couples Momentum - three 4-week cycles"
-              },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "2550.00",
-                "priceCurrency": "USD"
-              }
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "In-Home Couples Momentum - three 4-week cycles"
-              },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "3750.00",
-                "priceCurrency": "USD"
-              }
+              "price": "150.00",
+              "priceCurrency": "USD"
             }
           ]
         },
         {
           "@type": "OfferCatalog",
-          "name": "The Program — Studio (billed every 4 weeks)",
+          "name": "The Foundation - new clients, one payment for three 4-week cycles",
           "itemListElement": [
             {
               "@type": "Offer",
+              "name": "The Foundation - Studio Momentum",
+              "description": "New clients only. Three consecutive 4-week cycles (12 weeks), one payment at signup. $560 per 4-week cycle; $1,680 total. 4 sessions per cycle. Non-refundable; the 30-Day Fit Guarantee is the only exit. Continues on The Program afterward. Requires a Teqneeq membership ($119 per month, billed by Teqneeq).",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-foundation",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Studio Momentum - 1 session per week"
+                "name": "The Foundation - Studio Momentum"
+              },
+              "price": "1680.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "The Foundation - Studio Performance",
+              "description": "New clients only. Three consecutive 4-week cycles (12 weeks), one payment at signup. $1,100 per 4-week cycle; $3,300 total. 8 sessions per cycle. Non-refundable; the 30-Day Fit Guarantee is the only exit. Continues on The Program afterward. Requires a Teqneeq membership ($119 per month, billed by Teqneeq).",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-foundation",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "The Foundation - Studio Performance"
+              },
+              "price": "3300.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "The Foundation - In-Home Momentum",
+              "description": "New clients only. Three consecutive 4-week cycles (12 weeks), one payment at signup. $800 per 4-week cycle; $2,400 total. 4 sessions per cycle. Non-refundable; the 30-Day Fit Guarantee is the only exit. Continues on The Program afterward.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-foundation",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "The Foundation - In-Home Momentum"
+              },
+              "price": "2400.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "The Foundation - Studio Couples Momentum",
+              "description": "New clients only. Three consecutive 4-week cycles (12 weeks), one payment at signup. $850 per 4-week cycle; $2,550 total. 4 sessions per cycle. Non-refundable; the 30-Day Fit Guarantee is the only exit. Continues on The Program afterward. Priced per couple; one session credit covers both partners. Requires a Teqneeq membership ($119 per month, billed by Teqneeq) for both partners.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-foundation",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "The Foundation - Studio Couples Momentum"
+              },
+              "price": "2550.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "The Foundation - In-Home Couples Momentum",
+              "description": "New clients only. Three consecutive 4-week cycles (12 weeks), one payment at signup. $1,250 per 4-week cycle; $3,750 total. 4 sessions per cycle. Non-refundable; the 30-Day Fit Guarantee is the only exit. Continues on The Program afterward. Priced per couple; one session credit covers both partners.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-foundation",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "The Foundation - In-Home Couples Momentum"
+              },
+              "price": "3750.00",
+              "priceCurrency": "USD"
+            }
+          ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "The Program - charged every 4 weeks",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "The Program - Studio Momentum",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 4 sessions per cycle. Requires a Teqneeq membership ($119 per month, billed by Teqneeq).",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "The Program - Studio Momentum"
               },
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "price": "640.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -136,14 +200,21 @@
             },
             {
               "@type": "Offer",
+              "name": "The Program - Studio Performance",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 8 sessions per cycle. Requires a Teqneeq membership ($119 per month, billed by Teqneeq).",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Studio Performance - 2 sessions per week"
+                "name": "The Program - Studio Performance"
               },
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "price": "1250.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -153,14 +224,21 @@
             },
             {
               "@type": "Offer",
+              "name": "The Program - Studio Peak",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 12 sessions per cycle. Requires a Teqneeq membership ($119 per month, billed by Teqneeq).",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Studio Peak - 3 sessions per week"
+                "name": "The Program - Studio Peak"
               },
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "price": "1800.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -170,54 +248,21 @@
             },
             {
               "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Studio Couples Momentum - 1 session per week"
+              "name": "The Program - In-Home Momentum",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 4 sessions per cycle.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
               },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "1000.00",
-                "priceCurrency": "USD",
-                "billingDuration": {
-                  "@type": "QuantitativeValue",
-                  "value": 4,
-                  "unitCode": "WEE"
-                }
-              }
-            },
-            {
-              "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Studio Couples Performance - 2 sessions per week"
-              },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "2000.00",
-                "priceCurrency": "USD",
-                "billingDuration": {
-                  "@type": "QuantitativeValue",
-                  "value": 4,
-                  "unitCode": "WEE"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "@type": "OfferCatalog",
-          "name": "The Program — In-Home (billed every 4 weeks)",
-          "itemListElement": [
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "In-Home Momentum"
+                "name": "The Program - In-Home Momentum"
               },
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "price": "900.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -227,14 +272,21 @@
             },
             {
               "@type": "Offer",
+              "name": "The Program - In-Home Performance",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 8 sessions per cycle.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "In-Home Performance"
+                "name": "The Program - In-Home Performance"
               },
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "price": "1800.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -244,14 +296,46 @@
             },
             {
               "@type": "Offer",
+              "name": "The Program - In-Home Peak",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 12 sessions per cycle. From $2,600 per 4-week cycle, priced by travel and scope.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "In-Home Peak - from"
+                "name": "The Program - In-Home Peak"
               },
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
-                "price": "2600.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
+                "billingDuration": {
+                  "@type": "QuantitativeValue",
+                  "value": 4,
+                  "unitCode": "WEE"
+                },
+                "minPrice": "2600.00",
+                "price": "2600.00"
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "The Program - Studio Couples Momentum",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 4 sessions per cycle. Priced per couple; one session credit covers both partners. Requires a Teqneeq membership ($119 per month, billed by Teqneeq) for both partners.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "The Program - Studio Couples Momentum"
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "1000.00",
+                "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -261,14 +345,45 @@
             },
             {
               "@type": "Offer",
+              "name": "The Program - Studio Couples Performance",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 8 sessions per cycle. Priced per couple; one session credit covers both partners. Requires a Teqneeq membership ($119 per month, billed by Teqneeq) for both partners.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "In-Home Couples Momentum - 1 session per week"
+                "name": "The Program - Studio Couples Performance"
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "2000.00",
+                "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
+                "billingDuration": {
+                  "@type": "QuantitativeValue",
+                  "value": 4,
+                  "unitCode": "WEE"
+                }
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "The Program - In-Home Couples Momentum",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 4 sessions per cycle. Priced per couple; one session credit covers both partners.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "The Program - In-Home Couples Momentum"
               },
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "price": "1450.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -278,14 +393,21 @@
             },
             {
               "@type": "Offer",
+              "name": "The Program - In-Home Couples Performance",
+              "description": "Charged at the start of each 4-week cycle; continues until 30 days' notice. 8 sessions per cycle. Priced per couple; one session credit covers both partners.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-program",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "In-Home Couples Performance - 2 sessions per week"
+                "name": "The Program - In-Home Couples Performance"
               },
               "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "price": "2900.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -297,84 +419,157 @@
         },
         {
           "@type": "OfferCatalog",
-          "name": "30-Minute Executive Reset (virtual)",
+          "name": "Sessions without a program",
           "itemListElement": [
             {
               "@type": "Offer",
+              "name": "Single session - studio, Teqneeq member",
+              "description": "Session without a program. Expires 30 days from purchase.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Bronze - programming only"
+                "name": "Single session - studio, Teqneeq member"
               },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "200.00",
-                "priceCurrency": "USD",
-                "billingDuration": {
-                  "@type": "QuantitativeValue",
-                  "value": 4,
-                  "unitCode": "WEE"
-                }
-              }
+              "price": "205.00",
+              "priceCurrency": "USD"
             },
             {
               "@type": "Offer",
+              "name": "Single session - studio, non-member",
+              "description": "Session without a program; Teqneeq day pass included. Expires 30 days from purchase.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Gold - one live session per week"
+                "name": "Single session - studio, non-member"
               },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "500.00",
-                "priceCurrency": "USD",
-                "billingDuration": {
-                  "@type": "QuantitativeValue",
-                  "value": 4,
-                  "unitCode": "WEE"
-                }
-              }
+              "price": "235.00",
+              "priceCurrency": "USD"
             },
             {
               "@type": "Offer",
+              "name": "Single session - in-home",
+              "description": "Session without a program. Expires 30 days from purchase.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Platinum - two live sessions per week"
+                "name": "Single session - in-home"
               },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "750.00",
-                "priceCurrency": "USD",
-                "billingDuration": {
-                  "@type": "QuantitativeValue",
-                  "value": 4,
-                  "unitCode": "WEE"
-                }
-              }
+              "price": "275.00",
+              "priceCurrency": "USD"
             },
             {
               "@type": "Offer",
+              "name": "5-pack - studio, Teqneeq member",
+              "description": "Five sessions without a program at $180 per session. Expires 8 weeks from purchase.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
-                "name": "Black - three live sessions per week"
+                "name": "5-pack - studio, Teqneeq member"
               },
-              "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "1100.00",
-                "priceCurrency": "USD",
-                "billingDuration": {
-                  "@type": "QuantitativeValue",
-                  "value": 4,
-                  "unitCode": "WEE"
-                }
-              }
+              "price": "900.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "5-pack - studio, non-member",
+              "description": "Five sessions without a program at $210 per session; Teqneeq day pass included. Expires 8 weeks from purchase.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "5-pack - studio, non-member"
+              },
+              "price": "1050.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "5-pack - in-home",
+              "description": "Five sessions without a program at $250 per session. Expires 8 weeks from purchase.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "5-pack - in-home"
+              },
+              "price": "1250.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "Extra session - studio (clients on a program)",
+              "description": "One session added to a program.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Extra session - studio (clients on a program)"
+              },
+              "price": "160.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "Extra session - in-home (clients on a program)",
+              "description": "One session added to a program.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Extra session - in-home (clients on a program)"
+              },
+              "price": "215.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "Guest add-on",
+              "description": "A guest joins your session, any setting. Per session.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-sessions",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Guest add-on"
+              },
+              "price": "90.00",
+              "priceCurrency": "USD"
             }
           ]
         },
         {
           "@type": "OfferCatalog",
-          "name": "Tune-Up (program graduates, billed every 4 weeks)",
+          "name": "Tune-Up - program graduates, billed every 4 weeks",
           "itemListElement": [
             {
               "@type": "Offer",
+              "name": "Tune-Up - Teqneeq members",
+              "description": "For program graduates. 1 session per 4-week cycle: reassessment on the Bodystat QuadScan 4000 and an hour of training. Cancel with 30 days' notice.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-tuneup",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
                 "name": "Tune-Up - Teqneeq members"
@@ -383,6 +578,7 @@
                 "@type": "UnitPriceSpecification",
                 "price": "295.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -392,6 +588,12 @@
             },
             {
               "@type": "Offer",
+              "name": "Tune-Up - non-members",
+              "description": "For program graduates. 1 session per 4-week cycle; Teqneeq day pass included. Cancel with 30 days' notice.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-tuneup",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
                 "name": "Tune-Up - non-members"
@@ -400,6 +602,7 @@
                 "@type": "UnitPriceSpecification",
                 "price": "325.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -409,6 +612,12 @@
             },
             {
               "@type": "Offer",
+              "name": "Tune-Up - in-home",
+              "description": "For program graduates. 1 session per 4-week cycle. Cancel with 30 days' notice.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-tuneup",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
               "itemOffered": {
                 "@type": "Service",
                 "name": "Tune-Up - in-home"
@@ -417,6 +626,7 @@
                 "@type": "UnitPriceSpecification",
                 "price": "375.00",
                 "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
                 "billingDuration": {
                   "@type": "QuantitativeValue",
                   "value": 4,
@@ -427,13 +637,106 @@
           ]
         },
         {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Performance Assessment (Bodystat QuadScan 4000 plus 9-point movement screen), credited toward your first cycle"
-          },
-          "price": "150.00",
-          "priceCurrency": "USD"
+          "@type": "OfferCatalog",
+          "name": "30-Minute Executive Reset (virtual), billed every 4 weeks",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Executive Reset - Bronze",
+              "description": "Virtual, asynchronous programming only; no live sessions. Billed every 4 weeks.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-reset",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Executive Reset - Bronze"
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "200.00",
+                "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
+                "billingDuration": {
+                  "@type": "QuantitativeValue",
+                  "value": 4,
+                  "unitCode": "WEE"
+                }
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "Executive Reset - Gold",
+              "description": "Virtual. 4 live 30-minute sessions per 4-week cycle (one a week). Billed every 4 weeks.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-reset",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Executive Reset - Gold"
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "500.00",
+                "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
+                "billingDuration": {
+                  "@type": "QuantitativeValue",
+                  "value": 4,
+                  "unitCode": "WEE"
+                }
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "Executive Reset - Platinum",
+              "description": "Virtual. 8 live 30-minute sessions per 4-week cycle (two a week). Billed every 4 weeks.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-reset",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Executive Reset - Platinum"
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "750.00",
+                "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
+                "billingDuration": {
+                  "@type": "QuantitativeValue",
+                  "value": 4,
+                  "unitCode": "WEE"
+                }
+              }
+            },
+            {
+              "@type": "Offer",
+              "name": "Executive Reset - Black",
+              "description": "Virtual. 12 live 30-minute sessions per 4-week cycle (three a week). Billed every 4 weeks.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-reset",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Executive Reset - Black"
+              },
+              "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "1100.00",
+                "priceCurrency": "USD",
+                "priceType": "https://schema.org/Subscription",
+                "billingDuration": {
+                  "@type": "QuantitativeValue",
+                  "value": 4,
+                  "unitCode": "WEE"
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -443,90 +746,66 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "How much does personal training cost in San Diego?",
+          "name": "How much does OmniFit cost per month?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OmniFit Performance offers structured programs billed every 4 weeks, starting at $640 for in-studio training at Teqneeq FHC and $900 for in-home training, with a discounted three-cycle Foundation for new clients from $560 per cycle. Every program includes monthly clinical-grade body composition assessments, custom programming, nutrition guidance, and weekly accountability."
+            "text": "The Program starts at $640 per 4-week cycle for studio Momentum, which is 4 sessions per cycle. OmniFit bills in 4-week cycles, not calendar months. In-home starts at $900 per cycle. New clients usually start on The Foundation from $560 per cycle, paid as one $1,680 payment covering three cycles. Studio clients also need a Teqneeq membership at $119 per month; Teqneeq bills monthly."
           }
         },
         {
           "@type": "Question",
-          "name": "What's included in OmniFit Performance programs?",
+          "name": "Is there a contract or minimum commitment?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Every program includes a monthly OmniFit Performance Assessment with clinical-grade Bodystat diagnostics, custom programming based on the OmniFit 4-phase methodology (Assess, Correct, Build, Sustain), nutrition guidance and macro framework, full app access for workout tracking, weekly accountability check-ins, and direct trainer access. In-home programs include all equipment — no home gym required."
+            "text": "Only on The Foundation: three 4-week cycles (12 weeks), paid in one payment at signup. The Foundation is non-refundable, and the 30-Day Fit Guarantee is the only exit. The Program has no fixed term. It is charged every 4 weeks and continues until you give 30 days' notice. Experienced clients can start on The Program directly at any tier."
           }
         },
         {
           "@type": "Question",
-          "name": "How does billing work?",
+          "name": "What do I pay to start?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "New clients start on The Foundation: three consecutive 4-week cycles, paid in full at enrolment and discounted for that reason. The Program bills every 4 weeks via auto-pay and can be cancelled with 30 days' written notice, with remaining credit applied to the final cycle. There are no activation fees."
+            "text": "A $30 refundable deposit books your 45-minute consultation by video or phone. The Performance Assessment is $150, credited toward your first cycle. To enrol on The Foundation you pay all three cycles at signup, from $1,680. On The Program you pay the first 4-week cycle, from $640. No slot is held without payment."
           }
         },
         {
           "@type": "Question",
-          "name": "What are the program tiers?",
+          "name": "Can I cancel, and with how much notice?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "OmniFit Performance offers three named programs: Momentum (1 session per week), Performance (2 sessions per week), and Peak (3 sessions per week). Each is available for both Teqneeq FHC in-studio and in-home training, individually or as a couple. New clients start on The Foundation, three consecutive 4-week cycles paid in full at enrolment; after that, or by direct entry with prior training experience, The Program bills every 4 weeks. All tiers include the same comprehensive inclusions — the difference is training frequency."
+            "text": "The Program: yes, with 30 days' notice. Remaining credit is applied to the final cycle. The Foundation is non-refundable; the 30-Day Fit Guarantee is the only exit. After its third cycle you continue on The Program, which you can then end with 30 days' notice."
           }
         },
         {
           "@type": "Question",
-          "name": "Do you offer online or virtual personal training?",
+          "name": "What happens when I travel?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. The Executive Reset delivers live 1:1 virtual coaching — Gold at $500 per 4 weeks (1 session per week), Platinum at $750 (2 per week), and Black at $1,100 (3 per week). Async-only programming (Bronze) is available at $200 per 4 weeks. Virtual coaching is available nationwide."
+            "text": "Use pause weeks. The Foundation includes 2 pause weeks across the course, with notice, and they extend the end date. The Program includes 6 pause weeks per 12 months, with 2 weeks' notice, credited against the next cycle. You can also reschedule a session with 24 hours' notice within the same cycle, or train virtually while away."
           }
         },
         {
           "@type": "Question",
-          "name": "What happens after I finish my program?",
+          "name": "Can I pay per session?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Graduates of an OmniFit program can continue with the Tune-Up — one session per cycle, a reassessment on the Bodystat QuadScan 4000 and an hour of training, with programming delivered through the OmniFit app between visits. Pricing is $295 per 4 weeks for Teqneeq members, $325 for non-members (day pass included, no facility membership required), or $375 in-home. Billing is every 4 weeks with no long-term commitment; cancel with 30 days notice."
+            "text": "Yes. A single session is $205 for Teqneeq members, $235 for studio non-members (Teqneeq day pass included) and $275 in-home, and expires 30 days from purchase. A 5-pack is $180, $210 or $250 per session and expires 8 weeks from purchase. These are sessions, not a coaching program."
           }
         },
         {
           "@type": "Question",
-          "name": "Does OmniFit offer a money-back guarantee?",
+          "name": "Is the assessment credited?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Every program includes a 30-Day Fit Guarantee: if after your first 30 days you decide it isn't the right fit, you can cancel and receive a refund of the unused balance of your program. You keep the first month and everything you've learned. There is no compliance test to pass and nothing to negotiate."
+            "text": "Yes. The Performance Assessment is $150, credited toward your first cycle on The Foundation or The Program. It is separate from the 45-minute consultation, which is booked with a $30 refundable deposit. A client returning after a lapse of 60 days or more books a new assessment."
           }
         },
         {
           "@type": "Question",
-          "name": "What is the OmniFit Performance Assessment?",
+          "name": "Do I have to join Teqneeq?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The OmniFit Performance Assessment is a clinical-grade diagnostic session using the Bodystat QuadScan 4000 for body composition analysis, plus blood pressure, SpO2, movement screening, and grip strength testing. It's available in-studio at Teqneeq FHC or in your home for $150, credited toward your first cycle. Reassessments are included in every program; a client returning after a lapse of 60 days or more books a new assessment. The Bodystat QuadScan 4000 holds CE certification as a Class IIa medical device under MDD 93/42/EEC and has FDA clearance. OmniFit Performance uses it to measure body composition. It is not used to diagnose, treat or assess any medical condition, and OmniFit is not a medical provider."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I bring a guest to my training session?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Clients on any named program (Momentum through Peak) can bring a guest for $90 per session. This is a great way for a spouse, friend, or colleague to experience OmniFit before committing to their own program."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I pause my program if I travel?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. The Foundation includes two pause weeks across the course with notice, extending the end date. The Program includes six pause weeks per twelve months with two weeks' notice, credited against the next cycle. Many clients also use the virtual option to continue training during travel instead of pausing."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Where does in-home training take place?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "OmniFit Performance serves 4S Ranch, Rancho Santa Fe, Fairbanks Ranch, Santaluz, Carmel Valley, Del Mar, Solana Beach, Encinitas, Carlsbad, La Jolla, Rancho Bernardo, and Poway. All equipment is provided — no home gym required. In-home programs start at $900 per 4 weeks, or $800 per cycle on the three-cycle Foundation."
+            "text": "Only for studio training. Studio Momentum and above, on The Foundation or The Program, requires a Teqneeq membership at $119 per month. Teqneeq bills monthly; it is not an OmniFit charge, and it includes facility access on non-training days. Studio couples need it for both partners. In-home and virtual clients don't, and studio non-member session prices include a day pass."
           }
         }
       ]
