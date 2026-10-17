@@ -5051,3 +5051,110 @@ Paste the POSITIONING LINE, verbatim, to Google Business Profile, Thumbtack, Yel
 
 ### Sources changed
 `CANON.md`, `tools/certify.py`, `tools/README.md`, `pages/headers/site-header.html` (one `slogan` property and its comment), `REPORT.md`, `public/` (rebuilt).
+
+# Canon Oct 17 follow-up run — consent, /outcomes disclosure, the Travel Protocol, the 17 amendment findings, enforcement (Oct 17, 2026)
+
+**Branch:** `claude/canon-oct-17-updates-ppfno8`, merged to `main`.
+**Scope:** owner decisions of Oct 17 2026, recorded in `CANON.md` and applied to body copy, the FAQPage mirrors that follow it, and `tools/certify.py`. No title, meta description, H1 or H2 changed. No figure, name or quote changed.
+
+## Owner decisions recorded in CANON
+
+| # | Decision | Where in CANON |
+|---|---|---|
+| 1 | **Dave R.** added to the OWNER-ATTESTED CONSENT LIST (Dave's case study and the 4S Ranch transformation card) | TIER 2 item 2a, consent list; `certify.py CONSENT_LIST` |
+| 2 | **/outcomes disclosure** is the first sentence alone, "Individual result, measured by OmniFit."; everywhere else the full verbatim line | TIER 2 item 2a condition (4), "/OUTCOMES EXEMPTION"; COMPLIANCE SCREEN rule notes |
+| 3 | **The Travel Protocol** definition gains "During a travel week, a scheduled session can be taken live by video instead, at no extra cost." USAGE RULES rewritten: the one live-session provision, its canonical page phrasing, no "added"/"switch to"/"converted to" virtual, never in title/meta/H1/H2, and the list of what was applied and what was deliberately not | THE OMNIFIT METHOD → ACCOUNTABILITY THAT TRAVELS |
+| 4–5 | 17 findings fixed; **`AMENDMENT_COUNTS = True`** | TIER 2 item 2g REPORTING; rule notes; NEXT RUNS entry marked DONE (the POSITIONING LINE item stays open) |
+
+## Item 4: the 17 amendment findings → 0
+
+| File:line | Clients | Change |
+|---|---|---|
+| `pages/personal-trainer-4s-ranch.html:919` | Vincent, Alo S., Dave R. | One centred line under the three-figure gallery: the verbatim disclosure, URL linked to `/outcomes`. **OWNER OVERRIDE of the 4S Ranch lock for this line only** — it is the page's only diff. The page had no disclaimer to keep. |
+| `pages/personal-trainer-over-50-san-diego.html:212` | Vincent, Ken | Verbatim disclosure added as its own `ov-disclaimer` line, linked. The existing longer disclaimer stays below it: it adds starting point / adherence / sleep / stress / medical history, "not a projection", and the case-study link. |
+| `pages/desk-worker-posture-pain.html:409` | Alo S. | "Individual result, measured against his own baseline; outcomes vary between clients." **replaced** by the verbatim disclosure, linked. Replaced, not kept: "against his own baseline" is already the sentence before, and "outcomes vary" is what the /outcomes pointer now says. |
+| `pages/outcomes.html:467, 477` | Isaac M., Egor B., Chad C., Alo S., Mark M. | "Individual result, measured by OmniFit; see aggregate outcomes above." → "Individual result, measured by OmniFit." (the item 2 short disclosure), both carriers in the profiles section. |
+
+The alt texts on the 4S Ranch gallery (lines 897, 905, 913) still carry the three figures; unchanged (body copy only, no rule reads attributes).
+
+## Item 3: the Travel Protocol on the travel-support pages
+
+Wording reconciled to the definition: every "add virtual sessions during travel weeks", "switch to virtual", "converted to virtual", "train virtually while away" and "virtual sessions … during travel weeks" now reads, or is built on, **"take a scheduled session live by video during a travel week, at no extra cost"**. FAQ answers changed in the page and in its header FAQPage identically (verified: `tools/mkterritory.py` regenerates the Del Mar and Rancho Santa Fe headers byte-identical to the hand edit; certify's mirror check is green on every header).
+
+| File:line | Now |
+|---|---|
+| `FAQs.html:223` (+ header) | in-studio/in-home clients "are on the Travel Protocol: hotel and home gym workout variations…, check-ins that continue at your Accountability Dial setting, and pause weeks…"; "In-person clients can take a scheduled session live by video during a travel week, at no extra cost." |
+| `FAQs.html:228` (+ header) | "the Travel Protocol programs bodyweight-only and band-based workouts" |
+| `FAQs.html:288` (+ header) | "…travels with you on the Travel Protocol: you can take a scheduled session live by video during a travel week, at no extra cost. The 30-Minute Executive Reset is fully virtual." |
+| `home-1.html:453` | "In-person sessions + hotel gym programming on the Travel Protocol, and you can take a scheduled session live by video…" (was "+ virtual sessions") |
+| `home-5.html:83` (+ `home-header.html`) | "…and on the road the Travel Protocol adapts it to hotel gyms and rooms." |
+| `how-it-works-pricing.html:308` | "guided travel workouts on the Travel Protocol" |
+| `how-it-works-pricing.html:547` | "converted to virtual" removed; "on the Travel Protocol you can take a scheduled session live by video…" |
+| `how-it-works-pricing.html:577` (+ header) | "switch to virtual" → the Travel Protocol sentence with app programming and pause weeks; the Reset sentence kept |
+| `training-rates-san-diego.html:619, 887, 917, 1187` (+ header for 1187) | includes item, Pause weeks card, both commitment-table cells, FAQ ("Use the Travel Protocol…"; "or train virtually while away" → the canonical phrase) |
+| `in-home-personal-trainer-san-diego.html:328, 477` | "The Travel Protocol for road weeks"; comparison cell "✓ The Travel Protocol: hotel/app workouts, live video sessions" (row label unchanged) |
+| `personal-trainer-del-mar.html:229, 233, 303, 411` (+ header for 411) | card, feature item, "virtual sessions … during travel weeks" → the Travel Protocol + canonical phrase, FAQ answer |
+| `personal-trainer-rancho-santa-fe.html:214, 288, 391` (+ header for 391) | card, section line, FAQ answer |
+| `personal-trainer-santaluz.html:138`, `-carlsbad.html:140`, `-carmel-valley.html:193`, `-fairbanks-ranch.html:193` | "…virtual programming and the Travel Protocol…" |
+| `personal-trainer-la-jolla.html:322` | "Virtual options for travel weeks." → "The Travel Protocol for travel weeks, including a scheduled session taken live by video at no extra cost." |
+| `weight-loss.html:428` (+ header) | FAQ: "…and studio and in-home clients on the Travel Protocol can take a scheduled session live by video…" |
+| `hiit-personal-trainer-san-diego.html:675` | "In-home clients keep training on the Travel Protocol, or try the 30-Minute Executive Reset" |
+| `omnifit-vs-competitors.html:796, 906, 908, 916` (+ header for 906–916) | included item, "Week 3: Virtual session via app" → scheduled session taken live by video on the Travel Protocol, "programs your travel weeks in advance on the Travel Protocol", "the Travel Protocol when you travel" |
+| `fit-check.html:154` | quiz reply "The Travel Protocol is built for it: pause weeks and the app." |
+| **Shared "Data-Driven Hybrid Coaching" card, 12 pages** — `how-we-measure-your-progress.html:330`, `the-omnifit-method.html:361`, `weight-loss.html:470`, `body-composition-testing.html:401`, `personal-training-services.html:459`, `hiit-personal-trainer-san-diego.html:763`, `strength-training-1.html:392`, `partners.html:1183`, `private-personal-trainer-san-diego.html:521`, `in-home-personal-trainer-san-diego.html:686`, `omnifit-vs-competitors.html:978`, `corrective-exercise-post-rehab.html:1012` | "…app-delivered programming, the Travel Protocol covers the weeks you're on the road, and the same benchmarks…" — the same clause inserted identically on all 12 |
+
+**The shared card is not inside a hash-locked invariant.** The five invariants are the pricing FAQ answer (page + header), the credentials block, the archetype cards and the 9-point screen; the card is in none of them. It changed identically on every page and **no hash was updated** — the owner-approved hash change was not needed. (Eleven carriers are byte-identical; `corrective-exercise-post-rehab` already had its own variant — "your schedule moves", "at Teqneeq" — and got the same clause.)
+
+**Listed but deliberately not changed** (CANON USAGE RULES records each):
+- `personal-trainer-4s-ranch.html:660, 1078, 1103` — the page is locked and today's override covers the disclosure line only.
+- The Executive Reset's own surfaces: `the-30-minute-executive-reset.html` (all six lines), the Reset cards at `private-personal-trainer-san-diego.html:321`, `weight-loss.html:385, 387`, `hiit-personal-trainer-san-diego.html:625, 628`. The definition sends fully remote clients to the Reset; naming its cards "the Travel Protocol" would say the Reset is the Travel Protocol.
+- `strength-training-1.html:313, 354` — the "Virtual — Anywhere" card and the "Can I train virtually?" FAQ describe the Reset's virtual offer, not studio or in-home travel.
+- `behavior-change-coaching.html:234` — the nutrition card, **renamed** "Travel & Restaurant Protocols" → "Travel & Restaurant Playbooks" (an H3; body text unchanged) so the plural no longer collides with the name.
+
+Name placement: `grep` for the name in every `<title>`, `<h1>`, `<h2>`, meta description and WebPage name finds none.
+
+## `tools/certify.py`
+
+| Change | Self-test (both ways) |
+|---|---|
+| `CONSENT_LIST` + "Dave R." | "Dave R., business owner, lost 27 lbs" passes consent; the old unlisted-name negative case now uses "Marco" and still fires |
+| `/outcomes` exemption: `DISCLOSURE_2A_OUTCOMES`, `_has_disclosure(surface, page)`, `attributed_outcome_conditions(text, page)`; scoped by basename to `outcomes.html` and `outcomes-header.html` | short line passes on outcomes.html and its header; fails on weight-loss.html and with no page; the full line fails on /outcomes and passes elsewhere; "; see aggregate outcomes above." fails on /outcomes; short line on another surface fails |
+| `AMENDMENT_COUNTS = True` | — (findings now count; RESULT shows `amendment 2a/2g 0`) |
+| **Checker fix, T2-1:** `aggregate_metric_conditions` read the disclosure's own "How clients typically progress" as aggregate framing and struck Vincent's −8% card on the over-50 page as soon as the disclosure went on. The verbatim pointer (link-wrapped or not) is blanked, same length, for the framing test only | the card beside the disclosure passes; the card beside "Clients typically see this." still fires |
+| **Checker fix, `travel_protocol_usage`:** the price test split sentences on punctuation only, so the unpunctuated `<li>` on omnifit-vs-competitors:796 ran back into "$640–$2,900 per 4 weeks" above the list. The name's sentence is now read inside its block element (`_block_sentence`, as 2a condition 5 does) | a price in the block above passes; "The Travel Protocol, $95 per trip" in the same `<li>` fires; the original four cases unchanged |
+
+Negative tests on copies of real pages (not committed): the full line put back on /outcomes → 8 findings; /outcomes scored as any other page → 8; the over-50 disclosure broken → Vincent and Ken fire (4); Dave removed from the list → the 4S Ranch consent finding returns; "travel protocol … ($45)" injected into the rates page → both Travel Protocol rules fire.
+
+## Checks
+
+| Check | Before | After |
+|---|---|---|
+| `python3 tools/certify.py` | PASSED (0 · 0 · 0 · 0 · amendment 17 NOT COUNTED) | **PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), counted** |
+| `python3 build.py` | — | rebuilt `public/`, 42 pages |
+| `python3 build.py --check` | PASSED | PASSED (the same four ownership coverage notes; redirects and tracking fixtures OK) |
+| keyword ownership | PASSED | PASSED (no title, meta, H1 or H2 changed; one H3 renamed) |
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | a6c7e65dddff4795 | a6c7e65dddff4795 |
+| header pricing | 7af0d0049b0b7aba | 7af0d0049b0b7aba |
+| credentials | 02bd9cb90a71ce69 | 02bd9cb90a71ce69 |
+| archetypes (Section A) | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c |
+| 9-point (Section B) | 4c720960dec5a809 | 4c720960dec5a809 |
+
+No hash moved.
+
+## Judgment calls (and the condition under which each is wrong)
+
+1. **Reset surfaces, the strength-training virtual card and 4S Ranch keep their travel wording** (listed above). Wrong if the owner meant "every line" literally, including the Reset's cards; then the Reset cards need a sentence pointing studio and in-home clients to the Travel Protocol, not a rename.
+2. **The /outcomes exemption is exact both ways**: the full line on /outcomes is a finding, not merely the short one being allowed. The decision said the disclosure there "is the first sentence alone". Wrong if the owner only meant to permit the short form; drop the negative lookahead in `_SHORT_ONLY`.
+3. **"Travel & Restaurant Playbooks"** rather than applying the name to a nutrition card. Wrong if the owner wants nutrition habits on the road to be part of the Travel Protocol; then the definition needs a nutrition clause first.
+4. **Over-50 keeps both lines** (the verbatim disclosure, then the longer disclaimer); desk-worker's shorter one was replaced. Wrong if the owner reads "keep if it adds information" as "merge into one paragraph".
+5. **In-home comparison cell says "live video sessions"** — shorthand for the definition's scheduled-session provision in a ✓ cell. Wrong if the owner wants the full canonical phrase even in table cells.
+
+## Human-side, not repo
+
+Paste the changed pages (Squarespace Code Blocks) and the eight changed headers (FAQs, home, how-it-works-pricing, omnifit-vs-competitors, del-mar, rancho-santa-fe, training-rates-san-diego, weight-loss); add them to the end-of-run Search Console recrawl batch. The POSITIONING LINE profile pastes remain open.
+
+### Sources changed
+`CANON.md`, `tools/certify.py`, `tools/README.md`, `REPORT.md`, 30 files in `pages/` and 8 in `pages/headers/`, `public/` (rebuilt).

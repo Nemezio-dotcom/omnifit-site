@@ -646,21 +646,33 @@ THE OMNIFIT METHOD (owner decision, Oct 17 2026)
         takes them on the road. Travel-adapted programming in the app for
         hotel gyms and rooms, check-ins that continue at your Accountability
         Dial setting, and pause weeks when a trip can't hold training.
-        Included in every tier of The Foundation and The Program at no extra
-        cost. Fully remote clients use the 30-Minute Executive Reset."
+        During a travel week, a scheduled session can be taken live by video
+        instead, at no extra cost. Included in every tier of The Foundation
+        and The Program at no extra cost. Fully remote clients use the
+        30-Minute Executive Reset."
+        (The live-video sentence: owner, Oct 17 2026, follow-up run.)
       USAGE RULES: always "the Travel Protocol" (capital T and P). Never
-      state a price for it. Never claim live virtual sessions are included
-      unless this brief already says so (it does not, for The Foundation or
-      The Program: the definition names app programming, check-ins and
-      pause weeks; live sessions are the Executive Reset's). No page carries
-      the name yet (Oct 17 2026). The pages that describe travel support
-      today are listed, file:line, in REPORT.md under "Outcome Claims
-      Amendment run", for the next run to use the name there; several of
-      them say sessions "switch to virtual" or promise "virtual sessions"
-      during travel weeks, which the next run reconciles with the
-      definition. certify.py travel_protocol_usage reports the wrong casing
-      and a dollar figure in the same sentence as the name; self-tested
-      both ways on every run.
+      state a price for it. Never in a title, meta description, H1 or H2.
+      LIVE VIDEO: the one live-session provision is the definition's own -
+      a SCHEDULED session taken live by video during a travel week, at no
+      extra cost. Canonical phrasing on pages: "take a scheduled session
+      live by video during a travel week, at no extra cost". Never claim
+      ADDED or EXTRA virtual sessions, or that sessions "switch to" or are
+      "converted to" virtual; standing live virtual sessions are the
+      Executive Reset's. APPLIED Oct 17 2026 (follow-up run) to every
+      travel-support line REPORT.md listed under "Outcome Claims Amendment
+      run", except: personal-trainer-4s-ranch (locked; its owner override
+      that day covers the 2a disclosure line only), the Executive Reset's
+      own cards and page (the fully-remote path the definition names), the
+      virtual-training card and FAQ on strength-training-1 (the Reset's
+      virtual offer, not studio or in-home travel), and
+      behavior-change-coaching's nutrition card, renamed "Travel &
+      Restaurant Playbooks" so the name no longer collides. The shared
+      "Data-Driven Hybrid Coaching" card (12 pages) is in no hash-locked
+      invariant; it changed identically on every page. certify.py
+      travel_protocol_usage reports the wrong casing and a dollar figure in
+      the name's sentence, read inside its block element; self-tested both
+      ways on every run.
   ONE-LINE REFERENCE (used on the most-cited pages): "OmniFit runs on the
   OmniFit Method: Measured Progress, Joint-First Strength and Accountability
   That Travels, carried through Assess -> Correct -> Build -> Sustain."
@@ -1064,6 +1076,13 @@ reports the missing condition, never the content.
        (4) this disclosure VERBATIM on the same surface as the figure:
            "Individual result, measured by OmniFit. How clients typically
            progress: omnifittraining.com/outcomes."
+           /OUTCOMES EXEMPTION (owner, Oct 17 2026): on /outcomes ONLY the
+           disclosure is the first sentence alone, "Individual result,
+           measured by OmniFit." - the full line would point the reader at
+           the page they are on. Everywhere else it stays the full verbatim
+           line. Page-scoped in certify.py (outcomes.html and its header)
+           and exact both ways: the full line on /outcomes, and the short
+           line on any other page, are both condition (4) findings.
        (5) third person, past tense; no projection and no "you".
      Surface = the enclosing <section>, falling back to the page (the same
      reading as TIER 2 item 1). Attribution is still required - a named
@@ -1071,11 +1090,12 @@ reports the missing condition, never the content.
      stated profile - and aggregate or typical-results framing is still
      never this item.
      OWNER-ATTESTED CONSENT LIST (condition 1; owner, Oct 17 2026): Isaac
-     M., Egor B., Chad C., Alo S., Mark M., Vincent, Ken. certify.py cannot
-     verify a consent form, so it reads this list (CONSENT_LIST): a figure
-     attributed to anyone else, or to an anonymised profile, is a consent
-     finding until the owner adds the name here. Dave (the 4S Ranch
-     transformation gallery) is not on the list.
+     M., Egor B., Chad C., Alo S., Mark M., Vincent, Ken, Dave R. certify.py
+     cannot verify a consent form, so it reads this list (CONSENT_LIST): a
+     figure attributed to anyone else, or to an anonymised profile, is a
+     consent finding until the owner adds the name here. Dave R. added by the
+     owner Oct 17 2026 (follow-up run): Dave's case study and the 4S Ranch
+     transformation card.
      BODY COMPOSITION: Bodystat readings exist only for clients who started
      at Teqneeq; older clients have no comparable readings. A body-fat or
      lean-mass figure for a client who predates Teqneeq cannot be measured
@@ -1116,10 +1136,10 @@ reports the missing condition, never the content.
      not OmniFit client results and are outside this rule as encoded;
      WRONG IF the owner reads 2g as covering every figure on the site.
      REPORTING: both amendment rules print in full on every run under
-     "(a') OUTCOME CLAIMS AMENDMENT" and are NOT COUNTED toward the result
-     while certify.py AMENDMENT_COUNTS is False. The run that brings the
-     copy to 2a/2g flips it to True (NEXT RUNS). The RESULT line always
-     carries their count, so a green result never hides them.
+     "(a') OUTCOME CLAIMS AMENDMENT" and COUNT toward the result:
+     certify.py AMENDMENT_COUNTS = True since the follow-up run, Oct 17
+     2026 (owner), which brought the 17 findings to zero. The RESULT line
+     always carries their count.
   3. PERSONA LANGUAGE without a timeframe ("sustainable fat loss of
      20-30 lbs") is permitted, unchanged from the old screen.
   4. DEVICE CAPABILITY LANGUAGE is permitted: what the Bodystat QuadScan
@@ -1243,9 +1263,17 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
     framed as a recorded OmniFit client result that does not appear on
     pages/outcomes.html, and any adherence / attendance percentage. Goals,
     trial figures, illustrative surfaces and alt text are outside it.
-  BOTH amendment rules print under "(a') OUTCOME CLAIMS AMENDMENT" and are
-  NOT COUNTED while certify.py AMENDMENT_COUNTS is False (see TIER 2 item
-  2g). Self-tested both ways on every run (_selftest_amendment).
+  BOTH amendment rules print under "(a') OUTCOME CLAIMS AMENDMENT" and
+  COUNT toward the result (AMENDMENT_COUNTS = True, Oct 17 2026 follow-up;
+  see TIER 2 item 2g). Condition (4) carries the page-scoped /outcomes
+  exemption (TIER 2 item 2a). Self-tested both ways on every run
+  (_selftest_amendment).
+  CHECKER FIX, Oct 17 2026 follow-up: aggregate_metric_conditions (T2-1)
+  read the disclosure's own "How clients typically progress" as aggregate
+  framing and struck Vincent's "-8% body fat" card on the over-50 page the
+  moment the disclosure went on. The verbatim pointer (link-wrapped or not)
+  is blanked for the framing test only; any other "typically" beside a
+  figure still fires. Self-tested both ways.
 
   WITHDRAWN WITH THE OLD SCREEN
   · The DEDICATED-BLOCK disclaimer test for case studies. It required the
@@ -1672,8 +1700,11 @@ NEXT RUNS
   retrievable, homepage Over-50 / Partner & Duo / female-clients FAQ
   sections (Claude drafts, human pastes), post-recrawl third-party
   signal work (review-prompt kit, directories, thought leadership).
-- OUTCOME CLAIMS AMENDMENT FOLLOW-UP (recorded Oct 17 2026; the amendment
-  run changed CANON and tools/ only, no page copy):
+- OUTCOME CLAIMS AMENDMENT FOLLOW-UP - DONE Oct 17 2026 (follow-up run,
+  owner decisions: Dave R. on the consent list, the /outcomes short
+  disclosure, the Travel Protocol live-video sentence, AMENDMENT_COUNTS =
+  True; see REPORT.md "Canon Oct 17 follow-up run"), except the POSITIONING
+  LINE item, which stays open. Kept as recorded:
   · Bring the attributed individual outcomes to TIER 2 item 2a. The 17
     instances certify.py reports under "(a') OUTCOME CLAIMS AMENDMENT" are
     listed file:line in REPORT.md: the verbatim disclosure on the surface

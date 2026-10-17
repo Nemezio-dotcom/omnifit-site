@@ -472,8 +472,15 @@ def aggregate_metric_conditions(text, window=14):
     first and searching back for the figure found the FIRST identical string in
     the document and read the wrong section's conditions."""
     out = []
+    # The TIER 2 item 2a disclosure says "How clients typically progress" and
+    # points AWAY from the figure; it is the individual-result label, not
+    # aggregate framing. Only that verbatim pointer (link-wrapped or not) is
+    # blanked, same length so positions hold, and only for the framing test:
+    # any other "typically" near a figure still reads as aggregate.
+    framing = re.sub(r'How clients typically progress:\s*(?:<a\b[^>]*>\s*)?omnifittraining\.com/outcomes',
+                     lambda x: re.sub(r'[^\n]', ' ', x.group(0)), text)
     for m in re.finditer(r'\d[\d.,]*\s*%', text):
-        ctx = _flat(text[max(0, m.start()-900):m.end()+900])
+        ctx = _flat(framing[max(0, m.start()-900):m.end()+900])
         if not re.search(_AGG, ctx, re.I): continue        # not presented as an aggregate
         surface = _surface(text, m.start())
         if _is_illustrative(surface): continue             # TIER 2 item 5
@@ -538,25 +545,39 @@ def result_near_timeframe(text, window=12):
 # below because certify cannot read a consent form, and (2) is not checked.
 # Conditions (3), (4) and (5) are machine-checkable and are checked here.
 #
-# These two rules REPORT BUT DO NOT COUNT while AMENDMENT_COUNTS is False: the
-# amendment was recorded before any page was brought to it, so the first run
-# reports every instance the site fails (file:line, client, condition) as a
-# new-rule finding, separate from the run's pass/fail. The run that edits the
-# copy flips AMENDMENT_COUNTS to True (CANON NEXT RUNS). The findings print
-# in full either way and the RESULT line carries their count, so a green
-# result never hides them.
-AMENDMENT_COUNTS = False
+# These two rules COUNT toward the result. The amendment run (Oct 17 2026)
+# recorded them with AMENDMENT_COUNTS = False and listed the 17 instances the
+# site failed; the follow-up run the same day brought the copy to 2a and
+# flipped it to True (owner decision). Set it back to False only to report a
+# new rule's first sweep without failing the run; the findings print in full
+# either way and the RESULT line carries their count.
+AMENDMENT_COUNTS = True
 
 # Owner-attested written consent (CANON TIER 2 item 2a, Oct 17 2026). First
 # name, optional initial. A figure attributed to anyone else - or to an
 # anonymised profile, which no list can vouch for - is a consent finding.
-CONSENT_LIST = ["Isaac M.", "Egor B.", "Chad C.", "Alo S.", "Mark M.", "Vincent", "Ken"]
+CONSENT_LIST = ["Isaac M.", "Egor B.", "Chad C.", "Alo S.", "Mark M.", "Vincent", "Ken", "Dave R."]
 _CONSENT_FIRST = sorted({n.split()[0] for n in CONSENT_LIST}, key=len, reverse=True)
 _CONSENT_RX = re.compile(r'\b(' + '|'.join(map(re.escape, _CONSENT_FIRST)) + r')\b(?:\s+[A-Z]\.)?')
 
 # Condition (4), verbatim, on the same surface as the figure.
 DISCLOSURE_2A = ("Individual result, measured by OmniFit. How clients typically progress: "
                  "omnifittraining.com/outcomes.")
+_OUTCOMES_FILES = ("outcomes.html", "outcomes-header.html")
+# ON /outcomes ONLY (owner, Oct 17 2026) the disclosure is its first sentence
+# alone: the full line points the reader at the page they are already on.
+# Page-scoped to outcomes.html and its header, and exact both ways: the full
+# line there is NOT the /outcomes disclosure, and the short line anywhere else
+# is not the disclosure at all.
+DISCLOSURE_2A_OUTCOMES = "Individual result, measured by OmniFit."
+_SHORT_ONLY = re.compile(re.escape(DISCLOSURE_2A_OUTCOMES) + r'(?!\s*How clients typically progress)')
+
+def _has_disclosure(surface, page=None):
+    """Condition (4) on one flattened, normalised surface. `page` is the file's
+    basename; None means an ordinary page."""
+    if page in _OUTCOMES_FILES:
+        return bool(_SHORT_ONLY.search(surface))
+    return DISCLOSURE_2A in surface
 
 # Condition (3): elapsed time stated as fact. "in just" is the owner's named
 # shape; "in only" and "in as little as" are the same minimiser with a
@@ -671,7 +692,7 @@ _CONSENT_DISPLAY = {n.split()[0]: n for n in CONSENT_LIST}
 def _on_consent_list(name):
     return name.split()[0] in _CONSENT_FIRST
 
-def attributed_outcome_conditions(text):
+def attributed_outcome_conditions(text, page=None):
     """TIER 2 item 2a, conditions (3), (4), (5) and the consent list, on every
     attributed individual figure. Returns (line, client, condition, detail).
     Unattributed figures are TIER 1 item 2 / TIER 2 item 1 / item 2g territory
@@ -693,7 +714,7 @@ def attributed_outcome_conditions(text):
         if re.search(_MINIMISER, sent, re.I):
             findings.append(("(3) elapsed time as fact", f"'{re.search(_MINIMISER, sent, re.I).group(0)}' beside '{fig}'"))
         surface = _norm(html.unescape(_flat(_surface(raw, m.start()))))
-        if DISCLOSURE_2A not in surface:
+        if not _has_disclosure(surface, page):
             findings.append(("(4) verbatim disclosure", "disclosure missing or not verbatim on the surface"))
         for rx, what in ((_SECOND_PERSON, "second person"), (_FIRST_PERSON, "first person"),
                          (_PROJECTION, "projection"), (_PRESENT_TENSE, "present tense")):
@@ -716,7 +737,6 @@ def attributed_outcome_conditions(text):
 # labelled illustrative samples are not client results. Adherence
 # percentages are findings on sight until attendance is logged.
 OUTCOMES_PAGE = "pages/outcomes.html"
-_OUTCOMES_FILES = ("outcomes.html", "outcomes-header.html")
 _RESULT_VERB = (r'\b(?:lost|gained|dropped|shed|added|achieved|rose|fell|reached|recorded|measured|'
                 r'stronger|improved|increased|decreased|reduced|median|average[ds]?|mean|'
                 r'fully or partly|retention)\b')
@@ -824,10 +844,28 @@ def _selftest_amendment():
     for bad in ('Alo S., CTO, added 18 lbs; you can too.', 'Alo S., CTO: "I added 18 lbs."',
                 'Alo S., CTO, will add 18 lbs.', 'Alo S., CTO, gains 18 lbs every year.'):
         assert "(5) third person, past tense" in conds('<section><p>' + bad + '</p>' + D + '</section>'), f"(5) missed: {bad}"
-    assert "consent" in conds('<section><p>Dave, business owner, lost 27 lbs over 8 months.</p>' + D + '</section>'), "unlisted name passed consent"
+    # Dave joined the consent list Oct 17 2026; the negative case needs a name that is not on it
+    assert "consent" in conds('<section><p>Marco, business owner, lost 27 lbs over 8 months.</p>' + D + '</section>'), "unlisted name passed consent"
     assert "consent" in conds('<section><p>An anonymised male client, 29, gained 10 lb over 12 weeks.</p>' + D + '</section>'), "anonymised profile passed consent"
     assert "consent" not in conds('<section><p>Ken · CTO · 50s</p><div>−11 lb bodyweight, 6 months</div>' + D + '</section>'), "listed name failed consent"
     assert attributed_outcome_conditions('<section><p>Clients lose 20 lbs in 6 months.</p></section>') == [], "unattributed figure read as 2a"
+    assert "consent" not in conds('<section><p>Dave R., business owner, lost 27 lbs over 8 months.</p>' + D + '</section>'), "Dave R. (consent list, Oct 17 2026) failed consent"
+    # /outcomes exemption: the first sentence alone, on that page only, both ways
+    card = '<section><p>Isaac M., attorney, went from 28.2% to 19.8% body fat between 2024 and 2025.</p>'
+    short = '<p>' + DISCLOSURE_2A_OUTCOMES + '</p></section>'
+    oc = lambda t, pg: {c for _, _, c, _ in attributed_outcome_conditions(t, pg)}
+    assert oc(card + short, "outcomes.html") == set(), "/outcomes short disclosure not accepted on /outcomes"
+    assert oc(card + short, "outcomes-header.html") == set(), "/outcomes short disclosure not accepted in its header"
+    assert "(4) verbatim disclosure" in oc(card + short, "weight-loss.html"), "short disclosure accepted off /outcomes"
+    assert "(4) verbatim disclosure" in oc(card + short, None), "short disclosure accepted with no page"
+    assert "(4) verbatim disclosure" in oc(card + D + '</section>', "outcomes.html"), "full disclosure accepted on /outcomes (the exemption is the first sentence alone)"
+    assert oc(card + D + '</section>', "weight-loss.html") == set(), "full disclosure rejected off /outcomes"
+    assert "(4) verbatim disclosure" in oc(card + '<p>Individual result, measured by OmniFit; see aggregate outcomes above.</p></section>', "outcomes.html"), "near-verbatim short disclosure accepted on /outcomes"
+    assert "(4) verbatim disclosure" in oc(card + '</section>' + short.replace('</section>', ''), "outcomes.html"), "short disclosure on another surface accepted on /outcomes"
+    # the 2a disclosure's "typically" is not T2-1 aggregate framing; any other "typically" still is
+    vin = '<div><div>−8% body fat</div><div>Vincent · Registered Nurse · Age 59</div></div>'
+    assert aggregate_metric_conditions(vin + '<p>Individual result, measured by OmniFit. How clients typically progress: <a href="/outcomes">omnifittraining.com/outcomes</a>.</p>') == [], "2a disclosure read as T2-1 aggregate framing"
+    assert aggregate_metric_conditions(vin + '<p>Clients typically see this.</p>'), "'typically' beside a figure stopped reading as aggregate"
     # 2g
     syn = ('<section><p>Between January 2023 and September 2026, 72 clients. Median strength change +13.7% across 38 clients. '
            'Clients lost 40 lb in 6 months (n=47).</p></section>')
@@ -901,18 +939,24 @@ def _selftest_positioning():
         '<script type="application/ld+json">{"@graph":[{"@type":"WebPage","description":"' + POSITIONING_LINE + '"}]}</script>')), "WebPage description passed"
 
 # ─── THE TRAVEL PROTOCOL (CANON, THE OMNIFIT METHOD, Oct 17 2026) ─
-# Always "the Travel Protocol" (capital T and P); never a price for it. No
-# page carries the name yet (the next run applies it), so both rules are
-# inert on the live site and proven by their self-test.
+# Always "the Travel Protocol" (capital T and P); never a price for it. The
+# name went live on the travel-support pages Oct 17 2026 (follow-up run).
 def travel_protocol_usage(text):
     t = html.unescape(_flat(text)); out = []
     for m in re.finditer(r'\btravel protocol\b', t, re.I):
         if m.group(0) != "Travel Protocol":
             out.append(("Travel Protocol casing", t[max(0, m.start()-40):m.end()+40].strip()))
-        lo = max((t.rfind(c, 0, m.start()) for c in '.!?'), default=-1) + 1
-        hi = min((x for x in (t.find(c, m.end()) for c in '.!?') if x != -1), default=len(t))
-        if re.search(r'\$\s*\d', t[lo:hi + 1]):
-            out.append(("price stated for the Travel Protocol", t[lo:hi + 1].strip()[:140]))
+    # The price test reads the name's sentence INSIDE its block element
+    # (_block_sentence, as 2a condition 5 does). Splitting on punctuation alone
+    # ran an unpunctuated <li> back into the price paragraph above its list
+    # (omnifit-vs-competitors, Oct 17 2026), which states the tier rates, not
+    # a price for the Travel Protocol.
+    raw = _blank_noncopy(text)
+    for m in re.finditer(r'\btravel protocol\b', raw, re.I):
+        if _in_tag(raw, m.start()): continue
+        sent = _block_sentence(raw, m.start())
+        if re.search(r'\$\s*\d', sent):
+            out.append(("price stated for the Travel Protocol", sent.strip()[:140]))
     return out
 
 def _selftest_travel_protocol():
@@ -922,6 +966,9 @@ def _selftest_travel_protocol():
     assert kinds('<p>The Travel protocol is included.</p>') == ["Travel Protocol casing"], "mixed case passed"
     assert kinds('<p>The Travel Protocol is $95 per trip.</p>') == ["price stated for the Travel Protocol"], "price passed"
     assert kinds('<p>Travel Protocols are included.</p>') == [], "plural word-boundary false positive"
+    assert kinds('<p><strong>$640 per 4 weeks</strong> depending on setting</p><ul><li>App logging</li>'
+                 '<li>The Travel Protocol: a scheduled session live by video, at no extra cost</li></ul>') == [], "price in the block above the list read as the Travel Protocol's"
+    assert kinds('<ul><li>The Travel Protocol, $95 per trip</li></ul>') == ["price stated for the Travel Protocol"], "price in the same list item passed"
 
 # Every rule names the tier it encodes. TIER 1 rules report a violation; TIER 2
 # rules report a MISSING CONDITION. See CANON COMPLIANCE SCREEN - TWO TIERS.
@@ -1445,7 +1492,7 @@ def run():
     for f in files:
         if os.path.basename(f) in FROZEN: continue
         t = open(f).read()
-        for ln, client, cond, detail in attributed_outcome_conditions(t):
+        for ln, client, cond, detail in attributed_outcome_conditions(t, os.path.basename(f)):
             print(f"   {f}:{ln}  [2a {cond}] client: {client}\n      {detail[:170]}"); N += 1
         if os.path.basename(f) in _OUTCOMES_FILES: continue    # 2g's reference surface
         for ln, fig, kind, detail in data_backed_figures(t):
