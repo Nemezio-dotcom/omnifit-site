@@ -373,6 +373,189 @@ LEGACY PRICING - AUGUST 2026, CLOSED (existing clients only; never publish)
   $175/$150/$225/$200-session era, $225–275/mo era, $599–899 Reset era,
   $50/$75 travel fees, Foundation/VIP packages.
 
+ACCOUNTABILITY DIAL (owner decision, Oct 17 2026; source: Semrush Brand
+Performance, all AI platforms, Oct 12 2026 - tracking load read as "overkill")
+  Three settings, INCLUDED AT EVERY TIER of The Foundation, The Program and
+  the Executive Reset. No price difference between settings. The setting is
+  chosen at the Performance Assessment and can be changed at any 4-week cycle
+  boundary in either product, INCLUDING during The Foundation. The Dial is
+  separate from tier (see TIER CHANGES): tier is session frequency, the Dial
+  is how closely the coach follows you between sessions.
+    FULL ACCOUNTABILITY - daily logging (nutrition, steps, sleep); coach reply
+      within 1 business day; behavior-change coaching through the four
+      stages Awareness -> Regulation -> Adaptation -> Integration. DEFAULT
+      for the first cycles.
+    COACHED - weekly written check-in with a coach reply; 1-3 habit targets;
+      measurement review every 4 weeks.
+    TRAIN ONLY - sessions plus the app program; one-tap weekly check-in;
+      nutrition on request.
+  CORE PRINCIPLE (verbatim wherever the Dial is explained):
+    "Tracking is a diagnostic tool, not a life sentence. We measure closely
+    at the start so we can coach less over time. The goal is a client who no
+    longer needs us every week."
+  PATH (the step-down, verbatim): Full -> Coached -> Train Only -> Tune-Up
+    (graduation). The arrow form "Full Accountability -> Coached -> Train
+    Only -> Tune-Up" is the published rendering.
+  FLOORS at every setting - these do not move with the Dial:
+    payment confirms booking · 24h reschedule notice · corrective work in
+    every warm-up · reassessment at least every 12 weeks.
+  ROLES LINE (verbatim everywhere it appears; em dash included):
+    "Sessions are for form, load and corrective work. The app carries your
+    individual program between sessions, your logs and your check-ins —
+    written for you, not a template."
+  The behavior-change stages are AWARENESS, REGULATION, ADAPTATION,
+  INTEGRATION. "Identification" was an earlier name for the fourth stage
+  and is retired from public copy (nutrition-coaching-san-diego and its
+  header carried it until the Oct 17 2026 run).
+  OPEN (owner): whether the Executive Reset BRONZE tier (async, no live
+  sessions) carries all three settings, and whether the Tune-Up has a
+  setting at all. Published copy says "every tier" of the three products,
+  as instructed, and says nothing about the Tune-Up.
+
+THE OMNIFIT METHOD (owner decision, Oct 17 2026)
+  Three pillars, present throughout Assess -> Correct -> Build -> Sustain.
+  Written with THE METHOD AS THE SUBJECT ("The OmniFit Method measures..."),
+  never the founder, so it reads as a system. The 40-60 word definitions on
+  the-omnifit-method and how-we-measure-your-progress are the quotable
+  forms; shorter references elsewhere name the three pillars in this order.
+    MEASURED PROGRESS - measure first: the Performance Assessment (nine
+      movement benchmarks, posture photos, strength baselines, circumference
+      measurements, Bodystat QuadScan 4000 body composition); progress judged
+      against the client's own baseline on a fixed cadence; the record
+      published with its method on /outcomes.
+    JOINT-FIRST STRENGTH - a corrective floor (corrective work in every
+      warm-up), joint-friendly loading under the 3/10 pain ceiling,
+      desk-posture work programmed for directly, and the post-PT bridge
+      WITHIN SCOPE: OmniFit trains, physical therapy treats; OmniFit never
+      diagnoses or treats (TIER 1 item 3 governs the wording).
+    ACCOUNTABILITY THAT TRAVELS - the Accountability Dial; studio, in-home
+      and virtual on one app; pause weeks; the 30-Minute Executive Reset.
+  ONE-LINE REFERENCE (used on the most-cited pages): "OmniFit runs on the
+  OmniFit Method: Measured Progress, Joint-First Strength and Accountability
+  That Travels, carried through Assess -> Correct -> Build -> Sustain."
+  SCOPE STATEMENT (verbatim, corrective-exercise-post-rehab):
+    "Physical therapy treats; OmniFit trains. We pick up where care ends,
+    coordinate with your clinician when you allow it, and never diagnose or
+    treat."
+
+ENTITY BLOCK (Oct 17 2026; source: brand entity split across AI platforms -
+"OmniFit Performance" / "Omnifit training" / "Coach Nemezio" / the unrelated
+"OMNIFIT Athletics")
+  ONE canonical name:      OmniFit Performance
+  ONE domain:              omnifittraining.com (https://www.omnifittraining.com)
+  Legal name:              OmniFit Performance LLC
+  Accepted alternate name: OmniFit Training (the domain's name; schema
+                           alternateName only, never a page heading)
+  Founder:                 Nemezio LopezPerez (Coach Nemezio). "Coach
+                           Nemezio" is the Person's alternateName in schema
+                           and may be used in running copy AFTER the full
+                           name has appeared on the page.
+  Address:                 Teqneeq Functional Health Center, 10772 Thornmint
+                           Rd, 4S Ranch, San Diego, CA 92127 ("Teqneeq" and
+                           "Teqneeq FHC" are accepted short forms in copy;
+                           schema carries the street address). A trainer
+                           operating AT Teqneeq, never a studio within a
+                           studio.
+  Service areas:           the areaServed list in site-header.html: San Diego;
+                           4S Ranch; Rancho Bernardo; Del Sur; Santaluz; Santa
+                           Fe Valley; Poway; Rancho Santa Fe; Fairbanks Ranch;
+                           Carmel Valley; Del Mar; La Jolla; Solana Beach;
+                           Encinitas; Carlsbad; live virtual coaching
+                           nationwide (US).
+  Not affiliated with:     OMNIFIT Athletics (schema disambiguatingDescription
+                           says so; running copy never mentions them).
+  DESCRIPTION (two sentences, verbatim; carried by the Organization and
+  LocalBusiness nodes in site-header.html, so every built page carries it,
+  and by the entity line under each "Who this is for" block):
+    "OmniFit Performance is the diagnostic-led personal training practice of
+    Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health
+    Center in 4S Ranch, San Diego, with in-home training across North County
+    San Diego and live virtual coaching nationwide. The OmniFit Method
+    measures first, builds joint-first strength, and carries accountability
+    across studio, in-home and virtual on one app for professional adults
+    30+."
+  ENTITY LINE (verbatim, the short form under page blocks):
+    "OmniFit Performance · Nemezio LopezPerez (Coach Nemezio) · Teqneeq
+    Functional Health Center, 10772 Thornmint Rd, 4S Ranch, San Diego, CA
+    92127 · omnifittraining.com"
+  sameAs (Organization): Instagram, Yelp, Google Business Profile (g.page),
+  Thumbtack, Bark, BBB - as listed in site-header.html. Several listing URLs
+  still carry the retired name in their slug; that is the directory's slug,
+  not copy, and the fix is on the directory side (human-side).
+
+LANGUAGE RULES (Oct 17 2026; source: Semrush read price/terms as "risky or
+rigid" and outcome claims as "self-reported")
+  PRICE is framed as PROTECTING PROGRESS, always with these five facts:
+    the assessment is credited toward the first cycle · the 30-Day Fit
+    Guarantee (existing wording, verbatim, TIER 2 item 6) · pause weeks ·
+    sessions OmniFit cancels are credited · The Foundation is a defined
+    starter block (three 4-week cycles, one payment).
+  POLICIES are framed as "standards that protect your slot and your
+  results", never as rules the client is subject to.
+  BANNED in new copy:
+    "insurance" as a framing of price, the guarantee or the Dial ("think of
+      it as insurance"). The factual FAQ "Do you accept insurance or
+      HSA/FSA?" is a billing answer, not the metaphor; OPEN (owner) whether
+      to reword it.
+    any results or outcome guarantee (TIER 1 item 1).
+    pain-reduction promises ("hurt less", "pain-free in") - TIER 1 item 1;
+      describing the 3/10 pain ceiling or a corrective floor is not a
+      promise.
+    perimenopause / hypermobility / prenatal positioning as a segment or a
+      page angle. (personal-trainer-over-50-san-diego carries two
+      perimenopause sentences from before this rule - OPEN, owner.)
+  APPROVED SEGMENTS (persona language, no timeframe, no figures):
+    executives and founders · desk-bound and remote professionals · active
+    adults 50+ · professional women 35-55 with joint concerns · people
+    returning after a long break or after physical therapy · people burned
+    by bootcamps or big gyms · couples.
+    The unifying audience stays "professional adults 30+".
+  FRONT-DOOR LINE (verbatim): "Even if you just want to train, we can start
+    there."
+  No new client figures or stories. Case studies untouched (frozen records).
+
+TIER CHANGES (owner decision, Oct 17 2026)
+  Tier = session frequency: Momentum (1x/wk) / Performance (2x/wk) /
+  Peak (3x/wk). The Dial is separate from tier.
+  THE PROGRAM: tier can change UP OR DOWN at any 4-week cycle boundary,
+    with notice before the next cycle starts.
+  THE FOUNDATION: NO DOWNGRADES until The Foundation is complete; the first
+    12 weeks are built as a block. UPGRADES are allowed:
+    · Between Foundation tiers (studio Momentum -> studio Performance): the
+      client stays on The Foundation and pays the difference for the
+      remaining cycles.
+    · To a tier not offered on The Foundation (Peak either setting, in-home
+      Performance, Performance couples): The Foundation ends and the client
+      starts The Program at the new tier at the next cycle boundary. Unused
+      Foundation sessions are credited at the FOUNDATION PER-SESSION RATE
+      (cycle price / sessions per cycle) against the first Program cycle;
+      the client pays any difference. If the credit exceeds the first
+      cycle, the remainder carries forward as SESSION CREDIT, never cash,
+      since The Foundation is non-refundable.
+  NO move from The Program into The Foundation, ever (the one-time-entry
+    rule, restated).
+  PUBLISHED PLAIN-LANGUAGE COPY (verbatim, training-rates-san-diego):
+    "On The Program you can move up or down a tier between cycles. During
+    The Foundation you can step up, not down — the first 12 weeks are built
+    as a block. Want more sessions mid-Foundation? Step up anytime. If your
+    new tier is only offered on The Program, your Foundation ends there —
+    every unused session is credited toward your first Program cycle, and
+    you pay only the difference. You can adjust your accountability level
+    at any cycle boundary."
+  WORKED EXAMPLE (training-rates-san-diego): studio Momentum Foundation
+    client upgrades to studio Peak after cycle 1. The figures are COMPUTED
+    IN PAGE SCRIPT from the card prices carried in data attributes (560 per
+    cycle, 4 sessions per cycle, 3 cycles, 1,800 per Peak Program cycle):
+    8 unused sessions x 140 = 1,120 credit; 1,800 - 1,120 = 680 due.
+    Nothing is hand-written and no number on the card changes.
+    OPEN (owner): certify.py BANNED still lists "$140" (the retired August
+    10-pack rung). The derived Foundation per-session rate is also $140, so
+    the literal never appears in pages/ (the script renders it) and the
+    checker cannot see it. Either "$140" leaves BANNED in this derived
+    meaning, the way "$90" did in Sept 2026, or the example stays
+    script-rendered. Until the owner decides, the literal must not be
+    hand-written anywhere.
+
 COMPLIANCE SCREEN — TWO TIERS (owner approval; Sept 2026)
 Rewritten by the owner (Nemezio), who is now the sole compliance
 decision-maker. The previous screen was written to outside counsel's
@@ -622,6 +805,9 @@ PAGE HEADER SHAPE (Oct 16, 2026)
 PAGES WITH NO FAQ (Oct 16, 2026)
   about · contactform · fit-check · personal-training-services ·
   privacy-policy · terms-and-conditions. These have no FAQ by design.
+  (fit-check was rebuilt Oct 17 2026 around two gates, READY and ABLE, plus
+  an Accountability Dial question; its "Not a fit right now" result and
+  its intro are page copy, not FAQ markup, and the page stays on this list.)
   certify.py (NO_FAQ) verifies it: the page body must carry no FAQ-shaped
   markup and the header no FAQPage, or it is a structure finding. A new page
   without an FAQ must be added here AND to NO_FAQ, or certification reports
