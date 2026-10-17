@@ -343,6 +343,47 @@ grandfathered back in through a context nobody re-reads.
   on its own merit. If the old banned wording ever reappears anywhere, it now
   flags like any other violation.
 
+### Launch decisions 18-20 (Oct 17 2026)
+
+- **`booking_cta_to_contactform`** extends `consultation_cta_to_contactform`
+  (item 15) to every enrolment or booking label: an anchor to `/contactform`
+  whose tag-stripped label starts "Start", "Get Started", "Book" or "Stay".
+  "Contact" (and "Contact us to start") stays quiet.
+- **`reserve_action_to_contactform`** parses every `ld+json` block and walks
+  it: a `ReserveAction` whose `target` (a URL string or an `EntryPoint`)
+  names `/contactform` fires. A `WebPage` `url` naming the contact page does
+  not: the contact page's own address is not an entry action.
+- **`ken_muscle_claim`** fires on `+6 lb(s)`, `6 pounds of muscle` and
+  `6 lbs of muscle` on the flattened copy of EVERY file, frozen records
+  included (the owner overrode their exemption for Ken's card, which is
+  where the figure lived). A digit guard keeps `16 lbs of muscle` and
+  `+6.2 lbs` quiet.
+- **`RETIRED_LAUNCH_COPY`** gains `depending on location` and `varies by
+  location` (item 19). The clean fixture now carries the canonical travel
+  sentence, a territory sentence and the pricing answer's "depending on
+  setting and membership", which must stay quiet.
+- All four self-test both ways on every run. Negative test: the new
+  `certify.py` against the pre-change tree reported 54 stale-canon hits (31
+  travel phrases, 11 booking CTAs, 5 ReserveActions, 7 Ken figures) and
+  FAILED; the changed tree reports none.
+
+### Two exemption defects, fixed Oct 17 2026
+
+The owner-dictated over-50 proof card "−11 lb bodyweight, 6 months" beside
+"Ken · CTO · 50s" fired T1-2 although TIER 2 item 2 exempts it (attributed,
+page disclaimed). Two defects, each enough on its own:
+
+| Defect | Shape that broke it | Fix |
+|---|---|---|
+| `DISCLAIMER_ANYWHERE` read one sentence only | "Individual results. Outcomes depend on ... and vary between clients." stopped at the first period: page read as undisclaimed | the condition word may sit in the same sentence or the next one (one period, 160 chars each side) |
+| `AGGREGATE` matched bare `everyone` | "years of putting everyone else first" in Vincent's card, 45 words away, read as population framing | `everyone(?!\s+else)`, `anyone(?!\s+else)` |
+
+`_selftest_case_study_exempt()` runs before the compliance screen on every
+run: the disclaimed attributed card must pass; the same card with no
+disclaimer, "Everyone loses 11 lb in 6 months" and an unattributed "Clients
+lose 11 lb in 6 months" must all fire, and "Individual results. Call us
+today." must not count as a disclaimer.
+
 ## Known checker defects, unfixed
 
 - **travel-fee rule, `$75` adjacency.** `travel[^.<]{0,30}\$(?:50|75)` fires on

@@ -215,7 +215,11 @@ NAMED_ATTRIB = (r'\b[A-Z][a-z]{2,}(?:\s+[A-Z][a-z]+)?\s*(?:·|&middot;|&#183;)' 
 PROFILE = r'\b(?:male|female|man|woman|\d{2}-year|\d{2}\s*,\s*\d|aged?)\b'
 # Aggregate or typical-results framing is NEVER exempt, on any page.
 AGGREGATE = (r'\b(?:typical|typically|average|averages|averaged|'
-             r'most clients|our clients|every client|everyone|anyone|'
+             r'most clients|our clients|every client|'
+             # "putting everyone else first" describes a client's life, not a
+             # population: the Oct 17 2026 over-50 proof card sat 45 words from
+             # it and lost its TIER 2 item 2 exemption. "everyone loses" fires.
+             r'everyone(?!\s+else)|anyone(?!\s+else)|'
              r'clients\s+(?:lose|gain|drop|see|can|will)|'
              r'you\s+(?:\w+\s+){0,2}?(?:lose|gain|drop|expect|see|will|can)|'
              r"you'll|expect to|up to)\b")
@@ -227,9 +231,28 @@ AGGREGATE = (r'\b(?:typical|typically|average|averages|averaged|'
 # are UNCHANGED, which is why how-we-measure-your-progress and
 # desk-worker-posture-pain do not gain an exemption from the relaxation - both
 # fail attribution independently.
+# The condition word may sit in the SAME sentence or the NEXT one (Oct 17
+# 2026): "Individual results. Outcomes depend on starting point ... and vary
+# between clients." is the over-50 page's disclaimer, and the one-sentence
+# reading stopped at the first period and called the page undisclaimed. Still
+# bounded: one sentence break, 160 characters either side of it.
 DISCLAIMER_ANYWHERE = re.compile(
-    r'individual results?\b[^.]{0,160}?\b(?:vary|varies|varied|depends?|depending|'
+    r'individual results?\b[^.]{0,160}?(?:\.[^.]{0,160}?)?\b(?:vary|varies|varied|depends?|depending|'
     r'not a projection|not projections|not typical)\b', re.I)
+
+def _selftest_case_study_exempt():
+    """Both directions, every run, for the two Oct 17 2026 fixes above."""
+    d = '<p>Individual results. Outcomes depend on starting point and vary between clients.</p>'
+    assert _has_results_disclaimer_anywhere(d), "two-sentence disclaimer not recognised"
+    assert not _has_results_disclaimer_anywhere('<p>Individual results. Call us today. We train in 4S Ranch.</p>'), \
+        "disclaimer recognised with no condition word"
+    card = ('<p>Years of putting everyone else first.</p><div>−11 lb bodyweight, 6 months</div>'
+            '<div>Ken · CTO · 50s</div>')
+    assert lbs_near_timeframe(card + d) == [], "attributed, disclaimed card still fired"
+    assert lbs_near_timeframe(card), "attributed card with no page disclaimer did not fire"
+    assert lbs_near_timeframe('<p>Everyone loses 11 lb in 6 months.</p><div>Ken · CTO</div>' + d), \
+        "aggregate framing ('everyone loses') was exempted"
+    assert lbs_near_timeframe('<p>Clients lose 11 lb in 6 months.</p>' + d), "unattributed figure was exempted"
 
 def _has_results_disclaimer_anywhere(text):
     return bool(DISCLAIMER_ANYWHERE.search(_flat(text)))
@@ -639,6 +662,11 @@ RETIRED_LAUNCH_COPY = [
     # sentence. Canonical: "The $150 Performance Assessment is credited toward
     # your first program, Reset cycle or 5-pack."
     "diagnostic fee is credited",
+    # Launch decision 19 (Oct 17 2026): the travel-fee variants. Canonical:
+    # "No travel fee inside our in-home service area; a travel fee may apply
+    # outside it." (territory pages: "No travel fee in [Town]; it's inside our
+    # in-home service area.")
+    "depending on location", "varies by location",
 ]
 
 def retired_launch_copy(text):
@@ -677,7 +705,10 @@ def _selftest_retired_copy():
              "Executive Reset, tell us in writing and we'll refund the unused portion of your "
              "enrollment. Private 1:1 coaching inside Teqneeq FHC, a members-only facility in "
              "4S Ranch. 190+ Reviews. nemezio@omnifittraining.com $200 per 4 weeks "
-             "https://g.page/r/CcePeMjnbDe9EBM</p>")
+             "https://g.page/r/CcePeMjnbDe9EBM No travel fee inside our in-home service area; "
+             "a travel fee may apply outside it. No travel fee in Del Mar; it's inside our "
+             "in-home service area. 5-packs run $180 to $250 per session depending on setting "
+             "and membership.</p>")
     assert retired_launch_copy(clean) == [], "retired-copy rule fired on canonical copy"
     return len(RETIRED_LAUNCH_COPY)
 
@@ -710,6 +741,88 @@ def _selftest_consultation_cta():
              '<a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>']
     for q in quiet:
         assert not consultation_cta_to_contactform(q), f"consultation-CTA rule fired on: {q[:50]}"
+
+# ─── (b) BOOKING CTA OR RESERVEACTION TO THE CONTACT FORM (owner, Oct 17 2026) ───
+# CANON LAUNCH DECISIONS item 18 extends item 15 from consultation labels to
+# every enrolment or booking button: a link labelled "Start ...", "Get
+# Started", "Book ..." or "Stay ..." goes to Calendly, never /contactform, and
+# no schema ReserveAction may target /contactform either. "Contact" links stay
+# on the form and stay quiet. Same raw-source reading as the consultation rule.
+_BOOKING_LABEL = re.compile(r'^(?:Start\b|Get Started\b|Book\b|Stay\b)', re.I)
+_LDJSON = re.compile(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', re.S | re.I)
+
+def booking_cta_to_contactform(text):
+    out = []
+    for m in _CONTACT_A.finditer(text):
+        label = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', m.group(1))).strip()
+        if _BOOKING_LABEL.search(label):
+            out.append((text[:m.start()].count('\n') + 1, label))
+    return out
+
+def reserve_action_to_contactform(text):
+    """ReserveAction nodes whose target (a URL string or an EntryPoint) names
+    /contactform: (line of the ld+json block, target). A block that does not
+    parse is the structure check's finding, not this rule's."""
+    out = []
+    def walk(n, ln):
+        if isinstance(n, dict):
+            t = n.get("@type")
+            if (t == "ReserveAction" or (isinstance(t, list) and "ReserveAction" in t)) \
+                    and "contactform" in json.dumps(n.get("target", "")):
+                out.append((ln, json.dumps(n.get("target"))[:90]))
+            for v in n.values(): walk(v, ln)
+        elif isinstance(n, list):
+            for v in n: walk(v, ln)
+    for m in _LDJSON.finditer(text):
+        try: data = json.loads(m.group(1))
+        except ValueError: continue
+        walk(data, text[:m.start()].count('\n') + 1)
+    return out
+
+def _selftest_booking_cta():
+    fire = ['<a class="rt-btn rt-btn-primary" href="/contactform">Start With the Foundation</a>',
+            '<a class="cp-mini" href="/contactform">Get Started</a>',
+            '<a href="https://www.omnifittraining.com/contactform">Book Sessions</a>',
+            '<a class="rt-btn" href="/contactform/">\n  Stay in the Program\n</a>']
+    for f in fire:
+        assert booking_cta_to_contactform(f), f"booking-CTA rule did not fire: {f[:50]}"
+    quiet = ['<a href="/contactform">Contact</a>', '<a href="/contactform">Contact us to start</a>',
+             '<a class="cp-mini" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Get Started</a>']
+    for q in quiet:
+        assert not booking_cta_to_contactform(q), f"booking-CTA rule fired on: {q[:50]}"
+    ra = lambda tgt: ('<script type="application/ld+json">{"@graph":[{"@type":"Service","potentialAction":'
+                      '{"@type":"ReserveAction","target":' + tgt + '}}]}</script>')
+    assert reserve_action_to_contactform(ra('"https://www.omnifittraining.com/contactform"')), "ReserveAction rule did not fire on a URL"
+    assert reserve_action_to_contactform(ra('{"@type":"EntryPoint","urlTemplate":"https://www.omnifittraining.com/contactform"}')), \
+        "ReserveAction rule did not fire on an EntryPoint"
+    assert not reserve_action_to_contactform(ra('"https://calendly.com/nemezio-omnifittraining/45min"')), "ReserveAction rule fired on Calendly"
+    assert not reserve_action_to_contactform('<script type="application/ld+json">{"@type":"WebPage",'
+                                             '"url":"https://www.omnifittraining.com/contactform"}</script>'), \
+        "ReserveAction rule fired on a WebPage url"
+
+# ─── (b) KEN'S RETIRED MUSCLE FIGURE (owner, Oct 17 2026) ───
+# CANON LAUNCH DECISIONS item 20 consolidates Ken's case to the documented
+# bodyweight figure (175 -> 164 lb, 6 months) and retires the "+6 lbs muscle"
+# claim. Unlike the retired-copy sweep this rule reads the FROZEN RECORDS too:
+# the owner overrode their exemption for Ken's card, and the card is where the
+# figure lived. Flattened copy, case-insensitive; the digit guard keeps
+# "16 lbs of muscle" or "+6.2 lbs" from firing.
+KEN_MUSCLE = [r'\+6 ?lbs?\b', r'(?<![\d.])6 pounds of muscle', r'(?<![\d.])6 lbs of muscle']
+
+def ken_muscle_claim(text):
+    t = _flat(text); out = []
+    for rx in KEN_MUSCLE:
+        for m in re.finditer(rx, t, re.I):
+            out.append((m.group(0), t[max(0, m.start()-60):m.end()+40].strip()))
+    return out
+
+def _selftest_ken_muscle():
+    for f in ['<div class="metric-value">+6 lbs</div>', '<p>−11 lb fat, +6 lb muscle</p>',
+              '<p>gained approximately 6 pounds of muscle</p>', '<li>while gaining approximately 6 lbs of muscle</li>']:
+        assert ken_muscle_claim(f), f"Ken muscle rule did not fire: {f[:50]}"
+    for q in ['<p>lost 11 pounds of bodyweight (175 to 164 lb) in 6 months</p>', '<p>+18 lbs</p>',
+              '<p>+6.2 lbs</p>', '<p>16 lbs of muscle</p>', '<p>−11 lb bodyweight, 6 months</p>']:
+        assert not ken_muscle_claim(q), f"Ken muscle rule fired on: {q[:50]}"
 
 # RETIRED with the October card: _marker_nearby, _inside_packs_table and the
 # CANON_MARKERS / CANON_CARDS tables. All four existed to carve $175 out of the
@@ -885,6 +998,7 @@ def run():
         print(f"   duplicate: {k}  ==  {src}  (sha256 {h[:16]}…) - certified via source")
 
     print("\n### (a) COMPLIANCE STRIKES")
+    _selftest_case_study_exempt()   # Oct 17 2026 exemption fixes, both directions
     ciia = {}
     for f in files:
         t = open(f).read()
@@ -976,6 +1090,19 @@ def run():
         for ln, label in consultation_cta_to_contactform(open(f).read()):
             print(f"   {f}:{ln}  [consultation CTA to /contactform: '{label}' must go to Calendly]"); B+=1
     print(f"   (consultation CTA rule: self-tested both ways, {len(swept)} files swept)")
+    _selftest_booking_cta()
+    for f in swept:
+        src = open(f).read()
+        for ln, label in booking_cta_to_contactform(src):
+            print(f"   {f}:{ln}  [booking CTA to /contactform: '{label}' must go to Calendly]"); B+=1
+        for ln, tgt in reserve_action_to_contactform(src):
+            print(f"   {f}:{ln}  [ReserveAction targets /contactform: {tgt} - must be Calendly]"); B+=1
+    print(f"   (booking CTA + ReserveAction rule: self-tested both ways, {len(swept)} files swept)")
+    _selftest_ken_muscle()
+    for f in ALL:
+        for hit, ctx in ken_muscle_claim(open(f).read()):
+            print(f"   {f}  [Ken's retired muscle figure: {hit}]  …{ctx[:90]}…"); B+=1
+    print(f"   (Ken muscle-figure rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")

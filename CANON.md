@@ -752,7 +752,8 @@ and overrides the earlier wording it replaces.)
   program" · "3-month package" · "after your first 30 days" · "no
   standardized assessment" · "Typically single" · "flags inflammation" ·
   "@gmail.com" · "g.page/r/CcePeMjnbDe9EBM/review" · "$250/month" ·
-  "diagnostic fee is credited" (added in the Calendly follow-up).
+  "diagnostic fee is credited" (added in the Calendly follow-up) ·
+  "depending on location" · "varies by location" (added with item 19).
   LOCKS THIS BATCH DID NOT TOUCH: titles, meta descriptions, headings, FAQ
   questions, the ownership table; the in-home page beyond its deposit
   sentence; 4S Ranch and Rancho Bernardo beyond the sentences named in
@@ -969,6 +970,12 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   Page-scoped, not site-wide. Aggregate or typical-results framing is NEVER
   exempt, on any page. Fails CLOSED: anything the attribution test cannot
   confirm stays a strike.
+  CHECKER FIXES, Oct 17 2026 (item 20 surfaced both): the page disclaimer may
+  carry its condition word in the sentence AFTER "individual results"
+  ("Individual results. Outcomes ... vary between clients."), and
+  "everyone else" / "anyone else" no longer read as aggregate framing
+  ("putting everyone else first" in a neighbouring card). Both self-tested
+  both ways on every run (certify.py _selftest_case_study_exempt).
   FROZEN: case-studies.html and home-3.html are exempt from re-screening.
 
   Reasoning, recorded so it survives: an individual, attributed, documented
@@ -980,13 +987,21 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   are there to keep it readable as one.
 
 (b) STALE CANON
-  RETIRED LAUNCH COPY (LAUNCH DECISIONS, Oct 17 2026): the eighteen literal
+  RETIRED LAUNCH COPY (LAUNCH DECISIONS, Oct 17 2026): the twenty literal
   phrases listed there, swept case-insensitively on the flattened copy of
   every file in the glob, footer.html included, frozen records exempt
   (certify.py RETIRED_LAUNCH_COPY, self-tested both ways on every run).
   CONSULTATION CTA TO /contactform (LAUNCH DECISIONS item 15): a link
   labelled as a consultation that points at the contact form (certify.py
   consultation_cta_to_contactform, self-tested both ways on every run).
+  BOOKING CTA OR RESERVEACTION TO /contactform (LAUNCH DECISIONS item 18):
+  a link labelled "Start ...", "Get Started", "Book ..." or "Stay ..."
+  that points at the contact form, or a schema ReserveAction whose target
+  names it (certify.py booking_cta_to_contactform and
+  reserve_action_to_contactform, self-tested both ways on every run).
+  KEN'S RETIRED MUSCLE FIGURE (LAUNCH DECISIONS item 20): "+6 lb(s)", "6
+  pounds of muscle", "6 lbs of muscle", in EVERY file, frozen records
+  included (certify.py ken_muscle_claim, self-tested both ways).
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
   "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
