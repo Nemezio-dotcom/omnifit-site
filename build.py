@@ -20,6 +20,10 @@ Sources
   site/layout.html, site/nav.html, site/site.css, site/site.js
   site/img/*                        static images, copied to public/assets/img/
 
+Also written: public/_redirects, robots.txt, sitemap.xml, 404.html (noindex,
+not in the sitemap, links to Home and Book Your Consultation only) and
+_headers (X-Robots-Tag: noindex on the *.pages.dev preview hostname only).
+
 Nothing here rewrites page copy, schema or CSS rules. The only edits made to
 page markup are structural: <style>/<link> tags are lifted out of the body into
 <head>, Google Fonts @imports are dropped in favour of the single font link in
@@ -121,6 +125,52 @@ REDIRECTS = [
     ("/consultation", "/contactform"),
     ("/FAQs", "/faqs"),
 ]
+
+CALENDLY = "https://calendly.com/nemezio-omnifittraining/45min"
+
+# public/404.html. Standalone (no nav, no footer): the page carries exactly two
+# links, Home and Book Your Consultation, and a noindex meta. Cloudflare Pages
+# serves /404.html for every unmatched route.
+NOT_FOUND_HTML = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page Not Found | OmniFit Performance</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html,body{{margin:0;min-height:100%;background:#0a1628;color:#fff;font-family:'Montserrat',sans-serif}}
+  .nf{{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 20px;text-align:center}}
+  .nf h1{{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,48px);margin:0 0 16px}}
+  .nf p{{color:rgba(255,255,255,.7);font-size:17px;line-height:1.7;max-width:520px;margin:0 auto 28px}}
+  .nf-row{{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}}
+  .nf-btn{{display:inline-block;padding:14px 32px;border-radius:6px;font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.3)}}
+  .nf-btn--primary{{background:#c9a84c;border-color:#c9a84c;color:#0a1628}}
+</style>
+</head>
+<body class="page page--404">
+<main id="main" class="nf">
+  <div>
+    <h1>Page Not Found</h1>
+    <p>That page isn't here. It may have moved when the site was rebuilt, or the address has a typo.</p>
+    <div class="nf-row">
+      <a class="nf-btn" href="/">Home</a>
+      <a class="nf-btn nf-btn--primary" href="{CALENDLY}" target="_blank" rel="noopener">Book Your Consultation</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
+"""
+
+# public/_headers (Cloudflare Pages). Only the preview hostname is marked
+# noindex; www.omnifittraining.com gets no X-Robots-Tag.
+HEADERS_TXT = """https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+"""
 
 STYLE_RE = re.compile(r"<style\b[^>]*>.*?</style>", re.S | re.I)
 LINK_RE = re.compile(r"<link\b[^>]*>", re.I)
@@ -390,6 +440,15 @@ def build():
         f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n", encoding="utf-8"
     )
 
+    # 404.html - Cloudflare Pages serves it for any route with no file and no
+    # redirect. Not a page: it is never appended to `pages`, so it stays out of
+    # the sitemap; noindex; links to Home and Book Your Consultation only.
+    (PUBLIC / "404.html").write_text(NOT_FOUND_HTML, encoding="utf-8")
+
+    # _headers - the *.pages.dev preview hostname is never indexed. The
+    # production domain carries no X-Robots-Tag and stays indexable.
+    (PUBLIC / "_headers").write_text(HEADERS_TXT, encoding="utf-8")
+
     # sitemap.xml
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -447,6 +506,27 @@ def check():
     for href, on in broken.items():
         where = "every page (nav or footer link)" if len(on) == len(files) else ", ".join(on)
         problems.append(f"broken internal link {href} on {where}")
+    # Launch plumbing: 404.html (noindex, out of the sitemap, two links) and
+    # _headers (preview hostname noindex, production domain untouched).
+    nf = PUBLIC / "404.html"
+    if not nf.exists():
+        problems.append("404.html missing")
+    else:
+        t = nf.read_text(encoding="utf-8")
+        if '<meta name="robots" content="noindex">' not in t:
+            problems.append("404.html: no noindex meta")
+        if "<title>Page Not Found | OmniFit Performance</title>" not in t:
+            problems.append("404.html: wrong title")
+        hrefs = re.findall(r'href="([^"]+)"', t.split("<body", 1)[1])
+        if hrefs != ["/", CALENDLY]:
+            problems.append(f"404.html: links must be Home and Book Your Consultation only, got {hrefs}")
+    if "404" in (PUBLIC / "sitemap.xml").read_text(encoding="utf-8"):
+        problems.append("sitemap.xml lists the 404 page")
+    hd = (PUBLIC / "_headers")
+    if not hd.exists() or hd.read_text(encoding="utf-8") != HEADERS_TXT:
+        problems.append("_headers: preview-hostname noindex rule missing or altered")
+    elif "omnifittraining.com" in HEADERS_TXT:
+        problems.append("_headers: production domain must not carry X-Robots-Tag")
     # Keyword ownership (CANON KEYWORD OWNERSHIP). Fixtures first: if a fixture
     # that must fail passes, the site result below means nothing.
     try:
@@ -473,7 +553,7 @@ def main():
             items = ", ".join(f"{ch} x{n} -> {icons.ICONS[ch][0]}" for ch, n in sorted(emoji_report[url_path].items(), key=lambda kv: -kv[1]))
             print(f"  {url_path:45s} {items}")
     problems, notes = check()
-    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji, keyword ownership")
+    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji, 404/_headers, keyword ownership")
     for n in sorted(set(notes)):
         print("  note    ", n)
     for p in problems:

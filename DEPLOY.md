@@ -133,6 +133,12 @@ regenerates `public/` on every deploy (Python 3 is in the Pages build image).
 Either way the output directory is `public`.
 
 `public/_redirects` uses Cloudflare Pages syntax (`/old /new 301`).
+`public/404.html` is written by `build.py` too (title "Page Not Found | OmniFit
+Performance", `<meta name="robots" content="noindex">`, never in the sitemap,
+links to Home and Book Your Consultation only); Cloudflare Pages serves it for
+any route with no file and no redirect. `public/_headers` marks only the
+`*.pages.dev` preview hostname `X-Robots-Tag: noindex`; the production domain
+carries no such header. `build.py --check` verifies both.
 Cloudflare serves `public/<slug>/index.html` at `/<slug>` and 308-redirects
 `/<slug>/` to `/<slug>`, which matches the canonical URLs.
 
