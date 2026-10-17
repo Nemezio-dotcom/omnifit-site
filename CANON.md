@@ -641,6 +641,26 @@ THE OMNIFIT METHOD (owner decision, Oct 17 2026)
       The quotable definition (both pages, 60 words, Oct 17 2026 follow-up)
       carries the Bronze exception in a parenthetical: "included at every
       tier (Executive Reset Bronze offers Coached or Train Only)".
+      THE TRAVEL PROTOCOL (named pathway; owner, Oct 17 2026; verbatim):
+        "The Travel Protocol: for studio and in-home clients whose work
+        takes them on the road. Travel-adapted programming in the app for
+        hotel gyms and rooms, check-ins that continue at your Accountability
+        Dial setting, and pause weeks when a trip can't hold training.
+        Included in every tier of The Foundation and The Program at no extra
+        cost. Fully remote clients use the 30-Minute Executive Reset."
+      USAGE RULES: always "the Travel Protocol" (capital T and P). Never
+      state a price for it. Never claim live virtual sessions are included
+      unless this brief already says so (it does not, for The Foundation or
+      The Program: the definition names app programming, check-ins and
+      pause weeks; live sessions are the Executive Reset's). No page carries
+      the name yet (Oct 17 2026). The pages that describe travel support
+      today are listed, file:line, in REPORT.md under "Outcome Claims
+      Amendment run", for the next run to use the name there; several of
+      them say sessions "switch to virtual" or promise "virtual sessions"
+      during travel weeks, which the next run reconciles with the
+      definition. certify.py travel_protocol_usage reports the wrong casing
+      and a dollar figure in the same sentence as the name; self-tested
+      both ways on every run.
   ONE-LINE REFERENCE (used on the most-cited pages): "OmniFit runs on the
   OmniFit Method: Measured Progress, Joint-First Strength and Accountability
   That Travels, carried through Assess -> Correct -> Build -> Sustain."
@@ -689,6 +709,22 @@ ENTITY BLOCK (Oct 17 2026; source: brand entity split across AI platforms -
     "OmniFit Performance · Nemezio LopezPerez (Coach Nemezio) · Teqneeq
     Functional Health Center, 10772 Thornmint Rd, 4S Ranch, San Diego, CA
     92127 · omnifittraining.com"
+  POSITIONING LINE (verbatim; owner, Oct 17 2026):
+    "OmniFit Performance is a diagnostic-led coaching system that takes busy
+    professionals over 30 from pain or plateau to lasting, independent
+    strength."
+    USAGE: the lead sentence of summary / TL;DR blocks; external profiles
+    (Google Business Profile, Thumbtack, Yelp, Bark - human-side); and
+    "slogan" on the Organization node in pages/headers/site-header.html
+    (added in the Outcome Claims Amendment run, Oct 17 2026, so every built
+    page carries it in schema). It does NOT replace the two-sentence
+    DESCRIPTION above. NEVER in a title, a meta description or an H1.
+    Wherever it appears it is VERBATIM: certify.py positioning_line_verbatim
+    reports a paraphrase that keeps either of its fragments
+    ("diagnostic-led coaching system", "pain or plateau") and any placement
+    in <title>, <h1>, a meta description or a header's WebPage
+    name/description (build.py reads those as the title and meta);
+    self-tested both ways on every run. No summary block carries it yet.
   sameAs (Organization): Instagram, Yelp, Google Business Profile (g.page),
   Thumbtack, Bark, BBB - as listed in site-header.html. Several listing URLs
   still carry the retired name in their slug; that is the directory's slug,
@@ -972,14 +1008,25 @@ it and STOPS rather than weighing context.
   2. Pounds, inches, or body-fat percentage paired with a timeframe AS AN
      EXPECTED OR TYPICAL RESULT ("20-30 lbs in 4-6 months"). This is the
      projection case. It is not the attributed-individual case, which is
-     TIER 2 item 2, and not the persona case, which is TIER 2 item 3.
+     TIER 2 item 2a, and not the persona case, which is TIER 2 item 3.
+     OUTCOME CLAIMS AMENDMENT (owner-approved Oct 1 2026; applied to this
+     brief and to certify.py Oct 17 2026): an aggregate figure with a
+     timeframe ("clients lose X in Y") STAYS BANNED UNLESS it is published
+     on /outcomes with its method, n and date range. Cited from there it is
+     a published measurement, not a projection. certify.py
+     lbs_near_timeframe carves a figure out only when the same figure
+     appears on pages/outcomes.html on a surface that states a sample size,
+     and the page states a date range; self-tested both ways on every run.
   3. Any statement that OmniFit diagnoses, treats, assesses, or manages a
      MEDICAL CONDITION, or that a device is used to do so. "Assesses" is
      new to this tier and is scoped to a medical condition: assessing
      MOVEMENT is what OmniFit does and stays legal. Negations and referral
      language stay legal and are the recommended form.
   4. "Free consultation" framing, under any name for the first session.
-     The consultation is paid: 45 minutes, $30 refundable deposit.
+     The consultation is paid: 45 minutes, $30 deposit, refunded the same
+     day you attend your consultation (the canonical wording, LAUNCH
+     DECISIONS item 3; this line said "$30 refundable deposit" until the
+     Outcome Claims Amendment run, Oct 17 2026).
   5. A client's PHASE ANGLE value, its change over time, or any improvement
      rate for it, presented as evidence of health. Phase angle may be NAMED
      as a tracked marker and DESCRIBED as what the device measures; it may
@@ -1007,17 +1054,72 @@ reports the missing condition, never the content.
      shape rather than inventing another.
      TIER 1 item 6 still governs: a clinical result rate is never an
      aggregate measured metric, however well conditioned.
-  2. ATTRIBUTED INDIVIDUAL OUTCOMES in case studies are permitted with the
-     individual-results disclaimer ON THE SAME PAGE. Attribution is still
-     required - a named individual beside a role noun, or an explicit
-     anonymisation with a stated profile - and aggregate framing is still
-     never exempt. What is RELAXED against the old screen: the disclaimer
-     no longer has to sit in a dedicated block opening with the phrase.
-     That dedicated-block test was written to counsel's standard and is
-     withdrawn for this item.
+  2a. ATTRIBUTED INDIVIDUAL OUTCOMES (OUTCOME CLAIMS AMENDMENT, owner-
+     approved Oct 1 2026; applied Oct 17 2026; replaces the Sept 2026 item 2
+     recorded below it). An individual client's measured result is
+     permitted ONLY when ALL FIVE conditions hold:
+       (1) written client consent;
+       (2) measured by OmniFit, with dates;
+       (3) elapsed time stated as fact, never "in just";
+       (4) this disclosure VERBATIM on the same surface as the figure:
+           "Individual result, measured by OmniFit. How clients typically
+           progress: omnifittraining.com/outcomes."
+       (5) third person, past tense; no projection and no "you".
+     Surface = the enclosing <section>, falling back to the page (the same
+     reading as TIER 2 item 1). Attribution is still required - a named
+     individual beside a role noun, or an explicit anonymisation with a
+     stated profile - and aggregate or typical-results framing is still
+     never this item.
+     OWNER-ATTESTED CONSENT LIST (condition 1; owner, Oct 17 2026): Isaac
+     M., Egor B., Chad C., Alo S., Mark M., Vincent, Ken. certify.py cannot
+     verify a consent form, so it reads this list (CONSENT_LIST): a figure
+     attributed to anyone else, or to an anonymised profile, is a consent
+     finding until the owner adds the name here. Dave (the 4S Ranch
+     transformation gallery) is not on the list.
+     BODY COMPOSITION: Bodystat readings exist only for clients who started
+     at Teqneeq; older clients have no comparable readings. A body-fat or
+     lean-mass figure for a client who predates Teqneeq cannot be measured
+     by OmniFit (condition 2) and comes down under item 2g.
+     ENFORCED: conditions (3), (4), (5) and the consent list, on every
+     non-frozen page (certify.py attributed_outcome_conditions, self-tested
+     both ways on every run). Conditions (1) beyond the list and (2) are
+     human warranties. Figures inside tag attributes (alt text, aria-label)
+     are outside every rule here, because the flattener drops attributes.
+     What the Sept 2026 item 2 RELAXED against the old screen still stands:
+     the disclosure does not have to sit in a dedicated block; it has to be
+     on the same surface, verbatim.
      FROZEN RECORDS: pages/case-studies.html and its byte-identical
      duplicate pages/home-3.html are historical records, exempt from
-     re-screening entirely. They record measurements that happened.
+     re-screening entirely. They record measurements that happened. Do not
+     run a case-study figure check.
+     SEPT 2026 WORDING, SUPERSEDED (kept so the reasoning survives):
+     "Attributed individual outcomes in case studies are permitted with the
+     individual-results disclaimer on the same page. Attribution is still
+     required - a named individual beside a role noun, or an explicit
+     anonymisation with a stated profile - and aggregate framing is still
+     never exempt. What is relaxed against the old screen: the disclaimer
+     no longer has to sit in a dedicated block opening with the phrase."
+  2g. DATA-BACKED FIGURES (OUTCOME CLAIMS AMENDMENT; lettered by the
+     owner's amendment, which this brief follows - 2b to 2f are not in it).
+     Every client-results number on the site must either appear on
+     /outcomes or meet 2a. A figure that can't be recomputed from records
+     comes down. No adherence percentage until attendance is logged.
+     ENFORCED (certify.py data_backed_figures, self-tested both ways): an
+     unattributed figure framed as a recorded OmniFit client result (a
+     past-tense result verb or a statistic word beside a client word) must
+     appear on pages/outcomes.html; a percentage beside adherence /
+     attendance / sessions completed is a finding on sight. Goals ("want to
+     lose 20-30 lbs", TIER 2 item 3), published-trial figures (the GLP-1
+     page's STEP-1 numbers) and surfaces labelled illustrative (TIER 2 item
+     5) are not client results. Third-party statistics ("80% of members
+     quit by month 3", the comparison table on how-it-works-pricing) are
+     not OmniFit client results and are outside this rule as encoded;
+     WRONG IF the owner reads 2g as covering every figure on the site.
+     REPORTING: both amendment rules print in full on every run under
+     "(a') OUTCOME CLAIMS AMENDMENT" and are NOT COUNTED toward the result
+     while certify.py AMENDMENT_COUNTS is False. The run that brings the
+     copy to 2a/2g flips it to True (NEXT RUNS). The RESULT line always
+     carries their count, so a green result never hides them.
   3. PERSONA LANGUAGE without a timeframe ("sustainable fat loss of
      20-30 lbs") is permitted, unchanged from the old screen.
   4. DEVICE CAPABILITY LANGUAGE is permitted: what the Bodystat QuadScan
@@ -1089,8 +1191,11 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
     "guarantee you'll lose 20 lbs", which must fire.
   · lbs_near_timeframe (T1-2) - pounds, inches or body-fat % within ~15
     words of a quantified timeframe. Inches and body-fat % are new to this
-    rule. Exempt: TIER 2 item 2 (attributed individual, page disclaimer),
-    TIER 2 item 3 (no timeframe at all never matches), frozen records.
+    rule. Exempt: TIER 2 item 2a (attributed individual, page disclaimer),
+    TIER 2 item 3 (no timeframe at all never matches), frozen records, and
+    (Outcome Claims Amendment, Oct 17 2026) an aggregate figure published on
+    /outcomes with a sample size on its surface and a date range on the
+    page - the TIER 1 item 2 carve-out, self-tested both ways.
   · uncertified_claims (T1-3) - asserting OmniFit diagnoses, treats,
     prescribes, cures or rehabilitates; provides physical therapy or
     chiropractic; ASSESSES OR MANAGES A MEDICAL CONDITION; or that a DEVICE
@@ -1123,17 +1228,35 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
     not-a-medical-provider note on the same surface. Two separate findings.
   · illustrative_label (T2-5) - NEW. Sample or example figures presented
     without an "illustrative, not client data" label on the same surface.
+  · attributed_outcome_conditions (T2-2a) - OUTCOME CLAIMS AMENDMENT, Oct
+    17 2026. For every figure (pounds, inches, body-fat %, a percentage)
+    attributed to an individual within 80 words - a consent-list name, or a
+    capitalised name beside a role noun, "Name is a <role>", or "Name, <age>"
+    - reports: the name not on CONSENT_LIST; "in just" / "in only" / "in as
+    little as" beside the figure (condition 3); the verbatim disclosure
+    absent from the figure's surface (condition 4); "you", first person, a
+    projection word or a present-tense outcome verb in the figure's own
+    block sentence (condition 5). The nearest preceding name within 12
+    words wins (table rows, "Name: figure" captions), else the nearest
+    name (stat cards). Reported with file:line and client.
+  · data_backed_figures (T2-2g) - same amendment. An unattributed figure
+    framed as a recorded OmniFit client result that does not appear on
+    pages/outcomes.html, and any adherence / attendance percentage. Goals,
+    trial figures, illustrative surfaces and alt text are outside it.
+  BOTH amendment rules print under "(a') OUTCOME CLAIMS AMENDMENT" and are
+  NOT COUNTED while certify.py AMENDMENT_COUNTS is False (see TIER 2 item
+  2g). Self-tested both ways on every run (_selftest_amendment).
 
   WITHDRAWN WITH THE OLD SCREEN
   · The DEDICATED-BLOCK disclaimer test for case studies. It required the
     disclaimer to open its own p/div/aside/section/blockquote. TIER 2 item
-    2 asks only that the disclaimer be on the same page, so the test is
-    withdrawn for that item. It is NOT withdrawn from TIER 2 item 1, which
-    states its own three conditions.
+    2a asks only that the disclosure be on the same surface (the Sept 2026
+    item 2 said page), so the test is withdrawn for that item. It is NOT
+    withdrawn from TIER 2 item 1, which states its own three conditions.
     Consequence recorded so it is not rediscovered as a surprise:
     how-we-measure-your-progress and desk-worker-posture-pain both failed
     the dedicated-block test and now pass the same-page test. Neither gains
-    an exemption from it on its own, because TIER 2 item 2 also requires
+    an exemption from it on its own, because TIER 2 item 2a also requires
     ATTRIBUTION, and both fail that independently.
   · clinical_stat as a blanket ban on quantified figures near a clinical
     word. Split: the population-scope clinical case is T1-6 and is
@@ -1143,13 +1266,15 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
     aggregate reported with its period IS a measurement with its method,
     which is the thing this screen stopped treating as a claim.
 
-  EXCEPTION - ATTRIBUTED INDIVIDUAL OUTCOMES (TIER 2 item 2)
+  EXCEPTION - ATTRIBUTED INDIVIDUAL OUTCOMES (TIER 2 item 2a)
   Individual client results carrying a timeframe are exempt from
-  lbs_near_timeframe and result_near_timeframe when:
+  lbs_near_timeframe and result_near_timeframe when (the T1-2 exemption;
+  the five 2a conditions are checked separately by
+  attributed_outcome_conditions, above):
     1. the result is attributed to a specific individual (named beside a
        role noun, or explicitly anonymised WITH a stated profile), AND
     2. the page carries the individual-results disclaimer ANYWHERE on the
-       page. Relaxed Sept 2026 from a dedicated block, per TIER 2 item 2.
+       page. Relaxed Sept 2026 from a dedicated block, per TIER 2 item 2a.
     3. substantiation exists on file. Not machine-checkable; a human
        warranty, unchanged.
   Page-scoped, not site-wide. Aggregate or typical-results framing is NEVER
@@ -1187,6 +1312,13 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   KEN'S RETIRED MUSCLE FIGURE (LAUNCH DECISIONS item 20): "+6 lb(s)", "6
   pounds of muscle", "6 lbs of muscle", in EVERY file, frozen records
   included (certify.py ken_muscle_claim, self-tested both ways).
+  POSITIONING LINE NOT VERBATIM, OR IN A TITLE / META / H1 (ENTITY BLOCK,
+  Oct 17 2026): certify.py positioning_line_verbatim, every file in the
+  glob, frozen records exempt, self-tested both ways on every run.
+  THE TRAVEL PROTOCOL MISCASED OR PRICED (THE OMNIFIT METHOD, Oct 17 2026):
+  "travel protocol" in any casing but "Travel Protocol", or a dollar figure
+  in the same sentence as the name (certify.py travel_protocol_usage,
+  self-tested both ways on every run).
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
   "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
@@ -1540,3 +1672,22 @@ NEXT RUNS
   retrievable, homepage Over-50 / Partner & Duo / female-clients FAQ
   sections (Claude drafts, human pastes), post-recrawl third-party
   signal work (review-prompt kit, directories, thought leadership).
+- OUTCOME CLAIMS AMENDMENT FOLLOW-UP (recorded Oct 17 2026; the amendment
+  run changed CANON and tools/ only, no page copy):
+  · Bring the attributed individual outcomes to TIER 2 item 2a. The 17
+    instances certify.py reports under "(a') OUTCOME CLAIMS AMENDMENT" are
+    listed file:line in REPORT.md: the verbatim disclosure on the surface
+    of every figure (desk-worker-posture-pain, personal-trainer-4s-ranch,
+    personal-trainer-over-50-san-diego, outcomes), and Dave's 27 lb figure
+    on the 4S Ranch gallery, which needs the owner to add Dave to the
+    CONSENT LIST or the figure comes down (item 2g). OWNER DECISION NEEDED:
+    on /outcomes itself the disclosure points the reader at /outcomes; the
+    rule is encoded as written and reports the page, and the owner may
+    exempt /outcomes from condition (4) or accept the self-reference.
+  · Then flip certify.py AMENDMENT_COUNTS to True so the two rules count.
+  · Use "the Travel Protocol" on the pages that describe travel support
+    (the file:line list in REPORT.md), reconciling "switch to virtual" /
+    "virtual sessions during travel weeks" wording with the definition.
+  · Lead every summary / TL;DR block with the POSITIONING LINE, verbatim;
+    human-side, paste it to Google Business Profile, Thumbtack, Yelp and
+    Bark.

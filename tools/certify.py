@@ -153,7 +153,7 @@ def guarantee_any(text, window=12):
                         f"'{m.group(0)}' promising '{r.group(0)}'", sentence.strip()))
     return out
 
-# ─── ATTRIBUTED INDIVIDUAL OUTCOMES (owner approval; CANON TIER 2 item 2) ──
+# ─── ATTRIBUTED INDIVIDUAL OUTCOMES (owner approval; CANON TIER 2 item 2a) ──
 # CANON's CANONICAL TRUTH records documented client figures WITH timeframes as
 # canonical fact while the COMPLIANCE SCREEN banned lbs-near-timeframe outright.
 # Resolution: an individual, attributed, documented client outcome with
@@ -218,13 +218,13 @@ AGGREGATE = (r'\b(?:typical|typically|average|averages|averaged|'
              r'most clients|our clients|every client|'
              # "putting everyone else first" describes a client's life, not a
              # population: the Oct 17 2026 over-50 proof card sat 45 words from
-             # it and lost its TIER 2 item 2 exemption. "everyone loses" fires.
+             # it and lost its TIER 2 item 2a exemption. "everyone loses" fires.
              r'everyone(?!\s+else)|anyone(?!\s+else)|'
              r'clients\s+(?:lose|gain|drop|see|can|will)|'
              r'you\s+(?:\w+\s+){0,2}?(?:lose|gain|drop|expect|see|will|can)|'
              r"you'll|expect to|up to)\b")
 
-# TIER 2 item 2 relaxes condition 2 from a DEDICATED BLOCK to anywhere on the
+# TIER 2 item 2a relaxes condition 2 from a DEDICATED BLOCK to anywhere on the
 # page. The dedicated-block test was written to counsel's standard and is
 # withdrawn for this item (it still governs nothing else: TIER 2 item 1 states
 # its own three conditions). Attribution and the never-exempt aggregate test
@@ -250,9 +250,9 @@ def _selftest_case_study_exempt():
             '<div>Ken · CTO · 50s</div>')
     assert lbs_near_timeframe(card + d) == [], "attributed, disclaimed card still fired"
     assert lbs_near_timeframe(card), "attributed card with no page disclaimer did not fire"
-    assert lbs_near_timeframe('<p>Everyone loses 11 lb in 6 months.</p><div>Ken · CTO</div>' + d), \
+    assert lbs_near_timeframe('<p>Everyone loses 11 lb in 6 months.</p><div>Ken · CTO</div>' + d, outcomes=''), \
         "aggregate framing ('everyone loses') was exempted"
-    assert lbs_near_timeframe('<p>Clients lose 11 lb in 6 months.</p>' + d), "unattributed figure was exempted"
+    assert lbs_near_timeframe('<p>Clients lose 11 lb in 6 months.</p>' + d, outcomes=''), "unattributed figure was exempted"
 
 def _has_results_disclaimer_anywhere(text):
     return bool(DISCLAIMER_ANYWHERE.search(_flat(text)))
@@ -282,14 +282,19 @@ _T1_UNITS = (r'\d[\d,]*(?:\s*(?:–|-|&ndash;|to)\s*\d[\d,]*)?\s*'
              r'|\d[\d.,]*\s*%\s*(?:of\s+)?body[\s-]?fat'
              r'|body[\s-]?fat[^.]{0,20}?\d[\d.,]*\s*%')
 
-def lbs_near_timeframe(text, window=15):
+def lbs_near_timeframe(text, window=15, outcomes=None):
     t = _flat(text); out = []
-    disclaimed = _has_results_disclaimer_anywhere(text)   # TIER 2 item 2
+    disclaimed = _has_results_disclaimer_anywhere(text)   # TIER 2 item 2a
     for m in re.finditer(_T1_UNITS, t, re.I):
         w = _near(t, m, window)
         for tf in re.finditer(TIMEFRAME, w, re.I):
             if re.search(CONTRAST, w[:tf.start()], re.I): continue
             if _case_study_exempt(t, m, disclaimed): break
+            # TIER 1 item 2 carve-out (Outcome Claims Amendment, Oct 1 2026):
+            # an aggregate figure with a timeframe stays banned UNLESS it is
+            # published on /outcomes with its method, n and date range.
+            # `outcomes` overrides the live page for the self-test only.
+            if _published_with_method(m.group(0), outcomes): break
             out.append(("lbs/inches/body-fat near timeframe (T1-2)",
                         f"'{m.group(0).strip()}' near '{tf.group(0)}'",
                         t[max(0, m.start()-100):m.end()+140].strip()))
@@ -439,7 +444,7 @@ def population_clinical_claim(text, window=10):
     """A clinical outcome applied at POPULATION scope and attributed to OmniFit
     training. Three conditions, all required: an outcome verb on a clinical
     condition, a population marker, and attribution to OmniFit. Individual
-    attributed case-study language is TIER 2 item 2 and is not this rule."""
+    attributed case-study language is TIER 2 item 2a and is not this rule."""
     t = _flat(text); out = []
     for m in re.finditer(OUTCOME_FRAME + r'\w*\s+(?:\w+\s+){0,3}?' + CLINICAL, t, re.I):
         if re.match(_ANATOMY, m.group(0), re.I): continue          # "lower back pain"
@@ -509,7 +514,7 @@ def result_near_timeframe(text, window=12):
     """A result paired with a promised window, in any units. The lbs rule is the
     specific case; results must be framed against the client's own baseline."""
     t = _flat(text); out = []
-    disclaimed = _has_results_disclaimer_anywhere(text)   # TIER 2 item 2
+    disclaimed = _has_results_disclaimer_anywhere(text)   # TIER 2 item 2a
     for m in re.finditer(RESULT, t, re.I):
         # a result stated as absent ("produces no change", "don't have ... producing
         # visible results") promises nothing
@@ -523,6 +528,400 @@ def result_near_timeframe(text, window=12):
                         t[max(0, m.start()-100):m.end()+140].strip()))
             break
     return out
+
+# ─── OUTCOME CLAIMS AMENDMENT (owner-approved Oct 1 2026; applied Oct 17 2026) ──
+# CANON TIER 2 item 2a (attributed individual outcomes: five conditions) and
+# item 2g (data-backed figures), plus the TIER 1 item 2 carve-out for an
+# aggregate figure that is published on /outcomes with its method, n and date
+# range. Conditions (1) consent and (2) measured-by-OmniFit-with-dates are
+# human warranties; (1) is checked against the OWNER-ATTESTED CONSENT LIST
+# below because certify cannot read a consent form, and (2) is not checked.
+# Conditions (3), (4) and (5) are machine-checkable and are checked here.
+#
+# These two rules REPORT BUT DO NOT COUNT while AMENDMENT_COUNTS is False: the
+# amendment was recorded before any page was brought to it, so the first run
+# reports every instance the site fails (file:line, client, condition) as a
+# new-rule finding, separate from the run's pass/fail. The run that edits the
+# copy flips AMENDMENT_COUNTS to True (CANON NEXT RUNS). The findings print
+# in full either way and the RESULT line carries their count, so a green
+# result never hides them.
+AMENDMENT_COUNTS = False
+
+# Owner-attested written consent (CANON TIER 2 item 2a, Oct 17 2026). First
+# name, optional initial. A figure attributed to anyone else - or to an
+# anonymised profile, which no list can vouch for - is a consent finding.
+CONSENT_LIST = ["Isaac M.", "Egor B.", "Chad C.", "Alo S.", "Mark M.", "Vincent", "Ken"]
+_CONSENT_FIRST = sorted({n.split()[0] for n in CONSENT_LIST}, key=len, reverse=True)
+_CONSENT_RX = re.compile(r'\b(' + '|'.join(map(re.escape, _CONSENT_FIRST)) + r')\b(?:\s+[A-Z]\.)?')
+
+# Condition (4), verbatim, on the same surface as the figure.
+DISCLOSURE_2A = ("Individual result, measured by OmniFit. How clients typically progress: "
+                 "omnifittraining.com/outcomes.")
+
+# Condition (3): elapsed time stated as fact. "in just" is the owner's named
+# shape; "in only" and "in as little as" are the same minimiser with a
+# different word and are caught with it, because a rule that matches one
+# literal string is the literal-string free-framing miss again.
+_MINIMISER = r'\bin\s+(?:just|only|as little as)\b'
+# Condition (5): third person, past tense, no projection, no "you".
+_SECOND_PERSON = r"\b(?:you|your|yours|yourself|you'?ll|you'?re|you'?ve)\b"
+_FIRST_PERSON  = r"\bI\b|\bI'?(?:m|ve|d)\b|(?i:\b(?:my|me|mine|myself)\b)"
+_PROJECTION    = r"\b(?:will|would|can|could|should|expect\w*|typical\w*|up to|on average|projected)\b"
+_PRESENT_TENSE = (r"\b(?:he|she|they|clients?|who)\s+(?:lose|gain|drop|shed|build|add)s?\b"
+                  r"|(?<!muscle )(?<!strength )(?<!lean )(?<!mass )\b(?:loses|gains|drops|sheds)\b"
+                  r"|\b(?:is|are)\s+(?:losing|gaining|dropping|shedding|building|adding)\b")
+
+# A client-results FIGURE: pounds, inches, body-fat %, or a bare percentage.
+_FIGURE = re.compile(_T1_UNITS + r'|\d[\d.,]*\s*%', re.I)
+
+_NONPERSON = {"San", "Diego", "OmniFit", "Omnifit", "Teqneeq", "Nemezio", "Coach", "Performance",
+              "Bodystat", "Ranch", "North", "County", "The", "Our", "Every", "Executive",
+              "Client", "Clients", "Most", "Results", "Individual", "Google", "Yelp", "Bark",
+              "Thumbtack", "Precision", "Nutrition", "Trainerize", "Program", "Foundation",
+              "This", "That", "These", "Those", "There", "Here", "What", "Which", "When",
+              "Where", "Why", "How", "Each", "Some", "Many", "Other", "Another", "Illustrative",
+              "Trials", "Research", "Published", "Measured", "Between", "Among", "After",
+              "Before", "Since", "During", "Within", "Also", "Then", "Still", "Because",
+              "While", "Although", "Training", "Strength", "Progress", "Session", "Sessions",
+              "Body", "Weight", "Muscle", "Posture", "Example", "Summary", "Note", "Method",
+              "Age", "Rate", "Share", "Profile", "Goal", "Reset", "Momentum", "Peak", "Full",
+              "Coached", "Train", "Studio", "Home", "Virtual", "Hybrid", "Phase", "Class",
+              "Case", "Study", "Proof", "Documented", "Outcomes", "Real", "Verified"}
+
+def _blank_noncopy(text):
+    """Comments, <style> and non-ld+json <script> bodies replaced by spaces of
+    the same length, so positions and line numbers survive and CSS percentages
+    never read as figures."""
+    def blank(m): return re.sub(r'[^\n]', ' ', m.group(0))
+    text = re.sub(r'<!--.*?-->', blank, text, flags=re.S)
+    # inline style attributes carry bar widths ("width:94%") that are not copy
+    text = re.sub(r'\sstyle="[^"]*"', blank, text, flags=re.I)
+    text = re.sub(r'<style\b[^>]*>.*?</style>', blank, text, flags=re.S | re.I)
+    return re.sub(r'<script\b(?![^>]*ld\+json)[^>]*>.*?</script>', blank, text, flags=re.S | re.I)
+
+def _in_tag(raw, pos):
+    """True when pos sits inside a tag (an alt, aria-label or data-tip
+    attribute). Attribute text is not copy for any rule here: _flat() drops
+    it, so the figure rules skip it too rather than screening text the rest
+    of the file never sees."""
+    return raw.rfind('<', 0, pos) > raw.rfind('>', 0, pos)
+
+def _window_raw(text, pos, chars=1200):
+    """(flattened copy around a raw position, index of the figure in it). The
+    slice is cut on tag boundaries so a half tag never leaks attribute junk
+    into the words."""
+    lo = text.rfind('>', 0, max(0, pos - chars)) + 1
+    hi = text.find('<', min(len(text), pos + chars))
+    flat = html.unescape(_flat(text[lo:hi if hi != -1 else len(text)]))
+    approx = len(html.unescape(_flat(text[lo:pos])))
+    fig = html.unescape(_flat(text[pos:pos + 40])).split()[:1]
+    idx = flat.find(fig[0], max(0, approx - 12)) if fig else approx
+    return flat, (idx if idx != -1 else approx)
+
+def _words_around(flat, idx, n=80):
+    """(the n words either side of idx, idx within that slice)."""
+    pre = flat[:idx].split()[-n:]
+    post = flat[idx:].split()[:n]
+    return ' '.join(pre + post), len(' '.join(pre)) + (1 if pre else 0)
+
+_BLOCK_TAGS = r'p|h[1-6]|li|td|th|figcaption|div|blockquote|dd|dt|summary|section|article|caption'
+def _block_sentence(raw, pos):
+    """The sentence the figure sits in, scoped to its innermost BLOCK element
+    so a stat card's label cannot run into the next card's copy. Falls back
+    to 40 words either side (headers are ld+json and have no blocks)."""
+    opens = list(re.finditer(r'<(?:' + _BLOCK_TAGS + r')\b[^>]*>', raw[:pos], re.I))
+    close = re.search(r'</(?:' + _BLOCK_TAGS + r')>', raw[pos:], re.I)
+    lo = opens[-1].end() if opens else max(0, pos - 600)
+    hi = pos + close.start() if close else min(len(raw), pos + 600)
+    flat = html.unescape(_flat(raw[lo:hi]))
+    i = len(html.unescape(_flat(raw[lo:pos])))
+    a = max((flat.rfind(c, 0, i) for c in '.!?'), default=-1) + 1
+    b = min((x for x in (flat.find(c, i) for c in '.!?') if x != -1), default=len(flat))
+    return ' '.join(flat[a:i].split()[-40:] + flat[i:b + 1].split()[:40])
+
+# Attribution shapes, CASE-SENSITIVE on the name (a sentence-start "That is
+# a ..." or "This ... client" is not a person): a capitalised name beside a
+# role noun after a comma, a middle dot or a dash ("Dave, business owner",
+# "Vincent · Registered Nurse", "Alo — Chief Technology Officer"), "Name is a
+# <role>", or "Name, <age>". Names in _NONPERSON are copy, not people.
+_NAME = r'([A-Z][a-z]{2,})(?:\s+[A-Z]\.|\s+[A-Z][a-z]+)?'
+_ATTRIB_SHAPES = re.compile(
+    _NAME + r'\s*(?:,|·|&middot;|&#183;|—|–|-)\s*(?:an?\s+|the\s+)?(?:[\w-]+\s+){0,3}?(?i:' + ROLE + r')\b'
+    + '|' + _NAME + r'\s+(?:is|was)\s+an?\s+(?:[\w-]+\s+){0,2}?(?i:' + ROLE + r')\b'
+    + '|' + _NAME + r'\s*(?:,|:)\s*\d{2}\b(?!\d|%|-)')
+
+def _attributed_name(window, idx=0):
+    """The individual a figure is attributed to, or None. Candidates are the
+    consent-list names and the _ATTRIB_SHAPES names within the window; the
+    nearest PRECEDING candidate within 12 words wins (a table row or a
+    "Name: figure" caption puts the name first), else the nearest overall (a
+    stat card puts the name after the figure). 'anonymised' when the copy
+    says so and names nobody. Returned as the first name."""
+    cands = [(m.start(), m.group(1)) for m in _CONSENT_RX.finditer(window)]
+    for m in _ATTRIB_SHAPES.finditer(window):
+        name = next(g for g in m.groups() if g)
+        if name not in _NONPERSON: cands.append((m.start(), name))
+    if not cands:
+        return "anonymised" if re.search(r'\banonymi[sz]ed\b', window, re.I) else None
+    before = [(idx - p, n) for p, n in cands if p < idx and len(window[p:idx].split()) <= 12]
+    if before: return min(before)[1]
+    return min((abs(p - idx), n) for p, n in cands)[1]
+
+_CONSENT_DISPLAY = {n.split()[0]: n for n in CONSENT_LIST}
+def _on_consent_list(name):
+    return name.split()[0] in _CONSENT_FIRST
+
+def attributed_outcome_conditions(text):
+    """TIER 2 item 2a, conditions (3), (4), (5) and the consent list, on every
+    attributed individual figure. Returns (line, client, condition, detail).
+    Unattributed figures are TIER 1 item 2 / TIER 2 item 1 / item 2g territory
+    and are not this rule's. Deduplicated on (line, client, condition)."""
+    raw = _blank_noncopy(text); out = []; seen = set()
+    for m in _FIGURE.finditer(raw):
+        if _in_tag(raw, m.start()): continue
+        w, idx = _window_raw(raw, m.start(), 700)
+        w, idx = _words_around(w, idx)
+        name = _attributed_name(w, idx)
+        if name is None: continue
+        name = _CONSENT_DISPLAY.get(name.split()[0], name.split()[0])
+        line = raw[:m.start()].count('\n') + 1
+        fig = html.unescape(_flat(m.group(0))).strip()
+        sent = _block_sentence(raw, m.start())
+        findings = []
+        if not _on_consent_list(name):
+            findings.append(("consent", f"'{name}' is not on the owner-attested consent list"))
+        if re.search(_MINIMISER, sent, re.I):
+            findings.append(("(3) elapsed time as fact", f"'{re.search(_MINIMISER, sent, re.I).group(0)}' beside '{fig}'"))
+        surface = _norm(html.unescape(_flat(_surface(raw, m.start()))))
+        if DISCLOSURE_2A not in surface:
+            findings.append(("(4) verbatim disclosure", "disclosure missing or not verbatim on the surface"))
+        for rx, what in ((_SECOND_PERSON, "second person"), (_FIRST_PERSON, "first person"),
+                         (_PROJECTION, "projection"), (_PRESENT_TENSE, "present tense")):
+            h = re.search(rx, sent, 0 if rx is _FIRST_PERSON else re.I)
+            if h:
+                findings.append(("(5) third person, past tense", f"{what}: '{h.group(0)}' in the figure's sentence"))
+        for cond, detail in findings:
+            key = (line, name, cond)
+            if key in seen: continue
+            seen.add(key)
+            out.append((line, name, cond, f"{detail}  …{sent[:110]}…"))
+    return out
+
+# ─── TIER 2 item 2g - data-backed figures ─────────────────────────
+# Every client-results number must either appear on /outcomes or meet 2a. A
+# figure attributed to an individual is 2a's; this rule takes the rest: a
+# figure framed as a recorded aggregate client result (a past-tense result
+# verb or a statistic word beside a client word) must be on /outcomes. Goals
+# ("want to lose 20-30 lbs", TIER 2 item 3), published-trial figures and
+# labelled illustrative samples are not client results. Adherence
+# percentages are findings on sight until attendance is logged.
+OUTCOMES_PAGE = "pages/outcomes.html"
+_OUTCOMES_FILES = ("outcomes.html", "outcomes-header.html")
+_RESULT_VERB = (r'\b(?:lost|gained|dropped|shed|added|achieved|rose|fell|reached|recorded|measured|'
+                r'stronger|improved|increased|decreased|reduced|median|average[ds]?|mean|'
+                r'fully or partly|retention)\b')
+# "members" is a gym word, not an OmniFit one: "80% of members quit by month
+# 3" on the comparison table is a big-box statistic, not a client result.
+_CLIENT_WORD = r'\b(?:clients?|client base|of those|cohort)\b'
+_GOAL_FRAME  = r'\b(?:wants?|wanted|needs?|looking|aim\w*|goal\w*|target\w*)\s+(?:to\s+)?(?:\w+\s+){0,3}$'
+_TRIAL_WORDS = r'\b(?:trial|trials|study|studies|published|research|participants|DXA|meta-analysis)\b'
+_ADHERENCE   = r'\b(?:adherence|attendance|sessions?\s+completed|completion rate)\b'
+
+_outcomes_cache = {}
+def _outcomes_text(override=None):
+    if override is not None: return override
+    if "flat" not in _outcomes_cache:
+        try: raw = open(OUTCOMES_PAGE).read()
+        except OSError: raw = ""
+        _outcomes_cache["raw"] = raw
+        _outcomes_cache["flat"] = html.unescape(_flat(raw))
+    return _outcomes_cache["flat"]
+
+_DATE_RANGE = (r'\b(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{4}\s+(?:to|through|–|-)\s+'
+               r'(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?\s+\d{4}'
+               r'|between\s+(?:\w+\s+)?\d{4}\s+and\s+(?:\w+\s+)?\d{4}|\b\d{4}\s+to\s+\d{4})\b')
+
+def _figure_rx(fig):
+    """A regex for the same figure in any of its spellings: sign dropped,
+    lb/lbs/pounds and in/inch/inches unified, thousands commas kept."""
+    f = html.unescape(fig)
+    num = re.search(r'\d[\d.,]*', f)
+    if not num: return None
+    n = re.escape(num.group(0).rstrip('.,'))
+    if '%' in f:                                   return re.compile(r'(?<![\d.])' + n + r'\s*%')
+    if re.search(r'lb|pound', f, re.I):            return re.compile(r'(?<![\d.])' + n + r'\s*(?:lbs?|pounds?)\b', re.I)
+    if re.search(r'\binch|\bin\b', f, re.I):       return re.compile(r'(?<![\d.])' + n + r'\s*(?:in|inch|inches)\b', re.I)
+    return re.compile(r'(?<![\d.])' + n + r'(?![\d.])')
+
+def _published_on_outcomes(fig, outcomes=None):
+    """True when the figure appears on /outcomes at all (item 2g's test)."""
+    rx = _figure_rx(fig)
+    return bool(rx and rx.search(_outcomes_text(outcomes)))
+
+def _published_with_method(fig, outcomes=None):
+    """TIER 1 item 2 carve-out: the figure appears on /outcomes AND its surface
+    there carries a sample size AND the page carries a date range. Surface =
+    the enclosing <section> of the first occurrence, falling back to the page;
+    the date range is accepted page-wide because /outcomes states it once in
+    its meta line for every section below."""
+    if outcomes is None:
+        _outcomes_text(); raw = _outcomes_cache["raw"]
+    else:
+        raw = outcomes
+    rx = _figure_rx(fig)
+    if not rx: return False
+    blanked = _blank_noncopy(raw)
+    hit = rx.search(blanked)
+    if not hit: return False
+    surface = html.unescape(_flat(_surface(blanked, hit.start())))
+    return bool(re.search(_C_SAMPLE, surface, re.I) and re.search(_DATE_RANGE, html.unescape(_flat(raw)), re.I))
+
+def data_backed_figures(text, outcomes=None):
+    """TIER 2 item 2g on one file: (line, figure, kind, detail)."""
+    raw = _blank_noncopy(text); out = []; seen = set()
+    for m in _FIGURE.finditer(raw):
+        if _in_tag(raw, m.start()): continue
+        w, idx = _window_raw(raw, m.start(), 700)
+        w, idx = _words_around(w, idx)
+        fig = html.unescape(_flat(m.group(0))).strip()
+        line = raw[:m.start()].count('\n') + 1
+        surface = _surface(raw, m.start())
+        if _is_illustrative(surface): continue                       # TIER 2 item 5
+        before = ' '.join(w[:idx].split()[-20:])
+        after  = ' '.join(w[idx:].split()[:20])
+        local = before + ' ' + after
+        if '%' in fig and re.search(_ADHERENCE, local, re.I):
+            key = (line, fig, "adherence")
+            if key not in seen:
+                seen.add(key); out.append((line, fig, "adherence percentage", "no adherence % until attendance is logged"))
+            continue
+        if _attributed_name(w, idx) is not None: continue            # item 2a's
+        if re.search(_TRIAL_WORDS, local, re.I): continue             # not an OmniFit client result
+        if re.search(_GOAL_FRAME, before, re.I) or re.match(r'\s*(?:\w+\s+){0,2}to\s+(?:lose|drop|gain)\b', after[len(fig):], re.I):
+            continue                                                  # a goal, TIER 2 item 3
+        if not (re.search(_CLIENT_WORD, local, re.I) and re.search(_RESULT_VERB, local, re.I)): continue
+        if _published_on_outcomes(fig, outcomes): continue
+        key = (line, fig, "2g")
+        if key in seen: continue
+        seen.add(key)
+        out.append((line, fig, "not on /outcomes", f"aggregate client figure absent from /outcomes  …{local[:110]}…"))
+    return out
+
+def _selftest_amendment():
+    """Both directions, every run, for every condition the amendment encodes."""
+    D = '<p>' + DISCLOSURE_2A + '</p>'
+    ok = '<section><p>Alo S., CTO, added 18 lbs of lean muscle between June 2023 and June 2024.</p>' + D + '</section>'
+    assert attributed_outcome_conditions(ok) == [], "compliant 2a card reported: %r" % attributed_outcome_conditions(ok)
+    linked = ('<section><p>Vincent, a registered nurse, dropped 8% body fat from March 2025 to March 2026.</p>'
+              '<p>Individual result, measured by OmniFit. How clients typically progress: '
+              '<a href="/outcomes">omnifittraining.com/outcomes</a>.</p></section>')
+    assert attributed_outcome_conditions(linked) == [], "link-wrapped disclosure not accepted"
+    conds = lambda t: {c for _, _, c, _ in attributed_outcome_conditions(t)}
+    assert "(3) elapsed time as fact" in conds('<section><p>Alo S., CTO, added 18 lbs in just 6 months.</p>' + D + '</section>'), "'in just' not caught"
+    assert conds('<section><p>Alo S., CTO, added 18 lbs over 6 months.</p>' + D + '</section>') == set(), "'over 6 months' flagged"
+    assert "(4) verbatim disclosure" in conds('<section><p>Alo S., CTO, added 18 lbs over 6 months.</p><p>Individual result, measured by OmniFit; see aggregate outcomes above.</p></section>'), "near-verbatim disclosure accepted"
+    assert "(4) verbatim disclosure" in conds('<section><p>Alo S., CTO, added 18 lbs over 6 months.</p></section>' + D), "disclosure on another surface accepted"
+    for bad in ('Alo S., CTO, added 18 lbs; you can too.', 'Alo S., CTO: "I added 18 lbs."',
+                'Alo S., CTO, will add 18 lbs.', 'Alo S., CTO, gains 18 lbs every year.'):
+        assert "(5) third person, past tense" in conds('<section><p>' + bad + '</p>' + D + '</section>'), f"(5) missed: {bad}"
+    assert "consent" in conds('<section><p>Dave, business owner, lost 27 lbs over 8 months.</p>' + D + '</section>'), "unlisted name passed consent"
+    assert "consent" in conds('<section><p>An anonymised male client, 29, gained 10 lb over 12 weeks.</p>' + D + '</section>'), "anonymised profile passed consent"
+    assert "consent" not in conds('<section><p>Ken · CTO · 50s</p><div>−11 lb bodyweight, 6 months</div>' + D + '</section>'), "listed name failed consent"
+    assert attributed_outcome_conditions('<section><p>Clients lose 20 lbs in 6 months.</p></section>') == [], "unattributed figure read as 2a"
+    # 2g
+    syn = ('<section><p>Between January 2023 and September 2026, 72 clients. Median strength change +13.7% across 38 clients. '
+           'Clients lost 40 lb in 6 months (n=47).</p></section>')
+    kinds = lambda t, o: {k for _, _, k, _ in data_backed_figures(t, o)}
+    assert "not on /outcomes" in kinds('<section><p>Our clients lost a median 9 lb over 12 weeks.</p></section>', syn), "off-outcomes aggregate passed"
+    assert kinds('<section><p>Our clients lost a median 40 lb over 12 weeks.</p></section>', syn) == set(), "on-outcomes aggregate flagged"
+    assert kinds('<section><p>Designed for professionals who want to lose 20–30 pounds. The typical client is 45.</p></section>', syn) == set(), "persona goal flagged (TIER 2 item 3)"
+    assert kinds('<section><p>In the STEP-1 trial, 45.2% of weight lost by participants was lean mass.</p></section>', syn) == set(), "trial figure flagged"
+    assert "adherence percentage" in kinds('<section><p>Session adherence across clients: 94%.</p></section>', syn), "adherence % passed"
+    assert kinds('<section><p>Session adherence 94%.</p><p>Illustrative example, not client data.</p></section>', syn) == set(), "illustrative adherence flagged"
+    assert kinds('<section><p>Alo S., CTO, added 18 lbs over 6 months.</p></section>', syn) == set(), "attributed figure read as 2g"
+    # TIER 1 item 2 carve-out
+    agg = '<p>Clients lose 40 lb in 6 months.</p>'
+    assert lbs_near_timeframe(agg), "aggregate-with-timeframe stopped firing"
+    assert lbs_near_timeframe(agg, outcomes='<p>nothing here</p>'), "carve-out fired with the figure absent from /outcomes"
+    assert lbs_near_timeframe(agg, outcomes='<section><p>Clients lost 40 lb (n=47).</p></section>'), "carve-out fired with no date range"
+    assert lbs_near_timeframe(agg, outcomes='<section><p>January 2023 to September 2026: clients lost 40 lb.</p></section>'), "carve-out fired with no sample size"
+    assert lbs_near_timeframe(agg, outcomes=syn) == [], "published aggregate still fired"
+
+# ─── POSITIONING LINE (CANON ENTITY BLOCK, Oct 17 2026) ───────────
+# Wherever the line appears it is verbatim, and it never sits in a title, a
+# meta description or an H1 (build.py reads a header's WebPage name and
+# description as the title and meta). Keyed on two fragments no other copy
+# uses, so a paraphrase that keeps either is a finding and the DESCRIPTION's
+# "diagnostic-led personal training practice" is not.
+POSITIONING_LINE = ("OmniFit Performance is a diagnostic-led coaching system that takes busy "
+                    "professionals over 30 from pain or plateau to lasting, independent strength.")
+_POS_ANCHORS = re.compile(r'diagnostic-led coaching system|pain or plateau', re.I)
+
+def positioning_line_verbatim(text):
+    """(kind, ctx): 'not verbatim' for a variant, 'in title/meta/H1' for a
+    placement CANON bans. The line in an ld+json slogan or a summary block is
+    the intended use and is quiet."""
+    out = []; last = -10**9
+    flat = _norm(html.unescape(_flat(text)))
+    for m in _POS_ANCHORS.finditer(flat):
+        near = flat[max(0, m.start() - 220):m.end() + 220]
+        if POSITIONING_LINE not in near and m.start() - last > 220:   # one finding per sentence
+            out.append(("positioning line not verbatim", flat[max(0, m.start() - 90):m.end() + 110].strip()))
+            last = m.start()
+    for tag in ("title", "h1"):
+        for m in re.finditer(r'<' + tag + r'\b[^>]*>(.*?)</' + tag + r'>', text, re.S | re.I):
+            if _POS_ANCHORS.search(_flat(m.group(1))):
+                out.append((f"positioning line in <{tag}>", _flat(m.group(1))[:120]))
+    for m in re.finditer(r'<meta\b[^>]*name="description"[^>]*content="([^"]*)"', text, re.I):
+        if _POS_ANCHORS.search(m.group(1)):
+            out.append(("positioning line in meta description", m.group(1)[:120]))
+    for m in _LDJSON.finditer(text):
+        try: doc = json.loads(m.group(1))
+        except ValueError: continue
+        nodes = doc.get("@graph", [doc]) if isinstance(doc, dict) else doc
+        for n in nodes if isinstance(nodes, list) else []:
+            if isinstance(n, dict) and n.get("@type") in PAGE_TYPES:
+                for k in ("name", "description"):
+                    if _POS_ANCHORS.search(str(n.get(k, ""))):
+                        out.append((f"positioning line in WebPage {k} (the page title/meta)", str(n.get(k))[:120]))
+    return out
+
+def _selftest_positioning():
+    kinds = lambda t: [k for k, _ in positioning_line_verbatim(t)]
+    assert kinds('<p>' + POSITIONING_LINE + '</p>') == [], "verbatim line flagged"
+    assert kinds('<p>Summary: ' + POSITIONING_LINE + ' Book a consultation.</p>') == [], "verbatim line in a summary flagged"
+    assert kinds('<script type="application/ld+json">{"@graph":[{"@type":"Organization","slogan":"' + POSITIONING_LINE + '"}]}</script>') == [], "slogan flagged"
+    assert kinds('<p>OmniFit Performance is a diagnostic-led coaching system for busy professionals.</p>') == ["positioning line not verbatim"], "paraphrase passed"
+    assert kinds('<p>We take you from pain or plateau to strength.</p>') == ["positioning line not verbatim"], "second-anchor paraphrase passed"
+    assert kinds('<p>OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez.</p>') == [], "DESCRIPTION flagged"
+    assert "positioning line in <h1>" in kinds('<h1>' + POSITIONING_LINE + '</h1>'), "H1 placement passed"
+    assert "positioning line in <title>" in kinds('<title>' + POSITIONING_LINE + '</title>'), "title placement passed"
+    assert "positioning line in meta description" in kinds('<meta name="description" content="' + POSITIONING_LINE + '">'), "meta placement passed"
+    assert any(k.startswith("positioning line in WebPage") for k in kinds(
+        '<script type="application/ld+json">{"@graph":[{"@type":"WebPage","description":"' + POSITIONING_LINE + '"}]}</script>')), "WebPage description passed"
+
+# ─── THE TRAVEL PROTOCOL (CANON, THE OMNIFIT METHOD, Oct 17 2026) ─
+# Always "the Travel Protocol" (capital T and P); never a price for it. No
+# page carries the name yet (the next run applies it), so both rules are
+# inert on the live site and proven by their self-test.
+def travel_protocol_usage(text):
+    t = html.unescape(_flat(text)); out = []
+    for m in re.finditer(r'\btravel protocol\b', t, re.I):
+        if m.group(0) != "Travel Protocol":
+            out.append(("Travel Protocol casing", t[max(0, m.start()-40):m.end()+40].strip()))
+        lo = max((t.rfind(c, 0, m.start()) for c in '.!?'), default=-1) + 1
+        hi = min((x for x in (t.find(c, m.end()) for c in '.!?') if x != -1), default=len(t))
+        if re.search(r'\$\s*\d', t[lo:hi + 1]):
+            out.append(("price stated for the Travel Protocol", t[lo:hi + 1].strip()[:140]))
+    return out
+
+def _selftest_travel_protocol():
+    kinds = lambda t: [k for k, _ in travel_protocol_usage(t)]
+    assert kinds('<p>Included in every tier: the Travel Protocol.</p>') == [], "canonical casing flagged"
+    assert kinds('<p>Ask about the travel protocol.</p>') == ["Travel Protocol casing"], "lower-case passed"
+    assert kinds('<p>The Travel protocol is included.</p>') == ["Travel Protocol casing"], "mixed case passed"
+    assert kinds('<p>The Travel Protocol is $95 per trip.</p>') == ["price stated for the Travel Protocol"], "price passed"
+    assert kinds('<p>Travel Protocols are included.</p>') == [], "plural word-boundary false positive"
 
 # Every rule names the tier it encodes. TIER 1 rules report a violation; TIER 2
 # rules report a MISSING CONDITION. See CANON COMPLIANCE SCREEN - TWO TIERS.
@@ -539,7 +938,7 @@ COMPLIANCE = [
     class_iia_note,                # T2-4
 ]
 
-# TIER 2 item 2: historical records, exempt from re-screening ENTIRELY. They
+# TIER 2 item 2a: historical records, exempt from re-screening ENTIRELY. They
 # record measurements that happened; re-screening them would put the run in the
 # position of arguing with its own archive.
 FROZEN = ("case-studies.html", "home-3.html")
@@ -1002,9 +1401,9 @@ def run():
     ciia = {}
     for f in files:
         t = open(f).read()
-        # TIER 2 item 2: frozen historical records are exempt from re-screening.
+        # TIER 2 item 2a: frozen historical records are exempt from re-screening.
         if os.path.basename(f) in FROZEN:
-            print(f"   {f}  [frozen historical record - not re-screened, CANON TIER 2 item 2]")
+            print(f"   {f}  [frozen historical record - not re-screened, CANON TIER 2 item 2a]")
             continue
         for fn in COMPLIANCE:
             for kind, what, ctx in fn(t):
@@ -1034,6 +1433,27 @@ def run():
             print(f"      {len(fs)}x  {', '.join(sorted(set(fs)))}\n         …{w[:160]}…")
         A += 1
     print("   none" if not A else f"   {A} strike(s)")
+
+    # Outcome Claims Amendment (CANON TIER 2 items 2a and 2g). Reported in
+    # full on every run; counted toward the result only once AMENDMENT_COUNTS
+    # is True (CANON NEXT RUNS), because the amendment was recorded before any
+    # page was brought to it and the first run's job is to list the gap.
+    print("\n### (a') OUTCOME CLAIMS AMENDMENT - TIER 2 items 2a and 2g"
+          + (" (counted)" if AMENDMENT_COUNTS else " (REPORTED, NOT COUNTED this run: AMENDMENT_COUNTS=False)"))
+    _selftest_amendment()
+    N = 0
+    for f in files:
+        if os.path.basename(f) in FROZEN: continue
+        t = open(f).read()
+        for ln, client, cond, detail in attributed_outcome_conditions(t):
+            print(f"   {f}:{ln}  [2a {cond}] client: {client}\n      {detail[:170]}"); N += 1
+        if os.path.basename(f) in _OUTCOMES_FILES: continue    # 2g's reference surface
+        for ln, fig, kind, detail in data_backed_figures(t):
+            print(f"   {f}:{ln}  [2g {kind}] '{fig}'\n      {detail[:170]}"); N += 1
+    print(f"   (2a conditions 3/4/5 + consent, 2g: self-tested both ways; consent list: "
+          f"{', '.join(CONSENT_LIST)}; frozen records exempt)")
+    print("   none" if not N else f"   {N} finding(s)")
+    if AMENDMENT_COUNTS: A += N
 
     print("\n### (b) STALE CANON")
     # A banned FIGURE must not match inside a longer one. Plain substring
@@ -1098,6 +1518,14 @@ def run():
         for ln, tgt in reserve_action_to_contactform(src):
             print(f"   {f}:{ln}  [ReserveAction targets /contactform: {tgt} - must be Calendly]"); B+=1
     print(f"   (booking CTA + ReserveAction rule: self-tested both ways, {len(swept)} files swept)")
+    _selftest_positioning(); _selftest_travel_protocol()
+    for f in swept:
+        src = open(f).read()
+        for kind, ctx in positioning_line_verbatim(src):
+            print(f"   {f}  [{kind}]  …{ctx[:90]}…"); B+=1
+        for kind, ctx in travel_protocol_usage(src):
+            print(f"   {f}  [{kind}]  …{ctx[:90]}…"); B+=1
+    print(f"   (positioning line + Travel Protocol rules: self-tested both ways, {len(swept)} files swept)")
     _selftest_ken_muscle()
     for f in ALL:
         for hit, ctx in ken_muscle_claim(open(f).read()):
@@ -1262,7 +1690,8 @@ def run():
 
     result = "FAILED" if (A or B or C) else ("INCOMPLETE" if notrun else "PASSED")
     print(f"\n### RESULT: {result}"
-          f"  (compliance {A} · stale canon {B} · structure {C} · not-run {len(notrun)})")
+          f"  (compliance {A} · stale canon {B} · structure {C} · not-run {len(notrun)}"
+          f" · amendment 2a/2g {N}{'' if AMENDMENT_COUNTS else ' NOT COUNTED'})")
     return A,B,C
 
 if __name__ == "__main__":

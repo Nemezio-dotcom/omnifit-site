@@ -209,6 +209,10 @@ when editing this file.
 | 14 | tag balance · ld+json validity | (c) | unchanged |
 | 15 | LocalBusiness `@id` · `about` reference · FAQ mirror · orphan page | (c) | unchanged |
 | 16 | invariant mismatch · canon hash stale | (c) | unchanged |
+| 17 | `attributed_outcome_conditions` | T2-2a | **new** (Oct 17 2026) — the Outcome Claims Amendment's conditions 3, 4, 5 and the consent list; reported, not counted until `AMENDMENT_COUNTS` |
+| 18 | `data_backed_figures` | T2-2g | **new** (Oct 17 2026) — unattributed client figures must be on /outcomes; adherence % on sight; same reporting rule |
+| 19 | `positioning_line_verbatim` | (b) | **new** (Oct 17 2026) — the POSITIONING LINE verbatim, never in title/meta/H1 |
+| 20 | `travel_protocol_usage` | (b) | **new** (Oct 17 2026) — "the Travel Protocol" casing, no price |
 | — | `clinical_stat` | **RETIRED** | split into 8 (hard ban, force unchanged) and 9 (conditional). Nothing is lost: the population-scope clinical case it existed for is 8. |
 | — | dedicated-block disclaimer test | **RETIRED for T2-2** | written to counsel's standard; T2-2 asks only for a same-page disclaimer. Still governs nothing else — T2-1 states its own three conditions. |
 
@@ -385,6 +389,102 @@ run: the disclaimed attributed card must pass; the same card with no
 disclaimer, "Everyone loses 11 lb in 6 months" and an unattributed "Clients
 lose 11 lb in 6 months" must all fire, and "Individual results. Call us
 today." must not count as a disclaimer.
+
+## Outcome Claims Amendment (Oct 17, 2026)
+
+CANON TIER 2 items 2a and 2g (owner-approved Oct 1 2026, applied Oct 17 2026)
+and the TIER 1 item 2 carve-out. The amendment was recorded before any page
+was brought to it, so the two new rules **report in full under `(a') OUTCOME
+CLAIMS AMENDMENT` and do not count toward the result** while
+`AMENDMENT_COUNTS = False`. The `RESULT:` line always carries their count
+(`amendment 2a/2g N NOT COUNTED`), so a green run never hides them. The run
+that fixes the copy flips the constant; nothing else changes.
+
+**`attributed_outcome_conditions` (T2-2a).** Scans the raw file with
+comments, `<style>`, non-ld+json `<script>` bodies and `style="…"` attributes
+blanked to spaces (positions and line numbers survive), so CSS bar widths
+(`width:94%`) never read as figures. A figure is pounds / inches / body-fat %
+(`_T1_UNITS`) or a bare percentage. It is *attributed* when, within 80 words,
+there is a consent-list first name or a case-sensitive name shape: `Name,
+<role>` / `Name · <role>` / `Name — <role>`, `Name is a <role>`, or `Name,
+<age>`. Case-sensitive on purpose: the first draft used `re.I` and read "That
+is a…", "This… client" and "Illustrative example, not client data" as
+people. The nearest *preceding* name within 12 words wins (the /outcomes
+profile table puts three clients on one line; a figcaption puts the name
+first), else the nearest name either side (a stat card puts the name under
+the figure). Then, per figure:
+
+- consent — the first name must be in `CONSENT_LIST` (anonymised profiles
+  fail too: no list vouches for them);
+- (3) — `in just` / `in only` / `in as little as` beside the figure;
+- (4) — `DISCLOSURE_2A` verbatim on the figure's surface (`_surface`: the
+  enclosing `<section>`, else the page), compared after flattening,
+  entity-unescaping and `_norm`, so a link-wrapped URL still matches;
+- (5) — in the figure's *block* sentence (innermost p/h/li/td/div…, then
+  sentence-split): second person, first person singular (`I`, `my`, `me`,
+  case-sensitive on `I`), a projection word (`will`, `can`, `expect…`,
+  `typical…`, `up to`) or a present-tense outcome verb. The block scope
+  exists because a stat card's label ("+18 lbs Lean Muscle") has no period
+  and the first draft ran it into the next card's "You…".
+
+Figures inside tag attributes (alt, aria-label, data-tip) are skipped
+(`_in_tag`): `_flat()` drops attributes, so no other rule sees them either.
+Deduplicated on (line, client, condition).
+
+**`data_backed_figures` (T2-2g).** Unattributed figures only. A figure is a
+*client result* when, within 20 words, a client word (`client(s)`, `client
+base`, `of those`, `cohort` — not `members`, a gym word: "80% of members
+quit by month 3" is a big-box statistic) sits beside a past-tense result verb
+or statistic word (`lost`, `achieved`, `rose`, `median`, `average`…). Skipped:
+goal framing before the figure (`want to lose 20–30 lbs`, TIER 2 item 3),
+trial words (`trial`, `study`, `participants`, `DXA` — the GLP-1 page),
+illustrative surfaces (TIER 2 item 5). A client result must appear on
+`pages/outcomes.html` (`_published_on_outcomes`: the number with its unit
+class, sign dropped, lb/lbs/pounds unified). A percentage within 20 words of
+`adherence` / `attendance` / `sessions completed` is a finding on sight.
+
+**TIER 1 item 2 carve-out.** `lbs_near_timeframe` now breaks before reporting
+when `_published_with_method(figure)` is true: the figure appears on
+/outcomes on a surface carrying a sample size (`_C_SAMPLE`) and the page
+carries a date range (`_DATE_RANGE`; page-wide, because /outcomes states it
+once in its meta line). `outcomes=` overrides the live page for self-tests;
+the Oct 17 case-study self-test passes `outcomes=''` so it can never be
+satisfied by a figure that happens to be on the live page.
+
+**Negative tests, both directions, every run (`_selftest_amendment`).** A
+compliant card passes; a link-wrapped disclosure passes; "in just" fires and
+"over 6 months" does not; the near-verbatim "…; see aggregate outcomes
+above." fires; the disclosure on another surface fires; "you", "I added", 
+"will add" and "gains … every year" each fire; "Dave, business owner" and an
+anonymised profile fail consent, "Ken · CTO" passes it; an unattributed
+figure is not a 2a finding. 2g: an off-outcomes aggregate fires, the same
+figure on a synthetic /outcomes passes, a persona goal passes, a trial
+figure passes, an adherence % fires and an illustrative adherence % passes,
+an attributed figure is not a 2g finding. Carve-out: the aggregate fires
+with the figure absent, with no sample size, and with no date range, and
+passes when all three are there.
+
+**First live run (Oct 17 2026): 17 findings, all genuine, listed in
+REPORT.md.** The three false-positive classes the drafts produced and what
+closed them: sentence-start words read as names (case-sensitive shapes +
+`_NONPERSON`); the 1200-character window reaching from /outcomes' retention
+table into its profiles section (80-word window, nearest-preceding rule);
+alt text read as copy while the rest of the screen ignores it (`_in_tag`).
+
+**`positioning_line_verbatim` (b).** Keyed on two fragments no other copy
+uses (`diagnostic-led coaching system`, `pain or plateau`); CANON's
+DESCRIPTION says "diagnostic-led personal training practice" and is quiet.
+Each fragment hit must have `POSITIONING_LINE` verbatim within 220
+characters (not sentence equality: inside ld+json the "sentence" before a
+slogan is an email address). Separately reports the fragment inside
+`<title>`, `<h1>`, a `<meta name="description">`, or a header's WebPage
+`name` / `description` (build.py reads those as the title and meta).
+Self-tested: verbatim, in a summary, and as an ld+json slogan pass; two
+paraphrases, the DESCRIPTION, and each banned placement behave as expected.
+
+**`travel_protocol_usage` (b).** `travel protocol` in any casing but
+`Travel Protocol`, and a `$` figure in the same sentence as the name. No
+page carries the name yet, so both are proven only by their self-test.
 
 ## Known checker defects, unfixed
 

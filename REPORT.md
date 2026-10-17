@@ -4886,3 +4886,168 @@ GA4 cross-domain for `calendly.com`; Calendly's Google Analytics integration wit
 
 ### Sources changed
 `pages/headers/site-header.html`, `site/site.js`, `pages/personal-trainer-4s-ranch.html`, `pages/fit-check.html`, `pages/headers/fit-check-header.html`, `pages/privacy-policy.html`, `build.py`, `tools/tracktest.js` (new), `tools/README.md`, `CANON.md`, `DEPLOY.md`, `REPORT.md`, `public/` (rebuilt).
+
+---
+
+# Outcome Claims Amendment run — CANON, tools, and the Organization slogan (Oct 17, 2026)
+
+**Branch:** `claude/sleepy-mccarthy-3vf26t`, merged to `main`.
+**Scope:** `CANON.md` and `tools/` only, plus the one schema property the brief named (`slogan` on the Organization node in `pages/headers/site-header.html`) and the rebuilt `public/`. **No page copy changed.** The one CANON wording fix (TIER 1 item 4) is in CANON, not on a page.
+
+## What changed
+
+### 1. Outcome Claims Amendment (owner-approved Oct 1 2026, applied today)
+
+| Where | Change |
+|---|---|
+| CANON TIER 1 item 2 | An aggregate figure with a timeframe ("clients lose X in Y") stays banned UNLESS it is published on /outcomes with its method, n and date range. |
+| CANON TIER 2 item 2 → **2a ATTRIBUTED INDIVIDUAL OUTCOMES** | Allowed only when all five conditions hold: (1) written consent; (2) measured by OmniFit, with dates; (3) elapsed time as fact, never "in just"; (4) the verbatim disclosure on the same surface; (5) third person, past tense, no projection, no "you". The Sept 2026 wording is kept beneath it as the superseded record. |
+| CANON TIER 2 **2g DATA-BACKED FIGURES** (new) | Every client-results number appears on /outcomes or meets 2a; a figure that can't be recomputed from records comes down; no adherence percentage until attendance is logged. |
+| CANON consent list | Owner-attested: Isaac M., Egor B., Chad C., Alo S., Mark M., Vincent, Ken. Recorded in 2a and in `certify.py CONSENT_LIST`. |
+| CANON body composition note | Bodystat readings exist only for clients who started at Teqneeq; older clients have no comparable readings. |
+| Frozen records | `pages/case-studies.html` and `pages/home-3.html` stay exempt. No case-study figure check was run. |
+| Every "TIER 2 item 2" reference in CANON and in certify.py comments | Renamed to item 2a. |
+| `tools/certify.py` | `attributed_outcome_conditions` (2a conditions 3, 4, 5 + consent), `data_backed_figures` (2g), the TIER 1 item 2 carve-out inside `lbs_near_timeframe`, and `_selftest_amendment` (both directions, every run). Both amendment rules print in full under a new `(a') OUTCOME CLAIMS AMENDMENT` section and are **not counted** toward the result while `AMENDMENT_COUNTS = False`; the RESULT line carries their count. |
+
+### 2. Positioning line
+
+Added to CANON's ENTITY BLOCK as **POSITIONING LINE**, verbatim, with its usage (summary / TL;DR lead sentence; external profiles; the Organization `slogan`) and its bans (never in a title, meta description or H1; never a replacement for the two-sentence DESCRIPTION). `pages/headers/site-header.html` gains `"slogan"` on the Organization node, so every built page carries it in schema (verified on `public/index.html`, `/outcomes`, `/faqs`). `certify.py positioning_line_verbatim` reports a paraphrase that keeps either fragment and any placement in `<title>`, `<h1>`, a meta description or a header's WebPage name/description. Self-tested both ways.
+
+### 3. The Travel Protocol
+
+Added to CANON under THE OMNIFIT METHOD → ACCOUNTABILITY THAT TRAVELS, verbatim, with the usage rules (always "the Travel Protocol"; never a price; never a live-virtual-sessions claim unless CANON already says so, and CANON does not say so for The Foundation or The Program). `certify.py travel_protocol_usage` reports the wrong casing and a dollar figure in the same sentence; inert on the live site (no page carries the name yet), proven by its self-test. The pages that describe travel support today are listed below for the next run.
+
+### 4. CANON TIER 1 item 4
+
+"$30 refundable deposit" → "$30 deposit, refunded the same day you attend your consultation" (LAUNCH DECISIONS item 3). The two remaining "refundable deposit" strings in CANON are the historical records in LAUNCH DECISIONS items 3 and 17 quoting the wording they replaced, and stay.
+
+### 5. `tools/README.md`
+
+Rules table rows 17–20 and a new "Outcome Claims Amendment (Oct 17, 2026)" section: how each rule reads the page, the three false-positive classes the drafts produced and what closed them, and the negative tests.
+
+## Checks
+
+| Check | Before | After |
+|---|---|---|
+| `python3 tools/certify.py` | PASSED (0 · 0 · 0 · 0) | PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · **amendment 2a/2g 17 NOT COUNTED**) |
+| `python3 build.py` | — | rebuilt; 42 pages |
+| `python3 build.py --check` | PASSED | PASSED (same four ownership coverage notes as before; redirects and tracking fixtures OK) |
+| keyword ownership | PASSED | PASSED (no title, H1, H2 or meta changed) |
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | a6c7e65dddff4795 | a6c7e65dddff4795 |
+| header pricing | 7af0d0049b0b7aba | 7af0d0049b0b7aba |
+| credentials | 02bd9cb90a71ce69 | 02bd9cb90a71ce69 |
+| archetypes (Section A) | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c |
+| 9-point (Section B) | 4c720960dec5a809 | 4c720960dec5a809 |
+
+No hash moved; nothing in the five invariant blocks was touched.
+
+### Self-tests, both directions (run on every certify)
+
+| Rule | Must fire (fires) | Must pass (passes) |
+|---|---|---|
+| 2a (3) | "added 18 lbs in just 6 months" | "added 18 lbs over 6 months" |
+| 2a (4) | "Individual result, measured by OmniFit; see aggregate outcomes above."; the verbatim disclosure on another `<section>` | the verbatim disclosure; the same with the URL wrapped in `<a>` |
+| 2a (5) | "you can too"; "I added 18 lbs"; "will add 18 lbs"; "gains 18 lbs every year" | "Alo S., CTO, added 18 lbs of lean muscle between June 2023 and June 2024." |
+| 2a consent | "Dave, business owner, lost 27 lbs"; "An anonymised male client, 29, gained 10 lb" | "Ken · CTO · 50s" |
+| 2a scope | — | "Clients lose 20 lbs in 6 months" is not a 2a finding (unattributed) |
+| 2g | "Our clients lost a median 9 lb" (absent from a synthetic /outcomes); "Session adherence across clients: 94%" | the same figure present on /outcomes; "want to lose 20–30 pounds" (a goal); a STEP-1 trial figure; an adherence % labelled illustrative; an attributed figure |
+| T1-2 carve-out | "Clients lose 40 lb in 6 months" with the figure absent from /outcomes, with no sample size, with no date range | the same with all three present |
+| positioning line | "a diagnostic-led coaching system for busy professionals."; "from pain or plateau to strength."; the line in `<h1>`, `<title>`, a meta description, a WebPage description | the line verbatim in a paragraph, as a summary lead, as an ld+json slogan; CANON's DESCRIPTION |
+| Travel Protocol | "the travel protocol"; "The Travel protocol"; "The Travel Protocol is $95 per trip." | "the Travel Protocol" |
+
+Also negative-tested on copies of real pages (not committed): adding the verbatim disclosure to the over-50 page clears both of its findings; injecting "in just" there fires condition (3) for Ken; adding Dave to the consent list clears the 4S Ranch consent finding and leaves its (4) finding; a paraphrase on FAQs fires, the verbatim lead is quiet, the line in the FAQs H1 fires; a one-word change to the site-header slogan fires once; an off-/outcomes aggregate injected into weight-loss fires and the +13.7% median (on /outcomes) does not; "travel protocol … $45" injected into the rates page fires both Travel Protocol rules.
+
+## New-rule findings by page (TIER 2 items 2a / 2g; reported, not counted; no copy edited)
+
+Every instance where the site fails the new rules, as `certify.py` prints it. Condition numbers are 2a's. Every finding was read by hand; none is a checker artifact.
+
+| File:line | Client | Fails | What is there now |
+|---|---|---|---|
+| `pages/desk-worker-posture-pain.html:402` | Alo S. | (4) disclosure | H2 "From 60-Hour Desk Weeks to Pain-Free and 18 lbs of Muscle"; the section carries "Individual result, measured against his own baseline; outcomes vary between clients." (line 409), not the verbatim text |
+| `pages/desk-worker-posture-pain.html:409` | Alo S. | (4) disclosure | "Against his own baseline he added 18 lbs of lean muscle…" — same surface, same reason |
+| `pages/desk-worker-posture-pain.html:415` | Alo S. | (4) disclosure | the "+18 lbs / Lean Muscle" stat card, same surface |
+| `pages/outcomes.html:465` | Isaac M. | (4) disclosure | body-composition profile row (28.2% to 19.8%, +6.1 lb, −5.0 in, −11.1 lb); the section's disclosure reads "Individual result, measured by OmniFit; see aggregate outcomes above." |
+| `pages/outcomes.html:465` | Egor B. | (4) disclosure | profile row (−6.5 in, −21.9 lb), same surface |
+| `pages/outcomes.html:465` | Chad C. | (4) disclosure | profile row (23.8% to 22.8%, +11.7 lb, +12.9 lb), same surface |
+| `pages/outcomes.html:469` | Alo S. (printed as Mark M., see judgment call 4) | (4) disclosure | "His estimated bench press rose from about 53 lb to about 161 lb … body weight rose 10.8 lb." |
+| `pages/outcomes.html:470` | Mark M. | (4) disclosure | "His working bench press rose from 235 lb to 275 lb … 248 lb to 229.6 lb …" |
+| `pages/outcomes.html:473` | Alo S. | (4) disclosure | chart subtitle "…on one scale from 0 to 300 lb" (same surface; clears with the others) |
+| `pages/outcomes.html:475` | Alo S. · Mark M. | (4) disclosure | chart value labels "53 … 161 lb", "235 … 275 lb" (same surface) |
+| `pages/personal-trainer-4s-ranch.html:900` | Vincent | (4) disclosure | figcaption "Vincent, 59: Dropped 8% body fat and reignited his energy"; no disclosure anywhere on the page |
+| `pages/personal-trainer-4s-ranch.html:908` | Alo S. | (4) disclosure | figcaption "Alo, CTO: Gained 18 lbs of lean muscle" |
+| `pages/personal-trainer-4s-ranch.html:916` | **Dave** | **consent** + (4) disclosure | figcaption "Dave, Business Owner: Dropped 27 lbs and rebuilt confidence". Dave is not on the owner-attested consent list: the owner adds him or the figure comes down (2g). |
+| `pages/personal-trainer-over-50-san-diego.html:202` | Vincent | (4) disclosure | proof card "−8% body fat"; the page's disclaimer is "Individual results. Outcomes depend on starting point…", not the verbatim text |
+| `pages/personal-trainer-over-50-san-diego.html:207` | Ken | (4) disclosure | proof card "−11 lb bodyweight, 6 months", same reason |
+
+Totals: 17 findings on 4 pages; 16 are condition (4), 1 is consent. No instance fails condition (3) ("in just" appears once on the site, `personal-trainer-4s-ranch.html:1106` "in just 30 minutes", a session length, not a figure) and none fails condition (5) in the copy the rule reads. 2g reported nothing: every unattributed client figure on a non-frozen page (how-we-measure-your-progress's 87% / 74% / +32% / 34%) is on /outcomes, and the only adherence percentage (94%, same page) is inside the block labelled "Illustrative example, not client data."
+
+The alt texts at `personal-trainer-4s-ranch.html:897, 905, 913` carry the same three figures ("Vincent, 59: dropped 8% body fat…", "Alo, CTO: gained 18 lbs…", "Dave, business owner: lost 27 lbs…"). They are not findings because no certify rule reads attribute text (the flattener drops it); the next run should change them with their captions.
+
+## Judgment calls (and the condition under which each is wrong)
+
+1. **The amendment rules report but do not count this run** (`AMENDMENT_COUNTS = False`). The brief asked for the findings "separate from the run's pass/fail"; the switch and its NEXT RUNS entry make the separation explicit rather than leaving a rule that is quietly off. Wrong if the owner wanted certification to FAIL today; one constant flips it.
+2. **/outcomes is screened like every other page**, so its own profile section reports condition (4) because its disclosure reads "see aggregate outcomes above" and the verbatim text points the reader at /outcomes. The brief said every non-frozen page; the rule is encoded as written and the decision is recorded in CANON NEXT RUNS. Wrong if the owner meant /outcomes to be the destination, not a carrier; then condition (4) gets an /outcomes exemption in CANON and in `attributed_outcome_conditions`.
+3. **Condition (3) also catches "in only" and "in as little as"**, not "in just" alone. A rule keyed on one literal is the literal-string free-framing miss tools/README records. Wrong if the owner wants exactly the quoted phrase; drop two alternatives from `_MINIMISER`.
+4. **Attribution is nearest-name, preceding-within-12-words first.** It names the right client on every finding except `outcomes.html:469`, where Alo S.'s paragraph is printed under Mark M. because Mark's name opens the next sentence within 12 words of Alo's last figure. The finding (condition 4) and the fix (one disclosure on that section) are the same either way. Wrong only if a page ever carries two clients' figures on one surface with different fixes; then the rule needs the paragraph, not the window.
+5. **2g treats third-party statistics as outside its scope.** "80% of members quit by month 3" (`how-it-works-pricing.html:507`, the big-box column of the comparison table) is not an OmniFit client result; `members` is deliberately not a client word. Wrong if the owner reads 2g as "every figure on the site must be recomputable", in which case that line comes down and `members` goes back into `_CLIENT_WORD`.
+6. **Alt text is outside the new rules**, as it is outside every existing rule (`_flat` drops attributes). Listed above so it is not lost. Wrong if the owner wants alt text screened; that is a change to `_flat` affecting every rule and needs its own run.
+7. **The Travel Protocol rule is stricter on casing than the brief's words**: "Travel Protocols" (plural) is not matched at all, "travel protocol" and "Travel protocol" are findings. Wrong if the owner wants the plural banned too.
+8. **"Never claim live virtual sessions are included unless CANON already says so" is recorded, not machine-checked.** CANON's definition names app programming, check-ins and pause weeks for The Foundation and The Program; several pages below say sessions "switch to virtual" when you travel. That is for the next run to reconcile when it applies the name; a rule written today would flag live copy the brief said not to edit.
+9. **The positioning line's second anchor is "pain or plateau"**, so a paraphrase that keeps only "diagnostic-led coaching system" or only "pain or plateau" is caught; one that keeps neither is not a positioning-line variant at all. `fit-check.html:98` "OmniFit is diagnostic-led coaching." keeps neither and is quiet. Wrong if the owner considers that sentence a paraphrase of the line.
+
+## Travel-support page list (for the next run to name the Travel Protocol)
+
+Every non-frozen page line that describes what OmniFit provides for travel. Lines that merely mention travel as a client circumstance ("professionals who travel") are listed only when they also state the provision. Header FAQPage mirrors (`pages/headers/*-header.html`) follow the page FAQ via `tools/mkheaders.py` and are not listed separately. Lines marked **virtual** promise live virtual sessions during travel, which the definition does not include for The Foundation or The Program.
+
+| File:line | Says now |
+|---|---|
+| `pages/FAQs.html:223` | "Travel-adapted programming is built into every OmniFit Performance program. In-studio and in-home clients receive hotel and home gym workout variations through the app between sessions. Executive Reset clients train live…" (closest to the definition) |
+| `pages/FAQs.html:228` | hotel-room bodyweight and band workouts, zero equipment |
+| `pages/FAQs.html:288` | "What if I travel or my schedule changes?" — pause weeks: 2 across The Foundation, 6 per 12 months on The Program |
+| `pages/home-1.html:453` | "In-person sessions + virtual sessions + hotel gym programming. Stay consistent through heavy travel." **virtual** |
+| `pages/home-5.html:83` | gear for a home, office or hotel setup (FAQ answer) |
+| `pages/how-it-works-pricing.html:308` | "Train in-studio, virtually, or with guided travel workouts." |
+| `pages/how-it-works-pricing.html:547` | sessions "converted to virtual, or adapted to travel workouts" **virtual** |
+| `pages/how-it-works-pricing.html:577` | FAQ "What if I travel frequently?" — "In-person sessions switch to virtual when you travel, and the 30-Minute Executive Reset is built specifically for heavy travellers…" **virtual** |
+| `pages/training-rates-san-diego.html:619` | "Pause weeks for travel (see the table above)" |
+| `pages/training-rates-san-diego.html:887` | pause weeks; "Travel doesn't cost you a session." |
+| `pages/training-rates-san-diego.html:917` | commitment table row "Travel or a busy stretch" — use pause weeks |
+| `pages/training-rates-san-diego.html:1187` | FAQ "What happens when I travel?" — use pause weeks |
+| `pages/in-home-personal-trainer-san-diego.html:328` | "Travel programming for road weeks" |
+| `pages/in-home-personal-trainer-san-diego.html:474, 477` | comparison row "Travel-week programming" — "✓ Hotel/app workouts" |
+| `pages/personal-trainer-4s-ranch.html:660` | "In-person sessions at Teqneeq plus virtual programming and live online coaching… travel" **virtual** |
+| `pages/personal-trainer-4s-ranch.html:1078` | FAQ "Can I train with OmniFit if I travel frequently?" — hybrid coaching transitions between in-studio and virtual |
+| `pages/personal-trainer-4s-ranch.html:1103` | travel often → the 30-Minute Executive Reset (fully virtual) |
+| `pages/personal-trainer-del-mar.html:229` | "in-person sessions plus virtual programming and direct trainer access, built for Del Mar executives who travel" |
+| `pages/personal-trainer-del-mar.html:233` | "Hotel-friendly travel workouts" |
+| `pages/personal-trainer-del-mar.html:303` | "hybrid coaching keeps you progressing with virtual sessions and hotel-friendly programming during travel weeks" **virtual** |
+| `pages/personal-trainer-del-mar.html:411` | FAQ "I travel frequently for work…" — in-person when home, virtual programming and hotel-friendly workouts when away |
+| `pages/personal-trainer-rancho-santa-fe.html:214` | in-person plus virtual programming and direct trainer access for executives who travel |
+| `pages/personal-trainer-rancho-santa-fe.html:288` | "hybrid coaching keeps your training consistent regardless of where you are that week" |
+| `pages/personal-trainer-rancho-santa-fe.html:391` | FAQ answer — in-person when in San Diego, virtual programming and hotel/travel gym workouts when away |
+| `pages/personal-trainer-santaluz.html:138` | in-person plus virtual programming for executives who travel frequently |
+| `pages/personal-trainer-carlsbad.html:140` | in-person plus virtual programming for periodic business travel |
+| `pages/personal-trainer-carmel-valley.html:193` | in-person plus virtual programming for periodic travel |
+| `pages/personal-trainer-fairbanks-ranch.html:193` | in-person plus virtual programming for executives who travel frequently |
+| `pages/personal-trainer-la-jolla.html:322` | "Virtual options for travel weeks." |
+| `pages/private-personal-trainer-san-diego.html:321` | executives who travel → live 30-minute virtual sessions (the Executive Reset card) |
+| `pages/weight-loss.html:385, 387` | Executive Reset card: live sessions, app programming, "Hotel/home-friendly protocols" |
+| `pages/weight-loss.html:428` | FAQ "Can I do this virtually if I travel?" — the Executive Reset; clients combine in-person with virtual |
+| `pages/hiit-personal-trainer-san-diego.html:625, 628, 675` | Executive Reset card and CTA: "Hotel/home-friendly protocols", "live virtual HIIT from anywhere" |
+| `pages/strength-training-1.html:313, 354` | "Home gym, hotel, or minimal setup"; virtual strength training adapts to hotel gym equipment |
+| `pages/omnifit-vs-competitors.html:796` | "Virtual session support for travel (hotel gym, home, bodyweight)" **virtual** |
+| `pages/omnifit-vs-competitors.html:906, 908, 916` | the travel-week walkthrough: "Week 3: Virtual session via app", "Your coach programs your travel weeks in advance…", "virtual when you travel" **virtual** |
+| `pages/the-30-minute-executive-reset.html:287, 320, 370, 401, 435, 469` | the Reset's own travel-week handling (hotel gym rebuilds, "Virtual coverage during travel weeks", "Travel-week programming", the travel use-case, the comparison row, the equipment FAQ). The Reset is the fully-remote path the definition names; these keep their own wording. |
+| `pages/fit-check.html:154` | quiz reply: "Pause weeks and the app are built for it." |
+| `pages/behavior-change-coaching.html:234–235` | "Travel & Restaurant Protocols" — nutrition habits for hotels, client dinners, airports (nutrition, not the training pathway; the name collides and the next run should rename or disambiguate it) |
+| `pages/how-we-measure-your-progress.html:330` and the "Data-Driven Hybrid Coaching" card repeated on `the-omnifit-method.html:361`, `weight-loss.html:470`, `body-composition-testing.html:401`, `personal-training-services.html:459`, `hiit-personal-trainer-san-diego.html:763`, `strength-training-1.html:392`, `partners.html:1183`, `private-personal-trainer-san-diego.html:521`, `in-home-personal-trainer-san-diego.html:686`, `omnifit-vs-competitors.html:978`, `corrective-exercise-post-rehab.html:1012` | "You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming…" — one shared card on twelve pages; change it once, everywhere |
+
+## Human-side, not repo
+
+Paste the POSITIONING LINE, verbatim, to Google Business Profile, Thumbtack, Yelp and Bark. Decide Dave's consent and the /outcomes self-reference (judgment calls 2 and the consent finding above).
+
+### Sources changed
+`CANON.md`, `tools/certify.py`, `tools/README.md`, `pages/headers/site-header.html` (one `slogan` property and its comment), `REPORT.md`, `public/` (rebuilt).
