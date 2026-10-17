@@ -606,6 +606,77 @@ def fee_language(text):
             out.append((term, sentence.strip()))
     return out
 
+# ─── (b) RETIRED LAUNCH COPY (owner decisions, Oct 17 2026) ────────
+# Literal phrases the launch batch retired. Each is a claim or a surface the
+# October 2026 owner decisions replaced (CANON, LAUNCH DECISIONS): the
+# deposit is "$30 deposit, refunded the same day you attend your
+# consultation" (never "fully refundable", never "applies to your first
+# cycle"); the assessment credit is "credited toward your first purchase ..."
+# (never "three month program" / "3-month package"); the start date is
+# confirmed on the consultation (never "within the week"); the facility line
+# is "private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S
+# Ranch" (never "fully private" / "zero crowds"); the 30-Day Fit Guarantee
+# reads "within your first 30 days" (never "after your first 30 days");
+# nutrition is included in every program (no "add-ons"); the entry point is
+# the Calendly consultation (no "Strategy Session"); reviews are 190+; the
+# comparison page names Equinox's Equifit assessment; InBody frequencies
+# vary by model; ECW/TBW is read as a trend, not an inflammation flag; the
+# footer email is the domain address and the reviews link is the plain
+# g.page URL; the lowest tier is $200 per 4 weeks, never "$250/month".
+# Matched case-insensitively on the FLATTENED copy, so a phrase split by an
+# inline tag ("<a>nutrition coaching</a> add-ons") still fires. Frozen
+# records are exempt. footer.html IS swept, although it is otherwise out of
+# scope, because two of the phrases lived only there. Negative-tested on
+# every run by _selftest_retired_copy() before the sweep.
+RETIRED_LAUNCH_COPY = [
+    "fully refundable", "applies to your first cycle", "within the week",
+    "zero crowds", "fully private", "nutrition coaching add-ons",
+    "Strategy Session", "133+ Reviews", "three month program",
+    "3-month package", "after your first 30 days",
+    "no standardized assessment", "Typically single", "flags inflammation",
+    "@gmail.com", "g.page/r/CcePeMjnbDe9EBM/review", "$250/month",
+]
+
+def retired_launch_copy(text):
+    """Every retired launch phrase in the file: (term, line, ctx). Searched on
+    the FLATTENED copy (so a phrase split by an inline tag fires) AND on the
+    raw source (so the footer's mailto: address and the review URL, which live
+    inside href attributes that the tag strip removes, fire too). line is the
+    first raw line carrying the phrase, or None when only the flattened copy
+    carries it."""
+    t = _flat(text); out = []
+    raw = text.splitlines()
+    for term in RETIRED_LAUNCH_COPY:
+        rx = re.compile(re.escape(term), re.I)
+        m = rx.search(t)
+        ln = next((i for i, l in enumerate(raw, 1) if rx.search(l)), None)
+        if not m and ln is None: continue
+        ctx = (t[max(0, m.start()-60):m.end()+60] if m else raw[ln-1].strip()[:140]).strip()
+        out.append((term, ln, ctx))
+    return out
+
+def _selftest_retired_copy():
+    """Both directions, every run: each term must fire on a synthetic line,
+    a tag-split phrase must fire, and clean canonical copy must not."""
+    for term in RETIRED_LAUNCH_COPY:
+        hits = retired_launch_copy(f"<p>Lorem {term.upper()} ipsum.</p>")
+        assert [h[0] for h in hits] == [term], f"retired-copy rule did not fire on {term!r}"
+    split = retired_launch_copy('<p>dedicated <a href="/x">nutrition coaching</a> add-ons are available.</p>')
+    assert [h[0] for h in split] == ["nutrition coaching add-ons"], "tag-split phrase not caught"
+    attr = retired_launch_copy('<a href="mailto:omnifittraining@gmail.com">Email</a>'
+                               '<a href="https://g.page/r/CcePeMjnbDe9EBM/review">Reviews</a>')
+    assert [h[0] for h in attr] == ["@gmail.com", "g.page/r/CcePeMjnbDe9EBM/review"], "attribute phrase not caught"
+    clean = ("<p>$30 deposit, refunded the same day you attend your consultation. The $150 "
+             "Performance Assessment is credited toward your first purchase: a Foundation or "
+             "Program cycle, an Executive Reset cycle, or a 5-session pack. If OmniFit isn't "
+             "the right fit within your first 30 days on The Foundation, The Program or the "
+             "Executive Reset, tell us in writing and we'll refund the unused portion of your "
+             "enrollment. Private 1:1 coaching inside Teqneeq FHC, a members-only facility in "
+             "4S Ranch. 190+ Reviews. nemezio@omnifittraining.com $200 per 4 weeks "
+             "https://g.page/r/CcePeMjnbDe9EBM</p>")
+    assert retired_launch_copy(clean) == [], "retired-copy rule fired on canonical copy"
+    return len(RETIRED_LAUNCH_COPY)
+
 # RETIRED with the October card: _marker_nearby, _inside_packs_table and the
 # CANON_MARKERS / CANON_CARDS tables. All four existed to carve $175 out of the
 # retired-rate rule as a legal in-home pack rung and Reset Bronze tier. The
@@ -855,6 +926,17 @@ def run():
             # a travel FEE, not any dollar figure sharing a line with the word travel
             if re.search(r'travel[^.<]{0,30}\$(?:50|75)\b|\$(?:50|75)\b[^.<]{0,30}travel', l, re.I):
                 print(f"   {f}:{i}  [travel fee dollar figure]"); B+=1
+    # Retired launch copy (CANON, LAUNCH DECISIONS): every file in the glob,
+    # footer.html included, frozen records exempt. Self-tested first so the
+    # sweep below cannot report green without having fired on a known hit.
+    n_terms = _selftest_retired_copy()
+    swept = [x for x in ALL if os.path.basename(x) not in FROZEN]
+    for f in swept:
+        for term, ln, ctx in retired_launch_copy(open(f).read()):
+            where = f"{f}:{ln}" if ln else f"{f} (phrase spans an inline tag)"
+            print(f"   {where}  [retired launch copy: {term}]  …{ctx[:90]}…"); B+=1
+    print(f"   (retired launch copy: {n_terms} phrases self-tested both ways, "
+          f"{len(swept)} files swept incl. footer.html, frozen exempt)")
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
