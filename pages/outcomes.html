@@ -189,9 +189,140 @@
   #omni-outcomes .hub a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
   #omni-outcomes .hub span { color: var(--white-20); }
   #omni-outcomes .s-light a { color: #8b7832; text-decoration: underline; text-underline-offset: 3px; }
+
+  /* CHARTS. Each chart draws figures already stated in the copy and tables on
+     this page; the table under each chart stays the full data view. Colours:
+     achieved navy, partly deep gold, not achieved light gray (validated for
+     colour-blind separation; every segment is also labelled). */
+  #omni-outcomes { --c-a: #0a1628; --c-p: #b8963c; --c-n: #dde0e6; --c-wash: rgba(184,150,60,0.22); }
+  #omni-outcomes .viz { background: var(--white); border: 1px solid var(--light-border); border-radius: var(--radius-lg); padding: 28px 28px 24px; margin: 32px 0 0; position: relative; }
+  #omni-outcomes .viz + .viz { margin-top: 18px; }
+  #omni-outcomes .viz-t { font-size: 15px; font-weight: 700; color: var(--light-text); line-height: 1.4; margin-bottom: 4px; }
+  #omni-outcomes .viz-s { font-size: 13px; color: var(--light-muted); line-height: 1.6; margin-bottom: 22px; }
+  #omni-outcomes .viz-key { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 12px; color: var(--light-muted); margin: -8px 0 18px; }
+  #omni-outcomes .viz-key span { display: inline-flex; align-items: center; gap: 7px; }
+  #omni-outcomes .viz-key i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  #omni-outcomes .viz-foot { font-size: 12px; color: var(--light-muted); margin-top: 16px; line-height: 1.6; }
+  #omni-outcomes .viz-foot + .viz-foot { margin-top: 6px; }
+
+  /* horizontal bars: label | track | value */
+  #omni-outcomes .hb { display: grid; grid-template-columns: minmax(130px, 32%) 1fr 64px; align-items: center; gap: 0 14px; padding: 7px 0; }
+  #omni-outcomes .hb-l { font-size: 13px; font-weight: 500; color: var(--light-text); line-height: 1.35; }
+  #omni-outcomes .hb-track { display: flex; gap: 2px; height: 22px; min-width: 0; }
+  #omni-outcomes .hb-seg { height: 100%; min-width: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--light-text); font-variant-numeric: tabular-nums; }
+  #omni-outcomes .hb-seg:last-child { border-radius: 0 4px 4px 0; }
+  #omni-outcomes .hb-seg.a { background: var(--c-a); color: var(--white); }
+  #omni-outcomes .hb-seg.p { background: var(--c-p); color: var(--navy); }
+  #omni-outcomes .hb-seg.n { background: var(--c-n); }
+  #omni-outcomes .hb-v { font-size: 12px; color: var(--light-muted); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  #omni-outcomes .hb-v b { color: var(--light-text); font-weight: 700; }
+  #omni-outcomes .hb.tot { border-top: 1px solid var(--light-border); margin-top: 8px; padding-top: 15px; }
+  #omni-outcomes .hb.tot .hb-l { font-weight: 700; }
+  #omni-outcomes .hb.sub .hb-l { padding-left: 14px; color: var(--light-muted); }
+
+  /* columns */
+  #omni-outcomes .cb { display: flex; align-items: flex-end; gap: 8px; height: 190px; border-bottom: 1px solid var(--light-border); padding: 0 4px; }
+  #omni-outcomes .cb-col { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; min-width: 0; }
+  #omni-outcomes .cb-cap { font-size: 13px; font-weight: 700; color: var(--light-text); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
+  #omni-outcomes .cb-fill { width: 100%; max-width: 40px; background: var(--c-a); border-radius: 4px 4px 0 0; }
+  #omni-outcomes .cb-x { display: flex; gap: 8px; padding: 10px 4px 0; }
+  #omni-outcomes .cb-x span { flex: 1; min-width: 0; text-align: center; font-size: 12px; font-weight: 600; color: var(--light-text); line-height: 1.4; }
+  #omni-outcomes .cb-x small { display: block; font-size: 11px; font-weight: 400; color: var(--light-muted); }
+
+  /* two-part split bar */
+  #omni-outcomes .sp { margin-top: 22px; }
+  #omni-outcomes .sp-l { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--light-muted); margin-bottom: 7px; }
+  #omni-outcomes .sp-l b { color: var(--light-text); }
+  #omni-outcomes .sp-l i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; margin-right: 6px; }
+  #omni-outcomes .sp-l span:last-child { text-align: right; }
+
+  /* range strip: middle half of clients and the median */
+  #omni-outcomes .rs { position: relative; height: 92px; margin: 0 20px; }
+  #omni-outcomes .rs-axis { position: absolute; left: 0; right: 0; top: 58px; height: 1px; background: var(--light-border); }
+  #omni-outcomes .rs-zero { position: absolute; top: 24px; width: 1px; height: 46px; background: #b9bec8; }
+  #omni-outcomes .rs-band { position: absolute; top: 44px; height: 28px; background: var(--c-wash); border-radius: 4px; }
+  #omni-outcomes .rs-dot { position: absolute; top: 58px; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: var(--c-a); box-shadow: 0 0 0 3px var(--white); }
+  #omni-outcomes .rs-lab { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; font-weight: 700; color: var(--light-text); white-space: nowrap; }
+  #omni-outcomes .rs-tick { position: absolute; top: 78px; transform: translateX(-50%); font-size: 11px; color: var(--light-muted); font-variant-numeric: tabular-nums; }
+  #omni-outcomes .rs-key { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 12px; color: var(--light-muted); margin-top: 18px; }
+  #omni-outcomes .rs-key i { display: inline-block; width: 14px; height: 10px; border-radius: 3px; background: var(--c-wash); margin-right: 7px; vertical-align: -1px; }
+  #omni-outcomes .rs-key i.dot { width: 10px; border-radius: 50%; background: var(--c-a); }
+
+  /* start to latest (individual profiles) */
+  #omni-outcomes .db { display: grid; grid-template-columns: minmax(130px, 32%) 1fr; gap: 0 14px; align-items: center; padding: 10px 0; }
+  #omni-outcomes .db-plot { position: relative; height: 26px; margin-right: 58px; margin-left: 46px; }
+  #omni-outcomes .db-line { position: absolute; top: 12px; height: 2px; background: var(--c-p); }
+  #omni-outcomes .db-dot { position: absolute; top: 13px; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; box-shadow: 0 0 0 2px var(--white); }
+  #omni-outcomes .db-dot.s { background: var(--white); border: 2px solid #8a8f9c; }
+  #omni-outcomes .db-dot.e { background: var(--c-a); }
+  #omni-outcomes .db-n { position: absolute; top: 4px; font-size: 12px; color: var(--light-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  #omni-outcomes .db-n.s { transform: translateX(calc(-100% - 12px)); }
+  #omni-outcomes .db-n.e { margin-left: 12px; font-weight: 700; color: var(--light-text); }
+
+  #omni-outcomes .hb-track > .hb-seg[style*="--w"] { width: calc(var(--w) * 1%); }
+  #omni-outcomes .cb-fill { height: calc(var(--h) * 1%); }
+  #omni-outcomes .rs-band, #omni-outcomes .db-line { width: calc(var(--w) * 1%); }
+  #omni-outcomes .rs-zero, #omni-outcomes .rs-band, #omni-outcomes .rs-dot, #omni-outcomes .rs-lab, #omni-outcomes .rs-tick,
+  #omni-outcomes .db-line, #omni-outcomes .db-dot, #omni-outcomes .db-n { left: calc(var(--x) * 1%); }
+
+  /* the table under a chart, one click away */
+  #omni-outcomes .tv { margin-top: 14px; }
+  #omni-outcomes .tv-btn { background: none; border: none; cursor: pointer; padding: 4px 0; display: inline-flex; align-items: center; gap: 9px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8b7832; }
+  #omni-outcomes .tv-btn::before { content: ''; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.3s; }
+  #omni-outcomes .tv-btn[aria-expanded="true"]::before { transform: rotate(45deg); }
+  #omni-outcomes .tv .ct-wrap { margin: 16px 0 8px; }
+  /* without JavaScript the tables simply stay open */
+  html.omni-js #omni-outcomes .tv-body { display: none; }
+  html.omni-js #omni-outcomes .tv.open .tv-body { display: block; }
+  html:not(.omni-js) #omni-outcomes .tv-btn { display: none; }
+
+  /* hover read-out */
+  #omni-outcomes .viz-tip { position: absolute; z-index: 5; pointer-events: none; background: var(--navy); color: var(--white); font-size: 12px; line-height: 1.5; padding: 8px 11px; border-radius: 6px; box-shadow: 0 8px 24px rgba(10,22,40,0.25); max-width: 240px; opacity: 0; transform: translate(-50%, calc(-100% - 10px)); transition: opacity 0.15s; }
+  #omni-outcomes .viz-tip.on { opacity: 1; }
+  #omni-outcomes [data-tip] { cursor: default; }
+  #omni-outcomes .hb-seg[data-tip]:hover, #omni-outcomes .cb-col[data-tip]:hover .cb-fill { filter: brightness(1.15); }
+
+  @media (max-width: 640px) {
+    #omni-outcomes .viz { padding: 22px 16px 18px; }
+    #omni-outcomes .hb { grid-template-columns: 1fr 56px; gap: 6px 10px; }
+    #omni-outcomes .hb-l { grid-column: 1 / -1; }
+    #omni-outcomes .db { grid-template-columns: 1fr; gap: 6px; }
+    #omni-outcomes .cb { height: 160px; gap: 6px; }
+    #omni-outcomes .cb-x { gap: 6px; }
+    #omni-outcomes .sp-l { flex-direction: column; gap: 4px; }
+    #omni-outcomes .sp-l span:last-child { text-align: left; }
+  }
+
+  /* MOTION. Inert without html.omni-motion, which the first line of the page
+     sets only when the visitor has not asked for reduced motion. */
+  html.omni-motion #omni-outcomes .o-rv { opacity: 0; transform: translateY(22px); transition: opacity 0.9s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms), transform 0.9s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms); }
+  html.omni-motion #omni-outcomes .o-rv.is-in { opacity: 1; transform: none; }
+  html.omni-motion #omni-outcomes .viz .hb-track,
+  html.omni-motion #omni-outcomes .viz .sp .hb-track,
+  html.omni-motion #omni-outcomes .viz .rs-band,
+  html.omni-motion #omni-outcomes .viz .db-line { clip-path: inset(0 100% 0 0); transition: clip-path 1.1s cubic-bezier(.22,1,.36,1) calc(var(--i,0) * 90ms + 250ms); }
+  html.omni-motion #omni-outcomes .viz .cb-fill { clip-path: inset(100% 0 0 0); transition: clip-path 1s cubic-bezier(.22,1,.36,1) calc(var(--i,0) * 90ms + 250ms); }
+  html.omni-motion #omni-outcomes .viz .cb-cap,
+  html.omni-motion #omni-outcomes .viz .hb-v,
+  html.omni-motion #omni-outcomes .viz .rs-lab,
+  html.omni-motion #omni-outcomes .viz .db-n { opacity: 0; transition: opacity 0.6s ease calc(var(--i,0) * 90ms + 900ms); }
+  html.omni-motion #omni-outcomes .viz .rs-dot,
+  html.omni-motion #omni-outcomes .viz .db-dot.e { transform: scale(0); transition: transform 0.6s cubic-bezier(.34,1.56,.64,1) calc(var(--i,0) * 90ms + 1000ms); }
+  html.omni-motion #omni-outcomes .viz.is-in .hb-track,
+  html.omni-motion #omni-outcomes .viz.is-in .rs-band,
+  html.omni-motion #omni-outcomes .viz.is-in .db-line,
+  html.omni-motion #omni-outcomes .viz.is-in .cb-fill { clip-path: inset(0 0 0 0); }
+  html.omni-motion #omni-outcomes .viz.is-in .cb-cap,
+  html.omni-motion #omni-outcomes .viz.is-in .hb-v,
+  html.omni-motion #omni-outcomes .viz.is-in .rs-lab,
+  html.omni-motion #omni-outcomes .viz.is-in .db-n { opacity: 1; }
+  html.omni-motion #omni-outcomes .viz.is-in .rs-dot,
+  html.omni-motion #omni-outcomes .viz.is-in .db-dot.e { transform: none; }
+  html.omni-motion #omni-outcomes .os .num { font-variant-numeric: tabular-nums; }
 </style>
 
 <div id="omni-outcomes">
+<script>document.documentElement.classList.add('omni-js');if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('omni-motion');}</script>
 
   <section class="hero">
     <span class="hero-badge">Measured Outcomes</span>
@@ -224,25 +355,69 @@
   <section class="s-light"><div class="s-inner">
     <span class="s-label">Who They Are</span><hr class="gold-line">
     <h2>Professionals and Executives, Mostly 30+</h2>
-    <p class="lede">Based on occupation recorded at intake, all 63 clients in the goal analysis were classified as professionals or executives. Among clients with age recorded, four in five were 30 or older.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Profile</th><th>Clients</th><th>Share</th></tr></thead><tbody><tr><td>Age 20s</td><td>12</td><td>20%</td></tr><tr><td>Age 30s</td><td>29</td><td>48%</td></tr><tr><td>Age 40s</td><td>6</td><td>10%</td></tr><tr><td>Age 50s</td><td>7</td><td>11%</td></tr><tr><td>Age 60+</td><td>7</td><td>11%</td></tr><tr><td>Executives</td><td>21</td><td>33%</td></tr><tr><td>Other professionals</td><td>42</td><td>67%</td></tr><tr><td>Trained in studio</td><td>57</td><td>90%</td></tr><tr><td>Trained in-home or online</td><td>6</td><td>10%</td></tr></tbody></table></div><p class="disc">Age was not recorded for 2 clients.</p>
+    <p class="lede">Based on occupation recorded at intake, all 63 clients in the goal analysis were classified as professionals or executives. Among clients with age recorded, four in five were 30 or older.</p><div class="viz" role="img" aria-label="Chart: client ages. 20s 20%, 30s 48%, 40s 10%, 50s 11%, 60 and over 11%. Executives 33%, other professionals 67%. Trained in studio 90%, in-home or online 10%.">
+      <div class="viz-t">Age at intake</div>
+      <div class="viz-s">Share of the 61 clients with age recorded</div>
+      <div class="cb"><div class="cb-col" data-tip="Age 20s: 12 clients (20%)"><span class="cb-cap">20%</span><span class="cb-fill" style="--h:32"></span></div><div class="cb-col" data-tip="Age 30s: 29 clients (48%)"><span class="cb-cap">48%</span><span class="cb-fill" style="--h:76.8"></span></div><div class="cb-col" data-tip="Age 40s: 6 clients (10%)"><span class="cb-cap">10%</span><span class="cb-fill" style="--h:16"></span></div><div class="cb-col" data-tip="Age 50s: 7 clients (11%)"><span class="cb-cap">11%</span><span class="cb-fill" style="--h:17.6"></span></div><div class="cb-col" data-tip="Age 60+: 7 clients (11%)"><span class="cb-cap">11%</span><span class="cb-fill" style="--h:17.6"></span></div></div>
+      <div class="cb-x"><span>20s<small>12 clients</small></span><span>30s<small>29 clients</small></span><span>40s<small>6 clients</small></span><span>50s<small>7 clients</small></span><span>60+<small>7 clients</small></span></div>
+      <div class="sp"><div class="sp-l"><span><i style="background:var(--c-a)"></i><b>Executives</b> &middot; 21 (33%)</span><span><i style="background:var(--c-p)"></i><b>Other professionals</b> &middot; 42 (67%)</span></div><div class="hb-track"><span class="hb-seg a" style="flex:21" data-tip="Executives: 21 of 63 (33%)"></span><span class="hb-seg p" style="flex:42" data-tip="Other professionals: 42 of 63 (67%)"></span></div></div>
+      <div class="sp"><div class="sp-l"><span><i style="background:var(--c-a)"></i><b>Trained in studio</b> &middot; 57 (90%)</span><span><i style="background:var(--c-p)"></i><b>In-home or online</b> &middot; 6 (10%)</span></div><div class="hb-track"><span class="hb-seg a" style="flex:57" data-tip="Trained in studio: 57 of 63 (90%)"></span><span class="hb-seg p" style="flex:6" data-tip="Trained in-home or online: 6 of 63 (10%)"></span></div></div>
+      <div class="viz-foot">Company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history.</div>
+    </div>
+    <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Profile</th><th>Clients</th><th>Share</th></tr></thead><tbody><tr><td>Age 20s</td><td>12</td><td>20%</td></tr><tr><td>Age 30s</td><td>29</td><td>48%</td></tr><tr><td>Age 40s</td><td>6</td><td>10%</td></tr><tr><td>Age 50s</td><td>7</td><td>11%</td></tr><tr><td>Age 60+</td><td>7</td><td>11%</td></tr><tr><td>Executives</td><td>21</td><td>33%</td></tr><tr><td>Other professionals</td><td>42</td><td>67%</td></tr><tr><td>Trained in studio</td><td>57</td><td>90%</td></tr><tr><td>Trained in-home or online</td><td>6</td><td>10%</td></tr></tbody></table></div></div></div><p class="disc">Age was not recorded for 2 clients.</p>
   </div></section>
 
   <section id="goals" class="s-light"><div class="s-inner">
     <span class="s-label">Goal Outcomes</span><hr class="gold-line">
     <h2>87% Fully or Partly Achieved Their Goal</h2>
-    <p class="lede">Among 48 clients coached for at least three months, 33 fully achieved their primary goal (69%) and 44 fully or partly achieved it (92%).</p><p>Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist. Active clients were rated on progress to date and may later move categories.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Primary goal</th><th>Clients</th><th>Achieved</th><th>Partly</th><th>Not achieved</th></tr></thead><tbody><tr><td>Strength</td><td>20</td><td>14</td><td>4</td><td>2</td></tr><tr><td>Body recomposition</td><td>14</td><td>8</td><td>3</td><td>3</td></tr><tr><td>Fat loss</td><td>13</td><td>8</td><td>3</td><td>2</td></tr><tr><td>Athletic performance</td><td>7</td><td>4</td><td>2</td><td>1</td></tr><tr><td>Muscle gain</td><td>6</td><td>3</td><td>3</td><td>0</td></tr><tr><td>Health, rehab and longevity</td><td>3</td><td>2</td><td>1</td><td>0</td></tr><tr class="tot"><td>All goals</td><td>63</td><td>39 (62%)</td><td>16 (25%)</td><td>8 (13%)</td></tr></tbody></table></div><p>13% of clients did not reach their goal. They are reported here alongside everyone else.</p><p>Goals are coached through both tracks of the <a href="/the-omnifit-method">OmniFit Method</a>: the training program and the habits around it, through <a href="/behavior-change-coaching">behavior change coaching</a>.</p>
+    <p class="lede">Among 48 clients coached for at least three months, 33 fully achieved their primary goal (69%) and 44 fully or partly achieved it (92%).</p><p>Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist. Active clients were rated on progress to date and may later move categories.</p><div class="viz" role="img" aria-label="Chart: coach-rated outcome by primary goal for 63 clients. All goals: 39 achieved, 16 partly achieved, 8 not achieved.">
+      <div class="viz-t">Coach-rated outcome by primary goal</div>
+      <div class="viz-s">Each bar is one goal&rsquo;s clients split by outcome; the numbers inside are clients</div>
+      <div class="viz-key"><span><i style="background:var(--c-a)"></i>Achieved</span><span><i style="background:var(--c-p)"></i>Partly achieved</span><span><i style="background:var(--c-n)"></i>Not achieved</span></div>
+      <div class="hb"><span class="hb-l">Strength</span><div class="hb-track"><span class="hb-seg a" style="flex:14" data-tip="Strength: 14 of 20 achieved (70%)">14</span><span class="hb-seg p" style="flex:4" data-tip="Strength: 4 of 20 partly achieved (20%)">4</span><span class="hb-seg n" style="flex:2" data-tip="Strength: 2 of 20 not achieved (10%)">2</span></div><span class="hb-v"><b>20</b> clients</span></div><div class="hb"><span class="hb-l">Body recomposition</span><div class="hb-track"><span class="hb-seg a" style="flex:8" data-tip="Body recomposition: 8 of 14 achieved (57%)">8</span><span class="hb-seg p" style="flex:3" data-tip="Body recomposition: 3 of 14 partly achieved (21%)">3</span><span class="hb-seg n" style="flex:3" data-tip="Body recomposition: 3 of 14 not achieved (21%)">3</span></div><span class="hb-v"><b>14</b> clients</span></div><div class="hb"><span class="hb-l">Fat loss</span><div class="hb-track"><span class="hb-seg a" style="flex:8" data-tip="Fat loss: 8 of 13 achieved (62%)">8</span><span class="hb-seg p" style="flex:3" data-tip="Fat loss: 3 of 13 partly achieved (23%)">3</span><span class="hb-seg n" style="flex:2" data-tip="Fat loss: 2 of 13 not achieved (15%)">2</span></div><span class="hb-v"><b>13</b> clients</span></div><div class="hb"><span class="hb-l">Athletic performance</span><div class="hb-track"><span class="hb-seg a" style="flex:4" data-tip="Athletic performance: 4 of 7 achieved (57%)">4</span><span class="hb-seg p" style="flex:2" data-tip="Athletic performance: 2 of 7 partly achieved (29%)">2</span><span class="hb-seg n" style="flex:1" data-tip="Athletic performance: 1 of 7 not achieved (14%)">1</span></div><span class="hb-v"><b>7</b> clients</span></div><div class="hb"><span class="hb-l">Muscle gain</span><div class="hb-track"><span class="hb-seg a" style="flex:3" data-tip="Muscle gain: 3 of 6 achieved (50%)">3</span><span class="hb-seg p" style="flex:3" data-tip="Muscle gain: 3 of 6 partly achieved (50%)">3</span></div><span class="hb-v"><b>6</b> clients</span></div><div class="hb"><span class="hb-l">Health, rehab and longevity</span><div class="hb-track"><span class="hb-seg a" style="flex:2" data-tip="Health, rehab and longevity: 2 of 3 achieved (67%)">2</span><span class="hb-seg p" style="flex:1" data-tip="Health, rehab and longevity: 1 of 3 partly achieved (33%)">1</span></div><span class="hb-v"><b>3</b> clients</span></div><div class="hb tot"><span class="hb-l">All goals</span><div class="hb-track"><span class="hb-seg a" style="flex:39" data-tip="All goals: 39 of 63 achieved (62%)">39</span><span class="hb-seg p" style="flex:16" data-tip="All goals: 16 of 63 partly achieved (25%)">16</span><span class="hb-seg n" style="flex:8" data-tip="All goals: 8 of 63 not achieved (13%)">8</span></div><span class="hb-v"><b>63</b> clients</span></div>
+      <div class="viz-foot">Method: 63 clients with 2 or more sessions, each rated by the coach against the primary goal set at intake; 48 of them were coached for at least 3 months.</div>
+      <div class="viz-foot">Company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history.</div>
+    </div>
+    <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Primary goal</th><th>Clients</th><th>Achieved</th><th>Partly</th><th>Not achieved</th></tr></thead><tbody><tr><td>Strength</td><td>20</td><td>14</td><td>4</td><td>2</td></tr><tr><td>Body recomposition</td><td>14</td><td>8</td><td>3</td><td>3</td></tr><tr><td>Fat loss</td><td>13</td><td>8</td><td>3</td><td>2</td></tr><tr><td>Athletic performance</td><td>7</td><td>4</td><td>2</td><td>1</td></tr><tr><td>Muscle gain</td><td>6</td><td>3</td><td>3</td><td>0</td></tr><tr><td>Health, rehab and longevity</td><td>3</td><td>2</td><td>1</td><td>0</td></tr><tr class="tot"><td>All goals</td><td>63</td><td>39 (62%)</td><td>16 (25%)</td><td>8 (13%)</td></tr></tbody></table></div></div></div><p>13% of clients did not reach their goal. They are reported here alongside everyone else.</p><p>Goals are coached through both tracks of the <a href="/the-omnifit-method">OmniFit Method</a>: the training program and the habits around it, through <a href="/behavior-change-coaching">behavior change coaching</a>.</p>
   </div></section>
 
   <section id="strength" class="s-light"><div class="s-inner">
     <span class="s-label">Strength</span><hr class="gold-line">
     <h2>Median Estimated Strength Increased 13.7%</h2>
-    <p class="lede">430 lifts were tracked across 38 clients, comparing the best result from each client's first two sessions on a lift with the best result from their latest two. Each client counts once, as the median across their lifts.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Group</th><th>Clients</th><th>Median strength change</th><th>Middle half of clients</th></tr></thead><tbody><tr><td>All clients with tracked lifts</td><td>38</td><td>+13.7%</td><td>0% to +27%</td></tr><tr><td>Trained 3+ months</td><td>33</td><td>+12.6%</td><td>&mdash;</td></tr><tr><td>Trained 6+ months</td><td>20</td><td>+14.6%</td><td>&mdash;</td></tr><tr><td>Trained 12+ months</td><td>14</td><td>+11.8%</td><td>&mdash;</td></tr></tbody></table></div><p>Measured on working load instead, the median client lifted 32% more on their tracked lifts, comparing the first session with weeks 10 to 16 (37 clients). The smaller percentage among long-term clients may partly reflect shifts toward maintenance, joint-friendly exercise variations and new movements over time, which can interrupt direct lift-to-lift comparisons. Measured at each client's best sustained level (defined in the method below), the median is +13.4%, nearly the same. A quarter of clients show no gain or a decline on most lifts; they are included.</p>
+    <p class="lede">430 lifts were tracked across 38 clients, comparing the best result from each client's first two sessions on a lift with the best result from their latest two. Each client counts once, as the median across their lifts.</p><div class="viz" role="img" aria-label="Chart: median estimated strength change was plus 13.7% across 38 clients; the middle half of clients fell between 0% and plus 27%.">
+      <div class="viz-t">Where clients landed</div>
+      <div class="viz-s">Median change in estimated one-rep max per client, 38 clients</div>
+      <div class="rs">
+        <span class="rs-zero" style="--x:20"></span>
+        <span class="rs-axis"></span>
+        <span class="rs-band" style="--x:20;--w:54" data-tip="Middle half of clients: 0% to +27%"></span>
+        <span class="rs-dot" style="--x:47.4" data-tip="Median client: +13.7%"></span>
+        <span class="rs-lab" style="--x:47.4">Median +13.7%</span>
+        <span class="rs-tick" style="--x:0">&minus;10%</span><span class="rs-tick" style="--x:20">0%</span><span class="rs-tick" style="--x:40">+10%</span><span class="rs-tick" style="--x:60">+20%</span><span class="rs-tick" style="--x:80">+30%</span><span class="rs-tick" style="--x:100">+40%</span>
+      </div>
+      <div class="rs-key"><span><i></i>Middle half of clients: 0% to +27%</span><span><i class="dot"></i>Median client</span></div>
+    </div>
+    <div class="viz" role="img" aria-label="Chart: median strength change by training length. All clients plus 13.7%, 3 or more months plus 12.6%, 6 or more months plus 14.6%, 12 or more months plus 11.8%.">
+      <div class="viz-t">Median strength change by training length</div>
+      <div class="viz-s">Scale 0% to +20%</div>
+      <div class="hb"><span class="hb-l">All clients with tracked lifts</span><div class="hb-track"><span class="hb-seg a" style="--w:68.5" data-tip="All clients with tracked lifts: median +13.7% (38 clients)"></span></div><span class="hb-v"><b>+13.7%</b></span></div><div class="hb sub"><span class="hb-l">Trained 3+ months</span><div class="hb-track"><span class="hb-seg a" style="--w:63" data-tip="Trained 3+ months: median +12.6% (33 clients)"></span></div><span class="hb-v"><b>+12.6%</b></span></div><div class="hb sub"><span class="hb-l">Trained 6+ months</span><div class="hb-track"><span class="hb-seg a" style="--w:73" data-tip="Trained 6+ months: median +14.6% (20 clients)"></span></div><span class="hb-v"><b>+14.6%</b></span></div><div class="hb sub"><span class="hb-l">Trained 12+ months</span><div class="hb-track"><span class="hb-seg a" style="--w:59" data-tip="Trained 12+ months: median +11.8% (14 clients)"></span></div><span class="hb-v"><b>+11.8%</b></span></div>
+      <div class="viz-foot">Method: 38 clients with lifts logged at least 4 times over at least 4 weeks; estimated one-rep max, first two sessions against the latest two.</div>
+      <div class="viz-foot">Company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history.</div>
+    </div>
+    <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Group</th><th>Clients</th><th>Median strength change</th><th>Middle half of clients</th></tr></thead><tbody><tr><td>All clients with tracked lifts</td><td>38</td><td>+13.7%</td><td>0% to +27%</td></tr><tr><td>Trained 3+ months</td><td>33</td><td>+12.6%</td><td>&mdash;</td></tr><tr><td>Trained 6+ months</td><td>20</td><td>+14.6%</td><td>&mdash;</td></tr><tr><td>Trained 12+ months</td><td>14</td><td>+11.8%</td><td>&mdash;</td></tr></tbody></table></div></div></div><p>Measured on working load instead, the median client lifted 32% more on their tracked lifts, comparing the first session with weeks 10 to 16 (37 clients). The smaller percentage among long-term clients may partly reflect shifts toward maintenance, joint-friendly exercise variations and new movements over time, which can interrupt direct lift-to-lift comparisons. Measured at each client's best sustained level (defined in the method below), the median is +13.4%, nearly the same. A quarter of clients show no gain or a decline on most lifts; they are included.</p>
   </div></section>
 
   <section id="retention" class="s-light"><div class="s-inner">
     <span class="s-label">Training Duration</span><hr class="gold-line">
     <h2>One in Three Had Recorded Training Spanning 12+ Months</h2>
-    <p class="lede">Each rate counts only clients who started long enough ago to reach that milestone, so recent clients do not distort the figures.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Milestone</th><th>Clients who started long enough ago</th><th>Reached it</th><th>Rate</th></tr></thead><tbody><tr><td>3 months</td><td>65</td><td>48</td><td>74%</td></tr><tr><td>6 months</td><td>60</td><td>29</td><td>48%</td></tr><tr><td>12 months</td><td>53</td><td>18</td><td>34%</td></tr><tr><td>24 months</td><td>30</td><td>5</td><td>17%</td></tr></tbody></table></div><p>The longest current client relationship is over four years. 48 clients had 10 or more scheduled sessions.</p>
+    <p class="lede">Each rate counts only clients who started long enough ago to reach that milestone, so recent clients do not distort the figures.</p><div class="viz" role="img" aria-label="Chart: share of clients whose recorded training reached each milestone. 3 months 74%, 6 months 48%, 12 months 34%, 24 months 17%.">
+      <div class="viz-t">Recorded training reaching each milestone</div>
+      <div class="viz-s">Share of clients who started long enough ago to reach it</div>
+      <div class="cb"><div class="cb-col" data-tip="3 months: 48 of 65 clients (74%)"><span class="cb-cap">74%</span><span class="cb-fill" style="--h:74"></span></div><div class="cb-col" data-tip="6 months: 29 of 60 clients (48%)"><span class="cb-cap">48%</span><span class="cb-fill" style="--h:48"></span></div><div class="cb-col" data-tip="12 months: 18 of 53 clients (34%)"><span class="cb-cap">34%</span><span class="cb-fill" style="--h:34"></span></div><div class="cb-col" data-tip="24 months: 5 of 30 clients (17%)"><span class="cb-cap">17%</span><span class="cb-fill" style="--h:17"></span></div></div>
+      <div class="cb-x"><span>3 months<small>48 of 65</small></span><span>6 months<small>29 of 60</small></span><span>12 months<small>18 of 53</small></span><span>24 months<small>5 of 30</small></span></div>
+      <div class="viz-foot">Company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history.</div>
+    </div>
+    <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Milestone</th><th>Clients who started long enough ago</th><th>Reached it</th><th>Rate</th></tr></thead><tbody><tr><td>3 months</td><td>65</td><td>48</td><td>74%</td></tr><tr><td>6 months</td><td>60</td><td>29</td><td>48%</td></tr><tr><td>12 months</td><td>53</td><td>18</td><td>34%</td></tr><tr><td>24 months</td><td>30</td><td>5</td><td>17%</td></tr></tbody></table></div></div></div><p>The longest current client relationship is over four years. 48 clients had 10 or more scheduled sessions.</p>
   </div></section>
 
   <section id="profiles" class="s-light"><div class="s-inner">
@@ -256,13 +431,25 @@
     <h3 style="font-size:21px;color:var(--light-text);margin:36px 0 10px">Long-term training profiles</h3>
     <p>Alo S. has trained with OmniFit for over four years, from September 2022 to September 2026. His estimated bench press rose from about 53 lb to about 161 lb over that time, and his body weight rose 10.8 lb.</p>
     <p>Mark M. trained with OmniFit for two and a half years, from June 2023 to December 2025, logging 188 workouts. His working bench press rose from 235 lb to 275 lb by December 2024, and his seated dumbbell shoulder press from 55 lb to 100 lb by July 2025. Between April and August 2024 his body weight fell from 248 lb to 229.6 lb; it later settled back in the low 240s. He finished training when he relocated to Hawaii.</p>
+    <div class="viz" role="img" aria-label="Chart: individual strength profiles. Alo S. estimated bench press from about 53 to about 161 pounds. Mark M. working bench press from 235 to 275 pounds; seated dumbbell shoulder press from 55 to 100 pounds.">
+      <div class="viz-t">First recorded to latest, in pounds</div>
+      <div class="viz-s">Individual results for the two clients above, on one scale from 0 to 300 lb</div>
+      <div class="viz-key"><span><i style="background:var(--white);border:2px solid #8a8f9c;border-radius:50%"></i>First recorded</span><span><i style="background:var(--c-a);border-radius:50%"></i>Latest</span></div>
+      <div class="db"><span class="hb-l">Alo S. &middot; estimated bench press<small style="display:block;font-size:11px;color:var(--light-muted);font-weight:400">Sep 2022 to Sep 2026</small></span><div class="db-plot"><span class="db-line" style="--x:17.67;--w:36.00"></span><span class="db-dot s" style="--x:17.67" data-tip="First recorded: about 53 lb (estimated)"></span><span class="db-dot e" style="--x:53.67" data-tip="Latest: about 161 lb (estimated)"></span><span class="db-n s" style="--x:17.67">53</span><span class="db-n e" style="--x:53.67">161 lb</span></div></div><div class="db"><span class="hb-l">Mark M. &middot; working bench press<small style="display:block;font-size:11px;color:var(--light-muted);font-weight:400">to Dec 2024</small></span><div class="db-plot"><span class="db-line" style="--x:78.33;--w:13.33"></span><span class="db-dot s" style="--x:78.33" data-tip="First recorded: 235 lb"></span><span class="db-dot e" style="--x:91.67" data-tip="Latest: 275 lb"></span><span class="db-n s" style="--x:78.33">235</span><span class="db-n e" style="--x:91.67">275 lb</span></div></div><div class="db"><span class="hb-l">Mark M. &middot; seated dumbbell shoulder press<small style="display:block;font-size:11px;color:var(--light-muted);font-weight:400">to Jul 2025</small></span><div class="db-plot"><span class="db-line" style="--x:18.33;--w:15.00"></span><span class="db-dot s" style="--x:18.33" data-tip="First recorded: 55 lb"></span><span class="db-dot e" style="--x:33.33" data-tip="Latest: 100 lb"></span><span class="db-n s" style="--x:18.33">55</span><span class="db-n e" style="--x:33.33">100 lb</span></div></div>
+    </div>
     <p class="disc">Individual result, measured by OmniFit; see aggregate outcomes above.</p>
   </div></section>
 
   <section class="s-light"><div class="s-inner">
     <span class="s-label">Evidence Pools</span><hr class="gold-line">
     <h2>What Each Figure Is Based On</h2>
-    <p class="lede">Each figure draws on a defined group of clients. The groups differ in size by design: a client appears in a measure only when the data supports it.</p><div class="ct-wrap"><table class="ct"><thead><tr><th>Evidence pool</th><th>Clients</th><th>What it shows</th></tr></thead><tbody><tr><td>Public reviews (Google, Yelp, Thumbtack, Bark)</td><td>190+ reviews</td><td>Client experience and reputation</td></tr><tr><td>Paying clients in the main payment account, Aug 2022 onward</td><td>90</td><td>A minimum count of clients served</td></tr><tr><td>Outcomes analysis (2+ sessions or logged workouts)</td><td>72</td><td>Primary analysis cohort; training duration</td></tr><tr><td>&nbsp;&nbsp;with a coach-rated goal</td><td>63</td><td>Goal outcomes</td></tr><tr><td>&nbsp;&nbsp;with repeated weigh-ins</td><td>47</td><td>Weight change</td></tr><tr><td>&nbsp;&nbsp;with repeated strength data</td><td>38</td><td>Strength change</td></tr><tr><td>&nbsp;&nbsp;with repeated Bodystat measurements</td><td>3</td><td>Client profiles</td></tr></tbody></table></div>
+    <p class="lede">Each figure draws on a defined group of clients. The groups differ in size by design: a client appears in a measure only when the data supports it.</p><div class="viz" role="img" aria-label="Chart: clients in each evidence pool. 90 paying clients; 72 in the outcomes analysis; of those, 63 with a coach-rated goal, 47 with repeated weigh-ins, 38 with repeated strength data and 3 with repeated Bodystat measurements.">
+      <div class="viz-t">Clients behind each figure</div>
+      <div class="viz-s">Each measure uses only the clients whose records support it. Public reviews (190+) are a separate pool and are not shown.</div>
+      <div class="hb"><span class="hb-l">Paying clients, Aug 2022 onward</span><div class="hb-track"><span class="hb-seg a" style="--w:100.0" data-tip="Paying clients, Aug 2022 onward: 90 clients"></span></div><span class="hb-v"><b>90</b></span></div><div class="hb"><span class="hb-l">Outcomes analysis</span><div class="hb-track"><span class="hb-seg a" style="--w:80.0" data-tip="Outcomes analysis: 72 clients"></span></div><span class="hb-v"><b>72</b></span></div><div class="hb sub"><span class="hb-l">with a coach-rated goal</span><div class="hb-track"><span class="hb-seg a" style="--w:70.0" data-tip="with a coach-rated goal: 63 clients"></span></div><span class="hb-v"><b>63</b></span></div><div class="hb sub"><span class="hb-l">with repeated weigh-ins</span><div class="hb-track"><span class="hb-seg a" style="--w:52.2" data-tip="with repeated weigh-ins: 47 clients"></span></div><span class="hb-v"><b>47</b></span></div><div class="hb sub"><span class="hb-l">with repeated strength data</span><div class="hb-track"><span class="hb-seg a" style="--w:42.2" data-tip="with repeated strength data: 38 clients"></span></div><span class="hb-v"><b>38</b></span></div><div class="hb sub"><span class="hb-l">with repeated Bodystat measurements</span><div class="hb-track"><span class="hb-seg a" style="--w:3.3" data-tip="with repeated Bodystat measurements: 3 clients"></span></div><span class="hb-v"><b>3</b></span></div>
+      <div class="viz-foot">Company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history.</div>
+    </div>
+    <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Evidence pool</th><th>Clients</th><th>What it shows</th></tr></thead><tbody><tr><td>Public reviews (Google, Yelp, Thumbtack, Bark)</td><td>190+ reviews</td><td>Client experience and reputation</td></tr><tr><td>Paying clients in the main payment account, Aug 2022 onward</td><td>90</td><td>A minimum count of clients served</td></tr><tr><td>Outcomes analysis (2+ sessions or logged workouts)</td><td>72</td><td>Primary analysis cohort; training duration</td></tr><tr><td>&nbsp;&nbsp;with a coach-rated goal</td><td>63</td><td>Goal outcomes</td></tr><tr><td>&nbsp;&nbsp;with repeated weigh-ins</td><td>47</td><td>Weight change</td></tr><tr><td>&nbsp;&nbsp;with repeated strength data</td><td>38</td><td>Strength change</td></tr><tr><td>&nbsp;&nbsp;with repeated Bodystat measurements</td><td>3</td><td>Client profiles</td></tr></tbody></table></div></div></div>
   </div></section>
 
   <section class="s-mid"><div class="s-inner">
@@ -304,5 +491,101 @@
     <a href="https://calendly.com/nemezio-omnifittraining/45min" class="cta-btn">Book Your Consultation</a>
     <span class="cta-note">How we measure every client: <a href="/how-we-measure-your-progress">How We Measure Your Progress</a></span>
   </section>
+
+<script>
+/* Outcomes charts: scroll reveal, count-ups on the headline figures and a
+   hover read-out on chart marks. Every figure is already in the markup; this
+   only animates it, and does nothing under prefers-reduced-motion. */
+(function () {
+  var root = document.getElementById('omni-outcomes');
+  if (!root) return;
+
+  /* Hover read-out (pointer only; the table under each chart carries the same numbers) */
+  root.querySelectorAll('.viz').forEach(function (viz) {
+    var tip = document.createElement('div');
+    tip.className = 'viz-tip';
+    tip.setAttribute('aria-hidden', 'true');
+    viz.appendChild(tip);
+    viz.addEventListener('pointerover', function (e) {
+      var m = e.target.closest('[data-tip]');
+      if (!m || !viz.contains(m)) { tip.classList.remove('on'); return; }
+      var r = m.getBoundingClientRect(), v = viz.getBoundingClientRect();
+      tip.textContent = m.getAttribute('data-tip');
+      var x = r.left + r.width / 2 - v.left;
+      tip.style.left = Math.max(90, Math.min(v.width - 90, x)) + 'px';
+      tip.style.top = (r.top - v.top) + 'px';
+      tip.classList.add('on');
+    });
+    viz.addEventListener('pointerleave', function () { tip.classList.remove('on'); });
+  });
+
+  /* "Show as a table" toggles */
+  root.querySelectorAll('.tv-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.parentNode.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'Hide the table' : 'Show as a table';
+    });
+  });
+
+  var html = document.documentElement;
+  if (!html.classList.contains('omni-motion')) return;
+  if (!('IntersectionObserver' in window)) { html.classList.remove('omni-motion'); return; }
+
+  /* Stagger the marks inside each chart */
+  root.querySelectorAll('.viz').forEach(function (viz) {
+    viz.querySelectorAll('.hb, .sp, .cb-col, .db').forEach(function (el, i) {
+      el.style.setProperty('--i', Math.min(i, 8));
+    });
+  });
+
+  var targets = [];
+  function tag(sel) {
+    root.querySelectorAll(sel).forEach(function (el, i) {
+      el.classList.add('o-rv');
+      el.style.setProperty('--rv-d', (Math.min(i, 4) * 90) + 'ms');
+      targets.push(el);
+    });
+  }
+  tag('.og > .os');
+  tag('.viz');
+
+  /* Count-ups end on the exact original text */
+  var EASE = function (t) { return 1 - Math.pow(1 - t, 3); };
+  var counters = [];
+  root.querySelectorAll('.os .num').forEach(function (el) {
+    var raw = el.textContent, m = /^(\+?)(\d+(?:\.\d)?)(%?)$/.exec(raw);
+    if (!m) return;
+    var c = { el: el, raw: raw, sign: m[1], end: parseFloat(m[2]), dec: m[2].indexOf('.') > -1 ? 1 : 0, unit: m[3] };
+    el.textContent = c.sign + (0).toFixed(c.dec) + c.unit;
+    counters.push(c);
+  });
+  function run(c) {
+    var t0 = null;
+    requestAnimationFrame(function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / 1600);
+      c.el.textContent = p < 1 ? c.sign + (c.end * EASE(p)).toFixed(c.dec) + c.unit : c.raw;
+      if (p < 1) requestAnimationFrame(step);
+    });
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      counters.forEach(function (c) { if (!c.done && e.target.contains(c.el)) { c.done = true; run(c); } });
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -6% 0px' });
+  targets.forEach(function (el) { io.observe(el); });
+
+  /* Safety net: nothing stays hidden or mid-count */
+  setTimeout(function () {
+    targets.forEach(function (el) { el.classList.add('is-in'); });
+    counters.forEach(function (c) { if (!c.done) { c.done = true; c.el.textContent = c.raw; } });
+  }, 9000);
+})();
+</script>
 
 </div>
