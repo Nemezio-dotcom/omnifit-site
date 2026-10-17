@@ -1,0 +1,93 @@
+<!-- BEHAVIOR CHANGE COACHING — PAGE HEADER JSON-LD · OCTOBER 2026
+  Paste into /behavior-change-coaching → Page Settings → Advanced →
+  Page Header Code Injection. On the static build this lives at
+  pages/headers/behavior-change-coaching-header.html.
+
+  FAQPage mirrors the five on-page FAQs verbatim (tags stripped), in page
+  order. LocalBusiness is referenced by @id from the homepage header, never
+  redefined here. Plain WebPage by design: the page states it is not therapy
+  and refers clinical needs out, so no medical schema type is used.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/behavior-change-coaching#webpage",
+      "url": "https://www.omnifittraining.com/behavior-change-coaching",
+      "name": "Behavior Change Coaching San Diego | Habits That Survive Real Life",
+      "description": "Behavior change coaching for busy professionals in San Diego, built on four stages: Awareness, Regulation, Adaptation, Integration. In-studio in 4S Ranch, in-home, or virtual.",
+      "isPartOf": { "@id": "https://www.omnifittraining.com/#website" },
+      "about": { "@id": "https://www.omnifittraining.com/#localbusiness-of" },
+      "publisher": { "@id": "https://www.omnifittraining.com/#organization" },
+      "breadcrumb": { "@id": "https://www.omnifittraining.com/behavior-change-coaching#breadcrumb" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.omnifittraining.com/behavior-change-coaching#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Behavior Change Coaching",
+          "item": "https://www.omnifittraining.com/behavior-change-coaching"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.omnifittraining.com/behavior-change-coaching#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is behavior change coaching?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Structured coaching that builds the habits a fitness plan depends on: eating, sleep, recovery, and consistency. OmniFit's version follows four stages: Awareness, Regulation, Adaptation, Integration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this therapy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It's coaching focused on habits and routines. OmniFit doesn't diagnose or treat any condition, and refers clinical needs to licensed professionals."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is behavior coaching included in my program?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Behavior change coaching is included in every program at every tier, including the 30-Minute Executive Reset, at no additional cost."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does each stage take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It varies by person and by habit. Most clients progress faster in some areas than others, which is why each stage has progression markers rather than fixed timelines."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work for virtual clients?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Check-ins, meal-photo analysis, and habit reviews all run through the OmniFit app, so the behavioral track works the same in-studio, in-home, or online."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
