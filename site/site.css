@@ -1,7 +1,7 @@
 /* =====================================================================
    OmniFit Performance - shared site styles (source: site/site.css)
    Design system: Navy #0a1628 / #0f1f3a / #152a4a, Gold #c9a84c / #e0c872,
-   Playfair Display headings, Montserrat body, Bebas Neue wordmark only.
+   Playfair Display headings, Montserrat body; the header logo is an inline SVG.
    Page-scoped CSS stays with each page (moved into its <head> by build.py).
    The footer CSS from pages/footer.html is appended to this file by build.py.
    ===================================================================== */
@@ -15,15 +15,7 @@
   --omni-white:#ffffff;
   --omni-font-body:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --omni-font-heading:'Playfair Display','Times New Roman',serif;
-  --omni-font-wordmark:'Bebas Neue','Bebas Neue Fallback',sans-serif;
 }
-/* Fallback face for the wordmark. Bebas Neue is a condensed display face;
-   until it arrives (font-display:swap), or when Google Fonts is blocked, the
-   wordmark rendered in the system sans at the same 30px was ~75px wider,
-   and because .site-logo does not shrink it pushed the hamburger 9px past a
-   390px viewport (the "9px mobile header overflow"). size-adjust gives the
-   local fallback Bebas-like widths, which also removes the swap shift. */
-@font-face{font-family:'Bebas Neue Fallback';src:local('Helvetica Neue'),local('Arial'),local('Liberation Sans'),local('DejaVu Sans');size-adjust:68%;}
 html{-webkit-text-size-adjust:100%;}
 body{margin:0;background:var(--omni-navy);color:var(--omni-white);font-family:var(--omni-font-body);line-height:1.6;-webkit-font-smoothing:antialiased;}
 main{display:block;}
@@ -47,9 +39,29 @@ main{overflow-x:clip;}
 .site-header{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid rgba(10,22,40,.08);}
 .site-header__inner{max-width:1380px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:36px;}
 .site-logo,.site-logo:link,.site-logo:visited{display:inline-flex;align-items:center;text-decoration:none;flex-shrink:0;}
-.site-logo__wordmark{font-family:var(--omni-font-wordmark);font-size:30px;letter-spacing:2px;line-height:1;color:var(--omni-navy);white-space:nowrap;}
-.site-logo__wordmark span{color:var(--omni-gold);}
-.site-logo__img{height:48px;width:auto;display:block;}
+/* Logo: the inline SVG in site/nav.html (viewBox 844x242, generated from
+   site/img/logo.svg). Sized by height, the width follows the aspect ratio. */
+.site-logo .omni-logo{display:block;height:54px;width:auto;aspect-ratio:844/242;overflow:visible;}
+.site-logo .omni-logo__spin{transform-box:fill-box;transform-origin:50% 48.74%;transition:transform .9s cubic-bezier(.22,1,.36,1);}
+.site-logo .omni-logo__f-hop{transition:transform .5s cubic-bezier(.34,1.56,.64,1);}
+@media (prefers-reduced-motion:no-preference){
+  /* hover / keyboard focus: the ring turns once, the F hops (transitions, so they ease back) */
+  .site-logo:hover .omni-logo__spin,.site-logo:focus-visible .omni-logo__spin{transform:rotate(360deg);}
+  .site-logo:hover .omni-logo__f-hop,.site-logo:focus-visible .omni-logo__f-hop{transform:translateY(-22px);}
+  /* intro, once per browser session (html.omni-logo-intro is set by the inline
+     script in site/nav.html on the session's first page view). Translate values
+     are SVG user units: 242 units = the logo's rendered height. */
+  html.omni-logo-intro .omni-logo__ring{stroke-dasharray:1 1.1;animation:omni-logo-ring .85s cubic-bezier(.65,0,.35,1) both;}
+  html.omni-logo-intro .omni-logo__f{transform-box:fill-box;transform-origin:50% 50%;animation:omni-logo-pop .55s cubic-bezier(.34,1.56,.64,1) .62s both;}
+  html.omni-logo-intro .omni-logo__name .omni-logo__ch{animation:omni-logo-rise .6s cubic-bezier(.22,1,.36,1) calc(.4s + var(--i,0)*60ms) both;}
+  html.omni-logo-intro .omni-logo__rule{transform-box:fill-box;transform-origin:0 50%;animation:omni-logo-rule .55s cubic-bezier(.22,1,.36,1) .95s both;}
+  html.omni-logo-intro .omni-logo__perf .omni-logo__ch{animation:omni-logo-fade .45s ease-out calc(1.05s + var(--i,0)*30ms) both;}
+}
+@keyframes omni-logo-ring{from{stroke-dashoffset:1;}to{stroke-dashoffset:0;}}
+@keyframes omni-logo-pop{from{opacity:0;transform:scale(.4) rotate(-14deg);}to{opacity:1;transform:none;}}
+@keyframes omni-logo-rise{from{opacity:0;transform:translateY(44px);}to{opacity:1;transform:none;}}
+@keyframes omni-logo-rule{from{transform:scaleX(0);}to{transform:none;}}
+@keyframes omni-logo-fade{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
 
 /* ===== Primary nav: two rows + dropdowns ===== */
 .site-nav{display:flex;align-items:center;flex:1 1 auto;gap:24px;min-width:0;}
@@ -88,10 +100,9 @@ main{overflow-x:clip;}
    the CTA needs ~1070px, so at 1024-1099px it overflowed the header. */
 @media (max-width:1099px){
   .site-header__inner{padding:10px 20px;gap:16px;}
-  /* the logo may shrink and the wordmark scales with narrow viewports
-     (30px at 400px+, 24px at 320px) so logo + hamburger always fit */
+  /* 44px tall logo = 153px wide, so logo + hamburger fit at 320px */
   .site-logo,.site-logo:link,.site-logo:visited{flex:0 1 auto;min-width:0;}
-  .site-logo__wordmark{font-size:clamp(24px,7.5vw,30px);}
+  .site-logo .omni-logo{height:44px;}
   .site-nav-toggle{display:block;}
   .site-nav{display:none;position:fixed;left:0;right:0;top:0;bottom:0;background:#fff;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px 20px 48px;flex-direction:column;align-items:stretch;gap:0;z-index:999;}
   .site-nav.is-open{display:flex;}

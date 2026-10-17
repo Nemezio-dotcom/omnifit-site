@@ -93,7 +93,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "url": "https://www.omnifittraining.com/",
       "email": "nemezio@omnifittraining.com",
       "telephone": "+1-619-259-0630",
-      "logo": "https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/4af2b6a3-4f05-44b4-9bda-cf222ca07b16/apple-touch-icon.png.png?content-type=image/png",
+      "logo": "https://www.omnifittraining.com/assets/img/logo.png",
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
       "sameAs": [
         "https://www.instagram.com/omnifit_sd/",
@@ -320,7 +320,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 
 <!-- ===== Page header injection (source: pages/headers/home-header.html) ===== -->
@@ -1769,12 +1769,15 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
     "text" is the bar's copy, "href" is where it links. Set "text" to "" to
     remove the bar entirely. Keep it on one line.
 
-  LOGO: this repo contains no logo image asset (no png/svg/jpg anywhere in
-  the tree; the only logo reference is the Squarespace CDN apple-touch-icon
-  URL in the JSON-LD). The header therefore shows the Bebas Neue wordmark.
-  To use the real logo, save it as public/assets/img/logo.png (or .svg) and
-  replace the <span class="site-logo__wordmark"> below with
-  <img class="site-logo__img" src="/assets/img/logo.png" alt="OmniFit Performance">.
+  LOGO: the <svg class="omni-logo"> inside .site-logo is the brand logo
+  (gold ring, navy F, OMNIFIT, gold rule, PERFORMANCE) as inline SVG so
+  each part can animate: the ring draws itself, the F pops in, the letters
+  rise, the rule extends. It is generated from site/img/logo.svg (same
+  markup plus a <title>; site/img/logo.png is the source bitmap). The intro
+  plays once per browser session: the one-line script before <header> adds
+  html.omni-logo-intro on the first page view only, so every later page
+  shows the logo static (hover still turns the ring). Everything is inert
+  under prefers-reduced-motion. Sizing and motion live in site/site.css.
 -->
 <div class="site-announce" id="site-announce">
   <a class="site-announce__link" href="/contactform">Limited availability — accepting applications for 1:1 coaching</a>
@@ -1782,10 +1785,11 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
 </div>
+<script>(function(){try{if(sessionStorage.getItem('omni-logo-played'))return;sessionStorage.setItem('omni-logo-played','1');}catch(e){}document.documentElement.classList.add('omni-logo-intro');})();</script>
 <header class="site-header" id="site-header">
   <div class="site-header__inner">
     <a class="site-logo" href="/" aria-label="OmniFit Performance home">
-      <span class="site-logo__wordmark">OmniFit <span>Performance</span></span>
+      <svg class="omni-logo" viewBox="8 44 844 242" width="844" height="242" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g class="omni-logo__spin"><path class="omni-logo__ring" d="M98.53 59.45A107.97 107.97 0 1 0 229.91 116.72" fill="none" stroke="#daa520" stroke-width="19.7" stroke-linecap="round" pathLength="1"/></g><g class="omni-logo__f" fill="#002147"><g class="omni-logo__f-hop"><path d="M267.8 55.0H326.2V71.4H289.4V87.0H324.0V103.4H289.4V139.0H267.8Z"/></g></g><g class="omni-logo__name" fill="#002147"><g class="omni-logo__omni"><path class="omni-logo__ch" style="--i:0" d="M442.5 97.3Q434.2 97.3 429.7 103.4Q425.2 109.5 425.2 120.5Q425.2 131.5 429.7 137.6Q434.2 143.7 442.5 143.7Q450.8 143.7 455.3 137.6Q459.9 131.5 459.9 120.5Q459.9 109.5 455.3 103.4Q450.8 97.3 442.5 97.3ZM442.5 84.2Q459.4 84.2 468.9 93.9Q478.5 103.5 478.5 120.5Q478.5 137.5 468.9 147.1Q459.4 156.8 442.5 156.8Q425.7 156.8 416.1 147.1Q406.5 137.5 406.5 120.5Q406.5 103.5 416.1 93.9Q425.7 84.2 442.5 84.2Z"/><path class="omni-logo__ch" style="--i:1" d="M493.6 86.0H516.5L532.5 123.5L548.5 86.0H571.4V156.0H554.4V104.8L538.2 142.5H526.8L510.7 104.8V156.0H493.6Z"/><path class="omni-logo__ch" style="--i:2" d="M591.6 86.0H611.8L637.2 134.0V86.0H654.4V156.0H634.2L608.8 108.0V156.0H591.6Z"/><path class="omni-logo__ch" style="--i:3" d="M673.0 86.0H691.0V156.0H673.0Z"/></g><g class="omni-logo__fit"><path class="omni-logo__ch" style="--i:4" d="M710.9 85.5H751.1V93.5H720.4V114.1H748.1V122.1H720.4V155.5H710.9Z"/><path class="omni-logo__ch" style="--i:5" d="M767.8 86.0H777.2V156.0H767.8Z"/><path class="omni-logo__ch" style="--i:6" d="M787.4 86.5H846.6V94.5H821.8V156.5H812.2V94.5H787.4Z"/></g></g><rect class="omni-logo__rule" x="402" y="180" width="300" height="5" fill="#daa520"/><g class="omni-logo__perf" fill="#002147"><g class="omni-logo__perf-g"><path class="omni-logo__ch" style="--i:0" d="M409.1 216.9V226.7H413.5Q416.0 226.7 417.3 225.4Q418.7 224.1 418.7 221.8Q418.7 219.4 417.3 218.2Q416.0 216.9 413.5 216.9ZM405.6 214.0H413.5Q417.9 214.0 420.1 216.0Q422.4 218.0 422.4 221.8Q422.4 225.6 420.1 227.6Q417.9 229.5 413.5 229.5H409.1V240.0H405.6Z"/><path class="omni-logo__ch" style="--i:1" d="M442.6 214.0H459.0V217.0H446.2V224.7H458.5V227.6H446.2V237.0H459.4V240.0H442.6Z"/><path class="omni-logo__ch" style="--i:2" d="M492.7 227.8Q493.8 228.2 494.9 229.4Q496.0 230.7 497.0 232.9L500.6 240.0H496.8L493.5 233.3Q492.2 230.7 491.0 229.9Q489.8 229.0 487.7 229.0H483.9V240.0H480.4V214.0H488.3Q492.8 214.0 495.0 215.9Q497.1 217.7 497.1 221.5Q497.1 223.9 496.0 225.6Q494.9 227.2 492.7 227.8ZM483.9 216.9V226.1H488.3Q490.9 226.1 492.2 224.9Q493.4 223.8 493.4 221.5Q493.4 219.2 492.2 218.1Q490.9 216.9 488.3 216.9Z"/><path class="omni-logo__ch" style="--i:3" d="M520.5 214.0H535.5V217.0H524.1V224.6H534.3V227.6H524.1V240.0H520.5Z"/><path class="omni-logo__ch" style="--i:4" d="M567.0 216.4Q563.2 216.4 560.9 219.2Q558.7 222.1 558.7 227.0Q558.7 231.9 560.9 234.8Q563.2 237.6 567.0 237.6Q570.8 237.6 573.1 234.8Q575.3 231.9 575.3 227.0Q575.3 222.1 573.1 219.2Q570.8 216.4 567.0 216.4ZM567.0 213.5Q572.5 213.5 575.7 217.2Q579.0 220.9 579.0 227.0Q579.0 233.1 575.7 236.8Q572.5 240.5 567.0 240.5Q561.5 240.5 558.3 236.8Q555.0 233.2 555.0 227.0Q555.0 220.9 558.3 217.2Q561.5 213.5 567.0 213.5Z"/><path class="omni-logo__ch" style="--i:5" d="M611.7 227.8Q612.8 228.2 613.9 229.4Q615.0 230.7 616.0 232.9L619.6 240.0H615.8L612.5 233.3Q611.2 230.7 610.0 229.9Q608.8 229.0 606.7 229.0H602.9V240.0H599.4V214.0H607.3Q611.8 214.0 614.0 215.9Q616.1 217.7 616.1 221.5Q616.1 223.9 615.0 225.6Q613.9 227.2 611.7 227.8ZM602.9 216.9V226.1H607.3Q609.9 226.1 611.2 224.9Q612.4 223.8 612.4 221.5Q612.4 219.2 611.2 218.1Q609.9 216.9 607.3 216.9Z"/><path class="omni-logo__ch" style="--i:6" d="M639.6 214.0H644.9L651.5 231.7L658.1 214.0H663.4V240.0H659.9V217.2L653.3 235.0H649.7L643.0 217.2V240.0H639.6Z"/><path class="omni-logo__ch" style="--i:7" d="M694.0 217.5 689.2 230.4H698.8ZM692.0 214.0H696.0L705.9 240.0H702.2L699.9 233.3H688.2L685.8 240.0H682.1Z"/><path class="omni-logo__ch" style="--i:8" d="M725.7 214.0H730.4L741.9 235.7V214.0H745.3V240.0H740.6L729.1 218.3V240.0H725.7Z"/><path class="omni-logo__ch" style="--i:9" d="M787.0 216.0V219.7Q785.2 218.1 783.2 217.2Q781.2 216.4 778.9 216.4Q774.5 216.4 772.1 219.1Q769.7 221.9 769.7 227.0Q769.7 232.1 772.1 234.9Q774.5 237.6 778.9 237.6Q781.2 237.6 783.2 236.8Q785.2 235.9 787.0 234.3V238.0Q785.1 239.2 783.1 239.8Q781.0 240.5 778.7 240.5Q772.8 240.5 769.4 236.9Q766.0 233.2 766.0 227.0Q766.0 220.8 769.4 217.1Q772.8 213.5 778.7 213.5Q781.0 213.5 783.1 214.2Q785.2 214.8 787.0 216.0Z"/><path class="omni-logo__ch" style="--i:10" d="M807.6 214.0H824.0V217.0H811.2V224.7H823.5V227.6H811.2V237.0H824.4V240.0H807.6Z"/></g></g></svg>
     </a>
     <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
       <svg class="site-nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
