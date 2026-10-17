@@ -438,6 +438,9 @@ THE OMNIFIT METHOD (owner decision, Oct 17 2026)
       diagnoses or treats (TIER 1 item 3 governs the wording).
     ACCOUNTABILITY THAT TRAVELS - the Accountability Dial; studio, in-home
       and virtual on one app; pause weeks; the 30-Minute Executive Reset.
+      The quotable definition (both pages, 60 words, Oct 17 2026 follow-up)
+      carries the Bronze exception in a parenthetical: "included at every
+      tier (Executive Reset Bronze offers Coached or Train Only)".
   ONE-LINE REFERENCE (used on the most-cited pages): "OmniFit runs on the
   OmniFit Method: Measured Progress, Joint-First Strength and Accountability
   That Travels, carried through Assess -> Correct -> Build -> Sustain."
