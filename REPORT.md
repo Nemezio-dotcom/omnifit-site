@@ -3652,3 +3652,24 @@ All five structure findings and the one stale-canon hit are **pre-existing and u
 ### Still human-side
 - Re-paste `contactform-header.html` and `energy-protocol-waitlist-form-header.html` (one-line `@id` change each).
 - Rich Results Test on `/in-home-personal-trainer-san-diego` after the site-wide paste: expect one LocalBusiness, no unresolved `@id`.
+
+
+---
+
+## Rates Page Pricing Clarity run — Oct 17, 2026
+
+**Branch:** ccr-ff7a13a4-28pmca, merged to main. Scope: `pages/training-rates-san-diego.html` (V12 → V13) and its header (v3 → v4). No other page touched.
+
+### What changed
+| File | Change |
+|---|---|
+| `pages/training-rates-san-diego.html` | "Two ways to train" definitions (Foundation ≤60 words, Program 60 words) replace the path chooser; "What you pay, and when" (deposit $30 → assessment $150 credited → Foundation one payment / Program every 4 weeks; no slot held without payment); "Commitment at a glance" table (9 rows). Every tier row carries "per 4-week cycle" and sessions per cycle; Foundation rows add the total due at signup and sessions across 12 weeks; tiers the Foundation does not offer read "Start on The Program". Teqneeq membership line ($119 per month, Teqneeq bills monthly) beside both studio ladders. One sessions table (single, 5-pack, extra session, guest add-on; member / non-member / in-home) with expiry. FAQ replaced with 8 pricing questions. Emoji → gold line SVGs. Removed: referral-credit card (not on the October card), duplicate single-session card, the quotable block ("monthly" assessment). The byte-identical assessment paragraph (Class IIa block) moved from the removed FAQ into the Assessment card, unchanged. |
+| `pages/headers/training-rates-san-diego-header.html` | v4. WebPage description rewritten (no guarantee). OfferCatalog: 33 Offers, one per product on the page. Recurring = UnitPriceSpecification, billingDuration 4 WEE, priceType Subscription; Foundation = one-time, price = three-cycle total, cycle price in description. FAQPage mirrors the 8 on-page questions. |
+
+### Checks
+- `python3 tools/certify.py` → FAILED (compliance 4 · stale canon 1 · structure 5 · not-run 11) — **identical to the pre-run baseline**; zero findings on the rates page or header. All five invariant hashes ok.
+- certify.py has no schema-price-vs-visible-price rule. A scratch check compared every schema Offer price with the price printed in that Offer's page section: 33/33 match; negative-tested (guest add-on set to $60 → flagged).
+- `python3 build.py --strict` → PASSED. `_redirects` unchanged.
+
+### Open for the owner
+- CANON DEFERRED-01 names the "Does OmniFit offer a money-back guarantee?" FAQ on this page as an approved-wording carrier; that FAQ no longer exists (FAQ replaced on instruction). The callout wording on the page is the V12 three-product wording, not CANON's Reset-only text.
