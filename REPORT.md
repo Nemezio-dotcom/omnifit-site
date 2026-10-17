@@ -4014,3 +4014,15 @@ CANON LANGUAGE RULES: the ban is the metaphor (price, guarantee or Dial presente
 2. Pillar 03 quotable definitions say "included at every tier" without the Bronze exception (see §2).
 3. Directory listings (Yelp, Thumbtack, Bark, BBB) still use the retired name in their URLs.
 4. Squarespace: paste the restored `/strength-training-1` page and header back, and remove its URL mapping; paste the seven-question fit-check SEO description if the live site still serves it.
+
+## Dial follow-up 2: homepage Sustain sentence, Pillar 03 Bronze exception (Oct 17, 2026)
+
+**Branch:** `ccr-71c38077-bz8vz8`, merged to main. Closes TODO items 1 and 2 of the Dial follow-up run. No price, cadence or Stripe reference changed; no header edited. Certification **PASSED** before and after (0 · 0 · 0 · not-run 0); invariant hashes unchanged. `build.py --strict` PASSED (42 pages).
+
+| File | Change |
+|---|---|
+| `pages/home-2.html` | Sustain intro: "Some move to periodic check-ins. Others graduate with a self-guided program and return for quarterly tune-ups." → "Most step the Accountability Dial down, one setting at a time, and graduate to the Tune-Up: one reassessment and training session every 4 weeks." The four cards (Reduced-Frequency Sessions, Tune-Up Sessions from $295, Self-Guided Programming, Quarterly Reassessments) are unchanged; "quarterly" no longer appears in the intro. |
+| `pages/the-omnifit-method.html`, `pages/how-we-measure-your-progress.html` | Pillar 03 quotable definition, identical on both pages, 59 → **60 words** (counted in code, guarded to the 40–60 range; a first draft at 63 words was rejected by the guard and never written). "included at every tier" → "included at every tier (Executive Reset Bronze offers Coached or Train Only)". To stay within 60 words: "fits accountability to the client instead of fitting the client to a template" → "fits accountability to the client, not a template"; "pause weeks protect travel" → "with pause weeks"; "the 30-Minute Executive Reset carries the Method anywhere" → "the Executive Reset carries the Method anywhere". Full, Coached, Train Only, the 4-week boundary, one app, pause weeks and the Executive Reset all remain. |
+| `CANON.md` | THE OMNIFIT METHOD, Accountability That Travels: note that the quotable definition carries the Bronze parenthetical. |
+
+Built pages changed: `/`, `/the-omnifit-method`, `/how-we-measure-your-progress`. Remaining owner items: the four directory URLs with the old name (fix at the directory), and the Squarespace pastes listed in the previous entry.
