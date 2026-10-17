@@ -122,7 +122,7 @@
 
 <script>
 (function () {
-const CONTACT_URL = "/contactform";
+const BOOK_URL = "https://calendly.com/nemezio-omnifittraining/45min";
 const RATES_URL = "/training-rates-san-diego";
 const METHOD_URL = "/the-omnifit-method";
 
@@ -279,12 +279,12 @@ function showResult() {
     res.innerHTML = `
       <span class="verdict pass">Result: You're a fit</span>
       <h2>Ready and able. Let's set your starting point.</h2>
-      <p class="lede">You cleared both gates. The next step is the Performance Assessment: $150, credited toward your first cycle. Book it through the contact form, which asks why now. Your honest answer there matters more than anything else on it.</p>
+      <p class="lede">You cleared both gates. The next step is a 45-minute consultation by video or phone, then the $150 Performance Assessment, credited toward your first cycle. Book the consultation directly below.</p>
       <div class="dial"><strong>Recommended starting setting</strong><h3>${d.name}</h3><p>${d.body}</p>${d.note ? `<p class="note">${d.note}</p>` : ""}<p class="path">Every tier of The Foundation and The Program includes all three settings at no price difference, and you can change yours at any 4-week cycle boundary. The path most clients follow: <b>Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</b>. The Tune-Up is not a setting; it is graduation, the point at the end of the Dial. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</p></div>
       <p class="roles">${ROLES}</p>
       ${notes}
-      <div class="capacity"><strong>Currently at capacity</strong><p>OmniFit is taking a limited number of new clients. If you submit the form and then don't reply when we reach out, you move to the back of the line.</p></div>
-      <div class="nav"><a class="btn primary" href="${CONTACT_URL}">Book the Performance Assessment</a><a class="btn ghost" href="${METHOD_URL}">Read the Method</a><button class="btn ghost" id="redo">Retake the check</button></div>`;
+      <div class="capacity"><strong>Limited availability</strong><p>OmniFit takes a limited number of new clients. If you book or send a message and then don't reply when we reach out, you move to the back of the line.</p></div>
+      <div class="nav"><a class="btn primary" href="${BOOK_URL}" target="_blank" rel="noopener">Book Your Consultation</a><a class="btn ghost" href="${METHOD_URL}">Read the Method</a><button class="btn ghost" id="redo">Retake the check</button></div>`;
   } else {
     res.innerHTML = `
       <span class="verdict hold">Result: Not a fit right now</span>
