@@ -253,7 +253,6 @@ Compare against the live site. Source = the file(s) under `pages/`.
 | https://www.omnifittraining.com/personal-trainer-solana-beach | personal-trainer-solana-beach | Personal Trainer Solana Beach \| In-Home & Studio \| OmniFit Performance |
 | https://www.omnifittraining.com/personal-training-services | personal-training-services | Personal Training Services for Professionals 30+ \| OmniFit Performance San Diego |
 | https://www.omnifittraining.com/private-personal-trainer-san-diego | private-personal-trainer-san-diego (identical to training-rates) | Private Personal Trainer in San Diego \| OmniFit Performance |
-| https://www.omnifittraining.com/strength-training-1 | strength-training-1 | Strength Training for Professionals Over 30 \| OmniFit Performance San Diego |
 | https://www.omnifittraining.com/terms-and-conditions | terms-and-conditions | Terms of Service |
 | https://www.omnifittraining.com/the-30-minute-executive-reset | the-30-minute-executive-reset | 30-Minute Executive Reset \| Virtual & Hybrid Coaching \| OmniFit Performance |
 | https://www.omnifittraining.com/the-omnifit-method | the-omnifit-method | The OmniFit Method: Assess, Correct, Build, Sustain \| OmniFit Performance |
@@ -283,4 +282,5 @@ Squarespace).
 /hybrid-coaching                     -> /the-30-minute-executive-reset
 /consultation                        -> /contactform
 /FAQs                                -> /faqs
+/strength-training-1                 -> /   (page archived in the Keyword Ownership run, Oct 2026)
 ```
