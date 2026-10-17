@@ -23,9 +23,14 @@
     image, preloaded, unchanged). Frame B is the executive-reset dumbbell
     photo, the same image the homepage schema names as primaryImageOfPage.
     After frame A has settled, the card crossfades to B and back on a 16s
-    loop: 1.6s fade, ~6.4s on each photo. While it is on screen, B eases out
-    of a slight zoom and A drifts in a touch, so the switch reads as a slow
-    push rather than a slideshow cut.
+    loop: 1.6s fade, ~6.4s on each photo. B appears at its natural size and
+    drifts in by 3.5% while on screen; A drifts in a touch too, so the
+    switch reads as a slow push rather than a slideshow cut.
+  - On phones the 1.2x bottom-anchored zoom applies to frame A only (it is
+    there so both faces in the kettlebell photo clear the copy). Frame B
+    shows at plain cover size, so as much of it survives as the tall frame
+    allows. The zoom uses the individual `scale` property so it composes
+    with the crossfade transform instead of fighting it.
   - Frame B does not take part until it has actually loaded: a 3-line script
     below the card adds .is-xfade to the card on B's load event. If B never
     loads (blocked CDN, missing file), nothing changes: frame A stays, just
@@ -93,7 +98,7 @@
       #omni-hero .hero-card.is-xfade .hero-frame--a{animation:omni-hero-frame-a var(--xfade-cycle) linear var(--xfade-delay) infinite;}
       #omni-hero .hero-card.is-xfade .hero-frame--b{animation:omni-hero-frame-b var(--xfade-cycle) linear var(--xfade-delay) infinite;}
       @keyframes omni-hero-frame-a{0%{transform:scale(1) translate(0,0);}50%,88%{transform:scale(1.045) translate(-1.2%,0.6%);}89%,100%{transform:scale(1) translate(0,0);}}
-      @keyframes omni-hero-frame-b{0%,40%{opacity:0;transform:scale(1.08);}50%{opacity:1;transform:scale(1.062);}90%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(1);}}
+      @keyframes omni-hero-frame-b{0%,40%{opacity:0;transform:scale(1);}50%{opacity:1;transform:scale(1.007);}90%{opacity:1;transform:scale(1.035);}100%{opacity:0;transform:scale(1.035);}}
       #omni-hero .hero-shade::after{animation:omni-hero-glow 2.4s ease-out .3s both;}
       #omni-hero .hero-eyebrow,#omni-hero h1,#omni-hero .hero-sub,#omni-hero .hero-actions{opacity:0;animation:omni-hero-rise 1.1s cubic-bezier(.22,1,.36,1) forwards;}
       #omni-hero .hero-eyebrow{animation-delay:.45s;}
@@ -124,8 +129,10 @@
     @media (max-width:768px){
       #omni-hero{padding:0;}
       #omni-hero .hero-card{--hero-inset:0;--hero-focus:52% 100%;--hero-focus-b:50% 50%;border-radius:0;min-height:min(92svh,800px);padding:56px 22px 36px;align-items:flex-end;}
-      /* zoom from the bottom so both faces clear the copy block */
-      #omni-hero .hero-photo{transform:scale(1.2);transform-origin:50% 100%;-webkit-mask-image:none;mask-image:none;}
+      #omni-hero .hero-photo{-webkit-mask-image:none;mask-image:none;}
+      /* frame A zooms from the bottom so both faces clear the copy block; frame B
+         stays at cover size (individual `scale` composes with the crossfade transform) */
+      #omni-hero .hero-frame--a{scale:1.2;transform-origin:50% 100%;}
       #omni-hero .hero-shade{background:
         linear-gradient(180deg,rgba(10,22,40,0.60) 0%,rgba(10,22,40,0.18) 22%,rgba(10,22,40,0.12) 44%,rgba(10,22,40,0.82) 60%,rgba(10,22,40,0.97) 100%);}
       #omni-hero .hero-shade::after{display:none;}
