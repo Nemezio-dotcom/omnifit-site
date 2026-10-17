@@ -253,9 +253,29 @@ def _selftest_case_study_exempt():
     assert lbs_near_timeframe('<p>Everyone loses 11 lb in 6 months.</p><div>Ken · CTO</div>' + d, outcomes=''), \
         "aggregate framing ('everyone loses') was exempted"
     assert lbs_near_timeframe('<p>Clients lose 11 lb in 6 months.</p>' + d, outcomes=''), "unattributed figure was exempted"
+    # Owner decision, homepage rebuild Oct 17 2026: the verbatim 2a disclosure
+    # pointer is not aggregate wording; anything else still is.
+    p2a = ('<p>Individual result, measured by OmniFit. How clients typically progress: '
+           '<a href="/outcomes">omnifittraining.com/outcomes</a>.</p>')
+    named = '<div>Mark · Board member</div><p>Mark came in at 248 lbs and went to 231 lbs over 4 months.</p>'
+    # (1) a named card carrying the verbatim disclosure passes
+    assert lbs_near_timeframe(named + p2a + d, outcomes='') == [], "named card with the verbatim 2a disclosure fired"
+    #     ... wherever the 45-word window edge falls across the sentence
+    for n in range(25, 55):
+        pad = '<p>' + 'word ' * n + '</p>'
+        assert lbs_near_timeframe(named + pad + p2a + d, outcomes='') == [], \
+            f"verbatim 2a disclosure split by the window edge fired (pad {n})"
+    # (2) a named card beside "clients typically lose 10 lbs in 3 months" still fails, on the named figure too
+    agg = lbs_near_timeframe(named + '<p>Our clients typically lose 10 lbs in 3 months.</p>' + p2a + d, outcomes='')
+    assert any('231' in x[1] or '248' in x[1] for x in agg), "aggregate 'typically' beside a named card was exempted"
+    # (3) the disclosure with one word changed is NOT exempt
+    p2a_bad = p2a.replace('typically progress', 'typically improve')
+    assert lbs_near_timeframe(named + p2a_bad + d, outcomes=''), "near-verbatim 2a pointer was exempted"
 
 def _has_results_disclaimer_anywhere(text):
     return bool(DISCLAIMER_ANYWHERE.search(_flat(text)))
+
+DISCLOSURE_2A_POINTER = re.compile(r'How clients typically progress:\s*omnifittraining\.com/outcomes\s*\.')
 
 def _case_study_exempt(t, m, page_disclaimed, window=45):
     """True when this match is a documented individual case-study figure on a
@@ -263,7 +283,17 @@ def _case_study_exempt(t, m, page_disclaimed, window=45):
     attribution test cannot confirm stays a strike."""
     if not page_disclaimed:                       # condition 2
         return False
-    w = ' '.join(t[:m.start()].split()[-window:] + t[m.end():].split()[:window])
+    # OWNER DECISION, homepage rebuild Oct 17 2026 (the T2-1 checker fix's
+    # twin): the verbatim TIER 2 item 2a disclosure sentence "How clients
+    # typically progress: omnifittraining.com/outcomes." points AWAY from the
+    # figure and is not aggregate wording. ONLY that exact sentence is blanked
+    # for this test, on the whole text BEFORE the window is cut (same length,
+    # so positions hold; a window edge must not split the sentence and leave a
+    # bare "typically"). t is flattened, so a link-wrapped URL reads
+    # "outcomes ."; any other "typically" / "most clients" / "on average"
+    # still fails.
+    a = DISCLOSURE_2A_POINTER.sub(lambda x: ' ' * len(x.group(0)), t)
+    w = ' '.join(a[:m.start()].split()[-window:] + a[m.end():].split()[:window])
     if re.search(AGGREGATE, w, re.I):             # never exempt, on any page
         return False
     if re.search(r'\banonymi[sz]ed\b', w, re.I):  # condition 1, anonymised form
@@ -970,6 +1000,43 @@ def _selftest_travel_protocol():
                  '<li>The Travel Protocol: a scheduled session live by video, at no extra cost</li></ul>') == [], "price in the block above the list read as the Travel Protocol's"
     assert kinds('<ul><li>The Travel Protocol, $95 per trip</li></ul>') == ["price stated for the Travel Protocol"], "price in the same list item passed"
 
+# ─── TEQNEEQ HAS NO ON-SITE PT CLINIC (CANON ENTITY BLOCK, Oct 17 2026) ─
+# Owner, homepage rebuild run: Teqneeq is a members-only functional health
+# facility; OmniFit's physical therapy relationships are EXTERNAL partners
+# (e.g. Stoke Physical Therapy). A sentence naming Teqneeq - or the sentence
+# right after it - that places a PT / physical therapy / rehab clinic on site
+# or in-house is a finding. Negations ("has no on-site physical therapy
+# clinic") are the canonical correction and pass.
+_TEQ_PT_CLAIM = re.compile(
+    r'\b(?:on[- ]?site|in[- ]house)\s+(?:physical[- ]therap\w*|PT|rehab\w*)\b'
+    r'|\b(?:physical[- ]therap\w*|PT|rehab\w*)\s+(?:clinic|practice|department|team)s?\s+'
+    r'(?:on[- ]?site|in[- ]house|inside|within|under one roof|in the building)'
+    r'|\b(?:integrat\w*|hous\w*|includ\w*|has|have|with|offers?)\s+(?:\w+\s+){0,4}?'
+    r'(?:physical[- ]therap\w*|PT|rehab\w*)\s+clinics?\b', re.I)
+_TEQ_PT_NEG = re.compile(r"\b(?:no|not|never|without|isn't|doesn't|has no)\b(?:\s+\S+){0,5}\s*$", re.I)
+
+def teqneeq_onsite_pt(text):
+    t = html.unescape(_flat(text)); out = []
+    sents = re.split(r'(?<=[.!?])\s+', t)
+    for i, s in enumerate(sents):
+        if not re.search(r'\bteqneeq\b', s, re.I): continue
+        for cand in sents[i:i + 2]:
+            for m in _TEQ_PT_CLAIM.finditer(cand):
+                if _TEQ_PT_NEG.search(cand[:m.start()]): continue
+                out.append(("on-site PT clinic claimed at Teqneeq", cand.strip()[:160]))
+    return list(dict.fromkeys(out))
+
+def _selftest_teqneeq_pt():
+    kinds = lambda t: [k for k, _ in teqneeq_onsite_pt(t)]
+    bad = "on-site PT clinic claimed at Teqneeq"
+    assert kinds('<p>Teqneeq is a members-only facility in 4S Ranch that integrates training with an on-site physical therapy clinic.</p>') == [bad], "integrated on-site PT clinic passed"
+    assert kinds('<p>We train at Teqneeq. It houses a physical therapy clinic.</p>') == [bad], "PT clinic in the next sentence passed"
+    assert kinds('<p>Teqneeq has a PT clinic on site.</p>') == [bad], "'PT clinic on site' passed"
+    assert kinds('<p>Teqneeq offers in-house rehab and recovery.</p>') == [bad], "in-house rehab passed"
+    assert kinds('<p>Teqneeq has no on-site physical therapy clinic.</p>') == [], "canonical negation flagged"
+    assert kinds('<p>Teqneeq is a members-only functional health facility. We coordinate with Stoke Physical Therapy, an external partner.</p>') == [], "external PT partner flagged"
+    assert kinds('<p>An on-site physical therapy clinic is common in big gyms. Teqneeq is in 4S Ranch.</p>') == [], "claim in the sentence BEFORE Teqneeq read as about Teqneeq"
+
 # Every rule names the tier it encodes. TIER 1 rules report a violation; TIER 2
 # rules report a MISSING CONDITION. See CANON COMPLIANCE SCREEN - TWO TIERS.
 COMPLIANCE = [
@@ -1581,6 +1648,11 @@ def run():
         for hit, ctx in ken_muscle_claim(open(f).read()):
             print(f"   {f}  [Ken's retired muscle figure: {hit}]  …{ctx[:90]}…"); B+=1
     print(f"   (Ken muscle-figure rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
+    _selftest_teqneeq_pt()
+    for f in ALL:
+        for kind, ctx in teqneeq_onsite_pt(open(f).read()):
+            print(f"   {f}  [{kind}]  …{ctx[:110]}…"); B+=1
+    print(f"   (Teqneeq on-site PT rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
