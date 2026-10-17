@@ -120,8 +120,6 @@ REDIRECTS = [
     ("# Slug variants", None),
     ("/consultation", "/contactform"),
     ("/FAQs", "/faqs"),
-    ("# Retired in the Keyword Ownership run (Oct 2026): page archived, URL 301s to the homepage", None),
-    ("/strength-training-1", "/"),
 ]
 
 STYLE_RE = re.compile(r"<style\b[^>]*>.*?</style>", re.S | re.I)
