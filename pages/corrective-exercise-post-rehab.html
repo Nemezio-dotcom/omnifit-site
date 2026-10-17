@@ -506,6 +506,25 @@
   @media (max-width: 440px) {
     #omni-corrective .cx-conditions { grid-template-columns: 1fr; }
   }
+
+  /* Who this is for (Oct 2026, shared block) */
+  #omni-corrective .omni-who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 0 0 24px; }
+  #omni-corrective .omni-who-col { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 26px 24px; text-align: left; }
+  #omni-corrective .omni-who-col.for { border-color: rgba(201,168,76,0.35); }
+  #omni-corrective .omni-who-col h3 { font-family: 'Montserrat', sans-serif !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 2px !important; text-transform: uppercase !important; line-height: 1.4 !important; color: #c9a84c !important; margin: 0 0 14px !important; }
+  #omni-corrective .omni-who-col.not h3 { color: rgba(255,255,255,0.55) !important; }
+  #omni-corrective .omni-who-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  #omni-corrective .omni-who-col li { display: flex; gap: 10px; align-items: flex-start; font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0; }
+  #omni-corrective .omni-who-col li::before { content: '\2713'; color: #c9a84c; font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+  #omni-corrective .omni-who-col.not li::before { content: '\2715'; color: rgba(255,255,255,0.45); }
+  #omni-corrective .omni-who-unify { font-family: 'Montserrat', sans-serif !important; font-size: 12.5px; color: rgba(255,255,255,0.55); margin: 14px 0 0; }
+  #omni-corrective .omni-who-lines { max-width: 860px; margin: 0 auto; text-align: left; display: grid; gap: 12px; }
+  #omni-corrective .omni-who-lines p { font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.78); margin: 0; }
+  #omni-corrective .omni-who-lines a { color: #c9a84c; text-decoration: underline; text-underline-offset: 3px; }
+  #omni-corrective .omni-who-roles { border-left: 2px solid #c9a84c; padding-left: 14px; }
+  #omni-corrective .omni-who-door { color: #fff !important; font-weight: 600; }
+  #omni-corrective .omni-who-entity { font-size: 12.5px !important; color: rgba(255,255,255,0.5) !important; }
+  @media (max-width: 768px) { #omni-corrective .omni-who-grid { grid-template-columns: 1fr; } }
 </style>
 
 <div id="omni-corrective">
@@ -571,13 +590,16 @@
         <h2>Who Corrective Exercise Training Is For</h2>
       </div>
 
-      <ul class="cx-who-list">
-        <li><strong>Post-PT professionals</strong> — Cleared from physical therapy but unsure how to train safely or rebuild strength on your own</li>
-        <li><strong>Desk workers with chronic discomfort</strong> — Recurring neck, shoulder, or lower back pain from prolonged sitting</li>
-        <li><strong>Former athletes recovering from surgery</strong> — Need structured return-to-performance programming that respects healing timelines</li>
-        <li><strong>Adults 30–60 with movement limitations</strong> — Experiencing joint pain, stiffness, or compensation patterns during workouts</li>
-        <li><strong>Professionals burned by generic training</strong> — Past experiences at gyms or with trainers who ignored pain signals or pushed through discomfort</li>
-      </ul>
+      <div class="omni-who-grid">
+      <div class="omni-who-col for"><h3>Built for</h3><ul><li>Executives and founders who want a measured program around a demanding calendar</li><li>Desk-bound and remote professionals with the posture and mobility patterns long sitting creates</li><li>Active adults 50+ who want strength built around their joints</li><li>Professional women 35&ndash;55 with joint concerns</li><li>People returning after a long break or after physical therapy</li><li>People burned by bootcamps or big gyms</li><li>Couples who want to train together on two separate programs</li></ul><p class="omni-who-unify">The unifying audience is professional adults 30+.</p></div>
+      <div class="omni-who-col not"><h3>Not the right fit if</h3><ul><li>You mainly want group energy or the lowest price. A gym or class studio will serve you better.</li><li>You want someone to count reps, with nothing between sessions.</li><li>You need treatment rather than training. Start with your clinician; we pick up where care ends.</li><li>You can't keep booked sessions or the 24-hour reschedule standard.</li></ul></div>
+    </div>
+    <div class="omni-who-lines">
+      <p class="omni-who-method">OmniFit runs on the <a href="/the-omnifit-method">OmniFit Method</a>: Measured Progress, Joint-First Strength and Accountability That Travels, carried through Assess &rarr; Correct &rarr; Build &rarr; Sustain.</p>
+      <p class="omni-who-roles">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.</p>
+      <p class="omni-who-door">Even if you just want to train, we can start there.</p>
+      <p class="omni-who-entity">OmniFit Performance &middot; Nemezio LopezPerez (Coach Nemezio) &middot; Teqneeq Functional Health Center, 10772 Thornmint Rd, 4S Ranch, San Diego, CA 92127 &middot; omnifittraining.com</p>
+    </div>
 
       <div class="gq-block">
         OmniFit Performance's corrective exercise program is designed for the professional who has been told "you're cleared" from physical therapy but doesn't feel confident walking into a gym and training independently. The typical corrective exercise client is between 30 and 55, works a desk-heavy job, has a history of at least one significant injury or surgery, and needs a coach who understands how to load the body progressively without triggering flare-ups. OmniFit functions as the structured bridge between rehab and real-world performance.
@@ -768,7 +790,7 @@
 
       <div class="cx-grid">
         <article class="cx-card">
-          <span class="cx-card-icon">📋</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--clipboard" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></span>
           <h3>Assessment-Driven, Not Guesswork</h3>
           <p>Every program begins with a formal movement assessment. We identify your specific limitations before loading anything.</p>
           <ul class="cx-card-features">
@@ -779,7 +801,7 @@
         </article>
 
         <article class="cx-card">
-          <span class="cx-card-icon">🛡️</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--shield" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></span>
           <h3>3/10 Pain Ceiling Protocol</h3>
           <p>Strict pain management in every session. If it hurts beyond mild discomfort, we modify or replace. No exceptions.</p>
           <ul class="cx-card-features">
@@ -790,7 +812,7 @@
         </article>
 
         <article class="cx-card">
-          <span class="cx-card-icon">🔬</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--microscope" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h4v7H9z"/><path d="M11 10v4"/><path d="M7 17a5 5 0 0 0 10 0"/><path d="M5 21h14"/><path d="M13 14a4 4 0 0 1 4 3"/></svg></span>
           <h3>NASM &amp; ACE Corrective Exercise Certified</h3>
           <p>Advanced corrective exercise credentials, not a basic personal training certification.</p>
           <ul class="cx-card-features">
@@ -802,7 +824,7 @@
         </article>
 
         <article class="cx-card">
-          <span class="cx-card-icon">📊</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--bar-chart" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="6" y="11" width="3" height="7" rx=".5"/><rect x="11" y="6" width="3" height="12" rx=".5"/><rect x="16" y="9" width="3" height="9" rx=".5"/></svg></span>
           <h3>Data-Driven Progress Tracking</h3>
           <p>Bodystat QuadScan 4000 diagnostics reading fat mass, lean mass and the fluid compartments, posture photos, strength benchmarks, mobility tests, and formal 30-day reports across twelve standardized metrics. Improvement is measured, not assumed.</p>
           <ul class="cx-card-features">
@@ -850,7 +872,7 @@
 
       <div class="cx-grid" style="max-width: 800px; margin-left: auto; margin-right: auto;">
         <article class="cx-card">
-          <span class="cx-card-icon">📍</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
           <h3>In-Person: Teqneeq FHC, 4S Ranch</h3>
           <p>Private 1-on-1 sessions at the studio inside Teqneeq FHC, with full assessment tools, corrective equipment, and hands-on coaching.</p>
           <ul class="cx-card-features">
@@ -861,7 +883,7 @@
         </article>
 
         <article class="cx-card">
-          <span class="cx-card-icon">🖥️</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--monitor" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
           <h3>Virtual: Anywhere</h3>
           <p>Remote movement screening, guided corrective progressions, and real-time form feedback. Available standalone or as part of the <a href="/the-30-minute-executive-reset">Executive Reset</a>.</p>
           <ul class="cx-card-features">
@@ -936,6 +958,10 @@
         <h2>Working With Your Healthcare Team</h2>
       </div>
 
+      <div class="cx-callout" style="margin-bottom: 20px;">
+        <strong>Physical therapy treats; OmniFit trains.</strong> We pick up where care ends, coordinate with your clinician when you allow it, and never diagnose or treat.
+      </div>
+
       <div class="text-center">
         <p>When appropriate and with your permission, OmniFit can share general training considerations with your physical therapist or physician to support a safe transition from rehab to training. We do not provide medical recommendations or modify a PT's treatment plan. We complement it.</p>
         <p style="margin-top: 12px;">If at any point during training your symptoms change or pain increases beyond the 3/10 threshold, we will refer you back to your healthcare provider before continuing.</p>
@@ -963,25 +989,25 @@
 
       <div class="cx-grid">
         <article class="cx-card">
-          <span class="cx-card-icon">🧭</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--compass" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
           <h3>Long-Term Transformation</h3>
           <p>You want a body that holds up for years, not a twelve-week push that unravels. Corrective work is the part that makes long horizons possible, because it removes the restrictions that force people to stop and restart.</p>
         </article>
 
         <article class="cx-card">
-          <span class="cx-card-icon">📉</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--trend-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l6 6 4-4 8 8"/><path d="M15 17h6v-6"/></svg></span>
           <h3>Fat Loss Without Crash Protocols</h3>
           <p>Aggressive plans usually fail on the joints before they fail on willpower. Building training your body tolerates is what makes consistent work possible, which is where body composition change comes from. Nutrition is coached alongside it, not bolted on.</p>
         </article>
 
         <article class="cx-card">
-          <span class="cx-card-icon">🪑</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--chair" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6"/><path d="M5 11h14v3H5z"/><path d="M7 14v6M17 14v6"/></svg></span>
           <h3>Desk-Worker Posture and Mobility</h3>
           <p>Long sitting hours, stiffness that arrives before the workday ends, and a growing sense of moving worse than you used to. The program targets the specific patterns that desk work creates rather than generic stretching.</p>
         </article>
 
         <article class="cx-card">
-          <span class="cx-card-icon">📊</span>
+          <span class="cx-card-icon"><svg class="omni-icon omni-icon--bar-chart" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><rect x="6" y="11" width="3" height="7" rx=".5"/><rect x="11" y="6" width="3" height="12" rx=".5"/><rect x="16" y="9" width="3" height="9" rx=".5"/></svg></span>
           <h3>Data-Driven Hybrid Coaching</h3>
           <p>You travel, your schedule moves, and you want the work to continue anyway. In-person sessions at Teqneeq combine with app-delivered programming, and the same benchmarks are tracked either way so nothing is guessed between visits.</p>
         </article>
@@ -1063,17 +1089,17 @@
         45-minute consultation by video or phone · Movement screen booked separately · No obligation
       </span>
       <p style="margin-top: 16px; font-size: 14px; text-align: center;">
-        📍 <strong>Teqneeq FHC · 4S Ranch, San Diego</strong> · Call/Text: <a href="tel:619-259-0630">619-259-0630</a> · Hybrid: In-Person &amp; Virtual
+        <svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> <strong>Teqneeq FHC · 4S Ranch, San Diego</strong> · Call/Text: <a href="tel:619-259-0630">619-259-0630</a> · Hybrid: In-Person &amp; Virtual
       </p>
     </div>
 
     <!-- ════════════ TRUST BAR ════════════ -->
     <div class="cx-trust">
-      <div class="cx-trust-item"><span>⭐</span> 5.0 · 190+ Reviews</div>
-      <div class="cx-trust-item"><span>🏅</span> NASM CES · PES · BCS · CPT · CNC</div>
-      <div class="cx-trust-item"><span>🎓</span> ACE Corrective Exercise Specialist</div>
-      <div class="cx-trust-item"><span>📍</span> Teqneeq FHC · 4S Ranch, San Diego</div>
-      <div class="cx-trust-item"><span>🖥️</span> Virtual Corrective Exercise</div>
+      <div class="cx-trust-item"><span><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span> 5.0 · 190+ Reviews</div>
+      <div class="cx-trust-item"><span><svg class="omni-icon omni-icon--medal" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg></span> NASM CES · PES · BCS · CPT · CNC</div>
+      <div class="cx-trust-item"><span><svg class="omni-icon omni-icon--graduation" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-4 9 4-9 4z"/><path d="M7 11v4c0 1.5 2.5 3 5 3s5-1.5 5-3v-4"/><path d="M21 9v5"/></svg></span> ACE Corrective Exercise Specialist</div>
+      <div class="cx-trust-item"><span><svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span> Teqneeq FHC · 4S Ranch, San Diego</div>
+      <div class="cx-trust-item"><span><svg class="omni-icon omni-icon--monitor" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span> Virtual Corrective Exercise</div>
     </div>
 
     <!-- ════════════ HUB LINKS ════════════ -->
