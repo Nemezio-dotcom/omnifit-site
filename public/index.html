@@ -1799,7 +1799,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 <body class="page page--home">
 <!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
 
-ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 coaching", "href": "/contactform"}
+ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"}
 
   ^ The one place to change the announcement bar. build.py reads this line:
     "text" is the bar's copy, "href" is where it links. Set "text" to "" to
@@ -1816,7 +1816,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   under prefers-reduced-motion. Sizing and motion live in site/site.css.
 -->
 <div class="site-announce" id="site-announce">
-  <a class="site-announce__link" href="/contactform">Limited availability — accepting applications for 1:1 coaching</a>
+  <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
   <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
@@ -2289,7 +2289,7 @@ Changelog v2:
     <p class="phase-lead">Most trainers start with a workout. We start with questions. The Assess phase has two parts: a video consultation to evaluate fit, and an in-person Performance Assessment to map your body's baseline and movement patterns.</p>
 
     <h3 style="font-size:18px;margin-top:32px;margin-bottom:8px;color:var(--gold)">Step 1: The 45-Minute Video Consultation</h3>
-    <p>This is a conversation, not a sales pitch. A fully refundable $30 deposit reserves your time. Before we design anything, we need to understand who you are:</p>
+    <p>This is a conversation, not a sales pitch. A $30 deposit, refunded the same day you attend your consultation, reserves your time. Before we design anything, we need to understand who you are:</p>
     <div class="dg">
       <div class="dc"><h4>Fit Evaluation</h4><p>We determine whether OmniFit's coaching model matches your goals, schedule, and expectations, and we're honest if it doesn't.</p></div>
       <div class="dc"><h4>Medical History</h4><p>Past injuries, surgeries, chronic pain, medications, and conditions that affect how you should train. Nothing gets ignored.</p></div>
@@ -2402,7 +2402,7 @@ Changelog v2:
 
     <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">What is OmniFit's training methodology?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit uses a four-phase method: Assess, Correct, Build, Sustain. It starts with a consultation and in-person Performance Assessment, then progresses through corrective exercise, progressive strength training, and ultimately builds client independence. Every program is individualized based on assessment findings.</p></div></div>
 
-    <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">What does the assessment include?<span class="fi-icon">+</span></button><div class="fa"><p>The assessment is a two-step process. First, a 45-minute video consultation covering medical history, behavioral habits, nutrition, goals, and schedule. A fully refundable $30 deposit reserves your time. Then, the $150 Performance Assessment, credited toward your first cycle: Bodystat QuadScan 4000 medical-grade body-composition analysis plus a movement screening covering overhead squat, single-leg squat, push/pull patterns, posture photos, joint ROM testing, grip strength, core stability, and gait analysis.</p></div></div>
+    <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">What does the assessment include?<span class="fi-icon">+</span></button><div class="fa"><p>The assessment is a two-step process. First, a 45-minute video consultation covering medical history, behavioral habits, nutrition, goals, and schedule. A $30 deposit, refunded the same day you attend your consultation, reserves your time. Then, the $150 Performance Assessment, credited toward your first cycle: Bodystat QuadScan 4000 medical-grade body-composition analysis plus a movement screening covering overhead squat, single-leg squat, push/pull patterns, posture photos, joint ROM testing, grip strength, core stability, and gait analysis.</p></div></div>
 
     <div class="fi"><button class="fq" aria-expanded="false" onclick="this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',this.parentElement.classList.contains('open'))">What is the 3/10 pain ceiling rule?<span class="fi-icon">+</span></button><div class="fa"><p>No exercise should cause pain above a 3 out of 10. If it does, the movement is modified, regressed, or replaced immediately. This protects clients with chronic pain or post-rehab needs and ensures joint-friendly progression throughout every phase of training.</p></div></div>
 
@@ -2417,10 +2417,10 @@ Changelog v2:
   <!-- CTA -->
   <section class="cta-sec">
     <h2>Start With a Conversation.<br>Build From a Baseline.</h2>
-    <p>Book your 45-minute consultation, Zoom or phone, no pressure. A fully refundable $30 deposit reserves your time. If we're aligned, your $150 Performance Assessment sets the baseline your entire program is built on, credited toward your first cycle.</p>
+    <p>Book your 45-minute consultation, Zoom or phone, no pressure. A $30 deposit, refunded the same day you attend your consultation, reserves your time. If we're aligned, your $150 Performance Assessment sets the baseline your entire program is built on, credited toward your first cycle.</p>
     <a href="https://calendly.com/nemezio-omnifittraining/45min" class="cta-btn">Book Your Consultation</a>
     <span class="cta-steps"><strong>Step 1:</strong> 45-minute consultation, Zoom or phone &nbsp;·&nbsp; <strong>Step 2:</strong> $150 Performance Assessment if we're aligned, credited toward your first cycle</span>
-    <span class="cta-note">Fully refundable deposit · No commitment · Honest evaluation of fit</span>
+    <span class="cta-note">$30 deposit, refunded the same day you attend your consultation · No commitment · Honest evaluation of fit</span>
   </section>
 
 </div>
@@ -3221,7 +3221,7 @@ Changelog v2:
     <h2>Ready to Train With Structure,<br>Not Guesswork?</h2>
     <p style="max-width:600px;margin:0 auto 28px;color:var(--white-70);">Book your 45-minute consultation. We'll discuss your goals, evaluate fit, and determine whether OmniFit is the right approach for where you are right now.</p>
     <a class="cta-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Minute Consultation</a>
-    <span class="cta-note">Refundable $30 deposit · No obligation · Honest assessment of fit</span>
+    <span class="cta-note">$30 deposit, refunded the same day you attend your consultation · No obligation · Honest assessment of fit</span>
 
     <div class="hub-links">
       <a href="/training-rates-san-diego">Rates &amp; Packages</a> <span>·</span>
@@ -3598,13 +3598,13 @@ Changelog v2:
           <li>
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
-            <a href="https://g.page/r/CcePeMjnbDe9EBM/review" target="_blank" rel="noopener">
+            <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
-            <a href="mailto:omnifittraining@gmail.com">
+            <a href="mailto:nemezio@omnifittraining.com">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a>

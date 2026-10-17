@@ -620,7 +620,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 <body class="page page--weight-loss">
 <!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
 
-ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 coaching", "href": "/contactform"}
+ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"}
 
   ^ The one place to change the announcement bar. build.py reads this line:
     "text" is the bar's copy, "href" is where it links. Set "text" to "" to
@@ -637,7 +637,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   under prefers-reduced-motion. Sizing and motion live in site/site.css.
 -->
 <div class="site-announce" id="site-announce">
-  <a class="site-announce__link" href="/contactform">Limited availability — accepting applications for 1:1 coaching</a>
+  <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
   <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
@@ -742,7 +742,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
       <a class="fl-btn fl-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
       <a class="fl-btn fl-btn-ghost" href="/training-rates-san-diego">View Training Rates</a>
     </div>
-    <div class="fl-cta-note">Paid 45-minute consultation · $30 refundable deposit · No obligation</div>
+    <div class="fl-cta-note">Paid 45-minute consultation · $30 deposit, refunded the same day you attend your consultation · No obligation</div>
   </section>
 
   <div class="fl-inner">
@@ -1032,7 +1032,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
       </p>
       <a class="fl-btn fl-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
       <span class="fl-bottom-note">
-        Paid 45-minute consultation · $30 refundable deposit · No obligation
+        Paid 45-minute consultation · $30 deposit, refunded the same day you attend your consultation · No obligation
       </span>
       <p style="margin-top: 16px; font-size: 14px; text-align: center;">
         <svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> <strong>Teqneeq FHC · 10772 Thornmint Rd, 4S Ranch</strong> · Call/Text: <a href="tel:619-259-0630">619-259-0630</a> · In-Person &amp; Virtual
@@ -1041,7 +1041,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 
     <!-- ════════════ TRUST BAR ════════════ -->
     <div class="fl-trust">
-      <div class="fl-trust-item"><span><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span> 5.0 · 133+ Reviews</div>
+      <div class="fl-trust-item"><span><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span> 5.0 · 190+ Reviews</div>
       <div class="fl-trust-item"><span><svg class="omni-icon omni-icon--medal" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg></span> NASM CPT · CES · PES · BCS</div>
       <div class="fl-trust-item"><span><svg class="omni-icon omni-icon--graduation" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-4 9 4-9 4z"/><path d="M7 11v4c0 1.5 2.5 3 5 3s5-1.5 5-3v-4"/><path d="M21 9v5"/></svg></span> ACE Corrective Exercise Specialist</div>
       <div class="fl-trust-item"><span><svg class="omni-icon omni-icon--pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span> Teqneeq FHC · 4S Ranch, San Diego</div>
@@ -1123,13 +1123,13 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
           <li>
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
-            <a href="https://g.page/r/CcePeMjnbDe9EBM/review" target="_blank" rel="noopener">
+            <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
-            <a href="mailto:omnifittraining@gmail.com">
+            <a href="mailto:nemezio@omnifittraining.com">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a>

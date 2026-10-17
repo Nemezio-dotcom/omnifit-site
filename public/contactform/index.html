@@ -412,7 +412,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
         "@type": "Offer",
         "price": "30.00",
         "priceCurrency": "USD",
-        "description": "45-minute consultation reserved with a fully refundable $30 deposit. Includes movement assessment, goal mapping, and program recommendation.",
+        "description": "45-minute consultation reserved with a $30 deposit, refunded the same day you attend your consultation. Goal mapping and program recommendation; the movement screen happens at the $150 Performance Assessment.",
         "availability": "https://schema.org/LimitedAvailability"
       },
       "hasOfferCatalog": {
@@ -673,6 +673,37 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   padding: 36px !important;
 }
 
+/* ── BOOK DIRECT (above the form) ── */
+#omni-consultation .book-direct {
+  text-align: center !important;
+  margin: 0 0 36px !important;
+  padding: 24px 28px !important;
+  background: var(--gold-dim) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+}
+#omni-consultation .book-direct p {
+  font-size: 16px !important;
+  color: var(--white) !important;
+  margin: 0 0 16px !important;
+  line-height: 1.6 !important;
+}
+#omni-consultation .book-direct-btn,
+#omni-consultation .book-direct-btn:link,
+#omni-consultation .book-direct-btn:visited {
+  display: inline-block !important;
+  padding: 14px 32px !important;
+  background: var(--gold) !important;
+  color: var(--navy) !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+}
+#omni-consultation .book-direct-btn:hover { background: var(--gold-light) !important; }
+
 /* ── DEPOSIT NOTE ── */
 #omni-consultation .deposit-note {
   text-align: center !important;
@@ -907,7 +938,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 <body class="page page--contactform">
 <!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
 
-ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 coaching", "href": "/contactform"}
+ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"}
 
   ^ The one place to change the announcement bar. build.py reads this line:
     "text" is the bar's copy, "href" is where it links. Set "text" to "" to
@@ -924,7 +955,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   under prefers-reduced-motion. Sizing and motion live in site/site.css.
 -->
 <div class="site-announce" id="site-announce">
-  <a class="site-announce__link" href="/contactform">Limited availability — accepting applications for 1:1 coaching</a>
+  <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
   <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
@@ -1003,7 +1034,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   <div class="consult-hero">
     <div class="consult-eyebrow">Contact OmniFit</div>
     <h1 class="consult-title">Let's See If OmniFit<br>Is Right For You</h1>
-    <div class="consult-subtitle">OmniFit is at capacity and taking a limited number of new clients. Send a message below to join the line. When a spot opens that fits your goals and location, I'll reach out to book your 45-minute consultation.</div>
+    <div class="consult-subtitle">OmniFit takes a limited number of new clients. The fastest way to start is to book your 45-minute consultation directly. Prefer to send a message first? Use the form below and I'll reach out in the order messages arrive.</div>
   </div>
 
   <!-- WHAT TO EXPECT -->
@@ -1024,7 +1055,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
           <div class="expect-icon">2</div>
           <div class="expect-content">
             <h3>Movement Screen</h3>
-            <p>A quick assessment of how you move — where you're compensating, what's tight, what's strong. This tells me more than any questionnaire. Wear comfortable clothes.</p>
+            <p>This happens at your $150 Performance Assessment, not on the consultation call: a hands-on look at how you move, where you're compensating, what's tight, what's strong. It tells me more than any questionnaire. Wear comfortable clothes.</p>
           </div>
         </div>
 
@@ -1057,7 +1088,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
       </div>
       <div class="trust-item">
         <span class="trust-value">$30</span>
-        <span class="trust-label">Fully Refundable</span>
+        <span class="trust-label">Deposit, Refunded When You Attend</span>
       </div>
     </div>
   </div>
@@ -1065,6 +1096,10 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   <!-- FORM SECTION -->
   <div class="form-section">
     <div class="form-container">
+      <div class="book-direct">
+        <p>The fastest way to start is to book a consultation directly.</p>
+        <a class="book-direct-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
       <div class="form-heading">Send a Message</div>
       <div class="form-sub">I read every message myself and reach out in the order they arrive. The form asks why now. Your honest answer there matters more than anything else on it.</div>
 
@@ -1074,7 +1109,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 
       <div class="deposit-note">
         <p><strong>One rule keeps the line fair:</strong> when I reach out, reply. If I don't hear back, your spot goes to the next person and you move to the back of the line.</p>
-        <p style="margin-top: 12px !important;">When we book your consultation, a <strong>fully refundable $30 deposit</strong> holds the time.</p>
+        <p style="margin-top: 12px !important;">Your consultation is held with a <strong>$30 deposit, refunded the same day you attend your consultation</strong>.</p>
       </div>
     </div>
   </div>
@@ -1083,7 +1118,6 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   <div class="bottom-section">
     <div class="bottom-note">
       Not sure yet? Take the <a href="/fit-check">3-minute fit check</a> first.<br>
-      Rather not wait? <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a 45-minute Strategy Session</a>.<br>
       Or email me directly: <a href="mailto:nemezio@omnifittraining.com">nemezio@omnifittraining.com</a>
     </div>
   </div>
@@ -1147,13 +1181,13 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
           <li>
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
-            <a href="https://g.page/r/CcePeMjnbDe9EBM/review" target="_blank" rel="noopener">
+            <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
-            <a href="mailto:omnifittraining@gmail.com">
+            <a href="mailto:nemezio@omnifittraining.com">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a>

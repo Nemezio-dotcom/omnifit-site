@@ -388,7 +388,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 <body class="page page--terms-and-conditions">
 <!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
 
-ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 coaching", "href": "/contactform"}
+ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"}
 
   ^ The one place to change the announcement bar. build.py reads this line:
     "text" is the bar's copy, "href" is where it links. Set "text" to "" to
@@ -405,7 +405,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   under prefers-reduced-motion. Sizing and motion live in site/site.css.
 -->
 <div class="site-announce" id="site-announce">
-  <a class="site-announce__link" href="/contactform">Limited availability — accepting applications for 1:1 coaching</a>
+  <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
   <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
@@ -528,7 +528,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 <p>Every program and session purchase is governed by a written client agreement (The Foundation Agreement, The Program Agreement, or the Sessions Agreement), signed before services begin. Those agreements are prepared to comply with the California Health Studio Services Act and California automatic-renewal law, and include your statutory cancellation rights. Where these Terms and your signed agreement differ, the signed agreement controls.</p>
 
 <h2>5. Payment Terms</h2>
-<p>Payments are processed securely through Stripe, Klarna, and Affirm under OmniFit Performance LLC. Assessment bookings are confirmed through Calendly with a $30 refundable deposit; the Performance Assessment fee is credited in full toward your first program cycle if you enroll.</p>
+<p>Payments are processed securely through Stripe, Klarna, and Affirm under OmniFit Performance LLC. Consultation bookings are confirmed through Calendly with a $30 deposit, refunded the same day you attend your consultation. The $150 Performance Assessment is credited toward your first purchase: a Foundation or Program cycle, an Executive Reset cycle, or a 5-session pack.</p>
 <ul>
   <li>Appointment slots are confirmed only when payment is received. Unpaid slots remain open.</li>
   <li>The Foundation is paid in full at enrollment.</li>
@@ -557,7 +557,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   <li>30 days' written notice to cancel. Any remaining credit applies to the final cycle, and any balance beyond that is refunded.</li>
 </ul>
 <h3>30-Day Fit Guarantee</h3>
-<p>If OmniFit is not the right fit for you within your first 30 days on The Foundation, The Program, or The Executive Reset, tell us in writing and we will refund the unused portion of your enrollment. This is a fit and satisfaction policy. It is not a guarantee of any physical outcome or result.</p>
+<p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. This is a fit and satisfaction policy. It is not a guarantee of any physical outcome or result.</p>
 
 <h2>7. Health Disclaimer</h2>
 <p>All information provided by OmniFit, on this website or in coaching, is for educational purposes only and is not medical advice. Consult your physician before beginning any exercise or nutrition program, particularly if you have injuries, medical conditions, or are pregnant. Body composition and movement screening are used to inform training decisions only.</p>
@@ -651,13 +651,13 @@ nemezio@omnifittraining.com<br>
           <li>
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
-            <a href="https://g.page/r/CcePeMjnbDe9EBM/review" target="_blank" rel="noopener">
+            <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
-            <a href="mailto:omnifittraining@gmail.com">
+            <a href="mailto:nemezio@omnifittraining.com">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a>

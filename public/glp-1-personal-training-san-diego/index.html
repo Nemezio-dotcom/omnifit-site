@@ -618,7 +618,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 <body class="page page--glp-1-personal-training-san-diego">
 <!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
 
-ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 coaching", "href": "/contactform"}
+ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"}
 
   ^ The one place to change the announcement bar. build.py reads this line:
     "text" is the bar's copy, "href" is where it links. Set "text" to "" to
@@ -635,7 +635,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   under prefers-reduced-motion. Sizing and motion live in site/site.css.
 -->
 <div class="site-announce" id="site-announce">
-  <a class="site-announce__link" href="/contactform">Limited availability — accepting applications for 1:1 coaching</a>
+  <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
   <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
@@ -893,7 +893,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
       <h2>Protect What You <em>Have</em></h2>
       <p style="max-width:620px; margin:0 auto;">Send the intake form and we will talk through where you are in the cycle, what your provider has you on, and what the training needs to do about it.</p>
       <a class="gl-btn" href="/contactform">Book a Consultation</a>
-      <span class="gl-cta-note">45 minutes by video or phone · $30 refundable deposit · The in-person Performance Assessment is $150, credited in full toward a three month program</span>
+      <span class="gl-cta-note">45 minutes by video or phone · $30 deposit, refunded the same day you attend your consultation · The in-person Performance Assessment is $150, credited toward your first program, Reset cycle or 5-pack</span>
     </div>
   </div>
 
@@ -967,13 +967,13 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
           <li>
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
-            <a href="https://g.page/r/CcePeMjnbDe9EBM/review" target="_blank" rel="noopener">
+            <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
-            <a href="mailto:omnifittraining@gmail.com">
+            <a href="mailto:nemezio@omnifittraining.com">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a>

@@ -826,7 +826,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 <body class="page page--outcomes">
 <!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
 
-ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 coaching", "href": "/contactform"}
+ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"}
 
   ^ The one place to change the announcement bar. build.py reads this line:
     "text" is the bar's copy, "href" is where it links. Set "text" to "" to
@@ -843,7 +843,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   under prefers-reduced-motion. Sizing and motion live in site/site.css.
 -->
 <div class="site-announce" id="site-announce">
-  <a class="site-announce__link" href="/contactform">Limited availability — accepting applications for 1:1 coaching</a>
+  <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
   <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
   </button>
@@ -997,7 +997,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 
   <section class="mid-cta" aria-label="Book a consultation"><div class="s-inner">
     <div class="mc-box">
-      <div class="mc-copy"><span class="mc-h">Curious where you would start?</span><span class="mc-p">Book a paid 45-minute consultation by video or phone. A $30 refundable deposit reserves your time.</span></div>
+      <div class="mc-copy"><span class="mc-h">Curious where you would start?</span><span class="mc-p">Book a paid 45-minute consultation by video or phone. A $30 deposit, refunded the same day you attend your consultation, reserves your time.</span></div>
       <a href="https://calendly.com/nemezio-omnifittraining/45min" class="cta-btn">Book Your Consultation</a>
     </div>
   </div></section>
@@ -1082,7 +1082,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 
   <section class="cta">
     <h2>See Where You<br>Would Start</h2>
-    <p>Book a paid 45-minute consultation, by video or phone. A $30 refundable deposit reserves your time. No commitment beyond that, just clarity on where you stand.</p>
+    <p>Book a paid 45-minute consultation, by video or phone. A $30 deposit, refunded the same day you attend your consultation, reserves your time. No commitment beyond that, just clarity on where you stand.</p>
     <a href="https://calendly.com/nemezio-omnifittraining/45min" class="cta-btn">Book Your Consultation</a>
     <span class="cta-note">How we measure every client: <a href="/how-we-measure-your-progress">How We Measure Your Progress</a></span>
   </section>
@@ -1272,13 +1272,13 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
           <li>
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
-            <a href="https://g.page/r/CcePeMjnbDe9EBM/review" target="_blank" rel="noopener">
+            <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
-            <a href="mailto:omnifittraining@gmail.com">
+            <a href="mailto:nemezio@omnifittraining.com">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a>
