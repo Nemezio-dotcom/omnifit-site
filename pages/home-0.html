@@ -19,14 +19,15 @@
     native scroll-driven parallax (photo drifts, copy lifts) that browsers
     without animation-timeline support simply skip.
   v5 changes (from v4):
-  - Five-photo crossfade loop. Frame A is still the kettlebell coaching photo
-    (the LCP image, preloaded, unchanged). The other four are repo assets in
-    site/img/ (served from /assets/img/), each in 1000px and full-size webp
+  - Six-photo crossfade loop. Frame A is still the kettlebell coaching photo
+    (the LCP image, preloaded, unchanged). The other five are repo assets in
+    site/img/ (served from /assets/img/), each in 1000px and 1600px webp
     with jpg fallbacks:
       hero-coach-client-cable-pulldown   landscape 3:2
       hero-coach-physique-portrait       portrait  5:6
       hero-coach-client-jump-training    landscape 3:2
       hero-coach-client-bench-pushup     portrait  2:3
+      hero-coach-dumbbell-workout        portrait  2:3 (the schema's primaryImageOfPage)
   - The loop is driven by the small script below the card: after frame A has
     settled it moves to the next loaded frame every ~7s with a 1.6s dissolve
     (CSS transition), and the incoming frame drifts in by 4% while it is up.
@@ -167,7 +168,7 @@
         <source type="image/webp" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" src="/assets/img/hero-trainer-coaching-kettlebell-1600.jpg" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.jpg 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" fetchpriority="high" decoding="async">
       </picture>
-      <!-- frames B-E: given their URLs by the script once frame A has loaded -->
+      <!-- frames B-F: given their URLs by the script once frame A has loaded -->
       <!-- frame B: coach and client at the cable station, landscape -->
       <picture class="hero-frame hero-frame--landscape" style="--focus:30% 25%;--focus-m:50% 30%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-client-cable-pulldown-1000.webp 1000w, /assets/img/hero-coach-client-cable-pulldown-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
@@ -187,6 +188,11 @@
       <picture class="hero-frame hero-frame--portrait" style="--focus:50% 40%;--focus-m:55% 45%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-client-bench-pushup-1000.webp 1000w, /assets/img/hero-coach-client-bench-pushup-1333.webp 1333w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-client-bench-pushup-1333.jpg" data-srcset="/assets/img/hero-coach-client-bench-pushup-1000.jpg 1000w, /assets/img/hero-coach-client-bench-pushup-1333.jpg 1333w" sizes="(max-width:768px) 100vw, 880px" width="1333" height="2000" alt="" decoding="async">
+      </picture>
+      <!-- frame F: coach with dumbbells, portrait -->
+      <picture class="hero-frame hero-frame--portrait" style="--focus:50% 30%;--focus-m:55% 40%">
+        <source type="image/webp" data-srcset="/assets/img/hero-coach-dumbbell-workout-1000.webp 1000w, /assets/img/hero-coach-dumbbell-workout-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
+        <img class="hero-bg" data-src="/assets/img/hero-coach-dumbbell-workout-1600.jpg" data-srcset="/assets/img/hero-coach-dumbbell-workout-1000.jpg 1000w, /assets/img/hero-coach-dumbbell-workout-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" decoding="async">
       </picture>
     </div>
     <div class="hero-shade" aria-hidden="true"></div>
