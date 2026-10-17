@@ -19,6 +19,7 @@ site/layout.html                  the HTML document skeleton
 site/nav.html                     announcement bar + site header + primary nav (single source)
 site/site.css, site/site.js       shared CSS / JS
 site/icons.py                     the gold line-SVG icon for every emoji the pages used
+site/img/logo.svg, logo.png       the brand logo (the SVG is inlined into site/nav.html)
 build.py                          stdlib-only build + checks
 public/                           generated output (committed)
 ```
@@ -31,7 +32,7 @@ python3 build.py --check    # run only the checks against public/
 Per page, `build.py` produces `public/<slug>/index.html` (homepage at
 `public/index.html`) containing: doctype, `<title>`, meta description,
 canonical, the site-wide header injection, one Google Fonts link (union of
-every weight the pages used, plus Bebas Neue), `/assets/site.css`, the page's
+every weight the pages used), `/assets/site.css`, the page's
 header injection verbatim, the page's own `<style>` blocks (moved from the body
 into `<head>`, with their Google Fonts `@import` lines dropped because the
 layout already loads the fonts), then nav, `<main>` with the page body, footer,
@@ -99,7 +100,7 @@ bar. It is maroon (`--omni-maroon: #7b1e2b`), white Montserrat, centred, with
 an X at the right that hides it for the rest of the browser session. The link
 target is a guess (the rates page); change it if the live bar links elsewhere.
 
-The header is white and sticky: wordmark at left, two Montserrat rows
+The header is white and sticky: logo at left, two Montserrat rows
 (Home, Programs, Rates, Methodology ▾, Results ▾ / More ▾, About, Fit Check,
 Contact), then Instagram and LinkedIn as gold line SVGs (URLs from the
 footer and the JSON-LD `sameAs`) and the "Book Your Consultation" text CTA to
@@ -108,10 +109,11 @@ dropdown that contains it); dropdowns open on hover on pointer devices and on
 tap/click everywhere. Below 1024px the header collapses to a hamburger and a
 full-height white drawer with the same items as accordions.
 
-**No logo asset exists in the repo** (no png/svg/jpg anywhere; the JSON-LD
-only references the Squarespace CDN apple-touch-icon), so the header shows the
-Bebas Neue wordmark. Save the real logo as `public/assets/img/logo.png` (or
-.svg) and swap the wordmark span for the `<img>` noted in `site/nav.html`.
+The logo is the brand mark as inline SVG (`site/img/logo.svg`, generated from
+`site/img/logo.png`), inlined into `site/nav.html` so its parts can animate:
+once per browser session the ring draws itself, the F pops in, the letters
+rise and the gold rule extends; hovering the logo turns the ring. All of it is
+inert under `prefers-reduced-motion`. Sizing and motion live in `site/site.css`.
 
 ## Cloudflare Pages settings
 
