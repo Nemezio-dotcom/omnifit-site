@@ -19,3 +19,5 @@
 # Slug variants
 /consultation /contactform 301
 /FAQs /faqs 301
+# Retired in the Keyword Ownership run (Oct 2026): page archived, URL 301s to the homepage
+/strength-training-1 / 301

@@ -8,16 +8,18 @@ REPO STATE (reconciled with disk, Sept 2026)
   disclosure, never before - fixing the name first hides a real structural
   check behind a filename mismatch.
 
-  CERTIFIED - 30 page/header pairs
+  CERTIFIED - 29 page/header pairs (30 until the Keyword Ownership run, Oct
+  2026, archived strength-training-1; see ARCHIVE)
     11 territory pages: personal-trainer-4s-ranch, -carlsbad,
       -carmel-valley, -del-mar, -encinitas, -fairbanks-ranch, -la-jolla,
       -rancho-bernardo, -rancho-santa-fe, -santaluz, -solana-beach
     corrective-exercise-post-rehab · FAQs · how-it-works-pricing ·
       in-home-personal-trainer-san-diego · private-personal-trainer-san-diego
-    the 9 Batch 3 pages: the-omnifit-method, how-we-measure-your-progress,
-      omnifit-vs-competitors, weight-loss, strength-training-1,
+    the 8 live Batch 3 pages: the-omnifit-method, how-we-measure-your-progress,
+      omnifit-vs-competitors, weight-loss,
       hiit-personal-trainer-san-diego, personal-training-services,
       body-composition-testing, partners
+      (strength-training-1 was the ninth; archived Oct 2026, 301 to /)
     training-rates-san-diego (refreshed from live and corrected, Aug 2026:
       two-ladder session packs, guest add-on, DEFERRED-01 applied)
     personal-trainer-over-50-san-diego - NEW, live as of Sept 2026, certified
@@ -141,6 +143,18 @@ ARCHIVE - archive/ and archive/headers/, NEVER certified, NEVER corrected
     online-training                 -> 301 /the-30-minute-executive-reset
     executive-hybrid-coaching       -> 301 /the-30-minute-executive-reset
     personal-trainer-mission-hills  -> 301 /in-home-personal-trainer-san-diego
+    strength-training-1             -> 301 /  (Keyword Ownership run, Oct
+                                       2026: page + header moved here
+                                       byte-identical; redirect emitted by
+                                       build.py REDIRECTS into _redirects;
+                                       removed from tools/mkheaders.py META,
+                                       the sitemap and every link list.
+                                       Running-text links repointed to
+                                       /personal-training-services. The
+                                       three links on
+                                       personal-trainer-rancho-bernardo stay,
+                                       because that page is frozen; they
+                                       resolve through the 301.)
     llms-txt-page-retired           -> superseded by Squarespace's native
                                        LLMS.txt field (no header ever existed)
   Archived in the Scope Reconciliation run, Sept 2026, byte-identical, with
@@ -597,6 +611,139 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   and text · invariant hash mismatch · HTML tag-balance failure ·
   LocalBusiness redefined in a page header instead of referenced by @id.
 
+KEYWORD OWNERSHIP (Keyword Ownership run, Oct 2026)
+Source: the Keyword Ownership Map, Semrush Position Tracking, Oct 5-11 2026.
+Google kept swapping the in-home page in for keywords other pages own, and the
+ranking dropped every time it won the swap. The proven fix: once Del Mar was
+stripped from the in-home page, the Del Mar query moved to the Del Mar page and
+went 26 -> 16. So every tracked keyword has ONE owner page.
+
+"Owns" means the phrase or a close variant appears in the owner's title, H1,
+H2s and meta description, and in NO other page's title, H1, H2s or meta. Other
+pages may cover the topic in body copy and should link to the owner with the
+phrase as anchor text.
+
+Enforced by tools/ownership.py, run from `python3 build.py --check` (and
+`python3 tools/ownership.py`). It reads the RENDERED page in public/ - title
+and meta are only resolved at build time - and fails when an owned phrase sits
+on a title/H1/H2/meta of any page other than its owner or an "also" page.
+It is deliberately NOT in certify.py: certification reports exactly three
+categories and keyword ownership is none of them. Fixtures that must fail and
+must pass live in tools/fixtures/ownership/; build.py --check runs them first,
+so a green ownership result always comes from a check seen failing.
+
+Matching rules (encoded in tools/ownership.py; change both together):
+  - Case-insensitive regex on tag-stripped text. HTML comments, <style> and
+    <script> are not copy. Headings are read from <main> only.
+  - LONGEST MATCH WINS. A match lying wholly inside another keyword's match
+    belongs to that keyword: "In-Home Personal Trainer in San Diego" counts
+    for K06 only, never for K01. This is what "keeps the in-home qualifier"
+    means mechanically.
+  - K01 matches the noun "personal trainer(s)", not "personal training".
+    JUDGMENT CALL: "personal training in San Diego" is the site-wide service
+    description (homepage H2, FAQs and HIIT titles, comparison page title) and
+    is not a tracked keyword. WRONG IF Semrush shows "personal training san
+    diego" being cannibalized; then K01 widens and those surfaces move.
+    K05 (private) and K06 (in-home) DO match "training": their qualifier is
+    the distinctive token, and the only non-owner hit (the FAQs meta,
+    "private personal training programs") was cheap to fix.
+  - Owner COVERAGE is reported as a note, not a failure: the homepage does
+    not yet carry K02, K03 or K04 on a title/H1/H2/meta surface. Adding them
+    means rewriting homepage headlines, which no run has been asked to do.
+  - An owner of "-" is UNASSIGNED: its phrase still claims its span (so a
+    cost question is not read as K01) but exclusivity is not enforced, and
+    the check prints that it is not enforced rather than passing silently.
+
+Page-specific rules that are NOT ownership but are locked in the same table:
+  - In-home (X01): no "private", North County, cost/pricing/"how much",
+    age group, or town name in its title, meta, any heading, FAQ question or
+    its own JSON-LD. In body copy towns appear ONLY as links to their own
+    territory page, in the one service-area list; Poway stays as text (no
+    page exists and ChatGPT cites this page for it). Del Mar, 4S Ranch and
+    North County do not appear in the body at all.
+  - Homepage (X02): "private" stays out of the title, H1 and H2s.
+  - /personal-trainer-4s-ranch and /personal-trainer-rancho-bernardo stay
+    exactly as they are (ChatGPT cites both). 4S Ranch is listed as an "also"
+    page on K03 for that reason: the homepage owns the keyword for Google.
+
+  OWNERSHIP TABLE - read by tools/ownership.py. Entry lines start "  K" or
+  "  X"; field lines are indented six spaces. owner/page = URL path. match =
+  regex, "|" between close variants. also = extra permitted pages, or "-".
+
+  K01 personal trainer san diego / personal trainer in san diego
+      owner  /
+      match  personal trainers? (?:in )?san diego|san diego personal trainers?
+  K02 personal trainer north county san diego
+      owner  /
+      match  personal trainers? (?:in )?north county(?: san diego)?|north county(?: san diego)? personal trainers?
+  K03 personal trainer 4s ranch
+      owner  /
+      also   /personal-trainer-4s-ranch
+      match  personal trainers? (?:in )?4s ranch|4s ranch personal trainers?
+  K04 executive fitness coach san diego
+      owner  /
+      match  executive fitness coach(?:es|ing)?
+  K05 private personal trainer san diego
+      owner  /private-personal-trainer-san-diego
+      match  private (?:1:1 |one-on-one )?personal train(?:er|ers|ing)(?: (?:in )?san diego)?
+  K06 in home personal trainer san diego
+      owner  /in-home-personal-trainer-san-diego
+      match  in[- ]home (?:personal )?train(?:er|ers|ing) (?:in )?san diego|san diego in[- ]home (?:personal )?train(?:er|ers|ing)
+  K07 personal trainer for older adults san diego / strength training over 50
+      owner  /personal-trainer-over-50-san-diego
+      match  personal trainers? for (?:older adults|(?:\w+ ){0,3}over 50)|older adults?|strength training (?:for (?:\w+ ){0,3})?(?:over|after) 50|\b(?:over|after)[- ]50\b
+  K08 corrective exercise specialist (near me / san diego)
+      owner  /corrective-exercise-post-rehab
+      match  corrective exercise specialists?
+  K09 personal trainer for back pain san diego
+      owner  /corrective-exercise-post-rehab
+      match  back[- ]pain
+  K10 personal trainer san diego cost (dedicated cost page: a later run)
+      owner  -
+      match  personal trainers? (?:in )?san diego cost|cost of (?:a |an )?(?:in[- ]home )?personal trainer(?: in san diego)?|how much (?:does|is|do) (?:a |an )?(?:in[- ]home )?personal trainers?(?: cost)?(?: in san diego)?
+  K20 personal trainer carlsbad / in home personal trainer carlsbad
+      owner  /personal-trainer-carlsbad
+      match  (?:in[- ]home )?personal trainers? (?:in )?carlsbad|carlsbad (?:in[- ]home )?personal trainers?
+  K21 personal trainer carmel valley / in home personal trainer carmel valley
+      owner  /personal-trainer-carmel-valley
+      match  (?:in[- ]home )?personal trainers? (?:in )?carmel valley|carmel valley (?:in[- ]home )?personal trainers?
+  K22 personal trainer del mar / in home personal trainer del mar
+      owner  /personal-trainer-del-mar
+      match  (?:in[- ]home )?personal trainers? (?:in )?del mar|del mar (?:in[- ]home )?personal trainers?
+  K23 personal trainer encinitas / in home personal trainer encinitas
+      owner  /personal-trainer-encinitas
+      match  (?:in[- ]home )?personal trainers? (?:in )?encinitas|encinitas (?:in[- ]home )?personal trainers?
+  K24 personal trainer fairbanks ranch / in home personal trainer fairbanks ranch
+      owner  /personal-trainer-fairbanks-ranch
+      match  (?:in[- ]home )?personal trainers? (?:in )?fairbanks ranch|fairbanks ranch (?:in[- ]home )?personal trainers?
+  K25 personal trainer la jolla / in home personal trainer la jolla
+      owner  /personal-trainer-la-jolla
+      match  (?:in[- ]home )?personal trainers? (?:in )?la jolla|la jolla (?:in[- ]home )?personal trainers?
+  K26 personal trainer rancho bernardo / in home personal trainer rancho bernardo
+      owner  /personal-trainer-rancho-bernardo
+      match  (?:in[- ]home )?personal trainers? (?:in )?rancho bernardo|rancho bernardo (?:in[- ]home )?personal trainers?
+  K27 personal trainer rancho santa fe / in home personal trainer rancho santa fe
+      owner  /personal-trainer-rancho-santa-fe
+      match  (?:in[- ]home )?personal trainers? (?:in )?rancho santa fe|rancho santa fe (?:in[- ]home )?personal trainers?
+  K28 personal trainer santaluz / in home personal trainer santaluz
+      owner  /personal-trainer-santaluz
+      match  (?:in[- ]home )?personal trainers? (?:in )?santaluz|santaluz (?:in[- ]home )?personal trainers?
+  K29 personal trainer solana beach / in home personal trainer solana beach
+      owner  /personal-trainer-solana-beach
+      match  (?:in[- ]home )?personal trainers? (?:in )?solana beach|solana beach (?:in[- ]home )?personal trainers?
+  X01 in-home page carries no other keyword's qualifier
+      page   /in-home-personal-trainer-san-diego
+      in     title meta h1 h2 h3 h4 h5 h6 faq jsonld
+      match  \bprivate\b|north county|older adults?|\b(?:over|after)[- ]50\b|\bseniors?\b|\bcost\b|how much|\bpric(?:e|es|ing)\b|4s ranch|carlsbad|carmel valley|del mar|encinitas|fairbanks ranch|la jolla|rancho bernardo|rancho santa fe|santaluz|solana beach|poway|del sur|olivenhain|la costa
+  X02 homepage keeps "private" out of its title, H1 and H2s
+      page   /
+      in     title h1 h2
+      match  \bprivate\b
+  END OWNERSHIP TABLE
+
+  K10 is the cost keyword: no new cost-anchor links anywhere until its page
+  exists, and /training-rates-san-diego stays transactional.
+
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
@@ -747,7 +894,7 @@ NEXT RUNS
   situation and approach language only, compliance screen applies.
 - BATCH 3: corrective-exercise-post-rehab DONE (Aug 2026) ·
   the-omnifit-method (12 metrics, not 7) · how-we-measure-your-progress ·
-  omnifit-vs-competitors · weight-loss · strength-training-1 ·
+  omnifit-vs-competitors · weight-loss · strength-training-1 (archived Oct 2026) ·
   hiit-personal-trainer-san-diego · personal-training-services ·
   body-composition-testing · partners.
 - BATCH 4: terms-and-conditions DONE (Sept 20, 2026 — pages/terms-and-conditions.html

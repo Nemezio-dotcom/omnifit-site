@@ -7,6 +7,8 @@ two stay in step.
 ```
 python3 tools/certify.py     # the three-category certification
 python3 tools/mkheaders.py   # regenerate the Batch 3 page headers
+python3 tools/ownership.py   # keyword ownership on public/ (also run by build.py --check)
+python3 tools/ownership.py --selftest   # its must-fail / must-pass fixtures
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
@@ -446,3 +448,32 @@ python3 tools/mkterritory.py   # regenerate the eleven territory page headers
 `mkterritory.py` keeps each territory header's own WebPage and breadcrumb,
 mirrors the on-page FAQ verbatim (tags stripped) in page order, and asserts the
 pricing answer is byte-identical across all eleven before writing.
+
+## Keyword ownership (`ownership.py`, Oct 2026)
+
+Reads the OWNERSHIP TABLE in CANON's KEYWORD OWNERSHIP section and fails when
+an owned phrase sits in the title, H1, H2s or meta description of a page other
+than its owner (or an `also` page), plus the page-specific X rules (the
+in-home page's banned qualifiers, the homepage's "private"). It reads the
+**rendered** pages in `public/`, because title and meta are only resolved at
+build time, and it is run by `build.py --check`, not `certify.py`: CANON caps
+certification at three finding categories and this is none of them.
+
+It fails closed the same way the rest of this directory does: a missing,
+empty or malformed table, a regex that does not compile, or an owner page that
+was not built is a problem, never a skipped check. An unassigned keyword
+(owner `-`) is printed as NOT enforced rather than passing silently.
+
+Fixtures: `fixtures/ownership/fail/*.html` must each produce a problem,
+`fixtures/ownership/pass/*.html` must each produce none; each carries a
+`<!-- fixture-path: /slug -->` line saying which page it pretends to be.
+`build.py --check` runs them before checking the site. Negative-tested by
+mutation when written: disabling longest-match attribution breaks four pass
+fixtures, dropping comment stripping breaks one, and dropping H2 from the
+scanned surfaces lets five fail fixtures through.
+
+Known drift, recorded so the next run is not surprised: `mkheaders.py` is NOT
+a no-op on `pages/headers/how-we-measure-your-progress-header.html` (its FAQPage has drifted from the
+page, the 7-vs-6 mirror finding certify.py already reports). Regenerating
+rewrites it; the Keyword Ownership run reverted that write as out of scope.
+
