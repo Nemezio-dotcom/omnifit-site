@@ -152,10 +152,15 @@ Cloudflare serves `public/<slug>/index.html` at `/<slug>` and 308-redirects
 4. **Homepage hero.** `pages/home-0.html` is the new hero (navy rounded card,
    Playfair H1 "San Diego Personal Trainer for Executives", gold italic
    subhead, no CTA). If the live hero carries anything else, edit that file.
-5. **Images are hotlinked from Squarespace.** 25 distinct
-   `images.squarespace-cdn.com` URLs are referenced across 39 pages. They will
-   break when the Squarespace subscription ends. Download them, put them under
-   `public/assets/img/`, and update the references before cancelling.
+5. **Images are hotlinked from Squarespace.** 6 distinct
+   `images.squarespace-cdn.com` URLs remain (Oct 17, 2026), one of them on
+   almost every page: the Brandon testimonial, the PN logo, a 100px image
+   (`61f78fa7-…png`), the Thumbtack Pro screenshot, Dr. Jackson-Ricketts'
+   headshot and the Executive Reset dumbbell photo. They will break when the
+   Squarespace subscription ends. Put each in `site/img/` (served at
+   `/assets/img/`) and update the references before cancelling. The seven
+   client transformation photos are done: re-branded (old knot logo removed,
+   header logo added; clients untouched) and served from `/assets/img/`.
 6. **Analytics / embeds.** Preserved exactly: GTM `GTM-5P4CKPT2`, Microsoft
    Clarity `ulpgsrkd98` and the HubSpot loader (portal 244441037) on every
    page; the HubSpot form (portal 244441037, form
