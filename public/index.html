@@ -3437,20 +3437,29 @@ Changelog v2:
       requestAnimationFrame(step);
     }
 
-    /* ---- 3. One observer for everything. ---- */
+    /* ---- 3. One observer for everything. A wipe starts fully clipped, and
+       a fully clipped element never reports as visible, so a wipe is watched
+       through its parent and revealed with it. ---- */
+    var watched = new Map();
+    function watch(el) {
+      var w = el.classList.contains('omni-rv--wipe') ? el.parentNode : el;
+      if (!watched.has(w)) { watched.set(w, []); io.observe(w); }
+      watched.get(w).push(el);
+    }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
-        var el = e.target;
-        el.classList.add('is-in');
-        counters.forEach(function (c) { if (!c.done && el.contains(c.el)) { c.done = true; runCounter(c); } });
-        io.unobserve(el);
+        (watched.get(e.target) || []).forEach(function (el) {
+          el.classList.add('is-in');
+          counters.forEach(function (c) { if (!c.done && el.contains(c.el)) { c.done = true; runCounter(c); } });
+        });
+        io.unobserve(e.target);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    targets.forEach(function (el) { io.observe(el); });
+    targets.forEach(watch);
     /* counters that sit outside any tagged element still need a trigger */
     counters.forEach(function (c) {
-      if (!targets.some(function (t) { return t.contains(c.el); })) { targets.push(c.el); c.el.classList.add('omni-rv'); io.observe(c.el); }
+      if (!targets.some(function (t) { return t.contains(c.el); })) { targets.push(c.el); c.el.classList.add('omni-rv'); watch(c.el); }
     });
 
     /* ---- 4. Gold sheen on the section CTAs. ---- */
@@ -3458,9 +3467,14 @@ Changelog v2:
       a.classList.add('omni-sheen');
     });
 
-    /* Safety net: whatever never intersected (e.g. display:none filters) is
-       shown after a while so nothing can stay hidden. */
-    setTimeout(function () { targets.forEach(function (el) { el.classList.add('is-in'); }); }, 9000);
+    /* Printing shows everything at once. No timed reveal: a timer would
+       finish sections the reader has not scrolled to yet, so they would
+       never be seen animating. Elements hidden by a filter (display:none)
+       stay observed and reveal when they are shown and scrolled into view. */
+    window.addEventListener('beforeprint', function () {
+      targets.forEach(function (el) { el.classList.add('is-in'); });
+      counters.forEach(function (c) { if (!c.done) { c.done = true; c.el.textContent = c.raw; } });
+    });
   })();
   </script>
 </div>
