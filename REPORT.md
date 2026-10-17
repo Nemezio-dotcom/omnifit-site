@@ -3863,3 +3863,23 @@ Longest-match attribution as the check applies it ("In-Home Personal Trainer in 
 ### Human-side
 - Deploy is from main. There's no Squarespace paste; the redirect ships in `_redirects`.
 - Search Console: request recrawl of the in-home, private, over-50, corrective, desk-worker and FAQs pages and the homepage; submit the new sitemap.
+
+## Certification cleanup (Oct 16, 2026)
+
+Cleared every pre-existing certification finding left after the keyword ownership pass. Certification went from FAILED (compliance 4 · stale canon 0 · structure 5 · not-run 11) to **INCOMPLETE (compliance 0 · stale canon 0 · structure 0 · not-run 9)**: no findings remain. No rule was weakened or exempted.
+
+### Fixes
+1. **how-we-measure-your-progress, FAQ mirror (page 7 vs schema 6).** Not real drift. The Results-section toggle "How these figures were calculated" uses the same `fq` accordion markup as the FAQ, so the extractor read it as FAQ question 1 and every index shifted. It is now `class="fq fq-method"` (same styling; the extractor's `class="fq"` pattern no longer reads it). The schema's six questions and answers mirror the six real FAQs. `mkheaders.py` would have copied the method block into FAQPage; that write was not taken.
+2. **how-we-measure-your-progress, T1-2.** "Tracked to determine whether mobility and corrective work is producing measurable functional change." → "Tracked to show whether mobility and corrective work is changing how those joints move." It describes what is tracked, not a promised result.
+3. **outcomes-header, T2-1 ×3 (87%, 13.7%, 34%).** The Dataset description had the method and the company-reported note but not the individual-results disclaimer. Appended the page's own verbatim line: "Individual results vary with starting point, adherence, sleep, stress and medical history."
+4. **Orphan headers.** `bodybuilding-header.html` and `energy-protocol-waitlist-form-header.html` moved to `archive/headers/` (Nemezio confirmed neither page is live). `home-header.html` is NOT an orphan: build.py uses it as the homepage header. certify.py now checks its FAQPage against `pages/home-5.html` (`HEADER_PAGE`, per CANON) instead of reporting "no matching page".
+5. **faq.py.** Running that homepage check surfaced an extractor artifact: home-5 puts `<span class="icon">+</span>` inside each `<summary>`, so questions read "+ Do you offer…". Decorative `…icon` spans are now stripped before comparison. Negative test: changing one homepage schema question makes certify report `[FAQPage questions do not mirror page]`; restoring it clears.
+
+### The 9 checks that could not run (unchanged, by design)
+Six headers whose pages have no FAQ (about, contactform, fit-check, personal-training-services, privacy-policy, terms-and-conditions), two headers that are bare nodes rather than an @graph (contactform, desk-worker-posture-pain), and about-header's AboutPage node (no WebPage node for the `about` check). None is a defect; converting those headers to @graph would let INCOMPLETE become PASSED.
+
+### Checks
+- `python3 build.py` → 41 pages; `build.py --check` → PASSED; `tools/ownership.py --selftest` → PASSED.
+- `tools/certify.py` → INCOMPLETE, 0 findings. All five invariant hashes unchanged.
+- `tools/mkheaders.py` → only the how-we-measure header's leading comment differs (hand-written Oct 2 comment kept); the JSON-LD is identical.
+- Sitemap: lastmod for how-we-measure and outcomes moves to Oct 16. hsa-fsa moves 09-13 → 08-28 because this build ran with full git history (earlier builds read dates from a shallow clone).

@@ -6,6 +6,10 @@ import re, glob, json, hashlib, html, html.parser, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import faq
 
+# Headers whose page is not pages/<slug>.html. Only the homepage: it lives
+# as the home-0..6 fragments and its FAQ is in home-5 (CANON, ORPHAN HEADERS).
+HEADER_PAGE = {"home": "pages/home-5.html"}
+
 # the-30-minute-executive-reset left this list in the October Card run's
 # follow-up, once its content was brought to the card and its RED-PEN flags
 # closed. footer.html is site-wide and in no batch.
@@ -870,7 +874,11 @@ def run():
                 elif not n["WebPage"].get("about",{}).get("@id","").endswith("#localbusiness-of"):
                     print(f"   {f}  [about not referencing homepage LocalBusiness]"); C+=1
             slug=re.sub(r'-header\.html$','',f.split('/')[-1])
-            pg=f"pages/{slug}.html"
+            # The homepage exists only as the home-0..6 fragments, so there is
+            # no pages/home.html. CANON (ORPHAN HEADERS, home-header.html) says
+            # its FAQPage mirrors pages/home-5.html; check it there rather than
+            # report "no matching page" for a header that is live and built.
+            pg=HEADER_PAGE.get(slug, f"pages/{slug}.html")
             sq=[q["name"] for x in graph if x.get("@type")=="FAQPage" for q in x["mainEntity"]]
             sa=[q["acceptedAnswer"]["text"] for x in graph if x.get("@type")=="FAQPage"
                 for q in x["mainEntity"]]

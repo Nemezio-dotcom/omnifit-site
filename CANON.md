@@ -89,12 +89,10 @@ REPO STATE (reconciled with disk, Sept 2026)
     · footer.html - site-wide, in no batch.
 
   ORPHAN HEADERS - a header with no page in the repo
-    · bodybuilding-header.html (5 FAQ entries)
-    · energy-protocol-waitlist-form-header.html (no FAQPage)
-      Both pages are Squarespace block-built: there is no Code Block to
-      retrieve, so the page will never exist here. The headers are real and
-      deployed. Certification reports each as "no matching page" - expected,
-      and left visible rather than suppressed.
+    · bodybuilding-header.html and energy-protocol-waitlist-form-header.html
+      were moved to archive/headers/ on Oct 16, 2026: Nemezio confirmed
+      neither page is live on Squarespace any more (/bodybuilding returns
+      nothing; the waitlist page is gone). No redirect needed.
     · site-header.html - NEW Sept 20, 2026. The SITE-WIDE header injection
       (Squarespace Settings → Advanced → Code Injection → Header): Clarity +
       HubSpot deferral, GTM, geo meta, and the site's ENTITY GRAPH —
@@ -116,9 +114,10 @@ REPO STATE (reconciled with disk, Sept 2026)
       "Personal Trainer San Diego | Diagnostic-Led Coaching") + FAQPage
       mirroring pages/home-5.html verbatim. It no longer defines the
       LocalBusiness (see site-header.html). The homepage itself lives in this
-      repo only as the home-1..home-6 fragments, so there is no pages/home.html
-      and the "no matching page" finding applies. LIVE as of 2026-09-20.
-      The mirror check should be read against home-5.html, not a home.html.
+      repo only as the home-0..home-6 fragments, so there is no pages/home.html.
+      LIVE as of 2026-09-20. Since Oct 16, 2026 certify.py checks its FAQPage
+      mirror against pages/home-5.html (HEADER_PAGE in certify.py) instead of
+      reporting "no matching page".
     · home-6.html - NEW Sept 20, 2026: the homepage Partner & Duo section
       (Code Block, after the programs section, before the FAQ). Replaces an
       August-card block that was live but never in the repo (it carried the
