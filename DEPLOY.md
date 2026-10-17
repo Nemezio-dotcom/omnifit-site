@@ -10,14 +10,15 @@ the shared header, nav and footer are wrapped around them from one source.
 ```
 pages/<slug>.html                 page body (the Squarespace Code Block)
 pages/headers/<slug>-header.html  page header injection (JSON-LD etc.)
-pages/headers/site-header.html    site-wide header injection (GTM, Clarity,
-                                  HubSpot deferral, geo meta, entity graph)
+pages/headers/site-header.html    site-wide header injection (GA4 + Clarity,
+                                  production only; HubSpot deferral; geo
+                                  meta; entity graph)
 pages/footer.html                 site-wide footer (CSS + markup + year script)
 pages/home-0.html                 homepage hero (built for the static site; the only h1)
 pages/home-1..6.html              homepage sections
 site/layout.html                  the HTML document skeleton
 site/nav.html                     announcement bar + site header + primary nav (single source)
-site/site.css, site/site.js       shared CSS / JS
+site/site.css, site/site.js       shared CSS / JS (site.js sends every event)
 site/icons.py                     the gold line-SVG icon for every emoji the pages used
 site/img/logo.svg, logo.png       the brand logo (the SVG is inlined into site/nav.html)
 build.py                          stdlib-only build + checks
@@ -119,6 +120,60 @@ once per browser session the ring draws itself, the F pops in, the letters
 rise and the gold rule extends; hovering the logo turns the ring. All of it is
 inert under `prefers-reduced-motion`. Sizing and motion live in `site/site.css`.
 
+## Measurement
+
+One setup, all in the repo, no Google Tag Manager. CANON MEASUREMENT is the
+rule; this is the operating note.
+
+| What | Value |
+|---|---|
+| Google Analytics 4 | Measurement ID `G-0K6VLEC2VJ`, loaded as gtag.js |
+| Microsoft Clarity | project `yzawpvwvdf` |
+| Single source | `pages/headers/site-header.html` loads both; `site/site.js` sends every event |
+| Loads on | `www.omnifittraining.com` and `omnifittraining.com` only (`location.hostname`) |
+| Anywhere else | `*.pages.dev` previews, localhost: nothing loads, `window.gtag` is undefined, and each event is one console line `[omnifit-track] <event> <json params>` |
+| Clarity exclusion | never loads on `/fit-check` (GA4 still does) |
+| HubSpot | untouched: the deferred tracking loader (portal 244441037) on every page, the form embed on `/contactform` and `/personal-trainer-4s-ranch` |
+| Retired | GTM `GTM-5P4CKPT2` and its noscript iframe, Clarity `ulpgsrkd98`, the page-level `cta_click` / `lead_form_submit` scripts on `/personal-trainer-4s-ranch`. `build.py --check` fails if any of `GTM-5P4CKPT2`, `ulpgsrkd98`, `AW-16616873404`, `G-QTG1ZLR0NQ` or `dataLayer.push` appears anywhere in `public/`, or if either live ID appears more than once on a page |
+
+Events (`gtag('event', name, params)` when gtag exists, else the console line;
+all sent from `site/site.js` by delegated listeners, no page carries a
+tracking script):
+
+| Event | When | Params |
+|---|---|---|
+| `book_consultation_click` | any link to calendly.com | `cta_location` (page slug, `home` for `/`), `cta_label` (link text, trimmed, max 60), `cta_position` (`nav` \| `hero` \| `body` \| `footer` \| `sticky`, from the nearest landmark: a `sticky` class, `<footer>`, the site header or announcement bar, a `hero` class, else body; `data-cta-position` on the link or an ancestor overrides) |
+| `generate_lead` | HubSpot form submitted (window `message` with `data.type === "hsFormCallback"` and `data.eventName === "onFormSubmitted"`) | `form_location` (page slug) |
+| `phone_click` / `email_click` | `tel:` / `mailto:` links | `cta_location` |
+| `fit_check_start` | first answer selected on `/fit-check` | none |
+| `fit_check_complete` | result shown (the page marks `#result` with `data-fit-result` and, on a pass, `data-fit-setting`) | `fit_result` (`pass` \| `hold`), `fit_setting` (recommended Dial setting, pass only). Individual answers are never sent. A retake that reaches a new result counts again |
+| `rates_section_view` | `/training-rates-san-diego` only, the first time each of `#rt-foundation`, `#rt-program`, `#rt-sessions`, `#rt-reset` scrolls into view (IntersectionObserver, once per section, bottom 20% of the viewport excluded) | `section` (the id) |
+
+Completed bookings are not a site event. Calendly's own Google Analytics
+integration (Calendly > Integrations > Google Analytics, the Measurement ID
+above) reports Calendly's booking events to the same property, and
+cross-domain measurement is configured in GA4 for `calendly.com` (Admin >
+Data streams > the web stream > Configure tag settings > Configure your
+domains) so a visitor who clicks through and books stays one session. Both
+are GA4 / Calendly settings, not repo code; see the manual steps.
+
+**Test-only override.** `?omnifit-track=prod` forces the production branch,
+and is honoured only when `location.hostname` is `localhost` or `127.0.0.1`.
+On any other host, the pages.dev preview included, the flag does nothing.
+`tools/tracktest.js` uses it:
+
+```
+python3 build.py
+NODE_PATH="$(npm root -g)" node tools/tracktest.js
+```
+
+The test serves `public/` locally, maps `www.omnifittraining.com` to the local
+server inside Chromium to prove the real production condition, stubs gtag.js so
+no hit reaches Google, intercepts google-analytics.com and clarity.ms, and
+asserts every event above with its params, Clarity absent on `/fit-check`, and
+no request to either service on a non-production host. Details in
+`tools/README.md`; the results table is in `REPORT.md`.
+
 ## Cloudflare Pages settings
 
 | Setting | Value |
@@ -174,16 +229,25 @@ Cloudflare serves `public/<slug>/index.html` at `/<slug>` and 308-redirects
    `/assets/img/`) and update the references before cancelling. The seven
    client transformation photos are done: re-branded (old knot logo removed,
    header logo added; clients untouched) and served from `/assets/img/`.
-6. **Analytics / embeds.** Preserved exactly: GTM `GTM-5P4CKPT2`, Microsoft
-   Clarity `ulpgsrkd98` and the HubSpot loader (portal 244441037) on every
-   page; the HubSpot form (portal 244441037, form
+6. **Analytics (GA4 / Clarity, human-side settings).** The tags themselves
+   are in the repo (see "Measurement"); these are the settings around them:
+   (a) GA4 cross-domain: Admin > Data streams > the web stream > Configure
+   tag settings > Configure your domains > add `calendly.com`. (b) Calendly >
+   Integrations > Google Analytics: enter `G-0K6VLEC2VJ`, so completed
+   bookings reach the property from Calendly's side; the site sends only the
+   click. (c) In GA4, mark `book_consultation_click`, `generate_lead`,
+   `fit_check_complete` and Calendly's scheduled event as key events.
+   (d) Clarity project `yzawpvwvdf`: keep masking at Balanced or Strict so
+   form fields are masked, as the privacy policy states; the project is
+   never loaded on `/fit-check`. (e) Retire the old stack: unpublish or
+   pause GTM container `GTM-5P4CKPT2` and stop expecting data in Clarity
+   project `ulpgsrkd98`; whatever `G-QTG1ZLR0NQ` and `AW-16616873404` fired
+   from inside the container stops with it. **Still not in the repo:** any
+   Jotform or Trainerize embed (no iframe or script for either exists in any
+   page; Trainerize appears only as text). HubSpot is preserved exactly:
+   the deferred loader (portal 244441037) on every page and the form (form
    `a34ea6d0-e63f-46d1-83d4-c675a27d64bb`) on `/contactform` and
-   `/personal-trainer-4s-ranch`; Calendly links on every page. **Not in the
-   repo:** a direct GA4 tag for property 392866825 (it must be firing from the
-   GTM container, confirm in GTM), and any Jotform or Trainerize embed (no
-   iframe or script for either exists in any page; Trainerize appears only as
-   text). If those were Squarespace-injected, add them to
-   `pages/headers/site-header.html` and rebuild.
+   `/personal-trainer-4s-ranch`.
 7. **Squarespace URL mappings.** Done Oct 17, 2026: the owner pasted the
    live mapping list and every line is in `public/_redirects` with its
    Squarespace target (see "Redirects" below). Nothing left to export.
