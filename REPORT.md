@@ -3673,3 +3673,193 @@ All five structure findings and the one stale-canon hit are **pre-existing and u
 
 ### Open for the owner
 - CANON DEFERRED-01 names the "Does OmniFit offer a money-back guarantee?" FAQ on this page as an approved-wording carrier; that FAQ no longer exists (FAQ replaced on instruction). The callout wording on the page is the V12 three-product wording, not CANON's Reset-only text.
+
+
+---
+
+## Keyword Ownership run — Oct 17, 2026
+
+**Branch:** ccr-c78d8076-sods35, merged to main. Source: the Keyword Ownership Map (Semrush Position Tracking, Oct 5–11, 2026). Every tracked keyword now has one owner page; the table lives in CANON (KEYWORD OWNERSHIP) and is enforced by `tools/ownership.py` from `python3 build.py --check`.
+
+### What changed
+| File | Change |
+|---|---|
+| `pages/in-home-personal-trainer-san-diego.html` + header | v4 / header v3. Meta and JSON-LD description rewritten with the in-home qualifier; no "private", North County, age group or cost there. H2 "What People Come to Private Coaching For" → "…In-Home Coaching For". Body: Del Mar, 4S Ranch and North County removed (badge, quotables, service-area intro, area cards, hub links, trust bar, FAQ). Towns only as cards in the one service-area list; Rancho Bernardo moved from plain text to a card linking its page; Del Sur, Olivenhain, La Costa and the five "Personal Trainer [town] →" hub links dropped; Poway kept. Cost FAQ removed (page + FAQPage). "Training After 50" and "Strength Training" hub links removed. Two links added (below). |
+| `pages/home-1.html` | One sentence + link "private personal trainer in San Diego" → private page. No title/H1/H2 change; "private" stays out of all three. Executive Reset already linked 5× from the homepage; none added. |
+| `pages/private-personal-trainer-san-diego.html` + header | "Corrective Exercise Specialist" spelled out 3× → NASM CES / ACE CES (credential list ×2, credentials FAQ answer, mirrored in FAQPage). One link "corrective exercise" → corrective page. North County, executive and travel language untouched. |
+| `pages/personal-trainer-over-50-san-diego.html` + header | "older adults" in two H2s and in the "How often would I train?" FAQ answer (mirrored). The research FAQ answer already carried it. |
+| `pages/corrective-exercise-post-rehab.html` + header | Owner of "back pain": H2 "Back Pain, Postural & Movement Issues We Address"; "What postural issues do you help with?" answer now says "chronic lower back pain" (mirrored). Strength Training removed from its link list. |
+| `pages/desk-worker-posture-pain.html`, `build.py` META_FALLBACK | "back pain" out of the meta ("a stiff lower back"); title/H1/H2s never had it. Hero copy keeps it, now as a link to the corrective page. |
+| `pages/headers/FAQs-header.html` | Meta "private personal training programs" → "personal training programs" (K05 variant on a non-owner). |
+| `/strength-training-1` | Page + header moved byte-identical to `archive/`; `build.py` REDIRECTS emits `/strength-training-1 / 301`; gone from the build (42 → 41 pages) and sitemap; dropped from `tools/mkheaders.py` META; 11 link-list entries removed, 4 running-text/card links repointed to `/personal-training-services`. |
+| `tools/ownership.py`, `tools/fixtures/ownership/`, `build.py` | New check + 17 must-fail / 10 must-pass fixtures + 4 malformed-table cases. `build.py --check` runs the fixtures, then the site. |
+| `CANON.md`, `tools/README.md`, `DEPLOY.md` | KEYWORD OWNERSHIP section with the parsed table; page list (29 certified pairs), ARCHIVE entry, redirect list. |
+
+### (a) Title / meta / H1 / H2, before → after (pages whose surfaces changed or were checked)
+#### `/`
+- **TITLE** unchanged: Personal Trainer San Diego | Diagnostic-Led Coaching
+- **META** unchanged: Diagnostic-led personal training for busy professionals 30+ in San Diego. Bodystat QuadScan 4000 body composition, 9-point movement screen, corrective-first strength, in-studio at Teqneeq in 4S Ranch, in-home across North County, and virtual nationwide. NASM Elite Trainer with 190+ five-star reviews.
+- **H1** unchanged: San Diego Personal Trainer for Executives
+- **H2** unchanged: 30 H2s
+
+#### `/in-home-personal-trainer-san-diego`
+- **TITLE** unchanged: In-Home Personal Trainer in San Diego | OmniFit Performance
+- **META** before: Private in-home personal training across North County and coastal San Diego for professionals 30+. Nine-point movement screen, corrective-first programming, equipment provided. NASM Elite Trainer with 190+ five-star reviews.
+  - after: In-home personal training in San Diego: your coach comes to you. Nine-point movement screen, corrective-first programming, equipment provided or built around yours. NASM Elite Trainer with 190+ five-star reviews.
+- **H1** unchanged: In-Home Personal Trainer in San Diego
+  - H2 before: What People Come to Private Coaching For
+  - H2 after: What People Come to In-Home Coaching For
+
+#### `/private-personal-trainer-san-diego`
+- **TITLE** unchanged: Private Personal Trainer in San Diego | OmniFit Performance
+- **META** unchanged: Private 1:1 personal training in San Diego for professionals and executives over 30, at Teqneeq FHC in 4S Ranch or in-home. NASM Elite Trainer with 190+ five-star reviews.
+- **H1** unchanged: Private Personal Trainer in San Diego
+- **H2** unchanged: 10 H2s
+
+#### `/personal-trainer-over-50-san-diego`
+- **TITLE** unchanged: Personal Trainer for Over 50 in San Diego | Strength Training After 50
+- **META** unchanged: Strength training for men and women over 50 in San Diego. Longer recovery windows, volume before intensity, corrective work for decades of desk posture.
+- **H1** unchanged: Personal Training for Men and Women Over 50
+  - H2 before: Why Recovery Windows Get Longer
+  - H2 after: Why Recovery Windows Get Longer for Older Adults
+  - H2 before: Three Things Most Programs Ignore
+  - H2 after: Three Things Most Programs for Older Adults Ignore
+
+#### `/corrective-exercise-post-rehab`
+- **TITLE** unchanged: Corrective Exercise Specialist in San Diego | Post-Rehab Training | OmniFit Performance
+- **META** unchanged: Corrective exercise and post-rehab personal training in San Diego at Teqneeq FHC, 4S Ranch, and virtually. NASM and ACE Corrective Exercise Specialist, 3/10 pain ceiling protocol, the structured bridge after physical therapy discharge. 190+ five-star reviews.
+- **H1** unchanged: Corrective Exercise Specialist & Post-Rehab Training in San Diego
+  - H2 before: Postural & Movement Issues We Address
+  - H2 after: Back Pain, Postural & Movement Issues We Address
+
+#### `/desk-worker-posture-pain`
+- **TITLE** unchanged: Desk Worker Posture & Pain Correction | OmniFit Performance San Diego
+- **META** before: Corrective exercise and posture correction for desk workers and busy professionals 30+ in San Diego. A 9-point movement screening identifies the muscular imbalances created by prolonged sitting; the Assess, Correct, Build, Sustain methodology addresses forward head posture, rounded shoulders, chronic lower back pain, and hip tightness.
+  - after: Corrective exercise and posture correction for desk workers and busy professionals 30+ in San Diego. A 9-point movement screening identifies the muscular imbalances created by prolonged sitting; the Assess, Correct, Build, Sustain methodology addresses forward head posture, rounded shoulders, a stiff lower back, and hip tightness.
+- **H1** unchanged: Desk Worker Posture & Pain Correction
+- **H2** unchanged: 8 H2s
+
+#### `/faqs`
+- **TITLE** unchanged: OmniFit Performance FAQs | Personal Training in San Diego
+- **META** before: Answers on OmniFit Performance's private personal training programs, pricing, policies, and what to expect, for professionals 30+ in San Diego and online. NASM Elite Trainer with 190+ five-star reviews.
+  - after: Answers on OmniFit Performance's personal training programs, pricing, policies, and what to expect, for professionals 30+ in San Diego and online. NASM Elite Trainer with 190+ five-star reviews.
+- **H1** unchanged: Frequently Asked Questions
+- **H2** unchanged: 1 H2s
+
+Territory pages, HIIT and weight-loss had link-list edits only; their surfaces are unchanged. `/strength-training-1` no longer renders.
+
+### (b) Owned phrase × page, matches before → after
+Longest-match attribution as the check applies it ("In-Home Personal Trainer in San Diego" counts for K06 only). Body = `<main>` text minus H1/H2. Only non-zero rows shown; "—" = page not built.
+
+| Keyword | Page | title/H1/H2/meta | body |
+|---|---|---|---|
+| K01 | `/` **owner** | 2 → 2 | 0 → 0 |
+| K01 | `/private-personal-trainer-san-diego`  | 0 → 0 | 1 → 1 |
+| K03 | `/personal-trainer-4s-ranch` also | 2 → 2 | 1 → 1 |
+| K05 | `/`  | 0 → 0 | 0 → 1 |
+| K05 | `/about`  | 0 → 0 | 1 → 1 |
+| K05 | `/faqs`  | 1 → 0 | 0 → 0 |
+| K05 | `/in-home-personal-trainer-san-diego`  | 0 → 0 | 0 → 1 |
+| K05 | `/private-personal-trainer-san-diego` **owner** | 3 → 3 | 4 → 4 |
+| K06 | `/faqs`  | 0 → 0 | 1 → 1 |
+| K06 | `/in-home-personal-trainer-san-diego` **owner** | 2 → 3 | 0 → 0 |
+| K07 | `/`  | 0 → 0 | 1 → 1 |
+| K07 | `/case-studies`  | 0 → 0 | 1 → 1 |
+| K07 | `/corrective-exercise-post-rehab`  | 0 → 0 | 1 → 1 |
+| K07 | `/couples-personal-training-san-diego`  | 0 → 0 | 1 → 1 |
+| K07 | `/glp-1-personal-training-san-diego`  | 0 → 0 | 1 → 1 |
+| K07 | `/in-home-personal-trainer-san-diego`  | 0 → 0 | 1 → 1 |
+| K07 | `/nutrition-coaching-san-diego`  | 0 → 0 | 1 → 1 |
+| K07 | `/personal-trainer-4s-ranch`  | 0 → 0 | 1 → 1 |
+| K07 | `/personal-trainer-over-50-san-diego` **owner** | 6 → 8 | 10 → 11 |
+| K07 | `/personal-training-services`  | 0 → 0 | 1 → 1 |
+| K08 | `/`  | 0 → 0 | 2 → 2 |
+| K08 | `/about`  | 0 → 0 | 6 → 6 |
+| K08 | `/body-composition-testing`  | 0 → 0 | 1 → 1 |
+| K08 | `/corrective-exercise-post-rehab` **owner** | 6 → 6 | 24 → 24 |
+| K08 | `/desk-worker-posture-pain`  | 0 → 0 | 4 → 4 |
+| K08 | `/faqs`  | 0 → 0 | 2 → 2 |
+| K08 | `/how-it-works-pricing`  | 0 → 0 | 2 → 2 |
+| K08 | `/partners`  | 0 → 0 | 2 → 2 |
+| K08 | `/personal-trainer-4s-ranch`  | 0 → 0 | 5 → 5 |
+| K08 | `/personal-trainer-carlsbad`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-carmel-valley`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-del-mar`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-encinitas`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-fairbanks-ranch`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-la-jolla`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-rancho-bernardo`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-rancho-santa-fe`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-santaluz`  | 0 → 0 | 3 → 3 |
+| K08 | `/personal-trainer-solana-beach`  | 0 → 0 | 3 → 3 |
+| K08 | `/private-personal-trainer-san-diego`  | 0 → 0 | 3 → 0 |
+| K08 | `/strength-training-1`  | 0 → — | 4 → — |
+| K08 | `/the-30-minute-executive-reset`  | 0 → 0 | 1 → 1 |
+| K08 | `/weight-loss`  | 0 → 0 | 1 → 1 |
+| K09 | `/`  | 0 → 0 | 5 → 5 |
+| K09 | `/case-studies`  | 0 → 0 | 5 → 5 |
+| K09 | `/corrective-exercise-post-rehab` **owner** | 0 → 1 | 2 → 3 |
+| K09 | `/desk-worker-posture-pain`  | 1 → 0 | 3 → 3 |
+| K09 | `/personal-trainer-del-mar`  | 0 → 0 | 1 → 1 |
+| K09 | `/personal-trainer-rancho-bernardo`  | 0 → 0 | 1 → 1 |
+| K09 | `/personal-trainer-santaluz`  | 0 → 0 | 1 → 1 |
+| K09 | `/personal-trainer-solana-beach`  | 0 → 0 | 1 → 1 |
+| K10 | `/in-home-personal-trainer-san-diego`  | 0 → 0 | 1 → 0 |
+| K20 | `/personal-trainer-carlsbad` **owner** | 2 → 2 | 1 → 1 |
+| K21 | `/in-home-personal-trainer-san-diego`  | 0 → 0 | 1 → 0 |
+| K21 | `/personal-trainer-carmel-valley` **owner** | 2 → 2 | 1 → 1 |
+| K22 | `/in-home-personal-trainer-san-diego`  | 0 → 0 | 1 → 0 |
+| K22 | `/personal-trainer-del-mar` **owner** | 2 → 2 | 1 → 1 |
+| K23 | `/personal-trainer-encinitas` **owner** | 2 → 2 | 1 → 1 |
+| K24 | `/personal-trainer-fairbanks-ranch` **owner** | 2 → 2 | 1 → 1 |
+| K25 | `/in-home-personal-trainer-san-diego`  | 0 → 0 | 1 → 0 |
+| K25 | `/personal-trainer-la-jolla` **owner** | 2 → 2 | 1 → 1 |
+| K26 | `/in-home-personal-trainer-san-diego`  | 0 → 0 | 1 → 0 |
+| K26 | `/personal-trainer-rancho-bernardo` **owner** | 2 → 2 | 1 → 1 |
+| K27 | `/in-home-personal-trainer-san-diego`  | 0 → 0 | 1 → 0 |
+| K27 | `/personal-trainer-rancho-santa-fe` **owner** | 2 → 2 | 1 → 1 |
+| K28 | `/personal-trainer-santaluz` **owner** | 2 → 2 | 1 → 1 |
+| K29 | `/personal-trainer-solana-beach` **owner** | 2 → 2 | 1 → 1 |
+
+### (c) Links added
+| Page | Anchor | Target |
+|---|---|---|
+| `/` (home-1 value statement) | private personal trainer in San Diego | /private-personal-trainer-san-diego |
+| `/in-home-personal-trainer-san-diego` (studio/virtual line under the tiers) | private personal trainer in San Diego | /private-personal-trainer-san-diego |
+| `/in-home-personal-trainer-san-diego` (use-case intro) | personal training after 50 | /personal-trainer-over-50-san-diego |
+| `/in-home-personal-trainer-san-diego` (service-area list) | Rancho Bernardo (card, 92128) | /personal-trainer-rancho-bernardo |
+| `/private-personal-trainer-san-diego` (trainer credentials card) | corrective exercise | /corrective-exercise-post-rehab |
+| `/desk-worker-posture-pain` (hero) | back pain | /corrective-exercise-post-rehab |
+
+### (d) /strength-training-1
+- `_redirects`: `/strength-training-1 / 301` (generated from `build.py` REDIRECTS).
+- `sitemap.xml`: entry gone, 42 → 41 URLs.
+- Removed from link lists (11): corrective-exercise-post-rehab, hiit-personal-trainer-san-diego, weight-loss (dot-separated lists); in-home, carmel-valley, del-mar, encinitas, fairbanks-ranch, rancho-santa-fe, santaluz, solana-beach (hub links).
+- Repointed to /personal-training-services (4): "See Strength Programs →" card links on encinitas, rancho-santa-fe, solana-beach; "strength program" in the solana-beach surf/cycle FAQ answer (FAQPage text unchanged, tags are stripped).
+- **Left in place (3): personal-trainer-rancho-bernardo** (card link, FAQ link, hub link). That page is on the do-not-touch list; the links resolve through the 301 and `build.py --check` reports them as a redirect note, not a broken link.
+
+### (e) Ownership check fixtures
+`python3 tools/ownership.py --selftest` → **PASSED**: 4/4 malformed tables raise; 17/17 fail fixtures fail (one or more problems each); 10/10 pass fixtures pass. Against the pre-run `public/` the same check reports 13 problems (desk meta back pain, FAQs meta private, 11 on the in-home page). Live demonstration: putting "Personal Trainer in San Diego" first in the in-home `<title>` and "Back Pain" in the desk H1 → `build.py --check` RESULT: 2 problem(s); rebuilt → PASSED. Mutation tests: switching off longest-match breaks 4 pass fixtures; keeping comments breaks 1; dropping H2 from the scanned surfaces lets 5 fail fixtures through.
+
+### Checks
+- `python3 build.py` → 41 pages; check PASSED (one note: the RB links via the 301; four ownership notes: K02/K03/K04 not on a homepage title/H1/H2/meta, K10 unassigned).
+- `python3 build.py --check` → PASSED.
+- `python3 tools/certify.py` → FAILED (compliance 4 · stale canon 0 · structure 5 · not-run 11). Baseline before this run was 4 · 1 · 5 · 11. The stale-canon hit was "Essential" in the in-home v3 changelog comment, reworded to "the unlisted entry tier" while that changelog was being edited. **Every remaining finding is pre-existing and in a file this run did not touch:** outcomes-header (3× T2-1), how-we-measure-your-progress (T1-2 and its 7/6 FAQ mirror), and the three orphan headers. All five invariant hashes unchanged. Scope 93 → 91 (strength-training-1 page + header archived).
+- `tools/mkheaders.py`: no-op on every header it generates except how-we-measure-your-progress, where it rewrites a drifted FAQPage. That write was reverted as out of scope.
+
+### Judgment calls (each with the condition under which it is wrong)
+1. **K01 matches "personal trainer", not "personal training".** "Personal training in San Diego" is the site-wide service phrase (homepage H2, FAQs and HIIT titles). Wrong if Semrush tracks "personal training san diego" as a cannibalized keyword.
+2. **K05 does match "private personal training"**, so the FAQs meta lost "private". Wrong if the FAQs page is meant to compete for private training.
+3. **Homepage coverage gaps left alone.** The homepage owns K02 (North County), K03 (4S Ranch), K04 (executive fitness coach) but carries none on a title/H1/H2/meta surface; adding them means rewriting homepage headlines, which wasn't asked for. The check prints these as notes. Wrong if "owns" was meant to include adding the phrase to the owner.
+4. **"Best in-home trainer in San Diego" isn't in the repo.** No page or header contains that phrase or a close variant, so this run had nothing to keep. If the live in-home page carries it, live has diverged from the repo, and deploying main will drop it.
+5. **"30+" / "over 30" kept in the in-home body** as the site-wide audience, not age-group copy (it was dropped from the meta with the rest of the rewrite). Wrong if the age-group ban was meant to cover every age.
+6. **In-home FAQ "How is OmniFit different from a mobile trainer?" still links "Teqneeq Functional Health Center" to /personal-trainer-4s-ranch.** The anchor names the facility, not the town. Wrong if "remove 4S Ranch entirely" covers link targets.
+7. **In-home tier section ("Three Tiers. One Standard.") and the comparison row "Pricing structure" kept.** Neither is a cost question, and neither states a price. Wrong if the in-home page should carry no pricing content at all.
+8. **"See Strength Programs →" card links counted as running text** and repointed, not removed. Wrong if cards count as link lists.
+9. **Desk-worker keeps "back pain" in its JSON-LD Service description and hero.** Both are body and schema, not owned surfaces, and the schema still matches the page. Its hero eyebrow "Corrective Exercise Specialist — San Diego" is also body and was left.
+10. **Over-50**: the research FAQ already said "older adults", so the phrase was added to a second answer to make the change deliberate.
+11. **Rancho Bernardo card zip 92128.** 92127 is shared with 4S Ranch and Santaluz.
+
+### Human-side
+- Deploy is from main. There's no Squarespace paste; the redirect ships in `_redirects`.
+- Search Console: request recrawl of the in-home, private, over-50, corrective, desk-worker and FAQs pages and the homepage; submit the new sitemap.
