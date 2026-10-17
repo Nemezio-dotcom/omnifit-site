@@ -209,7 +209,7 @@ when editing this file.
 | 14 | tag balance · ld+json validity | (c) | unchanged |
 | 15 | LocalBusiness `@id` · `about` reference · FAQ mirror · orphan page | (c) | unchanged |
 | 16 | invariant mismatch · canon hash stale | (c) | unchanged |
-| 17 | `attributed_outcome_conditions` | T2-2a | **new** (Oct 17 2026) — the Outcome Claims Amendment's conditions 3, 4, 5 and the consent list; reported, not counted until `AMENDMENT_COUNTS` |
+| 17 | `attributed_outcome_conditions` | T2-2a | **new** (Oct 17 2026) — the Outcome Claims Amendment's conditions 3, 4, 5 and the consent list; counted since the Oct 17 follow-up (`AMENDMENT_COUNTS = True`); page-scoped /outcomes short disclosure |
 | 18 | `data_backed_figures` | T2-2g | **new** (Oct 17 2026) — unattributed client figures must be on /outcomes; adherence % on sight; same reporting rule |
 | 19 | `positioning_line_verbatim` | (b) | **new** (Oct 17 2026) — the POSITIONING LINE verbatim, never in title/meta/H1 |
 | 20 | `travel_protocol_usage` | (b) | **new** (Oct 17 2026) — "the Travel Protocol" casing, no price |
@@ -395,10 +395,10 @@ today." must not count as a disclaimer.
 CANON TIER 2 items 2a and 2g (owner-approved Oct 1 2026, applied Oct 17 2026)
 and the TIER 1 item 2 carve-out. The amendment was recorded before any page
 was brought to it, so the two new rules **report in full under `(a') OUTCOME
-CLAIMS AMENDMENT` and do not count toward the result** while
-`AMENDMENT_COUNTS = False`. The `RESULT:` line always carries their count
-(`amendment 2a/2g N NOT COUNTED`), so a green run never hides them. The run
-that fixes the copy flips the constant; nothing else changes.
+CLAIMS AMENDMENT` and did not count toward the result** while
+`AMENDMENT_COUNTS = False`. The follow-up run the same day brought the copy to
+zero findings and set `AMENDMENT_COUNTS = True` (owner): they count now. The
+`RESULT:` line always carries their count.
 
 **`attributed_outcome_conditions` (T2-2a).** Scans the raw file with
 comments, `<style>`, non-ld+json `<script>` bodies and `style="…"` attributes
@@ -419,7 +419,12 @@ the figure). Then, per figure:
 - (3) — `in just` / `in only` / `in as little as` beside the figure;
 - (4) — `DISCLOSURE_2A` verbatim on the figure's surface (`_surface`: the
   enclosing `<section>`, else the page), compared after flattening,
-  entity-unescaping and `_norm`, so a link-wrapped URL still matches;
+  entity-unescaping and `_norm`, so a link-wrapped URL still matches. On
+  /outcomes only (`outcomes.html` and its header, by basename via the
+  `page` argument) the disclosure is `DISCLOSURE_2A_OUTCOMES`, the first
+  sentence alone, and must NOT be followed by "How clients typically
+  progress" (`_has_disclosure`): the full line there, and the short line
+  anywhere else, are both findings (owner, Oct 17 2026);
 - (5) — in the figure's *block* sentence (innermost p/h/li/td/div…, then
   sentence-split): second person, first person singular (`I`, `my`, `me`,
   case-sensitive on `I`), a projection word (`will`, `can`, `expect…`,
@@ -455,8 +460,13 @@ satisfied by a figure that happens to be on the live page.
 compliant card passes; a link-wrapped disclosure passes; "in just" fires and
 "over 6 months" does not; the near-verbatim "…; see aggregate outcomes
 above." fires; the disclosure on another surface fires; "you", "I added", 
-"will add" and "gains … every year" each fire; "Dave, business owner" and an
-anonymised profile fail consent, "Ken · CTO" passes it; an unattributed
+"will add" and "gains … every year" each fire; an unlisted name ("Marco,
+business owner"; Dave R. joined the list Oct 17 2026 and now passes) and an
+anonymised profile fail consent, "Ken · CTO" passes it; the /outcomes
+exemption both ways (short line passes on outcomes.html and its header,
+fails on another page and with no page; the full line and the
+"; see aggregate outcomes above." near-miss fail on /outcomes, the full
+line passes elsewhere; the short line on another surface fails); an unattributed
 figure is not a 2a finding. 2g: an off-outcomes aggregate fires, the same
 figure on a synthetic /outcomes passes, a persona goal passes, a trial
 figure passes, an adherence % fires and an illustrative adherence % passes,
@@ -483,8 +493,19 @@ Self-tested: verbatim, in a summary, and as an ld+json slogan pass; two
 paraphrases, the DESCRIPTION, and each banned placement behave as expected.
 
 **`travel_protocol_usage` (b).** `travel protocol` in any casing but
-`Travel Protocol`, and a `$` figure in the same sentence as the name. No
-page carries the name yet, so both are proven only by their self-test.
+`Travel Protocol`, and a `$` figure in the same sentence as the name. Live on
+the travel-support pages since the Oct 17 follow-up run. The price test reads
+the sentence inside its block element (`_block_sentence`): splitting on
+punctuation alone ran an unpunctuated `<li>` on omnifit-vs-competitors back
+into the `$640–$2,900 per 4 weeks` paragraph above the list. Self-tested: a
+price in the block above passes, a price in the same `<li>` fires.
+
+**T2-1 vs the 2a disclosure (Oct 17 follow-up).** `aggregate_metric_conditions`
+read "How clients typically progress" in the disclosure as aggregate framing
+and struck Vincent's −8% card on the over-50 page once the disclosure went
+on. That verbatim pointer (link-wrapped or not) is blanked, same length, for
+the framing test only. Self-tested: the card beside the disclosure passes,
+the card beside "Clients typically see this." still fires.
 
 ## Known checker defects, unfixed
 
