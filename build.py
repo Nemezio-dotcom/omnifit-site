@@ -5,6 +5,11 @@
     python3 build.py --strict   # same, exit 1 if any check fails
     python3 build.py --check    # only run the checks against an existing public/
 
+The checks include keyword ownership (tools/ownership.py, reading the
+KEYWORD OWNERSHIP table in CANON.md): no owned phrase in the title, H1, H2s
+or meta description of a page other than its owner. Its pass/fail fixtures
+run first, so a broken check cannot report green.
+
 Sources
   pages/<slug>.html                 page body (one Squarespace Code Block each)
   pages/headers/<slug>-header.html  per-page header injection (JSON-LD, etc.)
@@ -40,6 +45,8 @@ BASE = "https://www.omnifittraining.com"
 
 sys.path.insert(0, str(SITE))
 import icons  # noqa: E402  (site/icons.py)
+sys.path.insert(0, str(ROOT / "tools"))
+import ownership  # noqa: E402  (tools/ownership.py)
 
 # Source files under pages/ that are not standalone pages.
 NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6", "home-motion"}
@@ -86,8 +93,8 @@ META_FALLBACK = {
         "Corrective exercise and posture correction for desk workers and busy professionals "
         "30+ in San Diego. A 9-point movement screening identifies the muscular imbalances "
         "created by prolonged sitting; the Assess, Correct, Build, Sustain methodology "
-        "addresses forward head posture, rounded shoulders, chronic lower back pain, and hip "
-        "tightness.",
+        "addresses forward head posture, rounded shoulders, a stiff lower back, and hip "
+        "tightness.",  # "back pain" is owned by /corrective-exercise-post-rehab (CANON KEYWORD OWNERSHIP)
     ),
 }
 
@@ -126,6 +133,8 @@ REDIRECTS = [
     ("# Slug variants", None),
     ("/consultation", "/contactform"),
     ("/FAQs", "/faqs"),
+    ("# Retired in the Keyword Ownership run (Oct 2026): page archived, URL 301s to the homepage", None),
+    ("/strength-training-1", "/"),
 ]
 
 STYLE_RE = re.compile(r"<style\b[^>]*>.*?</style>", re.S | re.I)
@@ -453,6 +462,16 @@ def check():
     for href, on in broken.items():
         where = "every page (nav or footer link)" if len(on) == len(files) else ", ".join(on)
         problems.append(f"broken internal link {href} on {where}")
+    # Keyword ownership (CANON KEYWORD OWNERSHIP). Fixtures first: if a fixture
+    # that must fail passes, the site result below means nothing.
+    try:
+        bad = ownership.selftest(verbose=False)
+    except ownership.TableError as e:
+        bad = [f"CANON table not read: {e}"]
+    problems += [f"ownership check fixture misbehaved: {b}" for b in bad]
+    own_problems, own_notes = ownership.check_site(PUBLIC)
+    problems += [f"keyword ownership: {p}" for p in own_problems]
+    notes += [f"keyword ownership: {n}" for n in own_notes]
     return problems, notes
 
 
@@ -469,7 +488,7 @@ def main():
             items = ", ".join(f"{ch} x{n} -> {icons.ICONS[ch][0]}" for ch, n in sorted(emoji_report[url_path].items(), key=lambda kv: -kv[1]))
             print(f"  {url_path:45s} {items}")
     problems, notes = check()
-    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji")
+    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji, keyword ownership")
     for n in sorted(set(notes)):
         print("  note    ", n)
     for p in problems:
