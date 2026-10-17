@@ -9,6 +9,7 @@ python3 tools/certify.py     # the three-category certification
 python3 tools/mkheaders.py   # regenerate the Batch 3 page headers
 python3 tools/ownership.py   # keyword ownership on public/ (also run by build.py --check)
 python3 tools/ownership.py --selftest   # its must-fail / must-pass fixtures
+python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-urls-*.txt
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
@@ -533,6 +534,20 @@ Fixtures: `fixtures/ownership/fail/*.html` must each produce a problem,
 mutation when written: disabling longest-match attribution breaks four pass
 fixtures, dropping comment stripping breaks one, and dropping H2 from the
 scanned surfaces lets five fail fixtures through.
+
+## Redirect check (`build.py --check`, Oct 17, 2026)
+
+Lives in `build.py` (`check_redirects`, `redirect_selftest`), not here, because
+it reads the built `public/`. CANON ARCHIVE > REDIRECTS has the principle and
+the rules. Every path in `tools/gsc-known-urls-2026-10-17.txt` must be a built
+page or a `public/_redirects` source; every internal target must be a built
+page (so no chains); no source repeats; status 301 or 302. Fixtures mutate
+the real rule set (drop a rule whose source is a known URL, add a chain, a
+duplicate, a missing target, a 308) and each must raise exactly its own
+problem kind, or the run fails. Negative-tested when written: removing the
+`/testimonials` line from `public/_redirects` reports it unresolved, adding
+`/old-chain /home 301` reports the chain, and disabling the chain rule in the
+checker trips the "add a chain" fixture.
 
 Known drift, recorded so the next run is not surprised: `mkheaders.py` is NOT
 a no-op on `pages/headers/how-we-measure-your-progress-header.html`, but since

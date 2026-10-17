@@ -4623,3 +4623,136 @@ After item 20, the owner-dictated over-50 proof card ("−11 lb bodyweight, 6 mo
 
 ### Sources changed
 `CANON.md`, `REPORT.md`, `report-assets/` (2 screenshots), `tools/certify.py`, `tools/README.md`, `pages/` (case-studies, home-3, couples, training-rates, glp-1, over-50, body-composition-testing, FAQs, how-it-works-pricing, in-home, private, and the eleven territory pages), and `pages/headers/` (couples, desk-worker, glp-1, nutrition, over-50, body-composition-testing, FAQs, in-home, private, and ten territory headers). Built output: every affected page plus `sitemap.xml` (lastmod).
+
+## Redirects: Squarespace URL Mappings, exceptions, gap-fills, known-URL check (Oct 17, 2026)
+
+**Branch:** `claude/awesome-heisenberg-ymv7vm`, merged to main. **Source:** the owner's final redirect set of Oct 17, 2026, built around the Squarespace URL Mappings the owner pasted the same day. Only `build.py` (the `REDIRECTS` list and the new check), the generated `public/_redirects`, the new `tools/gsc-known-urls-2026-10-17.txt` and the docs changed. No page, header, title or meta changed. The built pages and `sitemap.xml` are byte-identical to the previous build.
+
+**Principle**, recorded in CANON (ARCHIVE > REDIRECTS) and DEPLOY.md: the Squarespace URL Mappings are authoritative and their targets are copied unchanged. The exceptions are booking URLs to Calendly (launch decision 1), three exact-match pages that did not exist when the mapping was made, and gap-fills for URLs Google knows that Squarespace never mapped. Earlier repo rules outside the mapping stay as they were. CANON's ORPHAN HEADERS note and DEPLOY's step 3 no longer say the Energy Protocol and `/bodybuilding` pages need no redirect: both now 301.
+
+### Results
+
+| Check | Before | After |
+|---|---|---|
+| `python3 build.py --strict` | PASSED, 15 redirect rules, no redirect check | PASSED, 74 rules (73 × 301, 1 × 302), 116 known URLs checked, fixtures OK |
+| `python3 build.py --check` | PASSED; 4 notes | PASSED; the same 4 ownership notes + the redirect note |
+| `python3 tools/certify.py` | PASSED (0 · 0 · 0 · 0) | PASSED (0 · 0 · 0 · 0) |
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | a6c7e65dddff4795 | a6c7e65dddff4795 |
+| header pricing | 7af0d0049b0b7aba | 7af0d0049b0b7aba |
+| credentials | 02bd9cb90a71ce69 | 02bd9cb90a71ce69 |
+| archetypes (Section A) | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c |
+| 9-point (Section B) | 4c720960dec5a809 | 4c720960dec5a809 |
+
+### The redirect check (new in `build.py --check`)
+- Every path in `tools/gsc-known-urls-2026-10-17.txt` must be a built page or a `_redirects` source. Every internal target must be a built page, so a target that is itself a redirect source is reported as a chain. No source may repeat, and the status must be 301 or 302.
+- Fixtures run first on mutated copies of the real rule set: drop a rule, add a chain, a duplicate, a missing target, a 308. Each must raise exactly its own problem kind, or the run fails.
+- **Negative tests**, on the generated `public/_redirects`, restored by rebuild afterwards:
+
+| Mutation | Result |
+|---|---|
+| removed the `/testimonials` line | 1 problem: `unresolved: known URL /testimonials is neither a built page nor a _redirects source` |
+| added `/old-chain /home 301` | 1 problem: `chain: /old-chain -> /home -> /` |
+| added `/rates /contactform 301` and `/zz /no-such-page 301` | 2 problems: `duplicate: /rates` and `missing: /zz -> /no-such-page` |
+| disabled the chain rule inside the checker | the fixture fails: `add a chain: expected [chain], got []` |
+| restored | PASSED |
+
+### Known-URL file
+`tools/gsc-known-urls-2026-10-17.txt` holds 116 unique paths, each listed once in the first section it belongs to:
+
+| Section | Paths |
+|---|---|
+| Google's indexed paths: the 42 sitemap pages, plus `/energy-protocol-waitlist-form`, `/executive-hybrid-coaching`, `/personal-trainer-mission-hills`, `/strategy-call` | 46 |
+| Earlier `_redirects` sources not already listed | 13 |
+| Sources from the new set not already listed | 57 |
+
+### Full redirect table
+All 74 rules, in `_redirects` order. Origin counts: 44 Squarespace, 9 exception, 14 gap-fill (including `/blog`), 7 existing.
+
+| Source | Target | Status | Origin |
+|---|---|---|---|
+| `/executive-hybrid` | `/the-30-minute-executive-reset` | 301 | existing |
+| `/personal-trainer-point-loma` | `/in-home-personal-trainer-san-diego` | 301 | existing |
+| `/how-it-works` | `/how-it-works-pricing` | 301 | existing |
+| `/hybrid-coaching` | `/the-30-minute-executive-reset` | 301 | existing |
+| `/is-omnifit-right-for-you` | `/fit-check` | 301 | existing |
+| `/consultation` | `/contactform` | 301 | existing |
+| `/FAQs` | `/faqs` | 301 | existing |
+| `/new-page` | `/private-personal-trainer-san-diego` | 301 | Squarespace |
+| `/new-page-1` | `/` | 301 | Squarespace |
+| `/home` | `/` | 301 | Squarespace |
+| `/store` | `/` | 301 | Squarespace |
+| `/strength-training` | `/strength-training-1` | 301 | Squarespace |
+| `/nutritional-coaching-mission-bay` | `/weight-loss` | 301 | Squarespace |
+| `/nutritional-coaching-mission-bat` | `/weight-loss` | 301 | Squarespace |
+| `/nutritional-coaching-pacific-beach` | `/weight-loss` | 301 | Squarespace |
+| `/fat-loss-training` | `/weight-loss` | 301 | Squarespace |
+| `/weight-loss-training-remote-training` | `/weight-loss` | 301 | Squarespace |
+| `/weight-loss-training-mission-bay` | `/weight-loss` | 301 | Squarespace |
+| `/personal-trainer-pacific-beach` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/personal-trainer-in-pacific-beach` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/personal-trainer-mission-bay` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/personal-trainer-mission-valley` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/personal-trainer-clairemont` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/personal-trainer-mission-hills` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/contact` | `/contactform` | 301 | Squarespace |
+| `/free-trial-copy` | `/contactform` | 301 | Squarespace |
+| `/reviews` | `/case-studies` | 301 | Squarespace |
+| `/personal-training` | `/personal-training-services` | 301 | Squarespace |
+| `/services` | `/personal-training-services` | 301 | Squarespace |
+| `/training-rates` | `/training-rates-san-diego` | 301 | Squarespace |
+| `/rates` | `/training-rates-san-diego` | 301 | Squarespace |
+| `/fitnessprograms` | `/training-rates-san-diego` | 301 | Squarespace |
+| `/terms-conditions` | `/terms-and-conditions` | 301 | Squarespace |
+| `/instructors` | `/about` | 301 | Squarespace |
+| `/facility` | `/personal-trainer-4s-ranch` | 301 | Squarespace |
+| `/online-coaching` | `/the-30-minute-executive-reset` | 301 | Squarespace |
+| `/online-training` | `/the-30-minute-executive-reset` | 301 | Squarespace |
+| `/executive-hybrid-coaching` | `/the-30-minute-executive-reset` | 301 | Squarespace |
+| `/blog/benefit-of-a-personal-trainer` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/blog/best-physical-training-programs-in-mission-bay` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/blog/how-to-choose-the-right-personal-trainer-in-pacific-beach-for-your-goals` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/blog/how-a-mission-bay-personal-trainer-can-help-you-achieve-peak-physical-fitness` | `/in-home-personal-trainer-san-diego` | 301 | Squarespace |
+| `/blog/common-weight-loss-mistakes-and-how-to-fix-them` | `/weight-loss` | 301 | Squarespace |
+| `/blog/effective-weight-loss-programs-for-men-over-30-in-san-diego` | `/weight-loss` | 301 | Squarespace |
+| `/blog/executive-fitness-in-san-diego-how-busy-professionals-over-30-can-get-results-without-burning-out` | `/about` | 301 | Squarespace |
+| `/blog/maximizing-your-potential-understanding-low-testosterones-impact-on-mens-fitness` | `/about` | 301 | Squarespace |
+| `/blog/functional-fitness-vs-traditional-workouts` | `/strength-training-1` | 301 | Squarespace |
+| `/blog/strength-training-in-pacific-beach` | `/strength-training-1` | 301 | Squarespace |
+| `/blog/understanding-personal-trainer-pricing-structures` | `/training-rates-san-diego` | 301 | Squarespace |
+| `/blog/how-does-online-personal-training-work` | `/the-30-minute-executive-reset` | 301 | Squarespace |
+| `/blog/q4kkx2u2vihb6kxgfepxrhfkkp60hr` | `/` | 301 | Squarespace |
+| `/strategy-call` | `https://calendly.com/nemezio-omnifittraining/45min` | 301 | exception |
+| `/book-online-consultation` | `https://calendly.com/nemezio-omnifittraining/45min` | 301 | exception |
+| `/schedule` | `https://calendly.com/nemezio-omnifittraining/45min` | 301 | exception |
+| `/schedule-1` | `https://calendly.com/nemezio-omnifittraining/45min` | 301 | exception |
+| `/booking` | `https://calendly.com/nemezio-omnifittraining/45min` | 301 | exception |
+| `/appointments-1` | `https://calendly.com/nemezio-omnifittraining/45min` | 301 | exception |
+| `/nutrition-coaching` | `/nutrition-coaching-san-diego` | 301 | exception |
+| `/blog/are-you-a-good-fit-for-working-with-a-personal-trainer` | `/fit-check` | 301 | exception |
+| `/blog/how-personal-trainers-can-motivate-seniors` | `/personal-trainer-over-50-san-diego` | 301 | exception |
+| `/energy-protocol-waitlist-form` | `/the-30-minute-executive-reset` | 301 | gap-fill |
+| `/testimonials` | `/case-studies` | 301 | gap-fill |
+| `/outdoor-fitness-mission-bay` | `/in-home-personal-trainer-san-diego` | 301 | gap-fill |
+| `/hiit-personal-trainer-pacific-beach` | `/hiit-personal-trainer-san-diego` | 301 | gap-fill |
+| `/hiit-training-mission-bay` | `/hiit-personal-trainer-san-diego` | 301 | gap-fill |
+| `/body-building` | `/strength-training-1` | 301 | gap-fill |
+| `/bodybuilding` | `/strength-training-1` | 301 | gap-fill |
+| `/more` | `/personal-training-services` | 301 | gap-fill |
+| `/methodology` | `/the-omnifit-method` | 301 | gap-fill |
+| `/faqs-1` | `/faqs` | 301 | gap-fill |
+| `/hsa-fsa` | `/hsa-fsa-personal-training` | 301 | gap-fill |
+| `/in-home-personal-traning-san-diego` | `/in-home-personal-trainer-san-diego` | 301 | gap-fill |
+| `/the-omnifittraining.com/the-omnifit-method` | `/the-omnifit-method` | 301 | gap-fill |
+| `/blog` | `/` | 302 | gap-fill |
+
+### Judgment calls (with the condition under which each is wrong)
+1. **Indexed count is 46, not 45.** The brief said "Google's 45 indexed paths (every page in the sitemap, plus four)". The sitemap has 42 pages, so the list holds 46. All 46 are in the file and all resolve. Wrong if one sitemap page (most likely `/privacy-policy` or `/behavior-change-coaching`, the two newest) is not actually indexed. Listing an extra path costs nothing, because it is a built page.
+2. **`/blog` is labelled gap-fill.** It is not in the Squarespace mapping, Google knows it, and the brief listed it under "Temporary". The status (302) carries the temporary part. Wrong if the owner wants a fifth origin label.
+3. **`LINK_FIXES` is unchanged.** The in-page link to `/personal-trainer-in-pacific-beach` is still repointed at build time to `/personal-trainer-4s-ranch`, because its link text reads "4S Ranch Training". Only the redirect for direct visits moved to `/in-home-personal-trainer-san-diego`. Wrong if the owner wants that link to follow the redirect too: one line in `LINK_FIXES`.
+4. **Exact-match only.** The check compares paths exactly, case included, so `/FAQs` (a kept rule) and `/faqs` (a built page) count as different paths, as they did before. Wrong if Cloudflare Pages matches `_redirects` sources case-insensitively; the `/FAQs` rule would then need a look on the preview deploy.
+
+### Sources changed
+`build.py`, `public/_redirects` (generated), `tools/gsc-known-urls-2026-10-17.txt` (new), `tools/README.md`, `CANON.md`, `DEPLOY.md`, `REPORT.md`.
