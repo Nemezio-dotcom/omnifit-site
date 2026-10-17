@@ -186,10 +186,24 @@ def page_meta(slug, page_text, header_text):
     raise SystemExit(f"{slug}: no title source (add it to META_FALLBACK)")
 
 
+COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
+
+
 def split_body(body):
     """Lift <style> and <link> tags out of the page body.
     Returns (body, styles, links). Google Fonts links/imports are dropped
-    because the layout loads one font stylesheet covering every weight."""
+    because the layout loads one font stylesheet covering every weight.
+    HTML comments are masked first: a paste note such as "Paste everything
+    from <style> to the end" must not be taken as the start of a style block
+    (it swallowed the comment's closing "-->", which left the page's wrapper
+    div commented out in the browser and its scoped CSS unapplied)."""
+    comments = []
+
+    def stash(m):
+        comments.append(m.group(0))
+        return f"\x00C{len(comments) - 1}\x00"
+
+    body = COMMENT_RE.sub(stash, body)
     styles = []
 
     def take_style(m):
@@ -208,6 +222,7 @@ def split_body(body):
         return ""
 
     body = LINK_RE.sub(take_link, body)
+    body = re.sub(r"\x00C(\d+)\x00", lambda m: comments[int(m.group(1))], body)
     return body, styles, links
 
 
