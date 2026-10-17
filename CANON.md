@@ -72,8 +72,8 @@ REPO STATE (reconciled with disk, Sept 2026)
            naming rule above.
       The page itself is live and is now linked from four hub pages.
     · about, contactform, desk-worker-posture-pain, hsa-fsa-personal-training
-      - each has a header. desk-worker's header carries no FAQPage while its
-      page has 6 FAQs: a real, reported mirror failure, not fixed.
+      - each has a header. desk-worker's header now carries a 6-question
+      FAQPage that mirrors the page (see PAGE HEADER SHAPE).
     · home-1, home-2, home-4, home-5 - homepage section fragments, no headers.
       Carry retired brand name, Pacific Beach, ACE OES, Executive Hybrid, $90
       and 180+. BATCH 4 or later.
@@ -608,7 +608,24 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
 (c) BROKEN STRUCTURE
   invalid JSON · header FAQPage not mirroring the page FAQ in count, order
   and text · invariant hash mismatch · HTML tag-balance failure ·
-  LocalBusiness redefined in a page header instead of referenced by @id.
+  LocalBusiness redefined in a page header instead of referenced by @id ·
+  a page declared as having no FAQ that carries FAQ markup.
+
+PAGE HEADER SHAPE (Oct 16, 2026)
+  Every page header is ONE @graph document with a page node (WebPage, or the
+  subtype AboutPage / ContactPage) whose "about" references
+  #localbusiness-of, plus BreadcrumbList and any Service / FAQPage nodes.
+  contactform and desk-worker-posture-pain were converted from bare nodes on
+  Oct 16, 2026; their Service and FAQPage content is unchanged, and their
+  WebPage name/description are the SEO title and meta (build.py reads them).
+
+PAGES WITH NO FAQ (Oct 16, 2026)
+  about · contactform · fit-check · personal-training-services ·
+  privacy-policy · terms-and-conditions. These have no FAQ by design.
+  certify.py (NO_FAQ) verifies it: the page body must carry no FAQ-shaped
+  markup and the header no FAQPage, or it is a structure finding. A new page
+  without an FAQ must be added here AND to NO_FAQ, or certification reports
+  it under CHECKS THAT COULD NOT RUN.
 
 KEYWORD OWNERSHIP (Keyword Ownership run, Oct 2026)
 Source: the Keyword Ownership Map, Semrush Position Tracking, Oct 5-11 2026.

@@ -61,6 +61,19 @@ a fixture proving a real violation in the same shape still flags.
 
 ## FAQ extraction (`faq.py`)
 
+**Pages with no FAQ (`NO_FAQ` in certify.py, CANON "PAGES WITH NO FAQ").** An
+empty mirror used to be recorded as "compared nothing" and kept certification
+at INCOMPLETE forever, because six pages simply have no FAQ. A declared page now
+passes only after a positive scan: no `<details>`, `<summary>`, `faq`/`accordion`
+class, `fq` button or "Frequently Asked Questions" in the page body, and no
+FAQPage in the header. Negative tests (Oct 16, 2026): adding a `<details>` FAQ to
+fit-check flags `[declared no-FAQ page carries FAQ markup]`; dropping fit-check
+from the list brings back the not-run entry. An undeclared page with no FAQ is
+still NOT RUN, never a silent pass.
+
+**Page node subtypes (`PAGE_TYPES`).** AboutPage and ContactPage count as the
+page node for the `about` → #localbusiness-of check.
+
 Decorative toggle icons (`<span class="…icon">+</span>`) inside a question
 container are stripped before comparison (home-5 carries one per question).
 

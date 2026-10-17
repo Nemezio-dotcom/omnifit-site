@@ -324,60 +324,112 @@ OmniFit | Site-wide Header Injection · Sept 2026
 <link rel="stylesheet" href="/assets/site.css">
 
 <!-- ===== Page header injection (source: pages/headers/contactform-header.html) ===== -->
+<!-- CONTACTFORM PAGE HEADER JSON-LD · @GRAPH, OCT 16 2026
+  One @graph: WebPage + BreadcrumbList + Service. The Service node is unchanged
+  except for its new @id; only the @graph wrapper and the page nodes are new.
+  WebPage name/description ARE the page's SEO title and meta (build.py reads
+  them from here).
+  LocalBusiness referenced by @id from the site-wide header, never redefined here.
+-->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "OmniFit Performance Personal Training Consultation",
-  "description": "A 45-minute consultation including movement assessment, goal mapping, and personalized program recommendation for busy professionals 30+ in San Diego.",
-  "provider": { "@id": "https://www.omnifittraining.com/#localbusiness-of" },
-  "serviceType": "Personal Fitness Training Consultation",
-  "areaServed": {
-    "@type": "City",
-    "name": "San Diego",
-    "sameAs": "https://en.wikipedia.org/wiki/San_Diego"
-  },
-  "audience": {
-    "@type": "Audience",
-    "audienceType": "Busy professionals and executives aged 30-55"
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "30.00",
-    "priceCurrency": "USD",
-    "description": "45-minute consultation reserved with a fully refundable $30 deposit. Includes movement assessment, goal mapping, and program recommendation.",
-    "availability": "https://schema.org/LimitedAvailability"
-  },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "OmniFit Performance Training Programs",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "The Foundation",
-          "description": "Entry program for new clients: three consecutive 4-week cycles of 1-on-1 corrective-first strength training, nutrition and behavior change coaching, and progress tracked across 12 objective metrics."
-        }
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/contactform#webpage",
+      "url": "https://www.omnifittraining.com/contactform",
+      "name": "Request Your Consultation | OmniFit Performance San Diego",
+      "description": "A 45-minute consultation including movement assessment, goal mapping, and personalized program recommendation for busy professionals 30+ in San Diego.",
+      "isPartOf": {
+        "@id": "https://www.omnifittraining.com/#website"
       },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "The Program",
-          "description": "Ongoing 1-on-1 personal training billed every 4 weeks, in-studio at Teqneeq Functional Health Center in 4S Ranch or in-home across north San Diego County."
-        }
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
       },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "The 30-Minute Executive Reset",
-          "description": "Live virtual and hybrid coaching in 30-minute sessions for professionals who travel or have unpredictable schedules, delivered nationwide."
+      "publisher": {
+        "@id": "https://www.omnifittraining.com/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://www.omnifittraining.com/contactform#breadcrumb"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.omnifittraining.com/contactform#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://www.omnifittraining.com/contactform"
         }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.omnifittraining.com/contactform#service",
+      "name": "OmniFit Performance Personal Training Consultation",
+      "description": "A 45-minute consultation including movement assessment, goal mapping, and personalized program recommendation for busy professionals 30+ in San Diego.",
+      "provider": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "serviceType": "Personal Fitness Training Consultation",
+      "areaServed": {
+        "@type": "City",
+        "name": "San Diego",
+        "sameAs": "https://en.wikipedia.org/wiki/San_Diego"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Busy professionals and executives aged 30-55"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "30.00",
+        "priceCurrency": "USD",
+        "description": "45-minute consultation reserved with a fully refundable $30 deposit. Includes movement assessment, goal mapping, and program recommendation.",
+        "availability": "https://schema.org/LimitedAvailability"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "OmniFit Performance Training Programs",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "The Foundation",
+              "description": "Entry program for new clients: three consecutive 4-week cycles of 1-on-1 corrective-first strength training, nutrition and behavior change coaching, and progress tracked across 12 objective metrics."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "The Program",
+              "description": "Ongoing 1-on-1 personal training billed every 4 weeks, in-studio at Teqneeq Functional Health Center in 4S Ranch or in-home across north San Diego County."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "The 30-Minute Executive Reset",
+              "description": "Live virtual and hybrid coaching in 30-minute sessions for professionals who travel or have unpredictable schedules, delivered nationwide."
+            }
+          }
+        ]
       }
-    ]
-  }
+    }
+  ]
 }
 </script>
 <!-- ===== End page header injection ===== -->
