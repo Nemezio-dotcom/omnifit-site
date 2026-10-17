@@ -446,6 +446,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 #of-fit .dial strong { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
 #of-fit .dial h3 { font-family: var(--display) !important; font-size: 22px !important; font-weight: 600 !important; margin: 0 !important; line-height: 1.25 !important; color: var(--ink) !important; letter-spacing: 0 !important; text-transform: none !important; }
 #of-fit .dial p { font-size: 15px !important; }
+#of-fit .dial .note { max-width: none; margin: 4px 0 0 !important; border-top: 1px dashed var(--gold); }
 #of-fit .path { font-size: 13px !important; color: var(--muted) !important; }
 #of-fit .path b { color: var(--ink); font-weight: 600; }
 #of-fit .roles { border-left: 2px solid var(--gold); padding: 2px 0 2px 14px !important; text-align: left; font-size: 14px !important; color: var(--muted) !important; }
@@ -635,11 +636,16 @@ const HOLD_MSG = [
   { title: "Able", body: "The budget, the calendar or the two booking standards don't line up right now. That's a timing issue, not a character one. Once they do, retake this check." }
 ];
 
+// Every Foundation and Program tier carries all three settings. The Executive
+// Reset's Bronze tier (no live sessions) offers Coached or Train Only, so a
+// Full Accountability result says where that setting is available. The
+// Tune-Up is not a setting: it is the graduation point at the end of the Dial.
+const BRONZE_NOTE = "On the Executive Reset, Full Accountability is available on Gold, Platinum and Black; Bronze, which has no live sessions, offers Coached or Train Only.";
 const DIAL = [
-  { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles." },
-  { name: "Coached", body: "A weekly written check-in with a coach reply, one to three habit targets, and a measurement review every 4 weeks." },
-  { name: "Train Only", body: "Your sessions and your program in the app, a one-tap weekly check-in, and nutrition on request." },
-  { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles, and the right place to start when you're not sure." }
+  { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles.", note: BRONZE_NOTE },
+  { name: "Coached", body: "A weekly written check-in with a coach reply, one to three habit targets, and a measurement review every 4 weeks. Available on every tier of every program, including Executive Reset Bronze." },
+  { name: "Train Only", body: "Your sessions and your program in the app, a one-tap weekly check-in, and nutrition on request. Available on every tier of every program, including Executive Reset Bronze." },
+  { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles, and the right place to start when you're not sure.", note: BRONZE_NOTE }
 ];
 
 const FIT_NOTES = {
@@ -735,7 +741,7 @@ function showResult() {
       <span class="verdict pass">Result: You're a fit</span>
       <h2>Ready and able. Let's set your starting point.</h2>
       <p class="lede">You cleared both gates. The next step is the Performance Assessment: $150, credited toward your first cycle. Book it through the contact form, which asks why now. Your honest answer there matters more than anything else on it.</p>
-      <div class="dial"><strong>Recommended starting setting</strong><h3>${d.name}</h3><p>${d.body}</p><p class="path">Every tier includes all three settings at no price difference, and you can change yours at any 4-week cycle boundary. The path most clients follow: <b>Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</b>. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</p></div>
+      <div class="dial"><strong>Recommended starting setting</strong><h3>${d.name}</h3><p>${d.body}</p>${d.note ? `<p class="note">${d.note}</p>` : ""}<p class="path">Every tier of The Foundation and The Program includes all three settings at no price difference, and you can change yours at any 4-week cycle boundary. The path most clients follow: <b>Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</b>. The Tune-Up is not a setting; it is graduation, the point at the end of the Dial. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</p></div>
       <p class="roles">${ROLES}</p>
       ${notes}
       <div class="capacity"><strong>Currently at capacity</strong><p>OmniFit is taking a limited number of new clients. If you submit the form and then don't reply when we reach out, you move to the back of the line.</p></div>

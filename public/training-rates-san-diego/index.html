@@ -1149,7 +1149,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
           "name": "Can I choose how much accountability I get?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Every tier of The Foundation, The Program and the Executive Reset includes the Accountability Dial at no price difference: Full Accountability (daily logging of nutrition, steps and sleep, a coach reply within 1 business day, and behavior-change coaching), Coached (a weekly written check-in with a coach reply, 1 to 3 habit targets, and a measurement review every 4 weeks) or Train Only (your sessions and app program, a one-tap weekly check-in, nutrition on request). You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week."
+            "text": "Yes. Every tier of The Foundation, The Program and the Executive Reset includes the Accountability Dial at no price difference: Full Accountability (daily logging of nutrition, steps and sleep, a coach reply within 1 business day, and behavior-change coaching), Coached (a weekly written check-in with a coach reply, 1 to 3 habit targets, and a measurement review every 4 weeks) or Train Only (your sessions and app program, a one-tap weekly check-in, nutrition on request). Executive Reset Bronze, which has no live sessions, offers Coached or Train Only. You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation. The Tune-Up has no setting; it is the graduation point at the end of the Dial. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week."
           }
         },
         {
@@ -1615,7 +1615,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-rates .rt-policies-5 .rt-policy:nth-child(4) { grid-column: 1 / 2; }
   #omni-rates .rt-policies-5 .rt-policy:nth-child(5) { grid-column: 2 / 3; }
   #omni-rates .rt-policies-5 .rt-policy p { color: var(--white-70); }
-  #omni-rates .rt-example [data-out] { color: var(--gold-light); font-weight: 700; }
+  #omni-rates .rt-example .rt-out { color: var(--gold-light); font-weight: 700; }
   @media (max-width: 768px) {
     #omni-rates .rt-why-table td:last-child { background: transparent; }
     #omni-rates .rt-policies-5 .rt-policy:nth-child(4), #omni-rates .rt-policies-5 .rt-policy:nth-child(5) { grid-column: auto; }
@@ -1717,6 +1717,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 <!-- V12.1: motion and visual polish (ambient orbs, hero entrance, scroll reveal, path-tile icons, sticky jump bar, hover accents, reduced-motion safe). One inline script, no dependencies. -->
 <!-- V12 CHANGES: layout only, no price or FAQ changes. Path chooser added under the hero (Foundation = new clients, Program = experienced and committed, Sessions = flexibility). Per-tier cards replaced by compact rate ladders grouped by setting; session packs collapsed to one table; Reset tiers to one ladder. Built For / Not the Right Fit moved below the rates. -->
 <!-- V14 CHANGES (Oct 17 2026, Accountability Dial + flexibility): under The Program, four new sections — the Accountability Dial table (every tier, no price difference), "What protects your investment", "What happens if your schedule or goals change" (tier-change rules per CANON TIER CHANGES, plus a worked example whose figures are COMPUTED by the page script from data attributes carrying the card prices, never hand-written), and "Why premium". Two FAQ questions added (accountability, changing your plan); header FAQPage mirrors ten. Jump bar gained three links. "Included in every program" names the Dial. No price, cadence or Stripe reference changed. -->
+<!-- V15 CHANGES (Oct 17 2026, Dial follow-up): the worked example's four figures ($140 per session · 8 sessions · $1,120 credit · $680 due) are now static text, verified in code against the card (560 / 4, 2 x 4, 8 x 140, 1,800 - 1,120); the V14 page script and data attributes that computed them are removed, and certify.py now bans $140 only as a pack/session price. Dial table gains an "Available on" row: Executive Reset Bronze offers Coached or Train Only; the Tune-Up has no setting, it is the graduation point. Accountability FAQ answer says so (header mirrors). No price, cadence or Stripe reference changed. -->
 <!-- V13 CHANGES: pricing clarity (Oct 2026). "Two ways to train" definitions above the rates; "What you pay, and when"; "Commitment at a glance" table; every price carries "per 4-week cycle" and sessions per cycle; Foundation rows show the total due at signup and sessions across 12 weeks; tiers the Foundation does not offer read "Start on The Program"; Teqneeq membership line beside studio prices; one sessions table (singles, 5-packs, extra session, guest add-on) with expiry; FAQ replaced with eight pricing questions; emoji replaced by gold line SVGs; referral credit and the duplicate single-session card removed. The assessment paragraph (byte-identical, Class IIa block) moved from the FAQ into the Assessment card. Header rebuilt to match. -->
 
 
@@ -2094,7 +2095,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
       <span class="rt-label">Included at Every Tier</span>
       <hr class="rt-divider">
       <h2>Every Tier Includes Your Choice of <em>Accountability</em></h2>
-      <p style="color:var(--white-50); font-size:14px; max-width:720px; margin:8px auto 0;">Tier is how often we train. The Accountability Dial is how closely we follow you between sessions. Three settings, included at every tier of The Foundation, The Program and the Executive Reset, with no price difference. You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation.</p>
+      <p style="color:var(--white-50); font-size:14px; max-width:720px; margin:8px auto 0;">Tier is how often we train. The Accountability Dial is how closely we follow you between sessions. Three settings, included at every tier of The Foundation and The Program and at every Executive Reset tier with live sessions, with no price difference. Executive Reset Bronze, which has no live sessions, offers Coached or Train Only. You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation. The Tune-Up has no setting: it is where the Dial ends.</p>
     </div>
   </div>
 
@@ -2110,13 +2111,14 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
           <tr><th scope="row">Habits and nutrition</th><td data-label="Full Accountability">Behavior-change coaching through Awareness, Regulation, Adaptation and Integration.</td><td data-label="Coached">1 to 3 habit targets at a time.</td><td data-label="Train Only">Nutrition on request.</td></tr>
           <tr><th scope="row">Measurement</th><td data-label="Full Accountability">Reviewed with every check-in.</td><td data-label="Coached">A measurement review every 4 weeks.</td><td data-label="Train Only">Reassessment at least every 12 weeks.</td></tr>
           <tr><th scope="row">Usually chosen by</th><td data-label="Full Accountability">New clients in the first cycles. This is the default.</td><td data-label="Coached">Clients whose routines hold through an ordinary week.</td><td data-label="Train Only">Clients who self-correct and want the sessions and the program.</td></tr>
+          <tr><th scope="row">Available on</th><td data-label="Full Accountability">Every tier of The Foundation and The Program; Executive Reset Gold, Platinum and Black.</td><td data-label="Coached">Every tier of The Foundation, The Program and the Executive Reset, including Bronze.</td><td data-label="Train Only">Every tier of The Foundation, The Program and the Executive Reset, including Bronze.</td></tr>
         </tbody>
       </table>
     </div>
     <p class="rt-steps-note rt-reveal" style="margin-bottom:14px;"><strong style="color:var(--white);">At every setting:</strong> payment confirms your booking, sessions reschedule with 24 hours' notice, corrective work sits in every warm-up, and you are reassessed at least every 12 weeks.</p>
     <div class="rt-guarantee rt-reveal" style="max-width:1120px; margin:0 auto 14px;">
       <h4>Tracking is a diagnostic tool, not a life sentence.</h4>
-      <p>We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week. The path most clients follow: <strong style="color:var(--gold-light);">Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</strong>.</p>
+      <p>We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week. The path most clients follow: <strong style="color:var(--gold-light);">Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</strong>. The Tune-Up is not a fourth setting; it is graduation, the point at the end of the Dial.</p>
       <p style="margin-top:10px;">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.</p>
     </div>
   </div>
@@ -2186,16 +2188,16 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
     </div>
     <p class="rt-steps-note rt-reveal" style="max-width:860px; margin-bottom:24px;">On The Program you can move up or down a tier between cycles. During The Foundation you can step up, not down &mdash; the first 12 weeks are built as a block. Want more sessions mid-Foundation? Step up anytime. If your new tier is only offered on The Program, your Foundation ends there &mdash; every unused session is credited toward your first Program cycle, and you pay only the difference. You can adjust your accountability level at any cycle boundary.</p>
 
-    <div class="rt-guarantee rt-reveal rt-example" style="max-width:1120px; margin:0 auto 14px;" data-cycle="560" data-sessions="4" data-cycles="3" data-completed="1" data-target="1800">
+    <div class="rt-guarantee rt-reveal rt-example" style="max-width:1120px; margin:0 auto 14px;">
       <h4>Worked example: Foundation Momentum to Program Peak</h4>
       <p>A client on studio Momentum on The Foundation ($560 per 4-week cycle, 4 sessions per cycle, three cycles) decides after the first cycle that they want to train three times a week. Studio Peak is only offered on The Program, at $1,800 per 4-week cycle, so The Foundation ends at the cycle boundary and the unused sessions become credit.</p>
       <ul class="rt-feature-list" style="margin-top:12px;">
-        <li><strong>Foundation per-session rate:</strong> $560 &divide; 4 sessions = <span data-out="per_session">&hellip;</span> per session</li>
-        <li><strong>Unused Foundation sessions:</strong> 2 remaining cycles &times; 4 sessions = <span data-out="unused">&hellip;</span> sessions</li>
-        <li><strong>Credit:</strong> <span data-out="unused">&hellip;</span> sessions &times; <span data-out="per_session">&hellip;</span> = <span data-out="credit">&hellip;</span></li>
-        <li><strong>First Peak cycle on The Program:</strong> $1,800 &minus; <span data-out="credit">&hellip;</span> credit = <strong><span data-out="due">&hellip;</span> due</strong></li>
+        <li><strong>Foundation per-session rate:</strong> $560 &divide; 4 sessions = <span class="rt-out">$140</span> per session</li>
+        <li><strong>Unused Foundation sessions:</strong> 2 remaining cycles &times; 4 sessions = <span class="rt-out">8</span> sessions</li>
+        <li><strong>Credit:</strong> 8 sessions &times; $140 = <span class="rt-out">$1,120</span></li>
+        <li><strong>First Peak cycle on The Program:</strong> $1,800 &minus; $1,120 credit = <strong><span class="rt-out">$680</span> due</strong></li>
       </ul>
-      <p style="margin-top:12px; font-size:13px; color:var(--white-70);">If the credit ever exceeds the first Program cycle, the remainder carries forward as session credit against the next cycle, never as cash. The figures above are computed from the published rates on this page.</p>
+      <p style="margin-top:12px; font-size:13px; color:var(--white-70);">If the credit ever exceeds the first Program cycle, the remainder carries forward as session credit against the next cycle, never as cash. The figures above follow from the published rates on this page.</p>
     </div>
   </div>
 
@@ -2364,7 +2366,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   </div>
 
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
-    <p style="font-size:12px; color:var(--white-50); text-align:center;">All Executive Reset tiers are billed every 4 weeks via auto-pay. Bronze is asynchronous programming only and includes no live sessions. <a href="/the-30-minute-executive-reset" style="color:var(--gold);">Full Executive Reset details →</a></p>
+    <p style="font-size:12px; color:var(--white-50); text-align:center;">All Executive Reset tiers are billed every 4 weeks via auto-pay. Bronze is asynchronous programming only and includes no live sessions; its Accountability Dial setting is Coached or Train Only. <a href="/the-30-minute-executive-reset" style="color:var(--gold);">Full Executive Reset details →</a></p>
   </div>
 
   <!-- BUILT FOR / NOT THE RIGHT FIT -->
@@ -2461,7 +2463,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 
       <details>
         <summary>Can I choose how much accountability I get?</summary>
-        <div class="rt-faq-body"><p>Yes. Every tier of The Foundation, The Program and the Executive Reset includes the Accountability Dial at no price difference: Full Accountability (daily logging of nutrition, steps and sleep, a coach reply within 1 business day, and behavior-change coaching), Coached (a weekly written check-in with a coach reply, 1 to 3 habit targets, and a measurement review every 4 weeks) or Train Only (your sessions and app program, a one-tap weekly check-in, nutrition on request). You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</p></div>
+        <div class="rt-faq-body"><p>Yes. Every tier of The Foundation, The Program and the Executive Reset includes the Accountability Dial at no price difference: Full Accountability (daily logging of nutrition, steps and sleep, a coach reply within 1 business day, and behavior-change coaching), Coached (a weekly written check-in with a coach reply, 1 to 3 habit targets, and a measurement review every 4 weeks) or Train Only (your sessions and app program, a one-tap weekly check-in, nutrition on request). Executive Reset Bronze, which has no live sessions, offers Coached or Train Only. You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation. The Tune-Up has no setting; it is the graduation point at the end of the Dial. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</p></div>
       </details>
 
       <details>
@@ -2515,25 +2517,6 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   root.className += ' rt-js';
 
   /* scroll reveal */
-  /* V14: worked example. Every figure is computed from the data attributes
-     (the card prices); nothing in the markup states a derived figure. */
-  (function () {
-    var ex = root.querySelector('.rt-example');
-    if (!ex) return;
-    var d = ex.dataset;
-    var cycle = Number(d.cycle), per = Number(d.sessions), cycles = Number(d.cycles),
-        done = Number(d.completed), target = Number(d.target);
-    if (!(cycle > 0 && per > 0 && cycles > done && target > 0)) return;
-    var perSession = cycle / per;
-    var unused = (cycles - done) * per;
-    var credit = unused * perSession;
-    var due = Math.max(target - credit, 0);
-    var money = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
-    var out = { per_session: money(perSession), unused: String(unused), credit: money(credit), due: money(due) };
-    Array.prototype.forEach.call(ex.querySelectorAll('[data-out]'), function (el) {
-      if (out[el.getAttribute('data-out')] !== undefined) el.textContent = out[el.getAttribute('data-out')];
-    });
-  })();
   var items = root.querySelectorAll('.rt-reveal');
   function showAll() { for (var i = 0; i < items.length; i++) items[i].className += ' is-in'; }
   if (hasIO && !reduce) {
