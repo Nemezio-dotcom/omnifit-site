@@ -4312,3 +4312,107 @@ Served `public/` locally and screenshotted: the contact page (new "fastest way t
 
 ### Merge
 `origin/main` was at `d6f5ae0` (the Dial follow-up 2 report) with this branch 19 commits ahead and nothing behind, so the merge was a fast-forward (`d6f5ae0..6ab938a`). A stale local remote-tracking ref had shown `645c659` during the run; the push confirmed the real tip.
+
+
+## Calendly follow-up: every consultation CTA, territory credit line, frozen CTA note (Oct 17, 2026)
+
+**Branch:** `ccr-46ce016f-gxgplv`, merged to main. Decisions recorded first in CANON.md (LAUNCH DECISIONS items 15, 16, 17). Body copy and FAQ answers only, with verbatim header mirrors. No title, meta description, heading, FAQ question or ownership-table entry changed. No new cost-anchor links.
+
+### Results
+
+| Check | Before | After |
+|---|---|---|
+| `python3 build.py --strict` (incl. `tools/ownership.py` and its fixtures) | PASSED; 4 notes | PASSED; the same 4 notes |
+| `python3 tools/certify.py` | PASSED (0 · 0 · 0 · 0) | PASSED (0 · 0 · 0 · 0) |
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | a6c7e65dddff4795 | a6c7e65dddff4795 |
+| header pricing | 7af0d0049b0b7aba | 7af0d0049b0b7aba |
+| credentials | 02bd9cb90a71ce69 | 02bd9cb90a71ce69 |
+| archetypes (Section A) | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c |
+| 9-point (Section B) | 4c720960dec5a809 | 4c720960dec5a809 |
+
+No invariant moved. The 30-Day Fit Guarantee wording is unchanged from the launch batch.
+
+### Item 1: consultation CTAs to Calendly
+Label and class unchanged; `href="/contactform"` became `href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener"`.
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/training-rates-san-diego.html:1231` | <a class="rt-btn rt-btn-primary" href="/contactform">Book Your Consultation</a> | <a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a> |
+| `pages/how-it-works-pricing.html:591` | <a href="/contactform" class="cta-btn">Book Your Consultation</a> | <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener" class="cta-btn">Book Your Consultation</a> |
+| `pages/about.html:332` | <a class="ab-btn" href="/contactform">Book a Consultation</a> | <a class="ab-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a Consultation</a> |
+| `pages/partners.html:1158` | <a href="/contactform" class="op-internal-link">Book a Consultation</a> | <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener" class="op-internal-link">Book a Consultation</a> |
+| `pages/partners.html:1193` | <a href="/contactform" class="op-cta-btn">⏎    Book Your Consultation | <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener" class="op-cta-btn">⏎    Book Your Consultation |
+| `pages/partners.html:1109` | <a href="/contactform">Book a paid consultation</a> | <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a paid consultation</a> |
+| `pages/couples-personal-training-san-diego.html:315` | <a class="cp-btn" href="/contactform">Book a Consultation</a> | <a class="cp-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a Consultation</a> |
+| `pages/glp-1-personal-training-san-diego.html:285` | <a class="gl-btn" href="/contactform">Book a Consultation</a> | <a class="gl-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a Consultation</a> |
+| `pages/personal-trainer-over-50-san-diego.html:282` | <a class="ov-btn" href="/contactform">Book a Consultation</a> | <a class="ov-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a Consultation</a> |
+| `pages/nutrition-coaching-san-diego.html:245` | <a class="nu-btn" href="/contactform">Book a Consultation</a> | <a class="nu-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a Consultation</a> |
+| `pages/behavior-change-coaching.html:312` | <a class="bc-btn" href="/contactform">Book a Consultation</a> | <a class="bc-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a Consultation</a> |
+| `pages/hsa-fsa-personal-training.html:222` | <a class="hsa-btn hsa-btn-ghost" href="/contactform">Book a Consultation</a> | <a class="hsa-btn hsa-btn-ghost" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a Consultation</a> |
+
+### Item 2: territory FAQ answer, nine pages and nine header mirrors
+Rancho Bernardo by owner override, this sentence only.
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/personal-trainer-carlsbad.html:279` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-carlsbad-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/personal-trainer-carmel-valley.html:365` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-carmel-valley-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/personal-trainer-del-mar.html:401` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-del-mar-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/personal-trainer-encinitas.html:275` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-encinitas-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/personal-trainer-fairbanks-ranch.html:365` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-fairbanks-ranch-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/personal-trainer-la-jolla.html:420` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-la-jolla-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/personal-trainer-rancho-bernardo.html:369` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-rancho-bernardo-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/personal-trainer-santaluz.html:277` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-santaluz-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/personal-trainer-solana-beach.html:365` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/personal-trainer-solana-beach-header.html:79` | If you continue into a training package, the diagnostic fee is credited toward your first cycle. | The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. |
+
+### Item 3: frozen records, one CTA line each (owner override)
+Only the deposit phrase in the CTA note changed. No measurement, figure, caption, quote or case text was touched; the frozen exemption from re-screening stands for every other line.
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/case-studies.html:635` | · $30 refundable deposit · | · $30 deposit, refunded the same day you attend your consultation · |
+| `pages/home-3.html:635` | · $30 refundable deposit · | · $30 deposit, refunded the same day you attend your consultation · |
+
+### New certify rules
+- **`consultation_cta_to_contactform`** in category (b). It reads raw source for any `<a>` pointing at `/contactform` (relative or absolute) whose tag-stripped label contains "consult". A self-test runs on every certify run: three shapes must fire (a plain button, the multi-line partners anchor with an inner svg, an absolute URL) and three must stay quiet ("Contact", "Get Started", a Calendly link).
+- **"diagnostic fee is credited"** joins `RETIRED_LAUNCH_COPY`, now 18 phrases, covered by the existing both-ways self-test.
+- Negative test: the new certify.py on the pre-change tree (git worktree at HEAD) reported 18 credit-sentence hits and these CTA hits, then FAILED. The current tree reports none.
+
+```
+   pages/about.html:332   CTA: 'Book a Consultation' 
+   pages/behavior-change-coaching.html:312   CTA: 'Book a Consultation' 
+   pages/couples-personal-training-san-diego.html:315   CTA: 'Book a Consultation' 
+   pages/glp-1-personal-training-san-diego.html:285   CTA: 'Book a Consultation' 
+   pages/how-it-works-pricing.html:591   CTA: 'Book Your Consultation' 
+   pages/hsa-fsa-personal-training.html:222   CTA: 'Book a Consultation' 
+   pages/nutrition-coaching-san-diego.html:245   CTA: 'Book a Consultation' 
+   pages/partners.html:1109   CTA: 'Book a paid consultation' 
+   pages/partners.html:1158   CTA: 'Book a Consultation' 
+   pages/partners.html:1193   CTA: 'Book Your Consultation' 
+   pages/personal-trainer-over-50-san-diego.html:282   CTA: 'Book a Consultation' 
+   pages/training-rates-san-diego.html:1231   CTA: 'Book Your Consultation' 
+### RESULT: FAILED  (compliance 0 · stale canon 30 · structure 0 · not-run 0)
+```
+
+- Mirror check, negative-tested: one changed letter in the Carlsbad header's assessment answer gave `[FAQPage answers do not mirror page] differing index=[3]`. Reverted, PASSED.
+
+### Judgment calls (with the condition under which each is wrong)
+1. **Partners FAQ inline link moved too.** The answer to the PT-coordination FAQ (`partners.html:1109`) carries an inline "Book a paid consultation" link to /contactform. It is the third consultation link on that page and the new rule would fail on it. Only the href changed, and the FAQPage mirror is plain text, so the mirror is unaffected. Wrong if "partners x2" meant those two links and no others.
+2. **Five header `ReserveAction` targets still name /contactform** (couples, desk-worker, glp-1, nutrition, over-50). They are schema actions, not buttons, and header JSON-LD outside the FAQ mirrors was out of scope. Wrong if the owner wants the schema to match the buttons. That is one change per header.
+3. **Non-consultation buttons stay on /contactform:** the five Rates ladder CTAs ("Start With the Foundation", "Start The Program", "Book Sessions", "Stay in the Program", "Start the Executive Reset"), the six Couples "Get Started" buttons and nav "Contact". Wrong if they are meant to book a consultation too. The rule keys on the label, so relabelling one would make it fire.
+4. **The new rule exempts the frozen records,** like the retired-copy sweep. Both records already link to Calendly, so today there is nothing to miss.
+
+### Built pages changed
+`/about`, `/behavior-change-coaching`, `/case-studies`, `/couples-personal-training-san-diego`, `/glp-1-personal-training-san-diego`, `/how-it-works-pricing`, `/hsa-fsa-personal-training`, `/` (home-3), `/nutrition-coaching-san-diego`, `/partners`, `/personal-trainer-over-50-san-diego`, `/training-rates-san-diego`, the nine territory pages, and `sitemap.xml` (lastmod).
