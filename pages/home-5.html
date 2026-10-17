@@ -1,116 +1,140 @@
-
-  
-    <!-- OMNIFIT | FAQ SECTION · v2 AUGUST 2026
-  Changelog v2 (canonical truth pass):
-  - COMPLIANCE: "1-2 lb/week ... 20-30+ lbs in 4-6 months" results answer replaced
-    with baseline/metrics framing (attorney screen: no lbs-in-timeframe claims)
-  - Em-dash removed from nutrition answer (voice rule)
+<!-- OMNIFIT | HOMEPAGE — MEET NEMEZIO + FAQ + FINAL CTA · v3 OCTOBER 2026
+  Homepage rebuild (Oct 17 2026).
+  - Meet Nemezio: the short version; the full bio, every credential with its
+    certificate, the Eden collaboration and the scope note live on /about.
+  - FAQ: the ONE homepage FAQ. Merges the v2 FAQ here with the methodology
+    FAQ that sat in pages/home-2.html (now on /the-omnifit-method). The page
+    header (pages/headers/home-header.html) mirrors it verbatim, in order;
+    tools/certify.py checks that mirror against this file (HEADER_PAGE).
+  - Final CTA: "Book Your Consultation" + the canonical deposit line. A plain
+    <a> outside any hero/footer landmark, so site.js reports
+    cta_position "body".
+  Uses the shared .omh styles from pages/home-1.html. The FAQ keeps the
+  #omni-faq id and the details/summary/.icon markup faq.py reads.
+  Price answer: framed as protecting progress with the five LANGUAGE RULES
+  facts; the 30-Day Fit Guarantee sentence is the canonical wording
+  (LAUNCH DECISIONS item 6), verbatim.
 -->
-<section id="omni-faq" aria-label="Frequently Asked Questions" style="margin:48px 0;">
-  <style>
-    #omni-faq{
-      --omni-navy:#002147;
-      --omni-navy-deep:#0B2B4A;
-      --omni-gold:#DAA520;
-      --omni-white:#FFFFFF;
-      --omni-text:#0f172a;
-      --omni-muted:#6b7280;
-      --body-font:'Montserrat', system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-      font-family:var(--body-font);
-    }
-    #omni-faq .wrap{max-width:1100px;margin:0 auto;padding:24px;}
-    #omni-faq h2{
-      font-family:'Playfair Display','Times New Roman',serif;
-      font-size:clamp(26px,3vw,34px);
-      margin:0 0 18px;
-      color:var(--omni-navy);
-      letter-spacing:.3px;
-      text-transform:none;
-    }
-    #omni-faq p.intro{color:var(--omni-muted);margin:0 0 20px;max-width:70ch;}
-    #omni-faq details{
-      background:var(--omni-white);
-      border:1px solid rgba(0,0,0,.08);
-      border-left:4px solid var(--omni-gold);
-      border-radius:14px;
-      padding:18px 20px;
-      margin:12px 0;
-      box-shadow:0 1px 3px rgba(0,0,0,.04);
-      transition:box-shadow .2s ease;
-    }
-    #omni-faq details[open]{box-shadow:0 6px 16px rgba(0,0,0,.08);}
-    #omni-faq summary{
-      list-style:none;
-      cursor:pointer;
-      font-weight:700;
-      color:var(--omni-text);
-      display:flex;align-items:center;gap:12px;
-    }
-    #omni-faq summary::-webkit-details-marker{display:none}
-    #omni-faq .icon{
-      flex:0 0 28px;height:28px;width:28px;border-radius:999px;
-      display:grid;place-items:center;
-      background:var(--omni-navy);color:var(--omni-white);font-size:18px;line-height:1;
-    }
-    #omni-faq details[open] .icon{background:var(--omni-gold);color:var(--omni-navy);}
-    #omni-faq .answer{margin:12px 0 4px;color:#1f2937;line-height:1.6;}
-    #omni-faq a{color:var(--omni-navy);text-decoration:underline;text-underline-offset:2px}
-    #omni-faq .cta{
-      margin-top:22px;display:inline-block;
-      background:var(--omni-navy);color:var(--omni-white);
-      padding:12px 18px;border-radius:14px;text-decoration:none;font-weight:700;
-      border:2px solid var(--omni-navy);
-      transition:background .15s ease, color .15s ease;
-    }
-    #omni-faq .cta:hover{background:var(--omni-white);color:var(--omni-navy);}
-  </style>
+<style>
+  /* ===== Meet Nemezio ===== */
+  #omh-coach .coach-wrap{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:44px;align-items:center;}
+  #omh-coach .coach-photo{margin:0;border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:var(--omh-navy);box-shadow:0 18px 40px rgba(10,22,40,.16);}
+  #omh-coach .coach-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  #omh-coach .coach-creds{font-size:13.5px!important;font-weight:600;color:var(--omh-navy)!important;border-top:1px solid var(--omh-line);border-bottom:1px solid var(--omh-line);padding:12px 0;margin:18px 0!important;}
+  @media (max-width:760px){
+    #omh-coach .coach-wrap{grid-template-columns:1fr;gap:26px;}
+    #omh-coach .coach-photo{max-width:320px;}
+  }
 
-  <div class="wrap">
-    <h2>Frequently Asked Questions</h2>
-    <p class="intro">Quick answers about OmniFit's <strong>personal training in San Diego</strong> and our online coaching for busy professionals.</p>
+  /* ===== FAQ ===== */
+  #omni-faq .faq-list{max-width:860px;}
+  #omni-faq details{background:#fff;border:1px solid var(--omh-line);border-left:4px solid var(--omh-gold);border-radius:14px;padding:18px 20px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:box-shadow .2s ease;}
+  #omni-faq details[open]{box-shadow:0 6px 16px rgba(0,0,0,.08);}
+  #omni-faq summary{list-style:none;cursor:pointer;font-weight:700;font-size:16px;line-height:1.45;color:var(--omh-navy);display:flex;align-items:center;gap:12px;}
+  #omni-faq summary::-webkit-details-marker{display:none;}
+  #omni-faq summary:focus-visible{outline:3px solid var(--omh-gold);outline-offset:4px;border-radius:4px;}
+  #omni-faq .icon{flex:0 0 28px;height:28px;width:28px;border-radius:999px;display:grid;place-items:center;background:var(--omh-navy);color:#fff;font-size:18px;line-height:1;}
+  #omni-faq details[open] .icon{background:var(--omh-gold);color:var(--omh-navy);}
+  #omni-faq .answer{margin:12px 0 4px 40px;color:var(--omh-ink);line-height:1.65;font-size:15.5px;}
+  #omni-faq .faq-more{margin:20px 0 0;font-size:15px;}
+  @media (max-width:640px){
+    #omni-faq details{padding:16px;}
+    #omni-faq summary{font-size:15.5px;align-items:flex-start;}
+    #omni-faq .answer{margin-left:0;}
+  }
+
+  /* ===== Final CTA ===== */
+  #omh-start{text-align:center;padding-top:80px;padding-bottom:80px;}
+  #omh-start h2{margin-left:auto;margin-right:auto;}
+  #omh-start .start-lede{max-width:56ch;margin:0 auto 26px;}
+  #omh-start .start-note{font-size:13.5px;color:rgba(255,255,255,.66);margin:14px 0 0;}
+  #omh-start .omh-label{justify-content:center;}
+  @media (max-width:640px){
+    #omh-start{padding-top:56px;padding-bottom:56px;}
+    #omh-start .omh-btn{width:100%;}
+  }
+</style>
+
+<section id="omh-coach" class="omh" aria-labelledby="omh-coach-h">
+  <div class="omh-inner coach-wrap">
+    <figure class="coach-photo"><img loading="lazy" decoding="async" src="/assets/img/work-portrait-photo.jpg" width="495" height="660" alt="Nemezio LopezPerez, founder of OmniFit Performance"></figure>
+    <div>
+      <p class="omh-label">Your Coach</p>
+      <h2 id="omh-coach-h">Meet Nemezio LopezPerez</h2>
+      <p>Nemezio LopezPerez founded OmniFit Performance after his own athletic years ended in stacked injuries and a rebuild that took years. Working around what his joints would tolerate, instead of arguing with them, taught him the principle the practice runs on: strength training should make your body more durable, not less.</p>
+      <p>Today Coach Nemezio trains clients at Teqneeq Functional Health Center in 4S Ranch, in their homes across North County, and by live video. Most are professionals over 30 who run the rest of their lives on structure and data and want the same rigor in their training. He measures first, corrects before loading, and counts it a success when a client needs him less.</p>
+      <p class="coach-creds">NASM Elite Trainer · Precision Nutrition Level 2 Certified Master Coach · 13 certifications</p>
+      <p><a href="/about">More about Nemezio</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="omni-faq" class="omh omh--cream" aria-labelledby="omni-faq-h">
+  <div class="omh-inner">
+    <p class="omh-label">Questions</p>
+    <h2 id="omni-faq-h">Frequently Asked Questions</h2>
+    <div class="faq-list">
+
+    <details>
+      <summary><span class="icon">+</span>Is OmniFit too advanced if I've never strength trained?</summary>
+      <div class="answer">
+        No. Never having trained is a common starting point here. The Performance Assessment shows where you are, corrective work comes before any load, and every exercise stays under a 3/10 pain ceiling, so the program starts at your level. Ken, a CTO in his 50s, had never followed a structured program before OmniFit; his story is on the <a href="/case-studies#ken">case studies</a> page.
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="icon">+</span>Is OmniFit worth the price compared to a regular gym membership?</summary>
+      <div class="answer">
+        Yes, if you want a plan, not just access: OmniFit builds your program from your assessment. The $150 Performance Assessment is credited toward your first cycle. If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. Pause weeks, credit for sessions OmniFit cancels and The Foundation's three 4-week cycles in one payment protect your progress.
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="icon">+</span>What happens when my program ends?</summary>
+      <div class="answer">
+        You graduate. Your Accountability Dial steps down as you need less coaching, Full Accountability → Coached → Train Only → Tune-Up, and the Tune-Up is the graduation point: one reassessment on the Bodystat QuadScan 4000 and an hour of training every 4 weeks, with your program in the app between visits. The goal is a client who no longer needs us every week.
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="icon">+</span>Do you work with people over 50?</summary>
+      <div class="answer">
+        Yes. Active adults 50+ are a core part of the practice. Training starts from your assessment, corrective work is part of every warm-up, loading stays under a 3/10 pain ceiling, and reassessment happens at least every 12 weeks so the program keeps pace with how you recover. See <a href="/personal-trainer-over-50-san-diego">strength training for adults over 50</a> for the details.
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="icon">+</span>What if I travel a lot for work?</summary>
+      <div class="answer">
+        The Travel Protocol covers it, for studio and in-home clients. You get travel-adapted programming in the app for hotel gyms and rooms, check-ins that continue at your Accountability Dial setting, and pause weeks when a trip can't hold training. You can take a scheduled session live by video during a travel week, at no extra cost. Fully remote clients use the 30-Minute Executive Reset.
+      </div>
+    </details>
 
     <details>
       <summary><span class="icon">+</span>Do you offer virtual personal training in San Diego?</summary>
       <div class="answer">
-        Yes. We coach clients locally and remotely via live video plus the OmniFit app. Many busy professionals combine
-        <a href="/the-30-minute-executive-reset">online coaching</a> with 1:1 sessions as schedules allow.
+        Yes, and nationwide. Fully remote clients train through the <a href="/the-30-minute-executive-reset">30-Minute Executive Reset</a>: live video sessions with Coach Nemezio on most tiers, your program and check-ins in the OmniFit app, and minimal gear such as a pair of dumbbells and a mat. Sessions fit between meetings and work from a home, an office or a hotel room.
       </div>
     </details>
 
     <details>
-      <summary><span class="icon">+</span>What equipment do I need for online sessions?</summary>
+      <summary><span class="icon">+</span>Is nutrition coaching included?</summary>
       <div class="answer">
-        Minimal gear works: a pair of dumbbells, a mat, and optional suspension straps. We'll tailor the plan to your home, office, or hotel setup, and on the road the Travel Protocol adapts it to hotel gyms and rooms. No gym required.
+        Yes, in every program, with no add-ons. Your coach sets calorie and protein targets and simple meal frameworks that fit your schedule, work dinners and travel included. How closely nutrition is followed depends on your Accountability Dial setting: daily logging at Full Accountability, weekly check-ins at Coached, and on request at Train Only.
       </div>
     </details>
 
-    <details>
-      <summary><span class="icon">+</span>Do you include nutrition guidance?</summary>
-      <div class="answer">
-        Yes. Custom nutrition guidance is built in. We'll set calories, protein targets, and simple meal frameworks that fit your schedule. Weekly check-ins keep you on track.
-      </div>
-    </details>
-
-    <details>
-      <summary><span class="icon">+</span>How often do we meet and what does accountability look like?</summary>
-      <div class="answer">
-        Most clients train 2–3x/week. You'll also get weekly progress reviews, in-app messaging, and habit tracking. Accountability is the difference-maker at OmniFit.
-        See options on <a href="/training-rates-san-diego">Rates &amp; Packages</a>.
-      </div>
-    </details>
-
-    <details>
-      <summary><span class="icon">+</span>What results can I expect in 3–6 months?</summary>
-      <div class="answer">
-        Results vary by starting point and adherence, so we measure you against your own baseline instead of a promise. Every client is tracked across 12 objective metrics, including body composition, strength benchmarks, and posture photos, with formal 30-day progress reports. The <a href="/case-studies">documented case studies</a> show real client outcomes and the timelines behind them.
-      </div>
-    </details>
-
-    <a class="cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener noreferrer">Book Your Personal Training Consultation</a>
+    </div>
+    <p class="faq-more">More answers on the <a href="/faqs">full FAQ page</a>.</p>
   </div>
 </section>
-  
-  
 
-
-
+<section id="omh-start" class="omh omh--navy" aria-labelledby="omh-start-h">
+  <div class="omh-inner">
+    <p class="omh-label">Start Here</p>
+    <h2 id="omh-start-h">Start With a Conversation</h2>
+    <p class="start-lede">A 45-minute consultation by video or phone. We talk through your goals, your history and your calendar, and you leave knowing whether OmniFit fits.</p>
+    <a class="omh-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+    <p class="start-note">$30 deposit, refunded the same day you attend your consultation.</p>
+  </div>
+</section>

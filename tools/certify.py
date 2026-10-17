@@ -988,7 +988,10 @@ COMPLIANCE = [
 # TIER 2 item 2a: historical records, exempt from re-screening ENTIRELY. They
 # record measurements that happened; re-screening them would put the run in the
 # position of arguing with its own archive.
-FROZEN = ("case-studies.html", "home-3.html")
+# home-3.html left this list in the homepage rebuild (Oct 17 2026): it is no
+# longer a copy of the case-studies record but three short homepage case
+# cards, screened like every other page (CANON REPO STATE).
+FROZEN = ("case-studies.html",)
 
 # ─── (b) stale canon ───────────────────────────────────────────────
 # ─── (b) stale canon, OCTOBER 2026 CARD ────────────────────────────
@@ -1426,8 +1429,8 @@ def run():
     skipped = [f for f in ALL if f not in files]
     assert files, "GLOB MATCHED ZERO FILES - run from repo root"
     # Where two in-scope files are BYTE-IDENTICAL, certify one and reference the
-    # other: home-3.html is the case-studies block pasted into the homepage, and
-    # certifying both double-counted every finding on it. The kept file is the
+    # other: home-3.html was once the case-studies block pasted into the
+    # homepage, and certifying both double-counted every finding on it. The kept file is the
     # alphabetically first, so the choice is deterministic, and the pairing is
     # printed rather than silently applied.
     seen, dup = {}, {}
