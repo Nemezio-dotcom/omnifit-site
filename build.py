@@ -8,13 +8,17 @@
 The checks include keyword ownership (tools/ownership.py, reading the
 KEYWORD OWNERSHIP table in CANON.md): no owned phrase in the title, H1, H2s
 or meta description of a page other than its owner. Its pass/fail fixtures
-run first, so a broken check cannot report green.
+run first, so a broken check cannot report green. They also include the
+measurement rule (CANON MEASUREMENT): no retired tracking ID or dataLayer
+push anywhere in public/, and the GA4 / Clarity IDs at most once per page;
+its fixtures run first too.
 
 Sources
   pages/<slug>.html                 page body (one Squarespace Code Block each)
   pages/headers/<slug>-header.html  per-page header injection (JSON-LD, etc.)
-  pages/headers/site-header.html    site-wide header injection (GTM, Clarity,
-                                    HubSpot deferral, geo meta, entity graph)
+  pages/headers/site-header.html    site-wide header injection (GA4 + Clarity,
+                                    production only; HubSpot deferral; geo
+                                    meta; entity graph)
   pages/footer.html                 site-wide footer (style + markup + script)
   pages/home-1..6.html              homepage sections, concatenated in HOME_ORDER
   site/layout.html, site/nav.html, site/site.css, site/site.js
@@ -615,6 +619,64 @@ def redirect_selftest(rules, built, known):
     return bad
 
 
+# Measurement (CANON MEASUREMENT). The retired trackers must appear nowhere in
+# public/ (any file), and the live IDs at most once per built page: the
+# site-wide header is their single source, so a second occurrence means a page
+# or header grew its own copy.
+TRACKING_BANNED = ("GTM-5P4CKPT2", "ulpgsrkd98", "AW-16616873404", "G-QTG1ZLR0NQ", "dataLayer.push")
+TRACKING_ONCE = ("G-0K6VLEC2VJ", "yzawpvwvdf")
+
+
+def check_tracking(files):
+    """files: {relative path: text} for everything under public/.
+    Problems: 'banned: <needle> in <file>' and 'repeated: <id> x<n> in <page>'."""
+    problems = []
+    for rel in sorted(files):
+        text = files[rel]
+        for needle in TRACKING_BANNED:
+            if needle in text:
+                problems.append(f"banned: {needle} in {rel}")
+        if rel.endswith(".html"):
+            for ident in TRACKING_ONCE:
+                n = text.count(ident)
+                if n > 1:
+                    problems.append(f"repeated: {ident} x{n} in {rel}")
+    return problems
+
+
+def tracking_selftest(files):
+    """Each fixture mutates a copy of the real public/ text and must raise
+    exactly its own problem kind (and nothing on the untouched set).
+    Returns the fixtures that misbehaved (empty = OK)."""
+    base = set(check_tracking(files))
+    kinds = lambda probs: sorted({p.split(":", 1)[0] for p in set(probs) - base})
+    page = next((r for r in sorted(files) if r.endswith("index.html")), None)
+    if page is None:
+        return ["no built page to mutate"]
+    bad = []
+    if base:
+        bad.append(f"real public/ already fails: {sorted(base)[:3]}")
+    for needle in TRACKING_BANNED:
+        for where in (page, "assets/site.js"):
+            if where not in files:
+                bad.append(f"{where} missing from public/")
+                continue
+            mutated = dict(files)
+            mutated[where] = files[where] + "\n<!-- " + needle + " -->\n"
+            got = kinds(check_tracking(mutated))
+            if got != ["banned"]:
+                bad.append(f"{needle} in {where}: expected [banned], got {got}")
+    for ident in TRACKING_ONCE:
+        if files[page].count(ident) != 1:
+            bad.append(f"{page} should carry {ident} exactly once, has {files[page].count(ident)}")
+        mutated = dict(files)
+        mutated[page] = files[page] + "\n<!-- " + ident + " -->\n"
+        got = kinds(check_tracking(mutated))
+        if got != ["repeated"]:
+            bad.append(f"second {ident} in {page}: expected [repeated], got {got}")
+    return bad
+
+
 def check():
     """Every internal link resolves, exactly one H1 per page, JSON-LD parses."""
     files = sorted(PUBLIC.rglob("index.html"))
@@ -692,6 +754,20 @@ def check():
         n301 = sum(1 for r in rules if r[2] == "301")
         notes.append(f"redirects: {len(rules)} rules ({n301} x 301, {len(rules) - n301} x 302); "
                      f"{len(known)} known URLs checked; fixtures OK")
+    # Measurement (CANON MEASUREMENT). Fixtures first, then every file under
+    # public/: retired trackers nowhere, live IDs at most once per page.
+    tracked = {}
+    for f in PUBLIC.rglob("*"):
+        if f.is_file():
+            try:
+                tracked[f.relative_to(PUBLIC).as_posix()] = f.read_text(encoding="utf-8")
+            except UnicodeDecodeError:
+                continue  # images
+    problems += [f"tracking check fixture misbehaved: {b}" for b in tracking_selftest(tracked)]
+    problems += [f"tracking: {p}" for p in check_tracking(tracked)]
+    n_pages = sum(1 for r in tracked if r.endswith("index.html"))
+    notes.append(f"tracking: {len(tracked)} files scanned for {len(TRACKING_BANNED)} retired strings; "
+                 f"{', '.join(TRACKING_ONCE)} once on each of {n_pages} pages; fixtures OK")
     # Keyword ownership (CANON KEYWORD OWNERSHIP). Fixtures first: if a fixture
     # that must fail passes, the site result below means nothing.
     try:
@@ -718,7 +794,7 @@ def main():
             items = ", ".join(f"{ch} x{n} -> {icons.ICONS[ch][0]}" for ch, n in sorted(emoji_report[url_path].items(), key=lambda kv: -kv[1]))
             print(f"  {url_path:45s} {items}")
     problems, notes = check()
-    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji, 404/_headers, redirects, keyword ownership")
+    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji, 404/_headers, redirects, tracking, keyword ownership")
     for n in sorted(set(notes)):
         print("  note    ", n)
     for p in problems:

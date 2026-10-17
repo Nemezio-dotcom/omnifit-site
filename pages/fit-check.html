@@ -95,7 +95,7 @@
   <section id="intro" class="stack">
     <span class="brand">OmniFit Performance</span>
     <h1>Are you the right fit?</h1>
-    <p class="lede">OmniFit is diagnostic-led coaching. We measure first, then build a program written for you. It works for people who are ready and able to start. Seven questions, about three minutes. Answer honestly, not the way you think you should. Nothing here is saved or sent, and you'll see your result right away, including the accountability setting we'd recommend you start on.</p>
+    <p class="lede">OmniFit is diagnostic-led coaching. We measure first, then build a program written for you. It works for people who are ready and able to start. Seven questions, about three minutes. Answer honestly, not the way you think you should. No answers are saved or sent; only an anonymous count of completed checks and their result is recorded. You'll see your result right away, including the accountability setting we'd recommend you start on.</p>
     <div class="two">
       <div class="box for"><h3>Built for you if</h3><ul><li>You've decided, and you're starting within the month</li><li>You want a program written for you, not a template</li><li>You can budget for the published rates and keep your appointments</li></ul></div>
       <div class="box not"><h3>Not the right fit if</h3><ul><li>You mainly want group energy or the lowest price</li><li>You're still deciding whether it's worth it</li><li>The next three months leave no room for sessions</li></ul></div>
@@ -272,6 +272,11 @@ function showResult() {
   const { held, soft } = score();
   const res = $("#result");
   $("#quiz").hidden = true;
+  // Measurement hooks read by site/site.js (fit_check_complete): the verdict
+  // and, on a pass, the recommended setting's name. Never an answer.
+  res.setAttribute("data-fit-result", held.length === 0 ? "pass" : "hold");
+  if (held.length === 0) res.setAttribute("data-fit-setting", DIAL[answers.dial].name);
+  else res.removeAttribute("data-fit-setting");
   res.hidden = false;
   if (held.length === 0) {
     const d = DIAL[answers.dial];
