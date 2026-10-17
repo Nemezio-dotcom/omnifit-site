@@ -11,6 +11,7 @@ python3 tools/ownership.py   # keyword ownership on public/ (also run by build.p
 python3 tools/ownership.py --selftest   # its must-fail / must-pass fixtures
 python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-urls-*.txt and the tracking rule
 NODE_PATH="$(npm root -g)" node tools/tracktest.js   # measurement test on the built site (Playwright)
+NODE_PATH="$(npm root -g)" node tools/mobileaudit.js [--shots DIR]   # 390/412px layout audit (Playwright)
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
@@ -507,6 +508,33 @@ on. That verbatim pointer (link-wrapped or not) is blanked, same length, for
 the framing test only. Self-tested: the card beside the disclosure passes,
 the card beside "Clients typically see this." still fires.
 
+**T1-2 vs the 2a disclosure (owner decision, homepage rebuild, Oct 17 2026).**
+The same misreading in `lbs_near_timeframe`'s named-individual exemption
+(`_case_study_exempt`): a named case card carrying the verbatim disclosure
+lost its exemption because "typically" sat inside the 45-word window, which
+struck all seven figures on the new homepage case cards. Only the exact
+sentence "How clients typically progress: omnifittraining.com/outcomes."
+(`DISCLOSURE_2A_POINTER`; link-wrapped reads "outcomes ." once flattened) is
+blanked, same length, on the whole text **before** the window is cut — a first
+version blanked it inside the window and missed the cases where the window
+edge split the sentence, leaving a bare "typically". Self-tested both ways in
+`_selftest_case_study_exempt`: (1) a named card with the verbatim disclosure
+passes, at every window offset from 25 to 54 words of padding; (2) a named
+card beside "Our clients typically lose 10 lbs in 3 months" still fires on the
+named figure; (3) the disclosure with one word changed ("typically improve")
+is not exempt.
+
+**Teqneeq on-site PT (`teqneeq_onsite_pt`, stale canon, Oct 17 2026).** Teqneeq
+has no on-site physical therapy clinic (CANON ENTITY BLOCK). A sentence naming
+Teqneeq, or the sentence after it, that places a PT / physical therapy /
+rehab clinic on site or in-house is a finding; negations pass. Every file in
+the glob, frozen records included. Self-tested both ways
+(`_selftest_teqneeq_pt`: the old /about line, a clinic in the next sentence,
+"PT clinic on site" and "in-house rehab" fire; the canonical negation, an
+external partner and a claim in the sentence before Teqneeq pass), and
+negative-tested on the real tree by restoring the removed /about sentence in
+memory (1 finding).
+
 ## Known checker defects, unfixed
 
 - **travel-fee rule, `$75` adjacency.** `travel[^.<]{0,30}\$(?:50|75)` fires on
@@ -523,9 +551,10 @@ Where two in-scope files are byte-identical, `certify.py` certifies one and
 references the other: it sha256-hashes every in-scope file, keeps the
 alphabetically first of each identical group so the choice is deterministic,
 and **prints the pairing** in the SCOPE block rather than applying it silently.
-`pages/home-3.html` is the `case-studies` block pasted into the homepage
-(sha256 `c82d5f32…`); certifying both double-counted every finding on it. It is
-the only such pair in `pages/` as of Sept 2026.
+`pages/home-3.html` was the `case-studies` block pasted into the homepage
+(sha256 `c82d5f32…`); certifying both double-counted every finding on it. Since
+the homepage rebuild (Oct 17 2026) it is three short case cards, no longer a
+duplicate and no longer frozen; there is no byte-identical pair in `pages/`.
 
 `archive/` never enters the glob, and an assertion enforces that: retired pages
 keep their retired pricing, old address and unmirrored headers on purpose.
@@ -745,3 +774,18 @@ a stub that forwards each `gtag('event', ...)` to
 HubSpot loaders are intercepted and answered locally; fonts, images and every
 other external host are blocked. The test therefore proves what the site sends
 into gtag and how, not what the GA4 property does with it afterwards.
+
+## Mobile audit (`tools/mobileaudit.js`, Oct 17, 2026)
+
+CANON LAUNCH DECISIONS item 22, committed for the first time in the homepage
+rebuild run (the earlier run described its method in REPORT.md but did not
+commit the script). Serves `public/` locally and loads each built page (or the
+paths given) at 390×900 and 412×900, `isMobile`. Reports `scrollWidth` past the
+viewport, grid items / card elements under 240px ("narrow", printed for
+review: 2-up tiles and table cells are narrow by design), and content clipped
+past the right edge that no scrollable ancestor contains (`<main>` has
+`overflow-x:clip`, so `scrollWidth` alone cannot see it). `aria-hidden`
+decorative layers are excluded from the clip test: the homepage hero's photo
+frames are zoomed 1.2× inside the clipped card on purpose. Exit 1 on any
+overflow or clip. `--shots DIR` also saves the homepage hero and In Short
+block at both widths.

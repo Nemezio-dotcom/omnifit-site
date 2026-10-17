@@ -1,494 +1,124 @@
-<!-- =========================
-OMNIFIT HOMEPAGE: Value + Services (MAXIMUM OVERRIDE) · v4 OCT 2026
-Changelog v4 (Keyword Ownership run):
-  - Value statement: one link, anchor "private personal trainer in San Diego" -> /private-personal-trainer-san-diego.
-    "Private" stays out of the homepage title, H1 and H2s (the private page owns it).
-Changelog v3 (canonical + compliance pass):
-  - Em-dashes removed from all client-facing copy (voice rule)
-  - CTA Step 1 wording cleaned; assessment price FLAGGED pending canonical pricing doc
-  - Retired hybrid product CONFIRMED dead: Card 6 relinked to /the-30-minute-executive-reset; add 301 for old slug
-  - PRICING (October 2026 card): Performance Assessment $150, credited toward your first cycle; starting-at line reflects The Program
-Changelog v2:
-  - Trust strip: 100+ → 190+ 5-Star Reviews; "BNI Del Mar" removed
-  - Card 2: dead "Learn more about nutrition coaching." sentence removed
-  - Card 3: double period + stray whitespace fixed
-  - Card icons: emoji replaced with gold line-SVG icons (brand-aligned)
-  - CTA: consultation kept primary; the in-person assessment added as Step 2
-  - Gold system unchanged (#c9a84c / #e0c872) per decision 2026-07
-========================== -->
+<!-- OMNIFIT | HOMEPAGE — IN SHORT + PROOF STRIP · v2 OCTOBER 2026
+  Homepage rebuild (Oct 17 2026): replaces the v1 services / who-it's-for
+  block. The services cards, the full who-for list and the CTA steps live on
+  /personal-training-services, /fit-check, /the-omnifit-method and the rates
+  page (REPORT.md, "Homepage rebuild run", lists where each fact went).
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  SHARED STYLES: the .omh rules below are the base for every rebuilt homepage
+  section (home-1, home-2, home-3, home-4, home-5). They are scoped to the
+  .omh class, which only these sections carry; each section adds its own
+  rules under its own id. Paste this fragment first.
 
+  Compliance:
+  - The In Short block leads with the POSITIONING LINE, verbatim (CANON
+    ENTITY BLOCK, "lead every summary / TL;DR block").
+  - Proof strip: the 4.98 / 190+ review figure and the 87% goal figure are
+    both on /outcomes (TIER 2 item 2g). The 87% carries its method, the
+    company-reported / not-independently-audited note and the
+    individual-results disclaimer on the same <section> (TIER 2 item 1,
+    the reference form copied from /outcomes).
+-->
 <style>
-  /* ============================================
-     MAXIMUM SQUARESPACE OVERRIDE
-     ============================================ */
-
-  /* Nuclear reset with maximum specificity */
-  div#omnifit-home-services-wrapper.omnifit-services {
-    all: revert !important;
-    display: block !important;
-    position: relative !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-
-    /* Force brand styles */
-    font-family: 'Montserrat', sans-serif !important;
-    background: #0a1628 !important;
-    color: rgba(255,255,255,0.9) !important;
-    line-height: 1.7 !important;
-    font-size: 16px !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
-    border-radius: 16px !important;
+  .omh{--omh-navy:#0a1628;--omh-navy-mid:#0f1f3a;--omh-navy-light:#152a4a;--omh-gold:#c9a84c;--omh-gold-light:#e0c872;--omh-cream:#f7f4ec;--omh-ink:#1e293b;--omh-muted:#475569;--omh-line:rgba(10,22,40,.10);
+    font-family:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--omh-ink);background:#fff;margin:0;padding:72px 24px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  .omh *{box-sizing:border-box;}
+  .omh--cream{background:var(--omh-cream);}
+  .omh--navy{background:var(--omh-navy);color:#fff;}
+  .omh-inner{max-width:1100px;margin:0 auto;}
+  .omh-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#9a7a26;margin:0 0 14px;}
+  .omh-label::before{content:'';display:inline-block;width:28px;height:2px;background:var(--omh-gold);flex:none;}
+  .omh--navy .omh-label{color:var(--omh-gold-light);}
+  .omh h2{font-family:'Playfair Display','Times New Roman',serif;font-size:clamp(27px,3.6vw,38px);font-weight:700;line-height:1.18;letter-spacing:-.3px;color:var(--omh-navy);margin:0 0 16px;text-transform:none;max-width:24ch;}
+  .omh--navy h2{color:#fff;}
+  .omh h3{font-family:'Playfair Display','Times New Roman',serif;font-size:20px;font-weight:700;line-height:1.3;color:var(--omh-navy);margin:0 0 8px;text-transform:none;}
+  .omh--navy h3{color:#fff;}
+  .omh p{font-size:16px;margin:0 0 14px;color:var(--omh-muted);}
+  .omh--navy p{color:rgba(255,255,255,.76);}
+  .omh .omh-lede{font-size:17px;max-width:68ch;margin-bottom:32px;}
+  .omh a{color:var(--omh-navy);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(201,168,76,.8);font-weight:600;}
+  .omh--navy a{color:var(--omh-gold-light);}
+  .omh a:hover,.omh a:focus-visible{color:#9a7a26;}
+  .omh--navy a:hover,.omh--navy a:focus-visible{color:#fff;}
+  .omh a:focus-visible{outline:3px solid var(--omh-gold);outline-offset:3px;border-radius:3px;}
+  .omh-grid{display:grid;gap:20px;grid-template-columns:repeat(3,minmax(0,1fr));}
+  .omh-card{background:#fff;border:1px solid var(--omh-line);border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;}
+  .omh--navy .omh-card{background:var(--omh-navy-light);border-color:rgba(255,255,255,.10);}
+  .omh-card p:last-child{margin-bottom:0;}
+  .omh-icon{width:40px;height:40px;margin:0 0 16px;flex:none;}
+  .omh-icon svg{width:40px;height:40px;fill:none;stroke:var(--omh-gold);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block;}
+  .omh-more{margin-top:auto;padding-top:6px;font-size:14px;}
+  .omh-btn,.omh-btn:link,.omh-btn:visited{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 30px;border-radius:999px;background:var(--omh-gold);color:var(--omh-navy);border:1.5px solid var(--omh-gold);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;text-decoration:none;transition:background-color .2s ease,transform .2s ease;}
+  .omh-btn:hover,.omh-btn:focus-visible{background:var(--omh-gold-light);border-color:var(--omh-gold-light);color:var(--omh-navy);transform:translateY(-1px);}
+  .omh-small{font-size:13px!important;}
+  @media (max-width:900px){.omh-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+  @media (max-width:640px){
+    .omh{padding:52px 16px;}
+    .omh-grid{grid-template-columns:1fr;gap:14px;}
+    .omh-card{padding:24px 20px;}
+    .omh .omh-lede{font-size:16px;margin-bottom:24px;}
   }
 
-  /* Wrapper spacing */
-  div#omnifit-home-services-wrapper.omnifit-services {
-    padding: clamp(48px, 6vw, 80px) clamp(20px, 4vw, 40px) !important;
+  /* ===== In Short ===== */
+  #omh-short{padding-top:56px;}
+  #omh-short .short-box{border:1px solid var(--omh-line);border-left:4px solid var(--omh-gold);border-radius:14px;padding:30px 32px;background:#fff;box-shadow:0 10px 30px rgba(10,22,40,.05);}
+  #omh-short ul{list-style:none;margin:0;padding:0;display:grid;gap:14px;}
+  #omh-short li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px;align-items:start;font-size:16px;line-height:1.6;color:var(--omh-ink);}
+  #omh-short li svg{width:22px;height:22px;margin-top:1px;fill:none;stroke:var(--omh-gold);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  #omh-short li strong{color:var(--omh-navy);}
+  @media (max-width:640px){
+    #omh-short{padding-top:40px;}
+    #omh-short .short-box{padding:22px 18px;}
+    #omh-short li{font-size:15.5px;gap:12px;}
   }
 
-  /* Inner container */
-  div#omnifit-home-services-wrapper.omnifit-services .wrap {
-    max-width: 1100px !important;
-    margin: 0 auto !important;
-    display: block !important;
-    padding: 0 !important;
+  /* ===== Proof strip ===== */
+  #omh-proof{padding-top:56px;padding-bottom:56px;}
+  #omh-proof .proof-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:8px 0 22px;}
+  #omh-proof .proof-stat{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:26px 24px;background:var(--omh-navy-light);}
+  #omh-proof .proof-num{font-family:'Playfair Display',serif;font-size:clamp(40px,5vw,54px);font-weight:700;line-height:1;color:var(--omh-gold-light);margin:0 0 10px;}
+  #omh-proof .proof-what{color:#fff;font-weight:600;margin:0 0 6px;}
+  #omh-proof .proof-method{font-size:13.5px;margin:0;}
+  #omh-proof .proof-note{font-size:13px;color:rgba(255,255,255,.62);max-width:80ch;margin:0 0 6px;}
+  @media (max-width:640px){
+    #omh-proof .proof-row{grid-template-columns:1fr;gap:14px;}
+    #omh-proof .proof-stat{padding:22px 20px;}
   }
-
-  /* ============================================
-     HEADINGS - MAXIMUM SPECIFICITY
-     ============================================ */
-
-  div#omnifit-home-services-wrapper.omnifit-services h2 {
-    font-family: 'Playfair Display', serif !important;
-    font-weight: 700 !important;
-    font-size: clamp(28px, 3.5vw, 40px) !important;
-    line-height: 1.2 !important;
-    color: #ffffff !important;
-    text-align: center !important;
-    margin: 0 auto 16px !important;
-    padding: 0 !important;
-    display: block !important;
-    letter-spacing: normal !important;
-    text-transform: none !important;
-    border: none !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services h2 em {
-    font-family: 'Playfair Display', serif !important;
-    font-style: italic !important;
-    color: #c9a84c !important;
-    font-weight: 700 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services h3 {
-    font-family: 'Playfair Display', serif !important;
-    font-size: clamp(17px, 2vw, 19px) !important;
-    font-weight: 600 !important;
-    color: #e0c872 !important;
-    line-height: 1.3 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block !important;
-    letter-spacing: normal !important;
-    text-transform: none !important;
-    border: none !important;
-  }
-
-  /* ============================================
-     PARAGRAPHS & TEXT
-     ============================================ */
-
-  div#omnifit-home-services-wrapper.omnifit-services p {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: clamp(16px, 2vw, 18px) !important;
-    line-height: 1.7 !important;
-    color: rgba(255,255,255,0.9) !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block !important;
-    letter-spacing: normal !important;
-    text-transform: none !important;
-    border: none !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services p.sub-text {
-    text-align: center !important;
-    margin: 0 auto 32px !important;
-    max-width: 900px !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services p strong {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-  }
-
-  /* ============================================
-     LINKS
-     ============================================ */
-
-  div#omnifit-home-services-wrapper.omnifit-services a {
-    color: #e0c872 !important;
-    text-decoration: underline !important;
-    cursor: pointer !important;
-    background: transparent !important;
-    border: none !important;
-    font-family: inherit !important;
-    font-size: inherit !important;
-    display: inline !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services a:hover {
-    color: #c9a84c !important;
-  }
-
-  /* ============================================
-     TRUST STRIP
-     ============================================ */
-
-  div#omnifit-home-services-wrapper.omnifit-services .trust-strip {
-    background: #152a4a !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    border-radius: 8px !important;
-    padding: 14px 20px !important;
-    margin: 0 auto 40px !important;
-    text-align: center !important;
-    font-size: 14px !important;
-    color: rgba(255,255,255,0.9) !important;
-    display: block !important;
-    max-width: 100% !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services .trust-strip strong {
-    color: #e0c872 !important;
-    font-weight: 700 !important;
-  }
-
-  /* ============================================
-     SECTION DIVIDER
-     ============================================ */
-
-  div#omnifit-home-services-wrapper.omnifit-services .section-divider {
-    margin: 48px 0 32px !important;
-    display: block !important;
-    padding: 0 !important;
-  }
-
-  /* ============================================
-     GRID
-     ============================================ */
-
-  div#omnifit-home-services-wrapper.omnifit-services .grid-services {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 20px !important;
-    margin: 48px 0 !important;
-    padding: 0 !important;
-    list-style: none !important;
-  }
-
-  @media (max-width: 900px) {
-    div#omnifit-home-services-wrapper.omnifit-services .grid-services {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-  }
-
-  @media (max-width: 640px) {
-    div#omnifit-home-services-wrapper.omnifit-services .grid-services {
-      grid-template-columns: 1fr !important;
-    }
-  }
-
-  /* ============================================
-     SERVICE CARDS
-     ============================================ */
-
-  div#omnifit-home-services-wrapper.omnifit-services article.service-card {
-    background: #0f1f3a !important;
-    border: 1px solid rgba(255,255,255,0.1) !important;
-    border-radius: 12px !important;
-    padding: 24px !important;
-    display: block !important;
-    transition: all 0.3s ease !important;
-    margin: 0 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services article.service-card:hover {
-    border-color: rgba(201,168,76,0.15) !important;
-    transform: translateY(-2px) !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services .card-header {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    margin-bottom: 12px !important;
-    padding: 0 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services .card-icon {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex: 0 0 auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 1 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services .card-icon svg {
-    width: 26px !important;
-    height: 26px !important;
-    stroke: #e0c872 !important;
-    fill: none !important;
-    stroke-width: 1.5 !important;
-    stroke-linecap: round !important;
-    stroke-linejoin: round !important;
-    display: block !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services .card-text {
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 15px !important;
-    line-height: 1.7 !important;
-    color: rgba(255,255,255,0.9) !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block !important;
-  }
-
-  /* ============================================
-     CTA SECTION
-     ============================================ */
-
-  div#omnifit-home-services-wrapper.omnifit-services .cta-footer {
-    text-align: center !important;
-    margin-top: 48px !important;
-    display: block !important;
-    padding: 0 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services a.cta-button {
-    display: inline-block !important;
-    background: #c9a84c !important;
-    color: #0a1628 !important;
-    font-family: 'Montserrat', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: clamp(16px, 2vw, 18px) !important;
-    padding: 16px 32px !important;
-    border-radius: 999px !important;
-    text-decoration: none !important;
-    transition: all 0.3s ease !important;
-    cursor: pointer !important;
-    border: 2px solid transparent !important;
-    margin: 0 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services a.cta-button:hover {
-    background: #0a1628 !important;
-    color: #c9a84c !important;
-    border-color: #c9a84c !important;
-    transform: translateY(-2px) !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services .cta-steps {
-    margin-top: 16px !important;
-    font-size: 14px !important;
-    color: rgba(255,255,255,0.85) !important;
-    display: block !important;
-    padding: 0 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services .cta-steps strong {
-    color: #e0c872 !important;
-    font-weight: 700 !important;
-  }
-
-  div#omnifit-home-services-wrapper.omnifit-services .cta-sub {
-    margin-top: 12px !important;
-    font-size: 13px !important;
-    color: rgba(255,255,255,0.7) !important;
-    display: block !important;
-    padding: 0 !important;
-  }
-
-  /* Who this is for (Oct 2026, shared block) */
-  #omnifit-home-services-wrapper .omni-who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 0 0 24px; }
-  #omnifit-home-services-wrapper .omni-who-col { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 26px 24px; text-align: left; }
-  #omnifit-home-services-wrapper .omni-who-col.for { border-color: rgba(201,168,76,0.35); }
-  #omnifit-home-services-wrapper .omni-who-col h3 { font-family: 'Montserrat', sans-serif !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 2px !important; text-transform: uppercase !important; line-height: 1.4 !important; color: #c9a84c !important; margin: 0 0 14px !important; }
-  #omnifit-home-services-wrapper .omni-who-col.not h3 { color: rgba(255,255,255,0.55) !important; }
-  #omnifit-home-services-wrapper .omni-who-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
-  #omnifit-home-services-wrapper .omni-who-col li { display: flex; gap: 10px; align-items: flex-start; font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0; }
-  #omnifit-home-services-wrapper .omni-who-col li::before { content: '\2713'; color: #c9a84c; font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 3px; }
-  #omnifit-home-services-wrapper .omni-who-col.not li::before { content: '\2715'; color: rgba(255,255,255,0.45); }
-  #omnifit-home-services-wrapper .omni-who-unify { font-family: 'Montserrat', sans-serif !important; font-size: 12.5px; color: rgba(255,255,255,0.55); margin: 14px 0 0; }
-  #omnifit-home-services-wrapper .omni-who-lines { max-width: 860px; margin: 0 auto; text-align: left; display: grid; gap: 12px; }
-  #omnifit-home-services-wrapper .omni-who-lines p { font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.78); margin: 0; }
-  #omnifit-home-services-wrapper .omni-who-lines a { color: #c9a84c; text-decoration: underline; text-underline-offset: 3px; }
-  #omnifit-home-services-wrapper .omni-who-roles { border-left: 2px solid #c9a84c; padding-left: 14px; }
-  #omnifit-home-services-wrapper .omni-who-door { color: #fff !important; font-weight: 600; }
-  #omnifit-home-services-wrapper .omni-who-entity { font-size: 12.5px !important; color: rgba(255,255,255,0.5) !important; }
-  @media (max-width: 768px) { #omnifit-home-services-wrapper .omni-who-grid { grid-template-columns: 1fr; } }
 </style>
 
-<!-- WRAPPER WITH DOUBLE ID + CLASS FOR MAXIMUM SPECIFICITY -->
-<div id="omnifit-home-services-wrapper" class="omnifit-services">
-  <section aria-label="OmniFit premium personal training and virtual coaching services in San Diego">
-    <div class="wrap">
-
-      <!-- VALUE STATEMENT -->
-      <h2>Why Choose <em>OmniFit</em> for Personal Training in San Diego?</h2>
-      <p class="sub-text">
-        <strong>OmniFit Performance is the premium personal training practice of Nemezio LopezPerez in San Diego</strong> offering executive-level coaching in person and online.
-        We help you <strong>lose fat</strong>, <strong>build strength</strong>, and <strong>transform your fitness journey</strong> with functional workouts,
-        individualized nutrition, and simple habit systems, at home, in the gym, or while traveling.
-        Want one coach, one client and no gym floor? See how it works with a
-        <a href="/private-personal-trainer-san-diego">private personal trainer in San Diego</a>.
-        Prefer to compare options first? View our
-        <a href="/training-rates-san-diego">personal training rates in San Diego</a>.
-      </p>
-
-      <!-- MICRO TRUST STRIP -->
-      <div class="trust-strip">
-        <strong>190+ 5-Star Reviews</strong> • NASM CPT, CES, PES, CNC, BCS • Coaching from $640 per 4 weeks • San Diego • Virtual Nationwide
-      </div>
-
-      <!-- SERVICES SECTION -->
-      <div class="section-divider">
-        <h2>Personal Training &amp; <em>Virtual Coaching Services</em></h2>
-        <p class="sub-text">Programs for fat loss, strength, posture and mobility, and our 30-Minute Executive Reset for remote professionals.</p>
-      </div>
-
-      <!-- SERVICES GRID -->
-      <div class="grid-services">
-
-        <!-- Card 1: Executive Reset -->
-        <article class="service-card">
-          <div class="card-header">
-            <span class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3.5 2"></path></svg>
-            </span>
-            <h3>30-Minute Executive Reset</h3>
-          </div>
-          <p class="card-text">
-            A focused, 30-minute session that fits between meetings. Minimal equipment, maximum results.
-            <a href="/the-30-minute-executive-reset">Explore the Executive Reset program</a>.
-          </p>
-        </article>
-
-        <!-- Card 2: Nutrition Coaching -->
-        <article class="service-card">
-          <div class="card-header">
-            <span class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 21c0-6.5 3.5-13.5 14-15-1 8.5-5.5 13.5-14 15z"></path><path d="M6 21c2.5-5 6.5-9.5 11-12.5"></path></svg>
-            </span>
-            <h3>Nutrition Coaching</h3>
-          </div>
-          <p class="card-text">
-            Personalized macros and habit coaching for fat loss, muscle gain, and steady energy.
-          </p>
-        </article>
-
-        <!-- Card 3: Corrective Exercise -->
-        <article class="service-card">
-          <div class="card-header">
-            <span class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 4v6h6"></path><path d="M3.5 15a9 9 0 1 0 2.1-9.4L2 10"></path></svg>
-            </span>
-            <h3>Corrective Exercise &amp; Mobility</h3>
-          </div>
-          <p class="card-text">
-            Pain-aware movement and mobility work to help you feel and perform better.
-            <a href="/corrective-exercise-post-rehab">Learn more about corrective exercise</a>.
-          </p>
-        </article>
-
-        <!-- Card 4: How We're Different -->
-        <article class="service-card">
-          <div class="card-header">
-            <span class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v18"></path><path d="M8 21h8"></path><path d="M5 7h14"></path><path d="M5 7l-3 6a3.2 3.2 0 0 0 6 0L5 7z"></path><path d="M19 7l-3 6a3.2 3.2 0 0 0 6 0l-3-6z"></path></svg>
-            </span>
-            <h3>OmniFit vs F45 &amp; Big Box Gyms</h3>
-          </div>
-          <p class="card-text">
-            Honest comparison of access-based fitness vs. accountability-based transformation.
-            <a href="/omnifit-vs-competitors">See how we're different</a>.
-          </p>
-        </article>
-
-        <!-- Card 5: How We Measure Progress -->
-        <article class="service-card">
-          <div class="card-header">
-            <span class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M6 21V13"></path><path d="M12 21V7"></path><path d="M18 21V10"></path><path d="M4 8l5-4 4 3 6-5"></path></svg>
-            </span>
-            <h3>How We Track Your Progress</h3>
-          </div>
-          <p class="card-text">
-            12 objective metrics tracked weekly: body composition, strength, mobility, and adherence.
-            <a href="/how-we-measure-your-progress">Learn about our tracking system</a>.
-          </p>
-        </article>
-
-        <!-- Card 6: Hybrid Coaching -->
-        <!-- Retired hybrid product: card now links to the live Executive Reset page. 301 /executive-hybrid-coaching to /the-30-minute-executive-reset in Squarespace URL mappings. -->
-        <article class="service-card">
-          <div class="card-header">
-            <span class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
-            </span>
-            <h3>Hybrid Coaching for Travelers</h3>
-          </div>
-          <p class="card-text">
-            In-person sessions + hotel gym programming on the Travel Protocol, and you can take a scheduled session live by video during a travel week, at no extra cost. Stay consistent through heavy travel.
-            <a href="/the-30-minute-executive-reset">Explore virtual and hybrid options</a>.
-          </p>
-        </article>
-
-      </div>
-
-      <!-- WHO THIS IS FOR (Oct 2026) -->
-      <div class="section-divider">
-        <h2>Who OmniFit Is <em>For</em></h2>
-        <p class="sub-text">Professional adults 30+ who want a measured program, not a template. Here is who it fits, and who it doesn't.</p>
-      </div>
-      <div class="omni-who-grid">
-      <div class="omni-who-col for"><h3>Built for</h3><ul><li>Executives and founders who want a measured program around a demanding calendar</li><li>Desk-bound and remote professionals with the posture and mobility patterns long sitting creates</li><li>Active adults 50+ who want strength built around their joints</li><li>Professional women 35&ndash;55 with joint concerns</li><li>People returning after a long break or after physical therapy</li><li>People burned by bootcamps or big gyms</li><li>Couples who want to train together on two separate programs</li></ul><p class="omni-who-unify">The unifying audience is professional adults 30+.</p></div>
-      <div class="omni-who-col not"><h3>Not the right fit if</h3><ul><li>You mainly want group energy or the lowest price. A gym or class studio will serve you better.</li><li>You want someone to count reps, with nothing between sessions.</li><li>You need treatment rather than training. Start with your clinician; we pick up where care ends.</li><li>You can't keep booked sessions or the 24-hour reschedule standard.</li></ul></div>
+<section id="omh-short" class="omh" aria-labelledby="omh-short-h">
+  <div class="omh-inner">
+    <p class="omh-label">The Short Version</p>
+    <h2 id="omh-short-h">OmniFit Performance, in Short</h2>
+    <div class="short-box">
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Who it's for:</strong> professional adults 30+ who are busy, stuck, sore, or starting from zero.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>The method:</strong> measure first, correct what the assessment finds, build strength, then step the coaching down until you train on your own.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Where you train:</strong> 1:1 at Teqneeq in 4S Ranch, in your home across North County San Diego, or by live video nationwide.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Proof:</strong> 190+ reviews with a 4.98 average across platforms, and client outcomes published with their method.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Next step:</strong> a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.</span></li>
+      </ul>
     </div>
-    <div class="omni-who-lines">
-      <p class="omni-who-method">OmniFit runs on the <a href="/the-omnifit-method">OmniFit Method</a>: Measured Progress, Joint-First Strength and Accountability That Travels, carried through Assess &rarr; Correct &rarr; Build &rarr; Sustain.</p>
-      <p class="omni-who-roles">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.</p>
-      <p class="omni-who-door">Even if you just want to train, we can start there.</p>
-      <p class="omni-who-entity">OmniFit Performance &middot; Nemezio LopezPerez (Coach Nemezio) &middot; Teqneeq Functional Health Center, 10772 Thornmint Rd, 4S Ranch, San Diego, CA 92127 &middot; omnifittraining.com</p>
-    </div>
+  </div>
+</section>
 
-      <!-- CTA FOOTER -->
-      <div class="cta-footer">
-        <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener" class="cta-button">
-          Book Your Personal Training Consultation
-        </a>
-        <div class="cta-steps">
-          <strong>Step 1:</strong> 45-minute consultation, Zoom or phone, no pressure. &nbsp;
-          <strong>Step 2:</strong> If we're aligned, your $150 Performance Assessment sets the baseline, credited toward your first cycle.
-        </div>
-        <div class="cta-sub">
-          Coaching on The Program starts at $640 per 4 weeks, or $560 per cycle on the Foundation. Prefer to compare options first? See our
-          <a href="/training-rates-san-diego">San Diego training rates &amp; packages</a>.
-        </div>
+<section id="omh-proof" class="omh omh--navy" aria-labelledby="omh-proof-h">
+  <div class="omh-inner">
+    <p class="omh-label">Proof, Measured</p>
+    <h2 id="omh-proof-h">What Clients Say, and What We Measure</h2>
+    <div class="proof-row">
+      <div class="proof-stat">
+        <p class="proof-num">4.98</p>
+        <p class="proof-what">Average across 190+ reviews</p>
+        <p class="proof-method">Across platforms: Google, Yelp, Thumbtack and Bark combined.</p>
       </div>
-
+      <div class="proof-stat">
+        <p class="proof-num">87%</p>
+        <p class="proof-what">of 63 clients rated fully or partly achieved their goals (coach-assessed), Jan 2023 to Sep 2026</p>
+        <p class="proof-method">Method: 63 clients with two or more sessions, each rated by the coach against the primary goal set at intake; 48 of them were coached for at least 3 months.</p>
+      </div>
     </div>
-  </section>
-</div>
-<!-- END WRAPPER -->
+    <p class="proof-note">Company-reported and internally measured, not independently audited. Individual results vary with starting point, adherence, sleep, stress and medical history.</p>
+    <p class="omh-small"><a href="/outcomes">How we measure</a></p>
+  </div>
+</section>

@@ -80,16 +80,26 @@ REPO STATE (reconciled with disk, Sept 2026)
     · about, contactform, desk-worker-posture-pain, hsa-fsa-personal-training
       - each has a header. desk-worker's header now carries a 6-question
       FAQPage that mirrors the page (see PAGE HEADER SHAPE).
-    · home-1, home-2, home-4, home-5 - homepage section fragments, no headers.
-      Carry retired brand name, Pacific Beach, ACE OES, Executive Hybrid, $90
-      and 180+. BATCH 4 or later.
+    · home-0 … home-6 - homepage section fragments, no headers of their own
+      (pages/headers/home-header.html is the homepage header). REBUILT in the
+      Homepage rebuild run (Oct 17 2026) from ~6,850 words of body copy to
+      ~2,000, same URL, title, meta description, H1 and canonical. Order
+      (HOME_ORDER unchanged): home-0 hero (POSITIONING LINE subhead, Calendly
+      + Fit Check link, deposit line) · home-1 In Short + proof strip (and the
+      shared .omh styles) · home-2 Who it's for + How it works · home-3 three
+      case cards · home-4 Ways to train · home-6 couples · home-5 Meet
+      Nemezio + the ONE homepage FAQ + final CTA · home-motion. Every unique
+      fact the old sections carried is on /the-omnifit-method, /case-studies,
+      /about or /how-we-measure-your-progress (REPORT.md lists the moves).
     · case-studies - JSON-LD is BODY-EMBEDDED, there is no header file and
       none is missing. The mirror check iterates headers, so it does not and
       must not flag this.
-    · home-3 - KNOWN DUPLICATE, byte-identical to case-studies.html
-      (sha256 c82d5f32dc869381...). It IS the case-studies block pasted into
-      the homepage. Certified via its source, not independently, and excluded
-      from the finding count. Also body-embedded JSON-LD, no header.
+    · home-3 - NO LONGER A DUPLICATE (Homepage rebuild run, Oct 17 2026). It
+      was the case-studies block pasted into the homepage (sha256
+      c82d5f32dc869381...), certified via its source. It is now three short
+      case cards (Mark, Ken, Isaac) linking to /case-studies, screened like
+      every other page: certify.py FROZEN lists case-studies.html only.
+      pages/case-studies.html keeps its frozen-record status unchanged.
 
   NOT YET CERTIFIED, do not paste
     · footer.html - site-wide, in no batch.
@@ -121,7 +131,10 @@ REPO STATE (reconciled with disk, Sept 2026)
       certify.py exempts it from the page-matching check (it returns before
       that check), so it emits no "no matching page" finding. LIVE as of
       2026-09-20.
-    · home-header.html - the homepage PAGE header. v4 (Sept 20, 2026):
+    · home-header.html - the homepage PAGE header. v5 (Oct 17 2026): the
+      FAQPage mirrors the rebuilt seven-question homepage FAQ in
+      pages/home-5.html (home-2's methodology FAQ merged into it); WebPage
+      name/description unchanged. v4 (Sept 20, 2026):
       page-level nodes only — WebPage #webpage (name = the homepage SEO Title
       "Personal Trainer San Diego | Diagnostic-Led Coaching") + FAQPage
       mirroring pages/home-5.html verbatim. It no longer defines the
@@ -130,7 +143,8 @@ REPO STATE (reconciled with disk, Sept 2026)
       LIVE as of 2026-09-20. Since Oct 16, 2026 certify.py checks its FAQPage
       mirror against pages/home-5.html (HEADER_PAGE in certify.py) instead of
       reporting "no matching page".
-    · home-6.html - NEW Sept 20, 2026: the homepage Partner & Duo section
+    · home-6.html - trimmed to essentials in the Homepage rebuild run (Oct 17
+      2026): intro, three cards, CTA. NEW Sept 20, 2026: the homepage Partner & Duo section
       (Code Block, after the programs section, before the FAQ). Replaces an
       August-card block that was live but never in the repo (it carried the
       Essential tier, 3-month / month-to-month couples tables, "per month",
@@ -567,10 +581,11 @@ LEGACY PRICING - AUGUST 2026, CLOSED (existing clients only; never publish)
   or fluid rather than inferred.
   THE 1500 MDD IS NOT RETIRED FROM THE RECORD. Scans that happened on it
   happened on it. Every 1500 MDD reference inside pages/case-studies.html
-  and its byte-identical duplicate pages/home-3.html is a factual record of
-  a past measurement and must be left exactly as written; changing it would
-  falsify the record. The same reasoning protects the v2 changelog entry at
-  pages/home-2.html:14, which records what a past edit added.
+  is a factual record of a past measurement and must be left exactly as
+  written; changing it would falsify the record. (Its homepage copy,
+  pages/home-3.html, and the v2 changelog entry at pages/home-2.html:14 that
+  this line also protected, were both replaced in the Homepage rebuild run,
+  Oct 17 2026; the homepage no longer names a device model in a record.)
 - Retired forever: Executive Hybrid (product, name, slug, $299/$500),
   $175/$150/$225/$200-session era, $225–275/mo era, $599–899 Reset era,
   $50/$75 travel fees, Foundation/VIP packages.
@@ -705,6 +720,14 @@ ENTITY BLOCK (Oct 17 2026; source: brand entity split across AI platforms -
                            Carmel Valley; Del Mar; La Jolla; Solana Beach;
                            Encinitas; Carlsbad; live virtual coaching
                            nationwide (US).
+  Teqneeq has no on-site physical therapy clinic. (Owner, Oct 17 2026,
+                           Homepage rebuild run.) Teqneeq is a members-only
+                           functional health facility; OmniFit's physical
+                           therapy relationships are EXTERNAL partners, such
+                           as Stoke Physical Therapy. certify.py
+                           teqneeq_onsite_pt fails on any on-site / in-house
+                           PT, physical therapy or rehab clinic claimed at
+                           Teqneeq (self-tested both ways).
   Not affiliated with:     OMNIFIT Athletics (schema disambiguatingDescription
                            says so; running copy never mentions them).
   DESCRIPTION (two sentences, verbatim; carried by the Organization and
@@ -736,7 +759,9 @@ ENTITY BLOCK (Oct 17 2026; source: brand entity split across AI platforms -
     ("diagnostic-led coaching system", "pain or plateau") and any placement
     in <title>, <h1>, a meta description or a header's WebPage
     name/description (build.py reads those as the title and meta);
-    self-tested both ways on every run. No summary block carries it yet.
+    self-tested both ways on every run. Carried by the homepage In Short
+    block (lead bullet) and the homepage hero subhead (Homepage rebuild run,
+    Oct 17 2026); no other summary block carries it yet.
   sameAs (Organization): Instagram, Yelp, Google Business Profile (g.page),
   Thumbtack, Bark, BBB - as listed in site-header.html. Several listing URLs
   still carry the retired name in their slug; that is the directory's slug,
@@ -978,6 +1003,10 @@ and overrides the earlier wording it replaces.)
       audit also reports content clipped past the viewport edge. A flagged
       content card is fixed the same way: a mobile override in that page's
       own <style>, nothing else. Results per page are in REPORT.md.
+      The audit is committed as tools/mobileaudit.js since the Homepage
+      rebuild run (Oct 17 2026; it had not been committed before), with one
+      documented exclusion: aria-hidden decorative layers (the hero's zoomed
+      photo frames) are not reported as clipped.
   RETIRED LAUNCH COPY (certify.py RETIRED_LAUNCH_COPY; frozen records
   exempt; footer swept): "fully refundable" · "applies to your first cycle"
   · "within the week" · "zero crowds" · "fully private" · "nutrition
@@ -1108,8 +1137,9 @@ reports the missing condition, never the content.
      What the Sept 2026 item 2 RELAXED against the old screen still stands:
      the disclosure does not have to sit in a dedicated block; it has to be
      on the same surface, verbatim.
-     FROZEN RECORDS: pages/case-studies.html and its byte-identical
-     duplicate pages/home-3.html are historical records, exempt from
+     FROZEN RECORDS: pages/case-studies.html (and, until the Homepage
+     rebuild run of Oct 17 2026, its byte-identical duplicate
+     pages/home-3.html) are historical records, exempt from
      re-screening entirely. They record measurements that happened. Do not
      run a case-study figure check.
      SEPT 2026 WORDING, SUPERSEDED (kept so the reasoning survives):
@@ -1268,6 +1298,18 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   see TIER 2 item 2g). Condition (4) carries the page-scoped /outcomes
   exemption (TIER 2 item 2a). Self-tested both ways on every run
   (_selftest_amendment).
+  CHECKER FIX, OWNER DECISION, Homepage rebuild run (Oct 17 2026) - the T1-2
+  twin of the fix below: lbs_near_timeframe's named-individual exemption
+  (_case_study_exempt) read the verbatim 2a disclosure's "How clients
+  typically progress" as aggregate wording, so a card carrying the
+  disclosure lost its exemption. ONLY the exact sentence "How clients
+  typically progress: omnifittraining.com/outcomes." (link-wrapped or not)
+  is blanked, on the whole text before the 45-word window is cut so a window
+  edge cannot split it; any other "typically" / "most clients" / "on
+  average" near a figure still fails. Self-tests (_selftest_case_study_exempt):
+  a named card with the verbatim disclosure passes, at every window offset;
+  a named card beside "clients typically lose 10 lbs in 3 months" fails on
+  the named figure; the disclosure with one word changed is not exempt.
   CHECKER FIX, Oct 17 2026 follow-up: aggregate_metric_conditions (T2-1)
   read the disclosure's own "How clients typically progress" as aggregate
   framing and struck Vincent's "-8% body fat" card on the over-50 page the
@@ -1314,7 +1356,8 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   "everyone else" / "anyone else" no longer read as aggregate framing
   ("putting everyone else first" in a neighbouring card). Both self-tested
   both ways on every run (certify.py _selftest_case_study_exempt).
-  FROZEN: case-studies.html and home-3.html are exempt from re-screening.
+  FROZEN: case-studies.html is exempt from re-screening (home-3.html left
+  the list in the Homepage rebuild run, Oct 17 2026: it is no longer a copy).
 
   Reasoning, recorded so it survives: an individual, attributed, documented
   client outcome is a fact about a named person; a claim about what a
@@ -1343,6 +1386,11 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   POSITIONING LINE NOT VERBATIM, OR IN A TITLE / META / H1 (ENTITY BLOCK,
   Oct 17 2026): certify.py positioning_line_verbatim, every file in the
   glob, frozen records exempt, self-tested both ways on every run.
+  TEQNEEQ ON-SITE PT CLINIC CLAIMED (ENTITY BLOCK, Oct 17 2026, Homepage
+  rebuild run): a sentence naming Teqneeq, or the sentence after it, that
+  places a PT / physical therapy / rehab clinic on site or in-house
+  (certify.py teqneeq_onsite_pt, every file in the glob, frozen records
+  INCLUDED, negations pass, self-tested both ways on every run).
   THE TRAVEL PROTOCOL MISCASED OR PRICED (THE OMNIFIT METHOD, Oct 17 2026):
   "travel protocol" in any casing but "Travel Protocol", or a dollar figure
   in the same sentence as the name (certify.py travel_protocol_usage,
@@ -1422,9 +1470,11 @@ Matching rules (encoded in tools/ownership.py; change both together):
     K05 (private) and K06 (in-home) DO match "training": their qualifier is
     the distinctive token, and the only non-owner hit (the FAQs meta,
     "private personal training programs") was cheap to fix.
-  - Owner COVERAGE is reported as a note, not a failure: the homepage does
-    not yet carry K02, K03 or K04 on a title/H1/H2/meta surface. Adding them
-    means rewriting homepage headlines, which no run has been asked to do.
+  - Owner COVERAGE is reported as a note, not a failure. Since the Homepage
+    rebuild run (Oct 17 2026) the homepage carries K02, K03 and K04 on H2s
+    ("Is a Personal Trainer in North County San Diego Right for You?",
+    "Your Personal Trainer in 4S Ranch, at Home, or Online", "How Our
+    Executive Fitness Coaching Works"), and the three coverage notes are gone.
   - An owner of "-" is UNASSIGNED: its phrase still claims its span (so a
     cost question is not read as K01) but exclusivity is not enforced, and
     the check prints that it is not enforced rather than passing silently.
@@ -1719,6 +1769,7 @@ NEXT RUNS
   · Use "the Travel Protocol" on the pages that describe travel support
     (the file:line list in REPORT.md), reconciling "switch to virtual" /
     "virtual sessions during travel weeks" wording with the definition.
-  · Lead every summary / TL;DR block with the POSITIONING LINE, verbatim;
+  · Lead every summary / TL;DR block with the POSITIONING LINE, verbatim
+    (DONE on the homepage In Short block, Oct 17 2026; other pages open);
     human-side, paste it to Google Business Profile, Thumbtack, Yelp and
     Bark.

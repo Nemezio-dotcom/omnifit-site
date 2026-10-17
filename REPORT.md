@@ -5158,3 +5158,120 @@ Paste the changed pages (Squarespace Code Blocks) and the eight changed headers 
 
 ### Sources changed
 `CANON.md`, `tools/certify.py`, `tools/README.md`, `REPORT.md`, 30 files in `pages/` and 8 in `pages/headers/`, `public/` (rebuilt).
+
+# Homepage rebuild run: condensed homepage, one FAQ, K02–K04 on H2s, Teqneeq PT correction (Oct 17, 2026)
+
+Same URL, rebuilt from the `home-0` … `home-6` fragments. **Locked and unchanged:** the `<title>` and meta description (the WebPage `name` and `description` in `pages/headers/home-header.html`), the H1 "San Diego Personal Trainer for Executives", the canonical, and all five invariant hashes. The homepage carries no hash-locked block; `grep` found none of the pricing, credentials, archetype or 9-point blocks in any `home-*` file. X02 holds: "private" appears in no title, H1 or H2. K10 holds: no cost-anchor link was added. "Every rate is published" links to the rates page.
+
+## Word count (visible body copy, tags, comments, styles and scripts stripped)
+
+| Fragment | Before | After |
+|---|---|---|
+| home-0 hero | 36 | 59 |
+| home-1 | 593 | 212 |
+| home-2 | 1,774 | 491 |
+| home-3 | 2,981 | 271 |
+| home-4 | 928 | 174 |
+| home-6 couples | 293 | 116 |
+| home-5 | 244 | 685 |
+| **Total** | **6,849** | **2,008** |
+
+The total is inside the 1,800–2,200 target, so no trim pass was needed.
+
+## Section map (page order; HOME_ORDER unchanged)
+
+| # | Section | Fragment | H2 |
+|---|---|---|---|
+| 1 | Hero: H1 unchanged; the POSITIONING LINE verbatim as the subhead; "Book Your Consultation" (Calendly 45min); "Not sure yet? Take the 3-minute Fit Check" → /fit-check; the deposit line | home-0 | (H1) |
+| 2 | In Short: six bullets, led by the POSITIONING LINE verbatim | home-1 | OmniFit Performance, in Short |
+| 3 | Proof strip: 4.98 average across 190+ reviews ("across platforms", with the four named); "87% of 63 clients rated fully or partly achieved their goals (coach-assessed), Jan 2023 to Sep 2026" with its method line, the not-independently-audited note and the individual-results disclaimer (T2-1); "How we measure" → /outcomes | home-1 | What Clients Say, and What We Measure |
+| 4 | Who it's for: three cards (stalled progress; joints, old injuries or finishing PT, with the SCOPE STATEMENT verbatim; a calendar or travel, naming the Travel Protocol); the welcome line with the FRONT-DOOR LINE; "Not the right fit if…" (three standards, each with its reason) | home-2 | **K02** Is a Personal Trainer in North County San Diego Right for You? |
+| 5 | How it works: Assess → Correct → Build → Sustain, one sentence each; the ONE-LINE REFERENCE; "We teach you to graduate from us" with the Dial path Full Accountability → Coached → Train Only → Tune-Up and the CORE PRINCIPLE verbatim; link to /the-omnifit-method | home-2 | **K04** How Our Executive Fitness Coaching Works |
+| 6 | Results: Mark, Ken and Isaac cards, each with name, role, stat block, past-tense third-person copy, the verbatim 2a disclosure and a link to its /case-studies story; "See all case studies" | home-3 | Three Clients, Measured Start to Finish |
+| 7 | Ways to train: studio (the facility line, LAUNCH DECISIONS item 9), in-home (the travel-fee sentence, item 19; the one in-home link), virtual (the 30-Minute Executive Reset); the Travel Protocol line; "Every rate is published" | home-4 | **K03** Your Personal Trainer in 4S Ranch, at Home, or Online |
+| 8 | Couples, trimmed to the intro, three cards and the CTA | home-6 | One Session. Two People. Two Separate Programs. |
+| 9 | Meet Nemezio (~140 words): one credentials line, "NASM Elite Trainer · Precision Nutrition Level 2 Certified Master Coach · 13 certifications"; link to /about | home-5 | Meet Nemezio LopezPerez |
+| 10 | The ONE FAQ: seven questions, answer-first, 53–78 words each | home-5 | Frequently Asked Questions |
+| 11 | Final CTA: "Book Your Consultation" and the deposit line | home-5 | Start With a Conversation |
+
+**FAQ, in order** (the header FAQPage was regenerated with `faq.qa_strict` and mirrors the page verbatim, in order):
+1. Is OmniFit too advanced if I've never strength trained?
+2. Is OmniFit worth the price compared to a regular gym membership? (The five LANGUAGE RULES facts, with the 30-Day Fit Guarantee sentence verbatim.)
+3. What happens when my program ends?
+4. Do you work with people over 50?
+5. What if I travel a lot for work? (The Travel Protocol.)
+6. Do you offer virtual personal training in San Diego? (Kept from the old home-5.)
+7. Is nutrition coaching included? (Kept from the old home-5 and reworded to LAUNCH DECISIONS item 5 and the Dial.)
+
+Dropped questions: from the old home-5, "What equipment do I need for online sessions?" is folded into Q6; "How often do we meet and what does accountability look like?" is covered by Q3 and the Dial in How it works; and "What results can I expect in 3–6 months?" is replaced by the proof strip and /outcomes. From the old home-2, all six methodology questions; they are on /the-omnifit-method. The homepage carries no pricing FAQ answer, so there was no locked answer to preserve.
+
+**Removed with the old fragments:** the body-embedded JSON-LD in the old home-3 (the case-studies ItemList) and the old home-4 (a Person node). The Person stays defined site-wide in `site-header.html` (#founder).
+
+## Where the removed content lives
+
+A sub-agent compared the visible copy of the old home-1, home-2, home-3 and home-4 against every page, fact by fact.
+- **home-3:** its visible text was identical to /case-studies, so nothing was lost.
+- **home-1 and home-2:** nothing was missing. The who-for and not-a-fit lists, the 24-hour standard and the front-door line are on /personal-training-services and /fit-check. Prices are on the rates page and /faqs. The pillars, the roles line, the four phases, the nine assessment items, the Correct toolbox, the 3/10 rule, the Build elements, the comparison table and the methodology FAQ are on /the-omnifit-method. Phase angle is on /how-we-measure-your-progress and /body-composition-testing, and the Tune-Up price is on the rates page.
+
+Moved as body copy (no heading, title, meta or keyword change):
+
+| Fact (source) | Now on | Where |
+|---|---|---|
+| Purple belt in Brazilian Jiu-Jitsu, multiple tournament wins, background in track, soccer and rugby (old home-4) | /about | new paragraph after "A decade on, that is still the job." |
+| The Eden certifications come through a certified collaboration with Eden, a network of metabolic health professionals (old home-4) | /about | GLP-1 and Peptides credential, after "These three certifications cover exactly that." |
+| Peptide Fundamentals: how peptide-based therapies interact with training load, recovery and body composition, so programming complements clinician-guided protocols (old home-4) | /about | same block |
+| "OmniFit Performance is not a medical provider and does not prescribe, administer, or recommend medications, peptides, or clinical protocols." (old home-4) | /about | same block, in the scope sentence |
+| The $150 Performance Assessment and its credit (old home-2 Step 2; already on /about and the rates page) | /the-omnifit-method | "Your first session at the studio is a comprehensive physical assessment — not a workout." + the CANON short-form credit line |
+
+Not carried over because they conflict with canon: the "12 Certifications" stat tile (canon is thirteen); "12 objective metrics tracked weekly" (/how-we-measure says the 12 measures run on defined cadences); and "190+ five-star reviews across Google, Yelp, and Thumbtack" with a "5.0 Average Rating" (/outcomes and /how-we-measure state 4.98 across four platforms, which is the figure the homepage now uses). Noted for CANON, not changed: line 396 still reads "Credentials (12)", while the INVARIANTS block and the pages read thirteen.
+
+## Teqneeq has no on-site physical therapy clinic (owner correction)
+
+I searched `pages/`, `pages/headers/` and `site/` for any sentence naming Teqneeq beside physical therapy, PT, rehab, a clinic, on-site, in-house or "integrates":
+
+| File:line (main @ fd2c37b) | Claim | Fix |
+|---|---|---|
+| `pages/home-4.html:37` | body-embedded Person JSON-LD `description`: "…Teqneeq, a members-only functional health and performance lab in 4S Ranch, San Diego that integrates training with an on-site physical therapy clinic." | removed with the old home-4 |
+| `pages/home-4.html:638` | the same sentence in the bio block | removed with the old home-4 |
+| `pages/home-4.html:670` | Eden intro: "OmniFit Performance operates from Teqneeq, a members-only functional health and performance lab in 4S Ranch that integrates training with an on-site physical therapy clinic." | removed with the old home-4 |
+| `pages/about.html` (this run, before the owner's correction) | I had moved the claim to /about as "nothing lost" ("…in 4S Ranch that integrates training with an on-site physical therapy clinic.") | removed; the sentence reads as it did on main |
+
+No other page, header or `site/` file makes the claim. The other PT mentions describe external partners (Stoke Physical Therapy on /partners), the post-PT bridge, or negations ("does not … provide physical therapy").
+
+CANON ENTITY BLOCK now carries "Teqneeq has no on-site physical therapy clinic." The new `certify.py teqneeq_onsite_pt` rule (stale canon, every file, frozen records included, negations pass) is self-tested both ways on every run. On the real files it reports 0 on the tree as merged, 1 on /about with the removed sentence restored in memory, and 3 on main's old home-4.
+
+## `tools/certify.py`
+
+- **FROZEN** is now `("case-studies.html",)`. home-3 is no longer a copy of the record, so it is screened like every other page. /case-studies keeps its frozen status.
+- **T1-2 exemption: the verbatim 2a disclosure is not aggregate wording (OWNER DECISION A).** Before the fix, all seven pound figures on the new case cards were struck. The named-individual exemption read the disclosure's own "How clients typically progress" as typical-results framing. Only the exact sentence "How clients typically progress: omnifittraining.com/outcomes." is blanked. It is blanked on the whole text before the 45-word window is cut; the first version blanked it inside the window and still failed when the window edge split the sentence. Any other "typically", "most clients" or "on average" still fails.
+  - **Self-tests:** (1) a named card with the verbatim disclosure passes, at 30 window offsets; (2) a named card beside "Our clients typically lose 10 lbs in 3 months" fires on the named figure; (3) the disclosure with one word changed is not exempt.
+  - **Recorded** in CANON next to the matching T2-1 fix, and in tools/README.
+- **`teqneeq_onsite_pt`:** see above.
+
+## Checks
+
+| Check | Result |
+|---|---|
+| `python3 tools/certify.py` | **PASSED** (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0); all five invariant hashes match CANON |
+| `python3 build.py --strict` / `--check` | **PASSED**: internal links, one H1 per page, JSON-LD parses, no emoji, 404/_headers, redirects (74 rules, 116 known URLs), tracking, keyword ownership |
+| Keyword ownership | K01–K04 owned by /; the three "K02/K03/K04 … does not carry it" coverage notes are **gone**; only the K10 "no owner yet" note remains (by design); X01/X02 pass |
+| `node tools/tracktest.js` | **PASSED** (46 assertions; homepage hero Calendly → `cta_position "hero"`, footer → `"footer"`). Spot check: the homepage final CTA (#omh-start) logs `cta_position "body"`. |
+| `node tools/mobileaudit.js` (390 and 412, all 43 built pages) | **PASSED**: no page has scrollWidth over the viewport or clipped content. Homepage: **0 narrow cards, 0 clipped, 0 horizontal scroll at both widths.** Narrow flags on other pages are unchanged by-design items (2-up tiles, table cells) already reviewed in the item 22 run. |
+
+The mobile audit's method was recorded in REPORT.md (item 22), but the script itself had never been committed. It is now `tools/mobileaudit.js`, built to that method. It has one documented exclusion: `aria-hidden` decorative layers are not reported as clipped. Without it, the homepage hero's photo frame, zoomed 1.2× inside the clipped card on purpose, was the only flag on any page at either width.
+
+**Screenshots** (`report-assets/`):
+- Hero 390px: `2026-10-17-home-hero-390.png`
+- Hero 412px: `2026-10-17-home-hero-412.png`
+- In Short 390px: `2026-10-17-home-in-short-390.png`
+- In Short 412px: `2026-10-17-home-in-short-412.png`
+
+## Judgment calls (and the condition under which each is wrong)
+
+1. **Who-it's-for H2 is a question carrying K02** ("Is a Personal Trainer in North County San Diego Right for You?"). Wrong if the owner wants K02 in a declarative heading.
+2. **The Meet Nemezio section moved into home-5**, ahead of the FAQ, so the page order matches the brief without editing HOME_ORDER. home-4 is now Ways to train. Wrong if the paste workflow expects one section per fragment, named by section.
+3. **Shared `.omh` styles live in home-1** and the other rebuilt fragments depend on them. Wrong if any fragment is ever pasted to Squarespace without home-1 on the same page.
+4. **The proof strip names the four platforms** under "Across platforms" (Google, Yelp, Thumbtack and Bark combined). Wrong if the owner wants the platforms unnamed.
+5. **The 87% method line adds "48 of them were coached for at least 3 months"** (verbatim from /outcomes). It also gives the surface the period that T2-1's method condition reads. Wrong if the owner wants only the date range.
+6. **Card copy names a role in both the stat header and the sentence** ("Mark, a board member in the construction industry, …"). The case-studies wording is kept, and the checker's named-attribution shapes need the "Name, a role" form. Wrong if the owner prefers the role stated once.
+7. **The not-a-fit standards** are written calmly, each with its reason, and none uses the old "back of the line" or "not for everyone" framing. Wrong if the owner wants the 24-hour reschedule standard named on the homepage; it is on /personal-training-services and the rates page.

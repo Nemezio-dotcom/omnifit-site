@@ -1,4 +1,7 @@
-<!-- OMNIFIT | HOMEPAGE MOTION LAYER · v1 OCTOBER 2026
+<!-- OMNIFIT | HOMEPAGE MOTION LAYER · v2 OCTOBER 2026
+  v2 (homepage rebuild, Oct 17 2026): selectors moved to the rebuilt
+  sections (.omh, #omh-*, #omni-duo, #omni-faq); the count-up now runs on
+  the proof strip figures only.
   Built for the static site (build.py appends it to the homepage via
   HOME_ORDER, after every section). Not a Squarespace Code Block.
 
@@ -35,22 +38,14 @@
     html.omni-motion .omni-rv--line em{background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0% 2px;padding-bottom:2px;transition:background-size 1s cubic-bezier(.22,1,.36,1) .45s;}
     html.omni-motion .omni-rv--line.is-in em{background-size:100% 2px;}
 
-    /* the case-study cards fade up on load in their own CSS; hand that to the scroll reveal */
-    html.omni-motion #omnifit-cases .case-card.omni-rv{animation:none!important;transition:opacity .95s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms),transform .95s cubic-bezier(.22,1,.36,1) var(--rv-d,0ms),border-color .35s ease,background-color .35s ease!important;}
 
     /* ===== Playful touches ===== */
-    /* method flow: the numbered step rings pulse once as they land */
-    html.omni-motion #omni-method .flow-step.is-in .flow-num{animation:omni-ring 1.3s cubic-bezier(.22,1,.36,1) calc(var(--rv-d,0ms) + .35s) both;}
+    /* how it works: the numbered step rings pulse once as they land */
+    html.omni-motion #omh-how .how-step.is-in .how-num{animation:omni-ring 1.3s cubic-bezier(.22,1,.36,1) calc(var(--rv-d,0ms) + .35s) both;}
     @keyframes omni-ring{0%{box-shadow:0 0 0 0 rgba(201,168,76,.55);}100%{box-shadow:0 0 0 22px rgba(201,168,76,0);}}
-    /* service + duo card icons tilt toward you on hover */
-    html.omni-motion #omnifit-home-services-wrapper .card-icon,html.omni-motion #omni-duo .duo-icon{transition:transform .55s cubic-bezier(.34,1.56,.64,1);}
-    html.omni-motion #omnifit-home-services-wrapper .service-card:hover .card-icon,html.omni-motion #omni-duo .duo-card:hover .duo-icon{transform:rotate(-8deg) scale(1.12);}
-    /* case-study photos ease in closer while the card is hovered */
-    html.omni-motion #omnifit-cases .case-photo-area img{transition:transform 1.4s cubic-bezier(.22,1,.36,1)!important;}
-    html.omni-motion #omnifit-cases .case-card:hover .case-photo-area img{transform:scale(1.045)!important;}
-    /* credential badges lift on hover */
-    html.omni-motion #omni-bio .badge-row a{transition:transform .45s cubic-bezier(.34,1.56,.64,1),filter .3s ease;}
-    html.omni-motion #omni-bio .badge-row a:hover{transform:translateY(-4px) scale(1.06);filter:drop-shadow(0 8px 14px rgba(201,168,76,.28));}
+    /* section card + duo card icons tilt toward you on hover */
+    html.omni-motion .omh-card .omh-icon,html.omni-motion #omni-duo .duo-icon{transition:transform .55s cubic-bezier(.34,1.56,.64,1);}
+    html.omni-motion .omh-card:hover .omh-icon,html.omni-motion #omni-duo .duo-card:hover .duo-icon{transform:rotate(-8deg) scale(1.12);}
     /* FAQ: the + turns into an x, the answer settles in */
     html.omni-motion #omni-faq .icon{transition:transform .4s cubic-bezier(.22,1,.36,1),background-color .3s ease,color .3s ease;}
     html.omni-motion #omni-faq details[open] .icon{transform:rotate(45deg);}
@@ -74,51 +69,26 @@
     /* ---- 1. Tag reveal targets. [selector, variant]. Elements that share a
        parent are staggered 70ms apart (capped at 6 steps). ---- */
     var GROUPS = [
-      /* home-1: value + services */
-      ['#omnifit-home-services-wrapper .wrap > h2', 'line'],
-      ['#omnifit-home-services-wrapper .wrap > .sub-text', ''],
-      ['#omnifit-home-services-wrapper .trust-strip', ''],
-      ['#omnifit-home-services-wrapper .section-divider', 'line'],
-      ['#omnifit-home-services-wrapper .grid-services > .service-card', ''],
-      ['#omnifit-home-services-wrapper .cta-footer', ''],
-      /* home-2: methodology */
-      ['#omni-method .hero > *', 'line'],
-      ['#omni-method .q-wrap', ''],
-      ['#omni-method .flow > .flow-step, #omni-method .flow > .flow-arrow', 'pop'],
-      ['#omni-method .phase > h2, #omni-method .phase > h3, #omni-method .phase > p', 'line'],
-      ['#omni-method .dg > .dc', ''],
-      ['#omni-method .cta-btn', ''],
-      /* home-3: case studies */
-      ['#omnifit-cases .hero > *', 'line'],
-      ['#omnifit-cases .stats-bar > .stat', 'pop'],
-      ['#omnifit-cases .results-disclaimer', ''],
-      ['#omnifit-cases .method-strip > .method-phase', ''],
-      ['#omnifit-cases .filter-section', ''],
-      ['#omnifit-cases .cases-grid > .case-card', ''],
-      /* home-4: about */
-      ['#omni-bio .bio-hero > *', 'line'],
-      ['#omni-bio .bio-photo', 'wipe'],
-      ['#omni-bio .bio-block > *', ''],
-      ['#omni-bio .cred-group', ''],
-      ['#omni-bio .badge-row > a', 'pop'],
-      ['#omni-bio .gq-block', ''],
-      ['#omni-bio .stats-bar > .stat-item', 'pop'],
-      ['#omni-bio .s-light .s-inner > h2, #omni-bio .s-light .s-inner > p', 'line'],
-      ['#omni-bio .eden-grid > .eden-card', ''],
-      ['#omni-bio .s-mid .s-inner > h2, #omni-bio .s-mid .s-inner > p', 'line'],
-      ['#omni-bio .phil-grid > .phil-card', ''],
-      ['#omni-bio .jj-gallery > img', 'wipe'],
-      ['#omni-bio .cta-sec > *', ''],
+      /* rebuilt sections (home-1..5, Oct 17 2026): the shared .omh layout */
+      ['.omh .omh-inner > .omh-label, .omh .omh-inner > h2, .omh .omh-inner > .omh-lede', 'line'],
+      ['#omh-short .short-box li', ''],
+      ['#omh-proof .proof-row > .proof-stat', 'pop'],
+      ['.omh .omh-grid > .omh-card', ''],
+      ['#omh-who .who-welcome, #omh-who .who-not', ''],
+      ['#omh-how .how-steps > .how-step', 'pop'],
+      ['#omh-how .how-ref, #omh-how .how-grad', ''],
+      ['#omh-how .dial > li', ''],
+      ['#omh-ways .ways-travel, #omh-ways .ways-rates, #omh-results .rs-all', ''],
+      ['#omh-coach .coach-photo', 'wipe'],
+      ['#omh-coach .coach-wrap > div > *', 'line'],
+      ['#omh-start .omh-inner > *', ''],
       /* home-6: partner & duo */
       ['#omni-duo .duo-inner > h2, #omni-duo .duo-inner > p', 'line'],
       ['#omni-duo .duo-grid > .duo-card', ''],
-      ['#omni-duo .duo-quote', ''],
-      ['#omni-duo .duo-fits > .duo-fit', 'pop'],
       ['#omni-duo .duo-cta-row', ''],
       /* home-5: FAQ */
-      ['#omni-faq .wrap > h2, #omni-faq .wrap > .intro', 'line'],
-      ['#omni-faq .wrap > details', ''],
-      ['#omni-faq .cta', '']
+      ['#omni-faq .faq-list > details', ''],
+      ['#omni-faq .faq-more', '']
     ];
 
     var targets = [];
@@ -141,7 +111,7 @@
     /* ---- 2. Count-ups: a leading integer or one-decimal number, optional "+",
        then whatever text followed. Ends on the exact original string. ---- */
     var counters = [];
-    document.querySelectorAll('#omnifit-cases .stat-value, #omni-bio .stat-num, #omnifit-home-services-wrapper .trust-strip strong').forEach(function (el) {
+    document.querySelectorAll('#omh-proof .proof-num').forEach(function (el) {
       var raw = el.textContent;
       /* a plain number ("12", "5.0", "190+", "190+ 5-Star Reviews"); ranges
          and ratios such as "3–12 mo", "1:1" or "3/10" stay as they are */
@@ -190,7 +160,7 @@
     });
 
     /* ---- 4. Gold sheen on the section CTAs. ---- */
-    document.querySelectorAll('#omnifit-home-services-wrapper a.cta-button, #omni-method .cta-btn, #omnifit-cases .cta-btn, #omni-bio .cta-btn, #omni-duo .duo-btn, #omni-faq a.cta').forEach(function (a) {
+    document.querySelectorAll('.omh a.omh-btn, #omni-duo .duo-btn').forEach(function (a) {
       a.classList.add('omni-sheen');
     });
 
