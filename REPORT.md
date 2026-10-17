@@ -3912,3 +3912,56 @@ The seven before/after photos (Mark, Dave, Ken, Vincent, Alo, Annie, Isaac) carr
 - Saved as WebP in `site/img/` (38-60 KB each) and swapped into case-studies, home-3 and personal-trainer-4s-ranch (20 links). 6 Squarespace-hosted images remain (DEPLOY.md step 5).
 - `build.py --check` PASSED · `certify.py` PASSED.
 - Note: home-3 and case-studies were already not byte-identical before this change (CANON's "byte-identical" note for home-3 is stale); both got the same 7 link swaps.
+
+## Canon consolidation: Accountability Dial, Method pillars, entity block (Oct 17, 2026)
+
+**Branch:** `claude/omnifitperformance-canon-consolidation-cacuyh` · **Source:** Semrush Brand Performance, all AI platforms, Oct 12 2026 (share of voice 15% → 9.4%; tracking read as "overkill"; price/terms read as risky or rigid; outcomes read as self-reported; brand entity split). No price, cadence or Stripe reference changed. Certification **PASSED** before and after (0 · 0 · 0 · not-run 0); all five invariant hashes unchanged.
+
+### CANON.md
+Five new sections before the Compliance Screen: **ACCOUNTABILITY DIAL** (three settings at every tier, no price difference, set at the assessment, changeable at any 4-week boundary including during The Foundation; core principle, path, floors, roles line, verbatim), **THE OMNIFIT METHOD** (three pillars with the Method as subject, one-line reference, scope statement), **ENTITY BLOCK** (one name, one domain, founder with "Coach Nemezio", address, service areas, two-sentence description, entity line), **LANGUAGE RULES** (price as protecting progress, policies as standards that protect your slot, banned framings, approved segments, front-door line) and **TIER CHANGES** (Program up/down between cycles; Foundation up only, with the two upgrade paths and the per-session credit rule). The PAGES WITH NO FAQ entry notes the fit-check rebuild.
+
+### Pages changed (source → built path)
+| Page | What changed |
+|---|---|
+| `fit-check` (+ header, `build.py` META_OVERRIDE) | Rebuilt: two gates (READY, ABLE), 7 questions; the Willing/tracking gate replaced by the Dial question; fit result shows the recommended starting setting, the step-down path, the roles line and a Performance Assessment CTA; "Not a fit right now" names the held gate plus the honest pointer; beginner reassurance line with the front-door line. Instant result, nothing saved, no email capture. SEO description and header description now say seven questions. |
+| `training-rates-san-diego` (+ header) | Under The Program: the Dial table ("Every tier includes your choice of accountability"), the floors line, the principle and roles line; "What protects your investment" (assessment credited, Fit Guarantee verbatim, pause weeks, OmniFit-cancelled sessions credited, Foundation as a defined block); "What happens if your schedule or goals change" table plus the owner's plain-language paragraph verbatim; the worked example (figures computed by the page script from `data-cycle=560 data-sessions=4 data-cycles=3 data-completed=1 data-target=1800`; renders $140 · 8 · $1,120 · $680, verified in Chromium); "Why premium" table. Jump bar +3. "Included in every program" names the Dial. Two FAQ questions added; header FAQPage mirrors ten. |
+| `the-omnifit-method` | Three Pillars section (57/59/59-word definitions), principle + graduation path in the gold callout; the 🛡️ swapped for the shield SVG. |
+| `how-we-measure-your-progress` (+ header) | Same three pillars as "Measurement is the first pillar"; principle + path quotable; FAQ "Do I need to log everything myself?" now answers by Dial setting (mirrored in the header). |
+| homepage `home-1` (+ `home-2`, `home-4` emoji only) | "Who OmniFit Is For" block before the CTA footer. |
+| `personal-training-services` | Who-for block before the bottom CTA. |
+| `private-personal-trainer-san-diego` | Fit/Not-fit section rebuilt on the approved segments; trust-bar emoji → SVG. |
+| `in-home-personal-trainer-san-diego` | Same; its entity line omits "4S Ranch" (X01, body rule). |
+| `corrective-exercise-post-rehab` | Who-for block replaces the old list (gq paragraph and under-18 callout kept); scope statement in the Collaboration section; 16 emoji → SVG. |
+| `weight-loss` | Who-for block replaces the not-for list (gq paragraph kept); 16 emoji → SVG. |
+| `FAQs` (+ header) | New group "Accountability & Flexibility" with the seven owner-specified questions; header FAQPage 14 → 21; trust-bar emoji → SVG. |
+| `nutrition-coaching-san-diego` (+ header) | "Identification" → "Integration" (phase card, intro, FAQ answer, header description and FAQ mirror). |
+| `pages/headers/site-header.html` | Organization: canonical description, address, disambiguatingDescription (not affiliated with OMNIFIT Athletics). Person: alternateName "Coach Nemezio", description, affiliation. LocalBusiness: canonical description; knowsAbout + Behavior Change Coaching. areaServed and sameAs unchanged. |
+
+Every "Who this is for" block carries, verbatim: the approved segments, "The unifying audience is professional adults 30+.", the one-line Method reference, the roles line, the front-door line and the entity line. The roles line now appears on 11 pages; the principle on 5; the two-sentence entity description on all 41 built pages (site header).
+
+### Certification and false-pass watch
+- `certify.py` PASSED (0 · 0 · 0 · 0). Negative-tested the mirror check on every header this run edited: one altered answer in FAQs-header → `[FAQPage answers do not mirror page] differing index=[19]`; one altered question in the rates header → `[FAQPage questions do not mirror page]`; one altered answer in the how-we-measure header → `differing index=[2]`. All three restored → PASSED. `faq.qa_strict` reads 21/10/6 pairs on FAQs/rates/how-we-measure with zero None answers, matching the header counts, so no null overwrite and no vacuous `[] == []` compare.
+- Multi-block JSON-LD: no header gained a second block; all edited headers parse as one @graph.
+- `mkheaders.py` drift: only the known how-we-measure leading comment; JSON-LD identical. Reverted.
+- `build.py --strict` PASSED (41 pages; 160 emoji → SVG on 13 pages, down from 249 on 22 because the touched sources now carry the SVGs); `ownership.py` selftest PASSED; the four pre-existing ownership notes unchanged.
+- Chromium: rates worked example computes, both Fit Check outcomes render, no script errors (only the sandbox's blocked trackers); desktop and phone screenshots of every new section checked.
+
+### Judgment calls (with the condition under which each is wrong)
+1. **Worked example is script-rendered, not static.** `$140` is on certify's BANNED list (the August 10-pack rung) and the derived Foundation per-session rate is also $140. Rendering it in script keeps the literal out of `pages/` and `public/` and satisfies "compute in code", but the checker cannot see it and a crawler without JS sees the inputs and the formula, not the result. Wrong if the owner wants the figures in static HTML, in which case `$140` must leave BANNED first.
+2. **In-home entity line omits "4S Ranch"** to honour X01's body rule. Wrong if the entity line must be byte-identical on every page.
+3. **"real monthly investment" removed from the fit-check budget question** ("Where are you with the investment?") because nothing bills monthly. Wrong if "monthly investment" was meant as cadence language to keep.
+4. **The 3/10 pain ceiling is written into CANON's Joint-First pillar** so the "too intense for a beginner" FAQ answer stays CANON-sourced. Wrong if CANON was meant to stay silent on it.
+5. **How We Measure's logging FAQ rewritten** ("weekly nutrition habit check-ins" contradicted Full Accountability's daily logging). Wrong if that page should describe only the Coached setting.
+6. **"Insurance" FAQ left as is** (it answers billing, not the banned framing). Listed for the owner.
+7. **Seven FAQ entries placed on /faqs (all seven) and /training-rates-san-diego (two),** not on the homepage FAQ. Wrong if the homepage FAQ was the intended surface.
+
+### TODO: owner decisions
+1. `$140`: remove from certify's BANNED in its derived meaning (as `$90` was) or keep the example script-rendered.
+2. Executive Reset Bronze (async, no live sessions): does it carry all three Dial settings? The Tune-Up: any setting at all? Copy says "every tier" of the three products and nothing about the Tune-Up.
+3. "Do you accept insurance or HSA/FSA?" on /faqs: keep (factual) or reword under the new rule.
+4. Over-50 page carries two perimenopause sentences predating the ban; not a target page, untouched.
+5. /strength-training-1 is archived (Oct 2026, 301 to /) so the "most-cited" list's seventh page received nothing. Resurrect, or let the 301 stand.
+6. Directory listings (Yelp, Thumbtack, Bark, BBB) still use the retired name in their URLs; fix at the directory, then the sameAs URLs may change.
+7. The Method page's Sustain cards still say "Monthly Check-Ins" and "Quarterly Tune-Ups"; align with the Dial path and the Tune-Up's 4-week cycle, or leave.
+8. Squarespace: if the live site still serves fit-check from Squarespace, its SEO description ("Nine questions…") needs the seven-question text pasted.
+9. `pages/case-studies.html` and `home-3.html` untouched (frozen); no new client figures or stories were added anywhere.

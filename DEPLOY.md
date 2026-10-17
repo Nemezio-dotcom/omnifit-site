@@ -59,9 +59,11 @@ Only four things differ from the pasted sources, all structural:
 4. Every emoji is swapped at build time for a gold line SVG from
    `site/icons.py` (24x24, 1.5px gold stroke, the style of the hub-card icons
    on the territory pages), sized at 1em so it takes the size the emoji had.
-   249 replacements on 22 pages; the build prints the full list and fails if
-   a newly pasted page carries an emoji with no icon. The `pages/` sources
-   still contain the emoji. The text symbols ✓ ✗ ✕ (table ticks and CSS list
+   160 replacements on 13 pages as of Oct 17, 2026 (249 on 22 before the
+   canon-consolidation run swapped the emoji in the touched sources for the
+   same SVGs); the build prints the full list and fails if a newly pasted
+   page carries an emoji with no icon. Untouched `pages/` sources still
+   contain their emoji. The text symbols ✓ ✗ ✕ (table ticks and CSS list
    bullets) are not emoji and stay as text.
 
 Three source files were edited on purpose (the only copy-adjacent change):
