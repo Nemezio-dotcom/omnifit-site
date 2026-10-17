@@ -9,7 +9,10 @@
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
-OmniFit | Site-wide Header Injection · Sept 2026
+OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
+  Organization and LocalBusiness carry CANON's two-sentence ENTITY BLOCK
+  description verbatim; Organization gains address + disambiguatingDescription;
+  Person gains alternateName "Coach Nemezio" + affiliation)
 - Defer Clarity + HubSpot (after paint)
 - GTM (early)
 - Geo meta
@@ -90,8 +93,18 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "name": "OmniFit Performance",
       "legalName": "OmniFit Performance LLC",
       "alternateName": "OmniFit Training",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "disambiguatingDescription": "OmniFit Performance in San Diego, California, founded by Nemezio LopezPerez (Coach Nemezio). Not affiliated with OMNIFIT Athletics.",
       "url": "https://www.omnifittraining.com/",
       "email": "nemezio@omnifittraining.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
       "telephone": "+1-619-259-0630",
       "logo": "https://www.omnifittraining.com/assets/img/logo.png",
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
@@ -108,7 +121,10 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "@type": "Person",
       "@id": "https://www.omnifittraining.com/#founder",
       "name": "Nemezio LopezPerez",
+      "alternateName": "Coach Nemezio",
       "jobTitle": "Founder & NASM Elite Trainer",
+      "description": "Nemezio LopezPerez (Coach Nemezio) is the founder of OmniFit Performance in San Diego and the coach behind the OmniFit Method.",
+      "affiliation": { "@id": "https://www.omnifittraining.com/#organization" },
       "url": "https://www.omnifittraining.com/about",
       "worksFor": { "@id": "https://www.omnifittraining.com/#organization" },
       "sameAs": [
@@ -140,7 +156,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "url": "https://www.omnifittraining.com/",
       "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
-      "description": "OmniFit Performance is the personal training practice of Nemezio LopezPerez, based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. Specializing in joint-friendly strength training, corrective exercise, and structured coaching for busy professionals 30+. NASM Elite Trainer with 190+ five-star reviews across Google, Yelp, Thumbtack, and Bark.",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
       "telephone": "+1-619-259-0630",
       "email": "nemezio@omnifittraining.com",
       "image": "https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w",
@@ -204,6 +220,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         "In-Home Personal Training",
         "Body Composition Testing",
         "Nutrition Coaching",
+        "Behavior Change Coaching",
         "Virtual Coaching"
       ],
       "aggregateRating": {
@@ -381,7 +398,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "provider": {
         "@id": "https://www.omnifittraining.com/#localbusiness-of"
       },
-      "description": "Nutrition coaching for healthy adults over 30 in San Diego, built on a four-phase behavioural framework adapted from Precision Nutrition: awareness, regulation, adaptation, identification. Includes macro targeting, structured meal frameworks, and AI photo logging through the OmniFit app which returns full macros with automated feedback. Included in every training tier. OmniFit Performance provides nutrition coaching, not medical nutrition therapy; clients managing a chronic disease are referred to a registered dietitian.",
+      "description": "Nutrition coaching for healthy adults over 30 in San Diego, built on a four-phase behavioural framework adapted from Precision Nutrition: awareness, regulation, adaptation, integration. Includes macro targeting, structured meal frameworks, and AI photo logging through the OmniFit app which returns full macros with automated feedback. Included in every training tier. OmniFit Performance provides nutrition coaching, not medical nutrition therapy; clients managing a chronic disease are referred to a registered dietitian.",
       "areaServed": [
         {
           "@type": "City",
@@ -438,7 +455,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
           "name": "What if I hate dieting and tracking?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Then the framework is built for you specifically. The awareness phase exists to establish a baseline, not to make tracking permanent. The end state is identification, where the decisions are automatic and you are not logging anything. Tracking is a diagnostic tool with a defined lifespan, not the product."
+            "text": "Then the framework is built for you specifically. The awareness phase exists to establish a baseline, not to make tracking permanent. The end state is integration, where the decisions are automatic and you are not logging anything. Tracking is a diagnostic tool with a defined lifespan, not the product."
           }
         },
         {
@@ -669,7 +686,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   </section>
 
   <div class="nu-answer">
-    <p><strong>Most nutrition plans fail because they change what you eat without changing how you decide.</strong> OmniFit Performance uses a four-phase behavioural framework adapted from Precision Nutrition: awareness, regulation, adaptation, identification. It runs alongside the training method rather than separately from it. You get macro targets and meal frameworks built for your goals, and photo logging in the app returns full macros with automated feedback. What you do not get is a fourteen-day meal plan you abandon in week three.</p>
+    <p><strong>Most nutrition plans fail because they change what you eat without changing how you decide.</strong> OmniFit Performance uses a four-phase behavioural framework adapted from Precision Nutrition: awareness, regulation, adaptation, integration. It runs alongside the training method rather than separately from it. You get macro targets and meal frameworks built for your goals, and photo logging in the app returns full macros with automated feedback. What you do not get is a fourteen-day meal plan you abandon in week three.</p>
   </div>
 
   <div class="nu-sec">
@@ -700,7 +717,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
         </div>
       </div>
       <div class="nu-phase">
-        <div class="nu-phase-num">04<em>Identification</em></div>
+        <div class="nu-phase-num">04<em>Integration</em></div>
         <div>
           <h3>Stop following a plan and start being someone who eats this way</h3>
           <p>The goal is not compliance. It is the point where the decisions are automatic and you no longer need a coach to make them. That is what long-term means, and it is why the framework is behavioural rather than prescriptive.</p>
@@ -783,7 +800,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
       </details>
       <details>
         <summary>What if I hate dieting and tracking?</summary>
-        <div class="nu-faq-a"><p>Then the framework is built for you specifically. The awareness phase exists to establish a baseline, not to make tracking permanent. The end state is identification, where the decisions are automatic and you are not logging anything. Tracking is a diagnostic tool with a defined lifespan, not the product.</p></div>
+        <div class="nu-faq-a"><p>Then the framework is built for you specifically. The awareness phase exists to establish a baseline, not to make tracking permanent. The end state is integration, where the decisions are automatic and you are not logging anything. Tracking is a diagnostic tool with a defined lifespan, not the product.</p></div>
       </details>
       <details>
         <summary>Are you a dietitian?</summary>

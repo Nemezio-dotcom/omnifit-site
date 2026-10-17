@@ -9,7 +9,10 @@
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
-OmniFit | Site-wide Header Injection · Sept 2026
+OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
+  Organization and LocalBusiness carry CANON's two-sentence ENTITY BLOCK
+  description verbatim; Organization gains address + disambiguatingDescription;
+  Person gains alternateName "Coach Nemezio" + affiliation)
 - Defer Clarity + HubSpot (after paint)
 - GTM (early)
 - Geo meta
@@ -90,8 +93,18 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "name": "OmniFit Performance",
       "legalName": "OmniFit Performance LLC",
       "alternateName": "OmniFit Training",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "disambiguatingDescription": "OmniFit Performance in San Diego, California, founded by Nemezio LopezPerez (Coach Nemezio). Not affiliated with OMNIFIT Athletics.",
       "url": "https://www.omnifittraining.com/",
       "email": "nemezio@omnifittraining.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
       "telephone": "+1-619-259-0630",
       "logo": "https://www.omnifittraining.com/assets/img/logo.png",
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
@@ -108,7 +121,10 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "@type": "Person",
       "@id": "https://www.omnifittraining.com/#founder",
       "name": "Nemezio LopezPerez",
+      "alternateName": "Coach Nemezio",
       "jobTitle": "Founder & NASM Elite Trainer",
+      "description": "Nemezio LopezPerez (Coach Nemezio) is the founder of OmniFit Performance in San Diego and the coach behind the OmniFit Method.",
+      "affiliation": { "@id": "https://www.omnifittraining.com/#organization" },
       "url": "https://www.omnifittraining.com/about",
       "worksFor": { "@id": "https://www.omnifittraining.com/#organization" },
       "sameAs": [
@@ -140,7 +156,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "url": "https://www.omnifittraining.com/",
       "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
-      "description": "OmniFit Performance is the personal training practice of Nemezio LopezPerez, based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. Specializing in joint-friendly strength training, corrective exercise, and structured coaching for busy professionals 30+. NASM Elite Trainer with 190+ five-star reviews across Google, Yelp, Thumbtack, and Bark.",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
       "telephone": "+1-619-259-0630",
       "email": "nemezio@omnifittraining.com",
       "image": "https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w",
@@ -204,6 +220,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         "In-Home Personal Training",
         "Body Composition Testing",
         "Nutrition Coaching",
+        "Behavior Change Coaching",
         "Virtual Coaching"
       ],
       "aggregateRating": {
@@ -817,6 +834,25 @@ OmniFit | Site-wide Header Injection · Sept 2026
     display: block !important;
     padding: 0 !important;
   }
+
+  /* Who this is for (Oct 2026, shared block) */
+  #omnifit-home-services-wrapper .omni-who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 0 0 24px; }
+  #omnifit-home-services-wrapper .omni-who-col { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 26px 24px; text-align: left; }
+  #omnifit-home-services-wrapper .omni-who-col.for { border-color: rgba(201,168,76,0.35); }
+  #omnifit-home-services-wrapper .omni-who-col h3 { font-family: 'Montserrat', sans-serif !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 2px !important; text-transform: uppercase !important; line-height: 1.4 !important; color: #c9a84c !important; margin: 0 0 14px !important; }
+  #omnifit-home-services-wrapper .omni-who-col.not h3 { color: rgba(255,255,255,0.55) !important; }
+  #omnifit-home-services-wrapper .omni-who-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+  #omnifit-home-services-wrapper .omni-who-col li { display: flex; gap: 10px; align-items: flex-start; font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.78); margin: 0; }
+  #omnifit-home-services-wrapper .omni-who-col li::before { content: '\2713'; color: #c9a84c; font-weight: 700; font-size: 12px; flex-shrink: 0; margin-top: 3px; }
+  #omnifit-home-services-wrapper .omni-who-col.not li::before { content: '\2715'; color: rgba(255,255,255,0.45); }
+  #omnifit-home-services-wrapper .omni-who-unify { font-family: 'Montserrat', sans-serif !important; font-size: 12.5px; color: rgba(255,255,255,0.55); margin: 14px 0 0; }
+  #omnifit-home-services-wrapper .omni-who-lines { max-width: 860px; margin: 0 auto; text-align: left; display: grid; gap: 12px; }
+  #omnifit-home-services-wrapper .omni-who-lines p { font-family: 'Montserrat', sans-serif !important; font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.78); margin: 0; }
+  #omnifit-home-services-wrapper .omni-who-lines a { color: #c9a84c; text-decoration: underline; text-underline-offset: 3px; }
+  #omnifit-home-services-wrapper .omni-who-roles { border-left: 2px solid #c9a84c; padding-left: 14px; }
+  #omnifit-home-services-wrapper .omni-who-door { color: #fff !important; font-weight: 600; }
+  #omnifit-home-services-wrapper .omni-who-entity { font-size: 12.5px !important; color: rgba(255,255,255,0.5) !important; }
+  @media (max-width: 768px) { #omnifit-home-services-wrapper .omni-who-grid { grid-template-columns: 1fr; } }
 </style>
 <style>
 
@@ -2136,6 +2172,22 @@ Changelog v2:
         </article>
 
       </div>
+
+      <!-- WHO THIS IS FOR (Oct 2026) -->
+      <div class="section-divider">
+        <h2>Who OmniFit Is <em>For</em></h2>
+        <p class="sub-text">Professional adults 30+ who want a measured program, not a template. Here is who it fits, and who it doesn't.</p>
+      </div>
+      <div class="omni-who-grid">
+      <div class="omni-who-col for"><h3>Built for</h3><ul><li>Executives and founders who want a measured program around a demanding calendar</li><li>Desk-bound and remote professionals with the posture and mobility patterns long sitting creates</li><li>Active adults 50+ who want strength built around their joints</li><li>Professional women 35&ndash;55 with joint concerns</li><li>People returning after a long break or after physical therapy</li><li>People burned by bootcamps or big gyms</li><li>Couples who want to train together on two separate programs</li></ul><p class="omni-who-unify">The unifying audience is professional adults 30+.</p></div>
+      <div class="omni-who-col not"><h3>Not the right fit if</h3><ul><li>You mainly want group energy or the lowest price. A gym or class studio will serve you better.</li><li>You want someone to count reps, with nothing between sessions.</li><li>You need treatment rather than training. Start with your clinician; we pick up where care ends.</li><li>You can't keep booked sessions or the 24-hour reschedule standard.</li></ul></div>
+    </div>
+    <div class="omni-who-lines">
+      <p class="omni-who-method">OmniFit runs on the <a href="/the-omnifit-method">OmniFit Method</a>: Measured Progress, Joint-First Strength and Accountability That Travels, carried through Assess &rarr; Correct &rarr; Build &rarr; Sustain.</p>
+      <p class="omni-who-roles">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.</p>
+      <p class="omni-who-door">Even if you just want to train, we can start there.</p>
+      <p class="omni-who-entity">OmniFit Performance &middot; Nemezio LopezPerez (Coach Nemezio) &middot; Teqneeq Functional Health Center, 10772 Thornmint Rd, 4S Ranch, San Diego, CA 92127 &middot; omnifittraining.com</p>
+    </div>
 
       <!-- CTA FOOTER -->
       <div class="cta-footer">

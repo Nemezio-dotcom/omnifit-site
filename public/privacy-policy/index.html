@@ -9,7 +9,10 @@
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
-OmniFit | Site-wide Header Injection · Sept 2026
+OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
+  Organization and LocalBusiness carry CANON's two-sentence ENTITY BLOCK
+  description verbatim; Organization gains address + disambiguatingDescription;
+  Person gains alternateName "Coach Nemezio" + affiliation)
 - Defer Clarity + HubSpot (after paint)
 - GTM (early)
 - Geo meta
@@ -90,8 +93,18 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "name": "OmniFit Performance",
       "legalName": "OmniFit Performance LLC",
       "alternateName": "OmniFit Training",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "disambiguatingDescription": "OmniFit Performance in San Diego, California, founded by Nemezio LopezPerez (Coach Nemezio). Not affiliated with OMNIFIT Athletics.",
       "url": "https://www.omnifittraining.com/",
       "email": "nemezio@omnifittraining.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
       "telephone": "+1-619-259-0630",
       "logo": "https://www.omnifittraining.com/assets/img/logo.png",
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
@@ -108,7 +121,10 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "@type": "Person",
       "@id": "https://www.omnifittraining.com/#founder",
       "name": "Nemezio LopezPerez",
+      "alternateName": "Coach Nemezio",
       "jobTitle": "Founder & NASM Elite Trainer",
+      "description": "Nemezio LopezPerez (Coach Nemezio) is the founder of OmniFit Performance in San Diego and the coach behind the OmniFit Method.",
+      "affiliation": { "@id": "https://www.omnifittraining.com/#organization" },
       "url": "https://www.omnifittraining.com/about",
       "worksFor": { "@id": "https://www.omnifittraining.com/#organization" },
       "sameAs": [
@@ -140,7 +156,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "url": "https://www.omnifittraining.com/",
       "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
-      "description": "OmniFit Performance is the personal training practice of Nemezio LopezPerez, based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. Specializing in joint-friendly strength training, corrective exercise, and structured coaching for busy professionals 30+. NASM Elite Trainer with 190+ five-star reviews across Google, Yelp, Thumbtack, and Bark.",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
       "telephone": "+1-619-259-0630",
       "email": "nemezio@omnifittraining.com",
       "image": "https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w",
@@ -204,6 +220,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         "In-Home Personal Training",
         "Body Composition Testing",
         "Nutrition Coaching",
+        "Behavior Change Coaching",
         "Virtual Coaching"
       ],
       "aggregateRating": {

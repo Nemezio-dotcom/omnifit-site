@@ -4,12 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OmniFit Fit Check | Are You Ready for Coaching?</title>
-<meta name="description" content="Nine questions, three minutes. See if you&#x27;re ready, willing, and able for OmniFit&#x27;s diagnostic-led coaching in San Diego. Instant result, nothing saved.">
+<meta name="description" content="Seven questions, three minutes. See if you&#x27;re ready and able for OmniFit&#x27;s diagnostic-led coaching in San Diego, and which accountability setting fits you. Instant result, nothing saved.">
 <link rel="canonical" href="https://www.omnifittraining.com/fit-check">
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
-OmniFit | Site-wide Header Injection · Sept 2026
+OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
+  Organization and LocalBusiness carry CANON's two-sentence ENTITY BLOCK
+  description verbatim; Organization gains address + disambiguatingDescription;
+  Person gains alternateName "Coach Nemezio" + affiliation)
 - Defer Clarity + HubSpot (after paint)
 - GTM (early)
 - Geo meta
@@ -90,8 +93,18 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "name": "OmniFit Performance",
       "legalName": "OmniFit Performance LLC",
       "alternateName": "OmniFit Training",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "disambiguatingDescription": "OmniFit Performance in San Diego, California, founded by Nemezio LopezPerez (Coach Nemezio). Not affiliated with OMNIFIT Athletics.",
       "url": "https://www.omnifittraining.com/",
       "email": "nemezio@omnifittraining.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
       "telephone": "+1-619-259-0630",
       "logo": "https://www.omnifittraining.com/assets/img/logo.png",
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
@@ -108,7 +121,10 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "@type": "Person",
       "@id": "https://www.omnifittraining.com/#founder",
       "name": "Nemezio LopezPerez",
+      "alternateName": "Coach Nemezio",
       "jobTitle": "Founder & NASM Elite Trainer",
+      "description": "Nemezio LopezPerez (Coach Nemezio) is the founder of OmniFit Performance in San Diego and the coach behind the OmniFit Method.",
+      "affiliation": { "@id": "https://www.omnifittraining.com/#organization" },
       "url": "https://www.omnifittraining.com/about",
       "worksFor": { "@id": "https://www.omnifittraining.com/#organization" },
       "sameAs": [
@@ -140,7 +156,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "url": "https://www.omnifittraining.com/",
       "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
-      "description": "OmniFit Performance is the personal training practice of Nemezio LopezPerez, based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. Specializing in joint-friendly strength training, corrective exercise, and structured coaching for busy professionals 30+. NASM Elite Trainer with 190+ five-star reviews across Google, Yelp, Thumbtack, and Bark.",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
       "telephone": "+1-619-259-0630",
       "email": "nemezio@omnifittraining.com",
       "image": "https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w",
@@ -204,6 +220,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         "In-Home Personal Training",
         "Body Composition Testing",
         "Nutrition Coaching",
+        "Behavior Change Coaching",
         "Virtual Coaching"
       ],
       "aggregateRating": {
@@ -333,7 +350,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "@id": "https://www.omnifittraining.com/fit-check#webpage",
       "url": "https://www.omnifittraining.com/fit-check",
       "name": "Are You the Right Fit? | OmniFit Fit Check",
-      "description": "A nine-question self-check that shows whether you're ready, willing, and able for OmniFit's diagnostic-led personal training. Instant result; no answers are saved or sent.",
+      "description": "A seven-question self-check that shows whether you're ready and able for OmniFit's diagnostic-led personal training, and which accountability setting to start on. Instant result; no answers are saved or sent.",
       "isPartOf": { "@id": "https://www.omnifittraining.com/#website" },
       "about": { "@id": "https://www.omnifittraining.com/#localbusiness-of" },
       "publisher": { "@id": "https://www.omnifittraining.com/#organization" },
@@ -388,7 +405,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
 #of-fit .box ul { margin: 0 !important; padding: 0 0 0 18px !important; display: flex; flex-direction: column; gap: 6px; font-size: 15px !important; color: var(--ink) !important; list-style: disc outside !important; }
 #of-fit .box li { margin: 0 !important; padding: 0 !important; color: var(--ink) !important; font-size: 15px !important; line-height: 1.5 !important; }
 #of-fit .box li::marker { color: var(--gold); }
-#of-fit .gates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+#of-fit .gates { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 #of-fit .gate { display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 #of-fit .gate .bar { height: 4px; background: var(--raise); border-radius: 2px; overflow: hidden; }
 #of-fit .gate .bar i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .3s ease; }
@@ -425,6 +442,15 @@ OmniFit | Site-wide Header Injection · Sept 2026
 #of-fit .held { background: var(--hold-soft); border: 1px solid rgba(227,166,108,.25); border-radius: 6px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
 #of-fit .held strong { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--hold); }
 #of-fit .fine { font-size: 13px !important; color: var(--muted) !important; }
+#of-fit .dial { background: var(--surface); border: 1px solid var(--gold); border-radius: 6px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+#of-fit .dial strong { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+#of-fit .dial h3 { font-family: var(--display) !important; font-size: 22px !important; font-weight: 600 !important; margin: 0 !important; line-height: 1.25 !important; color: var(--ink) !important; letter-spacing: 0 !important; text-transform: none !important; }
+#of-fit .dial p { font-size: 15px !important; }
+#of-fit .path { font-size: 13px !important; color: var(--muted) !important; }
+#of-fit .path b { color: var(--ink); font-weight: 600; }
+#of-fit .roles { border-left: 2px solid var(--gold); padding: 2px 0 2px 14px !important; text-align: left; font-size: 14px !important; color: var(--muted) !important; }
+#of-fit .begin { font-size: 14px !important; color: var(--muted) !important; max-width: 56ch; margin: 0 auto !important; }
+#of-fit .begin b { color: var(--ink); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { #of-fit * { transition: none !important; animation: none !important; } }
 </style>
 </head>
@@ -516,7 +542,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 <main id="main">
 <!-- SQUARESPACE PAGE SETTINGS (not part of the Code Block) -->
 <!-- SEO Title:       OmniFit Fit Check | Are You Ready for Coaching? -->
-<!-- SEO Description: Nine questions, three minutes. See if you're ready, willing, and able for OmniFit's diagnostic-led coaching in San Diego. Instant result, nothing saved. -->
+<!-- SEO Description: Seven questions, three minutes. See if you're ready and able for OmniFit's diagnostic-led coaching in San Diego, and which accountability setting fits you. Instant result, nothing saved. -->
 <!-- Canonical URL:   https://www.omnifittraining.com/fit-check -->
 <!-- SLUG: /fit-check · JSON-LD lives in fit-check-header.html (Page Header Code Injection) -->
 
@@ -529,11 +555,12 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
   <section id="intro" class="stack">
     <span class="brand">OmniFit Performance</span>
     <h1>Are you the right fit?</h1>
-    <p class="lede">OmniFit is diagnostic-led coaching. We measure, track, and adjust from the numbers. It works for people who are ready, willing, and able to do the daily work. Nine questions, about three minutes. Answer honestly, not the way you think you should. Nothing here is saved or sent, and you'll see your result right away.</p>
+    <p class="lede">OmniFit is diagnostic-led coaching. We measure first, then build a program written for you. It works for people who are ready and able to start. Seven questions, about three minutes. Answer honestly, not the way you think you should. Nothing here is saved or sent, and you'll see your result right away, including the accountability setting we'd recommend you start on.</p>
     <div class="two">
-      <div class="box for"><h3>Built for you if</h3><ul><li>You want decisions based on data</li><li>You'll log, measure, and report honestly</li><li>You've decided, and now is the time</li></ul></div>
-      <div class="box not"><h3>Not the right fit if</h3><ul><li>You want results without tracking</li><li>You need someone else to motivate you</li><li>You're still deciding if it's worth it</li></ul></div>
+      <div class="box for"><h3>Built for you if</h3><ul><li>You've decided, and you're starting within the month</li><li>You want a program written for you, not a template</li><li>You can budget for the published rates and keep your appointments</li></ul></div>
+      <div class="box not"><h3>Not the right fit if</h3><ul><li>You mainly want group energy or the lowest price</li><li>You're still deciding whether it's worth it</li><li>The next three months leave no room for sessions</li></ul></div>
     </div>
+    <p class="begin"><b>New to training?</b> That's fine. The Performance Assessment sets your starting point, the first cycles are built around it, and corrective work sits in every warm-up. Even if you just want to train, we can start there.</p>
     <div><button class="btn primary" id="start">Start the fit check</button></div>
   </section>
 
@@ -557,8 +584,14 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
 (function () {
 const CONTACT_URL = "/contactform";
 const RATES_URL = "/training-rates-san-diego";
+const METHOD_URL = "/the-omnifit-method";
 
-const GATES = ["Ready", "Willing", "Able"];
+// Two gates. READY: decided, starting within about 30 days. ABLE: budget for
+// the published rates, room in the calendar, and the two standards that
+// protect your slot (payment confirms a booking; 24 hours' notice to
+// reschedule). The Dial question (g: null) is not a gate: it sets the
+// recommended starting setting on the result.
+const GATES = ["Ready", "Able"];
 // Each option: [answer in the client's voice, "pass" | "soft" | "fail", coach reply]
 // A gate is held on any "fail", or on two or more "soft" answers within that gate.
 const Q = [
@@ -571,56 +604,50 @@ const Q = [
     hi: "That's the range where people follow through.",
     mid: "A realistic answer. Most people at a 6 or 7 have one thing left to settle.",
     lo: "Anything under 6 usually means something big is still unsettled. Worth knowing before you start." },
-  { g: 0, id: "budget", text: "This is premium one-on-one coaching and a real monthly investment. Where are you with that?", opts: [
-    ["It's set aside. I'm treating this as a priority.", "pass", "That kind of commitment shows up in the results too."],
+  { g: 1, id: "budget", text: "OmniFit's rates are published, and this is premium one-on-one coaching. Where are you with the investment?", opts: [
+    ["It's set aside. I'm treating this as a priority.", "pass", "That kind of commitment shows up in the work too."],
     ["I can make it work if it's the right fit.", "pass", "Fair. Finding out if it's the right fit is what this is for."],
     ["I'd need to see the numbers before I decide.", "soft", `Makes sense. Look at the <a href="${RATES_URL}">rates page</a> before you reach out, so you come in decided.`],
     ["Money's tight right now, honestly.", "fail", "Thanks for being straight. Better to start when the investment won't add stress."] ] },
-  { g: 1, id: "track", text: "Some goals (fat loss, muscle gain) require tracking what you eat every day. If your goal calls for it, how does that land?", opts: [
-    ["Good. I'd rather know than guess.", "pass", "That's the mindset this method runs on."],
-    ["Not my favorite, but if the goal needs it, I'll do it.", "pass", "That's enough. Nobody loves logging. The people who get results do it anyway."],
-    ["I've tried before and fell off after a week or two.", "soft", "Very common. The difference here is someone reading your data and adjusting. The logging is still yours to do, though."],
-    ["I'd rather find an approach that skips the tracking.", "fail", "Understood. When a goal calls for tracking, skipping it isn't an option here."] ] },
-  { g: 1, id: "report", text: "You have a rough week: missed meals, skipped workouts. Check-in day comes. What do you do?", opts: [
-    ["Report it straight. Bad weeks are data too.", "pass", "Exactly. Some of the most useful data comes from the off weeks."],
-    ["Report it, but I'd probably feel a little embarrassed.", "pass", "Normal. The numbers don't get judged here. They just tell us what to change."],
-    ["Go quiet until I'm back on track.", "soft", "Going quiet is when coaching helps most. That habit would need to change."],
-    ["Skip it and just focus on doing better next week.", "fail", "Skipping check-ins breaks the method. It only works when the data is complete."] ] },
-  { g: 1, id: "stall", text: "Your progress stalls for three weeks. What do you want from your coach?", opts: [
-    ["Show me the numbers. Let's figure out what to change.", "pass", "That's how stalls get solved here."],
-    ["Help me understand why before we change anything.", "pass", "Good instinct. Diagnose first, then adjust."],
-    ["A fresh plan. Something new to get me going again.", "soft", "Fresh plans feel good but rarely fix a stall. The answer is usually in the data."],
-    ["Honestly, I need someone to keep me motivated.", "fail", "Motivation comes and goes. This method is built on systems, so it works for people who bring their own drive."] ] },
-  { g: 1, id: "style", text: "Which sounds more like you?", opts: [
-    ["I love systems, spreadsheets, and details.", "pass", "You'll feel right at home."],
-    ["I'm not naturally detailed, but I follow a system once it's set.", "pass", "That works. The system does the heavy lifting once it's in place."],
-    ["I'm a big-picture person. Details drain me.", "soft", "Fair. Just know the day-to-day here is detail work, and you'll be the one doing it."] ] },
-  { g: 2, id: "life", text: "What do the next three months look like for you?", opts: [
+  { g: 1, id: "life", text: "What do the next three months look like for you?", opts: [
     ["Pretty steady. My routine is predictable.", "pass", "Ideal conditions to build on."],
-    ["Some travel or busy stretches, but nothing I can't plan around.", "pass", "That's normal life. Good plans account for it."],
+    ["Some travel or busy stretches, but nothing I can't plan around.", "pass", "That's normal life. Pause weeks and the app are built for it."],
     ["Something big is coming, but I want to start anyway.", "soft", "Possible. Mention it up front so the plan is built around it."],
-    ["Life's about to get turned upside down.", "fail", "Then the timing's off, not you. Daily actions need some room to happen."] ] },
-  { g: 2, id: "confidence", text: "How confident are you that you could consistently complete the daily actions your plan calls for, for 12 weeks?", scale: true, min: 8, ends: ["Not confident", "Fully confident"],
+    ["Life's about to get turned upside down.", "fail", "Then the timing's off, not you. Sessions need some room to happen."] ] },
+  { g: 1, id: "standards", text: "Two standards protect your slot: payment confirms a booking, and sessions reschedule with 24 hours' notice. How does that land?", opts: [
+    ["Makes sense. That's how I run my own calendar.", "pass", "Then you'll find the rest of the standards familiar too."],
+    ["Fine, as long as it works both ways.", "pass", "It does. Sessions OmniFit cancels are credited."],
+    ["I'd probably need reminders.", "soft", "The app sends them. The 24-hour window still stands."],
+    ["I don't want to be held to that.", "fail", "Understood. Those two standards are what keep every client's slot protected, so they don't bend."] ] },
+  { g: null, id: "dial", text: "How much accountability do you want from me?", opts: [
+    ["All of it, at least to start. Daily logging, fast replies, habit coaching.", "pass", "That's Full Accountability, the default for the first cycles. It's also the setting most people step down from."],
+    ["A weekly written check-in and a few habit targets.", "pass", "That's Coached. Enough structure to keep the plan honest without daily logging."],
+    ["Just the sessions and my program in the app. I'll check in with one tap.", "pass", "That's Train Only. Sessions, your program in the app, nutrition on request."],
+    ["I'm not sure yet.", "pass", "Then start on Full Accountability. We measure closely at the start so we can coach less over time, and you can change the setting at any cycle boundary."] ] },
+  { g: 1, id: "confidence", text: "How confident are you that you could keep your sessions and the check-in level you just chose for 12 weeks?", scale: true, min: 8, ends: ["Not confident", "Fully confident"],
     hi: "Good. That confidence is a strong predictor of follow-through.",
     mid: "Honest answer. Think about what would make it an 8. That's worth sharing when you reach out.",
-    lo: "Under 6 usually means the daily work would be a fight right now. Better to know that now." }
+    lo: "Under 6 usually means the weekly rhythm would be a fight right now. Better to know that now." }
 ];
 
 const HOLD_MSG = [
-  { title: "Ready", body: "You're still weighing whether this is the right time, or the investment isn't in place yet. That's a fair place to be. Come back when you've decided. The work will still be here, and you'll get more from it." },
-  { title: "Willing", body: "This method runs on daily tracking and honest reporting. If that feels like the part you'd want to skip, OmniFit will feel like a fight instead of a plan. A less data-driven approach may suit you better right now." },
-  { title: "Able", body: "Your next few months don't leave room for daily actions. That's a timing issue, not a character one. Once things settle, retake this check." }
+  { title: "Ready", body: "You're still deciding, or the start date isn't inside the next month. That's a fair place to be. Come back when you've decided. The work will still be here, and you'll get more from it." },
+  { title: "Able", body: "The budget, the calendar or the two booking standards don't line up right now. That's a timing issue, not a character one. Once they do, retake this check." }
+];
+
+const DIAL = [
+  { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles." },
+  { name: "Coached", body: "A weekly written check-in with a coach reply, one to three habit targets, and a measurement review every 4 weeks." },
+  { name: "Train Only", body: "Your sessions and your program in the app, a one-tap weekly check-in, and nutrition on request." },
+  { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles, and the right place to start when you're not sure." }
 ];
 
 const FIT_NOTES = {
   ready: "You rated your readiness a 6 or 7. On the contact form, say what would make it an 8.",
   confidence: "You rated your confidence a 6 or 7. Name what might get in the way, so the plan accounts for it.",
   budget: `You wanted to see the numbers first. Review the <a href="${RATES_URL}">rates page</a> before you reach out, so the conversation starts from a decision.`,
-  track: "You've fallen off tracking before. Mention it on the form. Knowing that up front helps build the plan around it.",
-  report: "You tend to go quiet on rough weeks. Here, those are the weeks to check in.",
-  stall: "You like fresh starts. Expect adjustments instead of new plans. That's how progress compounds.",
-  style: "You prefer the big picture. That's fine. Just know the day-to-day is detail work, and you'll be doing it.",
-  life: "You have something big coming up. Put it on the contact form so the plan accounts for it."
+  life: "You have something big coming up. Put it on the contact form so the plan accounts for it, and ask about pause weeks.",
+  standards: "You'd want reminders. The app sends them before every session; the 24-hour window is the same for everyone."
 };
 
 const answers = {};
@@ -682,9 +709,10 @@ function rating(q) {
 
 function score() {
   const held = new Set();
-  const softCount = [0, 0, 0];
+  const softCount = [0, 0];
   const soft = [];
   Q.forEach(q => {
+    if (q.g === null) return;
     const r = rating(q);
     if (r === "fail") held.add(q.g);
     if (r === "soft") { softCount[q.g]++; soft.push(q.id); }
@@ -693,26 +721,32 @@ function score() {
   return { held: [...held].sort(), soft };
 }
 
+const ROLES = "Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins — written for you, not a template.";
+
 function showResult() {
   const { held, soft } = score();
   const res = $("#result");
   $("#quiz").hidden = true;
   res.hidden = false;
   if (held.length === 0) {
+    const d = DIAL[answers.dial];
     const notes = soft.map(id => `<p class="note">${FIT_NOTES[id]}</p>`).join("");
     res.innerHTML = `
       <span class="verdict pass">Result: You're a fit</span>
-      <h2>Ready, willing, and able. Let's talk.</h2>
-      <p class="lede">You cleared all three gates. The next step is the contact form. It asks why now, and your honest answer there matters more than anything else on it.</p>
+      <h2>Ready and able. Let's set your starting point.</h2>
+      <p class="lede">You cleared both gates. The next step is the Performance Assessment: $150, credited toward your first cycle. Book it through the contact form, which asks why now. Your honest answer there matters more than anything else on it.</p>
+      <div class="dial"><strong>Recommended starting setting</strong><h3>${d.name}</h3><p>${d.body}</p><p class="path">Every tier includes all three settings at no price difference, and you can change yours at any 4-week cycle boundary. The path most clients follow: <b>Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</b>. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</p></div>
+      <p class="roles">${ROLES}</p>
       ${notes}
       <div class="capacity"><strong>Currently at capacity</strong><p>OmniFit is taking a limited number of new clients. If you submit the form and then don't reply when we reach out, you move to the back of the line.</p></div>
-      <div class="nav"><a class="btn primary" href="${CONTACT_URL}">Go to the contact form</a><button class="btn ghost" id="redo">Retake the check</button></div>`;
+      <div class="nav"><a class="btn primary" href="${CONTACT_URL}">Book the Performance Assessment</a><a class="btn ghost" href="${METHOD_URL}">Read the Method</a><button class="btn ghost" id="redo">Retake the check</button></div>`;
   } else {
     res.innerHTML = `
-      <span class="verdict hold">Result: Not yet</span>
-      <h2>This isn't a no. It's a not yet.</h2>
-      <p class="lede">OmniFit only works when all three are in place: ready, willing, and able. Here's what held you back.</p>
+      <span class="verdict hold">Result: Not a fit right now</span>
+      <h2>This isn't a no. It's a not right now.</h2>
+      <p class="lede">OmniFit works when both are in place: ready and able. Here's what held, and why.</p>
       ${held.map(g => `<div class="held"><strong>${HOLD_MSG[g].title}</strong><p>${HOLD_MSG[g].body}</p></div>`).join("")}
+      <p class="note">If you mainly want group energy or the lowest price, a gym or class studio will serve you better.</p>
       <p class="fine">Readiness changes. If your answers change, retake the check.</p>
       <div class="nav"><button class="btn ghost" id="redo">Retake the check</button></div>`;
   }

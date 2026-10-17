@@ -9,7 +9,10 @@
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
-OmniFit | Site-wide Header Injection · Sept 2026
+OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
+  Organization and LocalBusiness carry CANON's two-sentence ENTITY BLOCK
+  description verbatim; Organization gains address + disambiguatingDescription;
+  Person gains alternateName "Coach Nemezio" + affiliation)
 - Defer Clarity + HubSpot (after paint)
 - GTM (early)
 - Geo meta
@@ -90,8 +93,18 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "name": "OmniFit Performance",
       "legalName": "OmniFit Performance LLC",
       "alternateName": "OmniFit Training",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "disambiguatingDescription": "OmniFit Performance in San Diego, California, founded by Nemezio LopezPerez (Coach Nemezio). Not affiliated with OMNIFIT Athletics.",
       "url": "https://www.omnifittraining.com/",
       "email": "nemezio@omnifittraining.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
       "telephone": "+1-619-259-0630",
       "logo": "https://www.omnifittraining.com/assets/img/logo.png",
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
@@ -108,7 +121,10 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "@type": "Person",
       "@id": "https://www.omnifittraining.com/#founder",
       "name": "Nemezio LopezPerez",
+      "alternateName": "Coach Nemezio",
       "jobTitle": "Founder & NASM Elite Trainer",
+      "description": "Nemezio LopezPerez (Coach Nemezio) is the founder of OmniFit Performance in San Diego and the coach behind the OmniFit Method.",
+      "affiliation": { "@id": "https://www.omnifittraining.com/#organization" },
       "url": "https://www.omnifittraining.com/about",
       "worksFor": { "@id": "https://www.omnifittraining.com/#organization" },
       "sameAs": [
@@ -140,7 +156,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
       "url": "https://www.omnifittraining.com/",
       "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
       "founder": { "@id": "https://www.omnifittraining.com/#founder" },
-      "description": "OmniFit Performance is the personal training practice of Nemezio LopezPerez, based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. Specializing in joint-friendly strength training, corrective exercise, and structured coaching for busy professionals 30+. NASM Elite Trainer with 190+ five-star reviews across Google, Yelp, Thumbtack, and Bark.",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
       "telephone": "+1-619-259-0630",
       "email": "nemezio@omnifittraining.com",
       "image": "https://images.squarespace-cdn.com/content/v1/63617698cf683b245ef93bea/cb03c488-6b54-407c-a481-dec3dec68125/executive-reset-dumbbell-workout.jpg?format=1500w",
@@ -204,6 +220,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
         "In-Home Personal Training",
         "Body Composition Testing",
         "Nutrition Coaching",
+        "Behavior Change Coaching",
         "Virtual Coaching"
       ],
       "aggregateRating": {
@@ -324,7 +341,7 @@ OmniFit | Site-wide Header Injection · Sept 2026
 <link rel="stylesheet" href="/assets/site.css">
 
 <!-- ===== Page header injection (source: pages/headers/FAQs-header.html) ===== -->
-<!-- FAQS PAGE HEADER JSON-LD · v3 OCTOBER 2026
+<!-- FAQS PAGE HEADER JSON-LD · v4 OCTOBER 2026 (21 questions)
   Paste into /FAQs → Page Settings → Advanced →
   Page Header Code Injection, replacing the old block entirely.
 
@@ -474,6 +491,62 @@ OmniFit | Site-wide Header Injection · Sept 2026
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes. Every OmniFit Performance program includes nutrition guidance. You'll receive custom macros, simple meal frameworks, travel and dining strategies, and weekly accountability check-ins. We use a Precision Nutrition-informed approach focused on sustainable habit change rather than restrictive diets. For clients who want deeper nutrition support, dedicated nutrition coaching add-ons are available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I choose how much accountability I get?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every tier of The Foundation, The Program and the Executive Reset includes the Accountability Dial at no price difference: Full Accountability (daily logging of nutrition, steps and sleep, a coach reply within 1 business day, and behavior-change coaching), Coached (a weekly written check-in with a coach reply, 1 to 3 habit targets, and a measurement review every 4 weeks) or Train Only (your sessions and app program, a one-tap weekly check-in, nutrition on request). You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I have to track food forever?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week. Full Accountability, with daily logging, is the default for the first cycles. The path from there is Full Accountability → Coached → Train Only → Tune-Up. On Coached you work on 1 to 3 habit targets instead of logging every meal, and on Train Only nutrition is on request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How personalized is the app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins — written for you, not a template. Your program is built from your Performance Assessment, reviewed against your own baseline, and you are reassessed at least every 12 weeks. The same app carries it whether you train in the studio, at home or virtually."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is OmniFit too intense for a beginner?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The OmniFit Method measures first: the Performance Assessment sets your starting point, corrective work sits in every warm-up, and loading is chosen for what your joints tolerate under the 3/10 pain ceiling. The Foundation is a defined 12-week starter block built for new clients: three 4-week cycles, one payment, a known end date. Even if you just want to train, we can start there."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I travel or my schedule changes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pause weeks protect your slot: 2 across The Foundation with notice, extending the end date, and 6 per 12 months on The Program with 2 weeks' notice, credited against the next cycle. Sessions reschedule with 24 hours' notice within the same cycle, and sessions OmniFit cancels are credited. Studio, in-home and virtual run on one app, so your program travels with you, and the 30-Minute Executive Reset is fully virtual."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I change my plan after I start?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, at any 4-week cycle boundary. Your accountability setting can change in either product, including during The Foundation. On The Program you can move up or down a tier (Momentum, Performance or Peak) between cycles, with notice before the next cycle starts. During The Foundation you can step up, not down: the first 12 weeks are built as a block. If your new tier is only offered on The Program, your Foundation ends there, every unused session is credited at the Foundation per-session rate toward your first Program cycle, and you pay only the difference. There is no move from The Program into The Foundation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will I be able to train on my own eventually?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "That is the goal. The path is Full Accountability → Coached → Train Only → Tune-Up. The Tune-Up is for graduates: one session per 4-week cycle, a reassessment on the Bodystat QuadScan 4000 and an hour of training, with programming delivered through the OmniFit app between visits. We measure closely at the start so we can coach less over time."
           }
         },
         {
@@ -674,7 +747,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
      SLUG: /faqs
      Framework: OmniFit Standard v1.0
      Page ID: #omni-faqs
-     SEO: FAQPage schema (14 questions)
+     SEO: FAQPage schema (21 questions; 7 Accountability & Flexibility added Oct 17 2026)
      ═══════════════════════════════════════════════════════════════ -->
 
 
@@ -711,6 +784,7 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
       <a href="#faq-getting-started">Getting Started</a>
       <a href="#faq-training">Training &amp; Travel</a>
       <a href="#faq-results">Results &amp; Nutrition</a>
+      <a href="#faq-accountability">Accountability &amp; Flexibility</a>
       <a href="#faq-policies">Policies</a>
     </div>
   </div>
@@ -831,6 +905,51 @@ ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 
         <details class="of-faq">
           <summary>Is nutrition coaching included?</summary>
           <div class="of-faq-a">Yes. Every OmniFit Performance program includes nutrition guidance. You'll receive custom macros, simple meal frameworks, travel and dining strategies, and weekly accountability check-ins. We use a Precision Nutrition-informed approach focused on sustainable habit change rather than restrictive diets. For clients who want deeper nutrition support, dedicated <a href="/weight-loss">nutrition coaching</a> add-ons are available.</div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ACCOUNTABILITY & FLEXIBILITY (Oct 2026) ═══ -->
+  <div class="of-section" id="faq-accountability">
+    <div class="of-faq-group">
+      <div class="of-faq-group-head">Accountability &amp; Flexibility</div>
+      <div class="of-faq-list">
+
+        <details class="of-faq">
+          <summary>Can I choose how much accountability I get?</summary>
+          <div class="of-faq-a">Yes. Every tier of The Foundation, The Program and the Executive Reset includes the Accountability Dial at no price difference: Full Accountability (daily logging of nutrition, steps and sleep, a coach reply within 1 business day, and behavior-change coaching), Coached (a weekly written check-in with a coach reply, 1 to 3 habit targets, and a measurement review every 4 weeks) or Train Only (your sessions and app program, a one-tap weekly check-in, nutrition on request). You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>Will I have to track food forever?</summary>
+          <div class="of-faq-a">No. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week. Full Accountability, with daily logging, is the default for the first cycles. The path from there is Full Accountability → Coached → Train Only → Tune-Up. On Coached you work on 1 to 3 habit targets instead of logging every meal, and on Train Only nutrition is on request.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>How personalized is the app?</summary>
+          <div class="of-faq-a">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins — written for you, not a template. Your program is built from your Performance Assessment, reviewed against your own baseline, and you are reassessed at least every 12 weeks. The same app carries it whether you train in the studio, at home or virtually.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>Is OmniFit too intense for a beginner?</summary>
+          <div class="of-faq-a">No. The OmniFit Method measures first: the Performance Assessment sets your starting point, corrective work sits in every warm-up, and loading is chosen for what your joints tolerate under the 3/10 pain ceiling. The Foundation is a defined 12-week starter block built for new clients: three 4-week cycles, one payment, a known end date. Even if you just want to train, we can start there.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>What if I travel or my schedule changes?</summary>
+          <div class="of-faq-a">Pause weeks protect your slot: 2 across The Foundation with notice, extending the end date, and 6 per 12 months on The Program with 2 weeks' notice, credited against the next cycle. Sessions reschedule with 24 hours' notice within the same cycle, and sessions OmniFit cancels are credited. Studio, in-home and virtual run on one app, so your program travels with you, and the 30-Minute Executive Reset is fully virtual.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>Can I change my plan after I start?</summary>
+          <div class="of-faq-a">Yes, at any 4-week cycle boundary. Your accountability setting can change in either product, including during The Foundation. On The Program you can move up or down a tier (Momentum, Performance or Peak) between cycles, with notice before the next cycle starts. During The Foundation you can step up, not down: the first 12 weeks are built as a block. If your new tier is only offered on The Program, your Foundation ends there, every unused session is credited at the Foundation per-session rate toward your first Program cycle, and you pay only the difference. There is no move from The Program into The Foundation.</div>
+        </details>
+
+        <details class="of-faq">
+          <summary>Will I be able to train on my own eventually?</summary>
+          <div class="of-faq-a">That is the goal. The path is Full Accountability → Coached → Train Only → Tune-Up. The Tune-Up is for graduates: one session per 4-week cycle, a reassessment on the Bodystat QuadScan 4000 and an hour of training, with programming delivered through the OmniFit app between visits. We measure closely at the start so we can coach less over time.</div>
         </details>
 
       </div>
