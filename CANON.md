@@ -310,7 +310,10 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     never reads this file, so the exemption needs no rule - but it is stated
     here so nobody "fixes" the legacy block into being wrong.
     No contract exceeds $4,400. No exit fees. Round numbers only.
-    Travel fee: "may apply" language OK, never a dollar figure.
+    Travel fee, canonical (LAUNCH DECISIONS item 19): "No travel fee inside
+    our in-home service area; a travel fee may apply outside it." Territory
+    pages: "No travel fee in [Town]; it's inside our in-home service area."
+    Never a dollar figure.
     No processing fees are added to stated prices; the 2.9% card fee stays
     retired.
     The 30-Day Fit Guarantee wording stays BYTE-IDENTICAL (CANON TIER 2
@@ -361,7 +364,8 @@ LEGACY PRICING - AUGUST 2026, CLOSED (existing clients only; never publish)
 - Case-study figures (captions/alt text; verbatim client quotes are
   untouchable): Vincent 59, 8% body fat. Alo +18 lbs. Mark −17 lbs
   (248→231, 4mo). Dave −27 (225→198, 6mo). Isaac −21 (181→160, 8→20
-  pull-ups, 6mo). Annie −14 (162→148, 3mo). Ken −11 fat/+6 muscle.
+  pull-ups, 6mo). Annie −14 (162→148, 3mo). Ken −11 lbs bodyweight
+  (175→164, 6mo).
 - DEVICE (confirmed by owner, Sept 2026; supersedes the Bodystat 1500 MDD
   everywhere the site describes what a client will receive):
   the body composition device is the "Bodystat QuadScan 4000". Brand casing
@@ -674,8 +678,9 @@ and overrides the earlier wording it replaces.)
       rel="noopener": Rates bottom CTA, How It Works, About, Partners (bottom
       CTA, internal-link CTA, and the inline link in the PT-coordination FAQ
       answer), Couples, GLP-1, Over-50, Nutrition, Behavior Change, HSA/FSA.
-      Links labelled "Contact", and the "Get Started" / "Start ..." / "Book
-      Sessions" / "Stay in the Program" buttons, stay on /contactform.
+      Links labelled "Contact" stay on /contactform. (The "Get Started" /
+      "Start ..." / "Book Sessions" / "Stay in the Program" buttons stayed
+      on /contactform in this item; item 18 moved them to Calendly.)
       certify.py consultation_cta_to_contactform enforces it (self-tested
       both ways). The five header ReserveAction targets that still name
       /contactform are schema, not buttons, and were not in scope.
@@ -689,6 +694,57 @@ and overrides the earlier wording it replaces.)
       refunded the same day you attend your consultation" in place of "$30
       refundable deposit". No measurement, figure or case text changed; the
       records stay frozen and exempt from re-screening in every other line.
+  18. CALENDLY DIRECT, REMAINING ENTRY BUTTONS (owner, Oct 17 2026;
+      supersedes the "stay on /contactform" clause of item 15). Every
+      enrolment or booking button goes to
+      https://calendly.com/nemezio-omnifittraining/45min with target="_blank"
+      rel="noopener": Rates "Start With the Foundation", "Start The Program",
+      "Start the Executive Reset", "Stay in the Program", "Book Sessions";
+      Couples, all six "Get Started". The five page-header ReserveAction
+      targets (couples, desk-worker, glp-1, nutrition, over-50) name the
+      Calendly URL. Nav/footer "Contact" stays on /contactform. certify.py
+      booking_cta_to_contactform: no enrolment or booking CTA (Start...,
+      Get Started, Book..., Stay...) and no ReserveAction may target
+      /contactform (self-tested both ways).
+  19. TRAVEL FEES, canonical: "No travel fee inside our in-home service
+      area; a travel fee may apply outside it." Replaces every variant
+      ("may apply depending on location", "per-session travel fee may apply
+      depending on location", "with a travel fee depending on location",
+      "Travel fee varies by location", "Travel fee may apply by location")
+      on every page and header mirror. Territory pages (all eleven towns are
+      inside the area) say "No travel fee in [Town]; it's inside our in-home
+      service area." OWNER OVERRIDE for personal-trainer-4s-ranch and
+      personal-trainer-rancho-bernardo: the travel-fee phrase only. The
+      in-home page carries the canonical sentence only, no town names (X01).
+      Never a dollar figure. certify.py fails on "depending on location" and
+      "varies by location" (RETIRED_LAUNCH_COPY).
+  20. KEN, consolidated to the documented figure (photo label 175 -> 164
+      lbs, 6 months). OWNER OVERRIDE of the frozen-record exemption for
+      Ken's card only, identically in pages/case-studies.html and
+      pages/home-3.html: heading "How a 50+ CTO Lost 11 lbs and Fixed
+      Decades of Desk Posture"; metrics "-11 lbs / Bodyweight (175 → 164)",
+      "6 mo / Timeline", "✓ / Posture Corrected" (the "+6 lbs / Muscle
+      Gained" metric is gone); list item and summary "lost 11 pounds of
+      bodyweight (175 to 164 lb) in 6 months", every muscle-gain clause
+      removed; data-tags lose "muscle-gain"; the JSON-LD ItemList name and
+      description mirror the heading and figure. Over-50 proof card:
+      "−11 lb bodyweight, 6 months". No other case, quote or figure changes;
+      the records stay frozen in every other line. certify.py fails on
+      "+6 lb", "6 pounds of muscle" and "6 lbs of muscle" in every file,
+      frozen records INCLUDED (ken_muscle_claim).
+  21. /strength-training-1 STAYS as restored in the Dial follow-up run. No
+      change.
+  22. MOBILE. Root cause on training-rates-san-diego: "#omni-rates
+      .rt-policies-5 { grid-template-columns: repeat(3, 1fr) }" sat after the
+      <=640/<=768 rules and overrode the mobile 1fr. Fixed inside the
+      existing "@media (max-width: 768px)" block at the end of the page
+      <style>. Every page is audited with Playwright at 390px and 412px:
+      any card/grid item narrower than 240px is flagged, and any document
+      scrollWidth wider than the viewport. Because site.css gives <main>
+      overflow-x:clip, scrollWidth cannot see overflow inside main, so the
+      audit also reports content clipped past the viewport edge. A flagged
+      content card is fixed the same way: a mobile override in that page's
+      own <style>, nothing else. Results per page are in REPORT.md.
   RETIRED LAUNCH COPY (certify.py RETIRED_LAUNCH_COPY; frozen records
   exempt; footer swept): "fully refundable" · "applies to your first cycle"
   · "within the week" · "zero crowds" · "fully private" · "nutrition
