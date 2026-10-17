@@ -4756,3 +4756,133 @@ All 74 rules, in `_redirects` order. Origin counts: 44 Squarespace, 9 exception,
 
 ### Sources changed
 `build.py`, `public/_redirects` (generated), `tools/gsc-known-urls-2026-10-17.txt` (new), `tools/README.md`, `CANON.md`, `DEPLOY.md`, `REPORT.md`.
+
+---
+
+# Measurement run — one tracking setup, no GTM (Oct 17, 2026)
+
+**Branch:** `claude/gallant-lamport-3wx3g0`, merged to `main`.
+**Scope:** remove every old tracker from the sources and the build, add GA4 `G-0K6VLEC2VJ` and Clarity `yzawpvwvdf` from one place (production hostnames only), send every event from `site/site.js`, update the Fit Check claim and the privacy policy tools list, add a build check and a Playwright test. Rule recorded in CANON MEASUREMENT; operating note in DEPLOY.md "Measurement"; checks documented in tools/README.md.
+
+## What was removed
+
+| Where | What | Status |
+|---|---|---|
+| `pages/headers/site-header.html` | GTM `GTM-5P4CKPT2` snippet; Clarity `ulpgsrkd98` inside the deferral | removed; the HubSpot loader in the same deferral is byte-identical |
+| `pages/personal-trainer-4s-ranch.html` | the "CTA + Form Tracking" script (`cta_click` via `gtag` + `dataLayer.push`, `lead_form_submit` on the HubSpot message, a 120 ms delay on external CTAs) | removed (40 lines). The `.omni-cta` class and `data-cta-id` / `data-cta-location` / `data-track` / `data-no-delay` attributes stay on the markup, inert |
+| GTM `<noscript>` iframe | | **not found** in any source, header, footer or built page; nothing to remove |
+| footer PB-era tracker (`pb_booking_started`, "PB Landing") | | **not found** in `pages/footer.html`, anywhere in the repo, or in its history (`git log -S`). The repo footer carries only the year script. It must have lived in the Squarespace footer injection, which was never pasted here |
+| `archive/online-training.html` | old `gtag` / `dataLayer.push` CTA code | left as is: ARCHIVE is never corrected and `archive/` is not built into `public/` |
+| `pages/privacy-policy.html` | "Google Tag Manager" | removed; Google Ads was never mentioned |
+
+## What was added
+
+- **Loader, one source** (`pages/headers/site-header.html`): GA4 gtag.js and the Clarity snippet, inside `if (prod)`, where `prod` is `location.hostname` equal to `www.omnifittraining.com` or `omnifittraining.com`, or `localhost` / `127.0.0.1` with `?omnifit-track=prod`. Clarity is additionally skipped when the path is `/fit-check`. Each ID is held in one variable so it appears once per page. The GA4 shim is Google's snippet with the data layer in a local (`dl.push(arguments)`), so the literal `dataLayer.push` can be banned outright. HubSpot's deferred loader is unchanged.
+- **Events** (`site/site.js`, delegated listeners): `book_consultation_click`, `phone_click`, `email_click`, `generate_lead`, `fit_check_start`, `fit_check_complete`, `rates_section_view`, with the params in CANON MEASUREMENT. `track()` calls `gtag('event', ...)` when `window.gtag` is a function, else logs `[omnifit-track] <event> <json params>`.
+- **Fit Check hooks** (`pages/fit-check.html`): `showResult` sets `data-fit-result` ("pass" | "hold") and, on a pass, `data-fit-setting` (the recommended setting's name) on `#result` before revealing it. Nothing else about the quiz changed; no answer is exposed.
+- **Fit Check wording**: header `WebPage.description` "Instant result; no answers are saved or sent." -> "... are saved or sent; only an anonymous count of completed checks and their result is recorded." The lede's "Nothing here is saved or sent, and you'll see your result right away, ..." made the same absolute claim and now reads "No answers are saved or sent; only an anonymous count of completed checks and their result is recorded. You'll see your result right away, ...". Title, meta description ("Instant result, nothing saved."), H1 and H2s unchanged.
+- **Privacy policy** (`pages/privacy-policy.html`): §02 "Google Analytics, Google Tag Manager, and Microsoft Clarity" -> "Google Analytics 4 and Microsoft Clarity"; §05 now says GA4 for anonymous traffic and usage data and Clarity for session analytics with form fields masked, not used on the Fit Check; §06 "Scheduling tools (Calendly)" -> "Booking (Calendly)", "Forms and CRM (HubSpot, Jotform)" -> "Forms and email (HubSpot, Jotform)", "Website hosting (Cloudflare)" -> "Hosting (Cloudflare)". Nothing else changed.
+- **Build check** (`build.py --check`, `check_tracking` + `tracking_selftest`): fails if `GTM-5P4CKPT2`, `ulpgsrkd98`, `AW-16616873404`, `G-QTG1ZLR0NQ` or `dataLayer.push` appears in any text file under `public/`, or if `G-0K6VLEC2VJ` / `yzawpvwvdf` appears more than once on a page. Fixtures first.
+- **Playwright test** (`tools/tracktest.js`): below.
+
+## Checks
+
+| Check | Before | After |
+|---|---|---|
+| `python3 build.py --check` | PASSED | PASSED (note: `tracking: 50 files scanned for 5 retired strings; G-0K6VLEC2VJ, yzawpvwvdf once on each of 42 pages; fixtures OK`) |
+| `python3 tools/certify.py` | PASSED (0 · 0 · 0 · 0) | PASSED (0 · 0 · 0 · 0) |
+| keyword ownership | PASSED | PASSED (titles, metas, H1s, H2s untouched) |
+| `grep -r` for the five retired strings in `public/` | GTM and `ulpgsrkd98` on all 42 pages; `dataLayer.push` on all 42 pages (GTM) and on `/personal-trainer-4s-ranch` | 0 hits |
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | a6c7e65dddff4795 | a6c7e65dddff4795 |
+| header pricing | 7af0d0049b0b7aba | 7af0d0049b0b7aba |
+| credentials | 02bd9cb90a71ce69 | 02bd9cb90a71ce69 |
+| archetypes (Section A) | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c |
+| 9-point (Section B) | 4c720960dec5a809 | 4c720960dec5a809 |
+
+### Tracking check, negative tests on the real `public/` (restored by rebuild)
+
+| Mutation | Result |
+|---|---|
+| `<!-- GTM-5P4CKPT2 -->` appended to `about/index.html` | `tracking: banned: GTM-5P4CKPT2 in about/index.html` (plus the fixture guard reporting that the real output already fails) |
+| a second `G-0K6VLEC2VJ` appended to `faqs/index.html` | `tracking: repeated: G-0K6VLEC2VJ x2 in faqs/index.html` |
+| `window.dataLayer.push({});` appended to `assets/site.js` | `tracking: banned: dataLayer.push in assets/site.js` |
+| the `repeated` rule disabled inside the checker | both of its fixtures fail: `second G-0K6VLEC2VJ in about/index.html: expected [repeated], got []`, same for `yzawpvwvdf` |
+| restored | PASSED |
+
+## Playwright results (`tools/tracktest.js`)
+
+Built site served from `public/` on 127.0.0.1 (Cloudflare path semantics). Chromium 141 (Playwright 1.56.1). `www.omnifittraining.com` and a fake preview host are mapped to the local server with `--host-resolver-rules`, so rows 1 to 6 exercise the real production condition with no override. gtag.js is stubbed to forward each `gtag('event', ...)` to `google-analytics.com/g/collect` in GA4's shape (`en`, `ep.*`); every request to google-analytics.com, clarity.ms and the HubSpot loaders is intercepted and answered locally; nothing reached Google or Microsoft. The "Got" column is what was intercepted.
+
+| # | Where | Check | Expected | Got | Result |
+|---|---|---|---|---|---|
+| 1 | prod host / | gtag.js requested with the GA4 ID | `["G-0K6VLEC2VJ"]` | `["G-0K6VLEC2VJ"]` | PASS |
+| 2 | prod host / | Clarity tag requested with the project ID | `["yzawpvwvdf"]` | `["yzawpvwvdf"]` | PASS |
+| 3 | prod host / | window.gtag is a function | `"function"` | `"function"` | PASS |
+| 4 | prod host / | no other external host requested | `[]` | `[]` | PASS |
+| 5 | prod host /fit-check | gtag.js requested | `1` | `1` | PASS |
+| 6 | prod host /fit-check | Clarity NOT requested | `0` | `0` | PASS |
+| 7 | localhost+flag / | override loads gtag.js and Clarity | `{"gtag":1,"clarity":1}` | `{"gtag":1,"clarity":1}` | PASS |
+| 8 | localhost+flag / | nav Calendly click | `[{"event":"book_consultation_click","params":{"cta_location":"home","cta_label":"Book Your Consultation","cta_position":"nav"}}]` | `[{"event":"book_consultation_click","params":{"cta_location":"home","cta_label":"Book Your Consultation","cta_position":"nav"}}]` | PASS |
+| 9 | localhost+flag / | homepage hero Calendly click | `{"event":"book_consultation_click","params":{"cta_location":"home","cta_label":"Book Your Consultation","cta_position":"hero"}}` | `{"event":"book_consultation_click","params":{"cta_location":"home","cta_label":"Book Your Consultation","cta_position":"hero"}}` | PASS |
+| 10 | localhost+flag / | announcement bar Calendly click is nav | `"nav"` | `"nav"` | PASS |
+| 11 | localhost+flag / | footer Calendly click | `{"event":"book_consultation_click","params":{"cta_location":"home","cta_label":"Book Your 45-Min Consultation","cta_position":"footer"}}` | `{"event":"book_consultation_click","params":{"cta_location":"home","cta_label":"Book Your 45-Min Consultation","cta_position":"footer"}}` | PASS |
+| 12 | localhost+flag / | tel: click | `{"event":"phone_click","params":{"cta_location":"home"}}` | `{"event":"phone_click","params":{"cta_location":"home"}}` | PASS |
+| 13 | localhost+flag / | mailto: click | `{"event":"email_click","params":{"cta_location":"home"}}` | `{"event":"email_click","params":{"cta_location":"home"}}` | PASS |
+| 14 | localhost+flag / | an internal link sends nothing | `6` | `6` | PASS |
+| 15 | localhost+flag / | every hit carries the GA4 ID | `["G-0K6VLEC2VJ"]` | `["G-0K6VLEC2VJ"]` | PASS |
+| 16 | localhost+flag / | no console fallback lines in production mode | `0` | `0` | PASS |
+| 17 | localhost+flag /training-rates-san-diego | rates hero Calendly click | `{"event":"book_consultation_click","params":{"cta_location":"training-rates-san-diego","cta_label":"Book Your Consultation","cta_position":"hero"}}` | `{"event":"book_consultation_click","params":{"cta_location":"training-rates-san-diego","cta_label":"Book Your Consultation","cta_position":"hero"}}` | PASS |
+| 18 | localhost+flag /training-rates-san-diego | no section view before scrolling | `[]` | `[]` | PASS |
+| 19 | localhost+flag /training-rates-san-diego | rates scroll: four sections, in page order | `["rt-foundation","rt-program","rt-sessions","rt-reset"]` | `["rt-foundation","rt-program","rt-sessions","rt-reset"]` | PASS |
+| 20 | localhost+flag /training-rates-san-diego | second scroll adds nothing (once per section) | `4` | `4` | PASS |
+| 21 | localhost+flag /training-rates-san-diego | Foundation ladder CTA (below the section head) is body | `{"event":"book_consultation_click","params":{"cta_location":"training-rates-san-diego","cta_label":"Start With the Foundation","cta_position":"body"}}` | `{"event":"book_consultation_click","params":{"cta_location":"training-rates-san-diego","cta_label":"Start With the Foundation","cta_position":"body"}}` | PASS |
+| 22 | localhost+flag /fit-check | Clarity NOT requested on /fit-check | `0` | `0` | PASS |
+| 23 | localhost+flag /fit-check | GA4 still loads on /fit-check | `1` | `1` | PASS |
+| 24 | localhost+flag /fit-check | nothing sent on Start | `[]` | `[]` | PASS |
+| 25 | localhost+flag /fit-check | fit_check_start on the first answer, no params | `[{"event":"fit_check_start","params":{}}]` | `[{"event":"fit_check_start","params":{}}]` | PASS |
+| 26 | localhost+flag /fit-check | pass: fit_check_complete with result and setting only | `[{"event":"fit_check_start","params":{}},{"event":"fit_check_complete","params":{"fit_result":"pass","fit_setting":"Coached"}}]` | `[{"event":"fit_check_start","params":{}},{"event":"fit_check_complete","params":{"fit_result":"pass","fit_setting":"Coached"}}]` | PASS |
+| 27 | localhost+flag /fit-check | result section visible, verdict pass | `true` | `true` | PASS |
+| 28 | localhost+flag /fit-check | result Book button click | `{"event":"book_consultation_click","params":{"cta_location":"fit-check","cta_label":"Book Your Consultation","cta_position":"body"}}` | `{"event":"book_consultation_click","params":{"cta_location":"fit-check","cta_label":"Book Your Consultation","cta_position":"body"}}` | PASS |
+| 29 | localhost+flag /fit-check | retake: start again, then hold with no setting | `[{"event":"fit_check_start","params":{}},{"event":"fit_check_complete","params":{"fit_result":"hold"}}]` | `[{"event":"fit_check_start","params":{}},{"event":"fit_check_complete","params":{"fit_result":"hold"}}]` | PASS |
+| 30 | localhost+flag /fit-check (hold) | hold: start once, complete with fit_result hold only | `[{"event":"fit_check_start","params":{}},{"event":"fit_check_complete","params":{"fit_result":"hold"}}]` | `[{"event":"fit_check_start","params":{}},{"event":"fit_check_complete","params":{"fit_result":"hold"}}]` | PASS |
+| 31 | localhost+flag /fit-check (hold) | no param on any hit names an answer | `[]` | `[]` | PASS |
+| 32 | localhost+flag /fit-check (hold) | hold result shown | `true` | `true` | PASS |
+| 33 | localhost+flag /contactform | onFormReady and a string message send nothing | `[]` | `[]` | PASS |
+| 34 | localhost+flag /contactform | HubSpot onFormSubmitted -> generate_lead | `[{"event":"generate_lead","params":{"form_location":"contactform"}}]` | `[{"event":"generate_lead","params":{"form_location":"contactform"}}]` | PASS |
+| 35 | localhost+flag /personal-trainer-4s-ranch (390px) | sticky bar Calendly click | `{"event":"book_consultation_click","params":{"cta_location":"personal-trainer-4s-ranch","cta_label":"Book 45-Min Consult","cta_position":"sticky"}}` | `{"event":"book_consultation_click","params":{"cta_location":"personal-trainer-4s-ranch","cta_label":"Book 45-Min Consult","cta_position":"sticky"}}` | PASS |
+| 36 | localhost+flag /personal-trainer-4s-ranch (390px) | sticky bar tel: click | `{"event":"phone_click","params":{"cta_location":"personal-trainer-4s-ranch"}}` | `{"event":"phone_click","params":{"cta_location":"personal-trainer-4s-ranch"}}` | PASS |
+| 37 | localhost+flag /personal-trainer-4s-ranch (390px) | no page-level tracking script remains in <main> | `0` | `0` | PASS |
+| 38 | localhost no flag / | no request to googletagmanager.com, google-analytics.com or clarity.ms | `{"gtag":0,"ga":0,"clarity":0}` | `{"gtag":0,"ga":0,"clarity":0}` | PASS |
+| 39 | localhost no flag / | HubSpot still loads | `1` | `1` | PASS |
+| 40 | localhost no flag / | window.gtag undefined | `"undefined"` | `"undefined"` | PASS |
+| 41 | localhost no flag / | console line per event | `["[omnifit-track] book_consultation_click {\"cta_location\":\"home\",\"cta_label\":\"Book Your Consultation\",\"cta_position\":\"nav\"}","[omnifit-track] phone_click {\"cta_location\":\"home\"}"]` | `["[omnifit-track] book_consultation_click {\"cta_location\":\"home\",\"cta_label\":\"Book Your Consultation\",\"cta_position\":\"nav\"}","[omnifit-track] phone_click {\"cta_location\":\"home\"}"]` | PASS |
+| 42 | localhost no flag / | still no request to either service after events | `0` | `0` | PASS |
+| 43 | localhost no flag /training-rates-san-diego | section views logged to the console, no requests | `{"logged":["rt-foundation","rt-program","rt-sessions","rt-reset"],"ga":0,"clarity":0}` | `{"logged":["rt-foundation","rt-program","rt-sessions","rt-reset"],"ga":0,"clarity":0}` | PASS |
+| 44 | localhost no flag /fit-check | Fit Check events logged to the console, no requests | `{"logged":[{"event":"fit_check_start","params":{}},{"event":"fit_check_complete","params":{"fit_result":"pass","fit_setting":"Full Accountability"}}],"ga":0,"clarity":0,"gtag":0}` | `{"logged":[{"event":"fit_check_start","params":{}},{"event":"fit_check_complete","params":{"fit_result":"pass","fit_setting":"Full Accountability"}}],"ga":0,"clarity":0,"gtag":0}` | PASS |
+| 45 | preview host + flag / | flag ignored off localhost: nothing loads | `{"gtag":0,"clarity":0,"gtagType":"undefined"}` | `{"gtag":0,"clarity":0,"gtagType":"undefined"}` | PASS |
+| 46 | 127.0.0.1 + flag / | flag honoured on 127.0.0.1 too | `{"gtag":1,"clarity":1}` | `{"gtag":1,"clarity":1}` | PASS |
+
+**RESULT: PASSED (46 assertions, 0 failed).**
+
+## Judgment calls (with the condition under which each is wrong)
+
+1. **The GA4 shim is spelled `dl.push(arguments)`**, not Google's `dataLayer.push(arguments)`, because the brief bans the literal string anywhere in `public/`. Behaviour is identical (gtag.js reads `window.dataLayer`). Wrong only if someone later pastes Google's verbatim snippet and expects the check to accept it; it will not, by design.
+2. **`cta_position` detection order**: `data-cta-position` override, then a class containing "sticky", then `<footer>`, then the site header or announcement bar, then a class containing "hero", else body. Checked innermost first so the 4S Ranch `<nav class="sticky-bar-4sr">` is `sticky`, not `nav`. Wrong if a page uses "hero" or "sticky" in an unrelated class name; the fix is `data-cta-position` on that link, no code change.
+3. **`section` is the element id as written** (`rt-foundation`, not `foundation`): the brief names the ids. Wrong if the owner wants the short name in reports; one line in `site.js`.
+4. **`rates_section_view` observes the `#rt-*` heading block.** On the rates page each `#rt-*` element wraps only the label, H2 and intro; the ladder below is a sibling `.rt-wrap`. The heading entering the viewport (with the bottom 20% excluded) is the signal. Wrong if the owner wanted "the ladder itself scrolled into view"; that needs ids on the `.rt-wrap` blocks.
+5. **`fit_check_start` resets after each completion**, so a retake that reaches a new result counts as a new start and a new completion; changing an answer before the result does not fire again. Wrong if the owner wants one start per page load.
+6. **Jotform stays in the privacy policy's sharing list** ("Forms and email (HubSpot, Jotform)"). The brief's five tools are the website stack, and Jotform is not on the site, but it is a business processor the policy already names and "no other policy changes" was the instruction. Wrong if Jotform is no longer used anywhere in the business; one word to remove.
+7. **The 4S Ranch CTA attributes stay.** `.omni-cta`, `data-cta-id`, `data-cta-location`, `data-track` and `data-no-delay` are now inert and were left so a certified page changed by exactly one script block. The old 120 ms delay before external navigation is gone with the script. Wrong if the owner wants the markup cleaned; it is a find-and-replace with no behaviour change.
+8. **The test proves what the site sends into gtag, not what the property does with it.** The stub forwards events in GA4's collect shape; the real gtag.js batches and may add parameters. Wrong only in the sense that a GA4-side misconfiguration (stream, filters, key events) is invisible here; DEPLOY.md manual step 6 lists those settings.
+9. **`http://www.omnifittraining.com:<port>/` is used to prove the production branch**, mapped to the local server inside Chromium. Wrong only if Chromium gains an HSTS preload entry for the domain; the row would then fail loudly, not pass.
+10. **Privacy policy §05 carries the Clarity description** ("session analytics with form fields masked; Clarity is not used on the Fit Check") because that is the only sentence in the policy that explains what the analytics tools do. Wrong if the owner wanted the parenthetical in §02's list item instead.
+
+## Human-side, not repo (DEPLOY.md manual step 6)
+
+GA4 cross-domain for `calendly.com`; Calendly's Google Analytics integration with `G-0K6VLEC2VJ` so completed bookings reach the property; key events; Clarity masking at Balanced or Strict; unpublish or pause GTM `GTM-5P4CKPT2` and retire Clarity `ulpgsrkd98`.
+
+### Sources changed
+`pages/headers/site-header.html`, `site/site.js`, `pages/personal-trainer-4s-ranch.html`, `pages/fit-check.html`, `pages/headers/fit-check-header.html`, `pages/privacy-policy.html`, `build.py`, `tools/tracktest.js` (new), `tools/README.md`, `CANON.md`, `DEPLOY.md`, `REPORT.md`, `public/` (rebuilt).
