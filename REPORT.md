@@ -3901,3 +3901,14 @@ All restored → PASSED.
 
 ### Checks
 `build.py` 41 pages · `build.py --check` PASSED · `ownership.py --selftest` PASSED · `certify.py` PASSED · invariant hashes unchanged. `mkheaders.py` still rewrites only the how-we-measure header's leading comment; reverted.
+
+## Client transformation photos re-branded (Oct 17, 2026)
+
+The seven before/after photos (Mark, Dave, Ken, Vincent, Alo, Annie, Isaac) carried the retired "OmniFit Personal Fitness Training" knot logo between the two shots and were hotlinked from Squarespace. Source: the full-resolution PNGs in Drive (same files the site used, 1080×1080).
+
+- **Old logo removed.** Only the logo's own pixels were replaced; no pixel outside the old logo's footprint changed in any photo (checked per image). On the backdrop the gap is filled from a smooth model of the gradient. On Ken the arm photo sits on top of the logo, so his arm pixels were left exactly as they were.
+- **Where the old logo was drawn over an arm** (Dave: the "Pers" of the tagline over his elbow; Vincent: the knot's right lobe and "Training" over his forearm), the skin under the strokes does not exist in the file. Those strokes were rebuilt from the surrounding real skin and backdrop (OpenCV xphoto FSR). Body shape, proportions and every other pixel are unchanged.
+- **New logo** is `site/img/logo.svg` (the header logo), rendered at 200×57 px, bottom-centre, clear of every client; on Vincent it sits 32 px right of centre to clear his hand.
+- Saved as WebP in `site/img/` (38-60 KB each) and swapped into case-studies, home-3 and personal-trainer-4s-ranch (20 links). 6 Squarespace-hosted images remain (DEPLOY.md step 5).
+- `build.py --check` PASSED · `certify.py` PASSED.
+- Note: home-3 and case-studies were already not byte-identical before this change (CANON's "byte-identical" note for home-3 is stale); both got the same 7 link swaps.
