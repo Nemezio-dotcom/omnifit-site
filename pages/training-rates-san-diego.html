@@ -6,6 +6,7 @@
 <!-- V11 CHANGES: October 2026 card. The Foundation and The Program replace the four venue ladders; the unlisted entry tier, 10- and 20-packs retired; assessment repriced; Reset, Tune-Up and add-ons retiered. Page and header rebuilt together. -->
 <!-- V12.1: motion and visual polish (ambient orbs, hero entrance, scroll reveal, path-tile icons, sticky jump bar, hover accents, reduced-motion safe). One inline script, no dependencies. -->
 <!-- V12 CHANGES: layout only, no price or FAQ changes. Path chooser added under the hero (Foundation = new clients, Program = experienced and committed, Sessions = flexibility). Per-tier cards replaced by compact rate ladders grouped by setting; session packs collapsed to one table; Reset tiers to one ladder. Built For / Not the Right Fit moved below the rates. -->
+<!-- V14 CHANGES (Oct 17 2026, Accountability Dial + flexibility): under The Program, four new sections — the Accountability Dial table (every tier, no price difference), "What protects your investment", "What happens if your schedule or goals change" (tier-change rules per CANON TIER CHANGES, plus a worked example whose figures are COMPUTED by the page script from data attributes carrying the card prices, never hand-written), and "Why premium". Two FAQ questions added (accountability, changing your plan); header FAQPage mirrors ten. Jump bar gained three links. "Included in every program" names the Dial. No price, cadence or Stripe reference changed. -->
 <!-- V13 CHANGES: pricing clarity (Oct 2026). "Two ways to train" definitions above the rates; "What you pay, and when"; "Commitment at a glance" table; every price carries "per 4-week cycle" and sessions per cycle; Foundation rows show the total due at signup and sessions across 12 weeks; tiers the Foundation does not offer read "Start on The Program"; Teqneeq membership line beside studio prices; one sessions table (singles, 5-packs, extra session, guest add-on) with expiry; FAQ replaced with eight pricing questions; emoji replaced by gold line SVGs; referral credit and the duplicate single-session card removed. The assessment paragraph (byte-identical, Class IIa block) moved from the FAQ into the Assessment card. Header rebuilt to match. -->
 
 <style>
@@ -435,6 +436,24 @@
     #omni-rates .rt-packs-4 .rt-packs-row { grid-template-columns: 1fr 1fr 1fr; }
     #omni-rates .rt-packs-4 .rt-packs-row > :first-child { grid-column: 1 / -1; }
   }
+  /* V14: Dial table (3 settings), why-premium table (4 options), 5-card protection grid */
+  @media (min-width: 769px) {
+    #omni-rates .rt-dial-table tbody th { width: 16%; }
+    #omni-rates .rt-dial-table td { width: 28%; }
+    #omni-rates .rt-why-table tbody th { width: 16%; }
+    #omni-rates .rt-why-table td { width: 18%; }
+    #omni-rates .rt-why-table td:last-child { width: 30%; }
+  }
+  #omni-rates .rt-why-table td:last-child { color: var(--white); background: rgba(201,168,76,0.06); }
+  #omni-rates .rt-policies-5 { grid-template-columns: repeat(3, 1fr); }
+  #omni-rates .rt-policies-5 .rt-policy:nth-child(4) { grid-column: 1 / 2; }
+  #omni-rates .rt-policies-5 .rt-policy:nth-child(5) { grid-column: 2 / 3; }
+  #omni-rates .rt-policies-5 .rt-policy p { color: var(--white-70); }
+  #omni-rates .rt-example [data-out] { color: var(--gold-light); font-weight: 700; }
+  @media (max-width: 768px) {
+    #omni-rates .rt-why-table td:last-child { background: transparent; }
+    #omni-rates .rt-policies-5 .rt-policy:nth-child(4), #omni-rates .rt-policies-5 .rt-policy:nth-child(5) { grid-column: auto; }
+  }
 </style>
 
 
@@ -497,6 +516,9 @@
       <a href="#rt-commit">Commitment</a>
       <a href="#rt-foundation">Foundation</a>
       <a href="#rt-program">Program</a>
+      <a href="#rt-dial">Accountability</a>
+      <a href="#rt-change">Changes</a>
+      <a href="#rt-why">Why Premium</a>
       <a href="#rt-sessions">Sessions</a>
       <a href="#rt-tuneup">Tune-Up</a>
       <a href="#rt-reset">Virtual</a>
@@ -589,7 +611,7 @@
         <div class="rt-includes-item rt-reveal">Custom programming based on OmniFit 4-phase methodology</div>
         <div class="rt-includes-item rt-reveal">Nutrition guidance &amp; macro framework</div>
         <div class="rt-includes-item rt-reveal">Full app access for workout tracking and logging</div>
-        <div class="rt-includes-item rt-reveal">Weekly accountability and progress tracking</div>
+        <div class="rt-includes-item rt-reveal">Accountability at the setting you choose: Full, Coached or Train Only</div>
         <div class="rt-includes-item rt-reveal">Direct trainer access via text/email</div>
         <div class="rt-includes-item rt-reveal">Corrective exercise and movement screening</div>
         <div class="rt-includes-item rt-reveal">Pause weeks for travel (see the table above)</div>
@@ -797,6 +819,152 @@
       <h4>30-Day Fit Guarantee</h4>
       <p>If after your first 30 days you decide OmniFit isn't the right fit, you can stop and I'll refund the unused balance of your program. You keep the first month and everything you've learned. No compliance test, no negotiation. Applies to The Foundation, The Program and the Executive Reset.</p>
     </div>
+  </div>
+
+  <div class="rt-spacer-sm"></div>
+
+  <!-- ═══════ ACCOUNTABILITY DIAL (every tier, no price difference) ═══════ -->
+  <div class="rt-section" id="rt-dial">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Included at Every Tier</span>
+      <hr class="rt-divider">
+      <h2>Every Tier Includes Your Choice of <em>Accountability</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:720px; margin:8px auto 0;">Tier is how often we train. The Accountability Dial is how closely we follow you between sessions. Three settings, included at every tier of The Foundation, The Program and the Executive Reset, with no price difference. You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation.</p>
+    </div>
+  </div>
+
+  <div class="rt-wrap">
+    <div class="rt-commit-wrap rt-reveal">
+      <table class="rt-commit rt-dial-table">
+        <thead>
+          <tr><th scope="col"><span class="rt-sr">Setting</span></th><th scope="col">Full Accountability</th><th scope="col">Coached</th><th scope="col">Train Only</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">What you log</th><td data-label="Full Accountability">Daily: nutrition, steps and sleep.</td><td data-label="Coached">A weekly written check-in.</td><td data-label="Train Only">A one-tap weekly check-in.</td></tr>
+          <tr><th scope="row">Coach contact</th><td data-label="Full Accountability">A coach reply within 1 business day.</td><td data-label="Coached">A coach reply to each weekly check-in.</td><td data-label="Train Only">Your sessions.</td></tr>
+          <tr><th scope="row">Habits and nutrition</th><td data-label="Full Accountability">Behavior-change coaching through Awareness, Regulation, Adaptation and Integration.</td><td data-label="Coached">1 to 3 habit targets at a time.</td><td data-label="Train Only">Nutrition on request.</td></tr>
+          <tr><th scope="row">Measurement</th><td data-label="Full Accountability">Reviewed with every check-in.</td><td data-label="Coached">A measurement review every 4 weeks.</td><td data-label="Train Only">Reassessment at least every 12 weeks.</td></tr>
+          <tr><th scope="row">Usually chosen by</th><td data-label="Full Accountability">New clients in the first cycles. This is the default.</td><td data-label="Coached">Clients whose routines hold through an ordinary week.</td><td data-label="Train Only">Clients who self-correct and want the sessions and the program.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rt-steps-note rt-reveal" style="margin-bottom:14px;"><strong style="color:var(--white);">At every setting:</strong> payment confirms your booking, sessions reschedule with 24 hours' notice, corrective work sits in every warm-up, and you are reassessed at least every 12 weeks.</p>
+    <div class="rt-guarantee rt-reveal" style="max-width:1120px; margin:0 auto 14px;">
+      <h4>Tracking is a diagnostic tool, not a life sentence.</h4>
+      <p>We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week. The path most clients follow: <strong style="color:var(--gold-light);">Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</strong>.</p>
+      <p style="margin-top:10px;">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.</p>
+    </div>
+  </div>
+
+  <div class="rt-spacer-sm"></div>
+
+  <!-- ═══════ WHAT PROTECTS YOUR INVESTMENT ═══════ -->
+  <div class="rt-section" id="rt-protect">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Standards That Protect Your Slot and Your Results</span>
+      <hr class="rt-divider">
+      <h2>What Protects Your <em>Investment</em></h2>
+    </div>
+  </div>
+
+  <div class="rt-policies rt-policies-5" style="padding:0 28px;">
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
+      <h5>The assessment is credited</h5>
+      <p>The $150 Performance Assessment is credited toward your first cycle. You pay for the baseline once, and it becomes part of your program.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></div>
+      <h5>30-Day Fit Guarantee</h5>
+      <p>If after your first 30 days you decide OmniFit isn't the right fit, you can stop and I'll refund the unused balance of your program. You keep the first month and everything you've learned. No compliance test, no negotiation. Applies to The Foundation, The Program and the Executive Reset.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
+      <h5>Pause weeks</h5>
+      <p>Two across The Foundation with notice, extending the end date. Six per 12 months on The Program with 2 weeks' notice, credited against the next cycle. Travel doesn't cost you a session.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div>
+      <h5>Sessions OmniFit cancels are credited</h5>
+      <p>The 24-hour standard runs both ways. If OmniFit cancels a session, it is credited back to you.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></div>
+      <h5>The Foundation is a defined starter block</h5>
+      <p>Three 4-week cycles, one payment, a known end date. You know exactly what the first 12 weeks cost and what they contain before you start.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ IF YOUR SCHEDULE OR GOALS CHANGE ═══════ -->
+  <div class="rt-section" id="rt-change">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Flexibility</span>
+      <hr class="rt-divider">
+      <h2>What Happens If Your Schedule or <em>Goals Change</em></h2>
+    </div>
+  </div>
+
+  <div class="rt-wrap">
+    <div class="rt-commit-wrap rt-reveal">
+      <table class="rt-commit">
+        <thead>
+          <tr><th scope="col"><span class="rt-sr">Change</span></th><th scope="col">The Foundation</th><th scope="col">The Program</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Travel or a busy stretch</th><td data-label="The Foundation">Use pause weeks: 2 across the course, with notice. They extend the end date.</td><td data-label="The Program">Use pause weeks: 6 per 12 months, with 2 weeks' notice, credited against the next cycle.</td></tr>
+          <tr><th scope="row">More or less accountability</th><td data-label="The Foundation">Change your Dial setting at any 4-week cycle boundary, including during The Foundation.</td><td data-label="The Program">Change your Dial setting at any 4-week cycle boundary.</td></tr>
+          <tr><th scope="row">More sessions</th><td data-label="The Foundation">Step up anytime. Between Foundation tiers, you stay on The Foundation and pay the difference for the remaining cycles. To a tier offered only on The Program, your Foundation ends at the next cycle boundary and every unused session is credited toward your first Program cycle.</td><td data-label="The Program">Move up a tier between cycles, with notice before the next cycle starts.</td></tr>
+          <tr><th scope="row">Fewer sessions</th><td data-label="The Foundation">Not during The Foundation. The first 12 weeks are built as a block; the step down comes after it.</td><td data-label="The Program">Move down a tier between cycles, with notice before the next cycle starts.</td></tr>
+          <tr><th scope="row">Not the right fit</th><td data-label="The Foundation">The 30-Day Fit Guarantee.</td><td data-label="The Program">The 30-Day Fit Guarantee in the first 30 days; 30 days' notice after that, with remaining credit applied to the final cycle.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rt-steps-note rt-reveal" style="max-width:860px; margin-bottom:24px;">On The Program you can move up or down a tier between cycles. During The Foundation you can step up, not down &mdash; the first 12 weeks are built as a block. Want more sessions mid-Foundation? Step up anytime. If your new tier is only offered on The Program, your Foundation ends there &mdash; every unused session is credited toward your first Program cycle, and you pay only the difference. You can adjust your accountability level at any cycle boundary.</p>
+
+    <div class="rt-guarantee rt-reveal rt-example" style="max-width:1120px; margin:0 auto 14px;" data-cycle="560" data-sessions="4" data-cycles="3" data-completed="1" data-target="1800">
+      <h4>Worked example: Foundation Momentum to Program Peak</h4>
+      <p>A client on studio Momentum on The Foundation ($560 per 4-week cycle, 4 sessions per cycle, three cycles) decides after the first cycle that they want to train three times a week. Studio Peak is only offered on The Program, at $1,800 per 4-week cycle, so The Foundation ends at the cycle boundary and the unused sessions become credit.</p>
+      <ul class="rt-feature-list" style="margin-top:12px;">
+        <li><strong>Foundation per-session rate:</strong> $560 &divide; 4 sessions = <span data-out="per_session">&hellip;</span> per session</li>
+        <li><strong>Unused Foundation sessions:</strong> 2 remaining cycles &times; 4 sessions = <span data-out="unused">&hellip;</span> sessions</li>
+        <li><strong>Credit:</strong> <span data-out="unused">&hellip;</span> sessions &times; <span data-out="per_session">&hellip;</span> = <span data-out="credit">&hellip;</span></li>
+        <li><strong>First Peak cycle on The Program:</strong> $1,800 &minus; <span data-out="credit">&hellip;</span> credit = <strong><span data-out="due">&hellip;</span> due</strong></li>
+      </ul>
+      <p style="margin-top:12px; font-size:13px; color:var(--white-70);">If the credit ever exceeds the first Program cycle, the remainder carries forward as session credit against the next cycle, never as cash. The figures above are computed from the published rates on this page.</p>
+    </div>
+  </div>
+
+  <div class="rt-spacer-sm"></div>
+
+  <!-- ═══════ WHY PREMIUM ═══════ -->
+  <div class="rt-section" id="rt-why">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Why the Rate</span>
+      <hr class="rt-divider">
+      <h2>Why This Costs More Than a Gym, a Class or a <em>Standard Trainer</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:720px; margin:8px auto 0;">You are paying for a measured system around the sessions, not for the sessions alone. Here is what the rate buys that the cheaper options don't include.</p>
+    </div>
+  </div>
+
+  <div class="rt-wrap">
+    <div class="rt-commit-wrap rt-reveal">
+      <table class="rt-commit rt-why-table">
+        <thead>
+          <tr><th scope="col"><span class="rt-sr">Element</span></th><th scope="col">Gym access</th><th scope="col">Group classes</th><th scope="col">A standard trainer</th><th scope="col">OmniFit Performance</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Who writes your program</th><td data-label="Gym access">You do.</td><td data-label="Group classes">The class, for everyone in the room.</td><td data-label="A standard trainer">The trainer, usually session by session.</td><td data-label="OmniFit Performance">Written for you from your Performance Assessment and rebuilt every 4-week cycle.</td></tr>
+          <tr><th scope="row">What a session is for</th><td data-label="Gym access">Whatever you decide.</td><td data-label="Group classes">Effort and energy.</td><td data-label="A standard trainer">A supervised workout.</td><td data-label="OmniFit Performance">Form, load and corrective work. The app carries the rest.</td></tr>
+          <tr><th scope="row">Between sessions</th><td data-label="Gym access">Nothing.</td><td data-label="Group classes">Nothing.</td><td data-label="A standard trainer">Varies.</td><td data-label="OmniFit Performance">Your program, logs and check-ins in one app, at the accountability setting you chose.</td></tr>
+          <tr><th scope="row">Measurement</th><td data-label="Gym access">The scale, if you weigh yourself.</td><td data-label="Group classes">A leaderboard.</td><td data-label="A standard trainer">Varies.</td><td data-label="OmniFit Performance">Bodystat QuadScan 4000, nine movement benchmarks, posture photos and strength, against your own baseline.</td></tr>
+          <tr><th scope="row">Joints and old injuries</th><td data-label="Gym access">Your problem.</td><td data-label="Group classes">The class doesn't slow down.</td><td data-label="A standard trainer">Depends on the trainer.</td><td data-label="OmniFit Performance">Corrective work in every warm-up and loading chosen for what your joints tolerate.</td></tr>
+          <tr><th scope="row">When life changes</th><td data-label="Gym access">The membership keeps billing.</td><td data-label="Group classes">The membership keeps billing.</td><td data-label="A standard trainer">Sessions lapse.</td><td data-label="OmniFit Performance">Pause weeks, a Dial you can turn down, tiers you can change between cycles, and the 30-Day Fit Guarantee.</td></tr>
+          <tr><th scope="row">Where it works</th><td data-label="Gym access">That gym.</td><td data-label="Group classes">That studio's schedule.</td><td data-label="A standard trainer">That floor.</td><td data-label="OmniFit Performance">Studio, in-home and virtual on one app. Your program travels with you.</td></tr>
+          <tr><th scope="row">The end goal</th><td data-label="Gym access">Keep the membership.</td><td data-label="Group classes">Keep coming.</td><td data-label="A standard trainer">Keep booking.</td><td data-label="OmniFit Performance">A client who no longer needs us every week: Full &rarr; Coached &rarr; Train Only &rarr; Tune-Up.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rt-steps-note rt-reveal">Even if you just want to train, we can start there. Train Only is a setting, not a lesser program: the sessions and the app program are the same at every setting.</p>
   </div>
 
   <div class="rt-spacer-sm"></div>
@@ -1027,6 +1195,16 @@
       </details>
 
       <details>
+        <summary>Can I choose how much accountability I get?</summary>
+        <div class="rt-faq-body"><p>Yes. Every tier of The Foundation, The Program and the Executive Reset includes the Accountability Dial at no price difference: Full Accountability (daily logging of nutrition, steps and sleep, a coach reply within 1 business day, and behavior-change coaching), Coached (a weekly written check-in with a coach reply, 1 to 3 habit targets, and a measurement review every 4 weeks) or Train Only (your sessions and app program, a one-tap weekly check-in, nutrition on request). You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I change my plan after I start?</summary>
+        <div class="rt-faq-body"><p>Yes, at any 4-week cycle boundary. Your accountability setting can change in either product, including during The Foundation. On The Program you can move up or down a tier (Momentum, Performance or Peak) between cycles, with notice before the next cycle starts. During The Foundation you can step up, not down: the first 12 weeks are built as a block. If your new tier is only offered on The Program, your Foundation ends there, every unused session is credited at the Foundation per-session rate toward your first Program cycle, and you pay only the difference. There is no move from The Program into The Foundation.</p></div>
+      </details>
+
+      <details>
         <summary>Do I have to join Teqneeq?</summary>
         <div class="rt-faq-body"><p>Only for studio training. Studio Momentum and above, on The Foundation or The Program, requires a Teqneeq membership at $119 per month. Teqneeq bills monthly; it is not an OmniFit charge, and it includes facility access on non-training days. Studio couples need it for both partners. In-home and virtual clients don't, and studio non-member session prices include a day pass.</p></div>
       </details>
@@ -1072,6 +1250,25 @@
   root.className += ' rt-js';
 
   /* scroll reveal */
+  /* V14: worked example. Every figure is computed from the data attributes
+     (the card prices); nothing in the markup states a derived figure. */
+  (function () {
+    var ex = root.querySelector('.rt-example');
+    if (!ex) return;
+    var d = ex.dataset;
+    var cycle = Number(d.cycle), per = Number(d.sessions), cycles = Number(d.cycles),
+        done = Number(d.completed), target = Number(d.target);
+    if (!(cycle > 0 && per > 0 && cycles > done && target > 0)) return;
+    var perSession = cycle / per;
+    var unused = (cycles - done) * per;
+    var credit = unused * perSession;
+    var due = Math.max(target - credit, 0);
+    var money = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+    var out = { per_session: money(perSession), unused: String(unused), credit: money(credit), due: money(due) };
+    Array.prototype.forEach.call(ex.querySelectorAll('[data-out]'), function (el) {
+      if (out[el.getAttribute('data-out')] !== undefined) el.textContent = out[el.getAttribute('data-out')];
+    });
+  })();
   var items = root.querySelectorAll('.rt-reveal');
   function showAll() { for (var i = 0; i < items.length; i++) items[i].className += ' is-in'; }
   if (hasIO && !reduce) {
