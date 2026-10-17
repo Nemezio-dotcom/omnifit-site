@@ -40,6 +40,10 @@ APATS = [
 ]
 
 def _clean(x):
+    # Decorative toggle icons ("+") sit inside some question containers
+    # (home-5: <summary><span class="icon">+</span>...). They are not part of
+    # the question text and must not reach the mirror comparison.
+    x = re.sub(r'<span class="[a-z-]*icon"[^>]*>.*?</span>', ' ', x, flags=re.S)
     x = re.sub(r'<[^>]+>', ' ', x)
     return re.sub(r'\s+', ' ', html.unescape(x)).strip()
 

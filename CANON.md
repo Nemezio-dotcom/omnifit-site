@@ -72,8 +72,8 @@ REPO STATE (reconciled with disk, Sept 2026)
            naming rule above.
       The page itself is live and is now linked from four hub pages.
     · about, contactform, desk-worker-posture-pain, hsa-fsa-personal-training
-      - each has a header. desk-worker's header carries no FAQPage while its
-      page has 6 FAQs: a real, reported mirror failure, not fixed.
+      - each has a header. desk-worker's header now carries a 6-question
+      FAQPage that mirrors the page (see PAGE HEADER SHAPE).
     · home-1, home-2, home-4, home-5 - homepage section fragments, no headers.
       Carry retired brand name, Pacific Beach, ACE OES, Executive Hybrid, $90
       and 180+. BATCH 4 or later.
@@ -89,12 +89,10 @@ REPO STATE (reconciled with disk, Sept 2026)
     · footer.html - site-wide, in no batch.
 
   ORPHAN HEADERS - a header with no page in the repo
-    · bodybuilding-header.html (5 FAQ entries)
-    · energy-protocol-waitlist-form-header.html (no FAQPage)
-      Both pages are Squarespace block-built: there is no Code Block to
-      retrieve, so the page will never exist here. The headers are real and
-      deployed. Certification reports each as "no matching page" - expected,
-      and left visible rather than suppressed.
+    · bodybuilding-header.html and energy-protocol-waitlist-form-header.html
+      were moved to archive/headers/ on Oct 16, 2026: Nemezio confirmed
+      neither page is live on Squarespace any more (/bodybuilding returns
+      nothing; the waitlist page is gone). No redirect needed.
     · site-header.html - NEW Sept 20, 2026. The SITE-WIDE header injection
       (Squarespace Settings → Advanced → Code Injection → Header): Clarity +
       HubSpot deferral, GTM, geo meta, and the site's ENTITY GRAPH —
@@ -116,9 +114,10 @@ REPO STATE (reconciled with disk, Sept 2026)
       "Personal Trainer San Diego | Diagnostic-Led Coaching") + FAQPage
       mirroring pages/home-5.html verbatim. It no longer defines the
       LocalBusiness (see site-header.html). The homepage itself lives in this
-      repo only as the home-1..home-6 fragments, so there is no pages/home.html
-      and the "no matching page" finding applies. LIVE as of 2026-09-20.
-      The mirror check should be read against home-5.html, not a home.html.
+      repo only as the home-0..home-6 fragments, so there is no pages/home.html.
+      LIVE as of 2026-09-20. Since Oct 16, 2026 certify.py checks its FAQPage
+      mirror against pages/home-5.html (HEADER_PAGE in certify.py) instead of
+      reporting "no matching page".
     · home-6.html - NEW Sept 20, 2026: the homepage Partner & Duo section
       (Code Block, after the programs section, before the FAQ). Replaces an
       August-card block that was live but never in the repo (it carried the
@@ -609,7 +608,24 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
 (c) BROKEN STRUCTURE
   invalid JSON · header FAQPage not mirroring the page FAQ in count, order
   and text · invariant hash mismatch · HTML tag-balance failure ·
-  LocalBusiness redefined in a page header instead of referenced by @id.
+  LocalBusiness redefined in a page header instead of referenced by @id ·
+  a page declared as having no FAQ that carries FAQ markup.
+
+PAGE HEADER SHAPE (Oct 16, 2026)
+  Every page header is ONE @graph document with a page node (WebPage, or the
+  subtype AboutPage / ContactPage) whose "about" references
+  #localbusiness-of, plus BreadcrumbList and any Service / FAQPage nodes.
+  contactform and desk-worker-posture-pain were converted from bare nodes on
+  Oct 16, 2026; their Service and FAQPage content is unchanged, and their
+  WebPage name/description are the SEO title and meta (build.py reads them).
+
+PAGES WITH NO FAQ (Oct 16, 2026)
+  about · contactform · fit-check · personal-training-services ·
+  privacy-policy · terms-and-conditions. These have no FAQ by design.
+  certify.py (NO_FAQ) verifies it: the page body must carry no FAQ-shaped
+  markup and the header no FAQPage, or it is a structure finding. A new page
+  without an FAQ must be added here AND to NO_FAQ, or certification reports
+  it under CHECKS THAT COULD NOT RUN.
 
 KEYWORD OWNERSHIP (Keyword Ownership run, Oct 2026)
 Source: the Keyword Ownership Map, Semrush Position Tracking, Oct 5-11 2026.

@@ -6,6 +6,25 @@ import re, glob, json, hashlib, html, html.parser, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import faq
 
+# Headers whose page is not pages/<slug>.html. Only the homepage: it lives
+# as the home-0..6 fragments and its FAQ is in home-5 (CANON, ORPHAN HEADERS).
+HEADER_PAGE = {"home": "pages/home-5.html"}
+
+# schema.org subtypes of WebPage that count as a header's page node.
+# about-header uses AboutPage; it carries the same "about" reference.
+PAGE_TYPES = ("WebPage", "AboutPage", "ContactPage")
+
+# Pages that have no FAQ BY DESIGN (CANON, "PAGES WITH NO FAQ"). For these an
+# empty mirror is not "compared nothing": certify scans the page body for any
+# FAQ-shaped markup and the header for any FAQPage, and passes only when both
+# are absent. Anything FAQ-shaped on a declared page is a finding, so a page
+# that later grows an FAQ cannot hide behind this list. Pages NOT on the list
+# still report an empty mirror under CHECKS THAT COULD NOT RUN.
+NO_FAQ = {"about", "contactform", "fit-check", "personal-training-services",
+          "privacy-policy", "terms-and-conditions"}
+FAQ_SHAPED = (r'<details\b|<summary\b|class="[^"]*(?:faq|accordion)|class="fq\b|'
+              r'Frequently Asked Questions|"FAQPage"')
+
 # the-30-minute-executive-reset left this list in the October Card run's
 # follow-up, once its content was brought to the card and its RED-PEN flags
 # closed. footer.html is site-wide and in no batch.
@@ -864,13 +883,18 @@ def run():
                     if not n.get("LocalBusiness",{}).get("@id","").endswith("#localbusiness-of"):
                         print(f"   {f}  [site-header LocalBusiness must carry @id #localbusiness-of]"); C+=1
                     continue
-                if "WebPage" not in n:
+                pn = next((n[k] for k in PAGE_TYPES if k in n), None)
+                if pn is None:
                     notrun.append(f"{f}  @graph has no WebPage node ({sorted(n)}) - "
                                   f"about-references-homepage-LocalBusiness check could not run")
-                elif not n["WebPage"].get("about",{}).get("@id","").endswith("#localbusiness-of"):
+                elif not pn.get("about",{}).get("@id","").endswith("#localbusiness-of"):
                     print(f"   {f}  [about not referencing homepage LocalBusiness]"); C+=1
             slug=re.sub(r'-header\.html$','',f.split('/')[-1])
-            pg=f"pages/{slug}.html"
+            # The homepage exists only as the home-0..6 fragments, so there is
+            # no pages/home.html. CANON (ORPHAN HEADERS, home-header.html) says
+            # its FAQPage mirrors pages/home-5.html; check it there rather than
+            # report "no matching page" for a header that is live and built.
+            pg=HEADER_PAGE.get(slug, f"pages/{slug}.html")
             sq=[q["name"] for x in graph if x.get("@type")=="FAQPage" for q in x["mainEntity"]]
             sa=[q["acceptedAnswer"]["text"] for x in graph if x.get("@type")=="FAQPage"
                 for q in x["mainEntity"]]
@@ -883,6 +907,12 @@ def run():
                 notrun.append(f"{f}  FAQ mirror NOT VERIFIED - extractor failed on {pg}: {e}")
                 continue
             pq=[q for q,_ in pairs]; pa=[a for _,a in pairs]
+            if slug in NO_FAQ:
+                shaped = re.findall(FAQ_SHAPED, pagesrc, re.I) + re.findall(r'"FAQPage"', open(f).read())
+                if pq or sq or shaped:
+                    print(f"   {f}  [declared no-FAQ page carries FAQ markup] "
+                          f"page={len(pq)} schema={len(sq)} markers={sorted(set(shaped))[:4]}"); C+=1
+                continue
             if not pq and not sq:
                 notrun.append(f"{f}  no FAQ found on either side (page 0, schema 0) - "
                               f"mirror check compared nothing")

@@ -61,6 +61,22 @@ a fixture proving a real violation in the same shape still flags.
 
 ## FAQ extraction (`faq.py`)
 
+**Pages with no FAQ (`NO_FAQ` in certify.py, CANON "PAGES WITH NO FAQ").** An
+empty mirror used to be recorded as "compared nothing" and kept certification
+at INCOMPLETE forever, because six pages simply have no FAQ. A declared page now
+passes only after a positive scan: no `<details>`, `<summary>`, `faq`/`accordion`
+class, `fq` button or "Frequently Asked Questions" in the page body, and no
+FAQPage in the header. Negative tests (Oct 16, 2026): adding a `<details>` FAQ to
+fit-check flags `[declared no-FAQ page carries FAQ markup]`; dropping fit-check
+from the list brings back the not-run entry. An undeclared page with no FAQ is
+still NOT RUN, never a silent pass.
+
+**Page node subtypes (`PAGE_TYPES`).** AboutPage and ContactPage count as the
+page node for the `about` → #localbusiness-of check.
+
+Decorative toggle icons (`<span class="…icon">+</span>`) inside a question
+container are stripped before comparison (home-5 carries one per question).
+
 Pages use six question-container patterns and six answer-container patterns.
 A missing question pattern yields no question at all; a missing answer pattern
 yields a question with no answer. Neither used to raise, which is how the `null`
@@ -74,6 +90,11 @@ Question containers:
   `<summary class="hsa-faq-q">` and read as zero questions.
 - `<div class="…faq-q">…</div>` — cx / fl / st / hiit / desk-worker
 - `<button class="fq" …>…<span` — how-it-works-pricing, the-omnifit-method
+  (how-we-measure-your-progress also uses it for its six FAQs. Its Results-section
+  "How these figures were calculated" toggle is marked `class="fq fq-method"`
+  on purpose: it is a method disclosure, not an FAQ, and counting it shifted
+  every FAQ index by one - the "7 vs 6 mirror drift" that mkheaders.py
+  "fixed" by copying the method block into FAQPage. Fixed Oct 16, 2026.)
 - `<button class="…faq-q" …>…</button>` — online-training
 - `<div class="faq-question">…</div>` — omnifit-vs-competitors
 - `<button class="op-faq-q" …>…<svg` — partners (now subsumed by the generic
@@ -473,7 +494,9 @@ fixtures, dropping comment stripping breaks one, and dropping H2 from the
 scanned surfaces lets five fail fixtures through.
 
 Known drift, recorded so the next run is not surprised: `mkheaders.py` is NOT
-a no-op on `pages/headers/how-we-measure-your-progress-header.html` (its FAQPage has drifted from the
-page, the 7-vs-6 mirror finding certify.py already reports). Regenerating
-rewrites it; the Keyword Ownership run reverted that write as out of scope.
+a no-op on `pages/headers/how-we-measure-your-progress-header.html`, but since
+Oct 16, 2026 only its leading comment differs (the file carries a hand-written
+Oct 2 comment; mkheaders writes its Batch 3 template comment). The JSON-LD is
+identical. The old 7-vs-6 FAQ "drift" was the method toggle being read as an
+FAQ, fixed by marking it `fq fq-method`. Keep the Oct 2 comment if it rewrites.
 
