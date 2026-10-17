@@ -13,8 +13,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   Organization and LocalBusiness carry CANON's two-sentence ENTITY BLOCK
   description verbatim; Organization gains address + disambiguatingDescription;
   Person gains alternateName "Coach Nemezio" + affiliation)
-- Defer Clarity + HubSpot (after paint)
-- GTM (early)
+- Measurement: GA4 gtag.js + Microsoft Clarity, production hostnames only
+  (CANON MEASUREMENT); HubSpot deferred as before. No Google Tag Manager.
 - Geo meta
 - Schema (JSON-LD): single site-wide entity definition.
   LocalBusiness @id #localbusiness-of is referenced by every page
@@ -22,10 +22,27 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   JSON-LD has been removed and merged here.
 ========================= -->
 
-<!-- Microsoft Clarity + HubSpot (DEFERRED) -->
+<!-- Measurement (CANON MEASUREMENT; DEPLOY.md "Measurement"). The ONE source
+     of tracking for every page: Google Analytics 4 (gtag.js) and Microsoft
+     Clarity load only when the hostname is www.omnifittraining.com or
+     omnifittraining.com. On any other host (*.pages.dev previews, localhost)
+     neither loads and site/site.js logs each event to the console instead.
+     Clarity never loads on /fit-check. Test-only override, honoured on
+     localhost / 127.0.0.1 only: ?omnifit-track=prod forces the production
+     branch (tools/tracktest.js). No Google Tag Manager. HubSpot is deferred
+     exactly as before. Each ID appears once on the page by design
+     (build.py --check counts them). -->
 <script>
-/* OmniFit: defer non-critical scripts to reduce TBT/LCP */
 (function () {
+  var GA4 = 'G-0K6VLEC2VJ';
+  var CLARITY = 'yzawpvwvdf';
+  var host = location.hostname;
+  var prod = (host === 'www.omnifittraining.com' || host === 'omnifittraining.com');
+  if (!prod && (host === 'localhost' || host === '127.0.0.1') &&
+      /[?&]omnifit-track=prod(?:&|$)/.test(location.search)) prod = true;
+  var path = location.pathname.replace(/\/+$/, '') || '/';
+  var fitCheck = (path === '/fit-check');
+
   function loadScript(src, attrs){
     var s = document.createElement('script');
     s.src = src;
@@ -41,34 +58,32 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     setTimeout(fn, 1500);
   }
 
+  if (prod) {
+    /* Google Analytics 4 (gtag.js). Google's snippet, with the data layer
+       held in a local and the ID in GA4 so each appears once. gtag() exists
+       only here: site.js treats its absence as "log to the console". */
+    var dl = window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dl.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA4);
+    loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4);
+  }
+
   defer(function () {
-    /* Microsoft Clarity */
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ulpgsrkd98");
+    if (prod && !fitCheck) {
+      /* Microsoft Clarity */
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", CLARITY);
+    }
 
     /* HubSpot (heavy) */
     loadScript("https://js-na2.hs-scripts.com/244441037.js", {"id":"hs-script-loader"});
   });
 })();
 </script>
-
-<!-- Google Tag Manager -->
-<script>
-(function(w,d,s,l,i){
-  w[l]=w[l]||[];
-  w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-  var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),
-      dl=l!='dataLayer'?'&l='+l:'';
-  j.async=true;
-  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-  f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5P4CKPT2');
-</script>
-<!-- End Google Tag Manager -->
 
 <!-- Geo meta -->
 <meta name="robots" content="index, follow">
