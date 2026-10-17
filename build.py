@@ -91,8 +91,8 @@ META_FALLBACK = {
 META_OVERRIDE = {
     "fit-check": (
         "OmniFit Fit Check | Are You Ready for Coaching?",
-        "Nine questions, three minutes. See if you're ready, willing, and able for OmniFit's "
-        "diagnostic-led coaching in San Diego. Instant result, nothing saved.",
+        "Seven questions, three minutes. See if you're ready and able for OmniFit's diagnostic-led "
+        "coaching in San Diego, and which accountability setting fits you. Instant result, nothing saved.",
     ),
 }
 
