@@ -19,7 +19,7 @@
   var nav = document.getElementById('site-nav');
   if (!header || !toggle || !nav) return;
 
-  function mobile() { return window.matchMedia('(max-width: 1023px)').matches; }
+  function mobile() { return window.matchMedia('(max-width: 1099px)').matches; }
 
   function closeMenus(except) {
     nav.querySelectorAll('.has-menu.is-open').forEach(function (li) {

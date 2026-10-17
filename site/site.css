@@ -15,8 +15,15 @@
   --omni-white:#ffffff;
   --omni-font-body:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --omni-font-heading:'Playfair Display','Times New Roman',serif;
-  --omni-font-wordmark:'Bebas Neue','Montserrat',sans-serif;
+  --omni-font-wordmark:'Bebas Neue','Bebas Neue Fallback',sans-serif;
 }
+/* Fallback face for the wordmark. Bebas Neue is a condensed display face;
+   until it arrives (font-display:swap), or when Google Fonts is blocked, the
+   wordmark rendered in the system sans at the same 30px was ~75px wider,
+   and because .site-logo does not shrink it pushed the hamburger 9px past a
+   390px viewport (the "9px mobile header overflow"). size-adjust gives the
+   local fallback Bebas-like widths, which also removes the swap shift. */
+@font-face{font-family:'Bebas Neue Fallback';src:local('Helvetica Neue'),local('Arial'),local('Liberation Sans'),local('DejaVu Sans');size-adjust:68%;}
 html{-webkit-text-size-adjust:100%;}
 body{margin:0;background:var(--omni-navy);color:var(--omni-white);font-family:var(--omni-font-body);line-height:1.6;-webkit-font-smoothing:antialiased;}
 main{display:block;}
@@ -59,7 +66,7 @@ main{overflow-x:clip;}
 .site-nav__menu{list-style:none;margin:0;padding:8px 0;display:none;position:absolute;top:100%;left:0;min-width:260px;background:#fff;border:1px solid rgba(10,22,40,.1);border-radius:10px;box-shadow:0 12px 32px rgba(10,22,40,.14);z-index:1001;}
 .site-nav__menu li a,.site-nav__menu li a:link,.site-nav__menu li a:visited{display:block;padding:9px 18px;font-weight:500;}
 .site-nav .has-menu.is-open>.site-nav__menu{display:block;}
-@media (hover:hover) and (min-width:1024px){
+@media (hover:hover) and (min-width:1100px){
   .site-nav .has-menu:hover>.site-nav__menu{display:block;}
 }
 /* right side: social icons + text CTA */
@@ -70,15 +77,21 @@ main{overflow-x:clip;}
 .site-nav a.site-nav__cta,.site-nav a.site-nav__cta:link,.site-nav a.site-nav__cta:visited{color:var(--omni-gold);font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:6px 0;margin-left:6px;border-bottom:2px solid transparent;transition:color .2s ease,border-color .2s ease;}
 .site-nav a.site-nav__cta:hover,.site-nav a.site-nav__cta:focus{color:var(--omni-navy);border-bottom-color:var(--omni-gold);}
 /* hamburger */
-.site-nav-toggle{display:none;margin-left:auto;background:none;border:1px solid rgba(10,22,40,.15);border-radius:8px;padding:8px;cursor:pointer;line-height:0;}
+.site-nav-toggle{display:none;flex-shrink:0;margin-left:auto;background:none;border:1px solid rgba(10,22,40,.15);border-radius:8px;padding:8px;cursor:pointer;line-height:0;}
 .site-nav-toggle svg{width:22px;height:22px;fill:none;stroke:var(--omni-navy);stroke-width:1.8;stroke-linecap:round;display:block;}
 .site-nav-toggle .site-nav-toggle__close{display:none;}
 .site-nav-toggle[aria-expanded="true"] .site-nav-toggle__open{display:none;}
 .site-nav-toggle[aria-expanded="true"] .site-nav-toggle__close{display:block;}
 
-/* mobile / tablet: hamburger + full-height drawer, same items */
-@media (max-width:1023px){
+/* mobile / tablet: hamburger + full-height drawer, same items.
+   Breakpoint 1100: with the web fonts loaded the two-row desktop nav plus
+   the CTA needs ~1070px, so at 1024-1099px it overflowed the header. */
+@media (max-width:1099px){
   .site-header__inner{padding:10px 20px;gap:16px;}
+  /* the logo may shrink and the wordmark scales with narrow viewports
+     (30px at 400px+, 24px at 320px) so logo + hamburger always fit */
+  .site-logo,.site-logo:link,.site-logo:visited{flex:0 1 auto;min-width:0;}
+  .site-logo__wordmark{font-size:clamp(24px,7.5vw,30px);}
   .site-nav-toggle{display:block;}
   .site-nav{display:none;position:fixed;left:0;right:0;top:0;bottom:0;background:#fff;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px 20px 48px;flex-direction:column;align-items:stretch;gap:0;z-index:999;}
   .site-nav.is-open{display:flex;}
