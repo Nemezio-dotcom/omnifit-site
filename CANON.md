@@ -8,18 +8,24 @@ REPO STATE (reconciled with disk, Sept 2026)
   disclosure, never before - fixing the name first hides a real structural
   check behind a filename mismatch.
 
-  CERTIFIED - 29 page/header pairs (30 until the Keyword Ownership run, Oct
-  2026, archived strength-training-1; see ARCHIVE)
+  CERTIFIED - 30 page/header pairs (29 between the Keyword Ownership run,
+  Oct 2026, which archived strength-training-1, and the Dial follow-up run,
+  Oct 17 2026, which restored it; see ARCHIVE)
     11 territory pages: personal-trainer-4s-ranch, -carlsbad,
       -carmel-valley, -del-mar, -encinitas, -fairbanks-ranch, -la-jolla,
       -rancho-bernardo, -rancho-santa-fe, -santaluz, -solana-beach
     corrective-exercise-post-rehab · FAQs · how-it-works-pricing ·
       in-home-personal-trainer-san-diego · private-personal-trainer-san-diego
-    the 8 live Batch 3 pages: the-omnifit-method, how-we-measure-your-progress,
-      omnifit-vs-competitors, weight-loss,
+    the 9 live Batch 3 pages: the-omnifit-method, how-we-measure-your-progress,
+      omnifit-vs-competitors, weight-loss, strength-training-1,
       hiit-personal-trainer-san-diego, personal-training-services,
       body-composition-testing, partners
-      (strength-training-1 was the ninth; archived Oct 2026, 301 to /)
+      (strength-training-1 was archived Oct 2026 with a 301 to /, and
+      RESTORED in the Dial follow-up run, Oct 17 2026, as "Strength Training
+      for Professionals 30+": byte-identical content plus the who-for block,
+      Method line, roles line and entity line; the 301 is gone from
+      build.py REDIRECTS; back in mkheaders META, the sitemap and the link
+      lists on personal-training-services and the homepage.)
     training-rates-san-diego (refreshed from live and corrected, Aug 2026:
       two-ladder session packs, guest add-on, DEFERRED-01 applied)
     personal-trainer-over-50-san-diego - NEW, live as of Sept 2026, certified
@@ -142,18 +148,14 @@ ARCHIVE - archive/ and archive/headers/, NEVER certified, NEVER corrected
     online-training                 -> 301 /the-30-minute-executive-reset
     executive-hybrid-coaching       -> 301 /the-30-minute-executive-reset
     personal-trainer-mission-hills  -> 301 /in-home-personal-trainer-san-diego
-    strength-training-1             -> 301 /  (Keyword Ownership run, Oct
-                                       2026: page + header moved here
-                                       byte-identical; redirect emitted by
-                                       build.py REDIRECTS into _redirects;
-                                       removed from tools/mkheaders.py META,
-                                       the sitemap and every link list.
-                                       Running-text links repointed to
-                                       /personal-training-services. The
-                                       three links on
-                                       personal-trainer-rancho-bernardo stay,
-                                       because that page is frozen; they
-                                       resolve through the 301.)
+    strength-training-1             -> RESTORED to pages/ in the Dial
+                                       follow-up run (Oct 17 2026); no
+                                       longer in archive/ and no longer a
+                                       redirect. It had been archived here
+                                       in the Keyword Ownership run (Oct
+                                       2026, 301 to /). The three links on
+                                       personal-trainer-rancho-bernardo now
+                                       resolve directly.
     llms-txt-page-retired           -> superseded by Squarespace's native
                                        LLMS.txt field (no header ever existed)
   Archived in the Scope Reconciliation run, Sept 2026, byte-identical, with
@@ -407,10 +409,16 @@ Performance, all AI platforms, Oct 12 2026 - tracking load read as "overkill")
   INTEGRATION. "Identification" was an earlier name for the fourth stage
   and is retired from public copy (nutrition-coaching-san-diego and its
   header carried it until the Oct 17 2026 run).
-  OPEN (owner): whether the Executive Reset BRONZE tier (async, no live
-  sessions) carries all three settings, and whether the Tune-Up has a
-  setting at all. Published copy says "every tier" of the three products,
-  as instructed, and says nothing about the Tune-Up.
+  EXECUTIVE RESET BRONZE (owner decision, Oct 17 2026): Bronze (async, no
+    live sessions) offers COACHED or TRAIN ONLY, not Full Accountability.
+    Gold, Platinum and Black carry all three. "Every tier" therefore means
+    every tier of The Foundation and The Program, and every Reset tier with
+    live sessions; copy that enumerates the three settings for the Reset
+    says so (rates page Dial table "Available on" row and Reset note, the
+    accountability FAQ on the rates page and /faqs, the Fit Check result).
+  THE TUNE-UP HAS NO DIAL SETTING (owner decision, Oct 17 2026). It is the
+    graduation point at the end of the Dial, not a fourth setting. Copy
+    that lists the path names it as graduation, never as a setting.
 
 THE OMNIFIT METHOD (owner decision, Oct 17 2026)
   Three pillars, present throughout Assess -> Correct -> Build -> Sustain.
@@ -493,17 +501,24 @@ rigid" and outcome claims as "self-reported")
   POLICIES are framed as "standards that protect your slot and your
   results", never as rules the client is subject to.
   BANNED in new copy:
-    "insurance" as a framing of price, the guarantee or the Dial ("think of
-      it as insurance"). The factual FAQ "Do you accept insurance or
-      HSA/FSA?" is a billing answer, not the metaphor; OPEN (owner) whether
-      to reword it.
+    "insurance" as a FRAMING of price or structure - the price, the
+      guarantee or the Dial presented as insurance ("think of it as
+      insurance", "insurance against falling off"). The ban is the metaphor,
+      not the word: a factual payment answer is not a framing. The FAQ "Do
+      you accept insurance or HSA/FSA?" on /faqs is a billing answer and
+      stays unchanged (owner decision, Oct 17 2026).
     any results or outcome guarantee (TIER 1 item 1).
     pain-reduction promises ("hurt less", "pain-free in") - TIER 1 item 1;
       describing the 3/10 pain ceiling or a corrective floor is not a
       promise.
     perimenopause / hypermobility / prenatal positioning as a segment or a
-      page angle. (personal-trainer-over-50-san-diego carries two
-      perimenopause sentences from before this rule - OPEN, owner.)
+      page angle. (personal-trainer-over-50-san-diego carried two
+      perimenopause sentences from before this rule; removed in the Dial
+      follow-up run, Oct 17 2026, with the surrounding copy kept
+      grammatical: the "Hormonal context" card now opens on recovery
+      capacity, tissue quality and load response changing after 50, and the
+      "On Hormones, Plainly" lead sentence names energy and recovery in
+      your fifties without a gendered or hormonal segment.)
   APPROVED SEGMENTS (persona language, no timeframe, no figures):
     executives and founders · desk-bound and remote professionals · active
     adults 50+ · professional women 35-55 with joint concerns · people
@@ -543,18 +558,22 @@ TIER CHANGES (owner decision, Oct 17 2026)
     you pay only the difference. You can adjust your accountability level
     at any cycle boundary."
   WORKED EXAMPLE (training-rates-san-diego): studio Momentum Foundation
-    client upgrades to studio Peak after cycle 1. The figures are COMPUTED
-    IN PAGE SCRIPT from the card prices carried in data attributes (560 per
-    cycle, 4 sessions per cycle, 3 cycles, 1,800 per Peak Program cycle):
-    8 unused sessions x 140 = 1,120 credit; 1,800 - 1,120 = 680 due.
-    Nothing is hand-written and no number on the card changes.
-    OPEN (owner): certify.py BANNED still lists "$140" (the retired August
-    10-pack rung). The derived Foundation per-session rate is also $140, so
-    the literal never appears in pages/ (the script renders it) and the
-    checker cannot see it. Either "$140" leaves BANNED in this derived
-    meaning, the way "$90" did in Sept 2026, or the example stays
-    script-rendered. Until the owner decides, the literal must not be
-    hand-written anywhere.
+    client upgrades to studio Peak after cycle 1. From the card prices (560
+    per cycle, 4 sessions per cycle, 3 cycles, 1,800 per Peak Program
+    cycle): 560 / 4 = 140 per session; 2 x 4 = 8 unused sessions;
+    8 x 140 = 1,120 credit; 1,800 - 1,120 = 680 due. No number on the card
+    changes. The four figures are STATIC TEXT on the page (Dial follow-up
+    run, Oct 17 2026; they were script-rendered from data attributes in the
+    Oct 17 consolidation run). Any edit to the example re-derives every
+    figure from the card IN CODE before writing it; the derivation is
+    recorded in REPORT.md.
+    $140 (owner decision, Oct 17 2026): removed from certify.py BANNED as a
+    bare literal, the way "$90" left it in Sept 2026. It stays banned in
+    its AUGUST MEANING - $140 as a pack or session PRICE (the studio
+    10-pack rung) - via certify.py retired_pack_rate, which reads context:
+    "$140 per session", "$140/session", "10-pack at $140" fire; $140 as a
+    computed figure in the credit arithmetic (following or followed by
+    "=") does not.
 
 COMPLIANCE SCREEN — TWO TIERS (owner approval; Sept 2026)
 Rewritten by the owner (Nemezio), who is now the sole compliance
@@ -1096,7 +1115,7 @@ NEXT RUNS
   situation and approach language only, compliance screen applies.
 - BATCH 3: corrective-exercise-post-rehab DONE (Aug 2026) ·
   the-omnifit-method (12 metrics, not 7) · how-we-measure-your-progress ·
-  omnifit-vs-competitors · weight-loss · strength-training-1 (archived Oct 2026) ·
+  omnifit-vs-competitors · weight-loss · strength-training-1 (archived Oct 2026, restored Oct 17 2026) ·
   hiit-personal-trainer-san-diego · personal-training-services ·
   body-composition-testing · partners.
 - BATCH 4: terms-and-conditions DONE (Sept 20, 2026 — pages/terms-and-conditions.html
