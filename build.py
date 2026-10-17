@@ -83,19 +83,6 @@ META_FALLBACK = {
         "corrective exercise, structured nutrition, and accountability coaching. Individual "
         "results; outcomes vary between clients.",
     ),
-    "contactform": (
-        "Request Your Consultation | OmniFit Performance San Diego",
-        "A 45-minute consultation including movement assessment, goal mapping, and "
-        "personalized program recommendation for busy professionals 30+ in San Diego.",
-    ),
-    "desk-worker-posture-pain": (
-        "Desk Worker Posture & Pain Correction | OmniFit Performance San Diego",
-        "Corrective exercise and posture correction for desk workers and busy professionals "
-        "30+ in San Diego. A 9-point movement screening identifies the muscular imbalances "
-        "created by prolonged sitting; the Assess, Correct, Build, Sustain methodology "
-        "addresses forward head posture, rounded shoulders, a stiff lower back, and hip "
-        "tightness.",  # "back pain" is owned by /corrective-exercise-post-rehab (CANON KEYWORD OWNERSHIP)
-    ),
 }
 
 # Title / meta description that override whatever the header or page carries.
