@@ -14,8 +14,6 @@ META = {
    "Honest comparison: OmniFit Performance vs F45, Orangetheory, 24 Hour Fitness, and Equinox. Find the right fit for busy professionals 30+ in San Diego."),
  "weight-loss": ("Sustainable Fat Loss for Busy Professionals 30+ | OmniFit Performance San Diego", "Fat Loss Coaching",
    "Structured fat loss coaching in 4S Ranch, San Diego for busy professionals over 30. Joint-friendly strength training, individualized nutrition coaching, and behavior change systems instead of crash diets."),
- "strength-training-1": ("Strength Training for Professionals Over 30 | OmniFit Performance San Diego", "Strength Training",
-   "Progressive, joint-friendly strength training in San Diego for professionals over 30. Corrective-first programming that builds real strength while protecting joints, led by a NASM Elite Trainer."),
  "hiit-personal-trainer-san-diego": ("HIIT Personal Training in San Diego | OmniFit Performance", "HIIT Personal Training",
    "Coached 1-on-1 HIIT and conditioning in San Diego, at the studio inside Teqneeq FHC in 4S Ranch, in-home across North County, or live virtual. Time-efficient sessions for busy professionals 30+."),
  "personal-training-services": ("Personal Training Services for Professionals 30+ | OmniFit Performance San Diego", "Personal Training Services",
