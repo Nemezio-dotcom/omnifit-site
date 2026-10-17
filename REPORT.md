@@ -4026,3 +4026,289 @@ CANON LANGUAGE RULES: the ban is the metaphor (price, guarantee or Dial presente
 | `CANON.md` | THE OMNIFIT METHOD, Accountability That Travels: note that the quotable definition carries the Bronze parenthetical. |
 
 Built pages changed: `/`, `/the-omnifit-method`, `/how-we-measure-your-progress`. Remaining owner items: the four directory URLs with the old name (fix at the directory), and the Squarespace pastes listed in the previous entry.
+
+
+## Launch batch: entry, deposit, credit, guarantee, accuracy, plumbing (Oct 17, 2026)
+
+**Branch:** `ccr-46ce016f-gxgplv`, merged to main. **Source:** the owner's launch decisions of Oct 17 2026, recorded in CANON.md (new section LAUNCH DECISIONS, placed before the Compliance Screen) before any page was touched. Body sentences, FAQ answers and their FAQPage mirrors only: no title, meta description, heading, FAQ question or ownership-table entry changed. Frozen records (`pages/case-studies.html`, `pages/home-3.html`) untouched.
+
+### Results
+
+| Check | Before | After |
+|---|---|---|
+| `python3 build.py --strict` (links, one H1, JSON-LD, emoji, 404/_headers, keyword ownership) | PASSED, 42 pages | PASSED, 42 pages (+ `404.html`, `_headers`) |
+| `tools/ownership.py` (run inside `build.py --check`; fixtures first) | PASSED; 4 notes (K02/K03/K04 coverage, K10 unassigned) | PASSED; the same 4 notes, unchanged |
+| `python3 tools/certify.py` | PASSED (0 · 0 · 0 · 0), 91 certified | PASSED (0 · 0 · 0 · 0), 91 certified; retired-copy sweep self-tested, 90 files incl. footer |
+
+Invariant hashes, computed by certify.py against CANON.md (none moved; the four locks hold):
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | a6c7e65dddff4795 | a6c7e65dddff4795 |
+| header pricing | 7af0d0049b0b7aba | 7af0d0049b0b7aba |
+| credentials | 02bd9cb90a71ce69 | 02bd9cb90a71ce69 |
+| archetypes (Section A) | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c |
+| 9-point (Section B) | 4c720960dec5a809 | 4c720960dec5a809 |
+
+The 30-Day Fit Guarantee lock is a byte-identical-wording lock, not a hash; it is the one lock this batch changed, by owner override (item 6). The sentence is now byte-identical on `training-rates-san-diego` (both callouts), `how-it-works-pricing` (body and FAQ answer), its header mirror, and `terms-and-conditions`.
+
+### Before / after, per item
+
+Line numbers are the pre-batch (HEAD) lines of the file. "new" marks text that was inserted rather than replaced. Item numbers follow the owner's list; a joined number ("1+3") is one sentence that two items reached.
+
+#### Item 1: ENTRY = CALENDLY DIRECT
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `site/nav.html:3` | ANNOUNCEMENT: {"text": "Limited availability — accepting applications for 1:1 coaching", "href": "/contactform"} | ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"} |
+| `pages/training-rates-san-diego.html:472,1231` | <a class="rt-btn rt-btn-primary" href="/contactform">Book Your Consultation</a> | <a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a> |
+| `pages/fit-check.html:125` | const CONTACT_URL = "/contactform"; | const BOOK_URL = "https://calendly.com/nemezio-omnifittraining/45min"; |
+| `pages/fit-check.html:282` | <p class="lede">You cleared both gates. The next step is the Performance Assessment: $150, credited toward your first cycle. Book it through the contact form, which asks … | <p class="lede">You cleared both gates. The next step is a 45-minute consultation by video or phone, then the $150 Performance Assessment, credited toward your first cycl… |
+| `pages/fit-check.html:287` | <a class="btn primary" href="${CONTACT_URL}">Book the Performance Assessment</a> | <a class="btn primary" href="${BOOK_URL}" target="_blank" rel="noopener">Book Your Consultation</a> |
+| `pages/contactform.html:465` | OmniFit is at capacity and taking a limited number of new clients. Send a message below to join the line. When a spot opens that fits your goals and location, I'll reach … | OmniFit takes a limited number of new clients. The fastest way to start is to book your 45-minute consultation directly. Prefer to send a message first? Use the form belo… |
+| `pages/contactform.html:545` | Rather not wait? <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book a 45-minute Strategy Session</a>.<br> | (deleted) |
+| `pages/contactform.html:527` | <div class="form-heading">Send a Message</div> | <div class="book-direct">⏎        <p>The fastest way to start is to book a consultation directly.</p>⏎        <a class="book-direct-btn" href="https://calendly.com/nemezi… |
+| `pages/contactform.html:228` | /* ── DEPOSIT NOTE ── */ | /* ── BOOK DIRECT (above the form) ── */⏎#omni-consultation .book-direct {⏎  text-align: center !important;⏎  margin: 0 0 36px !important;⏎  padding: 24px 28px !important… |
+| `pages/body-composition-testing.html:128,410` | >Book Your $150 Assessment</a> | >Book Your Consultation</a> |
+| `pages/body-composition-testing.html:129` | <a class="bc-btn bc-btn-ghost" href="/how-we-measure-your-progress">How We Track Progress</a>⏎    </div> | <a class="bc-btn bc-btn-ghost" href="/how-we-measure-your-progress">How We Track Progress</a>⏎    </div>⏎    <p class="bc-hero-sub" style="margin-top:-24px; font-size:14p… |
+| `pages/private-personal-trainer-san-diego.html:561` | If it's a mutual fit, you receive a custom program recommendation and can start training within the week. | If it's a mutual fit, you receive a custom program recommendation. Your start date depends on current availability and is confirmed on the consultation. |
+| `pages/headers/private-personal-trainer-san-diego-header.html:102` | If it's a mutual fit, you receive a custom program recommendation and can start training within the week. | If it's a mutual fit, you receive a custom program recommendation. Your start date depends on current availability and is confirmed on the consultation. |
+| `pages/fit-check.html:286` | <div class="capacity"><strong>Currently at capacity</strong><p>OmniFit is taking a limited number of new clients. If you submit the form and then don't reply when we reac… | <div class="capacity"><strong>Limited availability</strong><p>OmniFit takes a limited number of new clients. If you book or send a message and then don't reply when we re… |
+
+#### Item 1+3: FAQ 'How do I get started?' (items 1 and 3)
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/FAQs.html:203` | Book a <strong>45-minute paid consultation</strong> ($30 refundable deposit). We'll discuss your goals, movement history, schedule, and any injuries or limitations. If it… | Book a <strong>45-minute paid consultation</strong> ($30 deposit, refunded the same day you attend your consultation). We'll discuss your goals, movement history, schedul… |
+| `pages/headers/FAQs-header.html:102` | Book a 45-minute paid consultation ($30 refundable deposit). We'll discuss your goals, movement history, schedule, and any injuries or limitations. If it's a mutual fit, … | Book a 45-minute paid consultation ($30 deposit, refunded the same day you attend your consultation). We'll discuss your goals, movement history, schedule, and any injuri… |
+
+#### Item 2: ASSESSMENT CREDIT
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/training-rates-san-diego.html:876` | <p>The $150 Performance Assessment is credited toward your first cycle. You pay for the baseline once, and it becomes part of your program.</p> | <p>The $150 Performance Assessment is credited toward your first purchase: a Foundation or Program cycle, an Executive Reset cycle, or a 5-session pack. You pay for the b… |
+| `pages/about.html:323` | $150, credited in full toward a three month program. | $150, credited toward your first program, Reset cycle or 5-pack. |
+| `pages/glp-1-personal-training-san-diego.html:286` | credited in full toward a three month program | credited toward your first program, Reset cycle or 5-pack |
+| `pages/personal-trainer-over-50-san-diego.html:283` | credited in full toward a three month program | credited toward your first program, Reset cycle or 5-pack |
+| `pages/body-composition-testing.html:136` | for clients who continue into a training package, the fee is credited toward your first cycle | the fee is credited toward your first program, Reset cycle or 5-pack |
+| `pages/body-composition-testing.html:300` | If you continue into a training package, the $150 is credited toward your first cycle. | The $150 is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/body-composition-testing.html:317` | If you continue into a 3-month package, the $150 is credited toward your first cycle. | The $150 is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/body-composition-testing-header.html:53` | If you continue into a 3-month package, the $150 is credited toward your first cycle. | The $150 is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/body-composition-testing.html:345` | If you do continue into a training package, the fee is credited toward your first cycle. | The fee is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/body-composition-testing-header.html:109` | If you do continue into a training package, the fee is credited toward your first cycle. | The fee is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/private-personal-trainer-san-diego.html:545` | If you continue into a training package, the assessment fee is credited toward your program. | The assessment fee is credited toward your first program, Reset cycle or 5-pack. |
+| `pages/headers/private-personal-trainer-san-diego-header.html:70` | If you continue into a training package, the assessment fee is credited toward your program. | The assessment fee is credited toward your first program, Reset cycle or 5-pack. |
+
+#### Item 2+3: Terms: deposit + credit (items 2 and 3)
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/terms-and-conditions.html:57` | Assessment bookings are confirmed through Calendly with a $30 refundable deposit; the Performance Assessment fee is credited in full toward your first program cycle if yo… | Consultation bookings are confirmed through Calendly with a $30 deposit, refunded the same day you attend your consultation. The $150 Performance Assessment is credited t… |
+
+#### Item 3: DEPOSIT
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/contactform.html:536` | When we book your consultation, a <strong>fully refundable $30 deposit</strong> holds the time. | Your consultation is held with a <strong>$30 deposit, refunded the same day you attend your consultation</strong>. |
+| `pages/contactform.html:519` | <span class="trust-label">Fully Refundable</span> | <span class="trust-label">Deposit, Refunded When You Attend</span> |
+| `pages/training-rates-san-diego.html:544` | $30 <span>refundable deposit</span> | $30 <span>deposit, refunded the same day you attend your consultation</span> |
+| `pages/training-rates-san-diego.html:1176` | A $30 refundable deposit books your 45-minute consultation by video or phone. | Your 45-minute consultation by video or phone is booked with a $30 deposit, refunded the same day you attend your consultation. |
+| `pages/training-rates-san-diego.html:1196` | which is booked with a $30 refundable deposit. | which is booked with a $30 deposit, refunded the same day you attend your consultation. |
+| `pages/headers/training-rates-san-diego-header.html:769` | A $30 refundable deposit books your 45-minute consultation by video or phone. | Your 45-minute consultation by video or phone is booked with a $30 deposit, refunded the same day you attend your consultation. |
+| `pages/headers/training-rates-san-diego-header.html:801` | which is booked with a $30 refundable deposit. | which is booked with a $30 deposit, refunded the same day you attend your consultation. |
+| `pages/training-rates-san-diego.html:1230` | Book your consultation with a $30 refundable deposit. | Book your consultation with a $30 deposit, refunded the same day you attend your consultation. |
+| `pages/about.html:318` | A $30 refundable deposit holds the slot. | A $30 deposit, refunded the same day you attend your consultation, holds the slot. |
+| `pages/the-omnifit-method.html:368` | held with a $30 refundable deposit. | held with a $30 deposit, refunded the same day you attend your consultation. |
+| `pages/about.html:333` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/behavior-change-coaching.html:313` | &middot; $30 refundable deposit | &middot; $30 deposit, refunded the same day you attend your consultation |
+| `pages/couples-personal-training-san-diego.html:316` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/desk-worker-posture-pain.html:508` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/glp-1-personal-training-san-diego.html:286` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/headers/private-personal-trainer-san-diego-header.html:102` | A refundable $30 deposit reserves your time. | A $30 deposit, refunded the same day you attend your consultation, reserves your time. |
+| `pages/hiit-personal-trainer-san-diego.html:531,776` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/home-2.html:230,343,358` | A fully refundable $30 deposit reserves your time. | A $30 deposit, refunded the same day you attend your consultation, reserves your time. |
+| `pages/how-it-works-pricing.html:244` | A refundable $30 deposit reserves your time. | A $30 deposit, refunded the same day you attend your consultation, reserves your time. |
+| `pages/how-we-measure-your-progress.html:338` | A $30 refundable deposit reserves your time. | A $30 deposit, refunded the same day you attend your consultation, reserves your time. |
+| `pages/in-home-personal-trainer-san-diego.html:777` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/nutrition-coaching-san-diego.html:246` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/omnifit-vs-competitors.html:992` | ($30 refundable deposit) | ($30 deposit, refunded the same day you attend your consultation) |
+| `pages/outcomes.html:442,527` | A $30 refundable deposit reserves your time. | A $30 deposit, refunded the same day you attend your consultation, reserves your time. |
+| `pages/personal-trainer-carlsbad.html:333` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-carmel-valley.html:438` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-del-mar.html:474` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-encinitas.html:329` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-fairbanks-ranch.html:438` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-la-jolla.html:493` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-over-50-san-diego.html:283` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-rancho-bernardo.html:443` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-santaluz.html:331` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-trainer-solana-beach.html:438` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/personal-training-services.html:489` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/private-personal-trainer-san-diego.html:592` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/private-personal-trainer-san-diego.html:473,561` | A refundable $30 deposit reserves your time. | A $30 deposit, refunded the same day you attend your consultation, reserves your time. |
+| `pages/strength-training-1.html:159,404` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/the-30-minute-executive-reset.html:509` | Fully refundable $30 deposit reserves your time | $30 deposit, refunded the same day you attend your consultation |
+| `pages/the-30-minute-executive-reset.html:387` | A fully refundable $30 deposit reserves your time. | A $30 deposit, refunded the same day you attend your consultation, reserves your time. |
+| `pages/the-omnifit-method.html:370` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/training-rates-san-diego.html:1232` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/weight-loss.html:193,483` | · $30 refundable deposit | · $30 deposit, refunded the same day you attend your consultation |
+| `pages/home-4.html:749` | Refundable $30 deposit · No obligation | $30 deposit, refunded the same day you attend your consultation · No obligation |
+| `pages/personal-trainer-rancho-santa-fe.html:453` | · Refundable $30 deposit · | · $30 deposit, refunded the same day you attend your consultation · |
+| `pages/FAQs.html:347` | <span class="of-bottom-note">$30 refundable deposit · No commitment | <span class="of-bottom-note">$30 deposit, refunded the same day you attend your consultation · No commitment |
+| `pages/home-2.html:361` | <span class="cta-note">Fully refundable deposit · No commitment | <span class="cta-note">$30 deposit, refunded the same day you attend your consultation · No commitment |
+
+#### Item 3+4: Contact header Offer description (items 3 and 4)
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/headers/contactform-header.html:72` | 45-minute consultation reserved with a fully refundable $30 deposit. Includes movement assessment, goal mapping, and program recommendation. | 45-minute consultation reserved with a $30 deposit, refunded the same day you attend your consultation. Goal mapping and program recommendation; the movement screen happe… |
+
+#### Item 4: CONSULTATION SCOPE
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/contactform.html:486` | <p>A quick assessment of how you move — where you're compensating, what's tight, what's strong. This tells me more than any questionnaire. Wear comfortable clothes.</p> | <p>This happens at your $150 Performance Assessment, not on the consultation call: a hands-on look at how you move, where you're compensating, what's tight, what's strong… |
+| `pages/hiit-personal-trainer-san-diego.html:531` | · Includes movement screen · | · Movement screen at your assessment · |
+| `pages/hiit-personal-trainer-san-diego.html:776` | · Movement screen included · | · Movement screen at your assessment · |
+
+#### Item 5: NUTRITION
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/FAQs.html:253` | For clients who want deeper nutrition support, dedicated <a href="/weight-loss">nutrition coaching</a> add-ons are available. | (deleted) |
+| `pages/headers/FAQs-header.html:150` | For clients who want deeper nutrition support, dedicated nutrition coaching add-ons are available. | (deleted) |
+
+#### Item 6: 30-DAY FIT GUARANTEE
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/training-rates-san-diego.html:821,881` | <p>If after your first 30 days you decide OmniFit isn't the right fit, you can stop and I'll refund the unused balance of your program. You keep the first month and every… | <p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion … |
+| `pages/how-it-works-pricing.html:522` | <p>If after your first 30 days you decide OmniFit Performance isn't the right fit, you can cancel and receive a refund of the unused balance of your program. You keep the… | <p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion … |
+| `pages/how-it-works-pricing.html:581` | Yes. Every program includes a 30-Day Fit Guarantee: if after your first 30 days you decide it isn't the right fit, you can cancel and receive a refund of the unused balan… | Yes. If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portio… |
+| `pages/headers/how-it-works-pricing-header.html:102` | Yes. Every program includes a 30-Day Fit Guarantee: if after your first 30 days you decide it isn't the right fit, you can cancel and receive a refund of the unused balan… | Yes. If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portio… |
+| `pages/terms-and-conditions.html:86` | If OmniFit is not the right fit for you within your first 30 days on The Foundation, The Program, or The Executive Reset, tell us in writing and we will refund the unused… | If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of … |
+
+#### Item 7: omnifit-vs-competitors
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/omnifit-vs-competitors.html:641` | Depends entirely on trainer, no standardized assessment or methodology | Equinox offers its Equifit assessment; the approach after that varies by trainer |
+| `pages/omnifit-vs-competitors.html:820` | $400-600/month (8-12 sessions, variable quality) | $1,400–2,700 per month (membership + 8–12 sessions, estimated from the figures above) |
+| `pages/omnifit-vs-competitors.html:587` | Private studio, scheduled sessions, no drop-ins, limited client roster | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch; scheduled sessions, no drop-ins, limited client roster |
+| `pages/omnifit-vs-competitors.html:657` | Private studio (no locker room socializing), focused 60-minute sessions, zero amenities beyond coaching | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch (no locker room socializing), focused 60-minute sessions, zero amenities beyond coaching |
+
+#### Item 8: body-composition-testing
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/body-composition-testing.html:201` | <div class="bc-table-cell">Typically single</div> | <div class="bc-table-cell">Varies by model (2–3 on common gym models)</div> |
+| `pages/body-composition-testing.html:158` | Explains "mystery" weight swings and flags inflammation or under-recovery. | Helps explain day-to-day weight swings; read as a trend alongside how you feel and recover. |
+
+#### Item 9: FACILITY
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/FAQs.html:153` | <strong>In-studio private training</strong> at Teqneeq FHC in 4S Ranch, fully private, one client at a time. | <strong>In-studio training</strong>: private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch. |
+| `pages/headers/FAQs-header.html:54` | In-studio private training at Teqneeq FHC in 4S Ranch, fully private, one client at a time. | In-studio training: private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch. |
+| `pages/personal-training-services.html:333` | <p>Private, boutique environment inside Teqneeq FHC in 4S Ranch — professional equipment, calm atmosphere, zero crowds.</p> | <p>Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch: professional equipment and a calm atmosphere.</p> |
+| `pages/personal-trainer-encinitas.html:117` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch. Professional-grade equipment, zero crowds, full privacy, a focused environ… | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch. Professional-grade equipment and a focused environment for serious training. |
+| `pages/personal-trainer-solana-beach.html:157` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch, an easy drive inland via Lomas Santa Fe. Professional-grade equipment, zer… | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch, an easy drive inland via Lomas Santa Fe. Professional-grade equipment in a focused environme… |
+| `pages/personal-trainer-fairbanks-ranch.html:157` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in nearby 4S Ranch, about 15 minutes via Del Dios Highway. Professional-grade equipment… | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch, about 15 minutes via Del Dios Highway. Professional-grade equipment in a focused environment… |
+| `pages/personal-trainer-la-jolla.html:212` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch. Professional-grade equipment, zero crowds, full privacy. | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch. Professional-grade equipment in a focused environment. |
+| `pages/personal-trainer-santaluz.html:117` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in neighboring 4S Ranch, roughly 10 minutes from the Santaluz gates. Professional-grade… | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch, roughly 10 minutes from the Santaluz gates. Professional-grade equipment in a focused enviro… |
+| `pages/personal-trainer-carlsbad.html:119` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch. Professional-grade equipment, zero crowds, full privacy in a focused train… | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch. Professional-grade equipment in a focused training environment. |
+| `pages/personal-trainer-carmel-valley.html:157` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch, a quick drive up the 56. Professional-grade equipment, zero crowds. | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch, a quick drive up the 56. Professional-grade equipment in a focused environment. |
+| `pages/personal-trainer-del-mar.html:193` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch, an easy drive from Del Mar via the 56. No crowds, full privacy. | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch, an easy drive from Del Mar via the 56. Professional-grade equipment in a focused environment… |
+| `pages/personal-trainer-rancho-santa-fe.html:178` | Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in nearby 4S Ranch. Credentialed access only: no crowds, no distractions, complete priv… | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch. Credentialed access only, no distractions. |
+| `pages/personal-trainer-rancho-bernardo.html:161` | Professional-grade equipment, zero crowds, full privacy. | Professional-grade equipment and private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch. |
+| `pages/personal-trainer-4s-ranch.html:638` | Private sessions inside Teqneeq FHC: professional-grade equipment, zero crowds, credentialed professionals only. | Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch: professional-grade equipment, credentialed professionals only. |
+
+#### Item 10: 190+ Reviews
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/hiit-personal-trainer-san-diego.html:785` | 133+ Reviews | 190+ Reviews |
+| `pages/weight-loss.html:492` | 133+ Reviews | 190+ Reviews |
+
+#### Item 11: desk-worker budget line
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/desk-worker-posture-pain.html:462` | Budget is under $250/month, our lowest program tier. | Budget is under $200 per 4 weeks, our lowest tier (Executive Reset Bronze). |
+
+#### Item 12: Footer
+
+| File:line (before) | Before | After |
+|---|---|---|
+| `pages/footer.html:141` | mailto:omnifittraining@gmail.com | mailto:nemezio@omnifittraining.com |
+| `pages/footer.html:135` | href="https://g.page/r/CcePeMjnbDe9EBM/review" | href="https://g.page/r/CcePeMjnbDe9EBM" |
+
+112 replacement records in all.
+
+
+Not in the table because they are not page copy: `CANON.md` (LAUNCH DECISIONS section; ASSESSMENT block; TERMS guarantee line; LANGUAGE RULES; TIER 2 item 6 override note; DEFERRED-01 superseded note; (b) STALE CANON entry), `tools/certify.py` (RETIRED_LAUNCH_COPY, `retired_launch_copy()`, `_selftest_retired_copy()`, the sweep in `run()`), `build.py` (`NOT_FOUND_HTML`, `HEADERS_TXT`, the two writes, the `check()` rules), `DEPLOY.md` (the two new outputs).
+
+### Items 13 and 14: launch plumbing
+- `public/404.html` is written by `build.py`: `<title>Page Not Found \| OmniFit Performance</title>`, `<meta name="robots" content="noindex">`, a two-sentence message, and exactly two links (`/` and the Calendly URL). It is standalone (no nav or footer, which would add dozens of links), never appended to the sitemap page list, and `build.py --check` fails if the title, the noindex meta, the two-link rule or the sitemap exclusion is broken.
+- `public/_headers` is written verbatim as `https://:project.pages.dev/*` + `X-Robots-Tag: noindex`. The production domain gets no header. `--check` fails if the file is missing, altered, or if the production domain ever appears in it.
+- Negative test, both: with the noindex meta flipped to `index` and the header value flipped to `all`, `build.py --check` reported `404.html: no noindex meta` and `_headers: preview-hostname noindex rule missing or altered` (2 problems); after a rebuild, PASSED.
+
+### Certify: the retired-copy rule
+`RETIRED_LAUNCH_COPY` in `tools/certify.py`, 17 literal phrases, matched case-insensitively on the flattened copy AND on the raw source (the footer's address and review URL sit inside `href` attributes, which the tag strip removes; the first draft of the rule missed both, caught by the negative test below). Frozen records exempt. `footer.html` is swept although it is otherwise out of scope, because two phrases lived only there. `_selftest_retired_copy()` runs on every certify run: each phrase must fire on a synthetic line, a tag-split phrase (`<a>nutrition coaching</a> add-ons`) must fire, an attribute phrase must fire, and a paragraph of the canonical copy must not.
+
+Negative test on the pre-batch tree (git worktree at HEAD with the new certify.py copied in):
+```
+### RESULT: FAILED  (compliance 0 · stale canon 52 · structure 0 · not-run 0)
+     15 fully refundable
+     10 zero crowds
+      4 within the week
+      3 three month program
+      3 after your first 30 days
+      2 nutrition coaching add-ons
+      2 fully private
+      2 applies to your first cycle
+      2 3-month package
+      2 133+ Reviews
+      1 no standardized assessment
+      1 g.page/r/CcePeMjnbDe9EBM/review
+      1 flags inflammation
+      1 Typically single
+      1 Strategy Session
+      1 @gmail.com
+      1 $250/month
+```
+Every one of the 17 phrases fires there; the current tree reports none.
+
+Mirror check, negative-tested on an edited header: one capital letter changed in the FAQs header's "How do I get started?" answer gave `[FAQPage answers do not mirror page] differing index=[6]`. Reverted.
+
+### Chromium
+Served `public/` locally and screenshotted: the contact page (new "fastest way to start" block with the button above the form; the deposit note; the bottom note without the Strategy Session line), the body-composition hero (two "Book Your Consultation" buttons; the "booked after your consultation" line under them), the Fit Check pass result (walked with the pass-tagged answers: lede names the consultation then the assessment; button "Book Your Consultation" to Calendly), the rates guarantee callout, `/404.html`, the homepage announcement bar. No page errors.
+
+### Judgment calls (with the condition under which each is wrong)
+1. **`site/nav.html` edited.** The announcement bar's only source is the ANNOUNCEMENT line there, outside `pages/`. Wrong if the "pages/ and pages/headers/ only" rule was meant to forbid every other source; there is no pages/-side source for the bar.
+2. **Only the Rates hero button moved to Calendly.** The Rates bottom CTA (`training-rates-san-diego.html:1231`) and the How It Works CTA (`how-it-works-pricing.html:591`) also read "Book Your Consultation" and still point at `/contactform`, as do the "Book a Consultation" / "Get Started" buttons on about, behavior-change, couples, nutrition, glp-1, hsa-fsa, over-50, partners and the five Rates ladder CTAs. Item 1 named the hero only. Wrong if ENTRY = CALENDLY DIRECT was meant to cover every booking button; that is one sweep.
+3. **Terms guarantee sentence aligned to the canonical.** The owner called the canonical "the Terms text", but Terms read "is not the right fit for you ... The Program, or The Executive Reset ... we will refund". Terms now carries the canonical sentence byte-identically; its two following sentences stay. Wrong if the Terms page must keep the wording clients signed against.
+4. **Terms "Assessment bookings" became "Consultation bookings"** in the same sentence, because the Calendly deposit books the consultation, not the assessment. Wrong if the owner books assessments through Calendly with the same deposit.
+5. **Del Mar and Rancho Santa Fe facility sentences replaced** although they carried "No crowds, full privacy" and "complete privacy" rather than the two literal phrases: same exclusivity claim. Wrong if only the literal phrases were in scope. In-home copy that calls the client's own home private ("Complete privacy" on the in-home hero, RSF's in-home card and heading) is left: a home is private.
+6. **Rancho Bernardo and 4S Ranch: one sentence each,** per the lock. On Rancho Bernardo that leaves the first sentence ("Train 1:1 inside Teqneeq FHC, a members-only functional health and performance lab in 4S Ranch ...") beside the new one, so the facility is named twice. On the nine unlocked territory pages the two-sentence paragraph was merged into one canonical sentence plus "Professional-grade equipment in a focused environment". Wrong if the lock was meant to allow the same merge there.
+7. **Four deposit notes outside the two literal forms** were brought to the canonical too: `home-4.html:749` ("Refundable $30 deposit"), `personal-trainer-rancho-santa-fe.html:453`, `FAQs.html:347` (no leading separator) and `home-2.html:361` ("Fully refundable deposit", which the new rule would have failed). Wrong if those were meant to stay.
+8. **Contact header Offer description** (JSON-LD `offers.description`, not the WebPage meta) now carries the canonical deposit and says the movement screen happens at the assessment. Wrong if any header text was off limits; it is not the meta.
+9. **Contact trust badge** label "Fully Refundable" became "Deposit, Refunded When You Attend" so the badge does not contradict the canonical rule (and does not trip the new rule).
+10. **Fit Check capacity block** ("Currently at capacity ... If you submit the form") became "Limited availability ... If you book or send a message and then don't reply", because the button beside it no longer goes to the form. The back-of-the-line rule stays. Wrong if that block was meant to stay as it was.
+11. **Comparison row written "$1,400–2,700 per month"** rather than "$1,400–$2,700": `$1,400` and `$2,700` are both banned August figures, and certify's range exemption (the same one that lets "$150-250/month" stand) reads a range only when the second figure follows the dash without a `$`. This matches the page's other ranges. Wrong if the owner wants the double `$`; that needs the range regex widened, with both directions re-tested.
+12. **"training package" on the ten territory FAQ answers (and their headers) and the private page's "If you continue into a training package, the assessment fee is credited toward your program" twin on the territory pages are unchanged.** Item 2 named five pages; the territory pages were not among them and two are locked. The private page's own sentence was changed. Wrong if the owner meant every page; the sentence is identical on ten pages and one sweep fixes it.
+13. **The rates header WebPage description still reads "$30 refundable deposit"** (`training-rates-san-diego-header.html:22`): it is the meta, which item 3 excludes.
+14. **FAQ answer label "In-studio private training" became "In-studio training"** on `/faqs` so the canonical facility line is not preceded by the same adjective; body copy, not an ownership surface.
+15. **`footer.html` is swept by the new certify rule** though CANON lists it as out of scope. The sweep is literal-string only; footer's status is otherwise unchanged.
+16. **Rates "The assessment is credited" policy line** carries the full canonical credit sentence (item 2 asked for a policy line or FAQ answer); the locked assessment paragraph at `training-rates-san-diego.html:569` is untouched.
+
+### Still open (owner)
+- Whether every booking button should go to Calendly (judgment call 2).
+- The territory pages' "training package" sentence (judgment call 12).
+- The Calendly event itself (`/45min`): its description is outside the repo and should match the deposit and scope wording.
+
+### Sources changed
+`CANON.md DEPLOY.md build.py pages/FAQs.html pages/about.html pages/behavior-change-coaching.html pages/body-composition-testing.html pages/contactform.html pages/couples-personal-training-san-diego.html pages/desk-worker-posture-pain.html pages/fit-check.html pages/footer.html pages/glp-1-personal-training-san-diego.html pages/headers/FAQs-header.html pages/headers/body-composition-testing-header.html pages/headers/contactform-header.html pages/headers/how-it-works-pricing-header.html pages/headers/private-personal-trainer-san-diego-header.html pages/headers/training-rates-san-diego-header.html pages/hiit-personal-trainer-san-diego.html pages/home-2.html pages/home-4.html pages/how-it-works-pricing.html pages/how-we-measure-your-progress.html pages/in-home-personal-trainer-san-diego.html pages/nutrition-coaching-san-diego.html pages/omnifit-vs-competitors.html pages/outcomes.html pages/personal-trainer-4s-ranch.html pages/personal-trainer-carlsbad.html pages/personal-trainer-carmel-valley.html pages/personal-trainer-del-mar.html pages/personal-trainer-encinitas.html pages/personal-trainer-fairbanks-ranch.html pages/personal-trainer-la-jolla.html pages/personal-trainer-over-50-san-diego.html pages/personal-trainer-rancho-bernardo.html pages/personal-trainer-rancho-santa-fe.html pages/personal-trainer-santaluz.html pages/personal-trainer-solana-beach.html pages/personal-training-services.html pages/private-personal-trainer-san-diego.html pages/strength-training-1.html pages/terms-and-conditions.html pages/the-30-minute-executive-reset.html pages/the-omnifit-method.html pages/training-rates-san-diego.html pages/weight-loss.html site/nav.html tools/certify.py`. Built output: every page (the footer address and the announcement bar are site-wide) plus `public/404.html` and `public/_headers`.
+
+### Merge
+`origin/main` was at `645c659` ("Update how-we-measure-your-progress.html") with this branch 122 commits ahead and nothing behind, so the merge is a fast-forward: every earlier run's commits reach `origin/main` with this one.
