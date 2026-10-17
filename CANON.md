@@ -667,13 +667,36 @@ and overrides the earlier wording it replaces.)
   14. public/_headers, written by build.py: the *.pages.dev preview
       hostname carries X-Robots-Tag: noindex; the production domain stays
       indexable. build.py --check verifies both files.
+  15. CALENDLY FOLLOW-UP (owner, Oct 17 2026). Every button or link whose
+      label offers a consultation ("Book Your Consultation", "Book a
+      Consultation", "Book a paid consultation") goes to
+      https://calendly.com/nemezio-omnifittraining/45min with target="_blank"
+      rel="noopener": Rates bottom CTA, How It Works, About, Partners (bottom
+      CTA, internal-link CTA, and the inline link in the PT-coordination FAQ
+      answer), Couples, GLP-1, Over-50, Nutrition, Behavior Change, HSA/FSA.
+      Links labelled "Contact", and the "Get Started" / "Start ..." / "Book
+      Sessions" / "Stay in the Program" buttons, stay on /contactform.
+      certify.py consultation_cta_to_contactform enforces it (self-tested
+      both ways). The five header ReserveAction targets that still name
+      /contactform are schema, not buttons, and were not in scope.
+  16. Territory FAQ answer, all nine carriers (OWNER OVERRIDE on Rancho
+      Bernardo, this sentence only): "If you continue into a training
+      package, the diagnostic fee is credited toward your first cycle." ->
+      "The $150 Performance Assessment is credited toward your first
+      program, Reset cycle or 5-pack." Header mirrors verbatim.
+  17. FROZEN-RECORD OVERRIDE, ONE LINE: the CTA note in
+      pages/case-studies.html and pages/home-3.html reads "$30 deposit,
+      refunded the same day you attend your consultation" in place of "$30
+      refundable deposit". No measurement, figure or case text changed; the
+      records stay frozen and exempt from re-screening in every other line.
   RETIRED LAUNCH COPY (certify.py RETIRED_LAUNCH_COPY; frozen records
   exempt; footer swept): "fully refundable" · "applies to your first cycle"
   · "within the week" · "zero crowds" · "fully private" · "nutrition
   coaching add-ons" · "Strategy Session" · "133+ Reviews" · "three month
   program" · "3-month package" · "after your first 30 days" · "no
   standardized assessment" · "Typically single" · "flags inflammation" ·
-  "@gmail.com" · "g.page/r/CcePeMjnbDe9EBM/review" · "$250/month".
+  "@gmail.com" · "g.page/r/CcePeMjnbDe9EBM/review" · "$250/month" ·
+  "diagnostic fee is credited" (added in the Calendly follow-up).
   LOCKS THIS BATCH DID NOT TOUCH: titles, meta descriptions, headings, FAQ
   questions, the ownership table; the in-home page beyond its deposit
   sentence; 4S Ranch and Rancho Bernardo beyond the sentences named in
@@ -901,10 +924,13 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   are there to keep it readable as one.
 
 (b) STALE CANON
-  RETIRED LAUNCH COPY (LAUNCH DECISIONS, Oct 17 2026): the seventeen literal
+  RETIRED LAUNCH COPY (LAUNCH DECISIONS, Oct 17 2026): the eighteen literal
   phrases listed there, swept case-insensitively on the flattened copy of
   every file in the glob, footer.html included, frozen records exempt
   (certify.py RETIRED_LAUNCH_COPY, self-tested both ways on every run).
+  CONSULTATION CTA TO /contactform (LAUNCH DECISIONS item 15): a link
+  labelled as a consultation that points at the contact form (certify.py
+  consultation_cta_to_contactform, self-tested both ways on every run).
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
   "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
