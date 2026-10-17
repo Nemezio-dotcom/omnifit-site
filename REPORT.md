@@ -4416,3 +4416,210 @@ Only the deposit phrase in the CTA note changed. No measurement, figure, caption
 
 ### Built pages changed
 `/about`, `/behavior-change-coaching`, `/case-studies`, `/couples-personal-training-san-diego`, `/glp-1-personal-training-san-diego`, `/how-it-works-pricing`, `/hsa-fsa-personal-training`, `/` (home-3), `/nutrition-coaching-san-diego`, `/partners`, `/personal-trainer-over-50-san-diego`, `/training-rates-san-diego`, the nine territory pages, and `sitemap.xml` (lastmod).
+
+
+## Launch decisions 18–22: Calendly entry buttons, travel fee, Ken, strength-training-1, mobile (Oct 17, 2026)
+
+**Branch:** `ccr-221e5675-xcs3br`, merged to main. Decisions 18–22 were recorded in CANON.md LAUNCH DECISIONS first (commit `563fe75`), before any page changed. The only heading that changed is Ken's case H2 (named in item 20), on `/case-studies` and the homepage. No `<title>` or meta description changed (checked by diffing every built page against the pre-run build). FAQ answers that changed are mirrored verbatim in their header FAQPage.
+
+### Results
+
+| Check | Before | After |
+|---|---|---|
+| `python3 build.py --check` (incl. `tools/ownership.py` and its fixtures) | PASSED; 4 notes | PASSED; the same 4 notes |
+| `python3 build.py --strict` | PASSED | PASSED |
+| `python3 tools/certify.py` | PASSED (0 · 0 · 0 · 0) | PASSED (0 · 0 · 0 · 0) |
+
+| Invariant | Before | After |
+|---|---|---|
+| page pricing | a6c7e65dddff4795 | a6c7e65dddff4795 |
+| header pricing | 7af0d0049b0b7aba | 7af0d0049b0b7aba |
+| credentials | 02bd9cb90a71ce69 | 02bd9cb90a71ce69 |
+| archetypes (Section A) | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c |
+| 9-point (Section B) | 4c720960dec5a809 | 4c720960dec5a809 |
+
+No invariant moved. Before editing, I checked that no travel-fee sentence sits inside a hashed block. The pricing invariant is the "OmniFit Performance publishes its rates in full." answer, which has no travel copy. The `/faqs` pricing answer that does carry travel copy (`FAQs.html:183`) is a different answer. The 4S Ranch card list (`:674`) sits above the 9-point screen (`:1038`), so it is outside that regex.
+
+### Item 18: Calendly direct, remaining entry buttons
+Label and class are unchanged. Each `href="/contactform"` became the Calendly URL with `target="_blank" rel="noopener"`. The five header `ReserveAction` targets now name Calendly. The nav "Contact" link (`site/nav.html:70`) stays on /contactform. The footer has no Contact link, so nothing changed there. After the edit, that nav link is the only `/contactform` anchor left in `pages/` and `site/`.
+
+
+| File:line before → after | Before | After |
+|---|---|---|
+| `pages/training-rates-san-diego.html:713` → `:714` | href="/contactform">Start With the Foundation | href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Start With the Foundation |
+| `pages/training-rates-san-diego.html:811` → `:812` | href="/contactform">Start The Program | href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Start The Program |
+| `pages/training-rates-san-diego.html:1018` → `:1019` | href="/contactform">Book Sessions | href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Sessions |
+| `pages/training-rates-san-diego.html:1042` → `:1043` | href="/contactform">Stay in the Program | href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Stay in the Program |
+| `pages/training-rates-san-diego.html:1100` → `:1101` | href="/contactform">Start the Executive Reset | href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Start the Executive Reset |
+| `pages/couples-personal-training-san-diego.html:215,223,231,249,257,265` → `:215,223,231,249,257,265` | <a class="cp-mini" href="/contactform">Get Started | <a class="cp-mini" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Get Started |
+| `pages/headers/couples-personal-training-san-diego-header.html:167` → `:167` | "target": "https://www.omnifittraining.com/contactform" | "target": "https://calendly.com/nemezio-omnifittraining/45min" |
+| `pages/headers/desk-worker-posture-pain-header.html:83` → `:83` | "target": "https://www.omnifittraining.com/contactform" | "target": "https://calendly.com/nemezio-omnifittraining/45min" |
+| `pages/headers/glp-1-personal-training-san-diego-header.html:110` → `:110` | "target": "https://www.omnifittraining.com/contactform" | "target": "https://calendly.com/nemezio-omnifittraining/45min" |
+| `pages/headers/nutrition-coaching-san-diego-header.html:79` → `:79` | "target": "https://www.omnifittraining.com/contactform" | "target": "https://calendly.com/nemezio-omnifittraining/45min" |
+| `pages/headers/personal-trainer-over-50-san-diego-header.html:80` → `:80` | "target": "https://www.omnifittraining.com/contactform" | "target": "https://calendly.com/nemezio-omnifittraining/45min" |
+
+
+### Item 19: travel fee
+Canonical sentence on the six non-territory pages: "No travel fee inside our in-home service area; a travel fee may apply outside it." The eleven territory pages use the town form: "No travel fee in [Town]; it's inside our in-home service area." Every town on the territory list is in the `areaServed` list in `site-header.html`. On 4S Ranch and Rancho Bernardo (owner override), only the travel phrase changed. The in-home page carries the canonical sentence four times, with no town name, and X01 still passes. There is no dollar figure anywhere. That makes 17 pages and 14 header mirrors (FAQs has two answers in one header), 36 instances in all.
+
+
+| File:line before → after | Before | After |
+|---|---|---|
+| `pages/body-composition-testing.html:342` → `:342` |  — with a travel fee depending on location. | . No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/headers/body-composition-testing-header.html:101` → `:101` |  — with a travel fee depending on location. | . No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/FAQs.html:163` → `:163` | A per-session travel fee may apply depending on location. | No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/FAQs.html:183` → `:183` | , with a per-session travel fee that may apply depending on location. | . No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/headers/FAQs-header.html:70` → `:70` | A per-session travel fee may apply depending on location. | No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/headers/FAQs-header.html:86` → `:86` | , with a per-session travel fee that may apply depending on location. | . No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/how-it-works-pricing.html:485` → `:485` | A per-session travel fee may apply depending on location. | No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/couples-personal-training-san-diego.html:268` → `:268` | A travel fee may apply depending on location. | No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/in-home-personal-trainer-san-diego.html:219` → `:219` | Training Rates page, and a travel fee may apply depending on location. | Training Rates page. No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/in-home-personal-trainer-san-diego.html:342,497,720` → `:342,497,720` | A travel fee may apply depending on location. | No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/headers/in-home-personal-trainer-san-diego-header.html:57` → `:57` | A travel fee may apply depending on location. | No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/private-personal-trainer-san-diego.html:314` → `:314` | <li>Travel fee may apply by location</li> | <li>No travel fee inside our in-home service area; a travel fee may apply outside it</li> |
+| `pages/private-personal-trainer-san-diego.html:549` → `:549` | A travel fee may apply depending on location. | No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/headers/private-personal-trainer-san-diego-header.html:78` → `:78` | A travel fee may apply depending on location. | No travel fee inside our in-home service area; a travel fee may apply outside it. |
+| `pages/personal-trainer-encinitas.html:272` → `:272` | A per-session travel fee may apply depending on location. | No travel fee in Encinitas; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-encinitas-header.html:55` → `:55` | A per-session travel fee may apply depending on location. | No travel fee in Encinitas; it's inside our in-home service area. |
+| `pages/personal-trainer-solana-beach.html:350` → `:350` | A per-session travel fee may apply depending on location. | No travel fee in Solana Beach; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-solana-beach-header.html:55` → `:55` | A per-session travel fee may apply depending on location. | No travel fee in Solana Beach; it's inside our in-home service area. |
+| `pages/personal-trainer-la-jolla.html:405` → `:405` | A per-session travel fee may apply depending on location. | No travel fee in La Jolla; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-la-jolla-header.html:55` → `:55` | A per-session travel fee may apply depending on location. | No travel fee in La Jolla; it's inside our in-home service area. |
+| `pages/personal-trainer-carlsbad.html:276` → `:276` | A per-session travel fee may apply depending on location. | No travel fee in Carlsbad; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-carlsbad-header.html:55` → `:55` | A per-session travel fee may apply depending on location. | No travel fee in Carlsbad; it's inside our in-home service area. |
+| `pages/personal-trainer-del-mar.html:386` → `:386` | A per-session travel fee may apply depending on location. | No travel fee in Del Mar; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-del-mar-header.html:55` → `:55` | A per-session travel fee may apply depending on location. | No travel fee in Del Mar; it's inside our in-home service area. |
+| `pages/personal-trainer-rancho-bernardo.html:354` → `:354` | A per-session travel fee may apply depending on location. | No travel fee in Rancho Bernardo; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-rancho-bernardo-header.html:55` → `:55` | A per-session travel fee may apply depending on location. | No travel fee in Rancho Bernardo; it's inside our in-home service area. |
+| `pages/personal-trainer-carmel-valley.html:350` → `:350` | A per-session travel fee may apply depending on location. | No travel fee in Carmel Valley; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-carmel-valley-header.html:55` → `:55` | A per-session travel fee may apply depending on location. | No travel fee in Carmel Valley; it's inside our in-home service area. |
+| `pages/personal-trainer-fairbanks-ranch.html:350` → `:350` | , and a per-session travel fee may apply depending on location. | . No travel fee in Fairbanks Ranch; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-fairbanks-ranch-header.html:55` → `:55` | , and a per-session travel fee may apply depending on location. | . No travel fee in Fairbanks Ranch; it's inside our in-home service area. |
+| `pages/personal-trainer-santaluz.html:274` → `:274` | , and a per-session travel fee may apply depending on location. | . No travel fee in Santaluz; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-santaluz-header.html:55` → `:55` | , and a per-session travel fee may apply depending on location. | . No travel fee in Santaluz; it's inside our in-home service area. |
+| `pages/personal-trainer-rancho-santa-fe.html:371` → `:371` | A travel fee may apply for in-home sessions depending on location. | No travel fee in Rancho Santa Fe; it's inside our in-home service area. |
+| `pages/headers/personal-trainer-rancho-santa-fe-header.html:55` → `:55` | A travel fee may apply for in-home sessions depending on location. | No travel fee in Rancho Santa Fe; it's inside our in-home service area. |
+| `pages/personal-trainer-4s-ranch.html:674` → `:675` | <li>Travel fee varies by location</li> | <li>No travel fee in 4S Ranch; it's inside our in-home service area</li> |
+
+
+### Item 20: Ken (owner override of the frozen-record exemption, Ken's card only)
+`case-studies.html` and `home-3.html` received identical edits. They still differ only by the hero `h1`/`h2` lines they differed by before (8 diff lines). No other case, quote, caption or figure changed.
+
+
+| File:line before → after | Before | After |
+|---|---|---|
+| `pages/case-studies.html:27` → `:27` | "name": "How a 50+ CTO Lost Fat, Gained Muscle, and Fixed Decades of Desk Posture", "description": "Ken, a CTO in his 50s, lost 11 pounds of fat while gaining muscle in 6 months with hybrid coaching. | "name": "How a 50+ CTO Lost 11 lbs and Fixed Decades of Desk Posture", "description": "Ken, a CTO in his 50s, lost 11 pounds of bodyweight (175 to 164 lb) in 6 months with hybrid coaching. |
+| `pages/case-studies.html:526` → `:526` | data-tags="fat-loss muscle-gain posture 50-plus" id="ken" | data-tags="fat-loss posture 50-plus" id="ken" |
+| `pages/case-studies.html:533` → `:533` | <span class="case-tag">Fat Loss</span><span class="case-tag">Muscle Gain</span><span class="case-tag">Posture</span><span class="case-tag">50+</span> | <span class="case-tag">Fat Loss</span><span class="case-tag">Posture</span><span class="case-tag">50+</span> |
+| `pages/case-studies.html:534` → `:534` | <h2>How a 50+ CTO Lost Fat, Built Muscle, and <em>Fixed Decades of Desk Posture</em></h2> | <h2>How a 50+ CTO Lost 11 lbs and <em>Fixed Decades of Desk Posture</em></h2> |
+| `pages/case-studies.html:541` → `:541` | <div class="metric"><div class="metric-value">-11 lbs</div><div class="metric-label">Fat Lost</div></div>⏎        <div class="metric"><div class="metric-value">+6 lbs</div><div class="metric-label">Muscle Gained</div></div>⏎ | <div class="metric"><div class="metric-value">-11 lbs</div><div class="metric-label">Bodyweight (175 → 164)</div></div>⏎ |
+| `pages/case-studies.html:568` → `:567` | <li>Lost 11 lbs of fat while gaining approximately 6 lbs of muscle</li> | <li>Lost 11 pounds of bodyweight (175 to 164 lb) in 6 months</li> |
+| `pages/case-studies.html:578` → `:577` | lost 11 pounds of fat and gained approximately 6 pounds of muscle in 6 months with | lost 11 pounds of bodyweight (175 to 164 lb) in 6 months with |
+| `pages/home-3.html:27` → `:27` | "name": "How a 50+ CTO Lost Fat, Gained Muscle, and Fixed Decades of Desk Posture", "description": "Ken, a CTO in his 50s, lost 11 pounds of fat while gaining muscle in 6 months with hybrid coaching. | "name": "How a 50+ CTO Lost 11 lbs and Fixed Decades of Desk Posture", "description": "Ken, a CTO in his 50s, lost 11 pounds of bodyweight (175 to 164 lb) in 6 months with hybrid coaching. |
+| `pages/home-3.html:526` → `:526` | data-tags="fat-loss muscle-gain posture 50-plus" id="ken" | data-tags="fat-loss posture 50-plus" id="ken" |
+| `pages/home-3.html:533` → `:533` | <span class="case-tag">Fat Loss</span><span class="case-tag">Muscle Gain</span><span class="case-tag">Posture</span><span class="case-tag">50+</span> | <span class="case-tag">Fat Loss</span><span class="case-tag">Posture</span><span class="case-tag">50+</span> |
+| `pages/home-3.html:534` → `:534` | <h2>How a 50+ CTO Lost Fat, Built Muscle, and <em>Fixed Decades of Desk Posture</em></h2> | <h2>How a 50+ CTO Lost 11 lbs and <em>Fixed Decades of Desk Posture</em></h2> |
+| `pages/home-3.html:541` → `:541` | <div class="metric"><div class="metric-value">-11 lbs</div><div class="metric-label">Fat Lost</div></div>⏎        <div class="metric"><div class="metric-value">+6 lbs</div><div class="metric-label">Muscle Gained</div></div>⏎ | <div class="metric"><div class="metric-value">-11 lbs</div><div class="metric-label">Bodyweight (175 → 164)</div></div>⏎ |
+| `pages/home-3.html:568` → `:567` | <li>Lost 11 lbs of fat while gaining approximately 6 lbs of muscle</li> | <li>Lost 11 pounds of bodyweight (175 to 164 lb) in 6 months</li> |
+| `pages/home-3.html:578` → `:577` | lost 11 pounds of fat and gained approximately 6 pounds of muscle in 6 months with | lost 11 pounds of bodyweight (175 to 164 lb) in 6 months with |
+| `pages/personal-trainer-over-50-san-diego.html:207` → `:207` | <div class="ov-proof-stat">−11 lb fat, +6 lb muscle</div> | <div class="ov-proof-stat">−11 lb bodyweight, 6 months</div> |
+
+
+### Item 21: /strength-training-1
+It is kept as restored in the Dial follow-up run. No file changed, and the decision is recorded as LAUNCH DECISIONS item 21.
+
+### Item 22: mobile
+**Method.** `public/` was served over http (`python3 -m http.server`), and Chromium was driven by Playwright 1.56 (`/opt/pw-browsers/chromium-1194`, `isMobile`) at 390×900 and 412×900. That covered all 43 built pages, the 42 pages plus `404.html`, both before the fix (a copy of the pre-run build) and after it. For each page the audit recorded:
+- `document.documentElement.scrollWidth` against `innerWidth`;
+- every visible grid item, meaning any child of a `display:grid` element, plus any element whose class names a card, with an `offsetWidth` under 240px;
+- **content clipped past the viewport edge.** `site.css:27` gives `<main>` `overflow-x:clip`, so overflow inside main never raises `scrollWidth`. A scrollWidth-only check reports the rates page clean while its third protection card is cut off. The audit's first version also skipped `overflow:hidden` ancestors, and it missed that clip. I fixed the check so it skips only scrollable (`auto`/`scroll`) boxes, then confirmed it catches the rates clip on the old build (4 elements) and not on the new one (0).
+
+**Result.** No page has `scrollWidth` greater than the viewport at either width, before or after. Three pages had content cards squeezed under 240px, two of them clipped off-screen. In each case a desktop column count beat the mobile `1fr`: on rates, a later rule; on GLP-1 and 4S Ranch, an inline `style`. Each fix is one line in that page's own `<style>` mobile block, and nothing else changed. Inline styles outrank a stylesheet rule, so the GLP-1 and 4S Ranch overrides need `!important`. The rates rule does not, because it shares the base rule's specificity and comes later in the source.
+
+| File:line before → after | Before | After |
+|---|---|---|
+| `pages/training-rates-san-diego.html:456` → `:456` |     #omni-rates .rt-policies-5 .rt-policy:nth-child(4), #omni-rates .rt-policies-5 .rt-policy:nth-child(5) { grid-column: auto; }⏎  }⏎</style> |     #omni-rates .rt-policies-5 .rt-policy:nth-child(4), #omni-rates .rt-policies-5 .rt-policy:nth-child(5) { grid-column: auto; }⏎    #omni-rates .rt-policies-5 { grid-template-columns: 1fr; }⏎  }⏎</style> |
+| `pages/glp-1-personal-training-san-diego.html:104` → `:104` |     #omni-glp .gl-phase { grid-template-columns:1fr; gap:8px; }⏎  } |     #omni-glp .gl-phase { grid-template-columns:1fr; gap:8px; }⏎    #omni-glp .gl-grid-2 { grid-template-columns:1fr !important; }⏎  } |
+| `pages/personal-trainer-4s-ranch.html:510` → `:510` |     #omni-4sr .fr-coach-img { width: 132px; height: 132px; }⏎  } |     #omni-4sr .fr-coach-img { width: 132px; height: 132px; }⏎    #omni-4sr .fr-steps { grid-template-columns: 1fr !important; }⏎  } |
+
+**Every page checked (390px and 412px):**
+
+| Page | Result | Detail |
+|---|---|---|
+| `/` | pass (flags reviewed) | reviewed, not a card: icon / number badge; phase tile; frozen record's own mobile CSS sets 2 columns; 2-up stat tile (figure + label, 2 columns by design); 3-up fact strip inside a case card (frozen record); clipped: img.hero-bg (decorative hero photo, cropped by design) |
+| `/about/` | pass | no item under 240px, no overflow |
+| `/behavior-change-coaching/` | pass (flags reviewed) | reviewed, not a card: comparison-table cell (row/column structure is the content) |
+| `/body-composition-testing/` | pass (flags reviewed) | reviewed, not a card: comparison-table cell (row/column structure is the content) |
+| `/case-studies/` | pass (flags reviewed) | reviewed, not a card: phase tile; frozen record's own mobile CSS sets 2 columns; 2-up stat tile (figure + label, 2 columns by design); 3-up fact strip inside a case card (frozen record) |
+| `/contactform/` | pass | no item under 240px, no overflow |
+| `/corrective-exercise-post-rehab/` | pass | no item under 240px, no overflow |
+| `/couples-personal-training-san-diego/` | pass | no item under 240px, no overflow |
+| `/desk-worker-posture-pain/` | pass | no item under 240px, no overflow |
+| `/faqs/` | pass | no item under 240px, no overflow |
+| `/fit-check/` | pass | no item under 240px, no overflow |
+| `/glp-1-personal-training-san-diego/` | fixed | FIXED .gl-card: 390: 152/182px → 350px; 412: 172/182px → 372px |
+| `/hiit-personal-trainer-san-diego/` | pass | no item under 240px, no overflow |
+| `/how-it-works-pricing/` | pass | no item under 240px, no overflow |
+| `/how-we-measure-your-progress/` | pass | no item under 240px, no overflow |
+| `/hsa-fsa-personal-training/` | pass (flags reviewed) | reviewed, not a card: icon / number badge; text row inside a full-width card (card itself 294px+ at 390) |
+| `/in-home-personal-trainer-san-diego/` | pass (flags reviewed) | reviewed, not a card: 2-up neighbourhood link chip (2 columns by design); comparison-table cell (row/column structure is the content) |
+| `/nutrition-coaching-san-diego/` | pass | no item under 240px, no overflow |
+| `/omnifit-vs-competitors/` | pass | no item under 240px, no overflow |
+| `/outcomes/` | pass (flags reviewed) | reviewed, not a card: chart value column / plot |
+| `/partners/` | pass | no item under 240px, no overflow |
+| `/personal-trainer-4s-ranch/` | fixed | FIXED .fr-step: 390 and 412: 118–150px → 350px / 372px (two 3-column step rows; third card clipped off-screen before). Other flags reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-carlsbad/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-carmel-valley/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-del-mar/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-encinitas/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-fairbanks-ranch/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-la-jolla/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-over-50-san-diego/` | pass | no item under 240px, no overflow |
+| `/personal-trainer-rancho-bernardo/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-rancho-santa-fe/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-santaluz/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-trainer-solana-beach/` | pass (flags reviewed) | reviewed, not a card: 2-up stat tile (figure + label, 2 columns by design); 2-up neighbourhood link chip (2 columns by design) |
+| `/personal-training-services/` | pass (flags reviewed) | reviewed, not a card: 2-up neighbourhood link chip (2 columns by design) |
+| `/privacy-policy/` | pass | no item under 240px, no overflow |
+| `/private-personal-trainer-san-diego/` | pass (flags reviewed) | reviewed, not a card: comparison-table cell (row/column structure is the content) |
+| `/strength-training-1/` | pass | no item under 240px, no overflow |
+| `/terms-and-conditions/` | pass | no item under 240px, no overflow |
+| `/the-30-minute-executive-reset/` | pass | no item under 240px, no overflow |
+| `/the-omnifit-method/` | pass | no item under 240px, no overflow |
+| `/training-rates-san-diego/` | fixed | FIXED .rt-policy: 390: 126–137px → 334px; 412: 126–137px → 356px; third card was clipped off-screen before. Other flags reviewed, not a card: text row inside a full-width card (card itself 294px+ at 390); price-row column (name/price pair inside a full-width row); comparison-table cell (row/column structure is the content) |
+| `/weight-loss/` | pass | no item under 240px, no overflow |
+| `/404.html` | pass | no item under 240px, no overflow |
+
+"Reviewed, not a card" covers every flag the 240px rule raised that is not a content card: comparison-table cells, name/price columns in a full-width price row, 2-up stat tiles and neighbourhood link chips (2 columns by design), icons and number badges, chart columns, and text rows inside a card that is itself full width (294px or more at 390). The script classified all 963 flags (both widths, after the fix), and none was left unclassified. Collapsing any of these to one column would break a table or a deliberate 2-up layout, so none was changed.
+
+**Rates protection cards, 412px.** Before: 126–137px, three across, with the third card clipped. After: 356px, one per row.
+
+![Rates protection cards at 412px, before](report-assets/2026-10-17-rates-protection-cards-412-before.png)
+![Rates protection cards at 412px, after](report-assets/2026-10-17-rates-protection-cards-412-after.png)
+
+### New certify rules (category b)
+- **`booking_cta_to_contactform`** fires on an anchor to /contactform whose label starts "Start", "Get Started", "Book" or "Stay". **`reserve_action_to_contactform`** parses each `ld+json` block and fires on any `ReserveAction` whose target, as a URL string or an `EntryPoint`, names /contactform. A `WebPage` `url` naming the contact page stays quiet.
+- **`RETIRED_LAUNCH_COPY`** gains "depending on location" and "varies by location", for 20 phrases in all. The clean fixture now includes the canonical sentence, a territory sentence and "depending on setting and membership", and all three must stay quiet.
+- **`ken_muscle_claim`** fires on "+6 lb(s)", "6 pounds of muscle" and "6 lbs of muscle" in every file, frozen records included. A digit guard keeps "16 lbs of muscle" and "+6.2 lbs" quiet.
+- Each rule self-tests in both directions on every run. **Negative test:** the new `certify.py` run on the pre-change tree (a git worktree at `563fe75`) reported 54 stale-canon hits and FAILED: 31 travel phrases (one per file and phrase), 11 booking CTAs, 5 ReserveActions and 7 Ken figures. The changed tree reports none.
+
+### Two checker defects fixed (compliance, T1-2 exemption)
+After item 20, the owner-dictated over-50 proof card ("−11 lb bodyweight, 6 months" over "Ken · CTO · 50s · First time training") fired `lbs_near_timeframe`. TIER 2 item 2 exempts it: the result is attributed to a named person with a role, and the page carries the individual-results disclaimer. Two checker defects made the rule miss that, and either one was enough to cause the strike on its own:
+1. `DISCLAIMER_ANYWHERE` required "vary" in the same sentence as "individual results". The page's disclaimer reads "Individual results. Outcomes depend on … and vary between clients." It now allows the condition word in the next sentence: one period, 160 characters on each side.
+2. `AGGREGATE` matched bare "everyone". Vincent's neighbouring card says "years of putting everyone else first", 45 words away. It now reads `everyone(?!\s+else)` (and the same for "anyone").
+
+`_selftest_case_study_exempt()` runs before the compliance screen on every run. The disclaimed, attributed card must pass. The same card with no page disclaimer must fire, and so must "Everyone loses 11 lb in 6 months" and an unattributed "Clients lose 11 lb in 6 months". "Individual results. Call us today." must not count as a disclaimer. Both fixes are recorded in CANON (the TIER 2 item 2 exception) and in `tools/README.md`.
+
+### Judgment calls (with the condition under which each is wrong)
+1. **`contactform-header.html:15` `"url"` was NOT changed.** I could find only one schema `"url"` pointing to /contactform: the contact page's own `WebPage` node. Its `@id` is `/contactform#webpage`, its BreadcrumbList item and canonical are /contactform, and build.py reads its name and description as that page's title and meta. Pointing it at calendly.com would tell search engines the contact page lives on Calendly. The five ReserveActions, the schema entry points, all moved. Wrong if the owner did mean that node: it is a one-line change, and the new ReserveAction rule would not object.
+2. **Ken's visible "Muscle Gain" chip was removed too** (`case-studies.html:533`, `home-3.html:533`). The instruction named `data-tags` only. With the tag gone, the chip would label a card the "Muscle Gain" filter no longer shows, still asserting the claim item 20 retires. The "Fat Loss" chip stays. Wrong if the chips were meant to stay as they were.
+3. **List items carry no final period:** private `:314` "No travel fee inside our in-home service area; a travel fee may apply outside it" and 4S Ranch `:675` "No travel fee in 4S Ranch; it's inside our in-home service area". The other items in those lists have no period. Wrong if the canonical sentence must be byte-exact, period included, even in lists.
+4. **"Travel fee may apply by location"** (private `:314`) is a sixth variant the instruction did not name. It was replaced under "replace every variant". The new certify rule covers only the two phrases item 19 named, so a future "by location" would not fire. Wrong if the owner wants it banned as well: one more `RETIRED_LAUNCH_COPY` entry.
+5. **Body composition FAQ.** "… — including Rancho Santa Fe, …, and La Jolla — with a travel fee depending on location." became "… — including …, and La Jolla. No travel fee inside our in-home service area; …". The dash-introduced list now ends at the period, and the town list itself is unchanged. Wrong if the owner wants the towns dropped from that sentence.
+6. **4S Ranch CSS.** The page is locked "exactly as it is" for keyword reasons (CANON X rules). The item 22 fix is one mobile-only CSS line in its `<style>` and changes no copy, heading or link. Wrong if the lock covers styling too.
+7. **Fairbanks Ranch and Santaluz.** ", and a per-session travel fee may apply…" became ". No travel fee in [Town]; …", so the gate-access sentence now ends at "in advance.". This was the smallest change that keeps both sentences grammatical.
+8. **Flags left unfixed** are the "reviewed, not a card" classes above. Wrong if the owner reads "card/grid item" to include table cells and 2-up tiles. In that case the 2-up stat and neighbourhood grids are the candidates. The tables should stay as they are.
+9. **CANON's "byte-identical" note on home-3** (REPO STATE) is stale and was not edited. The two files have differed by the hero `h1`/`h2` since the homepage got its own `h1`. That difference was untouched, and Ken's edits are identical in both files.
+
+### Sources changed
+`CANON.md`, `REPORT.md`, `report-assets/` (2 screenshots), `tools/certify.py`, `tools/README.md`, `pages/` (case-studies, home-3, couples, training-rates, glp-1, over-50, body-composition-testing, FAQs, how-it-works-pricing, in-home, private, and the eleven territory pages), and `pages/headers/` (couples, desk-worker, glp-1, nutrition, over-50, body-composition-testing, FAQs, in-home, private, and ten territory headers). Built output: every affected page plus `sitemap.xml` (lastmod).
