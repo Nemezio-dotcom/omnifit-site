@@ -635,6 +635,10 @@ RETIRED_LAUNCH_COPY = [
     "3-month package", "after your first 30 days",
     "no standardized assessment", "Typically single", "flags inflammation",
     "@gmail.com", "g.page/r/CcePeMjnbDe9EBM/review", "$250/month",
+    # Calendly follow-up (Oct 17 2026): the territory FAQ answer's old credit
+    # sentence. Canonical: "The $150 Performance Assessment is credited toward
+    # your first program, Reset cycle or 5-pack."
+    "diagnostic fee is credited",
 ]
 
 def retired_launch_copy(text):
@@ -676,6 +680,36 @@ def _selftest_retired_copy():
              "https://g.page/r/CcePeMjnbDe9EBM</p>")
     assert retired_launch_copy(clean) == [], "retired-copy rule fired on canonical copy"
     return len(RETIRED_LAUNCH_COPY)
+
+# ─── (b) CONSULTATION CTA TO THE CONTACT FORM (owner, Oct 17 2026) ───
+# ENTRY = CALENDLY DIRECT (CANON LAUNCH DECISIONS items 1 and 15): a link whose
+# visible label offers a consultation goes to the Calendly booking page, never
+# to /contactform. The contact form is still linked, but only under labels that
+# do not promise a consultation ("Contact", "Get Started", "Start The
+# Program"). Reads the RAW source so a JS-template link (fit-check) and a
+# multi-line anchor (partners) are both seen; the label is tag-stripped, so an
+# icon <svg> inside the anchor does not hide it.
+_CONTACT_A = re.compile(r'<a\b[^>]*\bhref="(?:https://www\.omnifittraining\.com)?/contactform/?"[^>]*>(.*?)</a>',
+                        re.S | re.I)
+
+def consultation_cta_to_contactform(text):
+    out = []
+    for m in _CONTACT_A.finditer(text):
+        label = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', m.group(1))).strip()
+        if re.search(r'\bconsult', label, re.I):
+            out.append((text[:m.start()].count('\n') + 1, label))
+    return out
+
+def _selftest_consultation_cta():
+    fire = ['<a class="ab-btn" href="/contactform">Book a Consultation</a>',
+            '<a href="/contactform" class="op-cta-btn">\n  Book Your Consultation\n  <svg><line/></svg>\n</a>',
+            '<a href="https://www.omnifittraining.com/contactform">Book a paid consultation</a>']
+    for f in fire:
+        assert consultation_cta_to_contactform(f), f"consultation-CTA rule did not fire: {f[:50]}"
+    quiet = ['<a href="/contactform">Contact</a>', '<a class="cp-mini" href="/contactform">Get Started</a>',
+             '<a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>']
+    for q in quiet:
+        assert not consultation_cta_to_contactform(q), f"consultation-CTA rule fired on: {q[:50]}"
 
 # RETIRED with the October card: _marker_nearby, _inside_packs_table and the
 # CANON_MARKERS / CANON_CARDS tables. All four existed to carve $175 out of the
@@ -937,6 +971,11 @@ def run():
             print(f"   {where}  [retired launch copy: {term}]  …{ctx[:90]}…"); B+=1
     print(f"   (retired launch copy: {n_terms} phrases self-tested both ways, "
           f"{len(swept)} files swept incl. footer.html, frozen exempt)")
+    _selftest_consultation_cta()
+    for f in swept:
+        for ln, label in consultation_cta_to_contactform(open(f).read()):
+            print(f"   {f}:{ln}  [consultation CTA to /contactform: '{label}' must go to Calendly]"); B+=1
+    print(f"   (consultation CTA rule: self-tested both ways, {len(swept)} files swept)")
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
