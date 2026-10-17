@@ -9,7 +9,8 @@ python3 tools/certify.py     # the three-category certification
 python3 tools/mkheaders.py   # regenerate the Batch 3 page headers
 python3 tools/ownership.py   # keyword ownership on public/ (also run by build.py --check)
 python3 tools/ownership.py --selftest   # its must-fail / must-pass fixtures
-python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-urls-*.txt
+python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-urls-*.txt and the tracking rule
+NODE_PATH="$(npm root -g)" node tools/tracktest.js   # measurement test on the built site (Playwright)
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
@@ -556,3 +557,70 @@ Oct 2 comment; mkheaders writes its Batch 3 template comment). The JSON-LD is
 identical. The old 7-vs-6 FAQ "drift" was the method toggle being read as an
 FAQ, fixed by marking it `fq fq-method`. Keep the Oct 2 comment if it rewrites.
 
+## Tracking check (`build.py --check`, Oct 17, 2026)
+
+Lives in `build.py` (`check_tracking`, `tracking_selftest`), beside the redirect
+check, because it reads the RENDERED output: the site-wide header is the single
+source of the GA4 and Clarity loaders, and only `public/` shows what a page
+actually ships. CANON MEASUREMENT is the rule.
+
+- **Banned anywhere in `public/`** (every text file, pages and assets alike):
+  `GTM-5P4CKPT2`, `ulpgsrkd98`, `AW-16616873404`, `G-QTG1ZLR0NQ` and the
+  literal `dataLayer.push`. The last one is why the GA4 shim in
+  `pages/headers/site-header.html` holds the data layer in a local
+  (`dl.push(arguments)`): it is Google's snippet, spelled so the ban can be
+  absolute.
+- **At most once per built page:** `G-0K6VLEC2VJ` and `yzawpvwvdf`. A second
+  occurrence means a page or header grew its own copy of the loader.
+- **Fixtures first**, on mutated copies of the real `public/` text: each banned
+  string appended to a page and to `assets/site.js` must raise exactly
+  `banned`; a second copy of each live ID appended to a page must raise exactly
+  `repeated`; the untouched set must raise nothing; and the first page must
+  carry each live ID exactly once. Any fixture that misbehaves is a PROBLEM in
+  the report, so a broken checker cannot report green.
+- **Negative-tested on the real output** (Oct 17, 2026; restored by rebuild):
+  `GTM-5P4CKPT2` in a page comment -> `banned`; a second `G-0K6VLEC2VJ` in a
+  page -> `repeated`; `window.dataLayer.push({})` in `site.js` -> `banned`;
+  the `repeated` rule disabled inside the checker -> both of its fixtures fail.
+
+## Measurement test (`tools/tracktest.js`, Oct 17, 2026)
+
+Playwright against the built site, served from `public/` on 127.0.0.1 the way
+Cloudflare Pages serves it (`/slug` -> `public/slug/index.html`). It needs Node
+18+ and the `playwright` package with Chromium (`npm i -g playwright && npx
+playwright install chromium`), and is run after `python3 build.py`:
+
+```
+NODE_PATH="$(npm root -g)" node tools/tracktest.js
+```
+
+What it proves (46 assertions, the table is in REPORT.md):
+
+- The production branch runs on the real hostname: Chromium is launched with
+  `--host-resolver-rules` mapping `www.omnifittraining.com` to the local
+  server, so `http://www.omnifittraining.com:<port>/` loads gtag.js and Clarity
+  with no override. The same mapping for a fake preview host with the override
+  proves the flag is ignored off localhost.
+- The test-only override `?omnifit-track=prod` forces the production branch on
+  `localhost` and `127.0.0.1` only (DEPLOY.md "Measurement").
+- Every event in CANON MEASUREMENT fires with its params: Calendly clicks from
+  the nav, announcement bar, homepage hero, footer, rates hero, a ladder CTA,
+  the Fit Check result and the 4S Ranch sticky bar (position per landmark);
+  `tel:` and `mailto:`; HubSpot `onFormSubmitted` (and not `onFormReady` or a
+  string message); a full Fit Check to pass (`fit_setting` present) and to hold
+  (no `fit_setting`, no answer in any param), plus a retake; the four rates
+  sections once each and never twice.
+- Clarity never loads on `/fit-check` (production hostname and override alike);
+  GA4 still does.
+- On a non-production host nothing is requested from googletagmanager.com,
+  google-analytics.com or clarity.ms before or after events, `window.gtag` is
+  undefined, HubSpot still loads, and each event is one console line
+  `[omnifit-track] <event> <json params>`.
+
+**No hit reaches Google or Microsoft.** The request for gtag.js is answered with
+a stub that forwards each `gtag('event', ...)` to
+`google-analytics.com/g/collect` in GA4's own shape (`en=<event>`,
+`ep.<param>=<value>`); requests to google-analytics.com, clarity.ms and the
+HubSpot loaders are intercepted and answered locally; fonts, images and every
+other external host are blocked. The test therefore proves what the site sends
+into gtag and how, not what the GA4 property does with it afterwards.
