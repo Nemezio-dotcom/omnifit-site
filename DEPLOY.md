@@ -143,10 +143,10 @@ Cloudflare serves `public/<slug>/index.html` at `/<slug>` and 308-redirects
    exist before launch or the links 404: `/privacy-policy` (footer),
    `/behavior-change-coaching` (nav: Methodology, plus
    how-we-measure-your-progress and outcomes), `/is-omnifit-right-for-you`
-   (nav: Fit Check, plus contactform). Also `/bodybuilding` and
-   `/energy-protocol-waitlist` have headers in the repo but no page. Paste each
+   (nav: Fit Check, plus contactform). Paste each
    live page into `pages/<slug>.html` (plus its header) and rebuild, or add a
-   redirect.
+   redirect. (`/bodybuilding` and the Energy Protocol waitlist page are no
+   longer live; their headers were archived Oct 16, 2026.)
 4. **Homepage hero.** `pages/home-0.html` is the new hero (navy rounded card,
    Playfair H1 "San Diego Personal Trainer for Executives", gold italic
    subhead, no CTA). If the live hero carries anything else, edit that file.
@@ -261,9 +261,8 @@ Compare against the live site. Source = the file(s) under `pages/`.
 
 Not published (not pages): `pages/footer.html`, `pages/home-0..6.html`
 (homepage sections), everything under `archive/` (retired; redirected in
-`_redirects`), and the orphan headers `bodybuilding-header.html`,
-`energy-protocol-waitlist-form-header.html` (their pages exist only in
-Squarespace).
+`_redirects`), including the archived headers `bodybuilding-header.html`
+and `energy-protocol-waitlist-form-header.html` (pages no longer live).
 
 ## Redirects in `public/_redirects`
 
