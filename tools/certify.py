@@ -559,8 +559,12 @@ BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES",
           # asserted monthly billing that no longer exists. The LEGACY block in
           # CANON still carries it correctly and is out of this glob's reach.
           "Monthly Tune-Up",
-          # August 2026 ladders - retired by the October card
-          "$110", "$115", "$135", "$140", "$145", "$155", "$165", "$170",
+          # August 2026 ladders - retired by the October card.
+          # $140 is NOT here (Oct 17 2026): it is the August 10-pack rung, but
+          # it is also the Foundation per-session rate (560 / 4), which the
+          # rates page now states in static text. Caught by retired_pack_rate
+          # below in its August MEANING only - the way $150 is handled.
+          "$110", "$115", "$135", "$145", "$155", "$165", "$170",
           "$175", "$195", "$199", "$290", "$335", "$370", "$390", "$449", "$455",
           "$475", "$510", "$550", "$625", "$650", "$675", "$700", "$725",
           "$755", "$875", "$950", "$975", "$995",
@@ -633,6 +637,36 @@ def assessment_as_session_rate(text):
         if re.match(r'\s*[-–]\s*\d', t[m.end():]): continue
         after = ' '.join(t[m.end():].split()[:4])
         if re.search(_SESSION_RATE, after, re.I):
+            out.append(t[max(0, m.start()-90):m.end()+90].strip())
+    return out
+
+# $140 - the August studio 10-pack rung ($140 per session) - is retired in that
+# meaning and that meaning only. The same figure is the FOUNDATION PER-SESSION
+# RATE (560 per cycle / 4 sessions), and the rates page states it in static
+# text inside the tier-change worked example (CANON TIER CHANGES). So, like
+# $150 above, the rule reads the MEANING: $140 presented as a session or pack
+# PRICE fires; $140 as a computed figure in the credit arithmetic does not.
+# A computed figure is one that sits in an equation: it follows "=" (the
+# result of the division, "$560 / 4 sessions = $140 per session") or is
+# followed by "=" (a factor in the product, "8 sessions x $140 = $1,120").
+# Anything else that puts $140 beside "session" or "pack" - "$140 per
+# session", "$140/session", "10-pack at $140" - is the retired rung.
+_PACK_WORD = r'\b(?:\d+-?packs?|packs?|rungs?)\b'
+
+def retired_pack_rate(text):
+    """$140 as a pack/session price (the August 10-pack rung), not as the
+    derived Foundation per-session rate inside the worked example."""
+    t = _flat(text); out = []
+    for m in re.finditer(r'\$140\b(?![\d,]*\d)', t):
+        before = t[max(0, m.start()-40):m.start()]
+        after = t[m.end():m.end()+60]
+        # third-party range ("$140-200/session") - same exemption as $150
+        if re.match(r'\s*[-–]\s*\d', after): continue
+        # computed figure: result of, or factor in, an equation
+        if re.search(r'=\s*$', before) or re.match(r'\s*=', after): continue
+        near_after = ' '.join(after.split()[:4])
+        if (re.search(_SESSION_RATE, near_after, re.I) or re.search(_PACK_WORD, near_after, re.I)
+                or re.search(_PACK_WORD, before, re.I)):
             out.append(t[max(0, m.start()-90):m.end()+90].strip())
     return out
 
@@ -815,6 +849,8 @@ def run():
             print(f"   {f}  [{term} outside the Foundation policy]  …{sentence[:90]}…"); B+=1
         for ctx in assessment_as_session_rate(src):
             print(f"   {f}  [$150 published as a session rate - it is the assessment]  …{ctx[:90]}…"); B+=1
+        for ctx in retired_pack_rate(src):
+            print(f"   {f}  [$140 as a pack/session price - the retired August 10-pack rung]  …{ctx[:90]}…"); B+=1
         for i,l in enumerate(L,1):
             # a travel FEE, not any dollar figure sharing a line with the word travel
             if re.search(r'travel[^.<]{0,30}\$(?:50|75)\b|\$(?:50|75)\b[^.<]{0,30}travel', l, re.I):
