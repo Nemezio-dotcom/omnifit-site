@@ -1314,6 +1314,10 @@ RETIRED_LAUNCH_COPY = [
     "Unlimited coach communication", "check-in submissions required",
     "45–60 min", "30 or 45-minute", "30–45 min",
     "is the only exit",
+    # Claims & Tone run (6B, Oct 18 2026): the comparison page compares
+    # categories, never a named local business; "Elite Training" headings are
+    # retired ("Private Coaching in ..." / "1:1 Coaching in ...").
+    "Iron Orr", "Elite Training",
 ]
 
 def retired_launch_copy(text):
