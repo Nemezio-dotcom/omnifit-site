@@ -525,10 +525,13 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     CANONICAL FACTS): self-measured with live video guidance, posture photos
     in the app, no Bodystat scan, credited toward the first purchase the same
     way, booked after the consultation. Single sessions: the assessment is
-    recommended, not required; packs and programs require it. KNOWN CONFLICT,
-    NOT CHANGED (hash-locked, not named for change): the canonical pricing
-    FAQ answer on its twelve carriers still says "Every client starts with a
-    $150 Performance Assessment" - see REPORT.md, Audit Reconciliation run.
+    recommended, not required; packs and programs require it. KNOWN CONFLICT (now resolved),
+    RESOLVED in the Claims & Tone run (6B, Oct 18 2026, owner-approved hash
+    change): the canonical pricing FAQ answer now reads "Programs and
+    session packs start with a Performance Assessment ($150 in person, $75
+    virtual), credited toward your first purchase; for a single session it's
+    recommended, not required." (was "Every client starts with a $150
+    Performance Assessment" - see REPORT.md, Audit Reconciliation run).
     CONSULTATION DEPOSIT, CANONICAL (owner, Oct 17 2026, LAUNCH DECISIONS
     item 3): "$30 deposit, refunded the same day you attend your
     consultation". Never "fully refundable", never "the deposit applies to
@@ -1754,7 +1757,15 @@ Page-specific rules that are NOT ownership but are locked in the same table:
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash a6c7e65dddff4795, header hash 7af0d0049b0b7aba). Currently 12
+  (page hash ae491a42394531b5, header hash d94ee90c6fdafa8e). BOTH HASHES
+  CHANGED in the Claims & Tone run (6B, Oct 18 2026), OWNER-APPROVED (run
+  brief item 13a and item 12): previous a6c7e65dddff4795 / 7af0d0049b0b7aba.
+  Two edits, identical on all 12 pages and 12 header mirrors: "Every client
+  starts with a $150 Performance Assessment, credited toward the first
+  cycle." -> "Programs and session packs start with a Performance
+  Assessment ($150 in person, $75 virtual), credited toward your first
+  purchase; for a single session it's recommended, not required."; and
+  "$900 to $2,600 in-home" -> "$900 to $2,600+ in-home". Currently 12
   pages and 12 headers (CARRIER LIST, enforced by certify.py
   PRICING_FAQ_CARRIERS since the Audit Reconciliation run, Oct 18 2026): the
   eleven territory pages and corrective-exercise-post-rehab. CARRIER REMOVED, OWNER-APPROVED (Audit

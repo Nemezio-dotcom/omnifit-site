@@ -1555,6 +1555,8 @@ def retired_75(text):
         after = t[m.end():m.end()+120]
         if re.match(r'\s*[-–]\s*\d', after): continue      # third-party range
         if re.search(_VIRTUAL_ASSESS, t[max(0, m.start()-250):m.start()] + after, re.I): continue
+        # the pricing FAQ shape: "Performance Assessment ($150 in person, $75 virtual)"
+        if re.match(r'\s+virtual\b', after, re.I) and re.search(r'Performance Assessment \([^)]{0,40}$', t[max(0, m.start()-80):m.start()]): continue
         out.append(t[max(0, m.start()-90):m.end()+90].strip())
     return out
 
@@ -1565,7 +1567,9 @@ def _selftest_retired_75():
     must_pass = ["<p>Remote clients start with the $75 Virtual Performance Assessment, credited toward the first purchase.</p>",
                  "<p>Remote clients take the Virtual Performance Assessment. It is self-measured with live video guidance. It is $75, credited toward your first purchase.</p>",
                  "<p>Reset Platinum is $750 per 4 weeks.</p>",
-                 "<p>Competitors charge $75-120 per session.</p>"]
+                 "<p>Competitors charge $75-120 per session.</p>",
+                 "<p>Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase.</p>"]
+    must_fail.append("<p>Guest add-on ($90 member, $75 virtual guest).</p>")
     for s in must_fail: assert retired_75(s), f"retired_75 self-test: should fail: {s}"
     for s in must_pass: assert not retired_75(s), f"retired_75 self-test: should pass: {s}"
 
