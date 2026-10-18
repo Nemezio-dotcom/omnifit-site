@@ -8153,3 +8153,33 @@ New must-fail fixtures in `_selftest_result_review_cadence()`:
 The must-pass 4S Ranch sentence still passes. Negative test: with the promise guard removed, the self-test fails on the owner's fixture.
 
 Certify: PASSED, 0 findings. All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84.
+
+## Run 7C: Final leftovers (Oct 18 2026)
+
+Started from main 79fa292. CANON's expiry terms ("Singles expire 30 days from purchase; 5-packs 8 weeks", SESSIONS WITHOUT A PROGRAM) match the dictated Terms sentence, so it went in as written. The how-it-works step heading is an H3. Ownership was run before and after the change and PASSED both times, with only the existing K10 note.
+
+Every FAQ edit is mirrored in its header's FAQPage. The three body-composition sentences have no header mirror: none of them appears in `body-composition-testing-header.html`. Certify flagged none of the replacements, so nothing was reworded.
+
+`tools/certify.py`: `"paid consultation"` was added to `RETIRED_LAUNCH_COPY`. It is case-insensitive and matched on flattened copy. `_selftest_retired_copy()` now checks:
+- **Must fire:** `Paid Consultation (45 min)` in an H3, `45-minute paid consultation`, and a tag-split `<a>paid</a> consultation`.
+- **Must pass:** `Consultation (45 min)`, the canonical deposit sentence, and "paid in full. Consultation first."
+- **Against main:** run on the main copies of the five files, the rule fires on FAQs:183, FAQs-header:86, partners:1109, partners-header:72 and how-it-works-pricing:243.
+
+Noticed, not changed: `tools/mkheaders.py` is out of step with the hand-maintained headers. Running it rewrote four headers I had not touched, including putting back "Medical-grade" in the body-composition description. Those four rewrites were reverted. Nothing from mkheaders.py is in this commit, and its META needs bringing up to date in a later run.
+
+| Item | File:line | Before | After |
+|---|---|---|---|
+| 1 | `pages/terms-and-conditions.html:71` | Rescheduled sessions must be completed within the same 4-week cycle. | Rescheduled program sessions must be completed within the same 4-week cycle. Single sessions and 5-packs can be rescheduled any time before they expire (30 days and 8 weeks from purchase). |
+| 2 | `pages/FAQs.html:183` | All programs start with a 45-minute paid consultation. | All programs start with a 45-minute consultation ($30 deposit, refunded the same day you attend your consultation). |
+| 2 | `pages/headers/FAQs-header.html:86` | (same) | (same) |
+| 2 | `pages/FAQs.html:208` | Book a <strong>45-minute paid consultation</strong> | Book a <strong>45-minute consultation</strong> (deposit phrase already follows) |
+| 2 | `pages/headers/FAQs-header.html:110` | Book a 45-minute paid consultation ( | Book a 45-minute consultation ( |
+| 2 | `pages/partners.html:1109` | Book a paid consultation to discuss your situation. | Book a consultation ($30 deposit, refunded the same day you attend your consultation) to discuss your situation. |
+| 2 | `pages/headers/partners-header.html:72` | (same) | (same) |
+| 2 | `pages/how-it-works-pricing.html:243` | `<h3>Paid Consultation (45 min)</h3>` | `<h3>Consultation (45 min)</h3>` (deposit sentence already in the step body) |
+| 3 | `pages/body-composition-testing.html:155` | This is the number that tells you whether a diet is working — or just shrinking you. | Tracked over time, it helps show whether a diet is reducing fat or also costing you muscle. |
+| 3 | `pages/body-composition-testing.html:253` | …it's happening. Body composition testing can. | …it's happening. Repeated body composition estimates can flag it. |
+| 3 | `pages/body-composition-testing.html:264` | Rescans every 4–8 weeks catch muscle loss early. | Rescans every 4–8 weeks help flag lean-mass loss early. |
+| tools | `tools/certify.py` | — | `"paid consultation"` retired phrase + both-ways self-test |
+
+Results: build --check PASSED. Ownership PASSED. Certify PASSED with 0 findings (46 retired phrases self-tested). All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84. mobileaudit PASSED on all 84 page/width checks at 390 and 412, with 0 clipped and no horizontal overflow.
