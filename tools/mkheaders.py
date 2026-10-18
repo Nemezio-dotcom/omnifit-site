@@ -9,7 +9,7 @@ META = {
  "the-omnifit-method": ("The OmniFit Method: Assess, Correct, Build, Sustain | OmniFit Performance", "Personal Training Method",
    "OmniFit Performance's four-phase training method for busy professionals 30+ in San Diego: Assess, Correct, Build, Sustain. Corrective-first programming with a 3/10 pain ceiling, led by a NASM Elite Trainer."),
  "how-we-measure-your-progress": ("How We Measure Your Progress | OmniFit Performance San Diego", "How We Measure Progress",
-   "How OmniFit Performance tracks client progress in San Diego: standardized metrics, formal 30-day progress reports, and program adjustments driven by trend data rather than guesswork."),
+   "How OmniFit Performance tracks client progress in San Diego: standardized metrics, progress reviews every 4 weeks, and program adjustments driven by trend data rather than guesswork."),
  "omnifit-vs-competitors": ("OmniFit vs F45, Orangetheory, Big Box Gyms & Equinox | San Diego Personal Training Comparison", "OmniFit vs Other Options",
    "Honest comparison: OmniFit Performance vs F45, Orangetheory, 24 Hour Fitness, and Equinox. Find the right fit for busy professionals 30+ in San Diego."),
  "weight-loss": ("Sustainable Fat Loss for Busy Professionals 30+ | OmniFit Performance San Diego", "Fat Loss Coaching",
