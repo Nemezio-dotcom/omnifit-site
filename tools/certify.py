@@ -673,7 +673,7 @@ AMENDMENT_COUNTS = True
 # Owner-attested written consent (CANON TIER 2 item 2a, Oct 17 2026). First
 # name, optional initial. A figure attributed to anyone else - or to an
 # anonymised profile, which no list can vouch for - is a consent finding.
-CONSENT_LIST = ["Isaac M.", "Egor B.", "Chad C.", "Alo S.", "Mark M.", "Vincent", "Ken", "Dave R."]
+CONSENT_LIST = ["Isaac M.", "Egor B.", "Chad C.", "Alo S.", "Mark M.", "Vincent", "Ken", "Dave R.", "Mariano G."]
 _CONSENT_FIRST = sorted({n.split()[0] for n in CONSENT_LIST}, key=len, reverse=True)
 _CONSENT_RX = re.compile(r'\b(' + '|'.join(map(re.escape, _CONSENT_FIRST)) + r')\b(?:\s+[A-Z]\.)?')
 

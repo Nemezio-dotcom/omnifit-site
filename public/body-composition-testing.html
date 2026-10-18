@@ -522,6 +522,12 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-bodycomp .bc-device { max-width:900px; margin:-24px auto 56px; text-align:center; }
   #omni-bodycomp .bc-device img { display:block; width:100%; max-width:612px; height:auto; margin:0 auto; border-radius:var(--radius-lg); border:1px solid var(--white-10); }
   #omni-bodycomp .bc-device figcaption { font-size:13px; color:var(--white-50); margin-top:12px; line-height:1.6; }
+  #omni-bodycomp .bc-report { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:960px; margin:0 auto; }
+  #omni-bodycomp .bc-report a { display:block; border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--white-10); background:#fff; transition:border-color 0.3s; }
+  #omni-bodycomp .bc-report a:hover { border-color:var(--gold); }
+  #omni-bodycomp .bc-report img { display:block; width:100%; height:auto; }
+  #omni-bodycomp .bc-report-note { text-align:center; font-size:13px; color:var(--white-50); max-width:660px; margin:16px auto 56px; line-height:1.6; }
+  @media(max-width:640px) { #omni-bodycomp .bc-report { grid-template-columns:1fr; } }
 
   /* GRIDS */
   #omni-bodycomp .bc-grid { display:grid; gap:20px; margin-bottom:56px; }
@@ -743,6 +749,21 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <p>Fat-Free Mass Index puts your muscularity in context of your height — a far better benchmark than BMI. Every rescan builds your trend line, which is where the real answers live.</p>
       </article>
     </div>
+  </div>
+
+  <!-- ═══ SAMPLE SCAN REPORT ═══ -->
+  <div class="bc-section">
+    <div class="bc-section-head">
+      <span class="bc-label">Sample Scan Report</span>
+      <hr class="bc-divider">
+      <h2>What the Scan Report Looks Like</h2>
+    </div>
+    <p class="bc-body-center">Every scan produces a Bodystat report like this one: the raw impedance at each of the four frequencies, the fluid compartments, lean and fat mass against reference ranges, and the indices we track from scan to scan. We walk through every line of it with you at the assessment.</p>
+    <div class="bc-report">
+      <a href="/assets/img/bodystat-quadscan-sample-report-p1.webp" target="_blank" rel="noopener"><img src="/assets/img/bodystat-quadscan-sample-report-p1.webp" alt="Page 1 of a Bodystat QuadScan 4000 body composition report: impedance at 5, 50, 100 and 200 kHz, phase angle, a body composition chart, and water, lean and fat results with reference ranges" loading="lazy" width="1000" height="1176"></a>
+      <a href="/assets/img/bodystat-quadscan-sample-report-p2.webp" target="_blank" rel="noopener"><img src="/assets/img/bodystat-quadscan-sample-report-p2.webp" alt="Page 2 of a Bodystat QuadScan 4000 body composition report: BIAS index, BMI chart, impedance graph shape, BMI, BFMI, FFMI, waist-to-hip ratio, BMR, body cell mass, nutrition index and prediction marker" loading="lazy" width="1000" height="1176"></a>
+    </div>
+    <p class="bc-report-note">A real QuadScan 4000 report from an OmniFit assessment, shared with the client's permission. Name, age, test date and device details have been removed. Tap a page to view it full size.</p>
   </div>
 
   <!-- ═══ COMPARISON ═══ -->
