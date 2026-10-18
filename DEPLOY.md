@@ -30,8 +30,8 @@ python3 build.py            # rebuild public/ and print the check report
 python3 build.py --check    # run only the checks against public/
 ```
 
-Per page, `build.py` produces `public/<slug>/index.html` (homepage at
-`public/index.html`) containing: doctype, `<title>`, meta description,
+Per page, `build.py` produces `public/<slug>.html` (homepage at
+`public/index.html`; see "Trailing slash" below) containing: doctype, `<title>`, meta description,
 canonical, the site-wide header injection, one Google Fonts link (union of
 every weight the pages used), `/assets/site.css`, the page's
 header injection verbatim, the page's own `<style>` blocks (moved from the body
@@ -196,8 +196,22 @@ links to Home and Book Your Consultation only); Cloudflare Pages serves it for
 any route with no file and no redirect. `public/_headers` marks only the
 `*.pages.dev` preview hostname `X-Robots-Tag: noindex`; the production domain
 carries no such header. `build.py --check` verifies both.
-Cloudflare serves `public/<slug>/index.html` at `/<slug>` and 308-redirects
-`/<slug>/` to `/<slug>`, which matches the canonical URLs.
+### Trailing slash (launch blocker, fixed Oct 18 2026)
+
+Cloudflare Pages serves `public/<slug>/index.html` at `/<slug>/` and
+redirects `/<slug>` to `/<slug>/`, while every canonical, sitemap entry,
+internal link and Google-indexed URL is `/<slug>` with no slash. So
+`build.py` writes FLAT files: `public/<slug>.html`, served directly at
+`/<slug>` with no redirect (Pages' own `/<slug>.html` -> `/<slug>` and
+`/<slug>/` -> `/<slug>` redirects then point at the canonical form). The
+homepage stays `public/index.html`; `_redirects`, `404.html` and `_headers`
+are unchanged. `build.py --check` fails if any `public/**/index.html` other
+than the homepage's exists (its fixtures run first).
+
+**After every deploy, verify:** open
+https://omnifit-site.pages.dev/about - the address bar must STAY on `/about`
+(no slash added, no redirect). `curl -sI https://omnifit-site.pages.dev/about`
+must answer `200`, not `308`. Spot-check one territory page the same way.
 
 ## Manual steps (you)
 

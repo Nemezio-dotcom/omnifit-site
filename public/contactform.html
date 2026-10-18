@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request Your Consultation | OmniFit Performance San Diego</title>
+<meta name="description" content="A 45-minute consultation including movement assessment, goal mapping, and personalized program recommendation for busy professionals 30+ in San Diego.">
+<link rel="canonical" href="https://www.omnifittraining.com/contactform">
+
+<!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
+<!-- =========================
+OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
+  Organization and LocalBusiness carry CANON's two-sentence ENTITY BLOCK
+  description verbatim; Organization gains address + disambiguatingDescription;
+  Person gains alternateName "Coach Nemezio" + affiliation; Organization
+  "slogan" = CANON's POSITIONING LINE, verbatim, Outcome Claims Amendment run)
+- Measurement: GA4 gtag.js + Microsoft Clarity, production hostnames only
+  (CANON MEASUREMENT); HubSpot deferred as before. No Google Tag Manager.
+- Geo meta
+- Schema (JSON-LD): single site-wide entity definition.
+  LocalBusiness @id #localbusiness-of is referenced by every page
+  header and is NEVER redefined per page. Homepage page-header
+  JSON-LD has been removed and merged here.
+========================= -->
+
+<!-- Measurement (CANON MEASUREMENT; DEPLOY.md "Measurement"). The ONE source
+     of tracking for every page: Google Analytics 4 (gtag.js) and Microsoft
+     Clarity load only when the hostname is www.omnifittraining.com or
+     omnifittraining.com. On any other host (*.pages.dev previews, localhost)
+     neither loads and site/site.js logs each event to the console instead.
+     Clarity never loads on /fit-check. Test-only override, honoured on
+     localhost / 127.0.0.1 only: ?omnifit-track=prod forces the production
+     branch (tools/tracktest.js). No Google Tag Manager. HubSpot is deferred
+     exactly as before. Each ID appears once on the page by design
+     (build.py --check counts them). -->
+<script>
+(function () {
+  var GA4 = 'G-0K6VLEC2VJ';
+  var CLARITY = 'yzawpvwvdf';
+  var host = location.hostname;
+  var prod = (host === 'www.omnifittraining.com' || host === 'omnifittraining.com');
+  if (!prod && (host === 'localhost' || host === '127.0.0.1') &&
+      /[?&]omnifit-track=prod(?:&|$)/.test(location.search)) prod = true;
+  var path = location.pathname.replace(/\/+$/, '') || '/';
+  var fitCheck = (path === '/fit-check');
+
+  function loadScript(src, attrs){
+    var s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    if (attrs){
+      for (var k in attrs) s.setAttribute(k, attrs[k]);
+    }
+    document.head.appendChild(s);
+  }
+
+  function defer(fn){
+    if ('requestIdleCallback' in window) return requestIdleCallback(fn, {timeout: 2500});
+    setTimeout(fn, 1500);
+  }
+
+  if (prod) {
+    /* Google Analytics 4 (gtag.js). Google's snippet, with the data layer
+       held in a local and the ID in GA4 so each appears once. gtag() exists
+       only here: site.js treats its absence as "log to the console". */
+    var dl = window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dl.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA4);
+    loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4);
+  }
+
+  defer(function () {
+    if (prod && !fitCheck) {
+      /* Microsoft Clarity */
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", CLARITY);
+    }
+
+    /* HubSpot (heavy) */
+    loadScript("https://js-na2.hs-scripts.com/244441037.js", {"id":"hs-script-loader"});
+  });
+})();
+</script>
+
+<!-- Geo meta -->
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="US-CA">
+<meta name="geo.placename" content="San Diego">
+<meta name="geo.position" content="33.0178;-117.1022">
+<meta name="ICBM" content="33.0178, -117.1022">
+
+<!-- ═══════════════════════════════════════════════════════
+     SCHEMA (JSON-LD) — Site-wide entity definition · Sept 2026
+     Nodes: Organization #organization · Person #founder ·
+            LocalBusiness #localbusiness-of · WebSite #website
+     Page headers reference these by @id only.
+     ═══════════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.omnifittraining.com/#organization",
+      "name": "OmniFit Performance",
+      "legalName": "OmniFit Performance LLC",
+      "alternateName": "OmniFit Training",
+      "slogan": "OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "disambiguatingDescription": "OmniFit Performance in San Diego, California, founded by Nemezio LopezPerez (Coach Nemezio). Not affiliated with OMNIFIT Athletics.",
+      "url": "https://www.omnifittraining.com/",
+      "email": "nemezio@omnifittraining.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
+      "telephone": "+1-619-259-0630",
+      "logo": "https://www.omnifittraining.com/assets/img/logo.png",
+      "founder": { "@id": "https://www.omnifittraining.com/#founder" },
+      "sameAs": [
+        "https://www.instagram.com/omnifit_sd/",
+        "https://www.yelp.com/biz/omnifit-personal-fitness-training-san-diego",
+        "https://g.page/r/CcePeMjnbDe9EBM",
+        "https://www.thumbtack.com/ca/san-diego/personal-trainers/omnifit-personal-fitness-training/service/455913312050044943",
+        "https://www.bark.com/en/us/company/omnifit-personal-fitness-training/kDKNA/",
+        "https://www.bbb.org/us/ca/san-diego/profile/personal-trainer/omnifit-personal-fitness-training-1126-1000157801"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.omnifittraining.com/#founder",
+      "name": "Nemezio LopezPerez",
+      "alternateName": "Coach Nemezio",
+      "jobTitle": "Founder & NASM Elite Trainer",
+      "description": "Nemezio LopezPerez (Coach Nemezio) is the founder of OmniFit Performance in San Diego and the coach behind the OmniFit Method.",
+      "affiliation": { "@id": "https://www.omnifittraining.com/#organization" },
+      "url": "https://www.omnifittraining.com/about",
+      "worksFor": { "@id": "https://www.omnifittraining.com/#organization" },
+      "sameAs": [
+        "https://www.instagram.com/eziogetsfit",
+        "https://www.linkedin.com/in/nemeziolp/"
+      ],
+      "hasCredential": [
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Elite Trainer" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Certified Personal Trainer (CPT)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Corrective Exercise Specialist (CES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Performance Enhancement Specialist (PES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Certified Nutrition Coach (CNC)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Behavior Change Specialist (BCS)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "ACE Corrective Exercise Specialist (CES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 1" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 2 Certified Master Coach" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Sleep, Stress & Recovery" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden Peptide Fundamentals Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Nutrition Certification" }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.omnifittraining.com/#localbusiness-of",
+      "name": "OmniFit Performance",
+      "alternateName": "OmniFit Training",
+      "url": "https://www.omnifittraining.com/",
+      "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
+      "founder": { "@id": "https://www.omnifittraining.com/#founder" },
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "telephone": "+1-619-259-0630",
+      "email": "nemezio@omnifittraining.com",
+      "image": "https://www.omnifittraining.com/assets/img/hero-coach-client-cable-pulldown-1600.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 33.0178026,
+        "longitude": -117.1021946
+      },
+      "containedInPlace": {
+        "@type": "Place",
+        "name": "Teqneeq Functional Health Center"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "San Diego", "sameAs": "https://en.wikipedia.org/wiki/San_Diego" },
+        { "@type": "Neighborhood", "name": "4S Ranch" },
+        { "@type": "Place", "name": "Rancho Bernardo" },
+        { "@type": "Place", "name": "Del Sur" },
+        { "@type": "Place", "name": "Santaluz" },
+        { "@type": "Place", "name": "Santa Fe Valley" },
+        { "@type": "Place", "name": "Poway" },
+        { "@type": "Place", "name": "Rancho Santa Fe" },
+        { "@type": "Place", "name": "Fairbanks Ranch" },
+        { "@type": "Place", "name": "Carmel Valley" },
+        { "@type": "Place", "name": "Del Mar" },
+        { "@type": "Place", "name": "La Jolla" },
+        { "@type": "Place", "name": "Solana Beach" },
+        { "@type": "Place", "name": "Encinitas" },
+        { "@type": "Place", "name": "Carlsbad" },
+        { "@type": "Country", "name": "US", "description": "Live virtual coaching available nationwide" }
+      ],
+      "priceRange": "$640-$2,900 per 4 weeks",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Credit Card, Debit Card, Affirm, Klarna, HSA/FSA via Truemed",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "06:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ],
+      "knowsAbout": [
+        "Executive Personal Training",
+        "Corrective Exercise",
+        "Joint-Friendly Strength Training",
+        "Post-Rehab Training",
+        "In-Home Personal Training",
+        "Body Composition Testing",
+        "Nutrition Coaching",
+        "Behavior Change Coaching",
+        "Virtual Coaching"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.98",
+        "reviewCount": "190",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Training Programs",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Performance Assessment",
+              "description": "In-person baseline assessment: Bodystat QuadScan 4000 body-composition analysis plus a 9-point movement screening. Credited toward your first cycle."
+            },
+            "price": "150.00",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "1:1 Personal Training at Teqneeq",
+              "description": "Private coaching at Teqneeq Functional Health Center in 4S Ranch. Tiers from Momentum to Peak; a three-cycle Foundation for new clients, then The Program billed every 4 weeks."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "640.00",
+              "maxPrice": "1800.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "In-Home Personal Training",
+              "description": "The same assessment-first coaching system delivered in your home across North County San Diego."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "900.00",
+              "maxPrice": "2600.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Couples Training",
+              "description": "Train together at Teqneeq or in-home, one coached session with separate programming for each partner. Rates are per couple."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "1000.00",
+              "maxPrice": "2900.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Session Packs",
+              "description": "5-session packs at Teqneeq or in-home for clients who prefer per-session pricing without a program; studio non-member packs include the Teqneeq day pass."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "180.00",
+              "maxPrice": "250.00",
+              "priceCurrency": "USD",
+              "unitText": "per session"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Executive Reset Virtual Coaching",
+              "description": "Live virtual and app-based coaching for professionals anywhere in the US, from async programming to fully coached tiers."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "200.00",
+              "maxPrice": "1100.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.omnifittraining.com/#website",
+      "name": "OmniFit Performance",
+      "url": "https://www.omnifittraining.com",
+      "publisher": { "@id": "https://www.omnifittraining.com/#organization" },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+<!-- ===== End site-wide header injection ===== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+
+<!-- ===== Page header injection (source: pages/headers/contactform-header.html) ===== -->
+<!-- CONTACTFORM PAGE HEADER JSON-LD · @GRAPH, OCT 16 2026
+  One @graph: WebPage + BreadcrumbList + Service. The Service node is unchanged
+  except for its new @id; only the @graph wrapper and the page nodes are new.
+  WebPage name/description ARE the page's SEO title and meta (build.py reads
+  them from here).
+  LocalBusiness referenced by @id from the site-wide header, never redefined here.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/contactform#webpage",
+      "url": "https://www.omnifittraining.com/contactform",
+      "name": "Request Your Consultation | OmniFit Performance San Diego",
+      "description": "A 45-minute consultation including movement assessment, goal mapping, and personalized program recommendation for busy professionals 30+ in San Diego.",
+      "isPartOf": {
+        "@id": "https://www.omnifittraining.com/#website"
+      },
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "publisher": {
+        "@id": "https://www.omnifittraining.com/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://www.omnifittraining.com/contactform#breadcrumb"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.omnifittraining.com/contactform#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://www.omnifittraining.com/contactform"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.omnifittraining.com/contactform#service",
+      "name": "OmniFit Performance Personal Training Consultation",
+      "description": "A 45-minute consultation by video or phone covering goals, history and schedule; if it is a fit, the in-person Performance Assessment follows, then a personalized program recommendation, for busy professionals 30+ in San Diego.",
+      "provider": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "serviceType": "Personal Fitness Training Consultation",
+      "areaServed": {
+        "@type": "City",
+        "name": "San Diego",
+        "sameAs": "https://en.wikipedia.org/wiki/San_Diego"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Busy professionals and executives aged 30-55"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "30.00",
+        "priceCurrency": "USD",
+        "description": "45-minute consultation reserved with a $30 deposit, refunded the same day you attend your consultation. Goal mapping and program recommendation; the movement screen happens at the $150 Performance Assessment.",
+        "availability": "https://schema.org/LimitedAvailability"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "OmniFit Performance Training Programs",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "The Foundation",
+              "description": "Entry program for new clients: three consecutive 4-week cycles of 1-on-1 corrective-first strength training, nutrition and behavior change coaching, and progress tracked across 12 metrics, measured and self-reported, with progress reviews every 4 weeks."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "The Program",
+              "description": "Ongoing 1-on-1 personal training billed every 4 weeks, in-studio at Teqneeq Functional Health Center in 4S Ranch or in-home across north San Diego County."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "The 30-Minute Executive Reset",
+              "description": "Live virtual and hybrid coaching in 30-minute sessions for professionals who travel or have unpredictable schedules, delivered nationwide."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>
+<!-- ===== End page header injection ===== -->
+
+<!-- ===== Page-scoped CSS (moved from the page body; source: pages/contactform.html) ===== -->
+<style>
+
+#omni-consultation {
+  --navy: #0a1628;
+  --navy-mid: #0f1f3a;
+  --navy-light: #152a4a;
+  --navy-surface: #1a3158;
+  --gold: #c9a84c;
+  --gold-light: #d4b96a;
+  --gold-dim: rgba(201,168,76,0.15);
+  --white: #ffffff;
+  --white-90: rgba(255,255,255,0.9);
+  --white-70: rgba(255,255,255,0.7);
+  --white-50: rgba(255,255,255,0.5);
+  --white-20: rgba(255,255,255,0.2);
+  --white-10: rgba(255,255,255,0.1);
+  --green: #4caf50;
+  --radius: 16px;
+
+  font-family: 'Montserrat', sans-serif !important;
+  background: var(--navy) !important;
+  color: var(--white) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  line-height: 1.6 !important;
+  position: relative !important;
+
+  /* Break out of Squarespace container */
+  margin-left: calc(-50vw + 50%) !important;
+  margin-right: calc(-50vw + 50%) !important;
+  width: 100vw !important;
+}
+
+#omni-consultation *, #omni-consultation *::before, #omni-consultation *::after {
+  box-sizing: border-box !important;
+}
+
+/* ── HERO SECTION ── */
+#omni-consultation .consult-hero {
+  text-align: center !important;
+  padding: 80px 24px 72px !important;
+  background: linear-gradient(180deg, #0a1628 0%, #0f1f3a 100%) !important;
+  border-bottom: 1px solid var(--white-10) !important;
+}
+
+#omni-consultation .consult-eyebrow {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 5px !important;
+  text-transform: uppercase !important;
+  color: var(--gold) !important;
+  margin-bottom: 24px !important;
+}
+
+#omni-consultation .consult-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  color: var(--white) !important;
+  line-height: 1.2 !important;
+  margin-top: 0 !important;
+  margin-bottom: 24px !important;
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#omni-consultation .consult-subtitle {
+  font-size: 17px !important;
+  color: var(--white-70) !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  line-height: 1.8 !important;
+}
+
+/* ── WHAT TO EXPECT SECTION ── */
+#omni-consultation .expect-section {
+  padding: 72px 24px !important;
+  background: var(--navy) !important;
+  border-bottom: 1px solid var(--white-10) !important;
+}
+
+#omni-consultation .expect-inner {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+#omni-consultation .expect-label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  color: var(--gold) !important;
+  margin-bottom: 40px !important;
+  text-align: center !important;
+}
+
+#omni-consultation .expect-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+}
+
+#omni-consultation .expect-card {
+  background: var(--navy-mid) !important;
+  border: 1px solid var(--white-10) !important;
+  border-radius: var(--radius) !important;
+  padding: 36px !important;
+  display: flex !important;
+  gap: 24px !important;
+  align-items: flex-start !important;
+}
+
+#omni-consultation .expect-icon {
+  width: 60px !important;
+  height: 60px !important;
+  min-width: 60px !important;
+  background: var(--gold-dim) !important;
+  border-radius: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 24px !important;
+  color: var(--gold) !important;
+  font-weight: 700 !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+}
+
+#omni-consultation .expect-content h3 {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--white) !important;
+  margin: 0 0 10px !important;
+}
+
+#omni-consultation .expect-content p {
+  font-size: 15px !important;
+  color: var(--white-70) !important;
+  margin: 0 !important;
+  line-height: 1.75 !important;
+}
+
+/* ── TRUST SECTION ── */
+#omni-consultation .trust-section {
+  padding: 56px 24px !important;
+  background: var(--navy-mid) !important;
+  border-bottom: 1px solid var(--white-10) !important;
+}
+
+#omni-consultation .trust-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 48px !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+
+#omni-consultation .trust-item {
+  text-align: center !important;
+}
+
+#omni-consultation .trust-value {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  color: var(--gold) !important;
+  display: block !important;
+  margin-bottom: 6px !important;
+}
+
+#omni-consultation .trust-label {
+  font-size: 13px !important;
+  color: var(--white-50) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  font-weight: 500 !important;
+}
+
+/* ── FORM SECTION ── */
+#omni-consultation .form-section {
+  padding: 72px 24px 80px !important;
+  background: var(--navy) !important;
+}
+
+#omni-consultation .form-container {
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  background: var(--navy-mid) !important;
+  border: 1px solid var(--white-10) !important;
+  border-radius: var(--radius) !important;
+  padding: 48px 36px !important;
+}
+
+#omni-consultation .form-heading {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 30px !important;
+  font-weight: 600 !important;
+  color: var(--white) !important;
+  text-align: center !important;
+  margin-bottom: 10px !important;
+}
+
+#omni-consultation .form-sub {
+  font-size: 16px !important;
+  color: var(--white-50) !important;
+  text-align: center !important;
+  margin-bottom: 36px !important;
+}
+
+/* ── HUBSPOT FORM CONTAINER ── */
+#omni-consultation .hs-form-frame {
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 36px !important;
+}
+
+/* ── BOOK DIRECT (above the form) ── */
+#omni-consultation .book-direct {
+  text-align: center !important;
+  margin: 0 0 36px !important;
+  padding: 24px 28px !important;
+  background: var(--gold-dim) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+}
+#omni-consultation .book-direct p {
+  font-size: 16px !important;
+  color: var(--white) !important;
+  margin: 0 0 16px !important;
+  line-height: 1.6 !important;
+}
+#omni-consultation .book-direct-btn,
+#omni-consultation .book-direct-btn:link,
+#omni-consultation .book-direct-btn:visited {
+  display: inline-block !important;
+  padding: 14px 32px !important;
+  background: var(--gold) !important;
+  color: var(--navy) !important;
+  border-radius: 6px !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+}
+#omni-consultation .book-direct-btn:hover { background: var(--gold-light) !important; }
+
+/* ── DEPOSIT NOTE ── */
+#omni-consultation .deposit-note {
+  text-align: center !important;
+  margin-top: 28px !important;
+  padding: 24px 28px !important;
+  background: var(--gold-dim) !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+}
+
+#omni-consultation .deposit-note p {
+  font-size: 15px !important;
+  color: var(--white-70) !important;
+  margin: 0 !important;
+  line-height: 1.7 !important;
+}
+
+#omni-consultation .deposit-note strong {
+  color: var(--gold) !important;
+}
+
+/* ── BOTTOM NOTE ── */
+#omni-consultation .bottom-section {
+  padding: 48px 24px 64px !important;
+  text-align: center !important;
+  background: var(--navy-mid) !important;
+}
+
+#omni-consultation .bottom-note {
+  font-size: 16px !important;
+  color: var(--white-50) !important;
+  line-height: 2 !important;
+}
+
+#omni-consultation .bottom-note a {
+  color: var(--gold) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(201,168,76,0.3) !important;
+}
+
+/* ══════════════════════════════════════ */
+/* ── DESKTOP ── */
+/* ══════════════════════════════════════ */
+@media (min-width: 768px) {
+  #omni-consultation .consult-hero {
+    padding: 120px 48px 100px !important;
+  }
+  #omni-consultation .consult-eyebrow {
+    font-size: 15px !important;
+    letter-spacing: 6px !important;
+    margin-bottom: 28px !important;
+  }
+  #omni-consultation .consult-title {
+    font-size: 56px !important;
+    margin-bottom: 28px !important;
+  }
+  #omni-consultation .consult-subtitle {
+    font-size: 20px !important;
+  }
+
+  #omni-consultation .expect-section {
+    padding: 96px 48px !important;
+  }
+  #omni-consultation .expect-label {
+    font-size: 15px !important;
+    margin-bottom: 48px !important;
+  }
+  #omni-consultation .expect-grid {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 28px !important;
+  }
+  #omni-consultation .expect-card {
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+    padding: 48px 32px !important;
+  }
+  #omni-consultation .expect-icon {
+    width: 72px !important;
+    height: 72px !important;
+    min-width: 72px !important;
+    font-size: 28px !important;
+    margin-bottom: 8px !important;
+  }
+  #omni-consultation .expect-content h3 {
+    font-size: 20px !important;
+  }
+  #omni-consultation .expect-content p {
+    font-size: 16px !important;
+  }
+
+  #omni-consultation .trust-section {
+    padding: 72px 48px !important;
+  }
+  #omni-consultation .trust-row {
+    gap: 80px !important;
+  }
+  #omni-consultation .trust-value {
+    font-size: 52px !important;
+  }
+  #omni-consultation .trust-label {
+    font-size: 14px !important;
+    letter-spacing: 2.5px !important;
+  }
+
+  #omni-consultation .form-section {
+    padding: 96px 48px 104px !important;
+  }
+  #omni-consultation .form-container {
+    max-width: 780px !important;
+    padding: 64px 56px !important;
+  }
+  #omni-consultation .form-heading {
+    font-size: 38px !important;
+  }
+  #omni-consultation .form-sub {
+    font-size: 18px !important;
+    margin-bottom: 40px !important;
+  }
+  #omni-consultation .hs-form-frame {
+    padding: 44px !important;
+  }
+  #omni-consultation .deposit-note {
+    padding: 28px 32px !important;
+  }
+  #omni-consultation .deposit-note p {
+    font-size: 16px !important;
+  }
+
+  #omni-consultation .bottom-section {
+    padding: 64px 48px 80px !important;
+  }
+  #omni-consultation .bottom-note {
+    font-size: 17px !important;
+  }
+}
+
+/* ══════════════════════════════════════ */
+/* ── LARGE DESKTOP (1200px+) ── */
+/* ══════════════════════════════════════ */
+@media (min-width: 1200px) {
+  #omni-consultation .consult-hero {
+    padding: 140px 80px 120px !important;
+  }
+  #omni-consultation .consult-title {
+    font-size: 64px !important;
+  }
+  #omni-consultation .consult-subtitle {
+    font-size: 22px !important;
+    max-width: 740px !important;
+  }
+  #omni-consultation .expect-section {
+    padding: 108px 80px !important;
+  }
+  #omni-consultation .expect-grid {
+    gap: 36px !important;
+    max-width: 1300px !important;
+    margin: 0 auto !important;
+  }
+  #omni-consultation .expect-card {
+    padding: 56px 36px !important;
+  }
+  #omni-consultation .trust-section {
+    padding: 80px 80px !important;
+  }
+  #omni-consultation .trust-value {
+    font-size: 60px !important;
+  }
+  #omni-consultation .form-section {
+    padding: 108px 80px 120px !important;
+  }
+  #omni-consultation .form-container {
+    max-width: 840px !important;
+    padding: 72px 64px !important;
+  }
+  #omni-consultation .form-heading {
+    font-size: 42px !important;
+  }
+}
+
+/* ══════════════════════════════════════ */
+/* ── MOBILE ── */
+/* ══════════════════════════════════════ */
+@media (max-width: 600px) {
+  #omni-consultation {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+  #omni-consultation .consult-hero {
+    padding: 56px 20px 48px !important;
+  }
+  #omni-consultation .consult-title {
+    font-size: 28px !important;
+  }
+  #omni-consultation .consult-subtitle {
+    font-size: 15px !important;
+  }
+  #omni-consultation .expect-section {
+    padding: 48px 16px !important;
+  }
+  #omni-consultation .expect-card {
+    padding: 24px !important;
+  }
+  #omni-consultation .trust-section {
+    padding: 40px 16px !important;
+  }
+  #omni-consultation .trust-row {
+    gap: 24px !important;
+  }
+  #omni-consultation .trust-value {
+    font-size: 28px !important;
+  }
+  #omni-consultation .form-section {
+    padding: 48px 16px 56px !important;
+  }
+  #omni-consultation .form-container {
+    padding: 28px 20px !important;
+  }
+  #omni-consultation .form-heading {
+    font-size: 24px !important;
+  }
+  #omni-consultation .hs-form-frame {
+    padding: 20px !important;
+  }
+  #omni-consultation .bottom-section {
+    padding: 36px 16px 48px !important;
+  }
+}
+</style>
+</head>
+<body class="page page--contactform">
+<!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
+
+ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"}
+
+  ^ The one place to change the announcement bar. build.py reads this line:
+    "text" is the bar's copy, "href" is where it links. Set "text" to "" to
+    remove the bar entirely. Keep it on one line.
+
+  LOGO: the <svg class="omni-logo"> inside .site-logo is the brand logo
+  (gold ring, navy F, OMNIFIT, gold rule, PERFORMANCE) as inline SVG so
+  each part can animate: the ring draws itself, the F pops in, the letters
+  rise, the rule extends. It is generated from site/img/logo.svg (same
+  markup plus a <title>; site/img/logo.png is the source bitmap). The intro
+  plays once per browser session: the one-line script before <header> adds
+  html.omni-logo-intro on the first page view only, so every later page
+  shows the logo static (hover still turns the ring). Everything is inert
+  under prefers-reduced-motion. Sizing and motion live in site/site.css.
+-->
+<div class="site-announce" id="site-announce">
+  <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
+  <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
+<script>(function(){try{if(sessionStorage.getItem('omni-logo-played'))return;sessionStorage.setItem('omni-logo-played','1');}catch(e){}document.documentElement.classList.add('omni-logo-intro');})();</script>
+<header class="site-header" id="site-header">
+  <div class="site-header__inner">
+    <a class="site-logo" href="/" aria-label="OmniFit Performance home">
+      <svg class="omni-logo" viewBox="8 44 844 242" width="844" height="242" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g class="omni-logo__spin"><path class="omni-logo__ring" d="M98.53 59.45A107.97 107.97 0 1 0 229.91 116.72" fill="none" stroke="#daa520" stroke-width="19.7" stroke-linecap="round" pathLength="1"/></g><g class="omni-logo__f" fill="#002147"><g class="omni-logo__f-hop"><path d="M267.8 55.0H326.2V71.4H289.4V87.0H324.0V103.4H289.4V139.0H267.8Z"/></g></g><g class="omni-logo__name" fill="#002147"><g class="omni-logo__omni"><path class="omni-logo__ch" style="--i:0" d="M442.5 97.3Q434.2 97.3 429.7 103.4Q425.2 109.5 425.2 120.5Q425.2 131.5 429.7 137.6Q434.2 143.7 442.5 143.7Q450.8 143.7 455.3 137.6Q459.9 131.5 459.9 120.5Q459.9 109.5 455.3 103.4Q450.8 97.3 442.5 97.3ZM442.5 84.2Q459.4 84.2 468.9 93.9Q478.5 103.5 478.5 120.5Q478.5 137.5 468.9 147.1Q459.4 156.8 442.5 156.8Q425.7 156.8 416.1 147.1Q406.5 137.5 406.5 120.5Q406.5 103.5 416.1 93.9Q425.7 84.2 442.5 84.2Z"/><path class="omni-logo__ch" style="--i:1" d="M493.6 86.0H516.5L532.5 123.5L548.5 86.0H571.4V156.0H554.4V104.8L538.2 142.5H526.8L510.7 104.8V156.0H493.6Z"/><path class="omni-logo__ch" style="--i:2" d="M591.6 86.0H611.8L637.2 134.0V86.0H654.4V156.0H634.2L608.8 108.0V156.0H591.6Z"/><path class="omni-logo__ch" style="--i:3" d="M673.0 86.0H691.0V156.0H673.0Z"/></g><g class="omni-logo__fit"><path class="omni-logo__ch" style="--i:4" d="M710.9 85.5H751.1V93.5H720.4V114.1H748.1V122.1H720.4V155.5H710.9Z"/><path class="omni-logo__ch" style="--i:5" d="M767.8 86.0H777.2V156.0H767.8Z"/><path class="omni-logo__ch" style="--i:6" d="M787.4 86.5H846.6V94.5H821.8V156.5H812.2V94.5H787.4Z"/></g></g><rect class="omni-logo__rule" x="402" y="180" width="300" height="5" fill="#daa520"/><g class="omni-logo__perf" fill="#002147"><g class="omni-logo__perf-g"><path class="omni-logo__ch" style="--i:0" d="M409.1 216.9V226.7H413.5Q416.0 226.7 417.3 225.4Q418.7 224.1 418.7 221.8Q418.7 219.4 417.3 218.2Q416.0 216.9 413.5 216.9ZM405.6 214.0H413.5Q417.9 214.0 420.1 216.0Q422.4 218.0 422.4 221.8Q422.4 225.6 420.1 227.6Q417.9 229.5 413.5 229.5H409.1V240.0H405.6Z"/><path class="omni-logo__ch" style="--i:1" d="M442.6 214.0H459.0V217.0H446.2V224.7H458.5V227.6H446.2V237.0H459.4V240.0H442.6Z"/><path class="omni-logo__ch" style="--i:2" d="M492.7 227.8Q493.8 228.2 494.9 229.4Q496.0 230.7 497.0 232.9L500.6 240.0H496.8L493.5 233.3Q492.2 230.7 491.0 229.9Q489.8 229.0 487.7 229.0H483.9V240.0H480.4V214.0H488.3Q492.8 214.0 495.0 215.9Q497.1 217.7 497.1 221.5Q497.1 223.9 496.0 225.6Q494.9 227.2 492.7 227.8ZM483.9 216.9V226.1H488.3Q490.9 226.1 492.2 224.9Q493.4 223.8 493.4 221.5Q493.4 219.2 492.2 218.1Q490.9 216.9 488.3 216.9Z"/><path class="omni-logo__ch" style="--i:3" d="M520.5 214.0H535.5V217.0H524.1V224.6H534.3V227.6H524.1V240.0H520.5Z"/><path class="omni-logo__ch" style="--i:4" d="M567.0 216.4Q563.2 216.4 560.9 219.2Q558.7 222.1 558.7 227.0Q558.7 231.9 560.9 234.8Q563.2 237.6 567.0 237.6Q570.8 237.6 573.1 234.8Q575.3 231.9 575.3 227.0Q575.3 222.1 573.1 219.2Q570.8 216.4 567.0 216.4ZM567.0 213.5Q572.5 213.5 575.7 217.2Q579.0 220.9 579.0 227.0Q579.0 233.1 575.7 236.8Q572.5 240.5 567.0 240.5Q561.5 240.5 558.3 236.8Q555.0 233.2 555.0 227.0Q555.0 220.9 558.3 217.2Q561.5 213.5 567.0 213.5Z"/><path class="omni-logo__ch" style="--i:5" d="M611.7 227.8Q612.8 228.2 613.9 229.4Q615.0 230.7 616.0 232.9L619.6 240.0H615.8L612.5 233.3Q611.2 230.7 610.0 229.9Q608.8 229.0 606.7 229.0H602.9V240.0H599.4V214.0H607.3Q611.8 214.0 614.0 215.9Q616.1 217.7 616.1 221.5Q616.1 223.9 615.0 225.6Q613.9 227.2 611.7 227.8ZM602.9 216.9V226.1H607.3Q609.9 226.1 611.2 224.9Q612.4 223.8 612.4 221.5Q612.4 219.2 611.2 218.1Q609.9 216.9 607.3 216.9Z"/><path class="omni-logo__ch" style="--i:6" d="M639.6 214.0H644.9L651.5 231.7L658.1 214.0H663.4V240.0H659.9V217.2L653.3 235.0H649.7L643.0 217.2V240.0H639.6Z"/><path class="omni-logo__ch" style="--i:7" d="M694.0 217.5 689.2 230.4H698.8ZM692.0 214.0H696.0L705.9 240.0H702.2L699.9 233.3H688.2L685.8 240.0H682.1Z"/><path class="omni-logo__ch" style="--i:8" d="M725.7 214.0H730.4L741.9 235.7V214.0H745.3V240.0H740.6L729.1 218.3V240.0H725.7Z"/><path class="omni-logo__ch" style="--i:9" d="M787.0 216.0V219.7Q785.2 218.1 783.2 217.2Q781.2 216.4 778.9 216.4Q774.5 216.4 772.1 219.1Q769.7 221.9 769.7 227.0Q769.7 232.1 772.1 234.9Q774.5 237.6 778.9 237.6Q781.2 237.6 783.2 236.8Q785.2 235.9 787.0 234.3V238.0Q785.1 239.2 783.1 239.8Q781.0 240.5 778.7 240.5Q772.8 240.5 769.4 236.9Q766.0 233.2 766.0 227.0Q766.0 220.8 769.4 217.1Q772.8 213.5 778.7 213.5Q781.0 213.5 783.1 214.2Q785.2 214.8 787.0 216.0Z"/><path class="omni-logo__ch" style="--i:10" d="M807.6 214.0H824.0V217.0H811.2V224.7H823.5V227.6H811.2V237.0H824.4V240.0H807.6Z"/></g></g></svg>
+    </a>
+    <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg class="site-nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <div class="site-nav__rows">
+        <ul class="site-nav__row">
+          <li><a href="/">Home</a></li>
+          <li><a href="/personal-training-services">Programs</a></li>
+          <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-methodology">
+              <li><a href="/the-omnifit-method">The OmniFit Method</a></li>
+              <li><a href="/behavior-change-coaching">Behavior Change Coaching</a></li>
+            </ul>
+          </li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-results">Results <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-results">
+              <li><a href="/how-we-measure-your-progress">How We Measure Your Progress</a></li>
+              <li><a href="/case-studies">Case Studies</a></li>
+              <li><a href="/outcomes">Outcomes</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="site-nav__row">
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-more">More <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-more">
+              <li><a href="/nutrition-coaching-san-diego">Nutrition Coaching</a></li>
+              <li><a href="/glp-1-personal-training-san-diego">GLP-1 Personal Training</a></li>
+              <li><a href="/body-composition-testing">Body Composition Testing</a></li>
+              <li><a href="/partners">Partners</a></li>
+              <li><a href="/faqs">FAQs</a></li>
+            </ul>
+          </li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/fit-check">Fit Check</a></li>
+          <li><a href="/contactform" aria-current="page">Contact</a></li>
+        </ul>
+      </div>
+      <div class="site-nav__aside">
+        <a class="site-nav__social" href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener" aria-label="OmniFit on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+        </a>
+        <a class="site-nav__social" href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener" aria-label="Nemezio LopezPerez on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+        </a>
+        <a class="site-nav__cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<!-- OmniFit Consultation Landing Page — V4 (Oct 2026: contact/queue framing, back-of-line rule, fit check link) -->
+<!-- SLUG: /contactform -->
+<!-- SQUARESPACE: Paste into a Code Block (Display Source OFF) on a blank page -->
+<!-- NOTE: In Squarespace, set the page section to FULL WIDTH / NO PADDING for best results -->
+
+
+
+<div id="omni-consultation">
+
+  <!-- HERO -->
+  <div class="consult-hero">
+    <div class="consult-eyebrow">Contact OmniFit</div>
+    <h1 class="consult-title">Let's See If OmniFit<br>Is Right For You</h1>
+    <div class="consult-subtitle">OmniFit takes a limited number of new clients. The fastest way to start is to book your 45-minute consultation directly. Prefer to send a message first? Use the form below and I'll reach out in the order messages arrive.</div>
+  </div>
+
+  <!-- WHAT TO EXPECT -->
+  <div class="expect-section">
+    <div class="expect-inner">
+      <div class="expect-label">What Happens in Your Consultation</div>
+      <div class="expect-grid">
+
+        <div class="expect-card">
+          <div class="expect-icon">1</div>
+          <div class="expect-content">
+            <h3>Goals &amp; History</h3>
+            <p>We talk about what you want to achieve, what you've tried before, and what your typical week looks like. The more honest you are, the better I can help.</p>
+          </div>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon">2</div>
+          <div class="expect-content">
+            <h3>Movement Screen</h3>
+            <p>This happens at your $150 Performance Assessment, not on the consultation call: a hands-on look at how you move, where you're compensating, what's tight, what's strong. It tells me more than any questionnaire. Wear comfortable clothes.</p>
+          </div>
+        </div>
+
+        <div class="expect-card">
+          <div class="expect-icon">3</div>
+          <div class="expect-content">
+            <h3>Honest Recommendation</h3>
+            <p>I'll tell you what I think your biggest priorities are, which program fits, and what realistic results look like. If we're not the right match, I'll tell you directly.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST BADGES -->
+  <div class="trust-section">
+    <div class="trust-row">
+      <div class="trust-item">
+        <span class="trust-value">4.98</span>
+        <span class="trust-label">Average across 190+ reviews</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">13</span>
+        <span class="trust-label">Certifications</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">2016</span>
+        <span class="trust-label">Started Coaching</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">$30</span>
+        <span class="trust-label">Deposit, Refunded When You Attend</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM SECTION -->
+  <div class="form-section">
+    <div class="form-container">
+      <div class="book-direct">
+        <p>The fastest way to start is to book a consultation directly.</p>
+        <a class="book-direct-btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
+      <div class="form-heading">Send a Message</div>
+      <div class="form-sub">I read every message myself and reach out in the order they arrive. The form asks why now. Your honest answer there matters more than anything else on it.</div>
+
+      <!-- HUBSPOT FORM EMBED -->
+      <script src="https://js-na2.hsforms.net/forms/embed/244441037.js" defer></script>
+      <div class="hs-form-frame" data-region="na2" data-form-id="a34ea6d0-e63f-46d1-83d4-c675a27d64bb" data-portal-id="244441037"></div>
+
+      <div class="deposit-note">
+        <p><strong>One rule keeps the line fair:</strong> when I reach out, reply. If I don't hear back, your spot goes to the next person and you move to the back of the line.</p>
+        <p style="margin-top: 12px !important;">Your consultation is held with a <strong>$30 deposit, refunded the same day you attend your consultation</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom-section">
+    <div class="bottom-note">
+      Not sure yet? Take the <a href="/fit-check">3-minute fit check</a> first.<br>
+      Or email me directly: <a href="mailto:nemezio@omnifittraining.com">nemezio@omnifittraining.com</a>
+    </div>
+  </div>
+
+</div>
+</main>
+<!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->
+<!-- Changelog v3: Locations card — studio line + in-home service areas now link
+     to their location pages (internal-link task, Q3 strategy). Coronado left
+     unlinked (no page exists). Copyright line: removed hardcoded "2026"
+     (was rendering doubled year alongside the JS-injected span). -->
+<!-- Changelog v2: removed footer-badges block (NASM / ACE / BNI) and its CSS;
+     replaced legacy "OmniFit Personal Fitness Training" Pacific Beach GBP link
+     with current-listing Maps link. See note on swapping in your GBP review
+     short link (g.page/r/.../review) for a direct write-a-review prompt. -->
+
+
+<footer id="omnifit-footer">
+  <div class="wrap">
+
+    <div class="footer-cta">
+      <h3>Start Your Transformation Today</h3>
+      <p>Book your 45-minute consultation and experience OmniFit Performance's premium coaching.</p>
+      <a class="btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+    </div>
+
+    <div class="footer-grid">
+
+      <!-- About -->
+      <div class="footer-card">
+        <h4>About OmniFit Performance</h4>
+        <p>OmniFit Performance is a private personal training and corrective exercise practice serving San Diego's executive community. Clinical-grade diagnostics, evidence-based programming, and structured accountability for professionals 30+.</p>
+        <ul>
+          <li><a href="/personal-training-services"><span>All Services</span></a></li>
+          <li><a href="/nutrition-coaching-san-diego"><span>Nutrition Coaching</span></a></li>
+          <li><a href="/glp-1-personal-training-san-diego"><span>Training on a GLP-1</span></a></li>
+          <li><a href="/personal-trainer-over-50-san-diego"><span>Training After 50</span></a></li>
+          <li><a href="/couples-personal-training-san-diego"><span>Couples Training</span></a></li>
+          <li><a href="/hsa-fsa-personal-training"><span>HSA &amp; FSA Eligibility</span></a></li>
+          <li><a href="/terms-and-conditions"><span>Terms &amp; Conditions</span></a></li>
+          <li><a href="/privacy-policy"><span>Privacy Policy</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div class="footer-card">
+        <h4>Connect</h4>
+        <ul>
+          <li>
+            <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <span>@omnifit_sd</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
+                 from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
+            <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <span>Google Reviews</span>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:nemezio@omnifittraining.com">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <span>Email</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Location -->
+      <div class="footer-card">
+        <h4>Locations</h4>
+        <p>Studio: <a href="/personal-trainer-4s-ranch">Teqneeq · 4S Ranch, San Diego</a></p>
+        <p style="font-size:13px; color:var(--omni-muted); opacity:0.85;">In-home:
+          <a href="/personal-trainer-la-jolla">La Jolla</a> •
+          <a href="/personal-trainer-del-mar">Del Mar</a> •
+          <a href="/personal-trainer-carmel-valley">Carmel Valley</a> •
+          <a href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a> •
+          <a href="/personal-trainer-rancho-bernardo">Rancho Bernardo</a> •
+          <a href="/personal-trainer-solana-beach">Solana Beach</a> •
+          <a href="/personal-trainer-encinitas">Encinitas</a> •
+          <a href="/personal-trainer-carlsbad">Carlsbad</a> •
+          <a href="/personal-trainer-santaluz">Santaluz</a> •
+          <a href="/personal-trainer-fairbanks-ranch">Fairbanks Ranch</a> •
+          <a href="/personal-trainer-4s-ranch">4S Ranch</a>
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <span>Get Directions</span>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+16192590630">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <span>(619) 259-0630</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <span>Book Your Consultation</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-copy">
+      © <span id="omnifit-year">2026</span> OmniFit Performance · Personal Training &amp; Corrective Exercise · San Diego, CA
+    </div>
+
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

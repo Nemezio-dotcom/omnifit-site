@@ -37,8 +37,12 @@ _UNIT = r'(?:day|week|month|year)s?'
 # A timeframe bounds an outcome window only when it is numerically quantified
 # ("4-6 months", "Weeks 5-8", "Month 3") or rate-framed ("per week", "/week").
 # Bare duration nouns ("after years of inactivity") do not bound a window.
-TIMEFRAME = (r'(?:\b\d[\d,]*\s*(?:[-–]|to)?\s*\d*\s*' + _UNIT + r'\b'
-             r'|\b' + _UNIT + r'\s*\d+(?:\s*[-–]\s*\d+)?\b'
+# Any dash character counts as a range separator (Oct 18 2026 audit run): the
+# hyphen, en dash and em dash, raw or as an HTML entity, and "to". The em dash
+# was missing, so "4—6 months" was not a timeframe.
+_DASH = r'(?:[-–—‒]|&ndash;|&mdash;|&#821[12];|to)'
+TIMEFRAME = (r'(?:\b\d[\d,]*\+?\s*(?:' + _DASH + r')?\s*\d*\+?\s*' + _UNIT + r'\b'
+             r'|\b' + _UNIT + r'\s*\d+(?:\s*' + _DASH + r'\s*\d+)?\b'
              r'|\b(?:per|a|each|every)\s+' + _UNIT + r'\b'
              r'|/\s*' + _UNIT + r'\b)')
 NEGATED = r'\b(?:not|never|no|cannot|without|outside|beyond|instead of|rather than|refer)\b'
@@ -272,6 +276,26 @@ def _selftest_case_study_exempt():
     p2a_bad = p2a.replace('typically progress', 'typically improve')
     assert lbs_near_timeframe(named + p2a_bad + d, outcomes=''), "near-verbatim 2a pointer was exempted"
 
+def _selftest_lbs_fragment():
+    """Oct 18 2026 audit (item 9), both directions, every run: a pounds range
+    with a "+", any dash character and a quantified timeframe after in / over /
+    within is a T1-2 strike in a list item or a bare fragment."""
+    for bad in ('<li>20–30+ lbs in 4–6 months</li>',          # the exact retired line (en dash)
+                '<li>20-30+ lbs in 4-6 months</li>',          # hyphen
+                '<li>20—30+ lbs in 4—6 months</li>',          # em dash
+                '<li>20&ndash;30 lbs in 4&ndash;6 months</li>',
+                '<li>15-20 lbs within 8-12 weeks</li>', '<span>10 to 15 pounds over 3 to 6 months</span>',
+                '<li>Lose 20+ lb in 12 weeks</li>', '<p>Lose 10 lbs every 4 weeks.</p>'):
+        assert lbs_near_timeframe(bad, outcomes=''), f"T1-2 fragment passed: {bad}"
+    d = '<p>Individual results. Outcomes depend on starting point and vary between clients.</p>'
+    p2a = ('<p>Individual result, measured by OmniFit. How clients typically progress: '
+           '<a href="/outcomes">omnifittraining.com/outcomes</a>.</p>')
+    for ok in ('<li>Sustainable fat loss, no crash diets</li>',
+               '<p>sustainable fat loss of 20-30 lbs</p>',      # TIER 2 item 3: no timeframe
+               '<p>Virtual Executive Reset from $200 per 4 weeks.</p><p>Lose 20–30+ lbs sustainably.</p>',  # billing cadence
+               '<div>Mark · Board member</div><p>Mark came in at 248 lbs and went to 231 lbs over 4 months.</p>' + p2a + d):
+        assert lbs_near_timeframe(ok, outcomes='') == [], f"legitimate copy fired: {ok[:60]}"
+
 def _has_results_disclaimer_anywhere(text):
     return bool(DISCLAIMER_ANYWHERE.search(_flat(text)))
 
@@ -307,10 +331,18 @@ def _case_study_exempt(t, m, page_disclaimed, window=45):
 # rule invented 20 findings across three headers out of JSON punctuation. A
 # unit symbol that is also the language's most common delimiter cannot be a
 # unit token here.
-_T1_UNITS = (r'\d[\d,]*(?:\s*(?:–|-|&ndash;|to)\s*\d[\d,]*)?\s*'
+# Oct 18 2026 (external audit): "<li>20–30+ lbs in 4–6 months</li>" - the
+# exact TIER 1 item 2 example - sat on six town pages and certified clean. Root
+# cause: the "+" after the range ("30+") broke the unit match (the pattern
+# wanted the unit straight after the digits), and the em dash was not a range
+# separator. A "+" may now follow either number, and any dash counts
+# (_DASH). Self-tested both ways in _selftest_lbs_fragment.
+_T1_UNITS = (r'\d[\d,]*\+?(?:\s*' + _DASH + r'\s*\d[\d,]*\+?)?\s*'
              r'(?:lbs?\b|pounds?\b|inches\b|inch\b)'
              r'|\d[\d.,]*\s*%\s*(?:of\s+)?body[\s-]?fat'
              r'|body[\s-]?fat[^.]{0,20}?\d[\d.,]*\s*%')
+
+BILLING_CADENCE = r'\$\s?[\d,]+(?:\.\d\d)?\s*(?:/\s*|(?:per|every|each|a)\s+)$'
 
 def lbs_near_timeframe(text, window=15, outcomes=None):
     t = _flat(text); out = []
@@ -319,6 +351,11 @@ def lbs_near_timeframe(text, window=15, outcomes=None):
         w = _near(t, m, window)
         for tf in re.finditer(TIMEFRAME, w, re.I):
             if re.search(CONTRAST, w[:tf.start()], re.I): continue
+            # A billing cadence ("$200 per 4 weeks", "$640 every 4 weeks") is a
+            # price, not an outcome window. Surfaced when the "+" fix (Oct 18
+            # 2026) let "Lose 20–30+ lbs sustainably" match on Carmel Valley,
+            # 15 words from the neighbouring card's "$200 per 4 weeks".
+            if re.search(BILLING_CADENCE, w[:tf.start()], re.I): continue
             if _case_study_exempt(t, m, disclaimed): break
             # TIER 1 item 2 carve-out (Outcome Claims Amendment, Oct 1 2026):
             # an aggregate figure with a timeframe stays banned UNLESS it is
@@ -1072,6 +1109,44 @@ def _selftest_coaching_tenure():
     assert hits('<p>Celeste is a Licensed Massage Therapist with over a decade of clinical bodywork experience.</p>') == [], "a partner's experience flagged"
     assert hits('<p>Over a decade of desk work leaves the hips tight.</p>') == [], "a decade of desk work (no coaching claim) flagged"
 
+# ─── PLACEHOLDER COPY (Oct 18 2026, external audit item 10) ─────────
+# A build placeholder left in VISIBLE copy - "[CASE STUDY SUMMARY: ...]",
+# an "Add Image" photo-slot label, "TODO", or a "[" followed by all-caps
+# placeholder text ("[CLIENT NAME]", "[INSERT LINK") - is BROKEN STRUCTURE
+# (c): the page is unfinished, which is neither a compliance strike nor a
+# stale fact. Read on the flattened copy (_flat), so HTML comments, <style>,
+# executable <script> and tag attributes are not copy; ld+json IS copy (a
+# placeholder in schema is published too). Every file in the glob, frozen
+# records INCLUDED: an "Add Image" span is no measurement. Self-tested both
+# ways (_selftest_placeholder).
+_PLACEHOLDER = re.compile(
+    r'\[\s*CASE STUDY'
+    r'|\b(?i:add image)\b'
+    r'|\bTODO\b'
+    r'|\[\s*[A-Z]{2,}(?:[\s_:/&\'.,-]+[A-Z0-9]+)*(?:\]|:|\s|$)')
+
+def placeholder_copy(text):
+    t = html.unescape(_flat(text)); out = []
+    for m in _PLACEHOLDER.finditer(t):
+        out.append((m.group(0).strip(), t[max(0, m.start()-50):m.end()+60]))
+    return list(dict.fromkeys(out))
+
+def _selftest_placeholder():
+    hits = lambda t: [h for h, _ in placeholder_copy(t)]
+    for bad in ('<div class="gq-block">[CASE STUDY SUMMARY: starting diagnostic, rescan data.]</div>',
+                '<div class="photo-placeholder"><span>Add Image</span></div>',
+                '<p>TODO: write this section</p>', '<p>Hello [CLIENT NAME], welcome.</p>',
+                '<p>See [INSERT LINK HERE] for details.</p>',
+                '<script type="application/ld+json">{"name": "[PAGE TITLE]"}</script>'):
+        assert hits(bad), f"placeholder passed: {bad}"
+    for ok in ('<!-- [CASE STUDY SUMMARY: hidden in a comment] TODO -->',
+               '<style>#x [data-tag="a"] { color: red; } /* TODO */</style>',
+               '<script>var a = [1, 2]; // TODO</script>',
+               '<img alt="Add Image" src="a.jpg">', '<p>Results [n=47], measured by OmniFit.</p>',
+               '<p>Mark came in at 248 lbs [weighed on the Bodystat].</p>', '<p>Add images of your space to the app.</p>',
+               '<script type="application/ld+json">{"knowsAbout": ["NASM CPT", "ACE"]}</script>'):
+        assert hits(ok) == [], f"legitimate copy flagged: {ok} -> {hits(ok)}"
+
 # Every rule names the tier it encodes. TIER 1 rules report a violation; TIER 2
 # rules report a MISSING CONDITION. See CANON COMPLIANCE SCREEN - TWO TIERS.
 COMPLIANCE = [
@@ -1143,7 +1218,12 @@ BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES",
           "$475", "$510", "$550", "$625", "$650", "$675", "$700", "$725",
           "$755", "$875", "$950", "$975", "$995",
           # August add-ons: guest 75 (now 90), referral credit 50
-          "$50", "$75",
+          # $75 is NOT here (Audit Reconciliation run, Oct 18 2026): it is the
+          # Virtual Performance Assessment price (CANON CANONICAL FACTS). It
+          # stays banned in its August MEANINGS (guest add-on, travel fee) via
+          # retired_75 below, which reads context the way retired_pack_rate
+          # does for $140.
+          "$50",
           "$1,005", "$1,395", "$1,400", "$1,425", "$1,625", "$1,700",
           "$1,725", "$1,860", "$1,950", "$2,150", "$2,700", "$2,850",
           "$4,185", "$5,175", "$5,580"]
@@ -1218,6 +1298,22 @@ RETIRED_LAUNCH_COPY = [
     # outside it." (territory pages: "No travel fee in [Town]; it's inside our
     # in-home service area.")
     "depending on location", "varies by location",
+    # Audit Reconciliation run (Oct 18 2026; CANON CANONICAL FACTS). Each is
+    # the retired form of a canonical fact: the consultation is not an
+    # assessment; the assessment sets 12 metrics in 7 categories; the travel
+    # fee is named by area; reviews are "4.98 average across 190+ reviews";
+    # the audience is "built for professionals 30+"; retention is the
+    # /outcomes figure; check-ins follow the Dial; sessions are 60 minutes
+    # (30 on the Reset); the early exit names statutory rights.
+    "45-minute movement assessment", "seven tracked benchmarks",
+    "a travel fee may apply outside it", "training throughout San Diego County",
+    "available throughout San Diego County",
+    "five-star reviews", "5.0 rating", "5.0 · 190+", "Rated 5.0",
+    "verified reviews", "verified five-star", "works exclusively with",
+    "client tenure", "6 months minimum",
+    "Unlimited coach communication", "check-in submissions required",
+    "45–60 min", "30 or 45-minute", "30–45 min",
+    "is the only exit",
 ]
 
 def retired_launch_copy(text):
@@ -1256,10 +1352,17 @@ def _selftest_retired_copy():
              "Executive Reset, tell us in writing and we'll refund the unused portion of your "
              "enrollment. Private 1:1 coaching inside Teqneeq FHC, a members-only facility in "
              "4S Ranch. 190+ Reviews. nemezio@omnifittraining.com $200 per 4 weeks "
-             "https://g.page/r/CcePeMjnbDe9EBM No travel fee inside our in-home service area; "
-             "a travel fee may apply outside it. No travel fee in Del Mar; it's inside our "
-             "in-home service area. 5-packs run $180 to $250 per session depending on setting "
-             "and membership.</p>")
+             "https://g.page/r/CcePeMjnbDe9EBM No travel fee in Carmel Valley, Santaluz, "
+             "Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home "
+             "service area a travel fee applies, confirmed before you book. No travel fee in "
+             "Santaluz; it's inside our in-home service area. A travel fee applies in Del Mar, "
+             "confirmed before you book. 5-packs run $180 to $250 per session depending on "
+             "setting and membership. 4.98 average across 190+ reviews (Google, Yelp, Thumbtack "
+             "and Bark). Built for professionals 30+. About half of clients train with OmniFit "
+             "for 6 months or longer (see Outcomes). Sessions are 60 minutes; 30 minutes on the "
+             "Executive Reset. Apart from your statutory cancellation rights, the 30-Day Fit "
+             "Guarantee is the only early exit. A 45-minute consultation, then the Performance "
+             "Assessment. In-home training across North County San Diego.</p>")
     assert retired_launch_copy(clean) == [], "retired-copy rule fired on canonical copy"
     return len(RETIRED_LAUNCH_COPY)
 
@@ -1439,6 +1542,33 @@ def retired_pack_rate(text):
             out.append(t[max(0, m.start()-90):m.end()+90].strip())
     return out
 
+_VIRTUAL_ASSESS = r'virtual (?:performance )?assessment'
+
+def retired_75(text):
+    """$75 anywhere except as the Virtual Performance Assessment price
+    (CANON CANONICAL FACTS, Oct 17 2026). The name must sit within 250
+    characters before the figure or 120 after it, in the flattened copy, so
+    "It is $75, credited ..." after a sentence naming the assessment passes,
+    and "$75 guest add-on" or "$75 travel fee" fails."""
+    t = _flat(text); out = []
+    for m in re.finditer(r'\$75\b(?![\d,]*\d)', t):
+        after = t[m.end():m.end()+120]
+        if re.match(r'\s*[-–]\s*\d', after): continue      # third-party range
+        if re.search(_VIRTUAL_ASSESS, t[max(0, m.start()-250):m.start()] + after, re.I): continue
+        out.append(t[max(0, m.start()-90):m.end()+90].strip())
+    return out
+
+def _selftest_retired_75():
+    must_fail = ["<p>Guest add-on: $75 per session.</p>",
+                 "<p>A $75 travel fee applies outside the area.</p>",
+                 "<li>Extra session $75</li>"]
+    must_pass = ["<p>Remote clients start with the $75 Virtual Performance Assessment, credited toward the first purchase.</p>",
+                 "<p>Remote clients take the Virtual Performance Assessment. It is self-measured with live video guidance. It is $75, credited toward your first purchase.</p>",
+                 "<p>Reset Platinum is $750 per 4 weeks.</p>",
+                 "<p>Competitors charge $75-120 per session.</p>"]
+    for s in must_fail: assert retired_75(s), f"retired_75 self-test: should fail: {s}"
+    for s in must_pass: assert not retired_75(s), f"retired_75 self-test: should pass: {s}"
+
 # ─── (c) structure ─────────────────────────────────────────────────
 class _P(html.parser.HTMLParser):
     VOID = {'br','img','hr','meta','link','input','source','wbr','area','col','embed','param','track','path','svg'}
@@ -1486,6 +1616,15 @@ CANON_HASH_PATTERNS = {
     "archetypes":     (r'Archetype card bodies',         r'\(hash\s+([0-9a-f]{8,64})\s*;'),
     "9-point":        (r'9-point screen section body',   r'\(hash\s+([0-9a-f]{8,64})\s*;'),
 }
+
+# The twelve page/header pairs that carry the canonical pricing FAQ answer
+# (CANON INVARIANTS, "Canonical pricing FAQ answer"). Keep in step with CANON.
+PRICING_FAQ_CARRIERS = (
+    "corrective-exercise-post-rehab", "personal-trainer-4s-ranch", "personal-trainer-carlsbad",
+    "personal-trainer-carmel-valley", "personal-trainer-del-mar", "personal-trainer-encinitas",
+    "personal-trainer-fairbanks-ranch", "personal-trainer-la-jolla", "personal-trainer-rancho-bernardo",
+    "personal-trainer-rancho-santa-fe", "personal-trainer-santaluz", "personal-trainer-solana-beach",
+)
 
 def canon_hashes(path="CANON.md"):
     """The five invariant hashes as CANON.md records them.
@@ -1550,6 +1689,8 @@ def run():
 
     print("\n### (a) COMPLIANCE STRIKES")
     _selftest_case_study_exempt()   # Oct 17 2026 exemption fixes, both directions
+    _selftest_lbs_fragment()        # Oct 18 2026 audit: ranges with '+' and any dash, both directions
+    _selftest_retired_75()          # Oct 18 2026 audit: $75 legal only as the Virtual Performance Assessment
     ciia = {}
     for f in files:
         t = open(f).read()
@@ -1642,6 +1783,8 @@ def run():
             print(f"   {f}  [$150 published as a session rate - it is the assessment]  …{ctx[:90]}…"); B+=1
         for ctx in retired_pack_rate(src):
             print(f"   {f}  [$140 as a pack/session price - the retired August 10-pack rung]  …{ctx[:90]}…"); B+=1
+        for ctx in retired_75(src):
+            print(f"   {f}  [$75 outside the Virtual Performance Assessment - the retired guest add-on / travel fee]  …{ctx[:90]}…"); B+=1
         for i,l in enumerate(L,1):
             # a travel FEE, not any dollar figure sharing a line with the word travel
             if re.search(r'travel[^.<]{0,30}\$(?:50|75)\b|\$(?:50|75)\b[^.<]{0,30}travel', l, re.I):
@@ -1698,6 +1841,11 @@ def run():
     print("\n### (c) BROKEN STRUCTURE")
     faq.selftest()   # section-toggle summaries (rates V16) are not FAQ questions; both directions
     print("   (FAQ extractor: section-toggle exclusion self-tested both ways)")
+    _selftest_placeholder()
+    for f in ALL:
+        for hit, ctx in placeholder_copy(open(f).read()):
+            print(f"   {f}  [placeholder in visible copy: '{hit}']  …{ctx[:110]}…"); C+=1
+    print(f"   (placeholder rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
     inv={}; notrun=[]
     # The hashes CANON.md records, read once per run. A parse failure is
     # recorded, never swallowed: with no recorded table the comparison below
@@ -1810,6 +1958,17 @@ def run():
         if arch: inv.setdefault("archetypes",set()).add(hashlib.sha256("".join(arch).encode()).hexdigest()[:16])
         sm=re.search(r'THE 9-POINT MOVEMENT SCREEN.*?<p>(.*?)</p>.*?<ul class="[a-z]+-card-features">(.*?)</ul>\s*<p>(.*?)</p>',s,re.S)
         if sm: inv.setdefault("9-point",set()).add(hashlib.sha256((sm.group(1)+"".join(re.findall(r'<li>(.*?)</li>',sm.group(2)))+sm.group(3)).encode()).hexdigest()[:16])
+    # CARRIER LIST of the canonical pricing FAQ answer (CANON INVARIANTS). The
+    # hash says the carriers agree; this says WHICH files carry it, so a page
+    # dropping the block (or growing a copy) is a finding, not a silent change
+    # of scope. The-30-minute-executive-reset left the list in the Audit
+    # Reconciliation run (Oct 18 2026, owner-approved): its cost FAQ answers
+    # with the Reset tiers only.
+    carriers = {os.path.basename(x).replace('-header.html','').replace('.html','') + (' (header)' if '/headers/' in x else '')
+                for x in files if 'OmniFit Performance publishes its rates in full.' in open(x).read()}
+    want = {s + h for s in PRICING_FAQ_CARRIERS for h in ('', ' (header)')}
+    for x in sorted(carriers ^ want):
+        print(f"   [pricing FAQ carrier list] {x} {'carries the block but is not a listed carrier' if x in carriers else 'is a listed carrier but no longer carries the block'}"); C+=1
     for k,v in inv.items():
         if len(v)!=1: print(f"   [invariant mismatch] {k}: {v}"); C+=1
     # Two distinct failures, deliberately reported as two finding classes.

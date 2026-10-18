@@ -480,8 +480,12 @@ def build():
             body=body.strip("\n"),
             footer=footer_html,
         )
-        out = PUBLIC / ("index.html" if url_path == "/" else url_path.strip("/") + "/index.html")
-        out.parent.mkdir(parents=True, exist_ok=True)
+        # Flat files (CANON / DEPLOY.md "Trailing slash"): Cloudflare Pages
+        # serves public/<slug>.html at /<slug> directly, whereas
+        # public/<slug>/index.html is served at /<slug>/ with a redirect from
+        # /<slug> - and every canonical, sitemap entry and internal link uses
+        # /<slug>. The homepage stays public/index.html.
+        out = PUBLIC / ("index.html" if url_path == "/" else url_path.strip("/") + ".html")
         out.write_text(doc, encoding="utf-8")
         pages.append((url_path, title, meta_source, git_date(*sources, *([header_path] if header_path else []))))
 
@@ -653,7 +657,7 @@ def tracking_selftest(files):
     Returns the fixtures that misbehaved (empty = OK)."""
     base = set(check_tracking(files))
     kinds = lambda probs: sorted({p.split(":", 1)[0] for p in set(probs) - base})
-    page = next((r for r in sorted(files) if r.endswith("index.html")), None)
+    page = next((r for r in sorted(files) if r.endswith(".html") and "/" not in r and r != "404.html"), None)
     if page is None:
         return ["no built page to mutate"]
     bad = []
@@ -680,28 +684,54 @@ def tracking_selftest(files):
     return bad
 
 
+def check_flat(rels):
+    """Trailing slash (DEPLOY.md): rels = every file path under public/,
+    relative. A nested <dir>/index.html would be served at /<dir>/ and
+    /<dir> would redirect to it, so any index.html other than the homepage's
+    is a problem."""
+    return [f"nested: {r} exists; a page must be public/<slug>.html so /<slug> is served without a redirect"
+            for r in sorted(rels) if r.endswith("index.html") and r != "index.html"]
+
+
+def flat_selftest(rels):
+    """Adding a nested index.html to the real file list must raise exactly
+    one 'nested' problem, and a flat layout none. Returns the fixtures that misbehaved."""
+    bad = []
+    # Fixtures run on the real list minus anything the real check reports, so
+    # a real nested file is reported once (by the check), not as a fixture.
+    rels = {r for r in rels if not check_flat({r})}
+    for fx in ("about/index.html", "personal-trainer-del-mar/index.html"):
+        got = check_flat(rels | {fx})
+        if len(got) != 1 or not got[0].startswith("nested: " + fx):
+            bad.append(f"adding {fx}: expected one nested problem, got {got}")
+    if check_flat({"index.html", "about.html", "assets/site.css"}):
+        bad.append("a flat layout was flagged")
+    return bad
+
+
+def page_path(f):
+    """public/index.html -> '/', public/<slug>.html -> '/<slug>'."""
+    return "/" if f.name == "index.html" else "/" + f.stem
+
+
 def check():
     """Every internal link resolves, exactly one H1 per page, JSON-LD parses."""
-    files = sorted(PUBLIC.rglob("index.html"))
+    files = ownership.built_pages(PUBLIC)
     redirects = {}
     rules = read_redirects((PUBLIC / "_redirects").read_text(encoding="utf-8"))
     for a, b, _status, _ln in rules:
         redirects.setdefault(a, b)
-    existing = set()
-    for f in files:
-        rel = f.relative_to(PUBLIC).parent.as_posix()
-        existing.add("/" if rel == "." else "/" + rel)
+    existing = {page_path(f) for f in files}
     built = set(existing)  # built pages only (no static files)
     for f in PUBLIC.rglob("*"):
-        if f.is_file() and f.name != "index.html":
+        if f.is_file() and f not in files:
             existing.add("/" + f.relative_to(PUBLIC).as_posix())
 
     problems = []
     notes = []
     broken = {}
     for f in files:
-        rel = f.relative_to(PUBLIC).parent.as_posix()
-        page = "/" if rel == "." else "/" + rel
+        page = page_path(f)
         text = f.read_text(encoding="utf-8")
         n_h1 = len(H1_RE.findall(re.sub(r"<!--.*?-->", "", text, flags=re.S)))
         if n_h1 != 1:
@@ -768,7 +798,13 @@ def check():
                 continue  # images
     problems += [f"tracking check fixture misbehaved: {b}" for b in tracking_selftest(tracked)]
     problems += [f"tracking: {p}" for p in check_tracking(tracked)]
-    n_pages = sum(1 for r in tracked if r.endswith("index.html"))
+    n_pages = len(files)
+    # Trailing slash (DEPLOY.md): flat <slug>.html only. Fixtures first.
+    problems += [f"trailing-slash check fixture misbehaved: {b}" for b in flat_selftest(set(tracked) | {"index.html"})]
+    flat = check_flat({f.relative_to(PUBLIC).as_posix() for f in PUBLIC.rglob("*") if f.is_file()})
+    problems += [f"trailing slash: {p}" for p in flat]
+    notes.append(f"trailing slash: {n_pages} pages are public/index.html or public/<slug>.html, "
+                 f"no nested index.html; fixtures OK")
     notes.append(f"tracking: {len(tracked)} files scanned for {len(TRACKING_BANNED)} retired strings; "
                  f"{', '.join(TRACKING_ONCE)} once on each of {n_pages} pages; fixtures OK")
     # Keyword ownership (CANON KEYWORD OWNERSHIP). Fixtures first: if a fixture
@@ -788,8 +824,8 @@ def check():
     cdn = {}
     for rel, text in tracked.items():
         for url in set(SQSP_CDN_RE.findall(text)):
-            page = "/" + rel[:-len("index.html")].rstrip("/") if rel.endswith("index.html") else rel
-            cdn.setdefault(url, set()).add(page if page != "/" else "/")
+            page = page_path(Path(rel)) if (rel.endswith(".html") and "/" not in rel and rel != "404.html") else rel
+            cdn.setdefault(url, set()).add(page)
     for url in sorted(cdn):
         warnings.append(f"squarespace-cdn.com image still referenced: {url.split('/')[-1].split('?')[0]} "
                         f"on {', '.join(sorted(cdn[url]))}")

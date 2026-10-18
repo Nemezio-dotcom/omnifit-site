@@ -38,9 +38,11 @@ function serve() {
   return new Promise(res => {
     const srv = http.createServer((req, rsp) => {
       let p = decodeURIComponent(req.url.split('?')[0]);
-      let f = path.join(ROOT, p);
-      if (fs.existsSync(f) && fs.statSync(f).isDirectory()) f = path.join(f, 'index.html');
-      if (!fs.existsSync(f)) { rsp.writeHead(404); rsp.end(); return; }
+      if (p.length > 1) p = p.replace(/\/+$/, '');
+      // Cloudflare Pages layout: / -> index.html, /<slug> -> <slug>.html.
+      let f = p === '/' ? path.join(ROOT, 'index.html') : path.join(ROOT, p);
+      if (!(fs.existsSync(f) && fs.statSync(f).isFile())) f = path.join(ROOT, p + '.html');
+      if (!f.startsWith(ROOT) || !fs.existsSync(f) || !fs.statSync(f).isFile()) { rsp.writeHead(404); rsp.end(); return; }
       rsp.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' });
       fs.createReadStream(f).pipe(rsp);
     }).listen(0, '127.0.0.1', () => res(srv));
@@ -49,14 +51,12 @@ function serve() {
 
 function pages() {
   if (only.length) return only;
+  // Built pages: public/index.html (/) and public/<slug>.html (/<slug>).
   const out = [];
-  (function walk(d, rel) {
-    for (const n of fs.readdirSync(d)) {
-      const f = path.join(d, n);
-      if (fs.statSync(f).isDirectory()) { if (n !== 'assets') walk(f, rel + n + '/'); }
-      else if (n === 'index.html') out.push('/' + rel);
-    }
-  })(ROOT, '');
+  for (const n of fs.readdirSync(ROOT)) {
+    if (n === 'index.html') out.push('/');
+    else if (n.endsWith('.html') && n !== '404.html') out.push('/' + n.slice(0, -5));
+  }
   return out.sort();
 }
 
