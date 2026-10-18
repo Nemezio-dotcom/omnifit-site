@@ -365,9 +365,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   price printed on the page. One Offer per product on the page. Recurring
   products: UnitPriceSpecification, billingDuration 4 WEE, priceType
   Subscription. Foundation offers are one-time: price = the three-cycle
-  total, cycle price in the description. FAQPage mirrors the ten on-page
+  total, cycle price in the description. FAQPage mirrors the eleven on-page
   FAQ questions verbatim, in page order (V5, Oct 17 2026: accountability and
-  plan-change questions added). LocalBusiness referenced by @id.
+  plan-change questions added; V6, Oct 17 2026: "Is OmniFit worth the price
+  compared to a regular gym membership?", the homepage answer verbatim). LocalBusiness referenced by @id.
   V4: FAQ replaced (pricing and commitment); OfferCatalog rebuilt with
   sessions, add-ons, deposit and assessment. -->
 <script type="application/ld+json">
@@ -1184,6 +1185,14 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
             "@type": "Answer",
             "text": "Only for studio training. Studio Momentum and above, on The Foundation or The Program, requires a Teqneeq membership at $119 per month. Teqneeq bills monthly; it is not an OmniFit charge, and it includes facility access on non-training days. Studio couples need it for both partners. In-home and virtual clients don't, and studio non-member session prices include a day pass."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Is OmniFit worth the price compared to a regular gym membership?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, if you want a plan, not just access: OmniFit builds your program from your assessment. The $150 Performance Assessment is credited toward your first cycle. If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. Pause weeks, credit for sessions OmniFit cancels and The Foundation's three 4-week cycles in one payment protect your progress."
+          }
         }
       ]
     }
@@ -1638,6 +1647,92 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     #omni-rates .rt-policies-5 .rt-policy:nth-child(4), #omni-rates .rt-policies-5 .rt-policy:nth-child(5) { grid-column: auto; }
     #omni-rates .rt-policies-5 { grid-template-columns: 1fr; }
   }
+
+  /* ===== V16: STARTING-OPTION CHOOSER ===== */
+  #omni-rates .rt-ch-section { margin-bottom: 8px; }
+  #omni-rates .rt-ch-section .rt-section-head { margin-bottom: 26px; }
+  #omni-rates .rt-ch-lede { font-size: 14.5px; max-width: 620px; margin: 4px auto 0; color: var(--white-70); }
+  #omni-rates .rt-ch { max-width: 940px; margin: 0 auto 48px; }
+  #omni-rates .rt-ch-ui { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  #omni-rates .rt-ch-ui[hidden] { display: none; }
+  #omni-rates .rt-ch-form, #omni-rates .rt-ch-out { background: linear-gradient(160deg, var(--navy-surface) 0%, var(--navy-light) 65%); border: 1px solid rgba(201,168,76,0.35); border-radius: var(--radius-lg); padding: 24px 22px; min-width: 0; }
+  #omni-rates .rt-ch-step { border: 0; margin: 0 0 20px; min-width: 0; }
+  #omni-rates .rt-ch-step legend { display: flex; align-items: center; gap: 10px; padding: 0; margin-bottom: 12px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--white); }
+  #omni-rates .rt-ch-num { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 26px; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--gold); color: var(--gold); font-size: 12px; letter-spacing: 0; }
+  #omni-rates .rt-ch-opts { display: flex; flex-wrap: wrap; gap: 10px; }
+  #omni-rates .rt-ch-opts[hidden] { display: none; }
+  #omni-rates .rt-ch-opt { position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 3px; padding: 13px 14px; border: 1px solid var(--white-20); border-radius: var(--radius); background: var(--white-05); cursor: pointer; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; }
+  #omni-rates .rt-ch-opts-4 .rt-ch-opt { flex: 1 1 calc(50% - 5px); }
+  #omni-rates .rt-ch-opt:hover { border-color: rgba(201,168,76,0.6); }
+  #omni-rates .rt-ch-opt input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  #omni-rates .rt-ch-opt-name { font-family: 'Montserrat', sans-serif !important; font-size: 14.5px; font-weight: 700; color: var(--white); line-height: 1.3; }
+  #omni-rates .rt-ch-opt-sub { font-family: 'Montserrat', sans-serif !important; font-size: 12px; color: var(--white-70); line-height: 1.4; }
+  #omni-rates .rt-ch-opt.is-checked { border-color: var(--gold); background: var(--gold-dim); box-shadow: inset 0 0 0 1px var(--gold); }
+  #omni-rates .rt-ch-opt.is-checked .rt-ch-opt-sub { color: var(--gold-light); }
+  #omni-rates .rt-ch-opt:focus-within { outline: 2px solid var(--gold-light); outline-offset: 2px; }
+  #omni-rates .rt-ch-couples { display: flex; align-items: center; gap: 12px; cursor: pointer; font-family: 'Montserrat', sans-serif !important; font-size: 14px; font-weight: 600; color: var(--white-90); }
+  #omni-rates .rt-ch-couples[hidden] { display: none; }
+  #omni-rates .rt-ch-couples input { -webkit-appearance: none; appearance: none; position: relative; flex: 0 0 44px; width: 44px; height: 24px; border-radius: 12px; background: var(--white-20); border: 1px solid var(--white-30); cursor: pointer; transition: background 0.2s; }
+  #omni-rates .rt-ch-couples input::before { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--white); transition: transform 0.2s; }
+  #omni-rates .rt-ch-couples input:checked { background: var(--gold); border-color: var(--gold); }
+  #omni-rates .rt-ch-couples input:checked::before { transform: translateX(20px); background: var(--navy); }
+  #omni-rates .rt-ch-couples input:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+  #omni-rates .rt-ch-out { display: flex; flex-direction: column; gap: 18px; }
+  #omni-rates .rt-ch-prompt { font-size: 14px; color: var(--white-70); margin: 0 0 12px; }
+  #omni-rates .rt-ch-kicker { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  #omni-rates .rt-ch-title { font-family: 'Playfair Display', serif !important; font-size: 26px; font-weight: 700; line-height: 1.2; color: var(--white); margin: 0 0 4px; }
+  #omni-rates .rt-ch-title span { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 13px; font-weight: 600; color: var(--gold-light); margin-top: 4px; }
+  #omni-rates .rt-ch-meta { font-size: 13px; color: var(--white-70); margin: 0 0 14px; }
+  #omni-rates .rt-ch-figs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+  #omni-rates .rt-ch-fig { flex: 1 1 140px; min-width: 0; background: rgba(10,22,40,0.45); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 12px 14px; }
+  #omni-rates .rt-ch-big { display: block; font-family: 'Playfair Display', serif !important; font-size: 28px; font-weight: 700; line-height: 1.1; color: var(--white); }
+  #omni-rates .rt-ch-cap { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 11.5px; line-height: 1.45; color: var(--white-70); margin-top: 4px; }
+  #omni-rates .rt-ch-lines { list-style: none; padding: 0; display: grid; gap: 8px; margin: 0 0 12px; }
+  #omni-rates .rt-ch-lines li { position: relative; padding-left: 18px; font-family: 'Montserrat', sans-serif !important; font-size: 13.5px; line-height: 1.6; color: var(--white-90); }
+  #omni-rates .rt-ch-lines li::before { content: ''; position: absolute; left: 2px; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+  #omni-rates .rt-ch-lines li.is-key { color: var(--white); font-weight: 700; }
+  #omni-rates .rt-ch-more, #omni-rates .rt-ch-more:link, #omni-rates .rt-ch-more:visited { font-family: 'Montserrat', sans-serif !important; font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold) !important; text-decoration: none; }
+  #omni-rates .rt-ch-more::after { content: ' \203A'; font-size: 14px; line-height: 0; }
+  #omni-rates .rt-ch-cta .rt-btn { width: 100%; text-align: center; }
+  #omni-rates .rt-ch-noscript { list-style: none; padding: 0; display: grid; gap: 8px; max-width: 560px; margin: 0 auto; }
+  #omni-rates .rt-ch-noscript a, #omni-rates .rt-ch-noscript a:link, #omni-rates .rt-ch-noscript a:visited { color: var(--gold) !important; text-decoration: underline; font-size: 14px; }
+  #omni-rates .rt-subhead { font-family: 'Playfair Display', serif !important; font-size: clamp(22px, 3vw, 28px); font-weight: 700; line-height: 1.2; color: var(--white); margin-bottom: 8px; }
+  #omni-rates .rt-subhead em { font-style: italic; color: var(--gold); }
+
+  /* ===== V16: EXPANDABLE DETAIL SECTIONS ===== */
+  #omni-rates .rt-xsec { display: block; padding: 0 28px; margin: 0 0 14px; scroll-margin-top: 120px; }
+  #omni-rates .rt-xsec > summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 1120px; margin: 0 auto; padding: 18px 22px; background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); cursor: pointer; transition: border-color 0.25s, background 0.25s; }
+  #omni-rates .rt-xsec > summary::-webkit-details-marker { display: none; }
+  #omni-rates .rt-xsec > summary::marker { content: ''; }
+  #omni-rates .rt-xsec > summary:hover { border-color: rgba(201,168,76,0.6); }
+  #omni-rates .rt-xsec > summary:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+  #omni-rates .rt-xsec > summary h2 { font-size: clamp(21px, 3vw, 28px); margin: 0; text-align: left; min-width: 0; }
+  #omni-rates .rt-xsec-cue { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 10px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); }
+  #omni-rates .rt-xsec-cue::before { content: 'Show'; }
+  #omni-rates .rt-xsec-cue::after { content: ''; width: 9px; height: 9px; border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: translateY(-3px) rotate(45deg); transition: transform 0.25s; }
+  #omni-rates .rt-xsec[open] > summary { border-color: rgba(201,168,76,0.45); background: var(--navy-light); margin-bottom: 30px; }
+  #omni-rates .rt-xsec[open] .rt-xsec-cue::before { content: 'Hide'; }
+  #omni-rates .rt-xsec[open] .rt-xsec-cue::after { transform: translateY(2px) rotate(-135deg); }
+  #omni-rates .rt-xsec-body { margin: 0 -28px 40px; }
+  #omni-rates .rt-xsec-body > .rt-section:first-child .rt-section-head { margin-bottom: 28px; }
+  #omni-rates [id^="rt-"] { scroll-margin-top: 120px; }
+  @media (max-width: 768px) {
+    #omni-rates .rt-ch-ui { grid-template-columns: 1fr; gap: 14px; }
+    #omni-rates .rt-ch { margin-bottom: 40px; }
+    #omni-rates .rt-xsec { padding: 0 20px; }
+    #omni-rates .rt-xsec-body { margin: 0 -20px 32px; }
+    #omni-rates .rt-xsec > summary { padding: 16px 16px 16px 18px; }
+  }
+  @media (max-width: 640px) {
+    #omni-rates .rt-ch-form, #omni-rates .rt-ch-out { padding: 20px 16px; }
+    #omni-rates .rt-ch-opts { flex-direction: column; gap: 8px; }
+    #omni-rates .rt-ch-opt, #omni-rates .rt-ch-opts-4 .rt-ch-opt { flex: none; flex-direction: row; align-items: baseline; justify-content: space-between; gap: 12px; padding: 12px 14px; }
+    #omni-rates .rt-ch-opt-sub { text-align: right; }
+    #omni-rates .rt-ch-title { font-size: 23px; }
+    #omni-rates .rt-ch-big { font-size: 25px; }
+    #omni-rates .rt-ch-cta .rt-btn { max-width: none; }
+    #omni-rates .rt-xsec-cue::before { content: none; }
+  }
 </style>
 </head>
 <body class="page page--training-rates-san-diego">
@@ -1737,6 +1832,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 <!-- V14 CHANGES (Oct 17 2026, Accountability Dial + flexibility): under The Program, four new sections — the Accountability Dial table (every tier, no price difference), "What protects your investment", "What happens if your schedule or goals change" (tier-change rules per CANON TIER CHANGES, plus a worked example whose figures are COMPUTED by the page script from data attributes carrying the card prices, never hand-written), and "Why premium". Two FAQ questions added (accountability, changing your plan); header FAQPage mirrors ten. Jump bar gained three links. "Included in every program" names the Dial. No price, cadence or Stripe reference changed. -->
 <!-- V15 CHANGES (Oct 17 2026, Dial follow-up): the worked example's four figures ($140 per session · 8 sessions · $1,120 credit · $680 due) are now static text, verified in code against the card (560 / 4, 2 x 4, 8 x 140, 1,800 - 1,120); the V14 page script and data attributes that computed them are removed, and certify.py now bans $140 only as a pack/session price. Dial table gains an "Available on" row: Executive Reset Bronze offers Coached or Train Only; the Tune-Up has no setting, it is the graduation point. Accountability FAQ answer says so (header mirrors). No price, cadence or Stripe reference changed. -->
 <!-- V13 CHANGES: pricing clarity (Oct 2026). "Two ways to train" definitions above the rates; "What you pay, and when"; "Commitment at a glance" table; every price carries "per 4-week cycle" and sessions per cycle; Foundation rows show the total due at signup and sessions across 12 weeks; tiers the Foundation does not offer read "Start on The Program"; Teqneeq membership line beside studio prices; one sessions table (singles, 5-packs, extra session, guest add-on) with expiry; FAQ replaced with eight pricing questions; emoji replaced by gold line SVGs; referral credit and the duplicate single-session card removed. The assessment paragraph (byte-identical, Class IIa block) moved from the FAQ into the Assessment card. Header rebuilt to match. -->
+<!-- V16 CHANGES (Oct 17 2026, decision-first restructure): no price, term, policy, FAQ answer or locked wording changed. A starting-option chooser sits under the hero (#rt-choose: format, then frequency; couples toggle; result in an aria-live region) and every figure in its result is computed by the page script from data attributes carrying the card prices; site.js sends rates_chooser_result from the result's data attributes. "Two Ways to Train" moved into the chooser (H3, #rt-paths); "Commitment at a Glance" moved under What You Pay (H3, #rt-commit). Order: hero, chooser, What You Pay (assessment, commitment, inclusions), What Protects Your Investment (and the three policy cards), Why This Costs More (and Built For / Not the Right Fit), then seven expandable sections (<details>, closed by default, summary = the existing H2, full text in the HTML): The Foundation, The Program, Sessions Without a Program, The Tune-Up, The Executive Reset, What Happens If Your Schedule or Goals Change, Every Tier Includes Your Choice of Accountability; then the FAQ and the final CTA. Each section id is on its <details>; site.js opens a closed section when a link or the URL hash targets it. FAQ gains "Is OmniFit worth the price compared to a regular gym membership?" (the homepage answer, verbatim); header FAQPage mirrors eleven. -->
 
 
 
@@ -1753,7 +1849,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p class="rt-hero-sub">Structured coaching programs for busy professionals 30+, in-studio, in-home, or virtual. Every rate on this page, in full. OmniFit bills in 4-week cycles, never by the calendar month, and adds nothing at checkout.</p>
     <div class="rt-cta-row">
       <a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
-      <a class="rt-btn rt-btn-ghost" href="#rt-paths">Compare Programs</a>
+      <a class="rt-btn rt-btn-ghost" href="#rt-choose">Compare Programs</a>
     </div>
   </section>
 
@@ -1763,12 +1859,75 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div>
 
+  <!-- ═══════ CHOOSER (V16): the starting option for a new client in two steps. Every figure in the result is computed by the page script from the data attributes on #rt-chooser, which carry the card prices; nothing in the result is typed by hand. site.js sends rates_chooser_result from the result's data attributes. ═══════ -->
+  <section class="rt-section rt-ch-section" id="rt-choose" aria-labelledby="rt-choose-h">
+    <div class="rt-section-head">
+      <span class="rt-label">Start Here</span>
+      <hr class="rt-divider">
+      <h2 id="rt-choose-h">Find your starting option in two steps.</h2>
+      <p class="rt-ch-lede">Pick where and how often you want to train. The result shows the option a new client starts on and what it costs.</p>
+    </div>
+
+    <div class="rt-ch" id="rt-chooser"
+      data-assessment="150" data-membership="119" data-cycle-weeks="4" data-foundation-cycles="3"
+      data-sessions-1="4" data-sessions-2="8" data-sessions-3="12"
+      data-foundation-studio-1="560" data-foundation-studio-2="1100" data-foundation-inhome-1="800"
+      data-foundation-couples-studio-1="850" data-foundation-couples-inhome-1="1250"
+      data-program-studio-1="640" data-program-studio-2="1250" data-program-studio-3="1800"
+      data-program-inhome-1="900" data-program-inhome-2="1800" data-program-inhome-3="2600" data-from-inhome-3=""
+      data-program-couples-studio-1="1000" data-program-couples-studio-2="2000"
+      data-program-couples-inhome-1="1450" data-program-couples-inhome-2="2900"
+      data-reset-async="200" data-reset-1="500" data-reset-2="750" data-reset-3="1100">
+      <div class="rt-ch-ui" hidden>
+        <div class="rt-ch-form">
+          <fieldset class="rt-ch-step">
+            <legend><span class="rt-ch-num" aria-hidden="true">1</span>Step 1: Where do you want to train?</legend>
+            <div class="rt-ch-opts">
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-format" value="studio"><span class="rt-ch-opt-name">Studio</span><span class="rt-ch-opt-sub">Teqneeq, 4S Ranch</span></label>
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-format" value="inhome"><span class="rt-ch-opt-name">In-home</span><span class="rt-ch-opt-sub">We bring the equipment</span></label>
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-format" value="virtual"><span class="rt-ch-opt-name">Virtual</span><span class="rt-ch-opt-sub">Live video, nationwide</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="rt-ch-step">
+            <legend><span class="rt-ch-num" aria-hidden="true">2</span>Step 2: How often?</legend>
+            <div class="rt-ch-opts" data-opts="inperson">
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-freq" value="1"><span class="rt-ch-opt-name">1x/week</span><span class="rt-ch-opt-sub">Momentum</span></label>
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-freq" value="2"><span class="rt-ch-opt-name">2x/week</span><span class="rt-ch-opt-sub">Performance</span></label>
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-freq" value="3"><span class="rt-ch-opt-name">3x/week</span><span class="rt-ch-opt-sub">Peak</span></label>
+            </div>
+            <div class="rt-ch-opts rt-ch-opts-4" data-opts="virtual" hidden>
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-tier" value="async"><span class="rt-ch-opt-name">Bronze</span><span class="rt-ch-opt-sub">Async, no live sessions</span></label>
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-tier" value="1"><span class="rt-ch-opt-name">Gold</span><span class="rt-ch-opt-sub">1x/week live</span></label>
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-tier" value="2"><span class="rt-ch-opt-name">Platinum</span><span class="rt-ch-opt-sub">2x/week live</span></label>
+              <label class="rt-ch-opt"><input type="radio" name="rt-ch-tier" value="3"><span class="rt-ch-opt-name">Black</span><span class="rt-ch-opt-sub">3x/week live</span></label>
+            </div>
+          </fieldset>
+          <label class="rt-ch-couples"><input type="checkbox" role="switch" id="rt-ch-couples"><span>Training as a couple?</span></label>
+        </div>
+        <div class="rt-ch-out">
+          <div class="rt-ch-result" id="rt-ch-result" aria-live="polite" aria-atomic="true"></div>
+          <div class="rt-ch-cta"><a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a></div>
+        </div>
+      </div>
+      <noscript>
+        <ul class="rt-ch-noscript">
+          <li><a href="#rt-pay">What you pay, and when</a></li>
+          <li><a href="#rt-foundation">The Foundation: how new clients start</a></li>
+          <li><a href="#rt-program">The Program: every tier, every 4 weeks</a></li>
+          <li><a href="#rt-sessions">Sessions without a program</a></li>
+          <li><a href="#rt-tuneup">The Tune-Up</a></li>
+          <li><a href="#rt-reset">The Executive Reset (virtual)</a></li>
+        </ul>
+      </noscript>
+    </div>
+  </section>
+
   <!-- ═══════ TWO WAYS TO TRAIN (definitions; each paragraph quotable on its own) ═══════ -->
   <div class="rt-section" id="rt-paths">
     <div class="rt-section-head rt-reveal" style="margin-bottom:28px;">
       <span class="rt-label">How OmniFit Is Structured</span>
       <hr class="rt-divider">
-      <h2>Two Ways to <em>Train</em></h2>
+      <h3 class="rt-subhead">Two Ways to <em>Train</em></h3>
     </div>
   </div>
 
@@ -1796,16 +1955,18 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   <nav class="rt-jump" aria-label="Jump to rates">
     <div class="rt-jump-inner">
       <span class="rt-jump-label">Rates</span>
+      <a href="#rt-choose">Find Yours</a>
       <a href="#rt-pay">What You Pay</a>
       <a href="#rt-commit">Commitment</a>
+      <a href="#rt-protect">Protection</a>
+      <a href="#rt-why">Why Premium</a>
       <a href="#rt-foundation">Foundation</a>
       <a href="#rt-program">Program</a>
-      <a href="#rt-dial">Accountability</a>
-      <a href="#rt-change">Changes</a>
-      <a href="#rt-why">Why Premium</a>
       <a href="#rt-sessions">Sessions</a>
       <a href="#rt-tuneup">Tune-Up</a>
       <a href="#rt-reset">Virtual</a>
+      <a href="#rt-change">Changes</a>
+      <a href="#rt-dial">Accountability</a>
       <a href="#rt-faq">FAQ</a>
     </div>
   </nav>
@@ -1860,7 +2021,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">Side by Side</span>
       <hr class="rt-divider">
-      <h2>Commitment at a <em>Glance</em></h2>
+      <h3 class="rt-subhead">Commitment at a <em>Glance</em></h3>
     </div>
   </div>
 
@@ -1904,12 +2065,129 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div>
 
+  <!-- ═══════ WHAT PROTECTS YOUR INVESTMENT ═══════ -->
+  <div class="rt-section" id="rt-protect">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Standards That Protect Your Slot and Your Results</span>
+      <hr class="rt-divider">
+      <h2>What Protects Your <em>Investment</em></h2>
+    </div>
+  </div>
+
+  <div class="rt-policies rt-policies-5" style="padding:0 28px;">
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
+      <h5>The assessment is credited</h5>
+      <p>The $150 Performance Assessment is credited toward your first purchase: a Foundation or Program cycle, an Executive Reset cycle, or a 5-session pack. You pay for the baseline once, and it becomes part of your program.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></div>
+      <h5>30-Day Fit Guarantee</h5>
+      <p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. No compliance test, no negotiation.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
+      <h5>Pause weeks</h5>
+      <p>Two across The Foundation with notice, extending the end date. Six per 12 months on The Program with 2 weeks' notice, credited against the next cycle. Travel doesn't cost you a session: on the Travel Protocol you can take a scheduled session live by video during a travel week, at no extra cost.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div>
+      <h5>Sessions OmniFit cancels are credited</h5>
+      <p>The 24-hour standard runs both ways. If OmniFit cancels a session, it is credited back to you.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></div>
+      <h5>The Foundation is a defined starter block</h5>
+      <p>Three 4-week cycles, one payment, a known end date. You know exactly what the first 12 weeks cost and what they contain before you start.</p>
+    </div>
+  </div>
+
+  <!-- POLICIES -->
+  <div class="rt-policies" style="padding:0 28px;">
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
+      <h5>Pause Weeks</h5>
+      <p>The Foundation includes two pause weeks across the course with notice, extending the end date. The Program includes six pause weeks per twelve months with two weeks' notice, credited against the next cycle.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></div>
+      <h5>Billing</h5>
+      <p>The Foundation is one payment at signup covering all three cycles. The Program is charged at the start of each 4-week cycle via auto-pay and ends with 30 days' notice; remaining credit is applied to the final cycle. No activation fees. Some clients pay with HSA or FSA funds. See how <a href="/hsa-fsa-personal-training">HSA and FSA eligibility</a> works.</p>
+    </div>
+    <div class="rt-policy rt-reveal">
+      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
+      <h5>24-Hour Policy</h5>
+      <p>Reschedule with 24 hours' notice, within the same 4-week cycle. Sessions cancelled with less than 24 hours' notice are forfeited. Sessions OmniFit cancels are credited.</p>
+    </div>
+  </div>
+
+  <!-- ═══════ WHY PREMIUM ═══════ -->
+  <div class="rt-section" id="rt-why">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Why the Rate</span>
+      <hr class="rt-divider">
+      <h2>Why This Costs More Than a Gym, a Class or a <em>Standard Trainer</em></h2>
+      <p style="color:var(--white-50); font-size:14px; max-width:720px; margin:8px auto 0;">You are paying for a measured system around the sessions, not for the sessions alone. Here is what the rate buys that the cheaper options don't include.</p>
+    </div>
+  </div>
+
+  <div class="rt-wrap">
+    <div class="rt-commit-wrap rt-reveal">
+      <table class="rt-commit rt-why-table">
+        <thead>
+          <tr><th scope="col"><span class="rt-sr">Element</span></th><th scope="col">Gym access</th><th scope="col">Group classes</th><th scope="col">A standard trainer</th><th scope="col">OmniFit Performance</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Who writes your program</th><td data-label="Gym access">You do.</td><td data-label="Group classes">The class, for everyone in the room.</td><td data-label="A standard trainer">The trainer, usually session by session.</td><td data-label="OmniFit Performance">Written for you from your Performance Assessment and rebuilt every 4-week cycle.</td></tr>
+          <tr><th scope="row">What a session is for</th><td data-label="Gym access">Whatever you decide.</td><td data-label="Group classes">Effort and energy.</td><td data-label="A standard trainer">A supervised workout.</td><td data-label="OmniFit Performance">Form, load and corrective work. The app carries the rest.</td></tr>
+          <tr><th scope="row">Between sessions</th><td data-label="Gym access">Nothing.</td><td data-label="Group classes">Nothing.</td><td data-label="A standard trainer">Varies.</td><td data-label="OmniFit Performance">Your program, logs and check-ins in one app, at the accountability setting you chose.</td></tr>
+          <tr><th scope="row">Measurement</th><td data-label="Gym access">The scale, if you weigh yourself.</td><td data-label="Group classes">A leaderboard.</td><td data-label="A standard trainer">Varies.</td><td data-label="OmniFit Performance">Bodystat QuadScan 4000, nine movement benchmarks, posture photos and strength, against your own baseline.</td></tr>
+          <tr><th scope="row">Joints and old injuries</th><td data-label="Gym access">Your problem.</td><td data-label="Group classes">The class doesn't slow down.</td><td data-label="A standard trainer">Depends on the trainer.</td><td data-label="OmniFit Performance">Corrective work in every warm-up and loading chosen for what your joints tolerate.</td></tr>
+          <tr><th scope="row">When life changes</th><td data-label="Gym access">The membership keeps billing.</td><td data-label="Group classes">The membership keeps billing.</td><td data-label="A standard trainer">Sessions lapse.</td><td data-label="OmniFit Performance">Pause weeks, a Dial you can turn down, tiers you can change between cycles, and the 30-Day Fit Guarantee.</td></tr>
+          <tr><th scope="row">Where it works</th><td data-label="Gym access">That gym.</td><td data-label="Group classes">That studio's schedule.</td><td data-label="A standard trainer">That floor.</td><td data-label="OmniFit Performance">Studio, in-home and virtual on one app. Your program travels with you.</td></tr>
+          <tr><th scope="row">The end goal</th><td data-label="Gym access">Keep the membership.</td><td data-label="Group classes">Keep coming.</td><td data-label="A standard trainer">Keep booking.</td><td data-label="OmniFit Performance">A client who no longer needs us every week: Full &rarr; Coached &rarr; Train Only &rarr; Tune-Up.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rt-steps-note rt-reveal">Even if you just want to train, we can start there. Train Only is a setting, not a lesser program: the sessions and the app program are the same at every setting.</p>
+  </div>
+
+  <!-- BUILT FOR / NOT THE RIGHT FIT -->
+  <div style="padding: 0 28px;">
+    <div class="rt-fit-grid">
+      <div class="rt-fit-col built-for rt-reveal">
+        <span class="rt-fit-label">Built For</span>
+        <ul class="rt-fit-list">
+          <li>Professionals 30+ managing demanding schedules</li>
+          <li>People with joint issues or injury history who need corrective-first training</li>
+          <li>Executives who want structured accountability, not random workouts</li>
+          <li>Anyone ready to commit to consistent, measurable progress</li>
+          <li>Travelers who need a program that works anywhere</li>
+        </ul>
+      </div>
+      <div class="rt-fit-col not-for rt-reveal">
+        <span class="rt-fit-label">Not the Right Fit</span>
+        <ul class="rt-fit-list">
+          <li>Looking for drop-in classes or group workouts</li>
+          <li>Want the cheapest option available</li>
+          <li>Prefer to train without coaching feedback or accountability</li>
+          <li>Looking for a 6-week quick fix or crash program</li>
+          <li>Not willing to follow a structured plan between sessions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ DETAIL (V16): expandable sections, closed by default; the full text stays in the HTML. Anchor links to a closed section open it (site.js). ═══════ -->
+
   <!-- ═══════ THE FOUNDATION ═══════ -->
-  <div class="rt-section" id="rt-foundation">
+  <details class="rt-xsec" id="rt-foundation">
+    <summary class="rt-xsec-sum section-toggle"><h2>The <em>Foundation</em></h2><span class="rt-xsec-cue" aria-hidden="true"></span></summary>
+    <div class="rt-xsec-body">
+  <div class="rt-section">
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">New Clients</span>
       <hr class="rt-divider">
-      <h2>The <em>Foundation</em></h2>
       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Three consecutive 4-week cycles. Each row shows the price per 4-week cycle and the total due at signup, which is that price times three. Studio programs are at Teqneeq FHC, 10772 Thornmint Rd, San Diego 92127.</p>
     </div>
   </div>
@@ -2000,16 +2278,17 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p style="font-size:13px; color:var(--white-50); text-align:center; max-width:760px; margin:0 auto;"><strong style="color:var(--gold);">Starting on The Program instead:</strong> a new client with prior training experience may start directly on The Program at any tier; The Foundation is then no longer available to them.</p>
     <p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:12px auto 0;"><strong>Foundation policy.</strong> The Foundation is non-refundable and the 30-Day Fit Guarantee is the only exit. Two pause weeks are available across the course with notice, extending the end date. Sessions OmniFit cancels are credited.</p>
   </div>
-
-  <div class="rt-spacer-sm"></div>
-
+    </div>
+  </details>
 
   <!-- ═══════ THE PROGRAM ═══════ -->
-  <div class="rt-section" id="rt-program">
+  <details class="rt-xsec" id="rt-program">
+    <summary class="rt-xsec-sum section-toggle"><h2>The <em>Program</em></h2><span class="rt-xsec-cue" aria-hidden="true"></span></summary>
+    <div class="rt-xsec-body">
+  <div class="rt-section">
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">Ongoing Coaching</span>
       <hr class="rt-divider">
-      <h2>The <em>Program</em></h2>
       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Continuation after The Foundation, or direct entry for clients with prior training experience. Each price is charged at the start of every 4-week cycle.</p>
     </div>
   </div>
@@ -2104,163 +2383,17 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. No compliance test, no negotiation.</p>
     </div>
   </div>
-
-  <div class="rt-spacer-sm"></div>
-
-  <!-- ═══════ ACCOUNTABILITY DIAL (every tier, no price difference) ═══════ -->
-  <div class="rt-section" id="rt-dial">
-    <div class="rt-section-head rt-reveal">
-      <span class="rt-label">Included at Every Tier</span>
-      <hr class="rt-divider">
-      <h2>Every Tier Includes Your Choice of <em>Accountability</em></h2>
-      <p style="color:var(--white-50); font-size:14px; max-width:720px; margin:8px auto 0;">Tier is how often we train. The Accountability Dial is how closely we follow you between sessions. Three settings, included at every tier of The Foundation and The Program and at every Executive Reset tier with live sessions, with no price difference. Executive Reset Bronze, which has no live sessions, offers Coached or Train Only. You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation. The Tune-Up has no setting: it is where the Dial ends.</p>
     </div>
-  </div>
-
-  <div class="rt-wrap">
-    <div class="rt-commit-wrap rt-reveal">
-      <table class="rt-commit rt-dial-table">
-        <thead>
-          <tr><th scope="col"><span class="rt-sr">Setting</span></th><th scope="col">Full Accountability</th><th scope="col">Coached</th><th scope="col">Train Only</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">What you log</th><td data-label="Full Accountability">Daily: nutrition, steps and sleep.</td><td data-label="Coached">A weekly written check-in.</td><td data-label="Train Only">A one-tap weekly check-in.</td></tr>
-          <tr><th scope="row">Coach contact</th><td data-label="Full Accountability">A coach reply within 1 business day.</td><td data-label="Coached">A coach reply to each weekly check-in.</td><td data-label="Train Only">Your sessions.</td></tr>
-          <tr><th scope="row">Habits and nutrition</th><td data-label="Full Accountability">Behavior-change coaching through Awareness, Regulation, Adaptation and Integration.</td><td data-label="Coached">1 to 3 habit targets at a time.</td><td data-label="Train Only">Nutrition on request.</td></tr>
-          <tr><th scope="row">Measurement</th><td data-label="Full Accountability">Reviewed with every check-in.</td><td data-label="Coached">A measurement review every 4 weeks.</td><td data-label="Train Only">Reassessment at least every 12 weeks.</td></tr>
-          <tr><th scope="row">Usually chosen by</th><td data-label="Full Accountability">New clients in the first cycles. This is the default.</td><td data-label="Coached">Clients whose routines hold through an ordinary week.</td><td data-label="Train Only">Clients who self-correct and want the sessions and the program.</td></tr>
-          <tr><th scope="row">Available on</th><td data-label="Full Accountability">Every tier of The Foundation and The Program; Executive Reset Gold, Platinum and Black.</td><td data-label="Coached">Every tier of The Foundation, The Program and the Executive Reset, including Bronze.</td><td data-label="Train Only">Every tier of The Foundation, The Program and the Executive Reset, including Bronze.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="rt-steps-note rt-reveal" style="margin-bottom:14px;"><strong style="color:var(--white);">At every setting:</strong> payment confirms your booking, sessions reschedule with 24 hours' notice, corrective work sits in every warm-up, and you are reassessed at least every 12 weeks.</p>
-    <div class="rt-guarantee rt-reveal" style="max-width:1120px; margin:0 auto 14px;">
-      <h4>Tracking is a diagnostic tool, not a life sentence.</h4>
-      <p>We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week. The path most clients follow: <strong style="color:var(--gold-light);">Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</strong>. The Tune-Up is not a fourth setting; it is graduation, the point at the end of the Dial.</p>
-      <p style="margin-top:10px;">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.</p>
-    </div>
-  </div>
-
-  <div class="rt-spacer-sm"></div>
-
-  <!-- ═══════ WHAT PROTECTS YOUR INVESTMENT ═══════ -->
-  <div class="rt-section" id="rt-protect">
-    <div class="rt-section-head rt-reveal">
-      <span class="rt-label">Standards That Protect Your Slot and Your Results</span>
-      <hr class="rt-divider">
-      <h2>What Protects Your <em>Investment</em></h2>
-    </div>
-  </div>
-
-  <div class="rt-policies rt-policies-5" style="padding:0 28px;">
-    <div class="rt-policy rt-reveal">
-      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
-      <h5>The assessment is credited</h5>
-      <p>The $150 Performance Assessment is credited toward your first purchase: a Foundation or Program cycle, an Executive Reset cycle, or a 5-session pack. You pay for the baseline once, and it becomes part of your program.</p>
-    </div>
-    <div class="rt-policy rt-reveal">
-      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></div>
-      <h5>30-Day Fit Guarantee</h5>
-      <p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. No compliance test, no negotiation.</p>
-    </div>
-    <div class="rt-policy rt-reveal">
-      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
-      <h5>Pause weeks</h5>
-      <p>Two across The Foundation with notice, extending the end date. Six per 12 months on The Program with 2 weeks' notice, credited against the next cycle. Travel doesn't cost you a session: on the Travel Protocol you can take a scheduled session live by video during a travel week, at no extra cost.</p>
-    </div>
-    <div class="rt-policy rt-reveal">
-      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div>
-      <h5>Sessions OmniFit cancels are credited</h5>
-      <p>The 24-hour standard runs both ways. If OmniFit cancels a session, it is credited back to you.</p>
-    </div>
-    <div class="rt-policy rt-reveal">
-      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></div>
-      <h5>The Foundation is a defined starter block</h5>
-      <p>Three 4-week cycles, one payment, a known end date. You know exactly what the first 12 weeks cost and what they contain before you start.</p>
-    </div>
-  </div>
-
-  <!-- ═══════ IF YOUR SCHEDULE OR GOALS CHANGE ═══════ -->
-  <div class="rt-section" id="rt-change">
-    <div class="rt-section-head rt-reveal">
-      <span class="rt-label">Flexibility</span>
-      <hr class="rt-divider">
-      <h2>What Happens If Your Schedule or <em>Goals Change</em></h2>
-    </div>
-  </div>
-
-  <div class="rt-wrap">
-    <div class="rt-commit-wrap rt-reveal">
-      <table class="rt-commit">
-        <thead>
-          <tr><th scope="col"><span class="rt-sr">Change</span></th><th scope="col">The Foundation</th><th scope="col">The Program</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Travel or a busy stretch</th><td data-label="The Foundation">Use the Travel Protocol: pause weeks, 2 across the course, with notice, which extend the end date; or take a scheduled session live by video during a travel week, at no extra cost.</td><td data-label="The Program">Use the Travel Protocol: pause weeks, 6 per 12 months, with 2 weeks' notice, credited against the next cycle; or take a scheduled session live by video during a travel week, at no extra cost.</td></tr>
-          <tr><th scope="row">More or less accountability</th><td data-label="The Foundation">Change your Dial setting at any 4-week cycle boundary, including during The Foundation.</td><td data-label="The Program">Change your Dial setting at any 4-week cycle boundary.</td></tr>
-          <tr><th scope="row">More sessions</th><td data-label="The Foundation">Step up anytime. Between Foundation tiers, you stay on The Foundation and pay the difference for the remaining cycles. To a tier offered only on The Program, your Foundation ends at the next cycle boundary and every unused session is credited toward your first Program cycle.</td><td data-label="The Program">Move up a tier between cycles, with notice before the next cycle starts.</td></tr>
-          <tr><th scope="row">Fewer sessions</th><td data-label="The Foundation">Not during The Foundation. The first 12 weeks are built as a block; the step down comes after it.</td><td data-label="The Program">Move down a tier between cycles, with notice before the next cycle starts.</td></tr>
-          <tr><th scope="row">Not the right fit</th><td data-label="The Foundation">The 30-Day Fit Guarantee.</td><td data-label="The Program">The 30-Day Fit Guarantee in the first 30 days; 30 days' notice after that, with remaining credit applied to the final cycle.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="rt-steps-note rt-reveal" style="max-width:860px; margin-bottom:24px;">On The Program you can move up or down a tier between cycles. During The Foundation you can step up, not down &mdash; the first 12 weeks are built as a block. Want more sessions mid-Foundation? Step up anytime. If your new tier is only offered on The Program, your Foundation ends there &mdash; every unused session is credited toward your first Program cycle, and you pay only the difference. You can adjust your accountability level at any cycle boundary.</p>
-
-    <div class="rt-guarantee rt-reveal rt-example" style="max-width:1120px; margin:0 auto 14px;">
-      <h4>Worked example: Foundation Momentum to Program Peak</h4>
-      <p>A client on studio Momentum on The Foundation ($560 per 4-week cycle, 4 sessions per cycle, three cycles) decides after the first cycle that they want to train three times a week. Studio Peak is only offered on The Program, at $1,800 per 4-week cycle, so The Foundation ends at the cycle boundary and the unused sessions become credit.</p>
-      <ul class="rt-feature-list" style="margin-top:12px;">
-        <li><strong>Foundation per-session rate:</strong> $560 &divide; 4 sessions = <span class="rt-out">$140</span> per session</li>
-        <li><strong>Unused Foundation sessions:</strong> 2 remaining cycles &times; 4 sessions = <span class="rt-out">8</span> sessions</li>
-        <li><strong>Credit:</strong> 8 sessions &times; $140 = <span class="rt-out">$1,120</span></li>
-        <li><strong>First Peak cycle on The Program:</strong> $1,800 &minus; $1,120 credit = <strong><span class="rt-out">$680</span> due</strong></li>
-      </ul>
-      <p style="margin-top:12px; font-size:13px; color:var(--white-70);">If the credit ever exceeds the first Program cycle, the remainder carries forward as session credit against the next cycle, never as cash. The figures above follow from the published rates on this page.</p>
-    </div>
-  </div>
-
-  <div class="rt-spacer-sm"></div>
-
-  <!-- ═══════ WHY PREMIUM ═══════ -->
-  <div class="rt-section" id="rt-why">
-    <div class="rt-section-head rt-reveal">
-      <span class="rt-label">Why the Rate</span>
-      <hr class="rt-divider">
-      <h2>Why This Costs More Than a Gym, a Class or a <em>Standard Trainer</em></h2>
-      <p style="color:var(--white-50); font-size:14px; max-width:720px; margin:8px auto 0;">You are paying for a measured system around the sessions, not for the sessions alone. Here is what the rate buys that the cheaper options don't include.</p>
-    </div>
-  </div>
-
-  <div class="rt-wrap">
-    <div class="rt-commit-wrap rt-reveal">
-      <table class="rt-commit rt-why-table">
-        <thead>
-          <tr><th scope="col"><span class="rt-sr">Element</span></th><th scope="col">Gym access</th><th scope="col">Group classes</th><th scope="col">A standard trainer</th><th scope="col">OmniFit Performance</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Who writes your program</th><td data-label="Gym access">You do.</td><td data-label="Group classes">The class, for everyone in the room.</td><td data-label="A standard trainer">The trainer, usually session by session.</td><td data-label="OmniFit Performance">Written for you from your Performance Assessment and rebuilt every 4-week cycle.</td></tr>
-          <tr><th scope="row">What a session is for</th><td data-label="Gym access">Whatever you decide.</td><td data-label="Group classes">Effort and energy.</td><td data-label="A standard trainer">A supervised workout.</td><td data-label="OmniFit Performance">Form, load and corrective work. The app carries the rest.</td></tr>
-          <tr><th scope="row">Between sessions</th><td data-label="Gym access">Nothing.</td><td data-label="Group classes">Nothing.</td><td data-label="A standard trainer">Varies.</td><td data-label="OmniFit Performance">Your program, logs and check-ins in one app, at the accountability setting you chose.</td></tr>
-          <tr><th scope="row">Measurement</th><td data-label="Gym access">The scale, if you weigh yourself.</td><td data-label="Group classes">A leaderboard.</td><td data-label="A standard trainer">Varies.</td><td data-label="OmniFit Performance">Bodystat QuadScan 4000, nine movement benchmarks, posture photos and strength, against your own baseline.</td></tr>
-          <tr><th scope="row">Joints and old injuries</th><td data-label="Gym access">Your problem.</td><td data-label="Group classes">The class doesn't slow down.</td><td data-label="A standard trainer">Depends on the trainer.</td><td data-label="OmniFit Performance">Corrective work in every warm-up and loading chosen for what your joints tolerate.</td></tr>
-          <tr><th scope="row">When life changes</th><td data-label="Gym access">The membership keeps billing.</td><td data-label="Group classes">The membership keeps billing.</td><td data-label="A standard trainer">Sessions lapse.</td><td data-label="OmniFit Performance">Pause weeks, a Dial you can turn down, tiers you can change between cycles, and the 30-Day Fit Guarantee.</td></tr>
-          <tr><th scope="row">Where it works</th><td data-label="Gym access">That gym.</td><td data-label="Group classes">That studio's schedule.</td><td data-label="A standard trainer">That floor.</td><td data-label="OmniFit Performance">Studio, in-home and virtual on one app. Your program travels with you.</td></tr>
-          <tr><th scope="row">The end goal</th><td data-label="Gym access">Keep the membership.</td><td data-label="Group classes">Keep coming.</td><td data-label="A standard trainer">Keep booking.</td><td data-label="OmniFit Performance">A client who no longer needs us every week: Full &rarr; Coached &rarr; Train Only &rarr; Tune-Up.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="rt-steps-note rt-reveal">Even if you just want to train, we can start there. Train Only is a setting, not a lesser program: the sessions and the app program are the same at every setting.</p>
-  </div>
-
-  <div class="rt-spacer-sm"></div>
-
+  </details>
 
   <!-- ═══════ SESSIONS WITHOUT A PROGRAM ═══════ -->
-  <div class="rt-section" id="rt-sessions">
+  <details class="rt-xsec" id="rt-sessions">
+    <summary class="rt-xsec-sum section-toggle"><h2>Sessions Without a <em>Program</em></h2><span class="rt-xsec-cue" aria-hidden="true"></span></summary>
+    <div class="rt-xsec-body">
+  <div class="rt-section">
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">Pay Per Session</span>
       <hr class="rt-divider">
-      <h2>Sessions Without a <em>Program</em></h2>
       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">These are sessions, not a coaching program: no programming between visits and no cycle billing. Studio non-member prices include the Teqneeq day pass, so no facility membership is required.</p>
     </div>
   </div>
@@ -2300,15 +2433,17 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
     <div class="rt-ladder-cta rt-reveal"><a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Sessions</a></div>
   </div>
-
-  <div class="rt-spacer-sm"></div>
+    </div>
+  </details>
 
   <!-- ═══════ TUNE-UP — GRADUATES ═══════ -->
-  <div class="rt-section" id="rt-tuneup">
+  <details class="rt-xsec" id="rt-tuneup">
+    <summary class="rt-xsec-sum section-toggle"><h2>The <em>Tune-Up</em></h2><span class="rt-xsec-cue" aria-hidden="true"></span></summary>
+    <div class="rt-xsec-body">
+  <div class="rt-section">
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">For Program Graduates</span>
       <hr class="rt-divider">
-      <h2>The <em>Tune-Up</em></h2>
       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Finished your program? Stay in orbit without re-committing. Billed every 4 weeks, cancel with 30 days' notice.</p>
     </div>
   </div>
@@ -2337,15 +2472,17 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
-
-  <div class="rt-spacer"></div>
+    </div>
+  </details>
 
   <!-- ═══════ EXECUTIVE RESET TIERS (VIRTUAL) ═══════ -->
-  <div class="rt-section" id="rt-reset">
+  <details class="rt-xsec" id="rt-reset">
+    <summary class="rt-xsec-sum section-toggle"><h2>The Executive <em>Reset</em></h2><span class="rt-xsec-cue" aria-hidden="true"></span></summary>
+    <div class="rt-xsec-body">
+  <div class="rt-section">
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">Virtual Coaching · Available Nationwide</span>
       <hr class="rt-divider">
-      <h2>The Executive <em>Reset</em></h2>
       <p style="color:var(--white-50); font-size:14px; max-width:680px; margin:8px auto 0;">Live 30-minute virtual coaching for executives and high-performing professionals. Custom training, nutrition, and habit coaching built around your schedule, with full programming and accountability. Available nationwide.</p>
     </div>
   </div>
@@ -2386,51 +2523,89 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
     <p style="font-size:12px; color:var(--white-50); text-align:center;">All Executive Reset tiers are billed every 4 weeks via auto-pay. Bronze is asynchronous programming only and includes no live sessions; its Accountability Dial setting is Coached or Train Only. <a href="/the-30-minute-executive-reset" style="color:var(--gold);">Full Executive Reset details →</a></p>
   </div>
+    </div>
+  </details>
 
-  <!-- BUILT FOR / NOT THE RIGHT FIT -->
-  <div style="padding: 0 28px;">
-    <div class="rt-fit-grid">
-      <div class="rt-fit-col built-for rt-reveal">
-        <span class="rt-fit-label">Built For</span>
-        <ul class="rt-fit-list">
-          <li>Professionals 30+ managing demanding schedules</li>
-          <li>People with joint issues or injury history who need corrective-first training</li>
-          <li>Executives who want structured accountability, not random workouts</li>
-          <li>Anyone ready to commit to consistent, measurable progress</li>
-          <li>Travelers who need a program that works anywhere</li>
-        </ul>
-      </div>
-      <div class="rt-fit-col not-for rt-reveal">
-        <span class="rt-fit-label">Not the Right Fit</span>
-        <ul class="rt-fit-list">
-          <li>Looking for drop-in classes or group workouts</li>
-          <li>Want the cheapest option available</li>
-          <li>Prefer to train without coaching feedback or accountability</li>
-          <li>Looking for a 6-week quick fix or crash program</li>
-          <li>Not willing to follow a structured plan between sessions</li>
-        </ul>
-      </div>
+  <!-- ═══════ IF YOUR SCHEDULE OR GOALS CHANGE ═══════ -->
+  <details class="rt-xsec" id="rt-change">
+    <summary class="rt-xsec-sum section-toggle"><h2>What Happens If Your Schedule or <em>Goals Change</em></h2><span class="rt-xsec-cue" aria-hidden="true"></span></summary>
+    <div class="rt-xsec-body">
+  <div class="rt-section">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Flexibility</span>
+      <hr class="rt-divider">
     </div>
   </div>
 
-  <!-- POLICIES -->
-  <div class="rt-policies" style="padding:0 28px;">
-    <div class="rt-policy rt-reveal">
-      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
-      <h5>Pause Weeks</h5>
-      <p>The Foundation includes two pause weeks across the course with notice, extending the end date. The Program includes six pause weeks per twelve months with two weeks' notice, credited against the next cycle.</p>
+  <div class="rt-wrap">
+    <div class="rt-commit-wrap rt-reveal">
+      <table class="rt-commit">
+        <thead>
+          <tr><th scope="col"><span class="rt-sr">Change</span></th><th scope="col">The Foundation</th><th scope="col">The Program</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Travel or a busy stretch</th><td data-label="The Foundation">Use the Travel Protocol: pause weeks, 2 across the course, with notice, which extend the end date; or take a scheduled session live by video during a travel week, at no extra cost.</td><td data-label="The Program">Use the Travel Protocol: pause weeks, 6 per 12 months, with 2 weeks' notice, credited against the next cycle; or take a scheduled session live by video during a travel week, at no extra cost.</td></tr>
+          <tr><th scope="row">More or less accountability</th><td data-label="The Foundation">Change your Dial setting at any 4-week cycle boundary, including during The Foundation.</td><td data-label="The Program">Change your Dial setting at any 4-week cycle boundary.</td></tr>
+          <tr><th scope="row">More sessions</th><td data-label="The Foundation">Step up anytime. Between Foundation tiers, you stay on The Foundation and pay the difference for the remaining cycles. To a tier offered only on The Program, your Foundation ends at the next cycle boundary and every unused session is credited toward your first Program cycle.</td><td data-label="The Program">Move up a tier between cycles, with notice before the next cycle starts.</td></tr>
+          <tr><th scope="row">Fewer sessions</th><td data-label="The Foundation">Not during The Foundation. The first 12 weeks are built as a block; the step down comes after it.</td><td data-label="The Program">Move down a tier between cycles, with notice before the next cycle starts.</td></tr>
+          <tr><th scope="row">Not the right fit</th><td data-label="The Foundation">The 30-Day Fit Guarantee.</td><td data-label="The Program">The 30-Day Fit Guarantee in the first 30 days; 30 days' notice after that, with remaining credit applied to the final cycle.</td></tr>
+        </tbody>
+      </table>
     </div>
-    <div class="rt-policy rt-reveal">
-      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></div>
-      <h5>Billing</h5>
-      <p>The Foundation is one payment at signup covering all three cycles. The Program is charged at the start of each 4-week cycle via auto-pay and ends with 30 days' notice; remaining credit is applied to the final cycle. No activation fees. Some clients pay with HSA or FSA funds. See how <a href="/hsa-fsa-personal-training">HSA and FSA eligibility</a> works.</p>
-    </div>
-    <div class="rt-policy rt-reveal">
-      <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
-      <h5>24-Hour Policy</h5>
-      <p>Reschedule with 24 hours' notice, within the same 4-week cycle. Sessions cancelled with less than 24 hours' notice are forfeited. Sessions OmniFit cancels are credited.</p>
+    <p class="rt-steps-note rt-reveal" style="max-width:860px; margin-bottom:24px;">On The Program you can move up or down a tier between cycles. During The Foundation you can step up, not down &mdash; the first 12 weeks are built as a block. Want more sessions mid-Foundation? Step up anytime. If your new tier is only offered on The Program, your Foundation ends there &mdash; every unused session is credited toward your first Program cycle, and you pay only the difference. You can adjust your accountability level at any cycle boundary.</p>
+
+    <div class="rt-guarantee rt-reveal rt-example" style="max-width:1120px; margin:0 auto 14px;">
+      <h4>Worked example: Foundation Momentum to Program Peak</h4>
+      <p>A client on studio Momentum on The Foundation ($560 per 4-week cycle, 4 sessions per cycle, three cycles) decides after the first cycle that they want to train three times a week. Studio Peak is only offered on The Program, at $1,800 per 4-week cycle, so The Foundation ends at the cycle boundary and the unused sessions become credit.</p>
+      <ul class="rt-feature-list" style="margin-top:12px;">
+        <li><strong>Foundation per-session rate:</strong> $560 &divide; 4 sessions = <span class="rt-out">$140</span> per session</li>
+        <li><strong>Unused Foundation sessions:</strong> 2 remaining cycles &times; 4 sessions = <span class="rt-out">8</span> sessions</li>
+        <li><strong>Credit:</strong> 8 sessions &times; $140 = <span class="rt-out">$1,120</span></li>
+        <li><strong>First Peak cycle on The Program:</strong> $1,800 &minus; $1,120 credit = <strong><span class="rt-out">$680</span> due</strong></li>
+      </ul>
+      <p style="margin-top:12px; font-size:13px; color:var(--white-70);">If the credit ever exceeds the first Program cycle, the remainder carries forward as session credit against the next cycle, never as cash. The figures above follow from the published rates on this page.</p>
     </div>
   </div>
+    </div>
+  </details>
+
+  <!-- ═══════ ACCOUNTABILITY DIAL (every tier, no price difference) ═══════ -->
+  <details class="rt-xsec" id="rt-dial">
+    <summary class="rt-xsec-sum section-toggle"><h2>Every Tier Includes Your Choice of <em>Accountability</em></h2><span class="rt-xsec-cue" aria-hidden="true"></span></summary>
+    <div class="rt-xsec-body">
+  <div class="rt-section">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Included at Every Tier</span>
+      <hr class="rt-divider">
+      <p style="color:var(--white-50); font-size:14px; max-width:720px; margin:8px auto 0;">Tier is how often we train. The Accountability Dial is how closely we follow you between sessions. Three settings, included at every tier of The Foundation and The Program and at every Executive Reset tier with live sessions, with no price difference. Executive Reset Bronze, which has no live sessions, offers Coached or Train Only. You set it at the Performance Assessment and can change it at any 4-week cycle boundary, including during The Foundation. The Tune-Up has no setting: it is where the Dial ends.</p>
+    </div>
+  </div>
+
+  <div class="rt-wrap">
+    <div class="rt-commit-wrap rt-reveal">
+      <table class="rt-commit rt-dial-table">
+        <thead>
+          <tr><th scope="col"><span class="rt-sr">Setting</span></th><th scope="col">Full Accountability</th><th scope="col">Coached</th><th scope="col">Train Only</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">What you log</th><td data-label="Full Accountability">Daily: nutrition, steps and sleep.</td><td data-label="Coached">A weekly written check-in.</td><td data-label="Train Only">A one-tap weekly check-in.</td></tr>
+          <tr><th scope="row">Coach contact</th><td data-label="Full Accountability">A coach reply within 1 business day.</td><td data-label="Coached">A coach reply to each weekly check-in.</td><td data-label="Train Only">Your sessions.</td></tr>
+          <tr><th scope="row">Habits and nutrition</th><td data-label="Full Accountability">Behavior-change coaching through Awareness, Regulation, Adaptation and Integration.</td><td data-label="Coached">1 to 3 habit targets at a time.</td><td data-label="Train Only">Nutrition on request.</td></tr>
+          <tr><th scope="row">Measurement</th><td data-label="Full Accountability">Reviewed with every check-in.</td><td data-label="Coached">A measurement review every 4 weeks.</td><td data-label="Train Only">Reassessment at least every 12 weeks.</td></tr>
+          <tr><th scope="row">Usually chosen by</th><td data-label="Full Accountability">New clients in the first cycles. This is the default.</td><td data-label="Coached">Clients whose routines hold through an ordinary week.</td><td data-label="Train Only">Clients who self-correct and want the sessions and the program.</td></tr>
+          <tr><th scope="row">Available on</th><td data-label="Full Accountability">Every tier of The Foundation and The Program; Executive Reset Gold, Platinum and Black.</td><td data-label="Coached">Every tier of The Foundation, The Program and the Executive Reset, including Bronze.</td><td data-label="Train Only">Every tier of The Foundation, The Program and the Executive Reset, including Bronze.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rt-steps-note rt-reveal" style="margin-bottom:14px;"><strong style="color:var(--white);">At every setting:</strong> payment confirms your booking, sessions reschedule with 24 hours' notice, corrective work sits in every warm-up, and you are reassessed at least every 12 weeks.</p>
+    <div class="rt-guarantee rt-reveal" style="max-width:1120px; margin:0 auto 14px;">
+      <h4>Tracking is a diagnostic tool, not a life sentence.</h4>
+      <p>We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week. The path most clients follow: <strong style="color:var(--gold-light);">Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</strong>. The Tune-Up is not a fourth setting; it is graduation, the point at the end of the Dial.</p>
+      <p style="margin-top:10px;">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.</p>
+    </div>
+  </div>
+    </div>
+  </details>
 
   <div class="rt-spacer"></div>
 
@@ -2492,6 +2667,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <details>
         <summary>Do I have to join Teqneeq?</summary>
         <div class="rt-faq-body"><p>Only for studio training. Studio Momentum and above, on The Foundation or The Program, requires a Teqneeq membership at $119 per month. Teqneeq bills monthly; it is not an OmniFit charge, and it includes facility access on non-training days. Studio couples need it for both partners. In-home and virtual clients don't, and studio non-member session prices include a day pass.</p></div>
+      </details>
+
+      <details>
+        <summary>Is OmniFit worth the price compared to a regular gym membership?</summary>
+        <div class="rt-faq-body"><p>Yes, if you want a plan, not just access: OmniFit builds your program from your assessment. The $150 Performance Assessment is credited toward your first cycle. If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. Pause weeks, credit for sessions OmniFit cancels and The Foundation's three 4-week cycles in one payment protect your progress.</p></div>
       </details>
 
     </div>
@@ -2588,6 +2768,123 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
     for (var m = 0; m < secs.length; m++) io2.observe(secs[m]);
   }
+})();
+
+/* V16: starting-option chooser. Every figure in the result is computed here
+   from the data attributes on #rt-chooser, which carry the card prices; no
+   price or total in the result is typed by hand. The result's params are
+   written to #rt-ch-result as data attributes (data-ch-format,
+   data-ch-frequency, data-ch-couples, data-ch-offer, then data-ch-key) and
+   site.js sends rates_chooser_result from them; this script sends nothing. */
+(function () {
+  var box = document.getElementById('rt-chooser');
+  if (!box) return;
+  var ui = box.querySelector('.rt-ch-ui'), out = document.getElementById('rt-ch-result');
+  var inPerson = box.querySelector('[data-opts="inperson"]'), virtualOpts = box.querySelector('[data-opts="virtual"]');
+  var couplesBox = document.getElementById('rt-ch-couples'), couplesWrap = couplesBox.parentNode;
+  var TIER = { '1': 'Momentum', '2': 'Performance', '3': 'Peak' };
+  var RESET = { async: 'Bronze', '1': 'Gold', '2': 'Platinum', '3': 'Black' };
+  var WEEKLY = { '1': 'one a week', '2': 'two a week', '3': 'three a week' };
+  var PLACE = { studio: 'Studio', inhome: 'In-Home' };
+
+  function num(name) { var v = box.getAttribute('data-' + name); return v === null || v === '' ? null : Number(v); }
+  function money(n) { return '$' + n.toLocaleString('en-US'); }
+  function checked(name) { var c = box.querySelector('input[name="' + name + '"]:checked'); return c ? c.value : ''; }
+  function li(text, key) { return '<li' + (key ? ' class="is-key"' : '') + '>' + text + '</li>'; }
+  function fig(big, cap) { return '<div class="rt-ch-fig"><span class="rt-ch-big">' + big + '</span><span class="rt-ch-cap">' + cap + '</span></div>'; }
+
+  var credit = num('assessment'), member = num('membership'), weeks = num('cycle-weeks'), cycles = num('foundation-cycles');
+  var cycleLine = weeks + '-week cycles = ' + Math.round(52 / weeks) + ' per year, never billed by the calendar month.';
+
+  function result(format, freq, couples) {
+    var r = { lines: [], figs: [] };
+    if (format === 'virtual') {
+      var price = num('reset-' + freq);
+      r.offer = 'reset';
+      r.title = 'The Executive Reset';
+      r.sub = RESET[freq];
+      r.meta = freq === 'async' ? 'Async only, no live sessions' : num('sessions-' + freq) + ' live sessions per cycle (' + WEEKLY[freq] + ')';
+      r.figs.push(fig(money(price), 'per 4-week cycle'));
+      if (freq === 'async') r.lines.push(li('Accountability setting: Coached or Train Only.'));
+      r.more = ['#rt-reset', 'All Executive Reset tiers'];
+    } else {
+      var who = (couples ? 'couples-' : '') + format + '-' + freq;
+      var f = num('foundation-' + who), p = num('program-' + who), from = box.hasAttribute('data-from-' + who) ? 'from ' : '';
+      var name = (couples ? 'Couples ' : '') + PLACE[format] + ' ' + TIER[freq];
+      r.meta = num('sessions-' + freq) + ' sessions per cycle (' + WEEKLY[freq] + ')';
+      r.sub = name;
+      if (f !== null) {
+        r.offer = 'foundation';
+        r.title = 'The Foundation';
+        r.figs.push(fig(money(f * cycles), 'Foundation total: ' + cycles + ' cycles, one payment'));
+        r.figs.push(fig(money(f), 'per 4-week cycle'));
+        r.lines.push(li('Due at signup after your ' + money(credit) + ' assessment credit: ' + money(f * cycles - credit), true));
+        r.lines.push(li('Then The Program at ' + money(p) + ' per 4 weeks.'));
+        r.more = ['#rt-foundation', 'All Foundation rates'];
+      } else if (p !== null) {
+        r.offer = 'program';
+        r.title = 'The Program';
+        r.figs.push(fig(from + money(p), 'per 4-week cycle'));
+        r.lines.push(li('Not offered on The Foundation. Starts directly on The Program ' + (from || 'at ') + money(p) + ' per 4 weeks.', true));
+        r.lines.push(li(from ? 'Your ' + money(credit) + ' assessment credit comes off the first cycle. Priced by travel and scope, arranged individually.'
+          : 'Your ' + money(credit) + ' assessment credit comes off the first cycle: ' + money(p - credit) + ' due.'));
+        r.more = ['#rt-program', 'All Program rates'];
+      } else {
+        r.offer = 'program';
+        r.title = 'The Program';
+        r.figs.push(fig('By arrangement', 'Couples Peak'));
+        r.lines.push(li('Not offered on The Foundation. Couples Peak on The Program is by arrangement.', true));
+        r.lines.push(li('Your ' + money(credit) + ' assessment credit comes off the first cycle.'));
+        r.more = ['#rt-program', 'All Program rates'];
+      }
+      if (couples) r.lines.push(li('Priced per couple, not per person. One session credit covers both partners.'));
+      if (format === 'studio') r.lines.push(li('Plus Teqneeq membership, ' + money(member) + '/month, billed by Teqneeq.' + (couples ? ' Required for both partners.' : '')));
+    }
+    r.lines.push(li(cycleLine));
+    return r;
+  }
+
+  function mark() {
+    var opts = box.querySelectorAll('.rt-ch-opt');
+    for (var i = 0; i < opts.length; i++) {
+      var on = opts[i].querySelector('input').checked;
+      opts[i].className = opts[i].className.replace(/\s*is-checked/g, '') + (on ? ' is-checked' : '');
+    }
+  }
+
+  function setKey(attrs) {
+    if (out.getAttribute('data-ch-key') === attrs.key) return;
+    for (var k in attrs) if (k !== 'key') out.setAttribute('data-ch-' + k, attrs[k]);
+    out.setAttribute('data-ch-key', attrs.key); /* last: site.js reads the others when this changes */
+  }
+
+  function render() {
+    var format = checked('rt-ch-format'), virtual = format === 'virtual';
+    inPerson.hidden = virtual;
+    virtualOpts.hidden = !virtual;
+    couplesWrap.hidden = virtual;
+    if (virtual) couplesBox.checked = false;
+    mark();
+    var freq = checked(virtual ? 'rt-ch-tier' : 'rt-ch-freq');
+    if (!format || !freq) {
+      out.innerHTML = '<p class="rt-ch-prompt">Choose where and how often you want to train to see your starting option and its numbers.</p><ul class="rt-ch-lines">' + li(cycleLine) + '</ul>';
+      if (out.getAttribute('data-ch-key')) out.setAttribute('data-ch-key', '');
+      return;
+    }
+    var couples = !virtual && couplesBox.checked, r = result(format, freq, couples);
+    out.innerHTML = '<span class="rt-ch-kicker">Your starting option</span>' +
+      '<h3 class="rt-ch-title">' + r.title + '<span>' + r.sub + '</span></h3>' +
+      '<p class="rt-ch-meta">' + r.meta + '</p>' +
+      '<div class="rt-ch-figs">' + r.figs.join('') + '</div>' +
+      '<ul class="rt-ch-lines">' + r.lines.join('') + '</ul>' +
+      '<a class="rt-ch-more" href="' + r.more[0] + '">' + r.more[1] + '</a>';
+    var frequency = freq === 'async' ? 'async' : freq + 'x';
+    setKey({ format: format, frequency: frequency, couples: String(couples), offer: r.offer, key: [format, frequency, couples, r.offer].join('|') });
+  }
+
+  box.addEventListener('change', render);
+  ui.hidden = false;
+  render();
 })();
 </script>
 <!-- ===== FAQ SCHEMA (JSON-LD) ===== -->

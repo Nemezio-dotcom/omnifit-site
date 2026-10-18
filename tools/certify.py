@@ -1656,6 +1656,8 @@ def run():
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
+    faq.selftest()   # section-toggle summaries (rates V16) are not FAQ questions; both directions
+    print("   (FAQ extractor: section-toggle exclusion self-tested both ways)")
     inv={}; notrun=[]
     # The hashes CANON.md records, read once per run. A parse failure is
     # recorded, never swallowed: with no recorded table the comparison below

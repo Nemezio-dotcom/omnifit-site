@@ -122,7 +122,7 @@ def surfaces(doc):
            "meta": [html.unescape(meta.group(1)).strip()]}
     for n in range(1, 7):
         out[f"h{n}"] = [_text(h) for h in re.findall(rf"<h{n}\b[^>]*>(.*?)</h{n}>", body, re.S | re.I)]
-    out["faq"] = [_text(q) for q in re.findall(r"<summary\b[^>]*>(.*?)</summary>", body, re.S | re.I)]
+    out["faq"] = [_text(q) for q in re.findall(r"<summary\b(?![^>]*\bsection-toggle\b)[^>]*>(.*?)</summary>", body, re.S | re.I)]
     # The page's own header injection, not the site-wide entity graph.
     hdr = re.search(r"Page header injection \(source:.*?-->(.*?)<!-- =+ End page header injection", doc, re.S)
     strings = []

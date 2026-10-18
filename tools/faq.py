@@ -18,7 +18,11 @@ QPATS = [
     # <summary> carries a class on some pages (hsa-fsa-personal-training uses
     # <summary class="hsa-faq-q">); the attribute-less form matched only the
     # territory pages and silently skipped the rest.
-    r'<summary[^>]*>(.*?)</summary>',
+    # A <summary class="... section-toggle"> is an expandable page SECTION
+    # (training-rates-san-diego V16: The Foundation, The Program ... whose
+    # summary is the section's H2), not an FAQ question. Reading it as one
+    # would add seven questions with no answer and break the mirror.
+    r'<summary(?![^>]*\bsection-toggle\b)[^>]*>(.*?)</summary>',
     r'<div class="[a-z-]*faq-q">(.*?)</div>',
     r'<button class="fq"[^>]*>(.*?)<span',
     # <button class="faq-q"> - online-training. The `fq` pattern above stops at
@@ -90,3 +94,16 @@ def qa_strict(s):
 
 def questions(s):
     return [q for q, _ in qa(s)]
+
+def selftest():
+    """The section-toggle exclusion, both directions: an expandable section's
+    <summary class="... section-toggle"> is not a question, and every FAQ
+    <summary> beside it (bare or classed) still is. Raises on failure."""
+    sec = '<details id="rt-x"><summary class="rt-xsec-sum section-toggle"><h2>The <em>Program</em></h2></summary><p>Body.</p></details>'
+    fq = '<details><summary>{}</summary><div class="rt-faq-body"><p>A.</p></div></details>'
+    cls = '<details><summary class="hsa-faq-q">{}</summary><div class="hsa-faq-body"><p>A.</p></div></details>'
+    assert _hits(sec, QPATS) == [], "section-toggle summary read as an FAQ question"
+    assert questions(sec + fq.format("Q1?") + cls.format("Q2?")) == ["Q1?", "Q2?"], "FAQ summaries lost next to a section toggle"
+    assert questions(fq.format("Q?").replace("<summary>", '<summary class="section-toggled">')) == ["Q?"], "exclusion matched a longer class name"
+    assert qa_strict(sec + fq.format("Q?")) == [("Q?", "A.")], "pairing shifted by a section toggle"
+

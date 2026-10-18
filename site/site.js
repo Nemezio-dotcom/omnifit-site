@@ -96,6 +96,10 @@
                               Individual answers are NEVER sent.
      rates_section_view       /training-rates-san-diego, once per section
                               section (rt-foundation | rt-program | rt-sessions | rt-reset)
+     rates_chooser_result     /training-rates-san-diego, each new chooser result
+                              format (studio | inhome | virtual), frequency
+                              (1x | 2x | 3x | async), couples (true | false),
+                              offer (foundation | program | reset)
    cta_location / form_location is the page slug ("home" for /). */
 (function () {
   function track(name, params) {
@@ -182,7 +186,25 @@
     }
   }
 
+  /* Rates page chooser (#rt-ch-result). The page script writes the result's
+     params as data attributes and then a new data-ch-key, once per new
+     result; an empty key is the "choose both steps" prompt and sends nothing. */
+  var chooser = document.getElementById('rt-ch-result');
+  if (chooser && 'MutationObserver' in window) {
+    new MutationObserver(function () {
+      if (!chooser.getAttribute('data-ch-key')) return;
+      track('rates_chooser_result', {
+        format: chooser.getAttribute('data-ch-format'),
+        frequency: chooser.getAttribute('data-ch-frequency'),
+        couples: chooser.getAttribute('data-ch-couples') === 'true',
+        offer: chooser.getAttribute('data-ch-offer')
+      });
+    }).observe(chooser, { attributes: true, attributeFilter: ['data-ch-key'] });
+  }
+
   /* Rates page: each ladder section the first time it scrolls into view.
+     Each id is on the section's <details>, closed by default, so the summary
+     (the section's H2) entering the viewport is the signal, open or not.
      rootMargin trims 20% off the bottom of the viewport, so a section counts
      once its top edge is a fifth of the way up the screen (or its bottom
      edge has entered it), whatever the section's own height. */
@@ -199,4 +221,34 @@
       if (el) io.observe(el);
     });
   }
+})();
+
+/* ---- Expandable sections (<details id="...">, rates page V16) ----
+   A link to #id, or a URL hash, that targets a closed <details> (or anything
+   inside one) opens it, and every closed <details> around it. The click
+   listener runs in the capture phase, so the section is open before any
+   page script measures where to scroll. */
+(function () {
+  function open(id) {
+    var el = null;
+    try { el = id && document.getElementById(decodeURIComponent(id)); } catch (e) { return; }
+    var hidden = false;
+    for (var d = el; d; d = d.parentElement) {
+      if (d.tagName === 'DETAILS' && !d.open) { d.open = true; if (d !== el) hidden = true; }
+    }
+    return hidden ? el : null; /* the target was inside a closed section */
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="#"]') : null;
+    if (!a) return;
+    var u;
+    try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (u.hash && u.origin === location.origin && u.pathname === location.pathname) open(u.hash.slice(1));
+  }, true);
+  function fromHash() {
+    var el = location.hash && open(location.hash.slice(1));
+    if (el && el.scrollIntoView) el.scrollIntoView();
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
 })();

@@ -13,6 +13,9 @@
 //     scrollable (auto/scroll) ancestor contains it ("clipped"). Decorative
 //     layers marked aria-hidden="true" (the hero's zoomed photo frames) are
 //     cropped by design and are not content, so they are not reported.
+// --open-details opens every <details> before measuring, so content inside
+// closed expandable sections and FAQ answers is audited too (the rates page
+// keeps seven sections closed by default since V16).
 // Exit 1 when any page has a scrollWidth overflow or a clipped element.
 // Narrow items are printed for review (2-up tiles and table cells are narrow
 // by design); the caller decides. Re-created in the homepage rebuild run
@@ -27,6 +30,7 @@ const args = process.argv.slice(2);
 const shotsAt = args.indexOf('--shots');
 const SHOTS = shotsAt > -1 ? args[shotsAt + 1] : null;
 const only = args.filter((a, i) => !a.startsWith('--') && (shotsAt === -1 || i !== shotsAt + 1));
+const OPEN = args.includes('--open-details');
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.xml': 'text/xml', '.txt': 'text/plain' };
 
@@ -67,7 +71,10 @@ function pages() {
     for (const p of pages()) {
       await page.goto(base + p, { waitUntil: 'load' });
       // reveal everything the scroll-reveal layer hid, so measurements see the final layout
-      await page.evaluate(() => { document.querySelectorAll('.omni-rv').forEach(e => e.classList.add('is-in')); });
+      await page.evaluate((open) => {
+        document.querySelectorAll('.omni-rv').forEach(e => e.classList.add('is-in'));
+        if (open) document.querySelectorAll('details').forEach(d => { d.open = true; });
+      }, OPEN);
       await page.waitForTimeout(150);
       const r = await page.evaluate(() => {
         const vw = window.innerWidth;

@@ -11,7 +11,8 @@ python3 tools/ownership.py   # keyword ownership on public/ (also run by build.p
 python3 tools/ownership.py --selftest   # its must-fail / must-pass fixtures
 python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-urls-*.txt and the tracking rule
 NODE_PATH="$(npm root -g)" node tools/tracktest.js   # measurement test on the built site (Playwright)
-NODE_PATH="$(npm root -g)" node tools/mobileaudit.js [--shots DIR]   # 390/412px layout audit (Playwright)
+NODE_PATH="$(npm root -g)" node tools/mobileaudit.js [--open-details] [--shots DIR]   # 390/412px layout audit (Playwright)
+NODE_PATH="$(npm root -g)" node tools/choosertest.js [--shots DIR]   # rates chooser vs CANON card, keyboard/ARIA, 390/412 layout
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
@@ -789,3 +790,29 @@ decorative layers are excluded from the clip test: the homepage hero's photo
 frames are zoomed 1.2× inside the clipped card on purpose. Exit 1 on any
 overflow or clip. `--shots DIR` also saves the homepage hero and In Short
 block at both widths.
+
+## Rates restructure run (Oct 17, 2026)
+
+- **`faq.py`: `<summary class="... section-toggle">` is not a question.** The
+  rates page (V16) keeps seven sections in `<details>` with the section H2 in
+  the `<summary>`. The bare `<summary>` pattern read those as seven questions
+  with no answer, which would have broken the FAQPage mirror. The pattern now
+  skips a summary whose class carries the `section-toggle` token, and only
+  that token (`section-toggled` still reads). `faq.selftest()` runs from
+  certify.py on every run and proves both directions: a section toggle yields
+  nothing, and FAQ summaries beside it (bare and classed) still pair with
+  their answers. Negative-tested: with the old pattern, or without the `\b`,
+  the self-test fails. `ownership.py` applies the same exclusion to its FAQ
+  read (it only matters for X01).
+- **`choosertest.js`** (new) parses the OCTOBER 2026 CARD out of CANON.md, not
+  the page's data attributes, then selects all 16 chooser combinations in the
+  built page and checks every figure, the offer and the event attributes. It
+  also checks the ARIA shape, operates the chooser by keyboard alone, checks
+  the no-JavaScript fallback, measures every state at 390 and 412px, and with
+  `--shots` saves the three 390px screenshots.
+- **`mobileaudit.js --open-details`** opens every `<details>` before
+  measuring, so the content of closed sections is audited too.
+- **`tracktest.js`** covers `rates_chooser_result` (production and console
+  paths), the seven sections closed by default, a jump-bar anchor and a URL
+  hash each opening a closed section, and the Foundation CTA inside one.
+
