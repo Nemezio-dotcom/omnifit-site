@@ -106,6 +106,9 @@ META_OVERRIDE = {
 
 CALENDLY = "https://calendly.com/nemezio-omnifittraining/45min"
 
+# Images still hotlinked from Squarespace (build.py --check prints a WARNING per URL).
+SQSP_CDN_RE = re.compile(r"https?://[a-z0-9.-]*squarespace-cdn\.com/[^\s\"'<>)]+")
+
 # Cloudflare Pages _redirects: (source, target, status, origin); a None target
 # is a comment line. PRINCIPLE (owner, Oct 17 2026; CANON ARCHIVE > REDIRECTS):
 # the Squarespace URL Mappings the owner pasted on Oct 17, 2026 are
@@ -778,7 +781,19 @@ def check():
     own_problems, own_notes = ownership.check_site(PUBLIC)
     problems += [f"keyword ownership: {p}" for p in own_problems]
     notes += [f"keyword ownership: {n}" for n in own_notes]
-    return problems, notes
+    # Squarespace-hosted images (CANON "BEFORE CANCELLING SQUARESPACE"). A
+    # WARNING, never a problem: these URLs work today and break the day the
+    # Squarespace subscription ends. Listed per URL with the pages carrying it.
+    warnings = []
+    cdn = {}
+    for rel, text in tracked.items():
+        for url in set(SQSP_CDN_RE.findall(text)):
+            page = "/" + rel[:-len("index.html")].rstrip("/") if rel.endswith("index.html") else rel
+            cdn.setdefault(url, set()).add(page if page != "/" else "/")
+    for url in sorted(cdn):
+        warnings.append(f"squarespace-cdn.com image still referenced: {url.split('/')[-1].split('?')[0]} "
+                        f"on {', '.join(sorted(cdn[url]))}")
+    return problems, notes, warnings
 
 
 def main():
@@ -793,10 +808,14 @@ def main():
         for url_path in sorted(emoji_report, key=lambda u: (u != "/", u)):
             items = ", ".join(f"{ch} x{n} -> {icons.ICONS[ch][0]}" for ch, n in sorted(emoji_report[url_path].items(), key=lambda kv: -kv[1]))
             print(f"  {url_path:45s} {items}")
-    problems, notes = check()
-    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji, 404/_headers, redirects, tracking, keyword ownership")
+    problems, notes, warnings = check()
+    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji, 404/_headers, redirects, tracking, keyword ownership, Squarespace images (warning only)")
     for n in sorted(set(notes)):
         print("  note    ", n)
+    for w in warnings:
+        print("  WARNING ", w)
+    if not warnings:
+        print("  note     no squarespace-cdn.com references remain")
     for p in problems:
         print("  PROBLEM ", p)
     print(f"RESULT: {'PASSED' if not problems else str(len(problems)) + ' problem(s)'}")

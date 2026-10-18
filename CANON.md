@@ -1657,6 +1657,29 @@ legitimately changes an invariant, and say so in REPORT.md)
   block 2). certify.py reads every block and merges the nodes; a checker that
   read only the first reported that header as broken for two runs.
 
+BEFORE CANCELLING SQUARESPACE: replace or remove these images (accuracy sweep,
+Oct 18 2026)
+  Five visible images are still hotlinked from images.squarespace-cdn.com and
+  will break when the Squarespace subscription ends. Put each in site/img/
+  (served at /assets/img/) and update the reference, or remove it.
+  | Image | Where it appears |
+  |---|---|
+  | Brandon testimonial (`Brandon+Testimonial.jpg`) | pages/case-studies.html (frozen record; swapping the src needs an owner override) |
+  | Precision Nutrition logo (`PN+Logo+NMH.png`) | pages/about.html (credentials list) |
+  | NASM CES badge (`61f78fa7-8907-4144-8033-b37ec32718d5.png`, 100px) | pages/about.html (credentials list) |
+  | Thumbtack Pro screenshot, used as the coach photo (`Screenshot_20250416_132107_Thumbtack+Pro-EDIT.jpg`) | pages/about.html, pages/headers/about-header.html (schema "image"), pages/personal-trainer-4s-ranch.html (Meet Nemezio photo; locked page, the src swap needs an owner override) |
+  | Dr. Damien Jackson-Ricketts headshot (`damien-jackson-ricketts.jpg`) | pages/partners.html |
+  `python3 build.py --check` prints one WARNING per remaining URL with the
+  pages carrying it (a warning, never a failure).
+  DONE: the site-wide schema "image" (Organization/LocalBusiness in
+  pages/headers/site-header.html) and the homepage primaryImageOfPage
+  (pages/headers/home-header.html) moved from the Squarespace
+  executive-reset-dumbbell-workout.jpg to
+  https://www.omnifittraining.com/assets/img/hero-coach-client-cable-pulldown-1600.jpg
+  (1600x1067, coach and client at a cable pulldown). That URL resolves only
+  once the Cloudflare Pages build serves the domain: do not paste
+  site-header.html or home-header.html into Squarespace before cutover.
+
 KNOWN DEFERRED ITEMS
 Two kinds live here and they behave differently:
   · ACCEPTED EXCEPTION — an existing violation deliberately tolerated.
