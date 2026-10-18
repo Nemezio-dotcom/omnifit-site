@@ -7,7 +7,9 @@
      - the production branch runs on the production hostname (mapped to the
        local server with --host-resolver-rules), on localhost only with the
        test override ?omnifit-track=prod, and nowhere else;
-     - every event in CANON MEASUREMENT fires with its params, as a hit to
+     - every event in CANON MEASUREMENT fires with its params (incl. the rates
+       chooser's rates_chooser_result, and the rates page's closed sections
+       opening from an anchor or a URL hash), as a hit to
        google-analytics.com in production mode and as a "[omnifit-track]"
        console line otherwise;
      - Clarity never loads on /fit-check, and on a non-production host no
@@ -226,6 +228,37 @@ async function runFitCheck(page, answers) {
     assert("localhost+flag /training-rates-san-diego", "rates hero Calendly click", { event: "book_consultation_click", params: { cta_location: "training-rates-san-diego", cta_label: "Book Your Consultation", cta_position: "hero" } }, t.ga()[0]);
     const views = () => t.ga().filter((e) => e.event === "rates_section_view").map((e) => e.params.section);
     assert("localhost+flag /training-rates-san-diego", "no section view before scrolling", [], views());
+    // Chooser: one rates_chooser_result per new result, nothing before both steps are chosen
+    const chooser = () => t.ga().filter((e) => e.event === "rates_chooser_result").map((e) => e.params);
+    const pick = (name, value) => t.page.click(`#rt-chooser label:has(input[name="${name}"][value="${value}"])`);
+    await pick("rt-ch-format", "studio");
+    await t.page.waitForTimeout(200);
+    assert("localhost+flag /training-rates-san-diego", "chooser: no event after step 1 alone", [], chooser());
+    await pick("rt-ch-freq", "1");
+    await t.waitFor(() => chooser().length >= 1);
+    await t.page.click("#rt-chooser .rt-ch-couples");
+    await t.waitFor(() => chooser().length >= 2);
+    await pick("rt-ch-format", "inhome");
+    await pick("rt-ch-freq", "3");
+    await t.waitFor(() => chooser().length >= 4);
+    await pick("rt-ch-format", "virtual");
+    await t.page.waitForTimeout(200);
+    const beforeTier = chooser().length;
+    await pick("rt-ch-tier", "async");
+    await t.waitFor(() => chooser().length >= beforeTier + 1);
+    await pick("rt-ch-tier", "async"); // same result again: nothing new
+    await t.page.waitForTimeout(200);
+    assert("localhost+flag /training-rates-san-diego", "chooser: rates_chooser_result per new result, params format/frequency/couples/offer", [
+      { format: "studio", frequency: "1x", couples: "false", offer: "foundation" },
+      { format: "studio", frequency: "1x", couples: "true", offer: "foundation" },
+      { format: "inhome", frequency: "1x", couples: "true", offer: "foundation" },
+      { format: "inhome", frequency: "3x", couples: "true", offer: "program" },
+      { format: "virtual", frequency: "async", couples: "false", offer: "reset" },
+    ], chooser());
+    assert("localhost+flag /training-rates-san-diego", "chooser: switching to virtual before a tier sends nothing", 4, beforeTier);
+    assert("localhost+flag /training-rates-san-diego", "chooser clicks send no section view", [], views());
+    const xsecOpen = () => t.page.evaluate(() => [...document.querySelectorAll("details.rt-xsec")].map((d) => d.id + ":" + d.open));
+    assert("localhost+flag /training-rates-san-diego", "seven expandable sections, closed by default", ["rt-foundation:false", "rt-program:false", "rt-sessions:false", "rt-tuneup:false", "rt-reset:false", "rt-change:false", "rt-dial:false"], await xsecOpen());
     await scrollThrough(t.page);
     await t.page.waitForTimeout(300);
     assert("localhost+flag /training-rates-san-diego", "rates scroll: four sections, in page order", ["rt-foundation", "rt-program", "rt-sessions", "rt-reset"], views());
@@ -233,10 +266,24 @@ async function runFitCheck(page, answers) {
     await scrollThrough(t.page, 800, 60);
     await t.page.waitForTimeout(300);
     assert("localhost+flag /training-rates-san-diego", "second scroll adds nothing (once per section)", 4, views().length);
+    assert("localhost+flag /training-rates-san-diego", "scrolling past opens nothing", 0, (await xsecOpen()).filter((x) => x.endsWith(":true")).length);
+    await t.page.click(".rt-jump a[href='#rt-foundation']");
+    await t.page.waitForTimeout(300);
+    assert("localhost+flag /training-rates-san-diego", "jump-bar anchor opens the closed Foundation section", true, await t.page.evaluate(() => document.getElementById("rt-foundation").open));
     await t.page.click("#omni-rates a[href*='calendly.com']:has-text('Start With the Foundation')");
     await t.waitFor(() => t.ga().filter((e) => e.event === "book_consultation_click").length >= 2);
     assert("localhost+flag /training-rates-san-diego", "Foundation ladder CTA (below the section head) is body", { event: "book_consultation_click", params: { cta_location: "training-rates-san-diego", cta_label: "Start With the Foundation", cta_position: "body" } }, t.ga().filter((e) => e.event === "book_consultation_click")[1]);
     await t.context.close();
+    const h = await newPage(browser);
+    await h.page.goto(`${L}/training-rates-san-diego#rt-program`);
+    await h.page.waitForTimeout(300);
+    assert("localhost /training-rates-san-diego#rt-program", "a URL hash opens its closed section, and only that one", ["rt-program"], await h.page.evaluate(() => [...document.querySelectorAll("details.rt-xsec")].filter((d) => d.open).map((d) => d.id)));
+    await h.page.click("#rt-chooser label:has(input[value='virtual'])");
+    await h.page.click("#rt-chooser label:has(input[name='rt-ch-tier'][value='1'])");
+    await h.page.click("#rt-ch-result a.rt-ch-more");
+    await h.page.waitForTimeout(300);
+    assert("localhost /training-rates-san-diego#rt-program", "the result's section link opens the Executive Reset section", true, await h.page.evaluate(() => document.getElementById("rt-reset").open));
+    await h.context.close();
   }
 
   // ---- 4. localhost + override: Fit Check to PASS (no Clarity)
@@ -329,6 +376,10 @@ async function runFitCheck(page, answers) {
     await r.page.goto(`${L}/training-rates-san-diego`);
     await scrollThrough(r.page, 800, 60);
     await r.page.waitForTimeout(300);
+    await r.page.click("#rt-chooser label:has(input[value='studio'])");
+    await r.page.click("#rt-chooser label:has(input[name='rt-ch-freq'][value='2'])");
+    await r.waitFor(() => r.parsedLogs().some((e) => e.event === "rates_chooser_result"));
+    assert("localhost no flag /training-rates-san-diego", "chooser result logged to the console with boolean couples, no requests", { logged: [{ format: "studio", frequency: "2x", couples: false, offer: "foundation" }], ga: 0 }, { logged: r.parsedLogs().filter((e) => e.event === "rates_chooser_result").map((e) => e.params), ga: r.count("ga") });
     assert("localhost no flag /training-rates-san-diego", "section views logged to the console, no requests", { logged: ["rt-foundation", "rt-program", "rt-sessions", "rt-reset"], ga: 0, clarity: 0 }, { logged: r.parsedLogs().filter((e) => e.event === "rates_section_view").map((e) => e.params.section), ga: r.count("ga"), clarity: r.count("clarity") });
     await r.context.close();
     const f = await newPage(browser);
