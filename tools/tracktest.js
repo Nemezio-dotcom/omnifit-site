@@ -270,9 +270,9 @@ async function runFitCheck(page, answers) {
     await t.page.click(".rt-jump a[href='#rt-foundation']");
     await t.page.waitForTimeout(300);
     assert("localhost+flag /training-rates-san-diego", "jump-bar anchor opens the closed Foundation section", true, await t.page.evaluate(() => document.getElementById("rt-foundation").open));
-    await t.page.click("#omni-rates a[href*='calendly.com']:has-text('Start With the Foundation')");
+    await t.page.click("#rt-foundation .rt-ladder-cta a[href*='calendly.com']");
     await t.waitFor(() => t.ga().filter((e) => e.event === "book_consultation_click").length >= 2);
-    assert("localhost+flag /training-rates-san-diego", "Foundation ladder CTA (below the section head) is body", { event: "book_consultation_click", params: { cta_location: "training-rates-san-diego", cta_label: "Start With the Foundation", cta_position: "body" } }, t.ga().filter((e) => e.event === "book_consultation_click")[1]);
+    assert("localhost+flag /training-rates-san-diego", "Foundation ladder CTA (below the section head) is body", { event: "book_consultation_click", params: { cta_location: "training-rates-san-diego", cta_label: "Book Your Consultation", cta_position: "body" } }, t.ga().filter((e) => e.event === "book_consultation_click")[1]);
     await t.context.close();
     const h = await newPage(browser);
     await h.page.goto(`${L}/training-rates-san-diego#rt-program`);
