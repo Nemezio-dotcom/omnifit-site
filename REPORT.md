@@ -5275,3 +5275,100 @@ The mobile audit's method was recorded in REPORT.md (item 22), but the script it
 5. **The 87% method line adds "48 of them were coached for at least 3 months"** (verbatim from /outcomes). It also gives the surface the period that T2-1's method condition reads. Wrong if the owner wants only the date range.
 6. **Card copy names a role in both the stat header and the sentence** ("Mark, a board member in the construction industry, …"). The case-studies wording is kept, and the checker's named-attribution shapes need the "Name, a role" form. Wrong if the owner prefers the role stated once.
 7. **The not-a-fit standards** are written calmly, each with its reason, and none uses the old "back of the line" or "not for everyone" framing. Wrong if the owner wants the 24-hour reschedule standard named on the homepage; it is on /personal-training-services and the rates page.
+
+
+# Rates restructure run: /training-rates-san-diego for decision-making (Oct 17, 2026)
+
+No price, term, policy, FAQ answer or locked wording changed. The `<title>`, meta description, H1 and canonical are in the header's WebPage node and the hero, and both are untouched. The assessment paragraph (with "clinical-grade diagnostic session" and the Class IIa block), both 30-Day Fit Guarantee callouts, the worked example and every price are byte-identical. A line-by-line comparison of the old page against the new one finds only these removed lines: 7 section-head H2 lines (now inside `<summary>`), their 7 `<div class="rt-section" id=…>` wrappers (each id moved to the `<details>`), 2 H2s demoted to H3, 7 spacer divs, and the hero ghost link's old target. Every other line of the old page is present in the new one.
+
+## What changed
+
+| # | Change | Where |
+|---|---|---|
+| 1 | **Chooser** under the hero (`#rt-choose`): "Find your starting option in two steps." Step 1 is format (Studio · In-home · Virtual). Step 2 is frequency (1x/week Momentum · 2x/week Performance · 3x/week Peak). For Virtual, step 2 swaps to the Reset tiers (Bronze async · Gold 1x · Platinum 2x · Black 3x). A "Training as a couple?" switch (hidden for Virtual) swaps in the couples rates. The result sits in an `aria-live="polite"` region, with a static "Book Your Consultation" (Calendly) button below it. Every figure is computed by the page script from `data-*` attributes on `#rt-chooser` that carry the card prices. Without JavaScript, the chooser stays hidden and a `<noscript>` list links to six sections. | page, V16 |
+| 2 | **Seven expandable sections**: `<details>` closed by default. The `<summary>` holds the existing H2, unchanged, and the full text stays in the HTML. Each `rt-*` id is on its `<details>`. Order: The Foundation, The Program, Sessions Without a Program, The Tune-Up, The Executive Reset, What Happens If Your Schedule or Goals Change, Every Tier Includes Your Choice of Accountability. | page |
+| 3 | **Open by default**: What You Pay, and When; What Protects Your Investment; Why This Costs More Than a Gym, a Class or a Standard Trainer. | page |
+| 4 | **Order**: hero → chooser → What You Pay → What Protects → Why This Costs More → expandable sections → Questions About Pricing → final CTA. | page |
+| 5 | **FAQ** gains "Is OmniFit worth the price compared to a regular gym membership?" The answer is the homepage answer verbatim: answer-first ("Yes, …"), 78 words, and it carries the canonical 30-Day Fit Guarantee sentence unchanged. The header FAQPage now mirrors eleven questions. | page, header |
+| 6 | **site.js**: `rates_chooser_result` (format, frequency, couples, offer), plus a capture-phase opener so that a link or URL hash pointing at a closed `<details>` (or anything inside one) opens it first. | site/site.js |
+| 7 | **Homepage In Short**: the first bullet no longer repeats the POSITIONING LINE that is already the hero subhead. It now reads "**What it is:** 1:1 diagnostic-led coaching — measured, corrective-first strength training with nutrition and accountability included." | pages/home-1.html |
+| 8 | **CANON**: "Credentials (12)" → "Credentials (13)". MEASUREMENT gains `rates_chooser_result`. The rates REPO STATE entry and the POSITIONING LINE usage notes are updated. | CANON.md |
+| 9 | **Tools**: `faq.py` skips `section-toggle` summaries, self-tested both ways from certify.py. New `choosertest.js`. `mobileaudit.js --open-details`. `tracktest.js` extended. `ownership.py` FAQ read uses the same exclusion. | tools/ |
+
+### Merged text ("Two Ways to Train", "Commitment at a Glance")
+
+Nothing was dropped. Both sections were moved, and each H2 became an H3:
+
+- **Two Ways to Train** (label "How OmniFit Is Structured", both definitions word for word, and the "Want sessions without a program? …" line) is now part of the chooser section, directly below the chooser. The id `#rt-paths` is on it. Its H2 "Two Ways to Train" is now an H3.
+- **Commitment at a Glance** (label "Side by Side", the full nine-row table, "Sessions OmniFit cancels are credited, on both.") is now inside What You Pay, after the assessment card. The id `#rt-commit` is on it. Its H2 is now an H3.
+- The hero's "Compare Programs" button now points to `#rt-choose` (it was `#rt-paths`).
+- The jump bar gains "Find Yours" and "Protection" and follows the new order.
+- The three policy cards (Pause Weeks · Billing · 24-Hour Policy) sit under What Protects Your Investment. Built For / Not the Right Fit sits under Why This Costs More.
+
+## Chooser numbers for every combination, checked against CANON's card
+
+`tools/choosertest.js` parses the OCTOBER 2026 CARD out of CANON.md, not the page's data attributes, so a wrong data attribute fails the test. It then selects each combination in the built page and requires every expected line: the totals, the due-at-signup amount, the following Program rate, the Teqneeq line only for studio, and the 13-per-year line. It also checks the event attributes. Rules applied: The Foundation total = cycle × 3; due at signup = total − $150; Program-only tiers show cycle 1 = Program − $150; in-home Peak is "from $2,600" with no computed after-credit figure; Couples Peak is "by arrangement" (CANON); Performance couples are not offered on The Foundation (CANON).
+
+| # | Combination | Offer | Chooser shows | CANON card | Match |
+|---|---|---|---|---|---|
+| 1 | studio 1x | foundation | $1,680 · $560 · Due at signup after your $150 assessment credit: $1,530 · Then The Program at $640 per 4 weeks. · Plus Teqneeq membership, $119/month, billed by Teqneeq. | Foundation $1,680 ($560 x 3); due $1,530; then Program $640 | yes |
+| 2 | studio 2x | foundation | $3,300 · $1,100 · Due at signup after your $150 assessment credit: $3,150 · Then The Program at $1,250 per 4 weeks. · Plus Teqneeq membership, $119/month, billed by Teqneeq. | Foundation $3,300 ($1,100 x 3); due $3,150; then Program $1,250 | yes |
+| 3 | studio 3x | program | $1,800 · Not offered on The Foundation. Starts directly on The Program at $1,800 per 4 weeks. · Your $150 assessment credit comes off the first cycle: $1,650 due. · Plus Teqneeq membership, $119/month, billed by Teqneeq. | Program $1,800; cycle 1 after credit $1,650 | yes |
+| 4 | studio 1x couples | foundation | $2,550 · $850 · Due at signup after your $150 assessment credit: $2,400 · Then The Program at $1,000 per 4 weeks. · Plus Teqneeq membership, $119/month, billed by Teqneeq. Required for both partners. | Foundation $2,550 ($850 x 3); due $2,400; then Program $1,000 | yes |
+| 5 | studio 2x couples | program | $2,000 · Not offered on The Foundation. Starts directly on The Program at $2,000 per 4 weeks. · Your $150 assessment credit comes off the first cycle: $1,850 due. · Plus Teqneeq membership, $119/month, billed by Teqneeq. Required for both partners. | Program $2,000; cycle 1 after credit $1,850 | yes |
+| 6 | studio 3x couples | program | By arrangement · Not offered on The Foundation. Couples Peak on The Program is by arrangement. · Your $150 assessment credit comes off the first cycle. · Plus Teqneeq membership, $119/month, billed by Teqneeq. Required for both partners. | Program, Couples Peak by arrangement | yes |
+| 7 | inhome 1x | foundation | $2,400 · $800 · Due at signup after your $150 assessment credit: $2,250 · Then The Program at $900 per 4 weeks. | Foundation $2,400 ($800 x 3); due $2,250; then Program $900 | yes |
+| 8 | inhome 2x | program | $1,800 · Not offered on The Foundation. Starts directly on The Program at $1,800 per 4 weeks. · Your $150 assessment credit comes off the first cycle: $1,650 due. | Program $1,800; cycle 1 after credit $1,650 | yes |
+| 9 | inhome 3x | program | from $2,600 · Not offered on The Foundation. Starts directly on The Program from $2,600 per 4 weeks. · Your $150 assessment credit comes off the first cycle. Priced by travel and scope, arranged individually. | Program from $2,600; credit off cycle 1 | yes |
+| 10 | inhome 1x couples | foundation | $3,750 · $1,250 · Due at signup after your $150 assessment credit: $3,600 · Then The Program at $1,450 per 4 weeks. | Foundation $3,750 ($1,250 x 3); due $3,600; then Program $1,450 | yes |
+| 11 | inhome 2x couples | program | $2,900 · Not offered on The Foundation. Starts directly on The Program at $2,900 per 4 weeks. · Your $150 assessment credit comes off the first cycle: $2,750 due. | Program $2,900; cycle 1 after credit $2,750 | yes |
+| 12 | inhome 3x couples | program | By arrangement · Not offered on The Foundation. Couples Peak on The Program is by arrangement. · Your $150 assessment credit comes off the first cycle. | Program, Couples Peak by arrangement | yes |
+| 13 | virtual Bronze | reset | $200 | Reset $200 per 4-week cycle | yes |
+| 14 | virtual Gold | reset | $500 | Reset $500 per 4-week cycle | yes |
+| 15 | virtual Platinum | reset | $750 | Reset $750 per 4-week cycle | yes |
+| 16 | virtual Black | reset | $1,100 | Reset $1,100 per 4-week cycle | yes |
+
+**RESULT: PASSED** (16/16 combinations; 30 checks in total). Every line also shows "4-week cycles = 13 per year, never billed by the calendar month." Couples results add "Priced per couple, not per person. One session credit covers both partners." Studio couples add "Required for both partners." to the Teqneeq line. Bronze adds "Accountability setting: Coached or Train Only."
+
+## Accessibility and fallback (choosertest)
+
+| Check | Result |
+|---|---|
+| Result region `aria-live="polite"`, `aria-atomic` | PASS |
+| Both steps are `<fieldset>` with a `<legend>`; every radio is labelled by its tile; the couples toggle is `role="switch"` labelled "Training as a couple?" | PASS |
+| Keyboard only: Space, ArrowDown, Tab, Space gives in-home 1x Foundation $2,400; ArrowDown gives in-home 2x Program $1,800; Tab then Space gives couples in-home 2x $2,900; focus stays on the switch | PASS |
+| No JavaScript: chooser UI hidden; noscript list of six `#rt-*` links; all seven sections closed and openable natively | PASS |
+| 390px and 412px: no chooser element past the viewport, no cut-off text, no horizontal scroll, in all 17 states (empty plus 16) | PASS |
+
+## Checks
+
+| Check | Result |
+|---|---|
+| `python3 build.py --check` | **PASSED**: links, one H1 per page, JSON-LD, emoji, 404/_headers, redirects (74 rules, 116 known URLs, fixtures OK), tracking (fixtures OK), keyword ownership. The only note is K10 "no owner yet", by design. The rates page stays transactional and gains no cost-anchor link. |
+| `python3 tools/certify.py` (enforced) | **PASSED** (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 0); the new FAQ-extractor self-test runs in (c) |
+| Invariant hashes | all five **unchanged**: page pricing a6c7e65dddff4795 · header pricing 7af0d0049b0b7aba · credentials 02bd9cb90a71ce69 · archetypes 6b1b0f4efbd4a72c · 9-point 4c720960dec5a809 |
+| `node tools/tracktest.js` | **PASSED (56 assertions**, was 46). New: `rates_chooser_result` per new result with format/frequency/couples/offer; none after step 1 alone; none on a repeat; none while virtual has no tier; console path with a boolean `couples`. Also: the seven sections are closed by default; scrolling opens none; a jump-bar anchor opens The Foundation; the `#rt-program` hash opens only that section; the result's section link opens the Reset section. `rates_section_view` still fires once each for rt-foundation, rt-program, rt-sessions and rt-reset, in page order. |
+| `node tools/choosertest.js` | **PASSED** (30 checks, 16 combinations) |
+| `node tools/mobileaudit.js` (390/412, all pages) | **PASSED**: 0 clipped, no horizontal scroll on any page. The rates page also passes with `--open-details` (every section opened). Its narrow flags are the two-column rate-row name/price cells and pack cells, which are narrow by design (the same item-22 review). The chooser uses flex, not grid, and adds none. |
+
+**Screenshots** (`report-assets/`, chooser at 390px):
+- Studio 1x: `2026-10-17-rates-chooser-studio-1x-390.png`
+- In-home 2x: `2026-10-17-rates-chooser-inhome-2x-390.png`
+- Virtual: `2026-10-17-rates-chooser-virtual-390.png`
+
+## Things the brief assumed that were not so
+
+1. **The canonical pricing FAQ answer ("OmniFit Performance publishes its rates in full…") is not on this page.** It is on the eleven territory pages, corrective-exercise-post-rehab and the-30-minute-executive-reset. Every FAQ answer that is on the rates page is byte-identical, and both pricing hashes are unchanged.
+2. **The worked example is static text, not script-computed.** It has been static since V15 (Dial follow-up run; CANON TIER CHANGES records it). It is untouched: $140 · 8 · $1,120 · $680.
+
+## Judgment calls (and the condition under which each is wrong)
+
+1. **"Two Ways to Train" sits below the chooser steps**, inside the chooser section, not above them. This keeps the steps above the fold at 390px. Wrong if the owner wants the definitions read before choosing.
+2. **"Commitment at a Glance" moved under What You Pay as an H3** rather than into the chooser, because a nine-row table would push the chooser off the first screen. Wrong if the owner wants it inside the chooser or kept as its own H2.
+3. **The Program-only results show the cycle-1 amount after the credit** ("comes off the first cycle: $1,650 due"). This follows the canonical credit line. In-home Peak and Couples Peak show no computed figure because they have no fixed price. Wrong if the owner wants the credit stated without arithmetic.
+4. **Virtual results show no assessment-credit line.** The assessment is in-studio or in-home, and a nationwide Reset client may not take one. CANON's credit line does cover a Reset cycle. Wrong if every Reset client takes the assessment; then the line can be added from the same data attribute.
+5. **The couples switch is hidden for Virtual**, because the card has no couples Reset rates. Turning it on and then choosing Virtual resets it to off, so the event reports `couples: false`.
+6. **`frequency` uses `async` for Bronze** and 1x/2x/3x for Gold/Platinum/Black, so the parameter means the same thing across formats. Wrong if the owner wants the tier name.
+7. **The In Short bullet's em dash** is the owner's verbatim wording. The house rule against new em dashes in prose gives way to the verbatim text.
+8. **CANON "Credentials (13)" now also names Precision Nutrition "Level 2 Certified Master Coach".** Without it, the list counted twelve under a thirteen label. The INVARIANTS block, /about and the credentials block already name it.
+9. **`site.js` opens a targeted closed `<details>` on every page**, not only the rates page (for example, a hash pointing at an FAQ). Wrong if some page relies on a `<details>` staying closed when targeted. None does today.
