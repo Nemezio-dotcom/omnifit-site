@@ -192,9 +192,19 @@ def check_page(path, doc, keywords, exclusions):
     return problems, owned
 
 
+def built_pages(public):
+    """The rendered pages in public/: index.html is the homepage, every other
+    top-level <slug>.html is /<slug> (build.py writes flat files so Cloudflare
+    Pages serves /<slug> with no trailing-slash redirect). 404.html is not a
+    page."""
+    public = Path(public)
+    files = [public / "index.html"] if (public / "index.html").exists() else []
+    files += [f for f in sorted(public.glob("*.html")) if f.name not in ("index.html", "404.html")]
+    return files
+
+
 def _url_path(public, f):
-    rel = f.relative_to(public).parent.as_posix()
-    return "/" if rel == "." else "/" + rel
+    return "/" if f.name == "index.html" else "/" + f.stem
 
 
 def check_site(public=ROOT / "public", canon=ROOT / "CANON.md"):
@@ -203,7 +213,7 @@ def check_site(public=ROOT / "public", canon=ROOT / "CANON.md"):
         keywords, exclusions = load_table(canon)
     except TableError as err:
         return [f"KEYWORD OWNERSHIP table not read - {err}; no page was checked"], []
-    files = sorted(Path(public).rglob("index.html"))
+    files = built_pages(public)
     if not files:
         return [f"no rendered pages under {public} - ownership not checked"], []
     paths = {_url_path(public, f): f for f in files}

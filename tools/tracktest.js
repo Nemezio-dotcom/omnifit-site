@@ -2,7 +2,7 @@
 /* Measurement test (CANON MEASUREMENT; DEPLOY.md "Measurement").
 
    Serves public/ on 127.0.0.1 the way Cloudflare Pages does (/slug ->
-   public/slug/index.html), drives the built site in Chromium and asserts:
+   public/slug.html, / -> public/index.html), drives the built site in Chromium and asserts:
 
      - the production branch runs on the production hostname (mapped to the
        local server with --host-resolver-rules), on localhost only with the
@@ -54,7 +54,7 @@ function serve() {
       let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
       if (p.length > 1) p = p.replace(/\/+$/, "");
       const candidates = p === "/" ? [path.join(PUBLIC, "index.html")]
-        : [path.join(PUBLIC, p), path.join(PUBLIC, p, "index.html")];
+        : [path.join(PUBLIC, p), path.join(PUBLIC, p + ".html")];
       for (const f of candidates) {
         if (f.startsWith(PUBLIC) && fs.existsSync(f) && fs.statSync(f).isFile()) {
           res.writeHead(200, { "content-type": TYPES[path.extname(f)] || "application/octet-stream" });

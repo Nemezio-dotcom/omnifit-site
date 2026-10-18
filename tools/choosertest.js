@@ -103,7 +103,9 @@ function serve() {
     const srv = http.createServer((req, res) => {
       let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
       if (p.length > 1) p = p.replace(/\/+$/, "");
-      for (const f of [path.join(PUBLIC, p), path.join(PUBLIC, p, "index.html")]) {
+      // Cloudflare Pages layout: / -> index.html, /<slug> -> <slug>.html.
+      const cands = p === "/" ? [path.join(PUBLIC, "index.html")] : [path.join(PUBLIC, p), path.join(PUBLIC, p + ".html")];
+      for (const f of cands) {
         if (f.startsWith(PUBLIC) && fs.existsSync(f) && fs.statSync(f).isFile()) {
           res.writeHead(200, { "content-type": TYPES[path.extname(f)] || "application/octet-stream" });
           return res.end(fs.readFileSync(f));
