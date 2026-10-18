@@ -1561,6 +1561,16 @@ def retired_75(text):
         if re.search(_VIRTUAL_ASSESS, t[max(0, m.start()-250):m.start()] + after, re.I): continue
         # the pricing FAQ shape: "Performance Assessment ($150 in person, $75 virtual)"
         if re.match(r'\s+virtual\b', after, re.I) and re.search(r'Performance Assessment \([^)]{0,40}$', t[max(0, m.start()-80):m.start()]): continue
+        # the rates step-card shape (run 7, Oct 18 2026): "Performance Assessment
+        # $150 in person · $75 virtual" and its body "... or virtual with
+        # self-measurement and video guidance, no body-composition scan ($75)".
+        # The assessment must be named within 260 characters before, and the
+        # figure must read "$75 virtual" or close a virtual clause that names
+        # self-measurement or video guidance (CANON's definition of it).
+        before = t[max(0, m.start()-260):m.start()]
+        if 'Performance Assessment' in before and (
+                re.match(r'\s+virtual\b', after, re.I)
+                or re.search(r'\bvirtual\b[^.$]{0,100}(?:self-measure|video guidance)[^.$]{0,60}\($', before, re.I)): continue
         out.append(t[max(0, m.start()-90):m.end()+90].strip())
     return out
 
@@ -1574,6 +1584,11 @@ def _selftest_retired_75():
                  "<p>Competitors charge $75-120 per session.</p>",
                  "<p>Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase.</p>"]
     must_fail.append("<p>Guest add-on ($90 member, $75 virtual guest).</p>")
+    # step-card shape, run 7: both legitimate forms pass, a lookalike fails
+    must_pass += ["<h3>Performance Assessment</h3><div>$150 <span>in person · $75 virtual · credited toward your first purchase</span></div>",
+                  "<h3>Performance Assessment</h3><p>In-studio at Teqneeq FHC or in your home ($150), or virtual with self-measurement and video guidance, no body-composition scan ($75).</p>"]
+    must_fail += ["<h3>Performance Assessment</h3><p>$150. A virtual guest pass ($75).</p>",
+                  "<h3>Performance Assessment</h3><p>$150. Guest add-on $75 per session.</p>"]
     for s in must_fail: assert retired_75(s), f"retired_75 self-test: should fail: {s}"
     for s in must_pass: assert not retired_75(s), f"retired_75 self-test: should pass: {s}"
 
