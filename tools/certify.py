@@ -1594,6 +1594,15 @@ CANON_HASH_PATTERNS = {
     "9-point":        (r'9-point screen section body',   r'\(hash\s+([0-9a-f]{8,64})\s*;'),
 }
 
+# The twelve page/header pairs that carry the canonical pricing FAQ answer
+# (CANON INVARIANTS, "Canonical pricing FAQ answer"). Keep in step with CANON.
+PRICING_FAQ_CARRIERS = (
+    "corrective-exercise-post-rehab", "personal-trainer-4s-ranch", "personal-trainer-carlsbad",
+    "personal-trainer-carmel-valley", "personal-trainer-del-mar", "personal-trainer-encinitas",
+    "personal-trainer-fairbanks-ranch", "personal-trainer-la-jolla", "personal-trainer-rancho-bernardo",
+    "personal-trainer-rancho-santa-fe", "personal-trainer-santaluz", "personal-trainer-solana-beach",
+)
+
 def canon_hashes(path="CANON.md"):
     """The five invariant hashes as CANON.md records them.
 
@@ -1926,6 +1935,17 @@ def run():
         if arch: inv.setdefault("archetypes",set()).add(hashlib.sha256("".join(arch).encode()).hexdigest()[:16])
         sm=re.search(r'THE 9-POINT MOVEMENT SCREEN.*?<p>(.*?)</p>.*?<ul class="[a-z]+-card-features">(.*?)</ul>\s*<p>(.*?)</p>',s,re.S)
         if sm: inv.setdefault("9-point",set()).add(hashlib.sha256((sm.group(1)+"".join(re.findall(r'<li>(.*?)</li>',sm.group(2)))+sm.group(3)).encode()).hexdigest()[:16])
+    # CARRIER LIST of the canonical pricing FAQ answer (CANON INVARIANTS). The
+    # hash says the carriers agree; this says WHICH files carry it, so a page
+    # dropping the block (or growing a copy) is a finding, not a silent change
+    # of scope. The-30-minute-executive-reset left the list in the Audit
+    # Reconciliation run (Oct 18 2026, owner-approved): its cost FAQ answers
+    # with the Reset tiers only.
+    carriers = {os.path.basename(x).replace('-header.html','').replace('.html','') + (' (header)' if '/headers/' in x else '')
+                for x in files if 'OmniFit Performance publishes its rates in full.' in open(x).read()}
+    want = {s + h for s in PRICING_FAQ_CARRIERS for h in ('', ' (header)')}
+    for x in sorted(carriers ^ want):
+        print(f"   [pricing FAQ carrier list] {x} {'carries the block but is not a listed carrier' if x in carriers else 'is a listed carrier but no longer carries the block'}"); C+=1
     for k,v in inv.items():
         if len(v)!=1: print(f"   [invariant mismatch] {k}: {v}"); C+=1
     # Two distinct failures, deliberately reported as two finding classes.

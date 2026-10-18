@@ -1685,8 +1685,17 @@ Page-specific rules that are NOT ownership but are locked in the same table:
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash a6c7e65dddff4795, header hash 7af0d0049b0b7aba). Currently 13
-  pages and 13 headers - the-30-minute-executive-reset joined in the Reset
+  (page hash a6c7e65dddff4795, header hash 7af0d0049b0b7aba). Currently 12
+  pages and 12 headers (CARRIER LIST, enforced by certify.py
+  PRICING_FAQ_CARRIERS since the Audit Reconciliation run, Oct 18 2026): the
+  eleven territory pages and corrective-exercise-post-rehab. CARRIER REMOVED, OWNER-APPROVED (Audit
+  Reconciliation run, Oct 18 2026): the-30-minute-executive-reset left the
+  list; its FAQ "How much does the Executive Reset cost?" now answers with
+  the Reset tiers only (Bronze $200 async, Gold $500, Platinum $750, Black
+  $1,100, billed every 4 weeks; Virtual Performance Assessment $75,
+  credited), page and header mirror. Neither hash moved: the other twelve
+  carriers are byte-identical and unchanged, and the hash is computed over
+  them. Before this run the count was 13 pages and 13 headers - the-30-minute-executive-reset joined in the Reset
   Refresh run, byte-identical to the other twelve, so neither hash moved. BOTH HASHES CHANGED in the October Card run: the
   block states the rates, so repricing rewrote the same bytes on all 24
   files. Previous values ae388d31c0b6149e / 7e5de5984b133663. The
