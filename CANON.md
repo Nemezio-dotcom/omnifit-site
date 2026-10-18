@@ -1805,7 +1805,7 @@ legitimately changes an invariant, and say so in REPORT.md)
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
 - 9-point screen section body (Section B): byte-identical × 11 pages
-  (hash f9dfcec684d7a9dd; intro + nine <li> items + closing line, set by
+  (hash 5a629cf689301f84; intro + nine <li> items + closing line, set by
   the Section A/B run). Hash changed legitimately in the Device Swap run
   (Sept 2026): the Body Composition <li> names the device, so retiring the
   1500 MDD rewrote the same bytes on all eleven pages. Previous value
@@ -1828,6 +1828,13 @@ legitimately changes an invariant, and say so in REPORT.md)
   intro, the other eight items and the closing line are byte-identical across
   the change. All eleven pages agree; certify.py reports no invariant
   mismatch.
+  CHANGED AGAIN in the Claims & Tone run (6B, Oct 18 2026), OWNER-APPROVED
+  (run brief item 3): f9dfcec684d7a9dd -> 5a629cf689301f84. One <li> only,
+  identically on all eleven pages: "Bodystat Body Composition — medical-grade
+  bioimpedance via the Bodystat QuadScan 4000 ..." -> "... multi-frequency
+  bioimpedance ..." ("medical-grade" and "clinical-grade" are dropped
+  sitewide; the QuadScan 4000 is a four-frequency device). Intro, the other
+  eight items and the closing line are byte-identical.
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
