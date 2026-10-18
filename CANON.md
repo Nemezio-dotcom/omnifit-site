@@ -27,7 +27,29 @@ REPO STATE (reconciled with disk, Sept 2026)
       build.py REDIRECTS; back in mkheaders META, the sitemap and the link
       lists on personal-training-services and the homepage.)
     training-rates-san-diego (refreshed from live and corrected, Aug 2026:
-      two-ladder session packs, guest add-on, DEFERRED-01 applied)
+      two-ladder session packs, guest add-on, DEFERRED-01 applied).
+      V16, Oct 17 2026 (rates restructure run): decision-first layout, no
+      price, term, policy, FAQ answer or locked wording changed. Order:
+      hero, the starting-option CHOOSER (#rt-choose: format, frequency,
+      couples toggle; result in an aria-live region; every figure computed
+      by the page script from data attributes carrying the card prices;
+      "Two Ways to Train" is now an H3 inside it, #rt-paths), What You Pay
+      (assessment, "Commitment at a Glance" as an H3, #rt-commit,
+      inclusions), What Protects Your Investment (+ the three policy
+      cards), Why This Costs More (+ Built For / Not the Right Fit), then
+      SEVEN EXPANDABLE SECTIONS, <details> closed by default with the
+      existing H2 inside <summary class="... section-toggle"> and the full
+      text in the HTML: The Foundation, The Program, Sessions Without a
+      Program, The Tune-Up, The Executive Reset, What Happens If Your
+      Schedule or Goals Change, Every Tier Includes Your Choice of
+      Accountability; then the FAQ (eleven: "Is OmniFit worth the price
+      compared to a regular gym membership?" added, the homepage answer
+      verbatim; header mirrors) and the final CTA. Every rt-* id still
+      resolves; each section id sits on its <details>, and site.js opens a
+      closed section when a link or the URL hash targets it. tools/faq.py
+      skips section-toggle summaries (they are sections, not questions);
+      certify.py self-tests that both ways. tools/choosertest.js checks
+      every chooser combination against this card.
     personal-trainer-over-50-san-diego - NEW, live as of Sept 2026, certified
       in the Scope Reconciliation run. Its header arrived misnamed
       (no -header suffix); renamed after its content certified clean.
@@ -337,8 +359,17 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
       private-personal-trainer-san-diego), the first time each of
       #rt-foundation, #rt-program, #rt-sessions, #rt-reset scrolls into
       view (IntersectionObserver, once per section) · section (the id).
-      Each #rt-* element is the section's heading block; the ladder below
-      it is a sibling, so the heading entering the viewport is the signal.
+      Since V16 each of the four ids is on the section's <details>, closed
+      by default, so its <summary> (the section's H2) entering the
+      viewport is the signal, open or not.
+    rates_chooser_result  /training-rates-san-diego, each NEW chooser
+      result (both steps chosen; a repeat of the same result sends nothing)
+      · format (studio | inhome | virtual) · frequency (1x | 2x | 3x for
+      studio and in-home; async | 1x | 2x | 3x for the Reset tiers Bronze,
+      Gold, Platinum, Black) · couples (true | false; always false for
+      virtual) · offer (foundation | program | reset). The page writes these
+      as data attributes on #rt-ch-result and then a new data-ch-key; site.js
+      sends the event when data-ch-key changes. No price is sent.
 - COMPLETED BOOKINGS ARE NOT A SITE EVENT. Calendly's own GA4 integration
   (the Measurement ID entered in Calendly) reports them to the same
   property, and cross-domain measurement is configured in GA4 for
@@ -360,8 +391,10 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
   (Playwright on the built site served locally: the production hostname
   mapped to the local server, the override on localhost, every event with
   its params, Clarity absent on /fit-check, no request to either service on
-  a non-production host, the override ignored off localhost). Results in
-  REPORT.md (Measurement run).
+  a non-production host, the override ignored off localhost; since the
+  rates restructure run also rates_chooser_result and the rates page's
+  closed sections opening from an anchor or a URL hash). Results in
+  REPORT.md (Measurement run; rates restructure run).
 
 WORKFLOW RULES
 - Repo-only. Never publish anywhere; the human pastes approved output
@@ -407,9 +440,9 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
   CA 92127. Email nemezio@omnifittraining.com. Phone (619) 259-0630.
   Pacific Beach is history — zero references.
 - Reviews: 190+ (5.0). Never 180+.
-- Credentials (12): NASM CPT, CES, PES, BCS, CNC; ACE Corrective
+- Credentials (13): NASM CPT, CES, PES, BCS, CNC; ACE Corrective
   Exercise Specialist (NOT OES, NOT Orthopedic); Precision Nutrition L1,
-  Sleep Stress & Recovery, Nutrition for Metabolic Health; Eden GLP-1
+  Level 2 Certified Master Coach, Sleep Stress & Recovery, Nutrition for Metabolic Health; Eden GLP-1
   Fitness, Peptide Fundamentals, GLP-1 Nutrition (clinical collaboration
   framing). Experience: "10+ Years Coaching" — never "in San Diego".
 - PRICING — OCTOBER 2026 CARD (owner-confirmed Sept 13 2026). This card
@@ -759,9 +792,12 @@ ENTITY BLOCK (Oct 17 2026; source: brand entity split across AI platforms -
     ("diagnostic-led coaching system", "pain or plateau") and any placement
     in <title>, <h1>, a meta description or a header's WebPage
     name/description (build.py reads those as the title and meta);
-    self-tested both ways on every run. Carried by the homepage In Short
-    block (lead bullet) and the homepage hero subhead (Homepage rebuild run,
-    Oct 17 2026); no other summary block carries it yet.
+    self-tested both ways on every run. Carried by the homepage hero
+    subhead (Homepage rebuild run, Oct 17 2026). The homepage In Short block
+    no longer repeats it directly under the hero (owner, rates restructure
+    run, Oct 17 2026): its first bullet is "What it is: 1:1 diagnostic-led
+    coaching — measured, corrective-first strength training with nutrition
+    and accountability included." No other summary block carries it yet.
   sameAs (Organization): Instagram, Yelp, Google Business Profile (g.page),
   Thumbtack, Bark, BBB - as listed in site-header.html. Several listing URLs
   still carry the retired name in their slug; that is the directory's slug,
@@ -1770,6 +1806,8 @@ NEXT RUNS
     (the file:line list in REPORT.md), reconciling "switch to virtual" /
     "virtual sessions during travel weeks" wording with the definition.
   · Lead every summary / TL;DR block with the POSITIONING LINE, verbatim
-    (DONE on the homepage In Short block, Oct 17 2026; other pages open);
+    (homepage: carried by the hero subhead, which sits directly above In
+    Short, so In Short no longer repeats it - owner, Oct 17 2026; other
+    pages open);
     human-side, paste it to Google Business Profile, Thumbtack, Yelp and
     Bark.
