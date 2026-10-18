@@ -429,7 +429,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
         "@type": "Offer",
         "price": "30.00",
         "priceCurrency": "USD",
-        "description": "45-minute consultation reserved with a $30 deposit, refunded the same day you attend your consultation. Goal mapping and program recommendation; the movement screen happens at the $150 Performance Assessment.",
+        "description": "45-minute consultation reserved with a $30 deposit, refunded the same day you attend your consultation. Goal mapping and program recommendation; the movement screen happens at the Performance Assessment ($150 in person, $75 virtual).",
         "availability": "https://schema.org/LimitedAvailability"
       },
       "hasOfferCatalog": {
@@ -615,6 +615,30 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   line-height: 1.75 !important;
 }
 
+#omni-consultation .expect-next {
+  margin: 20px auto 0 !important;
+  padding: 24px 28px !important;
+  border: 1px solid var(--white-10) !important;
+  border-left: 3px solid var(--gold) !important;
+  border-radius: var(--radius) !important;
+  max-width: 900px !important;
+}
+
+#omni-consultation .expect-next p {
+  font-size: 15px !important;
+  color: var(--white-70) !important;
+  margin: 0 !important;
+  line-height: 1.75 !important;
+}
+
+#omni-consultation .expect-next .expect-next-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: var(--white) !important;
+  margin: 0 0 8px !important;
+}
+
 /* ── TRUST SECTION ── */
 #omni-consultation .trust-section {
   padding: 56px 24px !important;
@@ -789,7 +813,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     margin-bottom: 48px !important;
   }
   #omni-consultation .expect-grid {
-    grid-template-columns: 1fr 1fr 1fr !important;
+    grid-template-columns: 1fr 1fr !important;
     gap: 28px !important;
   }
   #omni-consultation .expect-card {
@@ -924,6 +948,9 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
   #omni-consultation .expect-card {
     padding: 24px !important;
+  }
+  #omni-consultation .expect-next {
+    padding: 20px !important;
   }
   #omni-consultation .trust-section {
     padding: 40px 16px !important;
@@ -1071,19 +1098,16 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <div class="expect-card">
           <div class="expect-icon">2</div>
           <div class="expect-content">
-            <h3>Movement Screen</h3>
-            <p>This happens at your $150 Performance Assessment, not on the consultation call: a hands-on look at how you move, where you're compensating, what's tight, what's strong. It tells me more than any questionnaire. Wear comfortable clothes.</p>
-          </div>
-        </div>
-
-        <div class="expect-card">
-          <div class="expect-icon">3</div>
-          <div class="expect-content">
             <h3>Honest Recommendation</h3>
             <p>I'll tell you what I think your biggest priorities are, which program fits, and what realistic results look like. If we're not the right match, I'll tell you directly.</p>
           </div>
         </div>
 
+      </div>
+
+      <div class="expect-next">
+        <p class="expect-next-title">What happens next: the Performance Assessment</p>
+        <p>The movement screen happens at your Performance Assessment, not on the consultation call: a look at how you move, where you're compensating, what's tight and what's strong. It tells me more than any questionnaire. In person ($150, studio or home) it's hands-on, so wear comfortable clothes; the virtual assessment ($75) is self-measured with live video guidance and has no body-composition scan.</p>
       </div>
     </div>
   </div>

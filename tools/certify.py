@@ -285,7 +285,8 @@ def _selftest_lbs_fragment():
                 '<li>20—30+ lbs in 4—6 months</li>',          # em dash
                 '<li>20&ndash;30 lbs in 4&ndash;6 months</li>',
                 '<li>15-20 lbs within 8-12 weeks</li>', '<span>10 to 15 pounds over 3 to 6 months</span>',
-                '<li>Lose 20+ lb in 12 weeks</li>', '<p>Lose 10 lbs every 4 weeks.</p>'):
+                '<li>Lose 20+ lb in 12 weeks</li>', '<p>Lose 10 lbs every 4 weeks.</p>',
+                '<p>From $200 per 4 weeks. Lose 20 lbs in 8 weeks.</p>'):    # run 7: a price beside a real claim
         assert lbs_near_timeframe(bad, outcomes=''), f"T1-2 fragment passed: {bad}"
     d = '<p>Individual results. Outcomes depend on starting point and vary between clients.</p>'
     p2a = ('<p>Individual result, measured by OmniFit. How clients typically progress: '
@@ -293,6 +294,8 @@ def _selftest_lbs_fragment():
     for ok in ('<li>Sustainable fat loss, no crash diets</li>',
                '<p>sustainable fat loss of 20-30 lbs</p>',      # TIER 2 item 3: no timeframe
                '<p>Virtual Executive Reset from $200 per 4 weeks.</p><p>Lose 20–30+ lbs sustainably.</p>',  # billing cadence
+               # run 7: the cadence split from its price by the window edge
+               '<p>Virtual Executive Reset from $200 per 4 weeks</p><a>Explore Virtual Coaching →</a><h3>📉 Weight Loss Coaching</h3><p>For professionals aiming to lose 20–30 lbs sustainably: progressive training.</p>',
                '<div>Mark · Board member</div><p>Mark came in at 248 lbs and went to 231 lbs over 4 months.</p>' + p2a + d):
         assert lbs_near_timeframe(ok, outcomes='') == [], f"legitimate copy fired: {ok[:60]}"
 
@@ -344,8 +347,19 @@ _T1_UNITS = (r'\d[\d,]*\+?(?:\s*' + _DASH + r'\s*\d[\d,]*\+?)?\s*'
 
 BILLING_CADENCE = r'\$\s?[\d,]+(?:\.\d\d)?\s*(?:/\s*|(?:per|every|each|a)\s+)$'
 
+# A price with its billing cadence ("$200 per 4 weeks"), blanked to spaces of
+# the same length before the window is cut (positions hold). The in-window
+# BILLING_CADENCE test below misses it when the window edge splits the price
+# from its cadence: run 7 (Oct 18 2026) moved the Carmel Valley figure four
+# words later ("For professionals aiming to lose 20–30 lbs"), the window then
+# began at "per 4 weeks", and the neighbouring card's Reset price read as an
+# outcome window. Self-tested both ways in _selftest_lbs_fragment.
+BILLED_TIMEFRAME = (r'\$\s?[\d,]+(?:\.\d\d)?\s*(?:/\s*|(?:per|every|each|a)\s+)'
+                    r'(?:\d[\d,]*\s*)?' + _UNIT + r'\b')
+
 def lbs_near_timeframe(text, window=15, outcomes=None):
     t = _flat(text); out = []
+    t = re.sub(BILLED_TIMEFRAME, lambda x: ' ' * len(x.group(0)), t, flags=re.I)
     disclaimed = _has_results_disclaimer_anywhere(text)   # TIER 2 item 2a
     for m in re.finditer(_T1_UNITS, t, re.I):
         w = _near(t, m, window)
@@ -1290,8 +1304,8 @@ RETIRED_LAUNCH_COPY = [
     "no standardized assessment", "Typically single", "flags inflammation",
     "@gmail.com", "g.page/r/CcePeMjnbDe9EBM/review", "$250/month",
     # Calendly follow-up (Oct 17 2026): the territory FAQ answer's old credit
-    # sentence. Canonical: "The $150 Performance Assessment is credited toward
-    # your first program, Reset cycle or 5-pack."
+    # sentence. Canonical (run 7): "The Performance Assessment ($150 in person,
+    # $75 virtual) is credited toward your first program, Reset cycle or 5-pack."
     "diagnostic fee is credited",
     # Launch decision 19 (Oct 17 2026): the travel-fee variants. Canonical:
     # "No travel fee inside our in-home service area; a travel fee may apply
@@ -1318,6 +1332,13 @@ RETIRED_LAUNCH_COPY = [
     # categories, never a named local business; "Elite Training" headings are
     # retired ("Private Coaching in ..." / "1:1 Coaching in ...").
     "Iron Orr", "Elite Training",
+    # Run 7 (Oct 18 2026): the consultation is not "paid" (it is a $30
+    # deposit, refunded the same day you attend your consultation); studio
+    # access is "Private, by appointment" (non-member rates include a Teqneeq
+    # day pass); "assessment" names only the Performance Assessment, so the
+    # CTA note reads "Straight answer on fit". Case-insensitive, like every
+    # term here, so "Paid 45-minute" and "paid 45-minute" both fire.
+    "paid 45-minute", "Credentialed access only", "Honest assessment of fit",
 ]
 
 def retired_launch_copy(text):
@@ -1366,7 +1387,11 @@ def _selftest_retired_copy():
              "for 6 months or longer (see Outcomes). Sessions are 60 minutes; 30 minutes on the "
              "Executive Reset. Apart from your statutory cancellation rights, the 30-Day Fit "
              "Guarantee is the only early exit. A 45-minute consultation, then the Performance "
-             "Assessment. In-home training across North County San Diego.</p>")
+             "Assessment. In-home training across North County San Diego. 45-minute "
+             "consultation · $30 deposit, refunded the same day you attend your consultation "
+             "· No commitment · Straight answer on fit. Private, by appointment: no walk-ins, "
+             "no crowds. Credentialed professionals only. Sessions are paid in full at "
+             "enrollment.</p>")
     assert retired_launch_copy(clean) == [], "retired-copy rule fired on canonical copy"
     return len(RETIRED_LAUNCH_COPY)
 
@@ -1561,6 +1586,16 @@ def retired_75(text):
         if re.search(_VIRTUAL_ASSESS, t[max(0, m.start()-250):m.start()] + after, re.I): continue
         # the pricing FAQ shape: "Performance Assessment ($150 in person, $75 virtual)"
         if re.match(r'\s+virtual\b', after, re.I) and re.search(r'Performance Assessment \([^)]{0,40}$', t[max(0, m.start()-80):m.start()]): continue
+        # the rates step-card shape (run 7, Oct 18 2026): "Performance Assessment
+        # $150 in person · $75 virtual" and its body "... or virtual with
+        # self-measurement and video guidance, no body-composition scan ($75)".
+        # The assessment must be named within 260 characters before, and the
+        # figure must read "$75 virtual" or close a virtual clause that names
+        # self-measurement or video guidance (CANON's definition of it).
+        before = t[max(0, m.start()-260):m.start()]
+        if 'Performance Assessment' in before and (
+                re.match(r'\s+virtual\b', after, re.I)
+                or re.search(r'\bvirtual\b[^.$]{0,100}(?:self-measure|video guidance)[^.$]{0,60}\($', before, re.I)): continue
         out.append(t[max(0, m.start()-90):m.end()+90].strip())
     return out
 
@@ -1574,6 +1609,11 @@ def _selftest_retired_75():
                  "<p>Competitors charge $75-120 per session.</p>",
                  "<p>Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase.</p>"]
     must_fail.append("<p>Guest add-on ($90 member, $75 virtual guest).</p>")
+    # step-card shape, run 7: both legitimate forms pass, a lookalike fails
+    must_pass += ["<h3>Performance Assessment</h3><div>$150 <span>in person · $75 virtual · credited toward your first purchase</span></div>",
+                  "<h3>Performance Assessment</h3><p>In-studio at Teqneeq FHC or in your home ($150), or virtual with self-measurement and video guidance, no body-composition scan ($75).</p>"]
+    must_fail += ["<h3>Performance Assessment</h3><p>$150. A virtual guest pass ($75).</p>",
+                  "<h3>Performance Assessment</h3><p>$150. Guest add-on $75 per session.</p>"]
     for s in must_fail: assert retired_75(s), f"retired_75 self-test: should fail: {s}"
     for s in must_pass: assert not retired_75(s), f"retired_75 self-test: should pass: {s}"
 
