@@ -452,6 +452,22 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
             "@type": "Answer",
             "text": "Most trainers don't run a 9-point physical screening on day one. They don't follow a named methodology with distinct phases. They don't use a pain ceiling rule. And they don't deliver formal 30-day progress reports with data-driven program adjustments. The difference isn't the claim — it's the system behind it."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you follow a proven framework, or is each session improvised?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A framework. Every program follows the same four phases, Assess, Correct, Build and Sustain, and is written in 4-week blocks from your assessment results rather than made up on the day. Each session still adapts to how you arrive: what's stiff, how the last session landed, and any movement above the 3/10 pain ceiling gets modified. The structure is fixed; the details are yours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when my program ends?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You graduate. Your Accountability Dial steps down as you need less coaching, Full Accountability → Coached → Train Only → Tune-Up, and the Tune-Up is the graduation point: one reassessment on the Bodystat QuadScan 4000 and an hour of training every 4 weeks, with your program in the app between visits. The goal is a client who no longer needs us every week."
+          }
         }
       ]
     }
@@ -611,6 +627,26 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     #omni-method .flow-step { min-width: auto; }
   }
 </style>
+<style>
+  #omh-short.omh{--omh-navy:#0a1628;--omh-gold:#c9a84c;--omh-ink:#1e293b;--omh-line:rgba(10,22,40,.10);font-family:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--omh-ink);background:#fff;margin:0;padding:56px 24px 72px;line-height:1.65;-webkit-font-smoothing:antialiased;text-align:left;}
+  #omh-short.omh *{box-sizing:border-box;}
+  #omh-short.omh .omh-inner{max-width:1100px;margin:0 auto;}
+  #omh-short.omh .omh-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#9a7a26 !important;margin:0 0 14px;}
+  #omh-short.omh .omh-label::before{content:'';display:inline-block;width:28px;height:2px;background:var(--omh-gold);flex:none;}
+  #omh-short.omh h2{font-family:'Playfair Display','Times New Roman',serif !important;font-size:clamp(27px,3.6vw,38px) !important;font-weight:700 !important;font-style:normal !important;line-height:1.18 !important;letter-spacing:-.3px !important;color:#0a1628 !important;margin:0 0 16px !important;padding:0 !important;text-transform:none !important;text-align:left !important;max-width:24ch;}
+  #omh-short.omh .short-box{border:1px solid var(--omh-line);border-left:4px solid var(--omh-gold);border-radius:14px;padding:30px 32px;background:#fff;box-shadow:0 10px 30px rgba(10,22,40,.05);}
+  #omh-short.omh ul{list-style:none;margin:0;padding:0;display:grid;gap:14px;}
+  #omh-short.omh li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px;align-items:start;font-size:16px;line-height:1.6;color:var(--omh-ink);margin:0;padding:0;}
+  #omh-short.omh li::before{content:none;}
+  #omh-short.omh li svg{width:22px;height:22px;margin-top:1px;fill:none;stroke:var(--omh-gold);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  #omh-short.omh li span{color:#1e293b !important;}
+  #omh-short.omh li strong{color:#0a1628 !important;font-weight:700 !important;}
+  @media (max-width:640px){
+    #omh-short.omh{padding:40px 16px 52px;}
+    #omh-short.omh .short-box{padding:22px 18px;}
+    #omh-short.omh li{font-size:15.5px;gap:12px;}
+  }
+</style>
 </head>
 <body class="page page--the-omnifit-method">
 <!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
@@ -709,6 +745,27 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <span class="cred">NASM CPT</span><span class="cred">NASM CES</span><span class="cred">NASM PES</span><span class="cred">NASM CNC</span><span class="cred">NASM BCS</span><span class="cred">ACE CES</span>
     </div>
   </section>
+
+<!-- ═══ IN SHORT (cited-pages run, Oct 18 2026) ═══
+  Same pattern and classes as the homepage In Short block (pages/home-1.html).
+  First bullet is the POSITIONING LINE verbatim (CANON ENTITY BLOCK). -->
+
+<section id="omh-short" class="omh" aria-labelledby="omh-short-h">
+  <div class="omh-inner">
+    <p class="omh-label">The Short Version</p>
+    <h2 id="omh-short-h">In Short</h2>
+    <div class="short-box">
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Who it's for:</strong> busy professionals 30+ with real injuries, real schedules and real skepticism.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>What happens:</strong> Assess measures your starting point, Correct fixes mobility before load, Build adds structured strength, Sustain steps coaching down until you train on your own.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>What it rests on:</strong> Measured Progress, Joint-First Strength and Accountability That Travels.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Next step:</strong> a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 
   <!-- GEMINI-QUOTABLE -->
   <div class="q-wrap"><div class="quotable">
@@ -894,6 +951,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Is this just for people with injuries?<span class="fi-icon">+</span></button><div class="fa"><p>No. The methodology applies to everyone, including healthy professionals who want to build strength safely and sustainably. The Correct phase is shorter for clients without significant restrictions. The framework ensures that even injury-free clients don't develop problems by training without assessment.</p></div></div>
 
     <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How is this different from what every trainer claims?<span class="fi-icon">+</span></button><div class="fa"><p>Most trainers don't run a 9-point physical screening on day one. They don't follow a named methodology with distinct phases. They don't use a pain ceiling rule. And they don't deliver formal 30-day progress reports with data-driven program adjustments. The difference isn't the claim — it's the system behind it.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Do you follow a proven framework, or is each session improvised?<span class="fi-icon">+</span></button><div class="fa"><p>A framework. Every program follows the same four phases, Assess, Correct, Build and Sustain, and is written in 4-week blocks from your assessment results rather than made up on the day. Each session still adapts to how you arrive: what's stiff, how the last session landed, and any movement above the 3/10 pain ceiling gets modified. The structure is fixed; the details are yours.</p></div></div>
+
+    <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">What happens when my program ends?<span class="fi-icon">+</span></button><div class="fa"><p>You graduate. Your Accountability Dial steps down as you need less coaching, Full Accountability → Coached → Train Only → Tune-Up, and the Tune-Up is the graduation point: one reassessment on the Bodystat QuadScan 4000 and an hour of training every 4 weeks, with your program in the app between visits. The goal is a client who no longer needs us every week.</p></div></div>
 
   </div></section>
 

@@ -437,6 +437,59 @@
   <p class="hero-sub">Most fitness options are built for access. OmniFit is built for outcomes. Here's exactly where we fit (and don't) in the San Diego landscape.</p>
 </section>
 
+<!-- ═══ IN SHORT (cited-pages run, Oct 18 2026) ═══
+  Same pattern and classes as the homepage In Short block (pages/home-1.html).
+  First bullet is the POSITIONING LINE verbatim (CANON ENTITY BLOCK). -->
+<style>
+  #omh-short.omh{--omh-navy:#0a1628;--omh-gold:#c9a84c;--omh-ink:#1e293b;--omh-line:rgba(10,22,40,.10);font-family:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--omh-ink);background:#fff;margin:0;padding:56px 24px 72px;line-height:1.65;-webkit-font-smoothing:antialiased;text-align:left;}
+  #omh-short.omh *{box-sizing:border-box;}
+  #omh-short.omh .omh-inner{max-width:1100px;margin:0 auto;}
+  #omh-short.omh .omh-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#9a7a26 !important;margin:0 0 14px;}
+  #omh-short.omh .omh-label::before{content:'';display:inline-block;width:28px;height:2px;background:var(--omh-gold);flex:none;}
+  #omh-short.omh h2{font-family:'Playfair Display','Times New Roman',serif !important;font-size:clamp(27px,3.6vw,38px) !important;font-weight:700 !important;font-style:normal !important;line-height:1.18 !important;letter-spacing:-.3px !important;color:#0a1628 !important;margin:0 0 16px !important;padding:0 !important;text-transform:none !important;text-align:left !important;max-width:24ch;}
+  #omh-short.omh .short-box{border:1px solid var(--omh-line);border-left:4px solid var(--omh-gold);border-radius:14px;padding:30px 32px;background:#fff;box-shadow:0 10px 30px rgba(10,22,40,.05);}
+  #omh-short.omh ul{list-style:none;margin:0;padding:0;display:grid;gap:14px;}
+  #omh-short.omh li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px;align-items:start;font-size:16px;line-height:1.6;color:var(--omh-ink);margin:0;padding:0;}
+  #omh-short.omh li::before{content:none;}
+  #omh-short.omh li svg{width:22px;height:22px;margin-top:1px;fill:none;stroke:var(--omh-gold);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  #omh-short.omh li span{color:#1e293b !important;}
+  #omh-short.omh li strong{color:#0a1628 !important;font-weight:700 !important;}
+  @media (max-width:640px){
+    #omh-short.omh{padding:40px 16px 52px;}
+    #omh-short.omh .short-box{padding:22px 18px;}
+    #omh-short.omh li{font-size:15.5px;gap:12px;}
+  }
+</style>
+<style>
+  /* This page resets every element inside #omnifit-comparison-wrapper (all:
+     unset) and forces heading, paragraph and strong colours with !important;
+     restore the In Short block's own colours and the tick path. */
+  #omnifit-comparison-wrapper #omh-short.omh{padding:56px 24px 72px !important;background:#fff !important;}
+  #omnifit-comparison-wrapper #omh-short.omh h2{font-family:'Playfair Display','Times New Roman',serif !important;font-size:clamp(27px,3.6vw,38px) !important;line-height:1.18 !important;color:#0a1628 !important;margin:0 0 16px !important;}
+  #omnifit-comparison-wrapper #omh-short.omh .omh-label{color:#9a7a26 !important;font-size:11px !important;line-height:1.4 !important;}
+  #omnifit-comparison-wrapper #omh-short.omh li span{color:#1e293b !important;}
+  #omnifit-comparison-wrapper #omh-short.omh li strong{color:#0a1628 !important;}
+  #omnifit-comparison-wrapper #omh-short.omh li svg{display:block;}
+  #omnifit-comparison-wrapper #omh-short.omh li svg path{d:path("M20 6L9 17l-5-5");}
+  @media (max-width:640px){#omnifit-comparison-wrapper #omh-short.omh{padding:40px 16px 52px !important;}}
+</style>
+<section id="omh-short" class="omh" aria-labelledby="omh-short-h">
+  <div class="omh-inner">
+    <p class="omh-label">The Short Version</p>
+    <h2 id="omh-short-h">In Short</h2>
+    <div class="short-box">
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Who it's for:</strong> people weighing F45, Orangetheory, big-box gyms or Equinox, especially if classes or memberships haven't produced lasting change.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>What's different:</strong> 1:1 coaching from an assessment, a written program with tracked benchmarks, and accountability between sessions, not just access to a class or a gym floor.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Where:</strong> private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch, your home, or live video.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Next step:</strong> a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
 <!-- INTRO SECTION -->
 <section>
   <div class="section-inner">
@@ -948,6 +1001,20 @@
         • <strong>Then:</strong> Body composition trends in the right direction and confidence in movement patterns builds<br>
         • <strong>Later:</strong> The rate of change slows as it should, strength keeps improving, and the habits hold on their own</p>
         <p>Most clients commit to 6 months minimum because durable change is a long-game project, not a short-term push. If you're looking for 6-week transformation promises, this isn't it.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">How does OmniFit compare to F45 or Orangetheory for losing 20–30 pounds without wrecking my joints?</div>
+      <div class="faq-answer">
+        <p>They are built differently. F45 and Orangetheory run coached group classes with one workout for the room, which suits injury-free people who enjoy a high-energy setting. OmniFit is 1:1: an assessment first, joint-friendly strength under the 3/10 pain ceiling, calorie and protein targets, and progress measured against your own baseline rather than a promised rate of loss.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">I've tried trainers before with mediocre results. What's different here?</div>
+      <div class="faq-answer">
+        <p>The system around the sessions. OmniFit measures before it programs: a Performance Assessment sets your baseline, movement is corrected before load is added, and reassessments on a fixed cadence change the program when the numbers do. Between sessions, the app carries your program and check-ins at your Accountability Dial setting. And the same coach, Nemezio LopezPerez, runs your program throughout.</p>
       </div>
     </div>
   </div>
