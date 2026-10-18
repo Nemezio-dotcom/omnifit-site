@@ -5934,3 +5934,830 @@ Fails on "10+ years", "over / more than a decade" or "over / more than ten years
 | Invariant hashes | only Section B moved (→ f9dfcec684d7a9dd, recorded); the other four are unchanged |
 | FAQ mirrors | every header FAQPage mirrors its page; this run's one FAQ answer change (corrective, "What credentials does the trainer have?") is mirrored in its header |
 | `tools/mobileaudit.js --open-details` at 390 and 412: about, contactform, corrective, desk-worker, hiit, and the 11 territory pages | PASSED: scrollWidth equals the viewport and nothing is clipped. Narrow counts are unchanged from the previous run (existing grids) |
+
+---
+
+# Audit Reconciliation run (Oct 18 2026) — canonical facts from the two external audits
+
+**Branch:** `claude/audit-reconciliation-canonical-x71xqa`, from main `0d75617`, merged back to main.
+**Source:** owner decisions of Oct 17 2026, recorded first as CANON.md **CANONICAL FACTS** (step 0), then applied page by page.
+
+## Summary
+
+| Step | What changed | Files |
+|---|---|---|
+| 0 | CANON.md CANONICAL FACTS block (consultation, Performance Assessment, Virtual Performance Assessment, single sessions, session length, no-fee area, reviews, audience, retention, accountability, early exit, HSA/FSA); superseded CANON lines updated (reviews, Foundation exit, travel fee, insurance FAQ, $75, retired-copy list, checker notes, trailing slash) | CANON.md |
+| 1 | Consultation = conversation, then the Performance Assessment measures, then programming: coach bio ×12 (11 Credentials carriers + the Reset), Method steps 1/2 + "two-step" FAQ, 4S Ranch (override), strength, HIIT, weight-loss, how-we-measure, how-it-works, vs-competitors, seven town CTAs, contactform Service schema | 26 |
+| 2 | "seven tracked benchmarks" → 9-point screen + 12 metrics in 7 categories (how-it-works step 2 + FAQ + mirror); Rates Bodystat reassessment → in-person clients | 3 |
+| 3 | Reset hero virtual line; Reset cost FAQ → Reset tiers only (removed from the pricing invariant, owner-approved); "How remote clients are assessed" on the Reset page, Rates and the chooser's virtual result; FAQs Reset wording | 5 + choosertest |
+| 4 | Accountability Dial wording (vs-competitors, how-it-works, in-home, nutrition, Reset Gold) | 5 |
+| 5 | Review line sitewide (stat strips, trust bars, heroes, bios, FAQ answers + mirrors, review-phrase metas), aggregateRating 4.98/190, "verified"/"exclusively" gone, retention line from /outcomes | 40 |
+| 6 | Six towns outside the no-fee area carry "A travel fee applies in [Town], confirmed before you book."; the old area-wide sentence replaced everywhere; in-home "No travel fee" tags (X01-safe); FAQs North County wording; Rates travel line; RSF equipment answer | 27 |
+| 7 | 60 min studio/in-home, 30 min Reset; one session-length line under each product on Rates | 20 |
+| 8 | Statutory cancellation rights in every "only exit" line; HSA/FSA answer + link; single sessions: assessment recommended, not required | 4 |
+| 9 | Six town pages drop "20–30+ lbs in 4–6 months"; certify lbs_near_timeframe fixed (root cause: the "+" and the em dash) | 6 + certify |
+| 10 | Corrective RESULTS SLOT deleted; 8 "Add Image" spans removed from case-studies (frozen-record exemption lifted for these only); certify placeholder_copy | 2 + certify |
+| 11 | build.py emits public/<slug>.html; nested-index check + fixture; local servers in tracktest/mobileaudit/choosertest map /<slug> → <slug>.html; ownership.py reads the flat layout; DEPLOY.md post-deploy check | build.py, tools, DEPLOY.md |
+| 12 | Footer hard-codes © 2026 (script kept as updater) | footer.html |
+
+## Invariant hashes
+
+| Invariant | Before | After | Note |
+|---|---|---|---|
+| page pricing | a6c7e65dddff4795 | a6c7e65dddff4795 | unchanged; carriers 13 → 12 (Executive Reset removed, OWNER-APPROVED in the run brief, item 3); certify.py PRICING_FAQ_CARRIERS now enforces the list |
+| header pricing | 7af0d0049b0b7aba | 7af0d0049b0b7aba | unchanged; same carrier change |
+| credentials | 02bd9cb90a71ce69 (663 bytes) | **f551f6751a2c7fd7 (783 bytes)** | OWNER-APPROVED in the run brief (item 1): one sentence, identical on all 11 carriers; recorded in CANON INVARIANTS |
+| archetypes | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c | unchanged |
+| 9-point | f9dfcec684d7a9dd | f9dfcec684d7a9dd | unchanged |
+
+## Checker changes (tools/)
+
+- `tools/certify.py` lbs_near_timeframe: `_DASH` separator (hyphen, en/em/figure dash, entities, "to") and an optional "+" in both the figure and the timeframe patterns; billing-cadence skip ("$200 per 4 weeks" is not an outcome window). `_selftest_lbs_fragment` runs every time: the old line in every dash form, "within 8-12 weeks", "over 3 to 6 months", "Lose 20+ lb in 12 weeks" fail; "Sustainable fat loss, no crash diets", "sustainable fat loss of 20-30 lbs", the Carmel Valley cadence shape and a 2a card pass. Run against the real pages before the content fix, it reported exactly the six town-page lines (carlsbad:150, encinitas:146, fairbanks-ranch:207, la-jolla:262, santaluz:148, solana-beach:207).
+- `tools/certify.py` placeholder_copy (structure): "[CASE STUDY", "Add Image", "TODO", "[" + capitals in visible copy, frozen records included; self-tested both ways. Before the content fix it reported the 8 case-studies spans; the corrective "[CASE STUDY SUMMARY" sat inside an HTML comment (not visible copy) and was removed as content. The homepage results markup had no placeholder spans left.
+- `tools/certify.py` retired_75: `$75` legal only as the Virtual Performance Assessment price (the August guest add-on / travel fee stay banned); self-tested both ways and negative-tested on a real page.
+- `tools/certify.py` PRICING_FAQ_CARRIERS: carrier-list finding, negative-tested both ways.
+- `tools/certify.py` RETIRED_LAUNCH_COPY: 20 retired phrases from the CANONICAL FACTS (listed in CANON), clean canonical sample updated; self-tested both ways.
+- `build.py`: flat output, `check_flat` + `flat_selftest`, `page_path`; `tools/ownership.py` `built_pages`; `tools/tracktest.js`, `tools/choosertest.js`, `tools/mobileaudit.js` servers map `/<slug>` → `<slug>.html`. Planted `public/about/index.html` → exactly one "nested" problem; removed → PASSED.
+- `tools/choosertest.js`: virtual results must carry the remote-assessment line with the CANON price and "no Bodystat scan"; in-person results must not. Negative-tested (all four virtual combinations failed with the phrase removed).
+
+## Checks (final, on the merged tree)
+
+| Check | Result |
+|---|---|
+| `python3 build.py` (+ `--check`: links, one H1, JSON-LD, emoji, 404/_headers, redirects 74 rules / 116 known URLs, tracking, keyword ownership incl. X01, Squarespace image warnings, trailing slash) | PASSED (5 Squarespace image WARNINGS, unchanged) |
+| `python3 tools/ownership.py` | PASSED |
+| `python3 tools/certify.py` | PASSED: compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 0; every rule's self-test ran |
+| `node tools/tracktest.js` | PASSED (56 assertions) |
+| `node tools/choosertest.js` | PASSED (30 checks, 16 combinations) |
+| `node tools/mobileaudit.js` (all 42 pages × 390/412 px, incl. every touched page) | PASSED: 84 rows ok, no overflow, no clipping |
+
+## Held, not changed (needs an owner decision)
+
+1. **Canonical pricing FAQ answer** (12 carriers, hash-locked, not named): still says "Every client starts with a $150 Performance Assessment, credited toward the first cycle." That now conflicts with CANONICAL FACTS (single sessions: recommended, not required; remote clients: $75 Virtual). Changing it is an owner-approved hash change on 24 files. Recorded in CANON ASSESSMENT.
+2. **personal-trainer-rancho-bernardo.html:441** bottom CTA "We'll discuss your goals, movement history, and active lifestyle, and build a program that complements everything you already love doing." The other town CTAs were changed (item 1); Rancho Bernardo's override covers named sentences only and this one was not named. The page's shared sentences that the brief named sitewide (coach bio, review strip, trust bar, session length "Sessions are 60 minutes" in its in-home FAQ and mirror) WERE changed; WRONG IF the owner meant RB to be untouched beyond the Credentials bio.
+3. **pages/headers/contactform-header.html:17** (WebPage description = the contact page META): "A 45-minute consultation including movement assessment, ..." Meta descriptions are locked except the review phrase; its Service node twin (line 54) was changed.
+4. **Headings naming "San Diego County"**: in-home H2 "In-Home Training Across San Diego County" (X01 forbids "North County" there) and the private page H3 "In-Home Training: San Diego County". Headings left.
+5. **"Every client begins with a Performance Assessment"** in the Measured Progress pillar definitions (the-omnifit-method, how-we-measure-your-progress; CANON's quotable forms) and "Every client starts with a movement screen" in the over-50 FAQ + mirror. Left; same conflict as 1.
+6. **Alo's case card on desk-worker** ("four 45-minute sessions a week", "45-Min Sessions"): a record of what the client did, not a session-length offer. Left.
+
+## Judgment calls (each with the condition under which it is wrong)
+
+- The coach bio also appears on **the-30-minute-executive-reset** (not a Credentials carrier); edited identically. Wrong if the owner wants the Reset bio to name the Virtual Performance Assessment instead.
+- Trust bars read "4.98 average across 190+ reviews" (platforms named on heroes, bios and FAQ answers, omitted in the short bars for width). Wrong if the owner wants the parenthetical in every instance.
+- Stat strips show "4.98" over "Average across 190+ reviews", the homepage proof-strip shape.
+- Decorative ★★★★★ glyphs (Reset hero and similar) were left: they are icons, not a "5.0" claim. Wrong if the owner reads five glyphs as a 5.0 rating.
+- Item 4 also changed the Reset Gold tier bullet "Weekly check-ins" and the vs-competitors "Not the right fit" bullet "adhere to weekly check-in requirements" (not named, same universal promise). Other "weekly check-ins" mentions were left: every Dial setting keeps a weekly check-in (one-tap on Train Only). Wrong if the owner wants every "weekly check-in" qualified.
+- 4S Ranch is a no-fee town but cannot be tagged on the in-home page (X01 keeps it out of the body); Poway, plain text there, reads "Also serving Poway (no travel fee)".
+- The area-wide travel sentence now names the six no-fee towns on non-in-home pages; on the in-home page it reads "No travel fee for the marked areas ..." (the service-area section) and "... for the areas marked in our service-area list ..." (In Short, pricing paragraph, FAQ + mirror).
+- RSF equipment FAQ keeps the home-gym sentence after the owner's "Nothing. We bring the equipment; you need about 8×8 feet of clear space."; "we'll assess" (photos on the consultation) became "we'll plan around what you have".
+- HSA/FSA answer ends with a link "How HSA/FSA payment works" (header mirror carries the text).
+- `$75` left the bare BANNED list for the context rule; `$50` stays banned.
+- `public/` is rebuilt and committed; sitemap lastmod follows the source commit dates.
+
+## Every change, file:line, before → after
+
+Line numbers are in the files as they now stand. Entries marked "(line at edit time)" are deletions.
+
+### 1. Consultation vs assessment
+
+- `pages/personal-trainer-carlsbad.html:212` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-carmel-valley.html:282` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-del-mar.html:318` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-encinitas.html:208` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-fairbanks-ranch.html:282` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-la-jolla.html:337` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-rancho-bernardo.html:286` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-rancho-santa-fe.html:303` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-santaluz.html:210` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-solana-beach.html:282` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/corrective-exercise-post-rehab.html:875` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/the-30-minute-executive-reset.html:493` — coach bio (Credentials invariant, owner-approved hash change)  
+  before: «Every program he builds starts with a 45-minute movement assessment and follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»  
+  after: «Every program he builds starts with a 45-minute consultation, a conversation about your goals and history, and, if it's a fit, the Performance Assessment that measures your starting point; it follows the Assess, Correct, Build, Sustain framework with a strict 3/10 pain ceiling rule.»
+- `pages/personal-trainer-4s-ranch.html:693` — consultation vs assessment (4S Ranch owner override)  
+  before: «<p>45-minute movement assessment, posture analysis, injury history review, and goal mapping. We identify exactly where you are before building your plan.</p>»  
+  after: «<p>A 45-minute consultation to talk through your goals and injury history, then, if it's a fit, the Performance Assessment: movement screen, posture photos and body composition. We measure exactly where you are before building your plan.</p>»
+- `pages/personal-trainer-4s-ranch.html:726` — consultation vs assessment (4S Ranch owner override)  
+  before: «where we map your goals, assess your movement, review your injury history, and build a clear plan. From there,»  
+  after: «where we talk through your goals and injury history. If it's a fit, the Performance Assessment measures how you move, and your plan is built from it. From there,»
+- `pages/personal-trainer-4s-ranch.html:1164` — consultation vs assessment (4S Ranch owner override)  
+  before: «<p>Book a 45-minute consultation. We'll discuss your goals, assess your movement, and build a program designed for your body, your schedule, and your life.</p>»  
+  after: «<p>Book a 45-minute consultation to talk through your goals, schedule and history. If it's a fit, the Performance Assessment measures your starting point, and your program is built from it.</p>»
+- `pages/strength-training-1.html:449` — consultation vs assessment  
+  before: «Book a 45-minute consultation and we'll assess your movement, review your training history, and build a strength program designed for your body, your goals, and your schedule.»  
+  after: «Book a 45-minute consultation to talk through your goals, training history and schedule. If it's a fit, the Performance Assessment measures how you move, and your strength program is built from it.»
+- `pages/hiit-personal-trainer-san-diego.html:652` — consultation vs assessment  
+  before: «we'll assess your conditioning, goals, and injury history to recommend the right program mix.»  
+  after: «we'll talk through your goals and injury history; if it's a fit, the Performance Assessment measures your conditioning and movement, and that sets the right program mix.»
+- `pages/hiit-personal-trainer-san-diego.html:772` — consultation vs assessment  
+  before: «Book a 45-minute consultation and we'll assess your conditioning, review your goals and injury history, and build a HIIT plan designed for your body and your schedule.»  
+  after: «Book a 45-minute consultation to talk through your goals, injury history and schedule. If it's a fit, the Performance Assessment measures your conditioning and movement, and your HIIT plan is built from it.»
+- `pages/weight-loss.html:527` — consultation vs assessment  
+  before: «Book a 45-minute consultation and we'll assess your body composition, review your goals, and build a fat loss plan designed for your schedule, your joints, and your real life.»  
+  after: «Book a 45-minute consultation to talk through your goals, schedule and history. If it's a fit, the Performance Assessment measures your body composition, and your fat loss plan is built from it, around your joints and your real life.»
+- `pages/how-we-measure-your-progress.html:339` — consultation vs assessment  
+  before: «✓ 45-min movement + lifestyle screen»  
+  after: «✓ 45-min consultation, then the in-person Performance Assessment»
+- `pages/omnifit-vs-competitors.html:896` — consultation vs assessment  
+  before: «• 45-minute movement assessment identifying pain patterns, mobility restrictions, strength imbalances<br>»  
+  after: «• 45-minute consultation, then the in-person Performance Assessment identifying pain patterns, mobility restrictions, strength imbalances<br>»
+- `pages/omnifit-vs-competitors.html:980` — consultation vs assessment  
+  before: «Every program starts with a 45-minute movement assessment to identify restrictions and pain patterns.»  
+  after: «Every program starts with a 45-minute consultation, then the in-person Performance Assessment to identify restrictions and pain patterns.»
+- `pages/headers/omnifit-vs-competitors-header.html:85` — consultation vs assessment (FAQ mirror)  
+  before: «Every program starts with a 45-minute movement assessment to identify restrictions and pain patterns.»  
+  after: «Every program starts with a 45-minute consultation, then the in-person Performance Assessment to identify restrictions and pain patterns.»
+- `pages/the-omnifit-method.html:268` — Method page steps  
+  before: «Step 1 — The 45-Minute Video Consultation</h3>»  
+  after: «Step 1: Before the assessment: the 45-minute consultation ($30 deposit, refunded when you attend)</h3>»
+- `pages/the-omnifit-method.html:269` — Method page steps  
+  before: «<p>This is a conversation, not a sales pitch. Before we design anything, we need to understand who you are:</p>»  
+  after: «<p>This is a conversation, not a sales pitch, and not an assessment: nothing is tested or measured on the call. By video or phone, before we design anything, we need to understand who you are:</p>»
+- `pages/the-omnifit-method.html:273` — Method page steps  
+  before: «<h4>Behavioral Assessment</h4>»  
+  after: «<h4>Habits &amp; Lifestyle</h4>»
+- `pages/the-omnifit-method.html:277` — Method page steps  
+  before: «Step 2 — In-Person Physical Movement Screening</h3>»  
+  after: «Step 2: The Performance Assessment ($150, credited)</h3>»
+- `pages/the-omnifit-method.html:278` — Method page steps  
+  before: «<p>Your first session at the studio is a comprehensive physical assessment — not a workout. The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. This is where we collect the data that shapes your entire program:</p>»  
+  after: «<p>If the consultation shows it's a fit, the Performance Assessment comes next, in person at the studio or in your home. It is a measurement session, not a workout. The $150 Performance Assessment is credited toward your first program, Reset cycle or 5-pack. It covers the 9-point movement screen, Bodystat QuadScan 4000 body composition, blood pressure, SpO2, grip strength, posture photos and circumference measurements, and sets your baselines for the 12-metric progress framework (12 metrics, measured and self-reported, in 7 categories). This is where we collect the data that shapes your entire program:</p>»
+- `pages/the-omnifit-method.html:360` — Method page steps  
+  before: «✓ Consultation + 9-point movement screen»  
+  after: «✓ Consultation, then the 9-point screen at your assessment»
+- `pages/the-omnifit-method.html:380` — Method FAQ two-step process  
+  before: «The assessment is a two-step process. First, a 45-minute video consultation covering medical history, behavioral habits, nutrition, goals, and schedule. Then, your first in-person session is a physical movement screening: overhead squat, single-leg squat, push/pull patterns, posture photos, joint ROM testing, grip strength, body composition, core stability, and gait analysis.»  
+  after: «The assessment comes after the consultation. The 45-minute consultation, by video or phone, is a conversation about your medical history, habits, nutrition, goals and schedule; nothing is measured on it. If it's a fit, the $150 Performance Assessment (in person, studio or home, credited toward your first program, Reset cycle or 5-pack) measures your starting point: the 9-point movement screen (overhead squat, single-leg squat, push/pull patterns, posture photos, joint ROM testing, grip strength, Bodystat QuadScan 4000 body composition, core stability and gait analysis), blood pressure, SpO2 and circumference measurements. It sets your baselines for the 12-metric progress framework.»
+- `pages/headers/the-omnifit-method-header.html:61` — Method FAQ two-step process (mirror)  
+  before: «The assessment is a two-step process. First, a 45-minute video consultation covering medical history, behavioral habits, nutrition, goals, and schedule. Then, your first in-person session is a physical movement screening: overhead squat, single-leg squat, push/pull patterns, posture photos, joint ROM testing, grip strength, body composition, core stability, and gait analysis.»  
+  after: «The assessment comes after the consultation. The 45-minute consultation, by video or phone, is a conversation about your medical history, habits, nutrition, goals and schedule; nothing is measured on it. If it's a fit, the $150 Performance Assessment (in person, studio or home, credited toward your first program, Reset cycle or 5-pack) measures your starting point: the 9-point movement screen (overhead squat, single-leg squat, push/pull patterns, posture photos, joint ROM testing, grip strength, Bodystat QuadScan 4000 body composition, core stability and gait analysis), blood pressure, SpO2 and circumference measurements. It sets your baselines for the 12-metric progress framework.»
+- `pages/personal-trainer-carlsbad.html:331` — consultation vs assessment (bottom CTA)  
+  before: «We'll discuss your goals, movement history, and schedule, and build a program that fits your Carlsbad lifestyle.»  
+  after: «We'll discuss your goals, movement history, and schedule; if it's a fit, the Performance Assessment measures your starting point and your program is built to fit your Carlsbad lifestyle.»
+- `pages/personal-trainer-carmel-valley.html:436` — consultation vs assessment (bottom CTA)  
+  before: «We'll discuss your goals, movement history, and schedule, and build a program that fits your Carmel Valley lifestyle.»  
+  after: «We'll discuss your goals, movement history, and schedule; if it's a fit, the Performance Assessment measures your starting point and your program is built to fit your Carmel Valley lifestyle.»
+- `pages/personal-trainer-del-mar.html:472` — consultation vs assessment (bottom CTA)  
+  before: «We'll discuss your goals, movement history, and schedule, and design a program that works with your Del Mar lifestyle.»  
+  after: «We'll discuss your goals, movement history, and schedule; if it's a fit, the Performance Assessment measures your starting point and your program is designed to work with your Del Mar lifestyle.»
+- `pages/personal-trainer-encinitas.html:327` — consultation vs assessment (bottom CTA)  
+  before: «We'll discuss your goals, your active lifestyle, and your body's specific needs, and build a program that enhances everything you already do.»  
+  after: «We'll discuss your goals, your active lifestyle, and your body's specific needs; if it's a fit, the Performance Assessment measures your starting point and your program is built to enhance everything you already do.»
+- `pages/personal-trainer-la-jolla.html:491` — consultation vs assessment (bottom CTA)  
+  before: «We'll discuss your goals, movement history, and schedule, and build a plan that fits your life in La Jolla.»  
+  after: «We'll discuss your goals, movement history, and schedule; if it's a fit, the Performance Assessment measures your starting point and your plan is built to fit your life in La Jolla.»
+- `pages/personal-trainer-rancho-santa-fe.html:451` — consultation vs assessment (bottom CTA)  
+  before: «We'll discuss your goals, review your home gym, and design a program that matches the standards you hold in every other area of your life.»  
+  after: «We'll discuss your goals and your home setup; if it's a fit, the Performance Assessment measures your starting point and your program is designed to match the standards you hold in every other area of your life.»
+- `pages/personal-trainer-solana-beach.html:436` — consultation vs assessment (bottom CTA)  
+  before: «We'll discuss your goals, movement history, and active lifestyle, and build a program that complements everything you already love doing.»  
+  after: «We'll discuss your goals, movement history, and active lifestyle; if it's a fit, the Performance Assessment measures your starting point and your program is built to complement everything you already love doing.»
+- `pages/strength-training-1.html:206` — consultation vs assessment  
+  before: «Every program begins with a 45-minute movement assessment using NASM Corrective Exercise Specialist (CES) and ACE Corrective Exercise Specialist protocols,»  
+  after: «Every program begins with a 45-minute consultation, then, if it's a fit, the in-person Performance Assessment using NASM Corrective Exercise Specialist (CES) and ACE Corrective Exercise Specialist protocols,»
+- `pages/headers/contactform-header.html:54` — consultation vs assessment (Service schema; WebPage description = meta, left)  
+  before: «"description": "A 45-minute consultation including movement assessment, goal mapping, and personalized program recommendation for busy professionals 30+ in San Diego.",⏎       "provider"»  
+  after: «"description": "A 45-minute consultation by video or phone covering goals, history and schedule; if it is a fit, the in-person Performance Assessment follows, then a personalized program recommendation, for busy professionals 30+ in San Diego.",⏎       "provider"»
+
+### 1/2. Consultation vs assessment; assessment contents
+
+- `pages/how-it-works-pricing.html:249` — consultation vs assessment; assessment contents  
+  before: «A 45-minute movement and lifestyle screen: joint function, posture analysis, pain history, mobility tests, and schedule mapping. This establishes your baseline metrics across all seven tracked benchmarks and shapes your entire individualized program.»  
+  after: «If the consultation shows it's a fit, the in-person Performance Assessment measures where you start: the 9-point movement screen, Bodystat QuadScan 4000 body composition, blood pressure, SpO2, grip strength, posture photos and circumference measurements. It sets your baselines for the 12-metric progress framework (12 metrics, measured and self-reported, in 7 categories) and shapes your entire individualized program.»
+
+### 2. Assessment contents
+
+- `pages/how-it-works-pricing.html:418` — assessment contents (FAQ)  
+  before: «Your first session is a 45-minute comprehensive assessment, not a workout. We screen movement patterns, joint function, posture, pain history, lifestyle constraints, and goals. This establishes your baseline metrics across all seven tracked benchmarks and shapes your entire individualized program.»  
+  after: «Your first session is the in-person Performance Assessment, not a workout; it follows the 45-minute consultation, which is a conversation by video or phone. The assessment covers the 9-point movement screen, Bodystat QuadScan 4000 body composition, blood pressure, SpO2, grip strength, posture photos and circumference measurements, alongside your pain history, lifestyle constraints and goals. It sets your baselines for the 12-metric progress framework (12 metrics, measured and self-reported, in 7 categories) and shapes your entire individualized program.»
+- `pages/headers/how-it-works-pricing-header.html:70` — assessment contents (FAQ mirror)  
+  before: «Your first session is a 45-minute comprehensive assessment, not a workout. We screen movement patterns, joint function, posture, pain history, lifestyle constraints, and goals. This establishes your baseline metrics across all seven tracked benchmarks and shapes your entire individualized program.»  
+  after: «Your first session is the in-person Performance Assessment, not a workout; it follows the 45-minute consultation, which is a conversation by video or phone. The assessment covers the 9-point movement screen, Bodystat QuadScan 4000 body composition, blood pressure, SpO2, grip strength, posture photos and circumference measurements, alongside your pain history, lifestyle constraints and goals. It sets your baselines for the 12-metric progress framework (12 metrics, measured and self-reported, in 7 categories) and shapes your entire individualized program.»
+- `pages/training-rates-san-diego.html:765` — Bodystat reassessment = in-person  
+  before: «<div class="rt-includes-item rt-reveal">Reassessments on the Bodystat QuadScan 4000</div>»  
+  after: «<div class="rt-includes-item rt-reveal">Reassessments on the Bodystat QuadScan 4000 (in-person clients)</div>»
+
+### 3. Virtual
+
+- `pages/the-30-minute-executive-reset.html:428` — Reset: How remote clients are assessed  
+  before: «the <a href="/training-rates-san-diego">training rates page</a>.</p>⏎   </div>⏎ ⏎   <!-- WHO THIS IS FOR -->»  
+  after: «the <a href="/training-rates-san-diego">training rates page</a>.</p>⏎     <p class="er-tier-note"><strong>How remote clients are assessed:</strong> Executive Reset and other remote clients take the Virtual Performance Assessment, booked after the consultation. It is self-measured with live video guidance, with posture photos taken in the app; there is no Bodystat scan. It is $75, credited toward your first purchase the same way as the in-person assessment.</p>⏎   </div>⏎ ⏎   <!-- WHO THIS IS FOR -->»
+- `pages/the-30-minute-executive-reset.html:509` — Reset FAQ cost answer: Reset tiers only (removed from pricing invariant, owner-approved)  
+  before: «How much does the Executive Reset cost?</summary><div class="er-faq-body"><p>OmniFit Performance publishes its rates in full. New clients start on The Foundation: three consecutive 4-week cycles paid in full at enrolment, $560 per cycle for studio Momentum, $1,100 for studio Performance, $800 for in-home Momentum, $850 for studio couples and $1,250 for in-home couples. After that, or by direct entry, The Program bills every 4 weeks: $640 to $1,800 at the studio, $900 to $2,600 in-home, $1,000 to $2,900 for couples. Without a program, single sessions are $205 to $275 and 5-packs run $180 to $250 per session depending on setting and membership. The fully virtual Executive Reset runs $200 to $1,100 per 4 weeks. Every client starts with a $150 Performance Assessment, credited toward the first cycle. Note: studio programs require a Teqneeq membership ($119 per month, billed by Teqneeq), with facility access on non-training days included. Full tables on the <a href="/training-rates-san-diego">training rates page</a>.</p>»  
+  after: «How much does the Executive Reset cost?</summary><div class="er-faq-body"><p>The Executive Reset bills every 4 weeks, in four tiers: Bronze $200 (async: programming and check-ins, no live sessions), Gold $500 (one live 30-minute session a week), Platinum $750 (two a week) and Black $1,100 (three a week). Remote clients start with the $75 Virtual Performance Assessment, credited toward the first purchase. Full tables on the <a href="/training-rates-san-diego">training rates page</a>.</p>»
+- `pages/headers/the-30-minute-executive-reset-header.html:76` — Reset FAQ cost answer (mirror)  
+  before: «"text": "OmniFit Performance publishes its rates in full. New clients start on The Foundation: three consecutive 4-week cycles paid in full at enrolment, $560 per cycle for studio Momentum, $1,100 for studio Performance, $800 for in-home Momentum, $850 for studio couples and $1,250 for in-home couples. After that, or by direct entry, The Program bills every 4 weeks: $640 to $1,800 at the studio, $900 to $2,600 in-home, $1,000 to $2,900 for couples. Without a program, single sessions are $205 to $275 and 5-packs run $180 to $250 per session depending on setting and membership. The fully virtual Executive Reset runs $200 to $1,100 per 4 weeks. Every client starts with a $150 Performance Assessment, credited toward the first cycle. Note: studio programs require a Teqneeq membership ($119 per month, billed by Teqneeq), with facility access on non-training days included. Full tables on the training rates page." }»  
+  after: «"text": "The Executive Reset bills every 4 weeks, in four tiers: Bronze $200 (async: programming and check-ins, no live sessions), Gold $500 (one live 30-minute session a week), Platinum $750 (two a week) and Black $1,100 (three a week). Remote clients start with the $75 Virtual Performance Assessment, credited toward the first purchase. Full tables on the training rates page." }»
+- `pages/training-rates-san-diego.html:713` — Rates: How remote clients are assessed (assessment step)  
+  before: «<p class="rt-steps-note rt-reveal">No slot is held without payment. Appointments are confirmed only when payment is received.</p>»  
+  after: «<p class="rt-steps-note rt-reveal">No slot is held without payment. Appointments are confirmed only when payment is received.</p>⏎     <p class="rt-steps-note rt-reveal"><strong>How remote clients are assessed:</strong> Executive Reset and other remote clients take the Virtual Performance Assessment, booked after the consultation. It is self-measured with live video guidance, with posture photos taken in the app; there is no Bodystat scan. It is $75, credited toward your first purchase the same way as the in-person assessment.</p>»
+- `pages/training-rates-san-diego.html:581` — Rates: How remote clients are assessed (assessment step)  
+  before: «data-assessment="150" data-membership="119"»  
+  after: «data-assessment="150" data-virtual-assessment="75" data-membership="119"»
+- `pages/training-rates-san-diego.html:1523` — Rates: How remote clients are assessed (assessment step)  
+  before: «if (freq === 'async') r.lines.push(li('Accountability setting: Coached or Train Only.'));⏎»  
+  after: «if (freq === 'async') r.lines.push(li('Accountability setting: Coached or Train Only.'));⏎       r.lines.push(li('How remote clients are assessed: the ' + money(num('virtual-assessment')) + ' Virtual Performance Assessment, booked after the consultation. Self-measured with live video guidance, posture photos in the app, no Bodystat scan; credited toward your first purchase.'));⏎»
+- `pages/FAQs.html:153` — FAQs: Reset live sessions wording  
+  before: «a fully virtual program with live sessions 1–3×/week.»  
+  after: «a fully virtual program with an async programming tier, or live 30-minute sessions one to three times a week.»
+- `pages/headers/FAQs-header.html:54` — FAQs: Reset live sessions wording  
+  before: «a fully virtual program with live sessions 1–3×/week.»  
+  after: «a fully virtual program with an async programming tier, or live 30-minute sessions one to three times a week.»
+
+### 3/5. Executive Reset hero
+
+- `pages/the-30-minute-executive-reset.html:203` — Reset hero: virtual line + review wording  
+  before: «<p class="er-hero-proof">Rated <strong>5.0</strong> from <strong>190+</strong> five-star reviews · NASM Elite Trainer · Coaching from <strong>$200</strong> per 4 weeks</p>»  
+  after: «<p class="er-hero-proof"><strong>4.98</strong> average across <strong>190+</strong> reviews (Google, Yelp, Thumbtack and Bark) · NASM Elite Trainer</p>⏎     <p class="er-hero-proof">Virtual coaching from <strong>$200</strong> per 4 weeks (Bronze: programming and check-ins, no live sessions). Live 1:1 coaching from <strong>$500</strong>.</p>»
+
+### 4. Accountability Dial consistency
+
+- `pages/the-30-minute-executive-reset.html:400` — Reset Gold tier: check-ins matched to the Dial  
+  before: «<li>Weekly check-ins</li>»  
+  after: «<li>Check-ins matched to your Accountability Dial setting</li>»
+- `pages/omnifit-vs-competitors.html:850` — Dial consistency  
+  before: «<li>Unlimited coach communication via app</li>»  
+  after: «<li>Coach communication via app, matched to your Accountability Dial setting</li>»
+- `pages/omnifit-vs-competitors.html:863` — Dial consistency  
+  before: «• Weekly check-in submissions required</p>»  
+  after: «• Check-ins matched to your Accountability Dial setting (even Train Only keeps a one-tap weekly check-in)</p>»
+- `pages/omnifit-vs-competitors.html:821` — Dial consistency  
+  before: «<li>You're unwilling to track workouts, nutrition, or adhere to weekly check-in requirements</li>»  
+  after: «<li>You're not ready to keep booked sessions or a weekly check-in, even a one-tap one</li>»
+- `pages/how-it-works-pricing.html:278` — Dial consistency  
+  before: «There are no tiers with stripped-down features. Every OmniFit client gets the full system, and the only variable is session frequency and format.»  
+  after: «There are no tiers with stripped-down features. Every OmniFit client gets the full system. Session frequency, format and the level of accountability between sessions are chosen to fit you.»
+- `pages/how-it-works-pricing.html:227` — Dial consistency  
+  before: «<li>You're not willing to track nutrition or attend weekly check-ins</li>»  
+  after: «<li>You're not ready to keep booked sessions or a weekly check-in, even a one-tap one</li>»
+- `pages/in-home-personal-trainer-san-diego.html:354` — Dial consistency  
+  before: «<li>Weekly nutrition accountability check-ins</li>»  
+  after: «<li>Nutrition accountability matched to your Accountability Dial setting</li>»
+- `pages/in-home-personal-trainer-san-diego.html:366` — Dial consistency  
+  before: «<li>Weekly check-ins via app + messaging</li>»  
+  after: «<li>Check-ins via app + messaging, matched to your Accountability Dial setting</li>»
+- `pages/nutrition-coaching-san-diego.html:176` — Dial consistency (nutrition: same core resources, feedback follows the Dial)  
+  before: «<h2>Every Client Gets the <em>Same Nutrition Coaching</em></h2>»  
+  after: «<h2>Every Client Gets the <em>Same Nutrition Resources</em></h2>»
+- `pages/nutrition-coaching-san-diego.html:177` — Dial consistency (nutrition: same core resources, feedback follows the Dial)  
+  before: «Every client gets the same thing: macro targets»  
+  after: «Every client gets the same core resources: macro targets»
+- `pages/nutrition-coaching-san-diego.html:178` — Dial consistency (nutrition: same core resources, feedback follows the Dial)  
+  before: «<p><strong>What changes between tiers is how often we speak, not what you get.</strong> A client training twice a week has more moments where nutrition comes up inside a session than a client training once a week. The coaching itself is identical, and so is the app access, the targets, and the framework.</p>»  
+  after: «<p><strong>The amount of active feedback follows your Accountability Dial setting, not what you spend.</strong> At Full Accountability your coach reviews your daily logs; at Coached you get a reply to a weekly written check-in; at Train Only nutrition is on request. A client training twice a week also has more moments where nutrition comes up inside a session. The resources, the app access, the targets and the framework are identical at every tier.</p>»
+
+### 5. Reviews / audience / retention
+
+- `pages/FAQs.html:141, pages/FAQs.html:213, pages/FAQs.html:363` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/body-composition-testing.html:418` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/corrective-exercise-post-rehab.html:1125` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/hiit-personal-trainer-san-diego.html:785` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/in-home-personal-trainer-san-diego.html:834` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-4s-ranch.html:17, pages/personal-trainer-4s-ranch.html:18, pages/personal-trainer-4s-ranch.html:1171` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-carlsbad.html:338` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-carmel-valley.html:444` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-del-mar.html:480` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-encinitas.html:334` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-fairbanks-ranch.html:444` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-la-jolla.html:499` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-rancho-bernardo.html:449` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-rancho-santa-fe.html:459` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-santaluz.html:336` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-trainer-solana-beach.html:444` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/personal-training-services.html:552` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/private-personal-trainer-san-diego.html:469, pages/private-personal-trainer-san-diego.html:471, pages/private-personal-trainer-san-diego.html:597, pages/private-personal-trainer-san-diego.html:642` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/strength-training-1.html:460` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/the-30-minute-executive-reset.html:560` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/training-rates-san-diego.html:1416` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/weight-loss.html:540` — reviews: trust bar  
+  before: «5.0 · 190+ Reviews»  
+  after: «4.98 average across 190+ reviews»
+- `pages/headers/FAQs-header.html:18` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/home-header.html:30` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/how-it-works-pricing-header.html:18` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/in-home-personal-trainer-san-diego-header.html:21` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-4s-ranch-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-carlsbad-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-carmel-valley-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-del-mar-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-encinitas-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-fairbanks-ranch-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-la-jolla-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-rancho-santa-fe-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-santaluz-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/personal-trainer-solana-beach-header.html:19` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/private-personal-trainer-san-diego-header.html:18` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/the-30-minute-executive-reset-header.html:16` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «NASM Elite Trainer with 190+ five-star reviews.»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews.»
+- `pages/headers/corrective-exercise-post-rehab-header.html:18` — reviews: meta/schema description (owner-approved meta edit, this phrase only)  
+  before: «the structured bridge after physical therapy discharge. 190+ five-star reviews.»  
+  after: «the structured bridge after physical therapy discharge. 4.98 average across 190+ reviews.»
+- `pages/personal-trainer-4s-ranch.html:736` — reviews: stat strip  
+  before: «<div class="fr-stat-num">190+</div><div class="fr-stat-label">5-Star Reviews</div>»  
+  after: «<div class="fr-stat-num">4.98</div><div class="fr-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-carlsbad.html:170` — reviews: stat strip  
+  before: «<div class="cb-stat-num">190+</div><div class="cb-stat-label">5-Star Reviews</div>»  
+  after: «<div class="cb-stat-num">4.98</div><div class="cb-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-carmel-valley.html:233` — reviews: stat strip  
+  before: «<div class="cv-stat-num">190+</div><div class="cv-stat-label">5-Star Reviews</div>»  
+  after: «<div class="cv-stat-num">4.98</div><div class="cv-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-del-mar.html:269` — reviews: stat strip  
+  before: «<div class="dm-stat-num">190+</div><div class="dm-stat-label">5-Star Reviews</div>»  
+  after: «<div class="dm-stat-num">4.98</div><div class="dm-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-encinitas.html:166` — reviews: stat strip  
+  before: «<div class="en-stat-num">190+</div><div class="en-stat-label">5-Star Reviews</div>»  
+  after: «<div class="en-stat-num">4.98</div><div class="en-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-fairbanks-ranch.html:233` — reviews: stat strip  
+  before: «<div class="fb-stat-num">190+</div><div class="fb-stat-label">5-Star Reviews</div>»  
+  after: «<div class="fb-stat-num">4.98</div><div class="fb-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-la-jolla.html:288` — reviews: stat strip  
+  before: «<div class="lj-stat-num">190+</div><div class="lj-stat-label">5-Star Reviews</div>»  
+  after: «<div class="lj-stat-num">4.98</div><div class="lj-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-rancho-bernardo.html:237` — reviews: stat strip  
+  before: «<div class="rb-stat-num">190+</div><div class="rb-stat-label">5-Star Reviews</div>»  
+  after: «<div class="rb-stat-num">4.98</div><div class="rb-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-rancho-santa-fe.html:254` — reviews: stat strip  
+  before: «<div class="rs-stat-num">190+</div><div class="rs-stat-label">5-Star Reviews</div>»  
+  after: «<div class="rs-stat-num">4.98</div><div class="rs-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-santaluz.html:168` — reviews: stat strip  
+  before: «<div class="sz-stat-num">190+</div><div class="sz-stat-label">5-Star Reviews</div>»  
+  after: «<div class="sz-stat-num">4.98</div><div class="sz-stat-label">Average across 190+ reviews</div>»
+- `pages/personal-trainer-solana-beach.html:233` — reviews: stat strip  
+  before: «<div class="sb-stat-num">190+</div><div class="sb-stat-label">5-Star Reviews</div>»  
+  after: «<div class="sb-stat-num">4.98</div><div class="sb-stat-label">Average across 190+ reviews</div>»
+- `pages/contactform.html:537` — reviews: trust strip  
+  before: «<span class="trust-value">190+</span>»  
+  after: «<span class="trust-value">4.98</span>»
+- `pages/contactform.html:538` — reviews: trust strip  
+  before: «<span class="trust-label">5-Star Reviews</span>»  
+  after: «<span class="trust-label">Average across 190+ reviews</span>»
+- `pages/about.html:339` — reviews: trust badge  
+  before: «<div>5.0 · 190+ REVIEWS</div>»  
+  after: «<div>4.98 AVERAGE ACROSS 190+ REVIEWS</div>»
+- `pages/about.html:280` — reviews: bio  
+  before: «He has been coaching since 2016 and holds 190+ five-star reviews.»  
+  after: «He has been coaching since 2016 and holds a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark).»
+- `pages/headers/about-header.html:61` — reviews: bio  
+  before: «He has been coaching since 2016 and holds 190+ five-star reviews.»  
+  after: «He has been coaching since 2016 and holds a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark).»
+- `pages/private-personal-trainer-san-diego.html:597` — reviews + audience (FAQ + mirror)  
+  before: «He has 190+ verified five-star reviews across Google, Yelp, Thumbtack, and Bark, and works exclusively with professionals over 30.»  
+  after: «He holds a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark), and his coaching is built for professionals 30+.»
+- `pages/headers/private-personal-trainer-san-diego-header.html:94` — reviews + audience (FAQ + mirror)  
+  before: «He has 190+ verified five-star reviews across Google, Yelp, Thumbtack, and Bark, and works exclusively with professionals over 30.»  
+  after: «He holds a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark), and his coaching is built for professionals 30+.»
+- `pages/private-personal-trainer-san-diego.html:468` — reviews / retention (private proof card)  
+  before: «<h3>190+ Five-Star Reviews</h3>»  
+  after: «<h3>190+ Reviews, 4.98 Average</h3>»
+- `pages/private-personal-trainer-san-diego.html:469` — reviews / retention (private proof card)  
+  before: «<p>Verified across Google, Yelp, Thumbtack, and Bark. OmniFit maintains a 5.0 rating because we only take clients we can genuinely help, and we're honest when we're not the right fit.</p>»  
+  after: «<p>A 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark). We only take clients we can genuinely help, and we're honest when we're not the right fit.</p>»
+- `pages/private-personal-trainer-san-diego.html:471` — reviews / retention (private proof card)  
+  before: «<li>5.0 average across all platforms</li>»  
+  after: «<li>4.98 average across 190+ reviews</li>»
+- `pages/private-personal-trainer-san-diego.html:474` — reviews / retention (private proof card)  
+  before: «<li>Average client tenure: 8+ months</li>»  
+  after: «<li>About half of clients train with OmniFit for 6 months or longer (see <a href="/outcomes">Outcomes</a>)</li>»
+- `pages/FAQs.html:141` — reviews  
+  before: «OmniFit Performance holds a 5.0 rating across 190+ verified reviews.»  
+  after: «OmniFit Performance holds a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark).»
+- `pages/FAQs.html:213` — reviews + audience (FAQ + mirror)  
+  before: «has 190+ verified five-star reviews, and works exclusively with professionals over 30.»  
+  after: «has a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark), and his coaching is built for professionals 30+.»
+- `pages/headers/FAQs-header.html:118` — reviews + audience (FAQ + mirror)  
+  before: «has 190+ verified five-star reviews, and works exclusively with professionals over 30.»  
+  after: «has a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark), and his coaching is built for professionals 30+.»
+- `pages/personal-trainer-4s-ranch.html:1074` — audience (FAQ + mirror)  
+  before: «OmniFit Performance specializes exclusively in busy professionals over 30 who»  
+  after: «OmniFit Performance is built for busy professionals 30+ who»
+- `pages/headers/personal-trainer-4s-ranch-header.html:55` — audience (FAQ + mirror)  
+  before: «OmniFit Performance specializes exclusively in busy professionals over 30 who»  
+  after: «OmniFit Performance is built for busy professionals 30+ who»
+- `pages/personal-trainer-4s-ranch.html:538` — reviews (4S Ranch hero, label, meta note)  
+  before: «Rated <strong>5.0</strong> from <strong>190+</strong> five-star reviews across Google, Yelp, Thumbtack &amp; Bark · NASM Elite Trainer»  
+  after: «<strong>4.98</strong> average across <strong>190+</strong> reviews (Google, Yelp, Thumbtack and Bark) · NASM Elite Trainer»
+- `pages/personal-trainer-4s-ranch.html:888` — reviews (4S Ranch hero, label, meta note)  
+  before: «<span class="fr-label">Verified</span>⏎       <hr class="fr-divider">⏎       <h2>Client <em>Transformations</em></h2>»  
+  after: «<span class="fr-label">Measured</span>⏎       <hr class="fr-divider">⏎       <h2>Client <em>Transformations</em></h2>»
+- `pages/personal-trainer-4s-ranch.html:17` — reviews (4S Ranch hero, label, meta note)  
+  before: «(Page Settings → SEO — must state 190+ five-star reviews):»  
+  after: «(Page Settings → SEO — must state the 4.98 average across 190+ reviews):»
+- `pages/personal-trainer-4s-ranch.html:18` — reviews (4S Ranch hero, label, meta note)  
+  before: «190+ five-star reviews across Google, Yelp, Thumbtack & Bark.»  
+  after: «4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark).»
+- `pages/personal-trainer-over-50-san-diego.html:3` — reviews (SEO note comment)  
+  before: «NASM Elite Trainer, 190+ five-star reviews. -->»  
+  after: «NASM Elite Trainer, 4.98 average across 190+ reviews. -->»
+- `pages/desk-worker-posture-pain.html:250` — reviews  
+  before: «<span>⭐ 190+ Five-Star Reviews</span>»  
+  after: «<span>⭐ 4.98 Average Across 190+ Reviews</span>»
+- `pages/omnifit-vs-competitors.html:1003` — retention (FAQ + mirror)  
+  before: «Most clients commit to 6 months minimum because durable change is a long-game project, not a short-term push.»  
+  after: «About half of clients train with OmniFit for 6 months or longer <a href="/outcomes">(see Outcomes)</a>. Durable change is a long-game project, not a short-term push.»
+- `pages/headers/omnifit-vs-competitors-header.html:101` — retention (FAQ + mirror)  
+  before: «Most clients commit to 6 months minimum because durable change is a long-game project, not a short-term push.»  
+  after: «About half of clients train with OmniFit for 6 months or longer (see Outcomes). Durable change is a long-game project, not a short-term push.»
+- `pages/headers/site-header.html:235` — aggregateRating  
+  before: «"ratingValue": "5.0",»  
+  after: «"ratingValue": "4.98",»
+
+### 6. Travel / service area
+
+- `pages/FAQs.html:153` — FAQs: North County service area wording  
+  before: «In-home training</strong> throughout San Diego County»  
+  after: «In-home training</strong> across our North County San Diego service area»
+- `pages/headers/FAQs-header.html:54` — FAQs: North County service area wording  
+  before: «In-home training throughout San Diego County»  
+  after: «In-home training across our North County San Diego service area»
+- `pages/personal-trainer-la-jolla.html:405` — travel fee outside the no-fee area  
+  before: «No travel fee in La Jolla; it's inside our in-home service area.»  
+  after: «A travel fee applies in La Jolla, confirmed before you book.»
+- `pages/headers/personal-trainer-la-jolla-header.html:55` — travel fee outside the no-fee area  
+  before: «No travel fee in La Jolla; it's inside our in-home service area.»  
+  after: «A travel fee applies in La Jolla, confirmed before you book.»
+- `pages/personal-trainer-del-mar.html:386` — travel fee outside the no-fee area  
+  before: «No travel fee in Del Mar; it's inside our in-home service area.»  
+  after: «A travel fee applies in Del Mar, confirmed before you book.»
+- `pages/headers/personal-trainer-del-mar-header.html:55` — travel fee outside the no-fee area  
+  before: «No travel fee in Del Mar; it's inside our in-home service area.»  
+  after: «A travel fee applies in Del Mar, confirmed before you book.»
+- `pages/personal-trainer-rancho-santa-fe.html:371` — travel fee outside the no-fee area  
+  before: «No travel fee in Rancho Santa Fe; it's inside our in-home service area.»  
+  after: «A travel fee applies in Rancho Santa Fe, confirmed before you book.»
+- `pages/headers/personal-trainer-rancho-santa-fe-header.html:55` — travel fee outside the no-fee area  
+  before: «No travel fee in Rancho Santa Fe; it's inside our in-home service area.»  
+  after: «A travel fee applies in Rancho Santa Fe, confirmed before you book.»
+- `pages/personal-trainer-solana-beach.html:350` — travel fee outside the no-fee area  
+  before: «No travel fee in Solana Beach; it's inside our in-home service area.»  
+  after: «A travel fee applies in Solana Beach, confirmed before you book.»
+- `pages/headers/personal-trainer-solana-beach-header.html:55` — travel fee outside the no-fee area  
+  before: «No travel fee in Solana Beach; it's inside our in-home service area.»  
+  after: «A travel fee applies in Solana Beach, confirmed before you book.»
+- `pages/personal-trainer-encinitas.html:272` — travel fee outside the no-fee area  
+  before: «No travel fee in Encinitas; it's inside our in-home service area.»  
+  after: «A travel fee applies in Encinitas, confirmed before you book.»
+- `pages/headers/personal-trainer-encinitas-header.html:55` — travel fee outside the no-fee area  
+  before: «No travel fee in Encinitas; it's inside our in-home service area.»  
+  after: «A travel fee applies in Encinitas, confirmed before you book.»
+- `pages/personal-trainer-carlsbad.html:276` — travel fee outside the no-fee area  
+  before: «No travel fee in Carlsbad; it's inside our in-home service area.»  
+  after: «A travel fee applies in Carlsbad, confirmed before you book.»
+- `pages/headers/personal-trainer-carlsbad-header.html:55` — travel fee outside the no-fee area  
+  before: «No travel fee in Carlsbad; it's inside our in-home service area.»  
+  after: «A travel fee applies in Carlsbad, confirmed before you book.»
+- `pages/FAQs.html:163, pages/FAQs.html:183` — travel fee canonical (no-fee area named)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.»
+- `pages/body-composition-testing.html:342` — travel fee canonical (no-fee area named)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.»
+- `pages/couples-personal-training-san-diego.html:308` — travel fee canonical (no-fee area named)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.»
+- `pages/headers/FAQs-header.html:70, pages/headers/FAQs-header.html:86` — travel fee canonical (no-fee area named)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.»
+- `pages/headers/body-composition-testing-header.html:101` — travel fee canonical (no-fee area named)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.»
+- `pages/headers/private-personal-trainer-san-diego-header.html:78` — travel fee canonical (no-fee area named)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.»
+- `pages/home-4.html:42` — travel fee canonical (no-fee area named)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.»
+- `pages/private-personal-trainer-san-diego.html:589` — travel fee canonical (no-fee area named)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.»
+- `pages/private-personal-trainer-san-diego.html:354` — travel fee canonical (no-fee area named)  
+  before: «<li>No travel fee inside our in-home service area; a travel fee may apply outside it</li>»  
+  after: «<li>No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book</li>»
+- `pages/in-home-personal-trainer-san-diego.html:383` — in-home service area: no-fee tags (X01: no town names outside the list)  
+  before: «in the neighborhoods below. No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «in the neighborhoods below. No travel fee for the marked areas; elsewhere a travel fee applies, confirmed before you book.»
+- `pages/in-home-personal-trainer-san-diego.html:260, pages/in-home-personal-trainer-san-diego.html:542, pages/in-home-personal-trainer-san-diego.html:765` — in-home service area: no-fee tags (X01: no town names outside the list)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee for the areas marked in our service-area list; elsewhere a travel fee applies, confirmed before you book.»
+- `pages/in-home-personal-trainer-san-diego.html:114` — in-home service area: no-fee tags (X01: no town names outside the list)  
+  before: «#omni-inhome .of-hood-zip { font-family:'Montserrat',sans-serif!important; font-size:11px; color:var(--white-50); }⏎»  
+  after: «#omni-inhome .of-hood-zip { font-family:'Montserrat',sans-serif!important; font-size:11px; color:var(--white-50); }⏎   #omni-inhome .of-hood-tag { display:inline-block; margin-top:8px; font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--gold); }⏎»
+- `pages/in-home-personal-trainer-san-diego.html:391` — in-home service area: no-fee tags (X01: no town names outside the list)  
+  before: «<div class="of-hood-name">Fairbanks Ranch</div>⏎           <div class="of-hood-zip">92067</div>»  
+  after: «<div class="of-hood-name">Fairbanks Ranch</div>⏎           <div class="of-hood-zip">92067</div>⏎           <div class="of-hood-tag">No travel fee</div>»
+- `pages/in-home-personal-trainer-san-diego.html:396` — in-home service area: no-fee tags (X01: no town names outside the list)  
+  before: «<div class="of-hood-name">Santaluz</div>⏎           <div class="of-hood-zip">92127</div>»  
+  after: «<div class="of-hood-name">Santaluz</div>⏎           <div class="of-hood-zip">92127</div>⏎           <div class="of-hood-tag">No travel fee</div>»
+- `pages/in-home-personal-trainer-san-diego.html:401` — in-home service area: no-fee tags (X01: no town names outside the list)  
+  before: «<div class="of-hood-name">Carmel Valley</div>⏎           <div class="of-hood-zip">92130</div>»  
+  after: «<div class="of-hood-name">Carmel Valley</div>⏎           <div class="of-hood-zip">92130</div>⏎           <div class="of-hood-tag">No travel fee</div>»
+- `pages/in-home-personal-trainer-san-diego.html:422` — in-home service area: no-fee tags (X01: no town names outside the list)  
+  before: «<div class="of-hood-name">Rancho Bernardo</div>⏎           <div class="of-hood-zip">92128</div>»  
+  after: «<div class="of-hood-name">Rancho Bernardo</div>⏎           <div class="of-hood-zip">92128</div>⏎           <div class="of-hood-tag">No travel fee</div>»
+- `pages/in-home-personal-trainer-san-diego.html:427` — in-home service area: no-fee tags (X01: no town names outside the list)  
+  before: «Also serving Poway. Don»  
+  after: «Also serving Poway (no travel fee). Don»
+- `pages/headers/in-home-personal-trainer-san-diego-header.html:57` — in-home FAQ travel fee (mirror)  
+  before: «No travel fee inside our in-home service area; a travel fee may apply outside it.»  
+  after: «No travel fee for the areas marked in our service-area list; elsewhere a travel fee applies, confirmed before you book.»
+- `pages/training-rates-san-diego.html:558` — Rates: in-home travel fee next to 'adds nothing at checkout'  
+  before: «never by the calendar month, and adds nothing at checkout.</p>»  
+  after: «never by the calendar month, and adds nothing at checkout. In-home outside our no-fee area: a travel fee, confirmed before you book.</p>»
+- `pages/personal-trainer-rancho-santa-fe.html:381` — RSF equipment FAQ  
+  before: «At minimum, you need adjustable dumbbells (5–50+ lbs), an adjustable bench, resistance bands, and about 8×8 feet of open space. Most RSF clients have more extensive setups: power racks, cable machines, cardio equipment. We design your program around whatever you have. During your consultation, send photos and we'll assess.»  
+  after: «Nothing. We bring the equipment; you need about 8×8 feet of clear space. Many RSF clients do have more extensive setups (power racks, cable machines, cardio equipment), and if you do, we design your program around it. Send photos before your consultation and we'll plan around what you have.»
+- `pages/headers/personal-trainer-rancho-santa-fe-header.html:71` — RSF equipment FAQ  
+  before: «At minimum, you need adjustable dumbbells (5–50+ lbs), an adjustable bench, resistance bands, and about 8×8 feet of open space. Most RSF clients have more extensive setups: power racks, cable machines, cardio equipment. We design your program around whatever you have. During your consultation, send photos and we'll assess.»  
+  after: «Nothing. We bring the equipment; you need about 8×8 feet of clear space. Many RSF clients do have more extensive setups (power racks, cable machines, cardio equipment), and if you do, we design your program around it. Send photos before your consultation and we'll plan around what you have.»
+- `pages/FAQs.html:141` — FAQs: North County service area wording  
+  before: «in-home training throughout San Diego County,»  
+  after: «in-home training across North County San Diego,»
+- `pages/FAQs.html:163` — FAQs: North County service area wording  
+  before: «is available throughout San Diego County including La Jolla,»  
+  after: «is available across our North County San Diego service area, including La Jolla,»
+- `pages/headers/FAQs-header.html:70` — FAQs: North County service area wording (mirror)  
+  before: «is available throughout San Diego County including La Jolla,»  
+  after: «is available across our North County San Diego service area, including La Jolla,»
+
+### 7. Session length
+
+- `pages/headers/in-home-personal-trainer-san-diego-header.html:81` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-carlsbad-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-carmel-valley-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-del-mar-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-encinitas-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-fairbanks-ranch-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-la-jolla-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-rancho-santa-fe-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-santaluz-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/headers/personal-trainer-solana-beach-header.html:55` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/in-home-personal-trainer-san-diego.html:777` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-carlsbad.html:276` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-carmel-valley.html:350` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-del-mar.html:386` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-encinitas.html:272` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-fairbanks-ranch.html:350` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-la-jolla.html:405` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-rancho-bernardo.html:354` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-rancho-santa-fe.html:371` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-santaluz.html:274` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/personal-trainer-solana-beach.html:350` — session length (60 min studio/in-home)  
+  before: «Sessions are 45–60 minutes»  
+  after: «Sessions are 60 minutes»
+- `pages/weight-loss.html:328` — session length  
+  before: «<li>45–60 min in-person or 30 min virtual</li>»  
+  after: «<li>60 min in-person or 30 min virtual</li>»
+- `pages/weight-loss.html:416` — session length  
+  before: «<li>45–60 minute sessions</li>»  
+  after: «<li>60-minute sessions</li>»
+- `pages/strength-training-1.html:342` — session length  
+  before: «<li>45–60 minute sessions</li>»  
+  after: «<li>60-minute sessions</li>»
+- `pages/strength-training-1.html:355` — session length  
+  before: «<li>30 or 45-minute sessions</li>»  
+  after: «<li>30-minute sessions</li>»
+- `pages/corrective-exercise-post-rehab.html:915` — session length  
+  before: «<li>30 or 45-minute sessions</li>»  
+  after: «<li>30-minute sessions</li>»
+- `pages/training-rates-san-diego.html:899` — Rates: one session-length line under each product (8: single-session assessment note)  
+  before: «<span class="rt-label">New Clients</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Three consecutive 4-week cycles. Each row shows the price per 4-week cycle and the total due at signup, which is that price times three. Studio programs are at Teqneeq FHC, 10772 Thornmint Rd, San Diego 92127.</p>⏎»  
+  after: «<span class="rt-label">New Clients</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Three consecutive 4-week cycles. Each row shows the price per 4-week cycle and the total due at signup, which is that price times three. Studio programs are at Teqneeq FHC, 10772 Thornmint Rd, San Diego 92127.</p>⏎       <p class="rt-session-length" style="color:var(--white-50); font-size:13px; max-width:660px; margin:8px auto 0;"><strong>Session length:</strong> 60 minutes, in studio or in-home.</p>⏎»
+- `pages/training-rates-san-diego.html:1001` — Rates: one session-length line under each product (8: single-session assessment note)  
+  before: «<span class="rt-label">Ongoing Coaching</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Continuation after The Foundation, or direct entry for clients with prior training experience. Each price is charged at the start of every 4-week cycle.</p>⏎»  
+  after: «<span class="rt-label">Ongoing Coaching</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Continuation after The Foundation, or direct entry for clients with prior training experience. Each price is charged at the start of every 4-week cycle.</p>⏎       <p class="rt-session-length" style="color:var(--white-50); font-size:13px; max-width:660px; margin:8px auto 0;"><strong>Session length:</strong> 60 minutes, in studio or in-home.</p>⏎»
+- `pages/training-rates-san-diego.html:1107` — Rates: one session-length line under each product (8: single-session assessment note)  
+  before: «<span class="rt-label">Pay Per Session</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">These are sessions, not a coaching program: no programming between visits and no cycle billing. Studio non-member prices include the Teqneeq day pass, so no facility membership is required.</p>⏎»  
+  after: «<span class="rt-label">Pay Per Session</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">These are sessions, not a coaching program: no programming between visits and no cycle billing. Studio non-member prices include the Teqneeq day pass, so no facility membership is required.</p>⏎       <p class="rt-session-length" style="color:var(--white-50); font-size:13px; max-width:660px; margin:8px auto 0;"><strong>Session length:</strong> 60 minutes, in studio or in-home. For a single session the Performance Assessment is recommended, not required; 5-packs and programs require it.</p>⏎»
+- `pages/training-rates-san-diego.html:1158` — Rates: one session-length line under each product (8: single-session assessment note)  
+  before: «<span class="rt-label">For Program Graduates</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Finished your program? Stay in orbit without re-committing. Billed every 4 weeks, cancel with 30 days' notice.</p>⏎»  
+  after: «<span class="rt-label">For Program Graduates</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Finished your program? Stay in orbit without re-committing. Billed every 4 weeks, cancel with 30 days' notice.</p>⏎       <p class="rt-session-length" style="color:var(--white-50); font-size:13px; max-width:660px; margin:8px auto 0;"><strong>Session length:</strong> 60 minutes, in studio or in-home (one session per cycle).</p>⏎»
+- `pages/training-rates-san-diego.html:1198` — Rates: one session-length line under each product (8: single-session assessment note)  
+  before: «<span class="rt-label">Virtual Coaching · Available Nationwide</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:680px; margin:8px auto 0;">Live 30-minute virtual coaching for executives and high-performing professionals. Custom training, nutrition, and habit coaching built around your schedule, with full programming and accountability. Available nationwide.</p>⏎»  
+  after: «<span class="rt-label">Virtual Coaching · Available Nationwide</span>⏎       <hr class="rt-divider">⏎       <p style="color:var(--white-50); font-size:14px; max-width:680px; margin:8px auto 0;">Live 30-minute virtual coaching for executives and high-performing professionals. Custom training, nutrition, and habit coaching built around your schedule, with full programming and accountability. Available nationwide.</p>⏎       <p class="rt-session-length" style="color:var(--white-50); font-size:13px; max-width:660px; margin:8px auto 0;"><strong>Session length:</strong> 30 minutes, live by video (Bronze has no live sessions).</p>⏎»
+- `pages/personal-training-services.html:303` — session length  
+  before: «<li>30–45 minute sessions</li>»  
+  after: «<li>60-minute sessions (30 minutes virtual)</li>»
+- `pages/hiit-personal-trainer-san-diego.html:520` — session length  
+  before: «<span>30–45 min sessions</span>»  
+  after: «<span>60 min in person · 30 min virtual</span>»
+- `pages/hiit-personal-trainer-san-diego.html:559` — session length  
+  before: «<div class="hiit-benefit-title">30–45 Minutes</div>»  
+  after: «<div class="hiit-benefit-title">60 Minutes (30 Virtual)</div>»
+
+### 8. Policy wording
+
+- `pages/FAQs.html:183` — single sessions: assessment recommended, not required (FAQ + mirror)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward your first cycle. All programs start with a 45-minute paid consultation.»  
+  after: «Programs and 5-packs start with a $150 Performance Assessment (remote clients take the $75 Virtual Performance Assessment), credited toward your first cycle; for a single session it is recommended, not required. All programs start with a 45-minute paid consultation.»
+- `pages/headers/FAQs-header.html:86` — single sessions: assessment recommended, not required (FAQ + mirror)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward your first cycle. All programs start with a 45-minute paid consultation.»  
+  after: «Programs and 5-packs start with a $150 Performance Assessment (remote clients take the $75 Virtual Performance Assessment), credited toward your first cycle; for a single session it is recommended, not required. All programs start with a 45-minute paid consultation.»
+- `pages/how-it-works-pricing.html:202` — single sessions: assessment recommended, not required  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.</strong>»  
+  after: «Programs and 5-packs start with a $150 Performance Assessment (remote clients: the $75 Virtual Performance Assessment), credited toward the first cycle; for a single session it is recommended, not required.</strong>»
+- `pages/private-personal-trainer-san-diego.html:290` — assessment requirement (programs)  
+  before: «<p>Every client starts with a $150 Performance Assessment on the Bodystat QuadScan 4000 and a 9-point movement screen.»  
+  after: «<p>Every in-person program starts with a $150 Performance Assessment on the Bodystat QuadScan 4000 and a 9-point movement screen.»
+- `pages/training-rates-san-diego.html:990` — early exit: statutory cancellation rights (all instances)  
+  before: «non-refundable and the 30-Day Fit Guarantee is the only exit»  
+  after: «non-refundable and, apart from your statutory cancellation rights, the 30-Day Fit Guarantee is the only early exit»
+- `pages/training-rates-san-diego.html:649, pages/training-rates-san-diego.html:752, pages/training-rates-san-diego.html:990, pages/training-rates-san-diego.html:1344, pages/training-rates-san-diego.html:1354` — early exit: statutory cancellation rights (all instances)  
+  before: «the 30-Day Fit Guarantee is the only exit»  
+  after: «apart from your statutory cancellation rights, the 30-Day Fit Guarantee is the only early exit»
+- `pages/headers/training-rates-san-diego-header.html:101, pages/headers/training-rates-san-diego-header.html:116, pages/headers/training-rates-san-diego-header.html:131, pages/headers/training-rates-san-diego-header.html:146, pages/headers/training-rates-san-diego-header.html:161, pages/headers/training-rates-san-diego-header.html:762, pages/headers/training-rates-san-diego-header.html:778` — early exit: statutory cancellation rights (all instances)  
+  before: «the 30-Day Fit Guarantee is the only exit»  
+  after: «apart from your statutory cancellation rights, the 30-Day Fit Guarantee is the only early exit»
+- `pages/FAQs.html:188` — HSA/FSA answer  
+  before: «OmniFit does not bill insurance directly. Some clients use HSA or FSA funds for eligible wellness services, though you'll need to confirm with your benefits administrator. We can provide invoices and documentation if needed for reimbursement.»  
+  after: «OmniFit doesn't bill insurance. HSA or FSA funds can be used only with a Letter of Medical Necessity from a licensed provider, available through Truemed. OmniFit provides itemized receipts. <a href="/hsa-fsa-personal-training">How HSA/FSA payment works</a>.»
+- `pages/headers/FAQs-header.html:94` — HSA/FSA answer (mirror)  
+  before: «OmniFit does not bill insurance directly. Some clients use HSA or FSA funds for eligible wellness services, though you'll need to confirm with your benefits administrator. We can provide invoices and documentation if needed for reimbursement.»  
+  after: «OmniFit doesn't bill insurance. HSA or FSA funds can be used only with a Letter of Medical Necessity from a licensed provider, available through Truemed. OmniFit provides itemized receipts. How HSA/FSA payment works.»
+- `pages/training-rates-san-diego.html:752, pages/training-rates-san-diego.html:1354` — early exit: statutory cancellation rights (all instances)  
+  before: «The Foundation is non-refundable; the 30-Day Fit Guarantee is the only early exit.»  
+  after: «The Foundation is non-refundable; apart from your statutory cancellation rights, the 30-Day Fit Guarantee is the only early exit.»
+
+### 9. Compliance gap
+
+- `pages/personal-trainer-encinitas.html:146` — TIER 1 item 2 compliance gap  
+  before: «<li>20–30+ lbs in 4–6 months</li>»  
+  after: «<li>Sustainable fat loss, no crash diets</li>»
+- `pages/personal-trainer-solana-beach.html:207` — TIER 1 item 2 compliance gap  
+  before: «<li>20–30+ lbs in 4–6 months</li>»  
+  after: «<li>Sustainable fat loss, no crash diets</li>»
+- `pages/personal-trainer-fairbanks-ranch.html:207` — TIER 1 item 2 compliance gap  
+  before: «<li>20–30+ lbs in 4–6 months</li>»  
+  after: «<li>Sustainable fat loss, no crash diets</li>»
+- `pages/personal-trainer-la-jolla.html:262` — TIER 1 item 2 compliance gap  
+  before: «<li>20–30+ lbs in 4–6 months</li>»  
+  after: «<li>Sustainable fat loss, no crash diets</li>»
+- `pages/personal-trainer-santaluz.html:148` — TIER 1 item 2 compliance gap  
+  before: «<li>20–30+ lbs in 4–6 months</li>»  
+  after: «<li>Sustainable fat loss, no crash diets</li>»
+- `pages/personal-trainer-carlsbad.html:150` — TIER 1 item 2 compliance gap  
+  before: «<li>20–30+ lbs in 4–6 months</li>»  
+  after: «<li>Sustainable fat loss, no crash diets</li>»
+
+### 10. Placeholders
+
+- `pages/corrective-exercise-post-rehab.html:805` (line at edit time) — placeholder section deleted (commented-out RESULTS SLOT with [CASE STUDY SUMMARY: ...])  
+  before: «<!-- ════════════ RESULTS SLOT — activate after first corrective case study publishes ════════════⏎     <hr />⏎     <section class="cx-section">⏎       <div class="cx-section-head">⏎         <span class="cx-label">Results</span>⏎         <hr class="cx-divider">⏎         <h2>Measured Corrective Outcomes</h2>⏎       </div>⏎       <div class="gq-block">⏎         [CASE STUDY SUMMARY: starting diagnostic → intervention → rescan data → timeframe.⏎          Link to /case-studies. Insert after first Bodystat corrective case study is published.]⏎       </div>⏎       <div class="text-center">⏎         <p><a href="/case-studies">See all client results →</a></p>⏎       </div>⏎     </section>⏎     ════════════ END RESULTS SLOT ════════════ -->⏎ ⏎»  
+  after: «(deleted)»
+- `pages/case-studies.html:233, pages/case-studies.html:264, pages/case-studies.html:295, pages/case-studies.html:326, pages/case-studies.html:357, pages/case-studies.html:414, pages/case-studies.html:472, pages/case-studies.html:530` (line at edit time) — 'Add Image' placeholder spans removed (frozen-record exemption lifted for these only; every card has its image)  
+  before: «<div class="photo-placeholder"><span>Add Image</span></div>⏎»  
+  after: «(deleted)»
+
+### 12. Footer year
+
+- `pages/footer.html:191` — footer year hard-coded (script kept as updater)  
+  before: «© <span id="omnifit-year"></span> OmniFit Performance»  
+  after: «© <span id="omnifit-year">2026</span> OmniFit Performance»
+
+### 11. Trailing slash, and tooling (not copy)
+
+- `build.py:483-488` page output `public/<slug>/index.html` → `public/<slug>.html` (homepage `public/index.html`).
+- `build.py` `check_flat`, `flat_selftest`, `page_path`; `check()` reads `ownership.built_pages(PUBLIC)`; `tracking_selftest` picks a flat page; Squarespace warning maps `<slug>.html` → `/<slug>`.
+- `tools/ownership.py:195-216` `built_pages`, `_url_path`, `check_site` on the flat layout.
+- `tools/tracktest.js`, `tools/choosertest.js`, `tools/mobileaudit.js`: `/<slug>` → `public/<slug>.html`, `/` → `index.html`, 404 otherwise; mobileaudit discovers top-level `*.html` (not 404.html).
+- `DEPLOY.md`: layout line and "Trailing slash" section (after deploy, https://omnifit-site.pages.dev/about must stay on /about; `curl -sI` 200, not 308).
+- `pages/training-rates-san-diego.html` chooser: `data-virtual-assessment="75"` on the chooser box; the virtual result pushes the remote-assessment line from it.
