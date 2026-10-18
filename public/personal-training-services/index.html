@@ -595,6 +595,29 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-services .omni-who-entity { font-size: 12.5px !important; color: rgba(255,255,255,0.5) !important; }
   @media (max-width: 768px) { #omni-services .omni-who-grid { grid-template-columns: 1fr; } }
 </style>
+<style>
+  #omh-short.omh{--omh-navy:#0a1628;--omh-gold:#c9a84c;--omh-ink:#1e293b;--omh-line:rgba(10,22,40,.10);font-family:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--omh-ink);background:#fff;margin:0;padding:56px 24px 72px;line-height:1.65;-webkit-font-smoothing:antialiased;text-align:left;}
+  #omh-short.omh *{box-sizing:border-box;}
+  #omh-short.omh .omh-inner{max-width:1100px;margin:0 auto;}
+  #omh-short.omh .omh-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#9a7a26;margin:0 0 14px;}
+  #omh-short.omh .omh-label::before{content:'';display:inline-block;width:28px;height:2px;background:var(--omh-gold);flex:none;}
+  #omh-short.omh h2{font-family:'Playfair Display','Times New Roman',serif;font-size:clamp(27px,3.6vw,38px);font-weight:700;line-height:1.18;letter-spacing:-.3px;color:var(--omh-navy);margin:0 0 16px;text-transform:none;max-width:24ch;}
+  #omh-short.omh .short-box{border:1px solid var(--omh-line);border-left:4px solid var(--omh-gold);border-radius:14px;padding:30px 32px;background:#fff;box-shadow:0 10px 30px rgba(10,22,40,.05);}
+  #omh-short.omh ul{list-style:none;margin:0;padding:0;display:grid;gap:14px;}
+  #omh-short.omh li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px;align-items:start;font-size:16px;line-height:1.6;color:var(--omh-ink);margin:0;padding:0;}
+  #omh-short.omh li::before{content:none;}
+  #omh-short.omh li svg{width:22px;height:22px;margin-top:1px;fill:none;stroke:var(--omh-gold);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  #omh-short.omh li strong{color:var(--omh-navy);}
+  @media (max-width:640px){
+    #omh-short.omh{padding:40px 16px 52px;}
+    #omh-short.omh .short-box{padding:22px 18px;}
+    #omh-short.omh li{font-size:15.5px;gap:12px;}
+  }
+</style>
+<style>
+  #sv-which .sv-which-a{max-width:68ch;font-size:16px;line-height:1.7;margin:0;}
+  #sv-which .sv-which-a a{color:inherit;text-decoration:underline;text-decoration-color:#c9a84c;text-underline-offset:3px;}
+</style>
 </head>
 <body class="page page--personal-training-services">
 <!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
@@ -714,6 +737,27 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a href="/faqs">FAQs</a>
     </div>
   </section>
+
+<!-- ═══ IN SHORT (cited-pages run, Oct 18 2026) ═══
+  Same pattern and classes as the homepage In Short block (pages/home-1.html).
+  First bullet is the POSITIONING LINE verbatim (CANON ENTITY BLOCK). -->
+
+<section id="omh-short" class="omh" aria-labelledby="omh-short-h">
+  <div class="omh-inner">
+    <p class="omh-label">The Short Version</p>
+    <h2 id="omh-short-h">In Short</h2>
+    <div class="short-box">
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Who it's for:</strong> professional adults 30+: executives and founders, desk-bound professionals, active adults 50+, couples, and people returning after a break or physical therapy.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>What happens:</strong> every program starts with the Performance Assessment and follows the OmniFit Method: Assess, Correct, Build, Sustain.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Where:</strong> the studio at Teqneeq FHC in 4S Ranch, your home, or live video nationwide.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Next step:</strong> a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 
   <!-- CORE SERVICES -->
   <div class="sv-section">
@@ -972,6 +1016,20 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p class="omni-who-door">Even if you just want to train, we can start there.</p>
       <p class="omni-who-entity">OmniFit Performance &middot; Nemezio LopezPerez (Coach Nemezio) &middot; Teqneeq Functional Health Center, 10772 Thornmint Rd, 4S Ranch, San Diego, CA 92127 &middot; omnifittraining.com</p>
     </div>
+    </div>
+
+<!-- ═══ WHICH PROGRAM (cited-pages run, Oct 18 2026) ═══
+  A plain question-and-answer section, NOT FAQ markup: this page is on
+  CANON "PAGES WITH NO FAQ" / certify.py NO_FAQ, so it carries no disclosure
+  toggles, no FAQ classes and no FAQ schema. -->
+
+    <div class="sv-section" id="sv-which">
+      <div class="sv-section-head">
+        <span class="sv-label">Choosing a Program</span>
+        <hr class="sv-divider">
+        <h2>Which program is right for me?</h2>
+      </div>
+      <p class="sv-which-a">Start with the <a href="/fit-check">Fit Check</a>: seven questions, about three minutes, and it suggests an accountability setting. Then use the <a href="/training-rates-san-diego#rt-choose">starting-option chooser on the rates page</a> to match format and frequency to your schedule. New clients usually start on The Foundation, a defined 12-week starter block. If you are still unsure, the 45-minute consultation is where the recommendation gets made.</p>
     </div>
 
 <!-- BOTTOM CTA -->
