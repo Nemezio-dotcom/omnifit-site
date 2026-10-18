@@ -1,5 +1,58 @@
 ═══ OMNIFIT SITE — CANONICAL BRIEF (Aug 2026, REPO STATE reconciled Sept 2026) ═══
 
+CANONICAL FACTS (owner decisions, Oct 17 2026; recorded in the Audit
+Reconciliation run, after two external audits of Oct 17 2026). EVERY PAGE
+MUST AGREE WITH THIS BLOCK. Where an older line in this brief says
+otherwise, this block wins and the older line is kept only as history.
+  CONSULTATION: 45 minutes by video or phone; $30 deposit, refunded the same
+    day you attend. It is a CONVERSATION, NOT AN ASSESSMENT: no movement
+    testing, no measurements. Published sequence everywhere a page describes
+    how a client starts: consultation (conversation) -> if a fit, the
+    Performance Assessment (measurements) -> programming. Never "we'll assess
+    your movement / body composition" or "build your program" on the
+    consultation.
+  PERFORMANCE ASSESSMENT (in person, studio or home): $150, credited toward
+    your first purchase (a Foundation or Program cycle, an Executive Reset
+    cycle, or a 5-session pack). Contents: the 9-point movement screen,
+    Bodystat QuadScan 4000 body composition, blood pressure, SpO2, grip
+    strength, posture photos, circumference measurements. It sets the
+    baselines for the 12-METRIC PROGRESS FRAMEWORK (12 metrics, measured and
+    self-reported, in 7 categories). Never "seven tracked benchmarks" or any
+    other count.
+  VIRTUAL PERFORMANCE ASSESSMENT (Executive Reset / remote clients):
+    self-measured with live video guidance; posture photos in the app; NO
+    Bodystat scan; $75, credited toward the first purchase the same way.
+    Booked after the consultation. Bodystat reassessment is an IN-PERSON
+    inclusion only.
+  SINGLE SESSIONS: the assessment is recommended, not required. Packs and
+    programs require it.
+  SESSION LENGTH: 60 minutes in studio and in-home; 30 minutes on the
+    Executive Reset. Never "45-60 minutes", "30-45 minute" or "30 or
+    45-minute".
+  IN-HOME NO-FEE AREA: Carmel Valley, Santaluz, Fairbanks Ranch, Rancho
+    Bernardo, 4S Ranch, Poway. Elsewhere in the in-home service area
+    (including La Jolla, Del Mar, Rancho Santa Fe, Solana Beach, Encinitas,
+    Carlsbad) a travel fee applies, confirmed before you book. Never a dollar
+    figure. Territory pages in the no-fee area: "No travel fee in [Town];
+    it's inside our in-home service area." Territory pages outside it: "A
+    travel fee applies in [Town], confirmed before you book." The service
+    area is described as North County San Diego, never "throughout San Diego
+    County".
+  REVIEWS: "4.98 average across 190+ reviews (Google, Yelp, Thumbtack and
+    Bark)". Never "5.0", "five-star reviews" for the total, or "verified".
+    Schema aggregateRating: ratingValue 4.98, reviewCount 190.
+  AUDIENCE: "built for professionals 30+". Never "exclusively".
+  RETENTION: "About half of clients train with OmniFit for 6 months or
+    longer (see Outcomes)." No other tenure or commitment figure.
+  ACCOUNTABILITY: between-session communication and check-ins are "matched
+    to your Accountability Dial setting"; no page promises unlimited
+    communication or required weekly check-ins to every client.
+  EARLY EXIT: "Apart from your statutory cancellation rights, the 30-Day Fit
+    Guarantee is the only early exit."
+  HSA / FSA: OmniFit doesn't bill insurance. HSA or FSA funds can be used
+    only with a Letter of Medical Necessity from a licensed provider,
+    available through Truemed. OmniFit provides itemized receipts.
+
 REPO STATE (reconciled with disk, Sept 2026)
 - main = paste source. Every file under pages/ is IN CERTIFICATION SCOPE unless
   listed as not-yet-certified below. archive/ is NEVER in scope.
