@@ -1375,6 +1375,10 @@ RETIRED_LAUNCH_COPY = [
     # CTA note reads "Straight answer on fit". Case-insensitive, like every
     # term here, so "Paid 45-minute" and "paid 45-minute" both fire.
     "paid 45-minute", "Credentialed access only", "Honest assessment of fit",
+    # Run 7C (Oct 18 2026): the rule widened to the bare noun phrase, which
+    # survived run 7 on FAQs, partners and the how-it-works step heading.
+    # Case-insensitive, so "Paid Consultation" and "paid consultation" fire.
+    "paid consultation",
 ]
 
 def retired_launch_copy(text):
@@ -1428,6 +1432,12 @@ def _selftest_retired_copy():
              "· No commitment · Straight answer on fit. Private, by appointment: no walk-ins, "
              "no crowds. Credentialed professionals only. Sessions are paid in full at "
              "enrollment.</p>")
+    for s in ("<h3>Paid Consultation (45 min)</h3>", "<p>Book a 45-minute paid consultation.</p>",
+              '<p>Book a <a href="/x">paid</a> consultation.</p>'):
+        assert [h[0] for h in retired_launch_copy(s)] == ["paid consultation"], f"paid-consultation rule did not fire on {s!r}"
+    for s in ("<h3>Consultation (45 min)</h3>", "<p>Book a consultation ($30 deposit, refunded the same "
+              "day you attend your consultation).</p>", "<p>Sessions are paid in full. Consultation first.</p>"):
+        assert retired_launch_copy(s) == [], f"paid-consultation rule fired on canonical copy {s!r}"
     assert retired_launch_copy(clean) == [], "retired-copy rule fired on canonical copy"
     return len(RETIRED_LAUNCH_COPY)
 
