@@ -525,10 +525,13 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     CANONICAL FACTS): self-measured with live video guidance, posture photos
     in the app, no Bodystat scan, credited toward the first purchase the same
     way, booked after the consultation. Single sessions: the assessment is
-    recommended, not required; packs and programs require it. KNOWN CONFLICT,
-    NOT CHANGED (hash-locked, not named for change): the canonical pricing
-    FAQ answer on its twelve carriers still says "Every client starts with a
-    $150 Performance Assessment" - see REPORT.md, Audit Reconciliation run.
+    recommended, not required; packs and programs require it. KNOWN CONFLICT (now resolved),
+    RESOLVED in the Claims & Tone run (6B, Oct 18 2026, owner-approved hash
+    change): the canonical pricing FAQ answer now reads "Programs and
+    session packs start with a Performance Assessment ($150 in person, $75
+    virtual), credited toward your first purchase; for a single session it's
+    recommended, not required." (was "Every client starts with a $150
+    Performance Assessment" - see REPORT.md, Audit Reconciliation run).
     CONSULTATION DEPOSIT, CANONICAL (owner, Oct 17 2026, LAUNCH DECISIONS
     item 3): "$30 deposit, refunded the same day you attend your
     consultation". Never "fully refundable", never "the deposit applies to
@@ -636,8 +639,16 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     The 30-Day Fit Guarantee wording stays BYTE-IDENTICAL (CANON TIER 2
     item 6; canonical text reset by owner override on Oct 17 2026, LAUNCH
     DECISIONS item 6). The assessment paragraph on training-rates-san-diego.html
-    stays BYTE-IDENTICAL, including "clinical-grade diagnostic session" and
-    the Class IIa block.
+    stays BYTE-IDENTICAL, including the Class IIa block. OWNER REVERSAL
+    (Claims & Tone run, 6B, Oct 18 2026; reverses the Sept 12 decision):
+    "clinical-grade" and "medical-grade" are dropped SITEWIDE. The Rates
+    assessment paragraph now reads "a measured baseline session" (was "a
+    clinical-grade diagnostic session"); device copy reads
+    "multi-frequency bioimpedance" (the 9-point block's Body Composition
+    <li> changed with an owner-approved hash change, see INVARIANTS). The
+    verified "Class IIa medical device" fact and its not-a-medical-provider
+    note stay byte-identical wherever they appear; body-composition-testing
+    now carries the Rates disclaimer under its device description.
 
   NOT ON THE CARD - do not publish
     Essential tier: unlisted. Graduates / case by case only. "Essential" is
@@ -679,7 +690,11 @@ LEGACY PRICING - AUGUST 2026, CLOSED (existing clients only; never publish)
     October card, not a re-price of the old one.
 
 - Case-study figures (captions/alt text; verbatim client quotes are
-  untouchable): Vincent 59, 8% body fat. Alo +18 lbs. Mark −17 lbs
+  untouchable): Vincent: "8 percentage points of body fat", no age in his
+  label (owner, 6B, Oct 18 2026: his testimonial says "I will be 62 in
+  July"; case-studies and homepage only, 4S Ranch and over-50 still carry
+  "59" / "8% body fat", see REPORT.md). Alo +18 lbs. No measurement method
+  for Alo's or Vincent's figures is stated anywhere in the repo. Mark −17 lbs
   (248→231, 4mo). Dave −27 (225→198, 6mo). Isaac −21 (181→160, 8→20
   pull-ups, 6mo). Annie −14 (162→148, 3mo). Ken −11 lbs bodyweight
   (175→164, 6mo).
@@ -759,7 +774,10 @@ THE OMNIFIT METHOD (owner decision, Oct 17 2026)
   never the founder, so it reads as a system. The 40-60 word definitions on
   the-omnifit-method and how-we-measure-your-progress are the quotable
   forms; shorter references elsewhere name the three pillars in this order.
-    MEASURED PROGRESS - measure first: the Performance Assessment (nine
+    MEASURED PROGRESS - measure first: every PROGRAM begins with a
+      Performance Assessment (6B, Oct 18 2026: "Every program begins with a
+      Performance Assessment", never "Every client"; single sessions only
+      recommend it) (nine
       movement benchmarks, posture photos, strength baselines, circumference
       measurements, Bodystat QuadScan 4000 body composition); progress judged
       against the client's own baseline on a fixed cadence; the record
@@ -1039,7 +1057,15 @@ and overrides the earlier wording it replaces.)
      (body and FAQ answer), the How It Works header mirror and Terms. "No
      compliance test" stays beside it. It promises a refund and an exit,
      never a result (TIER 2 item 6).
-  7. omnifit-vs-competitors: Equinox offers its Equifit assessment and the
+  7. SUPERSEDED IN PART (Claims & Tone run, 6B, Oct 18 2026): the page now
+     compares CATEGORIES (group class studios, big-box gyms incl. premium
+     clubs, an independent trainer, online apps and coaching, OmniFit), not
+     local brands; the Iron Orr Fitness section is gone (certify.py fails on
+     "Iron Orr"); competitor figures are labelled typical ranges and
+     reconciled (big-box PT $50-100 per session). The Equifit line survives
+     as the one factual example. Title, meta and H1 still name brands
+     (locked). Kept as history:
+     omnifit-vs-competitors: Equinox offers its Equifit assessment and the
      approach after that varies by trainer ("no standardized assessment or
      methodology" is gone). The Equinox + PT comparison row states what the
      page's own figures produce, $1,400-2,700 per month (membership + 8-12
@@ -1124,7 +1150,8 @@ and overrides the earlier wording it replaces.)
       lbs, 6 months). OWNER OVERRIDE of the frozen-record exemption for
       Ken's card only, identically in pages/case-studies.html and
       pages/home-3.html: heading "How a 50+ CTO Lost 11 lbs and Fixed
-      Decades of Desk Posture"; metrics "-11 lbs / Bodyweight (175 → 164)",
+      Decades of Desk Posture" (6B, Oct 18 2026, owner: now "How a 50+ CTO
+      Lost 11 lbs and Rebuilt Posture After Decades at a Desk"); metrics "-11 lbs / Bodyweight (175 → 164)",
       "6 mo / Timeline", "✓ / Posture Corrected" (the "+6 lbs / Muscle
       Gained" metric is gone); list item and summary "lost 11 pounds of
       bodyweight (175 to 164 lb) in 6 months", every muscle-gain clause
@@ -1160,6 +1187,9 @@ and overrides the earlier wording it replaces.)
   "@gmail.com" · "g.page/r/CcePeMjnbDe9EBM/review" · "$250/month" ·
   "diagnostic fee is credited" (added in the Calendly follow-up) ·
   "depending on location" · "varies by location" (added with item 19).
+  Added in the Claims & Tone run (6B, Oct 18 2026): "Iron Orr" · "Elite
+  Training" (headings now "Private Coaching in Santaluz" / "Private
+  Coaching for Fairbanks Ranch", owner-approved).
   Added in the Audit Reconciliation run (Oct 18 2026; CANONICAL FACTS):
   "45-minute movement assessment" · "seven tracked benchmarks" · "a travel
   fee may apply outside it" · "training throughout San Diego County" ·
@@ -1754,7 +1784,18 @@ Page-specific rules that are NOT ownership but are locked in the same table:
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash a6c7e65dddff4795, header hash 7af0d0049b0b7aba). Currently 12
+  (page hash ff5360d2b6b5029b, header hash 22744ada78eb0707). BOTH HASHES
+  CHANGED in the Claims & Tone run (6B, Oct 18 2026), OWNER-APPROVED (run
+  brief item 13a and item 12): previous a6c7e65dddff4795 / 7af0d0049b0b7aba.
+  Two edits, identical on all 12 pages and 12 header mirrors: "Every client
+  starts with a $150 Performance Assessment, credited toward the first
+  cycle." -> "Programs and session packs start with a Performance
+  Assessment ($150 in person, $75 virtual), credited toward your first
+  purchase; for a single session it's recommended, not required."; and
+  "$900 to $2,600 in-home" -> "$900 to $2,600+ in-home"; and the US
+  spelling sweep (item 12) "paid in full at enrolment" -> "... enrollment".
+  (Interim values after the first two edits only: ae491a42394531b5 /
+  d94ee90c6fdafa8e.) Currently 12
   pages and 12 headers (CARRIER LIST, enforced by certify.py
   PRICING_FAQ_CARRIERS since the Audit Reconciliation run, Oct 18 2026): the
   eleven territory pages and corrective-exercise-post-rehab. CARRIER REMOVED, OWNER-APPROVED (Audit
@@ -1794,7 +1835,7 @@ legitimately changes an invariant, and say so in REPORT.md)
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
 - 9-point screen section body (Section B): byte-identical × 11 pages
-  (hash f9dfcec684d7a9dd; intro + nine <li> items + closing line, set by
+  (hash 5a629cf689301f84; intro + nine <li> items + closing line, set by
   the Section A/B run). Hash changed legitimately in the Device Swap run
   (Sept 2026): the Body Composition <li> names the device, so retiring the
   1500 MDD rewrote the same bytes on all eleven pages. Previous value
@@ -1817,6 +1858,13 @@ legitimately changes an invariant, and say so in REPORT.md)
   intro, the other eight items and the closing line are byte-identical across
   the change. All eleven pages agree; certify.py reports no invariant
   mismatch.
+  CHANGED AGAIN in the Claims & Tone run (6B, Oct 18 2026), OWNER-APPROVED
+  (run brief item 3): f9dfcec684d7a9dd -> 5a629cf689301f84. One <li> only,
+  identically on all eleven pages: "Bodystat Body Composition — medical-grade
+  bioimpedance via the Bodystat QuadScan 4000 ..." -> "... multi-frequency
+  bioimpedance ..." ("medical-grade" and "clinical-grade" are dropped
+  sitewide; the QuadScan 4000 is a four-frequency device). Intro, the other
+  eight items and the closing line are byte-identical.
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".

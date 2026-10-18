@@ -6761,3 +6761,1083 @@ Line numbers are in the files as they now stand. Entries marked "(line at edit t
 - `tools/tracktest.js`, `tools/choosertest.js`, `tools/mobileaudit.js`: `/<slug>` → `public/<slug>.html`, `/` → `index.html`, 404 otherwise; mobileaudit discovers top-level `*.html` (not 404.html).
 - `DEPLOY.md`: layout line and "Trailing slash" section (after deploy, https://omnifit-site.pages.dev/about must stay on /about; `curl -sI` 200, not 308).
 - `pages/training-rates-san-diego.html` chooser: `data-virtual-assessment="75"` on the chooser box; the virtual result pushes the remote-assessment line from it.
+
+---
+
+# Claims & Tone run (6B, Oct 18 2026) — claims, tone and polish from the two external audits
+
+**Branch:** `claude/audit-reconciliation-canonical-x71xqa`, restarted from main `e27a814` (6A), merged back to main.
+
+## Summary
+
+| Item | What changed |
+|---|---|
+| 1 | omnifit-vs-competitors compares categories (group class studios, big-box gyms incl. premium clubs, an independent trainer, online apps and coaching, OmniFit); Iron Orr Fitness section deleted; motive claims and put-downs gone; competitor figures labelled "Typical range" and reconciled (big-box PT $50-100/session everywhere; big-box + PT $430-900/month; premium club + PT $1,400-2,700); Equifit line kept as the one factual example; header FAQPage regenerated (9 Q, verbatim). certify fails on "Iron Orr". |
+| 2 | Put-downs replaced with what OmniFit does: how-it-works (80% line removed; value sentence per brief), in-home mobile-trainer card + FAQ (X01-safe), weight-loss class line, strength "random workouts" and CrossFit lines, Fairbanks/Santaluz club lines (The Santaluz Club no longer named), over-50 "selling something", desk-worker "make pain worse". |
+| 3 | body-composition: dosing sentence deleted, H3 "Data You Can Share With Your Doctor" (owner-approved), Rates Bodystat disclaimer added under the device description, "specialist and," typo; "clinical-grade"/"medical-grade" dropped sitewide (Rates paragraph "a measured baseline session", footer "Measured assessments", device copy "multi-frequency bioimpedance", 9-point block OWNER-APPROVED hash change, body-composition meta); pain fix/resolve language (Carlsbad, Fairbanks H3 "Corrective Work First" owner-approved, Carmel Valley, desk-worker bridge, corrective "pain management"); GLP-1 rep-range prescription replaced (phase card, intro, FAQ + mirror, schema). |
+| 4 | Cut: Carmel Valley "4–6 sessions" (+ mirror), HIIT EPOC hours, weight-loss drop-off, strength "3–5% per decade" (no named source in the repo), private "small number of trainers"; FitMetrics "estimates calories and macros ... review and adjust" (3 places). |
+| 5 | "Private Coaching in Santaluz" / "Private Coaching for Fairbanks Ranch" (owner-approved; K05 not tripped, ownership PASSED). certify fails on "Elite Training". |
+| 6 | Rancho Bernardo (override, named lines): studio "minutes away in neighboring 4S Ranch", golf / Lake Hodges / Bernardo Mountain / cycling copy, FAQ question + answer + mirror, strength card link → /personal-training-services (where the other town cards point), surf icon → golf; weight-loss parks removed; Fairbanks "a short drive inland via the 56" (Del Dios kept on Rancho Santa Fe). |
+| 7 | "Correct usually takes 4–8 weeks and Build 3–6 months; programming runs in 4-week blocks." on the Method page (flow + FAQ + mirror) and the comparison page; comparison phases re-labelled, "quarterly reassessments" → reviews every 4 weeks / reassessment at least every 12; strength "4-week training blocks". |
+| 8 | Partners: referral partnership wording, "with your written permission", training-scope wording (body + FAQ + mirror). |
+| 9 | Case studies (owner-approved): "Back pain no longer limited training"; Ken "Rebuilt Posture After Decades at a Desk" (heading + JSON-LD); stats "4.98 / 190+ Reviews", "90+ Professionals Served"; Vincent "8 percentage points of body fat", age removed from his label, heading, metric, story, summary and JSON-LD. |
+| 10 | Rates ladder → "Book Your Consultation" + sublines; Tune-Up "Graduates: ask your coach to switch." (no link); couples ×6 "Book Your Consultation"; contact availability sentence; footer CTA; 4S Ranch form title + note (override); Fit Check fallback link + `<noscript>`. tracktest follows the new Foundation label. |
+| 11 | Privacy policy: CCPA/CPRA section, intake health information, Truemed, 7-year retention. **Needs a professional (legal) review** before it is relied on. |
+| 12 | US spelling sweep (frozen case-studies untouched); Rates duplicate pause box, studio membership line, Klarna/Affirm line, Reset pause weeks (Terms §6); in-home "$900 to $2,600+"; "Months 5–6+"; one credential line in 15 trust bars; GLP-1 meta range agrees with the body (owner-approved). |
+| 13 | a: pricing FAQ invariant (12 + 12, owner-approved); b: Rancho Bernardo CTA; c: contact meta (owner-approved); d: in-home H2 "In-Home Training Across Our In-Home Service Area", private H3 "In-Home Training: North County San Diego"; e: "Every program begins" (Method, How We Measure, over-50 + mirror; CANON pillar updated); f: Alo's sessions and the ★★★★★ icons kept. |
+
+## Invariant hashes
+
+| Invariant | Before | After | Approval |
+|---|---|---|---|
+| page pricing | a6c7e65dddff4795 | **ff5360d2b6b5029b** | OWNER-APPROVED (13a, 12): new assessment sentence, "$2,600+", "enrollment" |
+| header pricing | 7af0d0049b0b7aba | **22744ada78eb0707** | same, on the 12 header mirrors |
+| 9-point | f9dfcec684d7a9dd | **5a629cf689301f84** | OWNER-APPROVED (3): one `<li>`, "medical-grade" → "multi-frequency", all 11 pages |
+| credentials | f551f6751a2c7fd7 | f551f6751a2c7fd7 | unchanged |
+| archetypes | 6b1b0f4efbd4a72c | 6b1b0f4efbd4a72c | unchanged |
+
+All recorded in CANON INVARIANTS with old/new values and the approval.
+
+## Checker changes
+
+- `tools/certify.py` RETIRED_LAUNCH_COPY: "Iron Orr", "Elite Training" (self-tested both ways every run; negative-tested on the real pages: a planted "Iron Orr Fitness" on the comparison page and the old Santaluz H2 each reported).
+- `tools/certify.py` retired_75: the pricing FAQ shape "Performance Assessment ($150 in person, $75 virtual)" passes; a "$75 virtual guest" line still fails (both in `_selftest_retired_75`).
+- `tools/tracktest.js`: the Foundation CTA test targets `#rt-foundation .rt-ladder-cta a` with the new label.
+
+## Checks (final)
+
+| Check | Result |
+|---|---|
+| `python3 build.py` / `--check` (links, H1, JSON-LD, emoji, 404/_headers, redirects, tracking, ownership incl. X01, trailing slash) | PASSED (Squarespace image warnings unchanged) |
+| `python3 tools/ownership.py` | PASSED |
+| `python3 tools/certify.py` | PASSED: 0 · 0 · 0 · not-run 0 · amendment 0 |
+| `node tools/tracktest.js` | PASSED (56 assertions) |
+| `node tools/choosertest.js` | PASSED (30 checks, 16 combinations) |
+| `node tools/mobileaudit.js` (all 42 pages, 390/412 px, every touched page included) | PASSED, 84/84 ok |
+
+## Not changed / reported
+
+1. **H1 double spaces (item 12):** none exist. The Strength and Corrective H1s in source and in `public/` contain no double space or non-breaking space; each has a `<br>`, which an extractor that maps `<br>` to a space plus a newline reads as two spaces. No whitespace-only fix was needed, so the H1s are untouched.
+2. **Alo and Vincent measurement lines (item 9):** no measurement method for either figure is stated anywhere in the repo (case-studies names the Bodystat 1500 MDD only for Mark's card). No line added.
+3. **Vincent elsewhere:** personal-trainer-4s-ranch (gallery caption and alt "Vincent, 59 ... 8% body fat", locked) and personal-trainer-over-50-san-diego (proof card "−8% body fat", "Age 59") still carry the old figure and age; item 9 named case-studies and homepage copy only.
+4. **Credential line:** not applied on personal-trainer-4s-ranch and personal-trainer-rancho-bernardo trust bars (overrides cover named sentences only).
+5. **Comparison page title, meta and H1** still name F45, Orangetheory, 24 Hour Fitness and Equinox (locked).
+6. **Rancho Bernardo H2 "Training Across North County & Coastal San Diego"** left (heading, not named).
+7. **Privacy policy:** whether GA4 (e.g. Google signals) or Clarity count as CPRA "sharing" is not verified against the live configuration; the 45-day response and verification method are standard CCPA terms, not a documented OmniFit process; where intake health data is stored is inferred from the existing Sharing list. Professional review recommended.
+
+## Judgment calls (with the condition under which each is wrong)
+
+- "medical-grade" became "multi-frequency" (a verified device capability), not a bare deletion. Wrong if the owner wants no adjective at all. The body-composition meta description changed for this word only: wrong if "sitewide" was not meant to cover metas.
+- Rates "a measured baseline session" for "a clinical-grade diagnostic session". Wrong if the owner prefers just "a diagnostic session".
+- Fairbanks H3 "Pain Resolution, Not Pain Management" → "Corrective Work First".
+- In-home card H3 "Mobile Trainers" → "One-Off Home Sessions". Wrong if the owner wants the comparison card kept under its original label.
+- Comparison page: premium clubs merged into Big-Box Gyms; no price for the independent-trainer category (no sourced figure); Equinox kept only inside the Equifit line; Travel Protocol name removed from price-bearing cells (certify forbids a dollar figure in the name's sentence).
+- Contact: "One rule keeps the line fair:" → "One request:" alongside the named sentence.
+- Rates: kept the pause card that carries the Travel Protocol sentence; the membership FAQ also says "every studio program"; Reset pause line quotes Terms §6 ("Up to six pause weeks per 12 months, with two weeks' notice, credited against your next cycle").
+- Vincent: "Years Old 59" metric became "50+ / Age Group", and the story and summary lost the age too. Wrong if the owner meant the subtitle label only.
+- Rancho Bernardo: only the card link moved to /personal-training-services; the FAQ and hub links still point to /strength-training-1.
+- GLP-1 H3 "Moderate to heavy load, 6 to 10 reps" → "Progressive load, matched to you".
+- "canceled" (US) replaces "cancelled" across pages and mirrors.
+
+## Every change, file:line, before → after
+
+Line numbers are as the files now stand. "(line at edit time ...)" marks text that was later changed again (e.g. by the spelling sweep) or deleted. Very long blocks (the comparison page sections) are cut at 1,500 characters; the full text is in this run's commits.
+
+### 1. Comparison page
+
+- `pages/omnifit-vs-competitors.html:746` (line at edit time; text later changed again or deleted) — Iron Orr Fitness section deleted entirely  
+  before: «<!-- OMNIFIT VS IRON ORR -->⏎ <section style="background: var(--navy-mid);">⏎   <div class="section-inner">⏎     <h2>OmniFit vs <em>Iron Orr Fitness</em></h2>⏎     <p style="color: var(--white-70); margin-bottom: 32px;">Direct Competitor in San Diego</p>⏎     ⏎     <div class="comparison-grid">⏎       <div class="comp-card">⏎         <h3>Iron Orr Model</h3>⏎         <div class="comp-row">⏎           <div class="comp-label">Focus</div>⏎           <div class="comp-value">Data-driven training, medical integration, performance-oriented</div>⏎         </div>⏎         <div class="comp-row">⏎           <div class="comp-label">Approach</div>⏎           <div class="comp-value">Comprehensive assessments, technology-heavy tracking, science-forward positioning</div>⏎         </div>⏎         <div class="comp-row">⏎           <div class="comp-label">Clientele</div>⏎           <div class="comp-value">Athletes, performance-focused individuals, medical referrals</div>⏎         </div>⏎         <div class="comp-row">⏎           <div class="comp-label">Strength</div>⏎           <div class="comp-value">Strong reputation for sophisticated programming and medical partnerships</div>⏎         </div>⏎       </div>⏎ ⏎       <div class="comp-card">⏎         <h3>OmniFit Model</h3>⏎         <div class="comp-row">⏎           <div class="comp-label">Focus</div>⏎           <div class="comp-value">Executive lifestyle integration, joint-friendly transformation, behavior change</div>⏎         </div>⏎         <d»  
+  after: «(deleted)»
+- `pages/omnifit-vs-competitors.html:437` — hero sub, In Short and Bottom Line by category, no blanket negatives  
+  before: «<p class="hero-sub">Most fitness options are built for access. OmniFit is built for outcomes. Here's exactly where we fit (and don't) in the San Diego landscape.</p>»  
+  after: «<p class="hero-sub">Gyms, group classes, independent trainers and apps each solve a different problem. OmniFit is built for coached, measured outcomes. Here's where we fit (and don't) in the San Diego landscape.</p>»
+- `pages/omnifit-vs-competitors.html:483` — hero sub, In Short and Bottom Line by category, no blanket negatives  
+  before: «<strong>Who it's for:</strong> people weighing F45, Orangetheory, big-box gyms or Equinox, especially if classes or memberships haven't produced lasting change.»  
+  after: «<strong>Who it's for:</strong> people weighing a gym membership, group classes, an independent trainer or a training app, especially if classes or memberships haven't produced lasting change.»
+- `pages/omnifit-vs-competitors.html:1056` — hero sub, In Short and Bottom Line by category, no blanket negatives  
+  before: «<p style="max-width: 740px; margin: 0 auto;">OmniFit is not better than F45, Orangetheory, or Equinox.</p>»  
+  after: «<p style="max-width: 740px; margin: 0 auto;">OmniFit is not better than a gym, a class studio, an independent trainer or an app.</p>»
+- `pages/omnifit-vs-competitors.html:1057` — hero sub, In Short and Bottom Line by category, no blanket negatives  
+  before: «We're <em>different</em>—and only better for a specific person:»  
+  after: «We're <em>different</em>, and the better fit for a specific person:»
+- `pages/omnifit-vs-competitors.html:1058` — hero sub, In Short and Bottom Line by category, no blanket negatives  
+  before: «those other models will serve you better—and there's no shame in that.»  
+  after: «those other models will serve you better, and that's a good choice.»
+- `pages/omnifit-vs-competitors.html:1059` — hero sub, In Short and Bottom Line by category, no blanket negatives  
+  before: «The worst decision is choosing the wrong model for your actual needs and staying stuck for another year.»  
+  after: «The best decision is the model that fits your actual needs right now.»
+- `pages/headers/omnifit-vs-competitors-header.html:47` (line at edit time; text later changed again or deleted) — header FAQPage mirror regenerated from the page FAQ (verbatim)  
+  before: «"mainEntity": [⏎         {⏎           "@type": "Question",⏎           "name": "Is OmniFit worth the price compared to a gym membership?",⏎           "acceptedAnswer": {⏎             "@type": "Answer",⏎             "text": "That depends on what you're buying. If you're self-motivated, injury-free, and know how to program for yourself, a gym membership gives you equipment access for a low monthly fee. If you've had gym memberships for years without meaningful change, you're not paying for access—you need structure, expertise, and accountability. OmniFit is built around adherence and weekly adjustments rather than random variety, and progress is measured against your own baseline rather than a promised timeline. The real cost is the opportunity cost of another year of paying for a gym you don't use effectively."⏎           }⏎         },⏎         {⏎           "@type": "Question",⏎           "name": "Can't I just hire a trainer at 24 Hour Fitness for less?",⏎           "acceptedAnswer": {⏎             "@type": "Answer",⏎             "text": "You can, but here's what you're trading: Big box PT: $50-80/session, high trainer turnover, no accountability between sessions, generic programming, no travel support OmniFit: Studio Performance at $1,250 per 4 weeks for two sessions a week, with the assessment and reassessments included, same coach throughout, weekly check-ins, app-based tracking, virtual sessions for travel, proven methodology The question isn't cost per session—it's cost pe»  
+  after: «"mainEntity": [⏎         {⏎           "@type": "Question",⏎           "name": "Is OmniFit worth the price compared to a gym membership?",⏎           "acceptedAnswer": {⏎             "@type": "Answer",⏎             "text": "That depends on what you're buying. If you're self-motivated, injury-free, and know how to program for yourself, a gym membership gives you equipment access for a low monthly fee. If you want structure, expertise, and accountability, that is what OmniFit's price covers. OmniFit is built around adherence and adjustments every 4 weeks rather than random variety, and progress is measured against your own baseline rather than a promised timeline. Price alone doesn't measure value; judge a program by adherence, measurable progress and how well results are sustained."⏎           }⏎         },⏎         {⏎           "@type": "Question",⏎           "name": "Can't I just hire a trainer at a big-box gym for less?",⏎           "acceptedAnswer": {⏎             "@type": "Answer",⏎             "text": "You can, and for some people that's the right choice. Here's how the two compare: Big-box PT: typically $50-100 per session; the approach, and any support between sessions, depends on the trainer OmniFit: Studio Performance at $1,250 per 4 weeks for two sessions a week, with the assessment and reassessments included, same coach throughout, check-ins at your Accountability Dial setting, app-based tracking, and the Travel Protocol The useful comparison is cost per outcome, no»
+- `pages/omnifit-vs-competitors.html:582` — no price beside the Travel Protocol name (certify travel_protocol_usage)  
+  before: «includes app-based tracking, nutrition coaching, and the Travel Protocol</div>»  
+  after: «includes app-based tracking, nutrition coaching, and travel-week support</div>»
+- `pages/omnifit-vs-competitors.html:855` — no price beside the Travel Protocol name (certify travel_protocol_usage)  
+  before: «(individual programming, progress reviews every 4 weeks, the Travel Protocol)»  
+  after: «(individual programming, progress reviews every 4 weeks, travel-week support)»
+- `pages/omnifit-vs-competitors.html:923` — no price beside the Travel Protocol name (certify travel_protocol_usage)  
+  before: «app-based tracking, and the Travel Protocol</p>»  
+  after: «app-based tracking, and travel-week support</p>»
+- `pages/headers/omnifit-vs-competitors-header.html:61` — no price beside the Travel Protocol name (mirror)  
+  before: «app-based tracking, and the Travel Protocol The useful»  
+  after: «app-based tracking, and travel-week support The useful»
+
+### 2. Other put-downs
+
+- `pages/how-it-works-pricing.html:352` — put-downs  
+  before: «<tr><td>How progress is judged</td><td><span class="chk">&#10003; Measured against your own baseline</span></td><td><span class="xm">80% of members quit by month 3</span></td></tr>»  
+  after: «<tr><td>How progress is judged</td><td><span class="chk">&#10003; Measured against your own baseline</span></td><td><span class="xm">Attendance, if anything</span></td></tr>»
+- `pages/how-it-works-pricing.html:356` — put-downs  
+  before: «The real cost comparison isn't the price per cycle. It's cost per result. A low-cost gym membership that produces no change costs infinitely more per pound lost than a structured coaching program that delivers measurable transformation.»  
+  after: «The real cost comparison isn't the price per cycle. Price alone doesn't measure value; judge a program by adherence, measurable progress and how well results are sustained.»
+- `pages/in-home-personal-trainer-san-diego.html:281` — put-downs (X01 respected)  
+  before: «<h3>Mobile Trainers</h3>⏎         <p>Show up with a bag of bands. No assessment, no periodization, no corrective work. They deliver a one-off workout, not a structured program that progresses.</p>»  
+  after: «<h3>One-Off Home Sessions</h3>⏎         <p>A single session can be a good workout, but on its own it isn't a program: OmniFit measures first, plans the progression in 4-week blocks and puts corrective work in every warm-up.</p>»
+- `pages/in-home-personal-trainer-san-diego.html:773` — put-downs  
+  before: «Mobile trainers typically bring a bag of bands and deliver a generic one-off workout. OmniFit Performance delivers a full, structured personal training program.»  
+  after: «OmniFit Performance delivers a full, structured personal training program at home, not a one-off workout.»
+- `pages/headers/in-home-personal-trainer-san-diego-header.html:73` — put-downs (mirror)  
+  before: «Mobile trainers typically bring a bag of bands and deliver a generic one-off workout. OmniFit Performance delivers a full, structured personal training program.»  
+  after: «OmniFit Performance delivers a full, structured personal training program at home, not a one-off workout.»
+- `pages/weight-loss.html:452` — put-downs  
+  before: «Those are group classes with generic programming designed for fast, unsustainable results. OmniFit is private 1-on-1 coaching»  
+  after: «Those are group classes, and they suit people who want a class format. OmniFit is private 1-on-1 coaching»
+- `pages/headers/weight-loss-header.html:64` — put-downs (mirror)  
+  before: «Those are group classes with generic programming designed for fast, unsustainable results. OmniFit is private 1-on-1 coaching»  
+  after: «Those are group classes, and they suit people who want a class format. OmniFit is private 1-on-1 coaching»
+- `pages/strength-training-1.html:206, pages/strength-training-1.html:374` — put-downs  
+  before: «Most trainers design random workouts. OmniFit uses periodized programming»  
+  after: «OmniFit uses periodized programming»
+- `pages/headers/strength-training-1-header.html:53` — put-downs (mirror)  
+  before: «Most trainers design random workouts. OmniFit uses periodized programming»  
+  after: «OmniFit uses periodized programming»
+- `pages/strength-training-1.html:390` — put-downs  
+  before: «No. CrossFit prioritizes high-intensity, competition-driven workouts that can be hard on joints. Bodybuilding focuses on aesthetics and hypertrophy. OmniFit strength training»  
+  after: «No. OmniFit strength training»
+- `pages/headers/strength-training-1-header.html:85` — put-downs (mirror)  
+  before: «No. CrossFit prioritizes high-intensity, competition-driven workouts that can be hard on joints. Bodybuilding focuses on aesthetics and hypertrophy. OmniFit strength training»  
+  after: «No. OmniFit strength training»
+- `pages/strength-training-1.html:311` — put-downs  
+  before: «OmniFit is not a bodybuilding gym, a CrossFit box, or a bootcamp — it is structured, coached, corrective-first strength training»  
+  after: «OmniFit is structured, coached, corrective-first strength training»
+- `pages/personal-trainer-fairbanks-ranch.html:380` — put-downs  
+  before: «Country club trainers typically work with many members in a shared facility using general programming. OmniFit provides fully individualized, assessment-driven training.»  
+  after: «OmniFit provides fully individualized, assessment-driven training in your own home.»
+- `pages/headers/personal-trainer-fairbanks-ranch-header.html:103` — put-downs (mirror)  
+  before: «Country club trainers typically work with many members in a shared facility using general programming. OmniFit provides fully individualized, assessment-driven training.»  
+  after: «OmniFit provides fully individualized, assessment-driven training in your own home.»
+- `pages/personal-trainer-santaluz.html:280` — put-downs (never name the club)  
+  before: «Club trainers typically serve many members with general programming in a shared space. OmniFit provides fully individualized, assessment-driven training in the privacy of your own home.»  
+  after: «OmniFit provides fully individualized, assessment-driven training in the privacy of your own home.»
+- `pages/headers/personal-trainer-santaluz-header.html:103` — put-downs (never name the club) (mirror)  
+  before: «Club trainers typically serve many members with general programming in a shared space. OmniFit provides fully individualized, assessment-driven training in the privacy of your own home.»  
+  after: «OmniFit provides fully individualized, assessment-driven training in the privacy of your own home.»
+- `pages/personal-trainer-santaluz.html:163` — never name The Santaluz Club  
+  before: «Many play golf at The Santaluz Club, hike»  
+  after: «Many play golf, hike»
+- `pages/personal-trainer-santaluz.html:192` — never name The Santaluz Club  
+  before: «Many Santaluz clients play at The Santaluz Club.»  
+  after: «Many Santaluz clients are golfers.»
+- `pages/personal-trainer-over-50-san-diego.html:290` — put-downs  
+  before: «The honest caveat is that it takes longer than it would have at 30, and anyone telling you otherwise is selling something.»  
+  after: «The honest caveat is that it takes longer than it would have at 30.»
+- `pages/headers/personal-trainer-over-50-san-diego-header.html:92` — put-downs (mirror)  
+  before: «The honest caveat is that it takes longer than it would have at 30, and anyone telling you otherwise is selling something.»  
+  after: «The honest caveat is that it takes longer than it would have at 30.»
+- `pages/desk-worker-posture-pain.html:533` — put-downs  
+  before: «The wrong exercise absolutely can. Generic programs that load dysfunctional movement patterns make pain worse. OmniFit's corrective-first approach does the opposite — every exercise»  
+  after: «The wrong exercise can aggravate symptoms, which is why OmniFit works corrective-first: every exercise»
+- `pages/headers/desk-worker-posture-pain-header.html:127` — put-downs (mirror)  
+  before: «The wrong exercise absolutely can. Generic programs that load dysfunctional movement patterns make pain worse. OmniFit's corrective-first approach does the opposite — every exercise»  
+  after: «The wrong exercise can aggravate symptoms, which is why OmniFit works corrective-first: every exercise»
+
+### 3. Scope / clinical language
+
+- `pages/in-home-personal-trainer-san-diego.html:610` — drop medical-grade  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-4s-ranch.html:1056` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-carlsbad.html:259` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-carmel-valley.html:329` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-del-mar.html:365` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-encinitas.html:255` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-fairbanks-ranch.html:329` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-la-jolla.html:384` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-rancho-bernardo.html:333` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-rancho-santa-fe.html:350` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-santaluz.html:257` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/personal-trainer-solana-beach.html:329` — 9-point block: drop medical-grade (OWNER-APPROVED hash change)  
+  before: «<li>Bodystat Body Composition — medical-grade bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»  
+  after: «<li>Bodystat Body Composition — multi-frequency bioimpedance via the Bodystat QuadScan 4000: lean mass, fat mass, hydration</li>»
+- `pages/body-composition-testing.html:194` — drop medical-grade  
+  before: «<div class="bc-table-cell bc-table-highlight">Medical-grade multi-frequency BIA</div>»  
+  after: «<div class="bc-table-cell bc-table-highlight">Multi-frequency BIA (four frequencies)</div>»
+- `pages/body-composition-testing.html:137` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/body-composition-testing.html:323` — drop medical-grade  
+  before: «a medical-grade bioelectrical impedance»  
+  after: «a multi-frequency bioelectrical impedance»
+- `pages/body-composition-testing.html:125` — drop medical-grade  
+  before: «Medical-grade bioimpedance»  
+  after: «Multi-frequency bioimpedance»
+- `pages/headers/body-composition-testing-header.html:61` — drop medical-grade  
+  before: «a medical-grade bioelectrical impedance»  
+  after: «a multi-frequency bioelectrical impedance»
+- `pages/headers/body-composition-testing-header.html:17` — drop medical-grade  
+  before: «Medical-grade Bodystat QuadScan 4000»  
+  after: «Multi-frequency Bodystat QuadScan 4000»
+- `pages/headers/personal-trainer-carlsbad-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/personal-trainer-carmel-valley-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/personal-trainer-del-mar-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/personal-trainer-encinitas-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/personal-trainer-fairbanks-ranch-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/personal-trainer-la-jolla-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/personal-trainer-santaluz-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/personal-trainer-solana-beach-header.html:79` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/headers/private-personal-trainer-san-diego-header.html:70` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-carlsbad.html:279` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-carmel-valley.html:365` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-del-mar.html:401` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-encinitas.html:275` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-fairbanks-ranch.html:365` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-la-jolla.html:420` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-rancho-bernardo.html:369` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-santaluz.html:277` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/personal-trainer-solana-beach.html:365` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/private-personal-trainer-san-diego.html:585` — drop medical-grade  
+  before: «a medical-grade bioimpedance»  
+  after: «a multi-frequency bioimpedance»
+- `pages/training-rates-san-diego.html:724` — Rates assessment paragraph: drop clinical-grade (owner reverses the Sept 12 byte-identical lock)  
+  before: «The OmniFit Performance Assessment is a clinical-grade diagnostic session using the Bodystat QuadScan 4000»  
+  after: «The OmniFit Performance Assessment is a measured baseline session using the Bodystat QuadScan 4000»
+- `pages/body-composition-testing.html:268` — scope: prescriber card (H3 OWNER-APPROVED), dosing sentence deleted  
+  before: «<h3>Data Your Prescriber Can Use</h3>⏎         <p>Objective fat-versus-lean numbers give your physician real information for dosing and duration decisions — not just a scale trend.</p>»  
+  after: «<h3>Data You Can Share With Your Doctor</h3>⏎         <p>Fat-versus-lean trend data you can bring to your physician if you choose, alongside the scale trend.</p>»
+- `pages/body-composition-testing.html:137` — scope: prescriber card (H3 OWNER-APPROVED), dosing sentence deleted  
+  before: «Results are interpreted by a NASM-certified corrective exercise specialist and, the fee is credited»  
+  after: «Results are interpreted by a NASM-certified corrective exercise specialist, and the fee is credited»
+- `pages/body-composition-testing.html:137` — Rates Bodystat not-a-medical-provider disclaimer under the device description  
+  before: «Results are interpreted by a NASM-certified corrective exercise specialist, and the fee is credited toward your first program, Reset cycle or 5-pack. Follow-up rescans every 4–8 weeks track whether weight change is coming from fat or muscle — including for clients on GLP-1 medications.</p>»  
+  after: «Results are interpreted by a NASM-certified corrective exercise specialist, and the fee is credited toward your first program, Reset cycle or 5-pack. Follow-up rescans every 4–8 weeks track whether weight change is coming from fat or muscle — including for clients on GLP-1 medications.</p>⏎       <p style="font-size:13px; margin-top:12px;">The Bodystat QuadScan 4000 holds CE certification as a Class IIa medical device under MDD 93/42/EEC and has FDA clearance. OmniFit Performance uses it to measure body composition. It is not used to diagnose, treat or assess any medical condition, and OmniFit is not a medical provider.</p>»
+- `pages/personal-trainer-carlsbad.html:166` — pain language  
+  before: «We don't just program around pain. We identify the dysfunction causing it, resolve it systematically, and then build real strength on a stable foundation.»  
+  after: «We don't just program around pain. We find the movement patterns behind it, train them systematically within the 3/10 pain ceiling, and then build real strength on a stable foundation.»
+- `pages/personal-trainer-fairbanks-ranch.html:266` — pain language (H3 OWNER-APPROVED)  
+  before: «<h3>Pain Resolution, Not Pain Management</h3>⏎         <p>We don't work around your shoulder pain. We fix the dysfunction causing it. Corrective exercise»  
+  after: «<h3>Corrective Work First</h3>⏎         <p>We don't just work around your shoulder pain. We train the movement patterns around it, within the 3/10 pain ceiling, and refer out when something needs a clinician. Corrective exercise»
+- `pages/personal-trainer-carmel-valley.html:229` — pain language  
+  before: «We fix the root cause, then build strength on a stable foundation.»  
+  after: «We train the movement patterns underneath first, then build strength on a stable foundation.»
+- `pages/desk-worker-posture-pain.html:372` — pain language  
+  before: «<p>Acute pain → pain-free at rest</p>»  
+  after: «<p>Treats acute pain and clears you for exercise</p>»
+- `pages/desk-worker-posture-pain.html:377` — pain language  
+  before: «<p>Pain-free at rest → strong under load</p>»  
+  after: «<p>Cleared for exercise → strong under load</p>»
+- `pages/desk-worker-posture-pain.html:521` — pain language  
+  before: «taking you from "pain-free at rest" to "strong and resilient under load."»  
+  after: «taking you from "cleared for exercise" to "strong and resilient under load."»
+- `pages/headers/desk-worker-posture-pain-header.html:103` — pain language  
+  before: «taking you from \"pain-free at rest\" to \"strong and resilient under load.\"»  
+  after: «taking you from \"cleared for exercise\" to \"strong and resilient under load.\"»
+- `pages/corrective-exercise-post-rehab.html:732` — pain language  
+  before: «with additional emphasis on pain management and movement confidence.»  
+  after: «with additional emphasis on training within the 3/10 pain ceiling and movement confidence.»
+- `pages/corrective-exercise-post-rehab.html:829` — pain language  
+  before: «<p>Strict pain management in every session. If it hurts»  
+  after: «<p>A strict 3/10 pain ceiling in every session. If it hurts»
+- `pages/glp-1-personal-training-san-diego.html:159` — GLP-1 rep-range prescription  
+  before: «moderate-to-heavy loading in the 6 to 10 rep range,»  
+  after: «progressively challenging resistance training, adjusting load, repetition ranges, volume and recovery to your current strength and tolerance,»
+- `pages/headers/glp-1-personal-training-san-diego-header.html:89` — GLP-1 rep-range prescription (schema)  
+  before: «moderate-to-heavy loading in a 6 to 10 rep range,»  
+  after: «progressively challenging resistance training, adjusting load, repetition ranges, volume and recovery to your current strength and tolerance,»
+- `pages/glp-1-personal-training-san-diego.html:206` — GLP-1 rep-range prescription  
+  before: «<h3>Moderate to heavy load, 6 to 10 reps</h3>⏎           <p>This is the range that best preserves lean tissue under a deficit. Light weights for high reps feel appropriate when you are eating less and have less energy, and they are the wrong choice. The load has to be meaningful, which means the programme has to be built around what you can actually recover from.</p>»  
+  after: «<h3>Progressive load, matched to you</h3>⏎           <p>Progressively challenging resistance training, adjusting load, repetition ranges, volume and recovery to your current strength and tolerance. Light weights feel appropriate when you are eating less and have less energy, but the load has to be meaningful, which means the program has to be built around what you can actually recover from.</p>»
+- `pages/glp-1-personal-training-san-diego.html:302` — GLP-1 rep-range prescription (FAQ + mirror)  
+  before: «Resistance training first, in a moderate-to-heavy load range of roughly 6 to 10 reps,»  
+  after: «Resistance training first, progressively challenging and adjusted (load, repetition ranges, volume and recovery) to your current strength and tolerance,»
+- `pages/headers/glp-1-personal-training-san-diego-header.html:138` — GLP-1 rep-range prescription (FAQ + mirror)  
+  before: «Resistance training first, in a moderate-to-heavy load range of roughly 6 to 10 reps,»  
+  after: «Resistance training first, progressively challenging and adjusted (load, repetition ranges, volume and recovery) to your current strength and tolerance,»
+
+### 4. Unsupported claims
+
+- `pages/personal-trainer-carmel-valley.html:375` (line at edit time; text later changed again or deleted) — unsupported claim cut  
+  before: «Most clients see measurable improvement within 4–6 sessions.»  
+  after: «(deleted)»
+- `pages/headers/personal-trainer-carmel-valley-header.html:95` (line at edit time; text later changed again or deleted) — unsupported claim cut (mirror)  
+  before: «Most clients see measurable improvement within 4–6 sessions.»  
+  after: «(deleted)»
+- `pages/hiit-personal-trainer-san-diego.html:571` — unsupported claim cut  
+  before: «<div class="hiit-benefit-title">EPOC Afterburn</div>⏎           <div class="hiit-benefit-desc">Elevated metabolism for 24–36 hours after each session — burn more while you recover.</div>»  
+  after: «<div class="hiit-benefit-title">Recovery Built In</div>⏎           <div class="hiit-benefit-desc">Hard intervals are programmed with the recovery to match, so you come back stronger, not depleted.</div>»
+- `pages/weight-loss.html:268` — unsupported claim cut  
+  before: «Without weekly check-ins and structured coaching, most professionals drop off within 3–4 weeks.»  
+  after: «Check-ins at your Accountability Dial setting and structured coaching keep training consistent between sessions.»
+- `pages/strength-training-1.html:220` — unsupported claim cut (no named source in the repo)  
+  before: «After 30, adults lose 3–5% of lean muscle mass per decade without resistance training. This leads to»  
+  after: «Without resistance training, adults gradually lose lean muscle with age. This contributes to»
+- `pages/strength-training-1.html:220` — unsupported claim cut (no named source in the repo)  
+  before: «Structured strength training reverses these trends.»  
+  after: «Structured strength training is how OmniFit counters these trends.»
+- `pages/private-personal-trainer-san-diego.html:455` — unsupported claim cut  
+  before: «<p>NASM Elite Trainer. One of a small number of trainers in San Diego who hold concurrent <a href="/corrective-exercise-post-rehab" class="of-link">corrective exercise</a>, performance enhancement, behavior change, and nutrition credentials.</p>»  
+  after: «<p>NASM Elite Trainer, holding concurrent <a href="/corrective-exercise-post-rehab" class="of-link">corrective exercise</a>, performance enhancement, behavior change, and nutrition credentials.</p>»
+- `pages/nutrition-coaching-san-diego.html:163` — FitMetrics wording  
+  before: «Photograph a plate in the OmniFit app and FitMetrics AI returns a full macro breakdown of it.»  
+  after: «Photograph a plate in the OmniFit app and FitMetrics AI estimates calories and macros from the photo, which you can review and adjust.»
+- `pages/nutrition-coaching-san-diego.html:220` — FitMetrics wording  
+  before: «You photograph a plate in the OmniFit app and FitMetrics AI returns a full macro breakdown of it.»  
+  after: «You photograph a plate in the OmniFit app and FitMetrics AI estimates calories and macros from the photo, which you can review and adjust.»
+- `pages/headers/nutrition-coaching-san-diego-header.html:107` — FitMetrics wording (mirror)  
+  before: «You photograph a plate in the OmniFit app and FitMetrics AI returns a full macro breakdown of it.»  
+  after: «You photograph a plate in the OmniFit app and FitMetrics AI estimates calories and macros from the photo, which you can review and adjust.»
+
+### 5. 'Elite Training' headings
+
+- `pages/personal-trainer-santaluz.html:328` — heading (OWNER-APPROVED)  
+  before: «<h2>Elite Training in <em>Santaluz</em></h2>»  
+  after: «<h2>Private Coaching in <em>Santaluz</em></h2>»
+- `pages/personal-trainer-fairbanks-ranch.html:435` — heading (OWNER-APPROVED)  
+  before: «<h2>Elite Training for <em>Fairbanks Ranch</em></h2>»  
+  after: «<h2>Private Coaching for <em>Fairbanks Ranch</em></h2>»
+
+### 6. Local accuracy
+
+- `pages/personal-trainer-fairbanks-ranch.html:157` — local accuracy  
+  before: «a members-only facility in 4S Ranch, about 15 minutes via Del Dios Highway.»  
+  after: «a members-only facility in 4S Ranch, a short drive inland via the 56.»
+- `pages/personal-trainer-rancho-bernardo.html:161` — Rancho Bernardo local accuracy (owner override, these lines)  
+  before: «lab in 4S Ranch, an easy drive inland via Lomas Santa Fe. Professional-grade»  
+  after: «lab minutes away in neighboring 4S Ranch. Professional-grade»
+- `pages/personal-trainer-rancho-bernardo.html:197` — Rancho Bernardo local accuracy (owner override, these lines)  
+  before: «especially for active adults who surf, cycle, or run.</p>»  
+  after: «especially for active adults who golf, hike, or cycle.</p>»
+- `pages/personal-trainer-rancho-bernardo.html:203` — Rancho Bernardo local accuracy (owner override, these lines)  
+  before: «<a class="rb-card-link" href="/strength-training-1">See Strength Programs»  
+  after: «<a class="rb-card-link" href="/personal-training-services">See Strength Programs»
+- `pages/personal-trainer-rancho-bernardo.html:232` — Rancho Bernardo local accuracy (owner override, these lines)  
+  before: «Rancho Bernardo residents tend to be active: surfing, cycling, running on the bluffs. That's a strength, but it also means accumulated wear patterns that go unaddressed. Tight hip flexors from cycling. Shoulder impingement from paddling. Knee strain from running on uneven terrain. Our corrective-first approach identifies and resolves these patterns before layering strength work on top.»  
+  after: «Rancho Bernardo residents tend to be active: golf, hiking at Lake Hodges and Bernardo Mountain, cycling. That's a strength, but it also means accumulated wear patterns that go unaddressed. Tight hip flexors from cycling. Limited thoracic rotation from golf. Knee strain from downhill trail miles. Our corrective-first approach finds these patterns and trains them before layering strength work on top.»
+- `pages/personal-trainer-rancho-bernardo.html:257` — Rancho Bernardo local accuracy (owner override, these lines)  
+  before: «<span class="rb-card-icon">🏄</span>»  
+  after: «<span class="rb-card-icon">⛳</span>»
+- `pages/personal-trainer-rancho-bernardo.html:259` — Rancho Bernardo local accuracy (owner override, these lines)  
+  before: «Surfing, cycling, running: Rancho Bernardo residents are already moving.»  
+  after: «Golf, hiking, cycling: Rancho Bernardo residents are already moving.»
+- `pages/personal-trainer-rancho-bernardo.html:441` — Rancho Bernardo local accuracy (owner override, these lines)  
+  before: «Book a 45-minute consultation. We'll discuss your goals, movement history, and active lifestyle, and build a program that complements everything you already love doing.»  
+  after: «Book a 45-minute consultation. We'll discuss your goals, movement history, and active lifestyle; if it's a fit, the Performance Assessment measures your starting point and your program is built to complement everything you already love doing.»
+- `pages/personal-trainer-rancho-bernardo.html:364` — Rancho Bernardo local accuracy (owner override, FAQ)  
+  before: «in 4S Ranch, San Diego, about 20 minutes inland via Lomas Santa Fe and the 56.»  
+  after: «in 4S Ranch, San Diego, a few minutes from Rancho Bernardo.»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:71` — Rancho Bernardo local accuracy (owner override, FAQ) (mirror)  
+  before: «in 4S Ranch, San Diego, about 20 minutes inland via Lomas Santa Fe and the 56.»  
+  after: «in 4S Ranch, San Diego, a few minutes from Rancho Bernardo.»
+- `pages/personal-trainer-rancho-bernardo.html:378` — Rancho Bernardo local accuracy (owner override, FAQ)  
+  before: «<summary>I surf and cycle regularly. Will strength training complement that?</summary>»  
+  after: «<summary>I golf, hike and cycle regularly. Will strength training complement that?</summary>»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:92` — Rancho Bernardo local accuracy (owner override, FAQ) (mirror)  
+  before: «"name": "I surf and cycle regularly. Will strength training complement that?"»  
+  after: «"name": "I golf, hike and cycle regularly. Will strength training complement that?"»
+- `pages/personal-trainer-rancho-bernardo.html:379` — Rancho Bernardo local accuracy (owner override, FAQ)  
+  before: «Surfing and cycling create specific muscle imbalances (tight hip flexors, rounded shoulders, limited thoracic rotation) that eventually lead to pain and injury if left unaddressed.»  
+  after: «Golf, hiking and cycling create specific muscle imbalances (tight hip flexors, rounded shoulders, limited thoracic rotation) that can lead to pain and injury if left unaddressed.»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:95` — Rancho Bernardo local accuracy (owner override, FAQ) (mirror)  
+  before: «Surfing and cycling create specific muscle imbalances (tight hip flexors, rounded shoulders, limited thoracic rotation) that eventually lead to pain and injury if left unaddressed.»  
+  after: «Golf, hiking and cycling create specific muscle imbalances (tight hip flexors, rounded shoulders, limited thoracic rotation) that can lead to pain and injury if left unaddressed.»
+- `pages/weight-loss.html:414` — local accuracy  
+  before: «Private 1-on-1 sessions at the Teqneeq FHC studio or outdoors at Kate Sessions, Law Street Beach, and Crown Point.»  
+  after: «Private 1-on-1 sessions at the Teqneeq FHC studio in 4S Ranch.»
+
+### 7. Method timing
+
+- `pages/the-omnifit-method.html:225` — method timing  
+  before: «<div class="flow-time">Weeks 1–8</div>»  
+  after: «<div class="flow-time">Usually 4–8 Weeks</div>»
+- `pages/the-omnifit-method.html:231` — method timing  
+  before: «<div class="flow-time">Months 2–6</div>»  
+  after: «<div class="flow-time">Usually 3–6 Months</div>»
+- `pages/the-omnifit-method.html:214` — method timing  
+  before: «<p>Every OmniFit program follows the same four-phase framework. What changes is how it's customized for your body, your limitations, and your goals.</p>»  
+  after: «<p>Every OmniFit program follows the same four-phase framework. What changes is how it's customized for your body, your limitations, and your goals. Correct usually takes 4–8 weeks and Build 3–6 months; programming runs in 4-week blocks.</p>»
+- `pages/the-omnifit-method.html:214, pages/the-omnifit-method.html:384` — method timing (FAQ + mirror)  
+  before: «The Correct phase runs 4–8 weeks. The Build phase runs 3–6 months.»  
+  after: «Correct usually takes 4–8 weeks and Build 3–6 months; programming runs in 4-week blocks.»
+- `pages/headers/the-omnifit-method-header.html:77` — method timing (FAQ + mirror)  
+  before: «The Correct phase runs 4–8 weeks. The Build phase runs 3–6 months.»  
+  after: «Correct usually takes 4–8 weeks and Build 3–6 months; programming runs in 4-week blocks.»
+- `pages/strength-training-1.html:268` — method timing  
+  before: «<p>Structured 4–6 week training blocks with specific goals»  
+  after: «<p>Structured 4-week training blocks with specific goals»
+
+### 8. Partners
+
+- `pages/partners.html:1062` — partners scope  
+  before: «maintains formal clinical partnerships with board-certified specialists and licensed therapists to ensure»  
+  after: «maintains a referral partnership with a board-certified orthopedic physical therapist and a licensed massage therapist to ensure»
+- `pages/partners.html:1065` — partners scope  
+  before: «Each partnership is built on shared assessment insights, coordinated treatment progressions, and bi-directional referral pathways. OmniFit's NASM Corrective Exercise Specialist (CES) methodology aligns directly with clinical orthopedic screening and therapeutic bodywork, creating continuity of care that typical personal training cannot provide.»  
+  after: «Each partnership is built on referrals in both directions and, with your written permission, shared notes, so your training fits around the care your clinician provides. OmniFit's NASM Corrective Exercise Specialist (CES) methodology is designed to pick up where clinical care ends: OmniFit trains, and the clinicians treat.»
+- `pages/partners.html:1085` — partners scope (FAQ + mirror)  
+  before: «OmniFit maintains formal clinical partnerships with board-certified physical therapists in San Diego, including Dr. Damien Jackson-Ricketts, DPT, OCS, of <a href="https://stokept.com" target="_blank" rel="noopener">Stoke Physical Therapy</a>. These partnerships ensure seamless coordination between rehabilitation and corrective strength training through shared assessment protocols, progressive loading plans, and bi-directional referral pathways.»  
+  after: «OmniFit has a referral partnership with a board-certified orthopedic physical therapist in San Diego, Dr. Damien Jackson-Ricketts, DPT, OCS, of <a href="https://stokept.com" target="_blank" rel="noopener">Stoke Physical Therapy</a>. With your written permission, your training is coordinated with your rehabilitation through shared notes, progressive loading plans and referrals in both directions.»
+- `pages/partners.html:1109` — partners scope (FAQ + mirror)  
+  before: «OmniFit's clinical partnership model allows concurrent coordination between your physical therapist and your trainer. Dr. Jackson-Ricketts and the OmniFit team share assessment notes and exercise progressions to ensure»  
+  after: «OmniFit's referral partnership allows concurrent coordination between your physical therapist and your trainer. With your written permission, Dr. Jackson-Ricketts and the OmniFit team share assessment notes and exercise progressions to ensure»
+- `pages/headers/partners-header.html:56` — partners scope (FAQ + mirror)  
+  before: «OmniFit maintains formal clinical partnerships with board-certified physical therapists in San Diego, including Dr. Damien Jackson-Ricketts, DPT, OCS, of Stoke Physical Therapy . These partnerships ensure seamless coordination between rehabilitation and corrective strength training through shared assessment protocols, progressive loading plans, and bi-directional referral pathways.»  
+  after: «OmniFit has a referral partnership with a board-certified orthopedic physical therapist in San Diego, Dr. Damien Jackson-Ricketts, DPT, OCS, of Stoke Physical Therapy . With your written permission, your training is coordinated with your rehabilitation through shared notes, progressive loading plans and referrals in both directions.»
+- `pages/headers/partners-header.html:72` — partners scope (FAQ + mirror)  
+  before: «OmniFit's clinical partnership model allows concurrent coordination between your physical therapist and your trainer. Dr. Jackson-Ricketts and the OmniFit team share assessment notes and exercise progressions to ensure»  
+  after: «OmniFit's referral partnership allows concurrent coordination between your physical therapist and your trainer. With your written permission, Dr. Jackson-Ricketts and the OmniFit team share assessment notes and exercise progressions to ensure»
+
+### 9. Case studies
+
+- `pages/case-studies.html:246` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<div class="metric-label">Back Pain Resolved</div>»  
+  after: «<div class="metric-label">Back pain no longer limited training</div>»
+- `pages/case-studies.html:27, pages/case-studies.html:526` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «Fixed Decades of Desk Posture»  
+  after: «Rebuilt Posture After Decades at a Desk»
+- `pages/case-studies.html:191` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<div class="stat"><div class="stat-value">5.0</div><div class="stat-label">190+ Five-Star Reviews</div></div>»  
+  after: «<div class="stat"><div class="stat-value">4.98</div><div class="stat-label">190+ Reviews</div></div>»
+- `pages/case-studies.html:193` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<div class="stat"><div class="stat-value">50+</div><div class="stat-label">Professionals Served</div></div>»  
+  after: «<div class="stat"><div class="stat-value">90+</div><div class="stat-label">Professionals Served</div></div>»
+- `pages/case-studies.html:322` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «alt="Vincent — 59-Year-Old RN — Before and After OmniFit Training"»  
+  after: «alt="Vincent — RN — Before and After OmniFit Training"»
+- `pages/case-studies.html:326` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<h2>How a 59-Year-Old RN Dropped <em>8% Body Fat</em> and Rebuilt His Confidence</h2>»  
+  after: «<h2>How an RN Dropped <em>8 Percentage Points of Body Fat</em> and Rebuilt His Confidence</h2>»
+- `pages/case-studies.html:327` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<strong>Vincent</strong> · Registered Nurse, Age 59 · San Diego»  
+  after: «<strong>Vincent</strong> · Registered Nurse · San Diego»
+- `pages/case-studies.html:333` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<div class="metric"><div class="metric-value">-8%</div><div class="metric-label">Body Fat Dropped</div></div>»  
+  after: «<div class="metric"><div class="metric-value">-8 pts</div><div class="metric-label">Body Fat (percentage points)</div></div>»
+- `pages/case-studies.html:334` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<div class="metric"><div class="metric-value">59</div><div class="metric-label">Years Old</div></div>»  
+  after: «<div class="metric"><div class="metric-value">50+</div><div class="metric-label">Age Group</div></div>»
+- `pages/case-studies.html:339` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<p>At 59, Vincent was a registered nurse»  
+  after: «<p>Vincent was a registered nurse»
+- `pages/case-studies.html:342` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<li>Dropped 8% body fat</li>»  
+  after: «<li>Dropped 8 percentage points of body fat</li>»
+- `pages/case-studies.html:342` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «<li>Proved that 59 is not too late to transform</li>»  
+  after: «<li>Proved that 50+ is not too late to transform</li>»
+- `pages/case-studies.html:344` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «Vincent, a 59-year-old registered nurse in San Diego, dropped 8% body fat and rebuilt»  
+  after: «Vincent, a registered nurse in San Diego, dropped 8 percentage points of body fat and rebuilt»
+- `pages/case-studies.html:23` — case studies (OWNER-APPROVED frozen-record override, these items only)  
+  before: «"name": "How a 59-Year-Old RN Dropped 8% Body Fat and Rebuilt His Confidence"»  
+  after: «"name": "How an RN Dropped 8 Percentage Points of Body Fat and Rebuilt His Confidence"»
+- `pages/case-studies.html:23` — case studies (OWNER-APPROVED frozen-record override, these items only) (JSON-LD)  
+  before: «"description": "Vincent, a 59-year-old registered nurse working long hours, dropped 8% body fat and rebuilt his confidence using OmniFit's age-appropriate, joint-friendly training with structured nutrition and accountability."»  
+  after: «"description": "Vincent, a registered nurse working long hours, dropped 8 percentage points of body fat and rebuilt his confidence using OmniFit's age-appropriate, joint-friendly training with structured nutrition and accountability."»
+
+### 10. CTAs and tone
+
+- `pages/training-rates-san-diego.html:981` — Rates ladder CTAs -> Book Your Consultation + subline  
+  before: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Start With the Foundation</a></div>»  
+  after: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a><p class="rt-ladder-sub">The Foundation starts after your consultation and assessment.</p></div>»
+- `pages/training-rates-san-diego.html:1082` — Rates ladder CTAs -> Book Your Consultation + subline  
+  before: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Start The Program</a></div>»  
+  after: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a><p class="rt-ladder-sub">The Program starts after your consultation and assessment.</p></div>»
+- `pages/training-rates-san-diego.html:1144` — Rates ladder CTAs -> Book Your Consultation + subline  
+  before: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Sessions</a></div>»  
+  after: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a><p class="rt-ladder-sub">Single sessions and 5-packs are booked after your consultation.</p></div>»
+- `pages/training-rates-san-diego.html:1232` — Rates ladder CTAs -> Book Your Consultation + subline  
+  before: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Start the Executive Reset</a></div>»  
+  after: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a><p class="rt-ladder-sub">The Executive Reset starts after your consultation and virtual assessment.</p></div>»
+- `pages/training-rates-san-diego.html:146` — Rates ladder CTAs -> Book Your Consultation + subline  
+  before: «#omni-rates .rt-ladder-cta { text-align: center; max-width: 1120px; margin: 4px auto 20px; }⏎»  
+  after: «#omni-rates .rt-ladder-cta { text-align: center; max-width: 1120px; margin: 4px auto 20px; }⏎   #omni-rates .rt-ladder-sub { font-size: 13px; color: var(--white-50); max-width: 560px; margin: 10px auto 0; line-height: 1.6; }⏎»
+- `pages/training-rates-san-diego.html:1171` — Tune-Up CTA -> plain text, no Calendly link  
+  before: «<a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Stay in the Program</a>»  
+  after: «<p class="rt-feature-note"><strong style="color:var(--gold);">Graduates: ask your coach to switch.</strong></p>»
+- `pages/couples-personal-training-san-diego.html:255, pages/couples-personal-training-san-diego.html:263, pages/couples-personal-training-san-diego.html:271, pages/couples-personal-training-san-diego.html:289, pages/couples-personal-training-san-diego.html:297, pages/couples-personal-training-san-diego.html:305` — couples Get Started -> Book Your Consultation  
+  before: «rel="noopener">Get Started</a>»  
+  after: «rel="noopener">Book Your Consultation</a>»
+- `pages/contactform.html:570` — contact: availability wording  
+  before: «<strong>One rule keeps the line fair:</strong> when I reach out, reply. If I don't hear back, your spot goes to the next person and you move to the back of the line.»  
+  after: «<strong>One request:</strong> when I reach out, reply. Availability is limited; if I don't hear back within 3 days, I'll offer the slot to the next person.»
+- `pages/fit-check.html:104` — Fit Check: consultation link + noscript  
+  before: «<div><button class="btn primary" id="start">Start the fit check</button></div>⏎»  
+  after: «<div><button class="btn primary" id="start">Start the fit check</button></div>⏎     <p class="begin"><a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Or book your consultation</a></p>⏎     <noscript><p class="begin">The Fit Check needs JavaScript. You can <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">book your consultation</a> directly instead.</p></noscript>⏎»
+- `pages/personal-trainer-4s-ranch.html:548` — 4S Ranch CTA tone (owner override, these lines)  
+  before: «<h2 class="fr-form-title">Apply for Your 45-Min Consultation</h2>»  
+  after: «<h2 class="fr-form-title">Book Your Consultation</h2>»
+- `pages/personal-trainer-4s-ranch.html:962` — 4S Ranch CTA tone (owner override, these lines)  
+  before: «<div class="fr-cta-note">No commitment on the call. Decide only if it feels like the right fit.</div>»  
+  after: «<div class="fr-cta-note">No obligation to enroll. Decide only if it feels like the right fit.</div>»
+
+### 11. Privacy policy
+
+- `pages/privacy-policy.html:191` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">11</span>⏎       <h2>Contact Us</h2>»  
+  after: «<span class="pv-num">13</span>⏎       <h2>Contact Us</h2>»
+- `pages/privacy-policy.html:185` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">10</span>⏎       <h2>Updates to This Policy</h2>»  
+  after: «<span class="pv-num">12</span>⏎       <h2>Updates to This Policy</h2>»
+- `pages/privacy-policy.html:179` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">09</span>⏎       <h2>Links to Other Websites</h2>»  
+  after: «<span class="pv-num">11</span>⏎       <h2>Links to Other Websites</h2>»
+- `pages/privacy-policy.html:173` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">08</span>⏎       <h2>Data Retention</h2>»  
+  after: «<span class="pv-num">10</span>⏎       <h2>Data Retention</h2>»
+- `pages/privacy-policy.html:144` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">07</span>⏎       <h2>Your Rights</h2>»  
+  after: «<span class="pv-num">08</span>⏎       <h2>Your Rights</h2>»
+- `pages/privacy-policy.html:129` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">06</span>⏎       <h2>Sharing Information</h2>»  
+  after: «<span class="pv-num">07</span>⏎       <h2>Sharing Information</h2>»
+- `pages/privacy-policy.html:123` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">05</span>⏎       <h2>Cookies and Analytics</h2>»  
+  after: «<span class="pv-num">06</span>⏎       <h2>Cookies and Analytics</h2>»
+- `pages/privacy-policy.html:117` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">04</span>⏎       <h2>Data Storage and Security</h2>»  
+  after: «<span class="pv-num">05</span>⏎       <h2>Data Storage and Security</h2>»
+- `pages/privacy-policy.html:104` — privacy: sections renumbered for the two new sections  
+  before: «<span class="pv-num">03</span>⏎       <h2>How We Use Your Information</h2>»  
+  after: «<span class="pv-num">04</span>⏎       <h2>How We Use Your Information</h2>»
+- `pages/privacy-policy.html:95` — privacy: health information at intake (new section 03)  
+  before: «<section class="pv-section">⏎       <span class="pv-num">04</span>⏎       <h2>How We Use Your Information</h2>»  
+  after: «<section class="pv-section">⏎       <span class="pv-num">03</span>⏎       <h2>Health Information Collected at Intake</h2>⏎       <p>When you become a client, we collect health information at intake and at your Performance Assessment. This can include your health and injury history, surgeries, medications and conditions that affect training, your goals and lifestyle habits, and the measurements taken at your assessment and reassessments, such as body composition, blood pressure, SpO2, grip strength, posture photos and circumference measurements.</p>⏎       <p>We collect it so we can program your training safely and track your progress against your own baseline. OmniFit is not a medical provider and does not use this information to diagnose or treat any condition.</p>⏎       <p>Your coach sees it. We share it with a partner provider, such as a physical therapist, only with your written permission. It is stored in the coaching and forms platforms listed under Sharing Information, and kept for the period described under Data Retention.</p>⏎     </section>⏎ ⏎     <section class="pv-section">⏎       <span class="pv-num">04</span>⏎       <h2>How We Use Your Information</h2>»
+- `pages/privacy-policy.html:156` — privacy: California privacy rights (new section 09)  
+  before: «<section class="pv-section">⏎       <span class="pv-num">10</span>⏎       <h2>Data Retention</h2>»  
+  after: «<section class="pv-section">⏎       <span class="pv-num">09</span>⏎       <h2>Your California Privacy Rights</h2>⏎       <p>If you live in California, the California Consumer Privacy Act, as amended by the California Privacy Rights Act (CCPA/CPRA), gives you the right to:</p>⏎       <ul>⏎         <li>Know what personal information we collect, use and disclose, and why</li>⏎         <li>Request a copy of the personal information we hold about you</li>⏎         <li>Request that we delete your personal information, subject to records we are required by law to keep</li>⏎         <li>Request that we correct inaccurate personal information</li>⏎         <li>Opt out of the sale or sharing of your personal information</li>⏎         <li>Limit the use of sensitive personal information, such as health information</li>⏎       </ul>⏎       <p>We do not sell your personal information, and we do not share it for cross-context behavioral advertising. We use Google Analytics 4 and Microsoft Clarity to measure how this website is used; we do not run advertising tags on this site. We use sensitive personal information, such as health information, only to provide the services you ask for.</p>⏎       <p>To make a request, email <a href="mailto:nemezio@omnifittraining.com">nemezio@omnifittraining.com</a> or call <a href="tel:+16192590630">(619) 259-0630</a>. We will verify your identity before acting on a request, usually by confirming details we already hold about you, and we respond within 45 da»
+- `pages/privacy-policy.html:133` — privacy: Truemed under sharing  
+  before: «<li>Payment processors (Stripe, Klarna, Affirm)</li>⏎»  
+  after: «<li>Payment processors (Stripe, Klarna, Affirm)</li>⏎         <li>HSA/FSA payments (Truemed), only if you choose to pay with HSA or FSA funds: Truemed handles the Letter of Medical Necessity process with a licensed provider, and we share only the details that process needs</li>⏎»
+- `pages/privacy-policy.html:175` — privacy: retention period  
+  before: «<p>We keep client and payment information for as long as required by law or to fulfill service agreements. After that, your data is securely deleted or anonymized.</p>»  
+  after: «<p>We keep client records, including health information and payment records, for as long as you are a client and up to 7 years after, for records required by law. After that, your data is securely deleted or anonymized.</p>»
+- `pages/privacy-policy.html:70` — privacy: last-updated date  
+  before: «<p class="pv-updated">Last updated: October 2026</p>»  
+  after: «<p class="pv-updated">Last updated: October 18, 2026</p>»
+- `pages/headers/privacy-policy-header.html:16` — privacy: header dateModified  
+  before: «"dateModified": "2026-10-16",»  
+  after: «"dateModified": "2026-10-18",»
+
+### 12. Polish
+
+- `pages/training-rates-san-diego.html:818` (line at edit time; text later changed again or deleted) — duplicate Pause Weeks box deleted (the fuller one in What Protects Your Investment stays)  
+  before: «<div class="rt-policy rt-reveal">⏎       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>⏎       <h5>Pause Weeks</h5>⏎       <p>The Foundation includes two pause weeks across the course with notice, extending the end date. The Program includes six pause weeks per twelve months with two weeks' notice, credited against the next cycle.</p>⏎     </div>⏎»  
+  after: «(deleted)»
+- `pages/training-rates-san-diego.html:925, pages/training-rates-san-diego.html:1025` — Teqneeq membership wording  
+  before: «Required for studio Momentum and above, and it includes»  
+  after: «Required for all studio programs, and it includes»
+- `pages/training-rates-san-diego.html:1381` — Teqneeq membership wording (FAQ)  
+  before: «Only for studio training. Studio Momentum and above, on The Foundation or The Program, requires a Teqneeq membership»  
+  after: «Only for studio training. Every studio program, on The Foundation or The Program, requires a Teqneeq membership»
+- `pages/headers/training-rates-san-diego-header.html:826` — Teqneeq membership wording (FAQ mirror)  
+  before: «Only for studio training. Studio Momentum and above, on The Foundation or The Program, requires a Teqneeq membership»  
+  after: «Only for studio training. Every studio program, on The Foundation or The Program, requires a Teqneeq membership»
+- `pages/training-rates-san-diego.html:986` — Foundation: pay over time  
+  before: «<p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:12px auto 0;"><strong>Foundation policy.</strong>»  
+  after: «<p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:12px auto 0;">Pay over time with Klarna or Affirm.</p>⏎     <p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:12px auto 0;"><strong>Foundation policy.</strong>»
+- `pages/training-rates-san-diego.html:1236` — Reset pause weeks per Terms §6  
+  before: «its Accountability Dial setting is Coached or Train Only. <a href="/the-30-minute-executive-reset"»  
+  after: «its Accountability Dial setting is Coached or Train Only. Up to six pause weeks per 12 months, with two weeks' notice, credited against your next cycle. <a href="/the-30-minute-executive-reset"»
+- `pages/training-rates-san-diego.html:826` — US spelling  
+  before: «Sessions cancelled with less than 24 hours' notice»  
+  after: «Sessions canceled with less than 24 hours' notice»
+- `pages/couples-personal-training-san-diego.html:247` — US spelling  
+  before: «paid in full at enrolment;»  
+  after: «paid in full at enrollment;»
+- `pages/couples-personal-training-san-diego.html:342` — US spelling  
+  before: «Sessions cancelled with less»  
+  after: «Sessions canceled with less»
+- `pages/headers/couples-personal-training-san-diego-header.html:227` — US spelling (FAQ mirror)  
+  before: «Sessions cancelled with less»  
+  after: «Sessions canceled with less»
+- `pages/weight-loss.html:304` — typo  
+  before: «<span class="fl-step-num">Month 5–6+</span>»  
+  after: «<span class="fl-step-num">Months 5–6+</span>»
+- `pages/FAQs.html:183, pages/FAQs.html:193, pages/FAQs.html:323` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/FAQs.html:323` — US spelling  
+  before: «cancelled»  
+  after: «canceled»
+- `pages/about.html:206` — US spelling  
+  before: «behavioural»  
+  after: «behavioral»
+- `pages/about.html:191, pages/about.html:193, pages/about.html:280` — US spelling  
+  before: «Behaviour»  
+  after: «Behavior»
+- `pages/about.html:136, pages/about.html:166, pages/about.html:174, pages/about.html:222, pages/about.html:287, pages/about.html:289, pages/about.html:324` — US spelling  
+  before: «programme»  
+  after: «program»
+- `pages/about.html:170` — US spelling  
+  before: «organisation»  
+  after: «organization»
+- `pages/about.html:178` — US spelling  
+  before: «specialisations»  
+  after: «specializations»
+- `pages/behavior-change-coaching.html:4, pages/behavior-change-coaching.html:7, pages/behavior-change-coaching.html:8, pages/behavior-change-coaching.html:9, pages/behavior-change-coaching.html:12, pages/behavior-change-coaching.html:16, pages/behavior-change-coaching.html:27, pages/behavior-change-coaching.html:27, pages/behavior-change-coaching.html:27, pages/behavior-change-coaching.html:29, pages/behavior-change-coaching.html:30, pages/behavior-change-coaching.html:31 …` — US spelling  
+  before: «behaviour»  
+  after: «behavior»
+- `pages/corrective-exercise-post-rehab.html:1061` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/corrective-exercise-post-rehab.html:615, pages/corrective-exercise-post-rehab.html:796` — US spelling  
+  before: «recognise»  
+  after: «recognize»
+- `pages/glp-1-personal-training-san-diego.html:159, pages/glp-1-personal-training-san-diego.html:207, pages/glp-1-personal-training-san-diego.html:237, pages/glp-1-personal-training-san-diego.html:314, pages/glp-1-personal-training-san-diego.html:332` — US spelling  
+  before: «programme»  
+  after: «program»
+- `pages/glp-1-personal-training-san-diego.html:148, pages/glp-1-personal-training-san-diego.html:159` — US spelling  
+  before: «prioritised»  
+  after: «prioritized»
+- `pages/headers/FAQs-header.html:86, pages/headers/FAQs-header.html:102, pages/headers/FAQs-header.html:230` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/FAQs-header.html:230` — US spelling  
+  before: «cancelled»  
+  after: «canceled»
+- `pages/headers/about-header.html:67, pages/headers/about-header.html:112` — US spelling  
+  before: «Behaviour»  
+  after: «Behavior»
+- `pages/headers/about-header.html:7` — US spelling  
+  before: «organisation»  
+  after: «organization»
+- `pages/headers/about-header.html:61` — US spelling  
+  before: «specialises»  
+  after: «specializes»
+- `pages/headers/corrective-exercise-post-rehab-header.html:70` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/glp-1-personal-training-san-diego-header.html:89` — US spelling  
+  before: «prioritises»  
+  after: «prioritizes»
+- `pages/headers/how-it-works-pricing-header.html:54, pages/headers/how-it-works-pricing-header.html:78, pages/headers/how-it-works-pricing-header.html:102` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/how-it-works-pricing-header.html:78` — US spelling  
+  before: «cancelled»  
+  after: «canceled»
+- `pages/headers/nutrition-coaching-san-diego-header.html:58, pages/headers/nutrition-coaching-san-diego-header.html:99` — US spelling  
+  before: «behavioural»  
+  after: «behavioral»
+- `pages/headers/nutrition-coaching-san-diego-header.html:16, pages/headers/nutrition-coaching-san-diego-header.html:53` — US spelling  
+  before: «Behaviour»  
+  after: «Behavior»
+- `pages/headers/personal-trainer-4s-ranch-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-carlsbad-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-carmel-valley-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-del-mar-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-encinitas-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-fairbanks-ranch-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-la-jolla-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-rancho-santa-fe-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-santaluz-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/personal-trainer-solana-beach-header.html:63` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/headers/private-personal-trainer-san-diego-header.html:62` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/how-it-works-pricing.html:202, pages/how-it-works-pricing.html:327, pages/how-it-works-pricing.html:367, pages/how-it-works-pricing.html:383, pages/how-it-works-pricing.html:414, pages/how-it-works-pricing.html:420, pages/how-it-works-pricing.html:426` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/how-it-works-pricing.html:383, pages/how-it-works-pricing.html:420` — US spelling  
+  before: «cancelled»  
+  after: «canceled»
+- `pages/how-we-measure-your-progress.html:237, pages/how-we-measure-your-progress.html:285` — US spelling  
+  before: «analyser»  
+  after: «analyzer»
+- `pages/in-home-personal-trainer-san-diego.html:576` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/in-home-personal-trainer-san-diego.html:569` — US spelling  
+  before: «cancelled»  
+  after: «canceled»
+- `pages/nutrition-coaching-san-diego.html:110, pages/nutrition-coaching-san-diego.html:117, pages/nutrition-coaching-san-diego.html:144, pages/nutrition-coaching-san-diego.html:177, pages/nutrition-coaching-san-diego.html:216` — US spelling  
+  before: «behavioural»  
+  after: «behavioral»
+- `pages/nutrition-coaching-san-diego.html:3, pages/nutrition-coaching-san-diego.html:106, pages/nutrition-coaching-san-diego.html:201` — US spelling  
+  before: «Behaviour»  
+  after: «Behavior»
+- `pages/outcomes.html:505` — US spelling  
+  before: «cancelled»  
+  after: «canceled»
+- `pages/personal-trainer-4s-ranch.html:1075` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-carlsbad.html:277` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-carmel-valley.html:355` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-del-mar.html:391` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-encinitas.html:273` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-fairbanks-ranch.html:355` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-la-jolla.html:410` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-over-50-san-diego.html:114, pages/personal-trainer-over-50-san-diego.html:170, pages/personal-trainer-over-50-san-diego.html:178, pages/personal-trainer-over-50-san-diego.html:178, pages/personal-trainer-over-50-san-diego.html:217, pages/personal-trainer-over-50-san-diego.html:222, pages/personal-trainer-over-50-san-diego.html:302, pages/personal-trainer-over-50-san-diego.html:306, pages/personal-trainer-over-50-san-diego.html:328` — US spelling  
+  before: «programme»  
+  after: «program»
+- `pages/personal-trainer-over-50-san-diego.html:167` — US spelling  
+  before: «favour»  
+  after: «favor»
+- `pages/personal-trainer-rancho-bernardo.html:359` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-rancho-santa-fe.html:376` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-santaluz.html:275` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/personal-trainer-solana-beach.html:355` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/private-personal-trainer-san-diego.html:581` — US spelling  
+  before: «enrolment»  
+  after: «enrollment»
+- `pages/terms-and-conditions.html:19, pages/terms-and-conditions.html:70, pages/terms-and-conditions.html:72` — US spelling  
+  before: «cancelled»  
+  after: «canceled»
+- `pages/about.html:97, pages/about.html:202, pages/about.html:206` — US spelling  
+  before: «behaviour»  
+  after: «behavior»
+- `pages/headers/nutrition-coaching-san-diego-header.html:58, pages/headers/nutrition-coaching-san-diego-header.html:99, pages/headers/nutrition-coaching-san-diego-header.html:131, pages/headers/nutrition-coaching-san-diego-header.html:131` — US spelling  
+  before: «behaviour»  
+  after: «behavior»
+- `pages/nutrition-coaching-san-diego.html:110, pages/nutrition-coaching-san-diego.html:117, pages/nutrition-coaching-san-diego.html:144, pages/nutrition-coaching-san-diego.html:177, pages/nutrition-coaching-san-diego.html:187, pages/nutrition-coaching-san-diego.html:216, pages/nutrition-coaching-san-diego.html:232, pages/nutrition-coaching-san-diego.html:232, pages/nutrition-coaching-san-diego.html:244` — US spelling  
+  before: «behaviour»  
+  after: «behavior»
+- `pages/body-composition-testing.html:420` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-trainer-carlsbad.html:339` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-trainer-carmel-valley.html:445` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-trainer-del-mar.html:481` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-trainer-encinitas.html:335` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-trainer-fairbanks-ranch.html:445` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-trainer-la-jolla.html:500` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-trainer-santaluz.html:337` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-trainer-solana-beach.html:445` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/personal-training-services.html:553` — one credential line in trust bars  
+  before: «NASM CPT·CES·PES·BCS·CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/private-personal-trainer-san-diego.html:643` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/strength-training-1.html:461` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/the-30-minute-executive-reset.html:561` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS · CNC</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/weight-loss.html:541` — one credential line in trust bars  
+  before: «NASM CPT · CES · PES · BCS</»  
+  after: «NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</»
+- `pages/headers/glp-1-personal-training-san-diego-header.html:17` — GLP-1 meta agrees with body (OWNER-APPROVED meta edit)  
+  before: «Trials show up to 45% of weight lost can be lean mass.»  
+  after: «In trials, roughly 15% to 60% of weight lost was lean mass.»
+
+### 13a. Pricing FAQ invariant
+
+- `pages/corrective-exercise-post-rehab.html:1061` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/corrective-exercise-post-rehab.html:1061` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/corrective-exercise-post-rehab-header.html:70` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/corrective-exercise-post-rehab-header.html:70` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-4s-ranch-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-4s-ranch-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-carlsbad-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-carlsbad-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-carmel-valley-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-carmel-valley-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-del-mar-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-del-mar-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-encinitas-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-encinitas-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-fairbanks-ranch-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-fairbanks-ranch-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-la-jolla-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-la-jolla-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-rancho-bernardo-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-rancho-santa-fe-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-rancho-santa-fe-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-santaluz-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-santaluz-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/headers/personal-trainer-solana-beach-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/headers/personal-trainer-solana-beach-header.html:63` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-4s-ranch.html:1075` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-4s-ranch.html:1075` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-carlsbad.html:277` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-carlsbad.html:277` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-carmel-valley.html:355` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-carmel-valley.html:355` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-del-mar.html:391` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-del-mar.html:391` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-encinitas.html:273` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-encinitas.html:273` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-fairbanks-ranch.html:355` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-fairbanks-ranch.html:355` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-la-jolla.html:410` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-la-jolla.html:410` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-rancho-bernardo.html:359` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-rancho-bernardo.html:359` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-rancho-santa-fe.html:376` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-rancho-santa-fe.html:376` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-santaluz.html:275` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-santaluz.html:275` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+- `pages/personal-trainer-solana-beach.html:355` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «Every client starts with a $150 Performance Assessment, credited toward the first cycle.»  
+  after: «Programs and session packs start with a Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase; for a single session it's recommended, not required.»
+- `pages/personal-trainer-solana-beach.html:355` — pricing FAQ invariant (OWNER-APPROVED hash change)  
+  before: «$900 to $2,600 in-home»  
+  after: «$900 to $2,600+ in-home»
+
+### 13c. Contact meta
+
+- `pages/headers/contactform-header.html:17` — contactform meta (OWNER-APPROVED meta edit)  
+  before: «"description": "A 45-minute consultation including movement assessment, goal mapping, and personalized program recommendation for busy professionals 30+ in San Diego.",»  
+  after: «"description": "A 45-minute consultation by video or phone: goal mapping and a personalized program recommendation for busy professionals 30+ in San Diego.",»
+
+### 13d. Service-area headings
+
+- `pages/in-home-personal-trainer-san-diego.html:381` — heading (X01-safe)  
+  before: «<h2>In-Home Training Across San Diego County</h2>»  
+  after: «<h2>In-Home Training Across Our In-Home Service Area</h2>»
+- `pages/private-personal-trainer-san-diego.html:348` — heading  
+  before: «<h3>In-Home Training: San Diego County</h3>»  
+  after: «<h3>In-Home Training: North County San Diego</h3>»
+
+### 13e. 'Every program begins'
+
+- `pages/how-we-measure-your-progress.html:254` — Measured Progress definition  
+  before: «Every client begins with a Performance Assessment:»  
+  after: «Every program begins with a Performance Assessment:»
+- `pages/the-omnifit-method.html:248` — Measured Progress definition  
+  before: «Every client begins with a Performance Assessment:»  
+  after: «Every program begins with a Performance Assessment:»
+- `pages/personal-trainer-over-50-san-diego.html:302` — over-50 FAQ (+ mirror)  
+  before: «Every client starts with a movement screen»  
+  after: «Every program starts with a movement screen»
+- `pages/headers/personal-trainer-over-50-san-diego-header.html:116` — over-50 FAQ (+ mirror)  
+  before: «Every client starts with a movement screen»  
+  after: «Every program starts with a movement screen»
+
+### 10/3
+
+- `pages/footer.html:93` — footer CTA + about line  
+  before: «<h3>Start Your Transformation Today</h3>⏎       <p>Book your 45-minute consultation and experience OmniFit Performance's premium coaching.</p>»  
+  after: «<h3>Start with a conversation.</h3>⏎       <p>A 45-minute consultation by video or phone; $30 deposit, refunded the same day you attend.</p>»
+- `pages/footer.html:103` — footer CTA + about line  
+  before: «Clinical-grade diagnostics, evidence-based programming,»  
+  after: «Measured assessments, evidence-based programming,»
+
+### 1/2/7/12
+
+- `pages/omnifit-vs-competitors.html:493` (line at edit time; text later changed again or deleted) — comparison body rewritten by category (group class studios, big-box gyms incl. premium clubs + Equifit line, independent trainer, online apps); motive claims and blanket negatives removed; competitor figures only as labelled typical ranges, big-box PT $50-100 everywhere; method timing sentence; reassessment cadence; FAQ answers (question 2 and 8 renamed to categories); enrollment  
+  before: «<!-- INTRO SECTION -->⏎ <section>⏎   <div class="section-inner">⏎     <h2>Why This Comparison Exists</h2>⏎     <p>If you're comparing OmniFit to F45, Orangetheory, 24 Hour Fitness, Equinox, or other San Diego fitness options, you're likely asking the wrong question.</p>⏎     <p>These models serve fundamentally different purposes. Most are built for <strong>access</strong>—get in, follow a template, leave. OmniFit is built for <strong>outcomes</strong>—sustainable body transformation for busy professionals over 30 who need expert structure, not another membership.</p>⏎     <p>This page clarifies exactly where OmniFit fits (and doesn't) in the San Diego fitness landscape.</p>⏎   </div>⏎ </section>⏎ ⏎ <!-- CORE DIFFERENCE -->⏎ <section style="background: var(--navy-mid);">⏎   <div class="section-inner">⏎     <div class="section-label">The Fundamental Difference</div>⏎     <h2>Access vs. <em>Accountability</em></h2>⏎     ⏎     <div class="comparison-grid">⏎       <div class="comp-card">⏎         <h3>Access-Based Fitness</h3>⏎         <p><strong>Includes:</strong> F45, Orangetheory, Barry's Bootcamp, SoulCycle, 24 Hour Fitness, LA Fitness, Chuze, Equinox, Lifetime</p>⏎         ⏎         <h4>What They Optimize For:</h4>⏎         <p>Low barrier to entry, high volume, group energy, convenient locations, flexible drop-in schedules.</p>⏎         ⏎         <h4>Who They Serve Best:</h4>⏎         <p>People who are self-motivated, injury-free, know how to train, and need a place to execute»  
+  after: «<!-- INTRO SECTION -->⏎ <section>⏎   <div class="section-inner">⏎     <h2>Why This Comparison Exists</h2>⏎     <p>If you're comparing OmniFit to a gym membership, group classes, an independent trainer or a training app, the useful question is which model fits what you need right now.</p>⏎     <p>These models serve different purposes. Gyms, class studios and apps are built around <strong>access</strong>: equipment, a schedule of classes, or a program on your phone, with you running the plan. OmniFit is built around <strong>coached outcomes</strong>: an assessment first, a written program, and accountability between sessions for busy professionals over 30 who want expert structure.</p>⏎     <p>This page compares the categories, not individual businesses, and is clear about where OmniFit fits (and doesn't) in San Diego.</p>⏎   </div>⏎ </section>⏎ ⏎ <!-- CORE DIFFERENCE -->⏎ <section style="background: var(--navy-mid);">⏎   <div class="section-inner">⏎     <div class="section-label">The Fundamental Difference</div>⏎     <h2>Access vs. <em>Accountability</em></h2>⏎     ⏎     <div class="comparison-grid">⏎       <div class="comp-card">⏎         <h3>Access-Based Fitness</h3>⏎         <p><strong>Includes:</strong> big-box and premium gyms, group class studios, and training apps</p>⏎         ⏎         <h4>What They Optimize For:</h4>⏎         <p>Low barrier to entry, convenient locations, group energy, flexible drop-in schedules, and a low cost per visit.</p>⏎         ⏎         <h4>Wh»
