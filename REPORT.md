@@ -5612,3 +5612,238 @@ Questions added: none.
 6. **/outcomes answer uses counts, not percentages.** The first draft quoted 34% and 17%. certify T2-1 flagged both, because the FAQ section does not carry the not-independently-audited note on its surface. The answer now gives the counts with their denominators (18 of 53, 5 of 30), all published in the page's retention section. No new figure.
 7. **Host-page CSS.** Several pages force heading and strong colours with `!important`, and omnifit-vs-competitors applies `all: unset` to every element in its wrapper. The shared In Short CSS therefore holds its heading, label and text colours with `!important`, scoped to `#omh-short.omh`. omnifit-vs-competitors has one extra, page-only override that restores padding and the tick path (`d: path(...)`).
 8. **Over ~250 words.** Three first drafts ran 252 to 266 words and were trimmed. Final counts on the 14 In Short pages are 130 to 252 words (omnifit-vs-competitors is the largest); /faqs grew 158 and /outcomes 85.
+
+
+---
+
+# Accuracy sweep (Oct 18 2026)
+
+**Branch:** `claude/cited-pages-scannability-ai-qvizrx`, restarted from main at bee1f0d (the In Short + FAQ run, already merged).
+**Scope:** body copy and FAQ answers, with every header FAQPage answer re-mirrored to match its page. No `<title>`, meta description, H1 or H2 changed. 4S Ranch was edited only in the item 2 and 3 sentences (owner override); Rancho Bernardo and the frozen records (case-studies) were not touched. All five invariant hashes are unchanged.
+
+Line numbers below are in the file as it stood at bee1f0d. Text is shown with tags stripped.
+
+## Item 1: images
+
+| File:line | Before | After |
+|---|---|---|
+| pages/headers/site-header.html:169 | `"image": "https://images.squarespace-cdn.com/…/executive-reset-dumbbell-workout.jpg?format=1500w"` | `"image": "https://www.omnifittraining.com/assets/img/hero-coach-client-cable-pulldown-1600.jpg"` |
+| pages/headers/home-header.html:38 | `primaryImageOfPage.url` = the same Squarespace dumbbell photo | the same local cable-pulldown URL |
+
+- **Image chosen:** `site/img/hero-coach-client-cable-pulldown-1600.jpg` (served at `/assets/img/`), 1600×1067, coach and client at a cable pulldown, one of the homepage hero photos. Why this one: landscape (schema images crop best that way), at least 1200px wide, shows 1:1 coaching with the coach in frame, and is a JPEG. The other landscape option (jump training) has a "Boutique Chiropractic" sign on the wall, which works against CANON's no-on-site-clinic rule. home-header carried the same Squarespace photo as the homepage primaryImageOfPage, so it moved with the site-wide image.
+- **Caveat:** that URL resolves only once this build serves the domain. Don't paste site-header.html or home-header.html into Squarespace before cutover.
+- **The other five images are unchanged** and now recorded in CANON ("BEFORE CANCELLING SQUARESPACE: replace or remove these images", before KNOWN DEFERRED ITEMS) and in DEPLOY.md manual step 5, with their pages: Brandon testimonial (case-studies), PN logo (about), NASM CES badge `61f78fa7…png` (about), Thumbtack screenshot (about, about-header schema, personal-trainer-4s-ranch) and the Damien Jackson-Ricketts headshot (partners).
+- **build.py:** `check()` returns a third list, `warnings`. One `WARNING` line is printed per remaining `squarespace-cdn.com` URL in public/, with the pages carrying it. Warnings never count toward the result. Current output: the five images above. The pattern is `SQSP_CDN_RE`, next to `CALENDLY`.
+
+## Item 2: "12 objective metrics"
+
+| File:line | Before | After |
+|---|---|---|
+| pages/desk-worker-posture-pain.html:425 | Posture photos every 30 days. Formal progress reports tracking 12 objective metrics across 7 categories. | Posture photos at each reassessment. Progress reviews every 4 weeks across 12 metrics, measured and self-reported, in 7 categories. |
+| pages/glp-1-personal-training-san-diego.html:247 | Twelve objective metrics across seven categories, reviewed formally rather than eyeballed. | A 12-metric framework combining measured performance and self-reported well-being, across seven categories, reviewed formally every 4 weeks (at least every 12 weeks on Train Only) rather than eyeballed. |
+| pages/in-home-personal-trainer-san-diego.html:780 | Sustainable fat loss is tracked across 12 objective metrics, with formal 30-day progress reports. Monthly progress reports track posture photos | Sustainable fat loss is tracked across 12 metrics, measured and self-reported, with progress reviews every 4 weeks (at least every 12 weeks on Train Only). Each review tracks posture photos |
+| pages/personal-trainer-4s-ranch.html:1082 | tracked through Bodystat analysis and monthly measurements. Progress is documented across 12 objective metrics with formal 30-day reports, and | tracked through Bodystat analysis and regular measurements. Progress is documented across 12 metrics, measured and self-reported, with progress reviews every 4 weeks (at least every 12 weeks on Train Only), and |
+| pages/the-30-minute-executive-reset.html:255 | progress tracked across 12 objective metrics with formal 30-day reports. Tiers run | progress tracked across 12 metrics, measured and self-reported, with progress reviews every 4 weeks (at least every 12 weeks on Train Only). Tiers run |
+| pages/the-30-minute-executive-reset.html:337 | Twelve objective metrics tracked over time, with formal 30-day progress reports. You are measured | A 12-metric framework combining measured performance and self-reported well-being, with progress reviews every 4 weeks (at least every 12 weeks on Train Only). You are measured |
+| pages/the-30-minute-executive-reset.html:505 | the 3/10 pain ceiling rule and progress tracked across 12 objective metrics. | the 3/10 pain ceiling rule and progress tracked across 12 metrics, measured and self-reported. |
+| pages/the-30-minute-executive-reset.html:519 | Progress is tracked across 12 objective metrics: strength benchmarks | Progress is tracked across 12 metrics, measured and self-reported: strength benchmarks |
+
+## Item 3: reporting cadence
+
+| File:line | Before | After |
+|---|---|---|
+| pages/FAQs.html:163 | assessment-driven, with monthly progress reports. | assessment-driven, with progress reviews every 4 weeks (at least every 12 weeks on Train Only). |
+| pages/FAQs.html:253 | monthly data reports including | progress reviews every 4 weeks covering |
+| pages/corrective-exercise-post-rehab.html:601 | and formal 30-day reports covering twelve standardized metrics | and progress reviews every 4 weeks (at least every 12 weeks on Train Only) covering twelve standardized metrics |
+| pages/corrective-exercise-post-rehab.html:801 | at each 30-day report, | at each 4-week progress review, |
+| pages/corrective-exercise-post-rehab.html:870 | and formal 30-day reports across twelve standardized metrics. | and progress reviews every 4 weeks across twelve standardized metrics. |
+| pages/corrective-exercise-post-rehab.html:874 | Strength & ROM benchmarks tracked monthly | Strength & ROM benchmarks reviewed every 4 weeks |
+| pages/desk-worker-posture-pain.html:388 | and formal 30-day progress reports track posture scores, mobility improvements, and strength benchmarks objectively. | and progress reviews every 4 weeks (at least every 12 weeks on Train Only) track posture scores, mobility and strength benchmarks against your baseline. |
+| pages/desk-worker-posture-pain.html:529 | and strength benchmarks, with a formal report every 30 days. | and strength benchmarks, with a progress review every 4 weeks (at least every 12 weeks on Train Only). |
+| pages/glp-1-personal-training-san-diego.html:246 | A report every 30 days | A progress review every 4 weeks |
+| pages/home-6.html:117 | Each of you gets your own 30-day progress report. | Each of you gets your own progress review every 4 weeks. |
+| pages/how-it-works-pricing.html:259 | You'll receive weekly check-ins, nutrition accountability, and a formal 30-day progress report tracking all seven metrics against your baseline. | You'll receive weekly check-ins, nutrition accountability, and a progress review every 4 weeks (at least every 12 weeks on Train Only) against your baseline. |
+| pages/how-it-works-pricing.html:263 | Monthly Reviews & Program Updates Every 30 days, we review your data, | Progress Reviews & Program Updates Every 4 weeks (at least every 12 weeks on Train Only), we review your data, |
+| pages/how-it-works-pricing.html:283 | Fully custom training plans updated monthly based on your progress data. | Fully custom training plans updated every 4 weeks based on your progress data. |
+| pages/how-it-works-pricing.html:302 | Quarterly Progress Reviews | Progress Reviews Every 4 Weeks |
+| pages/how-it-works-pricing.html:500 | ✓ Custom, updated monthly | ✓ Custom, updated every 4 weeks |
+| pages/how-it-works-pricing.html:505 | ✓ 12 metrics, quarterly progress reviews | ✓ 12 metrics, progress reviews every 4 weeks |
+| pages/how-it-works-pricing.html:511 | The real cost comparison isn't monthly price. It's cost per result. | The real cost comparison isn't the price per cycle. It's cost per result. |
+| pages/how-it-works-pricing.html:571 | The real comparison is cost per result, not cost per month. | The real comparison is cost per result, not cost per cycle. |
+| pages/how-we-measure-your-progress.html:228 | Reports: a formal progress report every 30 days, | Reports: progress reviews every 4 weeks (at least every 12 weeks on Train Only), |
+| pages/how-we-measure-your-progress.html:237 | — with formal progress reports delivered every 30 days. | — with progress reviews every 4 weeks (at least every 12 weeks on Train Only). |
+| pages/how-we-measure-your-progress.html:244 | with results reviewed in the 30-day progress report. | with results reviewed at each progress review, every 4 weeks. |
+| pages/how-we-measure-your-progress.html:269 | Tracked monthly to ensure progressive overload | Reviewed every 4 weeks to ensure progressive overload |
+| pages/how-we-measure-your-progress.html:272 | sessions completed each month | sessions completed each 4-week cycle |
+| pages/how-we-measure-your-progress.html:298 | Every 30 days, you receive a formal progress report | At each progress review, every 4 weeks (at least every 12 weeks on Train Only), you receive a formal progress report |
+| pages/how-we-measure-your-progress.html:341 | ✓ Formal 30-day reports with trends | ✓ Progress reviews every 4 weeks, with trends |
+| pages/how-we-measure-your-progress.html:354 | Formal progress reports are delivered every 30 days with trend analysis and program recommendations. | Progress reviews come every 4 weeks (at least every 12 weeks on Train Only), with trend analysis and program recommendations. |
+| pages/how-we-measure-your-progress.html:355 | Every 30 days. Each report includes | Every 4 weeks at Full Accountability and Coached; on Train Only, a reassessment at least every 12 weeks. Each report includes |
+| pages/how-we-measure-your-progress.html:357 | If a metric stalls, the 30-day review looks | If a metric stalls, the 4-week progress review looks |
+| pages/how-we-measure-your-progress.html:358 | reviewed in a formal report every 30 days. | reviewed in a formal progress review every 4 weeks (at least every 12 weeks on Train Only). |
+| pages/in-home-personal-trainer-san-diego.html:313 | Updated monthly based on progress data. | Updated every 4 weeks based on progress data. |
+| pages/in-home-personal-trainer-san-diego.html:318 | and monthly progress reports with posture photos and strength benchmarks. | and progress reviews every 4 weeks with posture photos and strength benchmarks. |
+| pages/in-home-personal-trainer-san-diego.html:341 | Monthly program updates based on data | Program updates every 4 weeks based on data |
+| pages/in-home-personal-trainer-san-diego.html:366 | Monthly progress reports with hard data | Progress reviews every 4 weeks |
+| pages/in-home-personal-trainer-san-diego.html:502 | of-table-label">Monthly data reports | of-table-label">Progress reviews every 4 weeks |
+| pages/in-home-personal-trainer-san-diego.html:604 | Grip Strength — a reliable marker of functional strength, tracked monthly | Grip Strength — a reliable marker of functional strength, reviewed every 4 weeks |
+| pages/in-home-personal-trainer-san-diego.html:613 | repeated at each monthly review: | repeated at each progress review: |
+| pages/personal-trainer-4s-ranch.html:668 | Monthly strength benchmarks | Strength benchmarks every 4 weeks |
+| pages/personal-trainer-4s-ranch.html:807 | strength benchmarks, and monthly measurements, with formal 30-day reports. | strength benchmarks, and body measurements, with progress reviews every 4 weeks (at least every 12 weeks on Train Only). |
+| pages/personal-trainer-4s-ranch.html:822 | monthly body measurements and composition estimates | body measurements and composition estimates every 4 weeks |
+| pages/personal-trainer-4s-ranch.html:822 | monthly body measurements and composition estimates | body measurements and composition estimates every 4 weeks |
+| pages/personal-trainer-4s-ranch.html:987 | your first formal 30-day progress reports in hand. | your first progress reviews in hand. |
+| pages/personal-trainer-carmel-valley.html:261 | Monthly progress reports track posture, | Progress reviews every 4 weeks track posture, |
+| pages/personal-trainer-encinitas.html:139 | Monthly strength benchmarks | Strength benchmarks every 4 weeks |
+| pages/personal-trainer-fairbanks-ranch.html:380 | tracked with monthly progress reports, | tracked with progress reviews every 4 weeks, |
+| pages/personal-trainer-la-jolla.html:252 | Monthly strength benchmarks | Strength benchmarks every 4 weeks |
+| pages/personal-trainer-rancho-santa-fe.html:206 | Monthly strength benchmarks | Strength benchmarks every 4 weeks |
+| pages/personal-trainer-rancho-santa-fe.html:396 | and monthly data-driven progress reports. | and data-driven progress reviews every 4 weeks. |
+| pages/personal-trainer-santaluz.html:280 | tracked with monthly data reports, and adjusted based on measurable progress, not general fitness trends. | reviewed every 4 weeks, and adjusted based on your own numbers, not general fitness trends. |
+| pages/personal-trainer-solana-beach.html:197 | Monthly strength benchmarks | Strength benchmarks every 4 weeks |
+| pages/personal-training-services.html:281 | Progress photos & monthly check-ins | Progress photos & 4-week progress reviews |
+| pages/personal-training-services.html:438 | Formal 30-day progress reports | Progress reviews every 4 weeks |
+| pages/private-personal-trainer-san-diego.html:318 | Monthly progress reports with data | Progress reviews every 4 weeks |
+| pages/private-personal-trainer-san-diego.html:426 | of-table-label">Monthly progress reports | of-table-label">Progress reviews every 4 weeks |
+| pages/private-personal-trainer-san-diego.html:528 | Monthly progress reports track everything from day one. | Progress reviews every 4 weeks track everything from day one. |
+| pages/the-30-minute-executive-reset.html:341 | Formal 30-day reports | Progress reviews every 4 weeks |
+| pages/the-30-minute-executive-reset.html:411 | Formal 30-day progress reports | Progress reviews every 4 weeks |
+| pages/the-30-minute-executive-reset.html:476 | 12 metrics, 30-day reports | 12 metrics, reviews every 4 weeks |
+| pages/the-30-minute-executive-reset.html:511 | and formal progress reports every 30 days. | and progress reviews every 4 weeks (at least every 12 weeks on Train Only). |
+| pages/the-30-minute-executive-reset.html:519 | nutrition compliance, and more, with a formal progress report every 30 days. | nutrition compliance, and more, with a progress review every 4 weeks (at least every 12 weeks on Train Only). |
+| pages/the-omnifit-method.html:285 | a baseline metric we track monthly. | a baseline metric we review every 4 weeks. |
+| pages/the-omnifit-method.html:323 | reviewed and adjusted every 30 days. | reviewed and adjusted every 4 weeks. |
+| pages/the-omnifit-method.html:330 | 30-Day Progress Reports | Progress Reviews Every 4 Weeks |
+| pages/the-omnifit-method.html:365 | ✓ 12 metrics, formal 30-day reports | ✓ 12 metrics, progress reviews every 4 weeks |
+| pages/the-omnifit-method.html:388 | And they don't deliver formal 30-day progress reports with data-driven program adjustments. | And they don't run formal progress reviews every 4 weeks with data-driven program adjustments. |
+| pages/weight-loss.html:352 | Monthly body measurements | Body measurements every 4 weeks |
+| pages/weight-loss.html:472 | monthly body measurements, progress photos, | body measurements every 4 weeks, progress photos, |
+| pages/weight-loss.html:476 | Programs are structured as monthly commitments with transparent pricing. | Programs bill in 4-week cycles, with every rate published. |
+
+## Item 4: absolute claims
+
+| File:line | Before | After |
+|---|---|---|
+| pages/body-composition-testing.html:125 | Medical-grade bioimpedance analysis that tells you what a scale can't: how much of your weight is fat, how much is lean mass, and how both are changing. | Medical-grade bioimpedance analysis that gives you what a scale can't: a clear, repeatable read on how much of your weight is fat, an estimate of your lean mass, and how both are changing. |
+| pages/body-composition-testing.html:154 | The core split: how much of your weight is body fat versus muscle, bone, and organ tissue. | The core split, estimated from the scan: how much of your weight is body fat versus muscle, bone, and organ tissue. |
+| pages/body-composition-testing.html:252 | OmniFit tracks fat mass and lean mass separately at every rescan, | OmniFit tracks estimated fat mass and lean mass separately at every rescan, |
+| pages/body-composition-testing.html:258 | the first scan establishes exactly where your lean mass stands today — the number everything else is measured against. | the first scan gives you a clear, repeatable read on where your lean mass stands today — the estimate everything else is compared against. |
+| pages/body-composition-testing.html:322 | it reports fat mass, lean mass, body cell mass, total body water, the intracellular and extracellular water balance, and phase angle: measurements the device produces natively rather than estimates derived from a single-frequency reading. | it reads impedance and phase angle directly and separates intracellular from extracellular water; fat mass, lean mass, body cell mass and total body water are estimates calculated from those readings, which multi-frequency analysis makes more robust than a single-frequency reading. |
+| pages/body-composition-testing.html:330 | Regular body composition testing shows exactly what kind of weight you're losing, so resistance training and protein intake can be adjusted to protect muscle — and gives your prescriber objective data for treatment decisions. | Regular body composition testing gives you a clear, repeatable read on what kind of weight you're losing, so resistance training and protein intake can be adjusted to protect muscle — and gives you trend data to share with your prescriber. |
+| pages/body-composition-testing.html:410 | exactly what your body is made of, how it moves, | a clear, repeatable read on what your body is made of, how it moves, |
+| pages/corrective-exercise-post-rehab.html:537 | rebuild movement confidence, restore posture, and return to pain-free strength. | rebuild movement confidence, restore posture, and return to strength, training without flare-ups under a 3/10 pain ceiling. |
+| pages/corrective-exercise-post-rehab.html:870 | diagnostics reading fat mass, lean mass and the fluid compartments, | diagnostics estimating fat mass and lean mass and reading the fluid compartments, |
+| pages/corrective-exercise-post-rehab.html:1071 | and ends with you training independently, pain-free. | and ends with you training independently, without flare-ups, under a 3/10 pain ceiling. |
+| pages/desk-worker-posture-pain.html:300 | taking professionals from "pain-managed" to "pain-free and strong" against their own movement-screen baseline. | taking professionals from "pain-managed" to strong, training without flare-ups under a 3/10 pain ceiling, measured against their own movement-screen baseline. |
+| pages/desk-worker-posture-pain.html:405 | We map exactly which muscles are overactive and underactive before programming anything. | We map which muscles are likely overactive and underactive before programming anything. |
+| pages/desk-worker-posture-pain.html:517 | to pinpoint exactly which muscles are overactive (tight) and underactive (weak), | to identify which muscles are likely overactive (tight) and underactive (weak), |
+| pages/personal-trainer-carlsbad.html:189 | that makes those activities better, and injury-free. | that makes those activities better, with training built to keep injury risk low. |
+| pages/personal-trainer-encinitas.html:96 | who want evidence-based results without the injury risk of generic fitness programs. | who want evidence-based results from training built to keep injury risk low, unlike generic fitness programs. |
+| pages/personal-trainer-encinitas.html:278 | that identifies exactly what's causing the flare-up. | that identifies the movement patterns behind the flare-up. |
+| pages/personal-trainer-fairbanks-ranch.html:229 | The result: clients who are stronger, leaner, and pain-free, often for the first time in years. | The aim: stronger, leaner clients who train without flare-ups under a 3/10 pain ceiling. |
+| pages/personal-trainer-fairbanks-ranch.html:375 | that maps exactly where dysfunction exists. | that maps where your movement breaks down. |
+| pages/personal-trainer-la-jolla.html:248 | Designed for sustainable gains without injury risk. | Designed for sustainable gains and built to keep injury risk low. |
+| pages/personal-trainer-solana-beach.html:128 | for active adults over 30 who want results without injury risk. | for active adults over 30 who want a program built to keep injury risk low. |
+| pages/strength-training-1.html:143 | — without random workouts, burnout, or injury risk. | — without random workouts or burnout, and built to keep injury risk low. |
+| pages/strength-training-1.html:311 | who want to build or rebuild strength without the injury risk of random gym workouts or group classes. | who want to build or rebuild strength with training built to keep injury risk low, unlike random gym workouts or group classes. |
+
+## Item 5: GLP-1 lean mass
+
+| File:line | Before | After |
+|---|---|---|
+| pages/glp-1-personal-training-san-diego.html:237 | Bioelectrical impedance analysis separates fat mass from lean mass. On a GLP-1 that distinction is the entire point, and a bathroom scale cannot make it. The Bodystat QuadScan 4000 reads at four frequencies — 5, 50, 100 and 200 kHz — so each rescan reports lean mass and body cell mass beside fat mass, and separates intracellular from extracellular water, which is what keeps a shift in fluid from reading as a change in tissue. The scan tells you which compartment a change came from. | Bioelectrical impedance analysis estimates fat mass and lean mass; it does not measure muscle directly. On a GLP-1 that distinction is the entire point, and a bathroom scale cannot make it. The Bodystat QuadScan 4000 reads at four frequencies — 5, 50, 100 and 200 kHz — so each rescan reports estimated lean mass and body cell mass beside fat mass, and separates intracellular from extracellular water, which is what keeps a shift in fluid from reading as a change in tissue. Rescans on the same device track the trend over time and show which compartment a change most likely came from. |
+
+## Item 6: chronology
+
+| File:line | Before | After |
+|---|---|---|
+| pages/about.html:138 | A decade on, that is still the job. | Years on, that is still the job. |
+
+## Item 7: How It Works vs Rates
+
+| File:line | Before | After |
+|---|---|---|
+| pages/how-it-works-pricing.html:202 | OmniFit Performance offers 1:1 coaching at Teqneeq FHC in 4S Ranch as three named tiers: Studio Momentum at $640, Studio Performance at $1,250, and Studio Peak at $1,800 per 4 weeks on The Program. New clients start on The Foundation instead: three consecutive 4-week cycles paid in full at enrolment, $560 per cycle for Momentum and $1,100 for Performance. In-home coaching runs $900 to $2,600 per 4 weeks, and couples training $1,000 to $2,900. Without a program, single sessions are $205 for studio members, $235 for non-members with the day pass included, or $275 in-home, and 5-packs run $180 to… | OmniFit Performance publishes every rate on its training rates page, the single source for pricing. New clients start on The Foundation, three consecutive 4-week cycles paid in full at enrolment; The Program then bills every 4 weeks. Every client starts with a $150 Performance Assessment, credited toward the first cycle. |
+| pages/how-it-works-pricing.html:254 | Delivered through our coaching app with full exercise video library and nutrition targets. | Delivered through our coaching app with full exercise video library and nutrition targets. You then enrol: new clients start on The Foundation, a defined 12-week starter block, and experienced clients can start on The Program directly. |
+| pages/how-it-works-pricing.html:264 | Every adjustment is based on measurable trends, not opinions. | Every adjustment is based on measurable trends, not opinions. 6 Graduation (the Tune-Up) As you need less coaching, your Accountability Dial steps down: Full Accountability → Coached → Train Only → Tune-Up. The Tune-Up is the graduation point: one reassessment on the Bodystat QuadScan 4000 and an hour of training every 4 weeks, with your program in the app between visits. |
+| pages/how-it-works-pricing.html:324 | [lines 324-487: four rate-table groups (In-Person 1:1 at Teqneeq, Session Packs & Single Sessions, the 30-Minute Executive Reset, Couples Training) and the in-home note, 165 lines] | Every rate is published in one place, the training rates page: The Foundation and The Program at the studio and in-home, couples training, the 30-Minute Executive Reset, and single sessions and 5-packs, with the Teqneeq membership note beside them. See every rate. |
+| pages/how-it-works-pricing.html:569 | OmniFit Performance offers 1:1 coaching at Teqneeq FHC in 4S Ranch as three named tiers: Studio Momentum at $640, Studio Performance at $1,250, and Studio Peak at $1,800 per 4 weeks on The Program. New clients start on The Foundation instead: three consecutive 4-week cycles paid in full at enrolment, $560 per cycle for Momentum and $1,100 for Performance. In-home coaching runs $900 to $2,600 per 4 weeks, and couples training $1,000 to $2,900. Without a program, single sessions are $205 for studio members, $235 for non-members with the day pass included, or $275 in-home, and 5-packs run $180 to… | Every rate is published on the training rates page, the single source for OmniFit pricing: See every rate. New clients start on The Foundation, three consecutive 4-week cycles paid in full at enrolment; The Program then bills every 4 weeks. Every program includes individualized programming, nutrition coaching, and accountability, and your consultation includes a full cost breakdown for the setting and frequency you choose. |
+
+## Header FAQPage answers re-mirrored
+
+Each entry is the page's new answer as `tools/faq.py` extracts it, normalised like certify's `_norm`. Only the answer text changed; questions and every other header node are untouched.
+
+| Header:line | Question |
+|---|---|
+| pages/headers/FAQs-header.html:70 | Do you offer in-home personal training in San Diego? |
+| pages/headers/FAQs-header.html:150 | What results can I expect? |
+| pages/headers/body-composition-testing-header.html:61 | What is the Bodystat QuadScan 4000? |
+| pages/headers/body-composition-testing-header.html:77 | I'm on a GLP-1 medication. Why does body composition testing matter? |
+| pages/headers/corrective-exercise-post-rehab-header.html:54 | What does a corrective exercise specialist do? |
+| pages/headers/desk-worker-posture-pain-header.html:95 | Can a personal trainer fix desk posture problems? |
+| pages/headers/desk-worker-posture-pain-header.html:119 | How long does it take to fix desk posture? |
+| pages/headers/how-we-measure-your-progress-header.html:52 | How does OmniFit track client progress? |
+| pages/headers/how-we-measure-your-progress-header.html:60 | How often do I get a progress report? |
+| pages/headers/how-we-measure-your-progress-header.html:76 | What if I'm not making progress on a metric? |
+| pages/headers/how-we-measure-your-progress-header.html:84 | How is this different from what I'd get with another trainer? |
+| pages/headers/in-home-personal-trainer-san-diego-header.html:97 | What results can I expect? |
+| pages/headers/personal-trainer-4s-ranch-header.html:103 | How does OmniFit track progress? |
+| pages/headers/personal-trainer-4s-ranch-header.html:119 | What results can I expect in 90 days? |
+| pages/headers/personal-trainer-encinitas-header.html:103 | I've had a shoulder injury that flares up with certain movements. Can you work around that? |
+| pages/headers/personal-trainer-fairbanks-ranch-header.html:95 | I have a previous injury that was never fully resolved. Can you help? |
+| pages/headers/personal-trainer-fairbanks-ranch-header.html:103 | Is there a difference between OmniFit and the trainers at my country club? |
+| pages/headers/personal-trainer-rancho-santa-fe-header.html:95 | How is this different from other in-home trainers in Rancho Santa Fe? |
+| pages/headers/personal-trainer-santaluz-header.html:103 | How is OmniFit different from the trainers at the club? |
+| pages/headers/the-30-minute-executive-reset-header.html:71 | What is the 30-Minute Executive Reset? |
+| pages/headers/the-30-minute-executive-reset-header.html:86 | How is this different from an app subscription? |
+| pages/headers/the-30-minute-executive-reset-header.html:106 | How do you measure progress if you never see me in person? |
+| pages/headers/the-omnifit-method-header.html:93 | How is this different from what every trainer claims? |
+| pages/headers/weight-loss-header.html:104 | How do you track progress beyond the scale? |
+| pages/headers/weight-loss-header.html:112 | What does it cost? |
+| pages/headers/how-it-works-pricing-header.html:54 | How much does OmniFit personal training cost? |
+| pages/headers/how-it-works-pricing-header.html:62 | Is OmniFit worth the price compared to a gym membership? |
+
+## Not changed, and why
+
+| Where | Text | Why it stays |
+|---|---|---|
+| 9-point screen list on all 11 territory pages (incl. 4S Ranch line 1055, Rancho Bernardo line 332) | "Grip Strength — … tracked monthly"; "Posture Photos — … re-scored quarterly" | Inside the hash-locked 9-point invariant (4c720960dec5a809). Changing it moves the hash, which this run must not do. **Owner decision needed:** approve "tracked monthly" → "reviewed every 4 weeks" on all 11 pages and a new recorded hash. |
+| pages/personal-trainer-rancho-bernardo.html:132, :201 | "results without injury risk"; "Monthly strength benchmarks" | Rancho Bernardo is locked, and items 2, 3 and 6 name no Rancho Bernardo sentence. |
+| pages/desk-worker-posture-pain.html:366, :441 (H2) | "The Bridge From Pain-Managed to Pain-Free and Strong"; "From 60-Hour Desk Weeks to Pain-Free and 18 lbs of Muscle" | H2s are out of scope. Both promise "pain-free"; the second is also a case heading. Flagged for the owner. |
+| pages/hiit-personal-trainer-san-diego.html:548 (H2) | "Efficient Conditioning — Without the Injury Risk" | H2, out of scope. Flagged. |
+| pages/desk-worker-posture-pain.html:372, :377, :521 (and its header mirror) | "Acute pain → pain-free at rest"; "Pain-free at rest → strong under load"; "taking you from 'pain-free at rest' to 'strong…'" | Here "pain-free at rest" is the state physical therapy hands over (the starting point of OmniFit's stage), not something OmniFit promises. |
+| pages/the-omnifit-method.html:303 | "within a pain-free range of motion" | Describes a movement range, the case the brief keeps. |
+| omnifit-vs-competitors (5 places), the-omnifit-method:386 | "injury-free" | Describes who suits another option, or clients who arrive uninjured. Nothing is promised. |
+| pages/headers/the-30-minute-executive-reset-header.html:34 | "progress tracked across 12 objective metrics" | WebPage description = the meta description, out of scope. |
+| pages/headers/how-we-measure-your-progress-header.html:16 | "formal 30-day progress reports" | WebPage description = the meta description, out of scope. |
+| pages/headers/contactform-header.html:84 | "progress tracked across 12 objective metrics" | Service schema description, not body copy or an FAQ answer. Fix in a schema pass. |
+| "objective data" (body-composition FAQ was changed; territory "gives us objective data to build your program" left) | | The body-composition scan and movement screen do produce measured data; only the self-reported 12-metric framework was mislabelled objective. |
+| "Twelve standardized metrics" (corrective) | | Not inaccurate (the framework is standardized); only its "30-day reports" cadence changed. |
+| /how-it-works-pricing: step 2 and the first-session FAQ, "all seven tracked benchmarks" | | Seven categories vs twelve metrics. Out of this run's items; flagged for a later pass. |
+
+**Chronology, for you to supply the year.** pages/about.html:138 now reads "Years on, that is still the job.": the About story has the 2020 job loss, then years of rebuilding before certification, and no year coaching started appears anywhere in the repo. These lines claim a decade or more and may conflict with that story. Each needs the year to confirm or correct, and none was changed:
+- pages/about.html:280 ("He has coached for over ten years"), :341 ("10+ YEARS COACHING"), pages/headers/about-header.html:61
+- pages/personal-trainer-4s-ranch.html:737 ("10+ Years Coaching"), :1004 ("I've spent over a decade helping busy professionals…"). These are locked; item 6's override named "A decade on", which 4S Ranch does not carry.
+- pages/personal-trainer-rancho-santa-fe.html:255 ("10+ Years Coaching")
+- pages/corrective-exercise-post-rehab.html:1115 and its header :142 ("10+ years of coaching experience")
+- partners: no "A decade on" or founder-tenure line was found (its "nearly a decade" is Celeste Esposito's, a partner).
+
+## Checks (final state on this branch)
+
+| Check | Result |
+|---|---|
+| `python3 build.py --strict` (links, one H1, JSON-LD, emoji, 404/_headers, redirects, tracking, keyword ownership incl. X01) | PASSED |
+| `python3 build.py --check` | PASSED, with the five squarespace-cdn.com WARNING lines above |
+| `python3 tools/certify.py` | PASSED: compliance 0, stale canon 0, structure 0, not-run 0, amendment 2a/2g 0 |
+| Invariant hashes | all five unchanged: a6c7e65dddff4795, 7af0d0049b0b7aba, 02bd9cb90a71ce69, 6b1b0f4efbd4a72c, 4c720960dec5a809 |
+| FAQ mirrors | every header FAQPage mirrors its page (certify structure check); 27 answers re-mirrored this run |
+| `tools/mobileaudit.js --open-details` at 390 and 412 on the 25 touched pages (/, about, body-composition-testing, corrective, desk-worker, faqs, glp-1, how-we-measure, in-home, 4S Ranch, Carlsbad, Carmel Valley, Encinitas, Fairbanks Ranch, La Jolla, Rancho Santa Fe, Santaluz, Solana Beach, services, private, strength-training-1, Executive Reset, the-omnifit-method, weight-loss, how-it-works-pricing) | PASSED: scrollWidth equals the viewport and nothing is clipped. The narrow items listed are the pages' existing grids and tables; the changes on those pages are text-only. /how-it-works-pricing (tables removed) lists none |
+
+## Judgment calls
+
+1. **Certify T1-2 caught one rewrite.** On Santaluz, "tracked with progress reviews every 4 weeks, and adjusted based on measurable progress" read as a result promised within a window. It now reads "reviewed every 4 weeks, and adjusted based on your own numbers, not general fitness trends."
+2. **The quotable at the top of /how-it-works-pricing restated the whole rate card in prose.** Item 7 names the tables, but this was the same duplication, so it now points to the rates page too. It keeps the Foundation/Program structure and the $150 assessment credit, which is the canonical wording, not a table.
+3. **Journey steps.** /how-it-works-pricing had consultation → assessment → program build → training → reviews. Item 7's journey adds enrolment, now a sentence in step 3, and graduation, now step 6 "Graduation (the Tune-Up)", using the homepage's Tune-Up wording.
+4. **Desk-worker "exactly which muscles" (two places) and the Encinitas and Fairbanks Ranch "exactly what's causing / where dysfunction exists" were softened.** A movement screen can't pinpoint individual muscles or a cause with certainty, so these were claims about the body. Everyday uses ("exactly where you stand", "exactly what you pay", "exactly what to expect") stay.
+5. **The body-composition device FAQ claimed BIA outputs are "measurements the device produces natively rather than estimates".** It now says the device reads impedance and phase angle directly, and that fat mass, lean mass, body cell mass and total body water are calculated estimates. The four-frequency facts and the Class IIa wording are untouched (certify class_iia_conditions passes).
+6. **The cadence phrase** is "progress reviews every 4 weeks (at least every 12 weeks on Train Only)" wherever a sentence could carry it. Short list items and table cells say "Progress reviews every 4 weeks". Measurement cadences that said "monthly" (body measurements, strength benchmarks) say "every 4 weeks".

@@ -220,15 +220,28 @@ Cloudflare serves `public/<slug>/index.html` at `/<slug>` and 308-redirects
 4. **Homepage hero.** `pages/home-0.html` is the new hero (navy rounded card,
    Playfair H1 "San Diego Personal Trainer for Executives", gold italic
    subhead, no CTA). If the live hero carries anything else, edit that file.
-5. **Images are hotlinked from Squarespace.** 6 distinct
-   `images.squarespace-cdn.com` URLs remain (Oct 17, 2026), one of them on
-   almost every page: the Brandon testimonial, the PN logo, a 100px image
-   (`61f78fa7-…png`), the Thumbtack Pro screenshot, Dr. Jackson-Ricketts'
-   headshot and the Executive Reset dumbbell photo. They will break when the
-   Squarespace subscription ends. Put each in `site/img/` (served at
-   `/assets/img/`) and update the references before cancelling. The seven
-   client transformation photos are done: re-branded (old knot logo removed,
-   header logo added; clients untouched) and served from `/assets/img/`.
+5. **BEFORE CANCELLING SQUARESPACE: replace or remove these images.** Five
+   visible images are still hotlinked from `images.squarespace-cdn.com` (Oct 18,
+   2026) and will break when the subscription ends. Put each in `site/img/`
+   (served at `/assets/img/`) and update the reference, or remove it.
+   `python3 build.py --check` prints a WARNING per remaining URL.
+
+   | Image | Where it appears |
+   |---|---|
+   | Brandon testimonial (`Brandon+Testimonial.jpg`) | pages/case-studies.html (frozen record; swapping the src needs an owner override) |
+   | Precision Nutrition logo (`PN+Logo+NMH.png`) | pages/about.html (credentials list) |
+   | NASM CES badge (`61f78fa7-8907-4144-8033-b37ec32718d5.png`, 100px) | pages/about.html (credentials list) |
+   | Thumbtack Pro screenshot, used as the coach photo (`Screenshot_20250416_132107_Thumbtack+Pro-EDIT.jpg`) | pages/about.html, pages/headers/about-header.html (schema "image"), pages/personal-trainer-4s-ranch.html (Meet Nemezio photo; locked page, the src swap needs an owner override) |
+   | Dr. Damien Jackson-Ricketts headshot (`damien-jackson-ricketts.jpg`) | pages/partners.html |
+
+   Done: the site-wide schema image (site-header) and the homepage
+   primaryImageOfPage (home-header) now use
+   `/assets/img/hero-coach-client-cable-pulldown-1600.jpg` instead of the
+   Squarespace dumbbell photo. That URL only resolves once this build serves
+   the domain, so do not paste either header into Squarespace before cutover.
+   The seven client transformation photos were already moved: re-branded
+   (old knot logo removed, header logo added; clients untouched) and served
+   from `/assets/img/`.
 6. **Analytics (GA4 / Clarity, human-side settings).** The tags themselves
    are in the repo (see "Measurement"); these are the settings around them:
    (a) GA4 cross-domain: Admin > Data streams > the web stream > Configure
