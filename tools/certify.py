@@ -1218,7 +1218,12 @@ BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES",
           "$475", "$510", "$550", "$625", "$650", "$675", "$700", "$725",
           "$755", "$875", "$950", "$975", "$995",
           # August add-ons: guest 75 (now 90), referral credit 50
-          "$50", "$75",
+          # $75 is NOT here (Audit Reconciliation run, Oct 18 2026): it is the
+          # Virtual Performance Assessment price (CANON CANONICAL FACTS). It
+          # stays banned in its August MEANINGS (guest add-on, travel fee) via
+          # retired_75 below, which reads context the way retired_pack_rate
+          # does for $140.
+          "$50",
           "$1,005", "$1,395", "$1,400", "$1,425", "$1,625", "$1,700",
           "$1,725", "$1,860", "$1,950", "$2,150", "$2,700", "$2,850",
           "$4,185", "$5,175", "$5,580"]
@@ -1514,6 +1519,33 @@ def retired_pack_rate(text):
             out.append(t[max(0, m.start()-90):m.end()+90].strip())
     return out
 
+_VIRTUAL_ASSESS = r'virtual (?:performance )?assessment'
+
+def retired_75(text):
+    """$75 anywhere except as the Virtual Performance Assessment price
+    (CANON CANONICAL FACTS, Oct 17 2026). The name must sit within 250
+    characters before the figure or 120 after it, in the flattened copy, so
+    "It is $75, credited ..." after a sentence naming the assessment passes,
+    and "$75 guest add-on" or "$75 travel fee" fails."""
+    t = _flat(text); out = []
+    for m in re.finditer(r'\$75\b(?![\d,]*\d)', t):
+        after = t[m.end():m.end()+120]
+        if re.match(r'\s*[-–]\s*\d', after): continue      # third-party range
+        if re.search(_VIRTUAL_ASSESS, t[max(0, m.start()-250):m.start()] + after, re.I): continue
+        out.append(t[max(0, m.start()-90):m.end()+90].strip())
+    return out
+
+def _selftest_retired_75():
+    must_fail = ["<p>Guest add-on: $75 per session.</p>",
+                 "<p>A $75 travel fee applies outside the area.</p>",
+                 "<li>Extra session $75</li>"]
+    must_pass = ["<p>Remote clients start with the $75 Virtual Performance Assessment, credited toward the first purchase.</p>",
+                 "<p>Remote clients take the Virtual Performance Assessment. It is self-measured with live video guidance. It is $75, credited toward your first purchase.</p>",
+                 "<p>Reset Platinum is $750 per 4 weeks.</p>",
+                 "<p>Competitors charge $75-120 per session.</p>"]
+    for s in must_fail: assert retired_75(s), f"retired_75 self-test: should fail: {s}"
+    for s in must_pass: assert not retired_75(s), f"retired_75 self-test: should pass: {s}"
+
 # ─── (c) structure ─────────────────────────────────────────────────
 class _P(html.parser.HTMLParser):
     VOID = {'br','img','hr','meta','link','input','source','wbr','area','col','embed','param','track','path','svg'}
@@ -1626,6 +1658,7 @@ def run():
     print("\n### (a) COMPLIANCE STRIKES")
     _selftest_case_study_exempt()   # Oct 17 2026 exemption fixes, both directions
     _selftest_lbs_fragment()        # Oct 18 2026 audit: ranges with '+' and any dash, both directions
+    _selftest_retired_75()          # Oct 18 2026 audit: $75 legal only as the Virtual Performance Assessment
     ciia = {}
     for f in files:
         t = open(f).read()
@@ -1718,6 +1751,8 @@ def run():
             print(f"   {f}  [$150 published as a session rate - it is the assessment]  …{ctx[:90]}…"); B+=1
         for ctx in retired_pack_rate(src):
             print(f"   {f}  [$140 as a pack/session price - the retired August 10-pack rung]  …{ctx[:90]}…"); B+=1
+        for ctx in retired_75(src):
+            print(f"   {f}  [$75 outside the Virtual Performance Assessment - the retired guest add-on / travel fee]  …{ctx[:90]}…"); B+=1
         for i,l in enumerate(L,1):
             # a travel FEE, not any dollar figure sharing a line with the word travel
             if re.search(r'travel[^.<]{0,30}\$(?:50|75)\b|\$(?:50|75)\b[^.<]{0,30}travel', l, re.I):
