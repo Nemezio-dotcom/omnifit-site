@@ -5847,3 +5847,90 @@ Each entry is the page's new answer as `tools/faq.py` extracts it, normalised li
 4. **Desk-worker "exactly which muscles" (two places) and the Encinitas and Fairbanks Ranch "exactly what's causing / where dysfunction exists" were softened.** A movement screen can't pinpoint individual muscles or a cause with certainty, so these were claims about the body. Everyday uses ("exactly where you stand", "exactly what you pay", "exactly what to expect") stay.
 5. **The body-composition device FAQ claimed BIA outputs are "measurements the device produces natively rather than estimates".** It now says the device reads impedance and phase angle directly, and that fat mass, lean mass, body cell mass and total body water are calculated estimates. The four-frequency facts and the Class IIa wording are untouched (certify class_iia_conditions passes).
 6. **The cadence phrase** is "progress reviews every 4 weeks (at least every 12 weeks on Train Only)" wherever a sentence could carry it. Short list items and table cells say "Progress reviews every 4 weeks". Measurement cadences that said "monthly" (body measurements, strength benchmarks) say "every 4 weeks".
+
+
+---
+
+# Final cleanup before the external audit (Oct 18 2026)
+
+**Branch:** `claude/cited-pages-scannability-ai-qvizrx`, restarted from main at e6ddff4 (the accuracy sweep).
+**Owner approvals used this run:** the Section B hash change (item 1), three H2 edits (item 2), two Rancho Bernardo lines (item 3), meta and schema leftovers (item 4), and the 2016 coaching fact (item 5). Line numbers below are as of e6ddff4.
+
+## Item 1: 9-point screen (owner-approved hash change)
+
+`<li>Grip Strength — a reliable marker of functional strength, tracked monthly</li>` → `<li>Grip Strength — a reliable marker of functional strength, reviewed every 4 weeks</li>`, byte-identical on all 11 territory pages:
+
+- pages/personal-trainer-4s-ranch.html:1055
+- pages/personal-trainer-carlsbad.html:258
+- pages/personal-trainer-carmel-valley.html:328
+- pages/personal-trainer-del-mar.html:364
+- pages/personal-trainer-encinitas.html:254
+- pages/personal-trainer-fairbanks-ranch.html:328
+- pages/personal-trainer-la-jolla.html:383
+- pages/personal-trainer-rancho-bernardo.html:332
+- pages/personal-trainer-rancho-santa-fe.html:349
+- pages/personal-trainer-santaluz.html:256
+- pages/personal-trainer-solana-beach.html:328
+
+**Section B hash:** 4c720960dec5a809 → **f9dfcec684d7a9dd**. All 11 pages agree, and certify reports no invariant mismatch. CANON INVARIANTS records the new value, the previous one and this approval. The other four hashes are unchanged: a6c7e65dddff4795, 7af0d0049b0b7aba, 02bd9cb90a71ce69, 6b1b0f4efbd4a72c.
+
+## Item 2: headings that promised outcomes (owner-approved H2 edits)
+
+| File:line | Before | After |
+|---|---|---|
+| pages/desk-worker-posture-pain.html:366 | <h2>The Bridge From Pain-Managed to Pain-Free and Strong</h2> | <h2>The Bridge From Pain-Managed to Strong, Without the Flare-Ups</h2> |
+| pages/desk-worker-posture-pain.html:441 | <h2>From 60-Hour Desk Weeks to Pain-Free and 18 lbs of Muscle</h2> | <h2>From 60-Hour Desk Weeks to Corrected Posture and 18 lbs of Muscle</h2> |
+| pages/hiit-personal-trainer-san-diego.html:548 | <h2>Efficient Conditioning — Without the Injury Risk</h2> | <h2>Efficient Conditioning — Built to Keep Injury Risk Low</h2> |
+
+## Item 3: Rancho Bernardo (owner override, these two lines only)
+
+| File:line | Before | After |
+|---|---|---|
+| pages/personal-trainer-rancho-bernardo.html:132 | for active adults over 30 who want results without injury risk. | for active adults over 30 who want a program built to keep injury risk low. |
+| pages/personal-trainer-rancho-bernardo.html:201 | <li>Monthly strength benchmarks</li> | <li>Strength benchmarks reviewed every 4 weeks</li> |
+
+## Item 4: meta and schema leftovers
+
+| File:line | Before | After |
+|---|---|---|
+| pages/headers/how-we-measure-your-progress-header.html:16 | standardized metrics, formal 30-day progress reports, and program adjustments | standardized metrics, progress reviews every 4 weeks, and program adjustments |
+| tools/mkheaders.py:12 | standardized metrics, formal 30-day progress reports, and program adjustments | standardized metrics, progress reviews every 4 weeks, and program adjustments |
+| pages/headers/the-30-minute-executive-reset-header.html:34 | nutrition coaching, and progress tracked across 12 objective metrics. Follows | nutrition coaching, and progress tracked across 12 metrics, measured and self-reported, with progress reviews every 4 weeks. Follows |
+| pages/headers/contactform-header.html:84 | and progress tracked across 12 objective metrics." | and progress tracked across 12 metrics, measured and self-reported, with progress reviews every 4 weeks." |
+
+## Item 5: experience claims (coaching since 2016)
+
+| File:line | Before | After |
+|---|---|---|
+| pages/about.html:138 | and thought I could do it better. Years on, that is still the job. | and thought I could do it better. I first started coaching in 2016, for the love of it, and later made it my profession. That is still the job. |
+| pages/about.html:280 | He has coached for over ten years and holds 190+ five-star reviews. | He has been coaching since 2016 and holds 190+ five-star reviews. |
+| pages/headers/about-header.html:61 | He has coached for over ten years and holds 190+ five-star reviews. | He has been coaching since 2016 and holds 190+ five-star reviews. |
+| pages/about.html:341 | <div>10+ YEARS COACHING</div> | <div>COACHING SINCE 2016</div> |
+| pages/contactform.html:545 | <span class="trust-value">10+</span> <span class="trust-label">Years Experience</span> | <span class="trust-value">2016</span> <span class="trust-label">Started Coaching</span> |
+| pages/personal-trainer-4s-ranch.html:737 | <div class="fr-stat-num">10+</div><div class="fr-stat-label">Years Coaching</div> | <div class="fr-stat-num">2016</div><div class="fr-stat-label">Started Coaching</div> |
+| pages/personal-trainer-4s-ranch.html:1004 | I've spent over a decade helping busy professionals rebuild their bodies, | Since 2016, I've helped busy professionals rebuild their bodies, |
+| pages/personal-trainer-rancho-santa-fe.html:255 | <div class="rs-stat-num">10+</div><div class="rs-stat-label">Years Coaching</div> | <div class="rs-stat-num">2016</div><div class="rs-stat-label">Started Coaching</div> |
+| pages/corrective-exercise-post-rehab.html:1115 | plus an ACE Corrective Exercise Specialist certification, with 10+ years of coaching experience. | plus an ACE Corrective Exercise Specialist certification, and has been coaching since 2016. |
+| pages/headers/corrective-exercise-post-rehab-header.html:142 | plus an ACE Corrective Exercise Specialist certification, with 10+ years of coaching experience. | plus an ACE Corrective Exercise Specialist certification, and has been coaching since 2016. |
+
+**Notes on items 2–5**
+- **Desk-worker case H2.** Alo's case (consent list; card carries the verbatim 2a disclosure, the 12-month timeline and third-person past tense) is about posture, energy and +18 lb of lean muscle. It never mentions pain. So the heading names what the card documents, "Corrected Posture and 18 lbs of Muscle", rather than "Back to Training": Alo wasn't returning from a layoff. The card was already 2a-compliant and certify passes it.
+- **Ownership:** none of the three new H2s adds or removes an owned keyword. `build.py --check` (ownership incl. X01) passes.
+- **Item 4 correction to the last report.** The Executive Reset "meta" leftover was its Service schema description (header line 34), not the meta description. The page's WebPage description never carried "objective metrics". The Service description is fixed here. The how-we-measure meta keeps its length (182 characters before and after) and also changed in `tools/mkheaders.py` META, so a header regeneration can't revert it. The contactform change is the Foundation offer's Service description.
+- **Badges.** The two-part stat badges (a large number over a small label) read "2016 / Started Coaching" on contactform, 4S Ranch and Rancho Santa Fe. "Coaching Since 2016" doesn't split into a number and a label without reading backwards, and "Since 2016" at 36px risks overflow on phones. The single-line text badge on /about reads "COACHING SINCE 2016". All of these are literally true and claim no number of professional years.
+- **About narrative.** "I first started coaching in 2016, for the love of it, and later made it my profession. That is still the job." It follows the paragraph about getting certified, without dating the certification itself.
+- **Checked, nothing to change:** the site-wide Person node (site-header.html) has no tenure claim and no yearsOfExperience-style field anywhere in the repo. No FAQ answer elsewhere makes the claim. about.html:287 "I spent years coaching in commercial gyms and borrowed spaces" claims no number and stays. Celeste's "nearly a decade of clinical bodywork experience" (partners) is a third party's and is unchanged.
+
+## New certify rule: coaching_tenure_claim (stale canon)
+
+Fails on "10+ years", "over / more than a decade" or "over / more than ten years" in a sentence with a coaching, experience, helping or training word. It passes when the sentence names a partner or another practitioner. Every file in the glob is swept, frozen records included. It is self-tested both ways on every run: four must-fire cases (badge, prose, "over a decade helping", "10+ years of coaching experience") and three must-pass cases ("coaching since 2016", a partner's decade of bodywork, "a decade of desk work"). Run against the files as they stood at e6ddff4, it reported all nine old claims (about ×2, about-header, contactform, 4S Ranch ×2, Rancho Santa Fe, corrective page and header) and nothing on partners. CANON records the fact in the ENTITY BLOCK ("Coaching since 2016 (hobby, then professional). Never claim a specific number of professional years.") and the rule in (b) STALE CANON; tools/README documents it.
+
+## Checks (final state)
+
+| Check | Result |
+|---|---|
+| `python3 build.py` / `--strict` / `--check` (links, H1, JSON-LD, emoji, 404/_headers, redirects, tracking, keyword ownership incl. X01) | PASSED; the five squarespace-cdn.com warnings remain, by design |
+| `python3 tools/certify.py` | PASSED: compliance 0, stale canon 0, structure 0, not-run 0, amendment 2a/2g 0 |
+| Invariant hashes | only Section B moved (→ f9dfcec684d7a9dd, recorded); the other four are unchanged |
+| FAQ mirrors | every header FAQPage mirrors its page; this run's one FAQ answer change (corrective, "What credentials does the trainer have?") is mirrored in its header |
+| `tools/mobileaudit.js --open-details` at 390 and 412: about, contactform, corrective, desk-worker, hiit, and the 11 territory pages | PASSED: scrollWidth equals the viewport and nothing is clipped. Narrow counts are unchanged from the previous run (existing grids) |
