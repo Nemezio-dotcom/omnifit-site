@@ -7,6 +7,7 @@ two stay in step.
 ```
 python3 tools/certify.py     # the three-category certification
 python3 tools/mkheaders.py   # regenerate the Batch 3 page headers
+python3 tools/mkheaders.py --check   # writes nothing; FAILS if any of the 9 Batch 3 headers differs from what it would write
 python3 tools/ownership.py   # keyword ownership on public/ (also run by build.py --check)
 python3 tools/ownership.py --selftest   # its must-fail / must-pass fixtures
 python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-urls-*.txt and the tracking rule
@@ -701,12 +702,18 @@ problem kind, or the run fails. Negative-tested when written: removing the
 `/old-chain /home 301` reports the chain, and disabling the chain rule in the
 checker trips the "add a chain" fixture.
 
-Known drift, recorded so the next run is not surprised: `mkheaders.py` is NOT
-a no-op on `pages/headers/how-we-measure-your-progress-header.html`, but since
-Oct 16, 2026 only its leading comment differs (the file carries a hand-written
-Oct 2 comment; mkheaders writes its Batch 3 template comment). The JSON-LD is
-identical. The old 7-vs-6 FAQ "drift" was the method toggle being read as an
-FAQ, fixed by marking it `fq fq-method`. Keep the Oct 2 comment if it rewrites.
+`mkheaders.py` reproduces all nine Batch 3 headers byte-for-byte (Run 7C
+follow-up, Oct 18 2026). `python3 tools/mkheaders.py --check` proves it without
+writing; negative-tested by putting "Medical-grade" back into the
+body-composition header, which reports DRIFT and exits 1. Three things it used
+to get wrong are now encoded: the body-composition META description
+("Multi-frequency", not "Medical-grade"); `NOTE`, the hand-written Oct 2 comment
+on how-we-measure-your-progress; and `CLOSE_PUNCT`, the headers (weight-loss,
+omnifit-vs-competitors) whose answers were hand-corrected to close the space
+the tag strip leaves before punctuation ("(see Outcomes) ."). The other headers
+still carry that space, so the closing is per slug, not global. A hand edit to
+a Batch 3 header must be made in mkheaders.py too, or `--check` fails. Run
+`--check` before and after any header edit.
 
 ## Tracking check (`build.py --check`, Oct 17, 2026)
 
