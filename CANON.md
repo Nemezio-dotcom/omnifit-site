@@ -1757,7 +1757,7 @@ Page-specific rules that are NOT ownership but are locked in the same table:
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
-  (page hash ae491a42394531b5, header hash d94ee90c6fdafa8e). BOTH HASHES
+  (page hash ff5360d2b6b5029b, header hash 22744ada78eb0707). BOTH HASHES
   CHANGED in the Claims & Tone run (6B, Oct 18 2026), OWNER-APPROVED (run
   brief item 13a and item 12): previous a6c7e65dddff4795 / 7af0d0049b0b7aba.
   Two edits, identical on all 12 pages and 12 header mirrors: "Every client
@@ -1765,7 +1765,10 @@ legitimately changes an invariant, and say so in REPORT.md)
   cycle." -> "Programs and session packs start with a Performance
   Assessment ($150 in person, $75 virtual), credited toward your first
   purchase; for a single session it's recommended, not required."; and
-  "$900 to $2,600 in-home" -> "$900 to $2,600+ in-home". Currently 12
+  "$900 to $2,600 in-home" -> "$900 to $2,600+ in-home"; and the US
+  spelling sweep (item 12) "paid in full at enrolment" -> "... enrollment".
+  (Interim values after the first two edits only: ae491a42394531b5 /
+  d94ee90c6fdafa8e.) Currently 12
   pages and 12 headers (CARRIER LIST, enforced by certify.py
   PRICING_FAQ_CARRIERS since the Audit Reconciliation run, Oct 18 2026): the
   eleven territory pages and corrective-exercise-post-rehab. CARRIER REMOVED, OWNER-APPROVED (Audit
