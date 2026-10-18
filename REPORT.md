@@ -8092,3 +8092,51 @@ At 390px and 412px, the rates step-2 card (item 2d) and the contact page's two c
 | 10a | `pages/contactform.html:153-175, 487-489` | — | `.expect-next` styles (base + ≤600px padding) |
 | tools | `tools/certify.py` | see Checker changes | — |
 | canon | `CANON.md` (The Foundation; RETIRED LAUNCH COPY; LAUNCH DECISIONS item 16) | see CANON.md | — |
+
+---
+
+# Run 7B — Last copy fixes (Oct 18 2026)
+
+**Branch:** `ccr-e34fc0bb-2mfifz`, restarted from `main` at `5eee5db`, merged back to `main` once every check passed.
+
+## Checks
+
+| Check | Result |
+|---|---|
+| `python3 build.py` / `build.py --check` | PASSED / PASSED |
+| `python3 tools/ownership.py` / `--selftest` | PASSED / PASSED |
+| `python3 tools/certify.py` | **PASSED**, 0 findings |
+| Invariant hashes | page pricing ff5360d2b6b5029b · header pricing 22744ada78eb0707 · credentials f551f6751a2c7fd7 · archetypes 6b1b0f4efbd4a72c · 9-point 5a629cf689301f84. All unchanged. |
+| `tools/mobileaudit.js --open-details` (390/412) | PASSED. Per-page narrow and clipped counts identical to run 7. |
+
+No heading or FAQ question text changed. The private-personal-trainer FAQ answer edit is mirrored in its header FAQPage, and certify's mirror check passes. The FAQs-page line (`FAQs.html:355`) is the closing CTA paragraph, not an FAQ answer, so it has no mirror. Item 1 (4S Ranch) and item 3 (partners) are body copy with no header counterpart.
+
+## Checker change (tools/certify.py), self-tested both ways
+
+Item 1's dictated sentence, "...most of the measurable progress is built, reviewed against your baseline every 4 weeks", fired T1-2 `result_near_timeframe` ('measurable progress' near '4 weeks'). The sentence states how often progress is reviewed, not a result promised within a window, so this is a checker false positive. It has the same shape as the billing-cadence false positive fixed in run 7.
+
+The fix is `REVIEW_CADENCE`: a timeframe is skipped only when "review", "reviewed" or "reviews" appears up to four words before "every" or "each" followed by a number and unit. Every other timeframe in the window is still checked.
+
+`_selftest_result_review_cadence()` runs on every run:
+- **Must pass:** the item 1 sentence.
+- **Must fire:** "You will see measurable progress every 4 weeks.", "Measurable progress in 8 weeks, reviewed every 4 weeks.", "Measurable progress, reviewed every 4 weeks, within 8 weeks." and "Visible results every 4 weeks, review included."
+- **Negative test:** with the exemption removed, the self-test fails.
+
+This narrows a Tier 1 rule, so it is disclosed here for the owner to confirm.
+
+## Noticed, not changed
+
+`the-omnifit-method.html:323` still reads "This is where the visible transformation happens". There is no timeframe and it is outside this brief.
+
+## Every change, file:line before -> after
+
+| Item | File:line | Before | After |
+|---|---|---|---|
+| 1 | `pages/personal-trainer-4s-ranch.html:703` | This is where visible transformation happens, typically weeks 5–16. | This is where most of the measurable progress is built, reviewed against your baseline every 4 weeks. |
+| 2 | `pages/FAQs.html:355` | assess your goals | talk through your goals |
+| 2 | `pages/in-home-personal-trainer-san-diego.html:824` | assess your goals | talk through your goals |
+| 2 | `pages/private-personal-trainer-san-diego.html:601` | assess your goals | talk through your goals |
+| 2 | `pages/private-personal-trainer-san-diego.html:634` | assess your goals | talk through your goals |
+| 2 | `pages/headers/private-personal-trainer-san-diego-header.html:102` | assess your goals | talk through your goals |
+| 3 | `pages/partners.html:1191` | OmniFit's clinical partner network ensures nothing falls through the cracks. | OmniFit's referral partners help keep your training and your care coordinated, with your permission. |
+| tools | `tools/certify.py` | — | `REVIEW_CADENCE` exemption in `result_near_timeframe` + `_selftest_result_review_cadence()` (see above) |

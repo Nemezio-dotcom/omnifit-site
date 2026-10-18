@@ -598,6 +598,20 @@ RESULT = (r'(?:measurable|visible|noticeable|significant|dramatic)\s+\w*\s*'
           r'|(?:see|seeing|achiev\w+|produc\w+|deliver\w+)\s+(?:\w+\s+){0,3}?'
           r'(?:result|results|change|changes|improvement|improvements|transformation)')
 
+REVIEW_CADENCE = r'\breview(?:ed|s)?\b(?:\s+\S+){0,4}?\s+(?:every|each)\s+$'
+
+def _selftest_result_review_cadence():
+    """Both directions, every run (run 7B): a review cadence passes; a result
+    promised within a window still fires, beside a cadence or not."""
+    ok = ('<p>This is where most of the measurable progress is built, reviewed against '
+          'your baseline every 4 weeks.</p>')
+    assert result_near_timeframe(ok) == [], "review cadence fired as an outcome window"
+    for bad in ('<p>You will see measurable progress every 4 weeks.</p>',
+                '<p>Measurable progress in 8 weeks, reviewed every 4 weeks.</p>',
+                '<p>Measurable progress, reviewed every 4 weeks, within 8 weeks.</p>',
+                '<p>Visible results every 4 weeks, review included.</p>'):
+        assert result_near_timeframe(bad), f"T1-2 window promise passed: {bad}"
+
 def result_near_timeframe(text, window=12):
     """A result paired with a promised window, in any units. The lbs rule is the
     specific case; results must be framed against the client's own baseline."""
@@ -611,6 +625,12 @@ def result_near_timeframe(text, window=12):
         w = _near(t, m, window)
         for tf in re.finditer(TIMEFRAME, w, re.I):
             if re.search(CONTRAST, w[:tf.start()], re.I): continue
+            # A REVIEW CADENCE is not an outcome window (run 7B, Oct 18 2026):
+            # "progress ... reviewed against your baseline every 4 weeks" says
+            # how often progress is checked, not what it will be by when. Only
+            # "review(ed|s)" up to four words before "every/each <n> <unit>"
+            # qualifies; every other timeframe in the window is still checked.
+            if re.search(REVIEW_CADENCE, w[:tf.start()], re.I): continue
             if _case_study_exempt(t, m, disclaimed): break
             out.append(("result promised within a window (T1-2)", f"'{m.group(0).strip()}' near '{tf.group(0).strip()}'",
                         t[max(0, m.start()-100):m.end()+140].strip()))
@@ -1739,6 +1759,7 @@ def run():
     _selftest_case_study_exempt()   # Oct 17 2026 exemption fixes, both directions
     _selftest_lbs_fragment()        # Oct 18 2026 audit: ranges with '+' and any dash, both directions
     _selftest_retired_75()          # Oct 18 2026 audit: $75 legal only as the Virtual Performance Assessment
+    _selftest_result_review_cadence()  # run 7B: review cadence is not an outcome window, both directions
     ciia = {}
     for f in files:
         t = open(f).read()
