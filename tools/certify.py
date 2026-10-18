@@ -37,8 +37,12 @@ _UNIT = r'(?:day|week|month|year)s?'
 # A timeframe bounds an outcome window only when it is numerically quantified
 # ("4-6 months", "Weeks 5-8", "Month 3") or rate-framed ("per week", "/week").
 # Bare duration nouns ("after years of inactivity") do not bound a window.
-TIMEFRAME = (r'(?:\b\d[\d,]*\s*(?:[-–]|to)?\s*\d*\s*' + _UNIT + r'\b'
-             r'|\b' + _UNIT + r'\s*\d+(?:\s*[-–]\s*\d+)?\b'
+# Any dash character counts as a range separator (Oct 18 2026 audit run): the
+# hyphen, en dash and em dash, raw or as an HTML entity, and "to". The em dash
+# was missing, so "4—6 months" was not a timeframe.
+_DASH = r'(?:[-–—‒]|&ndash;|&mdash;|&#821[12];|to)'
+TIMEFRAME = (r'(?:\b\d[\d,]*\+?\s*(?:' + _DASH + r')?\s*\d*\+?\s*' + _UNIT + r'\b'
+             r'|\b' + _UNIT + r'\s*\d+(?:\s*' + _DASH + r'\s*\d+)?\b'
              r'|\b(?:per|a|each|every)\s+' + _UNIT + r'\b'
              r'|/\s*' + _UNIT + r'\b)')
 NEGATED = r'\b(?:not|never|no|cannot|without|outside|beyond|instead of|rather than|refer)\b'
@@ -272,6 +276,26 @@ def _selftest_case_study_exempt():
     p2a_bad = p2a.replace('typically progress', 'typically improve')
     assert lbs_near_timeframe(named + p2a_bad + d, outcomes=''), "near-verbatim 2a pointer was exempted"
 
+def _selftest_lbs_fragment():
+    """Oct 18 2026 audit (item 9), both directions, every run: a pounds range
+    with a "+", any dash character and a quantified timeframe after in / over /
+    within is a T1-2 strike in a list item or a bare fragment."""
+    for bad in ('<li>20–30+ lbs in 4–6 months</li>',          # the exact retired line (en dash)
+                '<li>20-30+ lbs in 4-6 months</li>',          # hyphen
+                '<li>20—30+ lbs in 4—6 months</li>',          # em dash
+                '<li>20&ndash;30 lbs in 4&ndash;6 months</li>',
+                '<li>15-20 lbs within 8-12 weeks</li>', '<span>10 to 15 pounds over 3 to 6 months</span>',
+                '<li>Lose 20+ lb in 12 weeks</li>', '<p>Lose 10 lbs every 4 weeks.</p>'):
+        assert lbs_near_timeframe(bad, outcomes=''), f"T1-2 fragment passed: {bad}"
+    d = '<p>Individual results. Outcomes depend on starting point and vary between clients.</p>'
+    p2a = ('<p>Individual result, measured by OmniFit. How clients typically progress: '
+           '<a href="/outcomes">omnifittraining.com/outcomes</a>.</p>')
+    for ok in ('<li>Sustainable fat loss, no crash diets</li>',
+               '<p>sustainable fat loss of 20-30 lbs</p>',      # TIER 2 item 3: no timeframe
+               '<p>Virtual Executive Reset from $200 per 4 weeks.</p><p>Lose 20–30+ lbs sustainably.</p>',  # billing cadence
+               '<div>Mark · Board member</div><p>Mark came in at 248 lbs and went to 231 lbs over 4 months.</p>' + p2a + d):
+        assert lbs_near_timeframe(ok, outcomes='') == [], f"legitimate copy fired: {ok[:60]}"
+
 def _has_results_disclaimer_anywhere(text):
     return bool(DISCLAIMER_ANYWHERE.search(_flat(text)))
 
@@ -307,10 +331,18 @@ def _case_study_exempt(t, m, page_disclaimed, window=45):
 # rule invented 20 findings across three headers out of JSON punctuation. A
 # unit symbol that is also the language's most common delimiter cannot be a
 # unit token here.
-_T1_UNITS = (r'\d[\d,]*(?:\s*(?:–|-|&ndash;|to)\s*\d[\d,]*)?\s*'
+# Oct 18 2026 (external audit): "<li>20–30+ lbs in 4–6 months</li>" - the
+# exact TIER 1 item 2 example - sat on six town pages and certified clean. Root
+# cause: the "+" after the range ("30+") broke the unit match (the pattern
+# wanted the unit straight after the digits), and the em dash was not a range
+# separator. A "+" may now follow either number, and any dash counts
+# (_DASH). Self-tested both ways in _selftest_lbs_fragment.
+_T1_UNITS = (r'\d[\d,]*\+?(?:\s*' + _DASH + r'\s*\d[\d,]*\+?)?\s*'
              r'(?:lbs?\b|pounds?\b|inches\b|inch\b)'
              r'|\d[\d.,]*\s*%\s*(?:of\s+)?body[\s-]?fat'
              r'|body[\s-]?fat[^.]{0,20}?\d[\d.,]*\s*%')
+
+BILLING_CADENCE = r'\$\s?[\d,]+(?:\.\d\d)?\s*(?:/\s*|(?:per|every|each|a)\s+)$'
 
 def lbs_near_timeframe(text, window=15, outcomes=None):
     t = _flat(text); out = []
@@ -319,6 +351,11 @@ def lbs_near_timeframe(text, window=15, outcomes=None):
         w = _near(t, m, window)
         for tf in re.finditer(TIMEFRAME, w, re.I):
             if re.search(CONTRAST, w[:tf.start()], re.I): continue
+            # A billing cadence ("$200 per 4 weeks", "$640 every 4 weeks") is a
+            # price, not an outcome window. Surfaced when the "+" fix (Oct 18
+            # 2026) let "Lose 20–30+ lbs sustainably" match on Carmel Valley,
+            # 15 words from the neighbouring card's "$200 per 4 weeks".
+            if re.search(BILLING_CADENCE, w[:tf.start()], re.I): continue
             if _case_study_exempt(t, m, disclaimed): break
             # TIER 1 item 2 carve-out (Outcome Claims Amendment, Oct 1 2026):
             # an aggregate figure with a timeframe stays banned UNLESS it is
@@ -1072,6 +1109,44 @@ def _selftest_coaching_tenure():
     assert hits('<p>Celeste is a Licensed Massage Therapist with over a decade of clinical bodywork experience.</p>') == [], "a partner's experience flagged"
     assert hits('<p>Over a decade of desk work leaves the hips tight.</p>') == [], "a decade of desk work (no coaching claim) flagged"
 
+# ─── PLACEHOLDER COPY (Oct 18 2026, external audit item 10) ─────────
+# A build placeholder left in VISIBLE copy - "[CASE STUDY SUMMARY: ...]",
+# an "Add Image" photo-slot label, "TODO", or a "[" followed by all-caps
+# placeholder text ("[CLIENT NAME]", "[INSERT LINK") - is BROKEN STRUCTURE
+# (c): the page is unfinished, which is neither a compliance strike nor a
+# stale fact. Read on the flattened copy (_flat), so HTML comments, <style>,
+# executable <script> and tag attributes are not copy; ld+json IS copy (a
+# placeholder in schema is published too). Every file in the glob, frozen
+# records INCLUDED: an "Add Image" span is no measurement. Self-tested both
+# ways (_selftest_placeholder).
+_PLACEHOLDER = re.compile(
+    r'\[\s*CASE STUDY'
+    r'|\b(?i:add image)\b'
+    r'|\bTODO\b'
+    r'|\[\s*[A-Z]{2,}(?:[\s_:/&\'.,-]+[A-Z0-9]+)*(?:\]|:|\s|$)')
+
+def placeholder_copy(text):
+    t = html.unescape(_flat(text)); out = []
+    for m in _PLACEHOLDER.finditer(t):
+        out.append((m.group(0).strip(), t[max(0, m.start()-50):m.end()+60]))
+    return list(dict.fromkeys(out))
+
+def _selftest_placeholder():
+    hits = lambda t: [h for h, _ in placeholder_copy(t)]
+    for bad in ('<div class="gq-block">[CASE STUDY SUMMARY: starting diagnostic, rescan data.]</div>',
+                '<div class="photo-placeholder"><span>Add Image</span></div>',
+                '<p>TODO: write this section</p>', '<p>Hello [CLIENT NAME], welcome.</p>',
+                '<p>See [INSERT LINK HERE] for details.</p>',
+                '<script type="application/ld+json">{"name": "[PAGE TITLE]"}</script>'):
+        assert hits(bad), f"placeholder passed: {bad}"
+    for ok in ('<!-- [CASE STUDY SUMMARY: hidden in a comment] TODO -->',
+               '<style>#x [data-tag="a"] { color: red; } /* TODO */</style>',
+               '<script>var a = [1, 2]; // TODO</script>',
+               '<img alt="Add Image" src="a.jpg">', '<p>Results [n=47], measured by OmniFit.</p>',
+               '<p>Mark came in at 248 lbs [weighed on the Bodystat].</p>', '<p>Add images of your space to the app.</p>',
+               '<script type="application/ld+json">{"knowsAbout": ["NASM CPT", "ACE"]}</script>'):
+        assert hits(ok) == [], f"legitimate copy flagged: {ok} -> {hits(ok)}"
+
 # Every rule names the tier it encodes. TIER 1 rules report a violation; TIER 2
 # rules report a MISSING CONDITION. See CANON COMPLIANCE SCREEN - TWO TIERS.
 COMPLIANCE = [
@@ -1550,6 +1625,7 @@ def run():
 
     print("\n### (a) COMPLIANCE STRIKES")
     _selftest_case_study_exempt()   # Oct 17 2026 exemption fixes, both directions
+    _selftest_lbs_fragment()        # Oct 18 2026 audit: ranges with '+' and any dash, both directions
     ciia = {}
     for f in files:
         t = open(f).read()
@@ -1698,6 +1774,11 @@ def run():
     print("\n### (c) BROKEN STRUCTURE")
     faq.selftest()   # section-toggle summaries (rates V16) are not FAQ questions; both directions
     print("   (FAQ extractor: section-toggle exclusion self-tested both ways)")
+    _selftest_placeholder()
+    for f in ALL:
+        for hit, ctx in placeholder_copy(open(f).read()):
+            print(f"   {f}  [placeholder in visible copy: '{hit}']  …{ctx[:110]}…"); C+=1
+    print(f"   (placeholder rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
     inv={}; notrun=[]
     # The hashes CANON.md records, read once per run. A parse failure is
     # recorded, never swallowed: with no recorded table the comparison below

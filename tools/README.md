@@ -737,7 +737,8 @@ actually ships. CANON MEASUREMENT is the rule.
 ## Measurement test (`tools/tracktest.js`, Oct 17, 2026)
 
 Playwright against the built site, served from `public/` on 127.0.0.1 the way
-Cloudflare Pages serves it (`/slug` -> `public/slug/index.html`). It needs Node
+Cloudflare Pages serves it (`/` -> `public/index.html`, `/slug` -> `public/slug.html`;
+DEPLOY.md "Trailing slash"). It needs Node
 18+ and the `playwright` package with Chromium (`npm i -g playwright && npx
 playwright install chromium`), and is run after `python3 build.py`:
 
@@ -831,3 +832,59 @@ as Nemezio's. Self-tested both ways on every run (`_selftest_coaching_tenure`).
 Negative test on real copy: run against the files as they stood at e6ddff4,
 it reported all nine old claims (about x2, about-header, contactform, 4S Ranch
 x2, Rancho Santa Fe, corrective page and header) and nothing on partners.
+
+## Audit reconciliation run (Oct 18 2026): two checker gaps
+
+### `lbs_near_timeframe` missed the TIER 1 item 2 example itself
+
+`<li>20–30+ lbs in 4–6 months</li>` sat on six town pages (Carlsbad,
+Encinitas, Fairbanks Ranch, La Jolla, Santaluz, Solana Beach) and certified
+clean. It is the exact example CANON gives for TIER 1 item 2. Root cause, not
+windowing: `_T1_UNITS` wanted the unit straight after the digits, so the "+"
+in "30+" broke the match at both numbers, and the em dash was not a range
+separator in either `_T1_UNITS` or `TIMEFRAME`. Fix: a `+` may follow either
+number, and `_DASH` (hyphen, en dash, em dash, figure dash, `&ndash;`,
+`&mdash;`, `&#8211;`, `&#8212;`, "to") is the range separator in both
+patterns. List items and short fragments were never excluded; the flattener
+joins them into the text the 15-word window reads.
+
+The wider match surfaced one false positive on the real pages: Carmel
+Valley's persona line "Lose 20–30+ lbs sustainably" (TIER 2 item 3, no
+timeframe) sits 15 words from the next card's "$200 per 4 weeks". A billing
+cadence is a price, not an outcome window, so a timeframe directly preceded
+by a dollar figure and "per" / "every" / "each" / "a" / "/" is skipped
+(`BILLING_CADENCE`). "Lose 10 lbs every 4 weeks" (no dollar figure) still
+fires. WRONG IF a page pairs a price and a pounds figure as one promise
+("$640 every 4 weeks for 10 lbs"); none does today.
+
+`_selftest_lbs_fragment` runs every certify run. Must FAIL: the exact old line
+(en dash), the hyphen and em-dash variants, the `&ndash;` variant,
+"15-20 lbs within 8-12 weeks", "10 to 15 pounds over 3 to 6 months",
+"Lose 20+ lb in 12 weeks", "Lose 10 lbs every 4 weeks". Must PASS:
+"Sustainable fat loss, no crash diets", "sustainable fat loss of 20-30 lbs"
+(no timeframe), the Carmel Valley shape beside a billing cadence, and a named
+2a card carrying the verbatim disclosure and the page disclaimer.
+
+### `placeholder_copy` (broken structure, c)
+
+A build placeholder in visible copy fails: `[CASE STUDY`, `Add Image`
+(any case, whole words: "Add images of your space" passes), `TODO`
+(upper case, whole word), or `[` followed by an all-caps run of two or more
+letters (`[CLIENT NAME]`, `[INSERT LINK HERE`, `[PAGE TITLE]`). Category (c),
+not (b): a placeholder is an unfinished page, not a retired fact, and not a
+compliance shape. Read on `_flat` + `html.unescape`, so HTML comments,
+`<style>`, executable `<script>` and tag attributes (alt text) are not copy;
+ld+json IS copy, as everywhere else, because schema is published. Every file
+in the glob, frozen records INCLUDED (an "Add Image" span is not a
+measurement). JSON arrays (`["NASM CPT"]`) open with a quote and do not
+match; bracketed lower-case notes (`[n=47]`) do not match.
+
+Consequence recorded so it is not a surprise: the corrective-exercise
+`[CASE STUDY SUMMARY: ...]` block sits INSIDE an HTML comment (the inactive
+"RESULTS SLOT"), so it is not visible copy and this rule does not report it;
+it was removed as content. The footer's `<!-- TODO: ... -->` is a comment too
+and passes. Self-tested both ways (`_selftest_placeholder`): the bracketed
+summary, an "Add Image" span, "TODO:", "[CLIENT NAME]", "[INSERT LINK HERE]"
+and "[PAGE TITLE]" in ld+json fail; the same text in a comment, in CSS, in a
+script, in alt text, `[n=47]`, a lower-case bracketed note, "Add images of"
+and a JSON array of credentials pass.
