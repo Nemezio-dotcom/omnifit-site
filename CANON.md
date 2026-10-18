@@ -1126,6 +1126,10 @@ and overrides the earlier wording it replaces.)
       package, the diagnostic fee is credited toward your first cycle." ->
       "The $150 Performance Assessment is credited toward your first
       program, Reset cycle or 5-pack." Header mirrors verbatim.
+      SUPERSEDED in run 7 (Oct 18 2026), both prices shown: "The
+      Performance Assessment ($150 in person, $75 virtual) is credited
+      toward your first program, Reset cycle or 5-pack." (and "... toward
+      your first cycle." where that was the form). Header mirrors verbatim.
   17. FROZEN-RECORD OVERRIDE, ONE LINE: the CTA note in
       pages/case-studies.html and pages/home-3.html reads "$30 deposit,
       refunded the same day you attend your consultation" in place of "$30
@@ -1202,6 +1206,14 @@ and overrides the earlier wording it replaces.)
   Added in the Claims & Tone run (6B, Oct 18 2026): "Iron Orr" · "Elite
   Training" (headings now "Private Coaching in Santaluz" / "Private
   Coaching for Fairbanks Ranch", owner-approved).
+  Added in run 7 (final audit fixes, Oct 18 2026): "paid 45-minute"
+  (case-insensitive; the consultation is a 45-minute consultation with a
+  "$30 deposit, refunded the same day you attend your consultation") ·
+  "Credentialed access only" (studio access reads "Private, by
+  appointment: no walk-ins, no crowds"; non-member studio rates include a
+  Teqneeq day pass) · "Honest assessment of fit" (CTA notes read
+  "Straight answer on fit"; "assessment" names only the Performance
+  Assessment).
   Added in the Audit Reconciliation run (Oct 18 2026; CANONICAL FACTS):
   "45-minute movement assessment" · "seven tracked benchmarks" · "a travel
   fee may apply outside it" · "training throughout San Diego County" ·

@@ -1304,8 +1304,8 @@ RETIRED_LAUNCH_COPY = [
     "no standardized assessment", "Typically single", "flags inflammation",
     "@gmail.com", "g.page/r/CcePeMjnbDe9EBM/review", "$250/month",
     # Calendly follow-up (Oct 17 2026): the territory FAQ answer's old credit
-    # sentence. Canonical: "The $150 Performance Assessment is credited toward
-    # your first program, Reset cycle or 5-pack."
+    # sentence. Canonical (run 7): "The Performance Assessment ($150 in person,
+    # $75 virtual) is credited toward your first program, Reset cycle or 5-pack."
     "diagnostic fee is credited",
     # Launch decision 19 (Oct 17 2026): the travel-fee variants. Canonical:
     # "No travel fee inside our in-home service area; a travel fee may apply
