@@ -555,7 +555,7 @@
   <section class="rt-hero">
     <span class="rt-badge">Personal Training Rates · San Diego</span>
     <h1>OmniFit Performance <em>Programs</em></h1>
-    <p class="rt-hero-sub">Structured coaching programs for busy professionals 30+, in-studio, in-home, or virtual. Every rate on this page, in full. OmniFit bills in 4-week cycles, never by the calendar month, and adds nothing at checkout.</p>
+    <p class="rt-hero-sub">Structured coaching programs for busy professionals 30+, in-studio, in-home, or virtual. Every rate on this page, in full. OmniFit bills in 4-week cycles, never by the calendar month, and adds nothing at checkout. In-home outside our no-fee area: a travel fee, confirmed before you book.</p>
     <div class="rt-cta-row">
       <a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
       <a class="rt-btn rt-btn-ghost" href="#rt-choose">Compare Programs</a>
@@ -578,7 +578,7 @@
     </div>
 
     <div class="rt-ch" id="rt-chooser"
-      data-assessment="150" data-membership="119" data-cycle-weeks="4" data-foundation-cycles="3"
+      data-assessment="150" data-virtual-assessment="75" data-membership="119" data-cycle-weeks="4" data-foundation-cycles="3"
       data-sessions-1="4" data-sessions-2="8" data-sessions-3="12"
       data-foundation-studio-1="560" data-foundation-studio-2="1100" data-foundation-inhome-1="800"
       data-foundation-couples-studio-1="850" data-foundation-couples-inhome-1="1250"
@@ -711,6 +711,7 @@
       </li>
     </ol>
     <p class="rt-steps-note rt-reveal">No slot is held without payment. Appointments are confirmed only when payment is received.</p>
+    <p class="rt-steps-note rt-reveal"><strong>How remote clients are assessed:</strong> Executive Reset and other remote clients take the Virtual Performance Assessment, booked after the consultation. It is self-measured with live video guidance, with posture photos taken in the app; there is no Bodystat scan. It is $75, credited toward your first purchase the same way as the in-person assessment.</p>
   </div>
 
   <!-- ASSESSMENT -->
@@ -761,7 +762,7 @@
     <div class="rt-includes rt-reveal">
       <span class="rt-includes-label">Included in Every Program</span>
       <div class="rt-includes-grid">
-        <div class="rt-includes-item rt-reveal">Reassessments on the Bodystat QuadScan 4000</div>
+        <div class="rt-includes-item rt-reveal">Reassessments on the Bodystat QuadScan 4000 (in-person clients)</div>
         <div class="rt-includes-item rt-reveal">Custom programming based on OmniFit 4-phase methodology</div>
         <div class="rt-includes-item rt-reveal">Nutrition guidance &amp; macro framework</div>
         <div class="rt-includes-item rt-reveal">Full app access for workout tracking and logging</div>
@@ -1515,6 +1516,7 @@
       r.meta = freq === 'async' ? 'Async only, no live sessions' : num('sessions-' + freq) + ' live sessions per cycle (' + WEEKLY[freq] + ')';
       r.figs.push(fig(money(price), 'per 4-week cycle'));
       if (freq === 'async') r.lines.push(li('Accountability setting: Coached or Train Only.'));
+      r.lines.push(li('How remote clients are assessed: the ' + money(num('virtual-assessment')) + ' Virtual Performance Assessment, booked after the consultation. Self-measured with live video guidance, posture photos in the app, no Bodystat scan; credited toward your first purchase.'));
       r.more = ['#rt-reset', 'All Executive Reset tiers'];
     } else {
       var who = (couples ? 'couples-' : '') + format + '-' + freq;
