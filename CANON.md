@@ -557,6 +557,18 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
     Reconciliation run, Oct 18 2026, which changed every Rates instance and
     the header Offer descriptions); two pause weeks across the course with notice, extending the end
     date; sessions OmniFit cancels are credited.
+    HOW IT ENDS (owner decision, run 7, Oct 18 2026): the client chooses; NO
+    AUTOMATIC BILLING. After the third cycle the client decides whether to
+    continue on The Program at their tier's published rate, and nothing is
+    charged unless they confirm. Rates page wording (intro, "How it ends"
+    table cell, cancellation FAQ + header mirror): "After the third cycle you
+    choose whether to continue on The Program at your tier's published rate.
+    Nothing is charged unless you confirm." / "It ends after the third cycle.
+    Nothing more is charged unless you choose to continue on The Program." /
+    "After its third cycle you decide whether to continue on The Program;
+    nothing is charged unless you confirm, and The Program can then be ended
+    with 30 days' notice." Never "you continue on The Program" as an
+    automatic step.
 
   THE PROGRAM - continuation after the Foundation, or direct entry.
   Billed every 4 weeks.

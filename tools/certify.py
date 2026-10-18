@@ -285,7 +285,8 @@ def _selftest_lbs_fragment():
                 '<li>20—30+ lbs in 4—6 months</li>',          # em dash
                 '<li>20&ndash;30 lbs in 4&ndash;6 months</li>',
                 '<li>15-20 lbs within 8-12 weeks</li>', '<span>10 to 15 pounds over 3 to 6 months</span>',
-                '<li>Lose 20+ lb in 12 weeks</li>', '<p>Lose 10 lbs every 4 weeks.</p>'):
+                '<li>Lose 20+ lb in 12 weeks</li>', '<p>Lose 10 lbs every 4 weeks.</p>',
+                '<p>From $200 per 4 weeks. Lose 20 lbs in 8 weeks.</p>'):    # run 7: a price beside a real claim
         assert lbs_near_timeframe(bad, outcomes=''), f"T1-2 fragment passed: {bad}"
     d = '<p>Individual results. Outcomes depend on starting point and vary between clients.</p>'
     p2a = ('<p>Individual result, measured by OmniFit. How clients typically progress: '
@@ -293,6 +294,8 @@ def _selftest_lbs_fragment():
     for ok in ('<li>Sustainable fat loss, no crash diets</li>',
                '<p>sustainable fat loss of 20-30 lbs</p>',      # TIER 2 item 3: no timeframe
                '<p>Virtual Executive Reset from $200 per 4 weeks.</p><p>Lose 20–30+ lbs sustainably.</p>',  # billing cadence
+               # run 7: the cadence split from its price by the window edge
+               '<p>Virtual Executive Reset from $200 per 4 weeks</p><a>Explore Virtual Coaching →</a><h3>📉 Weight Loss Coaching</h3><p>For professionals aiming to lose 20–30 lbs sustainably: progressive training.</p>',
                '<div>Mark · Board member</div><p>Mark came in at 248 lbs and went to 231 lbs over 4 months.</p>' + p2a + d):
         assert lbs_near_timeframe(ok, outcomes='') == [], f"legitimate copy fired: {ok[:60]}"
 
@@ -344,8 +347,19 @@ _T1_UNITS = (r'\d[\d,]*\+?(?:\s*' + _DASH + r'\s*\d[\d,]*\+?)?\s*'
 
 BILLING_CADENCE = r'\$\s?[\d,]+(?:\.\d\d)?\s*(?:/\s*|(?:per|every|each|a)\s+)$'
 
+# A price with its billing cadence ("$200 per 4 weeks"), blanked to spaces of
+# the same length before the window is cut (positions hold). The in-window
+# BILLING_CADENCE test below misses it when the window edge splits the price
+# from its cadence: run 7 (Oct 18 2026) moved the Carmel Valley figure four
+# words later ("For professionals aiming to lose 20–30 lbs"), the window then
+# began at "per 4 weeks", and the neighbouring card's Reset price read as an
+# outcome window. Self-tested both ways in _selftest_lbs_fragment.
+BILLED_TIMEFRAME = (r'\$\s?[\d,]+(?:\.\d\d)?\s*(?:/\s*|(?:per|every|each|a)\s+)'
+                    r'(?:\d[\d,]*\s*)?' + _UNIT + r'\b')
+
 def lbs_near_timeframe(text, window=15, outcomes=None):
     t = _flat(text); out = []
+    t = re.sub(BILLED_TIMEFRAME, lambda x: ' ' * len(x.group(0)), t, flags=re.I)
     disclaimed = _has_results_disclaimer_anywhere(text)   # TIER 2 item 2a
     for m in re.finditer(_T1_UNITS, t, re.I):
         w = _near(t, m, window)
