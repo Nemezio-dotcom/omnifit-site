@@ -1332,6 +1332,13 @@ RETIRED_LAUNCH_COPY = [
     # categories, never a named local business; "Elite Training" headings are
     # retired ("Private Coaching in ..." / "1:1 Coaching in ...").
     "Iron Orr", "Elite Training",
+    # Run 7 (Oct 18 2026): the consultation is not "paid" (it is a $30
+    # deposit, refunded the same day you attend your consultation); studio
+    # access is "Private, by appointment" (non-member rates include a Teqneeq
+    # day pass); "assessment" names only the Performance Assessment, so the
+    # CTA note reads "Straight answer on fit". Case-insensitive, like every
+    # term here, so "Paid 45-minute" and "paid 45-minute" both fire.
+    "paid 45-minute", "Credentialed access only", "Honest assessment of fit",
 ]
 
 def retired_launch_copy(text):
@@ -1380,7 +1387,11 @@ def _selftest_retired_copy():
              "for 6 months or longer (see Outcomes). Sessions are 60 minutes; 30 minutes on the "
              "Executive Reset. Apart from your statutory cancellation rights, the 30-Day Fit "
              "Guarantee is the only early exit. A 45-minute consultation, then the Performance "
-             "Assessment. In-home training across North County San Diego.</p>")
+             "Assessment. In-home training across North County San Diego. 45-minute "
+             "consultation · $30 deposit, refunded the same day you attend your consultation "
+             "· No commitment · Straight answer on fit. Private, by appointment: no walk-ins, "
+             "no crowds. Credentialed professionals only. Sessions are paid in full at "
+             "enrollment.</p>")
     assert retired_launch_copy(clean) == [], "retired-copy rule fired on canonical copy"
     return len(RETIRED_LAUNCH_COPY)
 
