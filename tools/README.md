@@ -888,3 +888,48 @@ summary, an "Add Image" span, "TODO:", "[CLIENT NAME]", "[INSERT LINK HERE]"
 and "[PAGE TITLE]" in ld+json fail; the same text in a comment, in CSS, in a
 script, in alt text, `[n=47]`, a lower-case bracketed note, "Add images of"
 and a JSON array of credentials pass.
+
+### `retired_75` (stale canon, b)
+
+`$75` left the bare-literal `BANNED` list: it is now the Virtual Performance
+Assessment price (CANON CANONICAL FACTS). It stays banned in its August
+meanings (the guest add-on, a travel fee) the way `$140` is handled by
+`retired_pack_rate`: a `$75` passes only when "Virtual (Performance)
+Assessment" sits within 250 characters before it or 120 after it in the
+flattened copy; a hyphenated range is third-party pricing and passes.
+Self-tested both ways (`_selftest_retired_75`): "Guest add-on: $75", "A $75
+travel fee", "Extra session $75" fail; the Reset FAQ shape, the Rates
+remote-assessment note (name two sentences before the figure), "$750" and
+"$75-120 per session" pass. Negative-tested on real copy: a "Guest add-on:
+$75 per session." line planted in pages/FAQs.html was reported.
+
+### Pricing FAQ carrier list (broken structure, c)
+
+`PRICING_FAQ_CARRIERS` names the twelve page/header pairs that carry the
+canonical pricing FAQ answer (CANON INVARIANTS). The hash check proves the
+carriers agree; this proves WHICH files carry the block, so a page dropping
+it or growing a copy is a finding, not a silent change of scope. The
+Executive Reset left the list in the Audit Reconciliation run (owner-
+approved). Negative-tested both ways: a copy appended to pages/FAQs.html
+("carries the block but is not a listed carrier") and the opener broken on
+pages/personal-trainer-santaluz.html ("is a listed carrier but no longer
+carries the block") each reported exactly their own line.
+
+### Retired launch copy, Audit Reconciliation additions
+
+Twenty phrases joined `RETIRED_LAUNCH_COPY` (listed in CANON, LAUNCH
+DECISIONS > RETIRED LAUNCH COPY), each the retired form of a CANONICAL FACT.
+"throughout San Diego County" is scoped to "training throughout" /
+"available throughout" so the 4S Ranch sentence about leaders "throughout
+San Diego County" (clients, not the in-home service area) passes. The clean
+canonical sample in `_selftest_retired_copy` now carries the new canonical
+lines (travel fee by area, the review line, built for professionals 30+, the
+retention line, 60 / 30 minutes, the statutory early-exit line).
+
+### `tools/choosertest.js`: remote assessment
+
+Every virtual result must carry "How remote clients are assessed: the $N
+Virtual Performance Assessment" with N parsed from CANON CANONICAL FACTS,
+and "no Bodystat scan"; no in-person result may mention the Virtual
+Performance Assessment. Negative-tested: dropping "no Bodystat scan" from
+the page script failed all four virtual combinations.
