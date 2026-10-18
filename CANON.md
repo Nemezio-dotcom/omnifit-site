@@ -1330,12 +1330,19 @@ reports the missing condition, never the content.
      stated profile - and aggregate or typical-results framing is still
      never this item.
      OWNER-ATTESTED CONSENT LIST (condition 1; owner, Oct 17 2026): Isaac
-     M., Egor B., Chad C., Alo S., Mark M., Vincent, Ken, Dave R. certify.py
+     M., Egor B., Chad C., Alo S., Mark M., Vincent, Ken, Dave R., Mariano G.
+     certify.py
      cannot verify a consent form, so it reads this list (CONSENT_LIST): a
      figure attributed to anyone else, or to an anonymised profile, is a
      consent finding until the owner adds the name here. Dave R. added by the
      owner Oct 17 2026 (follow-up run): Dave's case study and the 4S Ranch
      transformation card.
+     Mariano G. added by the owner Oct 18 2026: the real 4-week progress
+     report on how-we-measure-your-progress (scans on the 1500 MDD, a
+     factual record, with the note that OmniFit now uses the QuadScan 4000).
+     The sample QuadScan report on body-composition-testing is a single
+     baseline scan, unattributed at the client's request (name, age, test
+     date and serial removed); it carries no client-result figures in copy.
      BODY COMPOSITION: Bodystat readings exist only for clients who started
      at Teqneeq; older clients have no comparable readings. A body-fat or
      lean-mass figure for a client who predates Teqneeq cannot be measured
