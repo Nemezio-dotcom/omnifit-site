@@ -1037,6 +1037,41 @@ def _selftest_teqneeq_pt():
     assert kinds('<p>Teqneeq is a members-only functional health facility. We coordinate with Stoke Physical Therapy, an external partner.</p>') == [], "external PT partner flagged"
     assert kinds('<p>An on-site physical therapy clinic is common in big gyms. Teqneeq is in 4S Ranch.</p>') == [], "claim in the sentence BEFORE Teqneeq read as about Teqneeq"
 
+# ─── COACHING TENURE (CANON ENTITY BLOCK, Oct 18 2026) ──────────────────
+# Owner fact, final-cleanup run: Nemezio started coaching in 2016, as a hobby
+# before turning professional. Never claim a specific number of professional
+# years. A sentence carrying "10+ years", "over/more than a decade" or
+# "over/more than ten years" beside a coaching / experience / helping /
+# training word is a finding. A sentence naming a partner or another
+# practitioner (Celeste Esposito's "nearly a decade of clinical bodywork",
+# Dr. Damien Jackson-Ricketts, Stoke, a therapist) is not about Nemezio and
+# passes. Stat badges flatten into one run of text ("10+ Years Coaching"), so
+# they are caught as well.
+_TENURE_CLAIM = re.compile(
+    r'\b(?:10|ten)\s*\+\s*(?:years?|yrs)\b'
+    r'|\b(?:over|more\s+than)\s+(?:a|one)\s+decade\b'
+    r'|\b(?:over|more\s+than)\s+(?:10|ten)\s+(?:years?|yrs)\b', re.I)
+_TENURE_CTX = re.compile(r'\b(?:coach\w*|experience\w*|help\w*|train\w*)\b', re.I)
+_TENURE_THIRD = re.compile(r'\b(?:Celeste|Esposito|Serenity|Damien|Jackson-Ricketts|Stoke|therapist\w*|Dr\.)', re.I)
+
+def coaching_tenure_claim(text):
+    t = html.unescape(_flat(text)); out = []
+    for sent in re.split(r'(?<=[.!?])\s+', t):
+        m = _TENURE_CLAIM.search(sent)
+        if m and _TENURE_CTX.search(sent) and not _TENURE_THIRD.search(sent):
+            out.append((m.group(0), sent.strip()[:160]))
+    return list(dict.fromkeys(out))
+
+def _selftest_coaching_tenure():
+    hits = lambda t: [h for h, _ in coaching_tenure_claim(t)]
+    assert hits('<p>He has coached for over ten years and holds 190+ reviews.</p>'), "'coached for over ten years' passed"
+    assert hits('<div class="stat"><div class="num">10+</div><div class="lbl">Years Coaching</div></div>'), "'10+ Years Coaching' badge passed"
+    assert hits("<p>I've spent over a decade helping busy professionals rebuild their bodies.</p>"), "'over a decade helping' passed"
+    assert hits('<p>He holds NASM credentials, with 10+ years of coaching experience.</p>'), "'10+ years of coaching experience' passed"
+    assert hits('<p>Coaching since 2016 (hobby, then professional).</p>') == [], "'coaching since 2016' flagged"
+    assert hits('<p>Celeste is a Licensed Massage Therapist with over a decade of clinical bodywork experience.</p>') == [], "a partner's experience flagged"
+    assert hits('<p>Over a decade of desk work leaves the hips tight.</p>') == [], "a decade of desk work (no coaching claim) flagged"
+
 # Every rule names the tier it encodes. TIER 1 rules report a violation; TIER 2
 # rules report a MISSING CONDITION. See CANON COMPLIANCE SCREEN - TWO TIERS.
 COMPLIANCE = [
@@ -1653,6 +1688,11 @@ def run():
         for kind, ctx in teqneeq_onsite_pt(open(f).read()):
             print(f"   {f}  [{kind}]  …{ctx[:110]}…"); B+=1
     print(f"   (Teqneeq on-site PT rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
+    _selftest_coaching_tenure()
+    for f in ALL:
+        for hit, ctx in coaching_tenure_claim(open(f).read()):
+            print(f"   {f}  [coaching tenure claimed: '{hit}' - CANON: coaching since 2016, never a number of professional years]  …{ctx[:110]}…"); B+=1
+    print(f"   (coaching-tenure rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")

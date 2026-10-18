@@ -816,3 +816,18 @@ block at both widths.
   paths), the seven sections closed by default, a jump-bar anchor and a URL
   hash each opening a closed section, and the Foundation CTA inside one.
 
+
+## Coaching tenure rule (Oct 18 2026)
+
+`coaching_tenure_claim` (stale canon) encodes the owner fact in CANON's ENTITY
+BLOCK: Nemezio started coaching in 2016, a hobby before it was his profession,
+and copy never claims a number of professional years. It fires on "10+ years",
+"over / more than a decade" or "over / more than ten years" in a sentence that
+also carries a coaching / experience / helping / training word. Stat badges
+flatten to "10+ Years Coaching" and are caught. A sentence naming a partner or
+another practitioner (Celeste, Esposito, Serenity, Damien, Jackson-Ricketts,
+Stoke, "therapist", "Dr.") passes, so a partner's own experience is not read
+as Nemezio's. Self-tested both ways on every run (`_selftest_coaching_tenure`).
+Negative test on real copy: run against the files as they stood at e6ddff4,
+it reported all nine old claims (about x2, about-header, contactform, 4S Ranch
+x2, Rancho Santa Fe, corrective page and header) and nothing on partners.
