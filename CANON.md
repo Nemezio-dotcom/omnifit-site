@@ -797,7 +797,13 @@ ENTITY BLOCK (Oct 17 2026; source: brand entity split across AI platforms -
     no longer repeats it directly under the hero (owner, rates restructure
     run, Oct 17 2026): its first bullet is "What it is: 1:1 diagnostic-led
     coaching — measured, corrective-first strength training with nutrition
-    and accountability included." No other summary block carries it yet.
+    and accountability included." Cited-pages run (Oct 18 2026): the In
+    Short block (H2 "In Short", homepage classes) leads with it verbatim on
+    14 pages: private, in-home, corrective, strength-training-1, weight-loss,
+    personal-training-services, the-omnifit-method, over-50, desk-worker,
+    GLP-1, the Executive Reset, couples, omnifit-vs-competitors and
+    how-we-measure-your-progress. The in-home block keeps it verbatim
+    ("over 30" is not an X01 age term); REPORT.md records the call.
   sameAs (Organization): Instagram, Yelp, Google Business Profile (g.page),
   Thumbtack, Bark, BBB - as listed in site-header.html. Several listing URLs
   still carry the retired name in their slug; that is the directory's slug,

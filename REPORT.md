@@ -5372,3 +5372,212 @@ Nothing was dropped. Both sections were moved, and each H2 became an H3:
 7. **The In Short bullet's em dash** is the owner's verbatim wording. The house rule against new em dashes in prose gives way to the verbatim text.
 8. **CANON "Credentials (13)" now also names Precision Nutrition "Level 2 Certified Master Coach".** Without it, the list counted twelve under a thirteen label. The INVARIANTS block, /about and the credentials block already name it.
 9. **`site.js` opens a targeted closed `<details>` on every page**, not only the rates page (for example, a hash pointing at an FAQ). Wrong if some page relies on a `<details>` staying closed when targeted. None does today.
+
+---
+
+# Cited-pages run — In Short blocks and answer-first FAQs (Oct 18 2026)
+
+**Branch:** `claude/cited-pages-scannability-ai-qvizrx`, started fresh from main at 5c3e034 (rates restructure).
+**Source of the questions:** Semrush AI Brand Performance report, Oct 17 2026.
+**Goal:** make the most-cited pages easy to scan and easy for AI models to quote.
+
+## What changed
+
+- **In Short block on 14 pages**, directly after the hero. H2 text is exactly "In Short", under the label "The Short Version". It uses the homepage block's classes (`.omh`, `#omh-short`, `.short-box`, the gold tick) and one shared CSS block, byte-identical on all 14 pages (checked). The first bullet is the POSITIONING LINE, verbatim and once per page. The rest cover who it's for, what happens, where, and the next step.
+- **New FAQs** appended to each page's existing FAQ in that page's own markup, and mirrored in its header FAQPage. Each mirror entry is the page text as `tools/faq.py` extracts it (normalised like certify's `_norm`), inserted at its page position. Every other header node is unchanged.
+- **/faqs:** two homepage answers added word for word: "worth the price" goes under Pricing & Payments, and "what happens when my program ends" goes under Accountability & Flexibility, after "Will I be able to train on my own eventually?".
+- **/outcomes:** one FAQ answered from the page's own retention figures, using counts with their denominators.
+- No title, meta description, H1, existing H2, canonical, hash-locked block, price, policy or locked wording changed. No territory page, 4S Ranch or Rancho Bernardo file was touched.
+
+## Per page
+
+### /private-personal-trainer-san-diego  (+173 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: professionals who want one coach's full attention, not a gym floor or a group class.
+3. What happens: an assessment first, then a program written for your body, coached 1:1 with corrective work in every warm-up.
+4. Where: private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch, or in your own home.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **Will other people be around while I train?** (65 words) — answers "Will other people be around while I train?"
+
+### /in-home-personal-trainer-san-diego  (+171 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: people who would rather train at home than commute to a gym, whether they own equipment or not.
+3. What happens: the same assessment-first method as the studio, with corrective work in every warm-up and your program in the app between sessions.
+4. Where: your home, inside our in-home service area. We bring the equipment, or program around yours.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **What if I travel for work?** (61 words) — answers "What if I travel for work?"
+- Skipped "Do I need a home gym?": already answered by "Do I need a home gym or my own equipment?".
+
+### /corrective-exercise-post-rehab  (+199 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: people cleared from physical therapy, desk workers with posture patterns, and anyone returning after an injury who wants a structured way back to strength.
+3. What happens: a movement assessment, then corrective work and progressive loading under the 3/10 pain ceiling.
+4. Scope: Physical therapy treats; OmniFit trains. We pick up where care ends, coordinate with your clinician when you allow it, and never diagnose or treat.
+5. Where: 1:1 at Teqneeq FHC in 4S Ranch, in your home, or by live video.
+6. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **I just finished physical therapy. What comes next?** (64 words) — answers "I just finished physical therapy. What comes next?"
+- Skipped "What does the 3/10 pain ceiling mean?": already answered by "What is the 3/10 pain ceiling rule?".
+
+### /strength-training-1  (+241 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: professionals 30+ who want real strength without random workouts, from complete beginners to people with old injuries.
+3. What happens: a movement assessment, then periodized 4-week blocks with corrective work in every warm-up and joint-friendly loading under the 3/10 pain ceiling.
+4. Where: 1:1 at the Teqneeq FHC studio in 4S Ranch, or by live video.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **I've never lifted weights. Will I feel out of place?** (62 words) — answers "I've never lifted weights. Will I feel out of place?"
+- **Will strength training make me bulky?** (62 words) — answers "Will strength training make me bulky?"
+
+### /weight-loss  (+241 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: busy professionals 30+ who want to lose 20–30 pounds sustainably, without crash dieting.
+3. What happens: joint-friendly strength training, calorie and protein targets, weekly check-ins, and progress measured against your own baseline, not a promised rate of loss.
+4. Where: 1:1 at Teqneeq FHC in 4S Ranch, in your home, or by live video.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **Can I lose 20–30 pounds without crash dieting?** (62 words) — answers "Can I lose 20–30 pounds without crash dieting?"
+- **What happens to my results after the program?** (64 words) — answers "What happens to my results after the program?"
+
+### /personal-training-services  (+170 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: professional adults 30+: executives and founders, desk-bound professionals, active adults 50+, couples, and people returning after a break or physical therapy.
+3. What happens: every program starts with the Performance Assessment and follows the OmniFit Method: Assess, Correct, Build, Sustain.
+4. Where: the studio at Teqneeq FHC in 4S Ranch, your home, or live video nationwide.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **Which program is right for me?** (59 words) — answers "Which program is right for me?"
+
+### /the-omnifit-method  (+242 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: busy professionals 30+ with real injuries, real schedules and real skepticism.
+3. What happens: Assess measures your starting point, Correct fixes mobility before load, Build adds structured strength, Sustain steps coaching down until you train on your own.
+4. What it rests on: Measured Progress, Joint-First Strength and Accountability That Travels.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **Do you follow a proven framework, or is each session improvised?** (64 words) — answers "Do you follow a proven framework, or is each session improvised?"
+- **What happens when my program ends?** (63 words) — answers "What happens when my program ends?"
+
+### /personal-trainer-over-50-san-diego  (+184 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: active adults 50+ who want strength built around their joints, including people who have never trained.
+3. What happens: volume at moderate load first while tendon catches up, then load goes up as tissue tolerates it, with corrective work in every warm-up and the 3/10 pain ceiling throughout.
+4. Where: Teqneeq Functional Health Center in 4S Ranch, your home, or live video.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **I'm in my 40s or 50s. Can I feel athletic again?** (66 words) — answers "I'm in my 40s or 50s. Can I feel athletic again?"
+
+### /desk-worker-posture-pain  (+176 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: desk-bound and remote professionals with a forward head, rounded shoulders, tight hips or a stiff lower back from long hours of sitting.
+3. What happens: a 9-point movement screen finds the imbalances, then corrective work and progressive strength retrain them.
+4. Where: 1:1 at Teqneeq FHC in 4S Ranch, or by live video.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **Can a trainer help with tight hips and hamstrings from sitting all day?** (65 words) — answers "Can a trainer help with tight hips and hamstrings from sitting all day?"
+
+### /glp-1-personal-training-san-diego  (+176 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: people on semaglutide or tirzepatide who want to keep their muscle while the weight comes off.
+3. What happens: resistance training first, protein prioritised inside a suppressed appetite, and body composition measured rather than assumed.
+4. Scope: your physician manages the medication. OmniFit trains and never prescribes.
+5. Where: 1:1 at Teqneeq FHC in 4S Ranch, San Diego.
+6. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **Should I strength train while on a GLP-1 medication?** (65 words) — answers "Should I strength train while on a GLP-1 medication?"
+
+### /the-30-minute-executive-reset  (+243 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: executives and founders whose calendars and travel don't cooperate.
+3. What happens: 30-minute live video sessions: 5 minutes to prep and screen, 5 of corrective work, an 18-minute working block and 2 to log, programmed in 4-week blocks.
+4. Where: anywhere in the United States, from home, an office or a hotel room. San Diego clients can add in-person sessions at Teqneeq.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **I travel constantly. Can I still get consistent coaching?** (67 words) — answers "I travel constantly. Can I still get consistent coaching?"
+- **Are 30-minute sessions enough?** (56 words) — answers "Are 30-minute sessions enough?"
+
+### /couples-personal-training-san-diego  (+167 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: couples who want to train together, each on their own program.
+3. What happens: two separate Performance Assessments, two programs, and one split session where you alternate through different work and each log your own numbers.
+4. Where: Teqneeq Functional Health Center in 4S Ranch, or your home.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **Can we train together if we have different goals?** (65 words) — answers "Can we train together if we have different goals?"
+
+### /omnifit-vs-competitors  (+252 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: people weighing F45, Orangetheory, big-box gyms or Equinox, especially if classes or memberships haven't produced lasting change.
+3. What's different: 1:1 coaching from an assessment, a written program with tracked benchmarks, and accountability between sessions, not just access to a class or a gym floor.
+4. Where: private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch, your home, or live video.
+5. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added (the Semrush question each answers):
+- **How does OmniFit compare to F45 or Orangetheory for losing 20–30 pounds without wrecking my joints?** (57 words) — answers "How does OmniFit compare to F45 or Orangetheory for losing 20–30 pounds without wrecking my joints?"
+- **I've tried trainers before with mediocre results. What's different here?** (60 words) — answers "I've tried trainers before with mediocre results. What's different here?"
+- Skipped "Is OmniFit worth it compared to a gym membership like 24 Hour Fitness or Chuze?": already answered by "Is OmniFit worth the price compared to a gym membership?" and "Can't I just hire a trainer at 24 Hour Fitness for less?".
+
+### /how-we-measure-your-progress  (+130 words)
+
+In Short bullets:
+1. OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.
+2. Who it's for: anyone who wants progress shown in data, not described by feel.
+3. What gets measured: body composition on a Bodystat QuadScan 4000 for in-studio clients, strength benchmarks, posture, mobility and well-being, always against your own baseline.
+4. How much you track: it follows your Accountability Dial: daily logging at Full Accountability, a weekly written check-in at Coached, a one-tap weekly check-in on Train Only.
+5. Reports: a formal progress report every 30 days, with aggregate client results published with their method on the Client Outcomes page.
+6. Next step: a 45-minute consultation by video or phone. If it's a fit, the Performance Assessment comes next.
+
+Questions added: none.
+- Skipped "Do I have to track everything?": already answered by "Do I need to log everything myself?", which answers by Accountability Dial setting; the Dial breakdown is now also an In Short bullet.
+
+### /faqs  (+158 words; FAQ only, no In Short)
+
+- **Is OmniFit worth the price compared to a regular gym membership?** (78 words) — answers "worth the price vs a gym"
+- **What happens when my program ends?** (63 words) — answers "what happens when the program ends"
+- Skipped "too advanced for a beginner": already answered by "Is OmniFit too intense for a beginner?".
+- Skipped "what if I travel": already answered twice: "What if I travel frequently for work?" and "What if I travel or my schedule changes?".
+
+### /outcomes  (+85 words; FAQ only, no In Short)
+
+- **Do clients keep their results after the program ends?** (75 words) — answers "Do clients keep their results after the program ends?"
+
