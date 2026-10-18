@@ -599,6 +599,17 @@ RESULT = (r'(?:measurable|visible|noticeable|significant|dramatic)\s+\w*\s*'
           r'(?:result|results|change|changes|improvement|improvements|transformation)')
 
 REVIEW_CADENCE = r'\breview(?:ed|s)?\b(?:\s+\S+){0,4}?\s+(?:every|each)\s+$'
+# Promise verbs that void the REVIEW_CADENCE exemption when they share the
+# result's sentence (owner follow-up to run 7B, Oct 18 2026).
+PROMISE_VERB = r"\b(?:will|you'll|you\u2019ll|expect\w*|see|seeing|sees|guarantee\w*)\b"
+
+def _promise_in_sentence(t, m):
+    """True when the sentence around result match m carries a promise verb.
+    The sentence runs from the last . ! or ? before the match to the next one
+    after it, in the flattened copy."""
+    a = max(t.rfind(c, 0, m.start()) for c in '.!?') + 1
+    ends = [i for i in (t.find(c, m.end()) for c in '.!?') if i != -1]
+    return bool(re.search(PROMISE_VERB, t[a:min(ends) if ends else len(t)], re.I))
 
 def _selftest_result_review_cadence():
     """Both directions, every run (run 7B): a review cadence passes; a result
@@ -609,7 +620,10 @@ def _selftest_result_review_cadence():
     for bad in ('<p>You will see measurable progress every 4 weeks.</p>',
                 '<p>Measurable progress in 8 weeks, reviewed every 4 weeks.</p>',
                 '<p>Measurable progress, reviewed every 4 weeks, within 8 weeks.</p>',
-                '<p>Visible results every 4 weeks, review included.</p>'):
+                '<p>Visible results every 4 weeks, review included.</p>',
+                '<p>You will see dramatic results at each review every 4 weeks.</p>',   # promise verb voids the cadence
+                '<p>Expect measurable progress, reviewed every 4 weeks.</p>',
+                '<p>We guarantee measurable progress, reviewed every 4 weeks.</p>'):
         assert result_near_timeframe(bad), f"T1-2 window promise passed: {bad}"
 
 def result_near_timeframe(text, window=12):
@@ -630,7 +644,9 @@ def result_near_timeframe(text, window=12):
             # how often progress is checked, not what it will be by when. Only
             # "review(ed|s)" up to four words before "every/each <n> <unit>"
             # qualifies; every other timeframe in the window is still checked.
-            if re.search(REVIEW_CADENCE, w[:tf.start()], re.I): continue
+            # ... unless the sentence carrying the result also makes a promise
+            # ("You will see dramatic results at each review every 4 weeks").
+            if re.search(REVIEW_CADENCE, w[:tf.start()], re.I) and not _promise_in_sentence(t, m): continue
             if _case_study_exempt(t, m, disclaimed): break
             out.append(("result promised within a window (T1-2)", f"'{m.group(0).strip()}' near '{tf.group(0).strip()}'",
                         t[max(0, m.start()-100):m.end()+140].strip()))
