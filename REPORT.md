@@ -8140,3 +8140,16 @@ This narrows a Tier 1 rule, so it is disclosed here for the owner to confirm.
 | 2 | `pages/headers/private-personal-trainer-san-diego-header.html:102` | assess your goals | talk through your goals |
 | 3 | `pages/partners.html:1191` | OmniFit's clinical partner network ensures nothing falls through the cracks. | OmniFit's referral partners help keep your training and your care coordinated, with your permission. |
 | tools | `tools/certify.py` | — | `REVIEW_CADENCE` exemption in `result_near_timeframe` + `_selftest_result_review_cadence()` (see above) |
+
+### Run 7B follow-up: promise verbs void the review-cadence exemption
+
+`tools/certify.py`, `result_near_timeframe` now skips the `REVIEW_CADENCE` exemption when the sentence containing the result also has a promise verb. The verbs are matched case-insensitively: "will", "you'll", "expect…", "see", "seeing", "sees" and "guarantee…". The sentence is the flattened copy between the nearest `.`, `!` or `?` on either side of the match. A full-text search for "see" also catches phrases like "see our tracking system" in the same sentence. That errs toward flagging, so the worst case is an extra finding that a person can review. Nothing is silently passed.
+
+New must-fail fixtures in `_selftest_result_review_cadence()`:
+- "You will see dramatic results at each review every 4 weeks." (the owner's fixture)
+- "Expect measurable progress, reviewed every 4 weeks."
+- "We guarantee measurable progress, reviewed every 4 weeks."
+
+The must-pass 4S Ranch sentence still passes. Negative test: with the promise guard removed, the self-test fails on the owner's fixture.
+
+Certify: PASSED, 0 findings. All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84.
