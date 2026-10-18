@@ -1298,6 +1298,22 @@ RETIRED_LAUNCH_COPY = [
     # outside it." (territory pages: "No travel fee in [Town]; it's inside our
     # in-home service area.")
     "depending on location", "varies by location",
+    # Audit Reconciliation run (Oct 18 2026; CANON CANONICAL FACTS). Each is
+    # the retired form of a canonical fact: the consultation is not an
+    # assessment; the assessment sets 12 metrics in 7 categories; the travel
+    # fee is named by area; reviews are "4.98 average across 190+ reviews";
+    # the audience is "built for professionals 30+"; retention is the
+    # /outcomes figure; check-ins follow the Dial; sessions are 60 minutes
+    # (30 on the Reset); the early exit names statutory rights.
+    "45-minute movement assessment", "seven tracked benchmarks",
+    "a travel fee may apply outside it", "training throughout San Diego County",
+    "available throughout San Diego County",
+    "five-star reviews", "5.0 rating", "5.0 · 190+", "Rated 5.0",
+    "verified reviews", "verified five-star", "works exclusively with",
+    "client tenure", "6 months minimum",
+    "Unlimited coach communication", "check-in submissions required",
+    "45–60 min", "30 or 45-minute", "30–45 min",
+    "is the only exit",
 ]
 
 def retired_launch_copy(text):
@@ -1336,10 +1352,17 @@ def _selftest_retired_copy():
              "Executive Reset, tell us in writing and we'll refund the unused portion of your "
              "enrollment. Private 1:1 coaching inside Teqneeq FHC, a members-only facility in "
              "4S Ranch. 190+ Reviews. nemezio@omnifittraining.com $200 per 4 weeks "
-             "https://g.page/r/CcePeMjnbDe9EBM No travel fee inside our in-home service area; "
-             "a travel fee may apply outside it. No travel fee in Del Mar; it's inside our "
-             "in-home service area. 5-packs run $180 to $250 per session depending on setting "
-             "and membership.</p>")
+             "https://g.page/r/CcePeMjnbDe9EBM No travel fee in Carmel Valley, Santaluz, "
+             "Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home "
+             "service area a travel fee applies, confirmed before you book. No travel fee in "
+             "Santaluz; it's inside our in-home service area. A travel fee applies in Del Mar, "
+             "confirmed before you book. 5-packs run $180 to $250 per session depending on "
+             "setting and membership. 4.98 average across 190+ reviews (Google, Yelp, Thumbtack "
+             "and Bark). Built for professionals 30+. About half of clients train with OmniFit "
+             "for 6 months or longer (see Outcomes). Sessions are 60 minutes; 30 minutes on the "
+             "Executive Reset. Apart from your statutory cancellation rights, the 30-Day Fit "
+             "Guarantee is the only early exit. A 45-minute consultation, then the Performance "
+             "Assessment. In-home training across North County San Diego.</p>")
     assert retired_launch_copy(clean) == [], "retired-copy rule fired on canonical copy"
     return len(RETIRED_LAUNCH_COPY)
 
