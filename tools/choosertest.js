@@ -52,10 +52,12 @@ function card() {
   const r = t.match(/Bronze async ([\d,]+) · Gold 1x\/wk ([\d,]+) ·\s+Platinum 2x\/wk ([\d,]+) · Black 3x\/wk ([\d,]+)/);
   const a = t.match(/Performance Assessment \$(\d+)/);
   const m = t.match(/Teqneeq membership \(\$(\d+)\/mo/);
-  if (!fc || !r || !a || !m || !t.includes("Couples Peak: by arrangement.")) throw new Error("CANON card lines not parsed");
+  // CANONICAL FACTS (Oct 17 2026): the remote clients' assessment price.
+  const va = t.match(/VIRTUAL PERFORMANCE ASSESSMENT[\s\S]*?\$(\d+), credited/);
+  if (!fc || !r || !a || !m || !va || !t.includes("Couples Peak: by arrangement.")) throw new Error("CANON card lines not parsed");
   if (Object.keys(foundation).length !== 5 || Object.keys(program).length !== 10) throw new Error(`CANON card parsed ${Object.keys(foundation).length} Foundation / ${Object.keys(program).length} Program rows, expected 5 / 10`);
   return { foundation, program, from, cycles: words[fc[1].toLowerCase()], weeks: Number(fc[2]),
-    reset: { async: n(r[1]), 1: n(r[2]), 2: n(r[3]), 3: n(r[4]) }, assessment: Number(a[1]), membership: Number(m[1]) };
+    reset: { async: n(r[1]), 1: n(r[2]), 2: n(r[3]), 3: n(r[4]) }, assessment: Number(a[1]), membership: Number(m[1]), virtualAssessment: Number(va[1]) };
 }
 
 const money = (x) => "$" + x.toLocaleString("en-US");
@@ -71,6 +73,7 @@ function expected(C, format, freq, couples) {
     must.push(`${money(C.reset[freq])}per 4-week cycle`);
     summary = `Reset ${money(C.reset[freq])} per 4-week cycle`;
     mustNot.push("Teqneeq membership");
+    must.push(`How remote clients are assessed: the ${money(C.virtualAssessment)} Virtual Performance Assessment`, "no Bodystat scan");
   } else {
     const k = `${couples ? "couples-" : ""}${format}-${freq}`;
     const F = C.foundation[k], P = C.program[k], from = C.from[k] ? "from " : "";
@@ -93,6 +96,7 @@ function expected(C, format, freq, couples) {
       summary = "Program, Couples Peak by arrangement";
     }
     if (format === "studio") must.push(member); else mustNot.push("Teqneeq membership");
+    mustNot.push("Virtual Performance Assessment");
     if (couples) must.push("Priced per couple, not per person.");
   }
   return { must, mustNot, offer, summary };
