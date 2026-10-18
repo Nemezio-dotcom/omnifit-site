@@ -1693,8 +1693,19 @@ legitimately changes an invariant, and say so in REPORT.md)
   the-30-minute-executive-reset pair also carries this block and was NOT
   rewritten - it is out of certification scope and on the do-not-paste list,
   so it still carries the August wording and does not enter either hash.
-- Credentials block body: byte-identical on 11 pages (02bd9cb90a71ce69,
-  663 bytes)
+- Credentials block body: byte-identical on 11 pages (f551f6751a2c7fd7,
+  783 bytes)
+  CHANGED in the Audit Reconciliation run (Oct 18 2026), OWNER-APPROVED
+  (CANONICAL FACTS, consultation vs assessment; the owner named this
+  hash change in the run brief): 02bd9cb90a71ce69 (663 bytes) ->
+  f551f6751a2c7fd7 (783 bytes). One sentence only, identically on all
+  eleven pages: "Every program he builds starts with a 45-minute movement
+  assessment and follows ..." -> "Every program he builds starts with a
+  45-minute consultation, a conversation about your goals and history, and,
+  if it's a fit, the Performance Assessment that measures your starting
+  point; it follows ...". The same sentence on
+  the-30-minute-executive-reset (not a carrier of this invariant) changed
+  identically.
   — the 10 territory pages plus corrective-exercise-post-rehab. 4S Ranch keeps
   its own Meet Nemezio section instead. Hash changed legitimately in the
   Thirteen Certifications run (Oct 2026): the block now reads thirteen
