@@ -1634,7 +1634,7 @@ legitimately changes an invariant, and say so in REPORT.md)
   (hash 6b1b0f4efbd4a72c; concatenation of the three card <p> bodies in
   page order, set by the Section A/B run).
 - 9-point screen section body (Section B): byte-identical × 11 pages
-  (hash 4c720960dec5a809; intro + nine <li> items + closing line, set by
+  (hash f9dfcec684d7a9dd; intro + nine <li> items + closing line, set by
   the Section A/B run). Hash changed legitimately in the Device Swap run
   (Sept 2026): the Body Composition <li> names the device, so retiring the
   1500 MDD rewrote the same bytes on all eleven pages. Previous value
@@ -1649,6 +1649,14 @@ legitimately changes an invariant, and say so in REPORT.md)
   identically on all eleven pages. The alternative was leaving a retired price
   live on eleven territory pages to protect a hash, which is the wrong way
   round: the hash records the block, it does not license its contents.
+  CHANGED AGAIN in the final-cleanup run (Oct 18 2026), OWNER-APPROVED:
+  4c720960dec5a809 -> f9dfcec684d7a9dd. One <li> only, identically on all
+  eleven pages: "Grip Strength — a reliable marker of functional strength,
+  tracked monthly" -> "... reviewed every 4 weeks" (OmniFit runs on 4-week
+  cycles; the accuracy sweep had left it because it was hash-locked). The
+  intro, the other eight items and the closing line are byte-identical across
+  the change. All eleven pages agree; certify.py reports no invariant
+  mismatch.
 - Headers: FAQPage derived mechanically from that page's on-page FAQ,
   verbatim, in order, tags stripped. LocalBusiness never defined in page
   headers — reference "https://www.omnifittraining.com/#localbusiness-of".
