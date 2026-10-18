@@ -8183,3 +8183,16 @@ Noticed, not changed: `tools/mkheaders.py` is out of step with the hand-maintain
 | tools | `tools/certify.py` | — | `"paid consultation"` retired phrase + both-ways self-test |
 
 Results: build --check PASSED. Ownership PASSED. Certify PASSED with 0 findings (46 retired phrases self-tested). All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84. mobileaudit PASSED on all 84 page/width checks at 390 and 412, with 0 clipped and no horizontal overflow.
+
+### Run 7C follow-up: mkheaders.py reproduces the headers byte-for-byte
+
+`tools/mkheaders.py` now rewrites all nine Batch 3 headers with zero bytes changed, so `git status` stays clean after a run. Three gaps were closed:
+- **Body composition description:** the META description said "Medical-grade". It now says "Multi-frequency", which is what the header has carried since the claims runs.
+- **Header comment (`NOTE`):** how-we-measure-your-progress keeps its hand-written Oct 2 comment instead of the Batch 3 template.
+- **Spacing (`CLOSE_PUNCT`):** the tag strip in faq.py leaves a space before punctuation after a link, as in "(see Outcomes) .". The weight-loss and omnifit-vs-competitors headers were hand-corrected to close that space. Partners and strength-training-1 still carry it, so the fix applies per slug. Applied globally, it would have rewritten those two headers; I checked that and rejected it. Closing the space on partners and strength-training-1 too would be a content change for a later run.
+
+New `--check` mode: it writes nothing and exits 1, listing the headers that drift. Negative test: with "Medical-grade" put back in the body-composition header, it reports DRIFT and FAILED. After the fix it reports PASSED (9 headers reproduce byte-for-byte).
+
+CANON.md (rules encoded in tools/) and tools/README.md now say that Batch 3 header edits are made in mkheaders.py too, and that every other header is hand-mirrored.
+
+Results: certify PASSED with 0 findings. All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84. build --check PASSED. Ownership PASSED. No file under pages/ or public/ changed.

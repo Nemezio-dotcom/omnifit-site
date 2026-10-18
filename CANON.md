@@ -468,7 +468,11 @@ WORKFLOW RULES
 - Every run ends with: certification grep, invariant hashes, REPORT.md
   update, per-file commits, summary table.
 - The rules in this brief are ENCODED IN tools/ (certify.py, faq.py,
-  mkheaders.py, README.md). Run `python3 tools/certify.py` from the repo
+  mkheaders.py, README.md). mkheaders.py reproduces the nine Batch 3
+  headers byte-for-byte (Run 7C follow-up, Oct 18 2026). Any edit to one of
+  those headers is made in mkheaders.py as well, and `python3
+  tools/mkheaders.py --check` must PASS. Every other header is
+  hand-mirrored. Run `python3 tools/certify.py` from the repo
   root; do not rebuild the rules from scratch. If a rule is wrong, fix it
   in tools/ and update this brief in the same commit so the two stay in
   step. tools/README.md records the three checks that have reported
