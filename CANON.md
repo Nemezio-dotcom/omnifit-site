@@ -741,6 +741,18 @@ ENTITY BLOCK (Oct 17 2026; source: brand entity split across AI platforms -
                            Nemezio" is the Person's alternateName in schema
                            and may be used in running copy AFTER the full
                            name has appeared on the page.
+  Coaching tenure:         Coaching since 2016 (hobby, then professional).
+                           Never claim a specific number of professional
+                           years. (Owner fact, final-cleanup run, Oct 18
+                           2026.) Stat badges read "2016 / Started Coaching"
+                           or "Coaching Since 2016". certify.py
+                           coaching_tenure_claim fails on "10+ years", "over
+                           / more than a decade" or "over / more than ten
+                           years" beside a coaching, experience, helping or
+                           training word; a partner's own experience (e.g.
+                           Celeste's "nearly a decade of clinical bodywork")
+                           passes. Self-tested both ways; frozen records
+                           included.
   Address:                 Teqneeq Functional Health Center, 10772 Thornmint
                            Rd, 4S Ranch, San Diego, CA 92127 ("Teqneeq" and
                            "Teqneeq FHC" are accepted short forms in copy;
@@ -1433,6 +1445,12 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   places a PT / physical therapy / rehab clinic on site or in-house
   (certify.py teqneeq_onsite_pt, every file in the glob, frozen records
   INCLUDED, negations pass, self-tested both ways on every run).
+  COACHING TENURE CLAIMED AS A NUMBER OF YEARS (ENTITY BLOCK, Oct 18 2026,
+  final-cleanup run): "10+ years", "over / more than a decade" or "over /
+  more than ten years" in a sentence about coaching, experience, helping or
+  training, unless the sentence names a partner or another practitioner
+  (certify.py coaching_tenure_claim, every file in the glob, frozen records
+  INCLUDED, self-tested both ways on every run).
   THE TRAVEL PROTOCOL MISCASED OR PRICED (THE OMNIFIT METHOD, Oct 17 2026):
   "travel protocol" in any casing but "Travel Protocol", or a dollar figure
   in the same sentence as the name (certify.py travel_protocol_usage,
