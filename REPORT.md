@@ -5467,6 +5467,7 @@ In Short bullets:
 
 Questions added (the Semrush question each answers):
 - **Which program is right for me?** (59 words) — answers "Which program is right for me?"
+- **Not FAQ markup, and no header mirror.** This page is on CANON "PAGES WITH NO FAQ" and in certify.py `NO_FAQ`. The question is a plain section (H2 "Which program is right for me?" plus one paragraph) before the bottom CTA, with no toggle, no faq class and no FAQPage. See judgment call 1.
 
 ### /the-omnifit-method  (+242 words)
 
@@ -5581,3 +5582,33 @@ Questions added: none.
 
 - **Do clients keep their results after the program ends?** (75 words) — answers "Do clients keep their results after the program ends?"
 
+
+## Checks (final state on this branch)
+
+| Check | Result |
+|---|---|
+| `python3 build.py --strict` (links, one H1, JSON-LD, emoji, 404/_headers, redirects, tracking, keyword ownership incl. X01) | PASSED |
+| `python3 build.py --check` | PASSED |
+| `python3 tools/ownership.py --selftest` | PASSED |
+| `python3 tools/certify.py` | PASSED: compliance 0, stale canon 0, structure 0, not-run 0, amendment 2a/2g 0 |
+| Invariant hashes | all five unchanged: a6c7e65dddff4795, 7af0d0049b0b7aba, 02bd9cb90a71ce69, 6b1b0f4efbd4a72c, 4c720960dec5a809 |
+| FAQ mirror (certify structure check, every header) | every touched header mirrors its page in count, order and text |
+| Ownership on new FAQ questions (run-specific script against the CANON table) | no new question carries a phrase another page owns |
+| X01 on the in-home In Short bullets and new FAQ (run-specific script) | no hits; no fee, deposit or age wording either (positioning line aside, see judgment call 2) |
+| K10 | no new link anchor mentions cost, price or "how much" |
+| Positioning line | verbatim, exactly once, on each of the 14 pages |
+| `tools/mobileaudit.js --open-details` at 390 and 412 on all 16 touched pages | PASSED: scrollWidth equals the viewport and nothing is clipped. The narrow items listed are pre-existing (town cards, comparison-table cells, /outcomes chart labels); none are in the new blocks |
+| Rendering of the In Short block (Playwright, computed styles at 390 and 412) | heading, label, bold labels and text use the block's own colours on all 14 pages, and the tick path draws |
+
+**Header mirrors before this run.** Every touched header already mirrored its page once normalised. Raw text differed on some entries: in-home 2, corrective 1, over-50 1, GLP-1 1, Executive Reset 1, /faqs 2. Each difference is the link-strip space before punctuation ("rates page ." vs "rates page.") that certify's `_norm` documents as an extraction artifact. The Executive Reset entry is the hash-locked canonical pricing answer. Nothing was out of sync, so nothing was repaired. The Executive Reset header uses compact one-line JSON objects, so its two new entries were appended in that file's own style rather than re-serialising the file.
+
+## Judgment calls
+
+1. **personal-training-services: an FAQ was not added as markup.** The brief asked for "Which program is right for me?" as an FAQ mirrored in the header. That needs personal-training-services removed from certify.py `NO_FAQ` and from CANON "PAGES WITH NO FAQ". This session's auto-mode permission classifier blocked the certify.py edit as loosening a check, and I did not work around it. The question and answer are on the page as a plain H2 section. If you want it as a real FAQ: remove the slug from `NO_FAQ` and the CANON list, convert the section to the page's FAQ markup, and add the FAQPage node to its header.
+2. **Positioning line on the in-home page.** The brief says the In Short bullets must not name an age group, and it also says the first bullet is the positioning line verbatim. That line says "busy professionals over 30". X01 does not match "over 30" (its age terms are older adults, over/after 50 and seniors), and the line is site canon, so it stays verbatim. The other in-home bullets and the FAQ name no age. WRONG IF the owner reads X01's "no age group" as covering "over 30"; then the in-home block needs a canon decision, because the line cannot be paraphrased (certify positioning_line_verbatim).
+3. **In-home travel answer leaves out "at no extra cost".** The Travel Protocol's canonical live-video phrasing ends "at no extra cost". X01 bans `\bcost\b` in the in-home page's JSON-LD, which includes its FAQPage. The answer says the session "can be taken live by video instead, included in your program". The Travel Protocol name and casing are unchanged, and no price is stated.
+4. **Skipped questions** (listed per page above): asked again in different words, but already answered by an existing question on that page. A duplicate question would split the answer AI models quote.
+5. **weight-loss "What happens to my results after the program?" was added** next to the existing "Will I keep the weight off?". The existing answer covers maintenance skills; the new one covers the process after the program (Dial step-down, Tune-Up reassessment every 4 weeks). /faqs got "What happens when my program ends?" next to "Will I be able to train on my own eventually?" on the same reasoning.
+6. **/outcomes answer uses counts, not percentages.** The first draft quoted 34% and 17%. certify T2-1 flagged both, because the FAQ section does not carry the not-independently-audited note on its surface. The answer now gives the counts with their denominators (18 of 53, 5 of 30), all published in the page's retention section. No new figure.
+7. **Host-page CSS.** Several pages force heading and strong colours with `!important`, and omnifit-vs-competitors applies `all: unset` to every element in its wrapper. The shared In Short CSS therefore holds its heading, label and text colours with `!important`, scoped to `#omh-short.omh`. omnifit-vs-competitors has one extra, page-only override that restores padding and the tick path (`d: path(...)`).
+8. **Over ~250 words.** Three first drafts ran 252 to 266 words and were trimmed. Final counts on the 14 In Short pages are 130 to 252 words (omnifit-vs-competitors is the largest); /faqs grew 158 and /outcomes 85.
