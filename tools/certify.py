@@ -1197,6 +1197,57 @@ def _selftest_placeholder():
                '<script type="application/ld+json">{"knowsAbout": ["NASM CPT", "ACE"]}</script>'):
         assert hits(ok) == [], f"legitimate copy flagged: {ok} -> {hits(ok)}"
 
+# ─── RETIRED SERVICE AREAS (Oct 19 2026) ────────────────────────────
+# The Pacific Beach studio era is history (CANON NAP), and so are the beach
+# neighbourhoods it served. BANNED caught "Pacific Beach" but nothing else:
+# weight-loss carried "Serving PB, Mission Bay, OB, La Jolla" past every run.
+# "Mission Bay" and "Ocean Beach" are matched in any casing; the abbreviations
+# PB and OB as whole words and case-SENSITIVELY, so "pb" in a slug, "PBS" or
+# "OBJECTIVE" is not an area name. VISIBLE PAGE TEXT ONLY: HTML comments,
+# <style>, executable <script>, every tag and its attributes (href, src, alt)
+# and URLs written out in copy or ld+json are blanked first, positions kept so
+# a hit reports its line. _redirects, REPORT.md and archive/ are never read:
+# a 301 from /personal-trainer-mission-bay is how a retired URL stays retired.
+# Every file in the glob, frozen records INCLUDED. Self-tested both ways
+# (_selftest_retired_service_area).
+_RETIRED_AREA = re.compile(r'(?i:\bmission(?:\s|&nbsp;|&#160;)+bay\b|\bocean(?:\s|&nbsp;|&#160;)+beach\b)'
+                           r'|\bPB\b|\bOB\b')
+_URL = re.compile(r'(?:https?://|www\.)[^\s"\'<>]+|(?<![\w/])/[a-z0-9][\w\-./?#=&%]*')
+_AREA_SKIP = ("_redirects", "REPORT.md")
+
+def _area_skipped(path):
+    p = path.replace(os.sep, '/')
+    return os.path.basename(p) in _AREA_SKIP or p.startswith('archive/') or '/archive/' in p
+
+def retired_service_area(text, path=""):
+    if _area_skipped(path): return []
+    blank = lambda m: re.sub(r'[^\n]', ' ', m.group(0))
+    t = _blank_noncopy(text)
+    t = re.sub(r'<[^>]*>', blank, t)
+    t = _URL.sub(blank, t)
+    out = []
+    for m in _RETIRED_AREA.finditer(t):
+        ln = t.count('\n', 0, m.start()) + 1
+        out.append((re.sub(r'(?:\s|&nbsp;|&#160;)+', ' ', m.group(0)), ln,
+                    re.sub(r'\s+', ' ', t[max(0, m.start()-50):m.end()+50]).strip()))
+    return out
+
+def _selftest_retired_service_area():
+    hits = lambda t, p="pages/fixture.html": [h for h, _, _ in retired_service_area(t, p)]
+    assert hits('<ul><li>Serving PB, Mission Bay</li></ul>') == ["PB", "Mission Bay"], "'Serving PB, Mission Bay' passed"
+    assert hits('<p>Clients from OB and Ocean Beach.</p>') == ["OB", "Ocean Beach"], "OB / Ocean Beach passed"
+    assert hits('<p>Serving PB/OB.</p>') == ["PB", "OB"], "'PB/OB' passed"
+    assert hits('<p>Near mission\n  bay.</p>') == ["mission bay"], "lower-case Mission Bay across a line break passed"
+    assert hits('<script type="application/ld+json">{"areaServed": "Mission Bay"}</script>'), "Mission Bay in ld+json passed"
+    assert hits('/personal-trainer-mission-bay  /personal-trainer-la-jolla  301', "public/_redirects") == [], "_redirects was read"
+    assert hits('/personal-trainer-mission-bay  /  301', "_redirects") == [], "_redirects was read"
+    assert hits('Serving PB, Mission Bay', "REPORT.md") == [] and hits('Serving PB', "archive/old.html") == [], "REPORT.md / archive/ was read"
+    for ok in ('<!-- Serving PB, Mission Bay, OB -->', '<a href="/personal-trainer-mission-bay">La Jolla</a>',
+               '<img src="/img/ocean-beach.jpg" alt="Mission Bay view">', '<p>See https://example.com/Mission Bay</p>',
+               '<p>Watch it on PBS. Our OBJECTIVE is a pb-free slug.</p>', '<p>pb and ob in lower case</p>',
+               '<style>/* PB */</style><script>var OB = 1;</script>'):
+        assert hits(ok) == [], f"non-copy flagged: {ok} -> {hits(ok)}"
+
 # Every rule names the tier it encodes. TIER 1 rules report a violation; TIER 2
 # rules report a MISSING CONDITION. See CANON COMPLIANCE SCREEN - TWO TIERS.
 COMPLIANCE = [
@@ -1931,6 +1982,12 @@ def run():
         for hit, ctx in coaching_tenure_claim(open(f).read()):
             print(f"   {f}  [coaching tenure claimed: '{hit}' - CANON: coaching since 2016, never a number of professional years]  …{ctx[:110]}…"); B+=1
     print(f"   (coaching-tenure rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
+    _selftest_retired_service_area()
+    for f in ALL:
+        for hit, ln, ctx in retired_service_area(open(f).read(), f):
+            print(f"   {f}:{ln}  [retired service area: '{hit}' - CANON: the Pacific Beach era and its areas are history]  …{ctx[:110]}…"); B+=1
+    print(f"   (retired service area rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED; "
+          f"comments, attributes, URLs, _redirects, REPORT.md, archive/ ignored)")
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
