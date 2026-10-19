@@ -1619,7 +1619,13 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   "travel protocol" in any casing but "Travel Protocol", or a dollar figure
   in the same sentence as the name (certify.py travel_protocol_usage,
   self-tested both ways on every run).
-  "OmniFit Personal Fitness Training" · "Pacific Beach" · "ACE OES" ·
+  RETIRED SERVICE AREAS (Oct 19 2026): "Mission Bay", "Ocean Beach", and PB /
+  OB as whole-word, case-sensitive abbreviations, in visible page text
+  (certify.py retired_service_area, every file in the glob, frozen records
+  INCLUDED; HTML comments, attributes, URLs, _redirects, REPORT.md and
+  archive/ ignored; self-tested both ways on every run).
+  "OmniFit Personal Fitness Training" · "Pacific Beach" · "Mission Bay" ·
+  "Ocean Beach" · "PB"/"OB" (as area names) · "ACE OES" ·
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
   "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
   "$50"/"$75" as travel fees. $75 left the bare-literal list in the Audit
