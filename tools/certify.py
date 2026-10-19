@@ -1737,6 +1737,113 @@ def _norm(x):
     artifact of extraction, not a mirroring failure."""
     return re.sub(r'\s+([.,;:])', r'\1', re.sub(r'\s+', ' ', x or '')).strip()
 
+# ─── Ask OmniFit assistant (owner brief, Oct 2026) ─────────────────
+# The assistant answers visitors from assistant/knowledge.md, under the system
+# prompt in functions/_lib/system-prompt.js, inside the widget copy in
+# site/assistant.js (plus the fixed turn-cap reply in functions/_lib/assistant.js).
+# None of these files is under pages/, so the glob above never sees them; they
+# are screened here with the same rules, and the results count in (a) and (b).
+ASSISTANT_KNOWLEDGE = "assistant/knowledge.md"
+ASSISTANT_PROMPT = "functions/_lib/system-prompt.js"
+ASSISTANT_SURFACES = (ASSISTANT_KNOWLEDGE, ASSISTANT_PROMPT, "site/assistant.js", "functions/_lib/assistant.js")
+# The prompt is verbatim from the owner. Wording changes need owner approval
+# and a new hash here and in CANON (ASK OMNIFIT).
+ASSISTANT_PROMPT_SHA256 = "2ee2a1c006f3a6ef"
+
+def assistant_knowledge_text(raw):
+    """What the model actually receives: knowledge.md minus maintainer comments
+    (build.py drops <!-- --> blocks the same way)."""
+    return re.sub(r"<!--.*?-->\s*", "", raw, flags=re.S)
+
+def assistant_prompt_text(raw):
+    m = re.search(r"SYSTEM_PROMPT\s*=\s*`(.*?)`;", raw, re.S)
+    if not m:
+        raise ValueError(f"{ASSISTANT_PROMPT}: SYSTEM_PROMPT template literal not found")
+    return m.group(1)
+
+_NEVER_BLOCK = re.compile(r"^NEVER:\n(?:- .*\n)+", re.M)
+
+def assistant_prompt_screenable(prompt):
+    """The prompt minus its NEVER: list. That list names the banned framings in
+    order to forbid them ('promise or guarantee results', 'call the consultation
+    ... "free"'), so screening it reports the bans as violations. Every other
+    line of the prompt is screened. WRONG IF a claim is ever added inside the
+    NEVER list; the self-test below proves a claim outside it still fires."""
+    out, n = _NEVER_BLOCK.subn("", prompt)
+    if n != 1:
+        raise ValueError(f"{ASSISTANT_PROMPT}: expected one NEVER: list, found {n}")
+    return out
+
+def _canon_card_numbers(canon):
+    """Every figure in CANONICAL FACTS and the OCTOBER 2026 CARD block - the
+    only places a published price may come from."""
+    spans = [(canon.index("CANONICAL FACTS"), canon.index("\nREPO STATE")),
+             (canon.index("PRICING — OCTOBER 2026 CARD"), canon.index("\nLEGACY PRICING"))]
+    return {n.replace(",", "") for a, b in spans for n in re.findall(r"\d[\d,]*", canon[a:b])}
+
+_PRICE = re.compile(r"\$\s?(\d[\d,]*(?:\.\d\d)?)")
+
+def assistant_price_findings(md, canon):
+    card = _canon_card_numbers(canon)
+    return sorted({"$" + p for p in _PRICE.findall(md) if p.replace(",", "") not in card},
+                  key=lambda x: float(x[1:].replace(",", "")))
+
+# Wording the brief requires in the knowledge file exactly as published.
+ASSISTANT_REQUIRED = [
+    "If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the "
+    "Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment.",
+    "$30 deposit, refunded the same day you attend your consultation",
+    "4.98 average across 190+ reviews",
+    "No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway",
+    "a travel fee applies, confirmed before you book",
+]
+# Internal content that must never reach the assistant: tooling, compliance
+# notes, the payment processor, legacy pricing, and client names.
+_INTERNAL = re.compile(r"\b(?:Stripe|CANON|certify|certification|REPORT\.md|build\.py|tools/|compliance|"
+                       r"Squarespace|legacy|grandfathered|August card|August 2026|counsel|monthly|per month)\b", re.I)
+_CLIENT_NAMES = re.compile(r"\b(?:" + "|".join(sorted({n.split()[0] for n in CONSENT_LIST})) + r")\b")
+
+def assistant_internal_findings(md):
+    hits = [m.group(0) for m in _INTERNAL.finditer(md)]
+    hits += [f"client name {m.group(0)}" for m in _CLIENT_NAMES.finditer(md)]
+    return hits
+
+def _selftest_assistant(canon):
+    """Both directions for every assistant-only rule; raises on a rule that
+    does not fire on a real violation or fires on legitimate copy."""
+    bad = []
+    if assistant_price_findings("Studio Momentum: $640 per 4-week cycle; $1,680 due at signup; $119/mo.", canon):
+        bad.append("price check flagged October card prices")
+    if assistant_price_findings("Studio Momentum: $475 per cycle.", canon) != ["$475"]:
+        bad.append("price check missed the legacy $475")
+    if assistant_price_findings("A 5-pack is $1,050 in total.", canon) != ["$1,050"]:
+        bad.append("price check missed a total that is not on the card")
+    if assistant_internal_findings("Payments run through Stripe. Mark M. lost weight.") != ["Stripe", "client name Mark"]:
+        bad.append("internal-content check missed Stripe or a client name")
+    if assistant_internal_findings("Book a consultation. Bodystat QuadScan 4000 reassessments are marked in the app."):
+        bad.append("internal-content check flagged ordinary copy")
+    prompt = assistant_prompt_text(open(ASSISTANT_PROMPT).read())
+    screen = assistant_prompt_screenable(prompt)
+    if any(fn(screen) for fn in COMPLIANCE):
+        bad.append("prompt outside the NEVER list already fires (see the (a) findings)")
+    if not any(fn(screen + "\nThe consultation is free.") for fn in COMPLIANCE):
+        bad.append("a free-consultation claim outside the NEVER list did not fire")
+    if not any(fn(screen + "\nWe guarantee you will lose 20 lbs.") for fn in COMPLIANCE):
+        bad.append("an outcome guarantee outside the NEVER list did not fire")
+    if bad:
+        raise AssertionError("assistant self-test: " + "; ".join(bad))
+
+def assistant_surface_texts():
+    """{path: text as the visitor or the model meets it}."""
+    out = {}
+    for f in ASSISTANT_SURFACES:
+        raw = open(f).read()
+        if f == ASSISTANT_KNOWLEDGE: raw = assistant_knowledge_text(raw)
+        if f == ASSISTANT_PROMPT: raw = assistant_prompt_screenable(assistant_prompt_text(raw))
+        out[f] = raw
+    return out
+
+
 class CanonParseFailure(Exception):
     """CANON.md's INVARIANTS block could not be read. Raised rather than
     returning an empty dict: an empty recorded-hash table would make every
@@ -1865,6 +1972,15 @@ def run():
             lo = max((ft.rfind(c, 0, m.start()) for c in '.!?'), default=-1) + 1
             hi = min((x for x in (ft.find(c, m.end()) for c in '.!?') if x != -1), default=len(ft))
             ciia.setdefault(_norm(ft[lo:hi + 1]), []).append(f)
+    # Ask OmniFit surfaces (knowledge, system prompt outside its NEVER list,
+    # widget copy): the same TIER 1 / TIER 2 rules as the pages.
+    canon_text = open("CANON.md").read()
+    _selftest_assistant(canon_text)
+    for f, t in assistant_surface_texts().items():
+        for fn in COMPLIANCE:
+            for kind, what, ctx in fn(t):
+                print(f"   {f}\n      [{kind}] {what}\n      …{ctx[:130]}…"); A+=1
+    print(f"   (assistant: {len(ASSISTANT_SURFACES)} surfaces screened; prompt NEVER-list exemption self-tested both ways)")
     if len(ciia) > 1:
         print(f"   [Class IIa fact not byte-identical across files (T2-4)] "
               f"{len(ciia)} distinct wordings:")
@@ -1988,6 +2104,38 @@ def run():
             print(f"   {f}:{ln}  [retired service area: '{hit}' - CANON: the Pacific Beach era and its areas are history]  …{ctx[:110]}…"); B+=1
     print(f"   (retired service area rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED; "
           f"comments, attributes, URLs, _redirects, REPORT.md, archive/ ignored)")
+    # Ask OmniFit: stale canon on every assistant surface, then the knowledge
+    # file's prices against CANON, its required wording, and no internal content.
+    for f, t in assistant_surface_texts().items():
+        for term in BANNED:
+            rx = (re.compile(re.escape(term) + r'(?![\d,]*\d)(?!\s*[-–]\s*\d)') if term.startswith('$')
+                  else re.compile(re.escape(term), re.I))
+            if rx.search(t): print(f"   {f}  [{term}]"); B+=1
+        for term in BANNED_TIERS:
+            if re.search(r'\b'+re.escape(term)+r'\b', t): print(f"   {f}  [{term} is unlisted on the October card]"); B+=1
+        for term, sentence in fee_language(t):
+            print(f"   {f}  [{term} outside the Foundation policy]  …{sentence[:90]}…"); B+=1
+        for fn in (assessment_as_session_rate, retired_pack_rate, retired_75):
+            for ctx in fn(t): print(f"   {f}  [{fn.__name__}]  …{ctx[:90]}…"); B+=1
+        for term, ln, ctx in retired_launch_copy(t):
+            print(f"   {f}:{ln}  [retired launch copy: {term}]  …{ctx[:90]}…"); B+=1
+        for fn in (positioning_line_verbatim, travel_protocol_usage, ken_muscle_claim, teqneeq_onsite_pt, coaching_tenure_claim):
+            for kind, ctx in fn(t): print(f"   {f}  [{kind}]  …{ctx[:90]}…"); B+=1
+        for hit, ln, ctx in retired_service_area(t, f):
+            print(f"   {f}:{ln}  [retired service area: '{hit}']"); B+=1
+    md = assistant_knowledge_text(open(ASSISTANT_KNOWLEDGE).read())
+    for price in assistant_price_findings(md, canon_text):
+        print(f"   {ASSISTANT_KNOWLEDGE}  [price {price} is not on the CANON October card or in CANONICAL FACTS]"); B+=1
+    for phrase in ASSISTANT_REQUIRED:
+        if phrase not in md:
+            print(f"   {ASSISTANT_KNOWLEDGE}  [required wording missing: {phrase[:70]}…]"); B+=1
+    for hit in assistant_internal_findings(md):
+        print(f"   {ASSISTANT_KNOWLEDGE}  [internal content must not reach the assistant: {hit}]"); B+=1
+    prompt_sha = hashlib.sha256(assistant_prompt_text(open(ASSISTANT_PROMPT).read()).encode()).hexdigest()[:16]
+    if prompt_sha != ASSISTANT_PROMPT_SHA256:
+        print(f"   {ASSISTANT_PROMPT}  [system prompt changed: sha256 {prompt_sha}, owner-approved {ASSISTANT_PROMPT_SHA256}]"); B+=1
+    print(f"   (assistant: {len(ASSISTANT_SURFACES)} surfaces swept for stale canon; knowledge prices vs CANON card, "
+          f"{len(ASSISTANT_REQUIRED)} required phrases, internal content: self-tested both ways; prompt sha256 {prompt_sha})")
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
