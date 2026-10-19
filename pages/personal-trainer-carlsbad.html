@@ -13,21 +13,18 @@
   #omni-cbd .cb-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
   #omni-cbd .cb-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
   #omni-cbd .cb-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
-  #omni-cbd .cb-hero h1 em { font-style: italic; color: var(--gold); }
   #omni-cbd .cb-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
   #omni-cbd .cb-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; position: relative; }
   #omni-cbd .cb-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
   #omni-cbd a.cb-btn, #omni-cbd a.cb-btn:link, #omni-cbd a.cb-btn:visited { text-decoration: none; }
-  #omni-cbd .cb-btn-primary, #omni-cbd a.cb-btn-primary, #omni-cbd a.cb-btn-primary:link, #omni-cbd a.cb-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
-  #omni-cbd .cb-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-cbd .cb-btn-primary, #omni-cbd a.cb-btn-primary, #omni-cbd a.cb-btn-primary:link, #omni-cbd a.cb-btn-primary:visited { background: var(--gold-btn, var(--gold)); color: var(--navy) !important; }
+  #omni-cbd .cb-btn-primary:hover { background: var(--gold-btn-hover, var(--gold-light)); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
   #omni-cbd .cb-btn-ghost, #omni-cbd a.cb-btn-ghost, #omni-cbd a.cb-btn-ghost:link, #omni-cbd a.cb-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
   #omni-cbd .cb-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); color: var(--white) !important; }
-  #omni-cbd .cb-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
   #omni-cbd .cb-section-head { text-align: center; margin-bottom: 40px; }
   #omni-cbd .cb-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
   #omni-cbd .cb-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
   #omni-cbd h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
-  #omni-cbd h2 em { font-style: italic; color: var(--gold); }
   #omni-cbd h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
   #omni-cbd p { font-family: 'Montserrat', sans-serif !important; color: var(--white-70); font-weight: 400; line-height: 1.7; }
   #omni-cbd .cb-quotable { background: var(--navy-mid); border-left: 3px solid var(--gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 24px 28px; max-width: 1120px; margin: 0 auto 56px; }
@@ -77,7 +74,7 @@
   #omni-cbd .cb-trust-item { font-family: 'Montserrat', sans-serif !important; font-size: 11px; font-weight: 600; color: var(--white-50); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px; }
   #omni-cbd .cb-trust-item span { font-size: 14px; }
   @media (max-width: 980px) { #omni-cbd .cb-grid { grid-template-columns: repeat(2, 1fr); } #omni-cbd .cb-two-col { grid-template-columns: 1fr; gap: 28px; } }
-  @media (max-width: 768px) { #omni-cbd .cb-hero { padding: 56px 20px 36px; } #omni-cbd .cb-section { padding: 0 20px; } #omni-cbd .cb-quotable { margin-left: 20px; margin-right: 20px; } #omni-cbd .cb-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; } }
+  @media (max-width: 768px) { #omni-cbd .cb-hero { padding: 56px 20px 36px; } #omni-cbd .cb-quotable { margin-left: 20px; margin-right: 20px; } #omni-cbd .cb-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; } }
   @media (max-width: 640px) { #omni-cbd .cb-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; margin-bottom: 48px; } #omni-cbd .cb-hood-grid { grid-template-columns: 1fr 1fr; } #omni-cbd .cb-hub-grid { grid-template-columns: 1fr; } #omni-cbd .cb-cta-row { flex-direction: column; align-items: center; } #omni-cbd .cb-btn { width: 100%; max-width: 300px; text-align: center; } }
 </style>
 
@@ -99,7 +96,7 @@
     </blockquote>
   </div>
 
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--cream">
     <div class="cb-section-head">
       <span class="cb-label">Services in Carlsbad</span>
       <hr class="cb-divider">
@@ -153,7 +150,7 @@
     </div>
   </div>
 
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--white">
     <div class="cb-section-head">
       <span class="cb-label">Our Approach</span>
       <hr class="cb-divider">
@@ -176,7 +173,7 @@
     </div>
   </div>
 
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--white">
     <div class="cb-section-head">
       <span class="cb-label">Why OmniFit</span>
       <hr class="cb-divider">
@@ -202,7 +199,7 @@
   </div>
 
   <!-- MEET YOUR TRAINER -->
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--cream">
     <div class="cb-section-head">
       <span class="cb-label">Your Coach</span>
       <hr class="cb-divider">
@@ -214,10 +211,9 @@
     </article>
   </div>
 
-  <div class="cb-spacer"></div>
 
   <!-- WHO WE COACH -->
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--navy">
     <div class="cb-section-head">
       <span class="cb-label">Who We Coach</span>
       <hr class="cb-divider">
@@ -241,7 +237,7 @@
   </div>
 
   <!-- THE 9-POINT MOVEMENT SCREEN -->
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--navy">
     <div class="cb-section-head">
       <span class="cb-label">The Diagnostic</span>
       <hr class="cb-divider">
@@ -264,9 +260,8 @@
     </article>
   </div>
 
-  <div class="cb-spacer"></div>
 
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--cream">
     <div class="cb-section-head">
       <span class="cb-label">Frequently Asked</span>
       <hr class="cb-divider">
@@ -283,9 +278,8 @@
     </div>
   </div>
 
-  <div class="cb-spacer"></div>
 
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--white">
     <div class="cb-section-head">
       <span class="cb-label">Neighborhoods We Serve</span>
       <hr class="cb-divider">
@@ -304,7 +298,7 @@
     </div>
   </div>
 
-  <div class="cb-section">
+  <div class="cb-section omni-band omni-band--white">
     <div class="cb-section-head">
       <span class="cb-label">Explore More</span>
       <hr class="cb-divider">
@@ -325,20 +319,19 @@
     </div>
   </div>
 
-  <div style="padding: 0 28px;">
+  <div class="omni-band omni-band--navy">
     <div class="cb-bottom">
       <h2>Train Smarter in <em>Carlsbad</em></h2>
       <p>Book a 45-minute consultation. We'll discuss your goals, movement history, and schedule; if it's a fit, the Performance Assessment measures your starting point and your program is built to fit your Carlsbad lifestyle.</p>
       <a class="cb-btn cb-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
       <span class="cb-bottom-note">45-minute consultation · $30 deposit, refunded the same day you attend your consultation · Straight answer on fit</span>
     </div>
-  </div>
-
-  <div class="cb-trust">
+    <div class="cb-trust">
     <div class="cb-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> 4.98 average across 190+ reviews</div>
     <div class="cb-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg> NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</div>
     <div class="cb-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A7 7 0 0 0 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
     <div class="cb-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg> Serving Carlsbad &amp; La Costa</div>
+    </div>
   </div>
 
 </div>

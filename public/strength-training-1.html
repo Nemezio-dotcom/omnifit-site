@@ -504,14 +504,13 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-strength h1, #omni-strength h2, #omni-strength h3, #omni-strength p,
   #omni-strength ul, #omni-strength li, #omni-strength section, #omni-strength div { margin: 0; padding: 0; border: 0; }
 
-  #omni-strength .st-inner { max-width: 1260px; margin: 0 auto; padding: 0 2.5rem 3.5rem; }
+  #omni-strength .st-inner { margin: 0 auto; }
 
   /* ══ HERO ══ */
   #omni-strength .st-hero { text-align: center; padding: 5rem 2.5rem 3rem; max-width: 1000px; margin: 0 auto; position: relative; }
   #omni-strength .st-hero::before { content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.25; }
   #omni-strength .st-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 28px; position: relative; }
   #omni-strength .st-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 5vw, 46px) !important; font-weight: 700 !important; line-height: 1.15 !important; color: var(--white) !important; margin-bottom: 20px !important; letter-spacing: -0.5px !important; text-transform: none !important; }
-  #omni-strength .st-hero h1 em { font-style: italic; color: var(--gold); }
   #omni-strength .st-hero-sub { font-size: clamp(16px, 2.2vw, 18px); color: var(--white-70); max-width: 760px; margin: 0 auto 32px; line-height: 1.8; text-align: center; }
   #omni-strength .st-hero-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
   #omni-strength .st-hero-pills span { background: var(--navy-surface); border: 1px solid var(--white-20); border-radius: 999px; padding: 6px 16px; font-size: 13px; color: var(--white-70); }
@@ -519,8 +518,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   /* ══ CTAs ══ */
   #omni-strength .st-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 12px; }
   #omni-strength .st-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none !important; transition: all 0.3s; }
-  #omni-strength a.st-btn-primary, #omni-strength a.st-btn-primary:link, #omni-strength a.st-btn-primary:visited { background: var(--gold); color: var(--navy) !important; border: 2px solid var(--gold); }
-  #omni-strength a.st-btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); color: var(--navy) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-strength a.st-btn-primary, #omni-strength a.st-btn-primary:link, #omni-strength a.st-btn-primary:visited { background: var(--gold-btn, var(--gold)); color: var(--navy) !important; border: 2px solid var(--gold); }
+  #omni-strength a.st-btn-primary:hover { background: var(--gold-btn-hover, var(--gold-light)); border-color: var(--gold-light); color: var(--navy) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
   #omni-strength a.st-btn-ghost, #omni-strength a.st-btn-ghost:link, #omni-strength a.st-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
   #omni-strength a.st-btn-ghost:hover { border-color: var(--white); background: var(--white-05); color: var(--white) !important; transform: translateY(-2px); }
   #omni-strength .st-cta-note { text-align: center; font-size: 13px; color: var(--white-50); }
@@ -601,7 +600,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-strength p { font-family: 'Montserrat', sans-serif !important; }
 
   /* ══ Responsive ══ */
-  @media (max-width: 768px) { #omni-strength .st-inner { padding: 0 1.2rem 2.5rem; } #omni-strength .st-hero { padding: 3rem 1.2rem 2rem; } #omni-strength .st-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; } }
+  @media (max-width: 768px) { #omni-strength .st-hero { padding: 3rem 1.2rem 2rem; } #omni-strength .st-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; } }
   @media (max-width: 640px) { #omni-strength .st-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; } #omni-strength .st-benefits { grid-template-columns: 1fr 1fr; } #omni-strength .st-cta-row { flex-direction: column; align-items: center; } #omni-strength .st-btn { width: 100%; max-width: 320px; text-align: center; } #omni-strength .st-trust { gap: 16px; } }
   @media (max-width: 440px) { #omni-strength .st-benefits { grid-template-columns: 1fr; } }
 </style>
@@ -774,14 +773,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </section>
 
 
-  <div class="st-inner">
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ GEMINI-QUOTABLE ════════════ -->
     <div class="gq-block">
       <strong>OmniFit Strength Training</strong> is a structured, 1-on-1 strength and conditioning program in 4S Ranch, San Diego, designed for busy professionals over 30. Unlike generic personal training, OmniFit uses periodized programming with structured phases — each training block builds on the last with specific strength, hypertrophy, or conditioning goals. Every program begins with a 45-minute consultation, then, if it's a fit, the in-person Performance Assessment using NASM Corrective Exercise Specialist (CES) and ACE Corrective Exercise Specialist protocols, and follows the Assess → Correct → Build → Sustain methodology. Training is joint-friendly by design: the 3/10 pain ceiling rule applies to every session, and corrective exercise is integrated into every warm-up. Programs include nutrition coaching, weekly accountability check-ins, and data-driven progress tracking through strength benchmarks, body measurements, and posture photos.
     </div>
 
-    <hr />
 
     <!-- ════════════ WHY STRENGTH MATTERS AFTER 30 ════════════ -->
     <section class="st-section">
@@ -814,9 +812,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </div>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ WHAT MAKES OMNIFIT DIFFERENT ════════════ -->
     <section class="st-section">
       <div class="st-section-head">
@@ -871,9 +870,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--navy">
     <!-- ════════════ WHO IT'S FOR ════════════ -->
     <section class="st-section">
       <div class="st-section-head">
@@ -898,7 +898,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
     </section>
 
-    <hr />
 
     <!-- ════════════ TRAINING OPTIONS ════════════ -->
     <section class="st-section">
@@ -932,9 +931,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ FAQ ════════════ -->
     <section class="st-section">
       <div class="st-section-head">
@@ -983,7 +983,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </section>
 
-    <hr />
 
         <!-- ═══ USE CASES ═══ -->
     <div class="st-section">
@@ -1016,7 +1015,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </div>
+  </div>
 
+  <div class="omni-band omni-band--navy">
 <!-- ════════════ BOTTOM CTA ════════════ -->
     <div class="st-bottom">
       <h2>Start Strength Training in San Diego</h2>
@@ -1052,8 +1053,8 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a href="/weight-loss">Weight Loss</a> ·
       <a href="/training-rates-san-diego">Rates</a>
     </div>
-
   </div>
+
 </div>
 </main>
 <!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->

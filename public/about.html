@@ -417,7 +417,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
       "founder": {
         "@id": "https://www.omnifittraining.com/#localbusiness-of"
       },
-      "image": "https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/529df92f-56b5-489f-8441-d548f59017b6/Screenshot_20250416_132107_Thumbtack+Pro-EDIT.jpg?content-type=image%2Fjpeg",
+      "image": "https://www.omnifittraining.com/assets/img/coach-nemezio-lopezperez-portrait-1200.jpg",
       "description": "Nemezio LopezPerez is the founder of OmniFit Performance, a private personal training practice at Teqneeq Functional Health Center in 4S Ranch, San Diego. A former athlete who rebuilt after an accumulation of injuries, he specializes in corrective exercise, joint-friendly strength training, and structured coaching for busy professionals 30+. He has been coaching since 2016 and holds a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark). He is not a medical provider and does not diagnose, treat, or provide physical therapy.",
       "knowsAbout": [
         "Corrective Exercise",
@@ -603,18 +603,17 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-about .ab-hero::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:520px; height:520px; background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%); pointer-events:none; opacity:.3; }
   #omni-about .ab-badge { display:inline-block; padding:8px 22px; border:1px solid var(--gold); color:var(--gold); border-radius:100px; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:28px; position:relative; }
   #omni-about h1 { font-family:'Playfair Display',serif !important; font-size:clamp(31px,5vw,50px) !important; font-weight:700 !important; line-height:1.15 !important; color:var(--white) !important; margin-bottom:20px !important; letter-spacing:-.5px !important; text-transform:none !important; position:relative; }
-  #omni-about h1 em { font-style:italic; color:var(--gold); }
   #omni-about .ab-hero-sub { font-size:17px; color:var(--white-70); max-width:660px; margin:0 auto; line-height:1.8; position:relative; }
 
   #omni-about .ab-portrait { display:flex; justify-content:center; padding:0 28px 12px; }
+  #omni-about .ab-fig { margin:6px 0 24px; } #omni-about .ab-fig img { display:block; width:100%; height:auto; aspect-ratio:16 / 9; object-fit:cover; object-position:50% 60%; border-radius:var(--radius-lg); }
   #omni-about .ab-portrait img { width:172px; height:172px; border-radius:999px; object-fit:cover; object-position:50% 15%; border:2px solid var(--white-20); box-shadow:0 12px 30px rgba(0,0,0,.35); }
 
-  #omni-about .ab-sec { padding:0 28px; max-width:860px; margin:0 auto 56px; }
+  #omni-about .ab-sec { max-width:860px; margin:0 auto 56px; }
   #omni-about .ab-sec-wide { max-width:1080px; }
   #omni-about .ab-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; text-align:center; }
   #omni-about .ab-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 22px; border-radius:2px; }
   #omni-about h2 { font-family:'Playfair Display',serif !important; font-size:clamp(25px,3.6vw,34px) !important; font-weight:700 !important; line-height:1.2 !important; color:var(--white) !important; margin-bottom:20px !important; text-align:center !important; text-transform:none !important; letter-spacing:-.3px !important; }
-  #omni-about h2 em { font-style:italic; color:var(--gold); }
   #omni-about h3 { font-family:'Playfair Display',serif !important; font-size:19px !important; font-weight:600 !important; color:var(--white) !important; margin-bottom:8px !important; text-transform:none !important; }
   #omni-about p { color:var(--white-70); line-height:1.8; font-size:16px; margin-bottom:18px; }
   #omni-about p:last-child { margin-bottom:0; }
@@ -645,8 +644,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-about .ab-list.yes li::before { content:'\2713'; color:var(--gold); }
 
   #omni-about .ab-cta { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 34px; text-align:center; max-width:900px; margin:0 auto 40px; }
-  #omni-about a.ab-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:8px; }
-  #omni-about a.ab-btn:hover { background:var(--gold-light); color:var(--navy) !important; transform:translateY(-2px); }
+  #omni-about a.ab-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold-btn, var(--gold)); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:8px; }
+  #omni-about a.ab-btn:hover { background:var(--gold-btn-hover, var(--gold-light)); color:var(--navy) !important; transform:translateY(-2px); }
   #omni-about .ab-cta-note { display:block; margin-top:16px; font-size:13px; color:var(--white-50); line-height:1.7; }
   #omni-about a { color:var(--gold) !important; text-decoration:underline; text-underline-offset:3px; }
   #omni-about a:hover { color:var(--gold-light) !important; }
@@ -661,10 +660,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-about .ab-badge-row a:hover { opacity:1; transform:translateY(-3px); }
   #omni-about .ab-badge-row img { width:52px; height:52px; object-fit:contain; display:block; background:transparent; }
   #omni-about .ab-badges-note { font-size:11.5px; color:var(--white-50); line-height:1.6; margin:22px auto 0; max-width:640px; }
-  @media (max-width:820px) { #omni-about .ab-badges { margin-left:20px; margin-right:20px; padding:24px 18px 20px; } #omni-about .ab-badge-row { gap:14px 18px; } #omni-about .ab-badge-row img { width:44px; height:44px; } }
+  @media (max-width:820px) { #omni-about .ab-badges { padding:24px 18px 20px; } #omni-about .ab-badge-row { gap:14px 18px; } #omni-about .ab-badge-row img { width:44px; height:44px; } }
 
   /* Certificates: same card as the PN L2 block on /behavior-change-coaching */
-  #omni-about .ab-certs { max-width:1080px; margin:0 auto 24px; padding:0 28px; }
+  #omni-about .ab-certs { max-width:1080px; margin:0 auto 24px; }
   #omni-about .ab-cert-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
   #omni-about .ab-cert { display:flex; flex-direction:column; gap:16px; background:var(--navy-mid); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:22px; }
   #omni-about .ab-cert-img { display:block; line-height:0; text-decoration:none !important; }
@@ -673,13 +672,13 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-about .ab-cert-issuer { display:block; font-size:11px; font-weight:500; color:var(--white-50); letter-spacing:.5px; text-transform:uppercase; margin-bottom:8px; }
   #omni-about .ab-cert p { font-size:14px; color:var(--white-70); line-height:1.7; margin-bottom:8px; }
   #omni-about .ab-cert p:last-child { margin-bottom:0; }
-  @media (max-width:820px) { #omni-about .ab-certs { padding:0 20px; } #omni-about .ab-cert-grid { grid-template-columns:1fr; gap:16px; } #omni-about .ab-cert { padding:16px; gap:14px; } }
+  @media (max-width:820px) {  #omni-about .ab-cert-grid { grid-template-columns:1fr; gap:16px; } #omni-about .ab-cert { padding:16px; gap:14px; } }
   @media (max-width:820px) {
     #omni-about .ab-grid { grid-template-columns:1fr; }
     #omni-about .ab-cred { grid-template-columns:1fr; gap:6px; }
     #omni-about .ab-hero { padding:56px 20px 34px; }
-    #omni-about .ab-sec { padding-left:20px; padding-right:20px; }
-    #omni-about .ab-pull, #omni-about .ab-quotable { margin-left:20px; margin-right:20px; padding:22px 20px; }
+    
+    #omni-about .ab-pull, #omni-about .ab-quotable { padding:22px 20px; }
     #omni-about .ab-cta { margin-left:20px; margin-right:20px; padding:32px 22px; }
   }
   .sqs-block-code #omni-about, .sqs-block-html #omni-about { margin-bottom:0 !important; }
@@ -792,8 +791,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p class="ab-hero-sub">Founder of OmniFit Performance. NASM Elite Trainer and corrective exercise specialist, working out of Teqneeq Functional Health Center in 4S Ranch, San Diego.</p>
   </section>
 
+  <div class="omni-band omni-band--cream">
   <div class="ab-portrait">
-    <img src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/529df92f-56b5-489f-8441-d548f59017b6/Screenshot_20250416_132107_Thumbtack+Pro-EDIT.jpg?content-type=image%2Fjpeg" alt="Nemezio LopezPerez, NASM Elite Trainer and founder of OmniFit Performance in 4S Ranch, San Diego" loading="eager">
+    <img src="/assets/img/coach-nemezio-lopezperez-headshot-400.webp" srcset="/assets/img/coach-nemezio-lopezperez-headshot-400.webp 400w, /assets/img/coach-nemezio-lopezperez-headshot-800.webp 800w" sizes="172px" width="400" height="400" alt="Nemezio LopezPerez, NASM Elite Trainer and founder of OmniFit Performance in 4S Ranch, San Diego" loading="eager" decoding="async">
   </div>
 
   <div class="ab-sec" style="margin-top:34px;">
@@ -821,7 +821,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p>So we sequence it. The movement screen tells us what has to come first, because loading a body that cannot yet do the pattern is how you buy a new injury. Then we pick the one habit that unlocks the most downstream, which is usually sleep or the training schedule rather than the thing you thought you were here for. Everything else waits its turn and gets handled properly when it arrives.</p>
     <p>Slower on paper. Considerably faster in practice, because nothing gets abandoned.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="ab-sec ab-sec-wide">
     <span class="ab-label">Credentials</span>
     <hr class="ab-divider">
@@ -944,7 +946,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
     <p class="ab-badges-note">Ten of thirteen certifications are shown above as a certificate or an issuer badge. Eden GLP-1 Fitness, GLP-1 Nutrition, Peptide Fundamentals, and NASM Elite Trainer status are listed above without one.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="ab-quotable">
     <p>Nemezio LopezPerez is the founder of OmniFit Performance, a private personal training practice based at Teqneeq Functional Health Center in 4S Ranch, San Diego. He holds NASM Elite Trainer status with Certified Personal Trainer, Corrective Exercise Specialist, Performance Enhancement Specialist, Behavior Change Specialist, and Certified Nutrition Coach credentials, along with the ACE Corrective Exercise Specialist Program, four Precision Nutrition certifications in nutrition coaching (Level 1 and Level 2 Certified Master Coach), sleep and recovery, and metabolic health, and three Eden certifications covering GLP-1 fitness, GLP-1 nutrition, and peptide fundamentals. He has been coaching since 2016 and holds a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark). OmniFit Performance is a personal training practice and not a medical provider; it does not diagnose, treat, or provide physical therapy, and refers to licensed clinicians when a situation calls for one.</p>
   </div>
@@ -953,6 +957,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <span class="ab-label">The Facility</span>
     <hr class="ab-divider">
     <h2>Why I Train Clients at <em>Teqneeq</em></h2>
+    <figure class="ab-fig"><img src="/assets/img/teqneeq-fhc-rack-area-1200.webp" srcset="/assets/img/teqneeq-fhc-rack-area-600.webp 600w, /assets/img/teqneeq-fhc-rack-area-1200.webp 1200w" sizes="(max-width:900px) 100vw, 860px" width="1200" height="800" alt="Squat racks and lifting platforms beside the cardio deck at Teqneeq Functional Health Center in 4S Ranch, San Diego" loading="lazy" decoding="async"></figure>
     <p>I spent years coaching in commercial gyms and borrowed spaces. It works, and plenty of good coaching happens that way, but it puts a ceiling on what you can deliver. You program around whatever equipment is free. You compete with music nobody chose. Your client's hour is shaped by the room rather than by their plan.</p>
     <p>Teqneeq Functional Health Center is a members-only functional health facility in 4S Ranch. Credentialed professionals only, no walk-ins, no crowds. When I moved here it was a straightforward decision: I wanted the best environment available to train people out of, not the most convenient one.</p>
     <p>Practically, it means your session happens in a quiet room with the equipment your program actually calls for, alongside other people who are working with a coach or a clinician. For clients who would rather train at home, I also work in-home across North County San Diego, and virtually anywhere in the country.</p>
@@ -994,8 +999,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="ab-cta">
       <h2>If That Sounds Like <em>How You Want to Work</em></h2>
       <p style="max-width:600px; margin:0 auto;">Send the intake form and we will talk. Worst case, you get an honest read on whether this is right for you from someone with no reason to tell you it is.</p>
@@ -1009,6 +1016,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div>NASM ELITE TRAINER</div>
     <div>COACHING SINCE 2016</div>
     <div>TEQNEEQ FHC · 4S RANCH</div>
+  </div>
   </div>
 
 </div>

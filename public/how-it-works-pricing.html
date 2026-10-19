@@ -500,10 +500,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     --green-soft: rgba(45,138,94,0.12);
     --red-soft: rgba(200,80,80,0.10);
     --red-muted: #c87070;
-    --light-bg: #f4f5f7;
-    --light-text: #1a1a2e;
-    --light-muted: #555566;
-    --light-border: #e2e4e8;
+    --light-bg: var(--omni-cream);
+    --light-text: var(--omni-ink);
+    --light-muted: var(--omni-muted);
+    --light-border: var(--omni-line);
     --radius: 8px;
     --radius-lg: 12px;
     font-family: 'Montserrat', sans-serif !important;
@@ -522,7 +522,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-cost .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
   #omni-cost .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
   #omni-cost .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
-  #omni-cost .hero h1 em { font-style: italic; color: var(--gold); }
   #omni-cost .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 640px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
 
   /* QUOTABLE */
@@ -536,7 +535,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-cost .s-light { background: var(--light-bg); padding: 72px 28px; }
   #omni-cost .s-inner { max-width: 880px; margin: 0 auto; }
   #omni-cost .s-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
-  #omni-cost .s-light .s-label { color: #8b7832; }
+  #omni-cost .s-light .s-label { color: var(--omni-gold-ink); }
   #omni-cost .gold-line { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 0 24px; border-radius: 2px; }
   #omni-cost h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
   #omni-cost .s-light h2 { color: var(--light-text); }
@@ -584,14 +583,14 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   /* COMPARISON TABLE */
   #omni-cost .ct-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; border-radius: var(--radius-lg); border: 1px solid var(--light-border); }
   #omni-cost .ct { width: 100%; border-collapse: collapse; font-size: 14px; font-family: 'Montserrat', sans-serif !important; margin: 0; min-width: 540px; }
-  #omni-cost .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--white-70); border-bottom: 2px solid var(--gold); }
+  #omni-cost .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.72); border-bottom: 2px solid var(--gold); }
   #omni-cost .ct th:first-child { border-radius: var(--radius) 0 0 0; }
   #omni-cost .ct th:last-child { border-radius: 0 var(--radius) 0 0; }
   #omni-cost .ct td { padding: 16px 18px; border-bottom: 1px solid var(--light-border); color: var(--light-muted); font-family: 'Montserrat', sans-serif !important; }
   #omni-cost .ct tr:last-child td { border-bottom: none; }
   #omni-cost .ct tr:hover td { background: rgba(201,168,76,0.04); }
   #omni-cost .chk { color: #1a7a4c; font-weight: 600; }
-  #omni-cost .xm { color: #bbb; }
+  #omni-cost .xm { color: #7c879a; }
 
   /* FIT / NOT FIT */
   #omni-cost .fn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; margin: 44px 0 0; }
@@ -768,7 +767,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div></div>
 
   <!-- WHO THIS IS FOR / NOT FOR -->
-  <section class="s-mid"><div class="s-inner">
+  <section class="s-mid omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Honest Positioning</span><hr class="gold-line">
     <h2>Who This Is Designed For (and Who It's Not)</h2>
     <p>We'd rather you know now than waste your time. OmniFit is built for a specific type of person, and we're transparent about who benefits most and who should look elsewhere.</p>
@@ -837,7 +836,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div></section>
 
   <!-- WHAT'S INCLUDED -->
-  <section class="s-mid"><div class="s-inner">
+  <section class="s-mid omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Everything Included</span><hr class="gold-line">
     <h2>What's in Every OmniFit Program</h2>
     <p>There are no tiers with stripped-down features. Every OmniFit client gets the full system. Session frequency, format and the level of accountability between sessions are chosen to fit you.</p>
@@ -899,7 +898,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div></section>
 
   <!-- WHY IT COSTS MORE -->
-  <section class="s-light"><div class="s-inner">
+  <section class="s-light omni-band omni-band--white"><div class="s-inner">
     <span class="s-label">The Real Comparison</span><hr class="gold-line">
     <h2>Why OmniFit Costs More Than a Gym Membership</h2>
     <p>A gym membership costs $30&ndash;$60/month and gives you access to equipment. OmniFit costs more because it delivers a fundamentally different service. Here's what you're actually comparing:</p>
@@ -938,7 +937,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div></section>
 
   <!-- POLICIES -->
-  <section class="s-mid"><div class="s-inner">
+  <section class="s-mid omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Policies: No Fine Print</span><hr class="gold-line">
     <h2>Our Policies: Transparent and Direct</h2>
     <p>We believe policies should be simple enough to explain in one sentence each. Here they are:</p>

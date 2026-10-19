@@ -36,7 +36,6 @@
   #omni-services .sv-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
   #omni-services .sv-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
   #omni-services .sv-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
-  #omni-services .sv-hero h1 em { font-style: italic; color: var(--gold); }
   #omni-services .sv-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
 
   /* CTA ROW */
@@ -48,8 +47,8 @@
   #omni-services .sv-btn-primary,
   #omni-services a.sv-btn-primary,
   #omni-services a.sv-btn-primary:link,
-  #omni-services a.sv-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
-  #omni-services .sv-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-services a.sv-btn-primary:visited { background: var(--gold-btn, var(--gold)); color: var(--navy) !important; }
+  #omni-services .sv-btn-primary:hover { background: var(--gold-btn-hover, var(--gold-light)); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
   #omni-services .sv-btn-ghost,
   #omni-services a.sv-btn-ghost,
   #omni-services a.sv-btn-ghost:link,
@@ -64,7 +63,6 @@
   #omni-services .sv-quick a:hover { background: var(--gold-dim); border-color: var(--gold); color: var(--gold) !important; }
 
   /* SECTION HEADERS */
-  #omni-services .sv-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
   #omni-services .sv-section-head { text-align: center; margin-bottom: 40px; }
   #omni-services .sv-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
   #omni-services .sv-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
@@ -108,7 +106,6 @@
   }
 
   /* NEIGHBORHOOD GRID */
-  #omni-services .sv-hood-section { padding: 0 28px; max-width: 1120px; margin: 0 auto 56px; }
   #omni-services .sv-hood-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -156,8 +153,6 @@
   }
   @media (max-width: 768px) {
     #omni-services .sv-hero { padding: 56px 20px 36px; }
-    #omni-services .sv-section { padding: 0 20px; }
-    #omni-services .sv-hood-section { padding: 0 20px; }
     #omni-services .sv-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; }
   }
   @media (max-width: 640px) {
@@ -261,6 +256,7 @@
 </section>
 
 
+  <div class="omni-band omni-band--cream">
   <!-- CORE SERVICES -->
   <div class="sv-section">
     <div class="sv-section-head">
@@ -393,7 +389,9 @@
 
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <!-- HOW WE WORK — AUTHORITY PAGES -->
   <div class="sv-section">
     <div class="sv-section-head">
@@ -445,7 +443,9 @@
 
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <!-- NEIGHBORHOODS SERVED -->
   <div class="sv-hood-section">
     <div class="sv-section-head">
@@ -468,7 +468,9 @@
       <a class="sv-hood-item" href="/personal-trainer-rancho-bernardo">Rancho Bernardo</a>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
       <!-- ═══ USE CASES ═══ -->
     <div class="sv-section">
       <div class="sv-section-head">
@@ -536,9 +538,11 @@
       </div>
       <p class="sv-which-a">Start with the <a href="/fit-check">Fit Check</a>: seven questions, about three minutes, and it suggests an accountability setting. Then use the <a href="/training-rates-san-diego#rt-choose">starting-option chooser on the rates page</a> to match format and frequency to your schedule. New clients usually start on The Foundation, a defined 12-week starter block. If you are still unsure, the 45-minute consultation is where the recommendation gets made.</p>
     </div>
+  </div>
 
 <!-- BOTTOM CTA -->
-  <div style="padding: 0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="sv-bottom">
       <h2>Not Sure Where to Start?</h2>
       <p>Book a 45-minute consultation. We'll discuss your goals, schedule, and history — and recommend the program that fits your life.</p>
@@ -553,6 +557,7 @@
     <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><path d="M8.5 9.5L6 3h12l-2.5 6.5"/></svg> NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</div>
     <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Teqneeq FHC · 4S Ranch</div>
     <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg> Virtual Coaching Nationwide</div>
+  </div>
   </div>
 
 </div>

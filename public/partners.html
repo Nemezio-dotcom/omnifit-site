@@ -611,10 +611,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   animation: opFadeDown 0.8s 0.1s ease-out both;
 }
 
-#omnifit-partners .op-hero h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
 
 #omnifit-partners .op-hero-sub {
   font-family: var(--font-body) !important;
@@ -1276,6 +1272,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 .sqs-block-content #omnifit-partners * {
   font-family: inherit;
 }
+  /* inside a band the band supplies the vertical rhythm */
+  #omnifit-partners .omni-band > * { padding: 0; }
 </style>
 </head>
 <body class="page page--partners">
@@ -1426,6 +1424,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
 
 <!-- ═══ PHILOSOPHY ════════════════════════ -->
+<div class="omni-band omni-band--cream">
 <section class="op-philosophy" aria-labelledby="op-philosophy-heading">
   <div class="op-philosophy-card">
     <h2 class="op-section-label" id="op-philosophy-heading">Our Referral Philosophy</h2>
@@ -1434,9 +1433,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </p>
   </div>
 </section>
+</div>
 
 
 <!-- ═══ PARTNERS GRID ════════════════════ -->
+<div class="omni-band omni-band--white">
 <section class="op-partners-grid" aria-labelledby="op-partners-heading">
 
   <div class="op-section-header">
@@ -1604,6 +1605,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </article>
 
 </section>
+</div>
 
 
 <!-- ═══ GEMINI-QUOTABLE BLOCK ════════════ -->
@@ -1622,6 +1624,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
 
 <!-- ═══ FAQ SECTION ═══════════════════════ -->
+<div class="omni-band omni-band--cream">
 <section class="op-faq" aria-labelledby="op-faq-heading">
   <div class="op-faq-header">
     <h2 id="op-faq-heading">Frequently Asked Questions</h2>
@@ -1700,8 +1703,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div>
 </section>
+</div>
 
 
+<div class="omni-band omni-band--white">
 <!-- ═══ INTERNAL LINKS ═══════════════════ -->
 <nav class="op-internal-links" aria-label="Related pages">
   <a href="/personal-training-services" class="op-internal-link">Our Services</a>
@@ -1736,8 +1741,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, the Travel Protocol covers the weeks you're on the road, and the same benchmarks are tracked either way so nothing is guessed between visits.</p>
   </div>
 </section>
+</div>
 
 <!-- ═══ BOTTOM CTA ═══════════════════════ -->
+<div class="omni-band omni-band--navy">
 <section class="op-bottom-cta" aria-labelledby="op-cta-heading">
   <h2 id="op-cta-heading">Ready to Train With Clinical Confidence?</h2>
   <p>
@@ -1748,6 +1755,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
   </a>
 </section>
+</div>
 
 </div>
 <!-- END #omnifit-partners -->

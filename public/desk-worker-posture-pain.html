@@ -747,6 +747,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     #omni-posture .approach-grid{grid-template-columns:1fr;}
     #omni-posture .case-stats{grid-template-columns:1fr;}
   }
+  /* light bands: darker accent greens / reds for contrast on cream and white */
+  #omni-posture .omni-band--cream,#omni-posture .omni-band--white{--green-soft:#1f8f4e;--red-soft:#c0392b;}
 </style>
 <style>
   #omh-short.omh{--omh-navy:#0a1628;--omh-gold:#c9a84c;--omh-ink:#1e293b;--omh-line:rgba(10,22,40,.10);font-family:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--omh-ink);background:#fff;margin:0;padding:56px 24px 72px;line-height:1.65;-webkit-font-smoothing:antialiased;text-align:left;}
@@ -903,7 +905,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </section>
 
   <!-- THE PROBLEM: WHAT SITTING DOES -->
-  <section class="s-mid">
+  <section class="s-mid omni-band omni-band--cream">
     <div class="s-inner">
       <span class="s-label">The Problem</span>
       <hr class="gold-line">
@@ -959,7 +961,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </section>
 
   <!-- THE BRIDGE: PT → OMNIFIT → PERFORMANCE -->
-  <section class="s-light">
+  <section class="s-light omni-band omni-band--white">
     <div class="s-inner">
       <span class="s-label">Where OmniFit Fits</span>
       <hr class="gold-line">
@@ -991,7 +993,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </section>
 
   <!-- HOW WE FIX IT: THE APPROACH -->
-  <section class="s-mid">
+  <section class="s-mid omni-band omni-band--cream">
     <div class="s-inner">
       <span class="s-label">The OmniFit Approach</span>
       <hr class="gold-line">
@@ -1073,7 +1075,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </section>
 
   <!-- WHO THIS IS FOR / NOT FOR -->
-  <section class="s-light">
+  <section class="s-light omni-band omni-band--cream">
     <div class="s-inner">
       <span class="s-label">Honest Positioning</span>
       <hr class="gold-line">
@@ -1106,7 +1108,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </section>
 
   <!-- FAQ -->
-  <section class="s-mid">
+  <section class="s-mid omni-band omni-band--white">
     <div class="s-inner">
       <span class="s-label">Common Questions</span>
       <hr class="gold-line">

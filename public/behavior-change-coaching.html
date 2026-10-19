@@ -473,7 +473,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-behavior .bc-hero::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:520px; height:520px; background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%); pointer-events:none; opacity:.3; }
   #omni-behavior .bc-badge { display:inline-block; padding:8px 22px; border:1px solid var(--gold); color:var(--gold); border-radius:100px; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:28px; position:relative; }
   #omni-behavior h1 { font-family:'Playfair Display',serif !important; font-size:clamp(30px,5vw,48px) !important; font-weight:700 !important; line-height:1.15 !important; color:var(--white) !important; margin-bottom:20px !important; text-transform:none !important; position:relative; }
-  #omni-behavior h1 em { font-style:italic; color:var(--gold); }
   #omni-behavior .bc-hero-sub { font-size:17px; color:var(--white-70); max-width:680px; margin:0 auto; line-height:1.8; position:relative; }
   #omni-behavior .bc-byline { display:block; margin-top:22px; font-size:12.5px; color:var(--white-50); letter-spacing:.3px; position:relative; }
 
@@ -481,11 +480,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-behavior .bc-answer p { font-size:16.5px !important; line-height:1.78 !important; color:var(--white-90) !important; margin:0; }
   #omni-behavior .bc-answer strong { color:var(--gold-light); }
 
-  #omni-behavior .bc-sec { padding:0 28px; max-width:900px; margin:0 auto 56px; }
+  #omni-behavior .bc-sec { max-width:900px; margin:0 auto 56px; }
   #omni-behavior .bc-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; text-align:center; }
   #omni-behavior .bc-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 22px; border-radius:2px; }
   #omni-behavior h2 { font-family:'Playfair Display',serif !important; font-size:clamp(25px,3.6vw,34px) !important; font-weight:700 !important; line-height:1.2 !important; color:var(--white) !important; margin-bottom:20px !important; text-align:center !important; text-transform:none !important; }
-  #omni-behavior h2 em { font-style:italic; color:var(--gold); }
   #omni-behavior h3 { font-family:'Playfair Display',serif !important; font-size:20px !important; font-weight:600 !important; color:var(--white) !important; margin-bottom:8px !important; text-transform:none !important; }
   #omni-behavior p { color:var(--white-70); line-height:1.8; font-size:16px; margin-bottom:18px; }
   #omni-behavior p:last-child { margin-bottom:0; }
@@ -533,8 +531,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-behavior .bc-faq-a p { font-size:14.5px; margin:0; }
 
   #omni-behavior .bc-cta { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 34px; text-align:center; max-width:900px; margin:0 auto 40px; }
-  #omni-behavior a.bc-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
-  #omni-behavior a.bc-btn:hover { background:var(--gold-light); color:var(--navy) !important; transform:translateY(-2px); }
+  #omni-behavior a.bc-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold-btn, var(--gold)); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
+  #omni-behavior a.bc-btn:hover { background:var(--gold-btn-hover, var(--gold-light)); color:var(--navy) !important; transform:translateY(-2px); }
   #omni-behavior .bc-cta-note { display:block; margin-top:16px; font-size:13px; color:var(--white-50); line-height:1.7; }
   #omni-behavior a { color:var(--gold) !important; text-decoration:underline; text-underline-offset:3px; }
   #omni-behavior a:hover { color:var(--gold-light) !important; }
@@ -545,8 +543,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   @media (max-width:820px) {
     #omni-behavior .bc-grid { grid-template-columns:1fr; }
     #omni-behavior .bc-hero { padding:56px 20px 26px; }
-    #omni-behavior .bc-sec { padding-left:20px; padding-right:20px; }
-    #omni-behavior .bc-answer, #omni-behavior .bc-cta { margin-left:20px; margin-right:20px; padding:24px 20px; }
+    
+    #omni-behavior .bc-answer, #omni-behavior .bc-cta { padding:24px 20px; } #omni-behavior .bc-cta { margin-left:20px; margin-right:20px; }
     #omni-behavior .bc-stage { grid-template-columns:1fr; gap:10px; }
     #omni-behavior .bc-num { display:flex; align-items:baseline; gap:10px; }
     #omni-behavior .bc-num em { margin-top:0; }
@@ -669,6 +667,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <span class="bc-byline">Written by Nemezio LopezPerez, <a href="/about">Precision Nutrition Level 2 Certified Master Coach</a> &middot; Reviewed October 2026</span>
   </section>
 
+  <div class="omni-band omni-band--cream">
   <div class="bc-answer">
     <p><strong>Behavior change coaching</strong> is structured support for building the habits a training and nutrition plan depends on: how you eat, sleep, recover, and stay consistent when work gets in the way. At OmniFit Performance in San Diego, it runs alongside every training program, led by founder Nemezio LopezPerez, a Precision Nutrition Level 2 Certified Master Coach.</p>
   </div>
@@ -720,7 +719,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="bc-answer">
     <p>OmniFit's behavior change coaching runs in four stages: <strong>Awareness, Regulation, Adaptation, Integration.</strong> Led by a Precision Nutrition Level 2 Certified Master Coach, clients first see their patterns, then reduce the friction behind them, then make habits hold under real-world pressure, until coach input can be progressively reduced.</p>
   </div>
@@ -756,7 +757,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <li>Ntoumanis N, et al. (2021). A meta-analysis of self-determination theory-informed intervention studies in the health domain. <i>Health Psychology Review</i>, 15(2), 214&ndash;244. <a href="https://doi.org/10.1080/17437199.2020.1718529" target="_blank" rel="noopener">doi:10.1080/17437199.2020.1718529</a></li>
     </ul>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="bc-sec">
     <span class="bc-label">In Practice</span>
     <hr class="bc-divider">
@@ -797,7 +800,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <li>No promises about how fast change happens. Behavior change has its own timeline.</li>
     </ul>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="bc-sec">
     <span class="bc-label">Credentials</span>
     <hr class="bc-divider">
@@ -847,8 +852,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </details>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="bc-cta">
       <h2>Start With a <em>Conversation</em></h2>
       <p style="max-width:620px; margin:0 auto;">Send the intake form and we will talk through what has worked, what has fallen apart before, and whether both tracks of the OmniFit Method suit how you actually live.</p>
@@ -865,6 +872,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <a href="/the-30-minute-executive-reset">Executive Reset</a> <span>&middot;</span>
     <a href="/training-rates-san-diego">Rates</a> <span>&middot;</span>
     <a href="/case-studies">Case Studies</a>
+  </div>
   </div>
 
 </div>

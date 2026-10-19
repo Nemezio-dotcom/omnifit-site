@@ -14,23 +14,20 @@
   #omni-cv .cv-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
   #omni-cv .cv-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
   #omni-cv .cv-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
-  #omni-cv .cv-hero h1 em { font-style: italic; color: var(--gold); }
   #omni-cv .cv-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
 
   #omni-cv .cv-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; position: relative; }
   #omni-cv .cv-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
   #omni-cv a.cv-btn, #omni-cv a.cv-btn:link, #omni-cv a.cv-btn:visited { text-decoration: none; }
-  #omni-cv .cv-btn-primary, #omni-cv a.cv-btn-primary, #omni-cv a.cv-btn-primary:link, #omni-cv a.cv-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
-  #omni-cv .cv-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-cv .cv-btn-primary, #omni-cv a.cv-btn-primary, #omni-cv a.cv-btn-primary:link, #omni-cv a.cv-btn-primary:visited { background: var(--gold-btn, var(--gold)); color: var(--navy) !important; }
+  #omni-cv .cv-btn-primary:hover { background: var(--gold-btn-hover, var(--gold-light)); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
   #omni-cv .cv-btn-ghost, #omni-cv a.cv-btn-ghost, #omni-cv a.cv-btn-ghost:link, #omni-cv a.cv-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
   #omni-cv .cv-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); color: var(--white) !important; }
 
-  #omni-cv .cv-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
   #omni-cv .cv-section-head { text-align: center; margin-bottom: 40px; }
   #omni-cv .cv-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
   #omni-cv .cv-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
   #omni-cv h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
-  #omni-cv h2 em { font-style: italic; color: var(--gold); }
   #omni-cv h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
   #omni-cv p { font-family: 'Montserrat', sans-serif !important; color: var(--white-70); font-weight: 400; line-height: 1.7; }
 
@@ -95,7 +92,7 @@
   }
   @media (max-width: 768px) {
     #omni-cv .cv-hero { padding: 56px 20px 36px; }
-    #omni-cv .cv-section { padding: 0 20px; }
+   
     #omni-cv .cv-quotable { margin-left: 20px; margin-right: 20px; }
     #omni-cv .cv-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; }
   }
@@ -130,7 +127,7 @@
   </div>
 
   <!-- SERVICES -->
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--cream">
     <div class="cv-section-head">
       <span class="cv-label">Services in Carmel Valley</span>
       <hr class="cv-divider">
@@ -215,7 +212,7 @@
   </div>
 
   <!-- METHOD + STATS -->
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--white">
     <div class="cv-section-head">
       <span class="cv-label">Our Approach</span>
       <hr class="cv-divider">
@@ -240,7 +237,7 @@
   </div>
 
   <!-- WHY OMNIFIT -->
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--white">
     <div class="cv-section-head">
       <span class="cv-label">Why OmniFit</span>
       <hr class="cv-divider">
@@ -272,7 +269,7 @@
 
   <!-- FAQ -->
   <!-- MEET YOUR TRAINER -->
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--cream">
     <div class="cv-section-head">
       <span class="cv-label">Your Coach</span>
       <hr class="cv-divider">
@@ -284,10 +281,9 @@
     </article>
   </div>
 
-  <div class="cv-spacer"></div>
 
   <!-- WHO WE COACH -->
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--navy">
     <div class="cv-section-head">
       <span class="cv-label">Who We Coach</span>
       <hr class="cv-divider">
@@ -311,7 +307,7 @@
   </div>
 
   <!-- THE 9-POINT MOVEMENT SCREEN -->
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--navy">
     <div class="cv-section-head">
       <span class="cv-label">The Diagnostic</span>
       <hr class="cv-divider">
@@ -334,9 +330,8 @@
     </article>
   </div>
 
-  <div class="cv-spacer"></div>
 
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--cream">
     <div class="cv-section-head">
       <span class="cv-label">Frequently Asked</span>
       <hr class="cv-divider">
@@ -383,10 +378,9 @@
     </div>
   </div>
 
-  <div class="cv-spacer"></div>
 
   <!-- NEIGHBORHOODS -->
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--white">
     <div class="cv-section-head">
       <span class="cv-label">Neighborhoods We Serve</span>
       <hr class="cv-divider">
@@ -407,7 +401,7 @@
   </div>
 
   <!-- HUB LINKS -->
-  <div class="cv-section">
+  <div class="cv-section omni-band omni-band--white">
     <div class="cv-section-head">
       <span class="cv-label">Explore More</span>
       <hr class="cv-divider">
@@ -430,21 +424,21 @@
   </div>
 
   <!-- BOTTOM CTA -->
-  <div style="padding: 0 28px;">
+  <div class="omni-band omni-band--navy">
     <div class="cv-bottom">
       <h2>Train Smarter in <em>Carmel Valley</em></h2>
       <p>Book a 45-minute consultation. We'll discuss your goals, movement history, and schedule; if it's a fit, the Performance Assessment measures your starting point and your program is built to fit your Carmel Valley lifestyle.</p>
       <a class="cv-btn cv-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
       <span class="cv-bottom-note">45-minute consultation · $30 deposit, refunded the same day you attend your consultation · Straight answer on fit</span>
     </div>
-  </div>
 
   <!-- TRUST BAR -->
-  <div class="cv-trust">
+    <div class="cv-trust">
     <div class="cv-trust-item"><span>⭐</span> 4.98 average across 190+ reviews</div>
     <div class="cv-trust-item"><span>🏅</span> NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</div>
     <div class="cv-trust-item"><span>📍</span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
     <div class="cv-trust-item"><span>🌍</span> Serving Carmel Valley &amp; Coastal North County</div>
+    </div>
   </div>
 
 </div>

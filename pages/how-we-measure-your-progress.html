@@ -17,10 +17,10 @@
     --gold-light: #e0c872;
     --gold-dim: rgba(201,168,76,0.15);
     --gold-glow: rgba(201,168,76,0.25);
-    --light-bg: #f4f5f7;
-    --light-text: #1a1a2e;
-    --light-muted: #555566;
-    --light-border: #e2e4e8;
+    --light-bg: var(--omni-cream);
+    --light-text: var(--omni-ink);
+    --light-muted: var(--omni-muted);
+    --light-border: var(--omni-line);
     --radius: 8px;
     --radius-lg: 12px;
     font-family: 'Montserrat', sans-serif !important;
@@ -43,7 +43,6 @@
   #omni-progress .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
   #omni-progress .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
   #omni-progress .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
-  #omni-progress .hero h1 em { font-style: italic; color: var(--gold); }
   #omni-progress .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 620px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
   #omni-progress .creds { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
   #omni-progress .cred { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid var(--white-20); border-radius: 100px; color: var(--white-50); letter-spacing: 0.8px; background: transparent; }
@@ -59,7 +58,7 @@
   #omni-progress .s-light { background: var(--light-bg); padding: 72px 28px; }
   #omni-progress .s-inner { max-width: 880px; margin: 0 auto; min-width: 0; }
   #omni-progress .s-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
-  #omni-progress .s-light .s-label { color: #8b7832; }
+  #omni-progress .s-light .s-label { color: var(--omni-gold-ink); }
   #omni-progress .gold-line { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 0 24px; border-radius: 2px; }
   #omni-progress h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
   #omni-progress .s-light h2 { color: var(--light-text); }
@@ -86,7 +85,7 @@
   #omni-progress .os { text-align: center; padding: 0 4px; }
   #omni-progress .os .num { font-family: 'Playfair Display', serif !important; font-size: 42px; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 8px; }
   #omni-progress .os .lbl { font-family: 'Montserrat', sans-serif !important; font-size: 10px; color: var(--white-50); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
-  #omni-progress .ob-note { text-align: center; font-size: 12px; color: rgba(255,255,255,.62); margin-top: 28px; font-style: italic; }
+  #omni-progress .ob-note { text-align: center; font-size: 12px; color: var(--white-50); margin-top: 28px; font-style: italic; }
 
   /* PROGRESS REPORT (real, anonymised details removed) */
   #omni-progress .rm { --rm-ink: #0a1628; --rm-text: #3a4252; --rm-muted: #6b7280; --rm-line: #e2e4e8; --rm-soft: #f0f1f4; --rm-gold: #8a6a1c; background: #fff; border: 1px solid var(--rm-line); border-top: 4px solid var(--gold); border-radius: var(--radius-lg); padding: 36px; margin: 40px 0 0; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
@@ -140,14 +139,14 @@
   /* COMPARISON TABLE */
   #omni-progress .ct-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; border-radius: var(--radius-lg); border: 1px solid var(--light-border); max-width: 100%; }
   #omni-progress .ct { width: 100%; border-collapse: collapse; font-size: 14px; font-family: 'Montserrat', sans-serif !important; margin: 0; min-width: 540px; }
-  #omni-progress .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--white-70); border-bottom: 2px solid var(--gold); }
+  #omni-progress .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.72); border-bottom: 2px solid var(--gold); }
   #omni-progress .ct th:first-child { border-radius: var(--radius) 0 0 0; }
   #omni-progress .ct th:last-child { border-radius: 0 var(--radius) 0 0; }
   #omni-progress .ct td { padding: 16px 18px; border-bottom: 1px solid var(--light-border); color: var(--light-muted); font-family: 'Montserrat', sans-serif !important; }
   #omni-progress .ct tr:last-child td { border-bottom: none; }
   #omni-progress .ct tr:hover td { background: rgba(201,168,76,0.04); }
   #omni-progress .chk { color: #1a7a4c; font-weight: 600; }
-  #omni-progress .xm { color: #bbb; }
+  #omni-progress .xm { color: #7c879a; }
 
   /* FAQ */
   #omni-progress .fi { border-bottom: 1px solid var(--white-10); }
@@ -214,7 +213,7 @@
   #omni-progress .hub { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 14px; padding: 36px 28px 56px; background: var(--navy); font-size: 13px; }
   #omni-progress .hub a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
   #omni-progress .hub span { color: var(--white-20); }
-  #omni-progress .s-light a { color: #8b7832; text-decoration: underline; text-underline-offset: 3px; }
+  #omni-progress .s-light a { color: var(--omni-gold-ink); text-decoration: underline; text-underline-offset: 3px; }
 </style>
 
 <div id="omni-progress">
@@ -273,7 +272,7 @@
     <strong>OmniFit tracks every client through the same seven-category framework, with measurement methods adapted to coaching format</strong>: body composition measured on a Bodystat QuadScan 4000 multi-frequency bioimpedance analyzer for in-studio clients, strength benchmarks, posture assessment scores, mobility function tests, session adherence rate, nutrition compliance, and subjective well-being — with progress reviews every 4 weeks (at least every 12 weeks on Train Only). This data-driven approach ensures no guesswork: each program adjustment is based on measurable trends rather than subjective impressions. Progress is judged against your own baseline rather than an average, so the same framework works whether you are starting from a long layoff or returning to structured training.
   </div></div>
 
-  <section class="s-mid"><div class="s-inner">
+  <section class="s-mid omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">The Problem</span><hr class="gold-line">
     <h2>The Measurement Gap</h2>
     <p>Without structured data, training gets judged by feel. Sessions are "tough," progress is described rather than measured, and the scale becomes the only benchmark. But scale weight alone misses the real picture — and without structured data, neither you nor your trainer can tell whether the program is actually working or needs adjustment.</p>
@@ -315,7 +314,7 @@
   </div></section>
 
   
-  <section class="s-mid"><div class="s-inner">
+  <section class="s-mid omni-band omni-band--cream"><div class="s-inner">
       <span class="s-label">The Instrument</span><hr class="gold-line">
       <h2>Measured Consistently, Not Guessed</h2>
       <p>Body composition is the metric most often guessed at and most often wrong. A bathroom scale reports one number and hides three. OmniFit measures it on a <strong>Bodystat QuadScan 4000</strong>, a multi-frequency bioelectrical impedance analyzer used in clinical and research settings.</p>
@@ -328,7 +327,7 @@
       <p class="ob-note" style="margin-top:22px">The Bodystat QuadScan 4000 holds CE certification as a Class IIa medical device under MDD 93/42/EEC and has FDA clearance. OmniFit Performance uses it to measure body composition. It is not used to diagnose, treat or assess any medical condition, and OmniFit is not a medical provider.</p>
   </div></section>
 
-<section class="s-mid"><div class="s-inner">
+<section class="s-mid omni-band omni-band--white"><div class="s-inner">
     <span class="s-label">Example</span><hr class="gold-line">
     <h2>What Your Progress Report Looks Like</h2>
     <p>At each progress review, every 4 weeks (at least every 12 weeks on Train Only), you receive a formal progress report built from your scans, training logs and food log. Below is a real one: Mariano G.'s report from the first 4 weeks of training, shared with permission and rebuilt here so it reads on any screen.</p>
@@ -439,7 +438,7 @@
     <div class="fi" style="margin-top:32px;border-top:1px solid var(--white-10)"><button class="fq fq-method" onclick="this.parentElement.classList.toggle('open')">How these figures were calculated<span class="fi-icon">+</span></button><div class="fa"><p><strong style="color:var(--white-70)">Source.</strong> Session schedules and workout logs from the OmniFit app (Trainerize), pulled October 1, 2026. A client is counted if they had two or more scheduled sessions or logged workouts. No client who met the eligibility criteria for a figure was removed because of their outcome.<br><br><strong style="color:var(--white-70)">Strength.</strong> For each lift logged at least four times over at least four weeks, estimated one-rep max is calculated from weight and reps (Epley formula, sets of 12 reps or fewer). The best of a client's first two sessions is compared with the best of their latest two, and each client's result is the median across their lifts. Bodyweight exercises are excluded.<br><br><strong style="color:var(--white-70)">Working load.</strong> Heaviest logged weight on each lift in the first session versus the heaviest between weeks 10 and 16.<br><br><strong style="color:var(--white-70)">Retention.</strong> Time from first to last session or logged workout. The 12-month figure counts only clients who started at least 12 months before October 1, 2026, and reflects recorded training activity rather than a contract term.<br><br><strong style="color:var(--white-70)">Goals.</strong> Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist.<br><br><strong style="color:var(--white-70)">Limits.</strong> Sessions are scheduled sessions; attendance was not recorded before October 2026. There is no comparison group, so these figures describe what happened, not how much of it OmniFit caused.</p></div></div>
   </div></section>
 
-  <section class="s-light"><div class="s-inner">
+  <section class="s-light omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">The Difference</span><hr class="gold-line">
     <h2>Measured Coaching vs. Session-Only Training</h2>
     <p>Session-only training is built around the workout itself. OmniFit is built around the measurement system that surrounds it. Here is how the two formats compare. For this comparison, session-only training means supervised workouts without a standardized measurement and reporting system over time.</p>
@@ -471,7 +470,7 @@
   </div></section>
 
   <!-- ═══ USE CASES ═══ -->
-  <section class="s-mid"><div class="s-inner">
+  <section class="s-mid omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Use Cases</span><hr class="gold-line">
     <h2>What People Come to Coaching For</h2>
     <p>Coaching is rarely the goal on its own. These are the situations it usually attaches to.</p>
