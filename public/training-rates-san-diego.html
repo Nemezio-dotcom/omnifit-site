@@ -1245,15 +1245,15 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-rates .rt-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 40px; position: relative; }
   #omni-rates .rt-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; }
   #omni-rates a.rt-btn, #omni-rates a.rt-btn:link, #omni-rates a.rt-btn:visited { text-decoration: none; }
-  #omni-rates .rt-btn-primary, #omni-rates a.rt-btn-primary, #omni-rates a.rt-btn-primary:link, #omni-rates a.rt-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
-  #omni-rates .rt-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-rates .rt-btn-primary, #omni-rates a.rt-btn-primary, #omni-rates a.rt-btn-primary:link, #omni-rates a.rt-btn-primary:visited { background: var(--gold-btn, var(--gold)); color: var(--navy) !important; }
+  #omni-rates .rt-btn-primary:hover { background: var(--gold-btn-hover, var(--gold-light)); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
   #omni-rates .rt-btn-ghost, #omni-rates a.rt-btn-ghost, #omni-rates a.rt-btn-ghost:link, #omni-rates a.rt-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
   #omni-rates .rt-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); color: var(--white) !important; }
   #omni-rates .rt-btn-secondary, #omni-rates a.rt-btn-secondary, #omni-rates a.rt-btn-secondary:link, #omni-rates a.rt-btn-secondary:visited { border: 1px solid var(--gold); color: var(--gold) !important; background: transparent; }
   #omni-rates .rt-btn-secondary:hover { background: var(--gold-dim); transform: translateY(-2px); color: var(--gold) !important; }
 
   /* ===== SECTION STRUCTURE ===== */
-  #omni-rates .rt-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
+  #omni-rates .rt-section { max-width: 1120px; margin: 0 auto; }
   #omni-rates .rt-section-head { text-align: center; margin-bottom: 40px; }
   #omni-rates .rt-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
   #omni-rates .rt-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
@@ -1296,7 +1296,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 
 
   /* ===== PATH CHOOSER (who each option is for) ===== */
-  #omni-rates .rt-wrap { padding: 0 28px; }
   #omni-rates .rt-paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1120px; margin: 0 auto 16px; }
   #omni-rates .rt-path, #omni-rates a.rt-path, #omni-rates a.rt-path:link, #omni-rates a.rt-path:visited { display: flex; flex-direction: column; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 22px 22px 18px; text-decoration: none; color: var(--white) !important; transition: all 0.3s; }
   #omni-rates .rt-path:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
@@ -1359,11 +1358,11 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-rates .rt-feature-list li strong { color: var(--white); }
 
   /* ===== GUARANTEE ===== */
-  #omni-rates .rt-notice { max-width: 1120px; margin: 0 auto 34px; padding: 0 28px; }
+  #omni-rates .rt-notice { max-width: 1120px; margin: 0 auto 34px; }
   #omni-rates .rt-notice-inner { background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.35); border-radius: var(--radius-lg); padding: 20px 26px; text-align: center; }
   #omni-rates .rt-notice-inner p { font-family: 'Montserrat', sans-serif !important; font-size: 14.5px; line-height: 1.7; color: var(--white-90); margin: 0; }
   #omni-rates .rt-notice-inner strong { color: var(--gold-light); font-weight: 600; }
-  @media (max-width: 640px) { #omni-rates .rt-notice { padding: 0 20px; } #omni-rates .rt-notice-inner { padding: 18px 20px; } }
+  @media (max-width: 640px) { #omni-rates .rt-notice-inner { padding: 18px 20px; } }
   #omni-rates .rt-guarantee { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px 28px; margin-top: 24px; }
   #omni-rates .rt-guarantee h4 { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
   #omni-rates .rt-guarantee p { font-size: 14px; line-height: 1.7; color: var(--white-90); }
@@ -1546,8 +1545,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
   @media (max-width: 768px) {
     #omni-rates .rt-hero { padding: 56px 20px 36px; }
-    #omni-rates .rt-section { padding: 0 20px; }
-    #omni-rates .rt-wrap { padding: 0 20px; }
     #omni-rates .rt-includes { margin-left: 20px; margin-right: 20px; }
     #omni-rates .rt-fit-grid { margin-left: 20px; margin-right: 20px; }
     #omni-rates .rt-paths { grid-template-columns: 1fr; gap: 10px; }
@@ -1560,8 +1557,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     #omni-rates .rt-packs-row { grid-template-columns: 1.3fr 1fr 1fr; padding: 12px 16px; gap: 8px; }
     #omni-rates .rt-packs-price { font-size: 18px; }
     #omni-rates .rt-feature { margin-left: 20px; margin-right: 20px; }
-    #omni-rates .rt-addons-grid { grid-template-columns: 1fr; padding: 0 20px; }
-    #omni-rates .rt-policies { grid-template-columns: 1fr; padding: 0 20px; }
+    #omni-rates .rt-addons-grid { grid-template-columns: 1fr; }
+    #omni-rates .rt-policies { grid-template-columns: 1fr; }
     #omni-rates .rt-bottom { margin-left: 20px; margin-right: 20px; padding: 32px 24px; }
     #omni-rates .rt-includes-grid { grid-template-columns: 1fr; }
     #omni-rates .rt-assess { margin-left: 20px; margin-right: 20px; }
@@ -1699,7 +1696,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-rates .rt-subhead em { font-style: italic; color: var(--gold); }
 
   /* ===== V16: EXPANDABLE DETAIL SECTIONS ===== */
-  #omni-rates .rt-xsec { display: block; padding: 0 28px; margin: 0 0 14px; scroll-margin-top: 120px; }
+  #omni-rates .rt-xsec { display: block; padding: 0; margin: 0 0 14px; scroll-margin-top: 120px; }
   #omni-rates .rt-xsec > summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 1120px; margin: 0 auto; padding: 18px 22px; background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); cursor: pointer; transition: border-color 0.25s, background 0.25s; }
   #omni-rates .rt-xsec > summary::-webkit-details-marker { display: none; }
   #omni-rates .rt-xsec > summary::marker { content: ''; }
@@ -1718,7 +1715,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   @media (max-width: 768px) {
     #omni-rates .rt-ch-ui { grid-template-columns: 1fr; gap: 14px; }
     #omni-rates .rt-ch { margin-bottom: 40px; }
-    #omni-rates .rt-xsec { padding: 0 20px; }
     #omni-rates .rt-xsec-body { margin: 0 -20px 32px; }
     #omni-rates .rt-xsec > summary { padding: 16px 16px 16px 18px; }
   }
@@ -1732,6 +1728,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     #omni-rates .rt-ch-cta .rt-btn { max-width: none; }
     #omni-rates .rt-xsec-cue::before { content: none; }
   }
+  /* light bands: no gradient sheen on the accent word (the fill is too light on cream) */
+  #omni-rates .omni-band--cream h2 em, #omni-rates .omni-band--white h2 em { background: none; -webkit-background-clip: initial; background-clip: initial; -webkit-text-fill-color: currentColor; color: var(--omni-gold-ink); animation: none; }
+  /* the sticky jump bar is navy whatever band it sits in: restore the navy palette inside it */
+  #omni-rates .omni-band .rt-jump { --white-70: rgba(255,255,255,0.7); --white-50: rgba(255,255,255,0.5); --white-20: rgba(255,255,255,0.2); --gold: var(--omni-gold); --navy: var(--omni-navy); }
 </style>
 </head>
 <body class="page page--training-rates-san-diego">
@@ -1852,6 +1852,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </section>
 
+  <div class="omni-band omni-band--cream">
   <div class="rt-notice">
     <div class="rt-notice-inner">
       <p>Rates current as of October 2026.</p>
@@ -1949,8 +1950,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
     <p class="rt-paths-also rt-reveal">Want sessions without a program? See <a href="#rt-sessions">sessions without a program</a>, from $180 per session. Not in San Diego? <a href="#rt-reset">The Executive Reset</a> is live virtual coaching from $200 per 4-week cycle. Finished a program? <a href="#rt-tuneup">The Tune-Up</a> is from $295 per 4-week cycle.</p>
   </div>
+  </div>
 
   <!-- JUMP BAR (sticky) -->
+  <div class="omni-band omni-band--white">
   <nav class="rt-jump" aria-label="Jump to rates">
     <div class="rt-jump-inner">
       <span class="rt-jump-label">Rates</span>
@@ -2005,7 +2008,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
 
   <!-- ASSESSMENT -->
-  <div style="padding: 0 28px;">
+  <div>
     <div class="rt-assess rt-reveal">
       <div class="rt-assess-content">
         <span class="rt-label">Start Here</span>
@@ -2048,7 +2051,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
 
   <!-- WHAT EVERY PLAN INCLUDES -->
-  <div style="padding: 0 28px;">
+  <div>
     <div class="rt-includes rt-reveal">
       <span class="rt-includes-label">Included in Every Program</span>
       <div class="rt-includes-grid">
@@ -2064,8 +2067,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
   <!-- ═══════ WHAT PROTECTS YOUR INVESTMENT ═══════ -->
+  <div class="omni-band omni-band--cream">
   <div class="rt-section" id="rt-protect">
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">Standards That Protect Your Slot and Your Results</span>
@@ -2074,7 +2079,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div>
 
-  <div class="rt-policies rt-policies-5" style="padding:0 28px;">
+  <div class="rt-policies rt-policies-5">
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
       <h5>The assessment is credited</h5>
@@ -2103,7 +2108,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
 
   <!-- POLICIES -->
-  <div class="rt-policies" style="padding:0 28px;">
+  <div class="rt-policies">
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></div>
       <h5>Billing</h5>
@@ -2115,8 +2120,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p>Reschedule with 24 hours' notice, within the same 4-week cycle. Sessions canceled with less than 24 hours' notice are forfeited. Sessions OmniFit cancels are credited.</p>
     </div>
   </div>
+  </div>
 
   <!-- ═══════ WHY PREMIUM ═══════ -->
+  <div class="omni-band omni-band--white">
   <div class="rt-section" id="rt-why">
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">Why the Rate</span>
@@ -2148,7 +2155,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
 
   <!-- BUILT FOR / NOT THE RIGHT FIT -->
-  <div style="padding: 0 28px;">
+  <div>
     <div class="rt-fit-grid">
       <div class="rt-fit-col built-for rt-reveal">
         <span class="rt-fit-label">Built For</span>
@@ -2172,10 +2179,12 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
   <!-- ═══════ DETAIL (V16): expandable sections, closed by default; the full text stays in the HTML. Anchor links to a closed section open it (site.js). ═══════ -->
 
   <!-- ═══════ THE FOUNDATION ═══════ -->
+  <div class="omni-band omni-band--navy">
   <details class="rt-xsec" id="rt-foundation">
     <summary class="rt-xsec-sum section-toggle"><h2>The <em>Foundation</em></h2><span class="rt-xsec-cue" aria-hidden="true"></span></summary>
     <div class="rt-xsec-body">
@@ -2270,7 +2279,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="rt-ladder-cta rt-reveal"><a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a><p class="rt-ladder-sub">The Foundation starts after your consultation and assessment.</p></div>
   </div>
 
-  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+  <div style="max-width:1120px; margin:0 auto 20px;">
     <p style="font-size:13px; color:var(--white-50); text-align:center; max-width:760px; margin:0 auto;"><strong style="color:var(--gold);">Starting on The Program instead:</strong> a new client with prior training experience may start directly on The Program at any tier; The Foundation is then no longer available to them.</p>
     <p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:12px auto 0;">Pay over time with Klarna or Affirm.</p>
     <p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:12px auto 0;"><strong>Foundation policy.</strong> The Foundation is non-refundable and, apart from your statutory cancellation rights, the 30-Day Fit Guarantee is the only early exit. Two pause weeks are available across the course with notice, extending the end date. Sessions OmniFit cancels are credited.</p>
@@ -2371,11 +2380,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="rt-ladder-cta rt-reveal"><a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a><p class="rt-ladder-sub">The Program starts after your consultation and assessment.</p></div>
   </div>
 
-  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+  <div style="max-width:1120px; margin:0 auto 20px;">
     <p style="font-size:12px; color:var(--white-50); text-align:center; max-width:760px; margin:12px auto 0;"><strong>Program terms.</strong> Six pause weeks are available per twelve months with two weeks' notice, credited against the next cycle. Cancel with thirty days' notice; remaining credit is applied to the final cycle. Reschedule with twenty-four hours' notice within the same cycle. Sessions OmniFit cancels are credited.</p>
   </div>
 
-  <div style="padding: 0 28px; max-width:1120px; margin:24px auto 0;">
+  <div style="max-width:1120px; margin:24px auto 0;">
     <div class="rt-guarantee rt-reveal">
       <h4>30-Day Fit Guarantee</h4>
       <p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. No compliance test, no negotiation.</p>
@@ -2448,7 +2457,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div>
 
-  <div style="padding: 0 28px;">
+  <div>
     <div class="rt-feature rt-reveal">
       <div class="rt-feature-grid">
         <div>
@@ -2521,7 +2530,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="rt-ladder-cta rt-reveal"><a class="rt-btn rt-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a><p class="rt-ladder-sub">The Executive Reset starts after your consultation and virtual assessment.</p></div>
   </div>
 
-  <div style="padding:0 28px; max-width:1120px; margin:0 auto 20px;">
+  <div style="max-width:1120px; margin:0 auto 20px;">
     <p style="font-size:12px; color:var(--white-50); text-align:center;">All Executive Reset tiers are billed every 4 weeks via auto-pay. Bronze is asynchronous programming only and includes no live sessions; its Accountability Dial setting is Coached or Train Only. Up to six pause weeks per 12 months, with two weeks' notice, credited against your next cycle. <a href="/the-30-minute-executive-reset" style="color:var(--gold);">Full Executive Reset details →</a></p>
   </div>
     </div>
@@ -2607,10 +2616,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
     </div>
   </details>
+  </div>
 
-  <div class="rt-spacer"></div>
 
   <!-- FAQ -->
+  <div class="omni-band omni-band--cream">
   <div class="rt-section" id="rt-faq">
     <div class="rt-section-head rt-reveal">
       <span class="rt-label">Frequently Asked</span>
@@ -2677,18 +2687,18 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
     </div>
   </div>
+  </div>
 
-  <div class="rt-spacer-sm"></div>
 
   <!-- PRICING NOTE -->
-  <div style="padding: 0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <p class="rt-surcharge">Program pricing and availability are subject to change. Contact us for the most current rates.</p>
   </div>
 
-  <div class="rt-spacer"></div>
 
   <!-- BOTTOM CTA -->
-  <div style="padding: 0 28px;">
+  <div>
     <div class="rt-bottom rt-reveal">
       <h2>Ready to Start <em>Training</em>?</h2>
       <p>Book your consultation with a $30 deposit, refunded the same day you attend your consultation. Then the Performance Assessment ($150 in person, $75 virtual), credited toward your first cycle, gives us your baseline and the right program for your life.</p>
@@ -2703,6 +2713,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="rt-trust-item"><span class="rt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg></span> NASM CES · CPT · PES · BCS · CNC</div>
     <div class="rt-trust-item"><span class="rt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span> Teqneeq FHC · 4S Ranch, San Diego</div>
     <div class="rt-trust-item"><span class="rt-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg></span> Virtual Coaching Nationwide</div>
+  </div>
   </div>
 
 </div>

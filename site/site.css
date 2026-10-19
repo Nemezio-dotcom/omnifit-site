@@ -153,9 +153,9 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
 .page #main .omni-band--navy{background:var(--omni-navy);color:var(--omni-white);}
 .page #main .omni-band--cream{background:var(--omni-cream);color:var(--omni-ink);}
 .page #main .omni-band--white{background:var(--omni-white);color:var(--omni-ink);}
-.omni-band--cream,.omni-band--white{--white:var(--omni-ink);--white-90:#2a3446;--white-70:var(--omni-muted);--white-50:#5f6b7d;--white-30:rgba(10,22,40,.35);--white-20:rgba(10,22,40,.22);--white-10:var(--omni-line);--white-05:rgba(10,22,40,.045);--navy-surface:#ffffff;--gold:var(--omni-gold-ink);--gold-light:#7d6320;--gold-dim:rgba(154,122,38,.10);--gold-glow:rgba(154,122,38,.18);--gold-btn:var(--omni-gold);--gold-btn-hover:var(--omni-gold-light);}
-.omni-band--cream{--navy-mid:#ffffff;--navy-light:#ffffff;}
-.omni-band--white{--navy-mid:var(--omni-cream);--navy-light:var(--omni-cream);}
+.omni-band--cream,.omni-band--white{--white:var(--omni-ink);--white-90:#2a3446;--white-70:var(--omni-muted);--white-50:#5f6b7d;--white-30:rgba(10,22,40,.35);--white-20:rgba(10,22,40,.22);--white-15:rgba(10,22,40,.15);--white-10:var(--omni-line);--white-08:rgba(10,22,40,.08);--white-05:rgba(10,22,40,.045);--navy-surface:#ffffff;--gold:var(--omni-gold-ink);--gold-light:#7d6320;--gold-dim:rgba(154,122,38,.10);--gold-glow:rgba(154,122,38,.18);--gold-btn:var(--omni-gold);--gold-btn-hover:var(--omni-gold-light);}
+.omni-band--cream{--navy-mid:#ffffff;--navy-light:#ffffff;--navy-deep:#ffffff;}
+.omni-band--white{--navy-mid:var(--omni-cream);--navy-light:var(--omni-cream);--navy-deep:var(--omni-cream);}
 @media (max-width:768px){#main .omni-band{padding-top:48px;padding-bottom:48px;}}
 /* On a light band the heading accent and the line icons also take the darker gold (the brand gold is 2:1 on cream). */
 #main .omni-band--cream h1 em,#main .omni-band--cream h2 em,#main .omni-band--cream h3 em,#main .omni-band--white h1 em,#main .omni-band--white h2 em,#main .omni-band--white h3 em{color:var(--omni-gold-ink);}
