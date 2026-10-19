@@ -974,10 +974,12 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     native scroll-driven parallax (photo drifts, copy lifts) that browsers
     without animation-timeline support simply skip.
   v5 changes (from v4):
-  - Six-photo crossfade loop. Frame A is still the kettlebell coaching photo
-    (the LCP image, preloaded, unchanged). The other five are repo assets in
+  - Seven-photo crossfade loop. Frame A is still the kettlebell coaching photo
+    (the LCP image, preloaded, unchanged). The other six are repo assets in
     site/img/ (served from /assets/img/), each in 1000px and 1600px webp
-    with jpg fallbacks:
+    with jpg fallbacks (the Teqneeq photo: 1000px and 1200px, its source
+    width):
+      hero-teqneeq-rack-area             landscape 3:2 (Teqneeq FHC floor; owner asked for it second, Oct 19 2026)
       hero-coach-client-cable-pulldown   landscape 3:2
       hero-coach-physique-portrait       portrait  5:6
       hero-coach-client-jump-training    landscape 3:2
@@ -1025,28 +1027,33 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <source type="image/webp" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" src="/assets/img/hero-trainer-coaching-kettlebell-1600.jpg" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.jpg 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" fetchpriority="high" decoding="async">
       </picture>
-      <!-- frames B-F: given their URLs by the script once frame A has loaded -->
-      <!-- frame B: coach and client at the cable station, landscape -->
+      <!-- frames B-G: given their URLs by the script once frame A has loaded -->
+      <!-- frame B: the Teqneeq FHC rack area and cardio deck, landscape -->
+      <picture class="hero-frame hero-frame--landscape" style="--focus:50% 45%;--focus-m:40% 50%">
+        <source type="image/webp" data-srcset="/assets/img/hero-teqneeq-rack-area-1000.webp 1000w, /assets/img/hero-teqneeq-rack-area-1200.webp 1200w" sizes="(max-width:768px) 100vw, 880px">
+        <img class="hero-bg" data-src="/assets/img/hero-teqneeq-rack-area-1200.jpg" data-srcset="/assets/img/hero-teqneeq-rack-area-1000.jpg 1000w, /assets/img/hero-teqneeq-rack-area-1200.jpg 1200w" sizes="(max-width:768px) 100vw, 880px" width="1200" height="800" alt="" decoding="async">
+      </picture>
+      <!-- frame C: coach and client at the cable station, landscape -->
       <picture class="hero-frame hero-frame--landscape" style="--focus:30% 25%;--focus-m:38% 50%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-client-cable-pulldown-1000.webp 1000w, /assets/img/hero-coach-client-cable-pulldown-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-client-cable-pulldown-1600.jpg" data-srcset="/assets/img/hero-coach-client-cable-pulldown-1000.jpg 1000w, /assets/img/hero-coach-client-cable-pulldown-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1067" alt="" decoding="async">
       </picture>
-      <!-- frame C: coach physique portrait -->
+      <!-- frame D: coach physique portrait -->
       <picture class="hero-frame hero-frame--portrait" style="--focus:50% 30%;--focus-m:50% 40%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-physique-portrait-1000.webp 1000w, /assets/img/hero-coach-physique-portrait-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-physique-portrait-1600.jpg" data-srcset="/assets/img/hero-coach-physique-portrait-1000.jpg 1000w, /assets/img/hero-coach-physique-portrait-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1916" alt="" decoding="async">
       </picture>
-      <!-- frame D: client jump with coach, landscape -->
+      <!-- frame E: client jump with coach, landscape -->
       <picture class="hero-frame hero-frame--landscape" style="--focus:50% 50%;--focus-m:64% 50%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-client-jump-training-1000.webp 1000w, /assets/img/hero-coach-client-jump-training-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-client-jump-training-1600.jpg" data-srcset="/assets/img/hero-coach-client-jump-training-1000.jpg 1000w, /assets/img/hero-coach-client-jump-training-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1067" alt="" decoding="async">
       </picture>
-      <!-- frame E: client push-up on the bench with coach, portrait -->
+      <!-- frame F: client push-up on the bench with coach, portrait -->
       <picture class="hero-frame hero-frame--portrait" style="--focus:50% 40%;--focus-m:55% 45%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-client-bench-pushup-1000.webp 1000w, /assets/img/hero-coach-client-bench-pushup-1333.webp 1333w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-client-bench-pushup-1333.jpg" data-srcset="/assets/img/hero-coach-client-bench-pushup-1000.jpg 1000w, /assets/img/hero-coach-client-bench-pushup-1333.jpg 1333w" sizes="(max-width:768px) 100vw, 880px" width="1333" height="2000" alt="" decoding="async">
       </picture>
-      <!-- frame F: coach with dumbbells, portrait -->
+      <!-- frame G: coach with dumbbells, portrait -->
       <picture class="hero-frame hero-frame--portrait" style="--focus:50% 30%;--focus-m:55% 40%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-dumbbell-workout-1000.webp 1000w, /assets/img/hero-coach-dumbbell-workout-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-dumbbell-workout-1600.jpg" data-srcset="/assets/img/hero-coach-dumbbell-workout-1000.jpg 1000w, /assets/img/hero-coach-dumbbell-workout-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" decoding="async">

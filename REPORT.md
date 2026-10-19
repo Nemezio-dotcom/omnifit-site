@@ -8320,3 +8320,13 @@ The homepage's coach photo (an action shot, already local) is unchanged. CANON's
 **Phone gutter fix from the narrow-column batch.** A 390px probe (each band's boxes against the band edge, compared with a build of main) found that on about, behavior-change, couples, GLP-1, HSA/FSA, nutrition, over-50 and partners the body text, cards and quotables had moved from 20px to 40px from the screen edge: their mobile rules still added a 20px gutter (or a 28px desktop padding the mobile rule used to cancel) inside a band that already supplies one. Those side paddings and margins are removed; the bottom CTA boxes keep their inset. Every measured element is now at main's position or at the band edge.
 
 Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. bandcontrast: 7 (the known outcomes chart labels). mobileaudit PASSED on all 84 page/width checks. Screenshots of both photo sections reviewed at 1280 and 390.
+
+## Homepage hero: the Teqneeq FHC photo as the second frame (Oct 19 2026)
+
+Started from main c6137d8 (PR #9 merged). The owner asked for the black-and-white Teqneeq rack-area photo to be the second picture in the homepage hero rotation.
+
+- **Images:** `site/img/hero-teqneeq-rack-area-1000` and `-1200`, webp plus jpg fallback, matching the other frames' format. The source is 1200px wide, so 1200 replaces the usual 1600.
+- **Frame:** `pages/home-0.html` gets a new landscape frame directly after frame A, so the crossfade (which walks the frames in page order) shows it second. Focus is `50% 45%` on desktop and `40% 50%` on phones. The frame comments are relabelled B to G, and the v5 note now reads "seven-photo loop" with the new file listed first.
+- **Unchanged:** frame A, the LCP preload, timing and the lazy hydration of frames B onward.
+
+Verification: in the browser the live rotation ran kettlebell, then Teqneeq rack area, then cable pulldown, then physique portrait. The new frame, forced on, was screenshotted at 1280 and 390: on desktop the racks and the cardio deck sit to the right of the headline shade, and on phones the whole scene fits the top half of the card. build --strict PASSED. Certify PASSED with 0 findings, hashes unchanged. mobileaudit PASSED on / at 390 and 412.
