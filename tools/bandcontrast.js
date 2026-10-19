@@ -11,6 +11,8 @@
 // chart cards on outcomes and the navy table headers were found. Expected
 // residue: the seven "0" labels on outcomes' scroll-drawn bar segments.
 const fs = require('fs');
+const { chromium } = require('playwright');
+const fs = require('fs');
 (async () => {
   const pub = process.argv[2]; const files = fs.readdirSync(pub).filter(f => f.endsWith('.html')).sort();
   const browser = await chromium.launch(); const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
