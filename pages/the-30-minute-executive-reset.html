@@ -58,13 +58,12 @@
   /* BUTTONS */
   #omni-reset .er-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
   #omni-reset a.er-btn, #omni-reset a.er-btn:link, #omni-reset a.er-btn:visited { text-decoration: none; }
-  #omni-reset .er-btn-primary, #omni-reset a.er-btn-primary, #omni-reset a.er-btn-primary:link, #omni-reset a.er-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
-  #omni-reset .er-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-reset .er-btn-primary, #omni-reset a.er-btn-primary, #omni-reset a.er-btn-primary:link, #omni-reset a.er-btn-primary:visited { background: var(--gold-btn, var(--gold)); color: var(--navy) !important; }
+  #omni-reset .er-btn-primary:hover { background: var(--gold-btn-hover, var(--gold-light)); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
   #omni-reset .er-btn-ghost, #omni-reset a.er-btn-ghost, #omni-reset a.er-btn-ghost:link, #omni-reset a.er-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
   #omni-reset .er-btn-ghost:hover { border-color: var(--white); background: var(--white-05); transform: translateY(-2px); }
 
   /* SECTION SCAFFOLD */
-  #omni-reset .er-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
   #omni-reset .er-section-head { text-align: center; margin-bottom: 40px; }
   #omni-reset .er-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
   #omni-reset .er-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
@@ -173,7 +172,7 @@
   }
   @media (max-width: 768px) {
     #omni-reset .er-hero { padding: 56px 20px 36px; }
-    #omni-reset .er-section { padding: 0 20px; }
+   
     #omni-reset .er-quotable { margin-left: 20px; margin-right: 20px; }
     #omni-reset .er-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; }
   }
@@ -246,7 +245,6 @@
 </section>
 
 
-  <div class="er-spacer"></div>
 
   <!-- GEMINI-QUOTABLE -->
   <div style="padding: 0 28px;">
@@ -256,7 +254,7 @@
   </div>
 
   <!-- WHY 30 MINUTES -->
-  <div class="er-section">
+  <div class="er-section omni-band omni-band--cream">
     <div class="er-section-head">
       <span class="er-label">The Format</span>
       <hr class="er-divider">
@@ -293,7 +291,7 @@
   </div>
 
   <!-- HOW IT WORKS -->
-  <div class="er-section">
+  <div class="er-section omni-band omni-band--white">
     <div class="er-section-head">
       <span class="er-label">How It Works</span>
       <hr class="er-divider">
@@ -364,7 +362,7 @@
   </div>
 
   <!-- TIERS -->
-  <div class="er-section">
+  <div class="er-section omni-band omni-band--navy">
     <div class="er-section-head">
       <span class="er-label">Program Tiers</span>
       <hr class="er-divider">
@@ -428,7 +426,7 @@
   </div>
 
   <!-- WHO THIS IS FOR -->
-  <div class="er-section">
+  <div class="er-section omni-band omni-band--cream">
     <div class="er-section-head">
       <span class="er-label">Use Cases</span>
       <hr class="er-divider">
@@ -456,7 +454,7 @@
   </div>
 
   <!-- COMPARISON -->
-  <div class="er-section">
+  <div class="er-section omni-band omni-band--white">
     <div class="er-section-head">
       <span class="er-label">The Difference</span>
       <hr class="er-divider">
@@ -481,7 +479,7 @@
   </div>
 
   <!-- COACH -->
-  <div class="er-section">
+  <div class="er-section omni-band omni-band--navy">
     <div class="er-section-head">
       <span class="er-label">Your Coach</span>
       <hr class="er-divider">
@@ -494,7 +492,7 @@
   </div>
 
   <!-- FAQ -->
-  <div class="er-section">
+  <div class="er-section omni-band omni-band--cream">
     <div class="er-section-head">
       <span class="er-label">Common Questions</span>
       <hr class="er-divider">
@@ -526,7 +524,7 @@
   </div>
 
   <!-- RELATED -->
-  <div class="er-section">
+  <div class="er-section omni-band omni-band--white">
     <div class="er-section-head">
       <span class="er-label">Explore More</span>
       <hr class="er-divider">
@@ -545,20 +543,20 @@
   </div>
 
   <!-- BOTTOM CTA -->
-  <div style="padding: 0 28px;">
+  <div class="omni-band omni-band--navy">
     <div class="er-bottom">
       <h2>Training That Travels <em>With You</em></h2>
       <p>Book a 45-minute consultation. We will map your schedule, your travel patterns, and your movement history, then determine whether the Reset is the right structure for you.</p>
       <a class="er-btn er-btn-primary" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
       <span class="er-bottom-note">45-minute consultation · $30 deposit, refunded the same day you attend your consultation · Straight answer on fit</span>
     </div>
-  </div>
 
-  <div class="er-trust">
+    <div class="er-trust">
     <div class="er-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg> 4.98 average across 190+ reviews</div>
     <div class="er-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14l-1.5 7 5-2.5 5 2.5-1.5-7"/></svg> NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</div>
     <div class="er-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Teqneeq FHC · 4S Ranch, San Diego</div>
     <div class="er-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg> Virtual Coaching Nationwide</div>
+    </div>
   </div>
 
 </div>

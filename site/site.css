@@ -149,7 +149,7 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
    ("#omni-x .s-mid { background:var(--navy-mid) }") when the class is put on
    such a section. A section that sets its own padding keeps it. */
 #main .omni-band{padding:64px max(20px,calc((100% - 1064px)/2));}
-.page #main .omni-band>:last-child{margin-bottom:0;}
+.page #main .omni-band>:last-child{margin-bottom:0 !important;}  /* some pages set it inline */
 .page #main .omni-band--navy{background:var(--omni-navy);color:var(--omni-white);}
 .page #main .omni-band--cream{background:var(--omni-cream);color:var(--omni-ink);}
 .page #main .omni-band--white{background:var(--omni-white);color:var(--omni-ink);}
@@ -160,6 +160,19 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
 /* On a light band the heading accent and the line icons also take the darker gold (the brand gold is 2:1 on cream). */
 #main .omni-band--cream h1 em,#main .omni-band--cream h2 em,#main .omni-band--cream h3 em,#main .omni-band--white h1 em,#main .omni-band--white h2 em,#main .omni-band--white h3 em{color:var(--omni-gold-ink);}
 .omni-band--cream svg.omni-icon,.omni-band--white svg.omni-icon{stroke:var(--omni-gold-ink);}
+/* The shared "who this is for / not the right fit" block (omni-who-*, on six
+   pages) hard-codes white rgba text instead of the token vocabulary, so a light
+   band restyles it here. Specificity and !important match the page rules. */
+.page #main .omni-band--cream .omni-who-col,.page #main .omni-band--white .omni-who-col{background:var(--navy-light);border-color:var(--white-10);}
+.page #main .omni-band--cream .omni-who-col.for,.page #main .omni-band--white .omni-who-col.for{border-color:rgba(154,122,38,.45);}
+.page #main .omni-band--cream .omni-who-col h3,.page #main .omni-band--white .omni-who-col h3{color:var(--omni-gold-ink) !important;}
+.page #main .omni-band--cream .omni-who-col.not h3,.page #main .omni-band--white .omni-who-col.not h3{color:var(--white-50) !important;}
+.page #main .omni-band--cream .omni-who-col li,.page #main .omni-band--white .omni-who-col li,.page #main .omni-band--cream .omni-who-lines p,.page #main .omni-band--white .omni-who-lines p{color:var(--white-70);}
+.page #main .omni-band--cream .omni-who-col li::before,.page #main .omni-band--white .omni-who-col li::before,.page #main .omni-band--cream .omni-who-lines a,.page #main .omni-band--white .omni-who-lines a{color:var(--omni-gold-ink);}
+.page #main .omni-band--cream .omni-who-col.not li::before,.page #main .omni-band--white .omni-who-col.not li::before{color:var(--white-50);}
+.page #main .omni-band--cream .omni-who-roles,.page #main .omni-band--white .omni-who-roles{border-left-color:var(--omni-gold-ink);}
+.page #main .omni-band--cream .omni-who-unify,.page #main .omni-band--white .omni-who-unify,.page #main .omni-band--cream .omni-who-entity,.page #main .omni-band--white .omni-who-entity{color:var(--white-50) !important;}
+.page #main .omni-band--cream .omni-who-door,.page #main .omni-band--white .omni-who-door{color:var(--omni-ink) !important;}
 
 /* ---------------------------------------------------------------------
    Heading accent: the gold italic word inside a heading, e.g.

@@ -17,13 +17,12 @@
   #omni-bodycomp .bc-cta-row { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:40px; position:relative; }
   #omni-bodycomp .bc-btn { display:inline-block; padding:15px 36px; border-radius:var(--radius); font-family:'Montserrat',sans-serif!important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; transition:all 0.3s; }
   #omni-bodycomp a.bc-btn, #omni-bodycomp a.bc-btn:link, #omni-bodycomp a.bc-btn:visited { text-decoration:none; }
-  #omni-bodycomp .bc-btn-primary, #omni-bodycomp a.bc-btn-primary, #omni-bodycomp a.bc-btn-primary:link, #omni-bodycomp a.bc-btn-primary:visited { background:var(--gold); color:var(--navy)!important; }
-  #omni-bodycomp .bc-btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.3); color:var(--navy)!important; }
+  #omni-bodycomp .bc-btn-primary, #omni-bodycomp a.bc-btn-primary, #omni-bodycomp a.bc-btn-primary:link, #omni-bodycomp a.bc-btn-primary:visited { background:var(--gold-btn, var(--gold)); color:var(--navy)!important; }
+  #omni-bodycomp .bc-btn-primary:hover { background:var(--gold-btn-hover, var(--gold-light)); transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.3); color:var(--navy)!important; }
   #omni-bodycomp .bc-btn-ghost, #omni-bodycomp a.bc-btn-ghost, #omni-bodycomp a.bc-btn-ghost:link, #omni-bodycomp a.bc-btn-ghost:visited { border:1px solid var(--white-30); color:var(--white)!important; background:transparent; }
   #omni-bodycomp .bc-btn-ghost:hover { border-color:var(--white); background:var(--white-05); transform:translateY(-2px); color:var(--white)!important; }
 
   /* SECTIONS */
-  #omni-bodycomp .bc-section { padding:0 28px; max-width:1120px; margin:0 auto; }
   #omni-bodycomp .bc-band { background:var(--navy-mid); padding:56px 28px; }
   #omni-bodycomp .bc-band-inner { max-width:1120px; margin:0 auto; }
   #omni-bodycomp .bc-section-head { text-align:center; margin-bottom:40px; }
@@ -111,7 +110,7 @@
   }
   @media(max-width:768px) {
     #omni-bodycomp .bc-hero { padding:56px 20px 36px; }
-    #omni-bodycomp .bc-section { padding:0 20px; }
+   
     #omni-bodycomp .bc-band { padding:56px 20px; }
     #omni-bodycomp .bc-bottom { padding:32px 24px; margin-left:20px; margin-right:20px; }
     #omni-bodycomp .bc-quote-block { margin-left:20px; margin-right:20px; }
@@ -140,6 +139,7 @@
     <p class="bc-hero-sub" style="margin-top:-24px; font-size:14px;">The $150 Performance Assessment is booked after your consultation.</p>
   </section>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ QUOTABLE ═══ -->
   <div class="bc-section">
     <div class="bc-quote-block">
@@ -199,9 +199,10 @@
     </div>
     <p class="bc-report-note">A real QuadScan 4000 report from an OmniFit assessment, shared with the client's permission. Name, age, test date and device details have been removed. Tap a page to view it full size.</p>
   </div>
+  </div>
 
   <!-- ═══ COMPARISON ═══ -->
-  <div class="bc-band">
+  <div class="bc-band omni-band omni-band--white">
     <div class="bc-band-inner">
       <div class="bc-section-head">
         <span class="bc-label">How It Compares</span>
@@ -271,8 +272,9 @@
     </div>
   </div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ GLP-1 ═══ -->
-  <div class="bc-section" style="padding-top:56px; margin-bottom:56px;">
+  <div class="bc-section" style="margin-bottom:56px;">
     <div class="bc-section-head">
       <span class="bc-label">On a GLP-1 Medication?</span>
       <hr class="bc-divider">
@@ -297,6 +299,7 @@
         <p>Fat-versus-lean trend data you can bring to your physician if you choose, alongside the scale trend.</p>
       </article>
     </div>
+  </div>
   </div>
 
   <!-- ═══ WHAT HAPPENS AT THE APPOINTMENT ═══ -->
@@ -333,8 +336,9 @@
     </div>
   </div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ FAQ ═══ -->
-  <div class="bc-section" style="padding-top:56px; margin-bottom:56px;">
+  <div class="bc-section" style="margin-bottom:56px;">
     <div class="bc-section-head">
       <span class="bc-label">Common Questions</span>
       <hr class="bc-divider">
@@ -376,9 +380,10 @@
       </details>
     </div>
   </div>
+  </div>
 
   <!-- ═══ HUB LINKS ═══ -->
-  <div class="bc-band">
+  <div class="bc-band omni-band omni-band--white">
     <div class="bc-band-inner">
       <div class="bc-section-head">
         <span class="bc-label">Explore OmniFit</span>
@@ -401,6 +406,7 @@
   </div>
 
       <!-- ═══ USE CASES ═══ -->
+  <div class="omni-band omni-band--cream">
     <div class="bc-section">
       <div class="bc-section-head">
         <span class="bc-label">Use Cases</span>
@@ -431,9 +437,11 @@
         </article>
       </div>
     </div>
+  </div>
 
 <!-- ═══ BOTTOM CTA ═══ -->
-  <div style="padding: 56px 28px 0;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="bc-bottom">
       <h2>Know Your Numbers. <em>Then Change Them.</em></h2>
       <p>One appointment gives you the baseline most people train for years without: a clear, repeatable read on what your body is made of, how it moves, and what to do about it.</p>
@@ -448,6 +456,7 @@
     <div class="bc-trust-item"><span>🏅</span> NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</div>
     <div class="bc-trust-item"><span>📍</span> Teqneeq FHC · 10772 Thornmint Rd · 4S Ranch, San Diego 92127</div>
     <div class="bc-trust-item"><span>🌍</span> In-Home Testing Across North County</div>
+  </div>
   </div>
 
 </div>
