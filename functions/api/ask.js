@@ -31,10 +31,14 @@ function later(context, promise) {
   return p;
 }
 
+// Names what is missing (never a value), so a 503 can be diagnosed from a browser.
 export async function onRequestGet({ request, env }) {
-  if (!isConfigured(env) || !ALLOWED_HOSTS.has(new URL(request.url).hostname)) {
-    return json({ ok: false }, 503);
-  }
+  const missing = [];
+  if (!env || !env.ANTHROPIC_API_KEY) missing.push("ANTHROPIC_API_KEY");
+  if (!env || !env.DB) missing.push("DB");
+  const host = new URL(request.url).hostname;
+  if (missing.length) return json({ ok: false, missing }, 503);
+  if (!ALLOWED_HOSTS.has(host)) return json({ ok: false, host_not_allowed: host }, 503);
   return json({ ok: true });
 }
 

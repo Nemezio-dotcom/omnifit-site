@@ -122,6 +122,16 @@ test("GET status probe: 503 unconfigured, 200 configured, 503 on an unlisted hos
   assert.deepEqual(await ok.json(), { ok: true });
   assert.equal((await askGet({ request: at("https://preview.omnifit-site.pages.dev/api/ask"), env: env() })).status, 503);
 });
+test("GET status probe names what is missing, never a value", async () => {
+  const at = new Request("https://omnifit-site.pages.dev/api/ask");
+  assert.deepEqual(await (await askGet({ request: at, env: {} })).json(), { ok: false, missing: ["ANTHROPIC_API_KEY", "DB"] });
+  assert.deepEqual(await (await askGet({ request: at, env: { DB: new FakeD1() } })).json(), { ok: false, missing: ["ANTHROPIC_API_KEY"] });
+  const body = await (await askGet({ request: at, env: { ANTHROPIC_API_KEY: "sk-secret" } })).text();
+  assert.deepEqual(JSON.parse(body), { ok: false, missing: ["DB"] });
+  assert.ok(!body.includes("sk-secret"));
+  assert.deepEqual(await (await askGet({ request: new Request("https://x.omnifit-site.pages.dev/api/ask"), env: env() })).json(),
+    { ok: false, host_not_allowed: "x.omnifit-site.pages.dev" });
+});
 test("assistant-log: 503 without ADMIN_KEY or DB", async () => {
   const r = new Request("https://www.omnifittraining.com/api/assistant-log?key=x");
   assert.equal((await logGet({ request: r, env: { DB: new FakeD1() } })).status, 503);
