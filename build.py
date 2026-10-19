@@ -24,7 +24,7 @@ Sources
   site/layout.html, site/nav.html, site/site.css, site/site.js
   site/img/*                        static images, copied to public/assets/img/
 
-Also written: public/_redirects, robots.txt, sitemap.xml, 404.html (noindex,
+Also written: public/_redirects, robots.txt, llms.txt (from site/llms.txt), sitemap.xml, 404.html (noindex,
 not in the sitemap, links to Home and Book Your Consultation only) and
 _headers (X-Robots-Tag: noindex on the *.pages.dev preview hostname only).
 
@@ -520,6 +520,9 @@ def build():
     (PUBLIC / "robots.txt").write_text(
         f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n", encoding="utf-8"
     )
+
+    # llms.txt - AI-assistant summary of the site, copied verbatim from site/llms.txt
+    shutil.copyfile(SITE / "llms.txt", PUBLIC / "llms.txt")
 
     # 404.html - Cloudflare Pages serves it for any route with no file and no
     # redirect. Not a page: it is never appended to `pages`, so it stays out of
