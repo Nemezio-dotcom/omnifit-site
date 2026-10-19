@@ -8246,3 +8246,9 @@ Started from d08c5d5. The homepage alternates white, navy and cream sections; ha
 **Verification:** full-page Playwright screenshots at 1280 and 390 before and after, with the web fonts loaded (see the before/after composites in the session). build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings. All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84. mobileaudit PASSED on /personal-trainer-encinitas at 390 and 412 (clipped 0, no horizontal overflow; narrow 13 both before and after: the neighborhood chips and the stat tiles, which were two-up at phone width already).
 
 **Rollout note:** the normalised stylesheets of carlsbad, carmel-valley, del-mar, fairbanks-ranch, la-jolla, rancho-bernardo, rancho-santa-fe, santaluz and solana-beach are the Encinitas sheet with a prefix change and 0 to 95 differing lines, so the same edit applies to those nine. 4S Ranch is a different, much larger page and needs its own pass.
+
+### Section bands: the other nine template territory pages (Oct 19 2026)
+
+Pilot approved. The same edit applied to carlsbad, carmel-valley, del-mar, fairbanks-ranch, la-jolla, rancho-bernardo, rancho-santa-fe, santaluz and solana-beach, each with its own prefix: container rule and mobile override removed, the nine sections classed cream / white / white / cream / navy / navy / cream / white / white, the three spacers removed, the bottom CTA and trust row in one navy band. No copy, link, heading or schema changed. 4S Ranch is a different page and is handled separately below.
+
+Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. mobileaudit PASSED on all nine at 390 and 412 (clipped 0, no horizontal overflow, narrow 13 each, the same pre-existing chips and stat tiles as Encinitas). Full-page screenshots of all nine reviewed at 1280 and 390.
