@@ -85,7 +85,7 @@ LINK_FIXES = {
 # description already carried in its header or body schema.
 META_FALLBACK = {
     "case-studies": (
-        "Client Case Studies | Real Results From Real Professionals | OmniFit Performance",
+        "Client Case Studies | OmniFit Performance San Diego",
         "Documented individual client outcomes from busy professionals in San Diego using "
         "OmniFit Performance's Assess-Correct-Build-Sustain methodology with joint-friendly "
         "corrective exercise, structured nutrition, and accountability coaching. Individual "
