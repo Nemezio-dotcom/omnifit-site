@@ -200,11 +200,19 @@ def built_pages(public):
     public = Path(public)
     files = [public / "index.html"] if (public / "index.html").exists() else []
     files += [f for f in sorted(public.glob("*.html")) if f.name not in ("index.html", "404.html")]
+    # Journal posts (site/blog.py): public/blog/<slug>.html is /blog/<slug>.
+    files += sorted((public / "blog").glob("*.html"))
     return files
 
 
 def _url_path(public, f):
-    return "/" if f.name == "index.html" else "/" + f.stem
+    f = Path(f)
+    try:
+        rel = f.relative_to(public)
+    except ValueError:
+        rel = f  # already relative to public/
+    rel = rel.with_suffix("").as_posix()
+    return "/" if rel == "index" else "/" + rel
 
 
 def check_site(public=ROOT / "public", canon=ROOT / "CANON.md"):

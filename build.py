@@ -53,6 +53,7 @@ BASE = "https://www.omnifittraining.com"
 
 sys.path.insert(0, str(SITE))
 import icons  # noqa: E402  (site/icons.py)
+import blog  # noqa: E402  (site/blog.py - the Journal at /blog)
 sys.path.insert(0, str(ROOT / "tools"))
 import ownership  # noqa: E402  (tools/ownership.py)
 
@@ -438,6 +439,10 @@ def build():
     nav = load_nav()
     site_header = read(HEADERS / "site-header.html").strip()
     footer_css, footer_html, footer_js = footer_parts()
+    # The Journal (site/blog.py). With no post in pages/blog/ the build output
+    # is unchanged: no /blog page, the /blog 302 stays, no CSS, no footer link.
+    posts = blog.load_posts(PAGES / "blog")
+    footer_html = footer_html.replace("<!--BLOG_LINK-->", blog.FOOTER_LINK if posts else "")
 
     if PUBLIC.exists():
         shutil.rmtree(PUBLIC)
@@ -446,7 +451,8 @@ def build():
     if (SITE / "img").is_dir():
         shutil.copytree(SITE / "img", PUBLIC / "assets" / "img")
     (PUBLIC / "assets" / "site.css").write_text(
-        read(SITE / "site.css").rstrip() + "\n\n/* ===== Footer (source: pages/footer.html) ===== */\n" + footer_css + "\n",
+        read(SITE / "site.css").rstrip() + "\n\n/* ===== Footer (source: pages/footer.html) ===== */\n" + footer_css + "\n"
+        + ("\n" + read(SITE / "blog.css") if posts else ""),
         encoding="utf-8",
     )
     (PUBLIC / "assets" / "site.js").write_text(
@@ -457,8 +463,10 @@ def build():
     pages = []  # (url_path, title, meta_source, lastmod)
     emoji_report = {}  # url_path -> {char: count}
 
-    def emit(slug, url_path, body_text, sources, header_path, title, desc, meta_source):
-        header_text = read(header_path).strip() if header_path else ""
+    def emit(slug, url_path, body_text, sources, header_path, title, desc, meta_source,
+             header_text=None, lastmod=None):
+        if header_text is None:
+            header_text = read(header_path).strip() if header_path else ""
         # The layout sets the canonical; drop a duplicate carried by a header.
         header_text = re.sub(r'<link rel="canonical"[^>]*>\s*', "", header_text)
         body, styles, links = split_body(body_text)
@@ -473,7 +481,7 @@ def build():
             description=html.escape(desc, quote=True),
             canonical=canonical,
             site_header=site_header,
-            page_header_source=str(header_path.relative_to(ROOT)) if header_path else "none",
+            page_header_source=str(header_path.relative_to(ROOT)) if header_path else ("site/blog.py" if header_text else "none"),
             page_header=header_text or "<!-- (this page has no header file) -->",
             page_links="\n".join(links),
             page_source=", ".join(str(s.relative_to(ROOT)) for s in sources),
@@ -489,8 +497,10 @@ def build():
         # /<slug> - and every canonical, sitemap entry and internal link uses
         # /<slug>. The homepage stays public/index.html.
         out = PUBLIC / ("index.html" if url_path == "/" else url_path.strip("/") + ".html")
+        out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(doc, encoding="utf-8")
-        pages.append((url_path, title, meta_source, git_date(*sources, *([header_path] if header_path else []))))
+        pages.append((url_path, title, meta_source,
+                      lastmod or git_date(*sources, *([header_path] if header_path else []))))
 
     # Homepage
     home_sources = [PAGES / f"{f}.html" for f in HOME_ORDER]
@@ -513,9 +523,23 @@ def build():
             text = '<div id="omni-terms" class="omni-text-page">\n' + text + "\n</div>"
         emit(slug, f"/{slug}", text, [p], header, title, desc, src)
 
-    # _redirects
+    # The Journal: one page per post at /blog/<slug> (public/blog/<slug>.html),
+    # plus the index at /blog (public/blog.html). Dates come from each post's
+    # metadata, not git, so the sitemap carries the real publish/update date.
+    if posts:
+        for post in posts:
+            emit(f"blog-{post['slug']}", f"/blog/{post['slug']}", blog.post_body(post), [post["path"]], None,
+                 post["title"], post["description"], "pages/blog POST metadata",
+                 header_text=blog.post_header(post, BASE), lastmod=post["updated"])
+        emit("blog", "/blog", blog.index_body(posts), [p["path"] for p in posts], None,
+             blog.INDEX_TITLE, blog.INDEX_DESC, "site/blog.py",
+             header_text=blog.index_header(posts, BASE), lastmod=max(p["updated"] for p in posts))
+
+    # _redirects (the /blog 302 placeholder drops out once the Journal has a post)
     lines = []
     for old, new, status, _origin in REDIRECTS:
+        if posts and old == "/blog":
+            continue
         lines.append(old if new is None else f"{old} {new} {status}")
     (PUBLIC / "_redirects").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -526,6 +550,9 @@ def build():
 
     # llms.txt - AI-assistant summary of the site, copied verbatim from site/llms.txt
     shutil.copyfile(SITE / "llms.txt", PUBLIC / "llms.txt")
+    if posts:
+        with open(PUBLIC / "llms.txt", "a", encoding="utf-8") as fh:
+            fh.write(blog.llms_lines(posts, BASE))
 
     # 404.html - Cloudflare Pages serves it for any route with no file and no
     # redirect. Not a page: it is never appended to `pages`, so it stays out of
@@ -716,8 +743,9 @@ def flat_selftest(rels):
 
 
 def page_path(f):
-    """public/index.html -> '/', public/<slug>.html -> '/<slug>'."""
-    return "/" if f.name == "index.html" else "/" + f.stem
+    """public/index.html -> '/', public/<slug>.html -> '/<slug>',
+    public/blog/<slug>.html -> '/blog/<slug>'."""
+    return ownership._url_path(PUBLIC, f)
 
 
 def check():
