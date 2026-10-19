@@ -8214,3 +8214,21 @@ HubSpot's inline height now applies to the content box and the padding sits outs
 **Verification offline** (the HubSpot iframe does not load without network): the built page was loaded in Playwright at 390, 412 and 1280 with HubSpot's inline height simulated (`height:1248px` on `.hs-form-frame`, a `height:100%` iframe inside). The iframe measured 1248px at all three widths, the frame's outer height 1248px plus 2x padding (1288 / 1288 / 1336), and the document scrollWidth equalled the viewport at each width.
 
 Results: build --check PASSED. Ownership PASSED (only the existing K10 note). Certify PASSED with 0 findings. All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84. mobileaudit PASSED on /contactform at 390 and 412 (narrow 0, clipped 0, no horizontal overflow): no layout regression in the surrounding card.
+
+## Sitewide heading accent: one rule for the gold italic word (Oct 19 2026)
+
+Started from main a55b3b8. The gold italic word inside a heading (`<h2>Train Smarter in <em>Encinitas</em></h2>`) was styled by a separate `h1 em` / `h2 em` rule copied into 36 pages, and eight of those pages rendered it in the wrong font.
+
+**Cause (measured on the built site):** about, hsa-fsa-personal-training, personal-trainer-4s-ranch, the-30-minute-executive-reset, corrective-exercise-post-rehab, hiit-personal-trainer-san-diego, strength-training-1 and weight-loss each carry a scoped reset, `#omni-x * { font-family: 'Montserrat' !important }`. The heading itself gets Playfair Display from its own `!important` rule, but the `<em>` inside it matches the `*` reset and inherits nothing, so the accent word was Montserrat italic on 54 of the site's 262 heading accents.
+
+**Fix:** one rule in `site/site.css`:
+
+```
+#main h1 em,#main h2 em,#main h3 em{font-family:var(--omni-font-heading) !important;font-style:italic !important;font-weight:inherit;color:var(--omni-gold);}
+```
+
+`#main` lifts its specificity above the `#omni-x *` resets so the `!important` font declarations win. Colour is not `!important`, so the training-rates page's gold sheen (`#omni-rates .rt-hero h1 em, #omni-rates h2 em`, a gradient text fill) still applies on top. The 60 per-page copies of the plain rule (`font-style: italic; color: var(--gold)`, with or without `!important`) were removed from 36 files under `pages/`; the sheen rule and the two non-heading accents on the rates page (`.rt-path-name em`, `.rt-subhead em`) stay. No copy, schema or other CSS changed.
+
+**Verification:** the built site was served locally and every `em` inside an h1-h4 on all 43 built pages had its computed font-family, font-style, font-weight and colour captured with Playwright, before and after. 262 accents both times. 204 unchanged. 58 changed: the 54 Montserrat accents above are now Playfair Display italic in the same gold, and four that had no accent rule at all are now gold instead of white (4S Ranch "Who This Is *Not* For"; rates "The *Foundation*", "The *Program*", "OmniFit Performance *Assessment*"). The 13 sheen accents on the rates page are still the transparent gradient fill. Nothing else moved.
+
+Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings. All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84. mobileaudit PASSED on the eight affected pages, the rates page and the homepage at 390 and 412 (clipped 0, no horizontal overflow; the rates page's narrow counts, 91 and 65, are identical to before the change).

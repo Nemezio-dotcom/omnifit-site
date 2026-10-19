@@ -124,6 +124,16 @@ main{overflow-x:clip;}
    site/icons.py. 1em so each icon takes the size the emoji had. */
 svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:-0.125em;flex-shrink:0;}
 
+/* ---------------------------------------------------------------------
+   Heading accent: the gold italic word inside a heading, e.g.
+   <h2>Train Smarter in <em>Encinitas</em></h2>. One rule for every page
+   (the per-page "h1 em / h2 em" copies were removed). #main plus !important
+   so it also wins inside the pages whose scoped reset forces Montserrat on
+   every descendant ("#omni-x * { font-family: 'Montserrat' !important }"),
+   which used to leave the accent word in the body font on those pages.
+   --------------------------------------------------------------------- */
+#main h1 em,#main h2 em,#main h3 em{font-family:var(--omni-font-heading) !important;font-style:italic !important;font-weight:inherit;color:var(--omni-gold);}
+
 /* ===== Plain text pages (terms-and-conditions was a Squarespace TEXT page,
    so it carries no CSS of its own; this gives it the design system) ===== */
 .omni-text-page{max-width:820px;margin:0 auto;padding:64px 24px 80px;font-family:var(--omni-font-body);font-size:16px;line-height:1.75;color:rgba(255,255,255,.8);}
