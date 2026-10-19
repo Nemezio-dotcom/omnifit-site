@@ -2,8 +2,10 @@
   Paste into /terms-and-conditions → Page Settings → Advanced → Page Header
   Code Injection. Page-level nodes only; entity referenced by @id.
   No aggregateRating and no FAQPage: legal page.
-  Squarespace SEO Title: "Terms of Service" (no trailing brand; Squarespace
-  appends the site title on render).
+  SEO Title: "Terms of Service | OmniFit Performance". The brand suffix is
+  written here because the static build (build.py) does not append the site
+  title the way Squarespace did; without it the title matched the H1 exactly
+  (Semrush "Duplicate content in h1 and title", Oct 17 2026 audit).
   Squarespace SEO Description: "Terms of Service for OmniFit Performance LLC:
   client agreements, 4-week billing, 24-hour cancellation policy, pause weeks,
   the 30-Day Fit Guarantee, and health and liability disclosures."
@@ -16,7 +18,7 @@
       "@type": "WebPage",
       "@id": "https://www.omnifittraining.com/terms-and-conditions#webpage",
       "url": "https://www.omnifittraining.com/terms-and-conditions",
-      "name": "Terms of Service",
+      "name": "Terms of Service | OmniFit Performance",
       "description": "Terms of Service for OmniFit Performance LLC: client agreements, 4-week billing, 24-hour cancellation policy, pause weeks, the 30-Day Fit Guarantee, and health and liability disclosures.",
       "inLanguage": "en-US",
       "dateModified": "2026-09-20",
