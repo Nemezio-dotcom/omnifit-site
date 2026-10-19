@@ -247,6 +247,9 @@ NOT_FOUND_HTML = f"""<!DOCTYPE html>
 # noindex; www.omnifittraining.com gets no X-Robots-Tag.
 HEADERS_TXT = """https://:project.pages.dev/*
   X-Robots-Tag: noindex
+
+/*
+  Strict-Transport-Security: max-age=31536000
 """
 
 STYLE_RE = re.compile(r"<style\b[^>]*>.*?</style>", re.S | re.I)
