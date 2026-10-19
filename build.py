@@ -24,7 +24,7 @@ Sources
   site/layout.html, site/nav.html, site/site.css, site/site.js
   site/img/*                        static images, copied to public/assets/img/
 
-Also written: public/_redirects, robots.txt, llms.txt (from site/llms.txt), the favicon set
+Also written: public/_redirects, robots.txt, .well-known/security.txt, llms.txt (from site/llms.txt), the favicon set
 (favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png from site/), sitemap.xml, 404.html (noindex,
 not in the sitemap, links to Home and Book Your Consultation only) and
 _headers (X-Robots-Tag: noindex on the *.pages.dev preview hostname only).
@@ -255,6 +255,16 @@ HEADERS_TXT = """https://:project.pages.dev/*
 
 /*
   Strict-Transport-Security: max-age=31536000
+"""
+
+# public/.well-known/security.txt (RFC 9116): where to report a security
+# problem. Expires is fixed, not the build date, so public/ does not change on
+# every build; the check warns 60 days before it lapses - move it a year on.
+SECURITY_EXPIRES = datetime.datetime(2027, 10, 1, tzinfo=datetime.timezone.utc)
+SECURITY_TXT = f"""Contact: mailto:nemezio@omnifittraining.com
+Expires: {SECURITY_EXPIRES:%Y-%m-%dT%H:%M:%SZ}
+Preferred-Languages: en
+Canonical: {BASE}/.well-known/security.txt
 """
 
 STYLE_RE = re.compile(r"<style\b[^>]*>.*?</style>", re.S | re.I)
@@ -570,6 +580,11 @@ def build():
     # production domain carries no X-Robots-Tag and stays indexable.
     (PUBLIC / "_headers").write_text(HEADERS_TXT, encoding="utf-8")
 
+    # security.txt - vulnerability disclosure contact (Cloudflare Security
+    # Insights, Oct 19 2026: "Security.txt not configured").
+    (PUBLIC / ".well-known").mkdir(exist_ok=True)
+    (PUBLIC / ".well-known" / "security.txt").write_text(SECURITY_TXT, encoding="utf-8")
+
     # sitemap.xml
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -817,6 +832,9 @@ def check():
         problems.append("_headers: preview-hostname noindex rule missing or altered")
     elif "omnifittraining.com" in HEADERS_TXT:
         problems.append("_headers: production domain must not carry X-Robots-Tag")
+    st = PUBLIC / ".well-known" / "security.txt"
+    if not st.exists() or st.read_text(encoding="utf-8") != SECURITY_TXT:
+        problems.append(".well-known/security.txt missing or altered")
     # Redirects (CANON ARCHIVE > REDIRECTS). Fixtures first, then the real set
     # against every URL Google is known to have (tools/gsc-known-urls-*.txt).
     if not GSC_KNOWN.exists():
@@ -870,6 +888,9 @@ def check():
     for url in sorted(cdn):
         warnings.append(f"squarespace-cdn.com image still referenced: {url.split('/')[-1].split('?')[0]} "
                         f"on {', '.join(sorted(cdn[url]))}")
+    days_left = (SECURITY_EXPIRES - datetime.datetime.now(datetime.timezone.utc)).days
+    if days_left < 60:
+        warnings.append(f"security.txt Expires is {days_left} days away: move SECURITY_EXPIRES in build.py a year on")
     return problems, notes, warnings
 
 

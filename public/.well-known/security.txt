@@ -1,0 +1,4 @@
+Contact: mailto:nemezio@omnifittraining.com
+Expires: 2027-10-01T00:00:00Z
+Preferred-Languages: en
+Canonical: https://www.omnifittraining.com/.well-known/security.txt
