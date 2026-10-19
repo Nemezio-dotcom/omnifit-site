@@ -8196,3 +8196,21 @@ New `--check` mode: it writes nothing and exits 1, listing the headers that drif
 CANON.md (rules encoded in tools/) and tools/README.md now say that Batch 3 header edits are made in mkheaders.py too, and that every other header is hand-mirrored.
 
 Results: certify PASSED with 0 findings. All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84. build --check PASSED. Ownership PASSED. No file under pages/ or public/ changed.
+
+## Hotfix: contact form Submit button clipped on desktop (Oct 19 2026)
+
+Started from main 05fdafe. One page, one rule.
+
+**Cause (measured on the live page):** `pages/contactform.html` sets `#omni-consultation *, *::before, *::after { box-sizing: border-box !important; }`. HubSpot's embed script sets an inline height on `.hs-form-frame` equal to the form's content height (1248px on the live page) and its iframe is `height:100%`. Because `.hs-form-frame` has padding (36px base, 44px at >=768px, 20px at <=600px) and was border-box, the iframe got the inline height minus 2x padding, and the bottom of the form, the Submit button, was clipped.
+
+**Fix:** one rule directly after the base `.hs-form-frame` rule, `pages/contactform.html:251`:
+
+```
+#omni-consultation .hs-form-frame { box-sizing: content-box !important; }
+```
+
+HubSpot's inline height now applies to the content box and the padding sits outside it. Padding values, colours and everything else on the page are unchanged; no other page was touched.
+
+**Verification offline** (the HubSpot iframe does not load without network): the built page was loaded in Playwright at 390, 412 and 1280 with HubSpot's inline height simulated (`height:1248px` on `.hs-form-frame`, a `height:100%` iframe inside). The iframe measured 1248px at all three widths, the frame's outer height 1248px plus 2x padding (1288 / 1288 / 1336), and the document scrollWidth equalled the viewport at each width.
+
+Results: build --check PASSED. Ownership PASSED (only the existing K10 note). Certify PASSED with 0 findings. All five hashes are unchanged: ff5360d2b6b5029b · 22744ada78eb0707 · f551f6751a2c7fd7 · 6b1b0f4efbd4a72c · 5a629cf689301f84. mobileaudit PASSED on /contactform at 390 and 412 (narrow 0, clipped 0, no horizontal overflow): no layout regression in the surrounding card.
