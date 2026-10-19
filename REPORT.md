@@ -8362,3 +8362,17 @@ The owner confirmed the award was not purchased and supplied the round "2026 Win
 - **CANON:** the Squarespace list drops Brandon and Damien. Two hotlinked images remain, both About badges (NASM CES, Precision Nutrition NMH).
 
 Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. Image audit: 40 described, 7 deliberately empty (hero frames), 0 missing, 0 broken local paths. bandcontrast unchanged (7). mobileaudit PASSED on all 84 page/width checks. Screenshots of every changed section reviewed.
+
+## Ask OmniFit: on-site AI assistant (Oct 19 2026)
+
+Started from main f1826cc. Built the "Ask OmniFit" assistant for the Cloudflare Pages site, harmless until configured (no ANTHROPIC_API_KEY or no DB binding: /api/ask returns 503 and the widget never draws).
+
+- **Knowledge:** assistant/knowledge.md, public facts only, from CANON and the published pages (rates, terms, in-home, about, Executive Reset). build.py writes functions/_lib/knowledge.js from it on every build; build.py --check fails if the two drift.
+- **Functions:** functions/api/ask.js (POST chat, GET status probe), functions/api/assistant-log.js (CSV export behind ADMIN_KEY), functions/_lib/assistant.js, functions/_lib/system-prompt.js (owner wording verbatim), schema.sql. Limits as in CANON ASK OMNIFIT.
+- **Widget:** site/assistant.js + site/assistant.css, loaded from the shared footer after page load. Playwright on the built site with /api/ask mocked: launcher, dialog, chips, typing indicator, Book button to Calendly, Esc and focus trap, GA4 events, error copy, hidden on 503; mobile opens a 390x844 full-screen sheet; the launcher clears the 4S Ranch mobile Call / Book bar (728 vs 744); no overlap with any fixed or sticky element on 42 pages at 390 and 1280; no layout shift attributed to the widget.
+- **certify.py:** assistant surfaces screened with the (a)/(b) rules, knowledge prices vs the CANON card, required wording, no internal content, prompt hash. Negative-tested: a free-consultation line, a legacy $475 and "Stripe" added to knowledge.md each fired.
+- **robots.txt:** nine named crawlers allowed, /api/ disallowed for all.
+- **Privacy policy:** new "08 AI Assistant" section; Anthropic in Sharing Information; Last updated October 19, 2026 (header dateModified to match).
+
+Results: node --test tests/assistant.test.mjs 24/24 passed (mocked fetch, no network; four mutations of the code each turned a test red). build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. mkheaders --check PASSED.
+
