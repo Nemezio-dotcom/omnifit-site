@@ -10,7 +10,6 @@
 // hard-coded white text in the shared omni-who block, the --white-as-background
 // chart cards on outcomes and the navy table headers were found. Expected
 // residue: the seven "0" labels on outcomes' scroll-drawn bar segments.
-const fs = require('fs');
 const { chromium } = require('playwright');
 const fs = require('fs');
 (async () => {
