@@ -8302,3 +8302,21 @@ Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings
 Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. choosertest PASSED (30 checks, 16 combinations). mobileaudit PASSED on the three pages at 390 and 412 (partners and the comparison page narrow 0; rates narrow 65 / 64, down from 91 / 65 before, because the removed gutters widened its tiles). Full-page screenshots reviewed at 1280 (rates after scrolling, since its content reveals on scroll).
 
 **Not converted, on purpose:** the homepage (it is the model), case-studies (its own palette, no token vocabulary, the case cards are designed for navy), contactform and fit-check (a single white card on navy already), privacy-policy and terms-and-conditions (plain text pages on the shared `.omni-text-page` style).
+
+## Owner photos: coach portrait and Teqneeq facility (Oct 19 2026)
+
+The owner supplied a new portrait and three photos of Teqneeq FHC and asked for them on the site. Owner override for the locked 4S Ranch page's coach-photo swap, which CANON listed as needing one.
+
+**Images (site/img, metadata stripped):** `coach-nemezio-lopezperez-headshot-400.webp` / `-800.webp` (a square head-and-shoulders crop of the 3740x5610 portrait), `coach-nemezio-lopezperez-portrait-1200.jpg` (1200x1800, for schema), `teqneeq-fhc-training-floor-900.webp` / `-1600.webp`, `teqneeq-fhc-rack-area-600.webp` / `-1200.webp`, `teqneeq-fhc-strength-machines-588.webp` (the source is 588px wide). About 390 KB in total.
+
+**Where they appear:**
+- About, round portrait at the top of the page: the headshot replaces the hotlinked Thumbtack Pro screenshot.
+- 4S Ranch, Meet Nemezio: the same headshot replaces the same screenshot.
+- About schema (`pages/headers/about-header.html`): `"image"` is now the 1200px portrait JPEG on omnifittraining.com (resolves after cutover, as with the site-wide schema image).
+- 4S Ranch, "Training Inside Teqneeq FHC": a three-photo gallery between the heading and the copy, the training floor large on the left and the rack area and the strength machines stacked on the right (two-up under the large one on phones). All three are 3:2, so nothing is cropped meaningfully.
+- About, "Why I Train Clients at Teqneeq": the rack-area photo under the heading, cropped to 16:9.
+The homepage's coach photo (an action shot, already local) is unchanged. CANON's "before cancelling Squarespace" list drops the coach photo; four hotlinked images remain (two About badges, the Brandon testimonial, the partners headshot).
+
+**Phone gutter fix from the narrow-column batch.** A 390px probe (each band's boxes against the band edge, compared with a build of main) found that on about, behavior-change, couples, GLP-1, HSA/FSA, nutrition, over-50 and partners the body text, cards and quotables had moved from 20px to 40px from the screen edge: their mobile rules still added a 20px gutter (or a 28px desktop padding the mobile rule used to cancel) inside a band that already supplies one. Those side paddings and margins are removed; the bottom CTA boxes keep their inset. Every measured element is now at main's position or at the band edge.
+
+Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. bandcontrast: 7 (the known outcomes chart labels). mobileaudit PASSED on all 84 page/width checks. Screenshots of both photo sections reviewed at 1280 and 390.

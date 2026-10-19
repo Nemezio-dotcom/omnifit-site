@@ -783,6 +783,11 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     border-radius: var(--radius-lg); padding: 40px 36px; margin-bottom: 56px;
   }
   #omni-4sr .fr-partner-head { text-align: center; margin-bottom: 28px; }
+  #omni-4sr .fr-fac-gallery { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; margin: 0 0 32px; }
+  #omni-4sr .fr-fac-gallery figure { position: relative; margin: 0; min-height: 0; overflow: hidden; border-radius: var(--radius-lg); }
+  #omni-4sr .fr-fac-gallery .fr-fac-main { grid-row: 1 / span 2; aspect-ratio: 3 / 2; }
+  #omni-4sr .fr-fac-gallery img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }  /* the large photo's 3:2 sets the row heights */
+  @media (max-width: 768px) { #omni-4sr .fr-fac-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 8px; } #omni-4sr .fr-fac-gallery .fr-fac-main { grid-column: 1 / span 2; grid-row: auto; } #omni-4sr .fr-fac-gallery figure:not(.fr-fac-main) { aspect-ratio: 3 / 2; } }
   #omni-4sr .fr-partner-body { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
   #omni-4sr .fr-partner-body p { font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
   #omni-4sr .fr-partner-features { list-style: none; padding: 0; }
@@ -1425,6 +1430,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <h2>Training Inside <em>Teqneeq FHC</em></h2>
         <p style="max-width:640px; margin:8px auto 0;">A members-only functional health and performance lab in 4S Ranch, San Diego.</p>
       </div>
+      <div class="fr-fac-gallery">
+        <figure class="fr-fac-main"><img src="/assets/img/teqneeq-fhc-training-floor-1600.webp" srcset="/assets/img/teqneeq-fhc-training-floor-900.webp 900w, /assets/img/teqneeq-fhc-training-floor-1600.webp 1600w" sizes="(max-width:768px) 100vw, 680px" width="1600" height="1067" alt="Teqneeq FHC's main training floor in 4S Ranch, seen from the mezzanine: turf lane, cable stations, plate-loaded strength machines and dumbbell racks" loading="lazy" decoding="async"></figure>
+        <figure><img src="/assets/img/teqneeq-fhc-rack-area-600.webp" srcset="/assets/img/teqneeq-fhc-rack-area-600.webp 600w, /assets/img/teqneeq-fhc-rack-area-1200.webp 1200w" sizes="(max-width:768px) 50vw, 340px" width="600" height="400" alt="Squat racks and lifting platforms beside the cardio deck at Teqneeq FHC" loading="lazy" decoding="async"></figure>
+        <figure><img src="/assets/img/teqneeq-fhc-strength-machines-588.webp" sizes="(max-width:768px) 50vw, 340px" width="588" height="393" alt="Plate-loaded strength machines on the Teqneeq FHC training floor" loading="lazy" decoding="async"></figure>
+      </div>
       <div class="fr-partner-body">
         <div>
           <p>OmniFit Performance chose Teqneeq FHC as its home base because the facility mirrors OmniFit's standards: <strong style="color:var(--white);">credentialed professionals only, no walk-ins, no distractions.</strong> This isn't a commercial gym. It's a private performance environment designed for coaches and clinicians who take their craft seriously.</p>
@@ -1594,7 +1604,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <h2>Meet <em>Nemezio</em></h2>
     </div>
     <div class="fr-coach">
-      <img class="fr-coach-img" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/529df92f-56b5-489f-8441-d548f59017b6/Screenshot_20250416_132107_Thumbtack+Pro-EDIT.jpg?content-type=image%2Fjpeg" alt="Nemezio LopezPerez, NASM Elite Trainer and corrective exercise specialist at Teqneeq FHC in 4S Ranch, San Diego" loading="lazy">
+      <img class="fr-coach-img" src="/assets/img/coach-nemezio-lopezperez-headshot-400.webp" srcset="/assets/img/coach-nemezio-lopezperez-headshot-400.webp 400w, /assets/img/coach-nemezio-lopezperez-headshot-800.webp 800w" sizes="160px" width="400" height="400" decoding="async" alt="Nemezio LopezPerez, NASM Elite Trainer and corrective exercise specialist at Teqneeq FHC in 4S Ranch, San Diego" loading="lazy">
       <div class="fr-coach-text">
         <p>I'm <strong style="color:var(--white);">Nemezio ("Ezio") LopezPerez</strong>, founder of OmniFit Performance. Since 2016, I've helped busy professionals rebuild their bodies, confidence, and energy, with programs that respect their time and protect their joints.</p>
         <ul>
