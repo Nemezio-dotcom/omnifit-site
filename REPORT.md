@@ -8330,3 +8330,12 @@ Started from main c6137d8 (PR #9 merged). The owner asked for the black-and-whit
 - **Unchanged:** frame A, the LCP preload, timing and the lazy hydration of frames B onward.
 
 Verification: in the browser the live rotation ran kettlebell, then Teqneeq rack area, then cable pulldown, then physique portrait. The new frame, forced on, was screenshotted at 1280 and 390: on desktop the racks and the cardio deck sit to the right of the headline shade, and on phones the whole scene fits the top half of the card. build --strict PASSED. Certify PASSED with 0 findings, hashes unchanged. mobileaudit PASSED on / at 390 and 412.
+
+## Accessibility: decorative icons and lightbox descriptions (Oct 19 2026)
+
+Started from main be20e0a. An audit of the built site found every `<img>` carries an alt attribute: 37 descriptive, 7 deliberately empty (the homepage hero frames, inside an `aria-hidden` container). Two smaller gaps were fixed.
+
+- **Decorative SVG icons:** 52 inline icons were neither hidden nor labelled. They were the card and trust-row icons on couples, GLP-1, nutrition, over-50, Rancho Bernardo and services, plus the seven footer icons. Each now carries `aria-hidden="true" focusable="false"`. Every footer icon sits in a link with visible text (@omnifit_sd, LinkedIn, Google Reviews, Email, Get Directions, the phone number, Book Your Consultation), so no link loses its name. After the change, all 1,140 inline SVGs in the built site are hidden or labelled.
+- **4S Ranch lightbox:** the three enlarged before-and-after images had the alt text "Vincent / Alo / Dave transformation enlarged". They now reuse their thumbnail's full description, and each lightbox dialog has an `aria-label` ("Vincent, before and after, enlarged").
+
+No visible change. build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged.
