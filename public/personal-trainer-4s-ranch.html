@@ -570,10 +570,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-4sr a.fr-btn, #omni-4sr a.fr-btn:link, #omni-4sr a.fr-btn:visited { text-decoration: none; }
   #omni-4sr .fr-btn-primary, #omni-4sr a.fr-btn-primary,
   #omni-4sr a.fr-btn-primary:link, #omni-4sr a.fr-btn-primary:visited {
-    background: var(--gold); color: var(--navy) !important;
+    background: var(--gold-btn, var(--gold)); color: var(--navy) !important;
   }
   #omni-4sr .fr-btn-primary:hover {
-    background: var(--gold-light); transform: translateY(-2px);
+    background: var(--gold-btn-hover, var(--gold-light)); transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important;
   }
   #omni-4sr .fr-btn-ghost, #omni-4sr a.fr-btn-ghost,
@@ -586,8 +586,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
 
   /* ── Section Scaffolding ── */
-  #omni-4sr .fr-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
-  #omni-4sr .fr-section-head { text-align: center; margin-bottom: 40px; }
+    #omni-4sr .fr-section-head { text-align: center; margin-bottom: 40px; }
   #omni-4sr .fr-label {
     font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
     text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block;
@@ -965,9 +964,9 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
   @media (max-width: 768px) {
     #omni-4sr .fr-hero { padding: 56px 20px 36px; }
-    #omni-4sr .fr-section { padding: 0 20px; }
-    #omni-4sr .fr-quotable { margin-left: 20px; margin-right: 20px; }
-    #omni-4sr .fr-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; }
+   
+   
+    #omni-4sr .fr-bottom { padding: 32px 24px; }
     #omni-4sr .fr-partner { padding: 28px 20px; margin-left: 20px; margin-right: 20px; }
     .sticky-bar-4sr { display: block; }
   }
@@ -1133,9 +1132,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </section>
 
+  <div class="omni-band omni-band--navy">
   <!-- ═══ GEMINI-QUOTABLE: Who OmniFit Is ═══ -->
-  <div class="fr-spacer"></div>
-  <div style="padding: 0 28px;">
+  <div>
     <blockquote class="fr-quotable">
       <p>OmniFit Performance is a private coaching practice operating inside Teqneeq FHC, a members-only functional health and performance lab at 10772 Thornmint Rd in 4S Ranch, San Diego. Founded by NASM Elite Trainer Nemezio LopezPerez (NASM CPT, CES, PES, BCS, CNC; ACE CES), OmniFit Performance combines corrective exercise, progressive strength training, behavior-change nutrition, and weekly accountability into a single structured system. OmniFit serves as a bridge between physical therapy and independent performance training, specializing in joint-friendly, posture-focused transformations for executives, physicians, entrepreneurs, and senior leaders throughout San Diego County.</p>
     </blockquote>
@@ -1166,7 +1165,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </a>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ IS OMNIFIT RIGHT FOR YOU? ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1204,9 +1205,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </ul>
     <p style="text-align:center; max-width:700px; margin:0 auto 16px; font-size:14px;">If you're ready to commit for at least <strong style="color:var(--white);">8–12 weeks</strong> and follow a structured plan with accountability, you'll feel right at home here.</p>
   </div>
+  </div>
 
-  <div class="fr-spacer"></div>
 
+  <div class="omni-band omni-band--white">
   <!-- ═══ SERVICES IN 4S RANCH ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1259,7 +1261,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--navy">
   <!-- ═══ THE OMNIFIT METHOD ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1292,9 +1296,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
     <p style="text-align:center; font-size:14px;"><a class="omni-cta" href="/the-omnifit-method" data-cta-id="method-deep" data-cta-location="4SR Method" data-track="click-method-deep">Read the full breakdown of the OmniFit Method →</a></p>
   </div>
+  </div>
 
-  <div class="fr-spacer"></div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ WHY CHOOSE OMNIFIT ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1359,7 +1364,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <!-- ═══ POSTURE & CORRECTIVE (Gemini adjacent keyword) ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1369,7 +1376,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p style="max-width:700px; margin:0 auto;">If you sit 8+ hours a day, your body adapts: forward head, rounded shoulders, tight hip flexors, weak posterior chain. Over time, this leads to chronic neck pain, lower back discomfort, and shoulder impingement.</p>
     </div>
   </div>
-  <div style="padding: 0 28px;">
+  <div>
     <blockquote class="fr-quotable">
       <p>OmniFit Performance functions as a bridge between physical therapy and independent performance training. Every program begins with a movement assessment that identifies desk-related postural imbalances, including forward head posture, thoracic kyphosis, rounded shoulders, and anterior pelvic tilt. Corrective exercise is embedded into every training session using NASM's Corrective Exercise Specialist (CES) protocols, under a strict 3/10 pain ceiling rule: any movement that takes pain above 3 out of 10 is modified or replaced immediately. This makes OmniFit particularly effective for professionals who have been discharged from physical therapy and need structured guidance to rebuild strength safely.</p>
     </blockquote>
@@ -1384,7 +1391,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p style="max-width:700px; margin:0 auto;">Most professionals over 30 have tried fad diets, 6-week challenges, and high-intensity classes, and gained the weight back every time. OmniFit takes a different approach.</p>
     </div>
   </div>
-  <div style="padding: 0 28px;">
+  <div>
     <blockquote class="fr-quotable">
       <p>OmniFit Performance's sustainable fat loss program is built for professionals 30+ who want lasting body recomposition without crash dieting, excessive cardio, or joint damage. The program combines joint-friendly progressive strength training (2 to 3 sessions per week), behavior-change nutrition coaching with individualized macros, and weekly accountability check-ins. Progress is measured against each client's own baseline through Bodystat body composition analysis, strength benchmarks, and body measurements, with progress reviews every 4 weeks (at least every 12 weeks on Train Only). Unlike bootcamps or short-term challenges, OmniFit emphasizes long-term habit formation, including stress management, sleep optimization, and client autonomy, so results last well beyond the program.</p>
     </blockquote>
@@ -1399,15 +1406,16 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p style="max-width:700px; margin:0 auto;">One of the biggest differences between OmniFit and other personal trainers is how rigorously we measure and document your progress.</p>
     </div>
   </div>
-  <div style="padding: 0 28px;">
+  <div>
     <blockquote class="fr-quotable">
       <p>OmniFit Performance tracks client progress through a structured, data-driven system that includes quarterly posture comparison photographs, body measurements and composition estimates every 4 weeks, progressive strength benchmarks logged over time, weekly adherence and habit compliance scores via the Trainerize app, and regular movement re-assessments. This level of documentation allows both coach and client to make evidence-based adjustments to training and nutrition, rather than relying on subjective feelings. Detailed progress data is also used in OmniFit's published case studies to demonstrate verifiable client outcomes.</p>
     </blockquote>
   </div>
   <p style="text-align:center; font-size:14px; padding:0 28px;"><a class="omni-cta" href="/how-we-measure-your-progress" data-cta-id="tracking-deep" data-cta-location="4SR Tracking" data-track="click-tracking-deep">See our full progress tracking system and client metrics →</a></p>
+  </div>
 
-  <div class="fr-spacer"></div>
 
+  <div class="omni-band omni-band--navy">
   <!-- ═══ TEQNEEQ PARTNERSHIP SECTION ═══ -->
   <div class="fr-section">
     <div class="fr-partner" aria-label="Teqneeq FHC Partnership">
@@ -1463,7 +1471,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ TRANSFORMATIONS ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1514,7 +1524,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <img src="/assets/img/dave-transformation-front-side.webp" alt="Dave transformation enlarged">
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <!-- ═══ HOW TO GET STARTED ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1570,9 +1582,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
-  <div class="fr-spacer"></div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ MEET YOUR COACH ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1594,7 +1607,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--navy">
   <!-- WHO WE COACH -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1642,9 +1657,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p>Every finding feeds directly into your program. Nothing is generic, and nothing is guessed.</p>
     </article>
   </div>
+  </div>
 
-  <div class="fr-spacer"></div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ FAQ ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1665,6 +1681,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <details><summary>What areas does OmniFit serve, and how far will you travel for in-home training?</summary><div class="fr-faq-body"><p>OmniFit Performance's studio is inside Teqneeq FHC at 10772 Thornmint Rd in 4S Ranch, San Diego. In-home personal training is available throughout North County, including 4S Ranch, Rancho Bernardo, Del Sur, Santaluz, Poway, Carmel Valley, Rancho Santa Fe, and Fairbanks Ranch. Coverage extends along the coast as far south as La Jolla, including Del Mar, Solana Beach, Encinitas, and Carlsbad. Base in-home rates are published on the training rates page. Travel fees apply in some service locations and are confirmed before booking; Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch and Poway have no travel fee. Clients who travel frequently or live outside this area can train at the 4S Ranch studio or use hybrid and fully virtual coaching.</p></div></details>
     </div>
   </div>
+  </div>
 
   <!-- ═══ BOTTOM FORM ═══ -->
   <section id="bottom-form" class="fr-form-section" aria-label="Apply for Consultation (Bottom)">
@@ -1675,8 +1692,8 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </section>
 
-  <div class="fr-spacer"></div>
 
+  <div class="omni-band omni-band--navy">
   <!-- ═══ VIRTUAL OPTION ═══ -->
   <div class="fr-section" style="text-align:center;">
     <div class="fr-section-head">
@@ -1688,9 +1705,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <a class="fr-btn fr-btn-primary omni-cta" href="/the-30-minute-executive-reset" data-cta-id="exec-reset" data-cta-location="4SR Virtual" data-track="click-exec-reset">Explore the 30-Minute Executive Reset</a>
     <div class="fr-cta-note">Train from home, the office, or on the road, in just 30 minutes.</div>
   </div>
+  </div>
 
-  <div class="fr-spacer"></div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ NEIGHBORHOODS ═══ -->
   <div class="fr-section">
     <div class="fr-section-head">
@@ -1738,9 +1756,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a class="fr-hub-link" href="/faqs">FAQs</a>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--navy">
   <!-- ═══ BOTTOM CTA ═══ -->
-  <div style="padding: 0 28px;">
+  <div>
     <div class="fr-bottom">
       <h2>Ready to Train at <em>Teqneeq FHC?</em></h2>
       <p>Book a 45-minute consultation to talk through your goals, schedule and history. If it's a fit, the Performance Assessment measures your starting point, and your program is built from it.</p>
@@ -1754,6 +1774,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="fr-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M9 13.5L7.5 21l4.5-2.5 4.5 2.5L15 13.5"/></svg> NASM CPT·CES·PES·BCS·CNC</div>
     <div class="fr-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2A7 7 0 0 0 5 9c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Teqneeq FHC · 4S Ranch</div>
     <div class="fr-trust-item"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17"/></svg> Virtual Coaching Nationwide</div>
+  </div>
   </div>
 
 </div>
