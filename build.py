@@ -24,7 +24,8 @@ Sources
   site/layout.html, site/nav.html, site/site.css, site/site.js
   site/img/*                        static images, copied to public/assets/img/
 
-Also written: public/_redirects, robots.txt, llms.txt (from site/llms.txt), sitemap.xml, 404.html (noindex,
+Also written: public/_redirects, robots.txt, llms.txt (from site/llms.txt), the favicon set
+(favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png from site/), sitemap.xml, 404.html (noindex,
 not in the sitemap, links to Home and Book Your Consultation only) and
 _headers (X-Robots-Tag: noindex on the *.pages.dev preview hostname only).
 
@@ -216,6 +217,9 @@ NOT_FOUND_HTML = f"""<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page Not Found | OmniFit Performance</title>
 <meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -550,6 +554,9 @@ def build():
 
     # llms.txt - AI-assistant summary of the site, copied verbatim from site/llms.txt
     shutil.copyfile(SITE / "llms.txt", PUBLIC / "llms.txt")
+    # favicon set (site/favicon.ico etc.), served from the site root where browsers look for it
+    for icon in ("favicon.ico", "apple-touch-icon.png", "icon-192.png", "icon-512.png"):
+        shutil.copyfile(SITE / icon, PUBLIC / icon)
     if posts:
         with open(PUBLIC / "llms.txt", "a", encoding="utf-8") as fh:
             fh.write(blog.llms_lines(posts, BASE))
