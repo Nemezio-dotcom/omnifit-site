@@ -576,11 +576,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
 
   /* ── Inner wrapper ── */
-  #omni-corrective .cx-inner {
-    max-width: 1260px;
-    margin: 0 auto;
-    padding: 0 2.5rem 3.5rem;
-  }
+  #omni-corrective .cx-inner { margin: 0 auto; }
 
   /* ════════════════ HERO ════════════════ */
   #omni-corrective .cx-hero {
@@ -669,12 +665,12 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-corrective a.cx-btn-primary,
   #omni-corrective a.cx-btn-primary:link,
   #omni-corrective a.cx-btn-primary:visited {
-    background: var(--gold);
+    background: var(--gold-btn, var(--gold));
     color: var(--navy) !important;
     border: 2px solid var(--gold);
   }
   #omni-corrective a.cx-btn-primary:hover {
-    background: var(--gold-light);
+    background: var(--gold-btn-hover, var(--gold-light));
     border-color: var(--gold-light);
     color: var(--navy) !important;
     transform: translateY(-2px);
@@ -989,7 +985,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 
   /* ════════════════ RESPONSIVE ════════════════ */
   @media (max-width: 768px) {
-    #omni-corrective .cx-inner { padding: 0 1.2rem 2.5rem; }
     #omni-corrective .cx-hero { padding: 3rem 1.2rem 2rem; }
     #omni-corrective .cx-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; }
   }
@@ -1198,14 +1193,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </section>
 
 
-  <div class="cx-inner">
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ GEMINI-QUOTABLE: Bridge Positioning ════════════ -->
     <div class="gq-block">
       <strong>OmniFit Performance is San Diego's post-rehab and executive posture specialist</strong>, offering corrective exercise and post-rehab personal training from its studio inside Teqneeq FHC in 4S Ranch, and virtually, designed to bridge the gap between physical therapy discharge and independent strength training. Every program begins with a 45-minute movement and postural assessment using NASM Corrective Exercise Specialist (CES) and ACE Corrective Exercise Specialist protocols to identify restrictions, compensations, and asymmetries. From there, clients follow the Assess → Correct → Build → Sustain methodology, progressing from targeted mobility and activation work through progressive strength loading and ultimately to independent training with corrective maintenance built in. OmniFit applies a strict 3/10 pain ceiling rule to every session: if a movement causes more than mild discomfort, it is immediately modified or replaced. Progress is tracked through quarterly posture comparison photos, strength benchmarks, and progress reviews every 4 weeks (at least every 12 weeks on Train Only) covering twelve standardized metrics, ensuring every program adjustment is data-driven. This program is not physical therapy. Clients must be cleared by a licensed medical professional before beginning.
     </div>
 
-    <hr />
 
     <!-- ════════════ NEW: WHAT IS A CORRECTIVE EXERCISE SPECIALIST ════════════ -->
     <section class="cx-section">
@@ -1224,9 +1218,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <p style="margin-top: 12px;">If you're searching for a corrective exercise specialist near you, look for four things: a formal movement assessment before any programming begins, advanced credentials beyond a base personal training certification (such as the NASM CES or ACE Corrective Exercise Specialist), an explicit pain-management rule for every session, and an established referral relationship with physical therapists for anything outside a trainer's scope. Those four criteria separate genuine corrective specialists from general trainers who list "injuries" as a specialty.</p>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ WHO IT'S FOR ════════════ -->
     <section class="cx-section">
       <div class="cx-section-head">
@@ -1255,7 +1250,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </section>
 
-    <hr />
 
     <!-- ════════════ WHY IMBALANCES FORM ════════════ -->
     <section class="cx-section">
@@ -1275,9 +1269,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <strong>Education, not diagnosis:</strong> the patterns above are general movement education, not an assessment of your body and not a medical opinion. OmniFit does not diagnose conditions. If you have pain that has not been evaluated, start with a physician or a Doctor of Physical Therapy.
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--navy">
     <!-- ════════════ WHAT WE ADDRESS ════════════ -->
     <section class="cx-section">
       <div class="cx-section-head">
@@ -1322,7 +1317,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </section>
 
-    <hr />
 
     <!-- ════════════ THE PROCESS ════════════ -->
     <section class="cx-section">
@@ -1363,9 +1357,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <p>The full corrective arc runs as long as your body needs, with postural change documented against your own baseline through <a href="/how-we-measure-your-progress">quarterly comparison photos, strength benchmarks, and 12-metric progress reports</a>. Movement quality is usually the first thing clients notice changing.</p>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ CLIENT JOURNEY ════════════ -->
     <section class="cx-section">
       <div class="cx-section-head">
@@ -1406,7 +1401,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </section>
 
-    <hr />
     <!-- ════════════ WHAT MAKES OMNIFIT DIFFERENT ════════════ -->
     <section class="cx-section">
       <div class="cx-section-head">
@@ -1463,10 +1457,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </section>
+  </div>
 
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ MEET YOUR TRAINER ════════════ -->
     <section class="cx-section">
       <div class="cx-section-head">
@@ -1483,7 +1478,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
     </section>
 
-    <hr />
 
     <!-- ════════════ NEAR-ME / TRAINING OPTIONS ════════════ -->
     <section class="cx-section">
@@ -1521,9 +1515,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--navy">
     <!-- ════════════ SCOPE OF PRACTICE ════════════ -->
     <section class="cx-section">
       <div class="cx-section-head">
@@ -1575,7 +1570,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </section>
 
-    <hr />
 
     <!-- ════════════ PT COORDINATION ════════════ -->
     <section class="cx-section" id="cx-collab">
@@ -1598,10 +1592,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <strong>Medical disclaimer:</strong> Corrective exercise and post-rehab training at OmniFit are not physical therapy and do not replace medical care. Clients must be cleared by a licensed physician or Doctor of Physical Therapy (DPT) before beginning post-rehab training. OmniFit does not diagnose conditions, treat acute injuries, or prescribe rehabilitation protocols.
       </div>
     </section>
+  </div>
 
 
-    <hr />
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ USE CASES ════════════ -->
     <section class="cx-section">
       <div class="cx-section-head">
@@ -1640,9 +1635,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ FAQ ════════════ -->
     <section class="cx-section">
       <div class="cx-section-head">
@@ -1706,9 +1702,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </div>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--navy">
     <!-- ════════════ BOTTOM CTA ════════════ -->
     <div class="cx-bottom">
       <h2>Start With a Corrective Exercise Consultation</h2>
@@ -1746,8 +1743,8 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a href="/in-home-personal-trainer-san-diego">In-Home Training</a> ·
       <a href="/training-rates-san-diego">Rates</a>
     </div>
-
   </div>
+
 </div>
 </main>
 <!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->

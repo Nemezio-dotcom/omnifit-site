@@ -533,7 +533,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-fatloss li, #omni-fatloss figure, #omni-fatloss section,
   #omni-fatloss div { margin: 0; padding: 0; border: 0; }
 
-  #omni-fatloss .fl-inner { max-width: 1260px; margin: 0 auto; padding: 0 2.5rem 3.5rem; }
+  #omni-fatloss .fl-inner { margin: 0 auto; }
 
   /* ════════════════ HERO ════════════════ */
   #omni-fatloss .fl-hero { text-align: center; padding: 5rem 2.5rem 3rem; max-width: 1000px; margin: 0 auto; position: relative; }
@@ -547,8 +547,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   /* CTA */
   #omni-fatloss .fl-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 12px; }
   #omni-fatloss .fl-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none !important; transition: all 0.3s; }
-  #omni-fatloss a.fl-btn-primary, #omni-fatloss a.fl-btn-primary:link, #omni-fatloss a.fl-btn-primary:visited { background: var(--gold); color: var(--navy) !important; border: 2px solid var(--gold); }
-  #omni-fatloss a.fl-btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); color: var(--navy) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+  #omni-fatloss a.fl-btn-primary, #omni-fatloss a.fl-btn-primary:link, #omni-fatloss a.fl-btn-primary:visited { background: var(--gold-btn, var(--gold)); color: var(--navy) !important; border: 2px solid var(--gold); }
+  #omni-fatloss a.fl-btn-primary:hover { background: var(--gold-btn-hover, var(--gold-light)); border-color: var(--gold-light); color: var(--navy) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
   #omni-fatloss a.fl-btn-ghost, #omni-fatloss a.fl-btn-ghost:link, #omni-fatloss a.fl-btn-ghost:visited { border: 1px solid var(--white-30); color: var(--white) !important; background: transparent; }
   #omni-fatloss a.fl-btn-ghost:hover { border-color: var(--white); background: var(--white-05); color: var(--white) !important; transform: translateY(-2px); }
   #omni-fatloss .fl-cta-note { text-align: center; font-size: 13px; color: var(--white-50); }
@@ -625,7 +625,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-fatloss p { font-family: 'Montserrat', sans-serif !important; }
 
   /* Responsive */
-  @media (max-width: 768px) { #omni-fatloss .fl-inner { padding: 0 1.2rem 2.5rem; } #omni-fatloss .fl-hero { padding: 3rem 1.2rem 2rem; } #omni-fatloss .fl-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; } }
+  @media (max-width: 768px) { #omni-fatloss .fl-hero { padding: 3rem 1.2rem 2rem; } #omni-fatloss .fl-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; } }
   @media (max-width: 640px) { #omni-fatloss .fl-grid, #omni-fatloss .fl-steps { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; } #omni-fatloss .fl-benefits { grid-template-columns: 1fr 1fr; } #omni-fatloss .fl-cta-row { flex-direction: column; align-items: center; } #omni-fatloss .fl-btn { width: 100%; max-width: 320px; text-align: center; } #omni-fatloss .fl-trust { gap: 16px; } }
   @media (max-width: 440px) { #omni-fatloss .fl-benefits { grid-template-columns: 1fr; } }
 
@@ -818,14 +818,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </section>
 
 
-  <div class="fl-inner">
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ GEMINI-QUOTABLE: Core Definition ════════════ -->
     <div class="gq-block">
       <strong>OmniFit's fat loss program</strong> is a structured personal training and nutrition coaching program in 4S Ranch, San Diego, designed for busy professionals over 30 who want to lose 20–30 pounds sustainably without crash dieting. Unlike 6-week challenges and bootcamp-style programs, OmniFit combines joint-friendly strength training, individualized nutrition coaching with calorie and protein targets, behavior change systems, and weekly accountability check-ins to produce fat loss that lasts. Every program follows the Assess → Correct → Build → Sustain methodology, beginning with a movement assessment and ending with skills transfer so clients can maintain results independently. Progress is tracked against your own baseline through body measurements, progress photos, and strength benchmarks rather than a promised rate of loss.
     </div>
 
-    <hr />
 
     <!-- ════════════ WHY MOST FAT LOSS FAILS ════════════ -->
     <section class="fl-section">
@@ -858,9 +857,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </div>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ HOW OMNIFIT IS DIFFERENT ════════════ -->
     <section class="fl-section">
       <div class="fl-section-head">
@@ -892,9 +892,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </div>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--navy">
     <!-- ════════════ WHAT'S INCLUDED ════════════ -->
     <section class="fl-section">
       <div class="fl-section-head">
@@ -953,9 +954,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ WHO IT'S FOR / NOT FOR ════════════ -->
     <section class="fl-section">
       <div class="fl-section-head">
@@ -981,9 +983,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ TRAINING OPTIONS ════════════ -->
     <section class="fl-section">
       <div class="fl-section-head">
@@ -1016,9 +1019,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ FAQ ════════════ -->
     <section class="fl-section">
       <div class="fl-section-head">
@@ -1071,7 +1075,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </section>
 
-    <hr />
 
         <!-- ═══ USE CASES ═══ -->
     <div class="fl-section">
@@ -1104,7 +1107,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </div>
+  </div>
 
+  <div class="omni-band omni-band--navy">
 <!-- ════════════ BOTTOM CTA ════════════ -->
     <div class="fl-bottom">
       <h2>Start Your Transformation</h2>
@@ -1143,8 +1148,8 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a href="/hiit-personal-trainer-san-diego">HIIT Training</a> ·
       <a href="/training-rates-san-diego">Rates</a>
     </div>
-
   </div>
+
 </div>
 </main>
 <!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->

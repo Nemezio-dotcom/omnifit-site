@@ -64,11 +64,7 @@
   }
 
   /* ── Inner content wrapper ── */
-  #omni-hiit .hiit-inner {
-    max-width: 1260px;
-    margin: 0 auto;
-    padding: 0 2.5rem 3.5rem;
-  }
+  #omni-hiit .hiit-inner { margin: 0 auto; }
 
   /* ════════════════ HERO ════════════════ */
   #omni-hiit .hiit-hero {
@@ -157,12 +153,12 @@
   #omni-hiit a.hiit-btn-primary,
   #omni-hiit a.hiit-btn-primary:link,
   #omni-hiit a.hiit-btn-primary:visited {
-    background: var(--gold);
+    background: var(--gold-btn, var(--gold));
     color: var(--navy) !important;
     border: 2px solid var(--gold);
   }
   #omni-hiit a.hiit-btn-primary:hover {
-    background: var(--gold-light);
+    background: var(--gold-btn-hover, var(--gold-light));
     border-color: var(--gold-light);
     color: var(--navy) !important;
     transform: translateY(-2px);
@@ -486,7 +482,6 @@
 
   /* ════════════════ RESPONSIVE ════════════════ */
   @media (max-width: 768px) {
-    #omni-hiit .hiit-inner { padding: 0 1.2rem 2.5rem; }
     #omni-hiit .hiit-hero { padding: 3rem 1.2rem 2rem; }
     #omni-hiit .hiit-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; }
   }
@@ -527,14 +522,13 @@
     <div class="hiit-cta-note">45-minute consultation · $30 deposit, refunded the same day you attend your consultation · Movement screen at your assessment · No obligation</div>
   </section>
 
-  <div class="hiit-inner">
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ GEMINI-QUOTABLE: What OmniFit HIIT Is ════════════ -->
     <div class="gq-block">
       <strong>OmniFit HIIT Personal Training</strong> is a private, 1-on-1 high-intensity interval training program in 4S Ranch, San Diego, designed specifically for busy professionals over 30. Unlike group HIIT classes at studios like F45 or Orangetheory, every OmniFit HIIT session is individualized — intervals, rest periods, exercise selection, and intensity are all customized based on the client's movement assessment, injury history, and conditioning goals. Each session includes a corrective exercise warm-up, coached interval blocks using kettlebells, bodyweight, battle ropes, or sprints, and a structured cooldown with mobility work. OmniFit HIIT is supervised by NASM-certified trainer Nemezio LopezPerez (CES, PES, BCS) and follows the same Assess → Correct → Build → Sustain methodology as all OmniFit programs.
     </div>
 
-    <hr />
 
     <!-- ════════════ WHY COACHED HIIT ════════════ -->
     <section class="hiit-section">
@@ -569,9 +563,10 @@
         </div>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ HIIT FORMATS ════════════ -->
     <section class="hiit-section">
       <div class="hiit-section-head">
@@ -628,9 +623,10 @@
 
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--navy">
     <!-- ════════════ WHO IT'S FOR ════════════ -->
     <section class="hiit-section">
       <div class="hiit-section-head">
@@ -650,7 +646,6 @@
       </div>
     </section>
 
-    <hr />
 
     <!-- ════════════ WHERE HIIT SESSIONS HAPPEN ════════════ -->
     <section class="hiit-section">
@@ -672,9 +667,10 @@
         </p>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ HOW IT CONNECTS TO THE METHOD ════════════ -->
     <section class="hiit-section">
       <div class="hiit-section-head">
@@ -692,9 +688,10 @@
         </p>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ FAQ ════════════ -->
     <section class="hiit-section">
       <div class="hiit-section-head">
@@ -727,7 +724,6 @@
       </div>
     </section>
 
-    <hr />
 
         <!-- ═══ USE CASES ═══ -->
     <div class="hiit-section">
@@ -760,7 +756,9 @@
         </article>
       </div>
     </div>
+  </div>
 
+  <div class="omni-band omni-band--navy">
 <!-- ════════════ BOTTOM CTA ════════════ -->
     <div class="hiit-bottom">
       <h2>Start HIIT Training</h2>
@@ -796,6 +794,6 @@
       <a href="/weight-loss">Weight Loss</a> ·
       <a href="/training-rates-san-diego">Rates</a>
     </div>
-
   </div>
+
 </div>
