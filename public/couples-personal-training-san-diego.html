@@ -637,7 +637,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-couples .cp-answer p { font-size:16.5px !important; line-height:1.78 !important; color:var(--white-90) !important; margin:0; }
   #omni-couples .cp-answer strong { color:var(--gold-light); }
 
-  #omni-couples .cp-sec { padding:0 28px; max-width:900px; margin:0 auto 56px; }
+  #omni-couples .cp-sec { max-width:900px; margin:0 auto 56px; }
   #omni-couples .cp-sec-wide { max-width:1120px; }
   #omni-couples .cp-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; text-align:center; }
   #omni-couples .cp-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 22px; border-radius:2px; }
@@ -693,8 +693,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-couples .cp-faq-a p { font-size:14.5px; color:var(--white-70); margin:0; }
 
   #omni-couples .cp-cta { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 34px; text-align:center; max-width:900px; margin:0 auto 40px; }
-  #omni-couples a.cp-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
-  #omni-couples a.cp-btn:hover { background:var(--gold-light); color:var(--navy) !important; transform:translateY(-2px); }
+  #omni-couples a.cp-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold-btn, var(--gold)); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
+  #omni-couples a.cp-btn:hover { background:var(--gold-btn-hover, var(--gold-light)); color:var(--navy) !important; transform:translateY(-2px); }
   #omni-couples .cp-cta-note { display:block; margin-top:16px; font-size:13px; color:var(--white-50); line-height:1.7; }
   #omni-couples a { color:var(--gold) !important; text-decoration:underline; text-underline-offset:3px; }
   #omni-couples a:hover { color:var(--gold-light) !important; }
@@ -861,6 +861,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </section>
 
 
+  <div class="omni-band omni-band--cream">
   <div class="cp-answer">
     <p><strong>Couples training is one coached session with both of you in it. It is not two people doing the same workout.</strong> Both partners are screened separately and get their own program. Where goals or physical capacity differ, which is most of the time, the session is split: you alternate through different work rather than sharing a set. What you share is the hour, the coach, and the habit of showing up. Rates are per couple, not per person.</p>
   </div>
@@ -901,7 +902,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="cp-sec cp-sec-wide">
     <span class="cp-label">Who It Works For</span>
     <hr class="cp-divider">
@@ -938,7 +941,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </ul>
     <p style="margin-top:24px;">If any of that describes your situation, I will say so on the consultation rather than after you have paid.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="cp-sec cp-sec-wide">
     <span class="cp-label">Rates</span>
     <hr class="cp-divider">
@@ -1006,7 +1011,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
     <p class="cp-price-note">Extra guest add-on: $90/session · No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book. Peak is available to couples on an ad hoc basis and is not offered as a prepaid couples program. Full individual rates are on the <a href="/training-rates-san-diego">training rates page</a>.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="cp-sec">
     <span class="cp-label">Common Questions</span>
     <hr class="cp-divider">
@@ -1050,8 +1057,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </details>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="cp-cta">
       <h2>Start With One <em>Conversation</em></h2>
       <p style="max-width:620px; margin:0 auto;">Both of you on the same call. We talk through what each of you wants, whether the gap between you is workable, and I will tell you honestly if one to one would serve you better.</p>
@@ -1069,6 +1078,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <a href="/how-we-measure-your-progress">How We Measure Progress</a> <span>·</span>
     <a href="/case-studies">Case Studies</a> <span>·</span>
     <a href="/faqs">FAQs</a>
+  </div>
   </div>
 
 </div>

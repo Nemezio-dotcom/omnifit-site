@@ -8280,3 +8280,9 @@ Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings
 Second pass: 8 nodes left, all on outcomes' scroll-drawn charts (`.hb-seg` "0" labels on a neutral bar segment, pre-existing and unchanged).
 
 Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. mobileaudit PASSED on all six pages plus the eight re-touched ones at 390 and 412 (clipped 0, no horizontal overflow; the narrow counts on body-composition 40, in-home 45, private 32 and services 11 are identical to the committed build). Full-page screenshots of the six reviewed at 1280.
+
+### Section bands: the seven narrow-column pages (Oct 19 2026)
+
+about, behavior-change-coaching, couples-personal-training-san-diego, glp-1-personal-training-san-diego, hsa-fsa-personal-training, nutrition-coaching-san-diego and personal-trainer-over-50-san-diego share one layout: a 900px (about: 860px) reading column of `.x-sec` blocks with `.x-answer` quotables between them and a hub link list at the end. Runs of blocks were wrapped in bands (cream / white alternating, four or five per page, the bottom CTA and hub in one navy band); the `.x-sec` rule keeps its column and vertical margin but loses its `padding:0 28px` (the band supplies the gutters); the bottom wrapper lost its inline padding; the `a.x-btn` button reads the `--gold-btn` token. No copy, link, heading or schema changed.
+
+Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. Contrast probe: nothing new (the 7 pre-existing chart labels on outcomes only). mobileaudit PASSED on all seven at 390 and 412 (clipped 0, no horizontal overflow; narrow 10 on behavior-change and hsa-fsa, identical to the committed build). Full-page screenshots reviewed at 1280.

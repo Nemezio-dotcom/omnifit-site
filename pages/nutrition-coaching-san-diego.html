@@ -37,7 +37,7 @@
   #omni-nutrition .nu-answer p { font-size:16.5px !important; line-height:1.78 !important; color:var(--white-90) !important; margin:0; }
   #omni-nutrition .nu-answer strong { color:var(--gold-light); }
 
-  #omni-nutrition .nu-sec { padding:0 28px; max-width:900px; margin:0 auto 56px; }
+  #omni-nutrition .nu-sec { max-width:900px; margin:0 auto 56px; }
   #omni-nutrition .nu-sec-wide { max-width:1120px; }
   #omni-nutrition .nu-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; text-align:center; }
   #omni-nutrition .nu-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 22px; border-radius:2px; }
@@ -76,8 +76,8 @@
   #omni-nutrition .nu-faq-a p { font-size:14.5px; color:var(--white-70); margin:0; }
 
   #omni-nutrition .nu-cta { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 34px; text-align:center; max-width:900px; margin:0 auto 40px; }
-  #omni-nutrition a.nu-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
-  #omni-nutrition a.nu-btn:hover { background:var(--gold-light); color:var(--navy) !important; transform:translateY(-2px); }
+  #omni-nutrition a.nu-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold-btn, var(--gold)); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
+  #omni-nutrition a.nu-btn:hover { background:var(--gold-btn-hover, var(--gold-light)); color:var(--navy) !important; transform:translateY(-2px); }
   #omni-nutrition .nu-cta-note { display:block; margin-top:16px; font-size:13px; color:var(--white-50); line-height:1.7; }
   #omni-nutrition a { color:var(--gold) !important; text-decoration:underline; text-underline-offset:3px; }
   #omni-nutrition a:hover { color:var(--gold-light) !important; }
@@ -104,6 +104,7 @@
     <p class="nu-hero-sub">Behavior-based nutrition coaching for professionals over 30. Macro targets, structured meal frameworks, and photo logging in the OmniFit app. Included in every training program.</p>
   </section>
 
+  <div class="omni-band omni-band--cream">
   <div class="nu-answer">
     <p><strong>Most nutrition plans fail because they change what you eat without changing how you decide.</strong> OmniFit Performance uses a four-phase behavioral framework adapted from Precision Nutrition: awareness, regulation, adaptation, integration. It runs alongside the training method rather than separately from it. You get macro targets and meal frameworks built for your goals, and photo logging in the app returns full macros with automated feedback. What you do not get is a fourteen-day meal plan you abandon in week three.</p>
   </div>
@@ -144,7 +145,9 @@
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="nu-sec nu-sec-wide">
     <span class="nu-label">What You Get</span>
     <hr class="nu-divider">
@@ -176,7 +179,9 @@
     <p><strong>The amount of active feedback follows your Accountability Dial setting, not what you spend.</strong> At Full Accountability your coach reviews your daily logs; at Coached you get a reply to a weekly written check-in; at Train Only nutrition is on request. A client training twice a week also has more moments where nutrition comes up inside a session. The resources, the app access, the targets and the framework are identical at every tier.</p>
     <p>That is deliberate. Nutrition is where most of the result actually comes from, and rationing it by price would mean deliberately underserving the clients who need the structure most. Full tier pricing is on the <a href="/training-rates-san-diego">training rates page</a>.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="nu-sec">
     <span class="nu-label">Scope</span>
     <hr class="nu-divider">
@@ -199,7 +204,9 @@
       <li>No promises about how fast anything happens. Behavior change has its own timeline and it is longer than anyone wants it to be.</li>
     </ul>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="nu-sec">
     <span class="nu-label">Common Questions</span>
     <hr class="nu-divider">
@@ -235,8 +242,10 @@
       </details>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="nu-cta">
       <h2>Start With a <em>Conversation</em></h2>
       <p style="max-width:620px; margin:0 auto;">Send the intake form and we will talk through what you eat now, what has failed before, and whether a behavior-based approach suits how you actually live.</p>
@@ -254,6 +263,7 @@
     <a href="/training-rates-san-diego">Rates</a> <span>·</span>
     <a href="/case-studies">Case Studies</a> <span>·</span>
     <a href="/faqs">FAQs</a>
+  </div>
   </div>
 
 </div>

@@ -39,7 +39,7 @@
   #omni-about .ab-portrait { display:flex; justify-content:center; padding:0 28px 12px; }
   #omni-about .ab-portrait img { width:172px; height:172px; border-radius:999px; object-fit:cover; object-position:50% 15%; border:2px solid var(--white-20); box-shadow:0 12px 30px rgba(0,0,0,.35); }
 
-  #omni-about .ab-sec { padding:0 28px; max-width:860px; margin:0 auto 56px; }
+  #omni-about .ab-sec { max-width:860px; margin:0 auto 56px; }
   #omni-about .ab-sec-wide { max-width:1080px; }
   #omni-about .ab-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; text-align:center; }
   #omni-about .ab-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 22px; border-radius:2px; }
@@ -74,8 +74,8 @@
   #omni-about .ab-list.yes li::before { content:'\2713'; color:var(--gold); }
 
   #omni-about .ab-cta { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 34px; text-align:center; max-width:900px; margin:0 auto 40px; }
-  #omni-about a.ab-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:8px; }
-  #omni-about a.ab-btn:hover { background:var(--gold-light); color:var(--navy) !important; transform:translateY(-2px); }
+  #omni-about a.ab-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold-btn, var(--gold)); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:8px; }
+  #omni-about a.ab-btn:hover { background:var(--gold-btn-hover, var(--gold-light)); color:var(--navy) !important; transform:translateY(-2px); }
   #omni-about .ab-cta-note { display:block; margin-top:16px; font-size:13px; color:var(--white-50); line-height:1.7; }
   #omni-about a { color:var(--gold) !important; text-decoration:underline; text-underline-offset:3px; }
   #omni-about a:hover { color:var(--gold-light) !important; }
@@ -121,6 +121,7 @@
     <p class="ab-hero-sub">Founder of OmniFit Performance. NASM Elite Trainer and corrective exercise specialist, working out of Teqneeq Functional Health Center in 4S Ranch, San Diego.</p>
   </section>
 
+  <div class="omni-band omni-band--cream">
   <div class="ab-portrait">
     <img src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/529df92f-56b5-489f-8441-d548f59017b6/Screenshot_20250416_132107_Thumbtack+Pro-EDIT.jpg?content-type=image%2Fjpeg" alt="Nemezio LopezPerez, NASM Elite Trainer and founder of OmniFit Performance in 4S Ranch, San Diego" loading="eager">
   </div>
@@ -150,7 +151,9 @@
     <p>So we sequence it. The movement screen tells us what has to come first, because loading a body that cannot yet do the pattern is how you buy a new injury. Then we pick the one habit that unlocks the most downstream, which is usually sleep or the training schedule rather than the thing you thought you were here for. Everything else waits its turn and gets handled properly when it arrives.</p>
     <p>Slower on paper. Considerably faster in practice, because nothing gets abandoned.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="ab-sec ab-sec-wide">
     <span class="ab-label">Credentials</span>
     <hr class="ab-divider">
@@ -273,7 +276,9 @@
     </div>
     <p class="ab-badges-note">Ten of thirteen certifications are shown above as a certificate or an issuer badge. Eden GLP-1 Fitness, GLP-1 Nutrition, Peptide Fundamentals, and NASM Elite Trainer status are listed above without one.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="ab-quotable">
     <p>Nemezio LopezPerez is the founder of OmniFit Performance, a private personal training practice based at Teqneeq Functional Health Center in 4S Ranch, San Diego. He holds NASM Elite Trainer status with Certified Personal Trainer, Corrective Exercise Specialist, Performance Enhancement Specialist, Behavior Change Specialist, and Certified Nutrition Coach credentials, along with the ACE Corrective Exercise Specialist Program, four Precision Nutrition certifications in nutrition coaching (Level 1 and Level 2 Certified Master Coach), sleep and recovery, and metabolic health, and three Eden certifications covering GLP-1 fitness, GLP-1 nutrition, and peptide fundamentals. He has been coaching since 2016 and holds a 4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark). OmniFit Performance is a personal training practice and not a medical provider; it does not diagnose, treat, or provide physical therapy, and refers to licensed clinicians when a situation calls for one.</p>
   </div>
@@ -323,8 +328,10 @@
       </div>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="ab-cta">
       <h2>If That Sounds Like <em>How You Want to Work</em></h2>
       <p style="max-width:600px; margin:0 auto;">Send the intake form and we will talk. Worst case, you get an honest read on whether this is right for you from someone with no reason to tell you it is.</p>
@@ -338,6 +345,7 @@
     <div>NASM ELITE TRAINER</div>
     <div>COACHING SINCE 2016</div>
     <div>TEQNEEQ FHC · 4S RANCH</div>
+  </div>
   </div>
 
 </div>

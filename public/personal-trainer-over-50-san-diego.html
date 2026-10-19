@@ -542,7 +542,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-over50 .ov-answer p { font-size:16.5px !important; line-height:1.78 !important; color:var(--white-90) !important; margin:0; }
   #omni-over50 .ov-answer strong { color:var(--gold-light); }
 
-  #omni-over50 .ov-sec { padding:0 28px; max-width:900px; margin:0 auto 56px; }
+  #omni-over50 .ov-sec { max-width:900px; margin:0 auto 56px; }
   #omni-over50 .ov-sec-wide { max-width:1080px; }
   #omni-over50 .ov-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; text-align:center; }
   #omni-over50 .ov-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 22px; border-radius:2px; }
@@ -591,8 +591,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-over50 .ov-faq-a p { font-size:14.5px; color:var(--white-70); margin:0; }
 
   #omni-over50 .ov-cta { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 34px; text-align:center; max-width:900px; margin:0 auto 40px; }
-  #omni-over50 a.ov-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
-  #omni-over50 a.ov-btn:hover { background:var(--gold-light); color:var(--navy) !important; transform:translateY(-2px); }
+  #omni-over50 a.ov-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold-btn, var(--gold)); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
+  #omni-over50 a.ov-btn:hover { background:var(--gold-btn-hover, var(--gold-light)); color:var(--navy) !important; transform:translateY(-2px); }
   #omni-over50 .ov-cta-note { display:block; margin-top:16px; font-size:13px; color:var(--white-50); line-height:1.7; }
   #omni-over50 a { color:var(--gold) !important; text-decoration:underline; text-underline-offset:3px; }
   #omni-over50 a:hover { color:var(--gold-light) !important; }
@@ -758,6 +758,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </section>
 
 
+  <div class="omni-band omni-band--cream">
   <div class="ov-answer">
     <p><strong>Training after 50 is not lighter training. It is differently sequenced training.</strong> Muscle adapts faster than tendon and connective tissue does, and that gap widens with age. So the first block builds volume at moderate load rather than chasing heavy singles, which lets tendon remodel at the pace it actually remodels. Once tissue tolerates the work and reported effort starts dropping, load goes up. You earn intensity rather than avoid it.</p>
   </div>
@@ -774,7 +775,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p><strong style="color:var(--white);">The research this is built on.</strong> Crossland and colleagues took patellar tendon biopsies from 27 younger men and 27 older men across eight weeks of resistance training and measured tendon protein synthesis directly using a deuterium tracer. It is one of the few studies to look at human tendon turnover rather than infer it from muscle. Notably, the training load that produced tendon adaptation in men averaging 68 years old was <strong style="color:var(--white);">60% of one-rep max</strong>, not maximal effort. <a href="https://pubmed.ncbi.nlm.nih.gov/35948859/" target="_blank" rel="noopener">Crossland H, Brook MS, Quinlan JI, et al. Metabolic and molecular responses of human patellar tendon to concentric- and eccentric-type exercise in youth and older age. GeroScience. 2023;45(1):331–344.</a> This describes how tendon responds to loading. It is not a treatment protocol, and OmniFit Performance uses it to inform programming rather than to make any claim about outcomes.</p>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="ov-sec">
     <span class="ov-label">Sequencing</span>
     <hr class="ov-divider">
@@ -827,7 +830,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="ov-sec">
     <span class="ov-label">Scope</span>
     <hr class="ov-divider">
@@ -856,7 +861,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p class="ov-disclaimer">Individual result, measured by OmniFit. How clients typically progress: <a href="/outcomes">omnifittraining.com/outcomes</a>.</p>
     <p class="ov-disclaimer">Individual results. Outcomes depend on starting point, adherence, sleep, stress, and medical history, and vary between clients. These are documented individual outcomes, not a projection of what any other client will achieve. Full detail in the <a href="/case-studies">case studies</a>.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="ov-sec">
     <span class="ov-label">Fit</span>
     <hr class="ov-divider">
@@ -923,8 +930,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </details>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="ov-cta">
       <h2>Start With a <em>Conversation</em></h2>
       <p style="max-width:620px; margin:0 auto;">Send the intake form and we will talk through your history, what stopped working, and whether this is the right approach for where you are now.</p>
@@ -942,6 +951,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <a href="/in-home-personal-trainer-san-diego">In-Home Training</a> <span>·</span>
     <a href="/case-studies">Case Studies</a> <span>·</span>
     <a href="/training-rates-san-diego">Rates</a>
+  </div>
   </div>
 
 </div>

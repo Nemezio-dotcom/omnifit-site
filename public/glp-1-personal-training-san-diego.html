@@ -572,7 +572,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-glp .gl-answer p { font-size:16.5px !important; line-height:1.78 !important; color:var(--white-90) !important; margin:0; }
   #omni-glp .gl-answer strong { color:var(--gold-light); }
 
-  #omni-glp .gl-sec { padding:0 28px; max-width:900px; margin:0 auto 56px; }
+  #omni-glp .gl-sec { max-width:900px; margin:0 auto 56px; }
   #omni-glp .gl-sec-wide { max-width:1120px; }
   #omni-glp .gl-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; text-align:center; }
   #omni-glp .gl-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 22px; border-radius:2px; }
@@ -618,8 +618,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-glp .gl-faq-a p { font-size:14.5px; color:var(--white-70); margin:0; }
 
   #omni-glp .gl-cta { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 34px; text-align:center; max-width:900px; margin:0 auto 40px; }
-  #omni-glp a.gl-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
-  #omni-glp a.gl-btn:hover { background:var(--gold-light); color:var(--navy) !important; transform:translateY(-2px); }
+  #omni-glp a.gl-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold-btn, var(--gold)); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
+  #omni-glp a.gl-btn:hover { background:var(--gold-btn-hover, var(--gold-light)); color:var(--navy) !important; transform:translateY(-2px); }
   #omni-glp .gl-cta-note { display:block; margin-top:16px; font-size:13px; color:var(--white-50); line-height:1.7; }
   #omni-glp a { color:var(--gold) !important; text-decoration:underline; text-underline-offset:3px; }
   #omni-glp a:hover { color:var(--gold-light) !important; }
@@ -789,6 +789,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </section>
 
 
+  <div class="omni-band omni-band--cream">
   <div class="gl-answer">
     <p><strong>A GLP-1 makes you lose weight. It does not decide what kind of weight.</strong> Across published trials, the proportion of weight lost that came from lean mass has ranged from roughly a quarter to nearly half. Resistance training is the intervention that shifts that ratio. At OmniFit Performance the program is built around it: progressively challenging resistance training, adjusting load, repetition ranges, volume and recovery to your current strength and tolerance, protein prioritized inside a suppressed appetite, and body composition measured rather than assumed. Your physician manages the medication. This is the training and eating that runs alongside it.</p>
   </div>
@@ -820,7 +821,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p>These describe outcomes observed in clinical trials. They are not a prediction about you, and OmniFit Performance makes no claim about what any individual will experience.</p>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="gl-sec">
     <span class="gl-label">The Approach</span>
     <hr class="gl-divider">
@@ -859,7 +862,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p><strong>Eat what you can, and make it count.</strong> In the early weeks, an open-minded approach matters more than a rigid one. Training tends to raise appetite, and that window is worth using. When you do feel like eating, the choice in that moment is what protects lean mass, and it is a coachable decision rather than a willpower problem.</p>
     <p>Practically that means protein-first structures, food choices selected for density rather than volume, and photo logging in the OmniFit app so we can see what actually went in rather than what you remember. Full detail on the coaching approach is on the <a href="/nutrition-coaching-san-diego">nutrition coaching page</a>.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="gl-sec gl-sec-wide">
     <span class="gl-label">Measurement</span>
     <hr class="gl-divider">
@@ -891,7 +896,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p><strong>What OmniFit does not do:</strong> prescribe, recommend, or advise on whether you should take a GLP-1. Set or adjust dosing. Advise on side effects, contraindications, or interactions. Interpret bloodwork. Diagnose or treat anything. All of that belongs to a licensed medical provider and none of it is within a trainer's scope, regardless of certification.</p>
     <p>If you are considering a GLP-1 and have not spoken to a physician, that conversation comes first. If you are already on one, the training is built around what your provider has put in place.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="gl-sec">
     <span class="gl-label">Fit</span>
     <hr class="gl-divider">
@@ -957,8 +964,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </details>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="gl-cta">
       <h2>Protect What You <em>Have</em></h2>
       <p style="max-width:620px; margin:0 auto;">Send the intake form and we will talk through where you are in the cycle, what your provider has you on, and what the training needs to do about it.</p>
@@ -976,6 +985,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <a href="/personal-trainer-over-50-san-diego">Training After 50</a> <span>·</span>
     <a href="/case-studies">Case Studies</a> <span>·</span>
     <a href="/training-rates-san-diego">Rates</a>
+  </div>
   </div>
 
 </div>
