@@ -8339,3 +8339,26 @@ Started from main be20e0a. An audit of the built site found every `<img>` carrie
 - **4S Ranch lightbox:** the three enlarged before-and-after images had the alt text "Vincent / Alo / Dave transformation enlarged". They now reuse their thumbnail's full description, and each lightbox dialog has an `aria-label` ("Vincent, before and after, enlarged").
 
 No visible change. build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged.
+
+## About: Quality Business Awards 2026 badge (Oct 19 2026)
+
+Started from main a7d6fb8 (#11 merged). The owner supplied the Quality Business Awards 2026 badge ("The Best Personal Trainer, San Diego, California") and asked for a home for it.
+
+- **Images:** `site/img/quality-business-awards-2026-best-personal-trainer-san-diego-400.webp` / `-800.webp`, from the 1080x1080 PNG.
+- **Placement:** pages/about.html, a "Recognition" block directly after the Issuer Badges box in the credentials band. It holds the badge at 220px and a one-line caption naming the issuer and year. The homepage "Proof, Measured" section was considered and not used. It carries only company-measured figures with a method line and an "internally measured, not independently audited" note, and a third-party superlative badge would sit badly in it.
+- **Alt text:** describes the badge and names the recipient as "OmniFit". The badge artwork prints the retired name "OmniFit Personal Fitness Training", which certify.py BANNED catches in text, alt included. The first build used that name in the alt text and certify failed (stale canon 1); the reworded alt passes. The badge's "Quality ratings over 95%" is not repeated in page text; the canonical review line stays "4.98 average across 190+ reviews".
+
+Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. bandcontrast unchanged (7). mobileaudit PASSED on /about at 390 and 412. Screenshots reviewed at 1280 and 390.
+
+### Owner images: Winner badge, Brandon, Damien, Celeste, coaching photo, favicon (Oct 19 2026)
+
+The owner confirmed the award was not purchased and supplied the round "2026 Winner" badge, Brandon's headshot and Instagram story, Damien's headshot, a photo of the coach training a client, the favicon, and Celeste's photo.
+
+- **About, Recognition:** the round Winner badge (transparent, 240px) replaces the earlier "Best Personal Trainer / quality ratings over 95%" artwork, which is removed. The alt text names the award and "OmniFit", not the retired name printed on the badge.
+- **Case Studies, Brandon (owner override of the frozen record):** his headshot replaces the hotlinked Squarespace image in the card's photo panel. An "In His Words" figure under his summary shows his Instagram story after force-plate jump testing, with his caption quoted. The alt text quotes his captions and carries no figures.
+- **Partners:** Damien's headshot replaces the hotlinked one. Celeste's photo is the owner's higher-resolution copy, now WebP (the old JPEG is removed).
+- **Services:** the coach-and-client photo sits under the "Training Programs" heading, 16:9 on desktop and 4:3 on phones, cropped high so both faces stay in frame.
+- **Favicon:** site/favicon.ico (16, 32, 48), apple-touch-icon.png (180, full-bleed navy), icon-192.png and icon-512.png, copied by build.py to the site root. The layout and the standalone 404 page link them.
+- **CANON:** the Squarespace list drops Brandon and Damien. Two hotlinked images remain, both About badges (NASM CES, Precision Nutrition NMH).
+
+Results: build --strict PASSED. Ownership PASSED. Certify PASSED with 0 findings, all five hashes unchanged. Image audit: 40 described, 7 deliberately empty (hero frames), 0 missing, 0 broken local paths. bandcontrast unchanged (7). mobileaudit PASSED on all 84 page/width checks. Screenshots of every changed section reviewed.
