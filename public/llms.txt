@@ -54,3 +54,7 @@
 - **Intake:** [Contact Form](https://www.omnifittraining.com/contactform)
 - **Terms:** [Terms and Conditions](https://www.omnifittraining.com/terms-and-conditions)
 - **Privacy:** [Privacy Policy](https://www.omnifittraining.com/privacy-policy)
+
+## The OmniFit Journal
+- [Journal index](https://www.omnifittraining.com/blog) - Long-form articles pairing training, nutrition and behavior change.
+- [Why Posture Work Doesn't Stick, and What Makes It Last](https://www.omnifittraining.com/blog/why-posture-work-doesnt-stick) - Stretches and posture cues fade because the desk keeps winning. Why corrective work stalls for busy professionals, and the habit layer that makes it last.

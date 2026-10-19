@@ -12,7 +12,7 @@ into an owned keyword (CANON KEYWORD OWNERSHIP).
 
 | # | Slug | Working title | Method pairing | Reader question it answers | Link to (owner pages) | Status |
 |---|------|---------------|----------------|----------------------------|-----------------------|--------|
-| 01 | why-posture-fixes-dont-stick | Why Posture Fixes Don't Stick, and What Makes Them Last | Correct · Regulation | "I've done the stretches. Why does my neck and upper back still feel the same?" | /desk-worker-posture-pain, /behavior-change-coaching, /the-omnifit-method, /how-we-measure-your-progress | draft (blog-01) |
+| 01 | why-posture-work-doesnt-stick | Why Posture Work Doesn't Stick, and What Makes It Last | Correct · Regulation | "I've done the stretches. Why does my neck and upper back still feel the same?" | /desk-worker-posture-pain, /behavior-change-coaching, /the-omnifit-method, /how-we-measure-your-progress | draft (blog-01) |
 | 02 | glp-1-what-to-track-besides-the-scale | On a GLP-1? Track These Numbers, Not Just the Scale | Build · Awareness | "I'm losing weight on medication. How do I know I'm not losing muscle?" | /glp-1-personal-training-san-diego, /body-composition-testing, /how-we-measure-your-progress | queued |
 | 03 | travel-week-nutrition | The Travel-Week Playbook: Eating Well on the Road Without a Meal Plan | Sustain · Adaptation | "Every work trip wipes out my progress. What do I actually do on the road?" | /the-30-minute-executive-reset, /nutrition-coaching-san-diego | queued |
 | 04 | starting-strength-training-after-40 | Starting Strength Training After 40 When You Have Never Lifted | Assess · Awareness | "Is it too late to start lifting, and where do I begin safely?" | /the-omnifit-method, /strength-training-1, /fit-check | queued |

@@ -2,6 +2,7 @@
    Scoped under .omni-blog. Appended to site.css only once a post exists. */
 .omni-blog{--ob-text:rgba(255,255,255,.86);--ob-muted:rgba(255,255,255,.6);--ob-line:rgba(255,255,255,.1);
   background:var(--omni-navy);color:var(--ob-text);font-family:var(--omni-font-body);padding:0 20px 72px;}
+.omni-blog *,.omni-blog *::before,.omni-blog *::after{box-sizing:border-box;}
 .omni-blog a{color:var(--omni-gold-light);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
 .omni-blog a:hover{color:#fff;}
 .omni-blog .ob-hero{max-width:720px;margin:0 auto;padding:64px 0 28px;}
