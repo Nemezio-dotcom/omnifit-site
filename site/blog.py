@@ -263,17 +263,21 @@ def post_body(post):
     return f"""<div class="omni-blog">
 <article class="ob-post">
   <header class="ob-hero">
+    <div class="ob-hero-inner">
     <nav class="ob-crumb" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/blog">Journal</a></nav>
     <span class="ob-tag">{html.escape(post['method'])}</span>
     <h1>{html.escape(post['h1'])}</h1>
     <p class="ob-byline">By <a href="/about">{AUTHOR_NAME}</a> · <time datetime="{post['published']}">{_date_label(post['published'])}</time> · {post['minutes']} min read</p>
+    </div>
   </header>
+  <div class="ob-main">
   {_figure(post['image'])}<div class="ob-body">
 {post['body']}
   </div>
   {AUTHOR}
   {CTA}
   <p class="ob-back"><a href="/blog">More from the Journal</a></p>
+  </div>
 </article>
 </div>"""
 
@@ -294,14 +298,18 @@ def index_body(posts):
   </article>""")
     return f"""<div class="omni-blog">
 <header class="ob-hero ob-hero--index">
+  <div class="ob-hero-inner">
   <span class="ob-tag">The OmniFit Journal</span>
   <h1>Training, Nutrition and the Habits That Hold Them Together</h1>
   <p class="ob-intro">Every article pairs a physical stage of the OmniFit Method (Assess, Correct, Build, Sustain) with a behavioral one (Awareness, Regulation, Adaptation, Integration), because a program only works if the person can keep running it. Written by {AUTHOR_NAME} for busy professionals 30+.</p>
+  </div>
 </header>
+<div class="ob-main">
 <div class="ob-list">
 {chr(10).join(cards)}
 </div>
 {CTA}
+</div>
 </div>"""
 
 
