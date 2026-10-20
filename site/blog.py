@@ -287,14 +287,28 @@ INDEX_DESC = ("Long-form articles from OmniFit Performance on strength, correcti
               "and the habits that make them stick, written for busy professionals 30+.")
 
 
+def _thumb(img):
+    """Index-card thumbnail. Decorative (alt=""): the card's title link names it,
+    and the title link's ::after makes the whole card the click target."""
+    if not img:
+        return ""
+    webp = (f'<source type="image/webp" srcset="{img["webp"]}" sizes="(max-width:640px) 100vw, 300px">'
+            if img["webp"] else "")
+    return (f'<picture class="ob-card-thumb">{webp}<img src="{img["src"]}" srcset="{img["srcset"]}" '
+            f'sizes="(max-width:640px) 100vw, 300px" width="{img["width"]}" height="{img["height"]}" alt="" decoding="async"></picture>\n    ')
+
+
 def index_body(posts):
     cards = []
     for p in posts:
-        cards.append(f"""  <article class="ob-card">
+        cards.append(f"""  <article class="ob-card{' ob-card--thumb' if p['image'] else ''}">
+    {_thumb(p['image'])}<div class="ob-card-text">
     <span class="ob-tag">{html.escape(p['method'])}</span>
     <h2><a href="/blog/{p['slug']}">{html.escape(p['h1'])}</a></h2>
     <p>{html.escape(p['description'])}</p>
     <p class="ob-card-meta"><time datetime="{p['published']}">{_date_label(p['published'])}</time> · {p['minutes']} min read</p>
+    <span class="ob-card-more" aria-hidden="true">Read the article <span class="ob-card-arrow">&rarr;</span></span>
+    </div>
   </article>""")
     return f"""<div class="omni-blog">
 <header class="ob-hero ob-hero--index">
