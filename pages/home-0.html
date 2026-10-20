@@ -47,9 +47,11 @@
     Frames that have not loaded (or failed) are skipped, so a missing file
     never shows a blank card. Off under prefers-reduced-motion: the script
     keys off the html.omni-motion flag, so those visitors get frame A only.
-  - Frames B+ carry data-src/data-srcset and are only given their real URLs
-    once frame A has loaded, so the extra photos never compete with the LCP
-    image on the wire.
+  - Frames B+ carry data-src/data-srcset and are given their real URLs one
+    frame ahead of the rotation: B once frame A has loaded (so it never
+    competes with the LCP image on the wire), then each next frame as the
+    previous one comes up. A visitor who leaves after a few seconds downloads
+    two photos, not seven (about 470 KB saved on a phone).
   - Orientation: landscape frames cover-fit the photo layer like frame A.
     Portrait frames (.hero-frame--portrait) are not cropped on desktop: they
     render at full card height and natural width, pinned to the card's right
@@ -245,25 +247,31 @@
     var HOLD = 2400, FADE = 1600, FIRST = 4000; /* a dissolve starts every HOLD+FADE = 4s */
     function img(f) { return f.querySelector('img'); }
     function ready(f) { var i = img(f); return !!i && i.complete && i.naturalWidth > 0; }
-    function hydrate() {
-      frames.slice(1).forEach(function (f) {
-        [].forEach.call(f.querySelectorAll('[data-srcset]'), function (el) { el.setAttribute('srcset', el.getAttribute('data-srcset')); el.removeAttribute('data-srcset'); });
-        var i = img(f); if (i && i.getAttribute('data-src')) { i.setAttribute('src', i.getAttribute('data-src')); i.removeAttribute('data-src'); }
-      });
+    function hydrate(f) {
+      if (!f) return;
+      [].forEach.call(f.querySelectorAll('[data-srcset]'), function (el) { el.setAttribute('srcset', el.getAttribute('data-srcset')); el.removeAttribute('data-srcset'); });
+      var i = img(f);
+      if (i && i.getAttribute('data-src')) {
+        /* a frame that fails is skipped by next(), so fetch the one after it now */
+        i.addEventListener('error', function () { hydrate(frames[(frames.indexOf(f) + 1) % frames.length]); }, { once: true });
+        i.setAttribute('src', i.getAttribute('data-src')); i.removeAttribute('data-src');
+      }
     }
+    function hydrateNext() { hydrate(frames[1]); }
     var first = img(frames[0]);
-    if (!first || first.complete) { hydrate(); } else { first.addEventListener('load', hydrate, { once: true }); first.addEventListener('error', hydrate, { once: true }); }
+    if (!first || first.complete) { hydrateNext(); } else { first.addEventListener('load', hydrateNext, { once: true }); first.addEventListener('error', hydrateNext, { once: true }); }
     var cur = 0;
     function next() {
       if (document.hidden) { setTimeout(next, HOLD); return; }
       var n = cur, tries = 0;
       do { n = (n + 1) % frames.length; tries++; } while (!ready(frames[n]) && tries < frames.length);
-      if (n === cur || !ready(frames[n])) { setTimeout(next, HOLD); return; }
+      if (n === cur || !ready(frames[n])) { hydrate(frames[(cur + 1) % frames.length]); setTimeout(next, HOLD); return; }
       var from = frames[cur], to = frames[n];
       to.classList.add('is-on', 'is-drift');
       from.classList.remove('is-on');
       setTimeout(function () { from.classList.remove('is-drift'); }, FADE);
       cur = n;
+      hydrate(frames[(n + 1) % frames.length]);  /* fetch one frame ahead */
       setTimeout(next, HOLD + FADE);
     }
     setTimeout(next, FIRST);

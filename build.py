@@ -33,7 +33,9 @@ Functions in functions/ are configured (see DEPLOY.md, "Ask OmniFit").
 Also written: public/_redirects, robots.txt, llms.txt (from site/llms.txt), the favicon set
 (favicon.ico, apple-touch-icon.png, icon-192.png, icon-512.png from site/), sitemap.xml, 404.html (noindex,
 not in the sitemap, links to Home and Book Your Consultation only) and
-_headers (X-Robots-Tag: noindex on the *.pages.dev preview hostname only).
+_headers (X-Robots-Tag: noindex on the *.pages.dev preview hostname only,
+plus security headers on every page). Every page also gets Open Graph /
+Twitter card tags (SOCIAL_IMAGE unless its header sets its own).
 
 Nothing here rewrites page copy, schema or CSS rules. The only edits made to
 page markup are structural: <style>/<link> tags are lifted out of the body into
@@ -94,10 +96,8 @@ LINK_FIXES = {
 META_FALLBACK = {
     "case-studies": (
         "Client Case Studies | OmniFit Performance San Diego",
-        "Documented individual client outcomes from busy professionals in San Diego using "
-        "OmniFit Performance's Assess-Correct-Build-Sustain methodology with joint-friendly "
-        "corrective exercise, structured nutrition, and accountability coaching. Individual "
-        "results; outcomes vary between clients.",
+        "Documented individual client outcomes from busy professionals in San Diego using the "
+        "Assess-Correct-Build-Sustain method. Individual results; outcomes vary.",
     ),
 }
 
@@ -108,11 +108,44 @@ META_OVERRIDE = {
     "fit-check": (
         "OmniFit Fit Check | Are You Ready for Coaching?",
         "Seven questions, three minutes. See if you're ready and able for OmniFit's diagnostic-led "
-        "coaching in San Diego, and which accountability setting fits you. Instant result, nothing saved.",
+        "coaching in San Diego, and which accountability setting fits you.",
     ),
 }
 
 CALENDLY = "https://calendly.com/nemezio-omnifittraining/45min"
+
+# Open Graph / Twitter card tags on every page, so a link shared by text,
+# Facebook or LinkedIn shows a photo, title and description. A page whose
+# header already carries og:image (a Journal post, via site/blog.py) keeps its
+# own; everything else gets the site default below at the recommended
+# 1200x630. Made from hero-coach-client-cable-pulldown-1600.jpg (top-weighted
+# crop so both faces stay in frame).
+SOCIAL_IMAGE = {
+    "src": "/assets/img/og-coach-client-cable-pulldown-1200x630.jpg",
+    "width": 1200,
+    "height": 630,
+    "alt": "Coach Nemezio LopezPerez coaching a client through a cable exercise for the upper back",
+}
+
+
+def social_tags(title, desc, url):
+    """Default og:/twitter: tags for a page without its own."""
+    e = lambda v: html.escape(str(v), quote=True)
+    img = SOCIAL_IMAGE
+    tags = [
+        ("property", "og:type", "website"),
+        ("property", "og:site_name", "OmniFit Performance"),
+        ("property", "og:title", title),
+        ("property", "og:description", desc),
+        ("property", "og:url", url),
+        ("property", "og:image", BASE + img["src"]),
+        ("property", "og:image:width", img["width"]),
+        ("property", "og:image:height", img["height"]),
+        ("property", "og:image:alt", img["alt"]),
+        ("name", "twitter:card", "summary_large_image"),
+        ("name", "twitter:image", BASE + img["src"]),
+    ]
+    return "".join(f'<meta {a}="{k}" content="{e(v)}">\n' for a, k, v in tags)
 
 # Ask OmniFit. The knowledge file is the assistant's only source of facts;
 # knowledge.js is generated from it and never edited by hand.
@@ -289,11 +322,23 @@ NOT_FOUND_HTML = f"""<!DOCTYPE html>
 
 # public/_headers (Cloudflare Pages). Only the preview hostname is marked
 # noindex; www.omnifittraining.com gets no X-Robots-Tag.
+# Security headers on every page (site audit, Oct 20 2026). The CSP is
+# deliberately narrow: it stops other sites framing the pages (clickjacking),
+# plugins, and <base> hijacking, and upgrades any stray http:// asset. It does
+# NOT allowlist scripts: every page runs inline scripts (and GA4, Clarity,
+# HubSpot, Calendly), so a script-src policy would need 'unsafe-inline' and
+# buy little for the breakage risk. Permissions-Policy leaves payment alone
+# (Calendly takes the consultation deposit).
 HEADERS_TXT = """https://:project.pages.dev/*
   X-Robots-Tag: noindex
 
 /*
   Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
 """
 
 STYLE_RE = re.compile(r"<style\b[^>]*>.*?</style>", re.S | re.I)
@@ -525,11 +570,13 @@ def build():
         if counts:
             emoji_report[url_path] = counts
         canonical = BASE + ("/" if url_path == "/" else url_path)
+        social = "" if 'property="og:image"' in header_text else social_tags(title, desc, canonical)
         doc = render(
             layout,
             title=html.escape(title, quote=True),
             description=html.escape(desc, quote=True),
             canonical=canonical,
+            social=social,
             site_header=site_header,
             page_header_source=str(header_path.relative_to(ROOT)) if header_path else ("site/blog.py" if header_text else "none"),
             page_header=header_text or "<!-- (this page has no header file) -->",
@@ -824,6 +871,19 @@ def check():
         left = icons.find(text.split("<body", 1)[1])
         if left:
             problems.append(f"{page}: emoji still present: {' '.join(left)}")
+        if page != "/404":
+            # Social preview: one og:image + twitter:card, og:url = canonical,
+            # and the image is a file this build ships.
+            ogi = re.findall(r'<meta property="og:image" content="([^"]*)"', text)
+            ogu = re.findall(r'<meta property="og:url" content="([^"]*)"', text)
+            canon = re.findall(r'<link rel="canonical" href="([^"]*)"', text)
+            n_tc = text.count('name="twitter:card"')
+            if len(ogi) != 1 or n_tc != 1:
+                problems.append(f"{page}: expected one og:image and one twitter:card, found {len(ogi)} / {n_tc}")
+            elif not ogi[0].startswith(BASE + "/") or not (PUBLIC / ogi[0][len(BASE) + 1:]).is_file():
+                problems.append(f"{page}: og:image {ogi[0]} is not a file in public/")
+            if ogu != canon:
+                problems.append(f"{page}: og:url {ogu} does not match canonical {canon}")
         for i, block in enumerate(LDJSON_RE.findall(text), 1):
             try:
                 json.loads(block)
@@ -858,7 +918,7 @@ def check():
         problems.append("sitemap.xml lists the 404 page")
     hd = (PUBLIC / "_headers")
     if not hd.exists() or hd.read_text(encoding="utf-8") != HEADERS_TXT:
-        problems.append("_headers: preview-hostname noindex rule missing or altered")
+        problems.append("_headers: preview-hostname noindex rule or security headers missing or altered")
     elif "omnifittraining.com" in HEADERS_TXT:
         problems.append("_headers: production domain must not carry X-Robots-Tag")
     # Ask OmniFit: knowledge.js in step with knowledge.md, widget assets built
@@ -948,7 +1008,7 @@ def main():
             items = ", ".join(f"{ch} x{n} -> {icons.ICONS[ch][0]}" for ch, n in sorted(emoji_report[url_path].items(), key=lambda kv: -kv[1]))
             print(f"  {url_path:45s} {items}")
     problems, notes, warnings = check()
-    print("\nCHECK: internal links, one H1 per page, JSON-LD parses, no emoji, 404/_headers, redirects, tracking, keyword ownership, Squarespace images (warning only)")
+    print("\nCHECK: internal links, one H1 per page, social preview tags, JSON-LD parses, no emoji, 404/_headers, redirects, tracking, keyword ownership, Squarespace images (warning only)")
     for n in sorted(set(notes)):
         print("  note    ", n)
     for w in warnings:

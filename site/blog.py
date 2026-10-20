@@ -24,7 +24,7 @@ Post format (every key required except `updated`, `image` and `image_alt`):
     -->
     <p class="post-lede">...</p>
     <h2>...</h2> <p>...</p> ...
-    <aside class="post-quotable"><p>...</p></aside>
+    <div class="post-quotable" role="note"><p>...</p></div>
     <section class="post-faq">
       <h2>...</h2>
       <div class="post-q"><h3>Question?</h3><p>Answer.</p></div>

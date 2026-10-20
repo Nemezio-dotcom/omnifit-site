@@ -18,7 +18,7 @@
   --omni-ink:#1e293b;              /* heading / strong text on light */
   --omni-muted:#475569;            /* body text on light */
   --omni-line:rgba(10,22,40,.10);  /* hairline border on light */
-  --omni-gold-ink:#9a7a26;         /* gold for TEXT on light (the brand gold fails contrast there) */
+  --omni-gold-ink:#806520;         /* gold for TEXT on light: 4.5:1 or better on white and every cream the site uses (WCAG AA body text; #9a7a26 was 3.3-4.0) */
   --omni-radius:8px;
   --omni-radius-lg:12px;
   --omni-font-body:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
@@ -94,7 +94,7 @@ main{overflow-x:clip;}
 .site-nav .site-nav__social,.site-nav a.site-nav__social{padding:6px;}
 .site-nav .site-nav__social svg{width:22px;height:22px;fill:none;stroke:var(--omni-gold);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block;transition:stroke .2s ease;}
 .site-nav .site-nav__social:hover svg,.site-nav .site-nav__social:focus svg{stroke:var(--omni-gold-light);}
-.site-nav a.site-nav__cta,.site-nav a.site-nav__cta:link,.site-nav a.site-nav__cta:visited{color:var(--omni-gold);font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:6px 0;margin-left:6px;border-bottom:2px solid transparent;transition:color .2s ease,border-color .2s ease;}
+.site-nav a.site-nav__cta,.site-nav a.site-nav__cta:link,.site-nav a.site-nav__cta:visited{color:var(--omni-gold-ink);font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:6px 0;margin-left:6px;border-bottom:2px solid transparent;transition:color .2s ease,border-color .2s ease;}
 .site-nav a.site-nav__cta:hover,.site-nav a.site-nav__cta:focus{color:var(--omni-navy);border-bottom-color:var(--omni-gold);}
 /* hamburger */
 .site-nav-toggle{display:none;flex-shrink:0;margin-left:auto;background:none;border:1px solid rgba(10,22,40,.15);border-radius:8px;padding:8px;cursor:pointer;line-height:0;}
@@ -153,7 +153,7 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
 .page #main .omni-band--navy{background:var(--omni-navy);color:var(--omni-white);}
 .page #main .omni-band--cream{background:var(--omni-cream);color:var(--omni-ink);}
 .page #main .omni-band--white{background:var(--omni-white);color:var(--omni-ink);}
-.omni-band--cream,.omni-band--white{--white:var(--omni-ink);--white-90:#2a3446;--white-70:var(--omni-muted);--white-50:#5f6b7d;--white-30:rgba(10,22,40,.35);--white-20:rgba(10,22,40,.22);--white-15:rgba(10,22,40,.15);--white-10:var(--omni-line);--white-08:rgba(10,22,40,.08);--white-05:rgba(10,22,40,.045);--navy-surface:#ffffff;--gold:var(--omni-gold-ink);--gold-light:#7d6320;--gold-dim:rgba(154,122,38,.10);--gold-glow:rgba(154,122,38,.18);--gold-btn:var(--omni-gold);--gold-btn-hover:var(--omni-gold-light);}
+.omni-band--cream,.omni-band--white{--white:var(--omni-ink);--white-90:#2a3446;--white-70:var(--omni-muted);--white-50:#535d6c;--white-30:rgba(10,22,40,.35);--white-20:rgba(10,22,40,.22);--white-15:rgba(10,22,40,.15);--white-10:var(--omni-line);--white-08:rgba(10,22,40,.08);--white-05:rgba(10,22,40,.045);--navy-surface:#ffffff;--gold:var(--omni-gold-ink);--gold-light:#7d6320;--gold-dim:rgba(154,122,38,.10);--gold-glow:rgba(154,122,38,.18);--gold-btn:var(--omni-gold);--gold-btn-hover:var(--omni-gold-light);}
 .omni-band--cream{--navy-mid:#ffffff;--navy-light:#ffffff;--navy-deep:#ffffff;}
 .omni-band--white{--navy-mid:var(--omni-cream);--navy-light:var(--omni-cream);--navy-deep:var(--omni-cream);}
 @media (max-width:768px){#main .omni-band{padding-top:48px;padding-bottom:48px;}}
@@ -201,3 +201,9 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
    text with no background of its own. On the navy site body it would be
    unreadable, so the section gets the white background it was designed on. */
 #omni-faq{background:#ffffff;}
+
+/* Links inside running text are underlined, so they are not told apart by
+   colour alone (WCAG 1.4.1). Pages set `#omni-x a{text-decoration:none}`;
+   this outranks that by specificity. Classed links (buttons, chips, cards)
+   keep their own styling. */
+#main p a:not([class]),#main p a:not([class]):link,#main p a:not([class]):visited{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
