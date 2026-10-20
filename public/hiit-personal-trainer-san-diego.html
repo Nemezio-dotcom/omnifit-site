@@ -6,6 +6,9 @@
 <title>HIIT Personal Training in San Diego | OmniFit Performance</title>
 <meta name="description" content="Coached 1-on-1 HIIT and conditioning in San Diego, at the studio inside Teqneeq FHC in 4S Ranch, in-home across North County, or live virtual. Time-efficient sessions for busy professionals 30+.">
 <link rel="canonical" href="https://www.omnifittraining.com/hiit-personal-trainer-san-diego">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
@@ -509,11 +512,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
 
   /* ── Inner content wrapper ── */
-  #omni-hiit .hiit-inner {
-    max-width: 1260px;
-    margin: 0 auto;
-    padding: 0 2.5rem 3.5rem;
-  }
+  #omni-hiit .hiit-inner { margin: 0 auto; }
 
   /* ════════════════ HERO ════════════════ */
   #omni-hiit .hiit-hero {
@@ -555,10 +554,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     margin-bottom: 20px !important;
     letter-spacing: -0.5px !important;
     text-transform: none !important;
-  }
-  #omni-hiit .hiit-hero h1 em {
-    font-style: italic;
-    color: var(--gold);
   }
   #omni-hiit .hiit-hero-sub {
     font-size: clamp(16px, 2.2vw, 18px);
@@ -606,12 +601,12 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-hiit a.hiit-btn-primary,
   #omni-hiit a.hiit-btn-primary:link,
   #omni-hiit a.hiit-btn-primary:visited {
-    background: var(--gold);
+    background: var(--gold-btn, var(--gold));
     color: var(--navy) !important;
     border: 2px solid var(--gold);
   }
   #omni-hiit a.hiit-btn-primary:hover {
-    background: var(--gold-light);
+    background: var(--gold-btn-hover, var(--gold-light));
     border-color: var(--gold-light);
     color: var(--navy) !important;
     transform: translateY(-2px);
@@ -935,7 +930,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 
   /* ════════════════ RESPONSIVE ════════════════ */
   @media (max-width: 768px) {
-    #omni-hiit .hiit-inner { padding: 0 1.2rem 2.5rem; }
     #omni-hiit .hiit-hero { padding: 3rem 1.2rem 2rem; }
     #omni-hiit .hiit-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; }
   }
@@ -1076,14 +1070,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="hiit-cta-note">45-minute consultation · $30 deposit, refunded the same day you attend your consultation · Movement screen at your assessment · No obligation</div>
   </section>
 
-  <div class="hiit-inner">
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ GEMINI-QUOTABLE: What OmniFit HIIT Is ════════════ -->
     <div class="gq-block">
       <strong>OmniFit HIIT Personal Training</strong> is a private, 1-on-1 high-intensity interval training program in 4S Ranch, San Diego, designed specifically for busy professionals over 30. Unlike group HIIT classes at studios like F45 or Orangetheory, every OmniFit HIIT session is individualized — intervals, rest periods, exercise selection, and intensity are all customized based on the client's movement assessment, injury history, and conditioning goals. Each session includes a corrective exercise warm-up, coached interval blocks using kettlebells, bodyweight, battle ropes, or sprints, and a structured cooldown with mobility work. OmniFit HIIT is supervised by NASM-certified trainer Nemezio LopezPerez (CES, PES, BCS) and follows the same Assess → Correct → Build → Sustain methodology as all OmniFit programs.
     </div>
 
-    <hr />
 
     <!-- ════════════ WHY COACHED HIIT ════════════ -->
     <section class="hiit-section">
@@ -1118,9 +1111,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </div>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ HIIT FORMATS ════════════ -->
     <section class="hiit-section">
       <div class="hiit-section-head">
@@ -1177,9 +1171,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--navy">
     <!-- ════════════ WHO IT'S FOR ════════════ -->
     <section class="hiit-section">
       <div class="hiit-section-head">
@@ -1199,7 +1194,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </section>
 
-    <hr />
 
     <!-- ════════════ WHERE HIIT SESSIONS HAPPEN ════════════ -->
     <section class="hiit-section">
@@ -1221,9 +1215,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </p>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ HOW IT CONNECTS TO THE METHOD ════════════ -->
     <section class="hiit-section">
       <div class="hiit-section-head">
@@ -1241,9 +1236,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </p>
       </div>
     </section>
+  </div>
 
-    <hr />
 
+  <div class="omni-band omni-band--white">
     <!-- ════════════ FAQ ════════════ -->
     <section class="hiit-section">
       <div class="hiit-section-head">
@@ -1276,7 +1272,6 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
     </section>
 
-    <hr />
 
         <!-- ═══ USE CASES ═══ -->
     <div class="hiit-section">
@@ -1309,7 +1304,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </article>
       </div>
     </div>
+  </div>
 
+  <div class="omni-band omni-band--navy">
 <!-- ════════════ BOTTOM CTA ════════════ -->
     <div class="hiit-bottom">
       <h2>Start HIIT Training</h2>
@@ -1345,8 +1342,8 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a href="/weight-loss">Weight Loss</a> ·
       <a href="/training-rates-san-diego">Rates</a>
     </div>
-
   </div>
+
 </div>
 </main>
 <!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->
@@ -1394,13 +1391,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
               <span>@omnifit_sd</span>
             </a>
           </li>
           <li>
             <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
               <span>LinkedIn</span>
             </a>
           </li>
@@ -1408,13 +1405,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
             <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
             <!--email_off--><a href="mailto:nemezio@omnifittraining.com">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a><!--email_on-->
           </li>
@@ -1441,19 +1438,19 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
               <span>Get Directions</span>
             </a>
           </li>
           <li>
             <a href="tel:+16192590630">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
               <span>(619) 259-0630</span>
             </a>
           </li>
           <li>
             <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
               <span>Book Your Consultation</span>
             </a>
           </li>
@@ -1468,6 +1465,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
   </div>
 </footer>
+<script>(function(){function go(){var s=document.createElement("script");s.src="/assets/assistant.js";s.async=true;document.body.appendChild(s)}function idle(){"requestIdleCallback" in window?requestIdleCallback(go,{timeout:3000}):setTimeout(go,1500)}document.readyState==="complete"?idle():window.addEventListener("load",idle)})();</script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

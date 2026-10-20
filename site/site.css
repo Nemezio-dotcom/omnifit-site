@@ -1,6 +1,7 @@
 /* =====================================================================
    OmniFit Performance - shared site styles (source: site/site.css)
    Design system: Navy #0a1628 / #0f1f3a / #152a4a, Gold #c9a84c / #e0c872,
+   Cream #f7f4ec with ink #1e293b / muted #475569 on light sections,
    Playfair Display headings, Montserrat body; the header logo is an inline SVG.
    Page-scoped CSS stays with each page (moved into its <head> by build.py).
    The footer CSS from pages/footer.html is appended to this file by build.py.
@@ -13,6 +14,13 @@
   --omni-gold-light:#e0c872;
   --omni-maroon:#7b1e2b;
   --omni-white:#ffffff;
+  --omni-cream:#f7f4ec;            /* light section background (homepage) */
+  --omni-ink:#1e293b;              /* heading / strong text on light */
+  --omni-muted:#475569;            /* body text on light */
+  --omni-line:rgba(10,22,40,.10);  /* hairline border on light */
+  --omni-gold-ink:#9a7a26;         /* gold for TEXT on light (the brand gold fails contrast there) */
+  --omni-radius:8px;
+  --omni-radius-lg:12px;
   --omni-font-body:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --omni-font-heading:'Playfair Display','Times New Roman',serif;
 }
@@ -123,6 +131,58 @@ main{overflow-x:clip;}
    build.py swaps every emoji in the pages for one of the gold line SVGs in
    site/icons.py. 1em so each icon takes the size the emoji had. */
 svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:-0.125em;flex-shrink:0;}
+
+/* ===== Section bands: the homepage rhythm (navy / cream / white) =====
+   A band is a full-bleed section whose content is held to the 1064px column
+   (the old 1120px container minus its 28px gutters). Put the classes on the
+   page's own section element; drop that page's container rule for it.
+   Light bands remap the token vocabulary every page scopes on its wrapper
+   (--white, --white-70, --navy-mid, --gold, ...) so the page's own
+   components (cards, labels, FAQ rows, stats) re-colour themselves without
+   per-page light variants. Gold TEXT on a light band becomes --omni-gold-ink;
+   a gold BUTTON keeps the brand gold by reading background:var(--gold-btn,var(--gold))
+   and, on hover, var(--gold-btn-hover,var(--gold-light)); both tokens exist only
+   inside a light band, so the fallback applies everywhere else. Selectors carry #main / .page because
+   the pages' scoped resets ("#omni-x * { margin:0; padding:0 }") and their
+   grid rules ("#omni-x .x-grid { margin-bottom:56px }") outrank a bare
+   class, and the background has to beat a section's own
+   ("#omni-x .s-mid { background:var(--navy-mid) }") when the class is put on
+   such a section. A section that sets its own padding keeps it. */
+#main .omni-band{padding:64px max(20px,calc((100% - 1064px)/2));}
+.page #main .omni-band>:last-child{margin-bottom:0 !important;}  /* some pages set it inline */
+.page #main .omni-band--navy{background:var(--omni-navy);color:var(--omni-white);}
+.page #main .omni-band--cream{background:var(--omni-cream);color:var(--omni-ink);}
+.page #main .omni-band--white{background:var(--omni-white);color:var(--omni-ink);}
+.omni-band--cream,.omni-band--white{--white:var(--omni-ink);--white-90:#2a3446;--white-70:var(--omni-muted);--white-50:#5f6b7d;--white-30:rgba(10,22,40,.35);--white-20:rgba(10,22,40,.22);--white-15:rgba(10,22,40,.15);--white-10:var(--omni-line);--white-08:rgba(10,22,40,.08);--white-05:rgba(10,22,40,.045);--navy-surface:#ffffff;--gold:var(--omni-gold-ink);--gold-light:#7d6320;--gold-dim:rgba(154,122,38,.10);--gold-glow:rgba(154,122,38,.18);--gold-btn:var(--omni-gold);--gold-btn-hover:var(--omni-gold-light);}
+.omni-band--cream{--navy-mid:#ffffff;--navy-light:#ffffff;--navy-deep:#ffffff;}
+.omni-band--white{--navy-mid:var(--omni-cream);--navy-light:var(--omni-cream);--navy-deep:var(--omni-cream);}
+@media (max-width:768px){#main .omni-band{padding-top:48px;padding-bottom:48px;}}
+/* On a light band the heading accent and the line icons also take the darker gold (the brand gold is 2:1 on cream). */
+#main .omni-band--cream h1 em,#main .omni-band--cream h2 em,#main .omni-band--cream h3 em,#main .omni-band--white h1 em,#main .omni-band--white h2 em,#main .omni-band--white h3 em{color:var(--omni-gold-ink);}
+.omni-band--cream svg.omni-icon,.omni-band--white svg.omni-icon{stroke:var(--omni-gold-ink);}
+/* The shared "who this is for / not the right fit" block (omni-who-*, on six
+   pages) hard-codes white rgba text instead of the token vocabulary, so a light
+   band restyles it here. Specificity and !important match the page rules. */
+.page #main .omni-band--cream .omni-who-col,.page #main .omni-band--white .omni-who-col{background:var(--navy-light);border-color:var(--white-10);}
+.page #main .omni-band--cream .omni-who-col.for,.page #main .omni-band--white .omni-who-col.for{border-color:rgba(154,122,38,.45);}
+.page #main .omni-band--cream .omni-who-col h3,.page #main .omni-band--white .omni-who-col h3{color:var(--omni-gold-ink) !important;}
+.page #main .omni-band--cream .omni-who-col.not h3,.page #main .omni-band--white .omni-who-col.not h3{color:var(--white-50) !important;}
+.page #main .omni-band--cream .omni-who-col li,.page #main .omni-band--white .omni-who-col li,.page #main .omni-band--cream .omni-who-lines p,.page #main .omni-band--white .omni-who-lines p{color:var(--white-70);}
+.page #main .omni-band--cream .omni-who-col li::before,.page #main .omni-band--white .omni-who-col li::before,.page #main .omni-band--cream .omni-who-lines a,.page #main .omni-band--white .omni-who-lines a{color:var(--omni-gold-ink);}
+.page #main .omni-band--cream .omni-who-col.not li::before,.page #main .omni-band--white .omni-who-col.not li::before{color:var(--white-50);}
+.page #main .omni-band--cream .omni-who-roles,.page #main .omni-band--white .omni-who-roles{border-left-color:var(--omni-gold-ink);}
+.page #main .omni-band--cream .omni-who-unify,.page #main .omni-band--white .omni-who-unify,.page #main .omni-band--cream .omni-who-entity,.page #main .omni-band--white .omni-who-entity{color:var(--white-50) !important;}
+.page #main .omni-band--cream .omni-who-door,.page #main .omni-band--white .omni-who-door{color:var(--omni-ink) !important;}
+
+/* ---------------------------------------------------------------------
+   Heading accent: the gold italic word inside a heading, e.g.
+   <h2>Train Smarter in <em>Encinitas</em></h2>. One rule for every page
+   (the per-page "h1 em / h2 em" copies were removed). #main plus !important
+   so it also wins inside the pages whose scoped reset forces Montserrat on
+   every descendant ("#omni-x * { font-family: 'Montserrat' !important }"),
+   which used to leave the accent word in the body font on those pages.
+   --------------------------------------------------------------------- */
+#main h1 em,#main h2 em,#main h3 em{font-family:var(--omni-font-heading) !important;font-style:italic !important;font-weight:inherit;color:var(--omni-gold);}
 
 /* ===== Plain text pages (terms-and-conditions was a Squarespace TEXT page,
    so it carries no CSS of its own; this gives it the design system) ===== */

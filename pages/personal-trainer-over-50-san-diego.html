@@ -31,19 +31,17 @@
   #omni-over50 .ov-hero::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:520px; height:520px; background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%); pointer-events:none; opacity:.3; }
   #omni-over50 .ov-badge { display:inline-block; padding:8px 22px; border:1px solid var(--gold); color:var(--gold); border-radius:100px; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:28px; position:relative; }
   #omni-over50 h1 { font-family:'Playfair Display',serif !important; font-size:clamp(30px,5vw,48px) !important; font-weight:700 !important; line-height:1.15 !important; color:var(--white) !important; margin-bottom:20px !important; letter-spacing:-.5px !important; text-transform:none !important; position:relative; }
-  #omni-over50 h1 em { font-style:italic; color:var(--gold); }
   #omni-over50 .ov-hero-sub { font-size:17px; color:var(--white-70); max-width:680px; margin:0 auto; line-height:1.8; position:relative; }
 
   #omni-over50 .ov-answer { background:var(--navy-mid); border-left:3px solid var(--gold); border-radius:0 var(--radius-lg) var(--radius-lg) 0; padding:26px 30px; max-width:900px; margin:34px auto 46px; text-align:left; }
   #omni-over50 .ov-answer p { font-size:16.5px !important; line-height:1.78 !important; color:var(--white-90) !important; margin:0; }
   #omni-over50 .ov-answer strong { color:var(--gold-light); }
 
-  #omni-over50 .ov-sec { padding:0 28px; max-width:900px; margin:0 auto 56px; }
+  #omni-over50 .ov-sec { max-width:900px; margin:0 auto 56px; }
   #omni-over50 .ov-sec-wide { max-width:1080px; }
   #omni-over50 .ov-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; display:block; text-align:center; }
   #omni-over50 .ov-divider { width:50px; height:3px; background:var(--gold); border:none; margin:0 auto 22px; border-radius:2px; }
   #omni-over50 h2 { font-family:'Playfair Display',serif !important; font-size:clamp(25px,3.6vw,34px) !important; font-weight:700 !important; line-height:1.2 !important; color:var(--white) !important; margin-bottom:20px !important; text-align:center !important; text-transform:none !important; letter-spacing:-.3px !important; }
-  #omni-over50 h2 em { font-style:italic; color:var(--gold); }
   #omni-over50 h3 { font-family:'Playfair Display',serif !important; font-size:19px !important; font-weight:600 !important; color:var(--white) !important; margin-bottom:10px !important; text-transform:none !important; }
   #omni-over50 p { color:var(--white-70); line-height:1.8; font-size:16px; margin-bottom:18px; }
   #omni-over50 p:last-child { margin-bottom:0; }
@@ -88,8 +86,8 @@
   #omni-over50 .ov-faq-a p { font-size:14.5px; color:var(--white-70); margin:0; }
 
   #omni-over50 .ov-cta { background:var(--navy-mid); border-radius:var(--radius-lg); padding:44px 34px; text-align:center; max-width:900px; margin:0 auto 40px; }
-  #omni-over50 a.ov-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
-  #omni-over50 a.ov-btn:hover { background:var(--gold-light); color:var(--navy) !important; transform:translateY(-2px); }
+  #omni-over50 a.ov-btn { display:inline-block; padding:15px 38px; border-radius:var(--radius); background:var(--gold-btn, var(--gold)); color:var(--navy) !important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none !important; transition:all .3s; margin-top:10px; }
+  #omni-over50 a.ov-btn:hover { background:var(--gold-btn-hover, var(--gold-light)); color:var(--navy) !important; transform:translateY(-2px); }
   #omni-over50 .ov-cta-note { display:block; margin-top:16px; font-size:13px; color:var(--white-50); line-height:1.7; }
   #omni-over50 a { color:var(--gold) !important; text-decoration:underline; text-underline-offset:3px; }
   #omni-over50 a:hover { color:var(--gold-light) !important; }
@@ -100,8 +98,8 @@
   @media (max-width:820px) {
     #omni-over50 .ov-grid, #omni-over50 .ov-grid-2, #omni-over50 .ov-proof { grid-template-columns:1fr; }
     #omni-over50 .ov-hero { padding:56px 20px 34px; }
-    #omni-over50 .ov-sec { padding-left:20px; padding-right:20px; }
-    #omni-over50 .ov-answer, #omni-over50 .ov-cta { margin-left:20px; margin-right:20px; padding:24px 20px; }
+    
+    #omni-over50 .ov-answer, #omni-over50 .ov-cta { padding:24px 20px; } #omni-over50 .ov-cta { margin-left:20px; margin-right:20px; }
     #omni-over50 .ov-phase { grid-template-columns:1fr; gap:8px; }
   }
   .sqs-block-code #omni-over50, .sqs-block-html #omni-over50 { margin-bottom:0 !important; }
@@ -154,6 +152,7 @@
 </section>
 
 
+  <div class="omni-band omni-band--cream">
   <div class="ov-answer">
     <p><strong>Training after 50 is not lighter training. It is differently sequenced training.</strong> Muscle adapts faster than tendon and connective tissue does, and that gap widens with age. So the first block builds volume at moderate load rather than chasing heavy singles, which lets tendon remodel at the pace it actually remodels. Once tissue tolerates the work and reported effort starts dropping, load goes up. You earn intensity rather than avoid it.</p>
   </div>
@@ -170,7 +169,9 @@
       <p><strong style="color:var(--white);">The research this is built on.</strong> Crossland and colleagues took patellar tendon biopsies from 27 younger men and 27 older men across eight weeks of resistance training and measured tendon protein synthesis directly using a deuterium tracer. It is one of the few studies to look at human tendon turnover rather than infer it from muscle. Notably, the training load that produced tendon adaptation in men averaging 68 years old was <strong style="color:var(--white);">60% of one-rep max</strong>, not maximal effort. <a href="https://pubmed.ncbi.nlm.nih.gov/35948859/" target="_blank" rel="noopener">Crossland H, Brook MS, Quinlan JI, et al. Metabolic and molecular responses of human patellar tendon to concentric- and eccentric-type exercise in youth and older age. GeroScience. 2023;45(1):331–344.</a> This describes how tendon responds to loading. It is not a treatment protocol, and OmniFit Performance uses it to inform programming rather than to make any claim about outcomes.</p>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="ov-sec">
     <span class="ov-label">Sequencing</span>
     <hr class="ov-divider">
@@ -207,23 +208,25 @@
     <h2>Three Things Most Programs for Older Adults <em>Ignore</em></h2>
     <div class="ov-grid">
       <div class="ov-card">
-        <span class="ov-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M8.5 6h7"/><path d="M8 10.5h8"/><path d="M8.5 15h7"/><path d="M9.5 19h5"/></svg></span>
+        <span class="ov-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M8.5 6h7"/><path d="M8 10.5h8"/><path d="M8.5 15h7"/><path d="M9.5 19h5"/></svg></span>
         <h3>Decades of sitting</h3>
         <p>Thirty years at a desk leaves a specific pattern: tight hip flexors and chest, switched-off glutes and mid-back, a forward head that took decades to build. Corrective work is not a warm-up here. It is the reason the strength work is safe to do at all.</p>
       </div>
       <div class="ov-card">
-        <span class="ov-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <span class="ov-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
         <h3>Recovery is the variable</h3>
         <p>Sleep quality, stress load and time between sessions do more to determine progress after 50 than program design does. If your week has changed, the training week changes with it rather than pretending it did not.</p>
       </div>
       <div class="ov-card">
-        <span class="ov-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 20l6-6"/><path d="M14 10l6-6"/><path d="M15 4h5v5"/><circle cx="8.5" cy="15.5" r="4"/></svg></span>
+        <span class="ov-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 20l6-6"/><path d="M14 10l6-6"/><path d="M15 4h5v5"/><circle cx="8.5" cy="15.5" r="4"/></svg></span>
         <h3>Hormonal context</h3>
         <p>Recovery capacity, tissue quality and how the body responds to load all change after 50. Most programs act as though this is not happening. Yours will not.</p>
       </div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="ov-sec">
     <span class="ov-label">Scope</span>
     <hr class="ov-divider">
@@ -252,7 +255,9 @@
     <p class="ov-disclaimer">Individual result, measured by OmniFit. How clients typically progress: <a href="/outcomes">omnifittraining.com/outcomes</a>.</p>
     <p class="ov-disclaimer">Individual results. Outcomes depend on starting point, adherence, sleep, stress, and medical history, and vary between clients. These are documented individual outcomes, not a projection of what any other client will achieve. Full detail in the <a href="/case-studies">case studies</a>.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="ov-sec">
     <span class="ov-label">Fit</span>
     <hr class="ov-divider">
@@ -319,8 +324,10 @@
       </details>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="ov-cta">
       <h2>Start With a <em>Conversation</em></h2>
       <p style="max-width:620px; margin:0 auto;">Send the intake form and we will talk through your history, what stopped working, and whether this is the right approach for where you are now.</p>
@@ -338,6 +345,7 @@
     <a href="/in-home-personal-trainer-san-diego">In-Home Training</a> <span>·</span>
     <a href="/case-studies">Case Studies</a> <span>·</span>
     <a href="/training-rates-san-diego">Rates</a>
+  </div>
   </div>
 
 </div>

@@ -6,6 +6,9 @@
 <title>Personal Training Services for Professionals 30+ | San Diego</title>
 <meta name="description" content="OmniFit Performance&#x27;s personal training services in San Diego: private studio sessions at Teqneeq FHC in 4S Ranch, in-home training across North County, and virtual coaching for professionals 30+.">
 <link rel="canonical" href="https://www.omnifittraining.com/personal-training-services">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
@@ -444,7 +447,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-services .sv-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
   #omni-services .sv-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
   #omni-services .sv-hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(32px, 5vw, 52px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
-  #omni-services .sv-hero h1 em { font-style: italic; color: var(--gold); }
   #omni-services .sv-hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 660px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
 
   /* CTA ROW */
@@ -456,8 +458,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-services .sv-btn-primary,
   #omni-services a.sv-btn-primary,
   #omni-services a.sv-btn-primary:link,
-  #omni-services a.sv-btn-primary:visited { background: var(--gold); color: var(--navy) !important; }
-  #omni-services .sv-btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
+  #omni-services a.sv-btn-primary:visited { background: var(--gold-btn, var(--gold)); color: var(--navy) !important; }
+  #omni-services .sv-btn-primary:hover { background: var(--gold-btn-hover, var(--gold-light)); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); color: var(--navy) !important; }
   #omni-services .sv-btn-ghost,
   #omni-services a.sv-btn-ghost,
   #omni-services a.sv-btn-ghost:link,
@@ -472,8 +474,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-services .sv-quick a:hover { background: var(--gold-dim); border-color: var(--gold); color: var(--gold) !important; }
 
   /* SECTION HEADERS */
-  #omni-services .sv-section { padding: 0 28px; max-width: 1120px; margin: 0 auto; }
   #omni-services .sv-section-head { text-align: center; margin-bottom: 40px; }
+  #omni-services .sv-photo { margin: -8px 0 40px; }
+  #omni-services .sv-photo img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: 45% 8%; border-radius: var(--radius-lg); }
+  @media (max-width: 640px) { #omni-services .sv-photo img { aspect-ratio: 4 / 3; object-position: 40% 35%; } }
   #omni-services .sv-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
   #omni-services .sv-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
   #omni-services h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(26px, 4vw, 36px); font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
@@ -516,7 +520,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
 
   /* NEIGHBORHOOD GRID */
-  #omni-services .sv-hood-section { padding: 0 28px; max-width: 1120px; margin: 0 auto 56px; }
   #omni-services .sv-hood-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -564,8 +567,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
   @media (max-width: 768px) {
     #omni-services .sv-hero { padding: 56px 20px 36px; }
-    #omni-services .sv-section { padding: 0 20px; }
-    #omni-services .sv-hood-section { padding: 0 20px; }
     #omni-services .sv-bottom { padding: 32px 24px; margin-left: 20px; margin-right: 20px; }
   }
   @media (max-width: 640px) {
@@ -760,6 +761,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </section>
 
 
+  <div class="omni-band omni-band--cream">
   <!-- CORE SERVICES -->
   <div class="sv-section">
     <div class="sv-section-head">
@@ -767,11 +769,12 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <hr class="sv-divider">
       <h2>Training Programs</h2>
     </div>
+    <figure class="sv-photo"><img src="/assets/img/coach-training-client-dumbbells-1600.webp" srcset="/assets/img/coach-training-client-dumbbells-900.webp 900w, /assets/img/coach-training-client-dumbbells-1600.webp 1600w" sizes="(max-width:1100px) 100vw, 1064px" width="1600" height="1067" alt="Nemezio LopezPerez coaching a client through dumbbell curls side by side during a 1:1 session" loading="lazy" decoding="async"></figure>
 
     <div class="sv-grid">
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 8v8"/><path d="M4 9.5v5"/><path d="M17.5 8v8"/><path d="M20 9.5v5"/><path d="M6.5 12h11"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.5 8v8"/><path d="M4 9.5v5"/><path d="M17.5 8v8"/><path d="M20 9.5v5"/><path d="M6.5 12h11"/></svg></span>
         <h3>Personal Trainer — 4S Ranch</h3>
         <p>1:1 coaching at our private studio inside Teqneeq FHC in 4S Ranch with individualized programming, form coaching, and structured progression.</p>
         <ul class="sv-card-features">
@@ -783,7 +786,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></svg></span>
         <h3>In-Home Personal Training</h3>
         <p>Full-service personal training at your San Diego residence. We bring all equipment, programming, and NASM-certified expertise to your door.</p>
         <ul class="sv-card-features">
@@ -795,7 +798,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></span>
         <h3>HIIT Training — 4S Ranch</h3>
         <p>Efficient conditioning sessions built for busy professionals — coached intensity, real results, minimal time.</p>
         <ul class="sv-card-features">
@@ -807,7 +810,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M8.5 6h7"/><path d="M8 10.5h8"/><path d="M8.5 15h7"/><path d="M9.5 19h5"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M8.5 6h7"/><path d="M8 10.5h8"/><path d="M8.5 15h7"/><path d="M9.5 19h5"/></svg></span>
         <h3>Corrective Exercise / Post-Rehab</h3>
         <p>For clients cleared from PT who need a structured bridge back to strength, movement confidence, and performance.</p>
         <ul class="sv-card-features">
@@ -819,7 +822,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6l6.5 6.5 4-4L21 16"/><path d="M21 11.5V16h-4.5"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6l6.5 6.5 4-4L21 16"/><path d="M21 11.5V16h-4.5"/></svg></span>
         <h3>Weight Loss Coaching</h3>
         <p>For professionals aiming to lose 20–30 lbs sustainably: progressive training, Precision Nutrition habits, and accountability. No crash diets.</p>
         <ul class="sv-card-features">
@@ -831,7 +834,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6"/><path d="M6 6.5v11"/><path d="M18 6.5v11"/><path d="M21 9v6"/><path d="M6 12h12"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9v6"/><path d="M6 6.5v11"/><path d="M18 6.5v11"/><path d="M21 9v6"/><path d="M6 12h12"/></svg></span>
         <h3>Strength Training</h3>
         <p>Build muscle and performance with evidence-based, periodized programming designed around joint health.</p>
         <ul class="sv-card-features">
@@ -843,7 +846,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 21c0-6.5 3.5-13.5 14-15-1 8.5-5.5 13.5-14 15z"/><path d="M6 21c2.5-5 6.5-9.5 11-12.5"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 21c0-6.5 3.5-13.5 14-15-1 8.5-5.5 13.5-14 15z"/><path d="M6 21c2.5-5 6.5-9.5 11-12.5"/></svg></span>
         <h3>Nutrition Coaching</h3>
         <p>Sustainable nutrition tailored to your lifestyle — macros, meal structure, and behavioral strategies that stick.</p>
         <ul class="sv-card-features">
@@ -855,7 +858,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 5h18v11H3z"/><path d="M9 20h6"/><path d="M12 16v4"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 5h18v11H3z"/><path d="M9 20h6"/><path d="M12 16v4"/></svg></span>
         <h3>Online Training &amp; Programming</h3>
         <p>Remote 1:1 coaching for clients who train from anywhere — live virtual sessions, custom app-based programming, and accountability built around your schedule.</p>
         <ul class="sv-card-features">
@@ -867,7 +870,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 21V5.5L13 3v18"/><path d="M13 9h7v12"/><path d="M7.5 8v.01"/><path d="M9.5 12v.01"/><path d="M7.5 16v.01"/><path d="M16.5 13v.01"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 21V5.5L13 3v18"/><path d="M13 9h7v12"/><path d="M7.5 8v.01"/><path d="M9.5 12v.01"/><path d="M7.5 16v.01"/><path d="M16.5 13v.01"/></svg></span>
         <h3>Training Facility</h3>
         <p>Private 1:1 coaching inside Teqneeq FHC, a members-only facility in 4S Ranch: professional equipment and a calm atmosphere.</p>
         <ul class="sv-card-features">
@@ -879,7 +882,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.5 3H21v8.5l-9 9L3.5 12z"/><path d="M17 7v.01"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.5 3H21v8.5l-9 9L3.5 12z"/><path d="M17 7v.01"/></svg></span>
         <h3>Rates &amp; Next Steps</h3>
         <p>Transparent pricing, clear policies, and everything you need to make an informed decision.</p>
         <ul class="sv-card-features">
@@ -892,7 +895,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <!-- HOW WE WORK — AUTHORITY PAGES -->
   <div class="sv-section">
     <div class="sv-section-head">
@@ -904,7 +909,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="sv-grid-authority">
 
       <article class="sv-card featured">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2V5a1 1 0 0 1 1-1z"/><path d="M9 4v3h6V4"/><path d="M8.5 13l2 2 4-4"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v1h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2V5a1 1 0 0 1 1-1z"/><path d="M9 4v3h6V4"/><path d="M8.5 13l2 2 4-4"/></svg></span>
         <h3>The OmniFit Method</h3>
         <p>The four-phase Assess → Correct → Build → Sustain framework that drives every OmniFit program — and why it works.</p>
         <ul class="sv-card-features">
@@ -917,7 +922,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card featured">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 8h6"/><path d="M9 12h6"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 3h14v18l-2.5-1.5L14 21l-2-1.5L10 21l-2.5-1.5L5 21z"/><path d="M9 8h6"/><path d="M9 12h6"/></svg></span>
         <h3>How It Works &amp; What It Costs</h3>
         <p>Transparent pricing, what's included, and who OmniFit is (and isn't) built for.</p>
         <ul class="sv-card-features">
@@ -930,7 +935,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
 
       <article class="sv-card featured">
-        <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M6 21V13"/><path d="M12 21V7"/><path d="M18 21V10"/><path d="M4 8l5-4 4 3 6-5"/></svg></span>
+        <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M6 21V13"/><path d="M12 21V7"/><path d="M18 21V10"/><path d="M4 8l5-4 4 3 6-5"/></svg></span>
         <h3>How We Measure Your Progress</h3>
         <p>The 12-metric framework we use to track every client — body composition, strength, posture, mobility, adherence, nutrition, and well-being.</p>
         <ul class="sv-card-features">
@@ -944,7 +949,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <!-- NEIGHBORHOODS SERVED -->
   <div class="sv-hood-section">
     <div class="sv-section-head">
@@ -967,7 +974,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a class="sv-hood-item" href="/personal-trainer-rancho-bernardo">Rancho Bernardo</a>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
       <!-- ═══ USE CASES ═══ -->
     <div class="sv-section">
       <div class="sv-section-head">
@@ -978,22 +987,22 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
       <div class="sv-grid">
         <article class="sv-card">
-          <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
+          <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>
           <h3>Long-Term Transformation</h3>
           <p>You want a body that holds up for years rather than a twelve-week push that unravels. The work is built to be repeatable: a plan you can still follow in month nine, progressions tied to what your body tolerates, and a coach who adjusts the plan rather than restarting it.</p>
         </article>
         <article class="sv-card">
-          <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6l6.5 6.5 4-4L21 16"/><path d="M21 11.5V16h-4.5"/></svg></span>
+          <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6l6.5 6.5 4-4L21 16"/><path d="M21 11.5V16h-4.5"/></svg></span>
           <h3>Fat Loss Without Crash Protocols</h3>
           <p>Aggressive plans usually fail on the joints or the schedule before they fail on willpower. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p>
         </article>
         <article class="sv-card">
-          <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3h8v8H8z"/><path d="M9.5 11v4.5h5V11"/><path d="M12 15.5V21"/><path d="M8.5 21h7"/></svg></span>
+          <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3h8v8H8z"/><path d="M9.5 11v4.5h5V11"/><path d="M12 15.5V21"/><path d="M8.5 21h7"/></svg></span>
           <h3>Desk-Worker Posture and Mobility</h3>
           <p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets the specific patterns desk work creates, with corrective work built into every session rather than bolted on as a warm-up.</p>
         </article>
         <article class="sv-card">
-          <span class="sv-card-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4h13v10H3z"/><path d="M6 11V8"/><path d="M9.5 11V6.5"/><path d="M13 11V9"/><path d="M19 8h2v12h-2z"/><path d="M6 18h7"/></svg></span>
+          <span class="sv-card-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 4h13v10H3z"/><path d="M6 11V8"/><path d="M9.5 11V6.5"/><path d="M13 11V9"/><path d="M19 8h2v12h-2z"/><path d="M6 18h7"/></svg></span>
           <h3>Data-Driven Hybrid Coaching</h3>
           <p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, the Travel Protocol covers the weeks you're on the road, and the same benchmarks are tracked either way so nothing is guessed between visits.</p>
         </article>
@@ -1032,9 +1041,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </div>
       <p class="sv-which-a">Start with the <a href="/fit-check">Fit Check</a>: seven questions, about three minutes, and it suggests an accountability setting. Then use the <a href="/training-rates-san-diego#rt-choose">starting-option chooser on the rates page</a> to match format and frequency to your schedule. New clients usually start on The Foundation, a defined 12-week starter block. If you are still unsure, the 45-minute consultation is where the recommendation gets made.</p>
     </div>
+  </div>
 
 <!-- BOTTOM CTA -->
-  <div style="padding: 0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="sv-bottom">
       <h2>Not Sure Where to Start?</h2>
       <p>Book a 45-minute consultation. We'll discuss your goals, schedule, and history — and recommend the program that fits your life.</p>
@@ -1045,10 +1056,11 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
   <!-- TRUST BAR -->
   <div class="sv-trust">
-    <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> 4.98 average across 190+ reviews</div>
-    <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><path d="M8.5 9.5L6 3h12l-2.5 6.5"/></svg> NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</div>
-    <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Teqneeq FHC · 4S Ranch</div>
-    <div class="sv-trust-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg> Virtual Coaching Nationwide</div>
+    <div class="sv-trust-item"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg> 4.98 average across 190+ reviews</div>
+    <div class="sv-trust-item"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><path d="M8.5 9.5L6 3h12l-2.5 6.5"/></svg> NASM Elite Trainer · NASM CPT, CES, PES, BCS, CNC · ACE CES · Precision Nutrition Level 2 Certified Master Coach</div>
+    <div class="sv-trust-item"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Teqneeq FHC · 4S Ranch</div>
+    <div class="sv-trust-item"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z"/></svg> Virtual Coaching Nationwide</div>
+  </div>
   </div>
 
 </div>
@@ -1098,13 +1110,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
               <span>@omnifit_sd</span>
             </a>
           </li>
           <li>
             <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
               <span>LinkedIn</span>
             </a>
           </li>
@@ -1112,13 +1124,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
             <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
             <!--email_off--><a href="mailto:nemezio@omnifittraining.com">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a><!--email_on-->
           </li>
@@ -1145,19 +1157,19 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
               <span>Get Directions</span>
             </a>
           </li>
           <li>
             <a href="tel:+16192590630">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
               <span>(619) 259-0630</span>
             </a>
           </li>
           <li>
             <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
               <span>Book Your Consultation</span>
             </a>
           </li>
@@ -1172,6 +1184,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
   </div>
 </footer>
+<script>(function(){function go(){var s=document.createElement("script");s.src="/assets/assistant.js";s.async=true;document.body.appendChild(s)}function idle(){"requestIdleCallback" in window?requestIdleCallback(go,{timeout:3000}):setTimeout(go,1500)}document.readyState==="complete"?idle():window.addEventListener("load",idle)})();</script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

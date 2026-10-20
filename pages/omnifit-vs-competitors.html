@@ -113,10 +113,6 @@
     margin-bottom: 20px;
   }
 
-  #omnifit-comparison-wrapper .hero h1 em {
-    font-style: italic !important;
-    color: var(--gold) !important;
-  }
 
   #omnifit-comparison-wrapper .hero-sub {
     font-size: 18px !important;
@@ -149,10 +145,6 @@
     display: block;
   }
 
-  #omnifit-comparison-wrapper h2 em {
-    font-style: italic !important;
-    color: var(--gold) !important;
-  }
 
   #omnifit-comparison-wrapper h3 {
     font-family: 'Playfair Display', serif !important;
@@ -472,6 +464,8 @@
   #omnifit-comparison-wrapper #omh-short.omh li svg{display:block;}
   #omnifit-comparison-wrapper #omh-short.omh li svg path{d:path("M20 6L9 17l-5-5");}
   @media (max-width:640px){#omnifit-comparison-wrapper #omh-short.omh{padding:40px 16px 52px !important;}}
+  /* inside a band the band supplies the gutters */
+  #omnifit-comparison-wrapper .omni-band .section-inner { padding-left: 0; padding-right: 0; }
 </style>
 <section id="omh-short" class="omh" aria-labelledby="omh-short-h">
   <div class="omh-inner">
@@ -501,7 +495,7 @@
 </section>
 
 <!-- CORE DIFFERENCE -->
-<section style="background: var(--navy-mid);">
+<section class="omni-band omni-band--cream">
   <div class="section-inner">
     <div class="section-label">The Fundamental Difference</div>
     <h2>Access vs. <em>Accountability</em></h2>
@@ -604,7 +598,7 @@
 </section>
 
 <!-- OMNIFIT VS BIG-BOX AND PREMIUM GYMS -->
-<section style="background: var(--navy-mid);">
+<section class="omni-band omni-band--cream">
   <div class="section-inner">
     <h2>OmniFit vs <em>Big-Box Gyms</em></h2>
     <p style="color: var(--white-70); margin-bottom: 32px;">Large membership gyms and premium clubs, with optional personal training</p>
@@ -728,7 +722,7 @@
 </section>
 
 <!-- OMNIFIT VS ONLINE APPS -->
-<section style="background: var(--navy-mid);">
+<section class="omni-band omni-band--cream">
   <div class="section-inner">
     <h2>OmniFit vs <em>Online Apps and Coaching</em></h2>
     <p style="color: var(--white-70); margin-bottom: 32px;">Training apps and remote-only programming</p>
@@ -801,7 +795,7 @@
 </section>
 
 <!-- PRICING TRANSPARENCY -->
-<section style="background: var(--navy-mid);">
+<section class="omni-band omni-band--cream">
   <div class="section-inner">
     <div class="section-label">Transparent Pricing</div>
     <h2>What OmniFit <em>Costs</em></h2>
@@ -901,7 +895,7 @@
 </section>
 
 <!-- FAQ -->
-<section style="background: var(--navy-mid);">
+<section class="omni-band omni-band--cream">
   <div class="section-inner">
     <div class="section-label">Common Questions</div>
     <h2>Frequently <em>Asked Questions</em></h2>
@@ -1050,7 +1044,7 @@
 </section>
 
 <!-- BOTTOM LINE -->
-<section>
+<section class="omni-band omni-band--white">
   <div class="section-inner" style="text-align: center;">
     <h2>The Bottom <em>Line</em></h2>
     <p style="max-width: 740px; margin: 0 auto;">OmniFit is not better than a gym, a class studio, an independent trainer or an app.</p>

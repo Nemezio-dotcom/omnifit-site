@@ -6,6 +6,9 @@
 <title>Personal Trainer San Diego | Diagnostic-Led Coaching</title>
 <meta name="description" content="Diagnostic-led personal training for busy professionals 30+ in San Diego. Bodystat QuadScan 4000 body composition, 9-point movement screen, corrective-first strength, in-studio at Teqneeq in 4S Ranch, in-home across North County, and virtual nationwide. NASM Elite Trainer, 4.98 average across 190+ reviews.">
 <link rel="canonical" href="https://www.omnifittraining.com/">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
@@ -974,10 +977,12 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     native scroll-driven parallax (photo drifts, copy lifts) that browsers
     without animation-timeline support simply skip.
   v5 changes (from v4):
-  - Six-photo crossfade loop. Frame A is still the kettlebell coaching photo
-    (the LCP image, preloaded, unchanged). The other five are repo assets in
+  - Seven-photo crossfade loop. Frame A is still the kettlebell coaching photo
+    (the LCP image, preloaded, unchanged). The other six are repo assets in
     site/img/ (served from /assets/img/), each in 1000px and 1600px webp
-    with jpg fallbacks:
+    with jpg fallbacks (the Teqneeq photo: 1000px and 1200px, its source
+    width):
+      hero-teqneeq-rack-area             landscape 3:2 (Teqneeq FHC floor; owner asked for it second, Oct 19 2026)
       hero-coach-client-cable-pulldown   landscape 3:2
       hero-coach-physique-portrait       portrait  5:6
       hero-coach-client-jump-training    landscape 3:2
@@ -1025,28 +1030,33 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <source type="image/webp" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.webp 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" src="/assets/img/hero-trainer-coaching-kettlebell-1600.jpg" srcset="/assets/img/hero-trainer-coaching-kettlebell-1000.jpg 1000w, /assets/img/hero-trainer-coaching-kettlebell-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" fetchpriority="high" decoding="async">
       </picture>
-      <!-- frames B-F: given their URLs by the script once frame A has loaded -->
-      <!-- frame B: coach and client at the cable station, landscape -->
+      <!-- frames B-G: given their URLs by the script once frame A has loaded -->
+      <!-- frame B: the Teqneeq FHC rack area and cardio deck, landscape -->
+      <picture class="hero-frame hero-frame--landscape" style="--focus:50% 45%;--focus-m:40% 50%">
+        <source type="image/webp" data-srcset="/assets/img/hero-teqneeq-rack-area-1000.webp 1000w, /assets/img/hero-teqneeq-rack-area-1200.webp 1200w" sizes="(max-width:768px) 100vw, 880px">
+        <img class="hero-bg" data-src="/assets/img/hero-teqneeq-rack-area-1200.jpg" data-srcset="/assets/img/hero-teqneeq-rack-area-1000.jpg 1000w, /assets/img/hero-teqneeq-rack-area-1200.jpg 1200w" sizes="(max-width:768px) 100vw, 880px" width="1200" height="800" alt="" decoding="async">
+      </picture>
+      <!-- frame C: coach and client at the cable station, landscape -->
       <picture class="hero-frame hero-frame--landscape" style="--focus:30% 25%;--focus-m:38% 50%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-client-cable-pulldown-1000.webp 1000w, /assets/img/hero-coach-client-cable-pulldown-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-client-cable-pulldown-1600.jpg" data-srcset="/assets/img/hero-coach-client-cable-pulldown-1000.jpg 1000w, /assets/img/hero-coach-client-cable-pulldown-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1067" alt="" decoding="async">
       </picture>
-      <!-- frame C: coach physique portrait -->
+      <!-- frame D: coach physique portrait -->
       <picture class="hero-frame hero-frame--portrait" style="--focus:50% 30%;--focus-m:50% 40%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-physique-portrait-1000.webp 1000w, /assets/img/hero-coach-physique-portrait-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-physique-portrait-1600.jpg" data-srcset="/assets/img/hero-coach-physique-portrait-1000.jpg 1000w, /assets/img/hero-coach-physique-portrait-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1916" alt="" decoding="async">
       </picture>
-      <!-- frame D: client jump with coach, landscape -->
+      <!-- frame E: client jump with coach, landscape -->
       <picture class="hero-frame hero-frame--landscape" style="--focus:50% 50%;--focus-m:64% 50%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-client-jump-training-1000.webp 1000w, /assets/img/hero-coach-client-jump-training-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-client-jump-training-1600.jpg" data-srcset="/assets/img/hero-coach-client-jump-training-1000.jpg 1000w, /assets/img/hero-coach-client-jump-training-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="1067" alt="" decoding="async">
       </picture>
-      <!-- frame E: client push-up on the bench with coach, portrait -->
+      <!-- frame F: client push-up on the bench with coach, portrait -->
       <picture class="hero-frame hero-frame--portrait" style="--focus:50% 40%;--focus-m:55% 45%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-client-bench-pushup-1000.webp 1000w, /assets/img/hero-coach-client-bench-pushup-1333.webp 1333w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-client-bench-pushup-1333.jpg" data-srcset="/assets/img/hero-coach-client-bench-pushup-1000.jpg 1000w, /assets/img/hero-coach-client-bench-pushup-1333.jpg 1333w" sizes="(max-width:768px) 100vw, 880px" width="1333" height="2000" alt="" decoding="async">
       </picture>
-      <!-- frame F: coach with dumbbells, portrait -->
+      <!-- frame G: coach with dumbbells, portrait -->
       <picture class="hero-frame hero-frame--portrait" style="--focus:50% 30%;--focus-m:55% 40%">
         <source type="image/webp" data-srcset="/assets/img/hero-coach-dumbbell-workout-1000.webp 1000w, /assets/img/hero-coach-dumbbell-workout-1600.webp 1600w" sizes="(max-width:768px) 100vw, 880px">
         <img class="hero-bg" data-src="/assets/img/hero-coach-dumbbell-workout-1600.jpg" data-srcset="/assets/img/hero-coach-dumbbell-workout-1000.jpg 1000w, /assets/img/hero-coach-dumbbell-workout-1600.jpg 1600w" sizes="(max-width:768px) 100vw, 880px" width="1600" height="2400" alt="" decoding="async">
@@ -1722,13 +1732,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
               <span>@omnifit_sd</span>
             </a>
           </li>
           <li>
             <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
               <span>LinkedIn</span>
             </a>
           </li>
@@ -1736,13 +1746,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
             <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
             <!--email_off--><a href="mailto:nemezio@omnifittraining.com">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a><!--email_on-->
           </li>
@@ -1769,19 +1779,19 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
               <span>Get Directions</span>
             </a>
           </li>
           <li>
             <a href="tel:+16192590630">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
               <span>(619) 259-0630</span>
             </a>
           </li>
           <li>
             <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
               <span>Book Your Consultation</span>
             </a>
           </li>
@@ -1796,6 +1806,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
   </div>
 </footer>
+<script>(function(){function go(){var s=document.createElement("script");s.src="/assets/assistant.js";s.async=true;document.body.appendChild(s)}function idle(){"requestIdleCallback" in window?requestIdleCallback(go,{timeout:3000}):setTimeout(go,1500)}document.readyState==="complete"?idle():window.addEventListener("load",idle)})();</script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

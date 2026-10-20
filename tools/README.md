@@ -10,6 +10,7 @@ python3 tools/mkheaders.py   # regenerate the Batch 3 page headers
 python3 tools/mkheaders.py --check   # writes nothing; FAILS if any of the 9 Batch 3 headers differs from what it would write
 python3 tools/ownership.py   # keyword ownership on public/ (also run by build.py --check)
 python3 tools/ownership.py --selftest   # its must-fail / must-pass fixtures
+node --test tests/assistant.test.mjs   # Ask OmniFit functions: mocked fetch, in-memory D1 from schema.sql, no network
 python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-urls-*.txt and the tracking rule
 NODE_PATH="$(npm root -g)" node tools/tracktest.js   # measurement test on the built site (Playwright)
 NODE_PATH="$(npm root -g)" node tools/mobileaudit.js [--open-details] [--shots DIR]   # 390/412px layout audit (Playwright)
@@ -940,3 +941,27 @@ Virtual Performance Assessment" with N parsed from CANON CANONICAL FACTS,
 and "no Bodystat scan"; no in-person result may mention the Virtual
 Performance Assessment. Negative-tested: dropping "no Bodystat scan" from
 the page script failed all four virtual combinations.
+
+## Ask OmniFit (`certify.py`, assistant section)
+
+The assistant's surfaces live outside `pages/`, so the page glob never sees
+them: `assistant/knowledge.md` (as the model receives it, maintainer comments
+dropped), the system prompt in `functions/_lib/system-prompt.js`, the widget
+copy in `site/assistant.js` and the fixed turn-cap reply in
+`functions/_lib/assistant.js`. certify.py screens all four with the same (a)
+compliance rules and (b) stale-canon rules as the pages, and adds four
+assistant-only checks: every `$` figure in the knowledge file must appear in
+CANON's CANONICAL FACTS or OCTOBER 2026 CARD block; the required wording (the
+30-Day Fit Guarantee, the deposit line, "4.98 average across 190+ reviews",
+the travel-fee lines) must be present verbatim; no internal content (tooling,
+compliance notes, Stripe, legacy pricing, client names, "monthly") may appear;
+and the system prompt must match its owner-approved sha256.
+
+**The prompt's NEVER: list is not screened.** It names the banned framings in
+order to forbid them ("promise or guarantee results", "call the consultation
+... free"), so screening it reports the bans as violations. Every other line
+of the prompt is screened, and the self-test proves a free-consultation claim
+and an outcome guarantee added outside the list still fire. WRONG IF a claim is
+ever written inside the NEVER list. Each assistant-only rule is self-tested
+both ways on every run (a legacy $475 and a non-card total fire, card prices
+pass; Stripe and a client name fire, ordinary copy passes).

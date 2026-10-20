@@ -6,6 +6,9 @@
 <title>In-Home Personal Trainer in San Diego | OmniFit Performance</title>
 <meta name="description" content="In-home personal training in San Diego: your coach comes to you. Nine-point movement screen, corrective-first programming, equipment provided or built around yours. NASM Elite Trainer, 4.98 average across 190+ reviews.">
 <link rel="canonical" href="https://www.omnifittraining.com/in-home-personal-trainer-san-diego">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
@@ -490,19 +493,17 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-inhome .of-hero::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:500px; height:500px; background:radial-gradient(circle,var(--gold-glow) 0%,transparent 70%); pointer-events:none; opacity:0.3; }
   #omni-inhome .of-badge { display:inline-block; padding:8px 22px; border:1px solid var(--gold); color:var(--gold); border-radius:100px; font-family:'Montserrat',sans-serif!important; font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:32px; position:relative; }
   #omni-inhome .of-hero h1 { font-family:'Playfair Display',serif!important; font-size:clamp(32px,5vw,52px); font-weight:700; line-height:1.15; color:var(--white); margin-bottom:24px; letter-spacing:-0.5px; position:relative; text-transform:none; }
-  #omni-inhome .of-hero h1 em { font-style:italic; color:var(--gold); }
   #omni-inhome .of-hero-sub { font-family:'Montserrat',sans-serif!important; font-size:17px; color:var(--white-70); max-width:660px; margin:0 auto 36px; line-height:1.8; font-weight:400; }
   #omni-inhome .of-cta-row { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:40px; position:relative; }
   #omni-inhome .of-btn { display:inline-block; padding:15px 36px; border-radius:var(--radius); font-family:'Montserrat',sans-serif!important; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; transition:all 0.3s; }
   #omni-inhome a.of-btn, #omni-inhome a.of-btn:link, #omni-inhome a.of-btn:visited { text-decoration:none; }
-  #omni-inhome .of-btn-primary, #omni-inhome a.of-btn-primary, #omni-inhome a.of-btn-primary:link, #omni-inhome a.of-btn-primary:visited { background:var(--gold); color:var(--navy)!important; }
-  #omni-inhome .of-btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.3); color:var(--navy)!important; }
+  #omni-inhome .of-btn-primary, #omni-inhome a.of-btn-primary, #omni-inhome a.of-btn-primary:link, #omni-inhome a.of-btn-primary:visited { background:var(--gold-btn, var(--gold)); color:var(--navy)!important; }
+  #omni-inhome .of-btn-primary:hover { background:var(--gold-btn-hover, var(--gold-light)); transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.3); color:var(--navy)!important; }
   #omni-inhome .of-btn-ghost, #omni-inhome a.of-btn-ghost, #omni-inhome a.of-btn-ghost:link, #omni-inhome a.of-btn-ghost:visited { border:1px solid var(--white-30); color:var(--white)!important; background:transparent; }
   #omni-inhome .of-btn-ghost:hover { border-color:var(--white); background:var(--white-05); transform:translateY(-2px); color:var(--white)!important; }
   #omni-inhome .of-quick { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:860px; margin:0 auto 56px; position:relative; padding:0 20px; }
   #omni-inhome .of-quick a, #omni-inhome .of-quick a:link, #omni-inhome .of-quick a:visited { font-family:'Montserrat',sans-serif!important; font-size:11px; font-weight:600; padding:7px 16px; border-radius:100px; background:var(--white-05); border:1px solid var(--white-10); color:var(--white-50)!important; text-decoration:none; transition:all 0.3s; letter-spacing:0.3px; }
   #omni-inhome .of-quick a:hover { background:var(--gold-dim); border-color:var(--gold); color:var(--gold)!important; }
-  #omni-inhome .of-section { padding:0 28px; max-width:1120px; margin:0 auto; }
   #omni-inhome .of-band { background:var(--navy-mid); padding:56px 28px; }
   #omni-inhome .of-band-inner { max-width:1120px; margin:0 auto; }
   #omni-inhome .of-section-head { text-align:center; margin-bottom:40px; }
@@ -616,7 +617,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
   @media(max-width:768px) {
     #omni-inhome .of-hero { padding:56px 20px 36px; }
-    #omni-inhome .of-section { padding:0 20px; }
+   
     #omni-inhome .of-band { padding:56px 20px; }
     #omni-inhome .of-bottom { padding:32px 24px; margin-left:20px; margin-right:20px; }
     #omni-inhome .of-grid-2 { grid-template-columns:1fr; }
@@ -825,6 +826,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </section>
 
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ GEMINI QUOTABLE #1 ═══ -->
   <div class="of-section" style="margin-bottom:56px;">
     <div class="of-quote-block">
@@ -859,9 +861,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </article>
     </div>
   </div>
+  </div>
 
   <!-- ═══ HOW IT WORKS ═══ -->
-  <div class="of-band">
+  <div class="of-band omni-band omni-band--white">
     <div class="of-band-inner">
       <div class="of-section-head">
         <span class="of-label">How It Works</span>
@@ -893,8 +896,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ WHAT'S INCLUDED ═══ -->
-  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+  <div class="of-section" style="margin-bottom:56px;">
     <div class="of-section-head">
       <span class="of-label">What's Included</span>
       <hr class="of-divider">
@@ -941,6 +945,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </ul>
       </article>
     </div>
+  </div>
   </div>
 
   <!-- ═══ SERVICE AREAS (LINKED) ═══ -->
@@ -998,8 +1003,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p style="text-align:center; font-size:13px; color:var(--white-50); margin-top:12px;">Also serving Poway (no travel fee). Don't see your neighborhood? <a href="https://calendly.com/nemezio-omnifittraining/45min" class="of-link" target="_blank" rel="noopener">Contact us</a> and we may be able to accommodate select locations in San Diego County.</p>
     </div>
   </div>
+  <div class="omni-band omni-band--white">
   <!-- ═══ EQUIPMENT — TWO WAYS THIS WORKS ═══ -->
-  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+  <div class="of-section" style="margin-bottom:56px;">
     <div class="of-section-head">
       <span class="of-label">Equipment</span>
       <hr class="of-divider">
@@ -1101,9 +1107,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p>In-home personal training eliminates the two biggest barriers executives face: commute time and gym environment friction. OmniFit Performance's in-home service delivers the same structured Assess → Correct → Build → Sustain methodology used at its studio inside Teqneeq Functional Health Center, conducted in the client's own home. OmniFit provides all equipment when needed, or builds the program around a client's existing home gym, and either way the program is individually designed for the client's movement assessment results, equipment situation, and schedule, never adapted from generic templates. The typical OmniFit in-home client is a professional or executive over 30 in San Diego who wants structured, accountable coaching without commuting to a gym.</p>
     </div>
   </div>
+  </div>
 
   <!-- ═══ PRICING ═══ -->
-  <div class="of-band">
+  <div class="of-band omni-band omni-band--cream">
     <div class="of-band-inner">
       <div class="of-section-head">
         <span class="of-label">Investment</span>
@@ -1159,6 +1166,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div>
 
+  <div class="omni-band omni-band--white">
   <!-- ═══ WHY WE ASSESS ═══ -->
   <div class="of-section" style="margin-bottom:56px;">
     <div class="of-section-head">
@@ -1271,7 +1279,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <strong>The honest version:</strong> a trainer who claims every condition is workable is telling you something about their marketing, not their scope. If a situation belongs with a clinician, the useful thing we can do is say so early and coordinate once you are cleared.
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <!-- ═══ USE CASES ═══ -->
   <div class="of-section">
     <div class="of-section-head">
@@ -1305,7 +1315,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
 
   <!-- ═══ FIT / NOT FIT (Oct 2026: approved segments, Method line, roles line) ═══ -->
-  <div class="of-section" style="padding-top:56px; margin-bottom:56px;">
+  <div class="of-section" style="margin-bottom:56px;">
     <div class="of-section-head">
       <span class="of-label">Is This Right For You?</span>
       <hr class="of-divider">
@@ -1365,6 +1375,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </details>
     </div>
   </div>
+  </div>
 
   <!-- ═══ HUB LINKS ═══ -->
   <div class="of-band">
@@ -1389,7 +1400,8 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
 
   <!-- ═══ BOTTOM CTA ═══ -->
-  <div style="padding: 56px 28px 0;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="of-bottom">
       <h2>Ready to Train at Home?</h2>
       <p>Book a 45-minute consultation, Zoom or phone, with a $30 deposit, refunded the same day you attend your consultation. We'll talk through your goals, review your space and any equipment you have, and tell you honestly whether in-home training is the right format for you.</p>
@@ -1399,7 +1411,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
 
   <!-- ═══ TRUST BAR ═══ -->
-  <div class="of-trust" style="padding-bottom:48px;">
+  <div class="of-trust">
     <div class="of-trust-item">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5-5.9-3.1-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9 2.9-6z"/></svg>
       4.98 average across 190+ reviews
@@ -1416,6 +1428,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>
       Your Home. Your Schedule.
     </div>
+  </div>
   </div>
 
 </div>
@@ -1465,13 +1478,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
               <span>@omnifit_sd</span>
             </a>
           </li>
           <li>
             <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
               <span>LinkedIn</span>
             </a>
           </li>
@@ -1479,13 +1492,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
             <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
             <!--email_off--><a href="mailto:nemezio@omnifittraining.com">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a><!--email_on-->
           </li>
@@ -1512,19 +1525,19 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
               <span>Get Directions</span>
             </a>
           </li>
           <li>
             <a href="tel:+16192590630">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
               <span>(619) 259-0630</span>
             </a>
           </li>
           <li>
             <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
               <span>Book Your Consultation</span>
             </a>
           </li>
@@ -1539,6 +1552,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
   </div>
 </footer>
+<script>(function(){function go(){var s=document.createElement("script");s.src="/assets/assistant.js";s.async=true;document.body.appendChild(s)}function idle(){"requestIdleCallback" in window?requestIdleCallback(go,{timeout:3000}):setTimeout(go,1500)}document.readyState==="complete"?idle():window.addEventListener("load",idle)})();</script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

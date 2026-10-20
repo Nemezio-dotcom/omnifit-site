@@ -6,6 +6,9 @@
 <title>Client Outcomes | OmniFit Performance San Diego</title>
 <meta name="description" content="Measured outcomes from 72 OmniFit Performance clients in San Diego, January 2023 to September 2026, with sample sizes and full method.">
 <link rel="canonical" href="https://www.omnifittraining.com/outcomes">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
@@ -514,10 +517,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     --gold-light: #e0c872;
     --gold-dim: rgba(201,168,76,0.15);
     --gold-glow: rgba(201,168,76,0.25);
-    --light-bg: #f4f5f7;
-    --light-text: #1a1a2e;
-    --light-muted: #555566;
-    --light-border: #e2e4e8;
+    --light-bg: var(--omni-cream);
+    --light-text: var(--omni-ink);
+    --light-muted: var(--omni-muted);
+    --light-border: var(--omni-line);
     --radius: 8px;
     --radius-lg: 12px;
     font-family: 'Montserrat', sans-serif !important;
@@ -540,7 +543,6 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-outcomes .hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: 0.3; }
   #omni-outcomes .hero-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px; position: relative; }
   #omni-outcomes .hero h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(34px, 5.5vw, 56px); font-weight: 700; line-height: 1.15; color: var(--white); margin-bottom: 24px; letter-spacing: -0.5px; position: relative; text-transform: none; }
-  #omni-outcomes .hero h1 em { font-style: italic; color: var(--gold); }
   #omni-outcomes .hero-sub { font-family: 'Montserrat', sans-serif !important; font-size: 17px; color: var(--white-70); max-width: 620px; margin: 0 auto 36px; line-height: 1.8; font-weight: 400; }
   #omni-outcomes .creds { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; position: relative; }
   #omni-outcomes .cred { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid var(--white-20); border-radius: 100px; color: var(--white-50); letter-spacing: 0.8px; background: transparent; }
@@ -556,7 +558,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-outcomes .s-light { background: var(--light-bg); padding: 72px 28px; }
   #omni-outcomes .s-inner { max-width: 880px; margin: 0 auto; min-width: 0; }
   #omni-outcomes .s-label { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; }
-  #omni-outcomes .s-light .s-label { color: #8b7832; }
+  #omni-outcomes .s-light .s-label { color: var(--omni-gold-ink); }
   #omni-outcomes .gold-line { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 0 24px; border-radius: 2px; }
   #omni-outcomes h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.3px; color: var(--white); text-transform: none; }
   #omni-outcomes .s-light h2 { color: var(--light-text); }
@@ -583,7 +585,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-outcomes .os { text-align: center; padding: 0 4px; }
   #omni-outcomes .os .num { font-family: 'Playfair Display', serif !important; font-size: 42px; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 8px; }
   #omni-outcomes .os .lbl { font-family: 'Montserrat', sans-serif !important; font-size: 10px; color: var(--white-50); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
-  #omni-outcomes .ob-note { text-align: center; font-size: 12px; color: rgba(255,255,255,.62); margin-top: 28px; font-style: italic; }
+  #omni-outcomes .ob-note { text-align: center; font-size: 12px; color: var(--white-50); margin-top: 28px; font-style: italic; }
 
   /* REPORT MOCKUP */
   #omni-outcomes .rm { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 36px; margin: 40px 0 0; }
@@ -601,14 +603,14 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   /* COMPARISON TABLE */
   #omni-outcomes .ct-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 36px 0; border-radius: var(--radius-lg); border: 1px solid var(--light-border); max-width: 100%; }
   #omni-outcomes .ct { width: 100%; border-collapse: collapse; font-size: 14px; font-family: 'Montserrat', sans-serif !important; margin: 0; min-width: 540px; }
-  #omni-outcomes .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--white-70); border-bottom: 2px solid var(--gold); }
+  #omni-outcomes .ct th { text-align: left; padding: 16px 18px; background: var(--navy); font-family: 'Montserrat', sans-serif !important; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,.72); border-bottom: 2px solid var(--gold); }
   #omni-outcomes .ct th:first-child { border-radius: var(--radius) 0 0 0; }
   #omni-outcomes .ct th:last-child { border-radius: 0 var(--radius) 0 0; }
   #omni-outcomes .ct td { padding: 16px 18px; border-bottom: 1px solid var(--light-border); color: var(--light-muted); font-family: 'Montserrat', sans-serif !important; }
   #omni-outcomes .ct tr:last-child td { border-bottom: none; }
   #omni-outcomes .ct tr:hover td { background: rgba(201,168,76,0.04); }
   #omni-outcomes .chk { color: #1a7a4c; font-weight: 600; }
-  #omni-outcomes .xm { color: #bbb; }
+  #omni-outcomes .xm { color: #7c879a; }
 
   /* FAQ */
   #omni-outcomes .fi { border-bottom: 1px solid var(--white-10); }
@@ -685,14 +687,14 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-outcomes .hub { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 14px; padding: 36px 28px 56px; background: var(--navy); font-size: 13px; }
   #omni-outcomes .hub a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
   #omni-outcomes .hub span { color: var(--white-20); }
-  #omni-outcomes .s-light a { color: #8b7832; text-decoration: underline; text-underline-offset: 3px; }
+  #omni-outcomes .s-light a { color: var(--omni-gold-ink); text-decoration: underline; text-underline-offset: 3px; }
 
   /* CHARTS. Each chart draws figures already stated in the copy and tables on
      this page; the table under each chart stays the full data view. Colours:
      achieved navy, partly deep gold, not achieved light gray (validated for
      colour-blind separation; every segment is also labelled). */
   #omni-outcomes { --c-a: #0a1628; --c-p: #b8963c; --c-n: #dde0e6; --c-wash: rgba(184,150,60,0.22); }
-  #omni-outcomes .viz { background: var(--white); border: 1px solid var(--light-border); border-radius: var(--radius-lg); padding: 28px 28px 24px; margin: 32px 0 0; position: relative; }
+  #omni-outcomes .viz { background: var(--omni-white); border: 1px solid var(--light-border); border-radius: var(--radius-lg); padding: 28px 28px 24px; margin: 32px 0 0; position: relative; }
   #omni-outcomes .viz + .viz { margin-top: 18px; }
   #omni-outcomes .viz-t { font-size: 15px; font-weight: 700; color: var(--light-text); line-height: 1.4; margin-bottom: 4px; }
   #omni-outcomes .viz-s { font-size: 13px; color: var(--light-muted); line-height: 1.6; margin-bottom: 22px; }
@@ -750,7 +752,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-outcomes .db-plot { position: relative; height: 26px; margin-right: 58px; margin-left: 46px; }
   #omni-outcomes .db-line { position: absolute; top: 12px; height: 2px; background: var(--c-p); }
   #omni-outcomes .db-dot { position: absolute; top: 13px; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; box-shadow: 0 0 0 2px var(--white); }
-  #omni-outcomes .db-dot.s { background: var(--white); border: 2px solid #8a8f9c; }
+  #omni-outcomes .db-dot.s { background: var(--omni-white); border: 2px solid #8a8f9c; }
   #omni-outcomes .db-dot.e { background: var(--c-a); }
   #omni-outcomes .db-n { position: absolute; top: 4px; font-size: 12px; color: var(--light-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
   #omni-outcomes .db-n.s { transform: translateX(calc(-100% - 12px)); }
@@ -764,7 +766,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 
   /* the table under a chart, one click away */
   #omni-outcomes .tv { margin-top: 14px; }
-  #omni-outcomes .tv-btn { background: none; border: none; cursor: pointer; padding: 4px 0; display: inline-flex; align-items: center; gap: 9px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #8b7832; }
+  #omni-outcomes .tv-btn { background: none; border: none; cursor: pointer; padding: 4px 0; display: inline-flex; align-items: center; gap: 9px; font-family: 'Montserrat', sans-serif !important; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--omni-gold-ink); }
   #omni-outcomes .tv-btn::before { content: ''; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); transition: transform 0.3s; }
   #omni-outcomes .tv-btn[aria-expanded="true"]::before { transform: rotate(45deg); }
   #omni-outcomes .tv .ct-wrap { margin: 16px 0 8px; }
@@ -965,7 +967,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div></section>
 
-  <section class="s-light"><div class="s-inner">
+  <section class="s-light omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Who They Are</span><hr class="gold-line">
     <h2>Professionals and Executives, Mostly 30+</h2>
     <p class="lede">Based on occupation recorded at intake, all 63 clients in the goal analysis were classified as professionals or executives. Among clients with age recorded, four in five were 30 or older.</p><div class="viz" role="img" aria-label="Chart: client ages. 20s 20%, 30s 48%, 40s 10%, 50s 11%, 60 and over 11%. Executives 33%, other professionals 67%. Trained in studio 90%, in-home or online 10%.">
@@ -980,7 +982,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Profile</th><th>Clients</th><th>Share</th></tr></thead><tbody><tr><td>Age 20s</td><td>12</td><td>20%</td></tr><tr><td>Age 30s</td><td>29</td><td>48%</td></tr><tr><td>Age 40s</td><td>6</td><td>10%</td></tr><tr><td>Age 50s</td><td>7</td><td>11%</td></tr><tr><td>Age 60+</td><td>7</td><td>11%</td></tr><tr><td>Executives</td><td>21</td><td>33%</td></tr><tr><td>Other professionals</td><td>42</td><td>67%</td></tr><tr><td>Trained in studio</td><td>57</td><td>90%</td></tr><tr><td>Trained in-home or online</td><td>6</td><td>10%</td></tr></tbody></table></div></div></div><p class="disc">Age was not recorded for 2 clients.</p>
   </div></section>
 
-  <section id="goals" class="s-light"><div class="s-inner">
+  <section id="goals" class="s-light omni-band omni-band--white"><div class="s-inner">
     <span class="s-label">Goal Outcomes</span><hr class="gold-line">
     <h2>87% Fully or Partly Achieved Their Goal</h2>
     <p class="lede">Among 48 clients coached for at least three months, 33 fully achieved their primary goal (69%) and 44 fully or partly achieved it (92%).</p><p>Each primary goal was set at intake and rated by the coach as achieved, partly achieved or not achieved, using logged measurements where they exist. Active clients were rated on progress to date and may later move categories.</p><div class="viz" role="img" aria-label="Chart: coach-rated outcome by primary goal for 63 clients. All goals: 39 achieved, 16 partly achieved, 8 not achieved.">
@@ -994,7 +996,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Primary goal</th><th>Clients</th><th>Achieved</th><th>Partly</th><th>Not achieved</th></tr></thead><tbody><tr><td>Strength</td><td>20</td><td>14</td><td>4</td><td>2</td></tr><tr><td>Body recomposition</td><td>14</td><td>8</td><td>3</td><td>3</td></tr><tr><td>Fat loss</td><td>13</td><td>8</td><td>3</td><td>2</td></tr><tr><td>Athletic performance</td><td>7</td><td>4</td><td>2</td><td>1</td></tr><tr><td>Muscle gain</td><td>6</td><td>3</td><td>3</td><td>0</td></tr><tr><td>Health, rehab and longevity</td><td>3</td><td>2</td><td>1</td><td>0</td></tr><tr class="tot"><td>All goals</td><td>63</td><td>39 (62%)</td><td>16 (25%)</td><td>8 (13%)</td></tr></tbody></table></div></div></div><p>13% of clients did not reach their goal. They are reported here alongside everyone else.</p><p>Goals are coached through both tracks of the <a href="/the-omnifit-method">OmniFit Method</a>: the training program and the habits around it, through <a href="/behavior-change-coaching">behavior change coaching</a>.</p>
   </div></section>
 
-  <section id="strength" class="s-light"><div class="s-inner">
+  <section id="strength" class="s-light omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Strength</span><hr class="gold-line">
     <h2>Median Estimated Strength Increased 13.7%</h2>
     <p class="lede">430 lifts were tracked across 38 clients, comparing the best result from each client's first two sessions on a lift with the best result from their latest two. Each client counts once, as the median across their lifts.</p><div class="viz" role="img" aria-label="Chart: median estimated strength change was plus 13.7% across 38 clients; the middle half of clients fell between 0% and plus 27%.">
@@ -1027,7 +1029,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </div>
   </div></section>
 
-  <section id="retention" class="s-light"><div class="s-inner">
+  <section id="retention" class="s-light omni-band omni-band--white"><div class="s-inner">
     <span class="s-label">Training Duration</span><hr class="gold-line">
     <h2>One in Three Had Recorded Training Spanning 12+ Months</h2>
     <p class="lede">Each rate counts only clients who started long enough ago to reach that milestone, so recent clients do not distort the figures.</p><div class="viz" role="img" aria-label="Chart: share of clients whose recorded training reached each milestone. 3 months 74%, 6 months 48%, 12 months 34%, 24 months 17%.">
@@ -1040,7 +1042,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Milestone</th><th>Clients who started long enough ago</th><th>Reached it</th><th>Rate</th></tr></thead><tbody><tr><td>3 months</td><td>65</td><td>48</td><td>74%</td></tr><tr><td>6 months</td><td>60</td><td>29</td><td>48%</td></tr><tr><td>12 months</td><td>53</td><td>18</td><td>34%</td></tr><tr><td>24 months</td><td>30</td><td>5</td><td>17%</td></tr></tbody></table></div></div></div><p>The longest current client relationship is over four years. 48 clients had 10 or more scheduled sessions.</p>
   </div></section>
 
-  <section id="profiles" class="s-light"><div class="s-inner">
+  <section id="profiles" class="s-light omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Client Profiles</span><hr class="gold-line">
     <h2>Individual Results, Measured by OmniFit</h2>
     <p class="lede">Five individual client profiles illustrating body-composition and long-term strength outcomes, shown with each client's written permission.</p>
@@ -1060,7 +1062,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p class="disc">Individual result, measured by OmniFit.</p>
   </div></section>
 
-  <section class="s-light"><div class="s-inner">
+  <section class="s-light omni-band omni-band--white"><div class="s-inner">
     <span class="s-label">Evidence Pools</span><hr class="gold-line">
     <h2>What Each Figure Is Based On</h2>
     <p class="lede">Each figure draws on a defined group of clients. The groups differ in size by design: a client appears in a measure only when the data supports it.</p><div class="viz" role="img" aria-label="Chart: clients in each evidence pool. 90 paying clients; 72 in the outcomes analysis; of those, 63 with a coach-rated goal, 47 with repeated weigh-ins, 38 with repeated strength data and 3 with repeated Bodystat measurements.">
@@ -1072,7 +1074,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <div class="tv"><button class="tv-btn" type="button" aria-expanded="false">Show as a table</button><div class="tv-body"><div class="ct-wrap"><table class="ct"><thead><tr><th>Evidence pool</th><th>Clients</th><th>What it shows</th></tr></thead><tbody><tr><td>Public reviews (Google, Yelp, Thumbtack, Bark)</td><td>190+ reviews</td><td>Client experience and reputation</td></tr><tr><td>Paying clients in the main payment account, Aug 2022 onward</td><td>90</td><td>A minimum count of clients served</td></tr><tr><td>Outcomes analysis (2+ sessions or logged workouts)</td><td>72</td><td>Primary analysis cohort; training duration</td></tr><tr><td>&nbsp;&nbsp;with a coach-rated goal</td><td>63</td><td>Goal outcomes</td></tr><tr><td>&nbsp;&nbsp;with repeated weigh-ins</td><td>47</td><td>Weight change</td></tr><tr><td>&nbsp;&nbsp;with repeated strength data</td><td>38</td><td>Strength change</td></tr><tr><td>&nbsp;&nbsp;with repeated Bodystat measurements</td><td>3</td><td>Client profiles</td></tr></tbody></table></div></div></div>
   </div></section>
 
-  <section class="s-mid"><div class="s-inner">
+  <section class="s-mid omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Reputation</span><hr class="gold-line">
     <h2>Client Feedback</h2>
     <p>OmniFit holds a 4.98 average across 190+ reviews on Google, Yelp, Thumbtack and Bark. Reviews show how clients experience the coaching; the figures above come from coaching records. The two are separate evidence pools and do not describe the same group of people.</p>
@@ -1096,7 +1098,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     </ul>
   </div></section>
 
-  <section class="s-mid"><div class="s-inner">
+  <section class="s-mid omni-band omni-band--cream"><div class="s-inner">
     <span class="s-label">Common Questions</span><hr class="gold-line">
     <h2>Frequently Asked Questions</h2>
     <div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Are these all of OmniFit's clients?<span class="fi-icon">+</span></button><div class="fa"><p>No. The analysis covers 72 clients with two or more scheduled sessions or logged workouts between January 2023 and September 2026. Clients served before 2023, or paid through other channels, are not represented. No client who met the eligibility criteria for a figure was removed because of their outcome.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Who measured these results?<span class="fi-icon">+</span></button><div class="fa"><p>OmniFit, from its own session schedules, workout logs and in-session measurements. The figures are company-reported and have not been independently audited. The full method is on this page.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Will I get the same results?<span class="fi-icon">+</span></button><div class="fa"><p>Nobody can promise that. Results depend on starting point, consistency, sleep, stress, nutrition and medical history. These figures describe what OmniFit has recorded, not what any prospective client will achieve.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">How often is this page updated?<span class="fi-icon">+</span></button><div class="fa"><p>The page is refreshed as new data comes in. The date at the top shows when the figures were last calculated.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Is this medical data?<span class="fi-icon">+</span></button><div class="fa"><p>No. These are training and body-composition records from a fitness practice. OmniFit Performance does not diagnose or treat medical conditions.</p></div></div><div class="fi"><button class="fq" onclick="this.parentElement.classList.toggle('open')">Do clients keep their results after the program ends?<span class="fi-icon">+</span></button><div class="fa"><p>We don't know yet, and we won't claim to. What this page shows is how long recorded training lasted: of clients who started at least 12 months ago, 18 of 53 had training spanning 12 months or more, and of those who started at least 24 months ago, 5 of 30 reached 24 months. That measures continued training, not results kept afterwards. Post-program maintenance isn't yet measured systematically; Tune-Up reassessments are how it will be.</p></div></div>
@@ -1285,13 +1287,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
               <span>@omnifit_sd</span>
             </a>
           </li>
           <li>
             <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
               <span>LinkedIn</span>
             </a>
           </li>
@@ -1299,13 +1301,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
             <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
             <!--email_off--><a href="mailto:nemezio@omnifittraining.com">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a><!--email_on-->
           </li>
@@ -1332,19 +1334,19 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
               <span>Get Directions</span>
             </a>
           </li>
           <li>
             <a href="tel:+16192590630">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
               <span>(619) 259-0630</span>
             </a>
           </li>
           <li>
             <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
               <span>Book Your Consultation</span>
             </a>
           </li>
@@ -1359,6 +1361,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
   </div>
 </footer>
+<script>(function(){function go(){var s=document.createElement("script");s.src="/assets/assistant.js";s.async=true;document.body.appendChild(s)}function idle(){"requestIdleCallback" in window?requestIdleCallback(go,{timeout:3000}):setTimeout(go,1500)}document.readyState==="complete"?idle():window.addEventListener("load",idle)})();</script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

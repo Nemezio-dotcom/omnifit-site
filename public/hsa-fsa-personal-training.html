@@ -6,6 +6,9 @@
 <title>HSA &amp; FSA Eligible Personal Training | How It Works</title>
 <meta name="description" content="Personal training can be HSA or FSA eligible with a Letter of Medical Necessity from a licensed provider. How eligibility works, what the IRS requires, and how reimbursement works with OmniFit Performance.">
 <link rel="canonical" href="https://www.omnifittraining.com/hsa-fsa-personal-training">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
 <!-- =========================
@@ -510,15 +513,13 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-hsa .hsa-hero::before { content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%); pointer-events: none; opacity: .3; }
   #omni-hsa .hsa-badge { display: inline-block; padding: 8px 22px; border: 1px solid var(--gold); color: var(--gold); border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 28px; position: relative; }
   #omni-hsa h1 { font-family: 'Playfair Display', serif !important; font-size: clamp(30px,5vw,50px) !important; font-weight: 700 !important; line-height: 1.15 !important; color: var(--white) !important; margin-bottom: 22px !important; letter-spacing: -0.5px !important; text-transform: none !important; position: relative; }
-  #omni-hsa h1 em { font-style: italic; color: var(--gold); }
   #omni-hsa .hsa-answer { background: var(--navy-mid); border-left: 3px solid var(--gold); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; padding: 26px 30px; max-width: 900px; margin: 0 auto 40px; text-align: left; }
   #omni-hsa .hsa-answer p { font-size: 17px !important; line-height: 1.75 !important; color: var(--white-90) !important; }
   #omni-hsa .hsa-answer strong { color: var(--gold-light); }
-  #omni-hsa .hsa-section { padding: 0 28px; max-width: 900px; margin: 0 auto 52px; }
+  #omni-hsa .hsa-section { max-width: 900px; margin: 0 auto 52px; }
   #omni-hsa .hsa-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; text-align: center; }
   #omni-hsa .hsa-divider { width: 50px; height: 3px; background: var(--gold); border: none; margin: 0 auto 20px; border-radius: 2px; }
   #omni-hsa h2 { font-family: 'Playfair Display', serif !important; font-size: clamp(24px,3.6vw,34px) !important; font-weight: 700 !important; line-height: 1.2 !important; color: var(--white) !important; margin-bottom: 18px !important; text-transform: none !important; text-align: center !important; letter-spacing: -0.3px !important; }
-  #omni-hsa h2 em { font-style: italic; color: var(--gold); }
   #omni-hsa h3 { font-family: 'Playfair Display', serif !important; font-size: 19px !important; font-weight: 600 !important; color: var(--white) !important; margin-bottom: 8px !important; text-transform: none !important; }
   #omni-hsa p { color: var(--white-70); line-height: 1.75; font-size: 15.5px; margin-bottom: 16px; }
   #omni-hsa p:last-child { margin-bottom: 0; }
@@ -544,20 +545,20 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-hsa .hsa-faq-body p { font-size: 14.5px; color: var(--white-70); margin: 0; }
   #omni-hsa a { color: var(--gold) !important; text-decoration: underline; text-underline-offset: 3px; }
   #omni-hsa a:hover { color: var(--gold-light) !important; }
-  #omni-hsa a.hsa-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); background: var(--gold); color: var(--navy) !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none !important; transition: all .3s; }
-  #omni-hsa a.hsa-btn:hover { background: var(--gold-light); color: var(--navy) !important; transform: translateY(-2px); }
+  #omni-hsa a.hsa-btn { display: inline-block; padding: 15px 36px; border-radius: var(--radius); background: var(--gold-btn, var(--gold)); color: var(--navy) !important; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none !important; transition: all .3s; }
+  #omni-hsa a.hsa-btn:hover { background: var(--gold-btn-hover, var(--gold-light)); color: var(--navy) !important; transform: translateY(-2px); }
   #omni-hsa a.hsa-btn-ghost { background: transparent; border: 1px solid var(--white-30); color: var(--white) !important; }
   #omni-hsa a.hsa-btn-ghost:hover { background: var(--white-05); border-color: var(--white); color: var(--white) !important; }
   #omni-hsa .hsa-cta { background: var(--navy-mid); border-radius: var(--radius-lg); padding: 42px 34px; text-align: center; max-width: 900px; margin: 0 auto 40px; }
   #omni-hsa .hsa-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-  #omni-hsa .hsa-disclaimer { max-width: 900px; margin: 0 auto; padding: 0 28px 70px; }
+  #omni-hsa .hsa-disclaimer { max-width: 900px; margin: 0 auto; }
   #omni-hsa .hsa-disclaimer p { font-size: 12px; color: var(--white-50); line-height: 1.7; text-align: center; padding: 16px 22px; border: 1px solid var(--white-10); border-radius: var(--radius); background: var(--white-05); }
   @media (max-width: 768px) {
     #omni-hsa .hsa-hero { padding: 54px 20px 32px; }
     #omni-hsa .hsa-grid { grid-template-columns: 1fr; }
-    #omni-hsa .hsa-section, #omni-hsa .hsa-disclaimer { padding-left: 20px; padding-right: 20px; }
+    
     #omni-hsa .hsa-cta { padding: 30px 22px; margin-left: 20px; margin-right: 20px; }
-    #omni-hsa .hsa-answer { padding: 22px 20px; margin-left: 20px; margin-right: 20px; }
+    #omni-hsa .hsa-answer { padding: 22px 20px; }
     #omni-hsa .hsa-cta-row a.hsa-btn { width: 100%; max-width: 320px; text-align: center; }
   }
   .sqs-block-code #omni-hsa, .sqs-block-html #omni-hsa { margin-bottom: 0 !important; }
@@ -670,6 +671,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <h1>Is Personal Training <em>HSA or FSA Eligible?</em></h1>
   </section>
 
+  <div class="omni-band omni-band--cream">
   <div class="hsa-answer">
     <p><strong>Yes, in some cases.</strong> Personal training can be paid for with HSA or FSA funds when a licensed provider issues a Letter of Medical Necessity stating that the training is intended to treat, mitigate, or prevent a specific diagnosed condition. Training for general fitness, appearance, or overall wellbeing does not qualify under IRS rules. Eligibility is determined by a licensed provider, not by a trainer.</p>
   </div>
@@ -695,7 +697,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <div class="hsa-card"><h3>Bone density</h3><p>Resistance training recommended in response to a diagnosis of osteopenia or osteoporosis, where load-bearing exercise is part of the clinical plan.</p></div>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="hsa-section">
     <span class="hsa-label">Related</span>
     <hr class="hsa-divider">
@@ -720,7 +724,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <p><strong>Do not pay with an HSA or FSA card at checkout.</strong> This is a reimbursement process. Paying with a benefits card at the point of sale can complicate or invalidate the claim. Pay with a personal card, then claim afterward.</p>
     </div>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--cream">
   <div class="hsa-section">
     <span class="hsa-label">Documentation</span>
     <hr class="hsa-divider">
@@ -743,7 +749,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p>OmniFit Performance does not determine eligibility, issue Letters of Medical Necessity, diagnose conditions, or provide medical or tax advice. Nemezio LopezPerez is a NASM-certified personal trainer holding CPT, CES, PES, BCS, and CNC credentials. Those are fitness credentials, not clinical ones, and they do not qualify anyone to make a medical determination.</p>
     <p>If you are unsure whether your situation qualifies, the people to ask are your physician and your plan administrator.</p>
   </div>
+  </div>
 
+  <div class="omni-band omni-band--white">
   <div class="hsa-section">
     <span class="hsa-label">Common Questions</span>
     <hr class="hsa-divider">
@@ -787,8 +795,10 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       </details>
     </div>
   </div>
+  </div>
 
-  <div style="padding:0 28px;">
+  <div class="omni-band omni-band--navy">
+  <div>
     <div class="hsa-cta">
       <h2>See Whether You <em>Qualify</em></h2>
       <p style="max-width:600px;margin:0 auto;">The qualification survey takes a few minutes and is reviewed by a licensed provider. If you would rather talk through the training first, book a consultation.</p>
@@ -801,6 +811,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
   <div class="hsa-disclaimer">
     <p>OmniFit Performance does not provide medical, legal, or tax advice, and does not determine HSA or FSA eligibility. Eligibility is determined by a licensed provider through <a href="https://www.truemed.com/shop/partners/omnifit-performance?utm_source=omnifit-performance&amp;utm_medium=partner&amp;utm_campaign=landing-page&amp;utm_content=site-link" target="_blank" rel="noopener">Truemed</a>, and reimbursement decisions rest with your plan administrator. For qualified customers; HSA and FSA tax savings vary. This page is general information about how the process works and is not a statement about your individual circumstances. Consult your physician, your plan administrator, and a qualified tax professional.</p>
+  </div>
   </div>
 
 </div>
@@ -850,13 +861,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
               <span>@omnifit_sd</span>
             </a>
           </li>
           <li>
             <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
               <span>LinkedIn</span>
             </a>
           </li>
@@ -864,13 +875,13 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
             <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
                  from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
             <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
               <span>Google Reviews</span>
             </a>
           </li>
           <li>
             <!--email_off--><a href="mailto:nemezio@omnifittraining.com">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
               <span>Email</span>
             </a><!--email_on-->
           </li>
@@ -897,19 +908,19 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <ul>
           <li>
             <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
               <span>Get Directions</span>
             </a>
           </li>
           <li>
             <a href="tel:+16192590630">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
               <span>(619) 259-0630</span>
             </a>
           </li>
           <li>
             <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
               <span>Book Your Consultation</span>
             </a>
           </li>
@@ -924,6 +935,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 
   </div>
 </footer>
+<script>(function(){function go(){var s=document.createElement("script");s.src="/assets/assistant.js";s.async=true;document.body.appendChild(s)}function idle(){"requestIdleCallback" in window?requestIdleCallback(go,{timeout:3000}):setTimeout(go,1500)}document.readyState==="complete"?idle():window.addEventListener("load",idle)})();</script>
 <script src="/assets/site.js" defer></script>
 </body>
 </html>

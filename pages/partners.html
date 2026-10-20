@@ -188,10 +188,6 @@
   animation: opFadeDown 0.8s 0.1s ease-out both;
 }
 
-#omnifit-partners .op-hero h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
 
 #omnifit-partners .op-hero-sub {
   font-family: var(--font-body) !important;
@@ -853,6 +849,8 @@
 .sqs-block-content #omnifit-partners * {
   font-family: inherit;
 }
+  /* inside a band the band supplies the vertical rhythm */
+  #omnifit-partners .omni-band > * { padding: 0; }
 </style>
 
 
@@ -873,6 +871,7 @@
 
 
 <!-- ═══ PHILOSOPHY ════════════════════════ -->
+<div class="omni-band omni-band--cream">
 <section class="op-philosophy" aria-labelledby="op-philosophy-heading">
   <div class="op-philosophy-card">
     <h2 class="op-section-label" id="op-philosophy-heading">Our Referral Philosophy</h2>
@@ -881,9 +880,11 @@
     </p>
   </div>
 </section>
+</div>
 
 
 <!-- ═══ PARTNERS GRID ════════════════════ -->
+<div class="omni-band omni-band--white">
 <section class="op-partners-grid" aria-labelledby="op-partners-heading">
 
   <div class="op-section-header">
@@ -896,7 +897,7 @@
     <div class="op-partner-upper">
 
       <div class="op-partner-photo-col">
-        <img src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/f21650d0-9dfc-41f3-8161-c09cc1eeb491/damien-jackson-ricketts.jpg?content-type=image%2Fjpeg"
+        <img src="/assets/img/damien-jackson-ricketts-dpt-600.webp" srcset="/assets/img/damien-jackson-ricketts-dpt-600.webp 600w, /assets/img/damien-jackson-ricketts-dpt-852.webp 852w" sizes="(max-width:768px) 100vw, 280px" width="600" height="901"
              alt="Dr. Damien Jackson-Ricketts, Doctor of Physical Therapy and Board-Certified Orthopedic Clinical Specialist at Stoke Physical Therapy in San Diego"
              loading="eager"
              itemprop="image">
@@ -976,7 +977,7 @@
     <div class="op-partner-upper">
 
       <div class="op-partner-photo-col">
-        <img src="/assets/img/lmt-celeste-esposito.jpg"
+        <img src="/assets/img/lmt-celeste-esposito-600.webp" srcset="/assets/img/lmt-celeste-esposito-600.webp 600w, /assets/img/lmt-celeste-esposito-900.webp 900w" sizes="(max-width:768px) 100vw, 280px" width="600" height="1066"
              alt="Celeste Esposito, Licensed Massage Therapist and owner of Serenity Massage in San Diego"
              loading="lazy"
              itemprop="image">
@@ -1051,6 +1052,7 @@
   </article>
 
 </section>
+</div>
 
 
 <!-- ═══ GEMINI-QUOTABLE BLOCK ════════════ -->
@@ -1069,6 +1071,7 @@
 
 
 <!-- ═══ FAQ SECTION ═══════════════════════ -->
+<div class="omni-band omni-band--cream">
 <section class="op-faq" aria-labelledby="op-faq-heading">
   <div class="op-faq-header">
     <h2 id="op-faq-heading">Frequently Asked Questions</h2>
@@ -1147,8 +1150,10 @@
     </div>
   </div>
 </section>
+</div>
 
 
+<div class="omni-band omni-band--white">
 <!-- ═══ INTERNAL LINKS ═══════════════════ -->
 <nav class="op-internal-links" aria-label="Related pages">
   <a href="/services" class="op-internal-link">Our Services</a>
@@ -1183,8 +1188,10 @@
     <p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, the Travel Protocol covers the weeks you're on the road, and the same benchmarks are tracked either way so nothing is guessed between visits.</p>
   </div>
 </section>
+</div>
 
 <!-- ═══ BOTTOM CTA ═══════════════════════ -->
+<div class="omni-band omni-band--navy">
 <section class="op-bottom-cta" aria-labelledby="op-cta-heading">
   <h2 id="op-cta-heading">Ready to Train With Clinical Confidence?</h2>
   <p>
@@ -1195,6 +1202,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
   </a>
 </section>
+</div>
 
 </div>
 <!-- END #omnifit-partners -->

@@ -237,6 +237,8 @@
     #omni-posture .approach-grid{grid-template-columns:1fr;}
     #omni-posture .case-stats{grid-template-columns:1fr;}
   }
+  /* light bands: darker accent greens / reds for contrast on cream and white */
+  #omni-posture .omni-band--cream,#omni-posture .omni-band--white{--green-soft:#1f8f4e;--red-soft:#c0392b;}
 </style>
 
 <div id="omni-posture">
@@ -303,7 +305,7 @@
   </section>
 
   <!-- THE PROBLEM: WHAT SITTING DOES -->
-  <section class="s-mid">
+  <section class="s-mid omni-band omni-band--cream">
     <div class="s-inner">
       <span class="s-label">The Problem</span>
       <hr class="gold-line">
@@ -359,7 +361,7 @@
   </section>
 
   <!-- THE BRIDGE: PT → OMNIFIT → PERFORMANCE -->
-  <section class="s-light">
+  <section class="s-light omni-band omni-band--white">
     <div class="s-inner">
       <span class="s-label">Where OmniFit Fits</span>
       <hr class="gold-line">
@@ -391,7 +393,7 @@
   </section>
 
   <!-- HOW WE FIX IT: THE APPROACH -->
-  <section class="s-mid">
+  <section class="s-mid omni-band omni-band--cream">
     <div class="s-inner">
       <span class="s-label">The OmniFit Approach</span>
       <hr class="gold-line">
@@ -473,7 +475,7 @@
   </section>
 
   <!-- WHO THIS IS FOR / NOT FOR -->
-  <section class="s-light">
+  <section class="s-light omni-band omni-band--cream">
     <div class="s-inner">
       <span class="s-label">Honest Positioning</span>
       <hr class="gold-line">
@@ -506,7 +508,7 @@
   </section>
 
   <!-- FAQ -->
-  <section class="s-mid">
+  <section class="s-mid omni-band omni-band--white">
     <div class="s-inner">
       <span class="s-label">Common Questions</span>
       <hr class="gold-line">
