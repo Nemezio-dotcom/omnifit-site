@@ -253,6 +253,62 @@
   fromHash();
 })();
 
+/* ---- Scrollable tables: reachable by keyboard ----
+   A table (or its wrapper) that scrolls sideways (phones, and the hidden
+   tables on /outcomes once expanded) gets tabindex="0", role="region" and a label from
+   the table caption or the nearest heading above it, so keyboard users can
+   focus it and scroll with the arrow keys (WCAG 2.1.1). Wrappers that do not
+   overflow are left alone, so desktop gets no extra tab stops. */
+(function () {
+  function label(el) {
+    var cap = el.querySelector('caption');
+    if (cap && cap.textContent.trim()) return cap.textContent.trim();
+    var n = el;
+    while (n && n !== document.body) {
+      var p = n.previousElementSibling;
+      while (p) {
+        if (/^H[1-6]$/.test(p.tagName)) return p.textContent.trim();
+        var h = p.querySelectorAll ? p.querySelectorAll('h1,h2,h3,h4,h5,h6') : [];
+        if (h.length) return h[h.length - 1].textContent.trim();
+        p = p.previousElementSibling;
+      }
+      n = n.parentElement;
+    }
+    return 'Table';
+  }
+  function scan() {
+    /* real tables, and the div-grid "tables" some pages use (.bc-table, .of-table) */
+    document.querySelectorAll('main table, main [class$="-table"], main [class*="-table "]').forEach(function (t) {
+      var el = t;
+      while (el && el.tagName !== 'MAIN') {
+        var ox = getComputedStyle(el).overflowX;
+        if (ox === 'auto' || ox === 'scroll') break;
+        el = el.parentElement;
+      }
+      if (!el || el.tagName === 'MAIN') return;
+      var scrolls = el.scrollWidth > el.clientWidth + 1;
+      if (scrolls && !el.hasAttribute('tabindex')) {
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'region');
+        el.setAttribute('aria-label', label(el) + ' (scrollable table)');
+        el.setAttribute('data-omni-scroll', '');
+      } else if (!scrolls && el.hasAttribute('data-omni-scroll')) {
+        el.removeAttribute('tabindex'); el.removeAttribute('role');
+        el.removeAttribute('aria-label'); el.removeAttribute('data-omni-scroll');
+      }
+    });
+  }
+  var timer;
+  function later() { clearTimeout(timer); timer = setTimeout(scan, 150); }
+  scan();
+  window.addEventListener('load', scan);
+  window.addEventListener('resize', later);
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.closest && e.target.closest('button,summary')) later();
+  });
+  document.addEventListener('toggle', later, true);
+})();
+
 /* ===== Footer year (source: pages/footer.html) ===== */
 (function(){
     var y=document.getElementById('omnifit-year');
