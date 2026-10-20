@@ -299,6 +299,9 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
 .omni-blog .ob-byline a{color:var(--ob-muted);}
 .omni-blog .ob-intro{font-size:17px;line-height:1.8;color:var(--ob-text);margin:0 auto;max-width:680px;}
 
+.omni-blog .ob-figure{max-width:720px;margin:0 auto 32px;}
+.omni-blog .ob-figure img{display:block;width:100%;height:auto;border-radius:6px;}
+
 .omni-blog .ob-body{max-width:720px;margin:0 auto;border-top:1px solid var(--ob-line);padding-top:32px;}
 .omni-blog .ob-body p,.omni-blog .ob-body li{font-size:17px;line-height:1.85;color:var(--ob-text);}
 .omni-blog .ob-body p{margin:0 0 22px;}

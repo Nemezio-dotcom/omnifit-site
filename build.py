@@ -484,7 +484,7 @@ def build():
     footer_css, footer_html, footer_js = footer_parts()
     # The Journal (site/blog.py). With no post in pages/blog/ the build output
     # is unchanged: no /blog page, the /blog 302 stays, no CSS, no footer link.
-    posts = blog.load_posts(PAGES / "blog")
+    posts = blog.load_posts(PAGES / "blog", SITE / "img")
     footer_html = footer_html.replace("<!--BLOG_LINK-->", blog.FOOTER_LINK if posts else "")
     footer_html += "\n" + ASSISTANT_LOADER
 

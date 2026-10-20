@@ -7,7 +7,7 @@ Sources
   site/blog.css            journal styles, scoped under .omni-blog; appended
                            to public/assets/site.css only once a post exists
 
-Post format (every key required except `updated`):
+Post format (every key required except `updated`, `image` and `image_alt`):
 
     <!-- POST
     title:       SEO title (no trailing brand; keep it under ~60 characters)
@@ -17,6 +17,10 @@ Post format (every key required except `updated`):
     updated:     YYYY-MM-DD   (optional; defaults to published)
     method:      e.g. Correct · Regulation (physical stage · behavioral stage)
     minutes:     reading time, whole minutes
+    image:       optional lead photo, a .jpg in site/img (e.g. name-1600.jpg);
+                 a same-name .webp and smaller -NNNN.jpg/.webp siblings are
+                 picked up for srcset
+    image_alt:   alt text for the photo (required when image is set)
     -->
     <p class="post-lede">...</p>
     <h2>...</h2> <p>...</p> ...
@@ -27,7 +31,8 @@ Post format (every key required except `updated`):
     </section>
 
 Generated per post: the page chrome (breadcrumb, method tag, H1, byline,
-author box, consultation CTA) and one JSON-LD @graph (BlogPosting,
+lead photo, author box, consultation CTA), Open Graph / Twitter card tags
+when the post has an image, and one JSON-LD @graph (BlogPosting,
 BreadcrumbList, and a FAQPage built from the visible .post-q blocks, so the
 schema always mirrors the page). /blog lists every post, newest first.
 
@@ -39,6 +44,7 @@ import datetime
 import html
 import json
 import re
+import struct
 from pathlib import Path
 
 REQUIRED = ("title", "description", "h1", "published", "method", "minutes")
@@ -47,6 +53,7 @@ SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 TAG_RE = re.compile(r"<[^>]+>")
 Q_RE = re.compile(r'<div class="post-q">\s*<h3>(.*?)</h3>(.*?)</div>', re.S)
+WIDTH_RE = re.compile(r"^(.*)-(\d+)$")
 
 AUTHOR_NAME = "Nemezio LopezPerez"
 CALENDLY = "https://calendly.com/nemezio-omnifittraining/45min"
@@ -56,7 +63,45 @@ class PostError(SystemExit):
     pass
 
 
-def load_posts(blog_dir):
+def _jpeg_size(path):
+    """(width, height) from a JPEG's SOF marker."""
+    d = path.read_bytes()
+    i = 2
+    while i + 9 < len(d):
+        if d[i] != 0xFF:
+            break
+        marker = d[i + 1]
+        seg_len = struct.unpack(">H", d[i + 2:i + 4])[0]
+        if marker in (0xC0, 0xC1, 0xC2):
+            h, w = struct.unpack(">HH", d[i + 5:i + 9])
+            return w, h
+        i += 2 + seg_len
+    raise PostError(f"{path}: could not read the JPEG size")
+
+
+def _image(p, name, alt, img_dir):
+    """Resolve a post's lead photo into src, srcset (jpg and webp), size and alt."""
+    if not alt:
+        raise PostError(f"{p}: image is set, so image_alt is required")
+    src = Path(img_dir) / name
+    if src.suffix.lower() not in (".jpg", ".jpeg") or not src.is_file():
+        raise PostError(f"{p}: image {name!r} must be a .jpg in site/img")
+    w, h = _jpeg_size(src)
+    m = WIDTH_RE.match(src.stem)
+    if m:
+        widths = sorted(int(f.stem.rsplit("-", 1)[1]) for f in src.parent.glob(f"{m.group(1)}-*{src.suffix}")
+                        if WIDTH_RE.match(f.stem) and WIDTH_RE.match(f.stem).group(1) == m.group(1))
+        stems = [(f"{m.group(1)}-{n}", n) for n in widths if n <= int(m.group(2))]
+    else:
+        stems = [(src.stem, w)]
+    jpg = ", ".join(f"/assets/img/{s}{src.suffix} {n}w" for s, n in stems)
+    webp = ", ".join(f"/assets/img/{s}.webp {n}w" for s, n in stems)
+    has_webp = all((src.parent / f"{s}.webp").is_file() for s, _ in stems)
+    return {"src": f"/assets/img/{name}", "srcset": jpg, "webp": webp if has_webp else "",
+            "width": w, "height": h, "alt": alt}
+
+
+def load_posts(blog_dir, img_dir=None):
     """pages/blog/*.html -> list of post dicts, newest first."""
     blog_dir = Path(blog_dir)
     posts = []
@@ -89,6 +134,10 @@ def load_posts(blog_dir):
             raise PostError(f"{p}: minutes must be a whole number")
         if not SLUG_RE.match(p.stem):
             raise PostError(f"{p}: file name must be a lower-case hyphenated slug")
+        if meta.get("image"):
+            meta["image"] = _image(p, meta["image"], meta.get("image_alt", ""), img_dir)
+        else:
+            meta["image"] = None
         body = text[m.end():].strip()
         if "<style" in body or "<h1" in body:
             raise PostError(f"{p}: the body carries no <style> and no <h1> (the template adds the H1)")
@@ -139,6 +188,10 @@ def post_header(post, base):
             ],
         },
     ]
+    img = post["image"]
+    if img:
+        graph[0]["image"] = {"@type": "ImageObject", "url": base + img["src"],
+                             "width": img["width"], "height": img["height"]}
     pairs = faq_pairs(post["body"])
     if pairs:
         graph.append({
@@ -151,8 +204,43 @@ def post_header(post, base):
         })
     data = json.dumps({"@context": "https://schema.org", "@graph": graph}, indent=2, ensure_ascii=False)
     return ("<!-- Generated by site/blog.py from pages/blog/" + post["slug"] + ".html. "
-            "Edit the post, not this block. -->\n"
+            "Edit the post, not this block. -->\n" + _social_tags(post, url, base) +
             '<script type="application/ld+json">\n' + data + "\n</script>")
+
+
+def _social_tags(post, url, base):
+    """Open Graph and Twitter card tags, so a shared link shows the lead photo."""
+    img = post["image"]
+    if not img:
+        return ""
+    e = lambda v: html.escape(str(v), quote=True)
+    tags = [
+        ("property", "og:type", "article"),
+        ("property", "og:site_name", "OmniFit Performance"),
+        ("property", "og:title", post["h1"]),
+        ("property", "og:description", post["description"]),
+        ("property", "og:url", url),
+        ("property", "og:image", base + img["src"]),
+        ("property", "og:image:width", img["width"]),
+        ("property", "og:image:height", img["height"]),
+        ("property", "og:image:alt", img["alt"]),
+        ("property", "article:published_time", post["published"]),
+        ("property", "article:modified_time", post["updated"]),
+        ("name", "twitter:card", "summary_large_image"),
+        ("name", "twitter:image", base + img["src"]),
+    ]
+    return "".join(f'<meta {a}="{k}" content="{e(v)}">\n' for a, k, v in tags)
+
+
+def _figure(img):
+    if not img:
+        return ""
+    webp = (f'<source type="image/webp" srcset="{img["webp"]}" sizes="(max-width:760px) 100vw, 720px">'
+            if img["webp"] else "")
+    return f"""<figure class="ob-figure">
+    <picture>{webp}<img src="{img['src']}" srcset="{img['srcset']}" sizes="(max-width:760px) 100vw, 720px" width="{img['width']}" height="{img['height']}" alt="{html.escape(img['alt'], quote=True)}" fetchpriority="high" decoding="async"></picture>
+  </figure>
+  """
 
 
 CTA = f"""<aside class="ob-cta" aria-label="Work with OmniFit">
@@ -180,7 +268,7 @@ def post_body(post):
     <h1>{html.escape(post['h1'])}</h1>
     <p class="ob-byline">By <a href="/about">{AUTHOR_NAME}</a> · <time datetime="{post['published']}">{_date_label(post['published'])}</time> · {post['minutes']} min read</p>
   </header>
-  <div class="ob-body">
+  {_figure(post['image'])}<div class="ob-body">
 {post['body']}
   </div>
   {AUTHOR}
