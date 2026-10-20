@@ -440,8 +440,9 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
   answers are saved or sent; only an anonymous count of completed checks
   and their result is recorded." The lede made the same absolute claim
   ("Nothing here is saved or sent") and now carries the same wording. The
-  meta description ("Instant result, nothing saved.") is unchanged under
-  the no-title/meta rule.
+  meta description no longer makes the claim at all: "Instant result,
+  nothing saved." was dropped in the site-audit run (Oct 20 2026) when the
+  description was cut to 160 characters, which also removes the overclaim.
 - PRIVACY POLICY tools (Oct 17 2026): Google Analytics 4 · Microsoft
   Clarity (session analytics with form fields masked; not used on the Fit
   Check) · HubSpot (forms and email) · Calendly (booking) · Cloudflare
@@ -471,7 +472,8 @@ ASK OMNIFIT - ON-SITE AI ASSISTANT (owner brief, Oct 19 2026)
   needs owner approval and a new hash here and there) · functions/api/ask.js ·
   functions/api/assistant-log.js · functions/_lib/assistant.js · schema.sql ·
   site/assistant.js + site/assistant.css (copied to public/assets/) ·
-  tests/assistant.test.mjs. functions/ sits at the Pages root next to
+  tests/assistant.test.mjs · workers/assistant-cleanup/ (daily retention
+  Worker, deployed separately). functions/ sits at the Pages root next to
   build.py, never inside public/.
 - Fixed copy (screened by certify.py): header line "AI assistant · Answers come
   from OmniFit's published pricing and policies. Conversations are logged to
@@ -482,13 +484,21 @@ ASK OMNIFIT - ON-SITE AI ASSISTANT (owner brief, Oct 19 2026)
   "How is this different from a gym?" · BOOK -> gold "Book a Consultation" ->
   Calendly · FIT_CHECK -> outline "Take the Fit Check" -> /fit-check · error
   "Something went wrong. You can book a consultation directly." + Book.
-- Limits: Origin omnifittraining.com / www / omnifit-site.pages.dev only;
-  600 characters per message; last 10 messages sent; after 12 visitor turns a
-  fixed hand-off reply with BOOK; 30 messages/hour per visitor keyed on
-  SHA-256(IP + random daily salt), no raw IP stored; emails and phone numbers
-  removed before the API call and the log; log rows deleted after 90 days;
-  max_tokens 400, non-streaming, model ASSISTANT_MODEL (default
-  claude-sonnet-5-5), system block cached (ephemeral).
+- Limits (updated Oct 20 2026, site-audit run): Origin omnifittraining.com /
+  www / omnifit-site.pages.dev only; 600 characters per message; context is
+  rebuilt on the server from assistant_log by session_id (last 4 exchanges +
+  the new message; assistant turns the browser sends are ignored); after 12
+  visitor turns a fixed hand-off reply with BOOK; 30 messages/hour per visitor
+  keyed on SHA-256(IP, or the IPv6 /64 prefix, + random daily salt), no raw IP
+  stored; 300 messages/hour across all visitors (ASSISTANT_GLOBAL_LIMIT_PER_HOUR);
+  emails and phone numbers (incl. international and spelled-out emails)
+  removed before the API call and the log; log rows deleted after 90 days by
+  every /api/ask and /api/assistant-log request (at most every 10 minutes)
+  and by the daily workers/assistant-cleanup Worker; max_tokens 400 (a cut-off
+  reply is trimmed to its last full sentence), non-streaming, model
+  ASSISTANT_MODEL (default claude-sonnet-5-5), system block cached
+  (ephemeral). Log export: /api/assistant-log form or Authorization: Bearer;
+  ?key= is no longer accepted.
 - GA4 (only when gtag exists): assistant_open, assistant_message,
   assistant_cta_click (cta = book | fit_check). No message text is sent.
 - CERTIFICATION: certify.py screens knowledge.md (as the model receives it),
