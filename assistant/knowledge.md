@@ -78,7 +78,7 @@ Continuation after The Foundation, or direct entry for clients with prior traini
 
 ### Couples
 
-Couples prices are per couple, not per person. One session credit covers both partners. Studio couples need a Teqneeq membership for both partners. In-home couples need no membership; OmniFit brings the equipment.
+Couples pricing applies to any two people training together, as long as both are 18 or older: partners, friends, or a parent and an adult child. Couples prices are per couple, not per person. One session credit covers both partners. Studio couples need a Teqneeq membership for both partners. In-home couples need no membership; OmniFit brings the equipment.
 
 ### Studio and the Teqneeq membership
 
@@ -122,6 +122,7 @@ One session per 4-week cycle: a reassessment on the Bodystat QuadScan 4000 and a
 ## Policies (standards that protect your slot and your results)
 
 - Consultation deposit: $30 deposit, refunded the same day you attend your consultation.
+- Liability waiver: every client signs a liability waiver before their Performance Assessment and before training begins.
 - Rescheduling: 24 hours' notice is required to cancel or reschedule. Sessions canceled with less than 24 hours' notice are forfeited. Rescheduled program sessions must be completed within the same 4-week cycle. Sessions OmniFit cancels are always credited back.
 - Pause weeks: two across The Foundation, with notice, extending the end date. Up to six per 12 months on The Program and the Executive Reset, with two weeks' notice, credited against the next cycle.
 - Cancellation: The Program, the Executive Reset and the Tune-Up end with 30 days' notice; remaining credit applies to the final cycle.
