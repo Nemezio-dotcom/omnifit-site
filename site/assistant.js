@@ -134,6 +134,8 @@
       if (!data) return;
       if (!data.reply) throw new Error('empty');
       var handoff = data.handoff === 'book' || data.handoff === 'fit_check' ? data.handoff : null;
+      // The server rebuilds context from its log by session id; keep the id it used.
+      if (typeof data.sessionId === 'string' && /^[A-Za-z0-9-]{8,64}$/.test(data.sessionId)) state.sessionId = data.sessionId;
       state.messages.push({ role: 'assistant', content: data.reply, handoff: handoff });
       save();
       dots.remove();

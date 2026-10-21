@@ -1,0 +1,17 @@
+# Scheduled Worker that enforces the Ask OmniFit 90-day log retention.
+# Deploy once from this directory:  npx wrangler deploy
+# Before deploying, set database_name / database_id to the D1 database the
+# Pages project binds as DB (Cloudflare dashboard -> Storage & Databases -> D1,
+# or `npx wrangler d1 list`).
+name = "omnifit-assistant-cleanup"
+main = "index.js"
+compatibility_date = "2026-10-01"
+workers_dev = false
+
+[triggers]
+crons = ["17 10 * * *"] # daily, 10:17 UTC
+
+[[d1_databases]]
+binding = "DB"                                  # same binding name as the Pages project
+database_name = "REPLACE_WITH_D1_DATABASE_NAME"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"

@@ -65,7 +65,7 @@
   #omni-progress p { font-family: 'Montserrat', sans-serif !important; margin-bottom: 18px; color: var(--white-70); font-weight: 400; line-height: 1.7; }
   #omni-progress .s-light p { color: var(--light-muted); }
   #omni-progress h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
-  #omni-progress h4 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
+  #omni-progress h4,#omni-progress .mc h3 { font-family: 'Playfair Display', serif !important; color: var(--white); text-transform: none; }
   #omni-progress a { color: var(--gold); text-decoration: none; }
 
   /* METRICS GRID */
@@ -75,7 +75,7 @@
   #omni-progress .mc:hover { border-color: var(--gold); background: var(--navy-surface); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
   #omni-progress .mc:hover::after { opacity: 1; }
   #omni-progress .mc-num { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
-  #omni-progress .mc h4 { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); }
+  #omni-progress .mc :is(h3,h4) { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 600; margin-bottom: 10px; color: var(--white); }
   #omni-progress .mc p { font-size: 14px; line-height: 1.7; color: var(--white-50); margin: 0; }
 
   /* OUTCOMES */
@@ -88,7 +88,7 @@
   #omni-progress .ob-note { text-align: center; font-size: 12px; color: var(--white-50); margin-top: 28px; font-style: italic; }
 
   /* PROGRESS REPORT (real, anonymised details removed) */
-  #omni-progress .rm { --rm-ink: #0a1628; --rm-text: #3a4252; --rm-muted: #6b7280; --rm-line: #e2e4e8; --rm-soft: #f0f1f4; --rm-gold: #8a6a1c; background: #fff; border: 1px solid var(--rm-line); border-top: 4px solid var(--gold); border-radius: var(--radius-lg); padding: 36px; margin: 40px 0 0; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+  #omni-progress .rm { --rm-ink: #0a1628; --rm-text: #3a4252; --rm-muted: #5b6372; --rm-line: #e2e4e8; --rm-soft: #f0f1f4; --rm-gold: #806520; background: #fff; border: 1px solid var(--rm-line); border-top: 4px solid var(--gold); border-radius: var(--radius-lg); padding: 36px; margin: 40px 0 0; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
   #omni-progress .rm-head { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid var(--rm-line); margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
   #omni-progress .rm-head h3 { font-family: 'Playfair Display', serif !important; font-size: 24px; font-weight: 600; color: var(--rm-ink); margin: 0 0 6px; }
   #omni-progress .rm-sub { font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--rm-gold); }
@@ -146,7 +146,7 @@
   #omni-progress .ct tr:last-child td { border-bottom: none; }
   #omni-progress .ct tr:hover td { background: rgba(201,168,76,0.04); }
   #omni-progress .chk { color: #1a7a4c; font-weight: 600; }
-  #omni-progress .xm { color: #7c879a; }
+  #omni-progress .xm { color: #5f6a7c; }
 
   /* FAQ */
   #omni-progress .fi { border-bottom: 1px solid var(--white-10); }
@@ -234,7 +234,7 @@
   #omh-short.omh{--omh-navy:#0a1628;--omh-gold:#c9a84c;--omh-ink:#1e293b;--omh-line:rgba(10,22,40,.10);font-family:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--omh-ink);background:#fff;margin:0;padding:56px 24px 72px;line-height:1.65;-webkit-font-smoothing:antialiased;text-align:left;}
   #omh-short.omh *{box-sizing:border-box;}
   #omh-short.omh .omh-inner{max-width:1100px;margin:0 auto;}
-  #omh-short.omh .omh-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#9a7a26 !important;margin:0 0 14px;}
+  #omh-short.omh .omh-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#806520 !important;margin:0 0 14px;}
   #omh-short.omh .omh-label::before{content:'';display:inline-block;width:28px;height:2px;background:var(--omh-gold);flex:none;}
   #omh-short.omh h2{font-family:'Playfair Display','Times New Roman',serif !important;font-size:clamp(27px,3.6vw,38px) !important;font-weight:700 !important;font-style:normal !important;line-height:1.18 !important;letter-spacing:-.3px !important;color:#0a1628 !important;margin:0 0 16px !important;padding:0 !important;text-transform:none !important;text-align:left !important;max-width:24ch;}
   #omh-short.omh .short-box{border:1px solid var(--omh-line);border-left:4px solid var(--omh-gold);border-radius:14px;padding:30px 32px;background:#fff;box-shadow:0 10px 30px rgba(10,22,40,.05);}
@@ -286,9 +286,9 @@
     <h2>Measurement Is the First Pillar of the Method</h2>
     <p>The OmniFit Method rests on three pillars that run through Assess, Correct, Build and Sustain. Measurement comes first because the other two depend on it: you cannot load a joint correctly or set the right accountability without a baseline.</p>
     <div class="mg">
-      <div class="mc"><div class="mc-num">Pillar 01</div><h4>Measured Progress</h4><p>The OmniFit Method measures before it programs. Every program begins with a Performance Assessment: nine movement benchmarks, posture photos, strength baselines, circumference measurements and a Bodystat QuadScan 4000 body-composition scan. Progress is judged against that baseline on a fixed cadence, never against an average, and the record is published with its method on the Client Outcomes page.</p></div>
-      <div class="mc"><div class="mc-num">Pillar 02</div><h4>Joint-First Strength</h4><p>The OmniFit Method builds strength on a corrective floor. Corrective work sits in every warm-up, loading is chosen for what each joint tolerates under the 3/10 pain ceiling, and the patterns desk work creates are programmed for directly. For clients cleared from physical therapy, the Method is the bridge back to full training, within scope and never as treatment.</p></div>
-      <div class="mc"><div class="mc-num">Pillar 03</div><h4>Accountability That Travels</h4><p>The OmniFit Method fits accountability to the client, not a template. The Accountability Dial has three settings, Full, Coached and Train Only, included at every tier (Executive Reset Bronze offers Coached or Train Only) and adjustable at any 4-week cycle boundary. Studio, in-home and virtual run on one app with pause weeks, and the Executive Reset carries the Method anywhere.</p></div>
+      <div class="mc"><div class="mc-num">Pillar 01</div><h3>Measured Progress</h3><p>The OmniFit Method measures before it programs. Every program begins with a Performance Assessment: nine movement benchmarks, posture photos, strength baselines, circumference measurements and a Bodystat QuadScan 4000 body-composition scan. Progress is judged against that baseline on a fixed cadence, never against an average, and the record is published with its method on the Client Outcomes page.</p></div>
+      <div class="mc"><div class="mc-num">Pillar 02</div><h3>Joint-First Strength</h3><p>The OmniFit Method builds strength on a corrective floor. Corrective work sits in every warm-up, loading is chosen for what each joint tolerates under the 3/10 pain ceiling, and the patterns desk work creates are programmed for directly. For clients cleared from physical therapy, the Method is the bridge back to full training, within scope and never as treatment.</p></div>
+      <div class="mc"><div class="mc-num">Pillar 03</div><h3>Accountability That Travels</h3><p>The OmniFit Method fits accountability to the client, not a template. The Accountability Dial has three settings, Full, Coached and Train Only, included at every tier (Executive Reset Bronze offers Coached or Train Only) and adjustable at any 4-week cycle boundary. Studio, in-home and virtual run on one app with pause weeks, and the Executive Reset carries the Method anywhere.</p></div>
     </div>
     <div class="q-wrap" style="margin-top:32px"><div class="quotable">
       <strong>Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</strong> Full Accountability, with daily logging, is the default for the first cycles. The path from there is Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up, which is graduation: one reassessment and training session per 4-week cycle, with programming through the app between visits. Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.
@@ -300,13 +300,13 @@
     <h2>The 12 Metrics We Track for Every Client</h2>
     <p>Whether you train in-person at the studio inside Teqneeq FHC in 4S Ranch or through Hybrid and Virtual Coaching, every OmniFit client is tracked through the same seven-category framework. Body composition is measured on the QuadScan for studio clients and by guided self-measurement for virtual clients.</p>
     <div class="mg">
-      <div class="mc"><div class="mc-num">Category 01</div><h4>Body Composition</h4><p>Bioimpedance analysis on the Bodystat QuadScan 4000, plus tape measurements at 7 sites and circumference tracking. Scale weight alone cannot tell you whether a change is muscle, fat or fluid. The QuadScan helps separate them.</p></div>
-      <div class="mc"><div class="mc-num">Category 02</div><h4>Strength Benchmarks</h4><p>Key compound lift performance (deadlift, squat, press, row), grip strength, and relative strength ratios. Reviewed every 4 weeks to ensure progressive overload is actually happening.</p></div>
-      <div class="mc"><div class="mc-num">Category 03</div><h4>Posture Assessment</h4><p>Quarterly posture photos with structured scoring of common desk-posture patterns: rounded shoulders, forward head position, pelvic tilt and upper-back rounding. Built for desk-bound professionals.</p></div>
-      <div class="mc"><div class="mc-num">Category 04</div><h4>Mobility &amp; Joint Function</h4><p>Active range of motion tests for shoulders, hips, ankles, and thoracic spine. Tracked to show whether mobility and corrective work is changing how those joints move.</p></div>
-      <div class="mc"><div class="mc-num">Category 05</div><h4>Session Adherence</h4><p>Percentage of scheduled sessions completed each 4-week cycle — including virtual and travel sessions. One of the strongest practical drivers of results.</p></div>
-      <div class="mc"><div class="mc-num">Category 06</div><h4>Nutrition Compliance</h4><p>Weekly tracking of agreed-upon nutrition habits — protein intake, meal frequency, hydration, and behavior-change targets from <a href="/behavior-change-coaching">behavior change coaching</a>. Measured as percentage of weekly goals hit.</p></div>
-      <div class="mc"><div class="mc-num">Category 07</div><h4>Subjective Well-Being</h4><p>Self-reported energy, sleep quality and stress levels — rated weekly. This captures what numbers can't and shows when recovery is falling behind training.</p></div>
+      <div class="mc"><div class="mc-num">Category 01</div><h3>Body Composition</h3><p>Bioimpedance analysis on the Bodystat QuadScan 4000, plus tape measurements at 7 sites and circumference tracking. Scale weight alone cannot tell you whether a change is muscle, fat or fluid. The QuadScan helps separate them.</p></div>
+      <div class="mc"><div class="mc-num">Category 02</div><h3>Strength Benchmarks</h3><p>Key compound lift performance (deadlift, squat, press, row), grip strength, and relative strength ratios. Reviewed every 4 weeks to ensure progressive overload is actually happening.</p></div>
+      <div class="mc"><div class="mc-num">Category 03</div><h3>Posture Assessment</h3><p>Quarterly posture photos with structured scoring of common desk-posture patterns: rounded shoulders, forward head position, pelvic tilt and upper-back rounding. Built for desk-bound professionals.</p></div>
+      <div class="mc"><div class="mc-num">Category 04</div><h3>Mobility &amp; Joint Function</h3><p>Active range of motion tests for shoulders, hips, ankles, and thoracic spine. Tracked to show whether mobility and corrective work is changing how those joints move.</p></div>
+      <div class="mc"><div class="mc-num">Category 05</div><h3>Session Adherence</h3><p>Percentage of scheduled sessions completed each 4-week cycle — including virtual and travel sessions. One of the strongest practical drivers of results.</p></div>
+      <div class="mc"><div class="mc-num">Category 06</div><h3>Nutrition Compliance</h3><p>Weekly tracking of agreed-upon nutrition habits — protein intake, meal frequency, hydration, and behavior-change targets from <a href="/behavior-change-coaching">behavior change coaching</a>. Measured as percentage of weekly goals hit.</p></div>
+      <div class="mc"><div class="mc-num">Category 07</div><h3>Subjective Well-Being</h3><p>Self-reported energy, sleep quality and stress levels — rated weekly. This captures what numbers can't and shows when recovery is falling behind training.</p></div>
     </div>
     <h3 style="font-size:22px;margin:48px 0 6px">The Twelve Measures</h3>
     <p style="margin-bottom:0">The seven categories above break down into these twelve measures:</p>
@@ -475,10 +475,10 @@
     <h2>What People Come to Coaching For</h2>
     <p>Coaching is rarely the goal on its own. These are the situations it usually attaches to.</p>
     <div class="mg">
-      <div class="mc"><h4>Long-Term Transformation</h4><p>You want a body that holds up for years rather than a twelve-week push that unravels. The work is built to be repeatable: a plan you can still follow in month nine, progressions tied to what your body tolerates, and a coach who adjusts the plan rather than restarting it.</p></div>
-      <div class="mc"><h4>Fat Loss Without Crash Protocols</h4><p>Aggressive plans can be difficult to sustain around demanding schedules and individual training tolerance. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p></div>
-      <div class="mc"><h4>Desk-Worker Posture and Mobility</h4><p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets common mobility and strength patterns associated with prolonged sitting, with corrective work built into every session rather than bolted on as a warm-up.</p></div>
-      <div class="mc"><h4>Data-Driven Hybrid Coaching</h4><p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, the Travel Protocol covers the weeks you're on the road, and the same benchmarks are tracked either way so nothing is guessed between visits.</p></div>
+      <div class="mc"><h3>Long-Term Transformation</h3><p>You want a body that holds up for years rather than a twelve-week push that unravels. The work is built to be repeatable: a plan you can still follow in month nine, progressions tied to what your body tolerates, and a coach who adjusts the plan rather than restarting it.</p></div>
+      <div class="mc"><h3>Fat Loss Without Crash Protocols</h3><p>Aggressive plans can be difficult to sustain around demanding schedules and individual training tolerance. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p></div>
+      <div class="mc"><h3>Desk-Worker Posture and Mobility</h3><p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets common mobility and strength patterns associated with prolonged sitting, with corrective work built into every session rather than bolted on as a warm-up.</p></div>
+      <div class="mc"><h3>Data-Driven Hybrid Coaching</h3><p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, the Travel Protocol covers the weeks you're on the road, and the same benchmarks are tracked either way so nothing is guessed between visits.</p></div>
     </div>
   </div></section>
 

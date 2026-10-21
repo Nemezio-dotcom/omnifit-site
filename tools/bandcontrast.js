@@ -6,7 +6,8 @@
 // For every cream or white band (.omni-band--cream / --white, site/site.css) on
 // every built page, walks the visible text nodes, composites the computed text
 // colour over the nearest painted ancestor background (translucent ones are
-// blended over the band) and reports anything under 3:1. It is how the
+// blended over the band) and reports anything under WCAG AA (4.5:1 for body
+// text, 3:1 for large text). It is how the
 // hard-coded white text in the shared omni-who block, the --white-as-background
 // chart cards on outcomes and the navy table headers were found. Expected
 // residue: the seven "0" labels on outcomes' scroll-drawn bar segments.
@@ -35,7 +36,10 @@ const fs = require('fs');
           // nearest painted ancestor background inside the band
           let p = el, back = bg; while (p && p !== band) { const b = parse(getComputedStyle(p).backgroundColor); if (b[3] > .5) { back = b[3] > .98 ? b : blend(b, bg).concat([1]); break; } p = p.parentElement; }
           const fg = blend(parse(cs.color), back); const L1 = lum(fg), L2 = lum(back); const cr = (Math.max(L1, L2) + .05) / (Math.min(L1, L2) + .05);
-          n++; if (cr < 3) out.push({ sel: el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.split(' ')[0] : ''), text: t.textContent.trim().slice(0, 40), cr: +cr.toFixed(2), color: cs.color });
+          // WCAG 1.4.3 AA: 4.5:1 for body text, 3:1 only for large text (24px+, or 18.66px+ bold).
+          // Until Oct 20 2026 this probe used 3:1 for everything, which let the 11px gold labels (#9a7a26, 3.3-4.0:1) through on 36 pages.
+          const px = parseFloat(cs.fontSize), large = px >= 24 || (px >= 18.66 && (parseInt(cs.fontWeight, 10) || 400) >= 700), need = large ? 3 : 4.5;
+          n++; if (cr < need) out.push({ sel: el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.split(' ')[0] : ''), text: t.textContent.trim().slice(0, 40), cr: +cr.toFixed(2), need, color: cs.color });
         }
       }
       return { n, out };

@@ -3,36 +3,48 @@
 //
 // Harmless until configured: without the ANTHROPIC_API_KEY secret and the D1
 // binding DB, both methods return 503 and the widget never appears.
+//
+// Every request that reaches a D1 binding (any status, either method) also
+// runs the throttled log cleanup, so 90-day deletion does not depend on a
+// successful chat; workers/assistant-cleanup runs it daily as well.
 import { SYSTEM_PROMPT } from "../_lib/system-prompt.js";
 import { KNOWLEDGE } from "../_lib/knowledge.js";
 import {
   ALLOWED_HOSTS,
   BadRequest,
+  GLOBAL_RATE_KEY,
   MAX_USER_TURNS,
   TURN_CAP_REPLY,
   callClaude,
-  cleanup,
   extractHandoff,
+  globalLimit,
   isConfigured,
   json,
   logTurn,
   loggedTurns,
+  maybeCleanup,
   originAllowed,
   overRateLimit,
   parseBody,
+  sessionHistory,
   visitorKey,
 } from "../_lib/assistant.js";
 
 const SYSTEM = SYSTEM_PROMPT + "\n\nKNOWLEDGE:\n\n" + KNOWLEDGE;
 
-function later(context, promise) {
-  const p = promise.catch((e) => console.error("assistant cleanup failed", e));
+// Starts the throttled cleanup without delaying the response.
+function cleanupLater(context) {
+  const db = context.env && context.env.DB;
+  if (!db) return null;
+  const p = maybeCleanup(db, new Date()).catch((e) => console.error("assistant cleanup failed", e && e.message));
   if (context.waitUntil) context.waitUntil(p);
   return p;
 }
 
 // Names what is missing (never a value), so a 503 can be diagnosed from a browser.
-export async function onRequestGet({ request, env }) {
+export async function onRequestGet(context) {
+  const { request, env } = context;
+  cleanupLater(context);
   const missing = [];
   if (!env || !env.ANTHROPIC_API_KEY) missing.push("ANTHROPIC_API_KEY");
   if (!env || !env.DB) missing.push("DB");
@@ -44,6 +56,7 @@ export async function onRequestGet({ request, env }) {
 
 export async function onRequestPost(context) {
   const { request, env } = context;
+  cleanupLater(context);
   if (!isConfigured(env)) return json({ error: "unavailable" }, 503);
   if (!originAllowed(request)) return json({ error: "forbidden_origin" }, 403);
 
@@ -53,26 +66,31 @@ export async function onRequestPost(context) {
   } catch (e) {
     return json({ error: e instanceof BadRequest ? e.code : "bad_request" }, 400);
   }
-  const { messages, userTurns, page, sessionId } = parsed;
+  const { userMessage, userTurns, page, sessionId } = parsed;
   const db = env.DB;
   const now = new Date();
-  const userMessage = messages[messages.length - 1].content;
 
   try {
     if (await overRateLimit(db, await visitorKey(db, request, now), now)) {
       return json({ error: "rate_limited" }, 429);
     }
+    // The turn count and the context come from the log, not the browser: a
+    // new or missing sessionId starts an empty conversation, and assistant
+    // turns the browser sends are ignored.
     const turns = Math.max(userTurns, (await loggedTurns(db, sessionId)) + 1);
     let reply, handoff;
     if (turns > MAX_USER_TURNS) {
       reply = TURN_CAP_REPLY;
       handoff = "book";
     } else {
+      if (await overRateLimit(db, GLOBAL_RATE_KEY, now, globalLimit(env))) {
+        return json({ error: "rate_limited" }, 429);
+      }
+      const messages = [...(await sessionHistory(db, sessionId)), { role: "user", content: userMessage }];
       ({ reply, handoff } = extractHandoff(await callClaude(env, SYSTEM, messages)));
       if (!reply) throw new Error("reply was only a handoff token");
     }
     await logTurn(db, { now, page, sessionId, userMessage, reply, handoff });
-    later(context, cleanup(db, now));
     return json({ reply, handoff, sessionId });
   } catch (e) {
     console.error("assistant error", e && e.message);

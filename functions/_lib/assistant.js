@@ -18,7 +18,12 @@ export const MAX_ASSISTANT_CHARS = 2000; // history replayed by the browser; rep
 export const HISTORY_SENT = 10;
 export const MAX_USER_TURNS = 12;
 export const RATE_LIMIT_PER_HOUR = 30;
+// Messages per hour across every visitor together (ASSISTANT_GLOBAL_LIMIT_PER_HOUR
+// overrides). Caps what the API key can spend however many addresses send.
+export const GLOBAL_LIMIT_PER_HOUR = 300;
+export const GLOBAL_RATE_KEY = "global"; // visitor keys are 64 hex chars, so this cannot collide
 export const LOG_RETENTION_DAYS = 90;
+export const CLEANUP_INTERVAL_MS = 10 * 60000;
 export const UPSTREAM_TIMEOUT_MS = 25000;
 
 // Returned instead of a model call once a conversation passes MAX_USER_TURNS.
@@ -69,12 +74,81 @@ export function extractHandoff(text) {
   return { reply, handoff };
 }
 
-const EMAIL_RE = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
-const PHONE_RE = /(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\b/g;
+// A reply cut off at max_tokens: drop a half-written handoff token ("[[BO"),
+// then cut back to the last complete sentence (or line) so it reads as
+// finished. Complete tokens in the dropped tail are kept, so a hand-off the
+// model already wrote still shows its button. A reply with no sentence end at
+// all is cut at the last word and given an ellipsis.
+const PARTIAL_TOKEN_RE = /\[(?:\[[A-Z_]*\]?)?\s*$/;
+const SENTENCE_END_RE = /[.!?…]["'”’)\]]*(?=\s|$)|\n/g;
+export function tidyTruncated(text) {
+  const s = String(text || "").replace(PARTIAL_TOKEN_RE, "").replace(/\s+$/, "");
+  let cut = -1;
+  for (const m of s.matchAll(SENTENCE_END_RE)) {
+    // A cut inside a complete token is impossible: tokens hold no . ! ? or newline.
+    // A digit and a period at the very end may be a figure cut mid-decimal
+    // ("4." of "4.98"), so that is not trusted as a sentence end.
+    if (m[0] === "." && m.index + 1 === s.length && /\d/.test(s[m.index - 1] || "")) continue;
+    cut = m[0] === "\n" ? m.index : m.index + m[0].length;
+  }
+  let head = cut > 0 ? s.slice(0, cut) : "";
+  if (!head.replace(TOKEN_RE, "").trim()) {
+    // No usable sentence end: keep whole words and mark the cut.
+    head = s.replace(/\s*\S*$/, "").replace(/[\s,;:–—-]+$/, "");
+    head = head.replace(TOKEN_RE, "").trim() ? head + "…" : "";
+  }
+  const tail = s.slice(head.replace(/…$/, "").length);
+  const tokens = tail.match(TOKEN_RE) || [];
+  return (head.trimEnd() + (tokens.length ? " " + tokens.join(" ") : "")).trim();
+}
+
+// ── contact redaction ──────────────────────────────────────────────
+// Emails: literal ("a@b.com", "a @ b.com"), bracketed ("a [at] b [dot] com",
+// "a(at)b.com") and spelled out ("a dot b at c dot com"). The bare-word form
+// with real dots ("john at gmail.com") is only treated as an email when the
+// domain is a common mail provider or the name part looks like one (has a
+// dot, digit, underscore or plus), so "I found you at yelp.com" survives.
+const LOCAL_CH = "[A-Z0-9_%+-]";
+const DOT_OBF = "(?:\\s*(?:\\[dot\\]|\\(dot\\)|\\{dot\\}|<dot>)\\s*|\\s+dot\\s+)";
+const DOT_ANY = `(?:${DOT_OBF}|\\s+\\.\\s+|\\.)`;
+const LOCAL = `${LOCAL_CH}+(?:${DOT_ANY}${LOCAL_CH}+)*`;
+const AT_BRACKET = "\\s*(?:\\[at\\]|\\(at\\)|\\{at\\}|<at>)\\s*";
+const AT_SYM = "\\s*@\\s*";
+const AT_WORD = "\\s+at\\s+";
+const LABEL = "[A-Z0-9-]+";
+const TLD = "[A-Z]{2,24}";
+const DOMAIN_ANY = `(?:${LABEL}${DOT_ANY})+${TLD}`;
+const DOMAIN_OBF = `(?:${LABEL}${DOT_ANY})*${LABEL}${DOT_OBF}(?:${LABEL}${DOT_ANY})*${TLD}`;
+const END = "(?![A-Z0-9-])";
+const EMAIL_RES = [
+  // Any "at" with a spelled-out dot in the domain.
+  new RegExp(`${LOCAL}(?:${AT_SYM}|${AT_BRACKET}|${AT_WORD})${DOMAIN_OBF}${END}`, "gi"),
+  // "@" or a bracketed at, with any dots.
+  new RegExp(`${LOCAL}(?:${AT_SYM}|${AT_BRACKET})${DOMAIN_ANY}${END}`, "gi"),
+];
+const WORD_AT_RE = new RegExp(`(${LOCAL})${AT_WORD}(${DOMAIN_ANY})${END}`, "gi");
+const MAIL_PROVIDERS =
+  /^(?:gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|icloud|me|mac|aol|proton|protonmail|pm|gmx|mail|zoho|comcast|att|sbcglobal|cox|verizon|charter|earthlink|fastmail|hey|yandex)$/i;
+
+// Phones: 10 to 15 digits in one run, separated only by spaces, dots, dashes
+// or brackets, with an optional leading "+" ("+52 664 123 4567", "0061 412
+// 345 678", "(619) 555-0100"). Not preceded by a letter, digit, "$", "." or
+// ",", and not followed by a digit or a decimal/thousands part, so prices,
+// dates, ZIP codes, street numbers and times are left alone.
+const PHONE_RE = /(?<![A-Za-z0-9$.,\/])\+?\(?\d(?:[ \t\u00a0.\-()]{0,3}\d){9,14}(?![0-9]|[.,]\d)/g;
 
 // Contact details never reach the model or the log.
 export function redactContact(text) {
-  return String(text).replace(EMAIL_RE, "[email removed]").replace(PHONE_RE, "[phone removed]");
+  let s = String(text);
+  for (const re of EMAIL_RES) s = s.replace(re, "[email removed]");
+  s = s.replace(WORD_AT_RE, (all, local, domain) => {
+    const looksLikeEmail = /[._+0-9]|\bdot\b/i.test(local) || MAIL_PROVIDERS.test(domain.split(".")[0].trim());
+    return looksLikeEmail ? "[email removed]" : all;
+  });
+  // A run made only of years ("2024 2025 2026") is not a phone number.
+  return s.replace(PHONE_RE, (all) =>
+    all.split(/[^0-9]+/).every((g) => /^(?:19|20)\d\d$/.test(g)) ? all : "[phone removed]",
+  );
 }
 
 export class BadRequest extends Error {
@@ -84,9 +158,12 @@ export class BadRequest extends Error {
   }
 }
 
-// Validates the browser's payload and returns { messages, userTurns, page,
-// sessionId }. `messages` is the last HISTORY_SENT turns, starting on a user
-// turn and ending on the new user message, contact details redacted.
+// Validates the browser's payload and returns { userMessage, userTurns, page,
+// sessionId }. Only the new (last) user message is used: earlier turns are
+// rebuilt from the log for the session (sessionHistory), so assistant text
+// the browser sends back is never trusted. The browser may keep sending its
+// history; it is checked for shape and its user-turn count only ever raises
+// the turn count.
 export function parseBody(body) {
   if (!body || typeof body !== "object" || !Array.isArray(body.messages)) throw new BadRequest("bad_request");
   const all = body.messages;
@@ -100,15 +177,13 @@ export function parseBody(body) {
   }
   if (all[all.length - 1].role !== "user") throw new BadRequest("bad_request");
   const userTurns = all.filter((m) => m.role === "user").length;
-  let messages = all.slice(-HISTORY_SENT);
-  while (messages.length && messages[0].role !== "user") messages = messages.slice(1);
-  messages = messages.map((m) => ({ role: m.role, content: m.role === "user" ? redactContact(m.content) : m.content }));
+  const userMessage = redactContact(all[all.length - 1].content);
   const page = typeof body.page === "string" && body.page.startsWith("/") ? body.page.slice(0, 200) : "";
   const sessionId =
     typeof body.sessionId === "string" && /^[A-Za-z0-9-]{8,64}$/.test(body.sessionId)
       ? body.sessionId
       : crypto.randomUUID();
-  return { messages, userTurns, page, sessionId };
+  return { userMessage, userTurns, page, sessionId };
 }
 
 export async function sha256Hex(text) {
@@ -129,13 +204,51 @@ export async function dailySalt(db, now) {
   return row.salt;
 }
 
+// The address a visitor is rate-limited by: IPv4 as is, IPv6 by its /64
+// prefix (one household or device usually holds a whole /64, so keying on the
+// full address would let it rotate through 2^64 keys). Unparseable input is
+// used as is.
+export function rateSubject(ip) {
+  const raw = String(ip || "").trim().toLowerCase();
+  if (!raw.includes(":")) return raw || "unknown";
+  const addr = raw.replace(/^\[|\]$/g, "").replace(/%.*$/, "");
+  const halves = addr.split("::");
+  if (halves.length > 2) return raw;
+  const groups = (part) => {
+    if (!part) return [];
+    const out = [];
+    for (const g of part.split(":")) {
+      if (/^\d+\.\d+\.\d+\.\d+$/.test(g)) {
+        const b = g.split(".").map(Number);
+        if (b.some((n) => n > 255)) return null;
+        out.push(((b[0] << 8) | b[1]).toString(16), ((b[2] << 8) | b[3]).toString(16));
+      } else if (/^[0-9a-f]{1,4}$/.test(g)) out.push(parseInt(g, 16).toString(16));
+      else return null;
+    }
+    return out;
+  };
+  const head = groups(halves[0]);
+  const tail = halves.length === 2 ? groups(halves[1]) : [];
+  if (!head || !tail) return raw;
+  const fill = 8 - head.length - tail.length;
+  if (halves.length === 2 ? fill < 1 : fill !== 0) return raw;
+  const full = [...head, ...Array(fill).fill("0"), ...tail];
+  return full.slice(0, 4).join(":") + "::/64";
+}
+
 export async function visitorKey(db, request, now) {
-  const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+  const ip = rateSubject(request.headers.get("CF-Connecting-IP"));
   return sha256Hex(ip + "|" + (await dailySalt(db, now)));
 }
 
+export function globalLimit(env) {
+  const n = Number.parseInt(env && env.ASSISTANT_GLOBAL_LIMIT_PER_HOUR, 10);
+  return Number.isFinite(n) && n > 0 ? n : GLOBAL_LIMIT_PER_HOUR;
+}
+
 // Fixed one-hour windows. Returns true when this message is over the limit.
-export async function overRateLimit(db, key, now) {
+// Used per visitor (key = visitor hash) and site-wide (key = GLOBAL_RATE_KEY).
+export async function overRateLimit(db, key, now, limit = RATE_LIMIT_PER_HOUR) {
   const windowStart = Math.floor(now.getTime() / 3600000) * 3600;
   const row = await db
     .prepare(
@@ -144,12 +257,29 @@ export async function overRateLimit(db, key, now) {
     )
     .bind(key, windowStart)
     .first();
-  return row.count > RATE_LIMIT_PER_HOUR;
+  return row.count > limit;
 }
 
 export async function loggedTurns(db, sessionId) {
   const row = await db.prepare("SELECT COUNT(*) AS n FROM assistant_log WHERE session_id = ?1").bind(sessionId).first();
   return row ? Number(row.n) : 0;
+}
+
+// The conversation so far, rebuilt from what this server logged for the
+// session (visitor messages already redacted, replies as returned): the last
+// few exchanges, oldest first, as Messages API turns. With the new message
+// appended this stays within HISTORY_SENT messages.
+export async function sessionHistory(db, sessionId, pairs = Math.floor((HISTORY_SENT - 1) / 2)) {
+  const { results } = await db
+    .prepare("SELECT user_message, reply FROM assistant_log WHERE session_id = ?1 ORDER BY id DESC LIMIT ?2")
+    .bind(sessionId, pairs)
+    .all();
+  const out = [];
+  for (const r of (results || []).reverse()) {
+    if (!String(r.user_message || "").trim() || !String(r.reply || "").trim()) continue;
+    out.push({ role: "user", content: String(r.user_message) }, { role: "assistant", content: String(r.reply) });
+  }
+  return out;
 }
 
 export async function logTurn(db, { now, page, sessionId, userMessage, reply, handoff }) {
@@ -170,7 +300,32 @@ export async function cleanup(db, now) {
   await db.prepare("DELETE FROM assistant_salt WHERE day < ?1").bind(yesterday).run();
 }
 
-// One non-streaming Messages API call. Returns the reply text, or throws.
+// Retention without relying on any one request type: every /api/ask and
+// /api/assistant-log request calls this, and at most once per
+// CLEANUP_INTERVAL_MS one of them claims the assistant_meta row and runs
+// cleanup(). The daily worker in workers/assistant-cleanup calls cleanup()
+// directly. If assistant_meta does not exist yet (schema.sql not re-run), it
+// cleans on every call instead. Returns true when it cleaned.
+export async function maybeCleanup(db, now = new Date()) {
+  try {
+    const claimed = await db
+      .prepare(
+        "INSERT INTO assistant_meta (key, value) VALUES ('last_cleanup', ?1) " +
+          "ON CONFLICT (key) DO UPDATE SET value = excluded.value WHERE assistant_meta.value < ?2 RETURNING value",
+      )
+      .bind(now.toISOString(), new Date(now.getTime() - CLEANUP_INTERVAL_MS).toISOString())
+      .first();
+    if (!claimed) return false;
+  } catch (e) {
+    console.error("assistant_meta unavailable; cleaning anyway", e && e.message);
+  }
+  await cleanup(db, now);
+  return true;
+}
+
+// One non-streaming Messages API call. Returns the reply text, or throws. A
+// reply cut off at max_tokens is tidied (tidyTruncated) rather than shown
+// mid-sentence.
 export async function callClaude(env, system, messages, fetchImpl = fetch) {
   const model = env.ASSISTANT_MODEL || DEFAULT_MODEL;
   const controller = new AbortController();
@@ -195,11 +350,12 @@ export async function callClaude(env, system, messages, fetchImpl = fetch) {
     if (!res.ok) throw new Error(`upstream ${res.status}`);
     const data = await res.json();
     if (data.stop_reason === "refusal") throw new Error("upstream refusal");
-    const text = (data.content || [])
+    let text = (data.content || [])
       .filter((b) => b.type === "text")
       .map((b) => b.text)
       .join("")
       .trim();
+    if (data.stop_reason === "max_tokens") text = tidyTruncated(text);
     if (!text) throw new Error("upstream empty reply");
     return text;
   } finally {

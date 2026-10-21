@@ -89,7 +89,7 @@
   /* ===== ASSESSMENT HIGHLIGHT ===== */
   #omni-rates .rt-assess { background: var(--navy-light); border: 2px solid var(--gold); border-radius: var(--radius-lg); padding: 32px 28px; max-width: 1120px; margin: 0 auto 56px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
   #omni-rates .rt-assess-content { flex: 1; }
-  #omni-rates .rt-assess-price { background: var(--gold); color: var(--navy); font-family: 'Playfair Display', serif !important; font-size: 36px; font-weight: 700; border-radius: var(--radius); padding: 16px 28px; flex-shrink: 0; text-align: center; line-height: 1; }
+  #omni-rates .rt-assess-price { background: var(--gold-btn, var(--gold)); color: var(--navy); font-family: 'Playfair Display', serif !important; font-size: 36px; font-weight: 700; border-radius: var(--radius); padding: 16px 28px; flex-shrink: 0; text-align: center; line-height: 1; }
   #omni-rates .rt-assess-price span { display: block; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; }
 
   /* ===== FIT / NOT FIT ===== */
@@ -174,14 +174,14 @@
   #omni-rates .rt-notice-inner strong { color: var(--gold-light); font-weight: 600; }
   @media (max-width: 640px) { #omni-rates .rt-notice-inner { padding: 18px 20px; } }
   #omni-rates .rt-guarantee { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px 28px; margin-top: 24px; }
-  #omni-rates .rt-guarantee h4 { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+  #omni-rates .rt-guarantee :is(h3,h4) { font-family: 'Playfair Display', serif !important; font-size: 19px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
   #omni-rates .rt-guarantee p { font-size: 14px; line-height: 1.7; color: var(--white-90); }
 
   /* ===== ADD-ONS ===== */
   #omni-rates .rt-addons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 56px; }
   #omni-rates .rt-addon { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; transition: all 0.3s; }
   #omni-rates .rt-addon:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
-  #omni-rates .rt-addon h4 { font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  #omni-rates .rt-addon :is(h3,h4) { font-family: 'Montserrat', sans-serif !important; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
   #omni-rates .rt-addon-price { font-family: 'Playfair Display', serif !important; font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
   #omni-rates .rt-addon p { font-size: 13px; color: var(--white-50); line-height: 1.65; }
 
@@ -189,7 +189,7 @@
   #omni-rates .rt-policies { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto 56px; }
   #omni-rates .rt-policy { background: var(--navy-mid); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px; text-align: center; }
   #omni-rates .rt-policy-icon { font-size: 24px; margin-bottom: 10px; }
-  #omni-rates .rt-policy h5 { font-family: 'Montserrat', sans-serif !important; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  #omni-rates .rt-policy :is(h3,h5) { font-family: 'Montserrat', sans-serif !important; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
   #omni-rates .rt-policy p { font-size: 13px; color: var(--white-50); line-height: 1.6; }
   #omni-rates .rt-policy a, #omni-rates .rt-policy a:link, #omni-rates .rt-policy a:visited { color: var(--gold) !important; text-decoration: underline; }
   #omni-rates .rt-policy a:hover { color: var(--gold-light) !important; }
@@ -282,7 +282,7 @@
   #omni-rates .rt-jump { position: sticky; top: var(--rt-top, 0px); z-index: 60; margin: 0 0 44px; padding: 10px 20px; background: rgba(10,22,40,0.82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-top: 1px solid var(--white-05); border-bottom: 1px solid var(--white-10); }
   #omni-rates .rt-jump-inner { display: flex; gap: 8px; justify-content: center; max-width: 1120px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   #omni-rates .rt-jump-inner::-webkit-scrollbar { display: none; }
-  #omni-rates .rt-jump-label { flex: 0 0 auto; align-self: center; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white-50); margin-right: 6px; }
+  #omni-rates .rt-jump-label { flex: 0 0 auto; align-self: center; font-family: 'Montserrat', sans-serif !important; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white-70); margin-right: 6px; }
   #omni-rates .rt-jump a, #omni-rates .rt-jump a:link, #omni-rates .rt-jump a:visited { flex: 0 0 auto; padding: 8px 16px; border-radius: 100px; border: 1px solid var(--white-20); color: var(--white-70) !important; font-family: 'Montserrat', sans-serif !important; font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; white-space: nowrap; transition: all 0.25s; }
   #omni-rates .rt-jump a:hover { border-color: var(--gold); color: var(--gold) !important; transform: translateY(-1px); }
   #omni-rates .rt-jump a.is-active { background: var(--gold); border-color: var(--gold); color: var(--navy) !important; box-shadow: 0 6px 20px rgba(201,168,76,0.3); }
@@ -791,27 +791,27 @@
   <div class="rt-policies rt-policies-5">
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
-      <h5>The assessment is credited</h5>
+      <h3>The assessment is credited</h3>
       <p>The Performance Assessment ($150 in person, or $75 virtual: self-measured with video guidance, no body-composition scan) is credited toward your first purchase: a Foundation or Program cycle, an Executive Reset cycle, or a 5-session pack. You pay for the baseline once, and it becomes part of your program.</p>
     </div>
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></div>
-      <h5>30-Day Fit Guarantee</h5>
+      <h3>30-Day Fit Guarantee</h3>
       <p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. No compliance test, no negotiation.</p>
     </div>
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></div>
-      <h5>Pause weeks</h5>
+      <h3>Pause weeks</h3>
       <p>Two across The Foundation with notice, extending the end date. Six per 12 months on The Program with 2 weeks' notice, credited against the next cycle. Travel doesn't cost you a session: on the Travel Protocol you can take a scheduled session live by video during a travel week, at no extra cost.</p>
     </div>
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></div>
-      <h5>Sessions OmniFit cancels are credited</h5>
+      <h3>Sessions OmniFit cancels are credited</h3>
       <p>The 24-hour standard runs both ways. If OmniFit cancels a session, it is credited back to you.</p>
     </div>
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></div>
-      <h5>The Foundation is a defined starter block</h5>
+      <h3>The Foundation is a defined starter block</h3>
       <p>Three 4-week cycles, one payment, a known end date. You know exactly what the first 12 weeks cost and what they contain before you start.</p>
     </div>
   </div>
@@ -820,12 +820,12 @@
   <div class="rt-policies">
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg></div>
-      <h5>Billing</h5>
+      <h3>Billing</h3>
       <p>The Foundation is one payment at signup covering all three cycles. The Program is charged at the start of each 4-week cycle via auto-pay and ends with 30 days' notice; remaining credit is applied to the final cycle. No activation fees. Some clients pay with HSA or FSA funds. See how <a href="/hsa-fsa-personal-training">HSA and FSA eligibility</a> works.</p>
     </div>
     <div class="rt-policy rt-reveal">
       <div class="rt-policy-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg></div>
-      <h5>24-Hour Policy</h5>
+      <h3>24-Hour Policy</h3>
       <p>Reschedule with 24 hours' notice, within the same 4-week cycle. Sessions canceled with less than 24 hours' notice are forfeited. Sessions OmniFit cancels are credited.</p>
     </div>
   </div>
@@ -1095,7 +1095,7 @@
 
   <div style="max-width:1120px; margin:24px auto 0;">
     <div class="rt-guarantee rt-reveal">
-      <h4>30-Day Fit Guarantee</h4>
+      <h3>30-Day Fit Guarantee</h3>
       <p>If OmniFit isn't the right fit within your first 30 days on The Foundation, The Program or the Executive Reset, tell us in writing and we'll refund the unused portion of your enrollment. No compliance test, no negotiation.</p>
     </div>
   </div>
@@ -1274,7 +1274,7 @@
     <p class="rt-steps-note rt-reveal" style="max-width:860px; margin-bottom:24px;">On The Program you can move up or down a tier between cycles. During The Foundation you can step up, not down &mdash; the first 12 weeks are built as a block. Want more sessions mid-Foundation? Step up anytime. If your new tier is only offered on The Program, your Foundation ends there &mdash; every unused session is credited toward your first Program cycle, and you pay only the difference. You can adjust your accountability level at any cycle boundary.</p>
 
     <div class="rt-guarantee rt-reveal rt-example" style="max-width:1120px; margin:0 auto 14px;">
-      <h4>Worked example: Foundation Momentum to Program Peak</h4>
+      <h3>Worked example: Foundation Momentum to Program Peak</h3>
       <p>A client on studio Momentum on The Foundation ($560 per 4-week cycle, 4 sessions per cycle, three cycles) decides after the first cycle that they want to train three times a week. Studio Peak is only offered on The Program, at $1,800 per 4-week cycle, so The Foundation ends at the cycle boundary and the unused sessions become credit.</p>
       <ul class="rt-feature-list" style="margin-top:12px;">
         <li><strong>Foundation per-session rate:</strong> $560 &divide; 4 sessions = <span class="rt-out">$140</span> per session</li>
@@ -1318,7 +1318,7 @@
     </div>
     <p class="rt-steps-note rt-reveal" style="margin-bottom:14px;"><strong style="color:var(--white);">At every setting:</strong> payment confirms your booking, sessions reschedule with 24 hours' notice, corrective work sits in every warm-up, and you are reassessed at least every 12 weeks.</p>
     <div class="rt-guarantee rt-reveal" style="max-width:1120px; margin:0 auto 14px;">
-      <h4>Tracking is a diagnostic tool, not a life sentence.</h4>
+      <h3>Tracking is a diagnostic tool, not a life sentence.</h3>
       <p>We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week. The path most clients follow: <strong style="color:var(--gold-light);">Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</strong>. The Tune-Up is not a fourth setting; it is graduation, the point at the end of the Dial.</p>
       <p style="margin-top:10px;">Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins &mdash; written for you, not a template.</p>
     </div>

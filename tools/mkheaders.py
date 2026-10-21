@@ -6,24 +6,24 @@ import faq
 
 BASE = "https://www.omnifittraining.com"
 META = {
- "the-omnifit-method": ("The OmniFit Method: Assess, Correct, Build, Sustain | OmniFit Performance", "Personal Training Method",
-   "OmniFit Performance's four-phase training method for busy professionals 30+ in San Diego: Assess, Correct, Build, Sustain. Corrective-first programming with a 3/10 pain ceiling, led by a NASM Elite Trainer."),
+ "the-omnifit-method": ("The OmniFit Method: Assess, Correct, Build, Sustain", "Personal Training Method",
+   "OmniFit Performance's four-phase method for busy professionals 30+ in San Diego: Assess, Correct, Build, Sustain. Corrective-first, with a 3/10 pain ceiling."),
  "how-we-measure-your-progress": ("How We Measure Your Progress | OmniFit Performance San Diego", "How We Measure Progress",
-   "How OmniFit Performance tracks client progress in San Diego: standardized metrics, progress reviews every 4 weeks, and program adjustments driven by trend data rather than guesswork."),
- "omnifit-vs-competitors": ("OmniFit vs F45, Orangetheory, Equinox & Big Box Gyms | San Diego", "OmniFit vs Other Options",
+   "How OmniFit Performance tracks client progress in San Diego: standardized metrics, reviews every 4 weeks, and adjustments driven by trend data, not guesswork."),
+ "omnifit-vs-competitors": ("OmniFit vs F45, Orangetheory & Equinox | San Diego", "OmniFit vs Other Options",
    "Honest comparison: OmniFit Performance vs F45, Orangetheory, 24 Hour Fitness, and Equinox. Find the right fit for busy professionals 30+ in San Diego."),
  "weight-loss": ("Sustainable Fat Loss for Busy Professionals 30+ | San Diego", "Fat Loss Coaching",
-   "Structured fat loss coaching in 4S Ranch, San Diego for busy professionals over 30. Joint-friendly strength training, individualized nutrition coaching, and behavior change systems instead of crash diets."),
- "strength-training-1": ("Strength Training for Professionals 30+ | OmniFit Performance San Diego", "Strength Training",
-   "Progressive, joint-friendly strength training in San Diego for professionals 30+. Corrective-first programming that builds real strength while protecting joints, led by a NASM Elite Trainer."),
+   "Fat loss coaching in 4S Ranch, San Diego for busy professionals over 30: joint-friendly strength training, individualized nutrition coaching, no crash diets."),
+ "strength-training-1": ("Strength Training for Professionals 30+ | San Diego", "Strength Training",
+   "Progressive, joint-friendly strength training in San Diego for professionals 30+. Corrective-first programming that builds strength while protecting joints."),
  "hiit-personal-trainer-san-diego": ("HIIT Personal Training in San Diego | OmniFit Performance", "HIIT Personal Training",
-   "Coached 1-on-1 HIIT and conditioning in San Diego, at the studio inside Teqneeq FHC in 4S Ranch, in-home across North County, or live virtual. Time-efficient sessions for busy professionals 30+."),
+   "Coached 1-on-1 HIIT and conditioning in San Diego: in studio at Teqneeq FHC in 4S Ranch, in-home across North County, or live virtual. For professionals 30+."),
  "personal-training-services": ("Personal Training Services for Professionals 30+ | San Diego", "Personal Training Services",
-   "OmniFit Performance's personal training services in San Diego: private studio sessions at Teqneeq FHC in 4S Ranch, in-home training across North County, and virtual coaching for professionals 30+."),
+   "Personal training in San Diego for professionals 30+: private studio sessions at Teqneeq FHC in 4S Ranch, in-home across North County, and virtual coaching."),
  "body-composition-testing": ("Body Composition Testing San Diego | Bodystat QuadScan 4000", "Body Composition Testing",
-   "Multi-frequency Bodystat QuadScan 4000 body composition testing in San Diego at Teqneeq FHC in 4S Ranch. The $150 Performance Assessment includes a 9-point movement screen and expert interpretation."),
+   "Bodystat QuadScan 4000 body composition testing at Teqneeq FHC in 4S Ranch, San Diego. Part of the $150 Performance Assessment, with a 9-point movement screen."),
  "partners": ("Trusted Clinical Partners | OmniFit Performance — San Diego", "Clinical Partners",
-   "OmniFit Performance partners with board-certified physical therapists and licensed massage therapists in San Diego to bridge rehabilitation, recovery, and corrective strength training for busy professionals 30+."),
+   "Clinical partners: board-certified physical therapists and licensed massage therapists in San Diego, bridging rehab, recovery and corrective strength training."),
 }
 # Real partner entities carried over from the page's embedded schema. Kept because
 # they are partner facts that exist nowhere else; OmniFit's own business node is

@@ -3,9 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Behavior Change Coaching San Diego | Habits That Survive Real Life</title>
-<meta name="description" content="Behavior change coaching for busy professionals in San Diego, built on four stages: Awareness, Regulation, Adaptation, Integration. In-studio in 4S Ranch, in-home, or virtual.">
+<title>Behavior Change Coaching San Diego | OmniFit Performance</title>
+<meta name="description" content="Behavior change coaching for professionals in San Diego, built on four stages: Awareness, Regulation, Adaptation, Integration. In-studio, in-home, or virtual.">
 <link rel="canonical" href="https://www.omnifittraining.com/behavior-change-coaching">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OmniFit Performance">
+<meta property="og:title" content="Behavior Change Coaching San Diego | OmniFit Performance">
+<meta property="og:description" content="Behavior change coaching for professionals in San Diego, built on four stages: Awareness, Regulation, Adaptation, Integration. In-studio, in-home, or virtual.">
+<meta property="og:url" content="https://www.omnifittraining.com/behavior-change-coaching">
+<meta property="og:image" content="https://www.omnifittraining.com/assets/img/og-coach-client-cable-pulldown-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Coach Nemezio LopezPerez coaching a client through a cable exercise for the upper back">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.omnifittraining.com/assets/img/og-coach-client-cable-pulldown-1200x630.jpg">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -379,8 +390,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
       "@type": "WebPage",
       "@id": "https://www.omnifittraining.com/behavior-change-coaching#webpage",
       "url": "https://www.omnifittraining.com/behavior-change-coaching",
-      "name": "Behavior Change Coaching San Diego | Habits That Survive Real Life",
-      "description": "Behavior change coaching for busy professionals in San Diego, built on four stages: Awareness, Regulation, Adaptation, Integration. In-studio in 4S Ranch, in-home, or virtual.",
+      "name": "Behavior Change Coaching San Diego | OmniFit Performance",
+      "description": "Behavior change coaching for professionals in San Diego, built on four stages: Awareness, Regulation, Adaptation, Integration. In-studio, in-home, or virtual.",
       "isPartOf": { "@id": "https://www.omnifittraining.com/#website" },
       "about": { "@id": "https://www.omnifittraining.com/#localbusiness-of" },
       "publisher": { "@id": "https://www.omnifittraining.com/#organization" },
@@ -504,10 +515,11 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-behavior .bc-track-head { padding:18px 22px; font-size:11px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; }
   #omni-behavior .bc-track-head span { display:block; margin-top:4px; font-family:'Playfair Display',serif; font-style:italic; text-transform:none; letter-spacing:0; font-size:15px; font-weight:400; }
   #omni-behavior .bc-th-phys { background:var(--navy-light); color:var(--white); }
-  #omni-behavior .bc-th-beh { background:var(--gold); color:var(--navy); }
+  #omni-behavior .bc-th-beh { background:var(--gold-btn, var(--gold)); color:var(--navy); }
   #omni-behavior .bc-cell { padding:16px 22px; border-top:1px solid var(--white-10); font-size:14.5px; color:var(--white-70); line-height:1.6; background:var(--navy-mid); }
   #omni-behavior .bc-cell b { color:var(--white); font-weight:600; }
   #omni-behavior .bc-cell + .bc-cell { border-left:1px solid var(--white-10); }
+  #omni-behavior .bc-row { display:grid; grid-template-columns:1fr 1fr; grid-column:1 / -1; }
 
   #omni-behavior .bc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:26px; }
   #omni-behavior .bc-card { background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:26px 24px; }
@@ -582,7 +594,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   shows the logo static (hover still turns the ring). Everything is inert
   under prefers-reduced-motion. Sizing and motion live in site/site.css.
 -->
-<div class="site-announce" id="site-announce">
+<div class="site-announce" id="site-announce" role="region" aria-label="Announcement">
   <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
   <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -735,16 +747,26 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <hr class="bc-divider">
     <h2>Two Tracks, <em>One Method</em></h2>
     <div class="bc-tracks" role="table" aria-label="The OmniFit Method: physical and behavioral tracks">
-      <div class="bc-track-head bc-th-phys" role="columnheader">Physical Track<span>How you move</span></div>
-      <div class="bc-track-head bc-th-beh" role="columnheader">Behavioral Track<span>How you decide</span></div>
-      <div class="bc-cell" role="cell"><b>Assess:</b> diagnostic baseline</div>
-      <div class="bc-cell" role="cell"><b>Awareness:</b> see your real patterns</div>
-      <div class="bc-cell" role="cell"><b>Correct:</b> fix the movement limits</div>
-      <div class="bc-cell" role="cell"><b>Regulation:</b> reduce the friction</div>
-      <div class="bc-cell" role="cell"><b>Build:</b> progressive strength</div>
-      <div class="bc-cell" role="cell"><b>Adaptation:</b> habits that survive real life</div>
-      <div class="bc-cell" role="cell"><b>Sustain:</b> minimum effective dose</div>
-      <div class="bc-cell" role="cell"><b>Integration:</b> self-correction, less coach input</div>
+      <div class="bc-row" role="row">
+        <div class="bc-track-head bc-th-phys" role="columnheader">Physical Track<span>How you move</span></div>
+        <div class="bc-track-head bc-th-beh" role="columnheader">Behavioral Track<span>How you decide</span></div>
+      </div>
+      <div class="bc-row" role="row">
+        <div class="bc-cell" role="cell"><b>Assess:</b> diagnostic baseline</div>
+        <div class="bc-cell" role="cell"><b>Awareness:</b> see your real patterns</div>
+      </div>
+      <div class="bc-row" role="row">
+        <div class="bc-cell" role="cell"><b>Correct:</b> fix the movement limits</div>
+        <div class="bc-cell" role="cell"><b>Regulation:</b> reduce the friction</div>
+      </div>
+      <div class="bc-row" role="row">
+        <div class="bc-cell" role="cell"><b>Build:</b> progressive strength</div>
+        <div class="bc-cell" role="cell"><b>Adaptation:</b> habits that survive real life</div>
+      </div>
+      <div class="bc-row" role="row">
+        <div class="bc-cell" role="cell"><b>Sustain:</b> minimum effective dose</div>
+        <div class="bc-cell" role="cell"><b>Integration:</b> self-correction, less coach input</div>
+      </div>
     </div>
     <p style="margin-top:22px;">Neither track works alone. A program built for your body still fails if the habits around it never form, and good habits can't make up for a program that doesn't fit your body. <a href="/the-omnifit-method">See the full OmniFit Method</a>.</p>
   </div>
