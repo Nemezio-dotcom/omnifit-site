@@ -508,6 +508,23 @@ ASK OMNIFIT - ON-SITE AI ASSISTANT (owner brief, Oct 19 2026)
   OCTOBER 2026 CARD, the required verbatim wording (30-Day Fit Guarantee,
   deposit line, "4.98 average across 190+ reviews", travel-fee lines) and no
   internal content. Self-tested both ways. tools/README.md has the detail.
+- PACIFIC BEACH NOT-SERVED LINE (owner decision, Oct 21 2026): the one
+  exception to "Pacific Beach is history — zero references". Visitors still
+  ask the assistant about Pacific Beach ("PB"). With no mention in
+  knowledge.md it fell back to "availability ... confirmed before you book",
+  which reads as a maybe; the owner wants a plain "No" plus the studio at
+  Teqneeq (4S Ranch) or the virtual Executive Reset. certify.py
+  PB_NOT_SERVED_LINE holds the exact line; pb_not_served_exempt blanks it
+  (whole line, once, line numbers kept) in assistant/knowledge.md ONLY,
+  before the BANNED and retired-service-area checks run there. Any other
+  wording, a second copy, the line inside another line, or the line in any
+  other file (pages/, public/, the prompt, the widget) still fails, and
+  public/**/*.html visible copy is now swept for "Pacific Beach" and the
+  retired areas (public_pacific_beach). Self-tested both ways on every run
+  (_selftest_pb_not_served) and negative-tested on real files. Changing
+  the line means changing PB_NOT_SERVED_LINE and this entry together, with
+  owner approval. No other neighborhood is named this way. WRONG IF the
+  owner ever reopens in-home training in Pacific Beach.
 - JUDGMENT CALL: knowledge.md states the Teqneeq membership as "$119/mo,
   billed by Teqneeq". The prompt forbids "monthly" / "per month" for OmniFit
   billing; "$119/mo" is Teqneeq's own charge. WRONG IF the owner wants the
@@ -567,6 +584,11 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
 - NAP: Teqneeq Functional Health Center, 10772 Thornmint Rd, San Diego,
   CA 92127. Email nemezio@omnifittraining.com. Phone (619) 259-0630.
   Pacific Beach is history — zero references.
+  ONE EXCEPTION (owner decision, Oct 21 2026): assistant/knowledge.md may
+  carry exactly one line, "- Pacific Beach (PB) is not in the in-home service
+  area. OmniFit does not offer in-home training in Pacific Beach. Pacific
+  Beach clients can train at the studio at Teqneeq in 4S Ranch, or virtually
+  on the Executive Reset." See ASK OMNIFIT for why and how it is enforced.
 - Reviews: "4.98 average across 190+ reviews (Google, Yelp, Thumbtack and
   Bark)" (CANONICAL FACTS; was "190+ (5.0)" until the Audit Reconciliation
   run, Oct 18 2026). Never 180+, never 5.0, never "verified".
@@ -1686,7 +1708,10 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   OB as whole-word, case-sensitive abbreviations, in visible page text
   (certify.py retired_service_area, every file in the glob, frozen records
   INCLUDED; HTML comments, attributes, URLs, _redirects, REPORT.md and
-  archive/ ignored; self-tested both ways on every run).
+  archive/ ignored; self-tested both ways on every run). Since Oct 21 2026
+  the same visible-copy rule plus "Pacific Beach" also sweeps the built
+  site, public/**/*.html (certify.py public_pacific_beach). The one
+  exemption anywhere is the knowledge.md not-served line (ASK OMNIFIT).
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "Mission Bay" ·
   "Ocean Beach" · "PB"/"OB" (as area names) · "ACE OES" ·
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·

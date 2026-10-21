@@ -116,6 +116,7 @@ One session per 4-week cycle: a reassessment on the Bodystat QuadScan 4000 and a
 - In-home training covers North County San Diego. Equipment is provided; no home gym is required.
 - No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; it's inside our in-home service area.
 - Elsewhere in the in-home service area, including La Jolla, Del Mar, Rancho Santa Fe, Solana Beach, Encinitas and Carlsbad, a travel fee applies, confirmed before you book. The travel fee amount is not published.
+- Pacific Beach (PB) is not in the in-home service area. OmniFit does not offer in-home training in Pacific Beach. Pacific Beach clients can train at the studio at Teqneeq in 4S Ranch, or virtually on the Executive Reset.
 - For a neighborhood not listed, availability and any travel fee are confirmed before you book.
 - Outside the in-home area, the virtual Executive Reset is available anywhere in the United States.
 

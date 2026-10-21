@@ -1219,12 +1219,17 @@ def _area_skipped(path):
     p = path.replace(os.sep, '/')
     return os.path.basename(p) in _AREA_SKIP or p.startswith('archive/') or '/archive/' in p
 
-def retired_service_area(text, path=""):
-    if _area_skipped(path): return []
+def _visible_copy(text):
+    """Visible page text with positions kept: comments, <style>, executable
+    <script>, every tag and its attributes, and written-out URLs blanked."""
     blank = lambda m: re.sub(r'[^\n]', ' ', m.group(0))
     t = _blank_noncopy(text)
     t = re.sub(r'<[^>]*>', blank, t)
-    t = _URL.sub(blank, t)
+    return _URL.sub(blank, t)
+
+def retired_service_area(text, path=""):
+    if _area_skipped(path): return []
+    t = _visible_copy(text)
     out = []
     for m in _RETIRED_AREA.finditer(t):
         ln = t.count('\n', 0, m.start()) + 1
@@ -1247,6 +1252,66 @@ def _selftest_retired_service_area():
                '<p>Watch it on PBS. Our OBJECTIVE is a pb-free slug.</p>', '<p>pb and ob in lower case</p>',
                '<style>/* PB */</style><script>var OB = 1;</script>'):
         assert hits(ok) == [], f"non-copy flagged: {ok} -> {hits(ok)}"
+
+# ─── PACIFIC BEACH NOT-SERVED LINE (owner decision, Oct 21 2026) ────
+# The ONE exception to "Pacific Beach is history - zero references". Visitors
+# still ask the assistant about Pacific Beach, and without the name in its
+# facts it falls back to "confirmed before you book", which reads as a maybe.
+# The owner wants a plain "No". So exactly this line, as a whole line, once,
+# and only in assistant/knowledge.md, is removed before the BANNED and
+# retired-service-area checks run on that file. Any other wording, a second
+# copy, the line inside another line, or the line in ANY other file (pages/,
+# public/, the prompt, the widget) still fails. Self-tested both ways
+# (_selftest_pb_not_served).
+PB_NOT_SERVED_LINE = ("- Pacific Beach (PB) is not in the in-home service area. OmniFit does not offer "
+                      "in-home training in Pacific Beach. Pacific Beach clients can train at the studio "
+                      "at Teqneeq in 4S Ranch, or virtually on the Executive Reset.")
+_PB_NOT_SERVED = re.compile(r'^' + re.escape(PB_NOT_SERVED_LINE) + r'$', re.M)
+
+def pb_not_served_exempt(text, path):
+    """text with the one allowed line blanked when path is the knowledge file;
+    text unchanged for every other path."""
+    if path.replace(os.sep, '/') != "assistant/knowledge.md": return text
+    return _PB_NOT_SERVED.sub(lambda m: ' ' * len(m.group(0)), text, count=1)
+
+# public/ is the built site, so visible copy there is what a visitor reads.
+# certify's glob is pages/; this sweep makes the zero-references rule hold on
+# the build output too (visible copy only: build.py's footer changelog comment
+# names the retired Pacific Beach listing and is not copy).
+_PACIFIC_BEACH = re.compile(r'(?i)\bpacific(?:\s|&nbsp;|&#160;)+beach\b')
+
+def public_pacific_beach(text, path=""):
+    t = _visible_copy(text)
+    out = [(m.group(0), t.count('\n', 0, m.start()) + 1) for m in _PACIFIC_BEACH.finditer(t)]
+    out += [(h, ln) for h, ln, _ in retired_service_area(text, path)]
+    return out
+
+def _banned_hits(text):
+    return [term for term in BANNED if not term.startswith('$') and re.search(re.escape(term), text, re.I)]
+
+def _selftest_pb_not_served():
+    K = "assistant/knowledge.md"
+    md = "## In-home service area\n\n" + PB_NOT_SERVED_LINE + "\n- For a neighborhood not listed, ask.\n"
+    t = pb_not_served_exempt(md, K)
+    assert "Pacific Beach" not in _banned_hits(t) and retired_service_area(t, K) == [], "allowed line still fired in knowledge.md"
+    assert t.count('\n') == md.count('\n'), "exemption moved line numbers"
+    for other in ("pages/in-home-personal-trainer-san-diego.html", "public/in-home-personal-trainer-san-diego.html",
+                  "public/index.html", "functions/_lib/system-prompt.js", "site/assistant.js", "knowledge.md"):
+        u = pb_not_served_exempt(md, other)
+        assert "Pacific Beach" in _banned_hits(u), f"allowed line passed BANNED in {other}"
+        assert [h for h, _, _ in retired_service_area(u, other)] == ["PB"], f"allowed line passed the PB rule in {other}"
+    page = f"<html><body><ul><li>{PB_NOT_SERVED_LINE[2:]}</li></ul></body></html>"
+    hits = [h for h, _ in public_pacific_beach(page, "public/in-home-personal-trainer-san-diego.html")]
+    assert hits.count("Pacific Beach") == 3 and "PB" in hits, f"public/ sweep missed the line: {hits}"
+    assert public_pacific_beach('<!-- replaced legacy Pacific Beach GBP link --><a href="/personal-trainer-pacific-beach">x</a>',
+                                "public/x.html") == [], "public/ sweep read a comment or a URL"
+    for bad in (md + PB_NOT_SERVED_LINE + "\n",                                     # a second copy
+                md.replace("is not in", "is in"),                                    # changed wording
+                md.replace(PB_NOT_SERVED_LINE, PB_NOT_SERVED_LINE + " Also Mission Bay."),  # extended line
+                "Note: " + PB_NOT_SERVED_LINE + "\n",                                # inside another line
+                "- We train in Pacific Beach.\n"):                                  # any other mention
+        u = pb_not_served_exempt(bad, K)
+        assert "Pacific Beach" in _banned_hits(u) or retired_service_area(u, K), f"variant passed in knowledge.md: {bad[:60]!r}"
 
 # Every rule names the tier it encodes. TIER 1 rules report a violation; TIER 2
 # rules report a MISSING CONDITION. See CANON COMPLIANCE SCREEN - TWO TIERS.
@@ -2104,9 +2169,18 @@ def run():
             print(f"   {f}:{ln}  [retired service area: '{hit}' - CANON: the Pacific Beach era and its areas are history]  …{ctx[:110]}…"); B+=1
     print(f"   (retired service area rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED; "
           f"comments, attributes, URLs, _redirects, REPORT.md, archive/ ignored)")
+    PUB = sorted(glob.glob('public/**/*.html', recursive=True))
+    assert PUB, "public/ GLOB MATCHED ZERO FILES - run build.py first, from repo root"
+    for f in PUB:
+        for hit, ln in public_pacific_beach(open(f).read(), f):
+            print(f"   {f}:{ln}  [retired service area in built copy: '{hit}' - CANON: zero references]"); B+=1
+    print(f"   (Pacific Beach in built copy: {len(PUB)} public/ pages swept, visible copy only; the one "
+          f"knowledge.md not-served line is the only exemption anywhere, self-tested both ways)")
     # Ask OmniFit: stale canon on every assistant surface, then the knowledge
     # file's prices against CANON, its required wording, and no internal content.
+    _selftest_pb_not_served()
     for f, t in assistant_surface_texts().items():
+        t = pb_not_served_exempt(t, f)   # knowledge.md only; see PB_NOT_SERVED_LINE
         for term in BANNED:
             rx = (re.compile(re.escape(term) + r'(?![\d,]*\d)(?!\s*[-–]\s*\d)') if term.startswith('$')
                   else re.compile(re.escape(term), re.I))

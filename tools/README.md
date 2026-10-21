@@ -965,3 +965,15 @@ and an outcome guarantee added outside the list still fire. WRONG IF a claim is
 ever written inside the NEVER list. Each assistant-only rule is self-tested
 both ways on every run (a legacy $475 and a non-card total fire, card prices
 pass; Stripe and a client name fire, ordinary copy passes).
+
+**The Pacific Beach not-served line (Oct 21 2026).** The one exception to
+the zero-references rule. `PB_NOT_SERVED_LINE` is the exact line;
+`pb_not_served_exempt` blanks it, as a whole line and once, in
+`assistant/knowledge.md` only, before BANNED and `retired_service_area` run
+there. Every other path is returned unchanged. `public_pacific_beach` sweeps
+the visible copy of `public/**/*.html` for "Pacific Beach" and the retired
+areas, so the same line fails on any built page (build.py's footer
+changelog comment is not copy). `_selftest_pb_not_served` checks both ways:
+the line passes in knowledge.md; it fails in pages/, public/, the prompt
+and the widget; a second copy, a reworded or extended line, the line inside
+another line and any other mention fail in knowledge.md too.
