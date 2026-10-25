@@ -173,7 +173,7 @@ async function runFitCheck(page, answers) {
   {
     const t = await newPage(browser);
     await t.page.goto(`${base(PROD_HOST)}/`);
-    await t.waitFor(() => t.count("hubspot") > 0, 6000); // the deferred callback has run
+    await t.waitFor(() => t.count("hubspot") > 0, 9000); // the deferred callback has run
     assert("prod host /", "gtag.js requested with the GA4 ID", [GA4], t.hits.filter((x) => x.kind === "gtag.js").map((x) => x.id));
     assert("prod host /", "Clarity tag requested with the project ID", [CLARITY], t.hits.filter((x) => x.kind === "clarity").map((x) => x.id));
     assert("prod host /", "window.gtag is a function", "function", await t.page.evaluate(() => typeof window.gtag));
@@ -181,7 +181,7 @@ async function runFitCheck(page, answers) {
     await t.context.close();
     const f = await newPage(browser);
     await f.page.goto(`${base(PROD_HOST)}/fit-check`);
-    await f.waitFor(() => f.count("hubspot") > 0, 6000);
+    await f.waitFor(() => f.count("hubspot") > 0, 9000);
     assert("prod host /fit-check", "gtag.js requested", 1, f.count("gtag.js"));
     assert("prod host /fit-check", "Clarity NOT requested", 0, f.count("clarity"));
     await f.context.close();
@@ -191,7 +191,7 @@ async function runFitCheck(page, answers) {
   {
     const t = await newPage(browser);
     await t.page.goto(`${L}/?${FLAG}`);
-    await t.waitFor(() => t.count("hubspot") > 0, 6000);
+    await t.waitFor(() => t.count("hubspot") > 0, 9000);
     assert("localhost+flag /", "override loads gtag.js and Clarity", { gtag: 1, clarity: 1 }, { gtag: t.count("gtag.js"), clarity: t.count("clarity") });
     await t.page.click("#site-header .site-nav__cta");
     await t.waitFor(() => t.ga().length >= 1);
@@ -290,7 +290,7 @@ async function runFitCheck(page, answers) {
   {
     const t = await newPage(browser);
     await t.page.goto(`${L}/fit-check?${FLAG}`);
-    await t.waitFor(() => t.count("hubspot") > 0, 6000);
+    await t.waitFor(() => t.count("hubspot") > 0, 9000);
     assert("localhost+flag /fit-check", "Clarity NOT requested on /fit-check", 0, t.count("clarity"));
     assert("localhost+flag /fit-check", "GA4 still loads on /fit-check", 1, t.count("gtag.js"));
     await t.page.click("#of-fit #start");
@@ -362,7 +362,7 @@ async function runFitCheck(page, answers) {
   {
     const t = await newPage(browser);
     await t.page.goto(`${L}/`);
-    await t.waitFor(() => t.count("hubspot") > 0, 6000);
+    await t.waitFor(() => t.count("hubspot") > 0, 9000);
     assert("localhost no flag /", "no request to googletagmanager.com, google-analytics.com or clarity.ms", { gtag: 0, ga: 0, clarity: 0 }, { gtag: t.count("gtag.js"), ga: t.count("ga"), clarity: t.count("clarity") });
     assert("localhost no flag /", "HubSpot still loads", 1, t.count("hubspot"));
     assert("localhost no flag /", "window.gtag undefined", "undefined", await t.page.evaluate(() => typeof window.gtag));
@@ -394,12 +394,12 @@ async function runFitCheck(page, answers) {
   {
     const t = await newPage(browser);
     await t.page.goto(`${base(PREVIEW_HOST)}/?${FLAG}`);
-    await t.waitFor(() => t.count("hubspot") > 0, 6000);
+    await t.waitFor(() => t.count("hubspot") > 0, 9000);
     assert("preview host + flag /", "flag ignored off localhost: nothing loads", { gtag: 0, clarity: 0, gtagType: "undefined" }, { gtag: t.count("gtag.js"), clarity: t.count("clarity"), gtagType: await t.page.evaluate(() => typeof window.gtag) });
     await t.context.close();
     const u = await newPage(browser);
     await u.page.goto(`${base("127.0.0.1")}/?${FLAG}`);
-    await u.waitFor(() => u.count("hubspot") > 0, 6000);
+    await u.waitFor(() => u.count("hubspot") > 0, 9000);
     assert("127.0.0.1 + flag /", "flag honoured on 127.0.0.1 too", { gtag: 1, clarity: 1 }, { gtag: u.count("gtag.js"), clarity: u.count("clarity") });
     await u.context.close();
   }

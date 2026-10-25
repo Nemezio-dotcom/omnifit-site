@@ -36,7 +36,7 @@ python3 build.py --check    # run only the checks against public/
 
 Per page, `build.py` produces `public/<slug>.html` (homepage at
 `public/index.html`; see "Trailing slash" below) containing: doctype, `<title>`, meta description,
-canonical, the site-wide header injection, one Google Fonts link (union of
+canonical, the site-wide header injection, the self-hosted @font-face block (site/fonts, Oct 2026; formerly one Google Fonts link, union of
 every weight the pages used), `/assets/site.css`, the page's
 header injection verbatim, the page's own `<style>` blocks (moved from the body
 into `<head>`, with their Google Fonts `@import` lines dropped because the

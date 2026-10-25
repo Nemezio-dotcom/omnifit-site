@@ -314,9 +314,17 @@ NOT_FOUND_HTML = f"""<!DOCTYPE html>
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/playfair-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Self-hosted fonts (Oct 25 2026): Montserrat + Playfair Display variable, latin
+   subset, served from this site instead of Google Fonts. Same families, every
+   weight 100-900 and italics; removes the render-blocking Google Fonts request. */
+@font-face{{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}}
+@font-face{{font-family:'Montserrat';font-style:italic;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}}
+@font-face{{font-family:'Playfair Display';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/playfair-display-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}}
+@font-face{{font-family:'Playfair Display';font-style:italic;font-weight:400 900;font-display:swap;src:url(/assets/fonts/playfair-display-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}}
+</style>
 <style>
   html,body{{margin:0;min-height:100%;background:#0a1628;color:#fff;font-family:'Montserrat',sans-serif}}
   .nf{{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 20px;text-align:center}}
@@ -351,6 +359,9 @@ NOT_FOUND_HTML = f"""<!DOCTYPE html>
 # HubSpot, Calendly), so a script-src policy would need 'unsafe-inline' and
 # buy little for the breakage risk. Permissions-Policy leaves payment alone
 # (Calendly takes the consultation deposit).
+# Browser caching (Oct 25 2026): fonts never change (a year, immutable); images
+# keep their file names when replaced, so they get 30 days rather than a year.
+# site.css / site.js stay on Cloudflare's default so edits show up immediately.
 HEADERS_TXT = """https://:project.pages.dev/*
   X-Robots-Tag: noindex
 
@@ -361,6 +372,12 @@ HEADERS_TXT = """https://:project.pages.dev/*
   X-Frame-Options: SAMEORIGIN
   Content-Security-Policy: frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/img/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
 """
 
 STYLE_RE = re.compile(r"<style\b[^>]*>.*?</style>", re.S | re.I)
@@ -572,6 +589,9 @@ def build():
     # Static images: site/img/<file> is served at /assets/img/<file>.
     if (SITE / "img").is_dir():
         shutil.copytree(SITE / "img", PUBLIC / "assets" / "img")
+    # Self-hosted web fonts: site/fonts/<file> is served at /assets/fonts/<file>.
+    if (SITE / "fonts").is_dir():
+        shutil.copytree(SITE / "fonts", PUBLIC / "assets" / "fonts")
     (PUBLIC / "assets" / "site.css").write_text(
         read(SITE / "site.css").rstrip() + "\n\n/* ===== Footer (source: pages/footer.html) ===== */\n" + footer_css + "\n"
         + ("\n" + read(SITE / "blog.css") if posts else ""),

@@ -46,7 +46,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
      localhost / 127.0.0.1 only: ?omnifit-track=prod forces the production
      branch (tools/tracktest.js). No Google Tag Manager. HubSpot is deferred
      exactly as before. Each ID appears once on the page by design
-     (build.py --check counts them). -->
+     (build.py --check counts them). Load timing: see the note above afterLoad()
+     below (Oct 25 2026 mobile speed pass). -->
 <script>
 (function () {
   var GA4 = 'G-0K6VLEC2VJ';
@@ -68,9 +69,32 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     document.head.appendChild(s);
   }
 
-  function defer(fn){
-    if ('requestIdleCallback' in window) return requestIdleCallback(fn, {timeout: 2500});
-    setTimeout(fn, 1500);
+  /* Load timing (Oct 25 2026, mobile PageSpeed): nothing from Google, Clarity or
+     HubSpot downloads while the page is first drawing. On a phone those ~700 KB
+     were competing with the hero photo and fonts and were charged to mobile LCP.
+     - GA4: gtag() and the config are queued at once (so no event is lost), and
+       gtag.js itself loads after the page's load event, when the browser is idle.
+     - Clarity + HubSpot: load on the visitor's first scroll, tap, click or key,
+       or 5 seconds after the load event, whichever comes first. */
+  function afterLoad(fn){
+    function idle(){
+      if ('requestIdleCallback' in window) requestIdleCallback(fn, {timeout: 2000});
+      else setTimeout(fn, 200);
+    }
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle, {once: true});
+  }
+
+  function onEngage(fn){
+    var done = false, evs = ['scroll', 'pointerdown', 'keydown', 'touchstart'];
+    function go(){
+      if (done) return;
+      done = true;
+      evs.forEach(function (e) { window.removeEventListener(e, go, {passive: true}); });
+      fn();
+    }
+    evs.forEach(function (e) { window.addEventListener(e, go, {passive: true}); });
+    afterLoad(function () { setTimeout(go, 5000); });
   }
 
   if (prod) {
@@ -81,10 +105,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     window.gtag = function () { dl.push(arguments); };
     window.gtag('js', new Date());
     window.gtag('config', GA4);
-    loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4);
+    afterLoad(function () { loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4); });
   }
 
-  defer(function () {
+  onEngage(function () {
     if (prod && !fitCheck) {
       /* Microsoft Clarity */
       (function(c,l,a,r,i,t,y){
@@ -367,9 +391,17 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 </script>
 <!-- ===== End site-wide header injection ===== -->
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/playfair-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Self-hosted fonts (Oct 25 2026): Montserrat + Playfair Display variable, latin
+   subset, served from this site instead of Google Fonts. Same families, every
+   weight 100-900 and italics; removes the render-blocking Google Fonts request. */
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-style:italic;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/playfair-display-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:400 900;font-display:swap;src:url(/assets/fonts/playfair-display-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+</style>
 <link rel="stylesheet" href="/assets/site.css">
 
 <!-- ===== Page header injection (source: pages/headers/how-it-works-pricing-header.html) ===== -->
