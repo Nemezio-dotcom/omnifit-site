@@ -1,0 +1,644 @@
+<!-- SQUARESPACE PAGE SETTINGS (not part of the Code Block) -->
+<!-- SEO Title:       How to Choose a Personal Trainer: Red Flags | San Diego -->
+<!-- SEO Description: The red flags to watch for and the questions to ask before you hire a personal trainer, from a San Diego diagnostic-led coaching practice for professionals over 30. -->
+<!-- Layout modelled on /omnifit-vs-competitors: hero, In Short, sections, FAQ,
+     the shared "What People Come to Coaching For" block, closing CTA.
+     Header: pages/headers/how-to-choose-a-personal-trainer-san-diego-header.html
+     (FAQPage mirrors the FAQ below verbatim, in page order). -->
+
+<style>
+  #omnifit-choose-wrapper {
+    all: initial;
+    display: block;
+    font-family: 'Montserrat', sans-serif !important;
+    line-height: 1.7 !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+  }
+
+  /* SVG internals keep their geometry (all: unset would clear d, cx, r). */
+  #omnifit-choose-wrapper *:not(svg *),
+  #omnifit-choose-wrapper *:not(svg *)::before,
+  #omnifit-choose-wrapper *:not(svg *)::after {
+    all: unset;
+    box-sizing: border-box;
+  }
+
+  #omnifit-choose-wrapper div,
+  #omnifit-choose-wrapper section,
+  #omnifit-choose-wrapper ul,
+  #omnifit-choose-wrapper ol,
+  #omnifit-choose-wrapper li,
+  #omnifit-choose-wrapper details {
+    display: block;
+  }
+
+  #omnifit-choose-wrapper a {
+    display: inline;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+
+  #omnifit-choose-wrapper {
+    font-family: 'Montserrat', sans-serif !important;
+    background: var(--navy) !important;
+    color: var(--white-90) !important;
+    line-height: 1.7 !important;
+    font-size: 16px !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  /* HERO */
+  #omnifit-choose-wrapper .hero {
+    min-height: 44vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 24px 60px;
+  }
+
+  #omnifit-choose-wrapper .hero h1 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(32px, 5vw, 56px) !important;
+    font-weight: 700 !important;
+    color: var(--white) !important;
+    line-height: 1.2 !important;
+    max-width: 860px;
+    margin-bottom: 0;
+  }
+
+  /* SECTION */
+  #omnifit-choose-wrapper section {
+    padding: 80px 0;
+    display: block;
+  }
+
+  #omnifit-choose-wrapper .section-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: block;
+  }
+
+  #omnifit-choose-wrapper h2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(28px, 4vw, 42px) !important;
+    font-weight: 700 !important;
+    color: var(--white) !important;
+    line-height: 1.3 !important;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  #omnifit-choose-wrapper h3 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(22px, 3vw, 28px) !important;
+    font-weight: 600 !important;
+    color: var(--white) !important;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  #omnifit-choose-wrapper p {
+    font-size: 16px !important;
+    color: var(--white-90) !important;
+    line-height: 1.8 !important;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  #omnifit-choose-wrapper strong {
+    color: var(--white) !important;
+    font-weight: 700 !important;
+  }
+
+  #omnifit-choose-wrapper .section-inner p a,
+  #omnifit-choose-wrapper .oc-table a {
+    color: var(--gold-light) !important;
+    font-weight: 600 !important;
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  #omnifit-choose-wrapper .section-inner p a:hover,
+  #omnifit-choose-wrapper .oc-table a:hover {
+    color: var(--gold) !important;
+    border-bottom-color: var(--gold);
+  }
+
+  /* CARDS (shared shape with the comparison page) */
+  #omnifit-choose-wrapper .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  @media (min-width: 900px) {
+    #omnifit-choose-wrapper .comparison-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  #omnifit-choose-wrapper .comp-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: block;
+  }
+
+  /* RED FLAG CARDS */
+  #omnifit-choose-wrapper .flag-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 32px;
+    counter-reset: flag;
+  }
+
+  @media (min-width: 900px) {
+    #omnifit-choose-wrapper .flag-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  #omnifit-choose-wrapper .flag-card {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+    background: var(--navy-mid);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 26px 26px 26px 22px;
+  }
+
+  #omnifit-choose-wrapper .flag-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    color: var(--gold) !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+  }
+
+  #omnifit-choose-wrapper .flag-card p {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    margin: 0;
+  }
+
+  #omnifit-choose-wrapper .flag-card strong {
+    display: block;
+    font-size: 16px !important;
+    margin-bottom: 6px;
+  }
+
+  /* QUESTIONS LIST */
+  #omnifit-choose-wrapper .q-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  #omnifit-choose-wrapper .q-list li {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    color: var(--white-90) !important;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--white-05);
+  }
+
+  #omnifit-choose-wrapper .q-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  #omnifit-choose-wrapper .q-list svg,
+  #omnifit-choose-wrapper .oc-cta svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* STANDARDS TABLE */
+  #omnifit-choose-wrapper .oc-table-wrap {
+    display: block;
+    margin-top: 32px;
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--navy-mid);
+  }
+
+  #omnifit-choose-wrapper .oc-table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  #omnifit-choose-wrapper .oc-table thead { display: table-header-group; }
+  #omnifit-choose-wrapper .oc-table tbody { display: table-row-group; }
+  #omnifit-choose-wrapper .oc-table tr { display: table-row; }
+
+  #omnifit-choose-wrapper .oc-table th,
+  #omnifit-choose-wrapper .oc-table td {
+    display: table-cell;
+    padding: 18px 22px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--white-05);
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+    color: var(--white-90) !important;
+  }
+
+  #omnifit-choose-wrapper .oc-table th {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold-light) !important;
+    border-bottom: 2px solid var(--gold);
+  }
+
+  #omnifit-choose-wrapper .oc-table td:first-child {
+    width: 28%;
+    font-weight: 700 !important;
+    color: var(--gold-light) !important;
+  }
+
+  #omnifit-choose-wrapper .oc-table tr:last-child td { border-bottom: none; }
+
+  /* FAQ ACCORDION */
+  #omnifit-choose-wrapper .oc-faq {
+    background: var(--navy-mid);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  #omnifit-choose-wrapper .oc-faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px 28px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    line-height: 1.45 !important;
+    color: var(--white) !important;
+    list-style: none;
+  }
+
+  #omnifit-choose-wrapper .oc-faq-q::-webkit-details-marker { display: none; }
+
+  #omnifit-choose-wrapper .oc-faq-q::after {
+    content: '';
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-right: 1.6px solid var(--gold);
+    border-bottom: 1.6px solid var(--gold);
+    transform: rotate(45deg);
+    margin-top: -4px;
+    transition: transform .2s ease;
+  }
+
+  #omnifit-choose-wrapper .oc-faq[open] .oc-faq-q::after {
+    transform: rotate(225deg);
+    margin-top: 4px;
+  }
+
+  #omnifit-choose-wrapper .oc-faq-q:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  #omnifit-choose-wrapper .oc-faq-body {
+    display: block;
+    padding: 0 28px 24px;
+  }
+
+  #omnifit-choose-wrapper .oc-faq-body p {
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+    margin-bottom: 0;
+  }
+
+  /* CTA */
+  #omnifit-choose-wrapper .cta-section {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--white-10);
+    padding: 80px 0;
+    text-align: center;
+    display: block;
+  }
+
+  #omnifit-choose-wrapper .cta-section p {
+    color: var(--white-70) !important;
+    margin-bottom: 0;
+  }
+
+  #omnifit-choose-wrapper .oc-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px 28px;
+    margin-top: 32px;
+  }
+
+  #omnifit-choose-wrapper .cta-btn {
+    display: inline-block;
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    padding: 16px 36px;
+    border-radius: var(--radius);
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  #omnifit-choose-wrapper .cta-btn:hover {
+    background: var(--gold-light) !important;
+    transform: translateY(-2px);
+  }
+
+  #omnifit-choose-wrapper .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gold-light) !important;
+    font-weight: 600 !important;
+    border-bottom: 1px solid var(--gold-dim);
+    padding-bottom: 2px;
+  }
+
+  #omnifit-choose-wrapper .cta-link:hover {
+    color: var(--gold) !important;
+    border-bottom-color: var(--gold);
+  }
+
+  #omnifit-choose-wrapper .oc-cta .cta-link svg {
+    width: 18px;
+    height: 18px;
+    margin-top: 0;
+  }
+
+  /* inside a band the band supplies the gutters */
+  #omnifit-choose-wrapper .omni-band .section-inner { padding-left: 0; padding-right: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    #omnifit-choose-wrapper section { padding: 60px 0; }
+    #omnifit-choose-wrapper .flag-card { grid-template-columns: 38px minmax(0, 1fr); gap: 14px; padding: 22px 18px; }
+    #omnifit-choose-wrapper .flag-num { width: 38px; height: 38px; font-size: 17px !important; }
+    #omnifit-choose-wrapper .oc-table thead { display: none; }
+    #omnifit-choose-wrapper .oc-table,
+    #omnifit-choose-wrapper .oc-table tbody,
+    #omnifit-choose-wrapper .oc-table tr,
+    #omnifit-choose-wrapper .oc-table td { display: block; width: 100%; }
+    #omnifit-choose-wrapper .oc-table tr { padding: 18px 18px; border-bottom: 1px solid var(--white-05); }
+    #omnifit-choose-wrapper .oc-table tr:last-child { border-bottom: none; }
+    #omnifit-choose-wrapper .oc-table td { padding: 0; border-bottom: none; }
+    #omnifit-choose-wrapper .oc-table td:first-child { width: 100%; margin-bottom: 6px; }
+    #omnifit-choose-wrapper .oc-faq-q { padding: 20px 18px; font-size: 16.5px !important; }
+    #omnifit-choose-wrapper .oc-faq-body { padding: 0 18px 20px; }
+    #omnifit-choose-wrapper .comp-card { padding: 24px 20px; }
+  }
+</style>
+<div id="omnifit-choose-wrapper">
+
+<!-- HERO -->
+<section class="hero">
+  <h1>How to Choose a Personal Trainer: <em>Red Flags and the Questions to Ask</em></h1>
+</section>
+
+<!-- ═══ IN SHORT ═══
+  Same pattern and classes as the homepage In Short block (pages/home-1.html).
+  First bullet is the POSITIONING LINE verbatim (CANON ENTITY BLOCK). -->
+<style>
+  #omh-short.omh{--omh-navy:#0a1628;--omh-gold:#c9a84c;--omh-ink:#1e293b;--omh-line:rgba(10,22,40,.10);font-family:'Montserrat',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--omh-ink);background:#fff;margin:0;padding:56px 24px 72px;line-height:1.65;-webkit-font-smoothing:antialiased;text-align:left;}
+  #omh-short.omh *{box-sizing:border-box;}
+  #omh-short.omh .omh-inner{max-width:1100px;margin:0 auto;}
+  #omh-short.omh .omh-label{display:flex;align-items:center;gap:12px;font-size:11px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;color:#806520 !important;margin:0 0 14px;}
+  #omh-short.omh .omh-label::before{content:'';display:inline-block;width:28px;height:2px;background:var(--omh-gold);flex:none;}
+  #omh-short.omh h2{font-family:'Playfair Display','Times New Roman',serif !important;font-size:clamp(27px,3.6vw,38px) !important;font-weight:700 !important;font-style:normal !important;line-height:1.18 !important;letter-spacing:-.3px !important;color:#0a1628 !important;margin:0 0 16px !important;padding:0 !important;text-transform:none !important;text-align:left !important;max-width:24ch;}
+  #omh-short.omh .short-box{border:1px solid var(--omh-line);border-left:4px solid var(--omh-gold);border-radius:14px;padding:30px 32px;background:#fff;box-shadow:0 10px 30px rgba(10,22,40,.05);}
+  #omh-short.omh ul{list-style:none;margin:0;padding:0;display:grid;gap:14px;}
+  #omh-short.omh li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:14px;align-items:start;font-size:16px;line-height:1.6;color:var(--omh-ink);margin:0;padding:0;}
+  #omh-short.omh li::before{content:none;}
+  #omh-short.omh li svg{width:22px;height:22px;margin-top:1px;fill:none;stroke:var(--omh-gold);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  #omh-short.omh li span{color:#1e293b !important;}
+  #omh-short.omh li strong{color:#0a1628 !important;font-weight:700 !important;}
+  @media (max-width:640px){
+    #omh-short.omh{padding:40px 16px 52px;}
+    #omh-short.omh .short-box{padding:22px 18px;}
+    #omh-short.omh li{font-size:15.5px;gap:12px;}
+  }
+</style>
+<style>
+  /* This page resets every element inside #omnifit-choose-wrapper (all:
+     unset) and forces heading, paragraph and strong colours with !important;
+     restore the In Short block's own colours and the tick path. */
+  #omnifit-choose-wrapper #omh-short.omh{padding:56px 24px 72px !important;background:#fff !important;}
+  #omnifit-choose-wrapper #omh-short.omh h2{font-family:'Playfair Display','Times New Roman',serif !important;font-size:clamp(27px,3.6vw,38px) !important;line-height:1.18 !important;color:#0a1628 !important;margin:0 0 16px !important;}
+  #omnifit-choose-wrapper #omh-short.omh .omh-label{color:#806520 !important;font-size:11px !important;line-height:1.4 !important;}
+  #omnifit-choose-wrapper #omh-short.omh li span{color:#1e293b !important;}
+  #omnifit-choose-wrapper #omh-short.omh li strong{color:#0a1628 !important;}
+  #omnifit-choose-wrapper #omh-short.omh li svg{display:block;}
+  #omnifit-choose-wrapper #omh-short.omh li svg path{d:path("M20 6L9 17l-5-5");}
+  @media (max-width:640px){#omnifit-choose-wrapper #omh-short.omh{padding:40px 16px 52px !important;}}
+</style>
+<section id="omh-short" class="omh" aria-labelledby="omh-short-h">
+  <div class="omh-inner">
+    <p class="omh-label">The Short Version</p>
+    <h2 id="omh-short-h">In Short</h2>
+    <div class="short-box">
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The clearest red flags in a personal trainer are no assessment before the first workout, a template program, being told to push through pain, prices you only hear in person, and a promised result by a set date.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>A good trainer measures first, publishes prices and policies, adjusts around injuries and travel, and reports progress with data.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RED FLAGS -->
+<section>
+  <div class="section-inner">
+    <h2>Eight Red Flags <em>Before You Sign</em></h2>
+    <ol class="flag-grid">
+      <li class="flag-card"><span class="flag-num" aria-hidden="true">1</span><p><strong>No assessment before the first session.</strong> A trainer who starts loading you before screening how you move is guessing.</p></li>
+      <li class="flag-card"><span class="flag-num" aria-hidden="true">2</span><p><strong>The same program for everyone.</strong> If your plan looks like the last client's, it was written for neither of you.</p></li>
+      <li class="flag-card"><span class="flag-num" aria-hidden="true">3</span><p><strong>"Push through it."</strong> Pain is information. A trainer should change the exercise, not your tolerance for it.</p></li>
+      <li class="flag-card"><span class="flag-num" aria-hidden="true">4</span><p><strong>Prices you only hear in person.</strong> If the rate depends on how the conversation goes, so will everything else.</p></li>
+      <li class="flag-card"><span class="flag-num" aria-hidden="true">5</span><p><strong>Exit terms that are hard to find.</strong> Commitment is fine; not knowing how to leave is not.</p></li>
+      <li class="flag-card"><span class="flag-num" aria-hidden="true">6</span><p><strong>A number promised by a date.</strong> Bodies don't read contracts. Promises like that usually mean crash dieting or a program you can't sustain.</p></li>
+      <li class="flag-card"><span class="flag-num" aria-hidden="true">7</span><p><strong>The scale as the only measure.</strong> Weight alone can't show strength, posture or body composition, so it can't tell you whether the plan is working.</p></li>
+      <li class="flag-card"><span class="flag-num" aria-hidden="true">8</span><p><strong>No plan for travel or a bad week.</strong> If the program only works when life is quiet, it won't survive a busy professional's calendar.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- QUESTIONS TO ASK -->
+<section class="omni-band omni-band--cream">
+  <div class="section-inner">
+    <h2>Questions to Ask <em>Any Trainer</em></h2>
+    <ol class="q-list">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17h.01"/></svg><span>What do you assess before the first workout, and how often do you re-assess?</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17h.01"/></svg><span>How do you adjust when something hurts?</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17h.01"/></svg><span>Where are your prices and policies published?</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17h.01"/></svg><span>How do I cancel, pause or change my plan?</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17h.01"/></svg><span>What do you measure besides weight, and how do I see it?</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17h.01"/></svg><span>What happens to my training when I travel?</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17h.01"/></svg><span>How much tracking do you expect from me, and can that change?</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6"/><path d="M12 17h.01"/></svg><span>When do you refer a client to a physical therapist or doctor?</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- HOW OMNIFIT ANSWERS -->
+<section>
+  <div class="section-inner">
+    <h2>How OmniFit <em>Answers Them</em></h2>
+    <div class="oc-table-wrap">
+      <table class="oc-table">
+        <thead><tr><th scope="col">The question</th><th scope="col">OmniFit's standard</th></tr></thead>
+        <tbody>
+          <tr><td>Assessment</td><td>Every program starts with a Performance Assessment ($150 in person, $75 virtual), credited toward your first program, Reset cycle or 5-pack. Progress reviews every 4 weeks (at least every 12 weeks on Train Only).</td></tr>
+          <tr><td>Pain</td><td>A 3/10 pain ceiling: an exercise that goes past it is changed, not pushed.</td></tr>
+          <tr><td>Prices</td><td>Published on the rates page, with what each program includes.</td></tr>
+          <tr><td>Leaving</td><td>The 30-Day Fit Guarantee on every program. The Program bills every 4 weeks with 30 days' notice to cancel. Nothing bills after The Foundation unless you confirm The Program.</td></tr>
+          <tr><td>Measurement</td><td>Strength benchmarks, posture photos, circumference measurements, and Bodystat QuadScan 4000 body composition for in-person clients. Results across 72 clients are published on the <a href="/outcomes">Client Outcomes</a> page with their method.</td></tr>
+          <tr><td>Travel</td><td>The Travel Protocol: during a travel week, a scheduled session can be taken live by video at no extra cost.</td></tr>
+          <tr><td>Tracking</td><td>The Accountability Dial: Full Accountability, Coached or Train Only, changeable at any 4-week cycle boundary.</td></tr>
+          <tr><td>Referral</td><td>OmniFit does not diagnose or treat. It works alongside <a href="/partners">physical therapists and chiropractors</a> and refers out when symptoms need clinical care.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- YOUR SIDE -->
+<section class="omni-band omni-band--cream">
+  <div class="section-inner">
+    <h2>The Red Flags <em>on Your Side</em></h2>
+    <p>The best trainer can't help if the timing is wrong. Wait if you're still deciding whether it's worth it, if the next three months leave no room for sessions, or if you need treatment for an injury first. <a href="/fit-check">The Fit Check</a> takes about three minutes and tells you honestly.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-inner">
+    <h2>Frequently <em>Asked Questions</em></h2>
+
+    <details class="oc-faq">
+      <summary class="oc-faq-q">Should I choose the cheapest trainer?</summary>
+      <div class="oc-faq-body"><p>Price matters less than what it buys. Compare what is included: an assessment, a written program, progress reviews, nutrition coaching and support between sessions. A lower rate with none of those often costs more in time.</p></div>
+    </details>
+
+    <details class="oc-faq">
+      <summary class="oc-faq-q">What certifications should a personal trainer have?</summary>
+      <div class="oc-faq-body"><p>At minimum, a nationally accredited personal training certification, such as from NASM, ACE or NSCA. If you have old injuries, look for corrective exercise training; for nutrition guidance, a nutrition coaching credential. Just as important is knowing where their scope ends.</p></div>
+    </details>
+
+    <details class="oc-faq">
+      <summary class="oc-faq-q">Do I need an assessment if I just want to work out?</summary>
+      <div class="oc-faq-body"><p>For a program or a session pack, yes; for a single session it's recommended, not required. Even if you just want to train, the assessment sets your starting point and shows what to load and what to correct first, so the training you want doesn't cost you an injury.</p></div>
+    </details>
+
+    <details class="oc-faq">
+      <summary class="oc-faq-q">Is a contract a red flag?</summary>
+      <div class="oc-faq-body"><p>Not by itself. A clear commitment helps people follow through. The red flag is terms you can't find or can't leave.</p></div>
+    </details>
+
+    <details class="oc-faq">
+      <summary class="oc-faq-q">How will I know the training is working?</summary>
+      <div class="oc-faq-body"><p>You should see measured progress at regular reviews, not just a feeling. At OmniFit, progress is reviewed every 4 weeks (at least every 12 weeks on Train Only) against your assessment baseline.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- ═══ USE CASES ═══ (shared block, verbatim from /omnifit-vs-competitors) -->
+<section class="omni-band omni-band--cream">
+  <div class="section-inner">
+    <h2>What People Come to Coaching For</h2>
+    <p>Coaching is rarely the goal on its own. These are the situations it usually attaches to.</p>
+    <div class="comparison-grid">
+      <div class="comp-card">
+        <h3>Long-Term Transformation</h3>
+        <p>You want a body that holds up for years rather than a twelve-week push that unravels. The work is built to be repeatable: a plan you can still follow in month nine, progressions tied to what your body tolerates, and a coach who adjusts the plan rather than restarting it.</p>
+      </div>
+      <div class="comp-card">
+        <h3>Fat Loss Without Crash Protocols</h3>
+        <p>Aggressive plans usually fail on the joints or the schedule before they fail on willpower. Training your body tolerates is what makes consistency possible, and nutrition is coached alongside it with individualized macros rather than a template handed over on day one.</p>
+      </div>
+      <div class="comp-card">
+        <h3>Desk-Worker Posture and Mobility</h3>
+        <p>Long sitting hours, stiffness that arrives before the workday ends, and the sense of moving worse than you used to. Programming targets the specific patterns desk work creates, with corrective work built into every session rather than bolted on as a warm-up.</p>
+      </div>
+      <div class="comp-card">
+        <h3>Data-Driven Hybrid Coaching</h3>
+        <p>You travel, your calendar moves, and you want the work to continue anyway. In-person sessions combine with app-delivered programming, the Travel Protocol covers the weeks you're on the road, and the same benchmarks are tracked either way so nothing is guessed between visits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-inner">
+    <h2>Find Out If OmniFit <em>Is the Right Fit</em></h2>
+    <p>Seven questions, about three minutes, and an honest answer.</p>
+    <div class="oc-cta">
+      <a class="cta-btn" href="/fit-check">Take the Fit Check</a>
+      <a class="cta-link" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book your consultation <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+</div>
+<!-- END WRAPPER -->

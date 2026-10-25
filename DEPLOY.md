@@ -455,6 +455,7 @@ Compare against the live site. Source = the file(s) under `pages/`.
 | https://www.omnifittraining.com/glp-1-personal-training-san-diego | glp-1-personal-training-san-diego | GLP-1 Personal Training San Diego \| Keep the Muscle, Lose the Fat |
 | https://www.omnifittraining.com/hiit-personal-trainer-san-diego | hiit-personal-trainer-san-diego | HIIT Personal Training in San Diego \| OmniFit Performance |
 | https://www.omnifittraining.com/how-it-works-pricing | how-it-works-pricing | How It Works & Pricing \| OmniFit Performance San Diego |
+| https://www.omnifittraining.com/how-to-choose-a-personal-trainer-san-diego | how-to-choose-a-personal-trainer-san-diego | How to Choose a Personal Trainer: Red Flags \| San Diego |
 | https://www.omnifittraining.com/how-we-measure-your-progress | how-we-measure-your-progress | How We Measure Your Progress \| OmniFit Performance San Diego |
 | https://www.omnifittraining.com/hsa-fsa-personal-training | hsa-fsa-personal-training | HSA & FSA Eligible Personal Training \| How It Works |
 | https://www.omnifittraining.com/in-home-personal-trainer-san-diego | in-home-personal-trainer-san-diego | In-Home Personal Trainer in San Diego \| OmniFit Performance |
