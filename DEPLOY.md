@@ -68,7 +68,7 @@ Only four things differ from the pasted sources, all structural:
    on the territory pages), sized at 1em so it takes the size the emoji had.
    160 replacements on 13 pages as of Oct 17, 2026 (249 on 22 before the
    canon-consolidation run swapped the emoji in the touched sources for the
-   same SVGs); the build prints the full list and fails if a newly pasted
+   same SVGs); the build prints the full list and fails if a new or edited
    page carries an emoji with no icon. Untouched `pages/` sources still
    contain their emoji. The text symbols ✓ ✗ ✕ (table ticks and CSS list
    bullets) are not emoji and stay as text.
@@ -192,6 +192,17 @@ no request to either service on a non-production host. Details in
 Optional alternative: set the build command to `python3 build.py` so Cloudflare
 regenerates `public/` on every deploy (Python 3 is in the Pages build image).
 Either way the output directory is `public`.
+
+### Deploying (since the Oct 18, 2026 cutover)
+
+Merging to `main` is publishing. Nothing is pasted into Squarespace any more.
+
+1. Edit the source in `pages/<slug>.html` and/or
+   `pages/headers/<slug>-header.html` (or `site/`) on a branch.
+2. Run `python3 build.py` and commit the regenerated `public/` with the
+   source change; run `python3 tools/certify.py` (RESULT: PASSED).
+3. Merge to `main` and push. Cloudflare Pages deploys `public/` from `main`
+   (rebuilding it first if the build command above is set).
 
 `public/_redirects` uses Cloudflare Pages syntax (`/old /new 301`).
 `public/404.html` is written by `build.py` too (title "Page Not Found | OmniFit
@@ -331,14 +342,10 @@ The old `?key=` address no longer works: it shows the form instead.
    settings above. Deploy once to the `*.pages.dev` preview and click through.
 2. **Add the logo** (see "Header, nav and announcement bar" above) and check
    the announcement bar's link target.
-3. **Pages that live only in Squarespace** (block-built, no Code Block in the
-   repo). They are linked from every page via the nav or footer and need to
-   exist before launch or the links 404: `/privacy-policy` (footer),
-   `/behavior-change-coaching` (nav: Methodology, plus
-   how-we-measure-your-progress and outcomes), `/is-omnifit-right-for-you`
-   (nav: Fit Check, plus contactform). Paste each
-   live page into `pages/<slug>.html` (plus its header) and rebuild, or add a
-   redirect. (`/bodybuilding` and the Energy Protocol waitlist page are no
+3. **Pages that lived only in Squarespace** (block-built, no Code Block in the
+   repo). Done before the Oct 18, 2026 cutover: `/privacy-policy` and
+   `/behavior-change-coaching` are pages in `pages/`, and
+   `/is-omnifit-right-for-you` 301s to `/fit-check`. (`/bodybuilding` and the Energy Protocol waitlist page are no
    longer live; their headers were archived Oct 16, 2026. Google still knows
    both URLs, so since Oct 17, 2026 they 301: `/bodybuilding` ->
    `/strength-training-1`, `/energy-protocol-waitlist-form` ->
@@ -363,8 +370,8 @@ The old `?key=` address no longer works: it shows the form instead.
    Done: the site-wide schema image (site-header) and the homepage
    primaryImageOfPage (home-header) now use
    `/assets/img/hero-coach-client-cable-pulldown-1600.jpg` instead of the
-   Squarespace dumbbell photo. That URL only resolves once this build serves
-   the domain, so do not paste either header into Squarespace before cutover.
+   Squarespace dumbbell photo. That URL resolves now that this build serves
+   the domain (cutover Oct 18, 2026).
    The seven client transformation photos were already moved: re-branded
    (old knot logo removed, header logo added; clients untouched) and served
    from `/assets/img/`.
@@ -396,9 +403,10 @@ The old `?key=` address no longer works: it shows the form instead.
 9. **Search Console.** Submit `https://www.omnifittraining.com/sitemap.xml`
    after launch. Squarespace's native LLMS.txt field has no equivalent here;
    add `public/llms.txt` if you want to keep one.
-10. **Updating a page later.** Paste the live page into `pages/<slug>.html`
-    and its header into `pages/headers/<slug>-header.html`, run
-    `python3 build.py`, review the check report, commit.
+10. **Updating a page later.** Edit `pages/<slug>.html` and its header
+    `pages/headers/<slug>-header.html` in the repo (the only source), run
+    `python3 build.py` and `python3 tools/certify.py`, review both reports,
+    commit, and merge to `main` (see "Deploying" above).
 
 ## Check report (from `python3 build.py`)
 
