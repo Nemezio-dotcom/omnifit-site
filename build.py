@@ -112,6 +112,28 @@ META_OVERRIDE = {
     ),
 }
 
+# <title> only (description, header JSON-LD and page body untouched). Squarespace
+# appended the site name to every title on render; the static build does not, so
+# these 15 pages lost the brand at the Oct 18, 2026 cutover. Owner-approved
+# Oct 25, 2026: brand restored, every title kept at 61 characters or fewer.
+TITLE_OVERRIDE = {
+    "home": "Personal Trainer San Diego | OmniFit Performance",
+    "about": "About Nemezio LopezPerez | OmniFit Performance, San Diego",
+    "body-composition-testing": "Body Composition Testing San Diego | OmniFit Performance",
+    "corrective-exercise-post-rehab": "Corrective Exercise San Diego | Post-Rehab | OmniFit",
+    "couples-personal-training-san-diego": "Couples Personal Training San Diego | OmniFit Performance",
+    "glp-1-personal-training-san-diego": "GLP-1 Personal Training San Diego | OmniFit Performance",
+    "how-to-choose-a-personal-trainer-san-diego": "How to Choose a Personal Trainer: Red Flags | OmniFit",
+    "hsa-fsa-personal-training": "HSA & FSA Eligible Personal Training | OmniFit Performance",
+    "nutrition-coaching-san-diego": "Nutrition Coaching San Diego | OmniFit Performance",
+    "personal-trainer-fairbanks-ranch": "Personal Trainer Fairbanks Ranch | OmniFit Performance",
+    "personal-trainer-rancho-santa-fe": "Personal Trainer Rancho Santa Fe | OmniFit Performance",
+    "personal-training-services": "Personal Training for Professionals 30+ | OmniFit Performance",
+    "strength-training-1": "Strength Training for Professionals 30+ | OmniFit Performance",
+    "the-30-minute-executive-reset": "30-Minute Executive Reset | OmniFit Performance",
+    "weight-loss": "Sustainable Fat Loss for Professionals 30+ | OmniFit",
+}
+
 CALENDLY = "https://calendly.com/nemezio-omnifittraining/45min"
 
 # Open Graph / Twitter card tags on every page, so a link shared by text,
@@ -382,6 +404,13 @@ def header_nodes(text):
 
 
 def page_meta(slug, page_text, header_text):
+    t, d, src = _page_meta(slug, page_text, header_text)
+    if slug in TITLE_OVERRIDE:
+        return TITLE_OVERRIDE[slug], d, src + " + TITLE_OVERRIDE"
+    return t, d, src
+
+
+def _page_meta(slug, page_text, header_text):
     """(title, description) - header WebPage node, else the page's SEO
     comments, else META_FALLBACK. Returns the source label too."""
     if slug in META_OVERRIDE:
