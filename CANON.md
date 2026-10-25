@@ -54,7 +54,7 @@ otherwise, this block wins and the older line is kept only as history.
     available through Truemed. OmniFit provides itemized receipts.
 
 REPO STATE (reconciled with disk, Sept 2026)
-- main = paste source. Every file under pages/ is IN CERTIFICATION SCOPE unless
+- main = the live site: merging to main deploys to Cloudflare Pages. Every file under pages/ is IN CERTIFICATION SCOPE unless
   listed as not-yet-certified below. archive/ is NEVER in scope.
 - Header naming is standardised: pages/headers/<slug>-header.html, no
   exceptions. Naming slips are corrected AFTER the content certifies, with
@@ -134,11 +134,13 @@ REPO STATE (reconciled with disk, Sept 2026)
       is the THIRTEENTH carrier of both pricing invariants.
       CAVEAT, recorded because it is the one condition under which this
       certification is wrong: the page was PATCHED, not refreshed from live.
-      CANON's closing procedure begins "paste the live page into the repo",
-      and that step did not happen - no run in this repo can reach the live
-      page. The content is correct against the October card and against this
-      brief. If production has diverged from the repo copy since the file was
-      last pasted, the diff must be reviewed BEFORE this page is pasted back.
+      CANON's closing procedure then began "paste the live page into the
+      repo", and that step did not happen - no run in this repo could reach
+      the live page. The content is correct against the October card and
+      against this brief. Since the Squarespace paste workflow was retired
+      (Oct 24, 2026) the repo is the only source: a change is edited in
+      pages/, rebuilt, certified and merged to main, and there is no live
+      copy to diverge from or paste back.
 
     how-to-choose-a-personal-trainer-san-diego - NEW, Oct 25 2026 (Founder
       Bio + Trainer Guide run). Modelled on omnifit-vs-competitors (In Short
@@ -156,7 +158,7 @@ REPO STATE (reconciled with disk, Sept 2026)
       names San Diego away from "personal trainer". Not a cost page (K10
       stays unassigned; no link to the rates page from it).
 
-  IN SCOPE, NOT YET CERTIFIED - carry real findings, do not paste
+  IN SCOPE, NOT YET CERTIFIED - carry real findings; certify before the next change to these files
     · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
       NOT certified and BLOCKED on three things, all reported in the Link Graph
       Repair run and none fixed there:
@@ -194,7 +196,7 @@ REPO STATE (reconciled with disk, Sept 2026)
       every other page: certify.py FROZEN lists case-studies.html only.
       pages/case-studies.html keeps its frozen-record status unchanged.
 
-  NOT YET CERTIFIED, do not paste
+  IN SCOPE, NOT YET CERTIFIED - carry real findings; certify before the next change to these files
     · footer.html - site-wide, in no batch.
 
   ORPHAN HEADERS - a header with no page in the repo
@@ -556,8 +558,9 @@ ASK OMNIFIT - ON-SITE AI ASSISTANT (owner brief, Oct 19 2026)
   added to Sharing Information; later sections renumbered 09-14.
 
 WORKFLOW RULES
-- Repo-only. Never publish anywhere; the human pastes approved output
-  into Squarespace.
+- Repo-only. Claude Code runs publish by merging to main (which deploys
+  to Cloudflare Pages), and only when the prompt says to; otherwise work
+  stays on the run's branch. Nothing is pasted into the site by hand.
 - On certification failure or ambiguity: report file:line and STOP.
   Never fix silently. Naming slips (e.g. missing .html) may be corrected
   after content certifies, with disclosure.
@@ -2224,7 +2227,7 @@ NEXT RUNS
   delete page, Search Console recrawl of ALL changed URLs as one batch
   at the very end, fitnesstrainer.com URL into homepage sameAs when
   retrievable, homepage Over-50 / Partner & Duo / female-clients FAQ
-  sections (Claude drafts, human pastes), post-recrawl third-party
+  sections (Claude drafts in pages/, published by merging to main), post-recrawl third-party
   signal work (review-prompt kit, directories, thought leadership).
 - OUTCOME CLAIMS AMENDMENT FOLLOW-UP - DONE Oct 17 2026 (follow-up run,
   owner decisions: Dave R. on the consent list, the /outcomes short
@@ -2251,3 +2254,6 @@ NEXT RUNS
     pages open);
     human-side, paste it to Google Business Profile, Thumbtack, Yelp and
     Bark.
+
+CHANGE LOG
+- Oct 24, 2026: Squarespace paste workflow retired; main deploys to Cloudflare Pages.
