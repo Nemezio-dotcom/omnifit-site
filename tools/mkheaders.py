@@ -35,8 +35,8 @@ CLOSE_PUNCT = {"weight-loss", "omnifit-vs-competitors"}
 NOTE = {
  "how-we-measure-your-progress":
    "<!-- HOW-WE-MEASURE-YOUR-PROGRESS PAGE HEADER JSON-LD · OCT 2 2026\n"
-   "  Paste into /how-we-measure-your-progress → Page Settings → Advanced → Page Header Code Injection,\n"
-   "  replacing any previous block entirely.\n"
+   "  Header file: pages/headers/how-we-measure-your-progress-header.html (written by tools/mkheaders.py;\n"
+   "  build.py injects it into /how-we-measure-your-progress).\n"
    "  FAQPage mirrors the on-page FAQ verbatim (tags stripped), in page order.\n"
    "  LocalBusiness is referenced by @id from the site-wide header, never redefined here.\n",
 }
@@ -73,8 +73,8 @@ def build(slug, check=False):
                           "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pairs]})
     doc = {"@context": "https://schema.org", "@graph": graph}
     note = NOTE.get(slug) or (f"<!-- {slug.upper()} PAGE HEADER JSON-LD · BATCH 3, AUGUST 2026\n"
-            f"  Paste into /{slug} → Page Settings → Advanced → Page Header Code Injection,\n"
-            f"  replacing any previous block entirely.\n\n"
+            f"  Header file: pages/headers/{slug}-header.html (written by tools/mkheaders.py;\n"
+            f"  build.py injects it into /{slug}).\n\n"
             f"  FAQPage mirrors the patched on-page FAQ verbatim (tags stripped), in page order.\n"
             f"  LocalBusiness is referenced by @id from the homepage, never redefined here.\n")
     if slug in ("weight-loss", "hiit-personal-trainer-san-diego", "partners"):
