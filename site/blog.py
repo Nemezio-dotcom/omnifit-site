@@ -175,7 +175,6 @@ def post_header(post, base):
             "publisher": {"@id": f"{base}/#organization"},
             "isPartOf": {"@id": f"{base}/blog#blog"},
             "about": {"@id": f"{base}/#localbusiness-of"},
-            "breadcrumb": {"@id": f"{url}#breadcrumb"},
             "inLanguage": "en-US",
         },
         {
