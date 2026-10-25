@@ -8438,3 +8438,21 @@ Since the Oct 18, 2026 cutover the site is a static build on Cloudflare Pages de
 - **DEPLOY.md:** new "Deploying" subsection (branch edit -> `python3 build.py` + certify -> merge to `main`; Cloudflare Pages deploys `public/`); manual step 3 marked done (those pages exist or redirect); step 5's "do not paste either header into Squarespace before cutover" closed; step 10 rewritten to edit-in-repo; "newly pasted page" -> "new or edited page".
 - **tools/mkheaders.py, tools/mkterritory.py:** the header comment they write now names the header file (`pages/headers/<slug>-header.html`) instead of the Squarespace Code Injection path. No logic change. mkheaders.py's text lands in the nine Batch 3 headers, so they were regenerated to keep `mkheaders.py --check` byte-exact: a two-line comment change in each, JSON-LD untouched. mkterritory.py was not run (it has no --check); the eleven territory headers keep their old comment until its next run.
 - **Checks:** `python3 tools/certify.py` RESULT: PASSED, identical to before the run (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 0); invariant hashes unchanged: page pricing ff5360d2b6b5029b, header pricing 22744ada78eb0707, credentials f551f6751a2c7fd7, archetypes 6b1b0f4efbd4a72c, 9-point 5a629cf689301f84. `mkheaders.py --check` PASSED; `build.py --check` PASSED. `public/` rebuilt: the nine Batch 3 pages carry the new header comment; sitemap lastmod moves for them.
+
+## Semrush audit fixes: BlogPosting breadcrumb, Journal internal links (Oct 24 audit; run Oct 25, 2026)
+
+Two fixes, nothing else.
+
+1. **Structured data.** `site/blog.py` `post_header()`: removed `"breadcrumb": {"@id": f"{url}#breadcrumb"}` from the BlogPosting node (`breadcrumb` is a WebPage property, not valid on BlogPosting). The standalone BreadcrumbList node (`<url>#breadcrumb`, Home / Journal / post) is unchanged. Rebuilt: neither `public/blog/why-posture-work-doesnt-stick.html` nor `public/blog/protein-for-busy-professionals.html` carries `breadcrumb` inside BlogPosting; both still carry the 3-item BreadcrumbList.
+2. **Internal links.** One contextual in-text link appended to an existing paragraph on each page; no new section, no other change:
+
+| Page | Paragraph | Anchor -> target |
+|---|---|---|
+| `pages/desk-worker-posture-pain.html` | approach card 06 "Sustain & Prevent" | "why posture work doesn't stick at a desk job" -> /blog/why-posture-work-doesnt-stick (inline gold + underline style, as the hero's in-text link) |
+| `pages/corrective-exercise-post-rehab.html` | "Desk-Worker Posture and Mobility" card | "why desk posture work doesn't stick" -> /blog/why-posture-work-doesnt-stick |
+| `pages/nutrition-coaching-san-diego.html` | "Macro targeting" card | "a daily protein floor" -> /blog/protein-for-busy-professionals |
+| `pages/weight-loss.html` | "Personalized Nutrition" card | "a daily protein floor for busy professionals" -> /blog/protein-for-busy-professionals |
+
+Judgment call: each link is a short trailing pointer sentence ("More on ...") rather than a rewording of the existing sentence, so no existing claim changes and none is added; wrong if the owner wants the anchor woven into the original sentence.
+
+Checks: `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 0); invariant hashes unchanged (ff5360d2b6b5029b, 22744ada78eb0707, f551f6751a2c7fd7, 6b1b0f4efbd4a72c, 5a629cf689301f84). `build.py --check` PASSED; `mkheaders.py --check` PASSED; `ownership.py` PASSED; `node --test tests/assistant.test.mjs` 45/45.
