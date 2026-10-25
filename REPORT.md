@@ -8408,3 +8408,24 @@ Started from main f9ef9c9.
 - **Pacific Beach in public/ (report only, nothing edited).** No visible copy says or implies in-home training in Pacific Beach. The only mentions are the footer changelog HTML comment on 51 pages ("replaced legacy ... Pacific Beach GBP link") and six 301 rules in public/_redirects that keep the old Pacific Beach URLs retired.
 
 Results: build --check PASSED (only the two Squarespace warnings). Certify PASSED with 0 findings, all five hashes unchanged, 45 public/ pages swept. node --test tests/assistant.test.mjs 45/45. mkheaders --check PASSED. Ownership and its selftest PASSED.
+
+## Founder bio and the trainer guide page (Oct 25 2026)
+
+Two changes, nothing else. Checks after the run: `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 0; the five invariant hashes unchanged); `python3 build.py --check` PASSED (keyword ownership included); `python3 tools/mkheaders.py --check` PASSED; `tools/mobileaudit.js --open-details` on the new page and the three pages that link to it: no overflow, no clipping at 390 and 412 (the eight 38px red-flag number badges are reported as narrow by design).
+
+1. **Founder bio.** `pages/headers/site-header.html`, Person `#founder` "description" replaced with the owner's bio, verbatim; every other field and node unchanged. Recorded in CANON ENTITY BLOCK as FOUNDER BIO. Present on every built page (all of public/ except 404.html, which carries no site header).
+2. **New page `/how-to-choose-a-personal-trainer-san-diego`.** `pages/how-to-choose-a-personal-trainer-san-diego.html` + `pages/headers/how-to-choose-a-personal-trainer-san-diego-header.html` (WebPage, BreadcrumbList, FAQPage mirroring the 5-question on-page FAQ; #localbusiness-of and #organization by @id). Links: nav More menu (`site/nav.html`), footer link list (`pages/footer.html`; the footer has no "More" heading, so the link sits in the About card's list), one contextual link each on omnifit-vs-competitors (independent-trainer section), how-it-works-pricing (policies intro) and fit-check (intro), `site/llms.txt`; the sitemap picks it up from build.py. DEPLOY.md pages table updated.
+
+Owner copy changed where it disagreed with CANON (CANON wins):
+
+| Owner copy | Published | CANON line |
+|---|---|---|
+| SEO title "How to Choose a Personal Trainer in San Diego: Red Flags" | "How to Choose a Personal Trainer: Red Flags \| San Diego" | KEYWORD OWNERSHIP K01, owner `/`; build.py --check fails on the original |
+| Meta "...before you hire a personal trainer in San Diego, from a diagnostic-led coaching practice..." | "...before you hire a personal trainer, from a San Diego diagnostic-led coaching practice..." | same, K01 |
+| In Short: two sentences | The POSITIONING LINE first, verbatim, then the two sentences | ENTITY BLOCK, POSITIONING LINE usage: lead sentence of summary / TL;DR blocks |
+| Assessment: "a $150 Performance Assessment, credited toward your first program" | "a Performance Assessment ($150 in person, $75 virtual), credited toward your first program, Reset cycle or 5-pack" | CANONICAL FACTS (virtual $75); LAUNCH DECISIONS item 2 short form |
+| Measurement: Bodystat "for studio clients" | "for in-person clients" | CANONICAL FACTS: the in-person assessment, studio or home, includes the Bodystat scan |
+| FAQ "Do I need an assessment...": "Yes." | "For a program or a session pack, yes; for a single session it's recommended, not required." | CANONICAL FACTS, SINGLE SESSIONS |
+| FAQ "How will I know...": "progress is reviewed every 4 weeks" | adds "(at least every 12 weeks on Train Only)" | ACCOUNTABILITY DIAL floors; matches the table row and how-we-measure-your-progress |
+
+Judgment calls: (a) "Prices: published on the rates page" carries no link, because K10 forbids new cost-anchor links until the cost page exists; wrong if the owner reads K10 as covering only cost-phrase anchor text. (b) The FAQ is an accordion (`<details class="oc-faq">`, `<summary class="oc-faq-q">`, `<div class="oc-faq-body">`), not the comparison page's static cards, as the brief asked; faq.py reads that shape without a new pattern.
