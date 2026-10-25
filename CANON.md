@@ -61,7 +61,9 @@ REPO STATE (reconciled with disk, Sept 2026)
   disclosure, never before - fixing the name first hides a real structural
   check behind a filename mismatch.
 
-  CERTIFIED - 30 page/header pairs (29 between the Keyword Ownership run,
+  CERTIFIED - 31 page/header pairs (30 until the Founder Bio + Trainer
+  Guide run, Oct 25 2026, added how-to-choose-a-personal-trainer-san-diego;
+  29 between the Keyword Ownership run,
   Oct 2026, which archived strength-training-1, and the Dial follow-up run,
   Oct 17 2026, which restored it; see ARCHIVE)
     11 territory pages: personal-trainer-4s-ranch, -carlsbad,
@@ -137,6 +139,22 @@ REPO STATE (reconciled with disk, Sept 2026)
       page. The content is correct against the October card and against this
       brief. If production has diverged from the repo copy since the file was
       last pasted, the diff must be reviewed BEFORE this page is pasted back.
+
+    how-to-choose-a-personal-trainer-san-diego - NEW, Oct 25 2026 (Founder
+      Bio + Trainer Guide run). Modelled on omnifit-vs-competitors (In Short
+      led by the POSITIONING LINE, FAQ accordion of <details>, the shared
+      "What People Come to Coaching For" block, closing CTA). Header carries
+      WebPage/BreadcrumbList/FAQPage; its 5-question FAQPage mirrors the page
+      in count, order and text; #localbusiness-of and #organization by @id
+      only. Zero findings on its first run. Linked from the nav More menu,
+      the footer link list, omnifit-vs-competitors, how-it-works-pricing and
+      the fit-check intro; in llms.txt and (by build.py) the sitemap. Takes
+      no owned keyword: the owner's requested title "How to Choose a Personal
+      Trainer in San Diego: Red Flags" and meta "... a personal trainer in
+      San Diego ..." both match K01 (owner /), so the published title is
+      "How to Choose a Personal Trainer: Red Flags | San Diego" and the meta
+      names San Diego away from "personal trainer". Not a cost page (K10
+      stays unassigned; no link to the rates page from it).
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings, do not paste
     · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
@@ -989,6 +1007,18 @@ ENTITY BLOCK (Oct 17 2026; source: brand entity split across AI platforms -
     measures first, builds joint-first strength, and carries accountability
     across studio, in-home and virtual on one app for professional adults
     30+."
+  FOUNDER BIO (canonical, verbatim; owner, Oct 25 2026; the "description" of
+  the Person node #founder in pages/headers/site-header.html, so every built
+  page carries it in schema):
+    "Nemezio LopezPerez founded OmniFit Performance to coach busy
+    professionals over 30 who keep losing progress to pain, plateaus and
+    packed calendars. An NASM Elite Trainer with NASM certifications in
+    corrective exercise, performance enhancement and nutrition, and a
+    Precision Nutrition Level 2 Certified Master Coach, he trains clients at
+    Teqneeq in 4S Ranch, in their homes, and virtually."
+    It replaces "Nemezio LopezPerez (Coach Nemezio) is the founder of
+    OmniFit Performance in San Diego and the coach behind the OmniFit
+    Method." Every other field of #founder is unchanged.
   ENTITY LINE (verbatim, the short form under page blocks):
     "OmniFit Performance · Nemezio LopezPerez (Coach Nemezio) · Teqneeq
     Functional Health Center, 10772 Thornmint Rd, 4S Ranch, San Diego, CA
