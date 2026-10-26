@@ -106,9 +106,9 @@ META_FALLBACK = {
 # SEO title and description set for the page in October 2026 are these.
 META_OVERRIDE = {
     "fit-check": (
-        "OmniFit Fit Check | Are You Ready for Coaching?",
-        "Seven questions, three minutes. See if you're ready and able for OmniFit's diagnostic-led "
-        "coaching in San Diego, and which accountability setting fits you.",
+        "OmniFit Fit Check | Your Fit, Frequency and Price",
+        "Ten questions, three minutes. See if OmniFit fits, how many sessions a week your goal "
+        "calls for, and which options match your schedule and budget.",
     ),
 }
 

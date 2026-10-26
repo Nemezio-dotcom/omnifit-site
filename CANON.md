@@ -1801,8 +1801,19 @@ PAGES WITH NO FAQ (Oct 16, 2026)
   about · contactform · fit-check · personal-training-services ·
   privacy-policy · terms-and-conditions. These have no FAQ by design.
   (fit-check was rebuilt Oct 17 2026 around two gates, READY and ABLE, plus
-  an Accountability Dial question; its "Not a fit right now" result and
-  its intro are page copy, not FAQ markup, and the page stays on this list.)
+  an Accountability Dial question. REBUILT AGAIN Oct 26 2026 (owner: "too
+  strict") as a fit read plus plan finder: ten questions in three sections
+  (About you, Your goal, Your plan). The ONLY hold is refusing the two
+  booking standards (payment confirms a booking; 24 hours' notice).
+  Timing, budget, schedule and travel no longer fail anyone; they shape
+  the result: a recommended frequency per goal (fat loss 2x, posture 2x,
+  strength 2x or 3x with a training base, ageing well 1x, routine 1x),
+  capped by the days the visitor has, then up to three priced option
+  cards (Recommended / Best fit for your budget + What your goal calls
+  for / Faster pace / Lighter rhythm / For travel-heavy stretches /
+  Flexible start). Prices are hard-coded from the OCTOBER 2026 CARD in the
+  page script; a card change must be made there too. Its results are page
+  copy, not FAQ markup, and the page stays on this list.)
   certify.py (NO_FAQ) verifies it: the page body must carry no FAQ-shaped
   markup and the header no FAQPage, or it is a structure finding. A new page
   without an FAQ must be added here AND to NO_FAQ, or certification reports

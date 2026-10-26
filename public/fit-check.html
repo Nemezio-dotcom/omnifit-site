@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OmniFit Fit Check | Are You Ready for Coaching?</title>
-<meta name="description" content="Seven questions, three minutes. See if you&#x27;re ready and able for OmniFit&#x27;s diagnostic-led coaching in San Diego, and which accountability setting fits you.">
+<title>OmniFit Fit Check | Your Fit, Frequency and Price</title>
+<meta name="description" content="Ten questions, three minutes. See if OmniFit fits, how many sessions a week your goal calls for, and which options match your schedule and budget.">
 <link rel="canonical" href="https://www.omnifittraining.com/fit-check">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OmniFit Performance">
-<meta property="og:title" content="OmniFit Fit Check | Are You Ready for Coaching?">
-<meta property="og:description" content="Seven questions, three minutes. See if you&#x27;re ready and able for OmniFit&#x27;s diagnostic-led coaching in San Diego, and which accountability setting fits you.">
+<meta property="og:title" content="OmniFit Fit Check | Your Fit, Frequency and Price">
+<meta property="og:description" content="Ten questions, three minutes. See if OmniFit fits, how many sessions a week your goal calls for, and which options match your schedule and budget.">
 <meta property="og:url" content="https://www.omnifittraining.com/fit-check">
 <meta property="og:image" content="https://www.omnifittraining.com/assets/img/og-coach-client-cable-pulldown-1200x630.jpg">
 <meta property="og:image:width" content="1200">
@@ -414,7 +414,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
       "@id": "https://www.omnifittraining.com/fit-check#webpage",
       "url": "https://www.omnifittraining.com/fit-check",
       "name": "Are You the Right Fit? | OmniFit Fit Check",
-      "description": "A seven-question self-check that shows whether you're ready and able for OmniFit's diagnostic-led personal training, and which accountability setting to start on. Instant result; no answers are saved or sent; only an anonymous count of completed checks and their result is recorded.",
+      "description": "A ten-question self-check that shows whether OmniFit's diagnostic-led personal training fits you, how many sessions a week your goal calls for, which options and prices match your schedule and budget, and which accountability setting to start on. Instant result; no answers are saved or sent; only an anonymous count of completed checks and their result is recorded.",
       "isPartOf": { "@id": "https://www.omnifittraining.com/#website" },
       "about": { "@id": "https://www.omnifittraining.com/#localbusiness-of" },
       "publisher": { "@id": "https://www.omnifittraining.com/#organization" },
@@ -517,6 +517,25 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 #of-fit .begin { font-size: 14px !important; color: var(--muted) !important; max-width: 56ch; margin: 0 auto !important; }
 #of-fit .begin b { color: var(--ink); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) { #of-fit * { transition: none !important; animation: none !important; } }
+#of-fit .plans { display: grid; grid-template-columns: 1fr; gap: 12px; text-align: left; }
+#of-fit .plan { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+#of-fit .plan.top { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+#of-fit .plan .tag { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+#of-fit .plan .tag.alt { color: var(--muted); }
+#of-fit .plan h3 { font-family: var(--display) !important; font-size: 21px !important; font-weight: 600 !important; margin: 0 !important; line-height: 1.25 !important; color: var(--ink) !important; letter-spacing: 0 !important; text-transform: none !important; }
+#of-fit .plan .freq { font-size: 13px !important; color: var(--muted) !important; }
+#of-fit .plan ul.price { list-style: none !important; margin: 4px 0 0 !important; padding: 0 !important; display: flex; flex-direction: column; gap: 4px; }
+#of-fit .plan ul.price li { margin: 0 !important; padding: 0 !important; font-size: 15px !important; line-height: 1.45 !important; color: var(--ink) !important; font-variant-numeric: tabular-nums; }
+#of-fit .plan ul.price li b { color: var(--gold-hi); font-weight: 600; }
+#of-fit .plan ul.price li.x { font-size: 13px !important; color: var(--muted) !important; }
+#of-fit .plan .why { font-size: 14px !important; color: var(--muted) !important; border-top: 1px solid var(--line); padding-top: 10px !important; }
+#of-fit .plan .gap { font-size: 13px !important; color: var(--hold) !important; }
+#of-fit .freqbox { text-align: left; background: var(--gold-soft); border: 1px solid rgba(201,168,76,.3); border-radius: 6px; padding: 14px 18px; font-size: 15px !important; }
+#of-fit .freqbox strong { display: block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+#of-fit .next { text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+#of-fit .next strong { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+#of-fit .next p { font-size: 15px !important; }
+#of-fit .notes { display: flex; flex-direction: column; gap: 12px; }
 </style>
 </head>
 <body class="page page--fit-check">
@@ -608,8 +627,8 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
 </header>
 <main id="main">
 <!-- SQUARESPACE PAGE SETTINGS (not part of the Code Block) -->
-<!-- SEO Title:       OmniFit Fit Check | Are You Ready for Coaching? -->
-<!-- SEO Description: Seven questions, three minutes. See if you're ready and able for OmniFit's diagnostic-led coaching in San Diego, and which accountability setting fits you. -->
+<!-- SEO Title:       OmniFit Fit Check | Your Fit, Frequency and Price -->
+<!-- SEO Description: Ten questions, three minutes. See if OmniFit fits, how many sessions a week your goal calls for, and which options match your schedule and budget. -->
 <!-- Canonical URL:   https://www.omnifittraining.com/fit-check -->
 <!-- SLUG: /fit-check · JSON-LD lives in fit-check-header.html (Page Header Code Injection) -->
 
@@ -622,16 +641,16 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   <section id="intro" class="stack">
     <span class="brand">OmniFit Performance</span>
     <h1>Are you the right fit?</h1>
-    <p class="lede">OmniFit is diagnostic-led coaching. We measure first, then build a program written for you. It works for people who are ready and able to start. Seven questions, about three minutes. Answer honestly, not the way you think you should. No answers are saved or sent; only an anonymous count of completed checks and their result is recorded. You'll see your result right away, including the accountability setting we'd recommend you start on.</p>
+    <p class="lede">Ten questions, about three minutes. You'll get an honest read on fit, the session frequency we'd recommend for your goal, and the options that match your schedule and budget, priced from the published rate card. No answers are saved or sent; only an anonymous count of completed checks and their result is recorded.</p>
     <div class="two">
-      <div class="box for"><h2>Built for you if</h2><ul><li>You've decided, and you're starting within the month</li><li>You want a program written for you, not a template</li><li>You can budget for the published rates and keep your appointments</li></ul></div>
-      <div class="box not"><h2>Not the right fit if</h2><ul><li>You mainly want group energy or the lowest price</li><li>You're still deciding whether it's worth it</li><li>The next three months leave no room for sessions</li></ul></div>
+      <div class="box for"><h2>Built for you if</h2><ul><li>You want a program written for you, not a template</li><li>You'd rather know the options and prices before you book</li><li>You keep your appointments: payment confirms a booking, 24 hours' notice to reschedule</li></ul></div>
+      <div class="box not"><h2>Not the right fit if</h2><ul><li>You mainly want group energy or the lowest price</li><li>You want a 6-week challenge rather than a plan you keep</li><li>The booking standards feel like too much</li></ul></div>
     </div>
-    <p class="begin"><b>New to training?</b> That's fine. The Performance Assessment sets your starting point, the first cycles are built around it, and corrective work sits in every warm-up. Even if you just want to train, we can start there.</p>
+    <p class="begin"><b>New to training, or just want to work out?</b> That's fine. The Performance Assessment sets your starting point, and you decide how much of the coaching around your sessions you use. Even if you just want to train, we can start there.</p>
     <p class="begin"><b>Still comparing trainers?</b> Read <a href="/how-to-choose-a-personal-trainer-san-diego">how to choose a personal trainer</a>: the red flags and the questions to ask.</p>
     <div><button class="btn primary" id="start">Start the fit check</button></div>
     <p class="begin"><a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Or book your consultation</a></p>
-    <noscript><p class="begin">The Fit Check needs JavaScript. You can <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">book your consultation</a> directly instead.</p></noscript>
+    <noscript><p class="begin">The Fit Check needs JavaScript. You can <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">book your consultation</a> directly instead, or see every option on the <a href="/training-rates-san-diego">rates page</a>.</p></noscript>
   </section>
 
   <section id="quiz" class="stack" hidden>
@@ -656,75 +675,260 @@ const BOOK_URL = "https://calendly.com/nemezio-omnifittraining/45min";
 const RATES_URL = "/training-rates-san-diego";
 const METHOD_URL = "/the-omnifit-method";
 
-// Two gates. READY: decided, starting within about 30 days. ABLE: budget for
-// the published rates, room in the calendar, and the two standards that
-// protect your slot (payment confirms a booking; 24 hours' notice to
-// reschedule). The Dial question (g: null) is not a gate: it sets the
-// recommended starting setting on the result.
-const GATES = ["Ready", "Able"];
-// Each option: [answer in the client's voice, "pass" | "soft" | "fail", coach reply]
-// A gate is held on any "fail", or on two or more "soft" answers within that gate.
+// HOW THIS WORKS (rebuilt Oct 26 2026). The Fit Check is now a fit read AND a
+// plan finder. Only one answer holds the result: refusing the two booking
+// standards (payment confirms a booking; 24 hours' notice to reschedule).
+// Everything else shapes the recommendation instead of failing it: timing
+// changes the wording, budget picks the option that fits, schedule caps the
+// frequency, travel points to the Program's pause weeks or the Executive
+// Reset. Every price below is the CANON October 2026 card; change it there
+// first, then here.
+
+// ---- Rate card (CANON, October 2026) --------------------------------------
+const TEQNEEQ = 119;                       // per month, billed by Teqneeq
+const PROGRAM = {                          // every 4 weeks
+  studio:  { 1: 640,  2: 1250, 3: 1800 },
+  inhome:  { 1: 900,  2: 1800, 3: 2600 },  // in-home Peak is "from"
+  studioC: { 1: 1000, 2: 2000 },           // couples Peak by arrangement
+  inhomeC: { 1: 1450, 2: 2900 }
+};
+const FOUNDATION = {                       // per cycle, 3 cycles paid upfront
+  studio:  { 1: 560, 2: 1100 },
+  inhome:  { 1: 800 },
+  studioC: { 1: 850 },
+  inhomeC: { 1: 1250 }
+};
+const RESET = { 0: 200, 1: 500, 2: 750, 3: 1100 };   // every 4 weeks
+const RESET_NAME = { 0: "Bronze", 1: "Gold", 2: "Platinum", 3: "Black" };
+const TIER = { 1: "Momentum", 2: "Performance", 3: "Peak" };
+const PACK = { studio: [1050, 210, 180, 235], inhome: [1250, 250, 0, 275] }; // non-member 5-pack total, per session, member per session, single
+const GUEST = 90;
+const TRAVEL_FEE = "No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.";
+
+// ---- Questions -------------------------------------------------------------
+const SECTIONS = ["About you", "Your goal", "Your plan"];
+// Each option: [answer in the client's voice, value, coach reply]
 const Q = [
-  { g: 0, id: "stage", text: "Which sounds most like you right now?", opts: [
-    ["Honestly, I'm just curious what this would look like.", "fail", "Curiosity is a good start. This is built for people who've already decided, though."],
-    ["I know I should do something. I've been putting it off.", "fail", "That gap between knowing and starting is real. Starting has to be a decision first."],
-    ["I've made up my mind. I want to start this month.", "pass", "Good. A decision already made is the strongest starting point there is."],
-    ["I'm already doing some of the work and want it done right.", "pass", "You've got momentum. Structure is what makes it count."] ] },
-  { g: 0, id: "ready", text: "On a scale of 1 to 10, how ready are you to start in the next 30 days?", scale: true, min: 8, ends: ["Not ready", "Ready now"],
-    hi: "That's the range where people follow through.",
-    mid: "A realistic answer. Most people at a 6 or 7 have one thing left to settle.",
-    lo: "Anything under 6 usually means something big is still unsettled. Worth knowing before you start." },
-  { g: 1, id: "budget", text: "OmniFit's rates are published, and this is premium one-on-one coaching. Where are you with the investment?", opts: [
-    ["It's set aside. I'm treating this as a priority.", "pass", "That kind of commitment shows up in the work too."],
-    ["I can make it work if it's the right fit.", "pass", "Fair. Finding out if it's the right fit is what this is for."],
-    ["I'd need to see the numbers before I decide.", "soft", `Makes sense. Look at the <a href="${RATES_URL}">rates page</a> before you reach out, so you come in decided.`],
-    ["Money's tight right now, honestly.", "fail", "Thanks for being straight. Better to start when the investment won't add stress."] ] },
-  { g: 1, id: "life", text: "What do the next three months look like for you?", opts: [
-    ["Pretty steady. My routine is predictable.", "pass", "Ideal conditions to build on."],
-    ["Some travel or busy stretches, but nothing I can't plan around.", "pass", "That's normal life. The Travel Protocol is built for it: pause weeks and the app."],
-    ["Something big is coming, but I want to start anyway.", "soft", "Possible. Mention it up front so the plan is built around it."],
-    ["Life's about to get turned upside down.", "fail", "Then the timing's off, not you. Sessions need some room to happen."] ] },
-  { g: 1, id: "standards", text: "Two standards protect your slot: payment confirms a booking, and sessions reschedule with 24 hours' notice. How does that land?", opts: [
-    ["Makes sense. That's how I run my own calendar.", "pass", "Then you'll find the rest of the standards familiar too."],
-    ["Fine, as long as it works both ways.", "pass", "It does. Sessions OmniFit cancels are credited."],
-    ["I'd probably need reminders.", "soft", "The app sends them. The 24-hour window still stands."],
-    ["I don't want to be held to that.", "fail", "Understood. Those two standards are what keep every client's slot protected, so they don't bend."] ] },
-  { g: null, id: "dial", text: "How much accountability do you want from me?", opts: [
-    ["All of it, at least to start. Daily logging, fast replies, habit coaching.", "pass", "That's Full Accountability, the default for the first cycles. It's also the setting most people step down from."],
-    ["A weekly written check-in and a few habit targets.", "pass", "That's Coached. Enough structure to keep the plan honest without daily logging."],
-    ["Just the sessions and my program in the app. I'll check in with one tap.", "pass", "That's Train Only. Sessions, your program in the app, nutrition on request."],
-    ["I'm not sure yet.", "pass", "Then start on Full Accountability. We measure closely at the start so we can coach less over time, and you can change the setting at any cycle boundary."] ] },
-  { g: 1, id: "confidence", text: "How confident are you that you could keep your sessions and the check-in level you just chose for 12 weeks?", scale: true, min: 8, ends: ["Not confident", "Fully confident"],
-    hi: "Good. That confidence is a strong predictor of follow-through.",
-    mid: "Honest answer. Think about what would make it an 8. That's worth sharing when you reach out.",
-    lo: "Under 6 usually means the weekly rhythm would be a fight right now. Better to know that now." }
+  { s: 0, id: "start", text: "When do you want to start?", opts: [
+    ["This month. I've decided.", "now", "Good. A decision already made is the strongest starting point there is."],
+    ["In the next two or three months.", "soon", "Plenty of time to plan it properly. You'll see your options at the end."],
+    ["I'm researching. I want to understand my options first.", "research", "That's what this is for. You'll see each option and what it costs, with no pressure to book."] ] },
+  { s: 0, id: "background", text: "Where are you with training right now?", opts: [
+    ["New to it, or coming back after a long break.", "new", "That's where the Performance Assessment earns its keep. It sets your real starting point, so the first weeks are built for you, not guessed."],
+    ["On and off. I start strong, then life gets in the way.", "onoff", "The most common pattern there is. Structure and the right accountability setting are what break it."],
+    ["I've trained consistently for a year or more.", "consistent", "Good base. You can start directly on The Program, and a higher frequency is on the table if your goal calls for it."] ] },
+  { s: 0, id: "body", text: "Anything we should work around?", opts: [
+    ["Nothing to speak of.", "none", "Good. Corrective work still sits in every warm-up. It's how we keep it that way."],
+    ["An old injury, or recurring stiffness or pain: back, neck, shoulders, knees.", "old", "Common at 30+, and exactly what the corrective-first approach is built around."],
+    ["I'm in physical therapy, or under a doctor's care for it, right now.", "pt", "Then we start once you're cleared for training and work alongside your provider. OmniFit picks up where PT leaves off; it doesn't replace it."] ] },
+  { s: 1, id: "goal", text: "What's the main thing you want from this?", opts: [
+    ["Lose body fat and keep it off.", "fat", "Then most of the work happens between sessions: food, steps and sleep. Sessions protect the muscle; the plan around them drives the rest."],
+    ["Get stronger and build muscle.", "strength", "Strength responds to frequency and progressive load. Frequency matters most for this goal."],
+    ["Fix my posture and train without pain.", "posture", "Then we assess first and correct before we load. Early on, more frequent contact makes the biggest difference."],
+    ["Stay strong, mobile and independent as I age.", "age", "A goal you keep for decades. Consistency beats intensity here, so the plan has to fit your life."],
+    ["Just a structured routine I'll actually keep.", "routine", "Fair, and more common than people admit. The structure is the product."] ] },
+  { s: 1, id: "days", text: "How many days a week can you realistically give to a 60-minute session?", opts: [
+    ["One.", 1, "One good session a week, with your program in the app between sessions, is a real plan."],
+    ["Two.", 2, "Two is where most goals move steadily."],
+    ["Three or more.", 3, "That opens up every option, including Peak."],
+    ["It varies. I travel a lot, or my weeks are unpredictable.", 0, "Then the plan has to survive the travel. We'll factor that in: pause weeks, the app, or a virtual option."] ] },
+  { s: 2, id: "where", text: "Where would you train?", opts: [
+    ["At the studio: Teqneeq Functional Health Center, 4S Ranch.", "studio", "Studio programs include facility access on non-training days through your Teqneeq membership ($119/mo, billed by Teqneeq)."],
+    ["In my home, in North County San Diego.", "inhome", TRAVEL_FEE],
+    ["Virtually. I'm outside San Diego, or travel most weeks.", "virtual", "That's the Executive Reset: 30-minute live sessions by video, with your program in the app."],
+    ["Not sure yet.", "unsure", "Then we'll start from the studio, the best value for in-person coaching, and show the alternatives."] ] },
+  { s: 2, id: "who", text: "Training alone, or with someone?", opts: [
+    ["Just me.", "solo", "One-on-one it is."],
+    ["With a partner, spouse or friend (both 18 or over).", "couple", "Couples pricing applies to any two people training together, both 18 or over: the same session, separate programs."] ] },
+  { s: 2, id: "budget", text: "What would you comfortably invest in coaching every 4 weeks?", opts: [
+    ["Under $400", 400, "Noted. You'll see what fits inside that, honestly, including options without live sessions."],
+    ["$400 to $800", 800, "Noted. We'll show the best fit inside that range, and what your goal calls for if it's different."],
+    ["$800 to $1,300", 1300, "Noted. We'll show the best fit inside that range, and what your goal calls for if it's different."],
+    ["$1,300 to $2,000", 2000, "Noted. We'll show the best fit inside that range, and what your goal calls for if it's different."],
+    ["More than $2,000", 1e9, "Noted. Then your goal and schedule decide the recommendation."],
+    ["Show me what you'd recommend first.", null, "Fair. Your goal and schedule decide the recommendation, and every price is on the result."] ] },
+  { s: 2, id: "dial", text: "How much accountability do you want from me between sessions?", opts: [
+    ["All of it, at least to start. Daily logging, fast replies, habit coaching.", 0, "That's Full Accountability, the default for the first cycles. It's also the setting most people step down from."],
+    ["A weekly written check-in and a few habit targets.", 1, "That's Coached. Enough structure to keep the plan honest without daily logging."],
+    ["Just the sessions and my program in the app. I'll check in with one tap.", 2, "That's Train Only. Sessions, your program in the app, nutrition on request."],
+    ["I'm not sure yet.", 3, "Then start on Full Accountability. We measure closely at the start so we can coach less over time, and you can change the setting at any cycle boundary."] ] },
+  { s: 2, id: "standards", text: "Two standards protect your slot: payment confirms a booking, and sessions reschedule with 24 hours' notice. How does that land?", opts: [
+    ["Makes sense. That's how I run my own calendar.", "ok", "Then you'll find the rest of the standards familiar too."],
+    ["Fine, as long as it works both ways.", "ok", "It does. Sessions OmniFit cancels are credited."],
+    ["I'd probably need reminders.", "remind", "The app sends them before every session. The 24-hour window still stands."],
+    ["I don't want to be held to that.", "no", "Understood. Those two standards keep every client's slot protected, so they don't bend."] ] }
 ];
 
-const HOLD_MSG = [
-  { title: "Ready", body: "You're still deciding, or the start date isn't inside the next month. That's a fair place to be. Come back when you've decided. The work will still be here, and you'll get more from it." },
-  { title: "Able", body: "The budget, the calendar or the two booking standards don't line up right now. That's a timing issue, not a character one. Once they do, retake this check." }
-];
-
-// Every Foundation and Program tier carries all three settings. The Executive
-// Reset's Bronze tier (no live sessions) offers Coached or Train Only, so a
-// Full Accountability result says where that setting is available. The
-// Tune-Up is not a setting: it is the graduation point at the end of the Dial.
+// ---- Accountability Dial (unchanged wording) ------------------------------
 const BRONZE_NOTE = "On the Executive Reset, Full Accountability is available on Gold, Platinum and Black; Bronze, which has no live sessions, offers Coached or Train Only.";
+const FULL = { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles." };
 const DIAL = [
-  { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles.", note: BRONZE_NOTE },
+  FULL,
   { name: "Coached", body: "A weekly written check-in with a coach reply, one to three habit targets, and a measurement review every 4 weeks. Available on every tier of every program, including Executive Reset Bronze." },
   { name: "Train Only", body: "Your sessions and your program in the app, a one-tap weekly check-in, and nutrition on request. Available on every tier of every program, including Executive Reset Bronze." },
-  { name: "Full Accountability", body: "Daily logging of nutrition, steps and sleep, a coach reply within one business day, and behavior-change coaching through Awareness, Regulation, Adaptation and Integration. The default for the first cycles, and the right place to start when you're not sure.", note: BRONZE_NOTE }
+  { name: FULL.name, body: FULL.body + " The right place to start when you're not sure." }
 ];
 
-const FIT_NOTES = {
-  ready: "You rated your readiness a 6 or 7. On the contact form, say what would make it an 8.",
-  confidence: "You rated your confidence a 6 or 7. Name what might get in the way, so the plan accounts for it.",
-  budget: `You wanted to see the numbers first. Review the <a href="${RATES_URL}">rates page</a> before you reach out, so the conversation starts from a decision.`,
-  life: "You have something big coming up. Put it on the contact form so the plan accounts for it, and ask about pause weeks.",
-  standards: "You'd want reminders. The app sends them before every session; the 24-hour window is the same for everyone."
+// ---- Recommendation logic --------------------------------------------------
+const GOAL_PHRASE = { fat: "fat loss", strength: "strength and muscle", posture: "posture and training without pain", age: "staying strong and mobile as you age", routine: "a routine you'll keep" };
+// Sessions a week each goal calls for. Fat loss and posture need two; strength
+// needs two, or three once you have a base; ageing well and routine start at one.
+function idealFreq(a) {
+  if (a.goal === "strength") return a.background === "consistent" ? 3 : 2;
+  if (a.goal === "fat" || a.goal === "posture") return 2;
+  return 1;
+}
+const FREQ_WHY = {
+  fat: "Two sessions a week keep the strength work that protects muscle while you lose fat. The nutrition and daily habits between sessions decide the rest, which is why the accountability setting matters as much as the session count.",
+  strength: "Strength and muscle respond to how often a lift is trained under progressive load. Two sessions a week is the floor for steady progress; with a training base, three moves it faster.",
+  posture: "Corrective work sticks when the pattern is practiced often. Two sessions a week early on, then many clients step down to one once the pattern holds.",
+  age: "One session a week, done every week, beats three you can't keep. Two moves faster if your schedule allows it.",
+  routine: "One session a week, every week, with your program in the app between sessions. Add a second whenever you want more."
 };
 
+const money = (n) => "$" + n.toLocaleString("en-US");
+const freqWords = (n) => ["No live sessions", "One session a week", "Two sessions a week", "Three sessions a week"][n];
+
+// An option: { fmt: studio|inhome|virtual|pack, freq, couple }
+function key(o) { return o.fmt + (o.couple ? "C" : ""); }
+function available(o) {
+  if (o.fmt === "virtual") return RESET[o.freq] !== undefined;
+  if (o.fmt.startsWith("pack")) return true;
+  return PROGRAM[key(o)] && PROGRAM[key(o)][o.freq] !== undefined;
+}
+// What it costs every 4 weeks, for comparing against the budget. Uses the
+// lowest entry price (Foundation per cycle where offered) and adds the
+// Teqneeq membership to studio programs so the comparison is honest.
+function cost(o) {
+  if (o.fmt === "virtual") return RESET[o.freq] * (o.couple ? 2 : 1);
+  if (o.fmt.startsWith("pack")) return Infinity;
+  const k = key(o);
+  const f = FOUNDATION[k] && FOUNDATION[k][o.freq];
+  const p = f || PROGRAM[k][o.freq];
+  return p + (o.fmt === "studio" ? TEQNEEQ * (o.couple ? 2 : 1) : 0);
+}
+function same(a, b) { return a && b && a.fmt === b.fmt && a.freq === b.freq && a.couple === b.couple; }
+
+function preferredFormat(a) {
+  if (a.where === "unsure") return a.days === 0 ? "virtual" : "studio";
+  return a.where;
+}
+
+function plan(a) {
+  const couple = a.who === "couple";
+  const fmt = preferredFormat(a);
+  const want = idealFreq(a);
+  let cap = a.days === 0 ? (fmt === "virtual" ? 3 : 1) : a.days;
+  let freq = Math.min(want, cap);
+  if (couple && fmt !== "virtual") freq = Math.min(freq, 2);
+  const ideal = { fmt, freq, couple };
+  const budget = a.budget;
+  const cards = [];
+  const fits = (o) => budget === null || cost(o) <= budget;
+
+  // 1. Primary: the ideal if it fits the budget, else the best that does.
+  let primary = ideal, compromise = false;
+  if (!fits(ideal)) {
+    compromise = true;
+    const tries = [];
+    for (let f = freq - 1; f >= 1; f--) tries.push({ fmt, freq: f, couple });
+    if (fmt === "inhome") for (let f = freq; f >= 1; f--) tries.push({ fmt: "studio", freq: Math.min(f, couple ? 2 : 3), couple });
+    if (fmt !== "virtual") for (let f = Math.min(want, 3); f >= 1; f--) tries.push({ fmt: "virtual", freq: f, couple });
+    if (fmt === "virtual") for (let f = freq - 1; f >= 0; f--) tries.push({ fmt: "virtual", freq: f, couple });
+    tries.push({ fmt: "virtual", freq: 0, couple });
+    primary = tries.find(o => available(o) && fits(o)) || null;
+  }
+
+  if (primary) cards.push({ o: primary, tag: compromise ? "Best fit for your budget" : "Recommended for you", top: true });
+  else cards.push({ o: lowest(fmt, couple), tag: "Closest option", top: true, gap: true });
+  if (compromise) cards.push({ o: ideal, tag: freq < want ? "Recommended for your schedule" : "What your goal calls for" });
+
+  // 2. A faster pace when the schedule allows and the budget does too.
+  if (!compromise && fmt !== "virtual") {
+    const up = { fmt, freq: freq + 1, couple };
+    if (freq < cap && freq < 3 && available(up) && fits(up)) cards.push({ o: up, tag: "Faster pace" });
+    else if (freq > 1) cards.push({ o: { fmt, freq: freq - 1, couple }, tag: "Lighter rhythm" });
+  }
+  // 3. Travel: point to the Reset for the weeks away.
+  if (a.days === 0 && fmt !== "virtual" && cards.length < 3) {
+    const r = { fmt: "virtual", freq: Math.min(want, 3), couple };
+    if (fits(r) && !cards.some(c => same(c.o, r))) cards.push({ o: r, tag: "For travel-heavy stretches" });
+  }
+  // 4. A flexible way in, with no program commitment.
+  if (cards.length < 3) {
+    const flex = fmt === "virtual" ? { fmt: "virtual", freq: 0, couple } : { fmt: "pack-" + fmt, freq: 1, couple };
+    if (!cards.some(c => same(c.o, flex))) cards.push({ o: flex, tag: "Flexible start" });
+  }
+  return { cards: cards.slice(0, 3), ideal, primary, compromise, want, freq };
+}
+
+function lowest(fmt, couple) {
+  if (fmt === "virtual") return { fmt, freq: 0, couple };
+  return { fmt: fmt, freq: 1, couple };
+}
+
+// ---- Card rendering ----------------------------------------------------------
+function cardHTML(c, a) {
+  const o = c.o;
+  const couple = o.couple;
+  const per = couple ? " for the two of you" : "";
+  let title, freq, lines = [], why = "";
+  if (o.fmt === "virtual") {
+    title = "Executive Reset " + RESET_NAME[o.freq];
+    freq = o.freq === 0 ? "No live sessions: your program in the app, with check-ins" : freqWords(o.freq) + ", 30 minutes, by video";
+    lines.push(`<li><b>${money(RESET[o.freq])}</b> every 4 weeks${couple ? " per person" : ""}</li>`);
+    if (couple) lines.push(`<li class="x">The Executive Reset is individual, so each of you enrolls separately.</li>`);
+    why = o.freq === 0 ? "The lowest-cost way in. No live sessions, so it suits people who train on their own and want the program and the coaching around it." : "Live coaching that travels with you. Same program logic, delivered by video wherever you are.";
+  } else if (o.fmt.startsWith("pack")) {
+    const f = o.fmt.slice(5);
+    const p = PACK[f];
+    title = (f === "studio" ? "Studio" : "In-home") + " sessions without a program";
+    freq = "Book as you go: single sessions or a 5-pack";
+    lines.push(`<li><b>${money(p[0])}</b> for a 5-pack (${money(p[1])} a session, used within 8 weeks)</li>`);
+    lines.push(`<li>Single session ${money(p[3])}, used within 30 days</li>`);
+    if (f === "studio") lines.push(`<li class="x">Prices include the Teqneeq day pass; Teqneeq members pay ${money(p[2])} a session on a 5-pack.</li>`);
+    if (f === "inhome") lines.push(`<li class="x">${TRAVEL_FEE}</li>`);
+    if (couple) lines.push(`<li class="x">Bring your partner as a guest for ${money(GUEST)} a session.</li>`);
+    why = "No program commitment. The Performance Assessment is recommended, not required, for single sessions. Good for trying the coaching before you commit to a plan.";
+  } else {
+    const k = key(o);
+    const label = (o.fmt === "studio" ? "Studio" : "In-home") + (couple ? " couples " : " ") + TIER[o.freq];
+    title = label;
+    freq = freqWords(o.freq) + ", 60 minutes" + per;
+    const f = FOUNDATION[k] && FOUNDATION[k][o.freq];
+    const p = PROGRAM[k][o.freq];
+    if (f) lines.push(`<li>The Foundation: <b>${money(f)}</b> per 4-week cycle (${money(f * 3)} paid upfront for 12 weeks)</li>`);
+    lines.push(`<li>The Program: <b>${o.fmt === "inhome" && o.freq === 3 ? "from " : ""}${money(p)}</b> every 4 weeks</li>`);
+    if (!f) lines.push(`<li class="x">Starts on The Program; this tier isn't offered on The Foundation.</li>`);
+    if (o.fmt === "studio") lines.push(`<li class="x">Plus a Teqneeq membership, $119/mo${couple ? " each" : ""}, billed by Teqneeq.</li>`);
+    if (o.fmt === "inhome") lines.push(`<li class="x">${TRAVEL_FEE}</li>`);
+    if (c.tag === "Recommended for you" && o.freq < idealFreq(a)) why = "Your schedule sets the pace. Your program in the app carries the work between sessions, and the accountability setting below keeps it honest. Add a session whenever your weeks allow.";
+    else if (c.tag === "Recommended for your schedule") why = "What we'd recommend with the days you have, before budget. Your program in the app carries the work between sessions.";
+    else if (c.tag === "Recommended for you" || c.tag === "What your goal calls for") why = FREQ_WHY[a.goal];
+    else if (c.tag === "Best fit for your budget") why = "Inside your range. With fewer sessions than your goal calls for, more of the work happens between sessions, so the accountability setting below does more of the lifting. Every setting is included at no extra cost.";
+    else if (c.tag === "Faster pace") why = "Your schedule has room for it. More frequent sessions mean more coached practice and faster feedback on what's working.";
+    else if (c.tag === "Lighter rhythm") why = "One fewer session a week, with your program in the app carrying the rest. A solid way in if you'd rather build up.";
+    else why = FREQ_WHY[a.goal];
+  }
+  if (couple && o.fmt !== "virtual" && !o.fmt.startsWith("pack") && (a.days === 3 || idealFreq(a) === 3) && o.freq === 2) lines.push(`<li class="x">Three sessions a week for couples is by arrangement.</li>`);
+  const gap = c.gap ? `<p class="gap">This is above the range you chose. It's the most affordable way to start this format; sessions without a program are another way in.</p>` : "";
+  return `<div class="plan${c.top ? " top" : ""}"><span class="tag${c.top ? "" : " alt"}">${c.tag}</span><h3>${title}</h3><p class="freq">${freq}</p><ul class="price">${lines.join("")}</ul>${gap}<p class="why">${why}</p></div>`;
+}
+
+// ---- Notes under the plan ----------------------------------------------------
+function notesFor(a, r) {
+  const n = [];
+  if (a.body === "pt") n.push("You're in physical therapy or under a doctor's care right now. We start training once you're cleared, and the Performance Assessment builds on your provider's guidance. OmniFit doesn't diagnose or treat.");
+  if (a.body === "old") n.push("Mention the injury at the consultation. The Performance Assessment maps how you move around it, and the first cycles are built from that.");
+  if (a.days === 0 && preferredFormat(a) !== "virtual") n.push("For heavy travel, The Program allows 6 pause weeks every 12 months with 2 weeks' notice, credited against the next cycle, and your program travels with you in the app. The Foundation allows two pause weeks across its 12 weeks.");
+  if (a.goal === "fat" && a.dial === 2) n.push("Fat loss is decided mostly by what happens between sessions. Train Only works, but Coached is the minimum we'd suggest for this goal. Every setting is included at the same price.");
+  if (r.compromise && a.dial === 2 && a.goal !== "fat") n.push("With fewer sessions than your goal calls for, Coached or Full Accountability closes the gap between sessions, at no extra cost.");
+  if (a.background === "consistent") n.push("With a year or more of consistent training, you can start directly on The Program at any tier. The Foundation is then no longer available, so choose before you enroll.");
+  if (a.standards === "remind") n.push("You'd want reminders. The app sends them before every session; the 24-hour window is the same for everyone.");
+  return n.map(t => `<p class="note">${t}</p>`).join("");
+}
+
+// ---- Quiz engine (same behavior as before) ---------------------------------
 const answers = {};
 let i = 0;
 const root = document.getElementById("of-fit");
@@ -735,18 +939,12 @@ function toTop() {
 }
 
 function renderGates() {
-  const g = Q[i].g;
-  $("#gates").innerHTML = GATES.map((name, gi) => {
-    const qs = Q.filter(q => q.g === gi);
+  const s = Q[i].s;
+  $("#gates").innerHTML = SECTIONS.map((name, si) => {
+    const qs = Q.filter(q => q.s === si);
     const done = qs.filter(q => answers[q.id] !== undefined).length;
-    return `<div class="gate${gi === g ? " on" : ""}">${name}<span class="bar"><i style="width:${(done / qs.length) * 100}%"></i></span></div>`;
+    return `<div class="gate${si === s ? " on" : ""}">${name}<span class="bar"><i style="width:${(done / qs.length) * 100}%"></i></span></div>`;
   }).join("");
-}
-
-function replyFor(q) {
-  const a = answers[q.id];
-  if (a === undefined) return "";
-  return q.scale ? (a >= q.min ? q.hi : a >= q.min - 2 ? q.mid : q.lo) : q.opts[a][2];
 }
 
 function render() {
@@ -755,80 +953,72 @@ function render() {
   $("#qmeta").textContent = `Question ${i + 1} of ${Q.length}`;
   $("#qtext").textContent = q.text;
   const cur = answers[q.id];
-  if (q.scale) {
-    let h = `<div class="stack" style="gap:10px"><div class="scale" role="group" aria-label="${q.text}">`;
-    for (let n = 1; n <= 10; n++) h += `<button class="opt${cur === n ? " sel" : ""}" data-v="${n}" aria-pressed="${cur === n}">${n}</button>`;
-    h += `</div><div class="scale-ends"><span>${q.ends[0]}</span><span>${q.ends[1]}</span></div></div>`;
-    $("#qbody").innerHTML = h;
-  } else {
-    $("#qbody").innerHTML = `<div class="opts">` + q.opts.map((o, k) =>
-      `<button class="opt${cur === k ? " sel" : ""}" data-v="${k}" aria-pressed="${cur === k}">${o[0]}</button>`).join("") + `</div>`;
-  }
+  $("#qbody").innerHTML = `<div class="opts">` + q.opts.map((o, k) =>
+    `<button class="opt${cur === k ? " sel" : ""}" data-v="${k}" aria-pressed="${cur === k}">${o[0]}</button>`).join("") + `</div>`;
   $("#qbody").querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => {
     answers[q.id] = Number(b.dataset.v);
     render();
     const sel = $("#qbody .opt.sel");
     if (sel) sel.focus({ preventScroll: true });
   }));
-  const r = replyFor(q);
-  $("#reply").innerHTML = r ? `<div class="coach"><span class="mark" aria-hidden="true">N</span><p>${r}</p></div>` : "";
+  $("#reply").innerHTML = cur !== undefined ? `<div class="coach"><span class="mark" aria-hidden="true">N</span><p>${q.opts[cur][2]}</p></div>` : "";
   $("#next").disabled = cur === undefined;
   $("#next").textContent = i === Q.length - 1 ? "See my result" : "Next";
 }
 
-function rating(q) {
-  const a = answers[q.id];
-  if (q.scale) return a >= q.min ? "pass" : a >= q.min - 2 ? "soft" : "fail";
-  return q.opts[a][1];
+function values() {
+  const a = {};
+  Q.forEach(q => { a[q.id] = q.opts[answers[q.id]][1]; });
+  return a;
 }
-
-function score() {
-  const held = new Set();
-  const softCount = [0, 0];
-  const soft = [];
-  Q.forEach(q => {
-    if (q.g === null) return;
-    const r = rating(q);
-    if (r === "fail") held.add(q.g);
-    if (r === "soft") { softCount[q.g]++; soft.push(q.id); }
-  });
-  softCount.forEach((n, g) => { if (n >= 2) held.add(g); });
-  return { held: [...held].sort(), soft };
-}
-
-const ROLES = "Sessions are for form, load and corrective work. The app carries your individual program between sessions, your logs and your check-ins — written for you, not a template.";
 
 function showResult() {
-  const { held, soft } = score();
+  const a = values();
   const res = $("#result");
   $("#quiz").hidden = true;
+  const hold = a.standards === "no";
   // Measurement hooks read by site/site.js (fit_check_complete): the verdict
-  // and, on a pass, the recommended setting's name. Never an answer.
-  res.setAttribute("data-fit-result", held.length === 0 ? "pass" : "hold");
-  if (held.length === 0) res.setAttribute("data-fit-setting", DIAL[answers.dial].name);
+  // and, on a pass, the recommended Dial setting's name. Never an answer.
+  res.setAttribute("data-fit-result", hold ? "hold" : "pass");
+  if (!hold) res.setAttribute("data-fit-setting", DIAL[a.dial].name);
   else res.removeAttribute("data-fit-setting");
   res.hidden = false;
-  if (held.length === 0) {
-    const d = DIAL[answers.dial];
-    const notes = soft.map(id => `<p class="note">${FIT_NOTES[id]}</p>`).join("");
+
+  if (hold) {
     res.innerHTML = `
-      <span class="verdict pass">Result: You're a fit</span>
-      <h2>Ready and able. Let's set your starting point.</h2>
-      <p class="lede">You cleared both gates. The next step is a 45-minute consultation by video or phone, then the Performance Assessment ($150 in person, $75 virtual), credited toward your first cycle. Book the consultation directly below.</p>
-      <div class="dial"><strong>Recommended starting setting</strong><h3>${d.name}</h3><p>${d.body}</p>${d.note ? `<p class="note">${d.note}</p>` : ""}<p class="path">Every tier of The Foundation and The Program includes all three settings at no price difference, and you can change yours at any 4-week cycle boundary. The path most clients follow: <b>Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</b>. The Tune-Up is not a setting; it is graduation, the point at the end of the Dial. Tracking is a diagnostic tool, not a life sentence. We measure closely at the start so we can coach less over time. The goal is a client who no longer needs us every week.</p></div>
-      <p class="roles">${ROLES}</p>
-      ${notes}
-      <div class="capacity"><strong>Limited availability</strong><p>OmniFit takes a limited number of new clients. If you book or send a message and then don't reply when we reach out, you move to the back of the line.</p></div>
-      <div class="nav"><a class="btn primary" href="${BOOK_URL}" target="_blank" rel="noopener">Book Your Consultation</a><a class="btn ghost" href="${METHOD_URL}">Read the Method</a><button class="btn ghost" id="redo">Retake the check</button></div>`;
+      <span class="verdict hold">Result: Not a fit for 1:1 coaching</span>
+      <h2>The booking standards don't bend.</h2>
+      <p class="lede">Payment confirms a booking, and sessions reschedule with 24 hours' notice. They protect every client's slot, including yours, so they apply to everyone. Everything else about the coaching can flex to your schedule, budget and goal. These two can't.</p>
+      <p class="note">If you mainly want drop-in flexibility, a gym or class studio will serve you better. If the standards start to make sense, retake the check.</p>
+      <div class="nav"><a class="btn ghost" href="${RATES_URL}">See the rates</a><button class="btn ghost" id="redo">Retake the check</button></div>`;
   } else {
+    const r = plan(a);
+    const top = r.cards[0].o;
+    const d = DIAL[a.dial];
+    const resetShown = r.cards.some(c => c.o.fmt === "virtual");
+    const verdict = a.start === "now" ? "Result: You're a fit" : a.start === "soon" ? "Result: A good fit, when you're ready" : "Result: Here are your options";
+    const where = top.fmt === "studio" ? " in the studio" : top.fmt === "inhome" ? " at home" : top.fmt === "virtual" ? " virtually" : "";
+    const headline = r.compromise ? `${freqWords(r.want)} for ${GOAL_PHRASE[a.goal]}, and what fits your budget.` : top.fmt.startsWith("pack") ? "Your best way in: sessions without a program." : top.fmt === "virtual" && top.freq === 0 ? "Your best way in: the Executive Reset, Bronze." : `${freqWords(top.freq)}${where}, for ${GOAL_PHRASE[a.goal]}.`;
+    const lede = r.compromise
+      ? `For ${GOAL_PHRASE[a.goal]}, we'd recommend ${freqWords(r.want).toLowerCase()}${r.freq < r.want ? `; your schedule allows ${freqWords(r.freq).toLowerCase().replace(" a week", "")}` : ""}. The strongest option inside your budget is first, with ${r.freq < r.want ? "our recommendation for your schedule" : "what the goal calls for"} beside it, so you can decide with every number in front of you.`
+      : top.freq < r.want
+      ? `For ${GOAL_PHRASE[a.goal]}, ${freqWords(r.want).toLowerCase()} is the target. With your schedule, we'd start at ${freqWords(top.freq).toLowerCase().replace(" a week", "")}${where} and build from there. Here's that plan and the alternatives, priced from the published card.`
+      : `For ${GOAL_PHRASE[a.goal]}, with your schedule, we'd recommend ${freqWords(top.freq).toLowerCase()}${where}. Here's that plan and the alternatives, priced from the published card.`;
+    const nextLine = a.start === "research"
+      ? "When you're ready, the next step is a 45-minute consultation by video or phone. It's where the recommendation gets finalized. There's no rush; these prices are on the rates page any time."
+      : "The next step is a 45-minute consultation by video or phone, with a $30 deposit refunded the same day you attend. Then the Performance Assessment ($150 in person, $75 virtual), credited toward your first purchase.";
     res.innerHTML = `
-      <span class="verdict hold">Result: Not a fit right now</span>
-      <h2>This isn't a no. It's a not right now.</h2>
-      <p class="lede">OmniFit works when both are in place: ready and able. Here's what held, and why.</p>
-      ${held.map(g => `<div class="held"><strong>${HOLD_MSG[g].title}</strong><p>${HOLD_MSG[g].body}</p></div>`).join("")}
-      <p class="note">If you mainly want group energy or the lowest price, a gym or class studio will serve you better.</p>
-      <p class="fine">Readiness changes. If your answers change, retake the check.</p>
-      <div class="nav"><button class="btn ghost" id="redo">Retake the check</button></div>`;
+      <span class="verdict pass">${verdict}</span>
+      <h2>${headline}</h2>
+      <p class="lede">${lede}</p>
+      <div class="freqbox"><strong>What your goal calls for</strong>${FREQ_WHY[a.goal]}</div>
+      <div class="plans">${r.cards.map(c => cardHTML(c, a)).join("")}</div>
+      <div class="dial"><strong>Recommended accountability setting</strong><h3>${d.name}</h3><p>${d.body}</p>${resetShown && a.dial !== 1 && a.dial !== 2 ? `<p class="note">${BRONZE_NOTE}</p>` : ""}<p class="path">Every tier of The Foundation and The Program includes all three settings at no price difference, and you can change yours at any 4-week cycle boundary. The path most clients follow: <b>Full Accountability &rarr; Coached &rarr; Train Only &rarr; Tune-Up</b>. We measure closely at the start so we can coach less over time.</p></div>
+      <div class="notes">${notesFor(a, r)}</div>
+      <div class="next"><strong>Next step</strong><p>${nextLine}</p></div>
+      <div class="capacity"><strong>Limited availability</strong><p>OmniFit takes a limited number of new clients. If you book or send a message and then don't reply when we reach out, you move to the back of the line.</p></div>
+      <div class="nav"><a class="btn primary" href="${BOOK_URL}" target="_blank" rel="noopener">Book Your Consultation</a><a class="btn ghost" href="${RATES_URL}">See all rates</a><button class="btn ghost" id="redo">Retake the check</button></div>
+      <p class="fine">Prices are the published October 2026 rate card. Every recurring product bills every 4 weeks. <a href="${METHOD_URL}">Read the Method</a>.</p>`;
   }
   $("#redo").addEventListener("click", () => {
     Object.keys(answers).forEach(k => delete answers[k]);
