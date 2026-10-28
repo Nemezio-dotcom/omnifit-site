@@ -1860,6 +1860,16 @@ Matching rules (encoded in tools/ownership.py; change both together):
     ("Is a Personal Trainer in North County San Diego Right for You?",
     "Your Personal Trainer in 4S Ranch, at Home, or Online", "How Our
     Executive Fitness Coaching Works"), and the three coverage notes are gone.
+  - OWNER COVERAGE AS A FAILURE ("cover" lines, Town Card run, Oct 28 2026).
+    K20-K25 and K27-K29 carry a "cover" regex: the in-home variant ("in-home
+    personal trainer in [Town]") must appear SOMEWHERE on the owner page
+    (meta, any heading, FAQ question or body copy in <main>), or
+    tools/ownership.py reports a PROBLEM, not a note. Fixtures:
+    fail/k25-owner-without-in-home-variant.html and
+    pass/k25-owner-carries-in-home-variant.html. K26 (Rancho Bernardo) has NO
+    cover line: its owner page stays exactly as it is (ChatGPT cites it) and
+    does not carry the phrase. JUDGMENT CALL, WRONG IF the owner wants
+    Rancho Bernardo edited; then add its cover line in the same commit.
   - An owner of "-" is UNASSIGNED: its phrase still claims its span (so a
     cost question is not read as K01) but exclusivity is not enforced, and
     the check prints that it is not enforced rather than passing silently.
@@ -1914,33 +1924,42 @@ Page-specific rules that are NOT ownership but are locked in the same table:
   K20 personal trainer carlsbad / in home personal trainer carlsbad
       owner  /personal-trainer-carlsbad
       match  (?:in[- ]home )?personal trainers? (?:in )?carlsbad|carlsbad (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?carlsbad|carlsbad in[- ]home personal trainers?
   K21 personal trainer carmel valley / in home personal trainer carmel valley
       owner  /personal-trainer-carmel-valley
       match  (?:in[- ]home )?personal trainers? (?:in )?carmel valley|carmel valley (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?carmel valley|carmel valley in[- ]home personal trainers?
   K22 personal trainer del mar / in home personal trainer del mar
       owner  /personal-trainer-del-mar
       match  (?:in[- ]home )?personal trainers? (?:in )?del mar|del mar (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?del mar|del mar in[- ]home personal trainers?
   K23 personal trainer encinitas / in home personal trainer encinitas
       owner  /personal-trainer-encinitas
       match  (?:in[- ]home )?personal trainers? (?:in )?encinitas|encinitas (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?encinitas|encinitas in[- ]home personal trainers?
   K24 personal trainer fairbanks ranch / in home personal trainer fairbanks ranch
       owner  /personal-trainer-fairbanks-ranch
       match  (?:in[- ]home )?personal trainers? (?:in )?fairbanks ranch|fairbanks ranch (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?fairbanks ranch|fairbanks ranch in[- ]home personal trainers?
   K25 personal trainer la jolla / in home personal trainer la jolla
       owner  /personal-trainer-la-jolla
       match  (?:in[- ]home )?personal trainers? (?:in )?la jolla|la jolla (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?la jolla|la jolla in[- ]home personal trainers?
   K26 personal trainer rancho bernardo / in home personal trainer rancho bernardo
       owner  /personal-trainer-rancho-bernardo
       match  (?:in[- ]home )?personal trainers? (?:in )?rancho bernardo|rancho bernardo (?:in[- ]home )?personal trainers?
   K27 personal trainer rancho santa fe / in home personal trainer rancho santa fe
       owner  /personal-trainer-rancho-santa-fe
       match  (?:in[- ]home )?personal trainers? (?:in )?rancho santa fe|rancho santa fe (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?rancho santa fe|rancho santa fe in[- ]home personal trainers?
   K28 personal trainer santaluz / in home personal trainer santaluz
       owner  /personal-trainer-santaluz
       match  (?:in[- ]home )?personal trainers? (?:in )?santaluz|santaluz (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?santaluz|santaluz in[- ]home personal trainers?
   K29 personal trainer solana beach / in home personal trainer solana beach
       owner  /personal-trainer-solana-beach
       match  (?:in[- ]home )?personal trainers? (?:in )?solana beach|solana beach (?:in[- ]home )?personal trainers?
+      cover  in[- ]home personal trainers? (?:in )?solana beach|solana beach in[- ]home personal trainers?
   X01 in-home page carries no other keyword's qualifier
       page   /in-home-personal-trainer-san-diego
       in     title meta h1 h2 h3 h4 h5 h6 faq jsonld
@@ -1953,6 +1972,33 @@ Page-specific rules that are NOT ownership but are locked in the same table:
 
   K10 is the cost keyword: no new cost-anchor links anywhere until its page
   exists, and /training-rates-san-diego stays transactional.
+
+  KEYWORD OWNERSHIP CHANGELOG
+  - Oct 28 2026, Town Card run. Source: Semrush cannibalization report, Oct
+    22-28 2026 (the in-home page competing on 14 keywords; no town page
+    carried its "in home personal trainer [town]" variant, and each linked
+    to the in-home page 2-3 times with "In-Home Training" anchors).
+    Nine town pages (La Jolla, Del Mar, Carmel Valley, Rancho Santa Fe,
+    Fairbanks Ranch, Encinitas, Solana Beach, Santaluz, Carlsbad):
+      · "How We Train in [Town]" card H3 "In-Home Personal Training" ->
+        "In-Home Personal Trainer in [Town]" (still an H3, layout unchanged).
+      · The card's first sentence rewritten per town to carry "in-home
+        personal trainer in [Town]" once; the facts already there (equipment
+        brought or home gym used, zero commute where it was stated) kept.
+      · Meta description (header WebPage node, the only place it is
+        defined; build.py renders the page meta from it) opens "In-home and
+        studio personal trainer in [Town]"; 152-160 characters.
+      · Exactly ONE link to /in-home-personal-trainer-san-diego per page:
+        the card link, anchor "How in-home sessions are set up". The
+        "Related Pages" hub link was removed, and the trailing "Full
+        details on our in-home training page." FAQ sentence was dropped
+        (Carmel Valley, Rancho Santa Fe, Fairbanks Ranch, Encinitas, Solana
+        Beach, Santaluz, Carlsbad); header FAQPage mirrors regenerated.
+    Titles, H1s, the in-home page, the homepage, 4S Ranch and Rancho
+    Bernardo untouched. tools/ownership.py: new "cover" field; owner
+    coverage of the in-home variant is a FAILURE for K20-K25 and K27-K29
+    (see Matching rules). Negative-tested on real files: with the nine pages
+    at their previous state the check reports 9 problems, one per town.
 
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
