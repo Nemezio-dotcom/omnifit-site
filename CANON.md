@@ -1973,6 +1973,33 @@ Page-specific rules that are NOT ownership but are locked in the same table:
   K10 is the cost keyword: no new cost-anchor links anywhere until its page
   exists, and /training-rates-san-diego stays transactional.
 
+  KEYWORD OWNERSHIP CHANGELOG
+  - Oct 28 2026, Town Card run. Source: Semrush cannibalization report, Oct
+    22-28 2026 (the in-home page competing on 14 keywords; no town page
+    carried its "in home personal trainer [town]" variant, and each linked
+    to the in-home page 2-3 times with "In-Home Training" anchors).
+    Nine town pages (La Jolla, Del Mar, Carmel Valley, Rancho Santa Fe,
+    Fairbanks Ranch, Encinitas, Solana Beach, Santaluz, Carlsbad):
+      · "How We Train in [Town]" card H3 "In-Home Personal Training" ->
+        "In-Home Personal Trainer in [Town]" (still an H3, layout unchanged).
+      · The card's first sentence rewritten per town to carry "in-home
+        personal trainer in [Town]" once; the facts already there (equipment
+        brought or home gym used, zero commute where it was stated) kept.
+      · Meta description (header WebPage node, the only place it is
+        defined; build.py renders the page meta from it) opens "In-home and
+        studio personal trainer in [Town]"; 152-160 characters.
+      · Exactly ONE link to /in-home-personal-trainer-san-diego per page:
+        the card link, anchor "How in-home sessions are set up". The
+        "Related Pages" hub link was removed, and the trailing "Full
+        details on our in-home training page." FAQ sentence was dropped
+        (Carmel Valley, Rancho Santa Fe, Fairbanks Ranch, Encinitas, Solana
+        Beach, Santaluz, Carlsbad); header FAQPage mirrors regenerated.
+    Titles, H1s, the in-home page, the homepage, 4S Ranch and Rancho
+    Bernardo untouched. tools/ownership.py: new "cover" field; owner
+    coverage of the in-home variant is a FAILURE for K20-K25 and K27-K29
+    (see Matching rules). Negative-tested on real files: with the nine pages
+    at their previous state the check reports 9 problems, one per town.
+
 INVARIANTS (hash-verify every run; update hashes here when a run
 legitimately changes an invariant, and say so in REPORT.md)
 - Canonical pricing FAQ answer: byte-identical on every page carrying it
