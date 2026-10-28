@@ -21,6 +21,11 @@ Matching rules, recorded in CANON beside the table:
     for the in-home keyword only, never for "personal trainer in san diego".
   - Fails closed: the CANON table missing, empty, malformed, or naming an
     owner page that was not built is a problem, never a skipped check.
+  - A keyword with a "cover" line must be CARRIED by its owner: the cover
+    regex has to match somewhere on the owner page (meta, any heading, FAQ
+    question or body copy in <main>), or it is a problem. Used for the
+    "in home personal trainer [town]" variants (Town Card run, Oct 2026).
+    Keywords without one keep the title/H1/H2/meta coverage note.
 """
 import html
 import json
@@ -40,12 +45,12 @@ class TableError(Exception):
 
 # ─── CANON table ───────────────────────────────────────────────────
 ENTRY_RE = re.compile(r"^  ([KX]\d+)\s+(.+?)\s*$")
-FIELD_RE = re.compile(r"^      (owner|match|also|page|in)\s+(.+?)\s*$")
+FIELD_RE = re.compile(r"^      (owner|match|also|page|in|cover)\s+(.+?)\s*$")
 
 
 def read_table(text):
     """Returns (keywords, exclusions). Each keyword: dict(id, label, owner,
-    also, rx). Each exclusion: dict(id, label, page, surfaces, rx)."""
+    also, rx, cover_rx or None). Each exclusion: dict(id, label, page, surfaces, rx)."""
     m = re.search(r"^  OWNERSHIP TABLE\b.*?$(.*?)^  END OWNERSHIP TABLE\s*$", text, re.S | re.M)
     if not m:
         raise TableError("no OWNERSHIP TABLE ... END OWNERSHIP TABLE block in CANON.md")
@@ -71,6 +76,14 @@ def read_table(text):
             if "owner" not in x:
                 raise TableError(f"{x['id']}: no 'owner' line")
             x["also"] = x.get("also", "").split() if x.get("also", "-") != "-" else []
+            x["cover_rx"] = None
+            if "cover" in x:
+                if x["owner"] == "-":
+                    raise TableError(f"{x['id']}: 'cover' needs an owner")
+                try:
+                    x["cover_rx"] = re.compile(x["cover"], re.I)
+                except re.error as err:
+                    raise TableError(f"{x['id']}: cover is not a valid regex: {err}")
             keywords.append(x)
         else:
             if "page" not in x:
@@ -181,6 +194,15 @@ def check_page(path, doc, keywords, exclusions):
                     continue
                 problems.append(f"{path}: {k['id']} '{k['label']}' in {name}: \"{g}\" "
                                 f"(\"{_ctx(text, at, len(g))}\") - owner is {k['owner']}")
+    # Owner coverage that is a failure, not a note: the "cover" phrase must sit
+    # somewhere on the owner page (meta, headings, FAQ questions, body copy).
+    for k in keywords:
+        if k["cover_rx"] is None or path != k["owner"]:
+            continue
+        anywhere = surf["meta"] + [t for n in range(1, 7) for t in surf[f"h{n}"]] + surf["faq"] + surf["body"]
+        if not any(k["cover_rx"].search(t) for t in anywhere):
+            problems.append(f"{path}: {k['id']} '{k['label']}': owner does not carry the required "
+                            f"variant /{k['cover']}/ anywhere on the page (meta, headings, FAQ, body)")
     for x in exclusions:
         if x["page"] != path:
             continue
@@ -253,6 +275,7 @@ BAD_TABLES = {
     "table empty": "  OWNERSHIP TABLE\n  END OWNERSHIP TABLE\n",
     "entry without owner": "  OWNERSHIP TABLE\n  K01 x\n      match  x\n  END OWNERSHIP TABLE\n",
     "regex does not compile": "  OWNERSHIP TABLE\n  K01 x\n      owner  /\n      match  (x\n  END OWNERSHIP TABLE\n",
+    "cover does not compile": "  OWNERSHIP TABLE\n  K01 x\n      owner  /\n      match  x\n      cover  (x\n  END OWNERSHIP TABLE\n",
 }
 
 
