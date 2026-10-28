@@ -8456,3 +8456,36 @@ Two fixes, nothing else.
 Judgment call: each link is a short trailing pointer sentence ("More on ...") rather than a rewording of the existing sentence, so no existing claim changes and none is added; wrong if the owner wants the anchor woven into the original sentence.
 
 Checks: `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 0); invariant hashes unchanged (ff5360d2b6b5029b, 22744ada78eb0707, f551f6751a2c7fd7, 6b1b0f4efbd4a72c, 5a629cf689301f84). `build.py --check` PASSED; `mkheaders.py --check` PASSED; `ownership.py` PASSED; `node --test tests/assistant.test.mjs` 45/45.
+
+## Town Card run: in-home town variant on the nine town pages (Semrush cannibalization Oct 22-28; run Oct 28, 2026)
+
+Semrush showed the in-home page competing on 14 keywords. The town pages own "in home personal trainer [town]" (K20-K29), but none of them used the phrase anywhere, and each linked to /in-home-personal-trainer-san-diego 2-3 times with "In-Home Training" anchors, which passed the in-home signal to the in-home page.
+
+**Pages:** La Jolla, Del Mar, Carmel Valley, Rancho Santa Fe, Fairbanks Ranch, Encinitas, Solana Beach, Santaluz, Carlsbad (page plus header). Not touched: titles, H1s, the in-home page, the homepage, 4S Ranch, Rancho Bernardo.
+
+1. **Card H3.** "In-Home Personal Training" -> "In-Home Personal Trainer in [Town]" in "How We Train in [Town]". Still an H3, same markup.
+2. **Card first sentence.** Each town has its own wording. "in-home personal trainer in [Town]" appears once. Only the first sentence changed; the facts stay (equipment brought, or the client's home gym used; zero commute where the card already said it).
+
+| Town | New first sentence |
+|---|---|
+| La Jolla | Working with an in-home personal trainer in La Jolla means the gym comes to you: we bring the dumbbells, bands, suspension trainers and mats. |
+| Del Mar | Hire an in-home personal trainer in Del Mar and the full session comes to your door. |
+| Carmel Valley | Your in-home personal trainer in Carmel Valley runs the full session at your house, start to finish. |
+| Rancho Santa Fe | With an in-home personal trainer in Rancho Santa Fe, your estate's own gym becomes the training floor, using the equipment you already have. |
+| Fairbanks Ranch | Booking an in-home personal trainer in Fairbanks Ranch puts the session in your own estate gym, with professional-grade portable equipment brought in if you need it. |
+| Encinitas | Your in-home personal trainer in Encinitas comes to you, in town or out in Olivenhain, carrying all the equipment and a session already programmed from your assessment, or builds your program around the home gym you have. |
+| Solana Beach | Each session with your in-home personal trainer in Solana Beach arrives fully equipped and programmed from your assessment data, or is built around the home gym you already have. |
+| Santaluz | An in-home personal trainer in Santaluz should fit your house, not the other way around: we train on the equipment already in your home gym, or bring professional-grade portable gear when you need it. |
+| Carlsbad | Pick an in-home personal trainer in Carlsbad and the equipment and a fully programmed session come to your home, La Costa included, or we build your program around your existing home gym. |
+
+3. **Meta description.** It now opens "In-home and studio personal trainer in [Town]" and keeps the rest of the old text. "and in-home training" was dropped from the list because the opener now says it. Rancho Santa Fe keeps "at your estate or at Teqneeq FHC in 4S Ranch". Lengths are 152-160 characters, inside the site's 120-160 range. The meta is defined in one place only: the header WebPage `description`. The page has no SEO comment, and build.py renders `<meta name="description">`, og:description and twitter:description from that field. The built page and the header match.
+4. **Links to the in-home page.** Each page now has one link, the card link, with the anchor "How in-home sessions are set up". Removed: the "Related Pages" hub link "In-Home Training" (nine pages), and the closing sentence "Full details on our in-home training page." in the in-home FAQ answer (Rancho Santa Fe: "See full details ..."). That sentence existed only to hold the link, so I deleted it instead of pointing it at the consultation CTA. This affected seven pages; La Jolla and Del Mar had no such sentence. The header FAQPage mirrors were regenerated with `tools/mkterritory.py`. I restored the generator's two-line comment rewrite in each header and reverted its 4S Ranch and Rancho Bernardo output, so the header diffs contain only the meta and the FAQ answer. Rendered check: each of the nine built pages has 1 link to the in-home page, including nav and footer.
+
+**Check (tools/ownership.py).** New table field `cover`. When a keyword has one, its owner page must match the cover regex somewhere: meta, any heading, an FAQ question or body copy in `<main>`. If it doesn't, the check reports a PROBLEM, not a note. CANON K20-K25 and K27-K29 now carry the in-home variant as `cover`. A bad cover regex raises TableError (new bad-table fixture). New fixtures: `fail/k25-owner-without-in-home-variant.html` FAILS, `pass/k25-owner-carries-in-home-variant.html` passes. I also ran it on the real files: with the nine pages and headers put back to their previous state and rebuilt, `build.py --check` reported `RESULT: 9 problem(s)`, one K2x cover problem per town. With this run's pages it reports PASSED.
+
+**Judgment calls.**
+- K26 (Rancho Bernardo) has no `cover` line. CANON says that page stays exactly as it is, and it does not carry the phrase, so a K26 cover failure could never pass. This would be wrong if the owner wants Rancho Bernardo edited too; then add the line and the copy together.
+- I left the FAQ questions "How does in-home personal training work in [Town]?" unchanged. They say "training", so they don't match the cover regex, and they were outside the brief's four items.
+- `public/sitemap.xml`: only the nine town lastmods were committed. A rebuild also moves fit-check, how-to-choose-a-personal-trainer-san-diego and personal-training-services from 2026-10-25 to 2026-10-26. That drift came from earlier commits that weren't rebuilt, it is outside this run's scope, and it was left as it was. The next unrelated rebuild will pick it up.
+
+**Checks:** `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0). Invariant hashes unchanged: ff5360d2b6b5029b, 22744ada78eb0707, f551f6751a2c7fd7, 6b1b0f4efbd4a72c, 5a629cf689301f84. `python3 build.py --check` RESULT: PASSED (only the two known Squarespace image warnings on /about). `python3 tools/ownership.py` PASSED. `--selftest` PASSED. `mkheaders.py --check` PASSED. `node --test tests/assistant.test.mjs` 45/45. Note: `build.py --check` exits 0 even when it reports problems unless `--strict` is passed, so read the RESULT line.
