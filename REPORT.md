@@ -8489,3 +8489,29 @@ Semrush showed the in-home page competing on 14 keywords. The town pages own "in
 - `public/sitemap.xml`: only the nine town lastmods were committed. A rebuild also moves fit-check, how-to-choose-a-personal-trainer-san-diego and personal-training-services from 2026-10-25 to 2026-10-26. That drift came from earlier commits that weren't rebuilt, it is outside this run's scope, and it was left as it was. The next unrelated rebuild will pick it up.
 
 **Checks:** `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0). Invariant hashes unchanged: ff5360d2b6b5029b, 22744ada78eb0707, f551f6751a2c7fd7, 6b1b0f4efbd4a72c, 5a629cf689301f84. `python3 build.py --check` RESULT: PASSED (only the two known Squarespace image warnings on /about). `python3 tools/ownership.py` PASSED. `--selftest` PASSED. `mkheaders.py --check` PASSED. `node --test tests/assistant.test.mjs` 45/45. Note: `build.py --check` exits 0 even when it reports problems unless `--strict` is passed, so read the RESULT line.
+
+## Site-audit maintenance run (Nov 1, 2026 audit; run Nov 1, 2026)
+
+Three fixes requested; two applied. No page copy, schema or pricing changed.
+
+1. **Self-host the two /about badges — SKIPPED.** `nasm-ces-badge.png` and `pn-nmh-badge.png` were not attached to the session, so `pages/about.html` still hotlinks both from images.squarespace-cdn.com (`pages/about.html:275`, `:280`). `public/about.html` is the only public/ file still referencing squarespace-cdn.com, and `build.py --strict` still prints the two known warnings. Still a blocker for cancelling Squarespace.
+2. **Brand in Journal titles.** `site/blog.py` format comment: the "no trailing brand" rule is recorded as superseded (owner, Oct 25, 2026); titles now end " | OmniFit".
+
+| Post | New `<title>` | Length |
+|---|---|---|
+| /blog/protein-for-busy-professionals | Protein for Busy Professionals: A Floor, Not a Diet \| OmniFit | 61 |
+| /blog/why-posture-work-doesnt-stick | Why Posture Work Doesn't Stick at a Desk Job \| OmniFit | 54 |
+
+   H1 and og:title (rendered from the H1) unchanged.
+3. **Town-page titles and descriptions.** Both pages added to `build.py` META_OVERRIDE. Header JSON-LD and page bodies untouched. og:title / og:description follow the new pair because build.py renders them from it.
+
+| Page | New title (chars) | New description (chars) |
+|---|---|---|
+| /personal-trainer-rancho-bernardo | Personal Trainer Rancho Bernardo \| In-Home & Studio \| OmniFit (61) | Personal training in Rancho Bernardo for professionals 30+: corrective exercise, joint-friendly strength and in-home sessions. 4.98 average across 190+ reviews. (160) |
+| /personal-trainer-4s-ranch | Personal Trainer 4S Ranch \| In-Home & Studio \| OmniFit (54) | Personal training in 4S Ranch for professionals 30+: corrective exercise, joint-friendly strength, studio or in-home. 4.98 average across 190+ reviews. (151) |
+
+**Judgment calls.**
+- CANON said these two town pages "stay exactly as they are (ChatGPT cites both)". The owner's brief explicitly changed their title and meta, so only those changed; the rule is kept for everything else and the change is recorded in the KEYWORD OWNERSHIP CHANGELOG. Wrong if the citation concern was meant to cover titles too.
+- `public/sitemap.xml`: the pre-existing lastmod drift noted in the Town Card run (fit-check, how-to-choose-a-personal-trainer-san-diego, personal-training-services 2026-10-25 -> 2026-10-26) is committed with this rebuild. A rebuild of main without this run's changes produces the same drift. Wrong if those dates were meant to be kept.
+
+**Checks:** `python3 build.py --strict` RESULT: PASSED, keyword ownership included (two Squarespace image warnings on /about, because fix 1 was skipped). `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0). Invariant hashes all ok: ff5360d2b6b5029b, 22744ada78eb0707, f551f6751a2c7fd7, 6b1b0f4efbd4a72c, 5a629cf689301f84.
