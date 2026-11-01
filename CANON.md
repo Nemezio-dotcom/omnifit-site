@@ -1974,6 +1974,12 @@ Page-specific rules that are NOT ownership but are locked in the same table:
   exists, and /training-rates-san-diego stays transactional.
 
   KEYWORD OWNERSHIP CHANGELOG
+  - Nov 1 2026, site-audit maintenance run (owner-directed). /personal-
+    trainer-4s-ranch and /personal-trainer-rancho-bernardo: <title> and meta
+    description only, shortened via build.py META_OVERRIDE (og:title and
+    og:description follow, as build.py renders them from the same pair).
+    Page bodies, H1s, headings and header JSON-LD untouched; the "stay
+    exactly as they are" rule above still holds for everything else.
   - Oct 28 2026, Town Card run. Source: Semrush cannibalization report, Oct
     22-28 2026 (the in-home page competing on 14 keywords; no town page
     carried its "in home personal trainer [town]" variant, and each linked
@@ -2314,3 +2320,7 @@ NEXT RUNS
 
 CHANGE LOG
 - Oct 24, 2026: Squarespace paste workflow retired; main deploys to Cloudflare Pages.
+- Nov 1, 2026: site-audit maintenance run. Journal post titles carry " | OmniFit"
+  (Squarespace-era "no trailing brand" rule superseded Oct 25, 2026; site/blog.py);
+  4S Ranch and Rancho Bernardo title/meta shortened (META_OVERRIDE). The two /about
+  Squarespace badges were NOT self-hosted: the badge files were not supplied.
