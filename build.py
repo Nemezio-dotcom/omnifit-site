@@ -110,6 +110,18 @@ META_OVERRIDE = {
         "Ten questions, three minutes. See if OmniFit fits, how many sessions a week your goal "
         "calls for, and which options match your schedule and budget.",
     ),
+    # Title and meta only (header JSON-LD untouched). Shortened, owner-approved
+    # in the Nov 1, 2026 site-audit maintenance run.
+    "personal-trainer-rancho-bernardo": (
+        "Personal Trainer Rancho Bernardo | In-Home & Studio | OmniFit",
+        "Personal training in Rancho Bernardo for professionals 30+: corrective exercise, "
+        "joint-friendly strength and in-home sessions. 4.98 average across 190+ reviews.",
+    ),
+    "personal-trainer-4s-ranch": (
+        "Personal Trainer 4S Ranch | In-Home & Studio | OmniFit",
+        "Personal training in 4S Ranch for professionals 30+: corrective exercise, "
+        "joint-friendly strength, studio or in-home. 4.98 average across 190+ reviews.",
+    ),
 }
 
 # <title> only (description, header JSON-LD and page body untouched). Squarespace

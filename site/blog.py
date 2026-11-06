@@ -10,7 +10,9 @@ Sources
 Post format (every key required except `updated`, `image` and `image_alt`):
 
     <!-- POST
-    title:       SEO title (no trailing brand; keep it under ~60 characters)
+    title:       SEO title, ending " | OmniFit" (keep it under ~60 characters;
+                 the Squarespace-era "no trailing brand" rule was superseded
+                 Oct 25, 2026, when the owner approved OmniFit back in titles)
     description: meta description (~150 characters)
     h1:          the visible headline
     published:   YYYY-MM-DD
