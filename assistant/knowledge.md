@@ -111,13 +111,13 @@ One session per 4-week cycle: a reassessment on the Bodystat QuadScan 4000 and a
 - $325 per 4-week cycle for non-members (day pass included).
 - $375 per 4-week cycle in-home.
 
-## Fascia Stretch Therapy™ (FST)
+## Fascia Stretch Therapy™ (FST™)
 
-- Fascia Stretch Therapy (FST) is a modality of table-based assisted stretching that is pain-free, fully customizable and improves functionality. It is a service offered by OmniFit Performance and delivered by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute).
+- Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted stretching that is pain-free, fully customizable and improves functionality. It is a service offered by OmniFit Performance and delivered by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute).
 - It is not medical treatment, not physical therapy and not massage.
 - Offered in-home only, within the in-home service area in North County San Diego. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.
 - Open to anyone. No training program and no Performance Assessment is required.
-- First Visit: $150 for 90 minutes. Required for every new FST client. It covers a range-of-motion check, the first Fascia Stretch Therapy session on the table, and a re-measure at the end.
+- First Visit: $150 for 90 minutes. Required for every new FST™ client. It covers a range-of-motion check, the first Fascia Stretch Therapy™ session on the table, and a re-measure at the end.
 - The First Visit is not the Performance Assessment, and its $150 is not credited toward anything.
 - Single session: $225, 60 minutes. Expires 30 days from purchase.
 - 5-session pack: $200 per session ($1,000), expires 8 weeks from purchase.
@@ -205,7 +205,7 @@ The OmniFit Method rests on three pillars, carried through four phases: Assess, 
 - ACE Corrective Exercise Specialist.
 - Precision Nutrition: Level 1, Level 2 Certified Master Coach, Sleep, Stress and Recovery, Nutrition for Metabolic Health.
 - Eden: GLP-1 Fitness, Peptide Fundamentals, GLP-1 Nutrition.
-- Stretch to Win Institute: Fascia Stretch Practitioner – Level 1 (Fascia Stretch Therapy Level 1, 38 hours, certificate issued November 20, 2026).
+- Stretch to Win Institute: Fascia Stretch Practitioner – Level 1 (Fascia Stretch Therapy™ Level 1, 38 hours, certificate issued November 20, 2026).
 
 ## Reviews and track record
 
@@ -221,7 +221,7 @@ The OmniFit Method rests on three pillars, carried through four phases: Assess, 
 - In-home training: /in-home-personal-trainer-san-diego
 - Couples: /couples-personal-training-san-diego
 - Corrective exercise and post-rehab: /corrective-exercise-post-rehab
-- Fascia Stretch Therapy: /fascia-stretch-therapy-san-diego
+- Fascia Stretch Therapy™: /fascia-stretch-therapy-san-diego
 - HSA / FSA: /hsa-fsa-personal-training
 - FAQs: /faqs
 - Terms: /terms-and-conditions
