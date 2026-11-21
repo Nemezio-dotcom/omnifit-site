@@ -74,6 +74,18 @@ export function extractHandoff(text) {
   return { reply, handoff };
 }
 
+// Every mention of the stretching service carries its mark (owner, Nov 21
+// 2026; CANON CANONICAL FACTS). The knowledge file is written that way and the
+// model usually copies it; this makes it certain for what the visitor reads.
+// The names are listed as published, mark included, and the patterns are
+// derived from them. The alternate spelling ending in "-al" is not a mention.
+const MARKED_NAMES = ["Fascia Stretch Therapy™", "FST™"];
+const NAME_RE = new RegExp("\\b" + MARKED_NAMES[0].slice(0, -1) + "\\b(?!™)", "gi");
+const SHORT_RE = new RegExp("\\b" + MARKED_NAMES[1].slice(0, -1) + "\\b(?!™)", "g");
+export function ensureMarks(text) {
+  return String(text || "").replace(NAME_RE, (m) => m + "™").replace(SHORT_RE, (m) => m + "™");
+}
+
 // A reply cut off at max_tokens: drop a half-written handoff token ("[[BO"),
 // then cut back to the last complete sentence (or line) so it reads as
 // finished. Complete tokens in the dropped tail are kept, so a hand-off the
