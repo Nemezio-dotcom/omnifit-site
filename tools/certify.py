@@ -1952,6 +1952,21 @@ FST_CANCELLATION = "Cancellations with less than 24 hours' notice and no-shows f
 FST_ATTRIBUTION = "Fascia Stretch Therapy™ and FST™ are trademarks of the Stretch to Win Institute."
 FST_TRAVEL = ("No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or "
               "Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.")
+# Payment terms and the disclaimer (owner decisions, Nov 21 2026; CANON).
+FST_PAYMENT = ("Payment confirms your booking. The First Visit is paid when you book; follow-up sessions and "
+               "5-session packs are paid in advance. No slot is held without payment.")
+FST_NO_REFUND = "Fees are not refunded. With 24 hours' notice or more you can reschedule."
+FST_EXPIRY = "A single session expires 30 days from purchase; a 5-session pack expires 8 weeks from purchase."
+# The disclaimer is one block: the definition, the not-medical sentence, then
+# this tail. The tail names injuries and medical conditions, which are banned
+# words on an FST surface, so it is exempt as this exact text and nothing looser.
+FST_DISCLAIMER_TAIL = ("Information on this website and during a visit is educational and is not medical advice. "
+                       "Consult your physician before booking, particularly if you have injuries, medical "
+                       "conditions, or are pregnant. A Liability Waiver and Release must be signed before your "
+                       "First Visit.")
+FST_DISCLAIMER = ("Fascia Stretch Therapy is assisted stretching for mobility and recovery. " + FST_NOT_MEDICAL
+                  + " " + FST_DISCLAIMER_TAIL)
+FST_TERMS_PAGE = "pages/terms-and-conditions.html"
 FST_BUTTON = "Book Your First Visit"
 FST_FAQ_QUESTIONS = [
     "What is Fascia Stretch Therapy?", "What happens at the First Visit?", "How much does it cost?",
@@ -2075,11 +2090,13 @@ def fst_banned(text, path=""):
     """(a) Banned words and claims on FST surfaces: [(label, context)]."""
     out = []
     spans = fst_spans(text, path)
-    n_med = 0
+    n_med = n_tail = 0
     for a, b in spans:
         copy = _fst_copy(text, a, b)
         n_med += copy.count(FST_NOT_MEDICAL)
+        n_tail += copy.count(FST_DISCLAIMER_TAIL)
         scan = copy.replace(FST_NOT_MEDICAL, ' ' * len(FST_NOT_MEDICAL))
+        scan = scan.replace(FST_DISCLAIMER_TAIL, ' ' * len(FST_DISCLAIMER_TAIL))
         # the owner's FAQ question that the sentence answers names the thing
         # it denies ("Is FST massage or medical treatment?"); that exact
         # question is blanked too, and nothing looser
@@ -2100,8 +2117,12 @@ def fst_banned(text, path=""):
         for m in _FST_EMBED.finditer(raw):
             out.append((f"FST surface: '{m.group(0)}' (no embedded video, nothing from the Stretch to Win site)",
                         raw[max(0, m.start() - 40):m.end() + 40].strip()))
-    if n_med > 1:
-        out.append(("FST: the not-medical sentence appears more than once in this file (say so once)", FST_NOT_MEDICAL))
+    # Once on its own (the FAQ answer) and once more inside the disclaimer
+    # block, where there is one (owner, Nov 21 2026).
+    if n_med > 1 + min(n_tail, 1):
+        out.append((f"FST: the not-medical sentence appears {n_med} times in this file (once, plus once inside the disclaimer)", FST_NOT_MEDICAL))
+    if n_tail > 1:
+        out.append((f"FST: the disclaimer appears {n_tail} times in this file (once)", FST_DISCLAIMER_TAIL[:80]))
     return out
 
 def _price_key(s):
@@ -2237,11 +2258,15 @@ def fst_page_required(page, header):
     for label, s, exact in (("the trademark attribution line", FST_ATTRIBUTION, None),
                             ("the First Visit / Performance Assessment distinction", FST_DISTINCTION, 1),
                             ("the cancellation line", FST_CANCELLATION, None),
-                            ("the canonical in-home travel-fee sentence", FST_TRAVEL, None)):
+                            ("the canonical in-home travel-fee sentence", FST_TRAVEL, None),
+                            ("the payment sentence", FST_PAYMENT, None),
+                            ("the no-refund / reschedule sentence", FST_NO_REFUND, None),
+                            ("the expiry sentence", FST_EXPIRY, None),
+                            ("the disclaimer", FST_DISCLAIMER, 1)):
         n = copy.count(s)
         if n == 0: out.append(('b', f"FST page is missing {label}: {s[:70]}"))
         elif exact and n != exact: out.append(('b', f"FST page states {label} {n} times (once, plainly)"))
-    if FST_ATTRIBUTION in copy and copy.rfind(FST_ATTRIBUTION) < copy.rfind(FST_FAQ_QUESTIONS[-1]):
+    if FST_ATTRIBUTION in copy and copy.rfind(FST_ATTRIBUTION) < max(copy.rfind(FST_FAQ_QUESTIONS[-1]), copy.rfind(FST_DISCLAIMER_TAIL)):
         out.append(('b', "FST page: the trademark attribution line is not at the foot of the page"))
     if not re.search(r'<a\b[^>]*\bhref="' + re.escape(FST_CALENDLY) + r'"[^>]*>\s*' + re.escape(FST_BUTTON) + r'\s*</a>', page):
         out.append(('b', f"FST page has no '{FST_BUTTON}' link to the First Visit booking page"))
@@ -2325,6 +2350,15 @@ def _selftest_fst_badge():
     assert not fst_badge('<!-- the badge fst-certified-level-1.png lives on /about -->', "pages/footer.html"), "FST badge self-test: a comment read as the badge"
     assert fst_badge_file("tools/certify.py") and fst_badge_file("site/img/no-such-file.png"), "FST badge self-test: a wrong or missing file passed"
 
+def fst_terms_required(terms):
+    """(b) The Terms page states the same FST terms as the FST page, in the
+    same words, so the two cannot drift: [what]."""
+    copy = html.unescape(_flat(terms))
+    return [f"Terms and Conditions is missing the FST {label}: {s[:60]}" for label, s in (
+        ("payment sentence", FST_PAYMENT), ("no-refund / reschedule sentence", FST_NO_REFUND),
+        ("cancellation line", FST_CANCELLATION), ("expiry sentence", FST_EXPIRY), ("disclaimer", FST_DISCLAIMER),
+        ("First Visit distinction", FST_DISTINCTION)) if s not in copy]
+
 def _selftest_fst():
     """Every FST rule, both directions. Raises on a rule that stays quiet on a
     violation or fires on the canonical copy beside it."""
@@ -2338,8 +2372,8 @@ def _selftest_fst():
             + FST_FASCIAL_SENTENCE + '</div><div class="fs-faq-q">Do I need to be a training client?</div><div class="fs-faq-a">'
             'No. You do not need a training program or a Performance Assessment.</div>'
             '<div class="fs-faq-q">Is FST massage or medical treatment?</div><div class="fs-faq-a">No. ' + FST_NOT_MEDICAL + '</div>'
-            '<p>' + FST_TRAVEL + ' ' + FST_CANCELLATION + '</p>'
-            '<a href="' + FST_CALENDLY + '">Book Your First Visit</a><p>' + FST_ATTRIBUTION + '</p>')
+            '<p>' + FST_TRAVEL + ' ' + FST_CANCELLATION + ' ' + FST_PAYMENT + ' ' + FST_NO_REFUND + ' ' + FST_EXPIRY + '</p>'
+            '<a href="' + FST_CALENDLY + '">Book Your First Visit</a><p>' + FST_DISCLAIMER + '</p><p>' + FST_ATTRIBUTION + '</p>')
     for fn in (fst_banned, fst_rates, fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking):
         assert not fn(good, P), f"FST self-test: {fn.__name__} fired on canonical copy: {fn(good, P)[:2]}"
     assert not retired_225(good, P), "FST self-test: retired_225 fired on the FST page"
@@ -2358,6 +2392,16 @@ def _selftest_fst():
     assert fst_banned('<p>' + FST_NOT_MEDICAL + '</p><p>' + FST_NOT_MEDICAL + '</p>', P), "FST self-test: the not-medical sentence twice passed"
     assert fst_banned('<p>It is not a medical treatment or massage.</p>', P), "FST self-test: a reworded not-medical sentence passed"
     assert fst_banned('<p>Is FST a medical treatment?</p>', P), "FST self-test: a reworded medical question passed"
+    # the disclaimer: exempt as the exact block, once; a rewording, a second copy or a third not-medical sentence fails
+    assert not fst_banned('<p>No. ' + FST_NOT_MEDICAL + '</p><p>' + FST_DISCLAIMER + '</p>', P), "FST self-test: FAQ sentence plus the disclaimer flagged"
+    assert fst_banned('<p>' + FST_DISCLAIMER.replace("injuries, medical conditions", "an injury or a medical condition") + '</p>', P), "FST self-test: a reworded disclaimer passed"
+    assert fst_banned('<p>' + FST_DISCLAIMER + '</p><p>' + FST_DISCLAIMER + '</p>', P), "FST self-test: the disclaimer twice passed"
+    assert fst_banned('<p>' + FST_NOT_MEDICAL + '</p><p>' + FST_NOT_MEDICAL + '</p><p>' + FST_DISCLAIMER + '</p>', P), "FST self-test: three not-medical sentences passed"
+    assert fst_banned('<p>Fees are non-refundable and there is no money-back guarantee.</p>', P), "FST self-test: a guarantee in the payment terms passed"
+    full = ' '.join((FST_PAYMENT, FST_NO_REFUND, FST_CANCELLATION, FST_EXPIRY, FST_DISCLAIMER, FST_DISTINCTION))
+    assert not fst_terms_required('<p>' + full + '</p>'), "FST self-test: complete Terms flagged"
+    for gone in (FST_PAYMENT, FST_NO_REFUND, FST_CANCELLATION, FST_EXPIRY, FST_DISCLAIMER_TAIL, FST_DISTINCTION):
+        assert fst_terms_required('<p>' + full.replace(gone, '') + '</p>'), f"FST self-test: Terms without '{gone[:40]}' passed"
     assert fst_banned('<p>Watch:</p><iframe src="https://www.youtube.com/embed/x"></iframe>', P), "FST self-test: an embedded video passed"
     # surfaces: a marked block, an unmarked mention, an ld+json node, a text section
     blk = '<p>Studio sessions at Teqneeq.</p><!-- FST-BLOCK --><p>Stretching at the studio.</p><!-- /FST-BLOCK -->'
@@ -2418,9 +2462,10 @@ def _selftest_fst():
     # the page's own requirements and the exact mirror
     faqs = [(q, "Answer %d." % i) for i, q in enumerate(FST_FAQ_QUESTIONS)]
     faqs[0] = (faqs[0][0], "Assisted stretching. " + FST_FASCIAL_SENTENCE)
-    pg = ('<h1>Fascia Stretch Therapy™</h1><p>' + FST_DISTINCTION + ' ' + FST_TRAVEL + ' ' + FST_CANCELLATION + '</p>'
+    pg = ('<h1>Fascia Stretch Therapy™</h1><p>' + FST_DISTINCTION + ' ' + FST_TRAVEL + ' ' + FST_CANCELLATION + ' ' + FST_PAYMENT + ' ' + FST_NO_REFUND + ' ' + FST_EXPIRY + '</p>'
           '<a href="' + FST_CALENDLY + '">Book Your First Visit</a>'
-          + ''.join(f'<div class="fs-faq-q">{q}</div><div class="fs-faq-a">{a}</div>' for q, a in faqs) + '<p>' + FST_ATTRIBUTION + '</p>')
+          + ''.join(f'<div class="fs-faq-q">{q}</div><div class="fs-faq-a">{a}</div>' for q, a in faqs)
+          + '<p>' + FST_DISCLAIMER + '</p><p>' + FST_ATTRIBUTION + '</p>')
     def hdr(pairs, prices=("150.00", "225.00", "1000.00"), extra=()):
         g = [{"@type": "Service", "name": "Fascia Stretch Therapy", "provider": {"@id": "https://www.omnifittraining.com/#localbusiness-of"},
               "offers": [{"@type": "Offer", "price": p} for p in prices]},
@@ -2432,7 +2477,8 @@ def _selftest_fst():
     assert fst_page_required(pg, hdr(faqs[:-1])), "FST self-test: a seven-question mirror passed"
     assert fst_page_required(pg, hdr(faqs, prices=("150.00", "225.00", "200.00"))), "FST self-test: wrong Offer prices passed"
     assert fst_page_required(pg, hdr(faqs, extra=[{"@type": "LocalBusiness", "name": "OmniFit"}])), "FST self-test: a second business node passed"
-    for gone in (FST_ATTRIBUTION, FST_DISTINCTION, FST_CANCELLATION, FST_TRAVEL, 'Book Your First Visit</a>'):
+    for gone in (FST_ATTRIBUTION, FST_DISTINCTION, FST_CANCELLATION, FST_TRAVEL, 'Book Your First Visit</a>',
+                 FST_PAYMENT, FST_NO_REFUND, FST_EXPIRY, FST_DISCLAIMER_TAIL):
         assert fst_page_required(pg.replace(gone, ''), hdr(faqs)), f"FST self-test: the page without '{gone[:40]}' passed"
     assert fst_page_required(pg.replace(FST_DISTINCTION, FST_DISTINCTION + ' ' + FST_DISTINCTION), hdr(faqs)), "FST self-test: the distinction stated twice passed"
     assert fst_page_required(pg.replace('<p>' + FST_ATTRIBUTION + '</p>', '').replace('<h1>', '<p>' + FST_ATTRIBUTION + '</p><h1>', 1), hdr(faqs)), "FST self-test: the attribution line above the FAQ passed"
@@ -2785,6 +2831,8 @@ def run():
     fst_page_findings = fst_page_required(open(FST_PAGE).read(), open(FST_HEADER).read())
     for cat, what in fst_page_findings:
         if cat == 'b': print(f"   {FST_PAGE}  [{what}]"); B+=1
+    for what in fst_terms_required(open(FST_TERMS_PAGE).read()):
+        print(f"   {FST_TERMS_PAGE}  [{what}]"); B+=1
     print(f"   (FST: rates 150 / 225 / 200 per session, $225 off-surface, 'Fascial', brand names, the mark, session length "
           f"incl. the 90-minute First Visit, one booking link, required wording: self-tested both ways, {len(fst_files)} files swept)")
     print("   none" if not B else f"   {B} hit(s)")

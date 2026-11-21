@@ -104,6 +104,33 @@ otherwise, this block wins and the older line is kept only as history.
       session" and "assessment" in that URL are Calendly's slug, not copy.)
     WHAT THE CLIENT NEEDS: a quiet room with floor space. The table comes
       with him. Wear clothes you can move in.
+    PAYMENT TERMS (owner decisions, Nov 21 2026; verbatim sentences):
+      "Payment confirms your booking. The First Visit is paid when you
+      book; follow-up sessions and 5-session packs are paid in advance. No
+      slot is held without payment."
+      "Fees are not refunded. With 24 hours' notice or more you can
+      reschedule." (Less than 24 hours and no-shows: the CANCELLATION line.)
+      "A single session expires 30 days from purchase; a 5-session pack
+      expires 8 weeks from purchase." Either can be rescheduled any time
+      before it expires.
+      Written "not refunded", never "non-refundable": that word stays the
+      Foundation policy's alone (certify.py fee_language).
+    DISCLAIMER (owner decision, Nov 21 2026; verbatim, one block):
+      "Fascia Stretch Therapy is assisted stretching for mobility and
+      recovery. It is not medical treatment, not physical therapy and not
+      massage. Information on this website and during a visit is
+      educational and is not medical advice. Consult your physician before
+      booking, particularly if you have injuries, medical conditions, or
+      are pregnant. A Liability Waiver and Release must be signed before
+      your First Visit."
+      This AMENDS "the FST page says so once, in the FAQ": the not-medical
+      sentence now appears in the FAQ answer AND inside the disclaimer, and
+      nowhere else on a surface.
+    WHERE THE TERMS AND DISCLAIMER LIVE: the FST page (a Payment Terms
+      block under the rates table; the disclaimer above the trademark
+      line), Terms and Conditions (sections 2, 5, 6 and 7) and the Calendly
+      First Visit booking page. The Rates FST section and the knowledge
+      file carry the same facts.
 
 REPO STATE (reconciled with disk, Sept 2026)
 - main = the live site: merging to main deploys to Cloudflare Pages. Every file under pages/ is IN CERTIFICATION SCOPE unless
@@ -1227,8 +1254,10 @@ Therapy. No run, and no owner override inside a run, relaxes one.)
   the FST-specific points, owner brief Nov 20 2026):
     · FST is assisted stretching for mobility and recovery. It is not
       medical treatment, not physical therapy and not massage; the FST page
-      says so ONCE, in the FAQ, in this sentence: "It is not medical
-      treatment, not physical therapy and not massage."
+      says so in the FAQ, in this sentence: "It is not medical treatment,
+      not physical therapy and not massage." (AMENDED Nov 21 2026, owner:
+      the sentence also sits inside the DISCLAIMER block, CANONICAL FACTS.
+      Once in the FAQ, once in the disclaimer, nowhere else.)
     · No diagnose / treat / heal / cure / fix / rehabilitate claims. No
       pain-relief or injury claims. No outcome promises and no "in X
       sessions" language. The re-measure is a measurement the client sees,
@@ -1264,7 +1293,10 @@ Therapy. No run, and no owner override inside a run, relaxes one.)
         site/nav.html carries no FST link; the FST page carries the
         attribution line at its foot, the First Visit / Performance
         Assessment distinction exactly once, the cancellation line, the
-        canonical travel-fee sentence and the booking button.
+        canonical travel-fee sentence and the booking button; since Nov 21
+        2026 also the payment, no-refund and expiry sentences and the
+        disclaimer exactly once, and fst_terms_required holds Terms and
+        Conditions to the same sentences so the two pages cannot drift.
     (c) the FST page's eight FAQ questions in order, the header FAQPage
         byte-identical to them, the Service node with provider
         #localbusiness-of and Offers 150 / 225 / 1000, no business or
@@ -2545,3 +2577,10 @@ CHANGE LOG
   day and it was added unmodified to the FST page's practitioner block and the about
   credentials entry (certify.py fst_badge). The about note now reads "Eleven of
   fourteen".
+- Nov 21, 2026 (later the same day): FST payment terms and disclaimer, owner decisions
+  (CANONICAL FACTS > FASCIA STRETCH THERAPY > PAYMENT TERMS, DISCLAIMER). On the FST
+  page, in Terms and Conditions (sections 2, 5, 6, 7; "Last updated: November 2026")
+  and on the Calendly First Visit booking page. Calendly, outside the repo: the event
+  was renamed "Fascia Stretch Therapy™ First Visit (In-Home)" and its description
+  rewritten to these facts (its URL is unchanged); the Teqneeq first-visit event was
+  switched off, since FST is in-home only. The owner reports the charged amount is corrected (not visible to this run).

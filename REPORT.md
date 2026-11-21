@@ -8651,3 +8651,48 @@ The owner re-sent the "FST Certified Level 1" PNG and it is now on the site.
 - **New rule:** `certify.py` `fst_badge` and `fst_badge_file` (stale canon): the file must match the sha256 above; the badge appears exactly once on each of its two pages, with that alt text, inside its panel; a reference anywhere else fails. Self-tested both ways. Negative tests on the real files, each RESULT: FAILED and restored to PASSED: the badge added to the footer; the alt text changed on /about; the badge removed from the FST page; the badge taken out of its white panel; the PNG altered by one byte.
 - **Checks after the change:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), all five invariant hashes unchanged from the first pass; `python3 tools/ownership.py` OWNERSHIP: PASSED; `python3 build.py --check` RESULT: PASSED; `node --test tests/assistant.test.mjs` 45 of 45 pass; `node tools/mobileaudit.js` on the FST page and /about at 390 and 412px PASSED.
 
+## Payment terms and disclaimer follow-up (Nov 21, 2026)
+
+The owner answered the open questions from "Needs owner" items 3 and 4, and asked for payment terms and a disclaimer on the FST page, in Terms and Conditions and on the Calendly booking page.
+
+**Owner decisions (now in CANON, CANONICAL FACTS > FASCIA STRETCH THERAPY):**
+
+| Question | Decision |
+|---|---|
+| Cancel with 24 hours' notice or more | Reschedule; the fee is not refunded |
+| How follow-ups are paid | In advance; payment confirms the slot |
+| Single-session expiry | 30 days from purchase (the pack stays 8 weeks); neither is refunded |
+| Disclaimer | Health note plus the liability waiver before the First Visit |
+
+**Verbatim sentences:**
+- "Payment confirms your booking. The First Visit is paid when you book; follow-up sessions and 5-session packs are paid in advance. No slot is held without payment."
+- "Fees are not refunded. With 24 hours' notice or more you can reschedule."
+- "A single session expires 30 days from purchase; a 5-session pack expires 8 weeks from purchase."
+- Disclaimer: "Fascia Stretch Therapy is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage. Information on this website and during a visit is educational and is not medical advice. Consult your physician before booking, particularly if you have injuries, medical conditions, or are pregnant. A Liability Waiver and Release must be signed before your First Visit."
+
+**What changed:**
+
+| Where | Change |
+|---|---|
+| `pages/fascia-stretch-therapy-san-diego.html` | "Payment Terms" block under the rates table (four lines); the disclaimer above the trademark line; the single-session row gains "Expires 30 days from purchase"; the cancellation FAQ answer gains the no-refund sentence |
+| its header | FAQPage answer mirrored byte for byte; the single-session Offer description gains the expiry |
+| `pages/terms-and-conditions.html` and header | FST in section 2 (services), section 5 (payment), section 6 (a "Fascia Stretch Therapy" subsection), section 7 (the disclaimer). "Last updated: November 2026"; `dateModified` 2026-11-21 |
+| `pages/training-rates-san-diego.html` and header | Rates FST section: single-session expiry, paid in advance, the no-refund sentence |
+| `assistant/knowledge.md` | The same facts, so the assistant answers them |
+| `tools/certify.py`, `tools/README.md` | The four sentences are required on the FST page and on Terms; the disclaimer is exempt as the exact block only |
+| Calendly (outside the repo) | First Visit event renamed "Fascia Stretch Therapy™ First Visit (In-Home)" and its description rewritten with price, payment terms and disclaimer; URL unchanged. The Teqneeq first-visit event switched off. The owner reports the charged amount is corrected (not visible to this run) |
+
+**Conflicts resolved:**
+- The brief said the not-medical sentence appears once, in the FAQ. The owner's disclaimer restates it. It now appears in the FAQ answer and inside the disclaimer, and nowhere else; `fst_banned` enforces that.
+- `fee_language` fails "non-refundable" outside the Foundation policy. The FST terms say "Fees are not refunded" instead, and the rule is unchanged.
+
+**Judgment calls:**
+- The disclaimer and the reschedule line reuse the wording already in Terms sections 6, 7 and 8 ("Consult your physician … injuries, medical conditions, or are pregnant"; "A … Liability Waiver and Release must be signed"; "can be rescheduled any time before they expire"). WRONG IF FST needs its own waiver wording.
+- "Either can be rescheduled any time before it expires" is carried over from the training session terms the owner chose to mirror.
+- Terms section 6 says "Sessions canceled by OmniFit are always credited back" under Individual sessions. Nothing FST-specific was written about a visit Nemezio cancels.
+
+**Still open:** the travel fee is "confirmed before you book", but Calendly takes payment the moment someone books, so a client in a travel-fee town can pay before any fee is discussed. And the assistant's Book button still opens the consultation.
+
+**Negative tests on the real files** (each RESULT: FAILED, restored to PASSED): the disclaimer removed from the FST page; the disclaimer reworded; the no-refund sentence changed on Terms; the single-session expiry changed on the FST page; a guarantee added to the Terms FST block; the cancellation FAQ answer changed on the page only (mirror mismatch).
+
+**Checks:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), five invariant hashes unchanged; `python3 tools/ownership.py` OWNERSHIP: PASSED; `python3 build.py --check` RESULT: PASSED; `node --test tests/assistant.test.mjs` 45 of 45 pass; mobile audit on the FST page and Terms at 390 and 412px PASSED.

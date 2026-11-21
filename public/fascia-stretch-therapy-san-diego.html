@@ -539,7 +539,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
         {
           "@type": "Offer",
           "name": "Single session",
-          "description": "One 60-minute Fascia Stretch Therapy session, in-home. Booked after the First Visit.",
+          "description": "One 60-minute Fascia Stretch Therapy session, in-home. Booked after the First Visit. Expires 30 days from purchase.",
           "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#fs-rates",
           "seller": {
             "@id": "https://www.omnifittraining.com/#localbusiness-of"
@@ -630,7 +630,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
           "name": "What is the cancellation policy?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Cancellations with less than 24 hours' notice and no-shows forfeit the fee."
+            "text": "Cancellations with less than 24 hours' notice and no-shows forfeit the fee. Fees are not refunded. With 24 hours' notice or more you can reschedule."
           }
         }
       ]
@@ -1049,6 +1049,11 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-fst .fs-rate-notes li { font-size: 14px; color: var(--white-70); line-height: 1.7; padding-left: 20px; position: relative; text-align: left; }
   #omni-fst .fs-rate-notes li::before { content: ''; position: absolute; left: 0; top: .72em; width: 8px; height: 2px; background: var(--gold); }
   #omni-fst .fs-rate-cta { text-align: center; margin-top: 28px; }
+  #omni-fst .fs-terms { max-width: 900px; margin: 28px auto 0; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px 26px 22px; text-align: left; }
+  #omni-fst .fs-terms h3 { font-family: 'Montserrat', sans-serif !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 2px !important; text-transform: uppercase !important; color: var(--gold) !important; margin-bottom: 4px !important; }
+  #omni-fst .fs-terms .fs-rate-notes { margin-top: 12px; max-width: none; }
+  #omni-fst .fs-disclaimer { text-align: center; font-size: 12.5px; color: var(--white-50); margin: 2rem auto 0; max-width: 820px; line-height: 1.7; }
+  #omni-fst .fs-disclaimer strong { color: var(--white-70); }
   #omni-fst .fs-need { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1000px; margin: 22px auto 0; }
   #omni-fst .fs-need-item { background: var(--white-05); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 16px 18px; text-align: left; font-size: 14px; color: var(--white-70); line-height: 1.6; display: flex; gap: 12px; align-items: flex-start; }
   #omni-fst .fs-need-item svg.omni-icon { font-size: 20px; margin-top: 2px; }
@@ -1319,7 +1324,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
           </thead>
           <tbody>
             <tr><td><strong>First Visit</strong></td><td class="fs-price" data-label="Price">$150</td><td data-label="Length">90 minutes</td><td data-label="What to know">Required for every new FST client. A range-of-motion check, your first session on the table, and a re-measure at the end.</td></tr>
-            <tr><td><strong>Single session</strong></td><td class="fs-price" data-label="Price">$225</td><td data-label="Length">60 minutes</td><td data-label="What to know">Booked one at a time, after your First Visit.</td></tr>
+            <tr><td><strong>Single session</strong></td><td class="fs-price" data-label="Price">$225</td><td data-label="Length">60 minutes</td><td data-label="What to know">Booked one at a time, after your First Visit. Expires 30 days from purchase.</td></tr>
             <tr><td><strong>5-session pack</strong></td><td class="fs-price" data-label="Price">$200 per session</td><td data-label="Length">60 minutes each</td><td data-label="What to know">$1,000 for five sessions. Expires 8 weeks from purchase.</td></tr>
           </tbody>
         </table>
@@ -1328,8 +1333,17 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <ul class="fs-rate-notes">
         <li>Fascia Stretch Therapy is offered in-home only, and these are in-home rates. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.</li>
         <li>Follow-up sessions and 5-session packs are arranged with Nemezio after your First Visit.</li>
-        <li>Cancellations with less than 24 hours' notice and no-shows forfeit the fee.</li>
       </ul>
+
+      <div class="fs-terms" id="fs-payment-terms">
+        <h3>Payment Terms</h3>
+        <ul class="fs-rate-notes">
+          <li>Payment confirms your booking. The First Visit is paid when you book; follow-up sessions and 5-session packs are paid in advance. No slot is held without payment.</li>
+          <li>Fees are not refunded. With 24 hours' notice or more you can reschedule.</li>
+          <li>Cancellations with less than 24 hours' notice and no-shows forfeit the fee.</li>
+          <li>A single session expires 30 days from purchase; a 5-session pack expires 8 weeks from purchase. Either can be rescheduled any time before it expires.</li>
+        </ul>
+      </div>
 
       <div class="fs-rate-cta"><a class="fs-btn fs-btn-primary" href="https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home" target="_blank" rel="noopener">Book Your First Visit</a></div>
     </section>
@@ -1427,7 +1441,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         </div>
         <div class="fs-faq-item">
           <div class="fs-faq-q">What is the cancellation policy?</div>
-          <div class="fs-faq-a">Cancellations with less than 24 hours' notice and no-shows forfeit the fee.</div>
+          <div class="fs-faq-a">Cancellations with less than 24 hours' notice and no-shows forfeit the fee. Fees are not refunded. With 24 hours' notice or more you can reschedule.</div>
         </div>
       </div>
     </section>
@@ -1457,6 +1471,9 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a href="/training-rates-san-diego#rt-fst">Rates</a> ·
       <a href="/about">About Nemezio</a>
     </div>
+
+    <!-- ════════════ DISCLAIMER (CANON, verbatim) ════════════ -->
+    <p class="fs-disclaimer"><strong>Disclaimer.</strong> Fascia Stretch Therapy is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage. Information on this website and during a visit is educational and is not medical advice. Consult your physician before booking, particularly if you have injuries, medical conditions, or are pregnant. A Liability Waiver and Release must be signed before your First Visit.</p>
 
     <!-- ════════════ TRADEMARK ATTRIBUTION ════════════ -->
     <p class="fs-tm">Fascia Stretch Therapy™ and FST™ are trademarks of the Stretch to Win Institute.</p>

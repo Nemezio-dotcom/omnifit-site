@@ -119,10 +119,14 @@ One session per 4-week cycle: a reassessment on the Bodystat QuadScan 4000 and a
 - Open to anyone. No training program and no Performance Assessment is required.
 - First Visit: $150 for 90 minutes. Required for every new FST client. It covers a range-of-motion check, the first Fascia Stretch Therapy session on the table, and a re-measure at the end.
 - The First Visit is not the Performance Assessment, and its $150 is not credited toward anything.
-- Single session: $225, 60 minutes.
+- Single session: $225, 60 minutes. Expires 30 days from purchase.
 - 5-session pack: $200 per session ($1,000), expires 8 weeks from purchase.
 - Follow-up sessions and 5-session packs are arranged with Nemezio after the First Visit.
+- Payment confirms your booking. The First Visit is paid when you book; follow-up sessions and 5-session packs are paid in advance. No slot is held without payment.
+- Fees are not refunded. With 24 hours' notice or more you can reschedule.
 - Cancellations with less than 24 hours' notice and no-shows forfeit the fee.
+- A single session or a pack can be rescheduled any time before it expires.
+- Information on this website and during a visit is educational and is not medical advice. Consult your physician before booking, particularly if you have injuries, medical conditions, or are pregnant. A Liability Waiver and Release must be signed before your First Visit.
 - What you need: a quiet room with floor space. The table comes with Nemezio. Wear clothes you can move in.
 - Booking: the First Visit is booked at https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home or with the "Book Your First Visit" button on /fascia-stretch-therapy-san-diego.
 
