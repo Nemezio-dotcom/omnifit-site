@@ -230,13 +230,19 @@ REPO STATE (reconciled with disk, Sept 2026)
       top nav (owner). No In Short block and no shared "Who this is for"
       block: both carry the POSITIONING LINE or the ENTITY LINE, which name
       pain and the training facility, and neither belongs on an FST surface.
-      THE BADGE IS NOT ON THE SITE YET: the "FST Certified Level 1" PNG did
-      not reach the repo in this run (see CHANGE LOG). When it does:
-      site/img/fst-certified-level-1.png, unmodified, on a white rounded
-      panel (.fs-badge-panel on the FST page; its CSS is already there),
-      alt "Fascia Stretch Therapy Certified Level 1 badge", in the FST
-      page's practitioner block and the about credentials entry, nowhere
-      else.
+      THE BADGE (added Nov 21 2026, once the owner re-sent the file; it
+      had not reached the repo in the first pass of the run):
+      site/img/fst-certified-level-1.png is the owner's "FST Certified Level
+      1" PNG, UNMODIFIED (1183 x 502, teal on transparent, the ™ intact;
+      sha256 0455a194befab8e8...). Never recoloured, cropped, redrawn or
+      resized without owner approval. Because the artwork is teal on
+      transparent it sits on a white rounded panel, never on navy. Alt text:
+      "Fascia Stretch Therapy Certified Level 1 badge". Shown in EXACTLY TWO
+      places: the FST page's practitioner block (.fs-badge-panel) and the
+      about credentials entry (.ab-cred-badge). Nowhere else: not the nav,
+      the footer or beside the OmniFit logo. certify.py fst_badge and
+      fst_badge_file enforce the file hash, the two placements, the alt text
+      and the panel (self-tested both ways, negative-tested on real files).
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings; certify before the next change to these files
     · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
@@ -2534,6 +2540,8 @@ CHANGE LOG
   section, the Services card, CANONICAL FACTS > FASCIA STRETCH THERAPY (FST), the
   SESSION LENGTH carve-out, STRETCH TO WIN MARKETING RULES, K30 / K31, the certify.py
   FST rules. $225 left the bare BANNED list (retired_225 reads context). The "FST
-  Certified Level 1" badge was NOT added: the PNG did not reach the repo in this run
-  (the uploads folder was empty), so neither the FST page's practitioner block nor the
-  about credentials entry shows it. Nothing was drawn in its place.
+  Certified Level 1" badge did not reach the repo in the first pass (the uploads
+  folder was empty) and nothing was drawn in its place; the owner re-sent it the same
+  day and it was added unmodified to the FST page's practitioner block and the about
+  credentials entry (certify.py fst_badge). The about note now reads "Eleven of
+  fourteen".

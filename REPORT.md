@@ -8523,7 +8523,7 @@ Three fixes requested; two applied. No page copy, schema or pricing changed.
 
 ## Needs owner
 
-1. **The badge is not on the site.** The brief says the "FST Certified Level 1" PNG was uploaded with the prompt. It did not reach this session: the uploads folder was empty and no image file exists outside the repo. Nothing was drawn in its place. Everything else about the badge is ready: `.fs-badge-panel` (white rounded panel) is in the FST page's CSS, and a comment marks where the `<img>` goes in the practitioner block. When the file arrives it takes one small commit: save it unmodified as `site/img/fst-certified-level-1.png`, add it to the FST page's practitioner block and to the about credentials entry with alt "Fascia Stretch Therapy Certified Level 1 badge", and change the about note from "Ten of fourteen" to "Eleven of fourteen" (dropping Fascia Stretch Practitioner – Level 1 from the "listed without one" sentence).
+1. **The badge: RESOLVED the same day (see "Badge follow-up" at the end of this section).** In the first pass the PNG did not reach the session (the uploads folder was empty) and nothing was drawn in its place.
 2. **The assistant's Book button still opens the 45-minute consultation.** `assistant/knowledge.md` now carries the FST facts and gives the First Visit booking link in text, but the system prompt and the widget are hash-locked owner wording and were not changed. A First Visit button in the assistant needs owner wording and a new prompt hash.
 3. **Terms and Conditions say nothing about FST.** The cancellation line is on the FST page, the Rates section and the knowledge file. The brief did not ask for a Terms change, so `pages/terms-and-conditions.html` is untouched.
 4. **Facts the brief and CANON do not give, left out rather than invented:**
@@ -8639,3 +8639,15 @@ The 90-minute First Visit does not trip the session-length rule: the real tree p
 - `node tools/choosertest.js`: PASSED (30 checks, 16 combinations; still seven expandable sections, which is why the FST section is a plain section).
 - `node tools/mobileaudit.js --open-details` on the FST page, Rates, Services, About and In-Home at 390 and 412px: PASSED, no overflow and no clipped content. The FST rates table stacks into labelled rows at 640px and below.
 - `node tools/tracktest.js`: **fails, and it fails identically on an untouched checkout of the previous commit** (`tracktest.js:301`, waiting for `#of-fit #qbody .opts .opt`). The test is stale against the Oct 26 Fit Check rebuild. Not introduced by this run and not fixed in it.
+
+## Badge follow-up (Nov 21, 2026)
+
+The owner re-sent the "FST Certified Level 1" PNG and it is now on the site.
+
+- **File:** `site/img/fst-certified-level-1.png`, the uploaded bytes unmodified: 1183 x 502, RGBA, teal on transparent, 63,208 bytes, sha256 `0455a194befab8e8c18fe99aee33c78673f88b0ee571cc98de25d14db49f971b`. Not resized (it did not need it), not recoloured, cropped or redrawn; the ™ is intact.
+- **Where:** the FST page's practitioner block (white rounded panel, `.fs-badge-panel`) and the about credentials entry under "Assisted Stretching" (white rounded panel, `.ab-cred-badge`). Nowhere else.
+- **Alt text:** "Fascia Stretch Therapy Certified Level 1 badge" in both places.
+- **About note:** "Ten of fourteen … Fascia Stretch Practitioner – Level 1 … listed above without one" -> "Eleven of fourteen certifications are shown above as a certificate or an issuer badge. Eden GLP-1 Fitness, GLP-1 Nutrition, Peptide Fundamentals, and NASM Elite Trainer status are listed above without one."
+- **New rule:** `certify.py` `fst_badge` and `fst_badge_file` (stale canon): the file must match the sha256 above; the badge appears exactly once on each of its two pages, with that alt text, inside its panel; a reference anywhere else fails. Self-tested both ways. Negative tests on the real files, each RESULT: FAILED and restored to PASSED: the badge added to the footer; the alt text changed on /about; the badge removed from the FST page; the badge taken out of its white panel; the PNG altered by one byte.
+- **Checks after the change:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), all five invariant hashes unchanged from the first pass; `python3 tools/ownership.py` OWNERSHIP: PASSED; `python3 build.py --check` RESULT: PASSED; `node --test tests/assistant.test.mjs` 45 of 45 pass; `node tools/mobileaudit.js` on the FST page and /about at 390 and 412px PASSED.
+
