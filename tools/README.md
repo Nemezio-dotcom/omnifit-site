@@ -15,6 +15,7 @@ python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-ur
 NODE_PATH="$(npm root -g)" node tools/tracktest.js   # measurement test on the built site (Playwright)
 NODE_PATH="$(npm root -g)" node tools/mobileaudit.js [--open-details] [--shots DIR]   # 390/412px layout audit (Playwright)
 NODE_PATH="$(npm root -g)" node tools/choosertest.js [--shots DIR]   # rates chooser vs CANON card, keyboard/ARIA, 390/412 layout
+NODE_PATH="$(npm root -g)" node tools/widgettest.js   # Ask OmniFit widget: every hand-off draws its button (Playwright)
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
@@ -1080,3 +1081,18 @@ therapy) and K31 (assisted stretching), both owned by
 /fascia-stretch-therapy-san-diego, with four fixtures: an H2 on the Rates page
 and a Services title must fail; the owner page, and the Rates page naming the
 service on an H3 and in body copy, must pass.
+
+## Widget test (`tools/widgettest.js`, Nov 21 2026)
+
+Playwright against the built site. It answers `/api/ask` itself (GET
+`{ok: true}`, POST a fixed reply carrying the hand-off under test) and drives
+the real widget: `first_visit` must draw the gold "Book Your First Visit"
+button to the First Visit booking link, `book` the consultation button,
+`fit_check` the Fit Check button, and an unknown value no button at all.
+
+It exists because the First Visit hand-off passed every server test
+(`tests/assistant.test.mjs`) while the widget's own whitelist of hand-off
+values dropped it, so no button drew: a check reporting success on one half of
+a feature. Negative-tested: with `first_visit` taken back out of the widget's
+whitelist the test reports `FAIL hand-off "first_visit": no button` and exits 1.
+

@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS assistant_log (
   session_id   TEXT    NOT NULL,             -- random id made in the browser
   user_message TEXT    NOT NULL,
   reply        TEXT    NOT NULL,
-  handoff      TEXT    NOT NULL DEFAULT ''   -- 'book', 'fit_check' or ''
+  handoff      TEXT    NOT NULL DEFAULT ''   -- 'book', 'fit_check', 'first_visit' or ''
 );
 CREATE INDEX IF NOT EXISTS assistant_log_ts ON assistant_log (ts);
 CREATE INDEX IF NOT EXISTS assistant_log_session ON assistant_log (session_id);

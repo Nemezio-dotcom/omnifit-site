@@ -8714,3 +8714,32 @@ The owner answered the open questions from "Needs owner" items 3 and 4, and aske
 **Checks:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), five invariant hashes unchanged; `python3 tools/ownership.py` OWNERSHIP: PASSED; `python3 build.py --check` RESULT: PASSED; `node --test tests/assistant.test.mjs` 45 of 45 pass.
 
 **Still open:** the assistant's Book button opens the consultation, not the First Visit.
+
+## Assistant First Visit button (Nov 21, 2026)
+
+The last open item: the assistant's Book button opened the 45-minute consultation even for someone asking about Fascia Stretch Therapy. The owner approved fixing it.
+
+**What changed:**
+
+| File | Change |
+|---|---|
+| `functions/_lib/system-prompt.js` | HANDOFF line only. Old: "End with [[BOOK]] when the visitor shows interest or needs Nemezio, or [[FIT_CHECK]] when they're unsure it fits. At most one token per reply, and not on every reply." New: the same, with this sentence inserted before "At most one token": "When their interest is FST, use [[FIRST_VISIT]] instead of [[BOOK]]: it books the FST First Visit, not a consultation." |
+| `functions/_lib/assistant.js` | `[[FIRST_VISIT]]` is stripped from the reply and returned as hand-off `first_visit` |
+| `site/assistant.js` | hand-off `first_visit` draws a gold "Book Your First Visit" button to the First Visit booking link; the click is reported as `assistant_cta_click` with `cta: first_visit` |
+| `schema.sql` | comment only (the column is free text; no migration) |
+| `tests/assistant.test.mjs` | four tests added (49 in all) |
+| `tools/widgettest.js` | new browser test |
+| `tools/certify.py`, `CANON.md` | prompt sha256 `2ee2a1c006f3a6ef` -> `f6935ddef0fcaa0d` |
+
+**A defect the browser test caught.** After the server and prompt changes, all 49 unit tests passed and the button still did not draw: the widget keeps its own whitelist of hand-off values and dropped `first_visit`. `tools/widgettest.js` now drives the real widget for every hand-off. With the whitelist entry removed again it fails (`FAIL hand-off "first_visit": no button`); restored, it passes.
+
+**Not changed:** the turn-cap reply after 12 visitor turns still hands off to the consultation; the opener, the chips and every other line of the prompt.
+
+**Judgment calls:**
+- The prompt says "FST", not the full name, so the model takes the definition from the knowledge file. WRONG IF the owner wants the full name in the prompt.
+- No sentence was added to the prompt's SCOPE line ("Only OmniFit and training with OmniFit"); FST is in the knowledge file under OmniFit. WRONG IF the assistant is seen declining FST questions as out of scope; then SCOPE needs the owner's wording.
+
+**Not verifiable from this run:** how the live model uses the new token. The run has no API key and no access to the live site, so the model's choice between [[BOOK]] and [[FIRST_VISIT]] was not exercised; the tests cover everything after the model replies.
+
+**Checks:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0; prompt sha256 f6935ddef0fcaa0d), five invariant hashes unchanged; `python3 tools/ownership.py` OWNERSHIP: PASSED; `python3 build.py --check` RESULT: PASSED; `node --test tests/assistant.test.mjs` 49 of 49 pass; `node tools/widgettest.js` RESULT: PASSED (4 hand-offs).
+
