@@ -1354,7 +1354,11 @@ FROZEN = ("case-studies.html",)
 # eye, and every entry on it would have been a false positive on live copy.
 BANNED = ["OmniFit Personal Fitness Training", "Pacific Beach", "ACE OES",
           "Orthopedic Exercise", "Executive Hybrid", "Lopez Perez", "180+",
-          "$225", "$299", "$599",
+          # $225 is NOT here (FST Launch run, Nov 2026): it is the Fascia
+          # Stretch Therapy single session (CANON CANONICAL FACTS). It stays
+          # banned in its August meaning everywhere but an FST surface via
+          # retired_225, the way $75 and $140 are read in context.
+          "$299", "$599",
           # RETIRED PRODUCT NAME. The October card calls it the Performance
           # ASSESSMENT; "Performance Diagnostic" was the August name and was
           # left behind on ~28 files by the repricing, which changed figures
@@ -1909,6 +1913,477 @@ def assistant_surface_texts():
     return out
 
 
+# ─── Fascia Stretch Therapy (FST) - owner brief, Nov 20 2026 ───────
+# CANON: CANONICAL FACTS > FASCIA STRETCH THERAPY (FST), and STRETCH TO WIN
+# MARKETING RULES. FST is a second service with its own vocabulary, and most
+# of what is wrong on an FST surface is right everywhere else on the site
+# ("studio", "Teqneeq", "assessment", "$250 per session"), so the rules below
+# are SCOPED TO FST SURFACES rather than run site-wide:
+#   · the FST page and its header, whole file;
+#   · anything between <!-- FST-BLOCK --> and <!-- /FST-BLOCK --> on another
+#     page (the Rates section, the Services card, the about entry, the
+#     in-home sentence);
+#   · an ld+json object whose "name" names the service (the Rates header's
+#     three Offers and their catalog);
+#   · in a text file (assistant/knowledge.md, site/llms.txt), the section
+#     under a heading that names the service;
+#   · any other mention of the service, read in its own block element (HTML),
+#     ld+json string or line (text), so an unmarked sentence is still screened.
+# Four rules are site-wide because the thing they ban is wrong anywhere:
+# "Fascial" outside its one sentence, a brand name built on the method, the
+# practitioner called a therapist, and $225 outside FST (the figure left
+# BANNED the way $75 and $140 did; it is the FST single session and still the
+# retired August rate everywhere else).
+FST_SLUG = "fascia-stretch-therapy-san-diego"
+FST_PAGE = f"pages/{FST_SLUG}.html"
+FST_HEADER = f"pages/headers/{FST_SLUG}-header.html"
+FST_WHOLE_FILES = (f"{FST_SLUG}.html", f"{FST_SLUG}-header.html")
+# Files outside pages/ and the assistant surfaces that can carry FST copy.
+FST_EXTRA_FILES = ("site/llms.txt", "site/nav.html", "site/blog.py")
+FST_CALENDLY = ("https://calendly.com/nemezio-omnifittraining/"
+                "recovery-session-first-visit-assessment-in-home")
+# Canonical sentences (CANON CANONICAL FACTS). Each is exempt from the word
+# bans it would otherwise trip, as that exact sentence and nothing looser.
+FST_FASCIAL_SENTENCE = 'It is also written "fascial stretch therapy".'
+FST_NOT_MEDICAL = "It is not medical treatment, not physical therapy and not massage."
+FST_DISTINCTION = ("The First Visit is not the Performance Assessment, and its $150 is not "
+                   "credited toward anything.")
+FST_CANCELLATION = "Cancellations with less than 24 hours' notice and no-shows forfeit the fee."
+FST_ATTRIBUTION = "Fascia Stretch Therapy™ and FST™ are trademarks of the Stretch to Win Institute."
+FST_TRAVEL = ("No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or "
+              "Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.")
+FST_BUTTON = "Book Your First Visit"
+FST_FAQ_QUESTIONS = [
+    "What is Fascia Stretch Therapy?", "What happens at the First Visit?", "How much does it cost?",
+    "Do I need to be a training client?", "Where do sessions take place and what do I need?",
+    "What should I wear?", "Is FST massage or medical treatment?", "What is the cancellation policy?"]
+FST_MEDICAL_QUESTION = FST_FAQ_QUESTIONS[6]
+# First Visit 150 · single session 225 · 5-session pack 200 per session, 1,000.
+FST_PRICES = {"150", "225", "200", "1000"}
+_FST_PRICE_LABELS = [(re.compile(r'First Visit', re.I), {"150"}),
+                     (re.compile(r'single(?:\s+\d+-minute)?\s+session', re.I), {"225"}),
+                     (re.compile(r'\bpacks?\b', re.I), {"200", "1000"})]
+
+class FstMarkerError(Exception):
+    """An FST-BLOCK marker without its partner. Raised, never skipped: an
+    unclosed block would silently shrink (or swallow) the surface the FST
+    rules read, and a rule reading the wrong surface reports nothing."""
+
+_FST_MENTION = re.compile(r'Fasci(?:a|al)\s+Stretch\s+Therap|\bFST\b')
+_FST_OPEN = re.compile(r'<!--\s*FST-BLOCK\b.*?-->', re.S)
+_FST_CLOSE = re.compile(r'<!--\s*/FST-BLOCK\s*-->')
+_FST_LD = re.compile(r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>', re.S | re.I)
+
+def _json_spans(s, lo, hi):
+    """(object spans, string spans) inside s[lo:hi], by a string-aware scan,
+    so a brace inside an FAQ answer cannot open or close an object."""
+    objs, strs, stack, i, instr, start = [], [], [], lo, False, lo
+    while i < hi:
+        c = s[i]
+        if instr:
+            if c == '\\': i += 2; continue
+            if c == '"': instr = False; strs.append((start, i + 1))
+        elif c == '"': instr, start = True, i
+        elif c == '{': stack.append(i)
+        elif c == '}' and stack: objs.append((stack.pop(), i + 1))
+        i += 1
+    return objs, strs
+
+def _is_text_file(path):
+    return path.endswith(('.md', '.txt'))
+
+def fst_spans(text, path=""):
+    """Raw-text (start, end) spans that are FST surfaces (see the note above)."""
+    if os.path.basename(path) in FST_WHOLE_FILES: return [(0, len(text))]
+    spans = []
+    opens, closes = list(_FST_OPEN.finditer(text)), list(_FST_CLOSE.finditer(text))
+    if len(opens) != len(closes) or any(c.start() < o.end() for o, c in zip(opens, closes)) \
+            or any(o2.start() < c.start() for (o, c), o2 in zip(zip(opens, closes), opens[1:])):
+        raise FstMarkerError(f"{path or 'text'}: FST-BLOCK markers do not pair up "
+                             f"({len(opens)} open, {len(closes)} close)")
+    spans += [(o.end(), c.start()) for o, c in zip(opens, closes)]
+    if _is_text_file(path):
+        lines = list(re.finditer(r'^.*$', text, re.M)); i = 0
+        while i < len(lines):
+            if re.match(r'#{1,6}\s', lines[i].group(0)) and _FST_MENTION.search(lines[i].group(0)):
+                j = i + 1
+                while j < len(lines) and not re.match(r'#{1,6}\s', lines[j].group(0)): j += 1
+                spans.append((lines[i].start(), lines[j - 1].end())); i = j
+            else: i += 1
+    ld = [(b.start(1), b.end(1)) + _json_spans(text, b.start(1), b.end(1)) for b in _FST_LD.finditer(text)]
+    for lo, hi, objs, _strs in ld:
+        for m in re.finditer(r'"name"\s*:\s*"[^"]*Fascia Stretch Therapy', text[lo:hi]):
+            pos = lo + m.start()
+            inner = min((o for o in objs if o[0] <= pos < o[1]), key=lambda o: o[1] - o[0], default=None)
+            if inner: spans.append(inner)
+    vis = _visible_copy(text)
+    for m in _FST_MENTION.finditer(vis):
+        if any(a <= m.start() < b for a, b in spans): continue
+        block = next(((lo, hi, strs) for lo, hi, _o, strs in ld if lo <= m.start() < hi), None)
+        if block:                                   # ld+json: the string it sits in
+            a, b = next(((x, y) for x, y in block[2] if x <= m.start() < y), (block[0], block[1]))
+        elif _is_text_file(path) or not re.search(r'<\w', text):   # text: its line
+            a = text.rfind('\n', 0, m.start()) + 1
+            b = text.find('\n', m.end()); b = len(text) if b == -1 else b
+        else:                                       # HTML: its block element
+            op = list(re.finditer(r'<(?:' + _BLOCK_TAGS + r')\b[^>]*>', text[:m.start()], re.I))
+            cl = re.search(r'</(?:' + _BLOCK_TAGS + r')>', text[m.end():], re.I)
+            a = op[-1].end() if op else max(0, m.start() - 300)
+            b = m.end() + cl.start() if cl else min(len(text), m.end() + 300)
+        spans.append((a, b))
+    return sorted(set(spans))
+
+def _fst_copy(text, a, b):
+    """The visible copy of one surface, whitespace collapsed, entities and
+    JSON string escapes resolved (a header carries \" where the page has ")."""
+    t = _visible_copy(text)[a:b]
+    return html.unescape(re.sub(r'\s+', ' ', t)).replace('\\"', '"').replace('’', "'").strip()
+
+def fst_surfaces(text, path=""):
+    """[(raw start, copy)] for every FST surface in the file."""
+    return [(a, _fst_copy(text, a, b)) for a, b in fst_spans(text, path)]
+
+# Banned on an FST surface. The first group is the brief's own list; the
+# second is CANON's FST compliance points (section 3 of the brief) in the same
+# shape. Word-bounded, so "health" is not "heal" and "treatment" inside the
+# canonical not-medical sentence is blanked before the scan, not whitelisted
+# by a looser pattern.
+_FST_BANNED = [
+    ("therapist", r'\btherapists?\b'),
+    ("treat", r'\btreat(?:s|ed|ing|ments?)?\b'),
+    ("heal", r'\bheal(?:s|ed|ing)?\b'),
+    ("cure", r'\bcur(?:e|es|ed|ing)\b'),
+    ("compression", r'\bcompression\b'),
+    ("boots", r'\bboots?\b'),
+    ("percussion", r'\bpercussi\w+|\bmassage[- ]guns?\b'),
+    ("Teqneeq", r'\bTeqneeq\b'),
+    ("studio", r'\bstudios?\b'),
+    ("recovery session", r'\brecovery\s+sessions?\b'),
+    ("'therapy' outside the method's name", r'(?<!fascia stretch )(?<!fascial stretch )\btherapy\b'),
+    ("diagnose", r'\bdiagnos\w+'),
+    ("rehabilitate", r'\brehab\w*'),
+    ("fix", r'\bfix(?:es|ed|ing)?\b'),
+    ("pain or injury claim", r'\bpain(?:s|ful|less)?\b|\binjur\w+'),
+    ("guarantee (the 30-Day Fit Guarantee is for programs only)", r'\bguarantee\w*'),
+    ("free", r'\bfree\b'),
+    ("outcome 'in N sessions'", r'\bin\s+(?:\d+|two|three|four|five|six)\s+sessions?\b'),
+]
+_FST_NEG = r"\b(?:no|not|nor|never|without|isn't|don't|doesn't)\b"
+_FST_EMBED = re.compile(r'<video\b|<iframe\b|youtube\.com|youtu\.be|vimeo\.com|stretchtowin\.com', re.I)
+
+def fst_banned(text, path=""):
+    """(a) Banned words and claims on FST surfaces: [(label, context)]."""
+    out = []
+    spans = fst_spans(text, path)
+    n_med = 0
+    for a, b in spans:
+        copy = _fst_copy(text, a, b)
+        n_med += copy.count(FST_NOT_MEDICAL)
+        scan = copy.replace(FST_NOT_MEDICAL, ' ' * len(FST_NOT_MEDICAL))
+        # the owner's FAQ question that the sentence answers names the thing
+        # it denies ("Is FST massage or medical treatment?"); that exact
+        # question is blanked too, and nothing looser
+        scan = scan.replace(FST_MEDICAL_QUESTION, ' ' * len(FST_MEDICAL_QUESTION))
+        for label, rx in _FST_BANNED:
+            for m in re.finditer(rx, scan, re.I):
+                out.append((f"FST surface: '{m.group(0)}' ({label})", scan[max(0, m.start() - 60):m.end() + 60].strip()))
+        # "assessment" is never the First Visit. The one legal use is the
+        # Performance Assessment being DENIED ("is not the Performance
+        # Assessment", "no Performance Assessment required").
+        for m in re.finditer(r'\bassess\w*', scan, re.I):
+            before = ' '.join(scan[:m.start()].split()[-12:])
+            if m.group(0) == "Assessment" and before.endswith("Performance") and re.search(_FST_NEG, before, re.I):
+                continue
+            out.append((f"FST surface: '{m.group(0)}' (the First Visit is never an assessment)",
+                        scan[max(0, m.start() - 60):m.end() + 60].strip()))
+        raw = _blank_noncopy(text)[a:b]
+        for m in _FST_EMBED.finditer(raw):
+            out.append((f"FST surface: '{m.group(0)}' (no embedded video, nothing from the Stretch to Win site)",
+                        raw[max(0, m.start() - 40):m.end() + 40].strip()))
+    if n_med > 1:
+        out.append(("FST: the not-medical sentence appears more than once in this file (say so once)", FST_NOT_MEDICAL))
+    return out
+
+def _price_key(s):
+    return s.replace(',', '').split('.')[0]
+
+def fst_rates(text, path=""):
+    """(b) Wherever FST prices appear they read 150 / 225 / 200 per session
+    (1,000 the pack): [(what, context)]. Every dollar figure on an FST surface
+    must be one of the four; a figure following an option label within 120
+    characters must be that option's; "per session" is 200; an ld+json price
+    on an FST node is 150.00, 225.00 or 1000.00 (the pack total)."""
+    out = []
+    for a, b in fst_spans(text, path):
+        copy = _fst_copy(text, a, b)
+        for m in re.finditer(r'\$\s?(\d[\d,]*(?:\.\d\d)?)', copy):
+            fig = _price_key(m.group(1)); ctx = copy[max(0, m.start() - 70):m.end() + 50].strip()
+            if fig not in FST_PRICES:
+                out.append((f"FST price ${m.group(1)} is not 150, 225, 200 or 1,000", ctx)); continue
+            win = copy[max(0, m.start() - 120):m.start()]
+            near = max(((mm.end(), want, mm.group(0)) for rx, want in _FST_PRICE_LABELS for mm in rx.finditer(win)),
+                       default=None)
+            if near and fig not in near[1]:
+                out.append((f"FST price ${m.group(1)} beside '{near[2]}' (expected ${' or $'.join(sorted(near[1]))})", ctx))
+            if re.match(r'\s+per\s+session', copy[m.end():], re.I) and fig != "200":
+                out.append((f"FST per-session price ${m.group(1)} is not 200", ctx))
+        for m in re.finditer(r'"price"\s*:\s*"?([\d.,]+)"?', copy):
+            if _price_key(m.group(1)) not in FST_PRICES:
+                out.append((f"FST schema price {m.group(1)} is not 150, 225, 200 or 1000", copy[max(0, m.start() - 70):m.end() + 20].strip()))
+    return out
+
+_R225 = re.compile(re.escape("$225") + r'(?![\d,]*\d)(?!\s*[-–]\s*\d)')
+
+def retired_225(text, path=""):
+    """(b) $225 anywhere but an FST surface. It left the bare BANNED list in
+    the FST Launch run (it is the FST single session) and stays banned in its
+    August meaning everywhere else, the way retired_75 handles $75."""
+    spans = fst_spans(text, path)
+    return [(text.count('\n', 0, m.start()) + 1, re.sub(r'\s+', ' ', text[max(0, m.start() - 60):m.end() + 40]).strip())
+            for m in _R225.finditer(text) if not any(a <= m.start() < b for a, b in spans)]
+
+def fst_fascial(text, path=""):
+    """(b) "Fascial" is legal exactly once on the page and once in its header
+    mirror, inside FST_FASCIAL_SENTENCE. Anywhere else, or a second time, or
+    in another sentence, is a finding: [(what, context)]."""
+    copy = html.unescape(re.sub(r'\s+', ' ', _visible_copy(text))).replace('\\"', '"')
+    hits = list(re.finditer(r'\bfascial\b', copy, re.I))   # word-bounded: 'myofascial release' is another word
+    if not hits: return []
+    ctx = lambda m: copy[max(0, m.start() - 60):m.end() + 60].strip()
+    if os.path.basename(path) not in FST_WHOLE_FILES:
+        return [("'Fascial' outside the FST page's one FAQ sentence (the spelling is Fascia Stretch Therapy)", ctx(m)) for m in hits]
+    out = []
+    if len(hits) > 1:
+        out.append((f"'Fascial' appears {len(hits)} times in this file (once only)", ctx(hits[1])))
+    at = copy.find(FST_FASCIAL_SENTENCE)
+    if not (at != -1 and at <= hits[0].start() < at + len(FST_FASCIAL_SENTENCE)):
+        out.append(("'Fascial' outside its one permitted sentence", ctx(hits[0])))
+    return out
+
+# A business, brand or product-line name built on the method (CANON STRETCH TO
+# WIN MARKETING RULES), and the practitioner called a therapist. Site-wide.
+_FST_BRAND = re.compile(
+    r"OmniFit(?:\s+Performance)?(?:'s)?\s+(?:FST\b|Fasci(?:a|al)\s+Stretch|Frederick\s+Stretch|Stretch)"
+    r"|(?:\bFST™?|Stretch\s+Therapy™?|Stretch\s+to\s+Win)\s+by\s+OmniFit"
+    r"|Frederick\s+Stretch\s+Therapy", re.I)
+_FST_TITLE = re.compile(r'(?:Fasci(?:a|al)\s+Stretch|\bFST|\bstretch)\s+therapists?\b', re.I)
+
+def _flat_blocks(text):
+    """Visible copy with a break mark at every block boundary, so a heading
+    that ends "OmniFit Performance" and a card that starts "Fascia Stretch
+    Therapy" do not read as one name. Inline tags do not break."""
+    t = _blank_noncopy(text)
+    t = re.sub(r'</?(?:' + _BLOCK_TAGS + r'|tr|table|ul|ol|br|hr|title|option|button|nav|header|footer|main)\b[^>]*>', ' ¶ ', t, flags=re.I)
+    t = html.unescape(re.sub(r'<[^>]+>', ' ', t)).replace('’', "'")
+    return re.sub(r'\s+', ' ', t)
+
+def fst_brand(text, path=""):
+    out = []
+    t = _flat_blocks(text)
+    for rx, what in ((_FST_BRAND, "brand or product name built on the method"),
+                     (_FST_TITLE, "the title is Fascia Stretch Practitioner – Level 1, never a therapist")):
+        for m in rx.finditer(t):
+            out.append((f"'{m.group(0)}' ({what})", t[max(0, m.start() - 60):m.end() + 60].strip()))
+    return out
+
+def fst_trademark(text, path=""):
+    """(b) The first mention of the service on a page carries the mark:
+    "Fascia Stretch Therapy™". Page bodies and text files; a header's schema
+    names the service plainly (CANON)."""
+    if '/headers/' in path.replace(os.sep, '/'): return []
+    t = html.unescape(_flat(_FST_LD.sub(' ', text)))
+    m = re.search(r'Fascia Stretch Therapy', t)
+    if m and t[m.end():m.end() + 1] != '™':
+        return [("first mention of Fascia Stretch Therapy has no ™", t[max(0, m.start() - 40):m.end() + 50].strip())]
+    return []
+
+_MINUTES = re.compile(r'\b(\d+)[- ]?(?:minutes?|mins?)\b', re.I)
+
+def fst_session_length(text, path=""):
+    """(b) CANON SESSION LENGTH with its FST carve-out. 90 minutes is legal
+    only as the FST First Visit ("First Visit" within 160 characters before
+    the figure or 60 after it), anywhere on the site; and on an FST surface a
+    length is 60 or 90 minutes, nothing else: [(what, context)]."""
+    out = []
+    copy = html.unescape(re.sub(r'\s+', ' ', _visible_copy(text)))
+    for m in _MINUTES.finditer(copy):
+        if m.group(1) == "90" and "First Visit" not in copy[max(0, m.start() - 160):m.end() + 60]:
+            out.append(("90 minutes outside the FST First Visit", copy[max(0, m.start() - 60):m.end() + 40].strip()))
+    for a, b in fst_spans(text, path):
+        c = _fst_copy(text, a, b)
+        for m in _MINUTES.finditer(c):
+            if m.group(1) not in ("60", "90"):
+                out.append((f"FST length '{m.group(0)}' (First Visit 90 minutes, sessions 60)", c[max(0, m.start() - 60):m.end() + 40].strip()))
+    return out
+
+def fst_booking(text, path=""):
+    """(b) One booking link for FST: every Calendly URL on an FST surface is
+    FST_CALENDLY, and a "Book Your First Visit" link goes nowhere else."""
+    out = []
+    for a, b in fst_spans(text, path):
+        for m in re.finditer(r'https?://(?:www\.)?calendly\.com/[^\s"\'<>]*', text[a:b]):
+            if m.group(0).rstrip('/') != FST_CALENDLY:
+                out.append((f"Calendly link on an FST surface is not the First Visit link: {m.group(0)}", ""))
+    for m in re.finditer(r'<a\b[^>]*\bhref="([^"]*)"[^>]*>(.*?)</a>', text, re.S | re.I):
+        if _flat(m.group(2)).strip() == FST_BUTTON and m.group(1).rstrip('/') != FST_CALENDLY:
+            out.append((f"'{FST_BUTTON}' links to {m.group(1)}, not the First Visit booking page", ""))
+    return out
+
+def fst_page_required(page, header):
+    """(b)/(c) What the FST page itself must carry: [(category, what)].
+    category is 'b' (required wording) or 'c' (the FAQ and its exact mirror)."""
+    out = []
+    copy = html.unescape(_flat(page))
+    for label, s, exact in (("the trademark attribution line", FST_ATTRIBUTION, None),
+                            ("the First Visit / Performance Assessment distinction", FST_DISTINCTION, 1),
+                            ("the cancellation line", FST_CANCELLATION, None),
+                            ("the canonical in-home travel-fee sentence", FST_TRAVEL, None)):
+        n = copy.count(s)
+        if n == 0: out.append(('b', f"FST page is missing {label}: {s[:70]}"))
+        elif exact and n != exact: out.append(('b', f"FST page states {label} {n} times (once, plainly)"))
+    if FST_ATTRIBUTION in copy and copy.rfind(FST_ATTRIBUTION) < copy.rfind(FST_FAQ_QUESTIONS[-1]):
+        out.append(('b', "FST page: the trademark attribution line is not at the foot of the page"))
+    if not re.search(r'<a\b[^>]*\bhref="' + re.escape(FST_CALENDLY) + r'"[^>]*>\s*' + re.escape(FST_BUTTON) + r'\s*</a>', page):
+        out.append(('b', f"FST page has no '{FST_BUTTON}' link to the First Visit booking page"))
+    pairs = faq.qa(page)
+    if [q for q, _ in pairs] != FST_FAQ_QUESTIONS:
+        out.append(('c', f"FST page FAQ is not the eight questions in order: {[q for q, _ in pairs]}"))
+    nodes = []
+    for b in _FST_LD.findall(header):
+        d = json.loads(b); nodes += d.get("@graph", [d]) if isinstance(d, dict) else d
+    mirror = [(q["name"], q["acceptedAnswer"]["text"]) for n in nodes if n.get("@type") == "FAQPage" for q in n["mainEntity"]]
+    if mirror != pairs:
+        bad = [i for i, (x, y) in enumerate(zip(pairs, mirror)) if x != y]
+        out.append(('c', f"FST header FAQPage is not byte-identical to the page FAQ "
+                         f"(page {len(pairs)}, schema {len(mirror)}, differing index {bad})"))
+    if pairs and FST_FASCIAL_SENTENCE not in (pairs[0][1] or ''):
+        if re.search(r'\bfascial\b', copy, re.I):
+            out.append(('b', "FST page: 'fascial' is not in the first FAQ answer"))
+    svc = next((n for n in nodes if n.get("@type") == "Service"), None)
+    if not svc or svc.get("name") != "Fascia Stretch Therapy" \
+            or not str(svc.get("provider", {}).get("@id", "")).endswith("#localbusiness-of"):
+        out.append(('c', "FST header: Service node missing, misnamed, or its provider is not #localbusiness-of"))
+    else:
+        got = sorted(_price_key(str(o.get("price", ""))) for o in svc.get("offers", []))
+        if got != ["1000", "150", "225"]:
+            out.append(('c', f"FST header: Service offers are not First Visit 150 / single 225 / 5-pack 1000: {got}"))
+    if any(n.get("@type") in ("LocalBusiness", "Organization", "Person") for n in nodes):
+        out.append(('c', "FST header defines a business or person node (reference the existing @ids)"))
+    return out
+
+def _selftest_fst():
+    """Every FST rule, both directions. Raises on a rule that stays quiet on a
+    violation or fires on the canonical copy beside it."""
+    P, H = FST_PAGE, FST_HEADER
+    def kinds(fn, s, path): return [k for k, _ in fn(s, path)]
+    good = ('<h1>Fascia Stretch Therapy™ in San Diego</h1><p>Assisted stretching for mobility and recovery, in your home. '
+            'The First Visit is 90 minutes and costs $150. ' + FST_DISTINCTION + '</p>'
+            '<table><tr><td>First Visit</td><td>$150</td><td>90 minutes</td></tr><tr><td>Single session</td><td>$225</td>'
+            '<td>60 minutes</td></tr><tr><td>5-session pack</td><td>$200 per session</td><td>$1,000 for five sessions</td></tr></table>'
+            '<div class="fs-faq-q">What is Fascia Stretch Therapy?</div><div class="fs-faq-a">Assisted stretching. '
+            + FST_FASCIAL_SENTENCE + '</div><div class="fs-faq-q">Do I need to be a training client?</div><div class="fs-faq-a">'
+            'No. You do not need a training program or a Performance Assessment.</div>'
+            '<div class="fs-faq-q">Is FST massage or medical treatment?</div><div class="fs-faq-a">No. ' + FST_NOT_MEDICAL + '</div>'
+            '<p>' + FST_TRAVEL + ' ' + FST_CANCELLATION + '</p>'
+            '<a href="' + FST_CALENDLY + '">Book Your First Visit</a><p>' + FST_ATTRIBUTION + '</p>')
+    for fn in (fst_banned, fst_rates, fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking):
+        assert not fn(good, P), f"FST self-test: {fn.__name__} fired on canonical copy: {fn(good, P)[:2]}"
+    assert not retired_225(good, P), "FST self-test: retired_225 fired on the FST page"
+    # banned words, each on an FST surface and each quiet off one
+    for bad in ("Your FST therapist comes to you.", "FST treats tight hips.", "It heals old strains.", "A cure for stiffness.",
+                "Compression boots after the stretch.", "Percussion work is included.", "Sessions at Teqneeq.",
+                "Book a studio session.", "Book a recovery session.", "Stretch therapy for desk workers.",
+                "The First Visit is an assessment of your mobility.", "Your FST assessment is 90 minutes: the First Visit.",
+                "We fix tight hamstrings.", "For lower back pain.", "Covered by the 30-Day Fit Guarantee.", "Your first stretch is free.",
+                "Feel the change in 3 sessions.", "It is not physical therapy.", "The Performance Assessment includes the First Visit."):
+        assert fst_banned('<p>' + bad + '</p>', P), f"FST self-test: banned copy passed on the FST page: {bad}"
+    for ok in ("Private studio sessions at Teqneeq FHC.", "The Performance Assessment is credited toward your first purchase.",
+               "Physical therapy treats; OmniFit trains.", "Health and mobility."):
+        assert not fst_banned('<p>' + ok + '</p>', "pages/weight-loss.html"), f"FST self-test: ordinary copy flagged off an FST surface: {ok}"
+    assert not fst_banned('<p>Health, mobility and recovery. A treatise on stretching.</p>', P), "FST self-test: 'health' read as 'heal'"
+    assert fst_banned('<p>' + FST_NOT_MEDICAL + '</p><p>' + FST_NOT_MEDICAL + '</p>', P), "FST self-test: the not-medical sentence twice passed"
+    assert fst_banned('<p>It is not a medical treatment or massage.</p>', P), "FST self-test: a reworded not-medical sentence passed"
+    assert fst_banned('<p>Is FST a medical treatment?</p>', P), "FST self-test: a reworded medical question passed"
+    assert fst_banned('<p>Watch:</p><iframe src="https://www.youtube.com/embed/x"></iframe>', P), "FST self-test: an embedded video passed"
+    # surfaces: a marked block, an unmarked mention, an ld+json node, a text section
+    blk = '<p>Studio sessions at Teqneeq.</p><!-- FST-BLOCK --><p>Stretching at the studio.</p><!-- /FST-BLOCK -->'
+    assert kinds(fst_banned, blk, "pages/x.html") == ["FST surface: 'studio' (studio)"], "FST self-test: FST-BLOCK scope wrong"
+    assert fst_banned('<p>Training at Teqneeq.</p><p>Ask about FST at the studio.</p>', "pages/x.html"), "FST self-test: unmarked mention not screened"
+    assert not fst_banned('<p>Training at Teqneeq.</p><p>Also offered: Fascia Stretch Therapy™ in your home.</p>', "pages/x.html"), "FST self-test: neighbouring block read as FST"
+    assert not fst_banned('<p>He holds fourteen certifications, including Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute), and trains clients at Teqneeq.</p>', "pages/x.html"), "FST self-test: the credential line read as an FST surface"
+    try: fst_spans('<!-- FST-BLOCK --><p>x</p>', "pages/x.html"); raise AssertionError("FST self-test: an unclosed FST-BLOCK did not raise")
+    except FstMarkerError: pass
+    ldok = ('<script type="application/ld+json">{"@graph":[{"@type":"Offer","name":"5-pack - in-home","price":"1250.00","description":"At $250 per session at the studio."},'
+            '{"@type":"Offer","name":"Fascia Stretch Therapy - single session","description":"In-home. One 60-minute session.","price":"225.00"}]}</script>')
+    assert not fst_rates(ldok, "pages/headers/r-header.html") and not fst_banned(ldok, "pages/headers/r-header.html") and not retired_225(ldok, "pages/headers/r-header.html"), "FST self-test: a correct FST Offer beside a training Offer flagged"
+    assert fst_rates(ldok.replace('"price":"225.00"', '"price":"235.00"'), "pages/headers/r-header.html"), "FST self-test: wrong FST schema price passed"
+    assert fst_banned(ldok.replace("In-home. One", "At the studio. One"), "pages/headers/r-header.html"), "FST self-test: 'studio' in an FST Offer passed"
+    md = "## Sessions\n\n- Single session: $275 in-home at the studio.\n\n## Fascia Stretch Therapy™ (FST)\n\n- First Visit: $150 for 90 minutes.\n- Single session: $225, 60 minutes.\n- 5-session pack: $200 per session ($1,000).\n\n## Credentials\n\n- NASM.\n"
+    assert not fst_rates(md, "assistant/knowledge.md") and not fst_banned(md, "assistant/knowledge.md") and not retired_225(md, "assistant/knowledge.md"), "FST self-test: a correct knowledge section flagged"
+    assert fst_rates(md.replace("$225, 60", "$275, 60"), "assistant/knowledge.md"), "FST self-test: a wrong price in the knowledge section passed"
+    # rates: 150 / 225 / 200 per session
+    for bad in ("First Visit: $175, 90 minutes.", "First Visit: $225.", "Single session $200.", "5-session pack: $250 per session.",
+                "5-session pack: $225 per session.", "FST sessions from $180.", "A 5-session pack is $900."):
+        assert fst_rates('<p>' + bad + '</p>', P), f"FST self-test: wrong FST price passed: {bad}"
+    assert not fst_rates('<p>5-pack: $250 per session in-home.</p>', "pages/training-rates-san-diego.html"), "FST self-test: a training price read as an FST price"
+    # $225 outside FST is still the retired August rate
+    assert retired_225('<p>Single sessions are $225.</p>', "pages/FAQs.html"), "FST self-test: $225 off an FST surface passed"
+    assert not retired_225('<p>Equinox with training runs $225-400 a month.</p>', "pages/x.html"), "FST self-test: a third-party range flagged"
+    assert not retired_225('<p>From $2,250 per cycle.</p>', "pages/x.html") and not retired_225('<p>$2259</p>', "pages/x.html"), "FST self-test: $225 matched inside a longer figure"
+    # "Fascial": once, in its sentence, on the FST page and header only
+    assert fst_fascial('<p>Fascial Stretch Therapy in San Diego.</p>', "pages/about.html"), "FST self-test: 'Fascial' off the FST page passed"
+    assert fst_fascial('<p>' + FST_FASCIAL_SENTENCE + ' ' + FST_FASCIAL_SENTENCE + '</p>', P), "FST self-test: 'fascial' twice passed"
+    assert fst_fascial('<p>Fascial stretch therapy is assisted stretching.</p>', P), "FST self-test: 'fascial' in another sentence passed"
+    assert not fst_fascial('<p>Foam rolling and self-myofascial release.</p>', "pages/partners.html"), "FST self-test: 'myofascial' read as 'Fascial'"
+    assert not fst_fascial('{"text": "Assisted stretching. It is also written \\"fascial stretch therapy\\". At OmniFit"}', H), "FST self-test: the header mirror of the sentence flagged"
+    # brand names and the title
+    for bad in ("Try OmniFit FST today.", "OmniFit Stretch is here.", "FST by OmniFit.", "OmniFit Performance Fascia Stretch Therapy.",
+                "Fascia Stretch Therapy™ by OmniFit Performance.", "OmniFit's Stretch to Win program.", "Frederick Stretch Therapy at home.",
+                "Nemezio is a Fascial Stretch Therapist.", "Our FST therapist.", "A certified stretch therapist."):
+        assert fst_brand('<p>' + bad + '</p>', "pages/x.html"), f"FST self-test: brand or title passed: {bad}"
+    for ok in ("Fascia Stretch Therapy is a service offered by OmniFit Performance.", "Fascia Stretch Therapy in San Diego | In-Home | OmniFit Performance",
+               "<h4>About OmniFit Performance</h4><p>Fascia Stretch Therapy™ in your home.</p>", "Delivered by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute).",
+               "Physical therapists treat; OmniFit trains."):
+        assert not fst_brand('<p>' + ok + '</p>', "pages/x.html"), f"FST self-test: legitimate copy read as a brand name: {ok}"
+    # the mark on the first mention
+    assert fst_trademark('<h3>Fascia Stretch Therapy</h3><p>Fascia Stretch Therapy™ at home.</p>', "pages/x.html"), "FST self-test: an unmarked first mention passed"
+    assert not fst_trademark('<h3>Fascia Stretch Therapy™</h3><p>Fascia Stretch Therapy at home.</p>', "pages/x.html"), "FST self-test: a marked first mention flagged"
+    assert not fst_trademark('{"name": "Fascia Stretch Therapy"}', H), "FST self-test: the schema name flagged for the mark"
+    # session length: the 90-minute First Visit passes, 90 minutes anywhere else does not
+    for ok in ("The First Visit is 90 minutes.", "First Visit: $150 · 90 minutes · in your home", "Start with the 90-minute First Visit.", "Sessions are 60 minutes."):
+        assert not fst_session_length('<p>' + ok + '</p>', P), f"FST self-test: session length flagged: {ok}"
+    assert not retired_launch_copy('<p>The First Visit is 90 minutes. FST sessions are 60 minutes.</p>'), "FST self-test: the 90-minute First Visit tripped the retired session-length phrases"
+    assert fst_session_length('<p>Sessions are 90 minutes in studio.</p>', "pages/FAQs.html"), "FST self-test: 90-minute training sessions passed"
+    assert fst_session_length('<p>FST sessions are 90 minutes.</p>', P), "FST self-test: 90 minutes without the First Visit passed"
+    assert fst_session_length('<p>The First Visit is 90 minutes. Follow-up sessions are 45 minutes.</p>', P), "FST self-test: a 45-minute FST session passed"
+    assert not fst_session_length('<p>A 45-minute consultation by video or phone. Sessions are 60 minutes; 30 minutes on the Executive Reset.</p>', "pages/FAQs.html"), "FST self-test: training lengths flagged"
+    # booking: one link
+    assert fst_booking('<a href="https://calendly.com/nemezio-omnifittraining/45min">Book Your First Visit</a>', "pages/x.html"), "FST self-test: First Visit button to the consultation passed"
+    assert fst_booking('<p>Book: <a href="https://calendly.com/nemezio-omnifittraining/45min">here</a></p>', P), "FST self-test: a second Calendly page on the FST page passed"
+    assert not fst_booking('<a href="https://calendly.com/nemezio-omnifittraining/45min">Book Your Consultation</a>', "pages/x.html"), "FST self-test: the consultation link flagged off an FST surface"
+    # the page's own requirements and the exact mirror
+    faqs = [(q, "Answer %d." % i) for i, q in enumerate(FST_FAQ_QUESTIONS)]
+    faqs[0] = (faqs[0][0], "Assisted stretching. " + FST_FASCIAL_SENTENCE)
+    pg = ('<h1>Fascia Stretch Therapy™</h1><p>' + FST_DISTINCTION + ' ' + FST_TRAVEL + ' ' + FST_CANCELLATION + '</p>'
+          '<a href="' + FST_CALENDLY + '">Book Your First Visit</a>'
+          + ''.join(f'<div class="fs-faq-q">{q}</div><div class="fs-faq-a">{a}</div>' for q, a in faqs) + '<p>' + FST_ATTRIBUTION + '</p>')
+    def hdr(pairs, prices=("150.00", "225.00", "1000.00"), extra=()):
+        g = [{"@type": "Service", "name": "Fascia Stretch Therapy", "provider": {"@id": "https://www.omnifittraining.com/#localbusiness-of"},
+              "offers": [{"@type": "Offer", "price": p} for p in prices]},
+             {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pairs]}] + list(extra)
+        return '<script type="application/ld+json">' + json.dumps({"@graph": g}, ensure_ascii=False) + '</script>'
+    assert not fst_page_required(pg, hdr(faqs)), f"FST self-test: a complete page and exact mirror flagged: {fst_page_required(pg, hdr(faqs))}"
+    drift = list(faqs); drift[5] = (drift[5][0], drift[5][1] + " ")
+    assert fst_page_required(pg, hdr(drift)), "FST self-test: a mirror differing by one trailing space passed"
+    assert fst_page_required(pg, hdr(faqs[:-1])), "FST self-test: a seven-question mirror passed"
+    assert fst_page_required(pg, hdr(faqs, prices=("150.00", "225.00", "200.00"))), "FST self-test: wrong Offer prices passed"
+    assert fst_page_required(pg, hdr(faqs, extra=[{"@type": "LocalBusiness", "name": "OmniFit"}])), "FST self-test: a second business node passed"
+    for gone in (FST_ATTRIBUTION, FST_DISTINCTION, FST_CANCELLATION, FST_TRAVEL, 'Book Your First Visit</a>'):
+        assert fst_page_required(pg.replace(gone, ''), hdr(faqs)), f"FST self-test: the page without '{gone[:40]}' passed"
+    assert fst_page_required(pg.replace(FST_DISTINCTION, FST_DISTINCTION + ' ' + FST_DISTINCTION), hdr(faqs)), "FST self-test: the distinction stated twice passed"
+    assert fst_page_required(pg.replace('<p>' + FST_ATTRIBUTION + '</p>', '').replace('<h1>', '<p>' + FST_ATTRIBUTION + '</p><h1>', 1), hdr(faqs)), "FST self-test: the attribution line above the FAQ passed"
+
+
 class CanonParseFailure(Exception):
     """CANON.md's INVARIANTS block could not be read. Raised rather than
     returning an empty dict: an empty recorded-hash table would make every
@@ -2046,6 +2521,26 @@ def run():
             for kind, what, ctx in fn(t):
                 print(f"   {f}\n      [{kind}] {what}\n      …{ctx[:130]}…"); A+=1
     print(f"   (assistant: {len(ASSISTANT_SURFACES)} surfaces screened; prompt NEVER-list exemption self-tested both ways)")
+    # Fascia Stretch Therapy (CANON CANONICAL FACTS; STRETCH TO WIN MARKETING
+    # RULES). Self-tested both ways first. Swept: every file in the glob but
+    # the frozen records, footer.html included, the assistant surfaces, and
+    # the three files outside pages/ that can carry FST copy.
+    _selftest_fst()
+    fst_files = {f: open(f).read() for f in ALL if os.path.basename(f) not in FROZEN}
+    fst_files.update(assistant_surface_texts())
+    fst_files.update({f: open(f).read() for f in FST_EXTRA_FILES})
+    fst_marker_errors = []
+    def _fst(fn, f):
+        try: return fn(fst_files[f], f)
+        except FstMarkerError as e:
+            if str(e) not in fst_marker_errors: fst_marker_errors.append(str(e))
+            return []
+    for f in fst_files:
+        for what, ctx in _fst(fst_banned, f):
+            print(f"   {f}\n      [{what}]\n      …{ctx[:130]}…"); A+=1
+    n_fst = sum(1 for f in fst_files if _fst(fst_spans, f))
+    print(f"   (FST surfaces: banned words and claims self-tested both ways; {len(fst_files)} files swept, "
+          f"{n_fst} carry an FST surface)")
     if len(ciia) > 1:
         print(f"   [Class IIa fact not byte-identical across files (T2-4)] "
               f"{len(ciia)} distinct wordings:")
@@ -2210,6 +2705,26 @@ def run():
         print(f"   {ASSISTANT_PROMPT}  [system prompt changed: sha256 {prompt_sha}, owner-approved {ASSISTANT_PROMPT_SHA256}]"); B+=1
     print(f"   (assistant: {len(ASSISTANT_SURFACES)} surfaces swept for stale canon; knowledge prices vs CANON card, "
           f"{len(ASSISTANT_REQUIRED)} required phrases, internal content: self-tested both ways; prompt sha256 {prompt_sha})")
+    # Fascia Stretch Therapy: rates, $225 off an FST surface, "Fascial", brand
+    # names and the title, the mark on the first mention, session length
+    # (the 90-minute First Visit), the one booking link, the page's own
+    # required wording. Self-tested in (a) by _selftest_fst.
+    for f in fst_files:
+        for what, ctx in _fst(fst_rates, f):
+            print(f"   {f}  [{what}]  …{ctx[:100]}…"); B+=1
+        for ln, ctx in _fst(retired_225, f):
+            print(f"   {f}:{ln}  [$225 outside a Fascia Stretch Therapy surface - the retired August rate]  …{ctx[:90]}…"); B+=1
+        for fn in (fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking):
+            for what, ctx in _fst(fn, f):
+                print(f"   {f}  [{what}]  …{ctx[:100]}…"); B+=1
+    nav_txt = open("site/nav.html").read()
+    if _FST_MENTION.search(nav_txt) or re.search(r'stretch', nav_txt, re.I):
+        print("   site/nav.html  [Fascia Stretch Therapy is not in the top nav (owner, Nov 20 2026)]"); B+=1
+    fst_page_findings = fst_page_required(open(FST_PAGE).read(), open(FST_HEADER).read())
+    for cat, what in fst_page_findings:
+        if cat == 'b': print(f"   {FST_PAGE}  [{what}]"); B+=1
+    print(f"   (FST: rates 150 / 225 / 200 per session, $225 off-surface, 'Fascial', brand names, the mark, session length "
+          f"incl. the 90-minute First Visit, one booking link, required wording: self-tested both ways, {len(fst_files)} files swept)")
     print("   none" if not B else f"   {B} hit(s)")
 
     print("\n### (c) BROKEN STRUCTURE")
@@ -2220,6 +2735,11 @@ def run():
         for hit, ctx in placeholder_copy(open(f).read()):
             print(f"   {f}  [placeholder in visible copy: '{hit}']  …{ctx[:110]}…"); C+=1
     print(f"   (placeholder rule: self-tested both ways, {len(ALL)} files swept, frozen records INCLUDED)")
+    for e in fst_marker_errors:
+        print(f"   [FST-BLOCK markers] {e}"); C+=1
+    for cat, what in fst_page_findings:
+        if cat == 'c': print(f"   {FST_HEADER}  [{what}]"); C+=1
+    print("   (FST page: eight-question FAQ, header FAQPage byte-identical to it, Service node and its three Offers: self-tested both ways)")
     inv={}; notrun=[]
     # The hashes CANON.md records, read once per run. A parse failure is
     # recorded, never swallowed: with no recorded table the comparison below
