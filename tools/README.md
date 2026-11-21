@@ -1017,6 +1017,19 @@ included; the four assistant surfaces; `site/llms.txt`, `site/nav.html`,
 | nav | (b) | `site/nav.html` mentions FST or "stretch" (owner: not in the top nav) |
 | `fst_badge`, `fst_badge_file` | (b) | the certification badge: `site/img/fst-certified-level-1.png` is the owner's file by sha256 (never resized, recoloured, cropped or redrawn); it appears exactly once on the FST page and once on /about, with the one alt text, inside its white panel (`.fs-badge-panel`, `.ab-cred-badge`); any reference in another page, the footer, the nav, the layout, `site.css`, `site.js` or `blog.py` fails. Comments are not references. Self-tested both ways (`_selftest_fst_badge`) |
 
+**Payment terms and disclaimer (owner decisions, Nov 21 2026).** `FST_PAYMENT`,
+`FST_NO_REFUND`, `FST_EXPIRY` and `FST_DISCLAIMER` are CANON's sentences.
+`fst_page_required` wants each on the FST page (the disclaimer exactly once,
+above the attribution line) and `fst_terms_required` wants the same sentences
+on `pages/terms-and-conditions.html`, so the two cannot drift. The disclaimer's
+tail names injuries and medical conditions, which are banned words on an FST
+surface; `FST_DISCLAIMER_TAIL` is blanked before the scan as that exact text.
+The not-medical sentence may now appear twice in a file that carries the
+disclaimer (the FAQ answer and the disclaimer) and once anywhere else; a third
+copy, a second disclaimer or a reworded disclaimer fails (self-tested).
+"Non-refundable" stays the Foundation policy's word (`fee_language`); FST copy
+says "Fees are not refunded."
+
 **Canonical sentences are exempt as that exact sentence and nothing looser.**
 `FST_NOT_MEDICAL` ("It is not medical treatment, not physical therapy and not
 massage.") and the owner's FAQ question it answers (`FST_MEDICAL_QUESTION`)
