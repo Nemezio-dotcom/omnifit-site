@@ -2271,6 +2271,60 @@ def fst_page_required(page, header):
         out.append(('c', "FST header defines a business or person node (reference the existing @ids)"))
     return out
 
+# The certification badge (owner brief, Nov 20 2026): the owner's PNG,
+# UNMODIFIED (never recoloured, cropped or redrawn; the sha256 below is the
+# file as supplied on Nov 21 2026, 1183 x 502, teal on transparent), shown in
+# exactly two places - the FST page's practitioner block and the about
+# credentials entry - with one alt text, and on a white panel because the
+# artwork is unreadable on navy. Never in the nav, the footer or the layout.
+FST_BADGE_FILE = "site/img/fst-certified-level-1.png"
+FST_BADGE_SRC = "/assets/img/fst-certified-level-1.png"
+FST_BADGE_SHA256 = "0455a194befab8e8c18fe99aee33c78673f88b0ee571cc98de25d14db49f971b"
+FST_BADGE_ALT = "Fascia Stretch Therapy Certified Level 1 badge"
+FST_BADGE_PAGES = {FST_PAGE: "fs-badge-panel", "pages/about.html": "ab-cred-badge"}
+FST_BADGE_SWEEP = ("site/nav.html", "site/layout.html", "site/blog.py", "site/site.css", "site/site.js")
+
+def fst_badge(text, path=""):
+    """(b) Findings for one file: the badge anywhere but its two pages; on
+    those, not exactly once, the wrong alt text, or not inside its white
+    panel: [what]."""
+    tags = re.findall(r'<img\b[^>]*fst-certified-level-1[^>]*>', text, re.I)
+    refs = len(re.findall(r'fst-certified-level-1', _blank_noncopy(text)))
+    panel = FST_BADGE_PAGES.get(path.replace(os.sep, '/'))
+    if panel is None:
+        return ["the FST badge is shown only on the FST page and the about credentials entry"] if refs else []
+    out = []
+    if len(tags) != 1 or refs != 1:
+        out.append(f"the FST badge must appear exactly once on this page (found {len(tags)} image(s), {refs} reference(s))")
+    for tag in tags:
+        if f'src="{FST_BADGE_SRC}"' not in tag:
+            out.append("the FST badge is not served from " + FST_BADGE_SRC)
+        if f'alt="{FST_BADGE_ALT}"' not in tag:
+            out.append(f'the FST badge alt text is not "{FST_BADGE_ALT}"')
+        if not re.search(r'<(?:div|span)\b[^>]*class="[^"]*\b' + re.escape(panel) + r'\b[^"]*"[^>]*>\s*' + re.escape(tag), text):
+            out.append(f"the FST badge is not inside its white panel (.{panel})")
+    return out
+
+def fst_badge_file(path=FST_BADGE_FILE):
+    try: got = hashlib.sha256(open(path, 'rb').read()).hexdigest()
+    except OSError: return [f"{path} is missing"]
+    return [] if got == FST_BADGE_SHA256 else [f"{path} is not the owner's file (sha256 {got[:16]}, expected {FST_BADGE_SHA256[:16]}): the badge is never resized, recoloured, cropped or redrawn without owner approval"]
+
+def _selftest_fst_badge():
+    img = f'<img src="{FST_BADGE_SRC}" alt="{FST_BADGE_ALT}" width="1183" height="502">'
+    ok = '<div class="fs-prac"><div class="fs-badge-panel">' + img + '</div></div>'
+    assert not fst_badge(ok, FST_PAGE), f"FST badge self-test: the correct block flagged: {fst_badge(ok, FST_PAGE)}"
+    assert not fst_badge('<span class="ab-cred-badge">' + img + '</span>', "pages/about.html"), "FST badge self-test: the about entry flagged"
+    assert not fst_badge('<p>No badge here.</p>', "pages/FAQs.html"), "FST badge self-test: a page without the badge flagged"
+    for bad, why in ((ok + ok, "twice"), ('<div class="fs-prac">' + img + '</div>', "outside its panel"),
+                     (ok.replace(FST_BADGE_ALT, "FST badge"), "wrong alt"), ('<p>No badge.</p>', "missing"),
+                     (ok.replace(FST_BADGE_SRC, "/assets/img/fst-certified-level-1-navy.png"), "another file")):
+        assert fst_badge(bad, FST_PAGE), f"FST badge self-test: passed with the badge {why}"
+    for f in ("pages/footer.html", "site/nav.html", "pages/personal-training-services.html", "site/layout.html"):
+        assert fst_badge('<a href="/">' + img + '</a>', f), f"FST badge self-test: the badge on {f} passed"
+    assert not fst_badge('<!-- the badge fst-certified-level-1.png lives on /about -->', "pages/footer.html"), "FST badge self-test: a comment read as the badge"
+    assert fst_badge_file("tools/certify.py") and fst_badge_file("site/img/no-such-file.png"), "FST badge self-test: a wrong or missing file passed"
+
 def _selftest_fst():
     """Every FST rule, both directions. Raises on a rule that stays quiet on a
     violation or fires on the canonical copy beside it."""
@@ -2720,6 +2774,14 @@ def run():
     nav_txt = open("site/nav.html").read()
     if _FST_MENTION.search(nav_txt) or re.search(r'stretch', nav_txt, re.I):
         print("   site/nav.html  [Fascia Stretch Therapy is not in the top nav (owner, Nov 20 2026)]"); B+=1
+    _selftest_fst_badge()
+    for f in list(fst_files) + [x for x in FST_BADGE_SWEEP if x not in fst_files]:
+        t = fst_files[f] if f in fst_files else open(f).read()
+        for what in fst_badge(t, f):
+            print(f"   {f}  [{what}]"); B+=1
+    for what in fst_badge_file():
+        print(f"   [{what}]"); B+=1
+    print(f"   (FST badge: the owner's file by sha256, on the FST page and the about entry only, one alt text, on its white panel: self-tested both ways)")
     fst_page_findings = fst_page_required(open(FST_PAGE).read(), open(FST_HEADER).read())
     for cat, what in fst_page_findings:
         if cat == 'b': print(f"   {FST_PAGE}  [{what}]"); B+=1

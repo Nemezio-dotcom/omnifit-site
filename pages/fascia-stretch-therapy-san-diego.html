@@ -428,8 +428,8 @@
   /* Practitioner block. The badge artwork is teal on transparent, so it sits
      on a white rounded panel, never directly on navy. */
   #omni-fst .fs-prac { display: flex; gap: 28px; align-items: center; max-width: 900px; margin: 0 auto; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px; text-align: left; }
-  #omni-fst .fs-badge-panel { flex: 0 0 auto; background: #ffffff; border: 1px solid rgba(10,22,40,.10); border-radius: 16px; padding: 18px; line-height: 0; box-shadow: 0 10px 30px rgba(10,22,40,.08); }
-  #omni-fst .fs-badge-panel img { display: block; width: 168px !important; max-width: 100% !important; height: auto !important; }
+  #omni-fst .fs-badge-panel { flex: 0 0 auto; width: 286px; max-width: 100%; background: #ffffff; border: 1px solid rgba(10,22,40,.10); border-radius: 16px; padding: 18px; line-height: 0; box-shadow: 0 10px 30px rgba(10,22,40,.08); }
+  #omni-fst .fs-badge-panel img { display: block; width: 100% !important; max-width: 100% !important; height: auto !important; }
   #omni-fst .fs-prac-text { flex: 1 1 auto; min-width: 0; }
   #omni-fst .fs-prac-name { font-family: 'Playfair Display', serif !important; font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
   #omni-fst .fs-prac-cred { font-size: 13px; font-weight: 700; letter-spacing: .4px; color: var(--gold); margin-bottom: 12px; }
@@ -640,9 +640,10 @@
       </div>
 
       <div class="fs-prac">
-        <!-- BADGE: the "FST Certified Level 1" badge goes here, first child of
-             .fs-prac, on the white .fs-badge-panel (see REPORT.md, FST Launch
-             run, "needs owner": the PNG did not reach the repo in this run). -->
+        <!-- The certification badge: the owner's PNG, unmodified, on a white
+             panel (the artwork is teal on transparent). Shown here and in the
+             about credentials entry, nowhere else (CANON; certify.py fst_badge). -->
+        <div class="fs-badge-panel"><img src="/assets/img/fst-certified-level-1.png" alt="Fascia Stretch Therapy Certified Level 1 badge" width="1183" height="502" loading="lazy" decoding="async"></div>
         <div class="fs-prac-text">
           <div class="fs-prac-name">Nemezio LopezPerez</div>
           <div class="fs-prac-cred">Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute)</div>
