@@ -16,6 +16,7 @@ import {
   MAX_USER_TURNS,
   TURN_CAP_REPLY,
   callClaude,
+  ensureMarks,
   extractHandoff,
   globalLimit,
   isConfigured,
@@ -89,6 +90,7 @@ export async function onRequestPost(context) {
       const messages = [...(await sessionHistory(db, sessionId)), { role: "user", content: userMessage }];
       ({ reply, handoff } = extractHandoff(await callClaude(env, SYSTEM, messages)));
       if (!reply) throw new Error("reply was only a handoff token");
+      reply = ensureMarks(reply);
     }
     await logTurn(db, { now, page, sessionId, userMessage, reply, handoff });
     return json({ reply, handoff, sessionId });

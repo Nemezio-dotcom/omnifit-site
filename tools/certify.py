@@ -1817,7 +1817,7 @@ ASSISTANT_PROMPT = "functions/_lib/system-prompt.js"
 ASSISTANT_SURFACES = (ASSISTANT_KNOWLEDGE, ASSISTANT_PROMPT, "site/assistant.js", "functions/_lib/assistant.js")
 # The prompt is verbatim from the owner. Wording changes need owner approval
 # and a new hash here and in CANON (ASK OMNIFIT).
-ASSISTANT_PROMPT_SHA256 = "f6935ddef0fcaa0d"
+ASSISTANT_PROMPT_SHA256 = "6749df074f3ebec3"
 
 def assistant_knowledge_text(raw):
     """What the model actually receives: knowledge.md minus maintainer comments
@@ -1963,7 +1963,7 @@ FST_TRAVEL = ("No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho
 # "pain-free" describes how the stretching feels; it trips two FST bans (pain,
 # free), so this exact sentence is blanked before the word scan, and "pain-free"
 # anywhere else on an FST surface still fails, as do "pain relief" and "free".
-FST_DEFINITION = ("Fascia Stretch Therapy (FST) is a modality of table-based assisted stretching that is "
+FST_DEFINITION = ("Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted stretching that is "
                   "pain-free, fully customizable and improves functionality.")
 FST_HOME_BLOCK = "pages/home-4.html"
 # The one nav link (owner, Nov 21 2026; REVERSES "not in the top nav", Nov 20).
@@ -1982,14 +1982,14 @@ FST_DISCLAIMER_TAIL = ("Information on this website and during a visit is educat
                        "Consult your physician before booking, particularly if you have injuries, medical "
                        "conditions, or are pregnant. A Liability Waiver and Release must be signed before your "
                        "First Visit.")
-FST_DISCLAIMER = ("Fascia Stretch Therapy is assisted stretching for mobility and recovery. " + FST_NOT_MEDICAL
+FST_DISCLAIMER = ("Fascia Stretch Therapy™ is assisted stretching for mobility and recovery. " + FST_NOT_MEDICAL
                   + " " + FST_DISCLAIMER_TAIL)
 FST_TERMS_PAGE = "pages/terms-and-conditions.html"
 FST_BUTTON = "Book Your First Visit"
 FST_FAQ_QUESTIONS = [
-    "What is Fascia Stretch Therapy?", "What happens at the First Visit?", "How much does it cost?",
+    "What is Fascia Stretch Therapy™?", "What happens at the First Visit?", "How much does it cost?",
     "Do I need to be a training client?", "Where do sessions take place and what do I need?",
-    "What should I wear?", "Is FST massage or medical treatment?", "What is the cancellation policy?"]
+    "What should I wear?", "Is FST™ massage or medical treatment?", "What is the cancellation policy?"]
 FST_MEDICAL_QUESTION = FST_FAQ_QUESTIONS[6]
 # First Visit 150 · single session 225 · 5-session pack 200 per session, 1,000.
 FST_PRICES = {"150", "225", "200", "1000"}
@@ -2207,7 +2207,7 @@ _FST_BRAND = re.compile(
     r"OmniFit(?:\s+Performance)?(?:'s)?\s+(?:FST\b|Fasci(?:a|al)\s+Stretch|Frederick\s+Stretch|Stretch)"
     r"|(?:\bFST™?|Stretch\s+Therapy™?|Stretch\s+to\s+Win)\s+by\s+OmniFit"
     r"|Frederick\s+Stretch\s+Therapy", re.I)
-_FST_TITLE = re.compile(r'(?:Fasci(?:a|al)\s+Stretch|\bFST|\bstretch)\s+therapists?\b'
+_FST_TITLE = re.compile(r'(?:Fasci(?:a|al)\s+Stretch|\bFST™?|\bstretch)\s+therapists?\b'
                         r'|(?<!Fascia )\bStretch\s+Practitioner\b', re.I)
 
 def _flat_blocks(text):
@@ -2228,16 +2228,25 @@ def fst_brand(text, path=""):
             out.append((f"'{m.group(0)}' ({what})", t[max(0, m.start() - 60):m.end() + 60].strip()))
     return out
 
+_FST_UNMARKED = re.compile(r'(?:Fascia Stretch Therapy|\bFST\b)(?!™|&trade;|&#8482;)')
+
 def fst_trademark(text, path=""):
-    """(b) The first mention of the service on a page carries the mark:
-    "Fascia Stretch Therapy™". Page bodies and text files; a header's schema
-    names the service plainly (CANON)."""
-    if '/headers/' in path.replace(os.sep, '/'): return []
-    t = html.unescape(_flat(_FST_LD.sub(' ', text)))
-    m = re.search(r'Fascia Stretch Therapy', t)
-    if m and t[m.end():m.end() + 1] != '™':
-        return [("first mention of Fascia Stretch Therapy has no ™", t[max(0, m.start() - 40):m.end() + 50].strip())]
-    return []
+    """(b) EVERY mention carries the mark (owner, Nov 21 2026: the name is the
+    Stretch to Win Institute's property): "Fascia Stretch Therapy™" and
+    "FST™", in page copy, headings, alt text and other attributes, schema, the
+    title and meta, the text files and the assistant's prompt. Until this
+    rule the mark was required on a page's first mention only, and schema
+    named the service plainly. Not mentions: HTML comments (the FST-BLOCK
+    markers), CSS, the alternate spelling "fascial stretch therapy" in its
+    one sentence, the credential "Fascia Stretch Practitioner", and
+    lower-case ids, classes and URLs: [(what, context)]."""
+    body = _blank_noncopy(text)
+    out = []
+    for m in _FST_UNMARKED.finditer(body):
+        ln = body.count('\n', 0, m.start()) + 1
+        out.append((f"'{m.group(0)}' without ™ (line {ln}): every mention carries the mark",
+                    re.sub(r'\s+', ' ', body[max(0, m.start() - 50):m.end() + 40]).strip()))
+    return out
 
 _MINUTES = re.compile(r'\b(\d+)[- ]?(?:minutes?|mins?)\b', re.I)
 
@@ -2321,7 +2330,7 @@ def fst_page_required(page, header):
         if re.search(r'\bfascial\b', copy, re.I):
             out.append(('b', "FST page: 'fascial' is not in the first FAQ answer"))
     svc = next((n for n in nodes if n.get("@type") == "Service"), None)
-    if not svc or svc.get("name") != "Fascia Stretch Therapy" \
+    if not svc or svc.get("name") != "Fascia Stretch Therapy™" \
             or not str(svc.get("provider", {}).get("@id", "")).endswith("#localbusiness-of"):
         out.append(('c', "FST header: Service node missing, misnamed, or its provider is not #localbusiness-of"))
     else:
@@ -2341,7 +2350,7 @@ def fst_page_required(page, header):
 FST_BADGE_FILE = "site/img/fst-certified-level-1.png"
 FST_BADGE_SRC = "/assets/img/fst-certified-level-1.png"
 FST_BADGE_SHA256 = "0455a194befab8e8c18fe99aee33c78673f88b0ee571cc98de25d14db49f971b"
-FST_BADGE_ALT = "Fascia Stretch Therapy Certified Level 1 badge"
+FST_BADGE_ALT = "Fascia Stretch Therapy™ Certified Level 1 badge"
 FST_BADGE_PAGES = {FST_PAGE: "fs-badge-panel", "pages/about.html": "ab-cred-badge",
                    "pages/home-4.html": "fst-badge-panel"}   # third placement: the homepage block (owner, Nov 21 2026)
 FST_BADGE_SWEEP = ("site/nav.html", "site/layout.html", "site/blog.py", "site/site.css", "site/site.js")
@@ -2425,7 +2434,7 @@ def fst_definition_required(texts):
     kn = texts[ASSISTANT_KNOWLEDGE]
     m = re.search(r'^#{1,6}\s[^\n]*Fascia Stretch Therapy[^\n]*\n+- ([^\n]*)', kn, re.M)
     need(ASSISTANT_KNOWLEDGE, bool(m) and m.group(1).startswith(FST_DEFINITION + " "), "the FST section's first bullet")
-    m = re.search(r'^- \*\*Fascia Stretch Therapy™ \(FST\):\*\* ([^\n]*)', texts["site/llms.txt"], re.M)
+    m = re.search(r'^- \*\*Fascia Stretch Therapy™ \(FST™\):\*\* ([^\n]*)', texts["site/llms.txt"], re.M)
     need("site/llms.txt", bool(m) and m.group(1).startswith(FST_DEFINITION + " "), "the FST line")
     home = texts[FST_HOME_BLOCK]
     m = re.search(r'<section id="omh-fst".*?<p class="omh-lede">(.*?)</p>', home, re.S)
@@ -2449,7 +2458,7 @@ def fst_home_block(home):
               "Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1, brings the table to your home. "
               "It is a separate service from training and open to anyone.",
               "In-home only", "First Visit: $150, 90 minutes", "No training program required",
-              "Explore Fascia Stretch Therapy →"):
+              "Explore Fascia Stretch Therapy™ →"):
         if s not in copy: out.append(f"the homepage FST block is missing the owner's copy: {s[:60]}")
     if re.search(r'<h[12]\b', blk, re.I):
         out.append("the homepage FST block uses an H1 or H2 (K30 / K31 stay off homepage titles, H1, H2s and meta)")
@@ -2473,10 +2482,10 @@ def _selftest_fst():
             'The First Visit is 90 minutes and costs $150. ' + FST_DISTINCTION + '</p>'
             '<table><tr><td>First Visit</td><td>$150</td><td>90 minutes</td></tr><tr><td>Single session</td><td>$225</td>'
             '<td>60 minutes</td></tr><tr><td>5-session pack</td><td>$200 per session</td><td>$1,000 for five sessions</td></tr></table>'
-            '<div class="fs-faq-q">What is Fascia Stretch Therapy?</div><div class="fs-faq-a">Assisted stretching. '
+            '<div class="fs-faq-q">' + FST_FAQ_QUESTIONS[0] + '</div><div class="fs-faq-a">Assisted stretching. '
             + FST_FASCIAL_SENTENCE + '</div><div class="fs-faq-q">Do I need to be a training client?</div><div class="fs-faq-a">'
             'No. You do not need a training program or a Performance Assessment.</div>'
-            '<div class="fs-faq-q">Is FST massage or medical treatment?</div><div class="fs-faq-a">No. ' + FST_NOT_MEDICAL + '</div>'
+            '<div class="fs-faq-q">' + FST_FAQ_QUESTIONS[6] + '</div><div class="fs-faq-a">No. ' + FST_NOT_MEDICAL + '</div>'
             '<p>' + FST_TRAVEL + ' ' + FST_CANCELLATION + ' ' + FST_PAYMENT + ' ' + FST_NO_REFUND + ' ' + FST_EXPIRY + '</p>'
             '<a href="' + FST_CALENDLY + '">Book Your First Visit</a><p>' + FST_DISCLAIMER + '</p><p>' + FST_ATTRIBUTION + '</p>')
     for fn in (fst_banned, fst_rates, fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking, fst_travel):
@@ -2548,10 +2557,21 @@ def _selftest_fst():
                "<h4>About OmniFit Performance</h4><p>Fascia Stretch Therapy™ in your home.</p>", "Delivered by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute).",
                "Physical therapists treat; OmniFit trains."):
         assert not fst_brand('<p>' + ok + '</p>', "pages/x.html"), f"FST self-test: legitimate copy read as a brand name: {ok}"
-    # the mark on the first mention
-    assert fst_trademark('<h3>Fascia Stretch Therapy</h3><p>Fascia Stretch Therapy™ at home.</p>', "pages/x.html"), "FST self-test: an unmarked first mention passed"
-    assert not fst_trademark('<h3>Fascia Stretch Therapy™</h3><p>Fascia Stretch Therapy at home.</p>', "pages/x.html"), "FST self-test: a marked first mention flagged"
-    assert not fst_trademark('{"name": "Fascia Stretch Therapy"}', H), "FST self-test: the schema name flagged for the mark"
+    # the mark on EVERY mention: copy, headings, alt text, schema, the short form
+    for bad in ('<h3>Fascia Stretch Therapy™</h3><p>Fascia Stretch Therapy at home.</p>', '<p>Ask about FST today.</p>',
+                '<p>Every new FST client starts here.</p>', '<img src="/x.png" alt="Fascia Stretch Therapy Certified Level 1 badge">',
+                '<title>Fascia Stretch Therapy in San Diego</title>'):
+        assert fst_trademark(bad, "pages/x.html"), f"FST self-test: an unmarked mention passed: {bad}"
+    assert fst_trademark('<script type="application/ld+json">{"name": "Fascia Stretch Therapy", "alternateName": "FST"}</script>', H), "FST self-test: unmarked schema names passed"
+    assert len(fst_trademark('<p>Fascia Stretch Therapy (FST) at home.</p>', "pages/x.html")) == 2, "FST self-test: the name and the short form should each be reported"
+    for ok in ('<h3>Fascia Stretch Therapy™</h3><p>Fascia Stretch Therapy™ (FST™) at home. Every new FST™ client.</p>',
+               '<p>Fascia Stretch Therapy&trade; and FST&#8482; at home.</p>', '<!-- FST-BLOCK --><p>Stretching.</p><!-- /FST-BLOCK -->',
+               '<p>' + FST_FASCIAL_SENTENCE + '</p>', '<p>Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute).</p>',
+               '<div class="rt-section" id="rt-fst"><a href="/fascia-stretch-therapy-san-diego#fs-rates">Rates</a></div>',
+               '<style>#omni-fst .fs-x{color:red;} /* FST page */</style><p>Stretching.</p>', '<p>' + FST_ATTRIBUTION + '</p>'):
+        assert not fst_trademark(ok, "pages/x.html"), f"FST self-test: marked or non-mention copy flagged: {ok} -> {fst_trademark(ok, 'pages/x.html')}"
+    assert not fst_trademark('<script type="application/ld+json">{"name": "Fascia Stretch Therapy™", "alternateName": "FST™"}</script>', H), "FST self-test: marked schema flagged"
+    assert fst_brand('<p>Our FST™ therapist.</p>', "pages/x.html") and fst_brand('<p>Try OmniFit FST™ today.</p>', "pages/x.html"), "FST self-test: the mark hid a brand name or a therapist title"
     # session length: the 90-minute First Visit passes, 90 minutes anywhere else does not
     for ok in ("The First Visit is 90 minutes.", "First Visit: $150 · 90 minutes · in your home", "Start with the 90-minute First Visit.", "Sessions are 60 minutes."):
         assert not fst_session_length('<p>' + ok + '</p>', P), f"FST self-test: session length flagged: {ok}"
@@ -2583,21 +2603,21 @@ def _selftest_fst():
     # the definition, verbatim, as the lead in each of its five places
     def five(d=FST_DEFINITION):
         return {FST_PAGE: '<section id="fs-what"><div class="gq-block"><strong>' + d + '</strong> You lie down.</div></section>',
-                FST_HEADER: '<script type="application/ld+json">' + json.dumps({"@graph": [{"@type": "Service", "description": d + " Delivered in the home."}]}) + '</script>',
+                FST_HEADER: '<script type="application/ld+json">' + json.dumps({"@graph": [{"@type": "Service", "description": d + " Delivered in the home."}]}, ensure_ascii=False) + '</script>',
                 ASSISTANT_KNOWLEDGE: "## Fascia Stretch Therapy™ (FST)\n\n- " + d + " It is a service.\n- Second.\n",
-                "site/llms.txt": "- **Fascia Stretch Therapy™ (FST):** " + d + " Offered in-home only.\n",
+                "site/llms.txt": "- **Fascia Stretch Therapy™ (FST™):** " + d + " Offered in-home only.\n",
                 FST_HOME_BLOCK: '<section id="omh-fst"><p class="omh-lede">' + d + ' Nemezio brings the table.</p></section>'}
     assert not fst_definition_required(five()), f"FST self-test: five verbatim definitions flagged: {fst_definition_required(five())}"
     assert len(fst_definition_required(five(FST_DEFINITION.replace("pain-free", "comfortable")))) >= 5, "FST self-test: a reworded definition passed somewhere"
     t5 = five(); t5[FST_PAGE] = t5[FST_PAGE].replace("You lie down.", "You lie down. " + FST_DEFINITION)
     assert fst_definition_required(t5), "FST self-test: the definition twice in one file passed"
-    t5 = five(); t5["site/llms.txt"] = "- **Fascia Stretch Therapy™ (FST):** Assisted stretching. " + FST_DEFINITION + "\n"
+    t5 = five(); t5["site/llms.txt"] = "- **Fascia Stretch Therapy™ (FST™):** Assisted stretching. " + FST_DEFINITION + "\n"
     assert fst_definition_required(t5), "FST self-test: the definition not in the lead position passed"
     # the homepage block: owner copy, one link, no H2
     hb = ('<!-- FST-BLOCK --><section id="omh-fst"><p class="omh-label">Assisted Stretching</p><h3>Fascia Stretch Therapy™, in Your Home</h3>'
           '<p class="omh-lede">' + FST_DEFINITION + ' Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1, brings the table to your home. It is a separate service from training and open to anyone.</p>'
           '<ul><li>In-home only</li><li>First Visit: $150, 90 minutes</li><li>No training program required</li></ul>'
-          '<p><a href="/fascia-stretch-therapy-san-diego">Explore Fascia Stretch Therapy →</a></p></section><!-- /FST-BLOCK -->')
+          '<p><a href="/fascia-stretch-therapy-san-diego">Explore Fascia Stretch Therapy™ →</a></p></section><!-- /FST-BLOCK -->')
     assert not fst_home_block(hb), f"FST self-test: the correct homepage block flagged: {fst_home_block(hb)}"
     for bad, why in ((hb.replace('</p></section>', ' <a href="' + FST_CALENDLY + '">Book</a></p></section>'), "a Calendly link"),
                      (hb.replace('<h3>', '<h2>').replace('</h3>', '</h2>'), "an H2"), (hb.replace('First Visit: $150, 90 minutes', 'First Visit: $150'), "a changed point"),
@@ -2620,7 +2640,7 @@ def _selftest_fst():
           + ''.join(f'<div class="fs-faq-q">{q}</div><div class="fs-faq-a">{a}</div>' for q, a in faqs)
           + '<p>' + FST_DISCLAIMER + '</p><p>' + FST_ATTRIBUTION + '</p>')
     def hdr(pairs, prices=("150.00", "225.00", "1000.00"), extra=()):
-        g = [{"@type": "Service", "name": "Fascia Stretch Therapy", "provider": {"@id": "https://www.omnifittraining.com/#localbusiness-of"},
+        g = [{"@type": "Service", "name": "Fascia Stretch Therapy™", "provider": {"@id": "https://www.omnifittraining.com/#localbusiness-of"},
               "offers": [{"@type": "Offer", "price": p} for p in prices]},
              {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pairs]}] + list(extra)
         return '<script type="application/ld+json">' + json.dumps({"@graph": g}, ensure_ascii=False) + '</script>'
