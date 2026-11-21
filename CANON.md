@@ -29,6 +29,9 @@ otherwise, this block wins and the older line is kept only as history.
   SESSION LENGTH: 60 minutes in studio and in-home; 30 minutes on the
     Executive Reset. Never "45-60 minutes", "30-45 minute" or "30 or
     45-minute".
+    CARVE-OUT (owner, Nov 20 2026): Fascia Stretch Therapy. The FST First
+    Visit is 90 minutes; FST sessions are 60 minutes. 90 minutes is legal
+    only for the FST First Visit.
   IN-HOME NO-FEE AREA: Carmel Valley, Santaluz, Fairbanks Ranch, Rancho
     Bernardo, 4S Ranch, Poway. Elsewhere in the in-home service area
     (including La Jolla, Del Mar, Rancho Santa Fe, Solana Beach, Encinitas,
@@ -52,6 +55,55 @@ otherwise, this block wins and the older line is kept only as history.
   HSA / FSA: OmniFit doesn't bill insurance. HSA or FSA funds can be used
     only with a Letter of Medical Necessity from a licensed provider,
     available through Truemed. OmniFit provides itemized receipts.
+  FASCIA STRETCH THERAPY (FST) (owner decisions, Nov 20 2026; FST Launch
+    run. Where an older line in this brief disagrees, these lines win.)
+    CREDENTIAL: Nemezio LopezPerez completed Stretch to Win Institute Fascia
+      Stretch Therapy Level 1: 38 hours, certificate issued November 20,
+      2026. His title, exactly as on the certificate: "Fascia Stretch
+      Practitioner – Level 1" (en dash). NEVER "Fascial Stretch Therapist",
+      "FST therapist" or "stretch therapist". In credential lists it is
+      written "Fascia Stretch Practitioner – Level 1 (Stretch to Win
+      Institute)". It is the FOURTEENTH certification (see Credentials).
+    SPELLING: "Fascia Stretch Therapy" (as on the certificate and the Google
+      Business Profile). "Fascial" may appear EXACTLY ONCE on the whole
+      site: one sentence in the FST page's first FAQ answer (also written
+      "fascial stretch therapy"), mirrored in that FAQ's schema.
+    SERVICE NAME: Fascia Stretch Therapy (FST). The first mention on a page
+      carries the trademark mark: "Fascia Stretch Therapy™". It is a
+      service offered by OmniFit Performance, never part of a business,
+      brand or product-line name (see STRETCH TO WIN MARKETING RULES).
+    SCOPE: FST only. No compression boots, no percussion or massage-gun
+      work, no "recovery session" naming.
+    WHERE: IN-HOME ONLY. The FST page, its header and the Rates FST section
+      never mention Teqneeq, a studio, or a studio price for FST. Service
+      area and travel fee: exactly the IN-HOME NO-FEE AREA rule above (the
+      no-fee list; elsewhere "a travel fee applies, confirmed before you
+      book"; never a dollar figure).
+    WHO: open to anyone. No training program and no Performance Assessment
+      required.
+    RATES (in-home):
+      First Visit       $150, 90 minutes. Required for every new FST
+                        client. Contents: a range-of-motion check, the first
+                        Fascia Stretch Therapy session on the table, and a
+                        re-measure at the end.
+      Single session    $225, 60 minutes.
+      5-session pack    $200 per session ($1,000), expires 8 weeks from
+                        purchase.
+    THE FIRST VISIT is called "First Visit". NEVER "assessment" or "FST
+      assessment". It is NOT the Performance Assessment and its $150 is NOT
+      credited toward anything; the FST page states that once, plainly.
+    GUARANTEE: the 30-Day Fit Guarantee applies to programs only. It is
+      never attached to FST.
+    CANCELLATION (verbatim): "Cancellations with less than 24 hours' notice
+      and no-shows forfeit the fee."
+    BOOKING: ONE booking link on the site for FST, the First Visit:
+      https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home
+      Button text "Book Your First Visit". Follow-up sessions and 5-packs
+      are arranged with Nemezio after the First Visit (one line says so).
+      No other Calendly page is linked for FST. (The words "recovery
+      session" and "assessment" in that URL are Calendly's slug, not copy.)
+    WHAT THE CLIENT NEEDS: a quiet room with floor space. The table comes
+      with him. Wear clothes you can move in.
 
 REPO STATE (reconciled with disk, Sept 2026)
 - main = the live site: merging to main deploys to Cloudflare Pages. Every file under pages/ is IN CERTIFICATION SCOPE unless
@@ -61,7 +113,8 @@ REPO STATE (reconciled with disk, Sept 2026)
   disclosure, never before - fixing the name first hides a real structural
   check behind a filename mismatch.
 
-  CERTIFIED - 31 page/header pairs (30 until the Founder Bio + Trainer
+  CERTIFIED - 32 page/header pairs (31 until the FST Launch run, Nov 2026,
+  added fascia-stretch-therapy-san-diego; 30 until the Founder Bio + Trainer
   Guide run, Oct 25 2026, added how-to-choose-a-personal-trainer-san-diego;
   29 between the Keyword Ownership run,
   Oct 2026, which archived strength-training-1, and the Dial follow-up run,
@@ -157,6 +210,33 @@ REPO STATE (reconciled with disk, Sept 2026)
       "How to Choose a Personal Trainer: Red Flags | San Diego" and the meta
       names San Diego away from "personal trainer". Not a cost page (K10
       stays unassigned; no link to the rates page from it).
+
+    fascia-stretch-therapy-san-diego - NEW, Nov 2026 (FST Launch run; owner
+      brief, Nov 20 2026). The in-home Fascia Stretch Therapy service page,
+      modelled on corrective-exercise-post-rehab (same design system, CSS
+      scoped to #omni-fst, class prefix fs-). One H1. Section order: hero
+      with "Book Your First Visit"; quotable definition; what the First
+      Visit includes; who it suits; rates table; how it fits alongside
+      training; practitioner block; eight-question FAQ; closing CTA;
+      trademark attribution line. Header carries WebPage / BreadcrumbList /
+      Service / FAQPage; the business by @id only, no person node; the
+      FAQPage is BYTE-IDENTICAL to the page FAQ in question and answer
+      (certify.py compares with ==, not after normalising). Title "Fascia
+      Stretch Therapy in San Diego | In-Home | OmniFit Performance" (the
+      owner's wording). Owns K30 and K31. Zero findings on its first full
+      run. Linked from the Services card, the Rates FST section (#rt-fst),
+      the about credentials entry, one sentence on the in-home page, the
+      footer link list, llms.txt and (by build.py) the sitemap; NOT in the
+      top nav (owner). No In Short block and no shared "Who this is for"
+      block: both carry the POSITIONING LINE or the ENTITY LINE, which name
+      pain and the training facility, and neither belongs on an FST surface.
+      THE BADGE IS NOT ON THE SITE YET: the "FST Certified Level 1" PNG did
+      not reach the repo in this run (see CHANGE LOG). When it does:
+      site/img/fst-certified-level-1.png, unmodified, on a white rounded
+      panel (.fs-badge-panel on the FST page; its CSS is already there),
+      alt "Fascia Stretch Therapy Certified Level 1 badge", in the FST
+      page's practitioner block and the about credentials entry, nowhere
+      else.
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings; certify before the next change to these files
     · couples-personal-training-san-diego - NEW, arrived on main Sept 2026.
@@ -451,6 +531,12 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
       virtual) · offer (foundation | program | reset). The page writes these
       as data attributes on #rt-ch-result and then a new data-ch-key; site.js
       sends the event when data-ch-key changes. No price is sent.
+- FST BOOKING CLICKS (FST Launch run, Nov 2026): "Book Your First Visit"
+  links go to a Calendly page, so site.js already sends
+  book_consultation_click for them, with cta_label "Book Your First Visit"
+  and cta_location "fascia-stretch-therapy-san-diego". No new event and no
+  site.js change. JUDGMENT CALL, WRONG IF the owner wants FST bookings
+  counted apart from consultation clicks under their own event name.
 - COMPLETED BOOKINGS ARE NOT A SITE EVENT. Calendly's own GA4 integration
   (the Measurement ID entered in Calendly) reports them to the same
   property, and cross-domain measurement is configured in GA4 for
@@ -528,6 +614,14 @@ ASK OMNIFIT - ON-SITE AI ASSISTANT (owner brief, Oct 19 2026)
   OCTOBER 2026 CARD, the required verbatim wording (30-Day Fit Guarantee,
   deposit line, "4.98 average across 190+ reviews", travel-fee lines) and no
   internal content. Self-tested both ways. tools/README.md has the detail.
+- FASCIA STRETCH THERAPY IN THE KNOWLEDGE FILE (FST Launch run, Nov 2026):
+  assistant/knowledge.md carries a "Fascia Stretch Therapy™ (FST)" section
+  (public facts only, CANON wording), the credential, and the page link.
+  The system prompt and the widget are UNCHANGED (prompt sha256 unchanged):
+  the BOOK button still opens the 45-minute consultation, so the knowledge
+  section gives the First Visit booking link in text. OPEN, owner: whether
+  the assistant should offer a First Visit button (a prompt and widget
+  change, which needs owner wording and a new hash).
 - PACIFIC BEACH NOT-SERVED LINE (owner decision, Oct 21 2026): the one
   exception to "Pacific Beach is history — zero references". Visitors still
   ask the assistant about Pacific Beach ("PB"). With no mention in
@@ -613,11 +707,13 @@ CANONICAL TRUTH (sole source: Aug 2026 pricing doc + these lines)
 - Reviews: "4.98 average across 190+ reviews (Google, Yelp, Thumbtack and
   Bark)" (CANONICAL FACTS; was "190+ (5.0)" until the Audit Reconciliation
   run, Oct 18 2026). Never 180+, never 5.0, never "verified".
-- Credentials (13): NASM CPT, CES, PES, BCS, CNC; ACE Corrective
+- Credentials (14; thirteen until the FST Launch run, Nov 2026, owner brief
+  Nov 20 2026): NASM CPT, CES, PES, BCS, CNC; ACE Corrective
   Exercise Specialist (NOT OES, NOT Orthopedic); Precision Nutrition L1,
   Level 2 Certified Master Coach, Sleep Stress & Recovery, Nutrition for Metabolic Health; Eden GLP-1
   Fitness, Peptide Fundamentals, GLP-1 Nutrition (clinical collaboration
-  framing). Experience: "10+ Years Coaching" — never "in San Diego".
+  framing); Fascia Stretch Practitioner – Level 1 (Stretch to Win
+  Institute; never "therapist", see CANONICAL FACTS). Experience: "10+ Years Coaching" — never "in San Diego".
 - PRICING — OCTOBER 2026 CARD (owner-confirmed Sept 13 2026). This card
   SUPERSEDES the August 2026 ladders entirely. The August figures are not
   deleted: they move to LEGACY PRICING below, because existing clients are
@@ -842,7 +938,11 @@ LEGACY PRICING - AUGUST 2026, CLOSED (existing clients only; never publish)
   this line also protected, were both replaced in the Homepage rebuild run,
   Oct 17 2026; the homepage no longer names a device model in a record.)
 - Retired forever: Executive Hybrid (product, name, slug, $299/$500),
-  $175/$150/$225/$200-session era, $225–275/mo era, $599–899 Reset era,
+  $175/$150/$225/$200-session era (OWNER DECISION, Nov 20 2026: $225 and
+  $200 per session are canonical again in ONE meaning each, the Fascia
+  Stretch Therapy single session and the FST 5-session pack rate; as
+  TRAINING session prices they stay retired, and certify.py retired_225
+  fails $225 anywhere but an FST surface), $225–275/mo era, $599–899 Reset era,
   $50/$75 travel fees, Foundation/VIP packages.
 
 ACCOUNTABILITY DIAL (owner decision, Oct 17 2026; source: Semrush Brand
@@ -1098,6 +1198,75 @@ rigid" and outcome claims as "self-reported")
   FRONT-DOOR LINE (verbatim): "Even if you just want to train, we can start
     there."
   No new client figures or stories. Case studies untouched (frozen records).
+
+STRETCH TO WIN MARKETING RULES (HARD; owner brief, Nov 20 2026. These are
+the Stretch to Win Institute's conditions for marketing Fascia Stretch
+Therapy. No run, and no owner override inside a run, relaxes one.)
+  1. NO business or brand name containing "FST", "Fascia Stretch Therapy",
+     "Fascial Stretch Therapy", "Frederick Stretch Therapy" or "Stretch to
+     Win". FST is a service offered by OmniFit Performance, never part of a
+     business, brand or product-line name: no "OmniFit FST", "OmniFit
+     Stretch", "FST by OmniFit" or similar.
+  2. NO video recorded, embedded or downloaded from the Stretch to Win
+     website.
+  3. NOTHING THAT TEACHES FST. Copy describes what a session is like for
+     the client, never how a stretch is performed: no step-by-step
+     technique, no positions, sequences or cues.
+  4. VIDEO LIMITS, for any future video: Nemezio stretching a client, 1
+     minute maximum; a client testimonial, 2 minutes maximum. The FST Launch
+     run added no video.
+  5. ATTRIBUTION, verbatim, at the foot of the FST page: "Fascia Stretch
+     Therapy™ and FST™ are trademarks of the Stretch to Win Institute."
+  COMPLIANCE FOR FST COPY (the two-tier screen applies in full; these are
+  the FST-specific points, owner brief Nov 20 2026):
+    · FST is assisted stretching for mobility and recovery. It is not
+      medical treatment, not physical therapy and not massage; the FST page
+      says so ONCE, in the FAQ, in this sentence: "It is not medical
+      treatment, not physical therapy and not massage."
+    · No diagnose / treat / heal / cure / fix / rehabilitate claims. No
+      pain-relief or injury claims. No outcome promises and no "in X
+      sessions" language. The re-measure is a measurement the client sees,
+      never a promised gain.
+    · "Therapy" appears only inside the method's name.
+    · Persona language without a timeframe is fine (desk-bound
+      professionals, golfers, people who feel stiff after travel).
+    · No "free", no emoji (gold line-SVG icons from site/icons.py), no
+      Pacific Beach; the reviews line only in its canonical form (the FST
+      page carries no reviews line: the 190+ reviews are training reviews).
+  FST SURFACES (how certify.py scopes the rules; tools/README.md has the
+  detail): the FST page and its header, whole file; anything between
+  <!-- FST-BLOCK --> and <!-- /FST-BLOCK --> on another page; an ld+json
+  node whose "name" names the service; the section under a heading naming
+  the service in assistant/knowledge.md or site/llms.txt; and any other
+  mention, read in its own block, string or line. "Fascia Stretch
+  Practitioner" (the credential) is not a mention.
+  ENFORCED (certify.py, self-tested both ways on every run by _selftest_fst
+  and negative-tested on the real files, REPORT.md FST Launch run):
+    (a) fst_banned - on an FST surface: therapist, treat, heal, cure,
+        compression, boots, percussion, Teqneeq, studio, "recovery session",
+        "therapy" outside the method's name, diagnose, rehab, fix, pain /
+        injury, guarantee, free, "in N sessions", "assessment" used for the
+        First Visit (the only legal use is the Performance Assessment being
+        denied), an embedded video or a stretchtowin.com URL.
+    (b) fst_rates - FST prices read 150 / 225 / 200 per session (1,000 the
+        pack) wherever they appear; retired_225 - $225 anywhere else;
+        fst_fascial - "Fascial" only in its one FAQ sentence and the mirror;
+        fst_brand - the rule 1 names and the "therapist" titles, site-wide;
+        fst_trademark - the mark on a page's first mention;
+        fst_session_length - 90 minutes only as the First Visit, 60 or 90
+        on an FST surface; fst_booking - one Calendly link for FST;
+        site/nav.html carries no FST link; the FST page carries the
+        attribution line at its foot, the First Visit / Performance
+        Assessment distinction exactly once, the cancellation line, the
+        canonical travel-fee sentence and the booking button.
+    (c) the FST page's eight FAQ questions in order, the header FAQPage
+        byte-identical to them, the Service node with provider
+        #localbusiness-of and Offers 150 / 225 / 1000, no business or
+        person node defined in the header, FST-BLOCK markers paired.
+  NOT MACHINE-CHECKED (human warranties): rule 3 (copy that teaches a
+  stretch) and rule 4 (video length). certify.py fails any <video>,
+  <iframe>, YouTube or Vimeo URL on an FST surface, so a video cannot be
+  added without the rule being revisited.
 
 TIER CHANGES (owner decision, Oct 17 2026)
   Tier = session frequency: Momentum (1x/wk) / Performance (2x/wk) /
@@ -1748,7 +1917,10 @@ conditioned Tier 2 copy is a defect in the rule, not a finding.
   "OmniFit Personal Fitness Training" · "Pacific Beach" · "Mission Bay" ·
   "Ocean Beach" · "PB"/"OB" (as area names) · "ACE OES" ·
   "Orthopedic Exercise" · "Executive Hybrid" · "Lopez Perez" · "180+" ·
-  "$90 " · "$225" · "$275" · "$299" · "$500/mo" · "$599" ·
+  "$90 " · "$225" (since the FST Launch run, Nov 2026, banned everywhere
+  EXCEPT a Fascia Stretch Therapy surface, where it is the single session:
+  certify.py retired_225, self-tested both ways) · "$275" · "$299" ·
+  "$500/mo" · "$599" ·
   "$50"/"$75" as travel fees. $75 left the bare-literal list in the Audit
   Reconciliation run (Oct 18 2026): it is the Virtual Performance
   Assessment price. certify.py retired_75 keeps it banned everywhere else
@@ -1960,6 +2132,12 @@ Page-specific rules that are NOT ownership but are locked in the same table:
       owner  /personal-trainer-solana-beach
       match  (?:in[- ]home )?personal trainers? (?:in )?solana beach|solana beach (?:in[- ]home )?personal trainers?
       cover  in[- ]home personal trainers? (?:in )?solana beach|solana beach in[- ]home personal trainers?
+  K30 fascia stretch therapy san diego / fst san diego
+      owner  /fascia-stretch-therapy-san-diego
+      match  fasci(?:a|al) stretch therapy|\bFST\b
+  K31 assisted stretching san diego
+      owner  /fascia-stretch-therapy-san-diego
+      match  assisted stretch(?:ing|es)?
   X01 in-home page carries no other keyword's qualifier
       page   /in-home-personal-trainer-san-diego
       in     title meta h1 h2 h3 h4 h5 h6 faq jsonld
@@ -1974,6 +2152,21 @@ Page-specific rules that are NOT ownership but are locked in the same table:
   exists, and /training-rates-san-diego stays transactional.
 
   KEYWORD OWNERSHIP CHANGELOG
+  - Nov 2026, FST Launch run (owner brief, Nov 20 2026). K30 (fascia stretch
+    therapy) and K31 (assisted stretching) added, both owned by the new
+    /fascia-stretch-therapy-san-diego, which carries them on its title,
+    meta, H1 and H2s. No other page may carry either phrase in a title, H1,
+    H2 or meta: the Rates section heading is therefore an H3 ("Fascia
+    Stretch Therapy™ (in-home)", class rt-subhead, the page's own pattern
+    for a sub-section), the Services card heading is an H3, and the about
+    entry, the in-home sentence and the footer are body copy and links.
+    Four fixtures in tools/fixtures/ownership (two must fail, two must
+    pass). /personal-trainer-4s-ranch: the "Certified" line of its Meet
+    Nemezio section gained the new credential (the owner's brief names that
+    section); the "stays exactly as it is" rule holds for everything else.
+    /in-home-personal-trainer-san-diego: one body sentence under the
+    service-area list links to the FST page; no town, price or X01 term is
+    in it, and no title, meta, heading, FAQ question or JSON-LD changed.
   - Nov 1 2026, site-audit maintenance run (owner-directed). /personal-
     trainer-4s-ranch and /personal-trainer-rancho-bernardo: <title> and meta
     description only, shortened via build.py META_OVERRIDE (og:title and
@@ -2037,8 +2230,19 @@ legitimately changes an invariant, and say so in REPORT.md)
   the-30-minute-executive-reset pair also carries this block and was NOT
   rewritten - it is out of certification scope and on the do-not-paste list,
   so it still carries the August wording and does not enter either hash.
-- Credentials block body: byte-identical on 11 pages (f551f6751a2c7fd7,
-  783 bytes)
+- Credentials block body: byte-identical on 11 pages (b4727824cfc0312e,
+  851 bytes)
+  CHANGED in the FST Launch run (Nov 2026), OWNER-APPROVED (owner brief, Nov
+  20 2026, which names this hash as the only invariant the run may change):
+  f551f6751a2c7fd7 (783 bytes) -> b4727824cfc0312e (851 bytes). Two edits in
+  the one sentence, identically on all eleven pages: "He holds thirteen
+  certifications" -> "He holds fourteen certifications", and ", and three
+  Eden clinical-collaboration certifications supporting clients on GLP-1 and
+  peptide protocols." -> ", three Eden clinical-collaboration certifications
+  supporting clients on GLP-1 and peptide protocols, and Fascia Stretch
+  Practitioner – Level 1 (Stretch to Win Institute)." The same sentence on
+  the-30-minute-executive-reset (not a carrier of this invariant) changed
+  identically. Everything else in the block is byte-identical.
   CHANGED in the Audit Reconciliation run (Oct 18 2026), OWNER-APPROVED
   (CANONICAL FACTS, consultation vs assessment; the owner named this
   hash change in the run brief): 02bd9cb90a71ce69 (663 bytes) ->
@@ -2324,3 +2528,12 @@ CHANGE LOG
   (Squarespace-era "no trailing brand" rule superseded Oct 25, 2026; site/blog.py);
   4S Ranch and Rancho Bernardo title/meta shortened (META_OVERRIDE). The two /about
   Squarespace badges were NOT self-hosted: the badge files were not supplied.
+- Nov 21, 2026: FST Launch run (owner brief, Nov 20 2026). Fascia Stretch Therapy:
+  credential (fourteen certifications; credentials hash f551f6751a2c7fd7 ->
+  b4727824cfc0312e), /fascia-stretch-therapy-san-diego and its header, the Rates FST
+  section, the Services card, CANONICAL FACTS > FASCIA STRETCH THERAPY (FST), the
+  SESSION LENGTH carve-out, STRETCH TO WIN MARKETING RULES, K30 / K31, the certify.py
+  FST rules. $225 left the bare BANNED list (retired_225 reads context). The "FST
+  Certified Level 1" badge was NOT added: the PNG did not reach the repo in this run
+  (the uploads folder was empty), so neither the FST page's practitioner block nor the
+  about credentials entry shows it. Nothing was drawn in its place.

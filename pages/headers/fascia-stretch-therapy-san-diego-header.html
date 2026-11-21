@@ -1,0 +1,232 @@
+<!-- FASCIA STRETCH THERAPY PAGE HEADER JSON-LD · NOV 2026 (FST Launch run)
+  WebPage (name and description are the page title and meta description;
+  build.py reads them), BreadcrumbList, Service and FAQPage.
+  The business is referenced by @id (#localbusiness-of), never redefined;
+  no person node is defined here (the founder lives in site-header.html).
+  Service: name "Fascia Stretch Therapy", areaServed = CANON's in-home area
+  (the six no-fee towns, then the six travel-fee towns), three Offers =
+  CANON CANONICAL FACTS > FASCIA STRETCH THERAPY (FST) > RATES. The 5-pack
+  Offer price is the pack total, the way the rates header states packs.
+  FAQPage mirrors the eight on-page questions and answers byte for byte,
+  in page order (tools/certify.py checks it exactly, not after normalising).
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#webpage",
+      "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego",
+      "name": "Fascia Stretch Therapy in San Diego | In-Home | OmniFit Performance",
+      "description": "In-home Fascia Stretch Therapy in San Diego from OmniFit Performance: assisted stretching on a table for mobility and recovery. First Visit $150, 90 minutes.",
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "breadcrumb": {
+        "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#service"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://www.omnifittraining.com/personal-training-services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Fascia Stretch Therapy",
+          "item": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#service",
+      "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego",
+      "name": "Fascia Stretch Therapy",
+      "alternateName": "FST",
+      "serviceType": "Assisted stretching",
+      "provider": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "description": "Fascia Stretch Therapy (FST) is assisted stretching for mobility and recovery, done on a table in the client's home. Delivered by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute), as a service offered by OmniFit Performance. In-home only and open to anyone; every new client starts with a 90-minute First Visit.",
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "Carmel Valley"
+        },
+        {
+          "@type": "Place",
+          "name": "Santaluz"
+        },
+        {
+          "@type": "Place",
+          "name": "Fairbanks Ranch"
+        },
+        {
+          "@type": "Place",
+          "name": "Rancho Bernardo"
+        },
+        {
+          "@type": "Place",
+          "name": "4S Ranch"
+        },
+        {
+          "@type": "Place",
+          "name": "Poway"
+        },
+        {
+          "@type": "Place",
+          "name": "La Jolla"
+        },
+        {
+          "@type": "Place",
+          "name": "Del Mar"
+        },
+        {
+          "@type": "Place",
+          "name": "Rancho Santa Fe"
+        },
+        {
+          "@type": "Place",
+          "name": "Solana Beach"
+        },
+        {
+          "@type": "Place",
+          "name": "Encinitas"
+        },
+        {
+          "@type": "Place",
+          "name": "Carlsbad"
+        }
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "First Visit",
+          "description": "Required for every new FST client. 90 minutes, in-home: a range-of-motion check, the first Fascia Stretch Therapy session on the table, and a re-measure at the end.",
+          "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#fs-rates",
+          "seller": {
+            "@id": "https://www.omnifittraining.com/#localbusiness-of"
+          },
+          "price": "150.00",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Single session",
+          "description": "One 60-minute Fascia Stretch Therapy session, in-home. Booked after the First Visit.",
+          "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#fs-rates",
+          "seller": {
+            "@id": "https://www.omnifittraining.com/#localbusiness-of"
+          },
+          "price": "225.00",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "5-session pack",
+          "description": "Five 60-minute Fascia Stretch Therapy sessions, in-home, at $200 per session. Expires 8 weeks from purchase.",
+          "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#fs-rates",
+          "seller": {
+            "@id": "https://www.omnifittraining.com/#localbusiness-of"
+          },
+          "price": "1000.00",
+          "priceCurrency": "USD"
+        }
+      ],
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "name": "Book Your First Visit",
+        "target": "https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Fascia Stretch Therapy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fascia Stretch Therapy (FST) is assisted stretching for mobility and recovery, done on a table: you lie down and a trained practitioner does the stretching with you. It is also written \"fascial stretch therapy\". At OmniFit Performance it is delivered in your home by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens at the First Visit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The First Visit is 90 minutes and is required for every new FST client. It has three parts: a range-of-motion check, your first Fascia Stretch Therapy session on the table, and a re-measure at the end, so you see the same ranges measured before and after. Follow-up sessions and 5-session packs are arranged with Nemezio after the First Visit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The First Visit is $150 for 90 minutes. After that, a single 60-minute session is $225, and a 5-session pack is $200 per session ($1,000), which expires 8 weeks from purchase. These are in-home rates. Outside the no-fee part of our in-home service area a travel fee applies, confirmed before you book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to be a training client?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Fascia Stretch Therapy is open to anyone. You do not need a training program or a Performance Assessment to book it. It stands on its own, and it can also pair with a training program if you have one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do sessions take place and what do I need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sessions take place in your home, within OmniFit Performance's in-home service area in North County San Diego. You need a quiet room with floor space. The table comes with Nemezio. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I wear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wear clothes you can move in. That is all you need to prepare: the table comes with Nemezio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is FST massage or medical treatment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Fascia Stretch Therapy is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the cancellation policy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cancellations with less than 24 hours' notice and no-shows forfeit the fee."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

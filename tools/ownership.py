@@ -26,6 +26,13 @@ Matching rules, recorded in CANON beside the table:
     question or body copy in <main>), or it is a problem. Used for the
     "in home personal trainer [town]" variants (Town Card run, Oct 2026).
     Keywords without one keep the title/H1/H2/meta coverage note.
+
+Pages and keywords are registered in the CANON table, not here, so the table
+stays the single source. Most recent entries (FST Launch run, Nov 2026):
+K30 "fascia stretch therapy" and K31 "assisted stretching", both owned by
+/fascia-stretch-therapy-san-diego. Fixtures: fail/k30-fascia-stretch-therapy-
+on-rates-h2.html, fail/k31-assisted-stretching-in-services-title.html,
+pass/k30-k31-fst-owner.html, pass/k30-h3-and-body-are-not-owner-surfaces.html.
 """
 import html
 import json
