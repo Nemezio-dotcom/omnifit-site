@@ -1817,7 +1817,7 @@ ASSISTANT_PROMPT = "functions/_lib/system-prompt.js"
 ASSISTANT_SURFACES = (ASSISTANT_KNOWLEDGE, ASSISTANT_PROMPT, "site/assistant.js", "functions/_lib/assistant.js")
 # The prompt is verbatim from the owner. Wording changes need owner approval
 # and a new hash here and in CANON (ASK OMNIFIT).
-ASSISTANT_PROMPT_SHA256 = "2ee2a1c006f3a6ef"
+ASSISTANT_PROMPT_SHA256 = "f6935ddef0fcaa0d"
 
 def assistant_knowledge_text(raw):
     """What the model actually receives: knowledge.md minus maintainer comments
