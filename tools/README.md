@@ -1011,7 +1011,7 @@ included; the four assistant surfaces; `site/llms.txt`, `site/nav.html`,
 | `retired_225` | (b) | `$225` anywhere that is not an FST surface. `$225` left `BANNED` in this run (it is the FST single session) and stays banned in its August meaning, the way `retired_75` reads `$75` |
 | `fst_fascial` | (b) | "Fascial" (word-bounded: "myofascial release" is another word) anywhere but `FST_FASCIAL_SENTENCE`, once on the page and once in the header mirror |
 | `fst_brand` | (b) | site-wide: "OmniFit FST", "OmniFit Stretch", "FST by OmniFit", "OmniFit('s) Fascia Stretch …", "Stretch to Win by OmniFit", "Frederick Stretch Therapy", and "Fascial Stretch Therapist" / "FST therapist" / "stretch therapist". Read on `_flat_blocks`, which breaks at block boundaries so a heading ending "OmniFit Performance" and a card starting "Fascia Stretch Therapy" are not one name |
-| `fst_trademark` | (b) | the first "Fascia Stretch Therapy" in a page body or text file has no ™ (headers are schema and name the service plainly) |
+| `fst_trademark` | (b) | ANY "Fascia Stretch Therapy" or "FST" without ™ (or `&trade;` / `&#8482;`), in any swept file: copy, headings, attributes such as alt text, schema, the title and meta, the text files, the assistant prompt. Until the every-mention decision (Nov 21 2026) it checked a page's first mention only and skipped headers |
 | `fst_session_length` | (b) | CANON SESSION LENGTH and its FST carve-out: "90 minutes" anywhere without "First Visit" within 160 characters before or 60 after; on an FST surface, any length that is not 60 or 90 minutes |
 | `fst_booking` | (b) | a Calendly URL on an FST surface that is not `FST_CALENDLY`; a "Book Your First Visit" link that goes anywhere else |
 | `fst_page_required` | (b) and (c) | the FST page: attribution line (at the foot), the First Visit / Performance Assessment distinction exactly once, the cancellation line, the canonical travel-fee sentence, the booking button; the eight FAQ questions in order; the header FAQPage **byte-identical** to the page FAQ, question and answer (`==`, not `_norm`); the Service node, its provider `@id` and its three Offers; no business or person node defined in the header |
@@ -1128,4 +1128,32 @@ Self-tested with nine failing variants and the one passing nav.
 `(?<!Fascia )\bStretch\s+Practitioner\b`; the full title passes.
 
 **Negative tests on the real files** are in REPORT.md, FST Reach run.
+
+## The mark on every mention (Nov 21 2026)
+
+Owner decision: the name is the Stretch to Win Institute's property, so every
+published "Fascia Stretch Therapy" and "FST" carries ™. `fst_trademark` reads
+the file with comments, CSS and executable scripts blanked (`_blank_noncopy`),
+so tags' attributes and ld+json ARE read: alt text and schema names count.
+Not mentions: the FST-BLOCK markers (comments), CSS, lower-case ids, classes
+and URLs (`\bFST\b` is case-sensitive and `_` is a word character, so
+`FST_NAV_LINK`-style identifiers are not matched either), the alternate
+spelling "fascial stretch therapy", and the credential "Fascia Stretch
+Practitioner".
+
+The canonical constants carry the mark (`FST_DEFINITION`, `FST_DISCLAIMER`,
+`FST_FAQ_QUESTIONS`, `FST_BADGE_ALT`, the Service name), so a page that drops
+it fails twice: once here and once as "not verbatim". `_FST_TITLE` and
+`_FST_BRAND` accept `FST™`, so the mark cannot hide "FST™ therapist" or
+"OmniFit FST™" (self-tested).
+
+The assistant's replies are generated, so no sweep can read them.
+`ensureMarks` in `functions/_lib/assistant.js` adds the mark to any mention
+the model leaves bare before the reply is logged and returned;
+`tests/assistant.test.mjs` covers it, and asserts the knowledge the model
+receives has no unmarked mention. In that file the names are listed marked
+(`MARKED_NAMES`) and the patterns derived from them, because the file is
+itself a swept surface.
+
+Self-tested both ways; negative tests on the real files are in REPORT.md.
 
