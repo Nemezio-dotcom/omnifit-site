@@ -8515,3 +8515,127 @@ Three fixes requested; two applied. No page copy, schema or pricing changed.
 - `public/sitemap.xml`: the pre-existing lastmod drift noted in the Town Card run (fit-check, how-to-choose-a-personal-trainer-san-diego, personal-training-services 2026-10-25 -> 2026-10-26) is committed with this rebuild. A rebuild of main without this run's changes produces the same drift. Wrong if those dates were meant to be kept.
 
 **Checks:** `python3 build.py --strict` RESULT: PASSED, keyword ownership included (two Squarespace image warnings on /about, because fix 1 was skipped). `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0). Invariant hashes all ok: ff5360d2b6b5029b, 22744ada78eb0707, f551f6751a2c7fd7, 6b1b0f4efbd4a72c, 5a629cf689301f84.
+
+# FST Launch run — Fascia Stretch Therapy credential, service page and rates (owner brief Nov 20, 2026; run Nov 21, 2026)
+
+**Branch:** `ccr-4ac06c3f-tmscux`, merged to `main`.
+**Result:** `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0). `python3 build.py` RESULT: PASSED (49 pages; the two standing Squarespace image warnings on /about). `python3 tools/ownership.py` OWNERSHIP: PASSED. `python3 build.py --check` RESULT: PASSED. `node --test tests/assistant.test.mjs` 45 of 45 pass.
+
+## Needs owner
+
+1. **The badge is not on the site.** The brief says the "FST Certified Level 1" PNG was uploaded with the prompt. It did not reach this session: the uploads folder was empty and no image file exists outside the repo. Nothing was drawn in its place. Everything else about the badge is ready: `.fs-badge-panel` (white rounded panel) is in the FST page's CSS, and a comment marks where the `<img>` goes in the practitioner block. When the file arrives it takes one small commit: save it unmodified as `site/img/fst-certified-level-1.png`, add it to the FST page's practitioner block and to the about credentials entry with alt "Fascia Stretch Therapy Certified Level 1 badge", and change the about note from "Ten of fourteen" to "Eleven of fourteen" (dropping Fascia Stretch Practitioner – Level 1 from the "listed without one" sentence).
+2. **The assistant's Book button still opens the 45-minute consultation.** `assistant/knowledge.md` now carries the FST facts and gives the First Visit booking link in text, but the system prompt and the widget are hash-locked owner wording and were not changed. A First Visit button in the assistant needs owner wording and a new prompt hash.
+3. **Terms and Conditions say nothing about FST.** The cancellation line is on the FST page, the Rates section and the knowledge file. The brief did not ask for a Terms change, so `pages/terms-and-conditions.html` is untouched.
+4. **Facts the brief and CANON do not give, left out rather than invented:**
+   - whether a single FST session expires (training singles expire 30 days from purchase; the brief gives an expiry for the pack only);
+   - how and when the First Visit fee is paid;
+   - whether FST clients sign a waiver or are screened for anything before the First Visit;
+   - whether a consultation is ever needed first (the page sends people straight to the First Visit booking link, as the brief does);
+   - anything about what FST does beyond "assisted stretching for mobility and recovery".
+5. **Human-side, not repo:** request indexing for `/fascia-stretch-therapy-san-diego` in Search Console; the Stretch to Win marketing rules apply to the Google Business Profile, Thumbtack, Yelp and Bark listings as well.
+
+## What changed
+
+| Area | Files | Change |
+|---|---|---|
+| New page | `pages/fascia-stretch-therapy-san-diego.html`, `pages/headers/fascia-stretch-therapy-san-diego-header.html` | The in-home FST service page, modelled on corrective-exercise-post-rehab (same design system, CSS scoped to `#omni-fst`, prefix `fs-`). One H1. Sections in the brief's order: hero with "Book Your First Visit", definition, First Visit, who it suits, rates table, how it fits alongside training, practitioner, eight-question FAQ, closing CTA, trademark line. Header: WebPage, BreadcrumbList, Service (provider `#localbusiness-of`, areaServed = the twelve in-home towns, Offers 150 / 225 / 1000), FAQPage byte-identical to the page FAQ. No business or person node defined |
+| Credentials block (invariant) | the ten territory pages with the block, `corrective-exercise-post-rehab` | thirteen -> fourteen certifications; Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute) added to the list. Same bytes on all eleven |
+| Other credential counts and lists | `the-30-minute-executive-reset` (same sentence, not a carrier), `FAQs` + header (count), `home-5` ("14 certifications"), `about` (new "Assisted Stretching" entry with a link to the FST page; badge note now "Ten of fourteen"), `about-header` (Person credential, comment), `site-header` (Person `#founder` credential, recognizedBy Stretch to Win Institute), `personal-trainer-4s-ranch` (Meet Nemezio "Certified" line), `site/llms.txt`, `site/blog.py` (author box), `assistant/knowledge.md` | count and list updated |
+| Rates | `pages/training-rates-san-diego.html`, its header | New section `#rt-fst`, "Fascia Stretch Therapy™ (in-home)": the three rates, the First Visit line, the 8-week pack expiry, the travel-fee sentence, the cancellation line, a link to the FST page; a "FST" chip in the jump bar. Header: one more OfferCatalog with three Offers. Chooser, existing cards and every FAQ answer untouched |
+| Services | `pages/personal-training-services.html` | One card linking to the FST page |
+| In-home | `pages/in-home-personal-trainer-san-diego.html` | One sentence under the service-area list, linking to the FST page |
+| Footer | `pages/footer.html` | "Fascia Stretch Therapy™" in the services link list |
+| AI surfaces | `site/llms.txt`, `assistant/knowledge.md` (and the generated `functions/_lib/knowledge.js`) | Credential, service facts, page link |
+| Tools | `tools/certify.py`, `tools/ownership.py`, `tools/README.md`, four fixtures under `tools/fixtures/ownership/` | FST rules and self-test; K30 / K31 |
+| Canon | `CANON.md` | CANONICAL FACTS > FASCIA STRETCH THERAPY (FST), SESSION LENGTH carve-out, STRETCH TO WIN MARKETING RULES, credentials (14), invariant hash, scope list (32 pairs), ownership table, change log |
+| Build output | `public/` | rebuilt |
+
+The top nav is unchanged. No video was added. The nutrition page was searched and left alone: it lists only its four nutrition credentials and states no count.
+
+## Credentials invariant: old and new hash
+
+| | Hash | Bytes |
+|---|---|---|
+| Before | `f551f6751a2c7fd7` | 783 |
+| After | `b4727824cfc0312e` | 851 |
+
+Owner-approved in the brief. Two edits in one sentence, identical on all eleven carriers: "He holds thirteen certifications" -> "He holds fourteen certifications", and the list now ends "…, three Eden clinical-collaboration certifications supporting clients on GLP-1 and peptide protocols, and Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute)." The other four invariant hashes did not move: page pricing `ff5360d2b6b5029b`, header pricing `22744ada78eb0707`, archetypes `6b1b0f4efbd4a72c`, 9-point `5a629cf689301f84`.
+
+## Where CANON conflicted with the brief, and how each was resolved
+
+The brief wins in every case; the older line is kept as history.
+
+| CANON said | Brief says | Resolution |
+|---|---|---|
+| Credentials (13); credentials block locked by hash | Fourteen; the block may change | Block rewritten on all eleven carriers, hash and byte count updated in INVARIANTS |
+| `$225` is a banned literal; "$175/$150/$225/$200-session era" retired forever | FST single session $225, pack $200 per session | `$225` left the bare `BANNED` list. `retired_225` fails it anywhere but an FST surface, so it is still the retired August rate on every training page. `$200` was never a bare ban (Reset Bronze) |
+| SESSION LENGTH: 60 minutes, 30 on the Reset | First Visit 90 minutes | Carve-out added to CANONICAL FACTS; `fst_session_length` passes 90 minutes only beside "First Visit" |
+| "Assessment" names the Performance Assessment, $150, credited | First Visit is $150, not an assessment, not credited | The FST page states the distinction once. `assessment_as_session_rate` (which fails "$150" beside "session") was not changed: the FST copy never puts "session" within four words after "$150" |
+| Every booking button goes to the 45-minute consultation link (LAUNCH DECISIONS 1, 15, 18) | FST has its own booking link | "Book Your First Visit" goes to the First Visit link only (`fst_booking`). Consultation buttons are unchanged, and no FST surface links the consultation |
+| Price is always framed with five program facts, including the 30-Day Fit Guarantee (LANGUAGE RULES) | The guarantee is never attached to FST | The FST surfaces state the rates without those facts; `fst_banned` fails "guarantee" on an FST surface |
+| Cited pages lead an In Short block with the POSITIONING LINE and carry the shared "Who this is for" block | No pain claims, no Teqneeq on FST surfaces | The FST page has neither block: the positioning line says "pain or plateau" and the entity line names Teqneeq |
+| An owned keyword sits on no other page's title, H1, H2 or meta | "Add a 'Fascia Stretch Therapy (in-home)' section" to Rates | The Rates heading is an H3 (`rt-subhead`, the page's own sub-section pattern), so K30 stays exclusive to the FST page |
+| `/personal-trainer-4s-ranch` stays exactly as it is | Update its Meet Nemezio section | One line changed ("Certified: …"); everything else on the page is untouched |
+| "Therapy" only inside the method's name (the brief itself) | "not physical therapy", said once in the FAQ (the brief itself) | That exact sentence, and the owner's FAQ question it answers, are exempt; any rewording fails |
+
+## Judgment calls (each with the condition under which it is wrong)
+
+- **Title is the owner's example verbatim, 67 characters** ("Fascia Stretch Therapy in San Diego | In-Home | OmniFit Performance"). The Oct 25 title pass kept the restored-brand titles at 61 or fewer. WRONG IF the owner wants that limit here too; "Fascia Stretch Therapy in San Diego | OmniFit Performance" is 57.
+- **Partial credential lists were left alone.** The territory FAQ "What certifications does your trainer hold?" (nine pages), the how-it-works and private-training FAQs and the nutrition page each list the credentials relevant to their topic and state no count. WRONG IF the owner wants the new credential on every list, however partial.
+- **The "Fascial" sentence uses double quotes:** `It is also written "fascial stretch therapy".` It is in the first FAQ answer and its schema mirror and nowhere else.
+- **No reviews line on the FST page.** The 190+ reviews are training reviews. WRONG IF the owner wants the canonical line there.
+- **The Rates section links to the FST page rather than straight to Calendly,** so the one booking link lives on the FST page. WRONG IF the owner wants a booking button on Rates.
+- **`fst_banned` goes a little past the brief's list** with the brief's own section 3 points: "therapy" outside the method's name, diagnose, rehab, fix, pain / injury, guarantee, free, "in N sessions", embedded video. WRONG IF any of those words is wanted on an FST surface in a form the rule cannot tell from a claim.
+- **"Book Your First Visit" clicks are reported as `book_consultation_click`** (site.js fires on any Calendly link), with `cta_label` "Book Your First Visit" and the page slug. No site.js change. WRONG IF FST bookings should be a separate event.
+- **The section divider on the FST page is the small gold bar** the model page's CSS defines but a later generic `hr` rule overrides there. One rule (`hr.fs-divider`) restores it on the new page only.
+- **The 5-pack Offer price in schema is the pack total (1000.00)** with "$200 per session" in its description, the way the Rates header already states packs.
+
+## certify.py: the FST rules
+
+`tools/README.md` ("Fascia Stretch Therapy rules") has the detail. In short: the rules are scoped to FST surfaces (the page and header, `<!-- FST-BLOCK -->` regions, ld+json nodes named for the service, the knowledge.md and llms.txt sections, and any other mention in its own block), plus four site-wide rules ("Fascial", brand names and titles, `$225` off-surface, 90 minutes off the First Visit). 106 files are swept; 10 carry an FST surface. `_selftest_fst` runs every rule both ways before the sweep on every run.
+
+Two defects the first real runs surfaced, fixed before the rules were trusted: `fascial` as a substring reported eight "myofascial release" lines on four certified pages (now word-bounded), and banning "treat…" across the FST page fired on the owner's own FAQ question "Is FST massage or medical treatment?" (that exact question is exempt).
+
+### Negative tests on the real files
+
+Each mutation was applied to the real file, `python3 tools/certify.py` run, and the file restored. All 26 produced RESULT: FAILED with their own finding; the restored tree returns PASSED.
+
+| # | Mutation | Finding |
+|---|---|---|
+| 1 | FST page: single session `$225` -> `$235` | FST price $235 is not 150, 225, 200 or 1,000 |
+| 2 | Rates FST section: `$200 per session ($1,000)` -> `$210 … ($1,050)` | FST price $210 … |
+| 3 | Rates header: FST Offer price `225.00` -> `205.00` | FST schema price 205.00 … |
+| 4 | knowledge.md: First Visit `$150` -> `$175` | FST price $175 … |
+| 5 | Services card: "First Visit: $225" | FST price $225 beside 'First Visit' (expected $150) |
+| 6 | FAQs page: "Single sessions are $225." | $225 outside a Fascia Stretch Therapy surface |
+| 7 | About entry: "Fascial Stretch Therapy™" | 'Fascial' outside the FST page's one FAQ sentence |
+| 8 | FST page: a second "Fascial" | 'Fascial' appears 2 times in this file |
+| 9 | FST page: "your FST therapist" | FST surface: 'therapist' |
+| 10 | Rates FST section: "at the Teqneeq studio" | FST surface: 'Teqneeq', 'studio' |
+| 11 | Services card: "treats and heals tight hips" | FST surface: 'treats', 'heals' |
+| 12 | llms.txt FST line: "with compression boots" | FST surface: 'compression', 'boots' |
+| 13 | FST page: "First Visit assessment: 90 minutes" | the First Visit is never an assessment |
+| 14 | Services card heading: "OmniFit FST™" | brand or product name built on the method |
+| 15 | In-home sentence: the ™ dropped | first mention of Fascia Stretch Therapy has no ™ |
+| 16 | FAQs page: "Sessions are 90 minutes in studio." | 90 minutes outside the FST First Visit |
+| 17 | FST page: "Follow-up visits: 45 minutes" | FST length '45 minutes' |
+| 18 | FST page: one "Book Your First Visit" pointed at the consultation link | Calendly link on an FST surface is not the First Visit link |
+| 19 | `site/nav.html`: an FST link | Fascia Stretch Therapy is not in the top nav |
+| 20 | FST page: attribution line removed | FST page is missing the trademark attribution line |
+| 21 | FST page: the distinction sentence replaced | FST page is missing the First Visit / Performance Assessment distinction |
+| 22 | FST header: one answer, ":" -> ";" | FST header FAQPage is not byte-identical to the page FAQ |
+| 23 | FST page: "What should I wear?" -> "What do I wear?" | FST page FAQ is not the eight questions in order |
+| 24 | In-home page: closing `<!-- /FST-BLOCK -->` removed | FST-BLOCK markers do not pair up |
+| 25 | Rates FST section: "covered by the 30-Day Fit Guarantee" | FST surface: 'Guarantee' |
+| 26 | One territory page: "14 certifications" in the credentials block | invariant mismatch: credentials |
+
+The 90-minute First Visit does not trip the session-length rule: the real tree passes, and the self-test asserts it against both the retired phrases and the new rule.
+
+`tools/ownership.py`: K30 and K31 read from the CANON table; four new fixtures (two must fail, two must pass) pass their self-test. Negative test on the real output: with the Rates FST heading as an H2, ownership reports "K30 … in h2 … owner is /fascia-stretch-therapy-san-diego"; as the H3 it is, OWNERSHIP: PASSED.
+
+## Other checks run
+
+- `python3 tools/mkheaders.py --check`: PASSED (nine Batch 3 headers reproduce byte for byte; none was edited).
+- `node tools/choosertest.js`: PASSED (30 checks, 16 combinations; still seven expandable sections, which is why the FST section is a plain section).
+- `node tools/mobileaudit.js --open-details` on the FST page, Rates, Services, About and In-Home at 390 and 412px: PASSED, no overflow and no clipped content. The FST rates table stacks into labelled rows at 640px and below.
+- `node tools/tracktest.js`: **fails, and it fails identically on an untouched checkout of the previous commit** (`tracktest.js:301`, waiting for `#of-fit #qbody .opts .opt`). The test is stale against the Oct 26 Fit Check rebuild. Not introduced by this run and not fixed in it.
