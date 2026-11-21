@@ -1950,8 +1950,14 @@ FST_DISTINCTION = ("The First Visit is not the Performance Assessment, and its $
                    "credited toward anything.")
 FST_CANCELLATION = "Cancellations with less than 24 hours' notice and no-shows forfeit the fee."
 FST_ATTRIBUTION = "Fascia Stretch Therapy™ and FST™ are trademarks of the Stretch to Win Institute."
+# FST travel fee (owner, Nov 21 2026): the client is told the amount at
+# booking and it is collected at the visit. The site-wide in-home sentence
+# ("... a travel fee applies, confirmed before you book") is for training,
+# where a consultation comes first; FST is booked and paid in one step, so
+# that phrase is wrong on an FST surface and fst_travel fails it there.
+FST_TRAVEL_FEE = "a travel fee applies: you are told the amount when you book, and it is collected at the visit."
 FST_TRAVEL = ("No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or "
-              "Poway; elsewhere in our in-home service area a travel fee applies, confirmed before you book.")
+              "Poway. Elsewhere in our in-home service area " + FST_TRAVEL_FEE)
 # Payment terms and the disclaimer (owner decisions, Nov 21 2026; CANON).
 FST_PAYMENT = ("Payment confirms your booking. The First Visit is paid when you book; follow-up sessions and "
                "5-session packs are paid in advance. No slot is held without payment.")
@@ -2237,6 +2243,21 @@ def fst_session_length(text, path=""):
                 out.append((f"FST length '{m.group(0)}' (First Visit 90 minutes, sessions 60)", c[max(0, m.start() - 60):m.end() + 40].strip()))
     return out
 
+def fst_travel(text, path=""):
+    """(b) On an FST surface a travel fee is stated in the FST form: told at
+    booking, collected at the visit. "confirmed before you book" (the training
+    form) and any other statement that a travel fee applies are findings."""
+    out = []
+    for a, b in fst_spans(text, path):
+        c = _fst_copy(text, a, b)
+        for m in re.finditer(r'confirmed before you book', c, re.I):
+            out.append(("FST travel fee: 'confirmed before you book' is the training wording (FST: told at booking, collected at the visit)",
+                        c[max(0, m.start() - 70):m.end() + 20].strip()))
+        for m in re.finditer(r'a travel fee applies', c, re.I):
+            if not c.startswith(FST_TRAVEL_FEE, m.start()) and not re.match(r'a travel fee applies, confirmed before you book', c[m.start():], re.I):
+                out.append(("FST travel fee is not stated in the canonical form", c[max(0, m.start() - 50):m.end() + 90].strip()))
+    return out
+
 def fst_booking(text, path=""):
     """(b) One booking link for FST: every Calendly URL on an FST surface is
     FST_CALENDLY, and a "Book Your First Visit" link goes nowhere else."""
@@ -2374,7 +2395,7 @@ def _selftest_fst():
             '<div class="fs-faq-q">Is FST massage or medical treatment?</div><div class="fs-faq-a">No. ' + FST_NOT_MEDICAL + '</div>'
             '<p>' + FST_TRAVEL + ' ' + FST_CANCELLATION + ' ' + FST_PAYMENT + ' ' + FST_NO_REFUND + ' ' + FST_EXPIRY + '</p>'
             '<a href="' + FST_CALENDLY + '">Book Your First Visit</a><p>' + FST_DISCLAIMER + '</p><p>' + FST_ATTRIBUTION + '</p>')
-    for fn in (fst_banned, fst_rates, fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking):
+    for fn in (fst_banned, fst_rates, fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking, fst_travel):
         assert not fn(good, P), f"FST self-test: {fn.__name__} fired on canonical copy: {fn(good, P)[:2]}"
     assert not retired_225(good, P), "FST self-test: retired_225 fired on the FST page"
     # banned words, each on an FST surface and each quiet off one
@@ -2455,6 +2476,11 @@ def _selftest_fst():
     assert fst_session_length('<p>FST sessions are 90 minutes.</p>', P), "FST self-test: 90 minutes without the First Visit passed"
     assert fst_session_length('<p>The First Visit is 90 minutes. Follow-up sessions are 45 minutes.</p>', P), "FST self-test: a 45-minute FST session passed"
     assert not fst_session_length('<p>A 45-minute consultation by video or phone. Sessions are 60 minutes; 30 minutes on the Executive Reset.</p>', "pages/FAQs.html"), "FST self-test: training lengths flagged"
+    # travel fee: told at booking, collected at the visit; the training wording fails on an FST surface only
+    assert fst_travel('<p>Elsewhere a travel fee applies, confirmed before you book.</p>', P), "FST self-test: the training travel wording passed on the FST page"
+    assert fst_travel('<p>Elsewhere a travel fee applies and is added to your invoice.</p>', P), "FST self-test: a reworded FST travel fee passed"
+    assert not fst_travel('<p>Elsewhere in our in-home service area a travel fee applies, confirmed before you book.</p>', "pages/in-home-personal-trainer-san-diego.html"), "FST self-test: the training travel wording flagged off an FST surface"
+    assert fst_rates('<p>Elsewhere a $25 travel fee applies.</p>', P), "FST self-test: a travel fee dollar figure passed"
     # booking: one link
     assert fst_booking('<a href="https://calendly.com/nemezio-omnifittraining/45min">Book Your First Visit</a>', "pages/x.html"), "FST self-test: First Visit button to the consultation passed"
     assert fst_booking('<p>Book: <a href="https://calendly.com/nemezio-omnifittraining/45min">here</a></p>', P), "FST self-test: a second Calendly page on the FST page passed"
@@ -2814,7 +2840,7 @@ def run():
             print(f"   {f}  [{what}]  …{ctx[:100]}…"); B+=1
         for ln, ctx in _fst(retired_225, f):
             print(f"   {f}:{ln}  [$225 outside a Fascia Stretch Therapy surface - the retired August rate]  …{ctx[:90]}…"); B+=1
-        for fn in (fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking):
+        for fn in (fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking, fst_travel):
             for what, ctx in _fst(fn, f):
                 print(f"   {f}  [{what}]  …{ctx[:100]}…"); B+=1
     nav_txt = open("site/nav.html").read()
