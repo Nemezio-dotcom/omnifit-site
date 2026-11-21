@@ -1030,6 +1030,14 @@ copy, a second disclaimer or a reworded disclaimer fails (self-tested).
 "Non-refundable" stays the Foundation policy's word (`fee_language`); FST copy
 says "Fees are not refunded."
 
+**FST travel fee (owner, Nov 21 2026).** FST is booked and paid in one step,
+so the training sentence "a travel fee applies, confirmed before you book"
+cannot be true for it. `FST_TRAVEL` now ends "you are told the amount when you
+book, and it is collected at the visit", and `fst_travel` fails the training
+phrase, or any other form of "a travel fee applies", on an FST surface. Off an
+FST surface the training phrase is untouched and still required in the
+knowledge file's in-home section (`ASSISTANT_REQUIRED`). Self-tested both ways.
+
 **Canonical sentences are exempt as that exact sentence and nothing looser.**
 `FST_NOT_MEDICAL` ("It is not medical treatment, not physical therapy and not
 massage.") and the owner's FAQ question it answers (`FST_MEDICAL_QUESTION`)

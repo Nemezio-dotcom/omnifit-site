@@ -8696,3 +8696,21 @@ The owner answered the open questions from "Needs owner" items 3 and 4, and aske
 **Negative tests on the real files** (each RESULT: FAILED, restored to PASSED): the disclaimer removed from the FST page; the disclaimer reworded; the no-refund sentence changed on Terms; the single-session expiry changed on the FST page; a guarantee added to the Terms FST block; the cancellation FAQ answer changed on the page only (mirror mismatch).
 
 **Checks:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), five invariant hashes unchanged; `python3 tools/ownership.py` OWNERSHIP: PASSED; `python3 build.py --check` RESULT: PASSED; `node --test tests/assistant.test.mjs` 45 of 45 pass; mobile audit on the FST page and Terms at 390 and 412px PASSED.
+
+## FST travel fee follow-up (Nov 21, 2026)
+
+**Owner decision:** for Fascia Stretch Therapy the travel fee is collected on site, and the client is informed at the time of booking. This closes the open item above (Calendly takes payment at booking, so "confirmed before you book" could not be true for FST).
+
+**Wording on FST surfaces (verbatim, now in CANON):** "No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit." Short form in the cost FAQ and Terms: "Outside the no-fee part of our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit."
+
+**Changed:** the FST page (rates note, two FAQ answers) and its header mirror; the Rates FST section; Terms section 5; the knowledge file's FST section; the Calendly First Visit description (outside the repo; URL unchanged). Still never a dollar figure.
+
+**Not changed:** in-home training. Every training surface keeps "a travel fee applies, confirmed before you book", because those clients have a consultation first. JUDGMENT CALL, WRONG IF the owner meant the new wording for in-home training as well.
+
+**Conflict resolved:** the launch brief said FST uses "exactly CANON's existing in-home rule". The no-fee town list is still exactly that rule; only the fee sentence differs for FST, by this later owner decision.
+
+**New rule:** `certify.py` `fst_travel` fails "confirmed before you book", or any other form of "a travel fee applies", on an FST surface. Self-tested both ways. Negative tests on the real files, each RESULT: FAILED and restored to PASSED: the training wording put back on the FST page, in Terms section 5, and in the knowledge file's FST section.
+
+**Checks:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), five invariant hashes unchanged; `python3 tools/ownership.py` OWNERSHIP: PASSED; `python3 build.py --check` RESULT: PASSED; `node --test tests/assistant.test.mjs` 45 of 45 pass.
+
+**Still open:** the assistant's Book button opens the consultation, not the First Visit.

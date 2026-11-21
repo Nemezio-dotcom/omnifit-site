@@ -76,9 +76,23 @@ otherwise, this block wins and the older line is kept only as history.
       work, no "recovery session" naming.
     WHERE: IN-HOME ONLY. The FST page, its header and the Rates FST section
       never mention Teqneeq, a studio, or a studio price for FST. Service
-      area and travel fee: exactly the IN-HOME NO-FEE AREA rule above (the
-      no-fee list; elsewhere "a travel fee applies, confirmed before you
-      book"; never a dollar figure).
+      area: exactly the IN-HOME NO-FEE AREA above (the six no-fee towns;
+      elsewhere a travel fee applies; never a dollar figure).
+      FST TRAVEL FEE (owner, Nov 21 2026; AMENDS the brief's "exactly
+      CANON's existing in-home rule" for the fee wording only): the client
+      is told the travel fee at the time of booking and it is collected at
+      the visit, not with the booking payment. Verbatim on FST surfaces:
+      "No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho
+      Bernardo, 4S Ranch or Poway. Elsewhere in our in-home service area a
+      travel fee applies: you are told the amount when you book, and it is
+      collected at the visit." Short form: "Outside the no-fee part of our
+      in-home service area a travel fee applies: you are told the amount
+      when you book, and it is collected at the visit." WHY: FST is booked
+      and paid in one step on Calendly, so "confirmed before you book" (the
+      training wording, where a consultation comes first) cannot be true
+      for it. certify.py fst_travel fails "confirmed before you book" on an
+      FST surface. IN-HOME TRAINING IS UNCHANGED: every training surface
+      keeps "a travel fee applies, confirmed before you book".
     WHO: open to anyone. No training program and no Performance Assessment
       required.
     RATES (in-home):
@@ -2584,3 +2598,7 @@ CHANGE LOG
   was renamed "Fascia Stretch Therapy™ First Visit (In-Home)" and its description
   rewritten to these facts (its URL is unchanged); the Teqneeq first-visit event was
   switched off, since FST is in-home only. The owner reports the charged amount is corrected (not visible to this run).
+- Nov 21, 2026 (third pass): FST travel fee, owner decision: told at booking, collected
+  at the visit (CANONICAL FACTS > FST TRAVEL FEE). FST surfaces only (FST page and
+  header, Rates FST section, Terms section 5, the knowledge file's FST section, the
+  Calendly First Visit page); in-home training keeps "confirmed before you book".
