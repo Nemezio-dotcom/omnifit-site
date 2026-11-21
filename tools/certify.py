@@ -1958,6 +1958,18 @@ FST_ATTRIBUTION = "Fascia Stretch Therapy™ and FST™ are trademarks of the St
 FST_TRAVEL_FEE = "a travel fee applies: you are told the amount when you book, and it is collected at the visit."
 FST_TRAVEL = ("No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or "
               "Poway. Elsewhere in our in-home service area " + FST_TRAVEL_FEE)
+# The canonical definition (owner, Nov 21 2026, FST Reach run). OmniFit's own
+# wording, never attributed to a person or to the Stretch to Win Institute.
+# "pain-free" describes how the stretching feels; it trips two FST bans (pain,
+# free), so this exact sentence is blanked before the word scan, and "pain-free"
+# anywhere else on an FST surface still fails, as do "pain relief" and "free".
+FST_DEFINITION = ("Fascia Stretch Therapy (FST) is a modality of table-based assisted stretching that is "
+                  "pain-free, fully customizable and improves functionality.")
+FST_HOME_BLOCK = "pages/home-4.html"
+# The one nav link (owner, Nov 21 2026; REVERSES "not in the top nav", Nov 20).
+FST_NAV_FILE = "site/nav.html"
+FST_NAV_LINK = '<li><a href="/fascia-stretch-therapy-san-diego">Assisted Stretching</a></li>'
+FST_NAV_AFTER = '<li><a href="/training-rates-san-diego">Rates</a></li>'
 # Payment terms and the disclaimer (owner decisions, Nov 21 2026; CANON).
 FST_PAYMENT = ("Payment confirms your booking. The First Visit is paid when you book; follow-up sessions and "
                "5-session packs are paid in advance. No slot is held without payment.")
@@ -2103,6 +2115,8 @@ def fst_banned(text, path=""):
         n_tail += copy.count(FST_DISCLAIMER_TAIL)
         scan = copy.replace(FST_NOT_MEDICAL, ' ' * len(FST_NOT_MEDICAL))
         scan = scan.replace(FST_DISCLAIMER_TAIL, ' ' * len(FST_DISCLAIMER_TAIL))
+        # the canonical definition, verbatim, is the only home of "pain-free"
+        scan = scan.replace(FST_DEFINITION, ' ' * len(FST_DEFINITION))
         # the owner's FAQ question that the sentence answers names the thing
         # it denies ("Is FST massage or medical treatment?"); that exact
         # question is blanked too, and nothing looser
@@ -2193,7 +2207,8 @@ _FST_BRAND = re.compile(
     r"OmniFit(?:\s+Performance)?(?:'s)?\s+(?:FST\b|Fasci(?:a|al)\s+Stretch|Frederick\s+Stretch|Stretch)"
     r"|(?:\bFST™?|Stretch\s+Therapy™?|Stretch\s+to\s+Win)\s+by\s+OmniFit"
     r"|Frederick\s+Stretch\s+Therapy", re.I)
-_FST_TITLE = re.compile(r'(?:Fasci(?:a|al)\s+Stretch|\bFST|\bstretch)\s+therapists?\b', re.I)
+_FST_TITLE = re.compile(r'(?:Fasci(?:a|al)\s+Stretch|\bFST|\bstretch)\s+therapists?\b'
+                        r'|(?<!Fascia )\bStretch\s+Practitioner\b', re.I)
 
 def _flat_blocks(text):
     """Visible copy with a break mark at every block boundary, so a heading
@@ -2208,7 +2223,7 @@ def fst_brand(text, path=""):
     out = []
     t = _flat_blocks(text)
     for rx, what in ((_FST_BRAND, "brand or product name built on the method"),
-                     (_FST_TITLE, "the title is Fascia Stretch Practitioner – Level 1, never a therapist")):
+                     (_FST_TITLE, "the title is Fascia Stretch Practitioner – Level 1: never a therapist, never 'Stretch Practitioner' alone")):
         for m in rx.finditer(t):
             out.append((f"'{m.group(0)}' ({what})", t[max(0, m.start() - 60):m.end() + 60].strip()))
     return out
@@ -2327,7 +2342,8 @@ FST_BADGE_FILE = "site/img/fst-certified-level-1.png"
 FST_BADGE_SRC = "/assets/img/fst-certified-level-1.png"
 FST_BADGE_SHA256 = "0455a194befab8e8c18fe99aee33c78673f88b0ee571cc98de25d14db49f971b"
 FST_BADGE_ALT = "Fascia Stretch Therapy Certified Level 1 badge"
-FST_BADGE_PAGES = {FST_PAGE: "fs-badge-panel", "pages/about.html": "ab-cred-badge"}
+FST_BADGE_PAGES = {FST_PAGE: "fs-badge-panel", "pages/about.html": "ab-cred-badge",
+                   "pages/home-4.html": "fst-badge-panel"}   # third placement: the homepage block (owner, Nov 21 2026)
 FST_BADGE_SWEEP = ("site/nav.html", "site/layout.html", "site/blog.py", "site/site.css", "site/site.js")
 
 def fst_badge(text, path=""):
@@ -2338,7 +2354,7 @@ def fst_badge(text, path=""):
     refs = len(re.findall(r'fst-certified-level-1', _blank_noncopy(text)))
     panel = FST_BADGE_PAGES.get(path.replace(os.sep, '/'))
     if panel is None:
-        return ["the FST badge is shown only on the FST page and the about credentials entry"] if refs else []
+        return ["the FST badge is shown only on the FST page, the about credentials entry and the homepage FST block"] if refs else []
     out = []
     if len(tags) != 1 or refs != 1:
         out.append(f"the FST badge must appear exactly once on this page (found {len(tags)} image(s), {refs} reference(s))")
@@ -2361,6 +2377,8 @@ def _selftest_fst_badge():
     ok = '<div class="fs-prac"><div class="fs-badge-panel">' + img + '</div></div>'
     assert not fst_badge(ok, FST_PAGE), f"FST badge self-test: the correct block flagged: {fst_badge(ok, FST_PAGE)}"
     assert not fst_badge('<span class="ab-cred-badge">' + img + '</span>', "pages/about.html"), "FST badge self-test: the about entry flagged"
+    assert not fst_badge('<div class="fst-badge-panel">' + img + '</div>', "pages/home-4.html"), "FST badge self-test: the homepage block placement flagged"
+    assert fst_badge('<div class="fst-badge-panel">' + img + '</div>', "pages/home-5.html"), "FST badge self-test: the badge in another homepage section passed"
     assert not fst_badge('<p>No badge here.</p>', "pages/FAQs.html"), "FST badge self-test: a page without the badge flagged"
     for bad, why in ((ok + ok, "twice"), ('<div class="fs-prac">' + img + '</div>', "outside its panel"),
                      (ok.replace(FST_BADGE_ALT, "FST badge"), "wrong alt"), ('<p>No badge.</p>', "missing"),
@@ -2370,6 +2388,72 @@ def _selftest_fst_badge():
         assert fst_badge('<a href="/">' + img + '</a>', f), f"FST badge self-test: the badge on {f} passed"
     assert not fst_badge('<!-- the badge fst-certified-level-1.png lives on /about -->', "pages/footer.html"), "FST badge self-test: a comment read as the badge"
     assert fst_badge_file("tools/certify.py") and fst_badge_file("site/img/no-such-file.png"), "FST badge self-test: a wrong or missing file passed"
+
+def fst_nav(nav):
+    """(b) The top nav carries exactly one FST link: FST_NAV_LINK, directly
+    after Rates, labelled "Assisted Stretching". The service name, "FST", the
+    mark and the badge never appear in the nav: [what]."""
+    out = []
+    body = re.sub(r'<!--.*?-->', ' ', nav, flags=re.S)
+    if body.count(FST_NAV_LINK) != 1:
+        out.append(f"site/nav.html must carry exactly one link {FST_NAV_LINK} (found {body.count(FST_NAV_LINK)})")
+    elif not re.search(re.escape(FST_NAV_AFTER) + r'\s*' + re.escape(FST_NAV_LINK), body):
+        out.append("site/nav.html: the Assisted Stretching link is not directly after Rates")
+    n = len(re.findall(r'stretch', body, re.I))
+    if n != body.count(FST_NAV_LINK) * 2:      # once in the href, once in the label
+        out.append(f"site/nav.html: 'stretch' appears outside the one Assisted Stretching link ({n} occurrences)")
+    for rx, what in ((r'\bFST\b', "'FST'"), (r'Fasci(?:a|al)\s+Stretch', "the service name"), (r'™|&trade;|&#8482;', "the trademark mark"),
+                     (r'fst-certified-level-1', "the badge")):
+        if re.search(rx, _visible_copy(nav) if what != "the badge" else body, re.I if what != "'FST'" else 0):
+            out.append(f"site/nav.html carries {what} (the nav label is 'Assisted Stretching' and nothing else)")
+    return out
+
+def fst_definition_required(texts):
+    """(b) The canonical definition is the verbatim lead sentence in exactly
+    five places; texts maps path -> source. [(path, what)]."""
+    out = []
+    def need(path, ok, where):
+        if not ok: out.append((path, f"the canonical FST definition is not the verbatim lead of {where}"))
+    page = texts[FST_PAGE]
+    m = re.search(r'id="fs-what".*?<div class="gq-block">\s*<strong>(.*?)</strong>', page, re.S)
+    need(FST_PAGE, bool(m) and html.unescape(_flat(m.group(1))) == FST_DEFINITION, "the definition block's bold sentence")
+    nodes = []
+    for b in _FST_LD.findall(texts[FST_HEADER]):
+        d = json.loads(b); nodes += d.get("@graph", [d]) if isinstance(d, dict) else d
+    svc = next((n for n in nodes if n.get("@type") == "Service"), {})
+    need(FST_HEADER, str(svc.get("description", "")).startswith(FST_DEFINITION + " "), "the Service node description")
+    kn = texts[ASSISTANT_KNOWLEDGE]
+    m = re.search(r'^#{1,6}\s[^\n]*Fascia Stretch Therapy[^\n]*\n+- ([^\n]*)', kn, re.M)
+    need(ASSISTANT_KNOWLEDGE, bool(m) and m.group(1).startswith(FST_DEFINITION + " "), "the FST section's first bullet")
+    m = re.search(r'^- \*\*Fascia Stretch Therapy™ \(FST\):\*\* ([^\n]*)', texts["site/llms.txt"], re.M)
+    need("site/llms.txt", bool(m) and m.group(1).startswith(FST_DEFINITION + " "), "the FST line")
+    home = texts[FST_HOME_BLOCK]
+    m = re.search(r'<section id="omh-fst".*?<p class="omh-lede">(.*?)</p>', home, re.S)
+    need(FST_HOME_BLOCK, bool(m) and html.unescape(_flat(m.group(1))).startswith(FST_DEFINITION + " "), "the homepage FST block's body")
+    for path, t in texts.items():
+        n = html.unescape(_flat(t)).replace('\\"', '"').count(FST_DEFINITION)
+        if n != 1: out.append((path, f"the canonical FST definition appears {n} times in this file (once)"))
+    return out
+
+def fst_home_block(home):
+    """(b) The homepage FST block (owner copy, Nov 21 2026): one link, to the
+    FST page; no Calendly link; label, heading, points and link text verbatim;
+    the heading is not an H1 or H2 (KEYWORD OWNERSHIP): [what]."""
+    m = re.search(r'<!--\s*FST-BLOCK\b.*?-->(.*?)<!--\s*/FST-BLOCK\s*-->', home, re.S)
+    if not m: return ["the homepage FST block is missing from pages/home-4.html"]
+    blk = m.group(1); copy = html.unescape(_flat(blk)); out = []
+    hrefs = re.findall(r'<a\b[^>]*\bhref="([^"]*)"', blk)
+    if hrefs != ["/fascia-stretch-therapy-san-diego"]:
+        out.append(f"the homepage FST block must carry exactly one link, to the FST page (found {hrefs})")
+    for s in ("Assisted Stretching", "Fascia Stretch Therapy™, in Your Home",
+              "Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1, brings the table to your home. "
+              "It is a separate service from training and open to anyone.",
+              "In-home only", "First Visit: $150, 90 minutes", "No training program required",
+              "Explore Fascia Stretch Therapy →"):
+        if s not in copy: out.append(f"the homepage FST block is missing the owner's copy: {s[:60]}")
+    if re.search(r'<h[12]\b', blk, re.I):
+        out.append("the homepage FST block uses an H1 or H2 (K30 / K31 stay off homepage titles, H1, H2s and meta)")
+    return out
 
 def fst_terms_required(terms):
     """(b) The Terms page states the same FST terms as the FST page, in the
@@ -2476,6 +2560,49 @@ def _selftest_fst():
     assert fst_session_length('<p>FST sessions are 90 minutes.</p>', P), "FST self-test: 90 minutes without the First Visit passed"
     assert fst_session_length('<p>The First Visit is 90 minutes. Follow-up sessions are 45 minutes.</p>', P), "FST self-test: a 45-minute FST session passed"
     assert not fst_session_length('<p>A 45-minute consultation by video or phone. Sessions are 60 minutes; 30 minutes on the Executive Reset.</p>', "pages/FAQs.html"), "FST self-test: training lengths flagged"
+    # the canonical definition: "pain-free" passes inside the verbatim sentence and nowhere else
+    assert not fst_banned('<p>' + FST_DEFINITION + '</p>', P), f"FST self-test: the canonical definition flagged: {fst_banned('<p>' + FST_DEFINITION + '</p>', P)}"
+    for bad in ("Our stretching is pain-free.", "Fascia Stretch Therapy (FST) is a pain-free way to stretch.",
+                FST_DEFINITION.replace("pain-free, fully", "pain-free and fully"), "Assisted stretching for pain relief.",
+                "Your first stretch is free.", FST_DEFINITION + " It is pain-free every time."):
+        assert fst_banned('<p>' + bad + '</p>', P), f"FST self-test: 'pain-free' / pain / free outside the verbatim definition passed: {bad}"
+    assert len(fst_banned('<p>Our stretching is pain-free.</p>', P)) == 2, "FST self-test: 'pain-free' should trip both the pain and the free ban"
+    assert fst_brand('<p>Nemezio is a Stretch Practitioner.</p>', "pages/x.html"), "FST self-test: 'Stretch Practitioner' alone passed"
+    assert not fst_brand('<p>NASM Elite Trainer · Fascia Stretch Practitioner – Level 1 · 14 certifications</p>', "pages/x.html"), "FST self-test: the full title flagged"
+    # nav: exactly the one link, after Rates, and never the service name, FST, the mark or the badge
+    nav_ok = '<ul>' + FST_NAV_AFTER + '\n          ' + FST_NAV_LINK + '<li><a href="/about">About</a></li></ul>'
+    assert not fst_nav(nav_ok), f"FST self-test: the correct nav flagged: {fst_nav(nav_ok)}"
+    for bad, why in ((nav_ok.replace(FST_NAV_LINK, ''), "no link"), (nav_ok.replace(FST_NAV_LINK, FST_NAV_LINK * 2), "the link twice"),
+                     (nav_ok.replace('Assisted Stretching', 'Stretching'), "another label"),
+                     (nav_ok.replace('Assisted Stretching', 'Fascia Stretch Therapy'), "the service name"),
+                     (nav_ok.replace('Assisted Stretching', 'FST'), "FST"), (nav_ok.replace('Assisted Stretching', 'Assisted Stretching™'), "the mark"),
+                     (nav_ok.replace('<li><a href="/about">About</a></li>', '<li><a href="/about">About</a></li>' + FST_NAV_LINK).replace(FST_NAV_AFTER + '\n          ' + FST_NAV_LINK, FST_NAV_AFTER), "the link not after Rates"),
+                     (nav_ok + '<img src="/assets/img/fst-certified-level-1.png" alt="">', "the badge"),
+                     (nav_ok + '<li><a href="/x">Stretch FAQs</a></li>', "a second stretch item")):
+        assert fst_nav(bad), f"FST self-test: the nav passed with {why}"
+    # the definition, verbatim, as the lead in each of its five places
+    def five(d=FST_DEFINITION):
+        return {FST_PAGE: '<section id="fs-what"><div class="gq-block"><strong>' + d + '</strong> You lie down.</div></section>',
+                FST_HEADER: '<script type="application/ld+json">' + json.dumps({"@graph": [{"@type": "Service", "description": d + " Delivered in the home."}]}) + '</script>',
+                ASSISTANT_KNOWLEDGE: "## Fascia Stretch Therapy™ (FST)\n\n- " + d + " It is a service.\n- Second.\n",
+                "site/llms.txt": "- **Fascia Stretch Therapy™ (FST):** " + d + " Offered in-home only.\n",
+                FST_HOME_BLOCK: '<section id="omh-fst"><p class="omh-lede">' + d + ' Nemezio brings the table.</p></section>'}
+    assert not fst_definition_required(five()), f"FST self-test: five verbatim definitions flagged: {fst_definition_required(five())}"
+    assert len(fst_definition_required(five(FST_DEFINITION.replace("pain-free", "comfortable")))) >= 5, "FST self-test: a reworded definition passed somewhere"
+    t5 = five(); t5[FST_PAGE] = t5[FST_PAGE].replace("You lie down.", "You lie down. " + FST_DEFINITION)
+    assert fst_definition_required(t5), "FST self-test: the definition twice in one file passed"
+    t5 = five(); t5["site/llms.txt"] = "- **Fascia Stretch Therapy™ (FST):** Assisted stretching. " + FST_DEFINITION + "\n"
+    assert fst_definition_required(t5), "FST self-test: the definition not in the lead position passed"
+    # the homepage block: owner copy, one link, no H2
+    hb = ('<!-- FST-BLOCK --><section id="omh-fst"><p class="omh-label">Assisted Stretching</p><h3>Fascia Stretch Therapy™, in Your Home</h3>'
+          '<p class="omh-lede">' + FST_DEFINITION + ' Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1, brings the table to your home. It is a separate service from training and open to anyone.</p>'
+          '<ul><li>In-home only</li><li>First Visit: $150, 90 minutes</li><li>No training program required</li></ul>'
+          '<p><a href="/fascia-stretch-therapy-san-diego">Explore Fascia Stretch Therapy →</a></p></section><!-- /FST-BLOCK -->')
+    assert not fst_home_block(hb), f"FST self-test: the correct homepage block flagged: {fst_home_block(hb)}"
+    for bad, why in ((hb.replace('</p></section>', ' <a href="' + FST_CALENDLY + '">Book</a></p></section>'), "a Calendly link"),
+                     (hb.replace('<h3>', '<h2>').replace('</h3>', '</h2>'), "an H2"), (hb.replace('First Visit: $150, 90 minutes', 'First Visit: $150'), "a changed point"),
+                     (hb.replace('open to anyone', 'open to everyone'), "changed body copy"), ('<p>No block.</p>', "no block")):
+        assert fst_home_block(bad), f"FST self-test: the homepage block passed with {why}"
     # travel fee: told at booking, collected at the visit; the training wording fails on an FST surface only
     assert fst_travel('<p>Elsewhere a travel fee applies, confirmed before you book.</p>', P), "FST self-test: the training travel wording passed on the FST page"
     assert fst_travel('<p>Elsewhere a travel fee applies and is added to your invoice.</p>', P), "FST self-test: a reworded FST travel fee passed"
@@ -2843,9 +2970,15 @@ def run():
         for fn in (fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking, fst_travel):
             for what, ctx in _fst(fn, f):
                 print(f"   {f}  [{what}]  …{ctx[:100]}…"); B+=1
-    nav_txt = open("site/nav.html").read()
-    if _FST_MENTION.search(nav_txt) or re.search(r'stretch', nav_txt, re.I):
-        print("   site/nav.html  [Fascia Stretch Therapy is not in the top nav (owner, Nov 20 2026)]"); B+=1
+    for what in fst_nav(open(FST_NAV_FILE).read()):
+        print(f"   [{what}]"); B+=1
+    def_texts = {f: open(f).read() for f in (FST_PAGE, FST_HEADER, ASSISTANT_KNOWLEDGE, "site/llms.txt", FST_HOME_BLOCK)}
+    for f, what in fst_definition_required(def_texts):
+        print(f"   {f}  [{what}]"); B+=1
+    for what in fst_home_block(open(FST_HOME_BLOCK).read()):
+        print(f"   {FST_HOME_BLOCK}  [{what}]"); B+=1
+    print("   (FST Reach: one nav link 'Assisted Stretching' after Rates; the canonical definition verbatim in five places; "
+          "the homepage block's copy and single link: self-tested both ways)")
     _selftest_fst_badge()
     for f in list(fst_files) + [x for x in FST_BADGE_SWEEP if x not in fst_files]:
         t = fst_files[f] if f in fst_files else open(f).read()
