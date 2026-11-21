@@ -30,8 +30,8 @@ export const UPSTREAM_TIMEOUT_MS = 25000;
 export const TURN_CAP_REPLY =
   "We've covered a lot here. The best next step is a 45-minute consultation, where Nemezio can answer the rest of your questions directly.";
 
-const TOKENS = { "[[BOOK]]": "book", "[[FIT_CHECK]]": "fit_check" };
-const TOKEN_RE = /\[\[(BOOK|FIT_CHECK)\]\]/g;
+const TOKENS = { "[[BOOK]]": "book", "[[FIT_CHECK]]": "fit_check", "[[FIRST_VISIT]]": "first_visit" };
+const TOKEN_RE = /\[\[(BOOK|FIT_CHECK|FIRST_VISIT)\]\]/g;
 
 // Thinking settings that keep a 400-token reply from being spent on reasoning.
 // Keyed by model so ASSISTANT_MODEL can name a model that takes neither field.

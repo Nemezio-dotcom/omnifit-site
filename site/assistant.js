@@ -12,6 +12,8 @@
   var API = '/api/ask';
   var CALENDLY = 'https://calendly.com/nemezio-omnifittraining/45min';
   var FIT_CHECK = '/fit-check';
+  /* The First Visit booking page: the one booking link for assisted stretching (CANON). */
+  var FIRST_VISIT = 'https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home';
   var MAX_CHARS = 600;
   var STORE = 'oa-chat-v1';
   var COPY = {
@@ -22,6 +24,7 @@
     chips: ['What does it cost?', 'Do you train in-home?', 'I have an old injury. Is that okay?', 'How is this different from a gym?'],
     book: 'Book a Consultation',
     fitCheck: 'Take the Fit Check',
+    firstVisit: 'Book Your First Visit',
     error: 'Something went wrong. You can book a consultation directly.',
     placeholder: 'Ask a question',
     inputLabel: 'Your question',
@@ -71,6 +74,11 @@
       f.href = FIT_CHECK; f.textContent = COPY.fitCheck;
       f.addEventListener('click', function () { track('assistant_cta_click', { cta: 'fit_check' }); });
       wrap.appendChild(f);
+    } else if (handoff === 'first_visit') {
+      var v = el('a', 'oa-btn oa-btn--gold');
+      v.href = FIRST_VISIT; v.target = '_blank'; v.rel = 'noopener'; v.textContent = COPY.firstVisit;
+      v.addEventListener('click', function () { track('assistant_cta_click', { cta: 'first_visit' }); });
+      wrap.appendChild(v);
     }
     return wrap;
   }
@@ -133,7 +141,7 @@
     }).then(function (data) {
       if (!data) return;
       if (!data.reply) throw new Error('empty');
-      var handoff = data.handoff === 'book' || data.handoff === 'fit_check' ? data.handoff : null;
+      var handoff = data.handoff === 'book' || data.handoff === 'fit_check' || data.handoff === 'first_visit' ? data.handoff : null;
       // The server rebuilds context from its log by session id; keep the id it used.
       if (typeof data.sessionId === 'string' && /^[A-Za-z0-9-]{8,64}$/.test(data.sessionId)) state.sessionId = data.sessionId;
       state.messages.push({ role: 'assistant', content: data.reply, handoff: handoff });
