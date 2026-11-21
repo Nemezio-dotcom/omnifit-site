@@ -768,6 +768,21 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   }
 </style>
 <style>
+  #omh-fst .fst-wrap{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:48px;align-items:center;}
+  #omh-fst .fst-h{font-family:'Playfair Display','Times New Roman',serif;font-size:clamp(27px,3.6vw,38px);font-weight:700;line-height:1.18;letter-spacing:-.3px;color:var(--omh-navy);margin:0 0 16px;}
+  #omh-fst .omh-lede{margin-bottom:22px;}
+  #omh-fst .fst-points{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:10px 22px;}
+  #omh-fst .fst-points li{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600;color:var(--omh-navy);}
+  #omh-fst .fst-points svg{width:18px;height:18px;fill:none;stroke:#806520;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;}
+  #omh-fst .fst-link{margin:0;font-size:16px;}
+  #omh-fst .fst-badge-panel{background:#fff;border:1px solid var(--omh-line);border-radius:16px;padding:22px;line-height:0;box-shadow:0 10px 30px rgba(10,22,40,.06);}
+  #omh-fst .fst-badge-panel img{display:block;width:100%;height:auto;}
+  @media (max-width:900px){
+    #omh-fst .fst-wrap{grid-template-columns:1fr;gap:28px;}
+    #omh-fst .fst-badge-panel{max-width:320px;}
+  }
+</style>
+<style>
     #omni-duo{
       --navy:#0a1628; --navy-mid:#0f1f3a; --navy-light:#152a4a;
       --gold:#c9a84c; --gold-light:#e0c872;
@@ -956,6 +971,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
           <li><a href="/" aria-current="page">Home</a></li>
           <li><a href="/personal-training-services">Programs</a></li>
           <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li><a href="/fascia-stretch-therapy-san-diego">Assisted Stretching</a></li>
           <li class="has-menu">
             <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
             <ul class="site-nav__menu" id="menu-methodology">
@@ -1412,6 +1428,15 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   H2: K03 (personal trainer 4S Ranch), homepage-owned. One link to the
   in-home page. "Every rate is published" links the rates page; it is not a
   cost-anchor phrase (K10).
+
+  v3 NOV 2026 (FST Reach run, owner brief Nov 21 2026): the Fascia Stretch
+  Therapy block is appended below (section #omh-fst), so it renders directly
+  after Ways to Train and before the couples section with HOME_ORDER
+  unchanged. Copy is the owner's, verbatim; the body opens with the
+  canonical FST definition (CANON CANONICAL FACTS). Its heading is an H3:
+  the homepage carries no K30 / K31 phrase on a title, H1, H2 or meta
+  (KEYWORD OWNERSHIP). One link, to the FST page; no Calendly link. The
+  badge here is its third approved placement (certify.py fst_badge).
 -->
 
 
@@ -1447,6 +1472,27 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
     <p class="ways-rates"><a href="/training-rates-san-diego">Every rate is published</a>, studio, in-home and virtual.</p>
   </div>
 </section>
+
+<!-- FST-BLOCK (homepage; in-home only: no facility, no reviews line, one link) -->
+
+<section id="omh-fst" class="omh omh--cream" aria-labelledby="omh-fst-h">
+  <div class="omh-inner fst-wrap">
+    <div class="fst-text">
+      <div class="omh-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v5"/><path d="M4 18c3-2 5-5 8-5s5 3 8 5"/><path d="M4 18c2 1.5 4 2 8 2s6-.5 8-2"/></svg></div>
+      <p class="omh-label">Assisted Stretching</p>
+      <h3 class="fst-h" id="omh-fst-h">Fascia Stretch Therapy™, in Your Home</h3>
+      <p class="omh-lede">Fascia Stretch Therapy (FST) is a modality of table-based assisted stretching that is pain-free, fully customizable and improves functionality. Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1, brings the table to your home. It is a separate service from training and open to anyone.</p>
+      <ul class="fst-points">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>In-home only</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>First Visit: $150, 90 minutes</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>No training program required</li>
+      </ul>
+      <p class="fst-link"><a href="/fascia-stretch-therapy-san-diego">Explore Fascia Stretch Therapy →</a></p>
+    </div>
+    <div class="fst-badge-panel"><img src="/assets/img/fst-certified-level-1.png" alt="Fascia Stretch Therapy Certified Level 1 badge" width="1183" height="502" loading="lazy" decoding="async"></div>
+  </div>
+</section>
+<!-- /FST-BLOCK -->
 
 
 <!-- OMNIFIT | HOMEPAGE — PARTNER & DUO SECTION · v2 OCTOBER 2026
@@ -1531,7 +1577,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <h2 id="omh-coach-h">Meet Nemezio LopezPerez</h2>
       <p>Nemezio LopezPerez founded OmniFit Performance after his own athletic years ended in stacked injuries and a rebuild that took years. Working around what his joints would tolerate, instead of arguing with them, taught him the principle the practice runs on: strength training should make your body more durable, not less.</p>
       <p>Today Coach Nemezio trains clients at Teqneeq Functional Health Center in 4S Ranch, in their homes across North County, and by live video. Most are professionals over 30 who run the rest of their lives on structure and data and want the same rigor in their training. He measures first, corrects before loading, and counts it a success when a client needs him less.</p>
-      <p class="coach-creds">NASM Elite Trainer · Precision Nutrition Level 2 Certified Master Coach · 14 certifications</p>
+      <p class="coach-creds">NASM Elite Trainer · Precision Nutrition Level 2 Certified Master Coach · Fascia Stretch Practitioner – Level 1 · 14 certifications</p>
       <p><a href="/about">More about Nemezio</a></p>
     </div>
   </div>
