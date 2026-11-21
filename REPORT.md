@@ -8823,3 +8823,45 @@ Each mutation applied, `python3 tools/certify.py` run, file restored. All produc
 - `node tools/widgettest.js`: PASSED (4 hand-offs). `node tools/choosertest.js`: PASSED.
 - Homepage section order in the built page: hero, In Short, proof, who, how, results, Ways to Train, **FST block**, couples, coach, FAQ, start. One H1. No homepage H2 contains "stretch".
 
+## The mark on every mention (Nov 21, 2026, after the Reach run)
+
+**Owner decision:** everything that says "FST" or "Fascia Stretch Therapy" carries the TM designation, because the name is proprietary. This supersedes the Nov 20 rule that only a page's first mention carried it.
+
+**What changed:** 86 unmarked mentions marked, in ten files.
+
+| File | Mentions marked |
+|---|---|
+| `pages/fascia-stretch-therapy-san-diego.html` | 27 |
+| its header (title, meta, breadcrumb, Service name and alternateName, Offer descriptions, FAQPage) | 19 |
+| `pages/headers/training-rates-san-diego-header.html` (the FST catalog and Offers) | 9 |
+| `assistant/knowledge.md` | 7 |
+| `pages/terms-and-conditions.html` | 5 |
+| `site/llms.txt` | 5 |
+| `pages/training-rates-san-diego.html` (incl. the jump chip, now "FST™") | 4 |
+| `pages/home-4.html` | 4 |
+| `pages/about.html` | 2 |
+| `pages/personal-training-services.html` | 1 |
+
+Also: the assistant prompt's two mentions (sha256 `f6935ddef0fcaa0d` -> `6749df074f3ebec3`); the badge alt text in all three placements ("Fascia Stretch Therapy™ Certified Level 1 badge"); the Calendly First Visit description (outside the repo). The built site was swept afterwards: zero unmarked mentions in `public/`.
+
+**Sentences the owner gave verbatim now carry the mark.** The definition reads "Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted stretching that is pain-free, fully customizable and improves functionality." The disclaimer opens "Fascia Stretch Therapy™ is assisted stretching…". Two FAQ questions changed with their schema mirror: "What is Fascia Stretch Therapy™?" and "Is FST™ massage or medical treatment?". The homepage link reads "Explore Fascia Stretch Therapy™ →". The page title is "Fascia Stretch Therapy™ in San Diego | In-Home | OmniFit Performance" (68 characters) and the meta description is 158.
+
+**Left unmarked, on purpose:**
+- the alternate spelling in its one FAQ sentence, `It is also written "fascial stretch therapy".`;
+- the credential, "Fascia Stretch Practitioner – Level 1";
+- the nav label "Assisted Stretching" (the morning's brief keeps the mark out of the nav);
+- URLs, ids, class names, HTML comments and CSS;
+- CANON, REPORT and the tools README outside their quoted sentences: working documents, not published copy.
+
+**The assistant's replies.** The model usually copies the knowledge file's wording, which is now fully marked, but that is not certain. `ensureMarks` on the server adds the mark to any mention left bare before the reply is logged and shown. Four tests added (53 in all).
+
+**Conflicts resolved:** CANON's "the first mention on a page carries the trademark mark" is replaced by the every-mention rule. The Nov 20 brief gave the schema Service name as "Fascia Stretch Therapy" and the alt text without the mark; both now carry it. The morning's verbatim definition and homepage copy gained the mark.
+
+**Judgment calls:**
+- Schema, the title, the meta description and alt text are treated as "everything". WRONG IF the owner wants the mark in visible copy only; then `fst_trademark` narrows and those strings revert.
+- The two FAQ questions carry the mark, so the heading a visitor sees reads "Is FST™ massage or medical treatment?". WRONG IF questions should stay as typed.
+
+**Negative tests on the real files** (each RESULT: FAILED, restored to PASSED): the mark dropped from one FAQ answer; the schema Service name unmarked; the Rates jump chip "FST"; the badge alt text unmarked on the homepage; one unmarked "FST" in the knowledge file; the page title unmarked.
+
+**Checks:** `python3 build.py --check` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), five invariant hashes unchanged; `python3 tools/ownership.py` OWNERSHIP: PASSED; `node --test tests/assistant.test.mjs` 53 of 53 pass; `node tools/widgettest.js` RESULT: PASSED.
+

@@ -69,9 +69,10 @@ otherwise, this block wins and the older line is kept only as history.
       site: one sentence in the FST page's first FAQ answer (also written
       "fascial stretch therapy"), mirrored in that FAQ's schema.
     DEFINITION (owner, Nov 21 2026, FST Reach run; VERBATIM):
-      "Fascia Stretch Therapy (FST) is a modality of table-based assisted
+      "Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted
       stretching that is pain-free, fully customizable and improves
-      functionality."
+      functionality." (The owner's sentence of the morning brief, with the
+      mark on both names since the same day's every-mention decision.)
       It is OmniFit's own wording. It is NEVER attributed to any person or
       to the Stretch to Win Institute, on the site or in this brief.
       It is the LEAD SENTENCE in exactly five places, replacing "Fascia
@@ -107,7 +108,7 @@ otherwise, this block wins and the older line is kept only as history.
       – Level 1, brings the table to your home. It is a separate service
       from training and open to anyone."; points "In-home only", "First
       Visit: $150, 90 minutes", "No training program required"; ONE link,
-      "Explore Fascia Stretch Therapy →", to the FST page. No Calendly link
+      "Explore Fascia Stretch Therapy™ →", to the FST page. No Calendly link
       for FST on the homepage; no Teqneeq, studio or reviews line in the
       block. The heading is an H3 (see KEYWORD OWNERSHIP CHANGELOG). The
       homepage title, meta, H1, hero, positioning line and In Short list are
@@ -115,10 +116,30 @@ otherwise, this block wins and the older line is kept only as history.
       Precision Nutrition Level 2 Certified Master Coach · Fascia Stretch
       Practitioner – Level 1 · 14 certifications". The title is never
       "Stretch Practitioner" alone and never "therapist".
-    SERVICE NAME: Fascia Stretch Therapy (FST). The first mention on a page
-      carries the trademark mark: "Fascia Stretch Therapy™". It is a
-      service offered by OmniFit Performance, never part of a business,
-      brand or product-line name (see STRETCH TO WIN MARKETING RULES).
+    SERVICE NAME: Fascia Stretch Therapy™ (FST™). It is a service offered by
+      OmniFit Performance, never part of a business, brand or product-line
+      name (see STRETCH TO WIN MARKETING RULES).
+    THE MARK ON EVERY MENTION (owner, Nov 21 2026; SUPERSEDES "the first
+      mention on a page carries the trademark mark", owner, Nov 20 2026):
+      the name is the Stretch to Win Institute's property, so EVERY
+      published mention carries the mark: "Fascia Stretch Therapy™" and
+      "FST™". That covers page copy, headings, FAQ questions and answers,
+      link text, alt text, the title and meta description, schema (the
+      Service name and alternateName, Offer names, breadcrumb, FAQPage),
+      site/llms.txt, the assistant's knowledge file, its prompt and its
+      replies, and the Calendly booking page. The canonical sentences in
+      this block are quoted with the mark for that reason.
+      NOT mentions, and so unmarked: the alternate spelling in its one FAQ
+      sentence (also written "fascial stretch therapy"); the credential
+      "Fascia Stretch Practitioner – Level 1"; the nav label "Assisted
+      Stretching"; URLs, ids and class names; HTML comments (the FST-BLOCK
+      markers) and CSS. This brief, REPORT.md and tools/README.md are
+      working documents, not published copy, and name the service plainly
+      outside the quoted sentences.
+      ENFORCED: certify.py fst_trademark fails any unmarked mention in any
+      swept file, attributes and schema included; functions/_lib/assistant.js
+      ensureMarks adds the mark to any mention the model leaves bare, so a
+      visitor never reads one.
     SCOPE: FST only. No compression boots, no percussion or massage-gun
       work, no "recovery session" naming.
     WHERE: IN-HOME ONLY. The FST page, its header and the Rates FST section
@@ -177,7 +198,7 @@ otherwise, this block wins and the older line is kept only as history.
       Written "not refunded", never "non-refundable": that word stays the
       Foundation policy's alone (certify.py fee_language).
     DISCLAIMER (owner decision, Nov 21 2026; verbatim, one block):
-      "Fascia Stretch Therapy is assisted stretching for mobility and
+      "Fascia Stretch Therapy™ is assisted stretching for mobility and
       recovery. It is not medical treatment, not physical therapy and not
       massage. Information on this website and during a visit is
       educational and is not medical advice. Consult your physician before
@@ -310,7 +331,7 @@ REPO STATE (reconciled with disk, Sept 2026)
       Service / FAQPage; the business by @id only, no person node; the
       FAQPage is BYTE-IDENTICAL to the page FAQ in question and answer
       (certify.py compares with ==, not after normalising). Title "Fascia
-      Stretch Therapy in San Diego | In-Home | OmniFit Performance" (the
+      Stretch Therapy™ in San Diego | In-Home | OmniFit Performance" (the
       owner's wording). Owns K30 and K31. Zero findings on its first full
       run. Linked from the Services card, the Rates FST section (#rt-fst),
       the about credentials entry, one sentence on the in-home page, the
@@ -327,7 +348,8 @@ REPO STATE (reconciled with disk, Sept 2026)
       sha256 0455a194befab8e8...). Never recoloured, cropped, redrawn or
       resized without owner approval. Because the artwork is teal on
       transparent it sits on a white rounded panel, never on navy. Alt text:
-      "Fascia Stretch Therapy Certified Level 1 badge". Shown in EXACTLY
+      "Fascia Stretch Therapy™ Certified Level 1 badge" (the mark added Nov
+      21 2026, every-mention rule). Shown in EXACTLY
       THREE places (two until the FST Reach run, Nov 21 2026, owner): the
       FST page's practitioner block (.fs-badge-panel), the about credentials
       entry (.ab-cred-badge) and the homepage FST block (.fst-badge-panel in
@@ -681,7 +703,9 @@ ASK OMNIFIT - ON-SITE AI ASSISTANT (owner brief, Oct 19 2026)
   no tooling, compliance notes, Stripe, client names or legacy rates) ->
   functions/_lib/knowledge.js (generated by build.py on every build, never
   edited by hand) · functions/_lib/system-prompt.js (owner wording, verbatim;
-  sha256 f6935ddef0fcaa0d in certify.py ASSISTANT_PROMPT_SHA256 (was
+  sha256 6749df074f3ebec3 in certify.py ASSISTANT_PROMPT_SHA256 (was
+  f6935ddef0fcaa0d until the every-mention mark rule put "FST™" in the
+  HANDOFF line later on Nov 21 2026, and
   2ee2a1c006f3a6ef until Nov 21 2026, when the HANDOFF line gained
   [[FIRST_VISIT]], owner-approved); any change
   needs owner approval and a new hash here and there) · functions/api/ask.js ·
@@ -731,8 +755,8 @@ ASK OMNIFIT - ON-SITE AI ASSISTANT (owner brief, Oct 19 2026)
   FIRST VISIT BUTTON (owner, Nov 21 2026): the assistant has a third
   hand-off. The prompt's HANDOFF line now reads "End with [[BOOK]] when the
   visitor shows interest or needs Nemezio, or [[FIT_CHECK]] when they're
-  unsure it fits. When their interest is FST, use [[FIRST_VISIT]] instead of
-  [[BOOK]]: it books the FST First Visit, not a consultation. At most one
+  unsure it fits. When their interest is FST™, use [[FIRST_VISIT]] instead of
+  [[BOOK]]: it books the FST™ First Visit, not a consultation. At most one
   token per reply, and not on every reply." No other line of the prompt
   changed. functions/_lib/assistant.js strips the token and returns
   handoff "first_visit"; site/assistant.js draws the gold "Book Your First
@@ -1378,7 +1402,8 @@ Therapy. No run, and no owner override inside a run, relaxes one.)
         pack) wherever they appear; retired_225 - $225 anywhere else;
         fst_fascial - "Fascial" only in its one FAQ sentence and the mirror;
         fst_brand - the rule 1 names and the "therapist" titles, site-wide;
-        fst_trademark - the mark on a page's first mention;
+        fst_trademark - the mark on EVERY mention (first mention only
+        until Nov 21 2026), schema and attributes included;
         fst_session_length - 90 minutes only as the First Visit, 60 or 90
         on an FST surface; fst_booking - one Calendly link for FST;
         fst_nav - site/nav.html carries exactly the one "Assisted
@@ -2708,3 +2733,9 @@ CHANGE LOG
   verbatim in five places, with the "pain-free" carve-out; the homepage FST block
   (pages/home-4.html) with the badge's third placement; "Fascia Stretch Practitioner –
   Level 1" on the homepage coach line. All in CANONICAL FACTS > FASCIA STRETCH THERAPY.
+- Nov 21, 2026 (FST Reach run, later): the mark on EVERY mention (owner). "Fascia Stretch
+  Therapy™" and "FST™" everywhere published: 86 mentions marked across the FST page and
+  header, Rates, Terms, Services, about, the homepage block, llms.txt and the knowledge
+  file; the badge alt text; the page title and meta; schema names. Assistant prompt
+  sha256 f6935ddef0fcaa0d -> 6749df074f3ebec3; replies are marked server-side
+  (ensureMarks). Calendly First Visit description marked (outside the repo).
