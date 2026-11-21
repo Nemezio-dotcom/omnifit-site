@@ -68,6 +68,53 @@ otherwise, this block wins and the older line is kept only as history.
       Business Profile). "Fascial" may appear EXACTLY ONCE on the whole
       site: one sentence in the FST page's first FAQ answer (also written
       "fascial stretch therapy"), mirrored in that FAQ's schema.
+    DEFINITION (owner, Nov 21 2026, FST Reach run; VERBATIM):
+      "Fascia Stretch Therapy (FST) is a modality of table-based assisted
+      stretching that is pain-free, fully customizable and improves
+      functionality."
+      It is OmniFit's own wording. It is NEVER attributed to any person or
+      to the Stretch to Win Institute, on the site or in this brief.
+      It is the LEAD SENTENCE in exactly five places, replacing "Fascia
+      Stretch Therapy (FST) is assisted stretching for mobility and
+      recovery" there: the bold sentence of the FST page's definition block;
+      the Service node description in the FST header; the first bullet of
+      the FST section in assistant/knowledge.md; the FST line in
+      site/llms.txt; the homepage FST block. The older sentence STAYS where
+      the owner left it: the DISCLAIMER block, the FAQ and its schema,
+      Terms, the Services card, the page meta description.
+      "PAIN-FREE" describes how the stretching FEELS. It is never an outcome
+      and is never reworded as pain relief. It is legal ONLY inside this
+      verbatim sentence: certify.py blanks the exact sentence before the
+      FST word scan, so "pain-free" anywhere else on an FST surface still
+      fails twice (pain, free), as do "pain relief" and "free".
+      "IMPROVES FUNCTIONALITY" stays inside the definition. It is a
+      statement about the modality, never "you will" framing and never a
+      promised result for a client.
+    TOP NAV (owner, Nov 21 2026; REVERSES "not in the top nav", owner, Nov
+      20 2026): site/nav.html carries ONE item for the service, in the
+      first row directly after Rates:
+      <li><a href="/fascia-stretch-therapy-san-diego">Assisted Stretching</a></li>
+      The label is exactly "Assisted Stretching". The nav never carries
+      "FST", "Fascia Stretch Therapy", the trademark mark or the badge.
+      (site.css: between 1100 and 1199px the two social icons in the header
+      are hidden, because the extra item made the header 68px wider than
+      the page there; they remain in the footer.)
+    HOMEPAGE BLOCK (owner copy, Nov 21 2026; pages/home-4.html, section
+      #omh-fst, directly after Ways to Train and before the couples section,
+      HOME_ORDER unchanged, inside FST-BLOCK markers). Label "Assisted
+      Stretching"; heading "Fascia Stretch Therapy™, in Your Home"; body =
+      the DEFINITION, then "Nemezio LopezPerez, Fascia Stretch Practitioner
+      – Level 1, brings the table to your home. It is a separate service
+      from training and open to anyone."; points "In-home only", "First
+      Visit: $150, 90 minutes", "No training program required"; ONE link,
+      "Explore Fascia Stretch Therapy →", to the FST page. No Calendly link
+      for FST on the homepage; no Teqneeq, studio or reviews line in the
+      block. The heading is an H3 (see KEYWORD OWNERSHIP CHANGELOG). The
+      homepage title, meta, H1, hero, positioning line and In Short list are
+      unchanged. The homepage coach line reads "NASM Elite Trainer ·
+      Precision Nutrition Level 2 Certified Master Coach · Fascia Stretch
+      Practitioner – Level 1 · 14 certifications". The title is never
+      "Stretch Practitioner" alone and never "therapist".
     SERVICE NAME: Fascia Stretch Therapy (FST). The first mention on a page
       carries the trademark mark: "Fascia Stretch Therapy™". It is a
       service offered by OmniFit Performance, never part of a business,
@@ -267,8 +314,10 @@ REPO STATE (reconciled with disk, Sept 2026)
       owner's wording). Owns K30 and K31. Zero findings on its first full
       run. Linked from the Services card, the Rates FST section (#rt-fst),
       the about credentials entry, one sentence on the in-home page, the
-      footer link list, llms.txt and (by build.py) the sitemap; NOT in the
-      top nav (owner). No In Short block and no shared "Who this is for"
+      footer link list, llms.txt and (by build.py) the sitemap; since the
+      FST Reach run (Nov 21 2026) also from the top nav ("Assisted
+      Stretching", REVERSING the Nov 20 "not in the top nav") and the
+      homepage FST block. No In Short block and no shared "Who this is for"
       block: both carry the POSITIONING LINE or the ENTITY LINE, which name
       pain and the training facility, and neither belongs on an FST surface.
       THE BADGE (added Nov 21 2026, once the owner re-sent the file; it
@@ -278,11 +327,13 @@ REPO STATE (reconciled with disk, Sept 2026)
       sha256 0455a194befab8e8...). Never recoloured, cropped, redrawn or
       resized without owner approval. Because the artwork is teal on
       transparent it sits on a white rounded panel, never on navy. Alt text:
-      "Fascia Stretch Therapy Certified Level 1 badge". Shown in EXACTLY TWO
-      places: the FST page's practitioner block (.fs-badge-panel) and the
-      about credentials entry (.ab-cred-badge). Nowhere else: not the nav,
-      the footer or beside the OmniFit logo. certify.py fst_badge and
-      fst_badge_file enforce the file hash, the two placements, the alt text
+      "Fascia Stretch Therapy Certified Level 1 badge". Shown in EXACTLY
+      THREE places (two until the FST Reach run, Nov 21 2026, owner): the
+      FST page's practitioner block (.fs-badge-panel), the about credentials
+      entry (.ab-cred-badge) and the homepage FST block (.fst-badge-panel in
+      pages/home-4.html). Nowhere else: not the nav, the footer or beside
+      the OmniFit logo. certify.py fst_badge and fst_badge_file enforce the
+      file hash, the three placements, the alt text
       and the panel (self-tested both ways, negative-tested on real files).
 
   IN SCOPE, NOT YET CERTIFIED - carry real findings; certify before the next change to these files
@@ -584,6 +635,15 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
   and cta_location "fascia-stretch-therapy-san-diego". No new event and no
   site.js change. JUDGMENT CALL, WRONG IF the owner wants FST bookings
   counted apart from consultation clicks under their own event name.
+- THE HOMEPAGE FST LINK SENDS NO EVENT (FST Reach run, Nov 21 2026). The
+  owner's brief asks that its clicks "follow the existing pattern with
+  cta_location home, no new event". The existing pattern tracks links to
+  calendly.com, tel: and mailto: only; an internal link to the FST page has
+  never sent an event, and the homepage carries no Calendly link for FST
+  (by the same brief). So nothing was added. The First Visit booking click
+  is still reported on the FST page (cta_location
+  "fascia-stretch-therapy-san-diego"). OPEN, owner: an internal-link event
+  would be a new event.
 - COMPLETED BOOKINGS ARE NOT A SITE EVENT. Calendly's own GA4 integration
   (the Measurement ID entered in Calendly) reports them to the same
   property, and cross-domain measurement is configured in GA4 for
@@ -1287,6 +1347,12 @@ Therapy. No run, and no owner override inside a run, relaxes one.)
       pain-relief or injury claims. No outcome promises and no "in X
       sessions" language. The re-measure is a measurement the client sees,
       never a promised gain.
+      ONE OWNER EXCEPTION (Nov 21 2026): the canonical DEFINITION says the
+      stretching "is pain-free ... and improves functionality". Both
+      phrases live inside that verbatim sentence and nowhere else:
+      "pain-free" is how the stretching feels, not a pain-relief claim, and
+      "improves functionality" is about the modality, not a promise to a
+      client. Neither may be lifted out, reworded or given a timeframe.
     · "Therapy" appears only inside the method's name.
     · Persona language without a timeframe is fine (desk-bound
       professionals, golfers, people who feel stiff after travel).
@@ -1315,7 +1381,14 @@ Therapy. No run, and no owner override inside a run, relaxes one.)
         fst_trademark - the mark on a page's first mention;
         fst_session_length - 90 minutes only as the First Visit, 60 or 90
         on an FST surface; fst_booking - one Calendly link for FST;
-        site/nav.html carries no FST link; the FST page carries the
+        fst_nav - site/nav.html carries exactly the one "Assisted
+        Stretching" link after Rates and never the service name, "FST",
+        the mark or the badge (until Nov 21 2026 the rule failed any
+        "stretch" in the nav); fst_definition_required - the DEFINITION
+        verbatim as the lead in its five places, once per file;
+        fst_home_block - the homepage block's copy, its single link, no
+        Calendly link, no H1 / H2; fst_brand also fails "Stretch
+        Practitioner" without "Fascia"; the FST page carries the
         attribution line at its foot, the First Visit / Performance
         Assessment distinction exactly once, the cancellation line, the
         canonical travel-fee sentence and the booking button; since Nov 21
@@ -2215,6 +2288,19 @@ Page-specific rules that are NOT ownership but are locked in the same table:
   exists, and /training-rates-san-diego stays transactional.
 
   KEYWORD OWNERSHIP CHANGELOG
+  - Nov 21 2026, FST Reach run (owner brief). The homepage gained an FST
+    block whose heading reads "Fascia Stretch Therapy™, in Your Home". The
+    brief calls it an H2 AND says no homepage heading or meta may carry the
+    K30 or K31 phrases; the two cannot both hold. RESOLVED the way the
+    Rates section was on Nov 20: the heading is an H3 (styled at section
+    size), so K30 stays exclusive to /fascia-stretch-therapy-san-diego on
+    every title, H1, H2 and meta, which is what tools/ownership.py
+    enforces. WRONG IF the owner wants a true H2 there; then K30 needs
+    "also /" in the table, in the same commit. The block's label and the
+    nav link both read "Assisted Stretching" (K31): a label paragraph and a
+    nav link are not owner surfaces (ownership.py reads headings from
+    <main> only), so no exemption was needed and the rule is unchanged for
+    page copy.
   - Nov 2026, FST Launch run (owner brief, Nov 20 2026). K30 (fascia stretch
     therapy) and K31 (assisted stretching) added, both owned by the new
     /fascia-stretch-therapy-san-diego, which carries them on its title,
@@ -2617,3 +2703,8 @@ CHANGE LOG
   -> "Book Your First Visit" -> the FST booking link). System prompt HANDOFF line
   changed, owner-approved; prompt sha256 2ee2a1c006f3a6ef -> f6935ddef0fcaa0d.
   tools/widgettest.js added.
+- Nov 21, 2026: FST Reach run (owner brief, Nov 21 2026). Top-nav link "Assisted
+  Stretching" (REVERSES the Nov 20 "not in the top nav"); the canonical FST DEFINITION,
+  verbatim in five places, with the "pain-free" carve-out; the homepage FST block
+  (pages/home-4.html) with the badge's third placement; "Fascia Stretch Practitioner –
+  Level 1" on the homepage coach line. All in CANONICAL FACTS > FASCIA STRETCH THERAPY.

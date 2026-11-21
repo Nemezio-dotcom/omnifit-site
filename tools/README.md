@@ -1015,8 +1015,10 @@ included; the four assistant surfaces; `site/llms.txt`, `site/nav.html`,
 | `fst_session_length` | (b) | CANON SESSION LENGTH and its FST carve-out: "90 minutes" anywhere without "First Visit" within 160 characters before or 60 after; on an FST surface, any length that is not 60 or 90 minutes |
 | `fst_booking` | (b) | a Calendly URL on an FST surface that is not `FST_CALENDLY`; a "Book Your First Visit" link that goes anywhere else |
 | `fst_page_required` | (b) and (c) | the FST page: attribution line (at the foot), the First Visit / Performance Assessment distinction exactly once, the cancellation line, the canonical travel-fee sentence, the booking button; the eight FAQ questions in order; the header FAQPage **byte-identical** to the page FAQ, question and answer (`==`, not `_norm`); the Service node, its provider `@id` and its three Offers; no business or person node defined in the header |
-| nav | (b) | `site/nav.html` mentions FST or "stretch" (owner: not in the top nav) |
-| `fst_badge`, `fst_badge_file` | (b) | the certification badge: `site/img/fst-certified-level-1.png` is the owner's file by sha256 (never resized, recoloured, cropped or redrawn); it appears exactly once on the FST page and once on /about, with the one alt text, inside its white panel (`.fs-badge-panel`, `.ab-cred-badge`); any reference in another page, the footer, the nav, the layout, `site.css`, `site.js` or `blog.py` fails. Comments are not references. Self-tested both ways (`_selftest_fst_badge`) |
+| `fst_nav` | (b) | `site/nav.html` must carry exactly one FST link, `FST_NAV_LINK` ("Assisted Stretching"), directly after Rates; "stretch" anywhere else in the nav, the service name, "FST", the mark or the badge fails. REVERSED Nov 21 2026 (FST Reach run): until then the rule failed any "stretch" in the nav |
+| `fst_definition_required` | (b) | the canonical definition (`FST_DEFINITION`) is the verbatim lead in its five places (the FST page's definition block, the header's Service description, the knowledge file's first FST bullet, the llms.txt FST line, the homepage block) and appears once per file |
+| `fst_home_block` | (b) | the homepage block in `pages/home-4.html`: the owner's copy verbatim, exactly one link (to the FST page, so no Calendly link), no H1 or H2 |
+| `fst_badge`, `fst_badge_file` | (b) | the certification badge: `site/img/fst-certified-level-1.png` is the owner's file by sha256 (never resized, recoloured, cropped or redrawn); it appears exactly once in each of its THREE placements (the FST page, /about and, since Nov 21 2026, the homepage block in `pages/home-4.html`, `.fst-badge-panel`), with the one alt text, inside its white panel (`.fs-badge-panel`, `.ab-cred-badge`); any reference in another page, the footer, the nav, the layout, `site.css`, `site.js` or `blog.py` fails. Comments are not references. Self-tested both ways (`_selftest_fst_badge`) |
 
 **Payment terms and disclaimer (owner decisions, Nov 21 2026).** `FST_PAYMENT`,
 `FST_NO_REFUND`, `FST_EXPIRY` and `FST_DISCLAIMER` are CANON's sentences.
@@ -1095,4 +1097,35 @@ It exists because the First Visit hand-off passed every server test
 values dropped it, so no button drew: a check reporting success on one half of
 a feature. Negative-tested: with `first_visit` taken back out of the widget's
 whitelist the test reports `FAIL hand-off "first_visit": no button` and exits 1.
+
+## FST Reach run (Nov 21 2026): the "pain-free" carve-out and the nav reversal
+
+**"pain-free".** The owner's canonical definition reads "Fascia Stretch Therapy
+(FST) is a modality of table-based assisted stretching that is pain-free, fully
+customizable and improves functionality." On an FST surface "pain-free" trips
+`fst_banned` twice, once as `pain` and once as `free`. The carve-out is the
+same shape as the other canonical sentences: `FST_DEFINITION` is blanked, as
+that exact sentence, before the word scan. Nothing in the patterns was
+loosened, so "pain-free" anywhere else on an FST surface still produces both
+findings, and "pain relief" and "free" still fail. Self-tested: the verbatim
+sentence passes; "Our stretching is pain-free." produces exactly two findings;
+the definition with one word changed ("pain-free and fully") fails; the
+definition followed by "It is pain-free every time." fails.
+
+The site-wide TIER 1 rules (`guarantee_any`, `result_near_timeframe`,
+`population_clinical_claim`, `uncertified_claims`) do not fire on the
+definition: it names no timeframe, no population and no condition. That is a
+fact about what those rules look for, not a ruling that the sentence makes no
+claim. CANON records it as an owner decision.
+
+**The nav.** The Nov 20 rule failed any "stretch" in `site/nav.html`. The Nov
+21 brief reverses it. `fst_nav` now requires the one link and still fails
+everything the brief keeps out: a second "stretch" item, the service name,
+"FST", the mark, the badge, the link anywhere but directly after Rates.
+Self-tested with nine failing variants and the one passing nav.
+
+**"Stretch Practitioner" alone.** `_FST_TITLE` gained
+`(?<!Fascia )\bStretch\s+Practitioner\b`; the full title passes.
+
+**Negative tests on the real files** are in REPORT.md, FST Reach run.
 

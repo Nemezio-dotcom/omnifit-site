@@ -8743,3 +8743,83 @@ The last open item: the assistant's Book button opened the 45-minute consultatio
 
 **Checks:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0; prompt sha256 f6935ddef0fcaa0d), five invariant hashes unchanged; `python3 tools/ownership.py` OWNERSHIP: PASSED; `python3 build.py --check` RESULT: PASSED; `node --test tests/assistant.test.mjs` 49 of 49 pass; `node tools/widgettest.js` RESULT: PASSED (4 hand-offs).
 
+# FST Reach run — top-nav link, homepage block, homepage credential, canonical definition (owner brief Nov 21, 2026)
+
+**Branch:** `ccr-4ac06c3f-tmscux`, merged to `main`.
+**Result:** `python3 build.py --check` RESULT: PASSED. `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0). Five invariant hashes unchanged. `python3 tools/ownership.py` OWNERSHIP: PASSED. `node --test tests/assistant.test.mjs` 49 of 49 pass.
+
+## Needs owner
+
+1. **The brief contradicts itself on the homepage heading.** It gives the heading as "H2: Fascia Stretch Therapy™, in Your Home" and also says "No heading or meta on the homepage may contain the K30 or K31 phrases". "Fascia Stretch Therapy" is K30. The text is exactly as written; the element is an H3, styled at section-heading size, so K30 stays exclusive to the FST page on every title, H1, H2 and meta (what `tools/ownership.py` enforces, and how the Rates section was handled on Nov 20). If a true H2 is wanted, it is a one-tag change plus `also /` on K30 in the ownership table.
+2. **The homepage link sends no analytics event.** The brief says its clicks "follow CANON MEASUREMENT's existing pattern with cta_location home. No new event." The existing pattern tracks links to calendly.com, `tel:` and `mailto:` only. The block's one link is internal and the brief rules out a Calendly link there, so nothing fires, and nothing was added. Reporting clicks on it would be a new event.
+3. **"Pain-free" and "improves functionality" are the first benefit claims on an FST surface.** They are published as written, inside the verbatim definition only. CANON's FST compliance points said "No pain-relief or injury claims. No outcome promises." CANON now records the definition as the one owner exception, with the brief's own reading: "pain-free" is how the stretching feels, and "improves functionality" is about the modality, not a promise to a client. The assistant can now repeat the sentence, because it leads the FST section of its knowledge file.
+
+## What changed
+
+| Item | Files | Change |
+|---|---|---|
+| 1. Top nav | `site/nav.html` | `<li><a href="/fascia-stretch-therapy-san-diego">Assisted Stretching</a></li>` in the first row, directly after Rates |
+| | `site/site.css` | Between 1100 and 1199px the header's two social icons are hidden (see "Header check") |
+| 2. Definition | `pages/fascia-stretch-therapy-san-diego.html` | Bold sentence of the definition block. The next sentence now starts "You lie down and a trained practitioner…" (was "You lie on a table…") so the table is named once |
+| | its header | Service description: definition, then "Delivered in the client's home by Nemezio LopezPerez…" (was "…, done on a table in the client's home. Delivered by…") |
+| | `assistant/knowledge.md` | First bullet of the FST section: definition, then "It is a service offered by…" (", done on a table" dropped) |
+| | `site/llms.txt` | FST line: definition, then "Offered in-home only and open to anyone…" |
+| 3. Homepage block | `pages/home-4.html` | Section `#omh-fst` appended, so it renders after Ways to Train and before the couples section with HOME_ORDER unchanged. Owner copy verbatim; lotus line icon; the badge on a white rounded panel; one link, to the FST page; inside FST-BLOCK markers |
+| 4. Homepage credential | `pages/home-5.html` | "NASM Elite Trainer · Precision Nutrition Level 2 Certified Master Coach · Fascia Stretch Practitioner – Level 1 · 14 certifications" |
+| Rules | `tools/certify.py`, `tools/README.md` | `fst_nav` replaces the "no stretch in the nav" rule; the definition carve-out; `fst_definition_required`; `fst_home_block`; the badge's third placement; "Stretch Practitioner" alone fails |
+| Canon | `CANON.md` | DEFINITION, TOP NAV, HOMEPAGE BLOCK in CANONICAL FACTS; three badge placements; the compliance exception; the ownership and measurement notes; change log |
+| Build output | `public/` | rebuilt (every page carries the nav) |
+
+**Not touched, as instructed:** the DISCLAIMER block, the FAQ and its schema, Terms, the Services card, the FST page meta description; the homepage title, meta, H1, hero, positioning line and In Short list. The older sentence "assisted stretching for mobility and recovery" still leads those passages.
+
+**First Visit point on the homepage:** "First Visit: $150, 90 minutes", from CANON RATES.
+
+## Where CANON or certify.py conflicted with this brief
+
+| CANON / certify.py said | Brief says | Resolution |
+|---|---|---|
+| FST is NOT in the top nav (owner, Nov 20); certify failed any "stretch" in `site/nav.html` | One nav item, "Assisted Stretching", after Rates | Reversed in CANON. `fst_nav` requires exactly that link and still fails the service name, "FST", the mark, the badge, a second item, or the link anywhere else |
+| No pain-relief claims; "pain" and "free" banned on FST surfaces | The definition says "pain-free" | Carve-out for the verbatim sentence only. "pain-free" elsewhere still fails twice; "pain relief" and "free" still fail |
+| No outcome promises on FST copy | "improves functionality" | Kept inside the definition; CANON records it as about the modality, never "you will" |
+| The badge is shown in exactly two places | A third, in the homepage block | CANON and `fst_badge`: three placements. A fourth still fails |
+| The lead sentence everywhere was "assisted stretching for mobility and recovery" | The new definition leads in five named places | Replaced in those five; left where the brief says not to touch |
+| K30 / K31 belong to the FST page's title, H1, H2s and meta alone | A homepage heading with the service name; a nav label "Assisted Stretching" | Heading is an H3 (see Needs owner 1). The nav label and the block's label paragraph are not owner surfaces, so `ownership.py` needed no exemption and is unchanged |
+| LANGUAGE RULES ban "pain-free in" (a pain-reduction promise) | "pain-free, fully customizable" | Not that phrase: no timeframe follows. The site-wide TIER 1 rules do not fire on the definition |
+
+## Header check
+
+Measured in Chromium on the built FST page.
+
+| Width | Result |
+|---|---|
+| 1100, 1180, 1280, 1366, 1440, 1920 | Both nav rows on one line each (6 and 5 items); "Assisted Stretching" is the same height as "Rates" (no wrap); no sideways scroll; the rows do not touch the Book Your Consultation link |
+| Mobile menu at 390, 768, 1099 | The item sits directly under Rates, same row height, inside the viewport, no sideways scroll |
+| aria-current | `page` on the Assisted Stretching link on the FST page, and on no other link; absent on the homepage |
+
+**A defect this run introduced and fixed.** With the sixth item the desktop header needed 1168px, so between 1100 and 1167px the page scrolled sideways by up to 68px. `site.css` now hides the header's two social icons from 1100 to 1199px (they are also in the footer). Re-measured at 1100, 1120, 1167, 1199, 1200 and 1280: no overflow. JUDGMENT CALL, WRONG IF the owner would rather move the mobile-menu breakpoint up to 1200px instead.
+
+## Negative tests on the real files
+
+Each mutation applied, `python3 tools/certify.py` run, file restored. All produced RESULT: FAILED with their own finding; the restored tree returns PASSED.
+
+| # | Mutation | Finding |
+|---|---|---|
+| 1 | Nav label "Fascia Stretch Therapy" | site/nav.html carries the service name |
+| 2 | Nav link removed | must carry exactly one link |
+| 3 | Nav link moved before Rates | not directly after Rates |
+| 4 | Definition reworded on the FST page ("comfortable") | not the verbatim lead of the definition block |
+| 5 | "Pain-free stretching" as a hero pill on the FST page | pain and free, both |
+| 6 | Old lead restored in the knowledge file | not the verbatim lead of the FST section |
+| 7 | Definition dropped from the llms.txt lead | not the verbatim lead of the FST line |
+| 8 | Calendly link added to the homepage block | exactly one link |
+| 9 | Homepage block heading made an H2 | uses an H1 or H2 |
+| 10 | "at the studio" added to the homepage block | FST surface: studio |
+| 11 | Badge added to another homepage section | shown only in its three placements |
+| 12 | Coach line "Stretch Practitioner – Level 1" | never 'Stretch Practitioner' alone |
+
+## Other checks
+
+- `node tools/mobileaudit.js` on `/` and the FST page at 390 and 412px: PASSED.
+- `node tools/widgettest.js`: PASSED (4 hand-offs). `node tools/choosertest.js`: PASSED.
+- Homepage section order in the built page: hero, In Short, proof, who, how, results, Ways to Train, **FST block**, couples, coach, FAQ, start. One H1. No homepage H2 contains "stretch".
+
