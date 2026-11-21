@@ -1015,6 +1015,7 @@ included; the four assistant surfaces; `site/llms.txt`, `site/nav.html`,
 | `fst_booking` | (b) | a Calendly URL on an FST surface that is not `FST_CALENDLY`; a "Book Your First Visit" link that goes anywhere else |
 | `fst_page_required` | (b) and (c) | the FST page: attribution line (at the foot), the First Visit / Performance Assessment distinction exactly once, the cancellation line, the canonical travel-fee sentence, the booking button; the eight FAQ questions in order; the header FAQPage **byte-identical** to the page FAQ, question and answer (`==`, not `_norm`); the Service node, its provider `@id` and its three Offers; no business or person node defined in the header |
 | nav | (b) | `site/nav.html` mentions FST or "stretch" (owner: not in the top nav) |
+| `fst_badge`, `fst_badge_file` | (b) | the certification badge: `site/img/fst-certified-level-1.png` is the owner's file by sha256 (never resized, recoloured, cropped or redrawn); it appears exactly once on the FST page and once on /about, with the one alt text, inside its white panel (`.fs-badge-panel`, `.ab-cred-badge`); any reference in another page, the footer, the nav, the layout, `site.css`, `site.js` or `blog.py` fails. Comments are not references. Self-tested both ways (`_selftest_fst_badge`) |
 
 **Canonical sentences are exempt as that exact sentence and nothing looser.**
 `FST_NOT_MEDICAL` ("It is not medical treatment, not physical therapy and not
