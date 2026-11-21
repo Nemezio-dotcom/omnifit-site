@@ -256,7 +256,7 @@ CTA = f"""<aside class="ob-cta" aria-label="Work with OmniFit">
 
 AUTHOR = f"""<aside class="ob-author" aria-label="About the author">
     <p class="ob-author-name"><a href="/about">{AUTHOR_NAME}</a></p>
-    <p>Founder of OmniFit Performance. NASM Elite Trainer and Precision Nutrition Level 2 Master Health Coach, with thirteen certifications across corrective exercise, performance and nutrition coaching. He coaches busy professionals 30+ in 4S Ranch, in their homes across North County, and online. OmniFit is a personal training practice, not a medical provider.</p>
+    <p>Founder of OmniFit Performance. NASM Elite Trainer and Precision Nutrition Level 2 Master Health Coach, with fourteen certifications across corrective exercise, performance, nutrition coaching and assisted stretching. He coaches busy professionals 30+ in 4S Ranch, in their homes across North County, and online. OmniFit is a personal training practice, not a medical provider.</p>
   </aside>"""
 
 
