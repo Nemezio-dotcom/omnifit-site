@@ -153,8 +153,10 @@ CALENDLY = "https://calendly.com/nemezio-omnifittraining/45min"
 # menu and no search presence: it is built with the logo-only header (no
 # announcement bar, no nav), the legal-only footer (copyright, Terms,
 # Privacy; no consultation CTA, no link grid, no Ask OmniFit loader), a
-# noindex robots meta, and it is left out of sitemap.xml. Nothing links to it;
-# check() verifies all of that for every slug here.
+# noindex robots meta, and it is left out of sitemap.xml. Nothing links to it,
+# and nothing on it links away except the footer's Terms and Privacy: the
+# logo is a plain mark, not a link home. check() verifies all of that for
+# every slug here.
 LANDING = {"in-home-stretching-founders"}
 NOINDEX_META = '<meta name="robots" content="noindex, follow">'
 # <!-- IF-ASSET /assets/img/x.jpg --> ... <!-- /IF-ASSET --> keeps its contents
@@ -598,12 +600,15 @@ def conditional_assets(body, exists=None):
 
 def landing_header(nav):
     """The logo-only header for a LANDING page: the site logo (from
-    site/nav.html, so it stays the one logo) linking home, nothing else."""
-    m = re.search(r'<a class="site-logo".*?</a>', nav, re.S)
+    site/nav.html, so it stays the one logo) as a plain mark, not a link.
+    A logo link would carry a visitor off the one-offer page to the
+    homepage (owner, Nov 22 2026), so the header holds no link at all."""
+    m = re.search(r'<a class="site-logo"[^>]*>(.*?)</a>', nav, re.S)
     if not m:
         raise SystemExit("site/nav.html: <a class=\"site-logo\"> not found (landing header)")
+    logo = '<div class="site-logo site-logo--static" role="img" aria-label="OmniFit Performance">' + m.group(1) + '</div>'
     return ('<header class="site-header site-header--landing" id="site-header">\n'
-            '  <div class="site-header__inner">\n    ' + m.group(0) + '\n  </div>\n</header>')
+            '  <div class="site-header__inner">\n    ' + logo + '\n  </div>\n</header>')
 
 
 def footer_legal(footer_markup):
@@ -627,7 +632,8 @@ def landing_selftest(nav, footer_markup):
     assert '<img src="/assets/img/x.jpg">' in kept and "IF-ASSET" not in kept, "IF-ASSET: a shipped asset was dropped"
     assert "<img" not in gone and "not shipped" in gone and "<p>a</p>" in gone and "<p>b</p>" in gone, "IF-ASSET: a missing asset was kept"
     h = landing_header(nav)
-    assert 'class="site-logo"' in h and "<nav" not in h and "site-announce" not in h and "site-nav-toggle" not in h, "landing header carries more than the logo"
+    assert 'class="site-logo site-logo--static"' in h and "omni-logo" in h and "<nav" not in h and "site-announce" not in h \
+        and "site-nav-toggle" not in h and "<a " not in h and "href" not in h, "landing header carries more than the unlinked logo"
     f = footer_legal(footer_markup)
     assert "calendly.com" not in f and "footer-grid" not in f and "/terms-and-conditions" in f and "/privacy-policy" in f \
         and 'id="omnifit-year"' in f, "landing footer is not the legal lines only"
@@ -1092,8 +1098,11 @@ def check():
             problems.append(f"landing page {lp}: listed in sitemap.xml")
         if lp in llms:
             problems.append(f"landing page {lp}: listed in llms.txt")
-        if '<nav' in t.split("<main", 1)[0] or 'site-announce' in t or 'site-nav-toggle' in t:
+        head_chrome = t.split("<main", 1)[0].split("<body", 1)[-1]
+        if '<nav' in head_chrome or 'site-announce' in t or 'site-nav-toggle' in t:
             problems.append(f"landing page {lp}: carries the nav or announcement bar (logo-only header expected)")
+        if re.search(r'<a\b', head_chrome):
+            problems.append(f"landing page {lp}: the header carries a link (the logo is not a link on a landing page)")
         if 'omnifit-footer--legal' not in t or 'footer-grid' in t or ASSISTANT_LOADER in t:
             problems.append(f"landing page {lp}: footer is not the legal-only footer, or the Ask OmniFit loader is present")
         if 'IF-ASSET' in t and '<img' in t.split('IF-ASSET', 1)[0][-200:]:

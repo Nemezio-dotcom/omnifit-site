@@ -220,7 +220,9 @@ otherwise, this block wins and the older line is kept only as history.
       /in-home-stretching-founders, pages/in-home-stretching-founders.html
       and its header. A Meta ad landing page: one page, one offer, no menu.
       BUILT by build.py LANDING: logo-only header (no announcement bar, no
-      nav), legal-only footer (Terms, Privacy, copyright; no consultation
+      nav; the logo is a plain mark, NOT a link, so a tap on it cannot carry
+      the visitor off the offer to the homepage: owner, Nov 22 2026),
+      legal-only footer (Terms, Privacy, copyright; no consultation
       CTA, no link grid, no Ask OmniFit loader), <meta name="robots"
       content="noindex, follow">, out of sitemap.xml and llms.txt, linked
       from no other page (build.py --check verifies each). Title "In-Home
