@@ -33,7 +33,16 @@ otherwise, this block wins and the older line is kept only as history.
     Visit is 90 minutes; FST sessions are 60 minutes. 90 minutes is legal
     only for the FST First Visit.
   IN-HOME NO-FEE AREA: Carmel Valley, Santaluz, Fairbanks Ranch, Rancho
-    Bernardo, 4S Ranch, Poway. Elsewhere in the in-home service area
+    Bernardo, 4S Ranch, Poway and Harmony Grove (Harmony Grove added by the
+    owner, Nov 22 2026, Founders run). WHERE HARMONY GROVE IS CARRIED SO FAR:
+    the FST surfaces only, by the owner's scope for that run (the FST page and
+    its header, the Rates FST section, the knowledge file's FST section, the
+    founders landing page; site/llms.txt names no towns in its FST line). The
+    TRAINING surfaces still read the six-town list (home-4, FAQs, private,
+    couples, fit-check, the 4S Ranch territory FAQ, knowledge.md's in-home
+    section, certify.py ASSISTANT_REQUIRED): a follow-up pass once the owner
+    confirms Harmony Grove for in-home training, not a stale-canon finding
+    until then. Elsewhere in the in-home service area
     (including La Jolla, Del Mar, Rancho Santa Fe, Solana Beach, Encinitas,
     Carlsbad) a travel fee applies, confirmed before you book. Never a dollar
     figure. Territory pages in the no-fee area: "No travel fee in [Town];
@@ -144,16 +153,18 @@ otherwise, this block wins and the older line is kept only as history.
       work, no "recovery session" naming.
     WHERE: IN-HOME ONLY. The FST page, its header and the Rates FST section
       never mention Teqneeq, a studio, or a studio price for FST. Service
-      area: exactly the IN-HOME NO-FEE AREA above (the six no-fee towns;
-      elsewhere a travel fee applies; never a dollar figure).
+      area: exactly the IN-HOME NO-FEE AREA above (the seven no-fee towns,
+      Harmony Grove included since Nov 22 2026; elsewhere a travel fee
+      applies; never a dollar figure).
       FST TRAVEL FEE (owner, Nov 21 2026; AMENDS the brief's "exactly
       CANON's existing in-home rule" for the fee wording only): the client
       is told the travel fee at the time of booking and it is collected at
       the visit, not with the booking payment. Verbatim on FST surfaces:
       "No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho
-      Bernardo, 4S Ranch or Poway. Elsewhere in our in-home service area a
-      travel fee applies: you are told the amount when you book, and it is
-      collected at the visit." Short form: "Outside the no-fee part of our
+      Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere in our in-home
+      service area a travel fee applies: you are told the amount when you
+      book, and it is collected at the visit." (Harmony Grove added Nov 22
+      2026; before that "4S Ranch or Poway".) Short form: "Outside the no-fee part of our
       in-home service area a travel fee applies: you are told the amount
       when you book, and it is collected at the visit." WHY: FST is booked
       and paid in one step on Calendly, so "confirmed before you book" (the
@@ -171,6 +182,22 @@ otherwise, this block wins and the older line is kept only as history.
       Single session    $225, 60 minutes.
       5-session pack    $200 per session ($1,000), expires 8 weeks from
                         purchase.
+      FOUNDERS RATE (owner, Nov 22 2026; Founders run): $99 for the in-home
+                        First Visit. Applies to the first 5 new in-home
+                        Fascia Stretch Therapy clients, or through December
+                        31, 2026, whichever comes first. First Visit only,
+                        one per client. Follow-up sessions and 5-session
+                        packs stay at the regular rates above. No refunds:
+                        the existing First Visit payment and cancellation
+                        terms apply unchanged. PUBLISHED ON ONE SURFACE: the
+                        founders landing page (FOUNDERS LANDING PAGE below)
+                        and its header. $99 is legal there only, beside the
+                        word "founders" (certify.py fst_rates); on any other
+                        FST surface it is a wrong price. The regular rates
+                        on every other surface are unchanged. WHEN IT ENDS
+                        (the fifth founder books, or December 31, 2026): the
+                        page switches to the regular booking link and price,
+                        or is retired; the owner decides.
     THE FIRST VISIT is called "First Visit". NEVER "assessment" or "FST
       assessment". It is NOT the Performance Assessment and its $150 is NOT
       credited toward anything; the FST page states that once, plainly.
@@ -184,6 +211,42 @@ otherwise, this block wins and the older line is kept only as history.
       are arranged with Nemezio after the First Visit (one line says so).
       No other Calendly page is linked for FST. (The words "recovery
       session" and "assessment" in that URL are Calendly's slug, not copy.)
+      ONE EXCEPTION (owner, Nov 22 2026): the founders landing page books on
+      https://calendly.com/nemezio-omnifittraining/founders-first-visit-in-home-assisted-stretching
+      and on nothing else; that link appears on no other surface (certify.py
+      fst_booking, both directions). The owner confirms the $99 charge on
+      that Calendly event; the repo cannot see payment settings.
+    FOUNDERS LANDING PAGE (owner brief, Nov 21-22 2026; Founders run):
+      /in-home-stretching-founders, pages/in-home-stretching-founders.html
+      and its header. A Meta ad landing page: one page, one offer, no menu.
+      BUILT by build.py LANDING: logo-only header (no announcement bar, no
+      nav), legal-only footer (Terms, Privacy, copyright; no consultation
+      CTA, no link grid, no Ask OmniFit loader), <meta name="robots"
+      content="noindex, follow">, out of sitemap.xml and llms.txt, linked
+      from no other page (build.py --check verifies each). Title "In-Home
+      Assisted Stretching | Founders Rate | OmniFit Performance". The whole
+      page sits inside FST-BLOCK markers, so every FST rule reads all of it.
+      COPY: the owner's copy of Nov 21 2026 with these CANON forms, each an
+      owner decision of Nov 22 2026: the DEFINITION sentence verbatim as the
+      "What assisted stretching is" body (a sixth verbatim carrier; the
+      five-places rule names where it REPLACED the older sentence); the
+      "Does it hurt?" answer reads "It is designed to be comfortable, and I
+      adjust to you throughout the session." (no "pain-free" outside the
+      definition); the not-medical FAQ is the canonical question "Is FST™
+      massage or medical treatment?" with the canonical sentence; the
+      travel sentence verbatim with Harmony Grove; the DISCLAIMER block
+      verbatim after the payment lines, the attribution line last; the
+      credential "Precision Nutrition Level 2 Certified Master Coach"; the
+      button text "Book Your First Visit", every button scrolling to the
+      booking section (#fh-book), where the founders Calendly event is
+      embedded inline with a plain-text fallback link; "no crowded facility"
+      (the owner's "no crowded studio" trips the FST studio ban). NO reviews
+      line anywhere on it (the 190+ reviews are training reviews). FIRST
+      PERSON ("I bring the table to you") is the owner's voice for this page
+      only; the FST page stays in the third person. HERO IMAGE: an IF-ASSET
+      slot for /assets/img/fst-in-home-hero.jpg (site/img/fst-in-home-hero.jpg,
+      not yet supplied); until the file exists the hero renders without it.
+      NO Meta tracking code yet (an open item with the owner).
     WHAT THE CLIENT NEEDS: a quiet room with floor space. The table comes
       with him. Wear clothes you can move in.
     PAYMENT TERMS (owner decisions, Nov 21 2026; verbatim sentences):
@@ -2295,9 +2358,11 @@ Page-specific rules that are NOT ownership but are locked in the same table:
       cover  in[- ]home personal trainers? (?:in )?solana beach|solana beach in[- ]home personal trainers?
   K30 fascia stretch therapy san diego / fst san diego
       owner  /fascia-stretch-therapy-san-diego
+      also   /in-home-stretching-founders
       match  fasci(?:a|al) stretch therapy|\bFST\b
   K31 assisted stretching san diego
       owner  /fascia-stretch-therapy-san-diego
+      also   /in-home-stretching-founders
       match  assisted stretch(?:ing|es)?
   X01 in-home page carries no other keyword's qualifier
       page   /in-home-personal-trainer-san-diego
@@ -2313,6 +2378,12 @@ Page-specific rules that are NOT ownership but are locked in the same table:
   exists, and /training-rates-san-diego stays transactional.
 
   KEYWORD OWNERSHIP CHANGELOG
+  - Nov 22 2026, Founders run (owner brief). K30 and K31 gained "also
+    /in-home-stretching-founders": the founders landing page carries
+    "assisted stretching" in its title, H1 and an H2, and "FST™" in an FAQ
+    question. It is noindex, out of the sitemap and linked from nowhere, so
+    it competes for no ranking; the exemption records that it is allowed to
+    carry the phrases, not that it owns them.
   - Nov 21 2026, FST Reach run (owner brief). The homepage gained an FST
     block whose heading reads "Fascia Stretch Therapy™, in Your Home". The
     brief calls it an H2 AND says no homepage heading or meta may carry the
@@ -2739,3 +2810,13 @@ CHANGE LOG
   file; the badge alt text; the page title and meta; schema names. Assistant prompt
   sha256 f6935ddef0fcaa0d -> 6749df074f3ebec3; replies are marked server-side
   (ensureMarks). Calendly First Visit description marked (outside the repo).
+- Nov 22, 2026: Founders run (owner brief, Nov 21 2026; decisions on eight conflicts,
+  Nov 22 2026). New /in-home-stretching-founders (CANONICAL FACTS > FST > FOUNDERS
+  LANDING PAGE): the $99 founders First Visit for the first 5 new in-home clients
+  through December 31, 2026 (FOUNDERS RATE), on its own Calendly link (BOOKING, ONE
+  EXCEPTION). build.py gained LANDING (logo-only header, legal footer, noindex, out
+  of the sitemap and llms.txt, unlinked; checked) and IF-ASSET slots. certify.py:
+  FOUNDERS_* constants, fst_rates and fst_booking carve-outs, both self-tested both
+  ways. Harmony Grove joined the IN-HOME NO-FEE AREA on the FST surfaces (FST page and
+  header, Rates FST section, knowledge file FST section, the founders page); the
+  training surfaces still read six towns, by the owner's scope. K30 / K31 "also".

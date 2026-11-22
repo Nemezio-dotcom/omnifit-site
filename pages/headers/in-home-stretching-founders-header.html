@@ -1,0 +1,65 @@
+<!-- FOUNDERS LANDING PAGE HEADER JSON-LD · NOV 22 2026
+  WebPage (name and description are the page title and meta description;
+  build.py reads them) and FAQPage. The business is referenced by @id
+  (#localbusiness-of), never redefined; no Service or Offer node: the page
+  is noindex and the service's schema lives on the FST page. The FAQPage
+  mirrors the four on-page questions and answers byte for byte, in page
+  order (tools/certify.py checks it exactly). build.py adds the noindex
+  robots meta for every LANDING slug, so it is not repeated here.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/in-home-stretching-founders#webpage",
+      "url": "https://www.omnifittraining.com/in-home-stretching-founders",
+      "name": "In-Home Assisted Stretching | Founders Rate | OmniFit Performance",
+      "description": "Fascia Stretch Therapy™ in your home, North County San Diego. Founders rate: a $99 First Visit for the first 5 new clients, through December 31, 2026. Regular First Visit $150.",
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.omnifittraining.com/in-home-stretching-founders#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does it hurt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is designed to be comfortable, and I adjust to you throughout the session."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is FST™ massage or medical treatment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do I need at home?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A quiet room with floor space. The table comes with me. Wear clothes you can move in."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens after the First Visit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If you want to continue, follow-up sessions and 5-session packs are arranged with me at regular rates."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

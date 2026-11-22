@@ -8865,3 +8865,33 @@ Also: the assistant prompt's two mentions (sha256 `f6935ddef0fcaa0d` -> `6749df0
 
 **Checks:** `python3 build.py --check` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), five invariant hashes unchanged; `python3 tools/ownership.py` OWNERSHIP: PASSED; `node --test tests/assistant.test.mjs` 53 of 53 pass; `node tools/widgettest.js` RESULT: PASSED.
 
+
+# Founders run (Nov 22, 2026)
+
+Owner brief of Nov 21, 2026 (the founders offer doc); the build stopped on eight conflicts with CANON and the owner decided each on Nov 22, 2026. Nothing else on the site changed.
+
+## What changed
+
+- **New landing page** `/in-home-stretching-founders` (`pages/in-home-stretching-founders.html`, header `pages/headers/in-home-stretching-founders-header.html`): the $99 founders First Visit for the first 5 new in-home clients, through December 31, 2026, with the founders Calendly event embedded inline (`calendly-inline-widget`, widget.js async, plain-text fallback link). Title "In-Home Assisted Stretching | Founders Rate | OmniFit Performance". The whole page is one FST surface (FST-BLOCK markers). Hero image slot: `<!-- IF-ASSET /assets/img/fst-in-home-hero.jpg -->`; nothing renders until `site/img/fst-in-home-hero.jpg` exists (tested with a placeholder: two-column hero at 1280px, image under the copy on a phone, fold unchanged).
+- **build.py**: `LANDING` (logo-only header from the nav's logo, legal-only footer lifted from footer.html, `<meta name="robots" content="noindex, follow">` replacing the site-wide index meta, out of sitemap.xml and llms.txt, no Ask OmniFit loader), `IF_ASSET_RE` / `conditional_assets`, `landing_selftest` (runs on every build), and check() rules for each property plus "no built page links to it". main() prints the landing page separately.
+- **certify.py**: `FOUNDERS_*` constants; `fst_rates` accepts $99 beside "founders" on the two founders files only; `fst_booking` requires the founders Calendly link there and only there, lets "Book Your First Visit" scroll to `#fh-book` there, and flags the founders link on any other file; `FST_TRAVEL` carries Harmony Grove; new `fst_no_reviews` (the FST page and the founders page carry no reviews line). All self-tested both ways in `_selftest_fst`.
+- **Harmony Grove** joined the no-fee list on the FST surfaces: the FST page (rates note and the FAQ answer with its header mirror and `areaServed`), the Rates FST section, the knowledge file's FST section. `site/llms.txt` names no towns in its FST line, so it did not change. Training surfaces still read six towns (owner scope); CANON IN-HOME NO-FEE AREA records the split.
+- **CANON**: IN-HOME NO-FEE AREA, FST WHERE / TRAVEL FEE, FOUNDERS RATE, BOOKING (one exception), FOUNDERS LANDING PAGE, K30 / K31 `also`, changelogs.
+
+## Where CANON or certify.py conflicted with the brief (owner decisions, Nov 22 2026)
+
+1. Second Calendly link: allowed on the founders page only. 2. Harmony Grove: added, FST surfaces only. 3. Travel sentence in the canonical FST form. 4. "pain-free" only inside the verbatim definition: the "What assisted stretching is" body is the definition sentence; "Does it hurt?" answers "It is designed to be comfortable, and I adjust to you throughout the session." 5. The not-medical sentence verbatim; the FAQ question is the canonical "Is FST™ massage or medical treatment?" (the brief's "Is this massage or physical therapy?" carries "therapy" outside the method's name, an FST ban). 6. Disclaimer block verbatim, waiver sentence last. 7. No reviews line; the trust line is "Fascia Stretch Practitioner – Level 1". 8. "Precision Nutrition Level 2 Certified Master Coach". Also: button text "Book Your First Visit"; first person kept; "no crowded studio" became "no crowded facility" (certify bans "studio" on an FST surface; found during the build, not in the stop report).
+
+## Judgment calls
+
+- No Ask OmniFit widget on the landing page: one offer, no menu, and the widget's First Visit hand-off goes to the regular $150 link. WRONG IF the owner wants the widget there; then `LANDING` keeps the loader and the check drops that clause.
+- The header carries WebPage and FAQPage only (no Service/Offer with the $99 price): the page is noindex and the service schema lives on the FST page.
+- No Meta tracking code: the owner's open item.
+
+## Negative tests on the real files (each FAILED, restored)
+
+$99 on the FST page (fst_rates); the regular First Visit link on the founders page (fst_booking); "pain-free" in the FAQ answer (two strikes); the brief's travel wording (fst_travel); a link to the founders page from the FST page (build.py --check PROBLEM); "Book Your First Visit" to the consultation link on the founders page; a reviews line on the founders page (fst_no_reviews).
+
+## Checks
+
+`python3 build.py` RESULT: PASSED (49 pages plus 1 landing page); `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0), five invariant hashes unchanged; `python3 tools/ownership.py` PASSED; `node --test tests/assistant.test.mjs` all pass. Playwright at 390x844 and 412x915: the headline, the founders rate line and the first button end at 565px and 568px, inside the first screen; no horizontal scroll; one H1; no nav.
