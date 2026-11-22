@@ -30,8 +30,8 @@ export const UPSTREAM_TIMEOUT_MS = 25000;
 export const TURN_CAP_REPLY =
   "We've covered a lot here. The best next step is a 45-minute consultation, where Nemezio can answer the rest of your questions directly.";
 
-const TOKENS = { "[[BOOK]]": "book", "[[FIT_CHECK]]": "fit_check" };
-const TOKEN_RE = /\[\[(BOOK|FIT_CHECK)\]\]/g;
+const TOKENS = { "[[BOOK]]": "book", "[[FIT_CHECK]]": "fit_check", "[[FIRST_VISIT]]": "first_visit" };
+const TOKEN_RE = /\[\[(BOOK|FIT_CHECK|FIRST_VISIT)\]\]/g;
 
 // Thinking settings that keep a 400-token reply from being spent on reasoning.
 // Keyed by model so ASSISTANT_MODEL can name a model that takes neither field.
@@ -72,6 +72,18 @@ export function extractHandoff(text) {
     .replace(/[ \t]{2,}/g, " ")
     .trim();
   return { reply, handoff };
+}
+
+// Every mention of the stretching service carries its mark (owner, Nov 21
+// 2026; CANON CANONICAL FACTS). The knowledge file is written that way and the
+// model usually copies it; this makes it certain for what the visitor reads.
+// The names are listed as published, mark included, and the patterns are
+// derived from them. The alternate spelling ending in "-al" is not a mention.
+const MARKED_NAMES = ["Fascia Stretch Therapy™", "FST™"];
+const NAME_RE = new RegExp("\\b" + MARKED_NAMES[0].slice(0, -1) + "\\b(?!™)", "gi");
+const SHORT_RE = new RegExp("\\b" + MARKED_NAMES[1].slice(0, -1) + "\\b(?!™)", "g");
+export function ensureMarks(text) {
+  return String(text || "").replace(NAME_RE, (m) => m + "™").replace(SHORT_RE, (m) => m + "™");
 }
 
 // A reply cut off at max_tokens: drop a half-written handoff token ("[[BO"),

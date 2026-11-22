@@ -15,6 +15,7 @@ python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-ur
 NODE_PATH="$(npm root -g)" node tools/tracktest.js   # measurement test on the built site (Playwright)
 NODE_PATH="$(npm root -g)" node tools/mobileaudit.js [--open-details] [--shots DIR]   # 390/412px layout audit (Playwright)
 NODE_PATH="$(npm root -g)" node tools/choosertest.js [--shots DIR]   # rates chooser vs CANON card, keyboard/ARIA, 390/412 layout
+NODE_PATH="$(npm root -g)" node tools/widgettest.js   # Ask OmniFit widget: every hand-off draws its button (Playwright)
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
@@ -977,3 +978,182 @@ changelog comment is not copy). `_selftest_pb_not_served` checks both ways:
 the line passes in knowledge.md; it fails in pages/, public/, the prompt
 and the widget; a second copy, a reworded or extended line, the line inside
 another line and any other mention fail in knowledge.md too.
+
+## Fascia Stretch Therapy rules (`certify.py`, FST Launch run, Nov 2026)
+
+CANON: CANONICAL FACTS > FASCIA STRETCH THERAPY (FST) and STRETCH TO WIN
+MARKETING RULES. FST is a second service with its own vocabulary, and most of
+what is wrong on an FST surface is right everywhere else on the site
+("studio", "Teqneeq", "assessment", "$250 per session"). So the rules are
+**scoped to FST surfaces** (`fst_spans`), and a rule that reads the wrong
+surface reports nothing, which is why the scoping itself is self-tested:
+
+| Surface | How it is found |
+|---|---|
+| The FST page and its header | whole file (`FST_WHOLE_FILES`) |
+| A block on another page | between `<!-- FST-BLOCK -->` and `<!-- /FST-BLOCK -->` (Rates section, Services card, about entry, in-home sentence). Markers that do not pair up raise `FstMarkerError`, reported under (c), never skipped |
+| An ld+json node | the innermost object whose `"name"` contains "Fascia Stretch Therapy" (the Rates header's FST catalog and its three Offers), found by a string-aware brace scan |
+| A text file section | in `assistant/knowledge.md` and `site/llms.txt`, from a heading that names the service to the next heading |
+| Any other mention | "Fascia Stretch Therapy" or "FST" read in its own block element (HTML), ld+json string, or line (text), so an unmarked sentence is still screened |
+
+"Fascia Stretch Practitioner" (the credential) is **not** a mention: the
+eleven credentials-block pages name Teqneeq in the same paragraph and are not
+FST surfaces. Self-tested.
+
+Files swept: every file in the glob except the frozen record, `footer.html`
+included; the four assistant surfaces; `site/llms.txt`, `site/nav.html`,
+`site/blog.py` (`FST_EXTRA_FILES`).
+
+| Rule | Category | What it reports |
+|---|---|---|
+| `fst_banned` | (a) | on an FST surface: therapist, treat, heal, cure, compression, boots, percussion / massage gun, Teqneeq, studio, "recovery session", "therapy" outside the method's name, diagnose, rehab, fix, pain / injury, guarantee, free, "in N sessions", any `assess…` that is not the Performance Assessment being denied, an embedded video or a stretchtowin.com URL, and the not-medical sentence appearing twice |
+| `fst_rates` | (b) | every dollar figure on an FST surface is 150, 225, 200 or 1,000; a figure within 120 characters after "First Visit" is 150, after "single session" 225, after "pack" 200 or 1,000; "per session" is 200; an ld+json `price` is 150 / 225 / 200 / 1000 |
+| `retired_225` | (b) | `$225` anywhere that is not an FST surface. `$225` left `BANNED` in this run (it is the FST single session) and stays banned in its August meaning, the way `retired_75` reads `$75` |
+| `fst_fascial` | (b) | "Fascial" (word-bounded: "myofascial release" is another word) anywhere but `FST_FASCIAL_SENTENCE`, once on the page and once in the header mirror |
+| `fst_brand` | (b) | site-wide: "OmniFit FST", "OmniFit Stretch", "FST by OmniFit", "OmniFit('s) Fascia Stretch …", "Stretch to Win by OmniFit", "Frederick Stretch Therapy", and "Fascial Stretch Therapist" / "FST therapist" / "stretch therapist". Read on `_flat_blocks`, which breaks at block boundaries so a heading ending "OmniFit Performance" and a card starting "Fascia Stretch Therapy" are not one name |
+| `fst_trademark` | (b) | ANY "Fascia Stretch Therapy" or "FST" without ™ (or `&trade;` / `&#8482;`), in any swept file: copy, headings, attributes such as alt text, schema, the title and meta, the text files, the assistant prompt. Until the every-mention decision (Nov 21 2026) it checked a page's first mention only and skipped headers |
+| `fst_session_length` | (b) | CANON SESSION LENGTH and its FST carve-out: "90 minutes" anywhere without "First Visit" within 160 characters before or 60 after; on an FST surface, any length that is not 60 or 90 minutes |
+| `fst_booking` | (b) | a Calendly URL on an FST surface that is not `FST_CALENDLY`; a "Book Your First Visit" link that goes anywhere else |
+| `fst_page_required` | (b) and (c) | the FST page: attribution line (at the foot), the First Visit / Performance Assessment distinction exactly once, the cancellation line, the canonical travel-fee sentence, the booking button; the eight FAQ questions in order; the header FAQPage **byte-identical** to the page FAQ, question and answer (`==`, not `_norm`); the Service node, its provider `@id` and its three Offers; no business or person node defined in the header |
+| `fst_nav` | (b) | `site/nav.html` must carry exactly one FST link, `FST_NAV_LINK` ("Assisted Stretching"), directly after Rates; "stretch" anywhere else in the nav, the service name, "FST", the mark or the badge fails. REVERSED Nov 21 2026 (FST Reach run): until then the rule failed any "stretch" in the nav |
+| `fst_definition_required` | (b) | the canonical definition (`FST_DEFINITION`) is the verbatim lead in its five places (the FST page's definition block, the header's Service description, the knowledge file's first FST bullet, the llms.txt FST line, the homepage block) and appears once per file |
+| `fst_home_block` | (b) | the homepage block in `pages/home-4.html`: the owner's copy verbatim, exactly one link (to the FST page, so no Calendly link), no H1 or H2 |
+| `fst_badge`, `fst_badge_file` | (b) | the certification badge: `site/img/fst-certified-level-1.png` is the owner's file by sha256 (never resized, recoloured, cropped or redrawn); it appears exactly once in each of its THREE placements (the FST page, /about and, since Nov 21 2026, the homepage block in `pages/home-4.html`, `.fst-badge-panel`), with the one alt text, inside its white panel (`.fs-badge-panel`, `.ab-cred-badge`); any reference in another page, the footer, the nav, the layout, `site.css`, `site.js` or `blog.py` fails. Comments are not references. Self-tested both ways (`_selftest_fst_badge`) |
+
+**Payment terms and disclaimer (owner decisions, Nov 21 2026).** `FST_PAYMENT`,
+`FST_NO_REFUND`, `FST_EXPIRY` and `FST_DISCLAIMER` are CANON's sentences.
+`fst_page_required` wants each on the FST page (the disclaimer exactly once,
+above the attribution line) and `fst_terms_required` wants the same sentences
+on `pages/terms-and-conditions.html`, so the two cannot drift. The disclaimer's
+tail names injuries and medical conditions, which are banned words on an FST
+surface; `FST_DISCLAIMER_TAIL` is blanked before the scan as that exact text.
+The not-medical sentence may now appear twice in a file that carries the
+disclaimer (the FAQ answer and the disclaimer) and once anywhere else; a third
+copy, a second disclaimer or a reworded disclaimer fails (self-tested).
+"Non-refundable" stays the Foundation policy's word (`fee_language`); FST copy
+says "Fees are not refunded."
+
+**FST travel fee (owner, Nov 21 2026).** FST is booked and paid in one step,
+so the training sentence "a travel fee applies, confirmed before you book"
+cannot be true for it. `FST_TRAVEL` now ends "you are told the amount when you
+book, and it is collected at the visit", and `fst_travel` fails the training
+phrase, or any other form of "a travel fee applies", on an FST surface. Off an
+FST surface the training phrase is untouched and still required in the
+knowledge file's in-home section (`ASSISTANT_REQUIRED`). Self-tested both ways.
+
+**Canonical sentences are exempt as that exact sentence and nothing looser.**
+`FST_NOT_MEDICAL` ("It is not medical treatment, not physical therapy and not
+massage.") and the owner's FAQ question it answers (`FST_MEDICAL_QUESTION`)
+are blanked before the word scan; a reworded version of either still fires
+(self-tested). The Calendly booking URL carries "recovery-session" and
+"assessment" in its slug; `_visible_copy` blanks URLs, so the slug is not copy.
+
+**The 90-minute First Visit and the session-length rule.** Before this run
+"session length" was three retired phrases in `RETIRED_LAUNCH_COPY`
+("45–60 min", "30 or 45-minute", "30–45 min"). `_selftest_fst` asserts that
+"The First Visit is 90 minutes. FST sessions are 60 minutes." passes
+`retired_launch_copy`, and `fst_session_length` adds the carve-out in the
+other direction: 90 minutes is legal only beside the First Visit.
+
+**Self-test (`_selftest_fst`, every run, before the sweep).** Canonical copy
+passes every rule; nineteen banned sentences fire on the FST page and four
+ordinary sentences stay quiet off it; a marked block, an unmarked mention, an
+ld+json Offer and a knowledge.md section are each read as a surface while the
+copy beside them is not; an unclosed marker raises; seven wrong prices fire;
+`$225` fires off-surface and stays quiet in a third-party range and inside
+`$2,250`; "Fascial" fires off the page, twice, and in another sentence, while
+the header mirror and "myofascial" pass; ten brand names and titles fire and
+five legitimate sentences pass; the mark, the session lengths and the booking
+link both ways; and a complete page with an exact mirror passes while a
+one-space drift, a missing question, wrong Offer prices, a second business
+node, each missing required line, the distinction stated twice and the
+attribution line above the FAQ all fail.
+
+**Negative tests on the real files (Nov 2026; each mutation applied, certify
+run, file restored).** The table is in REPORT.md, FST Launch run. Two defects
+they surfaced before the rules were trusted:
+
+| Shortcut | What broke | Caught by |
+|---|---|---|
+| `fascial` as a substring | eight hits on "myofascial release" across corrective, desk-worker, partners and the-omnifit-method: correct copy reported as a violation | the first real run |
+| Banning "treat…" on the whole FST page | the owner's own FAQ question, "Is FST massage or medical treatment?", fired | the self-test's canonical page |
+
+`tools/ownership.py` reads two new CANON table entries, K30 (fascia stretch
+therapy) and K31 (assisted stretching), both owned by
+/fascia-stretch-therapy-san-diego, with four fixtures: an H2 on the Rates page
+and a Services title must fail; the owner page, and the Rates page naming the
+service on an H3 and in body copy, must pass.
+
+## Widget test (`tools/widgettest.js`, Nov 21 2026)
+
+Playwright against the built site. It answers `/api/ask` itself (GET
+`{ok: true}`, POST a fixed reply carrying the hand-off under test) and drives
+the real widget: `first_visit` must draw the gold "Book Your First Visit"
+button to the First Visit booking link, `book` the consultation button,
+`fit_check` the Fit Check button, and an unknown value no button at all.
+
+It exists because the First Visit hand-off passed every server test
+(`tests/assistant.test.mjs`) while the widget's own whitelist of hand-off
+values dropped it, so no button drew: a check reporting success on one half of
+a feature. Negative-tested: with `first_visit` taken back out of the widget's
+whitelist the test reports `FAIL hand-off "first_visit": no button` and exits 1.
+
+## FST Reach run (Nov 21 2026): the "pain-free" carve-out and the nav reversal
+
+**"pain-free".** The owner's canonical definition reads "Fascia Stretch Therapy
+(FST) is a modality of table-based assisted stretching that is pain-free, fully
+customizable and improves functionality." On an FST surface "pain-free" trips
+`fst_banned` twice, once as `pain` and once as `free`. The carve-out is the
+same shape as the other canonical sentences: `FST_DEFINITION` is blanked, as
+that exact sentence, before the word scan. Nothing in the patterns was
+loosened, so "pain-free" anywhere else on an FST surface still produces both
+findings, and "pain relief" and "free" still fail. Self-tested: the verbatim
+sentence passes; "Our stretching is pain-free." produces exactly two findings;
+the definition with one word changed ("pain-free and fully") fails; the
+definition followed by "It is pain-free every time." fails.
+
+The site-wide TIER 1 rules (`guarantee_any`, `result_near_timeframe`,
+`population_clinical_claim`, `uncertified_claims`) do not fire on the
+definition: it names no timeframe, no population and no condition. That is a
+fact about what those rules look for, not a ruling that the sentence makes no
+claim. CANON records it as an owner decision.
+
+**The nav.** The Nov 20 rule failed any "stretch" in `site/nav.html`. The Nov
+21 brief reverses it. `fst_nav` now requires the one link and still fails
+everything the brief keeps out: a second "stretch" item, the service name,
+"FST", the mark, the badge, the link anywhere but directly after Rates.
+Self-tested with nine failing variants and the one passing nav.
+
+**"Stretch Practitioner" alone.** `_FST_TITLE` gained
+`(?<!Fascia )\bStretch\s+Practitioner\b`; the full title passes.
+
+**Negative tests on the real files** are in REPORT.md, FST Reach run.
+
+## The mark on every mention (Nov 21 2026)
+
+Owner decision: the name is the Stretch to Win Institute's property, so every
+published "Fascia Stretch Therapy" and "FST" carries ™. `fst_trademark` reads
+the file with comments, CSS and executable scripts blanked (`_blank_noncopy`),
+so tags' attributes and ld+json ARE read: alt text and schema names count.
+Not mentions: the FST-BLOCK markers (comments), CSS, lower-case ids, classes
+and URLs (`\bFST\b` is case-sensitive and `_` is a word character, so
+`FST_NAV_LINK`-style identifiers are not matched either), the alternate
+spelling "fascial stretch therapy", and the credential "Fascia Stretch
+Practitioner".
+
+The canonical constants carry the mark (`FST_DEFINITION`, `FST_DISCLAIMER`,
+`FST_FAQ_QUESTIONS`, `FST_BADGE_ALT`, the Service name), so a page that drops
+it fails twice: once here and once as "not verbatim". `_FST_TITLE` and
+`_FST_BRAND` accept `FST™`, so the mark cannot hide "FST™ therapist" or
+"OmniFit FST™" (self-tested).
+
+The assistant's replies are generated, so no sweep can read them.
+`ensureMarks` in `functions/_lib/assistant.js` adds the mark to any mention
+the model leaves bare before the reply is logged and returned;
+`tests/assistant.test.mjs` covers it, and asserts the knowledge the model
+receives has no unmarked mention. In that file the names are listed marked
+(`MARKED_NAMES`) and the patterns derived from them, because the file is
+itself a swept surface.
+
+Self-tested both ways; negative tests on the real files are in REPORT.md.
+

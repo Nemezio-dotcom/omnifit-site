@@ -201,7 +201,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden Peptide Fundamentals Certification" },
-        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Nutrition Certification" }
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Nutrition Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Fascia Stretch Practitioner – Level 1", "recognizedBy": { "@type": "Organization", "name": "Stretch to Win Institute" } }
       ]
     },
     {
@@ -417,7 +418,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   plan-change questions added; V6, Oct 17 2026: "Is OmniFit worth the price
   compared to a regular gym membership?", the homepage answer verbatim). LocalBusiness referenced by @id.
   V4: FAQ replaced (pricing and commitment); OfferCatalog rebuilt with
-  sessions, add-ons, deposit and assessment. -->
+  sessions, add-ons, deposit and assessment.
+  V7 (Nov 2026, FST Launch run): one more OfferCatalog, "Fascia Stretch
+  Therapy (in-home)", three Offers from CANON CANONICAL FACTS (First Visit
+  150, single session 225, 5-session pack 1000 = 5 x 200). In-home only. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1146,6 +1150,57 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
               }
             }
           ]
+        },
+        {
+          "@type": "OfferCatalog",
+          "name": "Fascia Stretch Therapy™ (in-home)",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Fascia Stretch Therapy™ - First Visit",
+              "description": "In-home. 90 minutes. Required for every new FST™ client: a range-of-motion check, the first Fascia Stretch Therapy™ session on the table, and a re-measure at the end.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-fst",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Fascia Stretch Therapy™ - First Visit"
+              },
+              "price": "150.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "Fascia Stretch Therapy™ - single session",
+              "description": "In-home. One 60-minute session, booked after the First Visit. Expires 30 days from purchase.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-fst",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Fascia Stretch Therapy™ - single session"
+              },
+              "price": "225.00",
+              "priceCurrency": "USD"
+            },
+            {
+              "@type": "Offer",
+              "name": "Fascia Stretch Therapy™ - 5-session pack",
+              "description": "In-home. Five 60-minute sessions at $200 per session. Expires 8 weeks from purchase.",
+              "url": "https://www.omnifittraining.com/training-rates-san-diego#rt-fst",
+              "seller": {
+                "@id": "https://www.omnifittraining.com/#localbusiness-of"
+              },
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Fascia Stretch Therapy™ - 5-session pack"
+              },
+              "price": "1000.00",
+              "priceCurrency": "USD"
+            }
+          ]
         }
       ]
     },
@@ -1822,6 +1877,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
           <li><a href="/">Home</a></li>
           <li><a href="/personal-training-services">Programs</a></li>
           <li><a href="/training-rates-san-diego" aria-current="page">Rates</a></li>
+          <li><a href="/fascia-stretch-therapy-san-diego">Assisted Stretching</a></li>
           <li class="has-menu">
             <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
             <ul class="site-nav__menu" id="menu-methodology">
@@ -2018,6 +2074,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
       <a href="#rt-reset">Virtual</a>
       <a href="#rt-change">Changes</a>
       <a href="#rt-dial">Accountability</a>
+      <a href="#rt-fst">FST™</a>
       <a href="#rt-faq">FAQ</a>
     </div>
   </nav>
@@ -2665,6 +2722,40 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
   </div>
     </div>
   </details>
+
+  <!-- ═══════ FASCIA STRETCH THERAPY (IN-HOME) ═══════
+       FST Launch run, Nov 2026. A plain section, not one of the seven
+       expandable ones (tools/choosertest.js and tracktest.js count those).
+       CANON: CANONICAL FACTS > FASCIA STRETCH THERAPY (FST). In-home only:
+       nothing between the FST-BLOCK markers names the training facility. -->
+  <!-- FST-BLOCK -->
+  <div class="rt-section" id="rt-fst" style="margin-top:56px;">
+    <div class="rt-section-head rt-reveal">
+      <span class="rt-label">Also Offered</span>
+      <hr class="rt-divider">
+      <h3 class="rt-subhead">Fascia Stretch Therapy™ <em>(in-home)</em></h3>
+      <p style="color:var(--white-50); font-size:14px; max-width:660px; margin:8px auto 0;">Assisted stretching on a table, in your home. It is a separate service from training: open to anyone, with no program and no Performance Assessment required. Every new FST™ client starts with the First Visit.</p>
+    </div>
+  </div>
+
+  <div class="rt-wrap">
+    <div class="rt-commit-wrap rt-reveal">
+      <table class="rt-commit">
+        <thead>
+          <tr><th scope="col"><span class="rt-sr">Option</span></th><th scope="col">Price</th><th scope="col">Length and terms</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">First Visit</th><td data-label="Price">$150</td><td data-label="Length and terms">90 minutes. Required for every new FST™ client: a range-of-motion check, your first session on the table, and a re-measure at the end.</td></tr>
+          <tr><th scope="row">Single session</th><td data-label="Price">$225</td><td data-label="Length and terms">60 minutes. Booked after your First Visit. Expires 30 days from purchase.</td></tr>
+          <tr><th scope="row">5-session pack</th><td data-label="Price">$200 per session ($1,000)</td><td data-label="Length and terms">60 minutes each. Expires 8 weeks from purchase.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rt-steps-note rt-reveal" style="margin-bottom:10px;">Offered in-home only. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.</p>
+    <p class="rt-steps-note rt-reveal" style="margin-bottom:10px;">Follow-up sessions and 5-session packs are arranged with Nemezio after your First Visit and paid in advance. Fees are not refunded. With 24 hours' notice or more you can reschedule. Cancellations with less than 24 hours' notice and no-shows forfeit the fee.</p>
+    <p class="rt-steps-note rt-reveal">What a visit is like, who it suits and how to book: <a href="/fascia-stretch-therapy-san-diego">Fascia Stretch Therapy™ in San Diego</a>.</p>
+  </div>
+  <!-- /FST-BLOCK -->
   </div>
 
 
@@ -2985,6 +3076,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
           <li><a href="/glp-1-personal-training-san-diego"><span>Training on a GLP-1</span></a></li>
           <li><a href="/personal-trainer-over-50-san-diego"><span>Training After 50</span></a></li>
           <li><a href="/couples-personal-training-san-diego"><span>Couples Training</span></a></li>
+          <li><a href="/fascia-stretch-therapy-san-diego"><span>Fascia Stretch Therapy™</span></a></li>
           <li><a href="/hsa-fsa-personal-training"><span>HSA &amp; FSA Eligibility</span></a></li>
           <li><a href="/how-to-choose-a-personal-trainer-san-diego"><span>How to Choose a Trainer</span></a></li>
           <li><a href="/blog"><span>Journal</span></a></li>

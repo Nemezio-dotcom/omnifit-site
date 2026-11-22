@@ -1,0 +1,413 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     OmniFit Performance | Founders offer landing page: in-home assisted
+     stretching (Meta ad). NEW Nov 22 2026 (owner brief, Nov 21-22 2026).
+     CANON: CANONICAL FACTS > FASCIA STRETCH THERAPY (FST) > FOUNDERS
+     LANDING PAGE. One page, one offer, no menu: build.py LANDING builds
+     it with the logo-only header, the legal-only footer, a noindex robots
+     meta, out of sitemap.xml, and nothing links to it.
+     The whole page is one FST surface (FST-BLOCK markers), so every FST
+     rule in tools/certify.py reads all of it. Modelled on
+     fascia-stretch-therapy-san-diego: same design system, CSS scoped to
+     #omni-fh, class prefix fh-. First person is the owner's voice for this
+     page. No reviews line (CANON: the 190+ reviews are training reviews).
+     Hero image: the IF-ASSET slot for /assets/img/fst-in-home-hero.jpg
+     renders nothing until site/img/fst-in-home-hero.jpg exists.
+     Title and meta description: the WebPage node in
+     pages/headers/in-home-stretching-founders-header.html. The FAQPage in
+     that header mirrors the Questions below byte for byte.
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style>
+  #omni-fh {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-30: rgba(255,255,255,0.3);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px;
+    --radius-lg: 12px;
+    background: linear-gradient(180deg, var(--navy), var(--navy-mid));
+    color: var(--white);
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    margin: 0; padding: 0;
+  }
+  #omni-fh,
+  #omni-fh *,
+  #omni-fh *::before,
+  #omni-fh *::after {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif !important;
+    box-sizing: border-box;
+  }
+  #omni-fh h1, #omni-fh h2, #omni-fh h3,
+  #omni-fh p, #omni-fh ul, #omni-fh ol,
+  #omni-fh li, #omni-fh figure, #omni-fh section, #omni-fh div { margin: 0; padding: 0; border: 0; }
+
+  /* ════════════════ HERO ════════════════ */
+  #omni-fh .fh-hero {
+    padding: 2.6rem 1.25rem 2.4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  #omni-fh .fh-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.25;
+  }
+  #omni-fh .fh-hero-copy { position: relative; text-align: center; }
+  #omni-fh .fh-eyebrow {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  #omni-fh .fh-hero h1 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(30px, 7.6vw, 48px) !important;
+    font-weight: 700 !important;
+    line-height: 1.12 !important;
+    color: var(--white) !important;
+    margin-bottom: 14px !important;
+    letter-spacing: -0.5px !important;
+    text-transform: none !important;
+  }
+  #omni-fh .fh-sub {
+    font-size: clamp(15px, 2.1vw, 18px);
+    color: var(--white-70);
+    max-width: 680px;
+    margin: 0 auto 18px;
+    line-height: 1.65;
+  }
+  #omni-fh .fh-offer {
+    display: block;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin: 0 auto 18px;
+    max-width: 680px;
+    font-size: clamp(15px, 2.1vw, 17px);
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--white);
+  }
+  #omni-fh .fh-offer strong { color: var(--gold-light); }
+  #omni-fh .fh-trust {
+    margin-top: 12px;
+    font-size: 12.5px;
+    letter-spacing: .3px;
+    color: var(--white-50);
+  }
+  #omni-fh .fh-hero-media { position: relative; }
+  #omni-fh .fh-hero-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--white-10);
+  }
+
+  /* ── Buttons ── */
+  #omni-fh .fh-btn,
+  #omni-fh a.fh-btn:link,
+  #omni-fh a.fh-btn:visited {
+    display: inline-block;
+    padding: 16px 36px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    background: var(--gold-btn, var(--gold));
+    color: var(--navy) !important;
+    border: 2px solid var(--gold);
+    transition: all 0.3s;
+  }
+  #omni-fh a.fh-btn:hover {
+    background: var(--gold-btn-hover, var(--gold-light));
+    border-color: var(--gold-light);
+    color: var(--navy) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+  }
+
+  /* ════════════════ SECTIONS ════════════════ */
+  #omni-fh .fh-section { max-width: 920px; margin: 0 auto; text-align: center; }
+  #omni-fh .fh-section + .fh-section { margin-top: 3rem; }
+  #omni-fh .fh-divider {
+    width: 50px; height: 3px !important;
+    background: var(--gold) !important; border: none !important;
+    margin: 0 auto 16px !important; border-radius: 2px;
+  }
+  #omni-fh h2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(24px, 3.6vw, 34px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 14px !important;
+    letter-spacing: -0.3px !important;
+    color: var(--white) !important;
+    text-transform: none !important;
+    text-align: center !important;
+  }
+  #omni-fh p { color: var(--white-70); line-height: 1.75; font-size: 1rem; }
+  #omni-fh .fh-section > p { max-width: 760px; margin-left: auto; margin-right: auto; }
+  #omni-fh .fh-section > p + p { margin-top: 12px; }
+  #omni-fh .fh-section .fh-btn { margin-top: 22px; }
+
+  /* ── Steps ── */
+  #omni-fh .fh-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin: 24px auto 0;
+    text-align: left;
+  }
+  #omni-fh .fh-step {
+    background: var(--white-05);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 22px 20px;
+  }
+  #omni-fh .fh-step svg.omni-icon { font-size: 30px; display: block; margin-bottom: 12px; }
+  #omni-fh .fh-step-title {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 19px; font-weight: 600;
+    color: var(--white); margin-bottom: 6px;
+  }
+  #omni-fh .fh-step p { font-size: 14.5px; color: var(--white-70); line-height: 1.65; }
+
+  /* ── Founders box ── */
+  #omni-fh .fh-box {
+    border: 2px solid var(--gold);
+    border-radius: var(--radius-lg);
+    background: var(--navy-light);
+    padding: 30px 26px 28px;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  #omni-fh .fh-box h2 { text-align: center !important; }
+  #omni-fh .fh-box ul { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; }
+  #omni-fh .fh-box li { position: relative; padding-left: 22px; font-size: 15.5px; color: var(--white-70); line-height: 1.6; }
+  #omni-fh .fh-box li::before { content: ''; position: absolute; left: 0; top: .72em; width: 10px; height: 2px; background: var(--gold); }
+  #omni-fh .fh-box li strong { color: var(--white); }
+  #omni-fh .fh-box .fh-box-cta { text-align: center; margin-top: 24px; }
+
+  /* ── Booking ── */
+  #omni-fh .fh-book { max-width: 920px; margin: 0 auto; text-align: center; }
+  #omni-fh .fh-book .calendly-inline-widget {
+    margin: 22px auto 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--white-10);
+  }
+  #omni-fh .fh-book-fallback { margin-top: 14px; font-size: 13.5px; }
+
+  /* ── Questions ── */
+  #omni-fh .fh-faq { max-width: 820px; margin: 22px auto 0; text-align: left; display: grid; gap: 10px; }
+  #omni-fh .fh-faq-item {
+    border-radius: var(--radius);
+    border: 1px solid var(--white-20);
+    background: var(--navy-light);
+    padding: 1rem 1.3rem;
+  }
+  #omni-fh .fh-faq-q { font-weight: 700; margin-bottom: 6px; color: var(--white); font-size: 15.5px; }
+  #omni-fh .fh-faq-a { font-size: 14.5px; color: var(--white-70); line-height: 1.7; }
+
+  /* ── Small print ── */
+  #omni-fh .fh-fine { max-width: 820px; margin: 0 auto; text-align: center; }
+  #omni-fh .fh-fine p { font-size: 12.5px; color: var(--white-50); line-height: 1.7; }
+  #omni-fh .fh-fine p + p { margin-top: 10px; }
+
+  /* ── Links ── */
+  #omni-fh a { color: var(--gold) !important; text-decoration: underline; text-underline-offset: 3px; }
+  #omni-fh a:hover { color: var(--gold-light) !important; }
+  #omni-fh a.fh-btn, #omni-fh a.fh-btn:link, #omni-fh a.fh-btn:visited { text-decoration: none !important; }
+
+  /* ════════════════ RESPONSIVE ════════════════ */
+  @media (min-width: 900px) {
+    #omni-fh .fh-hero { padding: 4.5rem 2.5rem 3.5rem; }
+    /* Two columns only once the hero image ships (the IF-ASSET slot). */
+    #omni-fh .fh-hero:has(.fh-hero-media) { grid-template-columns: 1.15fr 1fr; gap: 48px; }
+    #omni-fh .fh-hero:has(.fh-hero-media) .fh-hero-copy { text-align: left; }
+    #omni-fh .fh-hero:has(.fh-hero-media) .fh-sub,
+    #omni-fh .fh-hero:has(.fh-hero-media) .fh-offer { margin-left: 0; }
+  }
+  @media (max-width: 640px) {
+    #omni-fh .fh-hero { padding-top: 2rem; }
+    #omni-fh .fh-btn, #omni-fh a.fh-btn:link, #omni-fh a.fh-btn:visited { width: 100%; max-width: 360px; text-align: center; }
+    #omni-fh .fh-steps { grid-template-columns: 1fr; max-width: 420px; }
+    #omni-fh .fh-box { padding: 24px 18px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #omni-fh a.fh-btn:hover { transform: none; }
+  }
+</style>
+
+<!-- FST-BLOCK: the whole founders page is one FST surface -->
+<div id="omni-fh">
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="fh-hero" id="fh-hero">
+    <div class="fh-hero-copy">
+      <span class="fh-eyebrow">In-home assisted stretching · North County San Diego</span>
+      <h1>Assisted stretching that comes to your home.</h1>
+      <p class="fh-sub">A 90-minute First Visit on the table, in your own living room. Your range of motion is measured before and after, so you can compare the two yourself.</p>
+      <p class="fh-offer"><strong>Founders rate: $99</strong> for the first 5 new clients, through December 31, 2026. Regular First Visit: $150.</p>
+      <a class="fh-btn" href="#fh-book">Book Your First Visit</a>
+      <p class="fh-trust">Fascia Stretch Practitioner – Level 1</p>
+    </div>
+    <!-- IF-ASSET /assets/img/fst-in-home-hero.jpg --><div class="fh-hero-media"><img src="/assets/img/fst-in-home-hero.jpg" alt="Nemezio LopezPerez stretching a client on the table, in the client's home" width="1200" height="900" decoding="async" fetchpriority="high"></div><!-- /IF-ASSET -->
+  </section>
+
+  <div class="omni-band omni-band--cream">
+    <!-- ════════════ WHAT IT IS ════════════ -->
+    <section class="fh-section" id="fh-what">
+      <hr class="fh-divider">
+      <h2>What assisted stretching is</h2>
+      <p>Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted stretching that is pain-free, fully customizable and improves functionality. You lie on the table. I do the work.</p>
+    </section>
+
+    <!-- ════════════ THE FIRST VISIT ════════════ -->
+    <section class="fh-section" id="fh-first-visit">
+      <hr class="fh-divider">
+      <h2>What happens in your First Visit</h2>
+      <div class="fh-steps">
+        <div class="fh-step">
+          <svg class="omni-icon omni-icon--ruler" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L20 4v16z"/><path d="M12 20v-3M16 20v-3M20 12h-3M20 16h-3"/></svg>
+          <div class="fh-step-title">1. Measure.</div>
+          <p>A range-of-motion check before we start.</p>
+        </div>
+        <div class="fh-step">
+          <svg class="omni-icon omni-icon--lotus" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v5"/><path d="M4 18c3-2 5-5 8-5s5 3 8 5"/><path d="M4 18c2 1.5 4 2 8 2s6-.5 8-2"/></svg>
+          <div class="fh-step-title">2. Stretch.</div>
+          <p>Your first Fascia Stretch Therapy™ (FST™) session on the table.</p>
+        </div>
+        <div class="fh-step">
+          <svg class="omni-icon omni-icon--clipboard" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg>
+          <div class="fh-step-title">3. Re-measure.</div>
+          <p>The same ranges, measured again at the end.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--navy">
+    <!-- ════════════ I BRING THE TABLE ════════════ -->
+    <section class="fh-section" id="fh-table">
+      <hr class="fh-divider">
+      <h2>I bring the table to you</h2>
+      <p>No driving, no gym, no crowded facility. All you need is a quiet room with floor space and clothes you can move in.</p>
+    </section>
+
+    <!-- ════════════ WHO YOU'RE BOOKING ════════════ -->
+    <section class="fh-section" id="fh-who">
+      <hr class="fh-divider">
+      <h2>Who you're booking</h2>
+      <p>Nemezio LopezPerez, founder of OmniFit Performance. Fascia Stretch Practitioner – Level 1, NASM Elite Trainer and Precision Nutrition Level 2 Certified Master Coach.</p>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--cream">
+    <!-- ════════════ THE FOUNDERS RATE ════════════ -->
+    <section class="fh-section" id="fh-rate">
+      <div class="fh-box">
+        <h2>The founders rate</h2>
+        <ul>
+          <li><strong>$99 for your First Visit.</strong> Regular price: $150.</li>
+          <li>For the first 5 new in-home clients, or through December 31, 2026, whichever comes first.</li>
+          <li>First Visit only, one per client.</li>
+          <li>Follow-up sessions and 5-session packs are at regular rates, arranged with me after your First Visit.</li>
+        </ul>
+        <div class="fh-box-cta"><a class="fh-btn" href="#fh-book">Book Your First Visit</a></div>
+      </div>
+    </section>
+
+    <!-- ════════════ WHERE ════════════ -->
+    <section class="fh-section" id="fh-where">
+      <hr class="fh-divider">
+      <h2>Where I come to you</h2>
+      <p>In-home only. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.</p>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--navy">
+    <!-- ════════════ BOOKING ════════════ -->
+    <section class="fh-book" id="fh-book">
+      <hr class="fh-divider">
+      <h2>Book Your First Visit</h2>
+      <p>Pick a time below. Payment confirms your booking.</p>
+      <div class="calendly-inline-widget" data-url="https://calendly.com/nemezio-omnifittraining/founders-first-visit-in-home-assisted-stretching" style="min-width:320px;height:1000px;"></div>
+      <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <p class="fh-book-fallback">If the booking box does not load, <a href="https://calendly.com/nemezio-omnifittraining/founders-first-visit-in-home-assisted-stretching" target="_blank" rel="noopener">open the booking page</a>.</p>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--cream">
+    <!-- ════════════ QUESTIONS ════════════ -->
+    <section class="fh-section" id="fh-questions">
+      <hr class="fh-divider">
+      <h2>Questions</h2>
+      <div class="fh-faq">
+        <div class="fh-faq-item">
+          <div class="fh-faq-q">Does it hurt?</div>
+          <div class="fh-faq-a">It is designed to be comfortable, and I adjust to you throughout the session.</div>
+        </div>
+        <div class="fh-faq-item">
+          <div class="fh-faq-q">Is FST™ massage or medical treatment?</div>
+          <div class="fh-faq-a">No. It is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage.</div>
+        </div>
+        <div class="fh-faq-item">
+          <div class="fh-faq-q">What do I need at home?</div>
+          <div class="fh-faq-a">A quiet room with floor space. The table comes with me. Wear clothes you can move in.</div>
+        </div>
+        <div class="fh-faq-item">
+          <div class="fh-faq-q">What happens after the First Visit?</div>
+          <div class="fh-faq-a">If you want to continue, follow-up sessions and 5-session packs are arranged with me at regular rates.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--navy">
+    <!-- ════════════ SMALL PRINT (CANON, verbatim) ════════════ -->
+    <section class="fh-fine" id="fh-fine">
+      <p>Payment confirms your booking. Fees are not refunded. With 24 hours' notice or more you can reschedule. Cancellations with less than 24 hours' notice and no-shows forfeit the fee.</p>
+      <p>Fascia Stretch Therapy™ is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage. Information on this website and during a visit is educational and is not medical advice. Consult your physician before booking, particularly if you have injuries, medical conditions, or are pregnant. A Liability Waiver and Release must be signed before your First Visit.</p>
+      <p>Fascia Stretch Therapy™ and FST™ are trademarks of the Stretch to Win Institute.</p>
+    </section>
+  </div>
+
+</div>
+<!-- /FST-BLOCK -->

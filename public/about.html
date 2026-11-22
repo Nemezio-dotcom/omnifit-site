@@ -201,7 +201,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
         { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden Peptide Fundamentals Certification" },
-        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Nutrition Certification" }
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Nutrition Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Fascia Stretch Practitioner – Level 1", "recognizedBy": { "@type": "Organization", "name": "Stretch to Win Institute" } }
       ]
     },
     {
@@ -411,7 +412,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   Person is the primary entity here — this is the page that answers
   "who is Nemezio LopezPerez" for search engines and AI assistants.
   LocalBusiness is referenced by @id from the homepage, never redefined.
-  14 credentials, each with its issuing organization: the thirteen certifications plus NASM Elite Trainer status.
+  15 credentials, each with its issuing organization: the fourteen certifications plus NASM Elite Trainer status
+  (Fascia Stretch Practitioner – Level 1, Stretch to Win Institute, added Nov 2026).
 -->
 <script type="application/ld+json">
 {
@@ -602,6 +604,15 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
             "@type": "Organization",
             "name": "Eden"
           }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Professional Certification",
+          "name": "Fascia Stretch Practitioner – Level 1",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Stretch to Win Institute"
+          }
         }
       ],
       "workLocation": {
@@ -679,6 +690,9 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-about .ab-cred-name { font-weight:600; color:var(--white); font-size:15px; line-height:1.45; }
   #omni-about .ab-cred-issuer { display:block; font-size:11px; font-weight:500; color:var(--white-50); letter-spacing:.5px; margin-top:3px; text-transform:uppercase; }
   #omni-about .ab-cred-what { font-size:14.5px; color:var(--white-70); line-height:1.75; }
+  /* FST badge: teal on transparent, so it sits on a white rounded panel */
+  #omni-about .ab-cred-badge { display:block; width:180px; max-width:100%; margin:12px 0 6px; padding:12px; background:#ffffff; border:1px solid rgba(10,22,40,.10); border-radius:12px; line-height:0; box-shadow:0 6px 18px rgba(10,22,40,.06); }
+  #omni-about .ab-cred-badge img { display:block; width:100% !important; height:auto !important; }
 
   #omni-about .ab-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:26px; }
   #omni-about .ab-card { background:var(--navy-light); border:1px solid var(--white-10); border-radius:var(--radius-lg); padding:26px 24px; }
@@ -777,6 +791,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
           <li><a href="/">Home</a></li>
           <li><a href="/personal-training-services">Programs</a></li>
           <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li><a href="/fascia-stretch-therapy-san-diego">Assisted Stretching</a></li>
           <li class="has-menu">
             <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
             <ul class="site-nav__menu" id="menu-methodology">
@@ -946,6 +961,16 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <div class="ab-cred-what">A growing number of clients arrive already taking a GLP-1 medication prescribed by their physician. That changes appetite, energy, and how much muscle is at risk during weight loss, which changes how they should be trained and fed. These three certifications cover exactly that. They come through a certified collaboration with Eden, a network of metabolic health professionals. Peptide Fundamentals adds a working knowledge of how peptide-based therapies interact with training load, recovery demands, and body composition goals, so the programming complements clinician-guided protocols rather than working against them. To be explicit about scope: I do not prescribe, I do not manage dosing, and I do not advise on whether anyone should be on one. OmniFit Performance is not a medical provider and does not prescribe, administer, or recommend medications, peptides, or clinical protocols. Your physician does all of that. My job starts once they have.</div>
       </div>
     </div>
+
+    <!-- FST-BLOCK (CANON: FASCIA STRETCH THERAPY; in-home only, no facility named here) -->
+    <div class="ab-cred-group">
+      <div class="ab-cred-head">Assisted Stretching</div>
+      <div class="ab-cred">
+        <div class="ab-cred-name">Fascia Stretch Practitioner – Level 1<span class="ab-cred-issuer">Stretch to Win Institute</span><span class="ab-cred-badge"><img src="/assets/img/fst-certified-level-1.png" alt="Fascia Stretch Therapy™ Certified Level 1 badge" width="1183" height="502" loading="lazy" decoding="async"></span></div>
+        <div class="ab-cred-what">The Stretch to Win Institute's Level 1 training in Fascia Stretch Therapy™: 38 hours, with the certificate issued November 20, 2026. It is the credential behind the assisted stretching I offer in clients' homes. That is a separate service from training, and you do not need to be a training client to book it. <a href="/fascia-stretch-therapy-san-diego">Fascia Stretch Therapy™ in San Diego</a></div>
+      </div>
+    </div>
+    <!-- /FST-BLOCK -->
   </div>
 
   <div class="ab-certs">
@@ -997,7 +1022,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
         <a href="https://www.precisionnutrition.com/" target="_blank" rel="noopener"><img loading="lazy" width="52" height="52" src="/assets/img/pn-logo-ssr.webp" alt="Precision Nutrition Sleep, Stress &amp; Recovery Badge"></a>
         <a href="https://www.precisionnutrition.com/" target="_blank" rel="noopener"><img loading="lazy" width="52" height="52" src="https://images.squarespace-cdn.com/content/63617698cf683b245ef93bea/2e0d8b2c-2c11-497c-a372-5512bbebb95e/PN+Logo+NMH.png?content-type=image%2Fpng" alt="Precision Nutrition Nutrition for Metabolic Health Badge"></a>
     </div>
-    <p class="ab-badges-note">Ten of thirteen certifications are shown above as a certificate or an issuer badge. Eden GLP-1 Fitness, GLP-1 Nutrition, Peptide Fundamentals, and NASM Elite Trainer status are listed above without one.</p>
+    <p class="ab-badges-note">Eleven of fourteen certifications are shown above as a certificate or an issuer badge. Eden GLP-1 Fitness, GLP-1 Nutrition, Peptide Fundamentals, and NASM Elite Trainer status are listed above without one.</p>
   </div>
   <div class="ab-award">
     <span class="ab-badges-label">Recognition</span>
@@ -1113,6 +1138,7 @@ ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultati
           <li><a href="/glp-1-personal-training-san-diego"><span>Training on a GLP-1</span></a></li>
           <li><a href="/personal-trainer-over-50-san-diego"><span>Training After 50</span></a></li>
           <li><a href="/couples-personal-training-san-diego"><span>Couples Training</span></a></li>
+          <li><a href="/fascia-stretch-therapy-san-diego"><span>Fascia Stretch Therapy™</span></a></li>
           <li><a href="/hsa-fsa-personal-training"><span>HSA &amp; FSA Eligibility</span></a></li>
           <li><a href="/how-to-choose-a-personal-trainer-san-diego"><span>How to Choose a Trainer</span></a></li>
           <li><a href="/blog"><span>Journal</span></a></li>

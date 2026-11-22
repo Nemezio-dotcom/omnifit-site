@@ -96,6 +96,13 @@ main{overflow-x:clip;}
 .site-nav .site-nav__social:hover svg,.site-nav .site-nav__social:focus svg{stroke:var(--omni-gold-light);}
 .site-nav a.site-nav__cta,.site-nav a.site-nav__cta:link,.site-nav a.site-nav__cta:visited{color:var(--omni-gold-ink);font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;padding:6px 0;margin-left:6px;border-bottom:2px solid transparent;transition:color .2s ease,border-color .2s ease;}
 .site-nav a.site-nav__cta:hover,.site-nav a.site-nav__cta:focus{color:var(--omni-navy);border-bottom-color:var(--omni-gold);}
+/* Narrow desktop (1100-1199px). With "Assisted Stretching" in the first row
+   (Nov 21 2026) the two-row nav plus the aside needs 1168px, so it pushed
+   the page 68px wide between 1100 and 1167px. The two social icons (also in
+   the footer's Connect list) give up their space here; nothing else moves. */
+@media (min-width:1100px) and (max-width:1199px){
+  .site-nav .site-nav__social,.site-nav a.site-nav__social{display:none;}
+}
 /* hamburger */
 .site-nav-toggle{display:none;flex-shrink:0;margin-left:auto;background:none;border:1px solid rgba(10,22,40,.15);border-radius:8px;padding:8px;cursor:pointer;line-height:0;}
 .site-nav-toggle svg{width:22px;height:22px;fill:none;stroke:var(--omni-navy);stroke-width:1.8;stroke-linecap:round;display:block;}
@@ -207,6 +214,14 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
    this outranks that by specificity. Classed links (buttons, chips, cards)
    keep their own styling. */
 #main p a:not([class]),#main p a:not([class]):link,#main p a:not([class]):visited{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
+
+/* ===== Landing pages (build.py LANDING; CANON FOUNDERS LANDING PAGE) =====
+   Logo-only header: the logo sits centered because nothing follows it.
+   Legal-only footer: Terms, Privacy and the copyright line, nothing else. */
+.site-header--landing .site-header__inner{justify-content:center;}
+#omnifit-footer.omnifit-footer--legal .wrap{padding:26px 20px 28px;text-align:center;}
+#omnifit-footer.omnifit-footer--legal .footer-legal-links{margin:0;font-size:14px;color:var(--omni-muted);}
+#omnifit-footer.omnifit-footer--legal .footer-copy{margin-top:8px;}
 
 /* ===== Footer (source: pages/footer.html) ===== */
 #omnifit-footer{

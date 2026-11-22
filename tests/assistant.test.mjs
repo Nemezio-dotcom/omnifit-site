@@ -10,6 +10,7 @@ import { DatabaseSync } from "node:sqlite";
 import { onRequestGet as askGet, onRequestPost as askPost } from "../functions/api/ask.js";
 import { onRequestGet as logGet, onRequestPost as logPost } from "../functions/api/assistant-log.js";
 import {
+  ensureMarks,
   extractHandoff,
   redactContact,
   csvCell,
@@ -108,6 +109,49 @@ test("extractHandoff strips [[BOOK]] and returns it as handoff", () => {
 });
 test("extractHandoff strips [[FIT_CHECK]] and returns it as handoff", () => {
   assert.deepEqual(extractHandoff("[[FIT_CHECK]] Not sure? Try this."), { reply: "Not sure? Try this.", handoff: "fit_check" });
+});
+test("extractHandoff strips [[FIRST_VISIT]] and returns it as handoff", () => {
+  assert.deepEqual(extractHandoff("The First Visit is $150 for 90 minutes. [[FIRST_VISIT]]"), { reply: "The First Visit is $150 for 90 minutes.", handoff: "first_visit" });
+  assert.deepEqual(extractHandoff("A [[FIRST_VISIT]] b [[BOOK]]"), { reply: "A b", handoff: "first_visit" });
+});
+test("POST: a [[FIRST_VISIT]] reply returns handoff first_visit and logs it", async () => {
+  mockFetch("The First Visit is 90 minutes, in your home. [[FIRST_VISIT]]");
+  const e = env();
+  const { status, data } = await ask(e, { messages: convo(1), page: "/fascia-stretch-therapy-san-diego", sessionId: "abcdef12-fst1" });
+  assert.equal(status, 200);
+  assert.equal(data.reply, "The First Visit is 90 minutes, in your home.");
+  assert.equal(data.handoff, "first_visit");
+});
+test("tidyTruncated keeps a complete [[FIRST_VISIT]] and drops a half-written one", () => {
+  assert.equal(tidyTruncated("Sure. [[FIRST_VISIT]] Also, the table"), "Sure. [[FIRST_VISIT]]");
+  assert.equal(tidyTruncated("Yes. You can book whenever [[FIRST_VIS"), "Yes.");
+});
+test("ensureMarks adds the mark to every unmarked mention and leaves marked ones alone", () => {
+  assert.equal(ensureMarks("Fascia Stretch Therapy (FST) is in-home. FST is open to anyone."), "Fascia Stretch Therapy™ (FST™) is in-home. FST™ is open to anyone.");
+  assert.equal(ensureMarks("Fascia Stretch Therapy™ (FST™) is in-home."), "Fascia Stretch Therapy™ (FST™) is in-home.");
+  assert.equal(ensureMarks("fascia stretch therapy and Fascia stretch therapy"), "fascia stretch therapy™ and Fascia stretch therapy™");
+  assert.equal(ensureMarks("FST's First Visit"), "FST™'s First Visit");
+});
+test("ensureMarks does not touch the alternate spelling, other words or plain replies", () => {
+  for (const s of ['It is also written "fascial stretch therapy".', "The fastest way to start is a consultation.", "Studio Momentum is $640 per 4-week cycle.", ""]) {
+    assert.equal(ensureMarks(s), s);
+  }
+});
+test("POST: a reply that names the service without the mark is returned and logged with it", async () => {
+  mockFetch("Yes. FST is assisted stretching in your home, and the Fascia Stretch Therapy First Visit is 90 minutes. [[FIRST_VISIT]]");
+  const e = env();
+  const { status, data } = await ask(e, { messages: convo(1), page: "/", sessionId: "abcdef12-mark" });
+  assert.equal(status, 200);
+  assert.equal(data.reply, "Yes. FST™ is assisted stretching in your home, and the Fascia Stretch Therapy™ First Visit is 90 minutes.");
+  assert.equal(data.handoff, "first_visit");
+});
+test("the knowledge the model receives never names the service without the mark", () => {
+  assert.equal(KNOWLEDGE.match(/(?:Fascia Stretch Therapy|\bFST\b)(?!™)/g), null);
+  assert.ok(KNOWLEDGE.includes("Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted stretching"));
+});
+test("the system prompt names all three handoff tokens the server strips", async () => {
+  const { SYSTEM_PROMPT } = await import("../functions/_lib/system-prompt.js");
+  for (const t of ["[[BOOK]]", "[[FIT_CHECK]]", "[[FIRST_VISIT]]"]) assert.ok(SYSTEM_PROMPT.includes(t), t);
 });
 test("extractHandoff: no token, null handoff; several tokens, all stripped, first wins", () => {
   assert.deepEqual(extractHandoff("Plain answer."), { reply: "Plain answer.", handoff: null });

@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fascia Stretch Therapy™ in San Diego | In-Home | OmniFit Performance</title>
+<meta name="description" content="In-home Fascia Stretch Therapy™ in San Diego from OmniFit Performance: assisted stretching on a table for mobility and recovery. First Visit $150, 90 minutes.">
+<link rel="canonical" href="https://www.omnifittraining.com/fascia-stretch-therapy-san-diego">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OmniFit Performance">
+<meta property="og:title" content="Fascia Stretch Therapy™ in San Diego | In-Home | OmniFit Performance">
+<meta property="og:description" content="In-home Fascia Stretch Therapy™ in San Diego from OmniFit Performance: assisted stretching on a table for mobility and recovery. First Visit $150, 90 minutes.">
+<meta property="og:url" content="https://www.omnifittraining.com/fascia-stretch-therapy-san-diego">
+<meta property="og:image" content="https://www.omnifittraining.com/assets/img/og-coach-client-cable-pulldown-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Coach Nemezio LopezPerez coaching a client through a cable exercise for the upper back">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.omnifittraining.com/assets/img/og-coach-client-cable-pulldown-1200x630.jpg">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- ===== Site-wide header injection (source: pages/headers/site-header.html) ===== -->
+<!-- =========================
+OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
+  Organization and LocalBusiness carry CANON's two-sentence ENTITY BLOCK
+  description verbatim; Organization gains address + disambiguatingDescription;
+  Person gains alternateName "Coach Nemezio" + affiliation; Organization
+  "slogan" = CANON's POSITIONING LINE, verbatim, Outcome Claims Amendment run)
+- Measurement: GA4 gtag.js + Microsoft Clarity, production hostnames only
+  (CANON MEASUREMENT); HubSpot deferred as before. No Google Tag Manager.
+- Geo meta
+- Schema (JSON-LD): single site-wide entity definition.
+  LocalBusiness @id #localbusiness-of is referenced by every page
+  header and is NEVER redefined per page. Homepage page-header
+  JSON-LD has been removed and merged here.
+========================= -->
+
+<!-- Measurement (CANON MEASUREMENT; DEPLOY.md "Measurement"). The ONE source
+     of tracking for every page: Google Analytics 4 (gtag.js) and Microsoft
+     Clarity load only when the hostname is www.omnifittraining.com or
+     omnifittraining.com. On any other host (*.pages.dev previews, localhost)
+     neither loads and site/site.js logs each event to the console instead.
+     Clarity never loads on /fit-check. Test-only override, honoured on
+     localhost / 127.0.0.1 only: ?omnifit-track=prod forces the production
+     branch (tools/tracktest.js). No Google Tag Manager. HubSpot is deferred
+     exactly as before. Each ID appears once on the page by design
+     (build.py --check counts them). Load timing: see the note above afterLoad()
+     below (Oct 25 2026 mobile speed pass). -->
+<script>
+(function () {
+  var GA4 = 'G-0K6VLEC2VJ';
+  var CLARITY = 'yzawpvwvdf';
+  var host = location.hostname;
+  var prod = (host === 'www.omnifittraining.com' || host === 'omnifittraining.com');
+  if (!prod && (host === 'localhost' || host === '127.0.0.1') &&
+      /[?&]omnifit-track=prod(?:&|$)/.test(location.search)) prod = true;
+  var path = location.pathname.replace(/\/+$/, '') || '/';
+  var fitCheck = (path === '/fit-check');
+
+  function loadScript(src, attrs){
+    var s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    if (attrs){
+      for (var k in attrs) s.setAttribute(k, attrs[k]);
+    }
+    document.head.appendChild(s);
+  }
+
+  /* Load timing (Oct 25 2026, mobile PageSpeed): nothing from Google, Clarity or
+     HubSpot downloads while the page is first drawing. On a phone those ~700 KB
+     were competing with the hero photo and fonts and were charged to mobile LCP.
+     - GA4: gtag() and the config are queued at once (so no event is lost), and
+       gtag.js itself loads after the page's load event, when the browser is idle.
+     - Clarity + HubSpot: load on the visitor's first scroll, tap, click or key,
+       or 5 seconds after the load event, whichever comes first. */
+  function afterLoad(fn){
+    function idle(){
+      if ('requestIdleCallback' in window) requestIdleCallback(fn, {timeout: 2000});
+      else setTimeout(fn, 200);
+    }
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle, {once: true});
+  }
+
+  function onEngage(fn){
+    var done = false, evs = ['scroll', 'pointerdown', 'keydown', 'touchstart'];
+    function go(){
+      if (done) return;
+      done = true;
+      evs.forEach(function (e) { window.removeEventListener(e, go, {passive: true}); });
+      fn();
+    }
+    evs.forEach(function (e) { window.addEventListener(e, go, {passive: true}); });
+    afterLoad(function () { setTimeout(go, 5000); });
+  }
+
+  if (prod) {
+    /* Google Analytics 4 (gtag.js). Google's snippet, with the data layer
+       held in a local and the ID in GA4 so each appears once. gtag() exists
+       only here: site.js treats its absence as "log to the console". */
+    var dl = window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dl.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA4);
+    afterLoad(function () { loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4); });
+  }
+
+  onEngage(function () {
+    if (prod && !fitCheck) {
+      /* Microsoft Clarity */
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", CLARITY);
+    }
+
+    /* HubSpot (heavy) */
+    loadScript("https://js-na2.hs-scripts.com/244441037.js", {"id":"hs-script-loader"});
+  });
+})();
+</script>
+
+<!-- Geo meta -->
+<meta name="robots" content="index, follow">
+<meta name="geo.region" content="US-CA">
+<meta name="geo.placename" content="San Diego">
+<meta name="geo.position" content="33.0178;-117.1022">
+<meta name="ICBM" content="33.0178, -117.1022">
+
+<!-- ═══════════════════════════════════════════════════════
+     SCHEMA (JSON-LD) — Site-wide entity definition · Sept 2026
+     Nodes: Organization #organization · Person #founder ·
+            LocalBusiness #localbusiness-of · WebSite #website
+     Page headers reference these by @id only.
+     ═══════════════════════════════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.omnifittraining.com/#organization",
+      "name": "OmniFit Performance",
+      "legalName": "OmniFit Performance LLC",
+      "alternateName": "OmniFit Training",
+      "slogan": "OmniFit Performance is a diagnostic-led coaching system that takes busy professionals over 30 from pain or plateau to lasting, independent strength.",
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "disambiguatingDescription": "OmniFit Performance in San Diego, California, founded by Nemezio LopezPerez (Coach Nemezio). Not affiliated with OMNIFIT Athletics.",
+      "url": "https://www.omnifittraining.com/",
+      "email": "nemezio@omnifittraining.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
+      "telephone": "+1-619-259-0630",
+      "logo": "https://www.omnifittraining.com/icon-512.png",
+      "image": "https://www.omnifittraining.com/assets/img/hero-coach-client-cable-pulldown-1600.jpg",
+      "founder": { "@id": "https://www.omnifittraining.com/#founder" },
+      "sameAs": [
+        "https://www.instagram.com/omnifit_sd/",
+        "https://www.yelp.com/biz/omnifit-personal-fitness-training-san-diego",
+        "https://g.page/r/CcePeMjnbDe9EBM",
+        "https://www.thumbtack.com/ca/san-diego/personal-trainers/omnifit-personal-fitness-training/service/455913312050044943",
+        "https://www.bark.com/en/us/company/omnifit-personal-fitness-training/kDKNA/",
+        "https://www.bbb.org/us/ca/san-diego/profile/personal-trainer/omnifit-personal-fitness-training-1126-1000157801"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.omnifittraining.com/#founder",
+      "name": "Nemezio LopezPerez",
+      "alternateName": "Coach Nemezio",
+      "jobTitle": "Founder & NASM Elite Trainer",
+      "description": "Nemezio LopezPerez founded OmniFit Performance to coach busy professionals over 30 who keep losing progress to pain, plateaus and packed calendars. An NASM Elite Trainer with NASM certifications in corrective exercise, performance enhancement and nutrition, and a Precision Nutrition Level 2 Certified Master Coach, he trains clients at Teqneeq in 4S Ranch, in their homes, and virtually.",
+      "affiliation": { "@id": "https://www.omnifittraining.com/#organization" },
+      "url": "https://www.omnifittraining.com/about",
+      "worksFor": { "@id": "https://www.omnifittraining.com/#organization" },
+      "sameAs": [
+        "https://www.instagram.com/eziogetsfit",
+        "https://www.linkedin.com/in/nemeziolp/"
+      ],
+      "hasCredential": [
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Elite Trainer" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Certified Personal Trainer (CPT)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Corrective Exercise Specialist (CES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Performance Enhancement Specialist (PES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Certified Nutrition Coach (CNC)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "NASM Behavior Change Specialist (BCS)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "ACE Corrective Exercise Specialist (CES)" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 1" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Level 2 Certified Master Coach" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Sleep, Stress & Recovery" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Precision Nutrition Nutrition for Metabolic Health" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Fitness Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden Peptide Fundamentals Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Eden GLP-1 Nutrition Certification" },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "Professional Certification", "name": "Fascia Stretch Practitioner – Level 1", "recognizedBy": { "@type": "Organization", "name": "Stretch to Win Institute" } }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.omnifittraining.com/#localbusiness-of",
+      "name": "OmniFit Performance",
+      "alternateName": "OmniFit Training",
+      "url": "https://www.omnifittraining.com/",
+      "parentOrganization": { "@id": "https://www.omnifittraining.com/#organization" },
+      "founder": { "@id": "https://www.omnifittraining.com/#founder" },
+      "description": "OmniFit Performance is the diagnostic-led personal training practice of Nemezio LopezPerez (Coach Nemezio), based at Teqneeq Functional Health Center in 4S Ranch, San Diego, with in-home training across North County San Diego and live virtual coaching nationwide. The OmniFit Method measures first, builds joint-first strength, and carries accountability across studio, in-home and virtual on one app for professional adults 30+.",
+      "telephone": "+1-619-259-0630",
+      "email": "nemezio@omnifittraining.com",
+      "image": "https://www.omnifittraining.com/assets/img/hero-coach-client-cable-pulldown-1600.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "10772 Thornmint Rd",
+        "addressLocality": "San Diego",
+        "addressRegion": "CA",
+        "postalCode": "92127",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 33.0178026,
+        "longitude": -117.1021946
+      },
+      "containedInPlace": {
+        "@type": "Place",
+        "name": "Teqneeq Functional Health Center"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "San Diego", "sameAs": "https://en.wikipedia.org/wiki/San_Diego" },
+        { "@type": "Neighborhood", "name": "4S Ranch" },
+        { "@type": "Place", "name": "Rancho Bernardo" },
+        { "@type": "Place", "name": "Del Sur" },
+        { "@type": "Place", "name": "Santaluz" },
+        { "@type": "Place", "name": "Santa Fe Valley" },
+        { "@type": "Place", "name": "Poway" },
+        { "@type": "Place", "name": "Rancho Santa Fe" },
+        { "@type": "Place", "name": "Fairbanks Ranch" },
+        { "@type": "Place", "name": "Carmel Valley" },
+        { "@type": "Place", "name": "Del Mar" },
+        { "@type": "Place", "name": "La Jolla" },
+        { "@type": "Place", "name": "Solana Beach" },
+        { "@type": "Place", "name": "Encinitas" },
+        { "@type": "Place", "name": "Carlsbad" },
+        { "@type": "Country", "name": "US", "description": "Live virtual coaching available nationwide" }
+      ],
+      "priceRange": "$640-$2,900 per 4 weeks",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Credit Card, Debit Card, Affirm, Klarna, HSA/FSA via Truemed",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "06:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ],
+      "knowsAbout": [
+        "Executive Personal Training",
+        "Corrective Exercise",
+        "Joint-Friendly Strength Training",
+        "Post-Rehab Training",
+        "In-Home Personal Training",
+        "Body Composition Testing",
+        "Nutrition Coaching",
+        "Behavior Change Coaching",
+        "Virtual Coaching"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.98",
+        "reviewCount": "190",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Training Programs",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Performance Assessment",
+              "description": "In-person baseline assessment: Bodystat QuadScan 4000 body-composition analysis plus a 9-point movement screening. Credited toward your first cycle."
+            },
+            "price": "150.00",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "1:1 Personal Training at Teqneeq",
+              "description": "Private coaching at Teqneeq Functional Health Center in 4S Ranch. Tiers from Momentum to Peak; a three-cycle Foundation for new clients, then The Program billed every 4 weeks."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "640.00",
+              "maxPrice": "1800.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "In-Home Personal Training",
+              "description": "The same assessment-first coaching system delivered in your home across North County San Diego."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "900.00",
+              "maxPrice": "2600.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Couples Training",
+              "description": "Train together at Teqneeq or in-home, one coached session with separate programming for each partner. Rates are per couple."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "1000.00",
+              "maxPrice": "2900.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Session Packs",
+              "description": "5-session packs at Teqneeq or in-home for clients who prefer per-session pricing without a program; studio non-member packs include the Teqneeq day pass."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "180.00",
+              "maxPrice": "250.00",
+              "priceCurrency": "USD",
+              "unitText": "per session"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Executive Reset Virtual Coaching",
+              "description": "Live virtual and app-based coaching for professionals anywhere in the US, from async programming to fully coached tiers."
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "200.00",
+              "maxPrice": "1100.00",
+              "priceCurrency": "USD",
+              "unitText": "per 4 weeks"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.omnifittraining.com/#website",
+      "name": "OmniFit Performance",
+      "url": "https://www.omnifittraining.com",
+      "publisher": { "@id": "https://www.omnifittraining.com/#organization" },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>
+<!-- ===== End site-wide header injection ===== -->
+
+<link rel="preload" href="/assets/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/playfair-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Self-hosted fonts (Oct 25 2026): Montserrat + Playfair Display variable, latin
+   subset, served from this site instead of Google Fonts. Same families, every
+   weight 100-900 and italics; removes the render-blocking Google Fonts request. */
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Montserrat';font-style:italic;font-weight:100 900;font-display:swap;src:url(/assets/fonts/montserrat-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/fonts/playfair-display-latin-wght-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:400 900;font-display:swap;src:url(/assets/fonts/playfair-display-latin-wght-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+</style>
+<link rel="stylesheet" href="/assets/site.css">
+
+<!-- ===== Page header injection (source: pages/headers/fascia-stretch-therapy-san-diego-header.html) ===== -->
+<!-- FASCIA STRETCH THERAPY PAGE HEADER JSON-LD · NOV 2026 (FST Launch run)
+  WebPage (name and description are the page title and meta description;
+  build.py reads them), BreadcrumbList, Service and FAQPage.
+  The business is referenced by @id (#localbusiness-of), never redefined;
+  no person node is defined here (the founder lives in site-header.html).
+  Service: name "Fascia Stretch Therapy", areaServed = CANON's in-home area
+  (the seven no-fee towns, then the six travel-fee towns), three Offers =
+  CANON CANONICAL FACTS > FASCIA STRETCH THERAPY (FST) > RATES. The 5-pack
+  Offer price is the pack total, the way the rates header states packs.
+  FAQPage mirrors the eight on-page questions and answers byte for byte,
+  in page order (tools/certify.py checks it exactly, not after normalising).
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#webpage",
+      "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego",
+      "name": "Fascia Stretch Therapy™ in San Diego | In-Home | OmniFit Performance",
+      "description": "In-home Fascia Stretch Therapy™ in San Diego from OmniFit Performance: assisted stretching on a table for mobility and recovery. First Visit $150, 90 minutes.",
+      "about": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "breadcrumb": {
+        "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#breadcrumb"
+      },
+      "mainEntity": {
+        "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#service"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.omnifittraining.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://www.omnifittraining.com/personal-training-services"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Fascia Stretch Therapy™",
+          "item": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#service",
+      "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego",
+      "name": "Fascia Stretch Therapy™",
+      "alternateName": "FST™",
+      "serviceType": "Assisted stretching",
+      "provider": {
+        "@id": "https://www.omnifittraining.com/#localbusiness-of"
+      },
+      "description": "Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted stretching that is pain-free, fully customizable and improves functionality. Delivered in the client's home by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute), as a service offered by OmniFit Performance. In-home only and open to anyone; every new client starts with a 90-minute First Visit.",
+      "areaServed": [
+        {
+          "@type": "Place",
+          "name": "Carmel Valley"
+        },
+        {
+          "@type": "Place",
+          "name": "Santaluz"
+        },
+        {
+          "@type": "Place",
+          "name": "Fairbanks Ranch"
+        },
+        {
+          "@type": "Place",
+          "name": "Rancho Bernardo"
+        },
+        {
+          "@type": "Place",
+          "name": "4S Ranch"
+        },
+        {
+          "@type": "Place",
+          "name": "Poway"
+        },
+        {
+          "@type": "Place",
+          "name": "Harmony Grove"
+        },
+        {
+          "@type": "Place",
+          "name": "La Jolla"
+        },
+        {
+          "@type": "Place",
+          "name": "Del Mar"
+        },
+        {
+          "@type": "Place",
+          "name": "Rancho Santa Fe"
+        },
+        {
+          "@type": "Place",
+          "name": "Solana Beach"
+        },
+        {
+          "@type": "Place",
+          "name": "Encinitas"
+        },
+        {
+          "@type": "Place",
+          "name": "Carlsbad"
+        }
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "First Visit",
+          "description": "Required for every new FST™ client. 90 minutes, in-home: a range-of-motion check, the first Fascia Stretch Therapy™ session on the table, and a re-measure at the end.",
+          "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#fs-rates",
+          "seller": {
+            "@id": "https://www.omnifittraining.com/#localbusiness-of"
+          },
+          "price": "150.00",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "Single session",
+          "description": "One 60-minute Fascia Stretch Therapy™ session, in-home. Booked after the First Visit. Expires 30 days from purchase.",
+          "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#fs-rates",
+          "seller": {
+            "@id": "https://www.omnifittraining.com/#localbusiness-of"
+          },
+          "price": "225.00",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "name": "5-session pack",
+          "description": "Five 60-minute Fascia Stretch Therapy™ sessions, in-home, at $200 per session. Expires 8 weeks from purchase.",
+          "url": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#fs-rates",
+          "seller": {
+            "@id": "https://www.omnifittraining.com/#localbusiness-of"
+          },
+          "price": "1000.00",
+          "priceCurrency": "USD"
+        }
+      ],
+      "potentialAction": {
+        "@type": "ReserveAction",
+        "name": "Book Your First Visit",
+        "target": "https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.omnifittraining.com/fascia-stretch-therapy-san-diego#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Fascia Stretch Therapy™?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fascia Stretch Therapy™ (FST™) is assisted stretching for mobility and recovery, done on a table: you lie down and a trained practitioner does the stretching with you. It is also written \"fascial stretch therapy\". At OmniFit Performance it is delivered in your home by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens at the First Visit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The First Visit is 90 minutes and is required for every new FST™ client. It has three parts: a range-of-motion check, your first Fascia Stretch Therapy™ session on the table, and a re-measure at the end, so you see the same ranges measured before and after. Follow-up sessions and 5-session packs are arranged with Nemezio after the First Visit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The First Visit is $150 for 90 minutes. After that, a single 60-minute session is $225, and a 5-session pack is $200 per session ($1,000), which expires 8 weeks from purchase. These are in-home rates. Outside the no-fee part of our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to be a training client?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Fascia Stretch Therapy™ is open to anyone. You do not need a training program or a Performance Assessment to book it. It stands on its own, and it can also pair with a training program if you have one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do sessions take place and what do I need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sessions take place in your home, within OmniFit Performance's in-home service area in North County San Diego. You need a quiet room with floor space. The table comes with Nemezio. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I wear?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wear clothes you can move in. That is all you need to prepare: the table comes with Nemezio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is FST™ massage or medical treatment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Fascia Stretch Therapy™ is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the cancellation policy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cancellations with less than 24 hours' notice and no-shows forfeit the fee. Fees are not refunded. With 24 hours' notice or more you can reschedule."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- ===== End page header injection ===== -->
+
+<!-- ===== Page-scoped CSS (moved from the page body; source: pages/fascia-stretch-therapy-san-diego.html) ===== -->
+<style>
+
+  /* ═══════════════════════════════════════════════════
+     Scoped to #omni-fst
+     ═══════════════════════════════════════════════════ */
+  #omni-fst {
+    --navy: #0a1628;
+    --navy-mid: #0f1f3a;
+    --navy-light: #152a4a;
+    --navy-surface: #1a3158;
+    --white: #ffffff;
+    --white-90: rgba(255,255,255,0.9);
+    --white-70: rgba(255,255,255,0.7);
+    --white-50: rgba(255,255,255,0.5);
+    --white-30: rgba(255,255,255,0.3);
+    --white-20: rgba(255,255,255,0.2);
+    --white-10: rgba(255,255,255,0.1);
+    --white-05: rgba(255,255,255,0.05);
+    --gold: #c9a84c;
+    --gold-light: #e0c872;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.25);
+    --radius: 8px;
+    --radius-lg: 12px;
+    background: linear-gradient(180deg, var(--navy), var(--navy-mid));
+    color: var(--white);
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    margin: 0; padding: 0;
+  }
+
+  /* ── Rates table ── */
+  #omni-fst .fs-table-wrap { overflow-x: auto; margin: 0 0 8px; }
+  #omni-fst .fs-table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 14px; }
+  #omni-fst .fs-table th,
+  #omni-fst .fs-table td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--white-10); vertical-align: top; line-height: 1.6; }
+  #omni-fst .fs-table th { color: var(--gold); font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+  #omni-fst .fs-table td { color: var(--white-70); }
+  #omni-fst .fs-table tbody tr:last-child td { border-bottom: none; }
+  #omni-fst .fs-table td strong { color: var(--white); }
+
+  /* ── Base Reset ── */
+  #omni-fst,
+  #omni-fst *,
+  #omni-fst *::before,
+  #omni-fst *::after {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif !important;
+    box-sizing: border-box;
+  }
+  #omni-fst h1, #omni-fst h2, #omni-fst h3,
+  #omni-fst p, #omni-fst ul, #omni-fst ol,
+  #omni-fst li, #omni-fst figure, #omni-fst section,
+  #omni-fst div, #omni-fst details, #omni-fst summary {
+    margin: 0; padding: 0; border: 0;
+  }
+
+  /* ── Inner wrapper ── */
+  #omni-fst .fs-inner { margin: 0 auto; }
+
+  /* ════════════════ HERO ════════════════ */
+  #omni-fst .fs-hero {
+    text-align: center;
+    padding: 5rem 2.5rem 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+  }
+  #omni-fst .fs-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.25;
+  }
+  #omni-fst .fs-badge {
+    display: inline-block;
+    padding: 8px 22px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  #omni-fst .fs-hero h1 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(28px, 5vw, 46px) !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    color: var(--white) !important;
+    margin-bottom: 20px !important;
+    letter-spacing: -0.5px !important;
+    text-transform: none !important;
+  }
+  #omni-fst .fs-hero-sub {
+    font-size: clamp(16px, 2.2vw, 18px);
+    color: var(--white-70);
+    max-width: 760px;
+    margin: 0 auto 32px;
+    line-height: 1.8;
+    text-align: center;
+  }
+  #omni-fst .fs-hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  #omni-fst .fs-hero-pills span {
+    background: var(--navy-surface);
+    border: 1px solid var(--white-20);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: var(--white-70);
+  }
+
+  /* ── CTA row ── */
+  #omni-fst .fs-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  #omni-fst .fs-btn {
+    display: inline-block;
+    padding: 15px 36px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    transition: all 0.3s;
+  }
+  #omni-fst a.fs-btn-primary,
+  #omni-fst a.fs-btn-primary:link,
+  #omni-fst a.fs-btn-primary:visited {
+    background: var(--gold-btn, var(--gold));
+    color: var(--navy) !important;
+    border: 2px solid var(--gold);
+  }
+  #omni-fst a.fs-btn-primary:hover {
+    background: var(--gold-btn-hover, var(--gold-light));
+    border-color: var(--gold-light);
+    color: var(--navy) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(201,168,76,0.3);
+  }
+  #omni-fst a.fs-btn-ghost,
+  #omni-fst a.fs-btn-ghost:link,
+  #omni-fst a.fs-btn-ghost:visited {
+    border: 1px solid var(--white-30);
+    color: var(--white) !important;
+    background: transparent;
+  }
+  #omni-fst a.fs-btn-ghost:hover {
+    border-color: var(--white);
+    background: var(--white-05);
+    color: var(--white) !important;
+    transform: translateY(-2px);
+  }
+  #omni-fst .fs-cta-note {
+    text-align: center;
+    font-size: 13px;
+    color: var(--white-50);
+  }
+
+  /* ════════════════ SECTIONS ════════════════ */
+  #omni-fst .fs-section { margin-bottom: 3rem; }
+  #omni-fst .fs-section-head { text-align: center; margin-bottom: 28px; }
+  #omni-fst .fs-label {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px; display: block;
+  }
+  #omni-fst .fs-divider {
+    width: 50px; height: 3px;
+    background: var(--gold); border: none;
+    margin: 0 auto 16px; border-radius: 2px;
+  }
+  #omni-fst h2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(24px, 3.6vw, 34px) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+    letter-spacing: -0.3px !important;
+    color: var(--white) !important;
+    text-transform: none !important;
+    text-align: center !important;
+  }
+  #omni-fst h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: var(--white) !important;
+    text-transform: none !important;
+    font-size: 19px !important;
+    font-weight: 600 !important;
+    margin-bottom: 8px !important;
+  }
+  #omni-fst p {
+    color: var(--white-70);
+    line-height: 1.75;
+    font-size: 1rem;
+  }
+  #omni-fst .text-center { text-align: center; }
+  #omni-fst .text-center p {
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ════════════════ CARDS ════════════════ */
+  #omni-fst .fs-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-top: 20px;
+  }
+  #omni-fst .fs-card {
+    background: var(--navy-light);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px 24px;
+    text-align: left;
+    transition: all 0.35s;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  #omni-fst .fs-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+  }
+  #omni-fst .fs-card-icon {
+    font-size: 26px; margin-bottom: 14px;
+    display: block; line-height: 1;
+  }
+  #omni-fst .fs-card h3 { line-height: 1.3; }
+  #omni-fst .fs-card p {
+    font-size: 14px; color: var(--white-50);
+    margin-bottom: 16px; line-height: 1.65;
+  }
+  #omni-fst .fs-card-features {
+    list-style: none; margin: 0; padding: 0; flex: 1 1 auto;
+  }
+  #omni-fst .fs-card-features li {
+    font-size: 13px; color: var(--white-50);
+    padding: 4px 0 4px 20px; position: relative; line-height: 1.55;
+  }
+  #omni-fst .fs-card-features li::before {
+    content: '✓'; position: absolute; left: 0;
+    color: var(--gold); font-weight: 700; font-size: 11px;
+  }
+
+  /* ════════════════ STEPS (Process) ════════════════ */
+  #omni-fst .fs-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    max-width: 1100px;
+    margin: 20px auto 0;
+  }
+  #omni-fst .fs-step {
+    background: var(--white-05);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 24px 22px;
+    text-align: left;
+  }
+  #omni-fst .fs-step-num {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px; display: block;
+  }
+  #omni-fst .fs-step-title {
+    font-family: 'Playfair Display', serif !important;
+    font-size: 18px; font-weight: 600;
+    color: var(--white); margin-bottom: 8px;
+  }
+  #omni-fst .fs-step p {
+    font-size: 14px; color: var(--white-50); line-height: 1.65;
+  }
+
+  /* ════════════════ GEMINI-QUOTABLE ════════════════ */
+  #omni-fst .gq-block {
+    background: var(--gold-dim);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.2rem 1.5rem;
+    margin: 1.4rem auto;
+    max-width: 940px;
+    font-size: .98rem;
+    line-height: 1.75;
+    text-align: left;
+    color: var(--white-90);
+  }
+  #omni-fst .gq-block strong { color: var(--white); }
+
+  /* ════════════════ CALLOUT / DISCLAIMER ════════════════ */
+  #omni-fst .fs-callout {
+    background: var(--navy-light);
+    border: 1px solid var(--white-20);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.1rem 1.4rem;
+    margin: 1.5rem auto;
+    max-width: 940px;
+    font-size: .92rem;
+    color: var(--white-70);
+    text-align: left;
+    line-height: 1.7;
+  }
+  #omni-fst .fs-callout strong { color: var(--gold); }
+
+  /* ════════════════ FAQ ════════════════ */
+  #omni-fst .fs-faq { max-width: 920px; margin: 0 auto; }
+  #omni-fst .fs-faq-item {
+    border-radius: var(--radius);
+    border: 1px solid var(--white-20);
+    background: var(--navy-light);
+    padding: 1rem 1.3rem;
+    margin-bottom: .75rem;
+    text-align: left;
+  }
+  #omni-fst .fs-faq-q {
+    font-weight: 700; margin-bottom: 6px;
+    color: var(--white); font-size: 15px;
+  }
+  #omni-fst .fs-faq-a {
+    font-size: 14px; color: var(--white-70); line-height: 1.7;
+  }
+
+  /* ════════════════ LINKS ════════════════ */
+  #omni-fst a {
+    color: var(--gold) !important;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color .15s;
+  }
+  #omni-fst a:hover { color: var(--gold-light) !important; }
+  #omni-fst a.fs-btn-primary,
+  #omni-fst a.fs-btn-primary:link,
+  #omni-fst a.fs-btn-primary:visited,
+  #omni-fst a.fs-btn-ghost,
+  #omni-fst a.fs-btn-ghost:link,
+  #omni-fst a.fs-btn-ghost:visited { text-decoration: none !important; }
+
+  /* ════════════════ DIVIDER ════════════════ */
+  #omni-fst hr {
+    border: 0 !important; height: 1px !important;
+    background: linear-gradient(to right, transparent, var(--white-20), transparent) !important;
+    margin: 3rem auto !important; max-width: 900px;
+  }
+
+  /* ════════════════ BOTTOM CTA ════════════════ */
+  #omni-fst .fs-bottom {
+    background: var(--navy-light);
+    border: 1px solid var(--white-10);
+    border-radius: var(--radius-lg);
+    padding: 44px 36px;
+    text-align: center;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  #omni-fst .fs-bottom p {
+    max-width: 640px; margin: 0 auto 24px;
+    font-size: 15px; text-align: center;
+  }
+  #omni-fst .fs-bottom-note {
+    display: block; margin-top: 14px;
+    font-size: 12px; color: var(--white-50);
+  }
+
+  /* ════════════════ HUB LINKS ════════════════ */
+  #omni-fst .fs-hub-links {
+    text-align: center; font-size: 14px;
+    color: var(--white-50); margin-top: 2rem; line-height: 2;
+  }
+  #omni-fst .fs-hub-links strong { color: var(--white-70); }
+
+  /* ════════════════ SQS GUARDS ════════════════ */
+  .sqs-block-code #omni-fst,
+  .sqs-block-html #omni-fst { margin-bottom: 0 !important; }
+  #omni-fst h1, #omni-fst h2, #omni-fst h3 {
+    text-transform: none !important; letter-spacing: normal !important;
+  }
+  #omni-fst p { font-family: 'Montserrat', sans-serif !important; }
+  #omni-fst img { max-width: 100% !important; height: auto !important; }
+
+  /* ════════════════ FST PAGE ADDITIONS ════════════════ */
+  #omni-fst hr.fs-divider { width: 50px; height: 3px !important; background: var(--gold) !important; margin: 0 auto 16px !important; border-radius: 2px; }
+  #omni-fst .fs-table td:first-child { white-space: nowrap; }
+  #omni-fst .fs-table td.fs-price { color: var(--white); font-weight: 700; font-size: 16px; white-space: nowrap; }
+  #omni-fst .fs-rate-notes { list-style: none; max-width: 860px; margin: 22px auto 0; padding: 0; display: grid; gap: 10px; }
+  #omni-fst .fs-rate-notes li { font-size: 14px; color: var(--white-70); line-height: 1.7; padding-left: 20px; position: relative; text-align: left; }
+  #omni-fst .fs-rate-notes li::before { content: ''; position: absolute; left: 0; top: .72em; width: 8px; height: 2px; background: var(--gold); }
+  #omni-fst .fs-rate-cta { text-align: center; margin-top: 28px; }
+  #omni-fst .fs-terms { max-width: 900px; margin: 28px auto 0; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 24px 26px 22px; text-align: left; }
+  #omni-fst .fs-terms h3 { font-family: 'Montserrat', sans-serif !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 2px !important; text-transform: uppercase !important; color: var(--gold) !important; margin-bottom: 4px !important; }
+  #omni-fst .fs-terms .fs-rate-notes { margin-top: 12px; max-width: none; }
+  #omni-fst .fs-disclaimer { text-align: center; font-size: 12.5px; color: var(--white-50); margin: 2rem auto 0; max-width: 820px; line-height: 1.7; }
+  #omni-fst .fs-disclaimer strong { color: var(--white-70); }
+  #omni-fst .fs-need { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1000px; margin: 22px auto 0; }
+  #omni-fst .fs-need-item { background: var(--white-05); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 16px 18px; text-align: left; font-size: 14px; color: var(--white-70); line-height: 1.6; display: flex; gap: 12px; align-items: flex-start; }
+  #omni-fst .fs-need-item svg.omni-icon { font-size: 20px; margin-top: 2px; }
+  #omni-fst .fs-need-item strong { color: var(--white); display: block; }
+  /* Practitioner block. The badge artwork is teal on transparent, so it sits
+     on a white rounded panel, never directly on navy. */
+  #omni-fst .fs-prac { display: flex; gap: 28px; align-items: center; max-width: 900px; margin: 0 auto; background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 28px; text-align: left; }
+  #omni-fst .fs-badge-panel { flex: 0 0 auto; width: 286px; max-width: 100%; background: #ffffff; border: 1px solid rgba(10,22,40,.10); border-radius: 16px; padding: 18px; line-height: 0; box-shadow: 0 10px 30px rgba(10,22,40,.08); }
+  #omni-fst .fs-badge-panel img { display: block; width: 100% !important; max-width: 100% !important; height: auto !important; }
+  #omni-fst .fs-prac-text { flex: 1 1 auto; min-width: 0; }
+  #omni-fst .fs-prac-name { font-family: 'Playfair Display', serif !important; font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  #omni-fst .fs-prac-cred { font-size: 13px; font-weight: 700; letter-spacing: .4px; color: var(--gold); margin-bottom: 12px; }
+  #omni-fst .fs-prac-text p { font-size: 14.5px; }
+  #omni-fst .fs-prac-text p + p { margin-top: 10px; }
+  #omni-fst .fs-tm { text-align: center; font-size: 12px; color: var(--white-50); margin: 2rem auto 0; max-width: 760px; line-height: 1.6; }
+
+  /* ════════════════ RESPONSIVE ════════════════ */
+  @media (max-width: 768px) {
+    #omni-fst .fs-hero { padding: 3rem 1.2rem 2rem; }
+    #omni-fst .fs-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; }
+    #omni-fst .fs-prac { flex-direction: column; align-items: center; text-align: center; }
+    #omni-fst .fs-prac-text { text-align: left; }
+  }
+  @media (max-width: 640px) {
+    #omni-fst .fs-grid,
+    #omni-fst .fs-steps { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+    #omni-fst .fs-cta-row { flex-direction: column; align-items: center; }
+    #omni-fst .fs-btn { width: 100%; max-width: 320px; text-align: center; }
+    #omni-fst .fs-need { grid-template-columns: 1fr; }
+    #omni-fst .fs-table { min-width: 0; }
+    #omni-fst .fs-table thead { display: none; }
+    #omni-fst .fs-table, #omni-fst .fs-table tbody, #omni-fst .fs-table tr, #omni-fst .fs-table td { display: block; width: 100%; }
+    #omni-fst .fs-table tr { padding: 14px 0; border-bottom: 1px solid var(--white-10); }
+    #omni-fst .fs-table tbody tr:last-child { border-bottom: none; }
+    #omni-fst .fs-table td { border-bottom: none; padding: 3px 4px; }
+    #omni-fst .fs-table td:first-child { font-size: 16px; padding-bottom: 6px; }
+    #omni-fst .fs-table td[data-label]::before { content: attr(data-label) ': '; font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--white-50); }
+  }
+</style>
+</head>
+<body class="page page--fascia-stretch-therapy-san-diego">
+<!-- ===== Announcement bar + site header + primary nav (source: site/nav.html) =====
+
+ANNOUNCEMENT: {"text": "Limited availability for 1:1 coaching. Book a consultation", "href": "https://calendly.com/nemezio-omnifittraining/45min"}
+
+  ^ The one place to change the announcement bar. build.py reads this line:
+    "text" is the bar's copy, "href" is where it links. Set "text" to "" to
+    remove the bar entirely. Keep it on one line.
+
+  LOGO: the <svg class="omni-logo"> inside .site-logo is the brand logo
+  (gold ring, navy F, OMNIFIT, gold rule, PERFORMANCE) as inline SVG so
+  each part can animate: the ring draws itself, the F pops in, the letters
+  rise, the rule extends. It is generated from site/img/logo.svg (same
+  markup plus a <title>; site/img/logo.png is the source bitmap). The intro
+  plays once per browser session: the one-line script before <header> adds
+  html.omni-logo-intro on the first page view only, so every later page
+  shows the logo static (hover still turns the ring). Everything is inert
+  under prefers-reduced-motion. Sizing and motion live in site/site.css.
+-->
+<div class="site-announce" id="site-announce" role="region" aria-label="Announcement">
+  <a class="site-announce__link" href="https://calendly.com/nemezio-omnifittraining/45min">Limited availability for 1:1 coaching. Book a consultation</a>
+  <button class="site-announce__close" type="button" aria-label="Dismiss announcement">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+</div>
+<script>(function(){try{if(sessionStorage.getItem('omni-logo-played'))return;sessionStorage.setItem('omni-logo-played','1');}catch(e){}document.documentElement.classList.add('omni-logo-intro');})();</script>
+<header class="site-header" id="site-header">
+  <div class="site-header__inner">
+    <a class="site-logo" href="/" aria-label="OmniFit Performance home">
+      <svg class="omni-logo" viewBox="8 44 844 242" width="844" height="242" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g class="omni-logo__spin"><path class="omni-logo__ring" d="M98.53 59.45A107.97 107.97 0 1 0 229.91 116.72" fill="none" stroke="#daa520" stroke-width="19.7" stroke-linecap="round" pathLength="1"/></g><g class="omni-logo__f" fill="#002147"><g class="omni-logo__f-hop"><path d="M267.8 55.0H326.2V71.4H289.4V87.0H324.0V103.4H289.4V139.0H267.8Z"/></g></g><g class="omni-logo__name" fill="#002147"><g class="omni-logo__omni"><path class="omni-logo__ch" style="--i:0" d="M442.5 97.3Q434.2 97.3 429.7 103.4Q425.2 109.5 425.2 120.5Q425.2 131.5 429.7 137.6Q434.2 143.7 442.5 143.7Q450.8 143.7 455.3 137.6Q459.9 131.5 459.9 120.5Q459.9 109.5 455.3 103.4Q450.8 97.3 442.5 97.3ZM442.5 84.2Q459.4 84.2 468.9 93.9Q478.5 103.5 478.5 120.5Q478.5 137.5 468.9 147.1Q459.4 156.8 442.5 156.8Q425.7 156.8 416.1 147.1Q406.5 137.5 406.5 120.5Q406.5 103.5 416.1 93.9Q425.7 84.2 442.5 84.2Z"/><path class="omni-logo__ch" style="--i:1" d="M493.6 86.0H516.5L532.5 123.5L548.5 86.0H571.4V156.0H554.4V104.8L538.2 142.5H526.8L510.7 104.8V156.0H493.6Z"/><path class="omni-logo__ch" style="--i:2" d="M591.6 86.0H611.8L637.2 134.0V86.0H654.4V156.0H634.2L608.8 108.0V156.0H591.6Z"/><path class="omni-logo__ch" style="--i:3" d="M673.0 86.0H691.0V156.0H673.0Z"/></g><g class="omni-logo__fit"><path class="omni-logo__ch" style="--i:4" d="M710.9 85.5H751.1V93.5H720.4V114.1H748.1V122.1H720.4V155.5H710.9Z"/><path class="omni-logo__ch" style="--i:5" d="M767.8 86.0H777.2V156.0H767.8Z"/><path class="omni-logo__ch" style="--i:6" d="M787.4 86.5H846.6V94.5H821.8V156.5H812.2V94.5H787.4Z"/></g></g><rect class="omni-logo__rule" x="402" y="180" width="300" height="5" fill="#daa520"/><g class="omni-logo__perf" fill="#002147"><g class="omni-logo__perf-g"><path class="omni-logo__ch" style="--i:0" d="M409.1 216.9V226.7H413.5Q416.0 226.7 417.3 225.4Q418.7 224.1 418.7 221.8Q418.7 219.4 417.3 218.2Q416.0 216.9 413.5 216.9ZM405.6 214.0H413.5Q417.9 214.0 420.1 216.0Q422.4 218.0 422.4 221.8Q422.4 225.6 420.1 227.6Q417.9 229.5 413.5 229.5H409.1V240.0H405.6Z"/><path class="omni-logo__ch" style="--i:1" d="M442.6 214.0H459.0V217.0H446.2V224.7H458.5V227.6H446.2V237.0H459.4V240.0H442.6Z"/><path class="omni-logo__ch" style="--i:2" d="M492.7 227.8Q493.8 228.2 494.9 229.4Q496.0 230.7 497.0 232.9L500.6 240.0H496.8L493.5 233.3Q492.2 230.7 491.0 229.9Q489.8 229.0 487.7 229.0H483.9V240.0H480.4V214.0H488.3Q492.8 214.0 495.0 215.9Q497.1 217.7 497.1 221.5Q497.1 223.9 496.0 225.6Q494.9 227.2 492.7 227.8ZM483.9 216.9V226.1H488.3Q490.9 226.1 492.2 224.9Q493.4 223.8 493.4 221.5Q493.4 219.2 492.2 218.1Q490.9 216.9 488.3 216.9Z"/><path class="omni-logo__ch" style="--i:3" d="M520.5 214.0H535.5V217.0H524.1V224.6H534.3V227.6H524.1V240.0H520.5Z"/><path class="omni-logo__ch" style="--i:4" d="M567.0 216.4Q563.2 216.4 560.9 219.2Q558.7 222.1 558.7 227.0Q558.7 231.9 560.9 234.8Q563.2 237.6 567.0 237.6Q570.8 237.6 573.1 234.8Q575.3 231.9 575.3 227.0Q575.3 222.1 573.1 219.2Q570.8 216.4 567.0 216.4ZM567.0 213.5Q572.5 213.5 575.7 217.2Q579.0 220.9 579.0 227.0Q579.0 233.1 575.7 236.8Q572.5 240.5 567.0 240.5Q561.5 240.5 558.3 236.8Q555.0 233.2 555.0 227.0Q555.0 220.9 558.3 217.2Q561.5 213.5 567.0 213.5Z"/><path class="omni-logo__ch" style="--i:5" d="M611.7 227.8Q612.8 228.2 613.9 229.4Q615.0 230.7 616.0 232.9L619.6 240.0H615.8L612.5 233.3Q611.2 230.7 610.0 229.9Q608.8 229.0 606.7 229.0H602.9V240.0H599.4V214.0H607.3Q611.8 214.0 614.0 215.9Q616.1 217.7 616.1 221.5Q616.1 223.9 615.0 225.6Q613.9 227.2 611.7 227.8ZM602.9 216.9V226.1H607.3Q609.9 226.1 611.2 224.9Q612.4 223.8 612.4 221.5Q612.4 219.2 611.2 218.1Q609.9 216.9 607.3 216.9Z"/><path class="omni-logo__ch" style="--i:6" d="M639.6 214.0H644.9L651.5 231.7L658.1 214.0H663.4V240.0H659.9V217.2L653.3 235.0H649.7L643.0 217.2V240.0H639.6Z"/><path class="omni-logo__ch" style="--i:7" d="M694.0 217.5 689.2 230.4H698.8ZM692.0 214.0H696.0L705.9 240.0H702.2L699.9 233.3H688.2L685.8 240.0H682.1Z"/><path class="omni-logo__ch" style="--i:8" d="M725.7 214.0H730.4L741.9 235.7V214.0H745.3V240.0H740.6L729.1 218.3V240.0H725.7Z"/><path class="omni-logo__ch" style="--i:9" d="M787.0 216.0V219.7Q785.2 218.1 783.2 217.2Q781.2 216.4 778.9 216.4Q774.5 216.4 772.1 219.1Q769.7 221.9 769.7 227.0Q769.7 232.1 772.1 234.9Q774.5 237.6 778.9 237.6Q781.2 237.6 783.2 236.8Q785.2 235.9 787.0 234.3V238.0Q785.1 239.2 783.1 239.8Q781.0 240.5 778.7 240.5Q772.8 240.5 769.4 236.9Q766.0 233.2 766.0 227.0Q766.0 220.8 769.4 217.1Q772.8 213.5 778.7 213.5Q781.0 213.5 783.1 214.2Q785.2 214.8 787.0 216.0Z"/><path class="omni-logo__ch" style="--i:10" d="M807.6 214.0H824.0V217.0H811.2V224.7H823.5V227.6H811.2V237.0H824.4V240.0H807.6Z"/></g></g></svg>
+    </a>
+    <button class="site-nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg class="site-nav-toggle__open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="site-nav-toggle__close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <div class="site-nav__rows">
+        <ul class="site-nav__row">
+          <li><a href="/">Home</a></li>
+          <li><a href="/personal-training-services">Programs</a></li>
+          <li><a href="/training-rates-san-diego">Rates</a></li>
+          <li><a href="/fascia-stretch-therapy-san-diego" aria-current="page">Assisted Stretching</a></li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-methodology">Methodology <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-methodology">
+              <li><a href="/the-omnifit-method">The OmniFit Method</a></li>
+              <li><a href="/behavior-change-coaching">Behavior Change Coaching</a></li>
+            </ul>
+          </li>
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-results">Results <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-results">
+              <li><a href="/how-we-measure-your-progress">How We Measure Your Progress</a></li>
+              <li><a href="/case-studies">Case Studies</a></li>
+              <li><a href="/outcomes">Outcomes</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="site-nav__row">
+          <li class="has-menu">
+            <button class="site-nav__trigger" type="button" aria-expanded="false" aria-controls="menu-more">More <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <ul class="site-nav__menu" id="menu-more">
+              <li><a href="/nutrition-coaching-san-diego">Nutrition Coaching</a></li>
+              <li><a href="/glp-1-personal-training-san-diego">GLP-1 Personal Training</a></li>
+              <li><a href="/body-composition-testing">Body Composition Testing</a></li>
+              <li><a href="/partners">Partners</a></li>
+              <li><a href="/how-to-choose-a-personal-trainer-san-diego">How to Choose a Trainer</a></li>
+              <li><a href="/faqs">FAQs</a></li>
+            </ul>
+          </li>
+          <li><a href="/blog">Journal</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/fit-check">Fit Check</a></li>
+          <li><a href="/contactform">Contact</a></li>
+        </ul>
+      </div>
+      <div class="site-nav__aside">
+        <a class="site-nav__social" href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener" aria-label="OmniFit on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+        </a>
+        <a class="site-nav__social" href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener" aria-label="Nemezio LopezPerez on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+        </a>
+        <a class="site-nav__cta" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your Consultation</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<!-- ═══════════════════════════════════════════════════════════════
+     OmniFit Performance | Fascia Stretch Therapy, in-home, San Diego
+     NEW Nov 2026 (FST Launch run; owner brief, Nov 20 2026).
+     Modelled on corrective-exercise-post-rehab: same design system, CSS
+     scoped to #omni-fst, class prefix fs-.
+     CANON: CANONICAL FACTS > FASCIA STRETCH THERAPY (FST), and STRETCH TO
+     WIN MARKETING RULES. In-home only: this page never names the training
+     facility or a facility price. The First Visit is never called an
+     assessment. Describes what a visit is like for the client, never how a
+     stretch is performed. No video.
+     Title and meta description: the WebPage node in
+     pages/headers/fascia-stretch-therapy-san-diego-header.html.
+     The FAQPage in that header mirrors the FAQ below byte for byte.
+     ═══════════════════════════════════════════════════════════════ -->
+
+
+
+<div id="omni-fst">
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="fs-hero">
+    <span class="fs-badge">In-Home · North County San Diego</span>
+    <h1>Fascia Stretch Therapy™<br><em>in San Diego, in Your Home</em></h1>
+    <p class="fs-hero-sub">
+      Assisted stretching on a table, brought to your home. Fascia Stretch Therapy™ (FST™) is delivered by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1, and is a service offered by OmniFit Performance.
+    </p>
+
+    <div class="fs-hero-pills">
+      <span>In-home only</span>
+      <span>Open to anyone</span>
+      <span>First Visit: 90 minutes</span>
+      <span>Follow-up visits: 60 minutes</span>
+      <span>On its own or alongside training</span>
+    </div>
+
+    <div class="fs-cta-row">
+      <a class="fs-btn fs-btn-primary" href="https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home" target="_blank" rel="noopener">Book Your First Visit</a>
+      <a class="fs-btn fs-btn-ghost" href="#fs-rates">See the Rates</a>
+    </div>
+    <div class="fs-cta-note">First Visit: $150 · 90 minutes · in your home</div>
+  </section>
+
+  <div class="omni-band omni-band--cream">
+    <!-- ════════════ DEFINITION (quotable) ════════════ -->
+    <section class="fs-section" id="fs-what">
+      <div class="fs-section-head">
+        <span class="fs-label">The Short Definition</span>
+        <hr class="fs-divider">
+        <h2>What Fascia Stretch Therapy™ Is</h2>
+      </div>
+      <div class="gq-block">
+        <strong>Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted stretching that is pain-free, fully customizable and improves functionality.</strong> You lie down and a trained practitioner does the stretching with you, so you are not working through a routine on your own. At OmniFit Performance it is delivered by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute), in clients' homes across North County San Diego. It is offered in-home only, it is open to anyone, and every new client starts with a 90-minute First Visit.
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--white">
+    <!-- ════════════ THE FIRST VISIT ════════════ -->
+    <section class="fs-section" id="fs-first-visit">
+      <div class="fs-section-head">
+        <span class="fs-label">Where Everyone Starts</span>
+        <hr class="fs-divider">
+        <h2>What the First Visit Includes</h2>
+        <p>The First Visit is 90 minutes, costs $150 and is required for every new FST™ client. It has three parts.</p>
+      </div>
+
+      <div class="fs-steps">
+        <div class="fs-step">
+          <span class="fs-step-num">Part 1</span>
+          <div class="fs-step-title"><svg class="omni-icon omni-icon--ruler" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L20 4v16z"/><path d="M12 20v-3M16 20v-3M20 12h-3M20 16h-3"/></svg> A range-of-motion check</div>
+          <p>Before anything else, Nemezio measures your range of motion. Those are your starting measurements.</p>
+        </div>
+        <div class="fs-step">
+          <span class="fs-step-num">Part 2</span>
+          <div class="fs-step-title"><svg class="omni-icon omni-icon--lotus" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v5"/><path d="M4 18c3-2 5-5 8-5s5 3 8 5"/><path d="M4 18c2 1.5 4 2 8 2s6-.5 8-2"/></svg> Your first session on the table</div>
+          <p>Your first Fascia Stretch Therapy™ session. You lie on the table he brings, and he guides the stretching from start to finish.</p>
+        </div>
+        <div class="fs-step">
+          <span class="fs-step-num">Part 3</span>
+          <div class="fs-step-title"><svg class="omni-icon omni-icon--clipboard" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v2H9z"/><path d="M8 11h8M8 15h6"/></svg> A re-measure at the end</div>
+          <p>The same ranges are measured again before he leaves, and you see both sets of measurements.</p>
+        </div>
+      </div>
+
+      <div class="fs-callout">
+        <strong>The First Visit is not the Performance Assessment, and its $150 is not credited toward anything.</strong>
+      </div>
+
+      <div class="fs-need">
+        <div class="fs-need-item"><svg class="omni-icon omni-icon--check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>A quiet room with floor space</strong>That is all the room needs.</span></div>
+        <div class="fs-need-item"><svg class="omni-icon omni-icon--check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>The table comes with him</strong>You do not need any equipment.</span></div>
+        <div class="fs-need-item"><svg class="omni-icon omni-icon--check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Clothes you can move in</strong>Wear what lets you move comfortably.</span></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--cream">
+    <!-- ════════════ WHO IT SUITS ════════════ -->
+    <section class="fs-section" id="fs-who">
+      <div class="fs-section-head">
+        <span class="fs-label">Who Books It</span>
+        <hr class="fs-divider">
+        <h2>Who Fascia Stretch Therapy™ Suits</h2>
+        <p>It is open to anyone. A few examples of who it suits:</p>
+      </div>
+
+      <div class="fs-grid">
+        <article class="fs-card">
+          <span class="fs-card-icon"><svg class="omni-icon omni-icon--chair" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6"/><path d="M5 11h14v3H5z"/><path d="M7 14v6M17 14v6"/></svg></span>
+          <h3>Desk-bound professionals</h3>
+          <p>Long days in a chair, and you want assisted stretching brought to your home instead of another appointment across town.</p>
+        </article>
+        <article class="fs-card">
+          <span class="fs-card-icon"><svg class="omni-icon omni-icon--golf" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 21V4"/><path d="M8 4l9 3-9 3"/><path d="M4 21c0-1.5 2-2.5 4-2.5s4 1 4 2.5"/></svg></span>
+          <h3>Golfers</h3>
+          <p>You want mobility work that sits alongside your game and your practice schedule.</p>
+        </article>
+        <article class="fs-card">
+          <span class="fs-card-icon"><svg class="omni-icon omni-icon--plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+          <h3>People who feel stiff after travel</h3>
+          <p>Flights and long drives are part of your routine, and you want a visit at home once you are back.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--white">
+    <!-- ════════════ RATES ════════════ -->
+    <section class="fs-section" id="fs-rates">
+      <div class="fs-section-head">
+        <span class="fs-label">Published Rates</span>
+        <hr class="fs-divider">
+        <h2>Fascia Stretch Therapy™ Rates, In-Home</h2>
+      </div>
+
+      <div class="fs-table-wrap">
+        <table class="fs-table">
+          <thead>
+            <tr><th>Option</th><th>Price</th><th>Length</th><th>What to know</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>First Visit</strong></td><td class="fs-price" data-label="Price">$150</td><td data-label="Length">90 minutes</td><td data-label="What to know">Required for every new FST™ client. A range-of-motion check, your first session on the table, and a re-measure at the end.</td></tr>
+            <tr><td><strong>Single session</strong></td><td class="fs-price" data-label="Price">$225</td><td data-label="Length">60 minutes</td><td data-label="What to know">Booked one at a time, after your First Visit. Expires 30 days from purchase.</td></tr>
+            <tr><td><strong>5-session pack</strong></td><td class="fs-price" data-label="Price">$200 per session</td><td data-label="Length">60 minutes each</td><td data-label="What to know">$1,000 for five sessions. Expires 8 weeks from purchase.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ul class="fs-rate-notes">
+        <li>Fascia Stretch Therapy™ is offered in-home only, and these are in-home rates. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.</li>
+        <li>Follow-up sessions and 5-session packs are arranged with Nemezio after your First Visit.</li>
+      </ul>
+
+      <div class="fs-terms" id="fs-payment-terms">
+        <h3>Payment Terms</h3>
+        <ul class="fs-rate-notes">
+          <li>Payment confirms your booking. The First Visit is paid when you book; follow-up sessions and 5-session packs are paid in advance. No slot is held without payment.</li>
+          <li>Fees are not refunded. With 24 hours' notice or more you can reschedule.</li>
+          <li>Cancellations with less than 24 hours' notice and no-shows forfeit the fee.</li>
+          <li>A single session expires 30 days from purchase; a 5-session pack expires 8 weeks from purchase. Either can be rescheduled any time before it expires.</li>
+        </ul>
+      </div>
+
+      <div class="fs-rate-cta"><a class="fs-btn fs-btn-primary" href="https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home" target="_blank" rel="noopener">Book Your First Visit</a></div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--cream">
+    <!-- ════════════ HOW IT FITS ALONGSIDE TRAINING ════════════ -->
+    <section class="fs-section" id="fs-training">
+      <div class="fs-section-head">
+        <span class="fs-label">FST™ and Training</span>
+        <hr class="fs-divider">
+        <h2>How It Fits Alongside Training</h2>
+      </div>
+
+      <div class="fs-grid">
+        <article class="fs-card">
+          <span class="fs-card-icon"><svg class="omni-icon omni-icon--lotus" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><path d="M12 8v5"/><path d="M4 18c3-2 5-5 8-5s5 3 8 5"/><path d="M4 18c2 1.5 4 2 8 2s6-.5 8-2"/></svg></span>
+          <h3>On its own</h3>
+          <p>Fascia Stretch Therapy™ stands alone. Book a First Visit, then continue with single sessions or a 5-session pack. No training program is attached.</p>
+        </article>
+        <article class="fs-card">
+          <span class="fs-card-icon"><svg class="omni-icon omni-icon--dumbbell" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M19 12h2"/><rect x="5" y="8" width="3" height="8" rx="1"/><rect x="16" y="8" width="3" height="8" rx="1"/><path d="M8 12h8"/></svg></span>
+          <h3>Alongside a program</h3>
+          <p>It can also pair with a training program. If you already train with OmniFit Performance, ask Nemezio about adding it.</p>
+        </article>
+      </div>
+
+      <div class="text-center" style="margin-top: 22px;">
+        <p>Neither requires the other. No training program and no Performance Assessment is needed for FST™, and training clients are not required to add it. Looking for coaching instead? See <a href="/in-home-personal-trainer-san-diego">in-home personal training</a> or <a href="/personal-training-services">all training services</a>.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--white">
+    <!-- ════════════ PRACTITIONER ════════════ -->
+    <section class="fs-section" id="fs-practitioner">
+      <div class="fs-section-head">
+        <span class="fs-label">Your Practitioner</span>
+        <hr class="fs-divider">
+        <h2>Who Delivers Your Visit</h2>
+      </div>
+
+      <div class="fs-prac">
+        <!-- The certification badge: the owner's PNG, unmodified, on a white
+             panel (the artwork is teal on transparent). Shown here and in the
+             about credentials entry, nowhere else (CANON; certify.py fst_badge). -->
+        <div class="fs-badge-panel"><img src="/assets/img/fst-certified-level-1.png" alt="Fascia Stretch Therapy™ Certified Level 1 badge" width="1183" height="502" loading="lazy" decoding="async"></div>
+        <div class="fs-prac-text">
+          <div class="fs-prac-name">Nemezio LopezPerez</div>
+          <div class="fs-prac-cred">Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute)</div>
+          <p>Nemezio completed the Stretch to Win Institute's Fascia Stretch Therapy™ Level 1 training: 38 hours, with the certificate issued November 20, 2026. He is the founder of OmniFit Performance and a NASM Elite Trainer, and he delivers every FST™ visit himself.</p>
+          <p><a href="/about">More about Nemezio →</a></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--cream">
+    <!-- ════════════ FAQ ════════════ -->
+    <section class="fs-section" id="fs-faq">
+      <div class="fs-section-head">
+        <span class="fs-label">Questions</span>
+        <hr class="fs-divider">
+        <h2>Fascia Stretch Therapy™ FAQs</h2>
+      </div>
+
+      <div class="fs-faq">
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">What is Fascia Stretch Therapy™?</div>
+          <div class="fs-faq-a">Fascia Stretch Therapy™ (FST™) is assisted stretching for mobility and recovery, done on a table: you lie down and a trained practitioner does the stretching with you. It is also written "fascial stretch therapy". At OmniFit Performance it is delivered in your home by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute).</div>
+        </div>
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">What happens at the First Visit?</div>
+          <div class="fs-faq-a">The First Visit is 90 minutes and is required for every new FST™ client. It has three parts: a range-of-motion check, your first Fascia Stretch Therapy™ session on the table, and a re-measure at the end, so you see the same ranges measured before and after. Follow-up sessions and 5-session packs are arranged with Nemezio after the First Visit.</div>
+        </div>
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">How much does it cost?</div>
+          <div class="fs-faq-a">The First Visit is $150 for 90 minutes. After that, a single 60-minute session is $225, and a 5-session pack is $200 per session ($1,000), which expires 8 weeks from purchase. These are in-home rates. Outside the no-fee part of our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.</div>
+        </div>
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">Do I need to be a training client?</div>
+          <div class="fs-faq-a">No. Fascia Stretch Therapy™ is open to anyone. You do not need a training program or a Performance Assessment to book it. It stands on its own, and it can also pair with a training program if you have one.</div>
+        </div>
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">Where do sessions take place and what do I need?</div>
+          <div class="fs-faq-a">Sessions take place in your home, within OmniFit Performance's in-home service area in North County San Diego. You need a quiet room with floor space. The table comes with Nemezio. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.</div>
+        </div>
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">What should I wear?</div>
+          <div class="fs-faq-a">Wear clothes you can move in. That is all you need to prepare: the table comes with Nemezio.</div>
+        </div>
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">Is FST™ massage or medical treatment?</div>
+          <div class="fs-faq-a">No. Fascia Stretch Therapy™ is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage.</div>
+        </div>
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">What is the cancellation policy?</div>
+          <div class="fs-faq-a">Cancellations with less than 24 hours' notice and no-shows forfeit the fee. Fees are not refunded. With 24 hours' notice or more you can reschedule.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--navy">
+    <!-- ════════════ CLOSING CTA ════════════ -->
+    <div class="fs-bottom">
+      <h2>Ready for Your First Visit?</h2>
+      <p>
+        Start with the 90-minute First Visit in your home. You need a quiet room with floor space; the table comes with Nemezio.
+      </p>
+      <a class="fs-btn fs-btn-primary" href="https://calendly.com/nemezio-omnifittraining/recovery-session-first-visit-assessment-in-home" target="_blank" rel="noopener">Book Your First Visit</a>
+      <span class="fs-bottom-note">
+        First Visit: $150 · 90 minutes · in your home
+      </span>
+      <p style="margin-top: 16px; font-size: 14px; text-align: center;">
+        Questions first? Call or text <a href="tel:619-259-0630">619-259-0630</a>.
+      </p>
+    </div>
+
+    <!-- ════════════ HUB LINKS ════════════ -->
+    <div class="fs-hub-links">
+      <strong>Explore OmniFit:</strong>
+      <a href="/in-home-personal-trainer-san-diego">In-Home Training</a> ·
+      <a href="/personal-training-services">All Services</a> ·
+      <a href="/training-rates-san-diego#rt-fst">Rates</a> ·
+      <a href="/about">About Nemezio</a>
+    </div>
+
+    <!-- ════════════ DISCLAIMER (CANON, verbatim) ════════════ -->
+    <p class="fs-disclaimer"><strong>Disclaimer.</strong> Fascia Stretch Therapy™ is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage. Information on this website and during a visit is educational and is not medical advice. Consult your physician before booking, particularly if you have injuries, medical conditions, or are pregnant. A Liability Waiver and Release must be signed before your First Visit.</p>
+
+    <!-- ════════════ TRADEMARK ATTRIBUTION ════════════ -->
+    <p class="fs-tm">Fascia Stretch Therapy™ and FST™ are trademarks of the Stretch to Win Institute.</p>
+  </div>
+
+</div>
+</main>
+<!-- ===== OmniFit Performance Footer (BRAND-ALIGNED · JULY 2026 · v3) ===== -->
+<!-- Changelog v3: Locations card — studio line + in-home service areas now link
+     to their location pages (internal-link task, Q3 strategy). Coronado left
+     unlinked (no page exists). Copyright line: removed hardcoded "2026"
+     (was rendering doubled year alongside the JS-injected span). -->
+<!-- Changelog v2: removed footer-badges block (NASM / ACE / BNI) and its CSS;
+     replaced legacy "OmniFit Personal Fitness Training" Pacific Beach GBP link
+     with current-listing Maps link. See note on swapping in your GBP review
+     short link (g.page/r/.../review) for a direct write-a-review prompt. -->
+
+
+<footer id="omnifit-footer">
+  <div class="wrap">
+
+    <div class="footer-cta">
+      <h3>Start with a conversation.</h3>
+      <p>A 45-minute consultation by video or phone; $30 deposit, refunded the same day you attend.</p>
+      <a class="btn" href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">Book Your 45-Min Consultation</a>
+    </div>
+
+    <div class="footer-grid">
+
+      <!-- About -->
+      <div class="footer-card">
+        <h4>About OmniFit Performance</h4>
+        <p>OmniFit Performance is a private personal training and corrective exercise practice serving San Diego's executive community. Measured assessments, evidence-based programming, and structured accountability for professionals 30+.</p>
+        <ul>
+          <li><a href="/personal-training-services"><span>All Services</span></a></li>
+          <li><a href="/nutrition-coaching-san-diego"><span>Nutrition Coaching</span></a></li>
+          <li><a href="/glp-1-personal-training-san-diego"><span>Training on a GLP-1</span></a></li>
+          <li><a href="/personal-trainer-over-50-san-diego"><span>Training After 50</span></a></li>
+          <li><a href="/couples-personal-training-san-diego"><span>Couples Training</span></a></li>
+          <li><a href="/fascia-stretch-therapy-san-diego"><span>Fascia Stretch Therapy™</span></a></li>
+          <li><a href="/hsa-fsa-personal-training"><span>HSA &amp; FSA Eligibility</span></a></li>
+          <li><a href="/how-to-choose-a-personal-trainer-san-diego"><span>How to Choose a Trainer</span></a></li>
+          <li><a href="/blog"><span>Journal</span></a></li>
+          <li><a href="/terms-and-conditions"><span>Terms &amp; Conditions</span></a></li>
+          <li><a href="/privacy-policy"><span>Privacy Policy</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div class="footer-card">
+        <h4>Connect</h4>
+        <ul>
+          <li>
+            <a href="https://www.instagram.com/omnifit_sd" target="_blank" rel="noopener">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></svg>
+              <span>@omnifit_sd</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/nemeziolp/" target="_blank" rel="noopener">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10.5V17"/><path d="M7 7.5v.01"/><path d="M11 17v-4a2.5 2.5 0 0 1 5 0v4"/><path d="M11 10.5V17"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <!-- TODO: replace href with your GBP review short link (g.page/r/XXXXXXXX/review)
+                 from GBP dashboard > "Ask for reviews" for a direct write-a-review prompt. -->
+            <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg>
+              <span>Google Reviews</span>
+            </a>
+          </li>
+          <li>
+            <!--email_off--><a href="mailto:nemezio@omnifittraining.com">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+              <span>Email</span>
+            </a><!--email_on-->
+          </li>
+        </ul>
+      </div>
+
+      <!-- Location -->
+      <div class="footer-card">
+        <h4>Locations</h4>
+        <p>Studio: <a href="/personal-trainer-4s-ranch">Teqneeq · 4S Ranch, San Diego</a></p>
+        <p style="font-size:13px; color:var(--omni-muted); opacity:0.85;">In-home:
+          <a href="/personal-trainer-la-jolla">La Jolla</a> •
+          <a href="/personal-trainer-del-mar">Del Mar</a> •
+          <a href="/personal-trainer-carmel-valley">Carmel Valley</a> •
+          <a href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a> •
+          <a href="/personal-trainer-rancho-bernardo">Rancho Bernardo</a> •
+          <a href="/personal-trainer-solana-beach">Solana Beach</a> •
+          <a href="/personal-trainer-encinitas">Encinitas</a> •
+          <a href="/personal-trainer-carlsbad">Carlsbad</a> •
+          <a href="/personal-trainer-santaluz">Santaluz</a> •
+          <a href="/personal-trainer-fairbanks-ranch">Fairbanks Ranch</a> •
+          <a href="/personal-trainer-4s-ranch">4S Ranch</a>
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.google.com/maps/search/?api=1&query=Teqneeq+10772+Thornmint+Rd+San+Diego+92127" target="_blank" rel="noopener">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <span>Get Directions</span>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+16192590630">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5a1 1 0 0 1 1-1h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5z"/></svg>
+              <span>(619) 259-0630</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://calendly.com/nemezio-omnifittraining/45min" target="_blank" rel="noopener">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M12 14v3"/><path d="M10.5 15.5h3"/></svg>
+              <span>Book Your Consultation</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-copy">
+      © <span id="omnifit-year">2026</span> OmniFit Performance · Personal Training &amp; Corrective Exercise · San Diego, CA
+    </div>
+
+  </div>
+</footer>
+<script>(function(){function go(){var s=document.createElement("script");s.src="/assets/assistant.js";s.async=true;document.body.appendChild(s)}function idle(){"requestIdleCallback" in window?requestIdleCallback(go,{timeout:3000}):setTimeout(go,1500)}document.readyState==="complete"?idle():window.addEventListener("load",idle)})();</script>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
