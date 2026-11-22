@@ -215,6 +215,14 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
    keep their own styling. */
 #main p a:not([class]),#main p a:not([class]):link,#main p a:not([class]):visited{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
 
+/* ===== Landing pages (build.py LANDING; CANON FOUNDERS LANDING PAGE) =====
+   Logo-only header: the logo sits centered because nothing follows it.
+   Legal-only footer: Terms, Privacy and the copyright line, nothing else. */
+.site-header--landing .site-header__inner{justify-content:center;}
+#omnifit-footer.omnifit-footer--legal .wrap{padding:26px 20px 28px;text-align:center;}
+#omnifit-footer.omnifit-footer--legal .footer-legal-links{margin:0;font-size:14px;color:var(--omni-muted);}
+#omnifit-footer.omnifit-footer--legal .footer-copy{margin-top:8px;}
+
 /* ===== Footer (source: pages/footer.html) ===== */
 #omnifit-footer{
     --omni-navy:#0a1628;
