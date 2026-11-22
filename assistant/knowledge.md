@@ -115,7 +115,7 @@ One session per 4-week cycle: a reassessment on the Bodystat QuadScan 4000 and a
 
 - Fascia Stretch Therapy™ (FST™) is a modality of table-based assisted stretching that is pain-free, fully customizable and improves functionality. It is a service offered by OmniFit Performance and delivered by Nemezio LopezPerez, Fascia Stretch Practitioner – Level 1 (Stretch to Win Institute).
 - It is not medical treatment, not physical therapy and not massage.
-- Offered in-home only, within the in-home service area in North County San Diego. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or Poway. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.
+- Offered in-home only, within the in-home service area in North County San Diego. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.
 - Open to anyone. No training program and no Performance Assessment is required.
 - First Visit: $150 for 90 minutes. Required for every new FST™ client. It covers a range-of-motion check, the first Fascia Stretch Therapy™ session on the table, and a re-measure at the end.
 - The First Visit is not the Performance Assessment, and its $150 is not credited toward anything.
