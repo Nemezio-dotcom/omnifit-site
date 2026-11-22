@@ -219,6 +219,7 @@ svg.omni-icon{width:1em;height:1em;fill:none;stroke:var(--omni-gold);stroke-widt
    Logo-only header: the logo sits centered because nothing follows it.
    Legal-only footer: Terms, Privacy and the copyright line, nothing else. */
 .site-header--landing .site-header__inner{justify-content:center;}
+.site-logo--static{display:inline-flex;align-items:center;cursor:default;}
 #omnifit-footer.omnifit-footer--legal .wrap{padding:26px 20px 28px;text-align:center;}
 #omnifit-footer.omnifit-footer--legal .footer-legal-links{margin:0;font-size:14px;color:var(--omni-muted);}
 #omnifit-footer.omnifit-footer--legal .footer-copy{margin-top:8px;}
