@@ -148,6 +148,20 @@ TITLE_OVERRIDE = {
 
 CALENDLY = "https://calendly.com/nemezio-omnifittraining/45min"
 
+# LANDING PAGES (owner, Nov 22 2026; CANON CANONICAL FACTS > FASCIA STRETCH
+# THERAPY > FOUNDERS LANDING PAGE). An ad landing page is one offer with no
+# menu and no search presence: it is built with the logo-only header (no
+# announcement bar, no nav), the legal-only footer (copyright, Terms,
+# Privacy; no consultation CTA, no link grid, no Ask OmniFit loader), a
+# noindex robots meta, and it is left out of sitemap.xml. Nothing links to it;
+# check() verifies all of that for every slug here.
+LANDING = {"in-home-stretching-founders"}
+NOINDEX_META = '<meta name="robots" content="noindex, follow">'
+# <!-- IF-ASSET /assets/img/x.jpg --> ... <!-- /IF-ASSET --> keeps its contents
+# only when that file ships in this build, so a slot for an image the owner
+# has not supplied yet renders as nothing, never as a broken image.
+IF_ASSET_RE = re.compile(r"<!--\s*IF-ASSET\s+(/assets/[^\s>]+)\s*-->(.*?)<!--\s*/IF-ASSET\s*-->", re.S)
+
 # Open Graph / Twitter card tags on every page, so a link shared by text,
 # Facebook or LinkedIn shows a photo, title and description. A page whose
 # header already carries og:image (a Journal post, via site/blog.py) keeps its
@@ -570,6 +584,56 @@ def footer_parts():
     return css, markup, js
 
 
+def conditional_assets(body, exists=None):
+    """Resolve IF-ASSET slots (see IF_ASSET_RE). `exists` is the file test,
+    injectable for the self-test; by default the asset must be a file under
+    public/ at the moment the page is emitted (site/img is copied first)."""
+    exists = exists or (lambda path: (PUBLIC / path.lstrip("/")).is_file())
+
+    def sub(m):
+        return m.group(2) if exists(m.group(1)) else f"<!-- IF-ASSET {m.group(1)}: not shipped in this build -->"
+
+    return IF_ASSET_RE.sub(sub, body)
+
+
+def landing_header(nav):
+    """The logo-only header for a LANDING page: the site logo (from
+    site/nav.html, so it stays the one logo) linking home, nothing else."""
+    m = re.search(r'<a class="site-logo".*?</a>', nav, re.S)
+    if not m:
+        raise SystemExit("site/nav.html: <a class=\"site-logo\"> not found (landing header)")
+    return ('<header class="site-header site-header--landing" id="site-header">\n'
+            '  <div class="site-header__inner">\n    ' + m.group(0) + '\n  </div>\n</header>')
+
+
+def footer_legal(footer_markup):
+    """The legal-only footer for a LANDING page: Terms, Privacy and the
+    copyright line, lifted from pages/footer.html so the wording is shared."""
+    copy = re.search(r'<div class="footer-copy">.*?</div>', footer_markup, re.S)
+    if not copy:
+        raise SystemExit("pages/footer.html: footer-copy block missing (landing footer)")
+    return ('<footer id="omnifit-footer" class="omnifit-footer--legal">\n  <div class="wrap">\n'
+            '    <p class="footer-legal-links"><a href="/terms-and-conditions">Terms &amp; Conditions</a> · '
+            '<a href="/privacy-policy">Privacy Policy</a></p>\n'
+            '    ' + copy.group(0) + '\n  </div>\n</footer>')
+
+
+def landing_selftest(nav, footer_markup):
+    """The landing chrome and the IF-ASSET slot, seen doing their job before
+    they are trusted: fixtures that must resolve each way."""
+    body = '<p>a</p><!-- IF-ASSET /assets/img/x.jpg --><img src="/assets/img/x.jpg"><!-- /IF-ASSET --><p>b</p>'
+    kept = conditional_assets(body, exists=lambda p: True)
+    gone = conditional_assets(body, exists=lambda p: False)
+    assert '<img src="/assets/img/x.jpg">' in kept and "IF-ASSET" not in kept, "IF-ASSET: a shipped asset was dropped"
+    assert "<img" not in gone and "not shipped" in gone and "<p>a</p>" in gone and "<p>b</p>" in gone, "IF-ASSET: a missing asset was kept"
+    h = landing_header(nav)
+    assert 'class="site-logo"' in h and "<nav" not in h and "site-announce" not in h and "site-nav-toggle" not in h, "landing header carries more than the logo"
+    f = footer_legal(footer_markup)
+    assert "calendly.com" not in f and "footer-grid" not in f and "/terms-and-conditions" in f and "/privacy-policy" in f \
+        and 'id="omnifit-year"' in f, "landing footer is not the legal lines only"
+    return True
+
+
 def render(layout, **kw):
     out = layout
     for k, v in kw.items():
@@ -589,6 +653,8 @@ def build():
     # is unchanged: no /blog page, the /blog 302 stays, no CSS, no footer link.
     posts = blog.load_posts(PAGES / "blog", SITE / "img")
     footer_html = footer_html.replace("<!--BLOG_LINK-->", blog.FOOTER_LINK if posts else "")
+    landing_selftest(nav, footer_html)
+    landing_footer = footer_legal(footer_html)
     footer_html += "\n" + ASSISTANT_LOADER
 
     # Ask OmniFit knowledge, regenerated on every build.
@@ -617,6 +683,7 @@ def build():
     )
 
     pages = []  # (url_path, title, meta_source, lastmod)
+    landing = []  # (url_path, title): built, noindex, never in the sitemap
     emoji_report = {}  # url_path -> {char: count}
 
     def emit(slug, url_path, body_text, sources, header_path, title, desc, meta_source,
@@ -625,8 +692,18 @@ def build():
             header_text = read(header_path).strip() if header_path else ""
         # The layout sets the canonical; drop a duplicate carried by a header.
         header_text = re.sub(r'<link rel="canonical"[^>]*>\s*', "", header_text)
+        is_landing = slug in LANDING
+        page_site_header = site_header
+        if is_landing:
+            # One robots directive: the page-level noindex replaces the
+            # site-wide "index, follow" meta from site-header.html.
+            header_text = NOINDEX_META + "\n" + header_text
+            page_site_header = re.sub(r'<meta name="robots" content="index, follow">\s*', "", site_header)
+            if 'name="robots"' in page_site_header:
+                raise SystemExit(f"{slug}: site-header.html carries a robots meta this build could not replace")
         body, styles, links = split_body(body_text)
         body = fix_links(body)
+        body = conditional_assets(body)
         body, styles, counts = replace_emoji(body, styles, url_path)
         if counts:
             emoji_report[url_path] = counts
@@ -638,16 +715,16 @@ def build():
             description=html.escape(desc, quote=True),
             canonical=canonical,
             social=social,
-            site_header=site_header,
+            site_header=page_site_header,
             page_header_source=str(header_path.relative_to(ROOT)) if header_path else ("site/blog.py" if header_text else "none"),
             page_header=header_text or "<!-- (this page has no header file) -->",
             page_links="\n".join(links),
             page_source=", ".join(str(s.relative_to(ROOT)) for s in sources),
             page_styles="\n".join(styles),
             slug=slug,
-            nav=mark_active(nav, url_path),
+            nav=landing_header(nav) if is_landing else mark_active(nav, url_path),
             body=body.strip("\n"),
-            footer=footer_html,
+            footer=landing_footer if is_landing else footer_html,
         )
         # Flat files (CANON / DEPLOY.md "Trailing slash"): Cloudflare Pages
         # serves public/<slug>.html at /<slug> directly, whereas
@@ -657,6 +734,9 @@ def build():
         out = PUBLIC / ("index.html" if url_path == "/" else url_path.strip("/") + ".html")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(doc, encoding="utf-8")
+        if is_landing:
+            landing.append((url_path, title))
+            return
         pages.append((url_path, title, meta_source,
                       lastmod or git_date(*sources, *([header_path] if header_path else []))))
 
@@ -731,7 +811,7 @@ def build():
     sm.append("</urlset>")
     (PUBLIC / "sitemap.xml").write_text("\n".join(sm) + "\n", encoding="utf-8")
 
-    return pages, emoji_report
+    return pages, emoji_report, landing
 
 
 def read_redirects(text):
@@ -990,9 +1070,40 @@ def check():
         built_asset = PUBLIC / "assets" / name
         if not built_asset.exists() or built_asset.read_bytes() != (SITE / name).read_bytes():
             problems.append(f"assistant: public/assets/{name} missing or differs from site/{name}")
-    no_loader = [page_path(f) for f in files if ASSISTANT_LOADER not in f.read_text(encoding="utf-8")]
+    landing_paths = {f"/{s}" for s in LANDING}
+    no_loader = [page_path(f) for f in files
+                 if page_path(f) not in landing_paths and ASSISTANT_LOADER not in f.read_text(encoding="utf-8")]
     if no_loader:
         problems.append(f"assistant: loader missing on {len(no_loader)} page(s): {', '.join(sorted(no_loader)[:5])}")
+    # Landing pages (LANDING): built, noindex, out of the sitemap, out of
+    # llms.txt, no nav or announcement bar, the legal footer only, no Ask
+    # OmniFit loader, and no other built page links to them.
+    sitemap = (PUBLIC / "sitemap.xml").read_text(encoding="utf-8") if (PUBLIC / "sitemap.xml").exists() else ""
+    llms = (PUBLIC / "llms.txt").read_text(encoding="utf-8") if (PUBLIC / "llms.txt").exists() else ""
+    for lp in sorted(landing_paths):
+        built_file = PUBLIC / (lp.strip("/") + ".html")
+        if not built_file.is_file():
+            problems.append(f"landing page {lp}: not built"); continue
+        t = built_file.read_text(encoding="utf-8")
+        robots_metas = re.findall(r'<meta name="robots"[^>]*>', t)
+        if robots_metas != [NOINDEX_META]:
+            problems.append(f"landing page {lp}: robots metas are {robots_metas}, expected exactly {NOINDEX_META}")
+        if BASE + lp in sitemap:
+            problems.append(f"landing page {lp}: listed in sitemap.xml")
+        if lp in llms:
+            problems.append(f"landing page {lp}: listed in llms.txt")
+        if '<nav' in t.split("<main", 1)[0] or 'site-announce' in t or 'site-nav-toggle' in t:
+            problems.append(f"landing page {lp}: carries the nav or announcement bar (logo-only header expected)")
+        if 'omnifit-footer--legal' not in t or 'footer-grid' in t or ASSISTANT_LOADER in t:
+            problems.append(f"landing page {lp}: footer is not the legal-only footer, or the Ask OmniFit loader is present")
+        if 'IF-ASSET' in t and '<img' in t.split('IF-ASSET', 1)[0][-200:]:
+            problems.append(f"landing page {lp}: an IF-ASSET slot left its <img> in place")
+        linked_from = [page_path(f) for f in files if page_path(f) != lp
+                       and re.search(r'href="' + re.escape(lp) + r'(?:[/#?"])', f.read_text(encoding="utf-8"))]
+        if linked_from:
+            problems.append(f"landing page {lp}: linked from {', '.join(sorted(linked_from)[:5])}")
+    if landing_paths:
+        notes.append(f"landing pages: {len(landing_paths)} built noindex, out of the sitemap and llms.txt, unlinked, logo-only header, legal footer")
     robots = (PUBLIC / "robots.txt").read_text(encoding="utf-8") if (PUBLIC / "robots.txt").exists() else ""
     if robots != ROBOTS_TXT:
         problems.append("robots.txt: missing or not what build.py writes (named crawlers allowed, /api/ disallowed)")
@@ -1059,10 +1170,13 @@ def check():
 def main():
     argv = sys.argv[1:]
     if "--check" not in argv:
-        pages, emoji_report = build()
-        print(f"Built {len(pages)} pages into {PUBLIC.relative_to(ROOT)}/")
+        pages, emoji_report, landing = build()
+        print(f"Built {len(pages)} pages into {PUBLIC.relative_to(ROOT)}/"
+              + (f" plus {len(landing)} landing page(s), noindex and out of the sitemap" if landing else ""))
         for url_path, title, src, lastmod in sorted(pages, key=lambda r: (r[0] != "/", r[0])):
             print(f"  {url_path:45s} {title}  [{src}; lastmod {lastmod}]")
+        for url_path, title in sorted(landing):
+            print(f"  {url_path:45s} {title}  [LANDING: noindex, not in sitemap.xml]")
         total = sum(sum(c.values()) for c in emoji_report.values())
         print(f"\nEMOJI -> SVG: {total} replacements on {len(emoji_report)} pages")
         for url_path in sorted(emoji_report, key=lambda u: (u != "/", u)):
