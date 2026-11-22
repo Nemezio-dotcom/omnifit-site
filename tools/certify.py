@@ -1956,8 +1956,11 @@ FST_ATTRIBUTION = "Fascia Stretch Therapy™ and FST™ are trademarks of the St
 # where a consultation comes first; FST is booked and paid in one step, so
 # that phrase is wrong on an FST surface and fst_travel fails it there.
 FST_TRAVEL_FEE = "a travel fee applies: you are told the amount when you book, and it is collected at the visit."
-FST_TRAVEL = ("No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch or "
-              "Poway. Elsewhere in our in-home service area " + FST_TRAVEL_FEE)
+# Harmony Grove joined the no-fee area on Nov 22 2026 (owner); the FST
+# surfaces carry it, the training surfaces still read the six-town list
+# (CANON IN-HOME NO-FEE AREA records the split).
+FST_TRAVEL = ("No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, "
+              "Poway or Harmony Grove. Elsewhere in our in-home service area " + FST_TRAVEL_FEE)
 # The canonical definition (owner, Nov 21 2026, FST Reach run). OmniFit's own
 # wording, never attributed to a person or to the Stretch to Win Institute.
 # "pain-free" describes how the stretching feels; it trips two FST bans (pain,
@@ -1986,6 +1989,19 @@ FST_DISCLAIMER = ("Fascia Stretch Therapy™ is assisted stretching for mobility
                   + " " + FST_DISCLAIMER_TAIL)
 FST_TERMS_PAGE = "pages/terms-and-conditions.html"
 FST_BUTTON = "Book Your First Visit"
+# The founders landing page (owner, Nov 22 2026; CANON CANONICAL FACTS > FST >
+# FOUNDERS LANDING PAGE): a $99 First Visit for the first 5 new in-home
+# clients, through December 31, 2026, booked on its own Calendly link. Both
+# are legal on these two files only: $99 beside the word "founders", and the
+# founders link as the page's only Calendly link ("Book Your First Visit"
+# there may also scroll to the booking section). Anywhere else, $99 is a
+# wrong FST price and the founders link is a second booking link.
+FOUNDERS_SLUG = "in-home-stretching-founders"
+FOUNDERS_PAGE = f"pages/{FOUNDERS_SLUG}.html"
+FOUNDERS_FILES = (f"{FOUNDERS_SLUG}.html", f"{FOUNDERS_SLUG}-header.html")
+FOUNDERS_CALENDLY = ("https://calendly.com/nemezio-omnifittraining/"
+                     "founders-first-visit-in-home-assisted-stretching")
+FOUNDERS_PRICE = "99"
 FST_FAQ_QUESTIONS = [
     "What is Fascia Stretch Therapy™?", "What happens at the First Visit?", "How much does it cost?",
     "Do I need to be a training client?", "Where do sessions take place and what do I need?",
@@ -2159,9 +2175,11 @@ def fst_rates(text, path=""):
         copy = _fst_copy(text, a, b)
         for m in re.finditer(r'\$\s?(\d[\d,]*(?:\.\d\d)?)', copy):
             fig = _price_key(m.group(1)); ctx = copy[max(0, m.start() - 70):m.end() + 50].strip()
+            win = copy[max(0, m.start() - 120):m.start()]
+            if fig == FOUNDERS_PRICE and os.path.basename(path) in FOUNDERS_FILES and re.search(r'\bfounders\b', win, re.I):
+                continue    # the founders rate beside its label, on the founders page only
             if fig not in FST_PRICES:
                 out.append((f"FST price ${m.group(1)} is not 150, 225, 200 or 1,000", ctx)); continue
-            win = copy[max(0, m.start() - 120):m.start()]
             near = max(((mm.end(), want, mm.group(0)) for rx, want in _FST_PRICE_LABELS for mm in rx.finditer(win)),
                        default=None)
             if near and fig not in near[1]:
@@ -2284,16 +2302,37 @@ def fst_travel(text, path=""):
 
 def fst_booking(text, path=""):
     """(b) One booking link for FST: every Calendly URL on an FST surface is
-    FST_CALENDLY, and a "Book Your First Visit" link goes nowhere else."""
+    FST_CALENDLY, and a "Book Your First Visit" link goes nowhere else. On
+    the founders page (FOUNDERS_FILES) the one link is FOUNDERS_CALENDLY
+    instead, and its button may scroll to the booking section (href "#...");
+    the founders link anywhere else is a second booking link."""
     out = []
+    founders = os.path.basename(path) in FOUNDERS_FILES
+    want, label = (FOUNDERS_CALENDLY, "founders") if founders else (FST_CALENDLY, "First Visit")
     for a, b in fst_spans(text, path):
         for m in re.finditer(r'https?://(?:www\.)?calendly\.com/[^\s"\'<>]*', text[a:b]):
-            if m.group(0).rstrip('/') != FST_CALENDLY:
-                out.append((f"Calendly link on an FST surface is not the First Visit link: {m.group(0)}", ""))
+            if m.group(0).rstrip('/') != want:
+                out.append((f"Calendly link on an FST surface is not the {label} link: {m.group(0)}", ""))
+    if not founders and FOUNDERS_CALENDLY in text:
+        out.append(("the founders Calendly link outside the founders page (CANON: that page only)", ""))
     for m in re.finditer(r'<a\b[^>]*\bhref="([^"]*)"[^>]*>(.*?)</a>', text, re.S | re.I):
-        if _flat(m.group(2)).strip() == FST_BUTTON and m.group(1).rstrip('/') != FST_CALENDLY:
-            out.append((f"'{FST_BUTTON}' links to {m.group(1)}, not the First Visit booking page", ""))
+        if _flat(m.group(2)).strip() != FST_BUTTON: continue
+        href = m.group(1).rstrip('/')
+        ok = href == FOUNDERS_CALENDLY or href.startswith('#') if founders else href == FST_CALENDLY
+        if not ok:
+            out.append((f"'{FST_BUTTON}' links to {m.group(1)}, not the {label} booking page", ""))
     return out
+
+_REVIEWS_LINE = re.compile(r'\b4\.98\b|\b190\+|\b\d[\d,]*\+?\s*reviews\b', re.I)
+
+def fst_no_reviews(text, path=""):
+    """(b) The FST page and the founders page carry no reviews line (CANON:
+    the 190+ reviews are training reviews, so a stretching page may not
+    borrow them): [(what, context)] on those files, nothing elsewhere."""
+    if os.path.basename(path) not in FST_WHOLE_FILES + FOUNDERS_FILES: return []
+    copy = html.unescape(re.sub(r'\s+', ' ', _visible_copy(text)))
+    return [("a reviews line on an FST page (the 190+ reviews are training reviews)", copy[max(0, m.start() - 60):m.end() + 40].strip())
+            for m in _REVIEWS_LINE.finditer(copy)]
 
 def fst_page_required(page, header):
     """(b)/(c) What the FST page itself must carry: [(category, what)].
@@ -2632,6 +2671,24 @@ def _selftest_fst():
     assert fst_booking('<a href="https://calendly.com/nemezio-omnifittraining/45min">Book Your First Visit</a>', "pages/x.html"), "FST self-test: First Visit button to the consultation passed"
     assert fst_booking('<p>Book: <a href="https://calendly.com/nemezio-omnifittraining/45min">here</a></p>', P), "FST self-test: a second Calendly page on the FST page passed"
     assert not fst_booking('<a href="https://calendly.com/nemezio-omnifittraining/45min">Book Your Consultation</a>', "pages/x.html"), "FST self-test: the consultation link flagged off an FST surface"
+    # the founders page: $99 beside its label and the founders link, there and nowhere else
+    FP = FOUNDERS_PAGE
+    fo = ('<!-- FST-BLOCK --><p>Fascia Stretch Therapy™ (FST™) in your home. Founders rate: $99 for the first 5 new clients. '
+          'Regular First Visit: $150.</p><a href="#fh-book">Book Your First Visit</a><p>If the box does not load, '
+          '<a href="' + FOUNDERS_CALENDLY + '">open the booking page</a>.</p><!-- /FST-BLOCK -->')
+    assert not fst_rates(fo, FP) and not fst_booking(fo, FP), f"FST self-test: the founders page flagged: {fst_rates(fo, FP) + fst_booking(fo, FP)}"
+    assert fst_rates(fo, P), "FST self-test: $99 on the FST page passed"
+    assert fst_rates(fo.replace("Founders rate: $99", "First Visit: $99"), FP), "FST self-test: $99 without its founders label passed on the founders page"
+    assert fst_booking(fo, P), "FST self-test: the founders Calendly link on the FST page passed"
+    assert fst_booking('<p>Book at ' + FOUNDERS_CALENDLY + '</p>', "pages/x.html"), "FST self-test: the founders link off an FST surface passed"
+    assert fst_booking(fo.replace(FOUNDERS_CALENDLY, FST_CALENDLY), FP), "FST self-test: the regular First Visit link on the founders page passed"
+    assert fst_booking('<a href="#fh-book">Book Your First Visit</a>', P), "FST self-test: a same-page First Visit button passed off the founders page"
+    # no reviews line on the FST page or the founders page; the training pages keep theirs
+    for rv in ("4.98 average across 190+ reviews", "190+ reviews", "rated 4.98"):
+        assert fst_no_reviews('<p>Nemezio LopezPerez. ' + rv + '.</p>', FP), f"FST self-test: '{rv}' passed on the founders page"
+        assert fst_no_reviews('<p>' + rv + '</p>', P), f"FST self-test: '{rv}' passed on the FST page"
+    assert not fst_no_reviews('<p>4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark).</p>', "pages/about.html"), "FST self-test: the reviews line flagged on a training page"
+    assert not fst_no_reviews(fo, FP) and not fst_no_reviews(good, P), "FST self-test: fst_no_reviews fired on clean FST copy"
     # the page's own requirements and the exact mirror
     faqs = [(q, "Answer %d." % i) for i, q in enumerate(FST_FAQ_QUESTIONS)]
     faqs[0] = (faqs[0][0], "Assisted stretching. " + FST_FASCIAL_SENTENCE)
@@ -2987,7 +3044,7 @@ def run():
             print(f"   {f}  [{what}]  …{ctx[:100]}…"); B+=1
         for ln, ctx in _fst(retired_225, f):
             print(f"   {f}:{ln}  [$225 outside a Fascia Stretch Therapy surface - the retired August rate]  …{ctx[:90]}…"); B+=1
-        for fn in (fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking, fst_travel):
+        for fn in (fst_fascial, fst_brand, fst_trademark, fst_session_length, fst_booking, fst_travel, fst_no_reviews):
             for what, ctx in _fst(fn, f):
                 print(f"   {f}  [{what}]  …{ctx[:100]}…"); B+=1
     for what in fst_nav(open(FST_NAV_FILE).read()):
