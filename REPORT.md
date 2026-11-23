@@ -8909,7 +8909,7 @@ Owner brief of Nov 23, 2026, two changes to the founders landing page, `/in-home
 - **tools/tracktest.js**: section 10 (10 assertions) for the three events, one assertion in section 3, `section()` so one aborted section no longer hides the others, `--only`. Details in tools/README.md "Founders hero and booking events".
 - **CANON**: FOUNDERS LANDING PAGE > HERO (copy, layout, image, alt text, the AI-generated rule, status); MEASUREMENT > EVENTS (INLINE CALENDLY BOOKING) and the FOUNDERS PAGE BOOKING INTEREST note; changelog. **DEPLOY.md** "Measurement": three rows in the events table and a note on reading them. **tools/README.md**: the new section.
 
-## NOT DONE: the hero image
+## NOT DONE in the first pass: the hero image (done later the same day, see "The hero image" below)
 
 The brief says the ad image was uploaded with the prompt. No file arrived in the session, so `site/img/fst-in-home-hero.jpg` does not exist and the IF-ASSET slot still renders nothing. The live page after this run opens with the new copy and no photo. Everything else is in place: once the JPEG (about 1200px wide, under 200 KB) is saved at that path and the site is rebuilt, the image appears with no further code change.
 
@@ -8950,4 +8950,26 @@ The calendly.com origin check removed: 2 assertions fail (the same-origin messag
 ## Checks
 
 `python3 build.py` RESULT: PASSED (49 pages plus 1 landing page); `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), five invariant hashes unchanged; `python3 build.py --check` RESULT: PASSED. `node tools/tracktest.js`: 59 of 62 assertions pass, section 10 all 10; the 3 failures are the stale Fit Check sections above. `node --test tests/assistant.test.mjs`: 53 of 53 pass.
+
+## The hero image (second pass, Nov 23, 2026)
+
+The owner re-sent the ad image. It is now `site/img/fst-in-home-hero.jpg`: the whole image, uncropped, JPEG, 1199x1312, 191 KB (quality 76, progressive). The IF-ASSET slot renders it with no other change to the build.
+
+**The image is portrait; the slot was written for 1200x900.** Two consequences:
+
+1. **Desktop:** the img's `width`/`height` attributes now read 1199 and 1312, so the space reserved before the file loads matches the file. At 1280x800 the hero is two columns, the whole image on the right at 452x495px, and the button ends at 587px.
+2. **Phone banner:** a 2:1 banner shows about 600 of the image's 1312 rows. The practitioner's head (from row 62) and the table top (to about row 1060) are too far apart for one banner. Rendered at 360x640 at four positions:
+
+| object-position | What the banner shows |
+|---|---|
+| `50% 50%` (the patch's default) | the client on the table, the practitioner from the chest down: **his head is cut off** |
+| `50% 30%` | his head cut at the nose, the client's face cut at the bottom edge |
+| `50% 8%` (**chosen**) | the practitioner, head to waist with headroom, both hands on the client's raised leg, sofa and fireplace behind; the client on the table and the table are below the banner |
+| `50% 0%` | the same with no headroom |
+
+By the brief's rule (a cut head is fixed with `object-position` on `#omni-fh .fh-hero-media img`, nothing else), the 899px block now carries `object-position: 50% 8%`. **The brief's other criterion, the table in frame, is NOT met on a phone and cannot be with this image at 2:1.** Options for the owner: a taller banner on phones (4:3 shows the practitioner and the client on the table, and adds 80px, which puts the button below a 360x640 first screen); a landscape version of the image; or leave it.
+
+**360x640, real image:** image 81 to 241px; H1 257 to 324; lead to 385; sub to 467; offer to 574; button 588 to 645. The button's label is on the first screen; its bottom 5px is not (the same figure as with the placeholder; the fix proposed above stands, not applied). 390x844: button 603 to 660. 412x915: 617 to 674. No horizontal scroll at any width; one H1.
+
+**Checks after the image:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0); `python3 build.py --check` RESULT: PASSED; `node tools/tracktest.js --only=10` RESULT: PASSED (10 assertions).
 
