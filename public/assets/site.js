@@ -100,6 +100,12 @@
                               format (studio | inhome | virtual), frequency
                               (1x | 2x | 3x | async), couples (true | false),
                               offer (foundation | program | reset)
+     booking_cta_click        an in-page link whose target holds an inline
+                              Calendly embed   cta_location, cta_label, cta_position
+     booking_section_view     that embed scrolls into view, once per page load
+                              cta_location
+     booking_time_selected    a day and time picked inside the embed
+                              cta_location
    cta_location / form_location is the page slug ("home" for /). */
 (function () {
   function track(name, params) {
@@ -146,6 +152,46 @@
     var host = linkHost(a);
     if (host === 'calendly.com' || /\.calendly\.com$/.test(host)) {
       track('book_consultation_click', { cta_location: slug, cta_label: label(a), cta_position: position(a) });
+    }
+  });
+
+  /* Inline Calendly booking (the founders landing page): the buttons scroll
+     to an embedded calendar, so no link to calendly.com is ever clicked.
+     booking_cta_click      an in-page link whose target holds the embed
+     booking_section_view   the embed scrolls into view, once per page
+     booking_time_selected  a day and time picked inside the embed
+     A completed booking stays Calendly's own GA4 report (CANON MEASUREMENT). */
+  function bookingTarget(a) {
+    var href = (a.getAttribute('href') || '').trim();
+    if (href.charAt(0) !== '#' || href.length < 2) return null;
+    var t = document.getElementById(href.slice(1));
+    return t && t.querySelector('.calendly-inline-widget') ? t : null;
+  }
+  document.addEventListener('click', function (e) {
+    var a = closest(e.target, 'a[href^="#"]');
+    if (a && bookingTarget(a)) {
+      track('booking_cta_click', { cta_location: slug, cta_label: label(a), cta_position: position(a) });
+    }
+  });
+  var embed = document.querySelector('.calendly-inline-widget');
+  if (embed && 'IntersectionObserver' in window) {
+    var seen = new IntersectionObserver(function (entries) {
+      for (var i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+          track('booking_section_view', { cta_location: slug });
+          seen.disconnect();
+          break;
+        }
+      }
+    });
+    seen.observe(embed);
+  }
+  window.addEventListener('message', function (e) {
+    var host = '';
+    try { host = new URL(e.origin).hostname.toLowerCase(); } catch (x) {}
+    if (host !== 'calendly.com' && !/\.calendly\.com$/.test(host)) return;
+    if (e.data && e.data.event === 'calendly.date_and_time_selected') {
+      track('booking_time_selected', { cta_location: slug });
     }
   });
 

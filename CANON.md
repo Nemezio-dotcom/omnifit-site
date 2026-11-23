@@ -245,10 +245,33 @@ otherwise, this block wins and the older line is kept only as history.
       (the owner's "no crowded studio" trips the FST studio ban). NO reviews
       line anywhere on it (the 190+ reviews are training reviews). FIRST
       PERSON ("I bring the table to you") is the owner's voice for this page
-      only; the FST page stays in the third person. HERO IMAGE: an IF-ASSET
-      slot for /assets/img/fst-in-home-hero.jpg (site/img/fst-in-home-hero.jpg,
-      not yet supplied); until the file exists the hero renders without it.
-      NO Meta tracking code yet (an open item with the owner).
+      only; the FST page stays in the third person.
+      HERO (owner brief, Nov 23 2026; WHY: the Meta ad shows a photo and the
+      page opened as text, and ad visitors left within seconds). In order:
+      eyebrow "In-home assisted stretching · North County San Diego" (HIDDEN
+      at 640px and under, so the offer and the button stay on a phone's first
+      screen); the H1, unchanged; the LEAD LINE "Stiff from the desk, the
+      golf course or the gym?" (.fh-lead); the SUB "A 90-minute First Visit
+      on the table, in your own living room. Your range of motion is measured
+      before and after." (shortened: ", so you can compare the two yourself"
+      is gone); the offer line and the button, unchanged; the TRUST LINE
+      "With Nemezio LopezPerez · NASM Elite Trainer · Fascia Stretch
+      Practitioner – Level 1" (was the title alone). Still no reviews line.
+      HERO IMAGE: an IF-ASSET slot for /assets/img/fst-in-home-hero.jpg,
+      source site/img/fst-in-home-hero.jpg: the Meta ad's image, JPEG, about
+      1200px wide, under 200 KB. Until the file exists the hero renders
+      without it. LAYOUT: 900px and up, two columns (copy left, image right);
+      below 900px the image sits ABOVE the headline, cropped to a 2:1 banner
+      (object-fit: cover). If that crop cuts the practitioner or the table,
+      adjust object-position on #omni-fh .fh-hero-media img and nothing else.
+      ALT TEXT: "Assisted stretching on a portable table in a living room".
+      THE IMAGE IS AI-GENERATED: it is never described, in alt text, a
+      caption or copy, as Nemezio, as a client, or as a real visit.
+      STATUS (Nov 23 2026): the file is STILL NOT IN THE REPO; it did not
+      arrive with the Nov 23 brief, so the slot is ready and renders nothing.
+      NO Meta tracking code yet (an open item with the owner). Booking
+      interest on this page is measured by site.js (MEASUREMENT > EVENTS,
+      the three booking_* events).
     WHAT THE CLIENT NEEDS: a quiet room with floor space. The table comes
       with him. Wear clothes you can move in.
     PAYMENT TERMS (owner decisions, Nov 21 2026; verbatim sentences):
@@ -716,12 +739,35 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
       virtual) · offer (foundation | program | reset). The page writes these
       as data attributes on #rt-ch-result and then a new data-ch-key; site.js
       sends the event when data-ch-key changes. No price is sent.
+    INLINE CALENDLY BOOKING (owner brief, Nov 23 2026). Three events for a
+    page whose buttons scroll to an embedded Calendly calendar instead of
+    linking to calendly.com; today that is the founders landing page only
+    (cta_location "in-home-stretching-founders"). site.js keys them on the
+    markup, a .calendly-inline-widget element, not on the page name.
+    booking_cta_click  a click on an in-page link (href "#id") whose target
+      section holds a .calendly-inline-widget · cta_location · cta_label ·
+      cta_position (the same three params, same rules, as
+      book_consultation_click)
+    booking_section_view  the embed scrolls into view (IntersectionObserver),
+      once per page load · cta_location
+    booking_time_selected  Calendly's "calendly.date_and_time_selected"
+      message from the embed, accepted only from a calendly.com origin ·
+      cta_location. A visitor who picks a second time sends it again.
+    The embed's plain-text fallback link is a link to calendly.com, so it
+    still sends book_consultation_click.
 - FST BOOKING CLICKS (FST Launch run, Nov 2026): "Book Your First Visit"
   links go to a Calendly page, so site.js already sends
   book_consultation_click for them, with cta_label "Book Your First Visit"
   and cta_location "fascia-stretch-therapy-san-diego". No new event and no
   site.js change. JUDGMENT CALL, WRONG IF the owner wants FST bookings
   counted apart from consultation clicks under their own event name.
+- FOUNDERS PAGE BOOKING INTEREST (owner brief, Nov 23 2026): every "Book
+  Your First Visit" button on /in-home-stretching-founders scrolls to the
+  inline embed (#fh-book), so no link to calendly.com is clicked and
+  book_consultation_click never fired there. The three booking_* events
+  above are the measure: how many visitors pressed the button, how many
+  reached the calendar, how many picked a day and time. The completed
+  booking is still Calendly's report (next bullet but one), not a site event.
 - THE HOMEPAGE FST LINK SENDS NO EVENT (FST Reach run, Nov 21 2026). The
   owner's brief asks that its clicks "follow the existing pattern with
   cta_location home, no new event". The existing pattern tracks links to
@@ -2822,3 +2868,11 @@ CHANGE LOG
   ways. Harmony Grove joined the IN-HOME NO-FEE AREA on the FST surfaces (FST page and
   header, Rates FST section, knowledge file FST section, the founders page); the
   training surfaces still read six towns, by the owner's scope. K30 / K31 "also".
+- Nov 23, 2026: Founders hero and booking events (owner brief, Nov 23 2026). The
+  founders landing page hero (FOUNDERS LANDING PAGE > HERO): lead line, shorter sub,
+  trust line naming Nemezio, eyebrow hidden on phones, the image above the headline
+  below 900px as a 2:1 banner, alt text for an AI-generated image. The image file
+  itself is still not in the repo. site.js: booking_cta_click, booking_section_view,
+  booking_time_selected for the inline Calendly embed (MEASUREMENT > EVENTS).
+  tools/tracktest.js covers the three events; a section that throws is now one FAIL
+  row instead of an abort.
