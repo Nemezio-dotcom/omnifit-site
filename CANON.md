@@ -257,18 +257,29 @@ otherwise, this block wins and the older line is kept only as history.
       is gone); the offer line and the button, unchanged; the TRUST LINE
       "With Nemezio LopezPerez · NASM Elite Trainer · Fascia Stretch
       Practitioner – Level 1" (was the title alone). Still no reviews line.
-      HERO IMAGE: an IF-ASSET slot for /assets/img/fst-in-home-hero.jpg,
-      source site/img/fst-in-home-hero.jpg: the Meta ad's image, JPEG, about
-      1200px wide, under 200 KB. Until the file exists the hero renders
-      without it. LAYOUT: 900px and up, two columns (copy left, image right);
-      below 900px the image sits ABOVE the headline, cropped to a 2:1 banner
-      (object-fit: cover). If that crop cuts the practitioner or the table,
-      adjust object-position on #omni-fh .fh-hero-media img and nothing else.
+      HERO IMAGE (in the repo since Nov 23 2026): site/img/fst-in-home-hero.jpg,
+      served at /assets/img/fst-in-home-hero.jpg through the IF-ASSET slot.
+      The Meta ad's image, whole and uncropped: JPEG, 1199x1312 (PORTRAIT),
+      191 KB. The img carries width="1199" height="1312" (the slot was
+      written for 1200x900 before the file existed; the attributes follow
+      the file so the desktop hero does not shift when it loads).
+      LAYOUT: 900px and up, two columns (copy left, the whole image right).
+      Below 900px the image sits ABOVE the headline, cropped to a 2:1 banner
+      (object-fit: cover; object-position: 50% 8%).
+      WHAT THE PHONE BANNER SHOWS, AND WHY: the image is portrait, so a 2:1
+      banner holds under half its height (about 600 of 1312 rows). The
+      practitioner's head and the table are about 950 rows apart, so NO
+      object-position shows both. The centred crop cut the practitioner's
+      head off; by the owner's rule (a cut head is fixed with object-position
+      and nothing else) the banner sits at 8% from the top: the practitioner,
+      head to waist, both hands on the client's raised leg, the living room
+      behind. The client on the table and the table itself are below the
+      banner on a phone; the desktop hero shows all of it. OPEN, owner: a
+      banner that shows the table needs a taller ratio (which pushes the
+      button off a 360x640 first screen) or a landscape version of the image.
       ALT TEXT: "Assisted stretching on a portable table in a living room".
       THE IMAGE IS AI-GENERATED: it is never described, in alt text, a
       caption or copy, as Nemezio, as a client, or as a real visit.
-      STATUS (Nov 23 2026): the file is STILL NOT IN THE REPO; it did not
-      arrive with the Nov 23 brief, so the slot is ready and renders nothing.
       NO Meta tracking code yet (an open item with the owner). Booking
       interest on this page is measured by site.js (MEASUREMENT > EVENTS,
       the three booking_* events).
@@ -2871,8 +2882,11 @@ CHANGE LOG
 - Nov 23, 2026: Founders hero and booking events (owner brief, Nov 23 2026). The
   founders landing page hero (FOUNDERS LANDING PAGE > HERO): lead line, shorter sub,
   trust line naming Nemezio, eyebrow hidden on phones, the image above the headline
-  below 900px as a 2:1 banner, alt text for an AI-generated image. The image file
-  itself is still not in the repo. site.js: booking_cta_click, booking_section_view,
+  below 900px as a 2:1 banner, alt text for an AI-generated image. (The image file
+  itself came later the same day, next entry.) site.js: booking_cta_click, booking_section_view,
   booking_time_selected for the inline Calendly embed (MEASUREMENT > EVENTS).
   tools/tracktest.js covers the three events; a section that throws is now one FAIL
   row instead of an abort.
+- Nov 23, 2026 (later): the hero image arrived and is in the repo
+  (site/img/fst-in-home-hero.jpg, 1199x1312, 191 KB). Phone banner at object-position
+  50% 8%; img width/height follow the file (FOUNDERS LANDING PAGE > HERO IMAGE).
