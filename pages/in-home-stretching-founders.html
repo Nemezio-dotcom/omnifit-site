@@ -106,6 +106,14 @@
     margin: 0 auto 18px;
     line-height: 1.65;
   }
+  #omni-fh .fh-lead {
+    font-size: clamp(16px, 2.3vw, 19px);
+    font-weight: 600;
+    color: var(--white);
+    max-width: 680px;
+    margin: 0 auto 8px;
+    line-height: 1.45;
+  }
   #omni-fh .fh-offer {
     display: block;
     background: var(--gold-dim);
@@ -264,8 +272,18 @@
     #omni-fh .fh-hero:has(.fh-hero-media) .fh-sub,
     #omni-fh .fh-hero:has(.fh-hero-media) .fh-offer { margin-left: 0; }
   }
+  @media (max-width: 899px) {
+    /* Phone and tablet: the photo leads, cropped to a banner so the offer
+       and the button stay on the first screen. */
+    #omni-fh .fh-hero { gap: 16px; }
+    #omni-fh .fh-hero-media { order: -1; }
+    #omni-fh .fh-hero-media img { aspect-ratio: 2 / 1; object-fit: cover; }
+  }
   @media (max-width: 640px) {
-    #omni-fh .fh-hero { padding-top: 2rem; }
+    #omni-fh .fh-hero { padding-top: 1rem; }
+    #omni-fh .fh-eyebrow { display: none; }
+    #omni-fh .fh-sub { margin-bottom: 14px; }
+    #omni-fh .fh-offer { margin-bottom: 14px; }
     #omni-fh .fh-btn, #omni-fh a.fh-btn:link, #omni-fh a.fh-btn:visited { width: 100%; max-width: 360px; text-align: center; }
     #omni-fh .fh-steps { grid-template-columns: 1fr; max-width: 420px; }
     #omni-fh .fh-box { padding: 24px 18px 22px; }
@@ -283,12 +301,13 @@
     <div class="fh-hero-copy">
       <span class="fh-eyebrow">In-home assisted stretching · North County San Diego</span>
       <h1>Assisted stretching that comes to your home.</h1>
-      <p class="fh-sub">A 90-minute First Visit on the table, in your own living room. Your range of motion is measured before and after, so you can compare the two yourself.</p>
+      <p class="fh-lead">Stiff from the desk, the golf course or the gym?</p>
+      <p class="fh-sub">A 90-minute First Visit on the table, in your own living room. Your range of motion is measured before and after.</p>
       <p class="fh-offer"><strong>Founders rate: $99</strong> for the first 5 new clients, through December 31, 2026. Regular First Visit: $150.</p>
       <a class="fh-btn" href="#fh-book">Book Your First Visit</a>
-      <p class="fh-trust">Fascia Stretch Practitioner – Level 1</p>
+      <p class="fh-trust">With Nemezio LopezPerez · NASM Elite Trainer · Fascia Stretch Practitioner – Level 1</p>
     </div>
-    <!-- IF-ASSET /assets/img/fst-in-home-hero.jpg --><div class="fh-hero-media"><img src="/assets/img/fst-in-home-hero.jpg" alt="Nemezio LopezPerez stretching a client on the table, in the client's home" width="1200" height="900" decoding="async" fetchpriority="high"></div><!-- /IF-ASSET -->
+    <!-- IF-ASSET /assets/img/fst-in-home-hero.jpg --><div class="fh-hero-media"><img src="/assets/img/fst-in-home-hero.jpg" alt="Assisted stretching on a portable table in a living room" width="1200" height="900" decoding="async" fetchpriority="high"></div><!-- /IF-ASSET -->
   </section>
 
   <div class="omni-band omni-band--cream">

@@ -152,6 +152,9 @@ tracking script):
 | `fit_check_start` | first answer selected on `/fit-check` | none |
 | `fit_check_complete` | result shown (the page marks `#result` with `data-fit-result` and, on a pass, `data-fit-setting`) | `fit_result` (`pass` \| `hold`), `fit_setting` (recommended Dial setting, pass only). Individual answers are never sent. A retake that reaches a new result counts again |
 | `rates_section_view` | `/training-rates-san-diego` only, the first time each of `#rt-foundation`, `#rt-program`, `#rt-sessions`, `#rt-reset` scrolls into view (IntersectionObserver, once per section, bottom 20% of the viewport excluded) | `section` (the id) |
+| `booking_cta_click` | a click on an in-page link (`href="#id"`) whose target section holds a `.calendly-inline-widget`: the "Book Your First Visit" buttons on `/in-home-stretching-founders`, which scroll to the inline embed instead of linking to calendly.com | `cta_location`, `cta_label`, `cta_position` (as for `book_consultation_click`) |
+| `booking_section_view` | the inline Calendly embed scrolls into view (IntersectionObserver), once per page load | `cta_location` |
+| `booking_time_selected` | Calendly's `calendly.date_and_time_selected` message from the embed, accepted only from a calendly.com origin | `cta_location` |
 
 Completed bookings are not a site event. Calendly's own Google Analytics
 integration (Calendly > Integrations > Google Analytics, the Measurement ID
@@ -160,6 +163,14 @@ cross-domain measurement is configured in GA4 for `calendly.com` (Admin >
 Data streams > the web stream > Configure tag settings > Configure your
 domains) so a visitor who clicks through and books stays one session. Both
 are GA4 / Calendly settings, not repo code; see the manual steps.
+
+The founders landing page (`/in-home-stretching-founders`) embeds Calendly
+inline, so its buttons never link to calendly.com and send
+`booking_cta_click`, not `book_consultation_click`. Read the three
+`booking_*` events as a funnel: button pressed, calendar reached, day and
+time picked. The booking itself is still Calendly's event. To count the
+landing page's interest in GA4, mark `booking_time_selected` (or
+`booking_cta_click`) as a key event; that is a GA4 setting, not repo code.
 
 **Test-only override.** `?omnifit-track=prod` forces the production branch,
 and is honoured only when `location.hostname` is `localhost` or `127.0.0.1`.

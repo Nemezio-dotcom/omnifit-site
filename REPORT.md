@@ -8895,3 +8895,59 @@ $99 on the FST page (fst_rates); the regular First Visit link on the founders pa
 ## Checks
 
 `python3 build.py` RESULT: PASSED (49 pages plus 1 landing page); `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0), five invariant hashes unchanged; `python3 tools/ownership.py` PASSED; `node --test tests/assistant.test.mjs` all pass. Playwright at 390x844 and 412x915: the headline, the founders rate line and the first button end at 565px and 568px, inside the first screen; no horizontal scroll; one H1; no nav.
+
+
+# Founders hero and booking events (Nov 23, 2026)
+
+Owner brief of Nov 23, 2026, two changes to the founders landing page, `/in-home-stretching-founders`, delivered as a patch against main at eba0aef. The patch applied cleanly with `git apply`. Nothing else on the site changed.
+
+## What changed
+
+- **Hero copy** (`pages/in-home-stretching-founders.html`). New lead line under the H1: "Stiff from the desk, the golf course or the gym?" (`.fh-lead`). Sub shortened to "A 90-minute First Visit on the table, in your own living room. Your range of motion is measured before and after." Trust line: "With Nemezio LopezPerez · NASM Elite Trainer · Fascia Stretch Practitioner – Level 1" (this replaces decision 7 of the Founders run for the trust line only; there is still no reviews line). Alt text of the hero image: "Assisted stretching on a portable table in a living room" (the image is AI-generated and is not described as Nemezio with a client). Unchanged: eyebrow text, H1, offer line, button text, every section below the hero, the FAQ, the small print, the header JSON-LD.
+- **Hero layout.** Below 900px the image sits above the headline (`order: -1`), cropped to a 2:1 banner (`aspect-ratio: 2 / 1; object-fit: cover`). At 640px and under the eyebrow pill is hidden, the hero's top padding is 1rem and the sub and offer margins are 14px. 900px and up keeps the two-column layout.
+- **Booking events** (`site/site.js`, the existing measurement block): `booking_cta_click` (an in-page link whose target section holds a `.calendly-inline-widget`; `cta_location`, `cta_label`, `cta_position`), `booking_section_view` (the embed scrolls into view, once per page load; `cta_location`), `booking_time_selected` (Calendly's `calendly.date_and_time_selected` message, accepted from a calendly.com origin only; `cta_location`). The event list in the comment at the top of the measurement block names the three (the one line outside the patch). No page carries a tracking script. Completed bookings stay Calendly's own GA4 report.
+- **tools/tracktest.js**: section 10 (10 assertions) for the three events, one assertion in section 3, `section()` so one aborted section no longer hides the others, `--only`. Details in tools/README.md "Founders hero and booking events".
+- **CANON**: FOUNDERS LANDING PAGE > HERO (copy, layout, image, alt text, the AI-generated rule, status); MEASUREMENT > EVENTS (INLINE CALENDLY BOOKING) and the FOUNDERS PAGE BOOKING INTEREST note; changelog. **DEPLOY.md** "Measurement": three rows in the events table and a note on reading them. **tools/README.md**: the new section.
+
+## NOT DONE: the hero image
+
+The brief says the ad image was uploaded with the prompt. No file arrived in the session, so `site/img/fst-in-home-hero.jpg` does not exist and the IF-ASSET slot still renders nothing. The live page after this run opens with the new copy and no photo. Everything else is in place: once the JPEG (about 1200px wide, under 200 KB) is saved at that path and the site is rebuilt, the image appears with no further code change.
+
+## The 360x640 check
+
+Run with Playwright on the built page, self-hosted fonts loaded, external hosts blocked.
+
+**As deployed (no image):** eyebrow hidden; H1 81 to 148px; lead line to 209px; sub to 291px; offer to 398px; "Book Your First Visit" 412 to 469px, on the first screen with 171px to spare. No horizontal scroll; one H1.
+
+**With a 1200x900 placeholder in the slot** (a grey test card, built locally, never committed; removed and rebuilt before commit):
+
+| Viewport | Image | H1 | Button top | Button bottom | On the first screen |
+|---|---|---|---|---|---|
+| 360x640 | 81 to 241px (320x160) | 257 to 324 | 588 | 645 | all but its last 5px: the label is fully visible, the button's bottom edge is cut |
+| 390x844 | 81 to 256px (350x175) | 272 to 339 | 603 | 660 | yes |
+| 412x915 | 81 to 267px (372x186) | 283 to 353 | 617 | 674 | yes |
+| 768x1024 | 107 to 471px (728x364), eyebrow shown | 536 to 644 | 855 | 912 | yes |
+| 1280x800 | two columns, image right (452x340) | 201 to 308 | 530 | 587 | yes |
+
+**FINDING, for the owner:** at exactly 360x640 the button will overflow the first screen by 5px once the image is in. The brief allows one adjustment after the image lands (`object-position`), which does not move the button, so nothing was changed. If the whole button must be inside 640px, the smallest fix is in the 640px block: `#omni-fh .fh-hero { gap: 10px; }` (6px back), or a 15:7 banner instead of 2:1 at that width.
+
+**The crop itself could not be checked**: whether the 2:1 banner keeps the practitioner and the table in frame depends on the real image. The banner keeps the middle 600 of the image's 900 rows (150px off the top and the bottom of a 1200x900 file).
+
+## Negative tests on the built site.js (each FAILED, restored)
+
+The calendly.com origin check removed: 2 assertions fail (the same-origin message is counted). `seen.disconnect()` removed: `booking_section_view` is sent more than once. `bookingTarget` bypassed: the rates page's jump-bar anchor is counted as a booking click.
+
+## Found, not fixed
+
+- **tools/tracktest.js, Fit Check sections (4, 5, the end of 8)** have aborted since Fit Check v3: question 1 has three options and the script clicks a fourth. On main this ended the whole test with no table. Unrelated to this brief; left for its own run. They now show as three FAIL rows.
+- **DEPLOY.md's events table** has no row for `rates_chooser_result` (CANON has it). Not added here: out of this brief's scope.
+
+## For the owner, outside the repo
+
+- Supply the hero image (above).
+- In GA4, the three events appear on their own once the first visitor triggers them; to report the landing page's result, mark `booking_time_selected` or `booking_cta_click` as a key event.
+
+## Checks
+
+`python3 build.py` RESULT: PASSED (49 pages plus 1 landing page); `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0), five invariant hashes unchanged; `python3 build.py --check` RESULT: PASSED. `node tools/tracktest.js`: 59 of 62 assertions pass, section 10 all 10; the 3 failures are the stale Fit Check sections above. `node --test tests/assistant.test.mjs`: 53 of 53 pass.
+

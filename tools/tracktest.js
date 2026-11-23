@@ -8,8 +8,9 @@
        local server with --host-resolver-rules), on localhost only with the
        test override ?omnifit-track=prod, and nowhere else;
      - every event in CANON MEASUREMENT fires with its params (incl. the rates
-       chooser's rates_chooser_result, and the rates page's closed sections
-       opening from an anchor or a URL hash), as a hit to
+       chooser's rates_chooser_result, the rates page's closed sections
+       opening from an anchor or a URL hash, and the founders landing page's
+       three inline-booking events), as a hit to
        google-analytics.com in production mode and as a "[omnifit-track]"
        console line otherwise;
      - Clarity never loads on /fit-check, and on a non-production host no
@@ -23,6 +24,7 @@
 
        python3 build.py
        NODE_PATH="$(npm root -g)" node tools/tracktest.js      # prints the results table
+       NODE_PATH="$(npm root -g)" node tools/tracktest.js --only=10   # one section (or 2,10)
 
    Needs Node 18+ and the playwright package with Chromium (npm i -g playwright
    && npx playwright install chromium). Exit code 1 if any row fails. */
@@ -91,6 +93,18 @@ function assert(area, check, expected, got) {
   if (!ok) failures++;
   rows.push({ area, check, expected: JSON.stringify(expected), got: JSON.stringify(got), ok });
   return ok;
+}
+
+/* One section of the run. A section that throws (a selector that no longer
+   exists, a timeout) is one FAIL row; the sections after it still run and the
+   table still prints. --only=10 (or --only=2,10) runs just those sections. */
+const ONLY = (process.argv.find((a) => a.startsWith("--only=")) || "").slice(7).split(",").filter(Boolean);
+async function section(title, fn) {
+  if (ONLY.length && !ONLY.includes(title.split(".")[0])) return;
+  try { await fn(); } catch (e) {
+    failures++;
+    rows.push({ area: title, check: "section ran to the end", expected: JSON.stringify("no error"), got: JSON.stringify(String(e && e.message || e).split("\n").slice(0, 2).join(" ").replace(/\u001b\[\d+m/g, "").slice(0, 200)), ok: false });
+  }
 }
 
 async function newPage(browser, { viewport } = {}) {
@@ -170,7 +184,7 @@ async function runFitCheck(page, answers) {
   const browser = await chromium.launch({ args: [`--host-resolver-rules=MAP ${PROD_HOST} 127.0.0.1, MAP ${PREVIEW_HOST} 127.0.0.1`] });
 
   // ---- 1. Production hostname, no flag: both load; Clarity not on /fit-check
-  {
+  await section("1. Production hostname, no flag: both load; Clarity not on /fit-check", async () => {
     const t = await newPage(browser);
     await t.page.goto(`${base(PROD_HOST)}/`);
     await t.waitFor(() => t.count("hubspot") > 0, 9000); // the deferred callback has run
@@ -185,10 +199,10 @@ async function runFitCheck(page, answers) {
     assert("prod host /fit-check", "gtag.js requested", 1, f.count("gtag.js"));
     assert("prod host /fit-check", "Clarity NOT requested", 0, f.count("clarity"));
     await f.context.close();
-  }
+  });
 
   // ---- 2. localhost + override: homepage clicks (nav, hero, footer, tel, mailto)
-  {
+  await section("2. localhost + override: homepage clicks (nav, hero, footer, tel, mailto)", async () => {
     const t = await newPage(browser);
     await t.page.goto(`${L}/?${FLAG}`);
     await t.waitFor(() => t.count("hubspot") > 0, 9000);
@@ -217,10 +231,10 @@ async function runFitCheck(page, answers) {
     assert("localhost+flag /", "every hit carries the GA4 ID", [GA4], [...new Set(t.hits.filter((x) => x.kind === "ga").map((x) => x.tid))]);
     assert("localhost+flag /", "no console fallback lines in production mode", 0, t.logs.length);
     await t.context.close();
-  }
+  });
 
   // ---- 3. localhost + override: rates hero click, section views once each
-  {
+  await section("3. localhost + override: rates hero click, section views once each", async () => {
     const t = await newPage(browser);
     await t.page.goto(`${L}/training-rates-san-diego?${FLAG}`);
     await t.page.click(".rt-hero a[href*='calendly.com']");
@@ -270,6 +284,7 @@ async function runFitCheck(page, answers) {
     await t.page.click(".rt-jump a[href='#rt-foundation']");
     await t.page.waitForTimeout(300);
     assert("localhost+flag /training-rates-san-diego", "jump-bar anchor opens the closed Foundation section", true, await t.page.evaluate(() => document.getElementById("rt-foundation").open));
+    assert("localhost+flag /training-rates-san-diego", "an in-page anchor with no Calendly embed in its target is not a booking click", 0, t.ga().filter((e) => /^booking_/.test(e.event)).length);
     await t.page.click("#rt-foundation .rt-ladder-cta a[href*='calendly.com']");
     await t.waitFor(() => t.ga().filter((e) => e.event === "book_consultation_click").length >= 2);
     assert("localhost+flag /training-rates-san-diego", "Foundation ladder CTA (below the section head) is body", { event: "book_consultation_click", params: { cta_location: "training-rates-san-diego", cta_label: "Book Your Consultation", cta_position: "body" } }, t.ga().filter((e) => e.event === "book_consultation_click")[1]);
@@ -284,10 +299,10 @@ async function runFitCheck(page, answers) {
     await h.page.waitForTimeout(300);
     assert("localhost /training-rates-san-diego#rt-program", "the result's section link opens the Executive Reset section", true, await h.page.evaluate(() => document.getElementById("rt-reset").open));
     await h.context.close();
-  }
+  });
 
   // ---- 4. localhost + override: Fit Check to PASS (no Clarity)
-  {
+  await section("4. localhost + override: Fit Check to PASS (no Clarity)", async () => {
     const t = await newPage(browser);
     await t.page.goto(`${L}/fit-check?${FLAG}`);
     await t.waitFor(() => t.count("hubspot") > 0, 9000);
@@ -317,10 +332,10 @@ async function runFitCheck(page, answers) {
     await t.waitFor(() => t.ga().length >= 5);
     assert("localhost+flag /fit-check", "retake: start again, then hold with no setting", [{ event: "fit_check_start", params: {} }, { event: "fit_check_complete", params: { fit_result: "hold" } }], t.ga().slice(3));
     await t.context.close();
-  }
+  });
 
   // ---- 5. localhost + override: Fit Check to HOLD in a fresh session
-  {
+  await section("5. localhost + override: Fit Check to HOLD in a fresh session", async () => {
     const t = await newPage(browser);
     await t.page.goto(`${L}/fit-check?${FLAG}`);
     await runFitCheck(t.page, [2, { scale: 9 }, 3, 0, 0, 2, { scale: 9 }]); // budget "Money's tight" = fail on Able
@@ -329,10 +344,10 @@ async function runFitCheck(page, answers) {
     assert("localhost+flag /fit-check (hold)", "no param on any hit names an answer", [], t.hits.filter((x) => x.kind === "ga").flatMap((x) => Object.keys(x.params)).filter((k) => !["fit_result", "fit_setting"].includes(k)));
     assert("localhost+flag /fit-check (hold)", "hold result shown", true, await t.page.evaluate(() => !!document.querySelector("#of-fit .verdict.hold")));
     await t.context.close();
-  }
+  });
 
   // ---- 6. localhost + override: HubSpot form submitted on /contactform
-  {
+  await section("6. localhost + override: HubSpot form submitted on /contactform", async () => {
     const t = await newPage(browser);
     await t.page.goto(`${L}/contactform?${FLAG}`);
     await t.page.evaluate(() => window.postMessage({ type: "hsFormCallback", eventName: "onFormReady", id: "x" }, "*"));
@@ -343,10 +358,10 @@ async function runFitCheck(page, answers) {
     await t.waitFor(() => t.ga().length >= 1);
     assert("localhost+flag /contactform", "HubSpot onFormSubmitted -> generate_lead", [{ event: "generate_lead", params: { form_location: "contactform" } }], t.ga());
     await t.context.close();
-  }
+  });
 
   // ---- 7. localhost + override, phone viewport: 4S Ranch sticky bar
-  {
+  await section("7. localhost + override, phone viewport: 4S Ranch sticky bar", async () => {
     const t = await newPage(browser, { viewport: { width: 390, height: 844 } });
     await t.page.goto(`${L}/personal-trainer-4s-ranch?${FLAG}`);
     await t.page.click(".sticky-bar-4sr a[href*='calendly.com']");
@@ -356,10 +371,10 @@ async function runFitCheck(page, answers) {
     assert("localhost+flag /personal-trainer-4s-ranch (390px)", "sticky bar tel: click", { event: "phone_click", params: { cta_location: "personal-trainer-4s-ranch" } }, t.ga()[1]);
     assert("localhost+flag /personal-trainer-4s-ranch (390px)", "no page-level tracking script remains in <main>", 0, await t.page.evaluate(() => [...document.querySelectorAll("main script")].filter((s) => /gtag\(|dataLayer|lead_form_submit|cta_click/.test(s.textContent)).length));
     await t.context.close();
-  }
+  });
 
   // ---- 8. Non-production host (localhost, no flag): nothing loads, console only
-  {
+  await section("8. Non-production host (localhost, no flag): nothing loads, console only", async () => {
     const t = await newPage(browser);
     await t.page.goto(`${L}/`);
     await t.waitFor(() => t.count("hubspot") > 0, 9000);
@@ -388,10 +403,10 @@ async function runFitCheck(page, answers) {
     await f.waitFor(() => f.logs.length >= 2);
     assert("localhost no flag /fit-check", "Fit Check events logged to the console, no requests", { logged: [{ event: "fit_check_start", params: {} }, { event: "fit_check_complete", params: { fit_result: "pass", fit_setting: "Full Accountability" } }], ga: 0, clarity: 0, gtag: 0 }, { logged: f.parsedLogs(), ga: f.count("ga"), clarity: f.count("clarity"), gtag: f.count("gtag.js") });
     await f.context.close();
-  }
+  });
 
   // ---- 9. The override is honoured on localhost only
-  {
+  await section("9. The override is honoured on localhost only", async () => {
     const t = await newPage(browser);
     await t.page.goto(`${base(PREVIEW_HOST)}/?${FLAG}`);
     await t.waitFor(() => t.count("hubspot") > 0, 9000);
@@ -402,7 +417,53 @@ async function runFitCheck(page, answers) {
     await u.waitFor(() => u.count("hubspot") > 0, 9000);
     assert("127.0.0.1 + flag /", "flag honoured on 127.0.0.1 too", { gtag: 1, clarity: 1 }, { gtag: u.count("gtag.js"), clarity: u.count("clarity") });
     await u.context.close();
-  }
+  });
+
+  // ---- 10. Founders landing page: the inline Calendly booking events
+  await section("10. Founders landing page: the inline Calendly booking events", async () => {
+    const SLUG = "in-home-stretching-founders";
+    const AREA = `localhost+flag /${SLUG}`;
+    const t = await newPage(browser);
+    // Stand-in for the embed's own frame: a page on calendly.com that posts
+    // Calendly's messages to the top window (the real widget.js stays blocked).
+    await t.page.route("https://calendly.com/**", (route) => route.fulfill({ status: 200, contentType: "text/html",
+      body: "<script>parent.postMessage({event:'calendly.event_type_viewed'},'*');parent.postMessage({event:'calendly.date_and_time_selected'},'*');</script>" }));
+    const named = (n) => t.ga().filter((e) => e.event === n);
+    await t.page.goto(`${L}/${SLUG}?${FLAG}`);
+    await t.page.waitForTimeout(400);
+    assert(AREA, "nothing sent on load (the embed is below the first screen)", [], t.ga());
+    await t.page.click("#fh-hero a.fh-btn");
+    await t.waitFor(() => named("booking_cta_click").length >= 1);
+    assert(AREA, "hero button (scrolls to the embed) -> booking_cta_click, hero", [{ event: "booking_cta_click", params: { cta_location: SLUG, cta_label: "Book Your First Visit", cta_position: "hero" } }], named("booking_cta_click"));
+    assert(AREA, "an in-page button is not a book_consultation_click", 0, named("book_consultation_click").length);
+    await t.page.click(".fh-box-cta a.fh-btn");
+    await t.waitFor(() => named("booking_cta_click").length >= 2);
+    assert(AREA, "offer box button -> booking_cta_click, body", { event: "booking_cta_click", params: { cta_location: SLUG, cta_label: "Book Your First Visit", cta_position: "body" } }, named("booking_cta_click")[1]);
+    await scrollThrough(t.page);
+    await t.waitFor(() => named("booking_section_view").length >= 1);
+    await t.page.evaluate(() => window.scrollTo(0, 0));
+    await scrollThrough(t.page, 800, 60);
+    await t.page.waitForTimeout(300);
+    assert(AREA, "embed scrolled into view -> booking_section_view, once per page load", [{ event: "booking_section_view", params: { cta_location: SLUG } }], named("booking_section_view"));
+    await t.page.evaluate(() => window.postMessage({ event: "calendly.date_and_time_selected" }, "*"));
+    await t.page.waitForTimeout(300);
+    assert(AREA, "the Calendly message from any other origin sends nothing", 0, named("booking_time_selected").length);
+    await t.page.evaluate(() => { const f = document.createElement("iframe"); f.src = "https://calendly.com/tracktest-stand-in"; document.body.appendChild(f); });
+    await t.waitFor(() => named("booking_time_selected").length >= 1);
+    await t.page.waitForTimeout(300);
+    assert(AREA, "calendly.date_and_time_selected from calendly.com -> booking_time_selected; another Calendly message sends nothing", [{ event: "booking_time_selected", params: { cta_location: SLUG } }], named("booking_time_selected"));
+    await t.page.click(".fh-book-fallback a[href*='calendly.com']");
+    await t.waitFor(() => named("book_consultation_click").length >= 1);
+    assert(AREA, "the fallback link is a link to calendly.com: book_consultation_click, not a booking_cta_click", { consult: [SLUG], cta: 2 }, { consult: named("book_consultation_click").map((e) => e.params.cta_location), cta: named("booking_cta_click").length });
+    assert(AREA, "no page-level tracking script on the landing page", 0, await t.page.evaluate(() => [...document.querySelectorAll("main script")].filter((s) => /gtag\(|dataLayer|booking_/.test(s.textContent)).length));
+    await t.context.close();
+    const c = await newPage(browser, { viewport: { width: 390, height: 844 } });
+    await c.page.goto(`${L}/${SLUG}`);
+    await c.page.click("#fh-hero a.fh-btn");
+    await c.waitFor(() => c.logs.length >= 1);
+    assert(`localhost no flag /${SLUG} (390px)`, "console line for the hero button, no requests", { logged: ["[omnifit-track] booking_cta_click {\"cta_location\":\"" + SLUG + "\",\"cta_label\":\"Book Your First Visit\",\"cta_position\":\"hero\"}"], ga: 0, gtag: 0, clarity: 0 }, { logged: c.logs.filter((l) => l.includes("booking_cta_click")), ga: c.count("ga"), gtag: c.count("gtag.js"), clarity: c.count("clarity") });
+    await c.context.close();
+  });
 
   await browser.close();
   srv.close();

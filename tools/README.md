@@ -770,7 +770,8 @@ What it proves (46 assertions, the table is in REPORT.md):
   `tel:` and `mailto:`; HubSpot `onFormSubmitted` (and not `onFormReady` or a
   string message); a full Fit Check to pass (`fit_setting` present) and to hold
   (no `fit_setting`, no answer in any param), plus a retake; the four rates
-  sections once each and never twice.
+  sections once each and never twice; the founders landing page's three
+  inline-booking events (see "Founders hero and booking events" below).
 - Clarity never loads on `/fit-check` (production hostname and override alike);
   GA4 still does.
 - On a non-production host nothing is requested from googletagmanager.com,
@@ -1157,3 +1158,48 @@ itself a swept surface.
 
 Self-tested both ways; negative tests on the real files are in REPORT.md.
 
+
+## Founders hero and booking events (Nov 23 2026)
+
+Owner brief, Nov 23 2026. CANON: FOUNDERS LANDING PAGE > HERO and
+MEASUREMENT > EVENTS (INLINE CALENDLY BOOKING).
+
+- **No new certify.py or build.py rule.** The hero copy (lead line, shorter
+  sub, trust line, alt text) is read by the existing FST rules, since the
+  whole founders page sits inside FST-BLOCK markers; `fst_no_reviews` still
+  holds. The three events live in `site/site.js`, so `check_tracking` reads
+  them in `public/assets/site.js` like the rest.
+- **`tracktest.js` section 10** (10 assertions) loads
+  `/in-home-stretching-founders` and proves: nothing is sent on load; the
+  hero button sends `booking_cta_click` with `cta_position` "hero" and the
+  offer-box button with "body", both with `cta_label` "Book Your First
+  Visit", and neither is a `book_consultation_click`; scrolling the embed
+  into view sends `booking_section_view` once, and a second pass adds
+  nothing; `calendly.date_and_time_selected` posted from the page's own
+  origin sends nothing, and the same message from a frame on calendly.com
+  (a routed stand-in; the real widget.js stays blocked like every other
+  external host) sends `booking_time_selected` once, with another Calendly
+  message beside it ignored; the plain-text fallback link, being a link to
+  calendly.com, sends `book_consultation_click`; `<main>` carries no
+  tracking script; on a non-production host the click is one console line
+  and nothing is requested. Section 3 gained one assertion: an in-page
+  anchor on the rates page, whose target holds no embed, is not a booking
+  click.
+- **Negative-tested on the built `public/assets/site.js`** (each failed,
+  restored): the origin check removed (2 fail); `seen.disconnect()` removed
+  (1 fails); `bookingTarget` bypassed so any in-page link counts (the
+  section 3 assertion fails).
+- **`section()` and `--only`.** Each numbered section now runs inside
+  `section(title, fn)`: a section that throws is one FAIL row ("section ran
+  to the end") and the rest still run, where before the whole run aborted
+  with no table. `--only=10` (or `--only=3,10`) runs just those sections.
+- **KNOWN STALE, not fixed in this run: the Fit Check sections (4, 5 and the
+  last part of 8).** They have aborted since the Fit Check v3 change: the
+  first question now has three options and the script clicks a fourth. On
+  main before this run that abort ended the whole test with no output; it is
+  now three FAIL rows. A full run therefore reads `3 FAILED (62
+  assertions)`; every other assertion passes. Bringing those sections to the
+  v3 questions is its own task. (The "46 assertions" figure above dates from
+  Oct 17 2026.)
+- **The hero at 360x640** is measured by hand with Playwright, not by a
+  committed tool: REPORT.md has the figures.
