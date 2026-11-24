@@ -264,8 +264,10 @@ otherwise, this block wins and the older line is kept only as history.
       written for 1200x900 before the file existed; the attributes follow
       the file so the desktop hero does not shift when it loads).
       LAYOUT: 900px and up, two columns (copy left, the whole image right).
-      Below 900px the image sits ABOVE the headline, cropped to a 2:1 banner
-      (object-fit: cover; object-position: 50% 8%).
+      From 769 to 899px the image sits ABOVE the headline, cropped to a 5:4
+      banner (object-fit: cover; object-position: 50% 14%): both people and
+      the table top are in frame; the table legs and his feet are outside
+      it. 768px and under: PHONE LAYOUT, below.
       WHAT THE PHONE BANNER SHOWS, AND WHY: the image is portrait, so a 2:1
       banner holds under half its height (about 600 of 1312 rows). The
       practitioner's head and the table are about 950 rows apart, so NO
