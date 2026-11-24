@@ -456,12 +456,16 @@ async function runFitCheck(page, answers) {
     await t.waitFor(() => named("book_consultation_click").length >= 1);
     assert(AREA, "the fallback link is a link to calendly.com: book_consultation_click, not a booking_cta_click", { consult: [SLUG], cta: 2 }, { consult: named("book_consultation_click").map((e) => e.params.cta_location), cta: named("booking_cta_click").length });
     assert(AREA, "no page-level tracking script on the landing page", 0, await t.page.evaluate(() => [...document.querySelectorAll("main script")].filter((s) => /gtag\(|dataLayer|booking_/.test(s.textContent)).length));
+    assert(AREA, "the sticky booking bar is phones only: not displayed at this width", "none", await t.page.evaluate(() => getComputedStyle(document.querySelector(".fh-sticky")).display));
     await t.context.close();
     const c = await newPage(browser, { viewport: { width: 390, height: 844 } });
     await c.page.goto(`${L}/${SLUG}`);
     await c.page.click("#fh-hero a.fh-btn");
     await c.waitFor(() => c.logs.length >= 1);
     assert(`localhost no flag /${SLUG} (390px)`, "console line for the hero button, no requests", { logged: ["[omnifit-track] booking_cta_click {\"cta_location\":\"" + SLUG + "\",\"cta_label\":\"Book Your First Visit\",\"cta_position\":\"hero\"}"], ga: 0, gtag: 0, clarity: 0 }, { logged: c.logs.filter((l) => l.includes("booking_cta_click")), ga: c.count("ga"), gtag: c.count("gtag.js"), clarity: c.count("clarity") });
+    await c.page.click(".fh-sticky a.fh-btn");
+    await c.waitFor(() => c.logs.filter((l) => l.includes("booking_cta_click")).length >= 2);
+    assert(`localhost no flag /${SLUG} (390px)`, "sticky bar button (768px and under) -> booking_cta_click, sticky", "[omnifit-track] booking_cta_click {\"cta_location\":\"" + SLUG + "\",\"cta_label\":\"Book Your First Visit\",\"cta_position\":\"sticky\"}", c.logs.filter((l) => l.includes("booking_cta_click"))[1]);
     await c.context.close();
   });
 

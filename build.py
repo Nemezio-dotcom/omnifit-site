@@ -35,7 +35,8 @@ Also written: public/_redirects, robots.txt, llms.txt (from site/llms.txt), the 
 not in the sitemap, links to Home and Book Your Consultation only) and
 _headers (X-Robots-Tag: noindex on the *.pages.dev preview hostname only,
 plus security headers on every page). Every page also gets Open Graph /
-Twitter card tags (SOCIAL_IMAGE unless its header sets its own).
+Twitter card tags (SOCIAL_IMAGE unless its header sets its own or the
+page is named in PAGE_SOCIAL_IMAGE).
 
 Nothing here rewrites page copy, schema or CSS rules. The only edits made to
 page markup are structural: <style>/<link> tags are lifted out of the body into
@@ -177,11 +178,28 @@ SOCIAL_IMAGE = {
     "alt": "Coach Nemezio LopezPerez coaching a client through a cable exercise for the upper back",
 }
 
+# A page with its own share image; every other page keeps SOCIAL_IMAGE.
+# The founders landing page (owner, Nov 24 2026) shares a navy 1200x630 card:
+# the photo it opens with (site/img/fst-in-home-hero.jpg, portrait) whole and
+# uncropped at full height on the left; on the right the logo on a white
+# panel, a gold rule and the page's H1 in Playfair Display. No price, no date.
+# Alt text as on the page (CANON: the image is AI-generated and is never
+# described as a person or a visit).
+PAGE_SOCIAL_IMAGE = {
+    "in-home-stretching-founders": {
+        "src": "/assets/img/og-fst-in-home-hero-1200x630.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Assisted stretching on a portable table in a living room",
+    },
+}
 
-def social_tags(title, desc, url):
-    """Default og:/twitter: tags for a page without its own."""
+
+def social_tags(title, desc, url, img=None):
+    """og:/twitter: tags for a page without its own: the site default image,
+    or the page's own from PAGE_SOCIAL_IMAGE."""
     e = lambda v: html.escape(str(v), quote=True)
-    img = SOCIAL_IMAGE
+    img = img or SOCIAL_IMAGE
     tags = [
         ("property", "og:type", "website"),
         ("property", "og:site_name", "OmniFit Performance"),
@@ -714,7 +732,7 @@ def build():
         if counts:
             emoji_report[url_path] = counts
         canonical = BASE + ("/" if url_path == "/" else url_path)
-        social = "" if 'property="og:image"' in header_text else social_tags(title, desc, canonical)
+        social = "" if 'property="og:image"' in header_text else social_tags(title, desc, canonical, PAGE_SOCIAL_IMAGE.get(slug))
         doc = render(
             layout,
             title=html.escape(title, quote=True),

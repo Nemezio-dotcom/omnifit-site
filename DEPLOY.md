@@ -236,7 +236,9 @@ deploy, check them with `curl -sI https://www.omnifittraining.com/ | grep -i
 `twitter:card` set), written by `build.py` from the page's title and meta
 description. The image is `site/img/og-coach-client-cable-pulldown-1200x630.jpg`
 (`SOCIAL_IMAGE` in `build.py`) except on Journal posts, whose own lead photo
-`site/blog.py` sets. `build.py --check` fails a page with no preview image, a
+`site/blog.py` sets, and on a page named in `PAGE_SOCIAL_IMAGE` in `build.py`
+(today the founders landing page only:
+`site/img/og-fst-in-home-hero-1200x630.jpg`). `build.py --check` fails a page with no preview image, a
 missing image file or an `og:url` that differs from the canonical.
 ### Trailing slash (launch blocker, fixed Oct 18 2026)
 
