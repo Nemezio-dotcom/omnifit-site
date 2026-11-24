@@ -277,7 +277,10 @@
        and the button stay on the first screen. */
     #omni-fh .fh-hero { gap: 16px; }
     #omni-fh .fh-hero-media { order: -1; }
-    #omni-fh .fh-hero-media img { aspect-ratio: 2 / 1; object-fit: cover; object-position: 50% 8%; }
+    /* Phone crop (owner, Nov 24 2026): the 2:1 slice cut the client off the
+       table. 5:4 from 14% down keeps both people and the table top; only the
+       table legs and his feet fall outside the frame. */
+    #omni-fh .fh-hero-media img { aspect-ratio: 5 / 4; object-fit: cover; object-position: 50% 14%; }
   }
   @media (max-width: 640px) {
     #omni-fh .fh-hero { padding-top: 1rem; }
