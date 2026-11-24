@@ -283,6 +283,33 @@ otherwise, this block wins and the older line is kept only as history.
       NO Meta tracking code yet (an open item with the owner). Booking
       interest on this page is measured by site.js (MEASUREMENT > EVENTS,
       the three booking_* events).
+      PHONE LAYOUT, 768px AND UNDER (owner brief, Nov 24 2026). CSS only,
+      one @media (max-width: 768px) block; 769px and up is as it was.
+      PHOTO: a 15:11 strip (object-fit: cover; object-position: 50% 11%).
+      In frame: the practitioner's whole head, the client's head and the
+      stretched leg; the table legs and his feet are outside it. 15:11 is
+      the widest ratio that holds them (the photo is 1199x1312; his hair
+      starts at row 58, her head ends at row 915); the owner's limit is no
+      taller than 4:3. 257px tall at 390 wide, 235px at 360.
+      ORDER (CSS order; the markup stays in the desktop order): H1, lead
+      line, offer line, button, SUB, trust line.
+      STICKY BAR (.fh-sticky, the last element inside #omni-fh; display:
+      none above 768px): "Founders rate: $99" on the left; on the right a
+      "Book Your First Visit" button that scrolls to #fh-book like every
+      other button on the page. Navy, a 2px gold top border, 64px tall; the
+      same 64px is added under the page (body.page--in-home-stretching-
+      founders) so the bar never covers content or the footer. Its click is
+      booking_cta_click with cta_position "sticky" (site.js reads the class
+      name). It is a second "$99" on this one surface, beside its
+      "founders" label.
+      SHARE IMAGE (owner, Nov 24 2026): this page's og:image and
+      twitter:image are site/img/og-fst-in-home-hero-1200x630.jpg, a navy
+      1200x630 card. Left: the whole photo, uncropped, at full height
+      (576x630). Right: the OmniFit Performance logo in its own colours on
+      a white panel, a gold rule, and the H1 "Assisted stretching that
+      comes to your home." in Playfair Display, white. No price and no date
+      on it. Set by build.py PAGE_SOCIAL_IMAGE; og:image:alt is the hero
+      alt text. Every other page keeps the site default (SOCIAL_IMAGE).
     WHAT THE CLIENT NEEDS: a quiet room with floor space. The table comes
       with him. Wear clothes you can move in.
     PAYMENT TERMS (owner decisions, Nov 21 2026; verbatim sentences):
@@ -2890,3 +2917,9 @@ CHANGE LOG
 - Nov 23, 2026 (later): the hero image arrived and is in the repo
   (site/img/fst-in-home-hero.jpg, 1199x1312, 191 KB). Phone banner at object-position
   50% 8%; img width/height follow the file (FOUNDERS LANDING PAGE > HERO IMAGE).
+- Nov 24, 2026: Founders page phone layout and share image (owner brief, Nov 24 2026).
+  768px and under only (FOUNDERS LANDING PAGE > PHONE LAYOUT): the photo is a 15:11
+  strip; the hero reads H1, lead line, offer line, button, sub; a sticky bottom bar
+  carries "Founders rate: $99" and the booking button. The page has its own 1200x630
+  share image, a navy card (SHARE IMAGE; build.py PAGE_SOCIAL_IMAGE). No copy, price,
+  date or booking link changed; 769px and up is unchanged.
