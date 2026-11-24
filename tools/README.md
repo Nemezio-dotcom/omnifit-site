@@ -1203,3 +1203,21 @@ MEASUREMENT > EVENTS (INLINE CALENDLY BOOKING).
   Oct 17 2026.)
 - **The hero at 360x640** is measured by hand with Playwright, not by a
   committed tool: REPORT.md has the figures.
+
+## Founders reviews line and short travel sentence (Nov 24 2026)
+
+Owner brief, Nov 24 2026. CANON: FOUNDERS LANDING PAGE > REVIEWS LINE and
+BOOKING INTRO; FST TRAVEL FEE > FOUNDERS PAGE SHORT FORM.
+
+- **`fst_no_reviews` no longer means "none" on the founders page.** It blanks
+  the exact text `FOUNDERS_REVIEWS` ("OmniFit Performance: 4.98 average across
+  190+ reviews") on the founders files, then scans as before, so any other
+  reviews wording there still fails. The FST page is unchanged: no reviews
+  line at all. Fixtures: the founders line passes on the founders page, fails
+  on the FST page, and a reworded line fails on the founders page.
+- **`fst_travel` accepts `FOUNDERS_TRAVEL_FEE`** ("a travel fee applies, and
+  you are told the amount when you book.") on the founders files only.
+  Fixtures: it passes there, fails on the FST page, and a reworded fee
+  sentence and the training wording both still fail on the founders page.
+- The rule does not count the lines or check the link target; the two
+  placements and the Google Business Profile URL are CANON's, checked by eye.

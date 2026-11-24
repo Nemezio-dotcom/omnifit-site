@@ -2002,6 +2002,13 @@ FOUNDERS_FILES = (f"{FOUNDERS_SLUG}.html", f"{FOUNDERS_SLUG}-header.html")
 FOUNDERS_CALENDLY = ("https://calendly.com/nemezio-omnifittraining/"
                      "founders-first-visit-in-home-assisted-stretching")
 FOUNDERS_PRICE = "99"
+# Founders page only (owner, Nov 24 2026). The travel sentence is shortened
+# there: the fee is still collected at the visit (CANON FST TRAVEL FEE), the
+# page just does not say so. And the page carries the reviews line in ONE
+# form, named as the business's reviews; any other reviews wording still fails
+# there, and the FST page still carries none.
+FOUNDERS_TRAVEL_FEE = "a travel fee applies, and you are told the amount when you book."
+FOUNDERS_REVIEWS = "OmniFit Performance: 4.98 average across 190+ reviews"
 FST_FAQ_QUESTIONS = [
     "What is Fascia Stretch Therapy™?", "What happens at the First Visit?", "How much does it cost?",
     "Do I need to be a training client?", "Where do sessions take place and what do I need?",
@@ -2288,14 +2295,18 @@ def fst_session_length(text, path=""):
 def fst_travel(text, path=""):
     """(b) On an FST surface a travel fee is stated in the FST form: told at
     booking, collected at the visit. "confirmed before you book" (the training
-    form) and any other statement that a travel fee applies are findings."""
+    form) and any other statement that a travel fee applies are findings. The
+    founders page (FOUNDERS_FILES) may also carry FOUNDERS_TRAVEL_FEE, its
+    short form; that form is a finding on every other FST surface."""
     out = []
+    founders = os.path.basename(path) in FOUNDERS_FILES
     for a, b in fst_spans(text, path):
         c = _fst_copy(text, a, b)
         for m in re.finditer(r'confirmed before you book', c, re.I):
             out.append(("FST travel fee: 'confirmed before you book' is the training wording (FST: told at booking, collected at the visit)",
                         c[max(0, m.start() - 70):m.end() + 20].strip()))
         for m in re.finditer(r'a travel fee applies', c, re.I):
+            if founders and c.startswith(FOUNDERS_TRAVEL_FEE, m.start()): continue
             if not c.startswith(FST_TRAVEL_FEE, m.start()) and not re.match(r'a travel fee applies, confirmed before you book', c[m.start():], re.I):
                 out.append(("FST travel fee is not stated in the canonical form", c[max(0, m.start() - 50):m.end() + 90].strip()))
     return out
@@ -2326,11 +2337,16 @@ def fst_booking(text, path=""):
 _REVIEWS_LINE = re.compile(r'\b4\.98\b|\b190\+|\b\d[\d,]*\+?\s*reviews\b', re.I)
 
 def fst_no_reviews(text, path=""):
-    """(b) The FST page and the founders page carry no reviews line (CANON:
-    the 190+ reviews are training reviews, so a stretching page may not
-    borrow them): [(what, context)] on those files, nothing elsewhere."""
-    if os.path.basename(path) not in FST_WHOLE_FILES + FOUNDERS_FILES: return []
+    """(b) The FST page carries no reviews line (CANON: the 190+ reviews are
+    training reviews, so a stretching page may not borrow them). The founders
+    page carries it in one form only, FOUNDERS_REVIEWS (owner, Nov 24 2026),
+    which names the business; that exact text is blanked there before the
+    scan, so any other reviews wording on it is still a finding:
+    [(what, context)] on those files, nothing elsewhere."""
+    base = os.path.basename(path)
+    if base not in FST_WHOLE_FILES + FOUNDERS_FILES: return []
     copy = html.unescape(re.sub(r'\s+', ' ', _visible_copy(text)))
+    if base in FOUNDERS_FILES: copy = copy.replace(FOUNDERS_REVIEWS, ' ')
     return [("a reviews line on an FST page (the 190+ reviews are training reviews)", copy[max(0, m.start() - 60):m.end() + 40].strip())
             for m in _REVIEWS_LINE.finditer(copy)]
 
@@ -2667,6 +2683,12 @@ def _selftest_fst():
     assert fst_travel('<p>Elsewhere a travel fee applies and is added to your invoice.</p>', P), "FST self-test: a reworded FST travel fee passed"
     assert not fst_travel('<p>Elsewhere in our in-home service area a travel fee applies, confirmed before you book.</p>', "pages/in-home-personal-trainer-san-diego.html"), "FST self-test: the training travel wording flagged off an FST surface"
     assert fst_rates('<p>Elsewhere a $25 travel fee applies.</p>', P), "FST self-test: a travel fee dollar figure passed"
+    # the founders short form: legal on the founders page, a finding on the FST page; a reworded one fails on both
+    fshort = '<!-- FST-BLOCK --><p>Elsewhere ' + FOUNDERS_TRAVEL_FEE + '</p><!-- /FST-BLOCK -->'
+    assert not fst_travel(fshort, FOUNDERS_PAGE), f"FST self-test: the founders travel sentence flagged on the founders page: {fst_travel(fshort, FOUNDERS_PAGE)}"
+    assert fst_travel(fshort, P), "FST self-test: the founders travel sentence passed on the FST page"
+    assert fst_travel(fshort.replace("told the amount when you book", "billed after the visit"), FOUNDERS_PAGE), "FST self-test: a reworded travel fee passed on the founders page"
+    assert fst_travel(fshort.replace(FOUNDERS_TRAVEL_FEE, "a travel fee applies, confirmed before you book."), FOUNDERS_PAGE), "FST self-test: the training travel wording passed on the founders page"
     # booking: one link
     assert fst_booking('<a href="https://calendly.com/nemezio-omnifittraining/45min">Book Your First Visit</a>', "pages/x.html"), "FST self-test: First Visit button to the consultation passed"
     assert fst_booking('<p>Book: <a href="https://calendly.com/nemezio-omnifittraining/45min">here</a></p>', P), "FST self-test: a second Calendly page on the FST page passed"
@@ -2683,12 +2705,16 @@ def _selftest_fst():
     assert fst_booking('<p>Book at ' + FOUNDERS_CALENDLY + '</p>', "pages/x.html"), "FST self-test: the founders link off an FST surface passed"
     assert fst_booking(fo.replace(FOUNDERS_CALENDLY, FST_CALENDLY), FP), "FST self-test: the regular First Visit link on the founders page passed"
     assert fst_booking('<a href="#fh-book">Book Your First Visit</a>', P), "FST self-test: a same-page First Visit button passed off the founders page"
-    # no reviews line on the FST page or the founders page; the training pages keep theirs
+    # no reviews line on the FST page; the founders page carries FOUNDERS_REVIEWS and no other form; the training pages keep theirs
     for rv in ("4.98 average across 190+ reviews", "190+ reviews", "rated 4.98"):
         assert fst_no_reviews('<p>Nemezio LopezPerez. ' + rv + '.</p>', FP), f"FST self-test: '{rv}' passed on the founders page"
         assert fst_no_reviews('<p>' + rv + '</p>', P), f"FST self-test: '{rv}' passed on the FST page"
     assert not fst_no_reviews('<p>4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark).</p>', "pages/about.html"), "FST self-test: the reviews line flagged on a training page"
     assert not fst_no_reviews(fo, FP) and not fst_no_reviews(good, P), "FST self-test: fst_no_reviews fired on clean FST copy"
+    frv = '<p>' + FOUNDERS_REVIEWS + '. <a href="https://g.page/r/CcePeMjnbDe9EBM">See our reviews on Google</a>.</p>'
+    assert not fst_no_reviews(frv, FP), f"FST self-test: the founders reviews line flagged on the founders page: {fst_no_reviews(frv, FP)}"
+    assert fst_no_reviews(frv, P), "FST self-test: the founders reviews line passed on the FST page"
+    assert fst_no_reviews(frv.replace("4.98 average across 190+ reviews", "190+ five-star reviews"), FP), "FST self-test: a reworded reviews line passed on the founders page"
     # the page's own requirements and the exact mirror
     faqs = [(q, "Answer %d." % i) for i, q in enumerate(FST_FAQ_QUESTIONS)]
     faqs[0] = (faqs[0][0], "Assisted stretching. " + FST_FASCIAL_SENTENCE)

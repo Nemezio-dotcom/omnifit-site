@@ -172,6 +172,14 @@ otherwise, this block wins and the older line is kept only as history.
       for it. certify.py fst_travel fails "confirmed before you book" on an
       FST surface. IN-HOME TRAINING IS UNCHANGED: every training surface
       keeps "a travel fee applies, confirmed before you book".
+      FOUNDERS PAGE SHORT FORM (owner, Nov 24 2026; that page only):
+      "In-home only. No travel fee in Carmel Valley, Santaluz, Fairbanks
+      Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere a
+      travel fee applies, and you are told the amount when you book." The
+      fact is unchanged (the fee is still collected at the visit, not with
+      the booking payment); the founders page does not state it. certify.py
+      fst_travel accepts this form on the founders files and fails it on
+      every other FST surface.
     WHO: open to anyone. No training program and no Performance Assessment
       required.
     RATES (in-home):
@@ -236,16 +244,37 @@ otherwise, this block wins and the older line is kept only as history.
       adjust to you throughout the session." (no "pain-free" outside the
       definition); the not-medical FAQ is the canonical question "Is FST™
       massage or medical treatment?" with the canonical sentence; the
-      travel sentence verbatim with Harmony Grove; the DISCLAIMER block
+      travel sentence in the FOUNDERS PAGE SHORT FORM (FST TRAVEL FEE above;
+      owner, Nov 24 2026; before that the full sentence verbatim, with
+      Harmony Grove); the DISCLAIMER block
       verbatim after the payment lines, the attribution line last; the
       credential "Precision Nutrition Level 2 Certified Master Coach"; the
       button text "Book Your First Visit", every button scrolling to the
       booking section (#fh-book), where the founders Calendly event is
       embedded inline with a plain-text fallback link; "no crowded facility"
-      (the owner's "no crowded studio" trips the FST studio ban). NO reviews
-      line anywhere on it (the 190+ reviews are training reviews). FIRST
+      (the owner's "no crowded studio" trips the FST studio ban). FIRST
       PERSON ("I bring the table to you") is the owner's voice for this page
       only; the FST page stays in the third person.
+      REVIEWS LINE (owner, Nov 24 2026; REVERSES "NO reviews line anywhere
+      on it", owner, Nov 22 2026, for this page only): the page carries
+      "OmniFit Performance: 4.98 average across 190+ reviews" in exactly two
+      places. (1) HERO, directly under the trust line, in the same style
+      (.fh-trust), unlinked. (2) "Who you're booking", as the final line
+      after the credential paragraph: "OmniFit Performance: 4.98 average
+      across 190+ reviews. See our reviews on Google." where "See our
+      reviews on Google" is a text link to the Google Business Profile,
+      https://g.page/r/CcePeMjnbDe9EBM (the footer's reviews link, no
+      /review suffix), target="_blank" rel="noopener". The line names the
+      business, so it does not present the reviews as stretching reviews.
+      Plain text only: no Google logo, no star icons, no emoji. Never "5.0",
+      "five-star" or "verified" (REVIEWS above). No other reviews wording on
+      the page, and none in its header. The FST page still carries NO
+      reviews line. ENFORCED: certify.py fst_no_reviews blanks that exact
+      text on the founders files and fails any other reviews wording there.
+      BOOKING INTRO (owner, Nov 24 2026): "Pick a time below. Payment
+      confirms your booking, and you can reschedule with 24 hours' notice or
+      more." (was "Pick a time below. Payment confirms your booking."). The
+      small print under the page is unchanged.
       HERO (owner brief, Nov 23 2026; WHY: the Meta ad shows a photo and the
       page opened as text, and ad visitors left within seconds). In order:
       eyebrow "In-home assisted stretching · North County San Diego" (HIDDEN
@@ -256,7 +285,8 @@ otherwise, this block wins and the older line is kept only as history.
       before and after." (shortened: ", so you can compare the two yourself"
       is gone); the offer line and the button, unchanged; the TRUST LINE
       "With Nemezio LopezPerez · NASM Elite Trainer · Fascia Stretch
-      Practitioner – Level 1" (was the title alone). Still no reviews line.
+      Practitioner – Level 1" (was the title alone); under it, since Nov 24
+      2026, the REVIEWS LINE (above).
       HERO IMAGE (in the repo since Nov 23 2026): site/img/fst-in-home-hero.jpg,
       served at /assets/img/fst-in-home-hero.jpg through the IF-ASSET slot.
       The Meta ad's image, whole and uncropped: JPEG, 1199x1312 (PORTRAIT),
@@ -2925,3 +2955,14 @@ CHANGE LOG
   carries "Founders rate: $99" and the booking button. The page has its own 1200x630
   share image, a navy card (SHARE IMAGE; build.py PAGE_SOCIAL_IMAGE). No copy, price,
   date or booking link changed; 769px and up is unchanged.
+- Nov 24, 2026 (later): Founders page reviews line and shorter copy (owner brief, Nov
+  24 2026). Four changes on /in-home-stretching-founders, nothing else on the page:
+  "OmniFit Performance: 4.98 average across 190+ reviews" under the hero trust line
+  (unlinked) and closing "Who you're booking" with a "See our reviews on Google" link
+  to the Google Business Profile (FOUNDERS LANDING PAGE > REVIEWS LINE; REVERSES the
+  no-reviews rule for this page only, the FST page still carries none); the travel
+  sentence in its short form (FST TRAVEL FEE > FOUNDERS PAGE SHORT FORM); the booking
+  intro names the 24-hour reschedule (BOOKING INTRO). certify.py: FOUNDERS_REVIEWS and
+  FOUNDERS_TRAVEL_FEE, carve-outs in fst_no_reviews and fst_travel for the founders
+  files only, both self-tested both ways. Footer terms, FAQ, founders rate box,
+  Calendly embed, header and schema unchanged.

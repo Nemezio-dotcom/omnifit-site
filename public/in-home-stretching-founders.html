@@ -591,6 +591,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     letter-spacing: .3px;
     color: var(--white-50);
   }
+  #omni-fh .fh-trust + .fh-trust { margin-top: 2px; }
   #omni-fh .fh-hero-media { position: relative; }
   #omni-fh .fh-hero-media img {
     display: block;
@@ -839,7 +840,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
      rule in tools/certify.py reads all of it. Modelled on
      fascia-stretch-therapy-san-diego: same design system, CSS scoped to
      #omni-fh, class prefix fh-. First person is the owner's voice for this
-     page. No reviews line (CANON: the 190+ reviews are training reviews).
+     page. Reviews line (owner, Nov 24 2026): "OmniFit Performance: 4.98
+     average across 190+ reviews", twice and in that form only: under the
+     hero credential line (unlinked) and closing "Who you're booking" (with
+     the Google Business Profile link). Plain text, no logo, stars or emoji.
      Hero image: the IF-ASSET slot for /assets/img/fst-in-home-hero.jpg
      renders nothing until site/img/fst-in-home-hero.jpg exists.
      Title and meta description: the WebPage node in
@@ -862,6 +866,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
       <p class="fh-offer"><strong>Founders rate: $99</strong> for the first 5 new clients, through December 31, 2026. Regular First Visit: $150.</p>
       <a class="fh-btn" href="#fh-book">Book Your First Visit</a>
       <p class="fh-trust">With Nemezio LopezPerez · NASM Elite Trainer · Fascia Stretch Practitioner – Level 1</p>
+      <p class="fh-trust">OmniFit Performance: 4.98 average across 190+ reviews</p>
     </div>
     <div class="fh-hero-media"><img src="/assets/img/fst-in-home-hero.jpg" alt="Assisted stretching on a portable table in a living room" width="1199" height="1312" decoding="async" fetchpriority="high"></div>
   </section>
@@ -911,6 +916,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
       <hr class="fh-divider">
       <h2>Who you're booking</h2>
       <p>Nemezio LopezPerez, founder of OmniFit Performance. Fascia Stretch Practitioner – Level 1, NASM Elite Trainer and Precision Nutrition Level 2 Certified Master Coach.</p>
+      <p>OmniFit Performance: 4.98 average across 190+ reviews. <a href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener">See our reviews on Google</a>.</p>
     </section>
   </div>
 
@@ -933,7 +939,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     <section class="fh-section" id="fh-where">
       <hr class="fh-divider">
       <h2>Where I come to you</h2>
-      <p>In-home only. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere in our in-home service area a travel fee applies: you are told the amount when you book, and it is collected at the visit.</p>
+      <p>In-home only. No travel fee in Carmel Valley, Santaluz, Fairbanks Ranch, Rancho Bernardo, 4S Ranch, Poway or Harmony Grove. Elsewhere a travel fee applies, and you are told the amount when you book.</p>
     </section>
   </div>
 
@@ -942,7 +948,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     <section class="fh-book" id="fh-book">
       <hr class="fh-divider">
       <h2>Book Your First Visit</h2>
-      <p>Pick a time below. Payment confirms your booking.</p>
+      <p>Pick a time below. Payment confirms your booking, and you can reschedule with 24 hours' notice or more.</p>
       <div class="calendly-inline-widget" data-url="https://calendly.com/nemezio-omnifittraining/founders-first-visit-in-home-assisted-stretching" style="min-width:320px;height:1000px;"></div>
       <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
       <p class="fh-book-fallback">If the booking box does not load, <a href="https://calendly.com/nemezio-omnifittraining/founders-first-visit-in-home-assisted-stretching" target="_blank" rel="noopener">open the booking page</a>.</p>
