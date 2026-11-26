@@ -2325,13 +2325,33 @@ def fst_booking(text, path=""):
 
 _REVIEWS_LINE = re.compile(r'\b4\.98\b|\b190\+|\b\d[\d,]*\+?\s*reviews\b', re.I)
 
+# The rating line the founders page carries (owner brief, Nov 26 2026;
+# CANON: FOUNDERS LANDING PAGE > SOCIAL PROOF): this text, exactly.
+FOUNDERS_RATING_LINE = "4.98 average across 190+ reviews"
+# What may follow the figure there: nothing that turns the training reviews
+# into reviews of the stretching ("190+ reviews of our assisted stretching").
+_RATING_AS_STRETCHING = re.compile(r'^\s*(?:of|for|from)\b[^.<¶]{0,60}\b(?:stretch\w*|FST|First Visit|Fascia)', re.I)
+
 def fst_no_reviews(text, path=""):
-    """(b) The FST page and the founders page carry no reviews line (CANON:
-    the 190+ reviews are training reviews, so a stretching page may not
-    borrow them): [(what, context)] on those files, nothing elsewhere."""
-    if os.path.basename(path) not in FST_WHOLE_FILES + FOUNDERS_FILES: return []
+    """(b) The FST page carries no reviews line (CANON: the 190+ reviews are
+    training reviews, so a stretching page may not borrow them). The founders
+    page carries FOUNDERS_RATING_LINE word for word (owner brief, Nov 26
+    2026), never worded as reviews of the stretching, and no other review
+    figure: [(what, context)] on those files, nothing elsewhere."""
+    base = os.path.basename(path)
+    if base not in FST_WHOLE_FILES + FOUNDERS_FILES: return []
     copy = html.unescape(re.sub(r'\s+', ' ', _visible_copy(text)))
-    return [("a reviews line on an FST page (the 190+ reviews are training reviews)", copy[max(0, m.start() - 60):m.end() + 40].strip())
+    what = "a reviews line on an FST page (the 190+ reviews are training reviews)"
+    if base in FOUNDERS_FILES:
+        out = [("the founders rating line worded as reviews of the stretching (they are training reviews)",
+                copy[max(0, m.start() - 20):m.end() + 80].strip())
+               for m in re.finditer(re.escape(FOUNDERS_RATING_LINE), copy)
+               if _RATING_AS_STRETCHING.search(copy[m.end():m.end() + 90])]
+        if out: return out
+        copy = copy.replace(FOUNDERS_RATING_LINE, " ")
+        what = ("a review figure on the founders page that is not its rating line '" + FOUNDERS_RATING_LINE +
+                "' (CANON: FOUNDERS LANDING PAGE > SOCIAL PROOF)")
+    return [(what, copy[max(0, m.start() - 60):m.end() + 40].strip())
             for m in _REVIEWS_LINE.finditer(copy)]
 
 def fst_page_required(page, header):
@@ -2683,9 +2703,16 @@ def _selftest_fst():
     assert fst_booking('<p>Book at ' + FOUNDERS_CALENDLY + '</p>', "pages/x.html"), "FST self-test: the founders link off an FST surface passed"
     assert fst_booking(fo.replace(FOUNDERS_CALENDLY, FST_CALENDLY), FP), "FST self-test: the regular First Visit link on the founders page passed"
     assert fst_booking('<a href="#fh-book">Book Your First Visit</a>', P), "FST self-test: a same-page First Visit button passed off the founders page"
-    # no reviews line on the FST page or the founders page; the training pages keep theirs
+    # no reviews line on the FST page; on the founders page the rating line word
+    # for word (owner brief, Nov 26 2026) and no other review figure; the
+    # training pages keep theirs
+    rl = '<p class="fh-rating"><a href="https://g.page/r/CcePeMjnbDe9EBM"><svg viewBox="0 0 48 48"><path d="M24 9.5z"/></svg><span>' + FOUNDERS_RATING_LINE + '</span></a></p>'
+    assert not fst_no_reviews(fo + rl + '<div>' + rl + '<a href="#fh-book">Book Your First Visit</a></div>', FP), "FST self-test: the rating line flagged on the founders page"
+    assert fst_no_reviews(rl, P), "FST self-test: the founders rating line passed on the FST page"
+    for rv in ("190+ reviews", "rated 4.98", "5.0 average across 190+ reviews", "4.98 average across 200+ reviews", "4.98 average across 190+ reviews of our assisted stretching", "4.98 average across 190+ reviews for Fascia Stretch Therapy™"):
+        assert fst_no_reviews(fo + '<p>Nemezio LopezPerez. ' + rv + '.</p>', FP), f"FST self-test: '{rv}' passed on the founders page"
+    assert fst_no_reviews(fo + rl + '<p>Over 200 reviews.</p>', FP), "FST self-test: a second review figure passed beside the rating line on the founders page"
     for rv in ("4.98 average across 190+ reviews", "190+ reviews", "rated 4.98"):
-        assert fst_no_reviews('<p>Nemezio LopezPerez. ' + rv + '.</p>', FP), f"FST self-test: '{rv}' passed on the founders page"
         assert fst_no_reviews('<p>' + rv + '</p>', P), f"FST self-test: '{rv}' passed on the FST page"
     assert not fst_no_reviews('<p>4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark).</p>', "pages/about.html"), "FST self-test: the reviews line flagged on a training page"
     assert not fst_no_reviews(fo, FP) and not fst_no_reviews(good, P), "FST self-test: fst_no_reviews fired on clean FST copy"

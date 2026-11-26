@@ -89,6 +89,8 @@
                               cta_location, cta_label (text, max 60), cta_position
                               (nav | hero | body | footer | sticky, nearest landmark)
      phone_click / email_click  tel: / mailto: links   cta_location
+     review_link_click        any link to the Google reviews page (g.page)
+                              cta_location, cta_label, cta_position
      generate_lead            HubSpot onFormSubmitted  form_location
      fit_check_start          first answer selected    (no params)
      fit_check_complete       result shown             fit_result (pass | hold),
@@ -157,6 +159,12 @@
     var host = linkHost(a);
     if (host === 'calendly.com' || /\.calendly\.com$/.test(host)) {
       track('book_consultation_click', { cta_location: slug, cta_label: label(a), cta_position: position(a) });
+      return;
+    }
+    /* The Google reviews page (owner, Nov 26 2026): the rating lines on the
+       founders landing page, and the footer's reviews link. */
+    if (host === 'g.page') {
+      track('review_link_click', { cta_location: slug, cta_label: label(a), cta_position: position(a) });
     }
   });
 

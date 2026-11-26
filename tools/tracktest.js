@@ -564,6 +564,22 @@ async function runFitCheck(page, answers) {
     await t.page.click(".fh-box-cta a.fh-btn");
     await t.waitFor(() => named("booking_cta_click").length >= 2);
     assert(AREA, "offer box button -> booking_cta_click, body", { event: "booking_cta_click", params: { cta_location: SLUG, cta_label: "Book Your First Visit", cta_position: "body" } }, named("booking_cta_click")[1]);
+    // Rating lines (owner brief, Nov 26 2026): each is one link to the Google
+    // reviews page, in a new tab, and a click is review_link_click.
+    const RATING = "4.98 average across 190+ reviews";
+    assert(AREA, "two rating lines, each one link to the Google reviews page, new tab, rel noopener, the exact text",
+      [1, 2].map(() => ({ href: "https://g.page/r/CcePeMjnbDe9EBM", target: "_blank", rel: "noopener", text: RATING, g: 1, stars: 5 })),
+      await t.page.evaluate(() => [...document.querySelectorAll("#omni-fh .fh-rating a")].map((a) => ({ href: a.getAttribute("href"), target: a.target, rel: a.rel, text: a.textContent.replace(/\s+/g, " ").trim(), g: a.querySelectorAll("svg.fh-g").length, stars: a.querySelectorAll("svg.omni-icon--star").length }))));
+    assert(AREA, "the rating lines sit under the hero trust line and directly above the offer box button",
+      { hero: "fh-trust", box: "fh-btn" },
+      await t.page.evaluate(() => ({ hero: document.querySelector("#fh-hero .fh-rating").previousElementSibling.className, box: document.querySelector(".fh-box-cta .fh-rating").nextElementSibling.className })));
+    await t.page.click("#fh-hero .fh-rating a");
+    await t.waitFor(() => named("review_link_click").length >= 1);
+    assert(AREA, "hero rating line -> review_link_click, hero", [{ event: "review_link_click", params: { cta_location: SLUG, cta_label: RATING, cta_position: "hero" } }], named("review_link_click"));
+    await t.page.click(".fh-box-cta .fh-rating a");
+    await t.waitFor(() => named("review_link_click").length >= 2);
+    assert(AREA, "offer box rating line -> review_link_click, body", { event: "review_link_click", params: { cta_location: SLUG, cta_label: RATING, cta_position: "body" } }, named("review_link_click")[1]);
+    assert(AREA, "a rating line click is not a booking click", { cta: 2, consult: 0 }, { cta: named("booking_cta_click").length, consult: named("book_consultation_click").length });
     await scrollThrough(t.page);
     await t.waitFor(() => named("booking_section_view").length >= 1);
     await t.page.evaluate(() => window.scrollTo(0, 0));
@@ -597,6 +613,7 @@ async function runFitCheck(page, answers) {
     const sent = t.hits.filter((x) => x.kind === "ga" || x.kind === "meta").map((x) => decodeURIComponent(x.url)).join("\n");
     assert(AREA, "nothing from the message payload (name, email, price, Calendly URIs) is in any GA4 or Meta request", [], SCHEDULED_SECRETS.filter((v) => sent.includes(v)));
     assert(AREA, "booking_time_selected is unchanged by the booking messages", 1, named("booking_time_selected").length);
+    assert(AREA, "review_link_click went to GA4 only: Meta received PageView and Schedule and nothing else", ["PageView", "Schedule"], t.meta().map((x) => x.event));
     assert(AREA, "the _headers Content-Security-Policy stopped nothing on the landing page", [], t.csp);
     assert(AREA, "no page-level tracking script on the landing page", 0, await t.page.evaluate(() => [...document.querySelectorAll("main script")].filter((s) => /gtag\(|dataLayer|booking_|fbq/.test(s.textContent)).length));
     assert(AREA, "the sticky booking bar is phones only: not displayed at this width", "none", await t.page.evaluate(() => getComputedStyle(document.querySelector(".fh-sticky")).display));
@@ -611,10 +628,26 @@ async function runFitCheck(page, answers) {
     await c.waitFor(() => c.logs.some((l) => l.includes("booking_completed")));
     await c.page.waitForTimeout(400);
     assert(`localhost no flag /${SLUG} (390px)`, "completed booking on a non-production host: one \"[omnifit-track]\" console line, no request to GA4 or to connect.facebook.net / facebook.com, window.fbq undefined", { logged: ["[omnifit-track] booking_completed {\"cta_location\":\"" + SLUG + "\"}"], ga: 0, gtag: 0, script: 0, hit: 0, fbq: "undefined" }, { logged: c.logs.filter((l) => l.includes("booking_completed")), ga: c.count("ga"), gtag: c.count("gtag.js"), script: c.count("fbevents.js"), hit: c.count("meta"), fbq: await c.page.evaluate(() => typeof window.fbq) });
+    await c.page.click("#fh-hero .fh-rating a");
+    await c.waitFor(() => c.logs.some((l) => l.includes("review_link_click")));
+    assert(`localhost no flag /${SLUG} (390px)`, "hero rating line on a phone: one console line, position hero", ["[omnifit-track] review_link_click {\"cta_location\":\"" + SLUG + "\",\"cta_label\":\"4.98 average across 190+ reviews\",\"cta_position\":\"hero\"}"], c.logs.filter((l) => l.includes("review_link_click")));
+    const first = await newPage(browser, { viewport: { width: 375, height: 667 } });
+    await first.page.goto(`${L}/${SLUG}`);
+    await first.page.waitForTimeout(400);
+    assert(`localhost no flag /${SLUG} (375x667)`, "the hero rating line is on the first screen: wholly above the sticky bar, no scrolling", true,
+      await first.page.evaluate(() => { const r = document.querySelector("#fh-hero .fh-rating a .fh-rating-text").getBoundingClientRect(); const s = document.querySelector(".fh-sticky").getBoundingClientRect(); return scrollY === 0 && r.top > 0 && r.bottom <= s.top && r.bottom <= innerHeight; }));
+    await first.context.close();
     await c.page.click(".fh-sticky a.fh-btn");
     await c.waitFor(() => c.logs.filter((l) => l.includes("booking_cta_click")).length >= 2);
     assert(`localhost no flag /${SLUG} (390px)`, "sticky bar button (768px and under) -> booking_cta_click, sticky", "[omnifit-track] booking_cta_click {\"cta_location\":\"" + SLUG + "\",\"cta_label\":\"Book Your First Visit\",\"cta_position\":\"sticky\"}", c.logs.filter((l) => l.includes("booking_cta_click"))[1]);
     await c.context.close();
+    const h = await newPage(browser);
+    await h.page.goto(`${L}/?${FLAG}`);
+    await h.page.waitForTimeout(400);
+    await h.page.click("footer a[href^='https://g.page/']");
+    await h.waitFor(() => h.ga().some((e) => e.event === "review_link_click"));
+    assert("localhost+flag /", "the footer's Google link -> review_link_click, footer", [{ event: "review_link_click", params: { cta_location: "home", cta_label: "Google Reviews", cta_position: "footer" } }], h.ga().filter((e) => e.event === "review_link_click"));
+    await h.context.close();
   });
 
   await browser.close();

@@ -1291,3 +1291,34 @@ CALENDLY BOOKING, `booking_completed`) and COMPLETED BOOKINGS.
 - **Negative-tested on the built output** (each FAILED as listed, then
   `public/` was restored from a copy): see REPORT.md, Meta Pixel run.
 
+
+## Founders social proof (Nov 26 2026)
+
+Owner brief, Nov 26 2026. CANON: FOUNDERS LANDING PAGE > SOCIAL PROOF and
+MEASUREMENT > EVENTS (`review_link_click`).
+
+- **`fst_no_reviews` changed for the founders page only.** The FST page
+  still fails on any reviews line. On the two founders files the rule now
+  allows `FOUNDERS_RATING_LINE` ("4.98 average across 190+ reviews") word
+  for word, any number of times, and fails on (1) any other review figure
+  left once that text is removed ("190+ reviews", "5.0 average across 190+
+  reviews", "rated 4.98", a second count) and (2) the line followed by "of /
+  for / from ... stretching, FST, First Visit, Fascia"
+  (`_RATING_AS_STRETCHING`): the reviews are training reviews. Self-tested
+  both ways in `_selftest_fst`.
+- **`review_link_click`** is sent by `site/site.js` from the same delegated
+  click listener as `book_consultation_click`, for any link whose host is
+  `g.page`, with the same three params. That is the two rating lines on the
+  founders page and the footer's Google link on every other page. No page
+  carries a tracking script, and nothing is sent to Meta.
+- **`tracktest.js` section 10** (9 new assertions, 98 in all): both rating
+  links carry the Google reviews URL, `target="_blank"`, `rel="noopener"`,
+  the exact text, one G mark and five stars; the hero line follows the trust
+  line and the box line sits directly above the box button; the hero line
+  sends `review_link_click` with `cta_position` "hero", the box line "body";
+  a rating click is not a booking click; Meta received PageView and Schedule
+  only; on a phone the click is one console line; at 375x667 the hero rating
+  text is wholly above the sticky bar without scrolling; the footer's Google
+  link on `/` sends `review_link_click` with `cta_position` "footer".
+- **Negative-tested on the real page** (each FAILED, then restored): see
+  REPORT.md, Founders social proof.

@@ -751,6 +751,32 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   #omni-fh a:hover { color: var(--gold-light) !important; }
   #omni-fh a.fh-btn, #omni-fh a.fh-btn:link, #omni-fh a.fh-btn:visited { text-decoration: none !important; }
 
+  /* ── Rating line (owner, Nov 26 2026): Google G, five line stars, the
+     review figure; the whole line is one link to the Google reviews page ── */
+  #omni-fh .fh-rating { margin-top: 8px; font-size: 13px; line-height: 1.4; }
+  #omni-fh a.fh-rating-link,
+  #omni-fh a.fh-rating-link:link,
+  #omni-fh a.fh-rating-link:visited {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px 6px;
+    /* a taller tap area that adds no height to the line */
+    padding: 8px 0;
+    margin: -8px 0;
+    font-weight: 600;
+    color: var(--white-90) !important;
+    text-decoration: none;
+  }
+  #omni-fh a.fh-rating-link:hover { color: var(--white) !important; }
+  #omni-fh .fh-rating-text { text-decoration: underline; text-decoration-color: var(--white-30); text-underline-offset: 3px; }
+  #omni-fh .fh-rating-marks { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; }
+  #omni-fh .fh-g { width: 14px; height: 14px; flex: 0 0 auto; display: block; }
+  #omni-fh .fh-stars { display: inline-flex; gap: 1px; font-size: 13px; flex: 0 0 auto; }
+  #omni-fh .fh-stars svg.omni-icon { display: block; }
+  #omni-fh .fh-box-cta .fh-rating { margin: 0 0 12px; }
+
   /* ════════════════ RESPONSIVE ════════════════ */
   @media (min-width: 900px) {
     #omni-fh .fh-hero { padding: 4.5rem 2.5rem 3.5rem; }
@@ -802,6 +828,9 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     #omni-fh .fh-hero h1 { order: 1; }
     #omni-fh .fh-lead { order: 2; margin-bottom: 12px; }
     #omni-fh .fh-offer { order: 3; margin-bottom: 14px; }
+    /* Rating line (owner, Nov 26 2026): on the first screen. Same order as
+       the offer box, so it follows it; the credentials line stays last. */
+    #omni-fh .fh-hero-copy > .fh-rating { order: 3; margin: -8px 0 12px; }
     #omni-fh .fh-hero-copy > .fh-btn { order: 4; align-self: center; }
     #omni-fh .fh-sub { order: 5; margin: 16px auto 0; }
     #omni-fh .fh-trust { order: 6; }
@@ -870,7 +899,12 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
      rule in tools/certify.py reads all of it. Modelled on
      fascia-stretch-therapy-san-diego: same design system, CSS scoped to
      #omni-fh, class prefix fh-. First person is the owner's voice for this
-     page. No reviews line (CANON: the 190+ reviews are training reviews).
+     page. RATING LINE (owner brief, Nov 26 2026; CANON: FOUNDERS LANDING PAGE >
+     SOCIAL PROOF): "4.98 average across 190+ reviews" behind a Google G mark
+     and five line-SVG stars, one link to the Google reviews page (new tab),
+     twice: under the hero trust line and above the offer-box button. No other
+     review figure on the page (certify.py fst_no_reviews). site.js reports a
+     click on either as review_link_click.
      Hero image: the IF-ASSET slot for /assets/img/fst-in-home-hero.jpg
      renders nothing until site/img/fst-in-home-hero.jpg exists.
      Title and meta description: the WebPage node in
@@ -893,6 +927,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
       <p class="fh-offer"><strong>Founders rate: $99</strong> for the first 5 new clients, through December 31, 2026. Regular First Visit: $150.</p>
       <a class="fh-btn" href="#fh-book">Book Your First Visit</a>
       <p class="fh-trust">With Nemezio LopezPerez · NASM Elite Trainer · Fascia Stretch Practitioner – Level 1</p>
+      <p class="fh-rating"><a class="fh-rating-link" href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener"><span class="fh-rating-marks"><svg class="fh-g" viewBox="0 0 48 48" role="img" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="fh-stars" aria-hidden="true"><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span></span><span class="fh-rating-text">4.98 average across 190+ reviews</span></a></p>
     </div>
     <div class="fh-hero-media"><img src="/assets/img/fst-in-home-hero.jpg" alt="Assisted stretching on a portable table in a living room" width="1199" height="1312" decoding="async" fetchpriority="high"></div>
   </section>
@@ -956,7 +991,10 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
           <li>First Visit only, one per client.</li>
           <li>Follow-up sessions and 5-session packs are at regular rates, arranged with me after your First Visit.</li>
         </ul>
-        <div class="fh-box-cta"><a class="fh-btn" href="#fh-book">Book Your First Visit</a></div>
+        <div class="fh-box-cta">
+          <p class="fh-rating"><a class="fh-rating-link" href="https://g.page/r/CcePeMjnbDe9EBM" target="_blank" rel="noopener"><span class="fh-rating-marks"><svg class="fh-g" viewBox="0 0 48 48" role="img" aria-label="Google"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="fh-stars" aria-hidden="true"><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg><svg class="omni-icon omni-icon--star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8z"/></svg></span></span><span class="fh-rating-text">4.98 average across 190+ reviews</span></a></p>
+          <a class="fh-btn" href="#fh-book">Book Your First Visit</a>
+        </div>
       </div>
     </section>
 

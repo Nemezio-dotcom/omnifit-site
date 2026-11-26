@@ -242,8 +242,9 @@ otherwise, this block wins and the older line is kept only as history.
       button text "Book Your First Visit", every button scrolling to the
       booking section (#fh-book), where the founders Calendly event is
       embedded inline with a plain-text fallback link; "no crowded facility"
-      (the owner's "no crowded studio" trips the FST studio ban). NO reviews
-      line anywhere on it (the 190+ reviews are training reviews). FIRST
+      (the owner's "no crowded studio" trips the FST studio ban). SOCIAL
+      PROOF: see SOCIAL PROOF below (owner brief, Nov 26 2026; it REPLACES
+      "NO reviews line anywhere on it"). FIRST
       PERSON ("I bring the table to you") is the owner's voice for this page
       only; the FST page stays in the third person.
       HERO (owner brief, Nov 23 2026; WHY: the Meta ad shows a photo and the
@@ -256,7 +257,46 @@ otherwise, this block wins and the older line is kept only as history.
       before and after." (shortened: ", so you can compare the two yourself"
       is gone); the offer line and the button, unchanged; the TRUST LINE
       "With Nemezio LopezPerez · NASM Elite Trainer · Fascia Stretch
-      Practitioner – Level 1" (was the title alone). Still no reviews line.
+      Practitioner – Level 1" (was the title alone); the RATING LINE (SOCIAL
+      PROOF below) directly under it since Nov 26 2026.
+      SOCIAL PROOF (owner brief, Nov 26 2026; REPLACES "NO reviews line
+      anywhere on it" and "Still no reviews line").
+      RATING LINE, exact text: "4.98 average across 190+ reviews". Never
+      "5.0", "five-star" or "verified" (REVIEWS, above). Before the text: a
+      small Google "G" mark (inline SVG, Google's four colours, 14px,
+      aria-label "Google") and five small gold line-SVG stars (the site's
+      omni-icon star; no emoji). The WHOLE line is one link to the Google
+      reviews page, https://g.page/r/CcePeMjnbDe9EBM (the footer's reviews
+      link; no /review suffix), target="_blank" rel="noopener". It is the
+      only link on this page that leaves it besides the booking fallback
+      and the legal footer, and it opens a new tab so the offer stays open.
+      TWO PLACES: (1) the hero, directly under the trust line; (2) the
+      founders-rate box, centred, directly above its "Book Your First
+      Visit" button (the last button in the page's flow; the sticky bar is
+      not a place for it).
+      PHONES, 768px AND UNDER: the hero rating line is shown directly under
+      the offer line, above the button (CSS order, the markup is unchanged),
+      because the trust line sits below the first screen on a phone and the
+      owner's brief wants the rating on it. At 375x667 it ends 1px above
+      the sticky bar; at 360x640 it is partly behind the bar.
+      THE REVIEWS ARE TRAINING REVIEWS. The line is never worded as reviews
+      of the stretching, FST™ or the First Visit, and no other review
+      figure appears on the page (certify.py fst_no_reviews,
+      FOUNDERS_RATING_LINE, self-tested both ways). The figure is the total
+      across Google, Yelp, Thumbtack and Bark (REVIEWS); the G mark and the
+      link point at Google because that is where the reviews can be read.
+      OPEN, owner: beside a Google mark the total can be read as the Google
+      rating alone.
+      This page only: the FST page and the homepage FST block still carry
+      no reviews line.
+      A click on either line is review_link_click (MEASUREMENT > EVENTS).
+      REVIEW QUOTES ("What clients say", before the booking section, with a
+      "Read all reviews on Google" link): in the owner's brief, NOT BUILT.
+      The repo holds six client quotes (three on /personal-trainer-4s-ranch,
+      three on the retired archive/online-training.html) and none of them
+      meets the brief's selection rules three times over; no review may be
+      written, reworded or combined to fill the section. It waits for the
+      owner's review texts.
       HERO IMAGE (in the repo since Nov 23 2026): site/img/fst-in-home-hero.jpg,
       served at /assets/img/fst-in-home-hero.jpg through the IF-ASSET slot.
       The Meta ad's image, whole and uncropped: JPEG, 1199x1312 (PORTRAIT),
@@ -298,7 +338,8 @@ otherwise, this block wins and the older line is kept only as history.
       starts at row 58, her head ends at row 915); the owner's limit is no
       taller than 4:3. 257px tall at 390 wide, 235px at 360.
       ORDER (CSS order; the markup stays in the desktop order): H1, lead
-      line, offer line, button, SUB, trust line.
+      line, offer line, rating line (since Nov 26 2026; SOCIAL PROOF),
+      button, SUB, trust line.
       STICKY BAR (.fh-sticky, the last element inside #omni-fh; display:
       none above 768px): "Founders rate: $99" on the left; on the right a
       "Book Your First Visit" button that scrolls to #fh-book like every
@@ -798,6 +839,13 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
       "hsFormCallback" and data.eventName "onFormSubmitted" · form_location
       (page slug)
     phone_click (tel: links) · email_click (mailto: links) · cta_location
+    review_link_click  (owner brief, Nov 26 2026) any link to the Google
+      reviews page (host g.page) · cta_location · cta_label · cta_position
+      (the same three params, same rules, as book_consultation_click).
+      Today: the two rating lines on the founders landing page (cta_label
+      "4.98 average across 190+ reviews"; cta_position "hero" and "body")
+      and the footer's Google link on every other page (cta_position
+      "footer"). GA4 only: nothing is sent to Meta.
     fit_check_start  first answer selected · no params
     fit_check_complete  result shown · fit_result ("pass" | "hold") ·
       fit_setting (the recommended Dial setting name, pass only).
@@ -1629,7 +1677,9 @@ Therapy. No run, and no owner override inside a run, relaxes one.)
       professionals, golfers, people who feel stiff after travel).
     · No "free", no emoji (gold line-SVG icons from site/icons.py), no
       Pacific Beach; the reviews line only in its canonical form (the FST
-      page carries no reviews line: the 190+ reviews are training reviews).
+      page carries no reviews line: the 190+ reviews are training reviews;
+      the founders landing page carries the rating line under FOUNDERS
+      LANDING PAGE > SOCIAL PROOF, owner brief Nov 26 2026).
   FST SURFACES (how certify.py scopes the rules; tools/README.md has the
   detail): the FST page and its header, whole file; anything between
   <!-- FST-BLOCK --> and <!-- /FST-BLOCK --> on another page; an ld+json
@@ -3029,3 +3079,12 @@ CHANGE LOG
   REPLACES "completed bookings are not a site event"). Privacy policy: "Advertising
   measurement (Meta Pixel)" in the Sharing Information list. build.py --check and
   tools/tracktest.js extended. Closes the founders page's "NO Meta tracking code yet".
+- Nov 26, 2026: Founders social proof (owner brief, Nov 26 2026). The founders landing
+  page carries the RATING LINE "4.98 average across 190+ reviews" (Google G mark, five
+  line-SVG stars, one link to the Google reviews page in a new tab) under the hero trust
+  line and above the founders-rate box button (FOUNDERS LANDING PAGE > SOCIAL PROOF, which
+  REPLACES "NO reviews line anywhere on it"); on phones the hero line sits under the offer
+  line, on the first screen. New GA4 event review_link_click (MEASUREMENT > EVENTS).
+  certify.py fst_no_reviews allows that exact line on the founders page and still fails
+  any other review figure there and any reviews line on the FST page. NOT BUILT: the
+  "What clients say" quotes, which wait for the owner's review texts.

@@ -9096,3 +9096,66 @@ Found while doing this: with the script-src policy the test crashed while printi
 | `node tools/widgettest.js` | RESULT: PASSED (4 hand-offs) |
 | `node tools/choosertest.js` | RESULT: PASSED (30 checks, 16 combinations) |
 | `node tools/mobileaudit.js` | RESULT: PASSED |
+
+# Founders social proof (owner brief and run, Nov 26, 2026)
+
+## Needs owner
+
+1. **The review quotes are NOT BUILT.** The brief asks for three reviews, word for word, "taken only from client reviews already published on the site or stored in the repo", about trust, professionalism, attentiveness, care around pain or injury, and reliability. The repo holds six client quotes and no others (every branch and the full history were searched; no review by Damon Dertina and no review mentioning Pacific Beach is in the repo at all, so the review set the brief has in mind is not here):
+   - `/personal-trainer-4s-ranch`, Alo S., CTO: "Training with Nemezio for the past 15 months has been the best gift I've given myself. I've gotten to the best shape of my life and achieved a physical transformation I didn't think was possible." A result beside a timeframe; about a transformation.
+   - `/personal-trainer-4s-ranch`, Vincent S., RN: "My experience over the last ten months has been amazing! I will be 62 in July and I can't believe my transformation. He creates an individualized plan and truly cares about your success." The last sentence fits the brief; the review also carries "ten months" and a transformation.
+   - `/personal-trainer-4s-ranch`, Dave R., Business Owner: "Nemezio is the best! He has helped me finally lose my belly fat, and made me feel more confident in myself! I highly recommend it!" A fat-loss result.
+   - `archive/online-training.html` (retired page), Alo, Mark M., Dave R.: three lines about 30-minute online sessions; Mark M.'s is a result "within weeks".
+   At most one of the six fits. Nothing was written, reworded or combined to fill the section, and the "Read all reviews on Google" link waits with it.
+2. **The Google mark beside a four-platform total.** CANON's figure is "4.98 average across 190+ reviews (Google, Yelp, Thumbtack and Bark)". Behind a Google "G" and a link to Google, the short form can be read as the Google rating alone. Built as briefed; WRONG IF the Google profile shows a different rating or count, in which case the line should carry Google's own figures or name the platforms.
+
+## What changed
+
+- **Rating line, twice** (`pages/in-home-stretching-founders.html`): Google "G" (inline SVG), five gold line-SVG stars (the site's `omni-icon` star), "4.98 average across 190+ reviews"; the whole line is one link to `https://g.page/r/CcePeMjnbDe9EBM` (the footer's reviews link), `target="_blank" rel="noopener"`. (1) Hero, directly under the trust line. (2) Founders-rate box, centred, directly above its "Book Your First Visit" button.
+- **Phones (768px and under)**: the hero line is shown under the offer line, above the button (CSS `order`; the markup is unchanged). The trust line is below the first screen on a phone (749px down at 375 wide), so "directly under the credentials line" and "on the first screen" cannot both hold there; the first screen won.
+- **`review_link_click`** (`site/site.js`): any link to `g.page`, with `cta_location`, `cta_label`, `cta_position`. GA4 only.
+- **CANON**: FOUNDERS LANDING PAGE > SOCIAL PROOF replaces "NO reviews line anywhere on it"; EVENTS; the changelog. **certify.py** `fst_no_reviews`, **tracktest.js**, **DEPLOY.md** events table, **tools/README.md**.
+- Not changed: price, offer terms, copy, the noindex meta, the booking embed, the header JSON-LD.
+
+## Judgment calls (each with the condition under which it is wrong)
+
+- **"The last Book Your First Visit button near the bottom" = the founders-rate box button.** The booking section holds the calendar, not a button, and the sticky bar is fixed to the screen. WRONG IF the owner meant the sticky bar or the booking section heading.
+- **The event is keyed on the destination, not the page**, as `book_consultation_click` is. So the footer's Google link on every other page now sends `review_link_click` too (`cta_position` "footer"). WRONG IF the owner wants the event from the landing page only.
+- **In the box on a phone the line wraps to two rows** (marks above, text below, centred): the box is 295px wide inside at 375 and the line needs about 320.
+
+## What moved (measured before and after, six viewports)
+
+| Viewport | Hero rating line (top to bottom) | Sticky bar top | Above the rating line | Below it |
+|---|---|---|---|---|
+| 375x667 | 582 to 602 | 603 | unchanged | hero button, sub, trust line 24px lower; from the box button down 70 to 71px lower |
+| 360x640 | 571 to 591 | 576 | unchanged | as 375 |
+| 390x844 | 593 to 613 | 780 | unchanged | as 375 |
+| 768x1024 | 945 to 966 | 960 | unchanged | 24 to 25px, then 56px |
+| 820x1180 | 1222 to 1242 | none | hero unchanged | 28px, then 60px |
+| 1280x800 | 651 to 671 | none | hero copy 1px higher, photo 13px lower (the hero centres its two columns and the copy column is 28px taller) | 25px, then 58px |
+
+No element changed width or horizontal position, and no page is wider than its viewport. At 360x640 the hero rating line is partly behind the sticky bar; the brief's check is 375.
+
+## Negative tests on the real page (each FAILED as listed; the page restored)
+
+| Change | certify.py |
+|---|---|
+| "190+ reviews · " added to the trust line | FAILED: a review figure on the founders page that is not its rating line |
+| the line reads "5.0 average across 190+ reviews" | FAILED: same finding |
+| the line reads "... 190+ reviews of our assisted stretching" | FAILED: the founders rating line worded as reviews of the stretching |
+| the line reads "... 190+ verified reviews" | FAILED: retired launch copy "verified reviews", and the review-figure finding |
+
+## Checks
+
+| Check | Result |
+|---|---|
+| `python3 build.py --strict` | RESULT: PASSED |
+| `python3 build.py --check` | RESULT: PASSED |
+| `python3 tools/certify.py` | RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0); the five invariant hashes unchanged |
+| `python3 tools/mkheaders.py --check` | PASSED (9 headers reproduce byte-for-byte) |
+| `python3 tools/ownership.py` | PASSED |
+| `node --test tests/assistant.test.mjs` | 53 of 53 pass |
+| `node tools/tracktest.js` | RESULT: PASSED (98 assertions; 89 before this run) |
+| `node tools/widgettest.js` | RESULT: PASSED (4 hand-offs) |
+| `node tools/choosertest.js` | RESULT: PASSED (30 checks, 16 combinations) |
+| `node tools/mobileaudit.js` | RESULT: PASSED |
