@@ -8973,3 +8973,126 @@ By the brief's rule (a cut head is fixed with `object-position` on `#omni-fh .fh
 
 **Checks after the image:** `python3 build.py` RESULT: PASSED; `python3 tools/certify.py` RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0); `python3 build.py --check` RESULT: PASSED; `node tools/tracktest.js --only=10` RESULT: PASSED (10 assertions).
 
+
+
+# Meta Pixel run — Meta Pixel and the completed-booking event (owner brief Nov 25, 2026; run Nov 26, 2026)
+
+Owner brief of Nov 25, 2026: the Meta ad test sends traffic to `/in-home-stretching-founders` and Meta could not see a completed booking. This run adds the Meta Pixel (`3596878003826620`) and reports a completed booking in the inline Calendly embed to Meta (`Schedule`) and to GA4 (`booking_completed`). It closes the open item "NO Meta tracking code yet". No page copy, price, layout or Calendly embed changed; the one change to a page is the new list item in the privacy policy.
+
+## Needs owner
+
+1. **OPEN, asked before the merge: the privacy policy now contradicts the pixel, and the brief said to change nothing else in it.** Section 10 (Your California Privacy Rights), `pages/privacy-policy.html:177`, still reads: "We do not sell your personal information, and we do not share it for cross-context behavioral advertising. We use Google Analytics 4 and Microsoft Clarity to measure how this website is used; we do not run advertising tags on this site." The Meta Pixel is an advertising tag, so from the moment this deploys the last clause is untrue, on the same page whose section 07 now lists the pixel. The first sentence is a legal statement under California law (CCPA/CPRA) about sharing data for advertising; whether an ad-measurement pixel counts as that "sharing" is a question for the owner or counsel, not something this run can decide. By the brief the sentences were not edited. Section 02 and section 06 also name only Google Analytics 4 and Microsoft Clarity as the site's measurement tools.
+2. **Automatic Advanced Matching must be OFF in Meta, and the repo cannot see or set it.** The brief says to turn it off. It is a switch in Meta Events Manager (Data sources > the pixel > Settings), not code. What the code does: `fbq('init')` carries the pixel ID and nothing else, so no email, phone or name is passed by the site (build.py fails on a third argument). If the switch is ON in Events Manager, Meta's script will still read form fields on the site and send them hashed, whatever the repo says. Please confirm it is off before the ads rely on this.
+3. **After deploy, confirm with Meta's own tools.** The real Meta script could not be run in this build environment (its host, `connect.facebook.net`, is not reachable from here), so the browser test uses a stand-in for it. In Events Manager > Test events (or the Meta Pixel Helper extension), open `https://www.omnifittraining.com/in-home-stretching-founders` and check that `PageView` arrives; after the first real booking, check that `Schedule` arrives once. Then set `Schedule` as the ad set's conversion event.
+4. **Do not enter this pixel ID in Calendly's own Meta Pixel integration** while the site sends `Schedule`. Calendly would send its own events to the pixel from inside the embed, and a booking could be counted twice. Keep the founders Calendly event on Calendly's own confirmation page (not a redirect to another site), so the embed can report the booking to the page.
+5. **GA4 key event.** `booking_completed` appears in GA4 with the first booking. Mark it as the key event for the landing page. Calendly's own Google Analytics integration also reports an embedded booking under Calendly's event name, so the same booking can show under two names; count one.
+
+## What changed
+
+- **`pages/headers/site-header.html`**: the Meta Pixel loader beside the GA4 and Clarity loaders, inside the same script and under the same PRODUCTION-ONLY RULE (`www.omnifittraining.com` / `omnifittraining.com`; the `?omnifit-track=prod` override on localhost only). It runs on every page except `/fit-check`. Meta's standard queue function, `fbq('set', 'autoConfig', false, META)`, `fbq('init', META)`, `fbq('track', 'PageView')`. The ID is written once (`var META`). No noscript image. Meta's script is downloaded after the page's load event, the way gtag.js is.
+- **`site/site.js`**: in the existing Calendly message listener (calendly.com origins only), `calendly.event_scheduled` sends `track('booking_completed', { cta_location: slug })` and, if `window.fbq` exists, `fbq('track', 'Schedule')`, once per page load (`booked`). Only the message's event name is read; the payload is never touched. On a non-production host it is the one `[omnifit-track] booking_completed {...}` console line and nothing is requested.
+- **`pages/privacy-policy.html`**: one new item in the Sharing Information list (section 07), "Advertising measurement (Meta Pixel)". Nothing else.
+- **`build.py`**: the pixel ID in `TRACKING_ONCE`; two new `check_tracking` problems (`noscript`, `userdata`) with fixtures; `csp_of` / `check_csp_pixel` / `csp_selftest` for the Content-Security-Policy.
+- **`tools/tracktest.js`**: 19 new assertions for the pixel, the booking and the policy; a stand-in for Meta's script; the local server sends the `_headers` policy; the stale Fit Check sections brought to the current Fit Check. 89 assertions, all pass.
+- **CANON.md**: MEASUREMENT (IDs, PRODUCTION-ONLY RULE, new META PIXEL bullet, `booking_completed` under INLINE CALENDLY BOOKING, COMPLETED BOOKINGS replacing "completed bookings are not a site event", the FOUNDERS PAGE BOOKING INTEREST line, PRIVACY POLICY tools, CHECKS); the founders page section's "NO Meta tracking code yet" replaced by META TRACKING; the site-header description; changelog. **DEPLOY.md** "Measurement" (the pixel row, the Meta events table, the two cases of a completed booking, manual step 6f, the CSP note). **tools/README.md** (tracking check, "Meta Pixel run" section).
+
+## What Meta receives, exactly
+
+| Meta event | When | Parameters |
+|---|---|---|
+| `PageView` | each page load on the production hostnames, except `/fit-check` | none |
+| `Schedule` | a booking completed in an inline Calendly embed (today the founders landing page), once per page load | none |
+
+Nothing else is sent to Meta: no click, phone, email, Fit Check, rates or assistant event. Meta's script adds what every pixel hit carries (the page address, the referrer, its own cookie ID, browser details such as screen size); the site adds nothing to it.
+
+## The Content-Security-Policy
+
+The policy in `public/_headers` is `frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests`. It has no `script-src`, `img-src`, `connect-src` or `default-src`, so it does not restrict where scripts are loaded from or where hits are sent: the pixel's script (`connect.facebook.net`) and its hits (`www.facebook.com`) are not blocked. Confirmed two ways: `build.py --check` reads the policy from the built file and reports it (and will fail if a blocking directive is ever added), and the browser test serves that policy from the local server and records zero violations on the homepage and on the founders page. `_headers` itself did not change.
+
+## Judgment calls (each with the condition under which it is wrong)
+
+1. **The pixel runs on every page except `/fit-check`, not only on the founders page.** The brief puts it in the site-wide header beside GA4 and Clarity under the same rule, so that is what it does: Meta gets a PageView for each page a visitor opens. WRONG IF the owner wants Meta to see the landing page only; then the loader gains a path condition.
+2. **Meta's script loads after the page's load event (as gtag.js does), not at once as in Meta's snippet.** The site's Oct 25 speed rule keeps third-party scripts out of the first draw, and the founders page is where phone speed matters most. The cost: a visitor who leaves before the page finishes loading sends Meta no PageView, so Meta's "landing page views" can read a little lower than its link clicks. Bookings are not affected (a visitor who books has been on the page for minutes). WRONG IF matching PageViews to ad clicks matters more than first-draw speed; then `loadScript` moves out of `afterLoad` (one line).
+3. **`autoConfig` is switched off.** With it on, Meta's script sends events of its own (button clicks with the button text, form field names, page metadata). The brief lists what should be sent (PageView, Schedule) and says no personal data, so the automatic events are off. WRONG IF the owner wants Meta's automatic events or plans to use Meta's Event Setup Tool; then remove the one `autoConfig` line.
+4. **"Absent on /fit-check" is read as "does not run there", the same as Clarity.** The loader skips `/fit-check`: no script, no hit, `window.fbq` undefined (tested). The ID string is still in that page's source, because the site-wide header is one file on every page; Clarity's ID is there the same way. WRONG IF the string itself must be gone from that page's source; then build.py has to strip it per page.
+5. **`Schedule` carries no value and no currency.** The brief says to send no price. Meta can count bookings and optimise for them; it cannot report revenue or return on ad spend from this event. WRONG IF the owner wants a value in Ads Manager; then `Schedule` gains `{value: 99, currency: 'USD'}` on the founders page, a fixed number, not anything from the visitor.
+6. **Bookings made on calendly.com itself are not reported to Meta.** Only an inline embed tells the page that a booking completed. The consultation link, the regular FST First Visit link and the founders embed's fallback link ("open the booking page") open calendly.com, and the site hears nothing back. For the ad test this covers the normal path (the embed). WRONG IF bookings through the fallback link turn out to be common; that needs Calendly's own Meta integration or a redirect to a thank-you page, a separate decision.
+7. **`Schedule` is keyed on the embed, not on the page name.** Any page that later embeds Calendly inline will send `booking_completed` and `Schedule` too, with its own `cta_location`. This is how the three earlier `booking_*` events already work. WRONG IF a future embed should not count as a Meta conversion.
+8. **Once per page load means one booking per page load.** A visitor who books, stays on the page and books a second time is counted once. A reload starts again.
+9. **Privacy policy: the Sharing Information list (section 07), in that list's own form, "Advertising measurement (Meta Pixel)".** The policy has no list titled "tools"; this is the list that names Calendly, HubSpot and Cloudflare the same way. Section 02's "Website usage data through Google Analytics 4 and Microsoft Clarity", section 06 (Cookies and Analytics) and the "Last updated: October 19, 2026" line were left alone, by "change nothing else". WRONG IF the owner meant one of those; see also Needs owner 1.
+10. **The stale Fit Check sections of `tools/tracktest.js` were fixed.** Sections 4, 5 and the end of 8 had failed since the Fit Check rebuild of Oct 26 (recorded as "found, not fixed" on Nov 23). The brief says all checks must pass, so their answer lists now follow the ten current questions. Test code only; `pages/fit-check.html` did not change, and what they assert is unchanged.
+11. **The browser test leaves `upgrade-insecure-requests` out of the policy it serves.** That directive rewrites every `http://` request to `https://` and the local test server is plain http. It restricts no host, so the test still shows what the policy blocks.
+12. **build.py bans the literal `facebook.com/tr` in every file under `public/`.** That is the noscript image's address. WRONG IF a page ever needs to print that address as text; then the rule narrows to tags.
+13. **One commit for the run, then the merge**, as the last several runs did, where CANON's workflow line says per-file commits.
+14. **Dates.** CANON and the docs label the decisions "owner brief, Nov 25 2026"; the changelog entry carries the run date, Nov 26 2026.
+
+## Negative tests on the built output (each FAILED as listed; `public/` restored from a copy and rebuilt)
+
+`python3 build.py --check`:
+
+| Change made to the built files | Problem reported |
+|---|---|
+| a second copy of the pixel ID in `about.html` | `tracking: repeated: 3596878003826620 x2 in about.html` |
+| Meta's noscript image in `about.html` | `tracking: noscript: Meta Pixel image beacon (facebook.com/tr) in about.html` |
+| `fbq('init', META, {em: ...})` in `about.html` | `tracking: userdata: fbq('init') carries a third argument (advanced matching) in about.html` |
+| an init with user data in `assets/site.js` | the same, in `assets/site.js` |
+| `script-src 'self' 'unsafe-inline'` added to the policy in `_headers` | `_headers: csp: script-src does not allow https://connect.facebook.net` (and the existing "altered" problem) |
+| `default-src 'self' 'unsafe-inline'` added | three `csp:` problems (script, img, connect) |
+
+`node tools/tracktest.js` (sections named in brackets):
+
+| Change made to the built files | Assertions that failed |
+|---|---|
+| the once-per-page-load guard removed from `site.js` [10] | 4: `booking_completed` twice, `Schedule` twice, the second embed adds more, two console lines on a non-production host |
+| the calendly.com origin check removed [10] | 4: the page's own message counted as a booking and sent to Meta, and as a time selection |
+| `Schedule` sent with the invitee URI from the payload [10] | 2: the hit carries `cd[uri]`; the payload values are found in a request |
+| `booking_completed` sent with the invitee email [10] | 3: the extra param; the email found in a request; the console line |
+| the `Schedule` call removed [10] | 2 |
+| the `/fit-check` exclusion removed from `fit-check.html` [1, 4] | 2: script and hit requested, `window.fbq` a function |
+| the production condition removed from the pixel on every page [8, 9, 10] | 4: requests to both Meta hosts on localhost and on the preview host |
+| `{em: ...}` added to init on the homepage [1] | 1: the PageView carries `ud[em]` |
+| the `autoConfig` line removed [1] | 1 |
+| the test server's policy given `script-src 'self' 'unsafe-inline'` [1] | 7: no script loads, and the violations are listed |
+| the test server's policy given `connect-src 'self'; img-src 'self' data:` [1] | 2: no PageView arrives; the violation names `www.facebook.com/tr` |
+
+Found while doing this: with the script-src policy the test crashed while printing its table (an `undefined` value could not be printed). `assert()` now prints it as the word; the run above is after that fix.
+
+## The pixel and booking rows of the full run (`node tools/tracktest.js`, 89 assertions, all PASS)
+
+| # | Where | Check | Result |
+|---|---|---|---|
+| 4 | production host `/` | Meta's script requested once, from `connect.facebook.net/en_US/fbevents.js` | PASS |
+| 5 | production host `/` | one hit on load, `PageView`, carrying the pixel ID and nothing else | PASS |
+| 6 | production host `/` | autoConfig switched off for this pixel before init | PASS |
+| 7 | production host `/` | the `_headers` Content-Security-Policy is being sent, and nothing violated it | PASS |
+| 11 | production host `/fit-check` | Meta Pixel absent: no script, no hit, `window.fbq` undefined | PASS |
+| 13 | localhost + override `/` | the override loads the pixel too: one script, one PageView | PASS |
+| 23 | localhost + override `/` | six site events later, still only the PageView at Meta | PASS |
+| 41 | localhost + override `/fit-check` | Meta Pixel not requested | PASS |
+| 60 | localhost, no flag `/` | no request to `connect.facebook.net` or `facebook.com`, `window.fbq` undefined | PASS |
+| 62 | localhost, no flag `/` | still no request to Google, Microsoft or Meta after events | PASS |
+| 67 | preview host + flag `/` | the flag is ignored off localhost: no pixel | PASS |
+| 77 | founders page, override | before any booking: one PageView, pixel ID only | PASS |
+| 78 | founders page, override | `calendly.event_scheduled` from another origin sends nothing, to GA4 or to Meta | PASS |
+| 79 | founders page, override | the message from calendly.com, posted twice: `booking_completed` exactly once, `cta_location` only | PASS |
+| 80 | founders page, override | the same booking: Meta `Schedule` exactly once, pixel ID only, no parameters | PASS |
+| 81 | founders page, override | a second embed reporting a booking in the same page load adds nothing | PASS |
+| 82 | founders page, override | nothing from the message payload (name, email, price, Calendly URIs) is in any GA4 or Meta request | PASS |
+| 83 | founders page, override | `booking_time_selected` is unchanged by the booking messages | PASS |
+| 84 | founders page, override | the `_headers` policy stopped nothing on the landing page | PASS |
+| 88 | founders page, localhost, no flag (390px) | completed booking: one `[omnifit-track] booking_completed` console line, no request to GA4 or Meta, `window.fbq` undefined | PASS |
+
+## Checks
+
+| Check | Result |
+|---|---|
+| `python3 build.py --strict` | RESULT: PASSED (50 pages; `3596878003826620` once on each; csp and tracking fixtures OK) |
+| `python3 build.py --check` | RESULT: PASSED |
+| `python3 tools/certify.py` | RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0); the five invariant hashes unchanged (ff5360d2b6b5029b, 22744ada78eb0707, b4727824cfc0312e, 6b1b0f4efbd4a72c, 5a629cf689301f84) |
+| `python3 tools/mkheaders.py --check` | PASSED (9 headers reproduce byte-for-byte) |
+| `python3 tools/ownership.py` | PASSED |
+| `node --test tests/assistant.test.mjs` | 53 of 53 pass |
+| `node tools/tracktest.js` | RESULT: PASSED (89 assertions); it was 59 of 62 before this run, with the three Fit Check sections failing |
+| `node tools/widgettest.js` | RESULT: PASSED (4 hand-offs) |
+| `node tools/choosertest.js` | RESULT: PASSED (30 checks, 16 combinations) |
+| `node tools/mobileaudit.js` | RESULT: PASSED |

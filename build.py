@@ -10,15 +10,17 @@ KEYWORD OWNERSHIP table in CANON.md): no owned phrase in the title, H1, H2s
 or meta description of a page other than its owner. Its pass/fail fixtures
 run first, so a broken check cannot report green. They also include the
 measurement rule (CANON MEASUREMENT): no retired tracking ID or dataLayer
-push anywhere in public/, and the GA4 / Clarity IDs at most once per page;
-its fixtures run first too.
+push anywhere in public/, the GA4 / Clarity / Meta Pixel IDs at most once per
+page, no Meta noscript image, no user data on the pixel's init, and a
+Content-Security-Policy in _headers that lets the pixel through; its fixtures
+run first too.
 
 Sources
   pages/<slug>.html                 page body (one Squarespace Code Block each)
   pages/headers/<slug>-header.html  per-page header injection (JSON-LD, etc.)
-  pages/headers/site-header.html    site-wide header injection (GA4 + Clarity,
-                                    production only; HubSpot deferral; geo
-                                    meta; entity graph)
+  pages/headers/site-header.html    site-wide header injection (GA4 + Clarity
+                                    + Meta Pixel, production only; HubSpot
+                                    deferral; geo meta; entity graph)
   pages/footer.html                 site-wide footer (style + markup + script)
   pages/home-1..6.html              homepage sections, concatenated in HOME_ORDER
   site/layout.html, site/nav.html, site/site.css, site/site.js
@@ -402,8 +404,10 @@ NOT_FOUND_HTML = f"""<!DOCTYPE html>
 # deliberately narrow: it stops other sites framing the pages (clickjacking),
 # plugins, and <base> hijacking, and upgrades any stray http:// asset. It does
 # NOT allowlist scripts: every page runs inline scripts (and GA4, Clarity,
-# HubSpot, Calendly), so a script-src policy would need 'unsafe-inline' and
-# buy little for the breakage risk. Permissions-Policy leaves payment alone
+# the Meta Pixel, HubSpot, Calendly), so a script-src policy would need
+# 'unsafe-inline' and buy little for the breakage risk. check_csp_pixel()
+# fails the build check if a fetch directive is ever added here without the
+# Meta Pixel's two hosts. Permissions-Policy leaves payment alone
 # (Calendly takes the consultation deposit).
 # Browser caching (Oct 25 2026): fonts never change (a year, immutable); images
 # keep their file names when replaced, so they get 30 days rather than a year.
@@ -927,24 +931,108 @@ def redirect_selftest(rules, built, known):
 # site-wide header is their single source, so a second occurrence means a page
 # or header grew its own copy.
 TRACKING_BANNED = ("GTM-5P4CKPT2", "ulpgsrkd98", "AW-16616873404", "G-QTG1ZLR0NQ", "dataLayer.push")
-TRACKING_ONCE = ("G-0K6VLEC2VJ", "yzawpvwvdf")
+META_PIXEL = "3596878003826620"
+TRACKING_ONCE = ("G-0K6VLEC2VJ", "yzawpvwvdf", META_PIXEL)
+# Meta Pixel (owner, Nov 25 2026). Two shapes that must never ship:
+#   noscript  - Meta's <noscript> image beacon. Its URL is the pixel's hit
+#               endpoint, which the script builds for itself, so the literal
+#               has no reason to appear in any file under public/.
+#   userdata  - a third argument on fbq('init', ...): that argument is
+#               advanced matching (email, phone, name). The site sends none.
+META_NOSCRIPT_RE = re.compile(r"facebook\.com/tr\b")
+META_INIT_USERDATA_RE = re.compile(r"""fbq\(\s*['"]init['"]\s*,[^,()]*,""")
 
 
 def check_tracking(files):
     """files: {relative path: text} for everything under public/.
-    Problems: 'banned: <needle> in <file>' and 'repeated: <id> x<n> in <page>'."""
+    Problems: 'banned: <needle> in <file>', 'repeated: <id> x<n> in <page>',
+    'noscript: ...' and 'userdata: ...' (the two Meta Pixel shapes above)."""
     problems = []
     for rel in sorted(files):
         text = files[rel]
         for needle in TRACKING_BANNED:
             if needle in text:
                 problems.append(f"banned: {needle} in {rel}")
+        if META_NOSCRIPT_RE.search(text):
+            problems.append(f"noscript: Meta Pixel image beacon (facebook.com/tr) in {rel}")
+        if META_INIT_USERDATA_RE.search(text):
+            problems.append(f"userdata: fbq('init') carries a third argument (advanced matching) in {rel}")
         if rel.endswith(".html"):
             for ident in TRACKING_ONCE:
                 n = text.count(ident)
                 if n > 1:
                     problems.append(f"repeated: {ident} x{n} in {rel}")
     return problems
+
+
+# The fetch directives that govern the Meta Pixel: its script comes from
+# connect.facebook.net, and its hits go to www.facebook.com as an image
+# request or a beacon. A directive that is absent falls back to default-src;
+# with no default-src either, the browser allows the request.
+CSP_PIXEL_NEEDS = (("script-src-elem", "script-src", "https://connect.facebook.net"),
+                   ("img-src", None, "https://www.facebook.com"),
+                   ("connect-src", None, "https://www.facebook.com"))
+
+
+def csp_of(headers_txt):
+    """The Content-Security-Policy value of the catch-all /* block of a
+    _headers file, or None."""
+    block = None
+    for line in headers_txt.splitlines():
+        if line and not line[0].isspace():
+            block = line.strip()
+        elif block == "/*" and line.strip().lower().startswith("content-security-policy:"):
+            return line.split(":", 1)[1].strip()
+    return None
+
+
+def check_csp_pixel(csp):
+    """Problems if the policy would stop the Meta Pixel's script or its hits.
+    A source list passes when it names the host (or its scheme, or *)."""
+    if csp is None:
+        return []
+    directives = {}
+    for part in csp.split(";"):
+        words = part.split()
+        if words:
+            directives.setdefault(words[0].lower(), [w.lower() for w in words[1:]])
+    problems = []
+    for name, fallback, host in CSP_PIXEL_NEEDS:
+        chain = [d for d in (name, fallback, "default-src") if d]
+        governing = next((d for d in chain if d in directives), None)
+        if governing is None:
+            continue
+        sources = directives[governing]
+        bare = host.split("//", 1)[1]
+        wildcard = "*." + bare.split(".", 1)[1]
+        if not ({host, bare, "https:", "*", "https://" + wildcard, wildcard} & set(sources)):
+            problems.append(f"csp: {governing} does not allow {host} (the Meta Pixel's {name} request)")
+    return problems
+
+
+def csp_selftest():
+    """Policies that must pass and must fail, so a green CSP result comes
+    from a check seen failing. Returns the fixtures that misbehaved."""
+    ok = ("frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests",
+          "script-src 'self' 'unsafe-inline' https://connect.facebook.net; img-src 'self' https://www.facebook.com; connect-src 'self' https://www.facebook.com",
+          "default-src https: 'unsafe-inline'")
+    fail = (("script-src 'self' 'unsafe-inline'", 1),
+            ("img-src 'self' data:", 1),
+            ("connect-src 'self'", 1),
+            ("default-src 'self'", 3),
+            ("script-src 'self' https://connect.facebook.net; default-src 'self'", 2))
+    bad = []
+    for csp in ok:
+        if check_csp_pixel(csp):
+            bad.append(f"flagged a policy that lets the pixel through: {csp}")
+    for csp, n in fail:
+        if len(check_csp_pixel(csp)) != n:
+            bad.append(f"expected {n} csp problem(s) for: {csp}")
+    if csp_of("/*\n  X-Frame-Options: SAMEORIGIN\n  Content-Security-Policy: default-src 'self'\n\n/assets/*\n  Cache-Control: x\n") != "default-src 'self'":
+        bad.append("csp_of did not read the /* block")
+    if csp_of("https://:project.pages.dev/*\n  Content-Security-Policy: default-src 'self'\n") is not None:
+        bad.append("csp_of read a block other than /*")
+    return bad
 
 
 def tracking_selftest(files):
@@ -977,6 +1065,22 @@ def tracking_selftest(files):
         got = kinds(check_tracking(mutated))
         if got != ["repeated"]:
             bad.append(f"second {ident} in {page}: expected [repeated], got {got}")
+    # Meta Pixel shapes. The noscript fixture is Meta's own tag with a
+    # placeholder ID, so it raises 'noscript' alone and not 'repeated'.
+    for want, extra in (("noscript", '<noscript><img height="1" width="1" style="display:none" '
+                                     'src="https://www.facebook.com/tr?id=0&ev=PageView&noscript=1"/></noscript>'),
+                        ("userdata", "<script>fbq('init', X, {em: 'a@b.c'});</script>"),
+                        ("userdata", '<script>window.fbq("init",X,{ph:"1"})</script>')):
+        for where in (page, "assets/site.js"):
+            if where not in files:
+                continue
+            mutated = dict(files)
+            mutated[where] = files[where] + "\n" + extra + "\n"
+            got = kinds(check_tracking(mutated))
+            if got != [want]:
+                bad.append(f"{want} fixture in {where}: expected [{want}], got {got}")
+    if not re.search(r"""fbq\(\s*['"]init['"]\s*,\s*META\s*\)""", files[page]):
+        bad.append(f"{page} should carry the pixel's two-argument init, fbq('init', META)")
     return bad
 
 
@@ -1086,6 +1190,16 @@ def check():
         problems.append("_headers: preview-hostname noindex rule or security headers missing or altered")
     elif "omnifittraining.com" in HEADERS_TXT:
         problems.append("_headers: production domain must not carry X-Robots-Tag")
+    # The Content-Security-Policy must let the Meta Pixel through (fixtures
+    # first). Read from the file on disk, which is what Cloudflare serves.
+    problems += [f"csp check fixture misbehaved: {b}" for b in csp_selftest()]
+    served_csp = csp_of(hd.read_text(encoding="utf-8")) if hd.exists() else None
+    problems += [f"_headers: {p}" for p in check_csp_pixel(served_csp)]
+    notes.append("csp: " + ("no Content-Security-Policy in _headers" if served_csp is None else
+                 "the _headers policy carries no script-src, img-src, connect-src or default-src that "
+                 "stops the Meta Pixel (connect.facebook.net script, www.facebook.com hit)"
+                 if not check_csp_pixel(served_csp) else "the _headers policy blocks the Meta Pixel")
+                 + "; fixtures OK")
     # Ask OmniFit: knowledge.js in step with knowledge.md, widget assets built
     # from site/, the loader on every page, robots.txt as written above.
     if not KNOWLEDGE_JS.exists() or KNOWLEDGE_JS.read_text(encoding="utf-8") != knowledge_js(read(KNOWLEDGE_MD)):
@@ -1167,7 +1281,8 @@ def check():
     problems += [f"trailing slash: {p}" for p in flat]
     notes.append(f"trailing slash: {n_pages} pages are public/index.html or public/<slug>.html, "
                  f"no nested index.html; fixtures OK")
-    notes.append(f"tracking: {len(tracked)} files scanned for {len(TRACKING_BANNED)} retired strings; "
+    notes.append(f"tracking: {len(tracked)} files scanned for {len(TRACKING_BANNED)} retired strings, "
+                 f"the Meta noscript image and user data on fbq('init'); "
                  f"{', '.join(TRACKING_ONCE)} once on each of {n_pages} pages; fixtures OK")
     # Keyword ownership (CANON KEYWORD OWNERSHIP). Fixtures first: if a fixture
     # that must fail passes, the site result below means nothing.

@@ -133,12 +133,13 @@ rule; this is the operating note.
 |---|---|
 | Google Analytics 4 | Measurement ID `G-0K6VLEC2VJ`, loaded as gtag.js |
 | Microsoft Clarity | project `yzawpvwvdf` |
-| Single source | `pages/headers/site-header.html` loads both; `site/site.js` sends every event |
+| Meta Pixel | pixel `3596878003826620`, Meta's standard base code (`fbevents.js`), added Nov 25, 2026. No noscript image, no advanced matching, autoConfig off |
+| Single source | `pages/headers/site-header.html` loads all three; `site/site.js` sends every event |
 | Loads on | `www.omnifittraining.com` and `omnifittraining.com` only (`location.hostname`) |
-| Anywhere else | `*.pages.dev` previews, localhost: nothing loads, `window.gtag` is undefined, and each event is one console line `[omnifit-track] <event> <json params>` |
-| Clarity exclusion | never loads on `/fit-check` (GA4 still does) |
+| Anywhere else | `*.pages.dev` previews, localhost: nothing loads, `window.gtag` and `window.fbq` are undefined, and each event is one console line `[omnifit-track] <event> <json params>` |
+| Clarity and Meta Pixel exclusion | neither loads on `/fit-check` (GA4 still does) |
 | HubSpot | untouched: the deferred tracking loader (portal 244441037) on every page, the form embed on `/contactform` and `/personal-trainer-4s-ranch` |
-| Retired | GTM `GTM-5P4CKPT2` and its noscript iframe, Clarity `ulpgsrkd98`, the page-level `cta_click` / `lead_form_submit` scripts on `/personal-trainer-4s-ranch`. `build.py --check` fails if any of `GTM-5P4CKPT2`, `ulpgsrkd98`, `AW-16616873404`, `G-QTG1ZLR0NQ` or `dataLayer.push` appears anywhere in `public/`, or if either live ID appears more than once on a page |
+| Retired | GTM `GTM-5P4CKPT2` and its noscript iframe, Clarity `ulpgsrkd98`, the page-level `cta_click` / `lead_form_submit` scripts on `/personal-trainer-4s-ranch`. `build.py --check` fails if any of `GTM-5P4CKPT2`, `ulpgsrkd98`, `AW-16616873404`, `G-QTG1ZLR0NQ` or `dataLayer.push` appears anywhere in `public/`, or if any of the three live IDs appears more than once on a page |
 
 Events (`gtag('event', name, params)` when gtag exists, else the console line;
 all sent from `site/site.js` by delegated listeners, no page carries a
@@ -155,22 +156,49 @@ tracking script):
 | `booking_cta_click` | a click on an in-page link (`href="#id"`) whose target section holds a `.calendly-inline-widget`: the "Book Your First Visit" buttons on `/in-home-stretching-founders`, which scroll to the inline embed instead of linking to calendly.com | `cta_location`, `cta_label`, `cta_position` (as for `book_consultation_click`) |
 | `booking_section_view` | the inline Calendly embed scrolls into view (IntersectionObserver), once per page load | `cta_location` |
 | `booking_time_selected` | Calendly's `calendly.date_and_time_selected` message from the embed, accepted only from a calendly.com origin | `cta_location` |
+| `booking_completed` | Calendly's `calendly.event_scheduled` message from the embed (the booking is confirmed), accepted only from a calendly.com origin, once per page load. Nothing in the message's payload is read or sent | `cta_location` |
 
-Completed bookings are not a site event. Calendly's own Google Analytics
-integration (Calendly > Integrations > Google Analytics, the Measurement ID
-above) reports Calendly's booking events to the same property, and
-cross-domain measurement is configured in GA4 for `calendly.com` (Admin >
-Data streams > the web stream > Configure tag settings > Configure your
-domains) so a visitor who clicks through and books stays one session. Both
-are GA4 / Calendly settings, not repo code; see the manual steps.
+**Meta Pixel (Nov 25, 2026).** Two things reach Meta and nothing else, both
+without parameters:
+
+| Meta event | When | Sent by |
+|---|---|---|
+| `PageView` | every page load on the production hostnames, except `/fit-check` | the loader in `pages/headers/site-header.html` |
+| `Schedule` | a booking is completed in an inline Calendly embed (the same moment as `booking_completed`), once per page load | `site/site.js`, only when `window.fbq` exists |
+
+No click, phone, email, Fit Check, rates or assistant event is sent to Meta.
+`fbq('init')` carries the pixel ID only (no advanced matching), autoConfig
+is off so Meta's script sends no button text, form details or page metadata
+of its own, and there is no noscript image. Meta's script downloads after
+the page's load event, like gtag.js, so it does not slow the first draw; a
+visitor who leaves before the page has finished loading sends no PageView.
+
+**Completed bookings: two cases.**
+
+1. *Inline embed* (today `/in-home-stretching-founders` only). The site
+   sends `booking_completed` to GA4 and `Schedule` to Meta. This is the
+   completed booking the Meta ad test reads: in Ads Manager, the campaign's
+   conversion event is **Schedule** on pixel `3596878003826620`.
+2. *Click-through* (every link to calendly.com: the consultation, the FST
+   First Visit, the founders embed's fallback link). The visitor books on
+   calendly.com, the site receives nothing, and neither event is sent.
+   Those bookings are reported by Calendly's own Google Analytics
+   integration (Calendly > Integrations > Google Analytics, the Measurement
+   ID above) to the same property, and cross-domain measurement is
+   configured in GA4 for `calendly.com` (Admin > Data streams > the web
+   stream > Configure tag settings > Configure your domains) so a visitor
+   who clicks through and books stays one session. Both are GA4 / Calendly
+   settings, not repo code; see the manual steps. Meta sees none of them.
 
 The founders landing page (`/in-home-stretching-founders`) embeds Calendly
 inline, so its buttons never link to calendly.com and send
-`booking_cta_click`, not `book_consultation_click`. Read the three
+`booking_cta_click`, not `book_consultation_click`. Read the four
 `booking_*` events as a funnel: button pressed, calendar reached, day and
-time picked. The booking itself is still Calendly's event. To count the
-landing page's interest in GA4, mark `booking_time_selected` (or
-`booking_cta_click`) as a key event; that is a GA4 setting, not repo code.
+time picked, booking completed. Calendly's Google Analytics integration
+also reports from inside the embed under its own event name, so an embedded
+booking can appear in GA4 under both names: mark `booking_completed` as the
+key event for the landing page and do not add Calendly's event on top for
+the same page. Key events are a GA4 setting, not repo code.
 
 **Test-only override.** `?omnifit-track=prod` forces the production branch,
 and is honoured only when `location.hostname` is `localhost` or `127.0.0.1`.
@@ -183,10 +211,14 @@ NODE_PATH="$(npm root -g)" node tools/tracktest.js
 ```
 
 The test serves `public/` locally, maps `www.omnifittraining.com` to the local
-server inside Chromium to prove the real production condition, stubs gtag.js so
-no hit reaches Google, intercepts google-analytics.com and clarity.ms, and
-asserts every event above with its params, Clarity absent on `/fit-check`, and
-no request to either service on a non-production host. Details in
+server inside Chromium to prove the real production condition, stubs gtag.js
+and Meta's fbevents.js so no hit reaches Google or Meta, intercepts
+google-analytics.com, clarity.ms and facebook.com, and asserts every event
+above with its params, Clarity and the Meta Pixel absent on `/fit-check`, no
+request to any of the three services on a non-production host, and a
+simulated completed booking sending `booking_completed` and `Schedule` exactly
+once. The local server sends the Content-Security-Policy from `public/_headers`,
+so a request the policy blocked would fail the run. Details in
 `tools/README.md`; the results table is in `REPORT.md`.
 
 ## Cloudflare Pages settings
@@ -226,7 +258,10 @@ Oct 20 2026): `X-Content-Type-Options: nosniff`, `Referrer-Policy:
 strict-origin-when-cross-origin`, `X-Frame-Options: SAMEORIGIN`, a narrow
 `Content-Security-Policy` (`frame-ancestors 'self'; base-uri 'self';
 object-src 'none'; upgrade-insecure-requests`, no script allowlist, so GA4,
-Clarity, HubSpot, Calendly and the inline page scripts are unaffected) and
+Clarity, the Meta Pixel, HubSpot, Calendly and the inline page scripts are
+unaffected; `build.py --check` fails if a `script-src`, `img-src`,
+`connect-src` or `default-src` is ever added without the pixel's two hosts,
+`connect.facebook.net` and `www.facebook.com`) and
 `Permissions-Policy: camera=(), microphone=(), geolocation=()`. After a
 deploy, check them with `curl -sI https://www.omnifittraining.com/ | grep -i
 -e content-security -e x-frame -e nosniff`. `build.py --check` verifies all of it.
@@ -388,20 +423,39 @@ The old `?key=` address no longer works: it shows the form instead.
    The seven client transformation photos were already moved: re-branded
    (old knot logo removed, header logo added; clients untouched) and served
    from `/assets/img/`.
-6. **Analytics (GA4 / Clarity, human-side settings).** The tags themselves
+6. **Analytics (GA4 / Clarity / Meta Pixel, human-side settings).** The tags themselves
    are in the repo (see "Measurement"); these are the settings around them:
    (a) GA4 cross-domain: Admin > Data streams > the web stream > Configure
    tag settings > Configure your domains > add `calendly.com`. (b) Calendly >
    Integrations > Google Analytics: enter `G-0K6VLEC2VJ`, so completed
-   bookings reach the property from Calendly's side; the site sends only the
-   click. (c) In GA4, mark `book_consultation_click`, `generate_lead`,
-   `fit_check_complete` and Calendly's scheduled event as key events.
+   bookings reach the property from Calendly's side; for a click-through
+   booking the site sends only the click (a booking in the founders page's
+   inline embed is also a site event, `booking_completed`, since Nov 25,
+   2026). (c) In GA4, mark `book_consultation_click`, `generate_lead`,
+   `fit_check_complete`, `booking_completed` and Calendly's scheduled event
+   as key events.
    (d) Clarity project `yzawpvwvdf`: keep masking at Balanced or Strict so
    form fields are masked, as the privacy policy states; the project is
    never loaded on `/fit-check`. (e) Retire the old stack: unpublish or
    pause GTM container `GTM-5P4CKPT2` and stop expecting data in Clarity
    project `ulpgsrkd98`; whatever `G-QTG1ZLR0NQ` and `AW-16616873404` fired
-   from inside the container stops with it. **Still not in the repo:** any
+   from inside the container stops with it. (f) Meta Pixel `3596878003826620` (added
+   Nov 25, 2026), in Meta Events Manager > Data sources > the pixel >
+   Settings: keep **Automatic Advanced Matching OFF**. That switch lives in
+   Meta, not in the repo, and when it is on Meta's script reads form fields
+   (email, phone, name) and sends them hashed; the site's code sends no
+   personal data only while it stays off. Do not enter this pixel ID in
+   Calendly > Integrations > Meta Pixel while the site sends `Schedule`:
+   Calendly would send its own events to the same pixel from inside the
+   embed and a booking could be counted twice. Keep the founders Calendly
+   event's confirmation set to Calendly's own confirmation page, not a
+   redirect to another site, so the embed can report the booking. After
+   deploy, confirm in Events Manager > Test events (or the Meta Pixel Helper
+   extension) that `PageView` arrives from
+   `https://www.omnifittraining.com/in-home-stretching-founders`, and after
+   the first real booking that `Schedule` arrives once; then choose
+   `Schedule` as the ad set's conversion event.
+   **Still not in the repo:** any
    Jotform or Trainerize embed (no iframe or script for either exists in any
    page; Trainerize appears only as text). HubSpot is preserved exactly:
    the deferred loader (portal 244441037) on every page and the form (form

@@ -282,9 +282,13 @@ otherwise, this block wins and the older line is kept only as history.
       ALT TEXT: "Assisted stretching on a portable table in a living room".
       THE IMAGE IS AI-GENERATED: it is never described, in alt text, a
       caption or copy, as Nemezio, as a client, or as a real visit.
-      NO Meta tracking code yet (an open item with the owner). Booking
-      interest on this page is measured by site.js (MEASUREMENT > EVENTS,
-      the three booking_* events).
+      META TRACKING (owner brief, Nov 25 2026; closes the open item this
+      line carried until then): the Meta Pixel loads on this page as on
+      every other (MEASUREMENT > META PIXEL), so Meta sees the ad visitor's
+      PageView, and a completed booking in the inline embed is reported to
+      Meta as Schedule and to GA4 as booking_completed. Booking interest
+      before that is measured by site.js (MEASUREMENT > EVENTS, the
+      booking_* events). The page itself carries no tracking code.
       PHONE LAYOUT, 768px AND UNDER (owner brief, Nov 24 2026). CSS only,
       one @media (max-width: 768px) block; 769px and up is as it was.
       PHOTO: a 15:11 strip (object-fit: cover; object-position: 50% 11%).
@@ -539,7 +543,8 @@ REPO STATE (reconciled with disk, Sept 2026)
     · site-header.html - NEW Sept 20, 2026. The SITE-WIDE header injection
       (Squarespace Settings → Advanced → Code Injection → Header): GA4 +
       Clarity loaders (production hostnames only; see MEASUREMENT, Oct 17
-      2026; GTM and the old Clarity project are gone), HubSpot deferral, geo
+      2026; GTM and the old Clarity project are gone) and, since Nov 25
+      2026, the Meta Pixel loader under the same rule, HubSpot deferral, geo
       meta, and the site's ENTITY GRAPH —
       Organization #organization · Person #founder · LocalBusiness
       #localbusiness-of · WebSite #website. This is now the ONE place the
@@ -734,19 +739,53 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
   carries data-fit-result and, on a pass, data-fit-setting). DEPLOY.md
   "Measurement" is the operating note; tools/README.md documents the checks.
 - IDs: Google Analytics 4 G-0K6VLEC2VJ (gtag.js) · Microsoft Clarity
-  yzawpvwvdf. RETIRED, and banned from public/ by build.py --check:
+  yzawpvwvdf · Meta Pixel 3596878003826620 (fbevents.js; owner, Nov 25
+  2026). RETIRED, and banned from public/ by build.py --check:
   GTM-5P4CKPT2 (script and noscript iframe), Clarity ulpgsrkd98,
   AW-16616873404, G-QTG1ZLR0NQ, and any "dataLayer.push" (the GA4 shim holds
   the data layer in a local for that reason; it is Google's snippet
   otherwise). Each live ID appears at most once per built page: the header
   is the single source, a second copy is a defect.
-- PRODUCTION-ONLY RULE: both load only when location.hostname is
+- PRODUCTION-ONLY RULE: all three load only when location.hostname is
   www.omnifittraining.com or omnifittraining.com. On any other host
-  (*.pages.dev previews, localhost) nothing loads, window.gtag is undefined,
-  and site.js logs each event to the console as
-  "[omnifit-track] <event> <params>". Clarity NEVER loads on /fit-check
-  (GA4 does). Test-only override: ?omnifit-track=prod forces the production
-  branch, honoured on localhost / 127.0.0.1 only; any other host ignores it.
+  (*.pages.dev previews, localhost) nothing loads, window.gtag and
+  window.fbq are undefined, and site.js logs each event to the console as
+  "[omnifit-track] <event> <params>". Clarity and the Meta Pixel NEVER load
+  on /fit-check (GA4 does). Test-only override: ?omnifit-track=prod forces
+  the production branch, honoured on localhost / 127.0.0.1 only; any other
+  host ignores it.
+- META PIXEL (owner brief, Nov 25 2026; WHY: the Meta ad test sends traffic
+  to /in-home-stretching-founders and Meta could not see a completed
+  booking). Meta's standard base code in pages/headers/site-header.html,
+  beside the GA4 and Clarity loaders and under the PRODUCTION-ONLY RULE.
+  WHAT REACHES META, AND NOTHING ELSE: PageView, once, on every page load
+  (the loader), and Schedule, once per page load, when a booking completes
+  in an inline Calendly embed (site.js; INLINE CALENDLY BOOKING below).
+  Neither carries a parameter. No other site event is sent to Meta: clicks,
+  phone, email, the Fit Check, the rates events and the assistant events
+  stay GA4's alone.
+  NO PERSONAL DATA: fbq('init') carries the pixel ID and nothing else (a
+  third argument there is advanced matching: email, phone, name; build.py
+  --check fails on one). autoConfig is switched off before init, so Meta's
+  script sends no button text, form details or page metadata of its own.
+  AUTOMATIC ADVANCED MATCHING is a switch in Meta Events Manager (the
+  pixel > Settings), not code: it must stay OFF there, and the repo cannot
+  see or set it (DEPLOY.md manual step 6).
+  NO NOSCRIPT IMAGE (build.py --check fails on one anywhere in public/).
+  NOT ON /fit-check: the loader does not run there, so window.fbq is
+  undefined and no request goes to Meta. The ID string is still in that
+  page's source, because the site-wide header is one file on every page;
+  the same is true of Clarity's.
+  LOAD TIMING: as GA4. fbq() and the PageView are queued at once and
+  Meta's script downloads after the page's load event, so it never
+  competes with the hero photo on a phone (the Oct 25 2026 speed rule). A
+  visitor who leaves before the page finishes loading sends Meta no
+  PageView.
+  CONTENT-SECURITY-POLICY: the policy in public/_headers carries no
+  script-src, img-src, connect-src or default-src, so it does not stop the
+  pixel's script (connect.facebook.net) or its hits (www.facebook.com).
+  build.py --check fails if such a directive is ever added without those
+  two hosts.
 - HubSpot is untouched: the deferred tracking loader (portal 244441037) on
   every page, the form embeds on /contactform and /personal-trainer-4s-ranch.
 - EVENTS (gtag('event', ...) when gtag exists, else the console line):
@@ -779,7 +818,8 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
       virtual) · offer (foundation | program | reset). The page writes these
       as data attributes on #rt-ch-result and then a new data-ch-key; site.js
       sends the event when data-ch-key changes. No price is sent.
-    INLINE CALENDLY BOOKING (owner brief, Nov 23 2026). Three events for a
+    INLINE CALENDLY BOOKING (owner brief, Nov 23 2026; booking_completed
+    added Nov 25 2026). Four events for a
     page whose buttons scroll to an embedded Calendly calendar instead of
     linking to calendly.com; today that is the founders landing page only
     (cta_location "in-home-stretching-founders"). site.js keys them on the
@@ -793,6 +833,15 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
     booking_time_selected  Calendly's "calendly.date_and_time_selected"
       message from the embed, accepted only from a calendly.com origin ·
       cta_location. A visitor who picks a second time sends it again.
+    booking_completed  (owner brief, Nov 25 2026) Calendly's
+      "calendly.event_scheduled" message from the embed, accepted only from
+      a calendly.com origin, ONCE PER PAGE LOAD · cta_location. At the same
+      moment, when window.fbq exists, fbq('track', 'Schedule') with no
+      parameters (META PIXEL above). Only the message's event name is read:
+      its payload (Calendly's event and invitee URIs) is never read or
+      sent, and no name, email or price is. On a non-production host it is
+      one "[omnifit-track] booking_completed" console line and nothing is
+      requested from Google or Meta.
     The embed's plain-text fallback link is a link to calendly.com, so it
     still sends book_consultation_click.
 - FST BOOKING CLICKS (FST Launch run, Nov 2026): "Book Your First Visit"
@@ -804,10 +853,11 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
 - FOUNDERS PAGE BOOKING INTEREST (owner brief, Nov 23 2026): every "Book
   Your First Visit" button on /in-home-stretching-founders scrolls to the
   inline embed (#fh-book), so no link to calendly.com is clicked and
-  book_consultation_click never fired there. The three booking_* events
+  book_consultation_click never fired there. The booking_* events
   above are the measure: how many visitors pressed the button, how many
-  reached the calendar, how many picked a day and time. The completed
-  booking is still Calendly's report (next bullet but one), not a site event.
+  reached the calendar, how many picked a day and time and, since Nov 25
+  2026, how many completed the booking (booking_completed; next bullet but
+  one).
 - THE HOMEPAGE FST LINK SENDS NO EVENT (FST Reach run, Nov 21 2026). The
   owner's brief asks that its clicks "follow the existing pattern with
   cta_location home, no new event". The existing pattern tracks links to
@@ -817,11 +867,27 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
   is still reported on the FST page (cta_location
   "fascia-stretch-therapy-san-diego"). OPEN, owner: an internal-link event
   would be a new event.
-- COMPLETED BOOKINGS ARE NOT A SITE EVENT. Calendly's own GA4 integration
-  (the Measurement ID entered in Calendly) reports them to the same
-  property, and cross-domain measurement is configured in GA4 for
-  calendly.com so a visitor who clicks through and books stays one session.
-  Both are GA4 / Calendly settings, not repo code (DEPLOY.md manual step 6).
+- COMPLETED BOOKINGS (owner brief, Nov 25 2026; REPLACES "completed
+  bookings are not a site event", Oct 17 2026). TWO CASES.
+  INLINE EMBED (today the founders landing page only): a site event. When
+  the embed confirms the booking, site.js sends booking_completed to GA4
+  and Schedule to Meta, once per page load (EVENTS > INLINE CALENDLY
+  BOOKING). This is the completed booking Meta Ads sees.
+  CLICK-THROUGH (every link to calendly.com: the consultation, the FST
+  First Visit, the founders embed's fallback link): the visitor books on
+  calendly.com, the site receives no message, and NEITHER booking_completed
+  NOR Schedule is sent. Those bookings stay Calendly's report: Calendly's
+  own GA4 integration (the Measurement ID entered in Calendly) reports
+  them to the same property, and cross-domain measurement is configured in
+  GA4 for calendly.com so a visitor who clicks through and books stays one
+  session. Both are GA4 / Calendly settings, not repo code (DEPLOY.md
+  manual step 6). Meta sees none of them.
+  TWO NAMES IN GA4: Calendly's integration reports from inside the embed
+  too, under Calendly's own event name, so an embedded booking can appear
+  in GA4 both as booking_completed and as Calendly's event. Count ONE of
+  them as the key event (DEPLOY.md). The same care applies to Meta: this
+  pixel ID is not entered in Calendly's own Meta Pixel integration while
+  the site sends Schedule (DEPLOY.md manual step 6).
 - FIT CHECK CLAIM: the header WebPage description reads "Instant result; no
   answers are saved or sent; only an anonymous count of completed checks
   and their result is recorded." The lede made the same absolute claim
@@ -829,11 +895,17 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
   meta description no longer makes the claim at all: "Instant result,
   nothing saved." was dropped in the site-audit run (Oct 20 2026) when the
   description was cut to 160 characters, which also removes the overclaim.
-- PRIVACY POLICY tools (Oct 17 2026): Google Analytics 4 · Microsoft
+- PRIVACY POLICY tools (Oct 17 2026; Meta Pixel added Nov 25 2026, owner):
+  Google Analytics 4 · Microsoft
   Clarity (session analytics with form fields masked; not used on the Fit
-  Check) · HubSpot (forms and email) · Calendly (booking) · Cloudflare
+  Check) · Meta Pixel (advertising measurement) · HubSpot (forms and
+  email) · Calendly (booking) · Cloudflare
   (hosting). No mention of Google Tag Manager or Google Ads anywhere in
   the policy. Nothing else in the policy changed.
+  ON THE PAGE (Nov 25 2026): one new item, "Advertising measurement (Meta
+  Pixel)", in the Sharing Information list (section 07), in that list's
+  own "purpose (tool)" form. By the owner's brief nothing else in the
+  policy changed.
 - CHECKS: build.py --check (check_tracking + tracking_selftest, fixtures
   first, negative-tested on the real output) and tools/tracktest.js
   (Playwright on the built site served locally: the production hostname
@@ -843,6 +915,19 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
   rates restructure run also rates_chooser_result and the rates page's
   closed sections opening from an anchor or a URL hash). Results in
   REPORT.md (Measurement run; rates restructure run).
+  META PIXEL CHECKS (Nov 25 2026; REPORT.md, Meta Pixel run). build.py
+  --check: the pixel ID at most once per built page (and exactly once on
+  the fixture page); no Meta noscript image and no third argument on
+  fbq('init') anywhere in public/; the _headers Content-Security-Policy
+  lets the pixel through (check_csp_pixel, csp_selftest). tracktest.js:
+  Meta's script requested once and one PageView carrying the pixel ID and
+  nothing else in production mode; the pixel absent on /fit-check; no
+  request to connect.facebook.net or facebook.com on a non-production
+  host, with or without events; a simulated calendly.event_scheduled
+  message sends booking_completed and Schedule exactly once, from a
+  calendly.com origin only, with nothing from its payload; and the test
+  server sends the _headers policy, so a blocked request would be a
+  recorded violation.
 
 ASK OMNIFIT - ON-SITE AI ASSISTANT (owner brief, Oct 19 2026)
 - What it is: a chat widget ("Ask OmniFit", navy pill bottom right, gold line
@@ -2925,3 +3010,11 @@ CHANGE LOG
   carries "Founders rate: $99" and the booking button. The page has its own 1200x630
   share image, a navy card (SHARE IMAGE; build.py PAGE_SOCIAL_IMAGE). No copy, price,
   date or booking link changed; 769px and up is unchanged.
+- Nov 26, 2026: Meta Pixel run (owner brief, Nov 25 2026). Meta Pixel 3596878003826620
+  in pages/headers/site-header.html under the PRODUCTION-ONLY RULE, not on /fit-check, no
+  noscript image, no advanced matching, autoConfig off (MEASUREMENT > META PIXEL). site.js:
+  booking_completed to GA4 and Schedule to Meta when a booking completes in the inline
+  Calendly embed, once per page load (INLINE CALENDLY BOOKING; COMPLETED BOOKINGS, which
+  REPLACES "completed bookings are not a site event"). Privacy policy: "Advertising
+  measurement (Meta Pixel)" in the Sharing Information list. build.py --check and
+  tools/tracktest.js extended. Closes the founders page's "NO Meta tracking code yet".

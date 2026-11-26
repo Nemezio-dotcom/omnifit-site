@@ -730,8 +730,12 @@ actually ships. CANON MEASUREMENT is the rule.
   `pages/headers/site-header.html` holds the data layer in a local
   (`dl.push(arguments)`): it is Google's snippet, spelled so the ban can be
   absolute.
-- **At most once per built page:** `G-0K6VLEC2VJ` and `yzawpvwvdf`. A second
+- **At most once per built page:** `G-0K6VLEC2VJ`, `yzawpvwvdf` and, since
+  Nov 25, 2026, the Meta Pixel ID `3596878003826620`. A second
   occurrence means a page or header grew its own copy of the loader.
+- **Meta Pixel shapes, banned anywhere in `public/`** (Nov 25, 2026; see
+  "Meta Pixel run" below): the noscript image beacon (`facebook.com/tr`) and
+  a third argument on `fbq('init', ...)` (advanced matching).
 - **Fixtures first**, on mutated copies of the real `public/` text: each banned
   string appended to a page and to `assets/site.js` must raise exactly
   `banned`; a second copy of each live ID appended to a page must raise exactly
@@ -755,7 +759,8 @@ playwright install chromium`), and is run after `python3 build.py`:
 NODE_PATH="$(npm root -g)" node tools/tracktest.js
 ```
 
-What it proves (46 assertions, the table is in REPORT.md):
+What it proves (46 assertions on Oct 17, 2026; 89 since the Meta Pixel run,
+Nov 26, 2026, all passing; the tables are in REPORT.md):
 
 - The production branch runs on the real hostname: Chromium is launched with
   `--host-resolver-rules` mapping `www.omnifittraining.com` to the local
@@ -1193,7 +1198,8 @@ MEASUREMENT > EVENTS (INLINE CALENDLY BOOKING).
   `section(title, fn)`: a section that throws is one FAIL row ("section ran
   to the end") and the rest still run, where before the whole run aborted
   with no table. `--only=10` (or `--only=3,10`) runs just those sections.
-- **KNOWN STALE, not fixed in this run: the Fit Check sections (4, 5 and the
+- **FIXED in the Meta Pixel run (Nov 26, 2026), see below. Was: KNOWN STALE,
+  not fixed in this run: the Fit Check sections (4, 5 and the
   last part of 8).** They have aborted since the Fit Check v3 change: the
   first question now has three options and the script clicks a fourth. On
   main before this run that abort ended the whole test with no output; it is
@@ -1203,3 +1209,85 @@ MEASUREMENT > EVENTS (INLINE CALENDLY BOOKING).
   Oct 17 2026.)
 - **The hero at 360x640** is measured by hand with Playwright, not by a
   committed tool: REPORT.md has the figures.
+
+
+## Meta Pixel run (Nov 26 2026)
+
+Owner brief, Nov 25 2026. CANON: MEASUREMENT > META PIXEL, EVENTS (INLINE
+CALENDLY BOOKING, `booking_completed`) and COMPLETED BOOKINGS.
+
+- **`build.py --check`, `check_tracking`.** `TRACKING_ONCE` gained the pixel
+  ID (`META_PIXEL`), so a second copy on a page is `repeated`, and the
+  fixture page must carry it exactly once. Two new problem kinds, read in
+  every text file under `public/`:
+  `noscript` (`META_NOSCRIPT_RE`, the literal `facebook.com/tr`: Meta's
+  script builds that URL for itself, so the only way it appears in a file is
+  the noscript image or a hand-made beacon) and `userdata`
+  (`META_INIT_USERDATA_RE`, a comma after the second argument of
+  `fbq('init', ...)`: the third argument is advanced matching). The
+  self-test appends Meta's own noscript tag (placeholder ID) and two
+  spellings of an init with user data to a page and to `assets/site.js`;
+  each must raise exactly its own kind, and the fixture page must carry the
+  two-argument `fbq('init', META)`.
+- **`build.py --check`, the Content-Security-Policy** (`csp_of`,
+  `check_csp_pixel`, `csp_selftest`). Reads the policy from the catch-all
+  `/*` block of `public/_headers` as written to disk and walks the three
+  fetch directives that govern the pixel, each with its fallback:
+  `script-src-elem` -> `script-src` -> `default-src` must allow
+  `https://connect.facebook.net`; `img-src` -> `default-src` and
+  `connect-src` -> `default-src` must allow `https://www.facebook.com`. A
+  directive that is absent, with no `default-src`, allows the request,
+  which is today's policy (`frame-ancestors`, `base-uri`, `object-src`,
+  `upgrade-insecure-requests` only). Fixtures: three policies that must pass
+  and five that must fail with an exact problem count. The report prints one
+  `csp:` note.
+- **`tracktest.js`.** The request for Meta's `fbevents.js` is answered with a
+  stub (`fbqStub`) that drains the queue the header built and forwards each
+  `fbq('track', ...)` to `www.facebook.com/tr` in the pixel's own shape
+  (`id`, `ev`, `cd[param]`, and `ud[field]` for anything given to `init`);
+  every request to a `facebook.net` or `facebook.com` host is recorded and
+  answered locally, so no hit reaches Meta. `t.meta()` returns each hit as
+  `{event, id, keys}`, where `keys` is every query parameter it carried:
+  `["id","ev"]` is the proof that nothing else was sent.
+  New assertions (19 for the pixel, the booking and the policy; the run is
+  89, all PASS):
+  section 1, production hostname: one script request to
+  `connect.facebook.net/en_US/fbevents.js`; one `PageView` with the pixel ID
+  and no other key; `autoConfig` set false for this pixel before init; the
+  page's response carries the `_headers` policy and no violation was
+  reported; on `/fit-check` no script, no hit, `window.fbq` undefined.
+  Section 2, override: the pixel loads too, and after six site events the
+  only Meta hit is still the PageView. Section 4: not requested on
+  `/fit-check` under the override. Section 8, localhost without the flag:
+  no request to either Meta host before or after events, `window.fbq`
+  undefined. Section 9: the flag off localhost loads no pixel.
+  Section 10, the founders page: one PageView before any booking;
+  `calendly.event_scheduled` posted from the page's own origin sends
+  nothing; the same message posted TWICE from a frame on calendly.com sends
+  `booking_completed` once (`cta_location` only) and `Schedule` once
+  (`id` and `ev` only); a second frame reporting a booking in the same page
+  load adds nothing; no GA4 or Meta request contains any value from the
+  message payload, which the stand-in fills with Calendly-shaped event and
+  invitee URIs plus a name, an email and a price (`SCHEDULED_SECRETS`);
+  `booking_time_selected` is unchanged; no CSP violation; and on a
+  non-production host the booking is one `[omnifit-track] booking_completed`
+  console line with no request to GA4 or Meta.
+- **The CSP in the browser test.** The local server now sends the policy
+  read from the built `public/_headers` on every response (`builtCsp`), and
+  every page reports `securitypolicyviolation` events to the test
+  (`t.csp`). `upgrade-insecure-requests` is left out: it rewrites every
+  `http://` request to `https://`, the local server is plain http, and the
+  directive restricts no host. `--csp="<policy>"` serves another policy, for
+  negative tests only.
+- **Fit Check sections (4, 5, the end of 8) brought to Fit Check v3.** They
+  had aborted since the Oct 26 rebuild (a fourth option clicked on a
+  three-option question; a rating scale that no longer exists). The answer
+  lists now follow the ten v3 questions (the order and option counts are in
+  the comment above `runFitCheck`); a hold is reached the only way v3 allows,
+  by refusing the booking standards. Assertion names and expected events
+  are unchanged, plus one new assertion (changing the first answer does not
+  send a second `fit_check_start`). Nothing in `pages/fit-check.html`
+  changed.
+- **Negative-tested on the built output** (each FAILED as listed, then
+  `public/` was restored from a copy): see REPORT.md, Meta Pixel run.
+
