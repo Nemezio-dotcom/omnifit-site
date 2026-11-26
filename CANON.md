@@ -904,8 +904,19 @@ MEASUREMENT (owner, Oct 17 2026) - ONE setup, all in the repo, NO Google Tag
   the policy. Nothing else in the policy changed.
   ON THE PAGE (Nov 25 2026): one new item, "Advertising measurement (Meta
   Pixel)", in the Sharing Information list (section 07), in that list's
-  own "purpose (tool)" form. By the owner's brief nothing else in the
-  policy changed.
+  own "purpose (tool)" form.
+  SECTION 10, ONE CLAUSE (owner decision, Nov 26 2026, asked before the
+  merge because the brief said to change nothing else): "we do not run
+  advertising tags on this site" became untrue with the pixel. The
+  sentence now reads "We use Google Analytics 4 and Microsoft Clarity to
+  measure how this website is used, and the Meta Pixel to measure the
+  results of our advertising." Nothing else in the policy changed.
+  OPEN, owner or counsel: the sentence before it, "We do not sell your
+  personal information, and we do not share it for cross-context
+  behavioral advertising", is unchanged. Whether an ad-measurement pixel
+  is that kind of sharing under CCPA/CPRA is a legal question no run
+  decides. Sections 02 and 06 still name only Google Analytics 4 and
+  Microsoft Clarity, and "Last updated" still reads October 19, 2026.
 - CHECKS: build.py --check (check_tracking + tracking_selftest, fixtures
   first, negative-tested on the real output) and tools/tracktest.js
   (Playwright on the built site served locally: the production hostname
