@@ -106,7 +106,12 @@
                               cta_location
      booking_time_selected    a day and time picked inside the embed
                               cta_location
-   cta_location / form_location is the page slug ("home" for /). */
+     booking_completed        the booking confirmed inside the embed, once per
+                              page load   cta_location
+   cta_location / form_location is the page slug ("home" for /).
+   Meta Pixel (owner, Nov 25 2026): window.fbq exists under the same rule as
+   gtag, except on /fit-check. ONE event is sent to Meta from here: Schedule,
+   beside booking_completed, with no parameters. PageView is the loader's. */
 (function () {
   function track(name, params) {
     if (typeof window.gtag === 'function') {
@@ -160,7 +165,11 @@
      booking_cta_click      an in-page link whose target holds the embed
      booking_section_view   the embed scrolls into view, once per page
      booking_time_selected  a day and time picked inside the embed
-     A completed booking stays Calendly's own GA4 report (CANON MEASUREMENT). */
+     booking_completed      the booking confirmed inside the embed
+                            ("calendly.event_scheduled"), once per page load;
+                            the same moment is reported to Meta as Schedule
+     Only the message's event name is read. Its payload (Calendly's event and
+     invitee URIs) is never read or sent, and no name, email or price is. */
   function bookingTarget(a) {
     var href = (a.getAttribute('href') || '').trim();
     if (href.charAt(0) !== '#' || href.length < 2) return null;
@@ -186,12 +195,18 @@
     });
     seen.observe(embed);
   }
+  var booked = false;
   window.addEventListener('message', function (e) {
     var host = '';
     try { host = new URL(e.origin).hostname.toLowerCase(); } catch (x) {}
     if (host !== 'calendly.com' && !/\.calendly\.com$/.test(host)) return;
-    if (e.data && e.data.event === 'calendly.date_and_time_selected') {
+    if (!e.data) return;
+    if (e.data.event === 'calendly.date_and_time_selected') {
       track('booking_time_selected', { cta_location: slug });
+    } else if (e.data.event === 'calendly.event_scheduled' && !booked) {
+      booked = true;
+      track('booking_completed', { cta_location: slug });
+      if (typeof window.fbq === 'function') window.fbq('track', 'Schedule');
     }
   });
 

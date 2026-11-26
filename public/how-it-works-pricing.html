@@ -28,8 +28,9 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
   description verbatim; Organization gains address + disambiguatingDescription;
   Person gains alternateName "Coach Nemezio" + affiliation; Organization
   "slogan" = CANON's POSITIONING LINE, verbatim, Outcome Claims Amendment run)
-- Measurement: GA4 gtag.js + Microsoft Clarity, production hostnames only
-  (CANON MEASUREMENT); HubSpot deferred as before. No Google Tag Manager.
+- Measurement: GA4 gtag.js + Microsoft Clarity + the Meta Pixel (Nov 25
+  2026), production hostnames only (CANON MEASUREMENT); HubSpot deferred as
+  before. No Google Tag Manager.
 - Geo meta
 - Schema (JSON-LD): single site-wide entity definition.
   LocalBusiness @id #localbusiness-of is referenced by every page
@@ -38,11 +39,12 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 ========================= -->
 
 <!-- Measurement (CANON MEASUREMENT; DEPLOY.md "Measurement"). The ONE source
-     of tracking for every page: Google Analytics 4 (gtag.js) and Microsoft
-     Clarity load only when the hostname is www.omnifittraining.com or
-     omnifittraining.com. On any other host (*.pages.dev previews, localhost)
-     neither loads and site/site.js logs each event to the console instead.
-     Clarity never loads on /fit-check. Test-only override, honoured on
+     of tracking for every page: Google Analytics 4 (gtag.js), Microsoft
+     Clarity and the Meta Pixel load only when the hostname is
+     www.omnifittraining.com or omnifittraining.com. On any other host
+     (*.pages.dev previews, localhost) none of them loads and site/site.js
+     logs each event to the console instead. Clarity and the Meta Pixel never
+     load on /fit-check. Test-only override, honoured on
      localhost / 127.0.0.1 only: ?omnifit-track=prod forces the production
      branch (tools/tracktest.js). No Google Tag Manager. HubSpot is deferred
      exactly as before. Each ID appears once on the page by design
@@ -52,6 +54,7 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
 (function () {
   var GA4 = 'G-0K6VLEC2VJ';
   var CLARITY = 'yzawpvwvdf';
+  var META = '3596878003826620';
   var host = location.hostname;
   var prod = (host === 'www.omnifittraining.com' || host === 'omnifittraining.com');
   if (!prod && (host === 'localhost' || host === '127.0.0.1') &&
@@ -74,6 +77,8 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
      were competing with the hero photo and fonts and were charged to mobile LCP.
      - GA4: gtag() and the config are queued at once (so no event is lost), and
        gtag.js itself loads after the page's load event, when the browser is idle.
+     - Meta Pixel (Nov 25 2026): the same as GA4. fbq() and its PageView are
+       queued at once; Meta's script loads after the page's load event.
      - Clarity + HubSpot: load on the visitor's first scroll, tap, click or key,
        or 5 seconds after the load event, whichever comes first. */
   function afterLoad(fn){
@@ -106,6 +111,32 @@ OmniFit | Site-wide Header Injection · Sept 2026 (entity block Oct 17 2026:
     window.gtag('js', new Date());
     window.gtag('config', GA4);
     afterLoad(function () { loadScript('https://www.googletagmanager.com/gtag/js?id=' + GA4); });
+  }
+
+  if (prod && !fitCheck) {
+    /* Meta Pixel (owner, Nov 25 2026): Meta's standard base code. The queue
+       function is Meta's, unchanged; its script is loaded by afterLoad()
+       like gtag.js, and there is no noscript image. fbq() exists only here:
+       site.js sends Meta an event only when it does.
+       NO PERSONAL DATA: init carries the pixel ID and nothing else (no
+       advanced matching), and autoConfig is off, so Meta's script sends no
+       button text, form details or page metadata of its own. What reaches
+       Meta is PageView on load and Schedule on a completed inline Calendly
+       booking (site.js), nothing else. Automatic advanced matching is a
+       switch in Meta Events Manager and must stay OFF there (DEPLOY.md
+       "Measurement"). */
+    (function (f, n) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+    })(window);
+    window.fbq('set', 'autoConfig', false, META);
+    window.fbq('init', META);
+    window.fbq('track', 'PageView');
+    afterLoad(function () { loadScript('https://connect.facebook.net/en_US/fbevents.js'); });
   }
 
   onEngage(function () {
