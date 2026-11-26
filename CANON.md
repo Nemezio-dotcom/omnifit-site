@@ -458,8 +458,18 @@ REPO STATE (reconciled with disk, Sept 2026)
       scoped to #omni-fst, class prefix fs-). One H1. Section order: hero
       with "Book Your First Visit"; quotable definition; what the First
       Visit includes; who it suits; rates table; how it fits alongside
-      training; practitioner block; eight-question FAQ; closing CTA;
-      trademark attribution line. Header carries WebPage / BreadcrumbList /
+      training; practitioner block; nine-question FAQ (eight until Nov 26
+      2026, when the owner added "Is FST™ suitable for seniors?" as the
+      eighth question, before the cancellation question); closing CTA;
+      trademark attribution line. DRAFT ON THE BRANCH, Nov 26 2026 (owner
+      request; copy not yet approved, so not canon until the owner signs
+      off): three sections added - "What Fascia Is" (three inline SVG
+      diagrams) and "How Fascia Stretch Therapy™ Works With Fascia" (with
+      the in-home photo) after the definition, and "Assisted Stretching for
+      Senior Adults" (two charts of published research: Stathokostas et al.
+      2013, Wilke et al. 2019) after "who it suits", which gained a fourth
+      card. Headings say "senior adults", never "older adults" (K07).
+      Header carries WebPage / BreadcrumbList /
       Service / FAQPage; the business by @id only, no person node; the
       FAQPage is BYTE-IDENTICAL to the page FAQ in question and answer
       (certify.py compares with ==, not after normalising). Title "Fascia
@@ -1667,7 +1677,7 @@ Therapy. No run, and no owner override inside a run, relaxes one.)
         2026 also the payment, no-refund and expiry sentences and the
         disclaimer exactly once, and fst_terms_required holds Terms and
         Conditions to the same sentences so the two pages cannot drift.
-    (c) the FST page's eight FAQ questions in order, the header FAQPage
+    (c) the FST page's nine FAQ questions in order, the header FAQPage
         byte-identical to them, the Service node with provider
         #localbusiness-of and Offers 150 / 225 / 1000, no business or
         person node defined in the header, FST-BLOCK markers paired.
