@@ -22,7 +22,7 @@ Sources
                                     + Meta Pixel, production only; HubSpot
                                     deferral; geo meta; entity graph)
   pages/footer.html                 site-wide footer (style + markup + script)
-  pages/home-1..6.html              homepage sections, concatenated in HOME_ORDER
+  pages/home-1..7.html              homepage sections, concatenated in HOME_ORDER
   site/layout.html, site/nav.html, site/site.css, site/site.js
   site/img/*                        static images, copied to public/assets/img/
 
@@ -70,13 +70,14 @@ sys.path.insert(0, str(ROOT / "tools"))
 import ownership  # noqa: E402  (tools/ownership.py)
 
 # Source files under pages/ that are not standalone pages.
-NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6", "home-motion"}
+NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6", "home-7", "home-motion"}
 
 # Homepage = these fragments, in page order. home-0 is the hero built for the
-# static site (the only h1); CANON: home-6 sits after the programs section and
-# before the FAQ. home-motion is the scroll-reveal layer (CSS lifted to head,
+# static site (the only h1); home-7 is the San Diego section, directly after
+# the proof strip (owner, Nov 27 2026); home-6 sits after the programs section
+# and before the FAQ. home-motion is the scroll-reveal layer (CSS lifted to head,
 # script runs after every section exists).
-HOME_ORDER = ["home-0", "home-1", "home-2", "home-3", "home-4", "home-6", "home-5", "home-motion"]
+HOME_ORDER = ["home-0", "home-1", "home-7", "home-2", "home-3", "home-4", "home-6", "home-5", "home-motion"]
 
 # Repo file name -> live slug, where they differ. Squarespace slugs are
 # lower-case and every internal link in the repo uses /faqs.
