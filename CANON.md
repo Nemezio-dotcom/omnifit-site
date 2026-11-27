@@ -822,5 +822,6 @@ WORKFLOW
   CERTIFICATION reports exactly three categories: (a) compliance strikes, (b) stale canon, (c) broken structure. On a finding or an ambiguity: report file:line and STOP; never fix silently.
   If a rule here is wrong the owner changes it here, and tools/ is brought into step in the same commit. A header's FAQPage is derived from the page's FAQ (tools/faq.py), verbatim, in order.
   archive/ is never certified, corrected or brought back. Sources are pages/ (headers: pages/headers/<slug>-header.html), site/ and assistant/; public/ and functions/_lib/knowledge.js are generated.
+  REPORT.md holds the five most recent runs. At the start of a run, older sections move byte-identical to archive/REPORT-<through date>.md.
   THE JOURNAL (/blog): posts are drafted on a schedule and publish only on the owner's "publish". Process and topics: editorial/PLAYBOOK.md and editorial/CALENDAR.md. Drafts live on a blog-NN branch. A post is a page for every check.
   SEARCH SAFETY. No run removes more than a quarter of an indexed page's visible copy, changes a title or H1, or takes a keyword phrase off a page's headings unless the brief names that change and states the ranking risk. Content cuts never ship in the same release as a platform, URL or template change. The Oct 17 2026 homepage cut is why.

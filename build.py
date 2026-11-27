@@ -9,7 +9,11 @@ Keyword ownership (tools/ownership.py, reading the KEYWORD OWNERSHIP table in
 CANON.md) runs with the checks but is a GUIDELINE since Nov 27 2026 (owner):
 an owned phrase in the title, H1, H2s or meta description of a page other than
 its owner prints as a WARNING and never fails the check. Its fixtures run
-first, so a quiet result comes from a tool seen warning. The checks include the
+first, so a quiet result comes from a tool seen warning. SEARCH SAFETY
+(tools/searchsafety.py, CANON WORKFLOW) runs the same way since Nov 27 2026:
+each built page is compared with the same file on origin/main, and a cut of
+more than a quarter of its visible copy, a changed title or H1, or a keyword
+phrase gone from its headings prints as a WARNING, never a failure. The checks include the
 measurement rule (CANON MEASUREMENT): no retired tracking ID or dataLayer
 push anywhere in public/, the GA4 / Clarity / Meta Pixel IDs at most once per
 page, no Meta noscript image, no user data on the pixel's init, and a
@@ -69,6 +73,7 @@ import icons  # noqa: E402  (site/icons.py)
 import blog  # noqa: E402  (site/blog.py - the Journal at /blog)
 sys.path.insert(0, str(ROOT / "tools"))
 import ownership  # noqa: E402  (tools/ownership.py)
+import searchsafety  # noqa: E402  (tools/searchsafety.py)
 
 # Source files under pages/ that are not standalone pages.
 NOT_PAGES = {"footer", "home-0", "home-1", "home-2", "home-3", "home-4", "home-5", "home-6", "home-7", "home-motion"}
@@ -1300,6 +1305,25 @@ def check():
     own_warnings, own_notes = ownership.check_site(PUBLIC)
     warnings += [f"keyword ownership (guideline): {w}" for w in own_warnings]
     notes += [f"keyword ownership: {n}" for n in own_notes]
+    # SEARCH SAFETY (CANON WORKFLOW; tools/searchsafety.py): each built page
+    # against the same file on origin/main. WARNINGS only, like keyword
+    # ownership: nothing below is added to `problems`. Self-test first, and
+    # its result is printed, so a quiet check is one that was seen warning.
+    try:
+        ss_bad, ss_cases = searchsafety.selftest(verbose=False)
+    except Exception as e:  # a broken guideline tool must not break the build check
+        ss_bad, ss_cases = [f"self-test could not run: {e}"], 0
+    if ss_bad:
+        warnings += [f"search safety: self-test misbehaved, its warnings are unreliable: {b}" for b in ss_bad]
+    else:
+        notes.append(f"search safety: self-test passed ({ss_cases} fixture cases: a 2,000 to 1,400 word cut, a changed "
+                     f"title, a changed H1 and a keyword phrase off the headings each warn; 2,000 to 1,600 does not)")
+    try:
+        ss_warnings, ss_notes = searchsafety.check_site(PUBLIC)
+    except Exception as e:
+        ss_warnings, ss_notes = [], [f"not checked: {e}"]
+    warnings += [f"search safety: {w}" for w in ss_warnings]
+    notes += [f"search safety: {n}" for n in ss_notes]
     # Squarespace-hosted images. A WARNING, never a problem: these URLs work
     # today and break the day the Squarespace subscription ends. Listed per
     # URL with the pages carrying it.
@@ -1330,7 +1354,7 @@ def main():
             items = ", ".join(f"{ch} x{n} -> {icons.ICONS[ch][0]}" for ch, n in sorted(emoji_report[url_path].items(), key=lambda kv: -kv[1]))
             print(f"  {url_path:45s} {items}")
     problems, notes, warnings = check()
-    print("\nCHECK: internal links, one H1 per page, social preview tags, JSON-LD parses, no emoji, 404/_headers, redirects, tracking; keyword ownership and Squarespace images (warnings only)")
+    print("\nCHECK: internal links, one H1 per page, social preview tags, JSON-LD parses, no emoji, 404/_headers, redirects, tracking; keyword ownership, SEARCH SAFETY and Squarespace images (warnings only)")
     for n in sorted(set(notes)):
         print("  note    ", n)
     for w in warnings:
@@ -1339,6 +1363,8 @@ def main():
         print("  note     no squarespace-cdn.com references remain")
     if not any(w.startswith("keyword ownership") for w in warnings):
         print("  note     keyword ownership (guideline): no warnings")
+    if not any(w.startswith("search safety") for w in warnings):
+        print("  note     search safety: no warnings")
     for p in problems:
         print("  PROBLEM ", p)
     print(f"RESULT: {'PASSED' if not problems else str(len(problems)) + ' problem(s)'}")
