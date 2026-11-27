@@ -527,8 +527,15 @@ REPO STATE (reconciled with disk, Sept 2026)
     · about, contactform, desk-worker-posture-pain, hsa-fsa-personal-training
       - each has a header. desk-worker's header now carries a 6-question
       FAQPage that mirrors the page (see PAGE HEADER SHAPE).
-    · home-0 … home-6 - homepage section fragments, no headers of their own
-      (pages/headers/home-header.html is the homepage header). REBUILT in the
+    · home-0 … home-7 - homepage section fragments, no headers of their own
+      (pages/headers/home-header.html is the homepage header). home-7 (owner
+      brief, Nov 27 2026, Homepage San Diego run) is the San Diego section,
+      #omh-sd, H2 "A San Diego Personal Trainer Who Measures First" (K01);
+      HOME_ORDER is home-0, home-1, home-7, home-2, home-3, home-4, home-6,
+      home-5, home-motion. The homepage FAQ in home-5 has NINE questions (the
+      seven of Oct 17 2026, unchanged, plus "Where in San Diego does OmniFit
+      train clients?" and "What should I look for in a personal trainer in
+      San Diego?"). REBUILT in the
       Homepage rebuild run (Oct 17 2026) from ~6,850 words of body copy to
       ~2,000, same URL, title, meta description, H1 and canonical. Order
       (HOME_ORDER unchanged): home-0 hero (POSITIONING LINE subhead, Calendly
@@ -579,7 +586,9 @@ REPO STATE (reconciled with disk, Sept 2026)
       certify.py exempts it from the page-matching check (it returns before
       that check), so it emits no "no matching page" finding. LIVE as of
       2026-09-20.
-    · home-header.html - the homepage PAGE header. v5 (Oct 17 2026): the
+    · home-header.html - the homepage PAGE header. v6 (Nov 27 2026): the
+      FAQPage mirrors the nine-question homepage FAQ in pages/home-5.html;
+      WebPage name/description unchanged. v5 (Oct 17 2026): the
       FAQPage mirrors the rebuilt seven-question homepage FAQ in
       pages/home-5.html (home-2's methodology FAQ merged into it); WebPage
       name/description unchanged. v4 (Sept 20, 2026):

@@ -1,0 +1,44 @@
+<!-- OMNIFIT | HOMEPAGE — SAN DIEGO · v1 NOVEMBER 2026
+  Homepage San Diego run (owner brief, Nov 27 2026). Renders directly after
+  the proof strip (home-1) and before "Who It's For" (home-2); see HOME_ORDER
+  in build.py. Copy is the owner's, verbatim.
+
+  WHY: the Oct 17 2026 rebuild left "personal trainer San Diego" (K01, owned
+  by the homepage) on the title and H1 only. This section puts it on an H2
+  and gives the homepage its San Diego depth back.
+
+  Uses the shared .omh styles from pages/home-1.html and the card pattern of
+  pages/home-2.html. No CSS of its own. The reveal in pages/home-motion.html
+  reaches it through the shared .omh selectors (label, h2, lede, cards).
+  Icons: the gold line SVGs "scales", "pin" and "users" from site/icons.py.
+
+  Rules this section holds: no price, no cost-anchor link, "private" in no
+  heading, no town or service keyword on the H2. The travel-fee sentence is
+  not repeated here; pages/home-4.html carries it.
+-->
+<section id="omh-sd" class="omh" aria-labelledby="omh-sd-h">
+  <div class="omh-inner">
+    <p class="omh-label">San Diego</p>
+    <h2 id="omh-sd-h">A San Diego Personal Trainer Who Measures First</h2>
+    <p class="omh-lede">OmniFit Performance is the San Diego personal training practice of Nemezio LopezPerez, NASM Elite Trainer, coaching since 2016. It is built for professionals 30+ across San Diego County who want joint-friendly strength, better posture and a plan that survives a full calendar. Every client works 1:1 with the same coach, and every program starts from a Performance Assessment instead of a template.</p>
+    <div class="omh-grid">
+      <article class="omh-card">
+        <div class="omh-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"/><path d="M8 20h8"/><path d="M4 8h16"/><path d="M6 8l-3 6a3 3 0 0 0 6 0z"/><path d="M18 8l-3 6a3 3 0 0 0 6 0z"/></svg></div>
+        <h3>How it differs from a San Diego gym or class</h3>
+        <p>A gym gives you access and leaves the program to you. A class runs one pace for the room. Here your program is written from your Performance Assessment and rebuilt every 4-week cycle. Progress is judged against your own baseline: Bodystat QuadScan 4000 body composition, nine movement benchmarks, posture photos and strength. Joints and old injuries are programmed for, with corrective work in every warm-up and loading under a 3/10 pain ceiling.</p>
+        <p class="omh-more"><a href="/omnifit-vs-competitors">See how OmniFit compares with other San Diego options</a></p>
+      </article>
+      <article class="omh-card">
+        <div class="omh-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+        <h3>Where we train in San Diego</h3>
+        <p>In studio at Teqneeq Functional Health Center in 4S Ranch. In your home across North County San Diego: <a href="/personal-trainer-carmel-valley">Carmel Valley</a>, <a href="/personal-trainer-santaluz">Santaluz</a>, <a href="/personal-trainer-fairbanks-ranch">Fairbanks Ranch</a>, <a href="/personal-trainer-rancho-bernardo">Rancho Bernardo</a>, <a href="/personal-trainer-4s-ranch">4S Ranch</a>, Poway, <a href="/personal-trainer-la-jolla">La Jolla</a>, <a href="/personal-trainer-del-mar">Del Mar</a>, <a href="/personal-trainer-rancho-santa-fe">Rancho Santa Fe</a>, <a href="/personal-trainer-solana-beach">Solana Beach</a>, <a href="/personal-trainer-encinitas">Encinitas</a> and <a href="/personal-trainer-carlsbad">Carlsbad</a>. Outside the in-home area, the <a href="/the-30-minute-executive-reset">30-Minute Executive Reset</a> runs by live video anywhere in San Diego County or the United States.</p>
+      </article>
+      <article class="omh-card">
+        <div class="omh-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M15.5 4.5a3.5 3.5 0 0 1 0 7"/><path d="M17 14a6 6 0 0 1 4 6"/></svg></div>
+        <h3>Who trains with us</h3>
+        <p>Executives and founders, desk-bound and remote professionals, active adults 50+, people <a href="/corrective-exercise-post-rehab">returning to training after physical therapy</a>, and <a href="/couples-personal-training-san-diego">couples who train together</a>. Never trained before? That is a common starting point here.</p>
+        <p class="omh-more"><a href="/how-to-choose-a-personal-trainer-san-diego">How to choose a personal trainer</a></p>
+      </article>
+    </div>
+  </div>
+</section>

@@ -15,7 +15,7 @@ pages/headers/site-header.html    site-wide header injection (GA4 + Clarity,
                                   meta; entity graph)
 pages/footer.html                 site-wide footer (CSS + markup + year script)
 pages/home-0.html                 homepage hero (built for the static site; the only h1)
-pages/home-1..6.html              homepage sections
+pages/home-1..7.html              homepage sections
 site/layout.html                  the HTML document skeleton
 site/nav.html                     announcement bar + site header + primary nav (single source)
 site/site.css, site/site.js       shared CSS / JS (site.js sends every event)
@@ -518,7 +518,7 @@ Compare against the live site. Source = the file(s) under `pages/`.
 
 | URL | Source | Title |
 |---|---|---|
-| https://www.omnifittraining.com/ | home-0 (hero), home-1, home-2, home-3, home-4, home-6, home-5 + headers/home-header | Personal Trainer San Diego \| Diagnostic-Led Coaching |
+| https://www.omnifittraining.com/ | home-0 (hero), home-1, home-7, home-2, home-3, home-4, home-6, home-5 + headers/home-header | Personal Trainer San Diego \| Diagnostic-Led Coaching |
 | https://www.omnifittraining.com/about | about | About Nemezio LopezPerez \| NASM Elite Trainer, San Diego |
 | https://www.omnifittraining.com/body-composition-testing | body-composition-testing | Body Composition Testing in San Diego \| Bodystat QuadScan 4000 \| OmniFit Performance |
 | https://www.omnifittraining.com/case-studies | case-studies | Client Case Studies \| Real Results From Real Professionals \| OmniFit Performance (derived) |
@@ -559,7 +559,7 @@ Compare against the live site. Source = the file(s) under `pages/`.
 | https://www.omnifittraining.com/training-rates-san-diego | training-rates-san-diego | Personal Training Rates San Diego \| Published Pricing \| OmniFit Performance |
 | https://www.omnifittraining.com/weight-loss | weight-loss | Sustainable Fat Loss for Busy Professionals 30+ \| OmniFit Performance San Diego |
 
-Not published (not pages): `pages/footer.html`, `pages/home-0..6.html`
+Not published (not pages): `pages/footer.html`, `pages/home-0..7.html`
 (homepage sections), everything under `archive/` (retired; redirected in
 `_redirects`), including the archived headers `bodybuilding-header.html`
 and `energy-protocol-waitlist-form-header.html` (pages no longer live; both

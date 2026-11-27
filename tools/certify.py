@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import faq
 
 # Headers whose page is not pages/<slug>.html. Only the homepage: it lives
-# as the home-0..6 fragments and its FAQ is in home-5 (CANON, ORPHAN HEADERS).
+# as the home-0..7 fragments and its FAQ is in home-5 (CANON, ORPHAN HEADERS).
 HEADER_PAGE = {"home": "pages/home-5.html"}
 
 # schema.org subtypes of WebPage that count as a header's page node.
@@ -3155,7 +3155,7 @@ def run():
                 elif not pn.get("about",{}).get("@id","").endswith("#localbusiness-of"):
                     print(f"   {f}  [about not referencing homepage LocalBusiness]"); C+=1
             slug=re.sub(r'-header\.html$','',f.split('/')[-1])
-            # The homepage exists only as the home-0..6 fragments, so there is
+            # The homepage exists only as the home-0..7 fragments, so there is
             # no pages/home.html. CANON (ORPHAN HEADERS, home-header.html) says
             # its FAQPage mirrors pages/home-5.html; check it there rather than
             # report "no matching page" for a header that is live and built.

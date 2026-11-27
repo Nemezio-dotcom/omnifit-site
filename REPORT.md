@@ -9157,3 +9157,62 @@ The ninth question reworded on the page ("Is FST™ right for seniors?"): `certi
 | `node tools/choosertest.js` | RESULT: PASSED (30 checks, 16 combinations) |
 | `node tools/mobileaudit.js` | RESULT: PASSED (the FST page: no overflow at 390 or 412px) |
 | `node tools/bandcontrast.js public` | 0 low-contrast text nodes in light bands |
+
+# Homepage San Diego run — San Diego section, two FAQ questions, eleven links back to the homepage (owner brief Nov 27, 2026)
+
+Part A of the owner's brief of Nov 27, 2026. **Why:** the homepage owns "personal trainer san diego" (K01), and since the Oct 17 rebuild it carried that phrase on the title and H1 only; every keyword-bearing H2 pointed at North County, 4S Ranch or executive coaching. Search Console shows Google swapping in the in-home page for the query since Oct 20. This run puts San Diego depth back on the homepage without undoing the rebuild.
+
+**Locked and unchanged** (compared on the built page before and after): the title, meta description, H1, canonical, hero, positioning line, In Short list, proof strip, every existing section and all seven existing FAQ answers. The built homepage differs from the previous build only by additions: the new section, two FAQ items, two FAQPage entries, and comments. `/personal-trainer-4s-ranch` and `/personal-trainer-rancho-bernardo` and their headers are untouched (`git diff` empty).
+
+## What changed
+
+| File | Change |
+|---|---|
+| `pages/home-7.html` (new) | Section `#omh-sd`, label "San Diego", H2 "A San Diego Personal Trainer Who Measures First", lede and three cards, the owner's copy verbatim. Existing `.omh` classes and the home-2 card pattern; no CSS of its own. Icons: `scales`, `pin`, `users` from `site/icons.py`. |
+| `build.py` | `home-7` in `HOME_ORDER` directly after `home-1`, in `NOT_PAGES`, and in the docstring. |
+| `pages/home-5.html` | Two questions appended after "Is nutrition coaching included?": "Where in San Diego does OmniFit train clients?" and "What should I look for in a personal trainer in San Diego?". Nine questions; the first seven are byte-identical. |
+| `pages/headers/home-header.html` | v6. FAQPage regenerated from `pages/home-5.html` with `faq.qa_strict`; the first seven entries came out byte-identical, two were added. WebPage name and description unchanged. |
+| `pages/home-motion.html` | Comment only. The shared selectors (`.omh .omh-inner > .omh-label, h2, .omh-lede` and `.omh .omh-grid > .omh-card`) already tag the new section; confirmed in a browser (label, H2, lede and the three cards all receive `omni-rv`). |
+| `pages/in-home-personal-trainer-san-diego.html` | One sentence at the end of the first body paragraph after In Short. |
+| `pages/private-personal-trainer-san-diego.html` | One sentence at the end of the first body paragraph after In Short. |
+| Nine town pages (La Jolla, Del Mar, Carmel Valley, Rancho Santa Fe, Fairbanks Ranch, Encinitas, Solana Beach, Santaluz, Carlsbad) | One sentence, as its own paragraph in the "Meet Nemezio LopezPerez" card, after the bio paragraph. |
+| `tools/certify.py`, `DEPLOY.md` | Fragment list reads home-0..7 (comments and the file table). |
+| `CANON.md` | home-7 in the fragment list, the nine-question homepage FAQ, header v6. Two short edits; Part B rewrites the file. |
+| `public/` | Rebuilt; sitemap lastmod moves to the commit date for the twelve pages touched. |
+
+No heading, title, meta description, FAQ question or JSON-LD changed on any of the eleven linking pages.
+
+## Homepage numbers
+
+| Measure | Before | After |
+|---|---|---|
+| Visible words in `<main>` (tags, comments, styles and scripts stripped) | 2,098 | 2,518 |
+| H1 | 1 | 1 |
+| Homepage FAQ questions (page and FAQPage) | 7 | 9 |
+| K01 on a homepage H2 | 0 | 1 ("A San Diego Personal Trainer Who Measures First") |
+| Body-copy links to `/` with the anchor "personal trainer in San Diego", site-wide | 0 | 11 |
+
+The brief quotes 2,008 words for the Oct 17 rebuild; 2,098 is today's starting point by the same method, because the FST block and the longer coach line were added since. The new copy is 420 words.
+
+## Checks (as they stood before this run; no rule was changed)
+
+| Check | Result |
+|---|---|
+| `python3 build.py` then `python3 build.py --check` | RESULT: PASSED. Output identical to the pre-run baseline, line for line: no new problem or note on any key. |
+| `python3 tools/ownership.py` and `--selftest` | PASSED. K01 now matches a homepage H2. X02 holds: "private" in no homepage title, H1 or H2. No K05-K09 or K20-K31 phrase on a homepage H2 (the H2 matches are K01, K02, K03 and K04, all homepage-owned). |
+| `python3 tools/certify.py` | RESULT: PASSED (compliance 0, stale canon 0, structure 0, not-run 0, amendment 0). 102 files certified (101 + `home-7`). All five invariant hashes unchanged, the credentials block included. |
+| Home-header FAQPage mirror | Passes with nine questions. Negative test: one word changed in the eighth header answer gave `[FAQPage answers do not mirror page] differing index=[7]` and RESULT: FAILED; restored, PASSED. |
+| `python3 tools/mkheaders.py --check` | PASSED (9 headers reproduce byte-for-byte). |
+| Rendered `public/index.html` | One H1. The new H2 is inside `<main>`, between the proof strip and "Who It's For". All 17 links in the new copy point at a built page that is not a redirect source (no 404, no hop). No em-dash, no dollar figure and no "private" in the new copy. |
+| `node --test tests/assistant.test.mjs`, `tools/widgettest.js`, `tools/choosertest.js`, `tools/tracktest.js` | All pass (4 hand-offs; 30 checks, 16 combinations; 89 assertions). |
+| `node tools/mobileaudit.js --open-details` (every page, 390 and 412px) | RESULT: PASSED, no overflow and nothing clipped. |
+| `node tools/bandcontrast.js public` | 0 low-contrast text nodes in light bands. |
+
+## Judgment calls (each with the condition under which it is wrong)
+
+1. **"across San Diego County" in the lede stays as written.** CANON says the service area is described as North County San Diego, never "throughout San Diego County". The lede says who the practice is built for, and the second card states the in-home area as North County and the county-wide reach as live video, so no published fact disagrees. `certify.py` passes it (its retired phrases are "training throughout San Diego County" and "available throughout San Diego County"). WRONG IF the owner reads the CANON rule as ruling out any county-wide description; then the lede should say "in San Diego".
+2. **The travel-fee sentence is not repeated in the "Where we train" card**, as the brief asked. No certify rule required it there; `home-4` carries it.
+3. **Town pages: the sentence is its own paragraph in the Meet Nemezio card, not inside the bio paragraph.** The bio paragraph is the hash-locked credentials block; a sentence inside it would have changed that hash on nine of its eleven carriers. WRONG IF the owner wanted it in the closing section instead.
+4. **In-home and private pages: the sentence closes the first body paragraph after In Short.** For the private page, "the opening section" was read as the first body section, not the hero. WRONG IF the owner meant the hero subhead.
+5. **The eleven links carry each page's existing link style.** Those paragraphs had no link rule, so the anchor rendered in browser-default blue. In-home and private use the pages' own `.of-link` class; the town pages use an inline style with the same declarations as their FAQ links (gold, underlined). No stylesheet rule was added. WRONG IF the owner wants unstyled anchors.
+6. **No selector was added to the reveal layer.** The section is animated the same way the other `.omh` sections are, through the shared selectors. WRONG IF a section-specific effect was wanted.
