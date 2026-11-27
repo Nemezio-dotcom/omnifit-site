@@ -1,12 +1,12 @@
 <!-- fixture-path: /in-home-personal-trainer-san-diego -->
-<!-- MUST FAIL K01: unqualified "personal trainer in San Diego" in the in-home title; the homepage owns it -->
+<!-- MUST WARN X01: North County in the in-home page's own JSON-LD description, though title/H1/H2/meta are clean -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Personal Trainer in San Diego | In-Home | OmniFit Performance</title>
+<title>In-Home Personal Trainer in San Diego | OmniFit</title>
 <meta name="description" content="In-home personal training in San Diego.">
 <!-- ===== Page header injection (source: fixture) ===== -->
-
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "description": "In-home personal training across North County."}</script>
 <!-- ===== End page header injection ===== -->
 </head>
 <body>

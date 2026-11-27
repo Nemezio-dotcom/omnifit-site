@@ -7,27 +7,25 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import faq
 
 # Headers whose page is not pages/<slug>.html. Only the homepage: it lives
-# as the home-0..7 fragments and its FAQ is in home-5 (CANON, ORPHAN HEADERS).
+# as the home-0..7 fragments and its FAQ is in home-5.
 HEADER_PAGE = {"home": "pages/home-5.html"}
 
 # schema.org subtypes of WebPage that count as a header's page node.
 # about-header uses AboutPage; it carries the same "about" reference.
 PAGE_TYPES = ("WebPage", "AboutPage", "ContactPage")
 
-# Pages that have no FAQ BY DESIGN (CANON, "PAGES WITH NO FAQ"). For these an
-# empty mirror is not "compared nothing": certify scans the page body for any
-# FAQ-shaped markup and the header for any FAQPage, and passes only when both
-# are absent. Anything FAQ-shaped on a declared page is a finding, so a page
-# that later grows an FAQ cannot hide behind this list. Pages NOT on the list
-# still report an empty mirror under CHECKS THAT COULD NOT RUN.
-NO_FAQ = {"about", "contactform", "fit-check", "personal-training-services",
-          "privacy-policy", "terms-and-conditions"}
+# FAQ-shaped markup. A page with no FAQ on either side has nothing to mirror.
+# A page that carries this markup while the extractor reads no question and
+# the header has no FAQPage is reported under CHECKS THAT COULD NOT RUN, so an
+# unknown FAQ pattern can never pass as "no FAQ". Until the CANON slim-down
+# (Nov 27 2026, owner decision) a declared list of no-FAQ pages lived here and
+# in CANON, and FAQ markup on a listed page was a structure finding; the list
+# and that finding are gone, the mirror check is not.
 FAQ_SHAPED = (r'<details\b|<summary\b|class="[^"]*(?:faq|accordion)|class="fq\b|'
               r'Frequently Asked Questions|"FAQPage"')
 
-# the-30-minute-executive-reset left this list in the October Card run's
-# follow-up, once its content was brought to the card and its RED-PEN flags
-# closed. footer.html is site-wide and in no batch.
+# footer.html is site-wide, not a page: it is swept by the stale-canon and
+# FST rules below but is not put through the per-page compliance screen.
 OUT_OF_SCOPE = ("footer",)
 
 # ─── (a) compliance shapes ─────────────────────────────────────────
@@ -158,7 +156,7 @@ def guarantee_any(text, window=12):
     return out
 
 # ─── ATTRIBUTED INDIVIDUAL OUTCOMES (owner approval; CANON TIER 2 item 2a) ──
-# CANON's CANONICAL TRUTH records documented client figures WITH timeframes as
+# CANON's CASE-STUDY FIGURES (BUSINESS AND ENTITY) records documented client figures WITH timeframes as
 # canonical fact while the COMPLIANCE SCREEN banned lbs-near-timeframe outright.
 # Resolution: an individual, attributed, documented client outcome with
 # substantiation on file is a different object from a claim about what a
@@ -1002,7 +1000,7 @@ def _selftest_amendment():
     assert lbs_near_timeframe(agg, outcomes='<section><p>January 2023 to September 2026: clients lost 40 lb.</p></section>'), "carve-out fired with no sample size"
     assert lbs_near_timeframe(agg, outcomes=syn) == [], "published aggregate still fired"
 
-# ─── POSITIONING LINE (CANON ENTITY BLOCK, Oct 17 2026) ───────────
+# ─── POSITIONING LINE (CANON BUSINESS AND ENTITY, Oct 17 2026) ────
 # Wherever the line appears it is verbatim, and it never sits in a title, a
 # meta description or an H1 (build.py reads a header's WebPage name and
 # description as the title and meta). Keyed on two fragments no other copy
@@ -1087,7 +1085,7 @@ def _selftest_travel_protocol():
                  '<li>The Travel Protocol: a scheduled session live by video, at no extra cost</li></ul>') == [], "price in the block above the list read as the Travel Protocol's"
     assert kinds('<ul><li>The Travel Protocol, $95 per trip</li></ul>') == ["price stated for the Travel Protocol"], "price in the same list item passed"
 
-# ─── TEQNEEQ HAS NO ON-SITE PT CLINIC (CANON ENTITY BLOCK, Oct 17 2026) ─
+# ─── TEQNEEQ HAS NO ON-SITE PT CLINIC (CANON BUSINESS AND ENTITY, Oct 17 2026) ─
 # Owner, homepage rebuild run: Teqneeq is a members-only functional health
 # facility; OmniFit's physical therapy relationships are EXTERNAL partners
 # (e.g. Stoke Physical Therapy). A sentence naming Teqneeq - or the sentence
@@ -1124,7 +1122,7 @@ def _selftest_teqneeq_pt():
     assert kinds('<p>Teqneeq is a members-only functional health facility. We coordinate with Stoke Physical Therapy, an external partner.</p>') == [], "external PT partner flagged"
     assert kinds('<p>An on-site physical therapy clinic is common in big gyms. Teqneeq is in 4S Ranch.</p>') == [], "claim in the sentence BEFORE Teqneeq read as about Teqneeq"
 
-# ─── COACHING TENURE (CANON ENTITY BLOCK, Oct 18 2026) ──────────────────
+# ─── COACHING TENURE (CANON BUSINESS AND ENTITY, Oct 18 2026) ───────────
 # Owner fact, final-cleanup run: Nemezio started coaching in 2016, as a hobby
 # before turning professional. Never claim a specific number of professional
 # years. A sentence carrying "10+ years", "over/more than a decade" or
@@ -1333,7 +1331,7 @@ COMPLIANCE = [
 # position of arguing with its own archive.
 # home-3.html left this list in the homepage rebuild (Oct 17 2026): it is no
 # longer a copy of the case-studies record but three short homepage case
-# cards, screened like every other page (CANON REPO STATE).
+# cards, screened like every other page (CANON TIER 2 item 2a, FROZEN RECORDS).
 FROZEN = ("case-studies.html",)
 
 # ─── (b) stale canon ───────────────────────────────────────────────
@@ -1432,7 +1430,7 @@ def fee_language(text):
 
 # ─── (b) RETIRED LAUNCH COPY (owner decisions, Oct 17 2026) ────────
 # Literal phrases the launch batch retired. Each is a claim or a surface the
-# October 2026 owner decisions replaced (CANON, LAUNCH DECISIONS): the
+# October 2026 owner decisions replaced (CANON STANDING COPY RULES, RETIRED PHRASES): the
 # deposit is "$30 deposit, refunded the same day you attend your
 # consultation" (never "fully refundable", never "applies to your first
 # cycle"); the assessment credit is "credited toward your first purchase ..."
@@ -1479,6 +1477,10 @@ RETIRED_LAUNCH_COPY = [
     "a travel fee may apply outside it", "training throughout San Diego County",
     "available throughout San Diego County",
     "five-star reviews", "5.0 rating", "5.0 · 190+", "Rated 5.0",
+    # Added in the CANON slim-down (Nov 27 2026). CANON REVIEWS: never "5.0".
+    # The four phrases above missed the plainest form, "5.0 stars": the run's
+    # negative test wrote it on a page and certify said nothing.
+    "5.0 star", "5.0-star",
     "verified reviews", "verified five-star", "works exclusively with",
     "client tenure", "6 months minimum",
     "Unlimited coach communication", "check-in submissions required",
@@ -1562,7 +1564,7 @@ def _selftest_retired_copy():
     return len(RETIRED_LAUNCH_COPY)
 
 # ─── (b) CONSULTATION CTA TO THE CONTACT FORM (owner, Oct 17 2026) ───
-# ENTRY = CALENDLY DIRECT (CANON LAUNCH DECISIONS items 1 and 15): a link whose
+# ENTRY = CALENDLY DIRECT (CANON OTHER DECISIONS, ENTRY): a link whose
 # visible label offers a consultation goes to the Calendly booking page, never
 # to /contactform. The contact form is still linked, but only under labels that
 # do not promise a consultation ("Contact", "Get Started", "Start The
@@ -1592,7 +1594,7 @@ def _selftest_consultation_cta():
         assert not consultation_cta_to_contactform(q), f"consultation-CTA rule fired on: {q[:50]}"
 
 # ─── (b) BOOKING CTA OR RESERVEACTION TO THE CONTACT FORM (owner, Oct 17 2026) ───
-# CANON LAUNCH DECISIONS item 18 extends item 15 from consultation labels to
+# CANON OTHER DECISIONS, ENTRY extends the rule from consultation labels to
 # every enrolment or booking button: a link labelled "Start ...", "Get
 # Started", "Book ..." or "Stay ..." goes to Calendly, never /contactform, and
 # no schema ReserveAction may target /contactform either. "Contact" links stay
@@ -1650,7 +1652,7 @@ def _selftest_booking_cta():
         "ReserveAction rule fired on a WebPage url"
 
 # ─── (b) KEN'S RETIRED MUSCLE FIGURE (owner, Oct 17 2026) ───
-# CANON LAUNCH DECISIONS item 20 consolidates Ken's case to the documented
+# CANON BUSINESS AND ENTITY, CASE-STUDY FIGURES consolidates Ken's case to the documented
 # bodyweight figure (175 -> 164 lb, 6 months) and retires the "+6 lbs muscle"
 # claim. Unlike the retired-copy sweep this rule reads the FROZEN RECORDS too:
 # the owner overrode their exemption for Ken's card, and the card is where the
@@ -1815,9 +1817,9 @@ def _norm(x):
 ASSISTANT_KNOWLEDGE = "assistant/knowledge.md"
 ASSISTANT_PROMPT = "functions/_lib/system-prompt.js"
 ASSISTANT_SURFACES = (ASSISTANT_KNOWLEDGE, ASSISTANT_PROMPT, "site/assistant.js", "functions/_lib/assistant.js")
-# The prompt is verbatim from the owner. Wording changes need owner approval
-# and a new hash here and in CANON (ASK OMNIFIT).
-ASSISTANT_PROMPT_SHA256 = "6749df074f3ebec3"
+# The prompt is the owner's wording; a change needs owner approval (CANON, ASK
+# OMNIFIT). It is screened below like every other assistant surface. Its
+# sha256 was pinned here until the CANON slim-down (Nov 27 2026).
 
 def assistant_knowledge_text(raw):
     """What the model actually receives: knowledge.md minus maintainer comments
@@ -1844,9 +1846,10 @@ def assistant_prompt_screenable(prompt):
     return out
 
 def _canon_card_numbers(canon):
-    """Every figure in CANONICAL FACTS and the OCTOBER 2026 CARD block - the
-    only places a published price may come from."""
-    spans = [(canon.index("CANONICAL FACTS"), canon.index("\nREPO STATE")),
+    """Every figure in CANONICAL FACTS (which ends where STRETCH TO WIN
+    MARKETING RULES begins) and the OCTOBER 2026 CARD block (which ends at
+    LEGACY PRICING) - the only places a published price may come from."""
+    spans = [(canon.index("CANONICAL FACTS"), canon.index("\nSTRETCH TO WIN MARKETING RULES")),
              (canon.index("PRICING — OCTOBER 2026 CARD"), canon.index("\nLEGACY PRICING"))]
     return {n.replace(",", "") for a, b in spans for n in re.findall(r"\d[\d,]*", canon[a:b])}
 
@@ -2716,32 +2719,125 @@ def _selftest_fst():
 
 
 class CanonParseFailure(Exception):
-    """CANON.md's INVARIANTS block could not be read. Raised rather than
-    returning an empty dict: an empty recorded-hash table would make every
-    comparison below vacuously true, which is the null-overwrite shape this
-    check exists to close."""
+    """A sentence CANON.md is meant to hold could not be read. Raised rather
+    than returning nothing: with no recorded sentence every comparison below
+    would pass vacuously."""
 
-# CANON.md records the five invariant hashes in prose, each on its own `- `
-# bullet of the INVARIANTS block. Parsed, never hard-coded: a copy of the
-# hashes in this file would be a second place to forget to update, and the
-# whole point of the check is that CANON is the single recorded source.
-#
-# Each entry is (bullet anchor, hash pattern) and BOTH are matched inside ONE
-# bullet. An earlier version searched the whole block with `.*?` under re.S,
-# which let a mangled hash match forward into the NEXT bullet's hash and report
-# a neighbouring invariant's value as its own - a parser failing open, exactly
-# the shape this check exists to close. Caught by negative-testing a blanked
-# archetypes hash, which "parsed" as the 9-point value.
-CANON_HASH_PATTERNS = {
-    "page pricing":   (r'Canonical pricing FAQ answer:', r'\bpage hash\s+([0-9a-f]{8,64})\b'),
-    "header pricing": (r'Canonical pricing FAQ answer:', r'\bheader hash\s+([0-9a-f]{8,64})\b'),
-    "credentials":    (r'Credentials block body:',       r'\(([0-9a-f]{8,64})\s*,'),
-    "archetypes":     (r'Archetype card bodies',         r'\(hash\s+([0-9a-f]{8,64})\s*;'),
-    "9-point":        (r'9-point screen section body',   r'\(hash\s+([0-9a-f]{8,64})\s*;'),
+# PLAIN CHECKS IN PLACE OF HASH LOCKS (CANON slim-down, Nov 27 2026, owner
+# decision: no hash locks on wording). Five blocks used to be hashed and the
+# hashes recorded in CANON's INVARIANTS block. Three of them held a published
+# price or credential sentence that nothing else guarded, so each of those
+# sentences is now written out in CANON.md in plain words and compared as
+# text, exactly as strictly: one changed figure or word is a finding.
+#   pricing FAQ answer            (was the "page pricing" + "header pricing" hashes)
+#   credentials sentence          (was the "credentials" hash; the rest of the bio is free)
+#   9-point assessment sentence   (was the "9-point" hash; the nine items are free)
+# The fourth and fifth (the archetype cards, the rest of the 9-point block)
+# were wording only and are no longer locked.
+CANON_SENTENCES = {
+    "pricing FAQ answer":          "CANONICAL PRICING FAQ ANSWER",
+    "credentials sentence":        "CREDENTIALS SENTENCE",
+    "9-point assessment sentence": "9-POINT SCREEN ASSESSMENT SENTENCE",
 }
+PRICING_ANSWER_START = "OmniFit Performance publishes its rates in full."
+_PAGE_PRICING_RX = r'-faq-(?:body"><p>|a">)(OmniFit Performance publishes its rates in full\..*?)(?:</p>|</div>)'
+_CRED_BLOCK_RX   = r'MEET YOUR TRAINER.*?<article class="[a-z]+-card">\s*<p>(.*?)</p>'
+_NINE_POINT_RX   = r'THE 9-POINT MOVEMENT SCREEN.*?<p>(.*?)</p>'
+
+def _plain(x):
+    """Copy as a reader meets it: tags dropped, entities decoded, whitespace
+    collapsed, no space left before punctuation where a tag was."""
+    return _norm(html.unescape(re.sub(r'<[^>]+>', ' ', x or '')))
+
+def canon_sentences(path="CANON.md", text=None):
+    """(sentences, problems). sentences maps each CANON_SENTENCES key to the
+    quoted sentence that follows its label in CANON.md; problems lists the keys
+    that could not be read. A label that is absent, given twice, or not
+    followed by a quoted sentence is reported, never defaulted."""
+    if text is None:
+        try: text = open(path).read()
+        except OSError as e: raise CanonParseFailure(f"cannot read {path}: {e}")
+    out, problems = {}, []
+    for key, label in CANON_SENTENCES.items():
+        hits = re.findall(r'^[ \t]*' + re.escape(label) + r'\b[^"]{0,400}"([^"]{40,})"', text, re.M)
+        if len(hits) != 1: problems.append(key); continue
+        out[key] = _plain(hits[0])
+    if not out:
+        raise CanonParseFailure(f"none of the {len(CANON_SENTENCES)} labelled sentences was found in {path}")
+    return out, problems
+
+def canon_sentence_findings(src, is_header, canon):
+    """[(key, problem)] for one file, plus the set of keys the file carries.
+    The pricing answer must BE the CANON sentence; the credentials block and
+    the 9-point intro must CONTAIN theirs. A key CANON did not yield is not
+    compared here (run() reports it as a check that could not run)."""
+    found, carried = [], set()
+    def differs(key, got, exact):
+        want = canon.get(key)
+        if want is None: return
+        got = _plain(got)
+        if (got != want) if exact else (want not in got):
+            i = next((n for n, (a, b) in enumerate(zip(got, want)) if a != b), min(len(got), len(want)))
+            found.append((key, f"…{got[max(0, i - 40):i + 50]}…" if exact else f"…{got[:110]}…"))
+    if is_header:
+        for b in re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', src, re.S):
+            try: doc = json.loads(b)
+            except Exception: continue          # invalid JSON is its own finding
+            for node in (doc.get("@graph", [doc]) if isinstance(doc, dict) else []):
+                if isinstance(node, dict) and node.get("@type") == "FAQPage":
+                    for q in node.get("mainEntity", []):
+                        a = q.get("acceptedAnswer", {}).get("text", "")
+                        if a.startswith(PRICING_ANSWER_START):
+                            carried.add("pricing FAQ answer"); differs("pricing FAQ answer", a, True)
+        return found, carried
+    for key, rx, exact in (("pricing FAQ answer", _PAGE_PRICING_RX, True),
+                           ("credentials sentence", _CRED_BLOCK_RX, False),
+                           ("9-point assessment sentence", _NINE_POINT_RX, False)):
+        m = re.search(rx, src, re.S)
+        if m: carried.add(key); differs(key, m.group(1), exact)
+    return found, carried
+
+def _selftest_canon_sentences():
+    """Both directions, on the parser and on each comparison. Raises on a
+    check that passes a changed sentence or fails the canonical one."""
+    ans = ("OmniFit Performance publishes its rates in full. The Program bills every 4 weeks: $640 to $1,800 at the "
+           "studio. Full tables on the training rates page.")
+    cred = "He holds fourteen certifications across movement, nutrition, and metabolic health: NASM CPT and CES."
+    nine = "Every OmniFit program starts with a 45-minute consultation and the $150 Performance Assessment, credited toward your first cycle."
+    canon_text = (f'    CANONICAL PRICING FAQ ANSWER (verbatim on its carriers): "{ans}"\n'
+                  f'  CREDENTIALS SENTENCE (verbatim): "{cred}"\n'
+                  f'    9-POINT SCREEN ASSESSMENT SENTENCE (verbatim): "{nine}"\n')
+    got, problems = canon_sentences(text=canon_text)
+    assert not problems and got == {"pricing FAQ answer": ans, "credentials sentence": cred,
+                                    "9-point assessment sentence": nine}, "CANON sentence self-test: the three labelled sentences were not read"
+    wrapped = canon_text.replace("The Program bills", "The Program\n      bills")
+    assert canon_sentences(text=wrapped)[0]["pricing FAQ answer"] == ans, "CANON sentence self-test: a wrapped sentence read differently"
+    assert canon_sentences(text=canon_text.replace("CREDENTIALS SENTENCE", "CREDENTIALS LINE"))[1] == ["credentials sentence"], "CANON sentence self-test: a missing label was not reported"
+    assert canon_sentences(text=canon_text + canon_text.split("\n")[1] + "\n")[1] == ["credentials sentence"], "CANON sentence self-test: a label given twice was not reported"
+    assert canon_sentences(text=canon_text.replace(f'"{nine}"', nine))[1] == ["9-point assessment sentence"], "CANON sentence self-test: an unquoted sentence was read"
+    try: canon_sentences(text="no labels here"); raise AssertionError("CANON sentence self-test: an empty CANON did not raise")
+    except CanonParseFailure: pass
+    page = ('<div class="lj-faq-body"><p>' + ans.replace("training rates page", '<a href="/training-rates-san-diego">training rates page</a>')
+            + '</p></div><!-- MEET YOUR TRAINER --><article class="lj-card">\n<p>Nemezio LopezPerez is a NASM Elite Trainer. ' + cred
+            + ' Every program he builds starts with a consultation.</p></article><!-- THE 9-POINT MOVEMENT SCREEN --><p>' + nine
+            + ' The diagnostic includes a nine-point movement screen:</p>')
+    hdr = '<script type="application/ld+json">' + json.dumps({"@graph": [{"@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": "Q?", "acceptedAnswer": {"@type": "Answer", "text": ans + " "}}]}]}) + '</script>'
+    assert canon_sentence_findings(page, False, got) == ([], set(CANON_SENTENCES)), "CANON sentence self-test: the canonical page was flagged"
+    assert canon_sentence_findings(hdr, True, got) == ([], {"pricing FAQ answer"}), "CANON sentence self-test: the canonical header was flagged"
+    for label, bad_page, key in (("a wrong Program price", page.replace("$640", "$660"), "pricing FAQ answer"),
+                                 ("a dropped figure", page.replace(" to $1,800", ""), "pricing FAQ answer"),
+                                 ("thirteen certifications", page.replace("fourteen", "thirteen"), "credentials sentence"),
+                                 ("a dropped credential", page.replace(" and CES", ""), "credentials sentence"),
+                                 ("a wrong assessment price", page.replace("the $150 Performance", "the $160 Performance"), "9-point assessment sentence"),
+                                 ("a changed credit term", page.replace("your first cycle", "your first month"), "9-point assessment sentence")):
+        assert [k for k, _ in canon_sentence_findings(bad_page, False, got)[0]] == [key], f"CANON sentence self-test: {label} on a page passed"
+    assert [k for k, _ in canon_sentence_findings(hdr.replace("$640", "$660"), True, got)[0]] == ["pricing FAQ answer"], "CANON sentence self-test: a wrong price in a header passed"
+    assert canon_sentence_findings("<p>No carrier here.</p>", False, got) == ([], set()), "CANON sentence self-test: a page that carries none was flagged"
+    assert canon_sentence_findings(page.replace("$640", "$660"), False, {}) == ([], set(CANON_SENTENCES)), "CANON sentence self-test: compared against a sentence CANON did not yield"
 
 # The twelve page/header pairs that carry the canonical pricing FAQ answer
-# (CANON INVARIANTS, "Canonical pricing FAQ answer"). Keep in step with CANON.
+# (CANON, OCTOBER 2026 CARD, "CANONICAL PRICING FAQ ANSWER"). Keep in step with CANON.
 PRICING_FAQ_CARRIERS = (
     "corrective-exercise-post-rehab", "personal-trainer-4s-ranch", "personal-trainer-carlsbad",
     "personal-trainer-carmel-valley", "personal-trainer-del-mar", "personal-trainer-encinitas",
@@ -2749,44 +2845,9 @@ PRICING_FAQ_CARRIERS = (
     "personal-trainer-rancho-santa-fe", "personal-trainer-santaluz", "personal-trainer-solana-beach",
 )
 
-def canon_hashes(path="CANON.md"):
-    """The five invariant hashes as CANON.md records them.
-
-    Returns (hashes, problems): hashes maps invariant name -> recorded hex
-    string, problems lists the names whose recorded value could not be read.
-    A name that cannot be parsed is reported, never defaulted - an invariant
-    with no recorded hash is an UNVERIFIED invariant, not a matching one."""
-    try:
-        text = open(path).read()
-    except OSError as e:
-        raise CanonParseFailure(f"cannot read {path}: {e}")
-    m = re.search(r'^INVARIANTS\b.*?(?=^[A-Z][A-Z0-9 ,/&-]+$)', text, re.S | re.M)
-    if not m:
-        raise CanonParseFailure(f"no INVARIANTS block found in {path}")
-    bullets = re.split(r'^- ', m.group(0), flags=re.M)[1:]
-    hashes, problems = {}, []
-    for key, (anchor, rx) in CANON_HASH_PATTERNS.items():
-        owning = [b for b in bullets if re.search(anchor, b, re.I)]
-        if len(owning) != 1:
-            problems.append(key); continue      # absent, or ambiguous across bullets
-        hit = re.search(rx, owning[0], re.S | re.I)
-        if hit: hashes[key] = hit.group(1).lower()
-        else:   problems.append(key)
-    if not hashes:
-        raise CanonParseFailure(
-            f"INVARIANTS block found in {path} but not one of the five hashes parsed")
-    return hashes, problems
-
-def canon_hash_matches(recorded, computed):
-    """CANON records some hashes truncated (credentials as `6492e3ca`, the rest
-    at 16 hex). Compare on the recorded prefix: a shorter recorded value is a
-    weaker check, not a mismatch. CANON_HASH_PATTERNS requires >= 8 hex chars,
-    so the prefix is never trivially short."""
-    return computed[:len(recorded)] == recorded
-
 def run():
     # archive/ is retired content kept as a historical record - never globbed,
-    # never certified, never corrected. See CANON REPO STATE.
+    # never certified, never corrected (CANON WORKFLOW).
     ALL = sorted(glob.glob('pages/**/*.html', recursive=True))
     assert not any(f.startswith('archive/') for f in ALL), "archive/ must never enter scope"
     files = [f for f in ALL if not any(k in f for k in OUT_OF_SCOPE)]
@@ -2882,8 +2943,8 @@ def run():
 
     # Outcome Claims Amendment (CANON TIER 2 items 2a and 2g). Reported in
     # full on every run; counted toward the result only once AMENDMENT_COUNTS
-    # is True (CANON NEXT RUNS), because the amendment was recorded before any
-    # page was brought to it and the first run's job is to list the gap.
+    # is True (it has been since Oct 17 2026), because the amendment was recorded
+    # before any page was brought to it and the first run's job was to list the gap.
     print("\n### (a') OUTCOME CLAIMS AMENDMENT - TIER 2 items 2a and 2g"
           + (" (counted)" if AMENDMENT_COUNTS else " (REPORTED, NOT COUNTED this run: AMENDMENT_COUNTS=False)"))
     _selftest_amendment()
@@ -2942,7 +3003,7 @@ def run():
             # a travel FEE, not any dollar figure sharing a line with the word travel
             if re.search(r'travel[^.<]{0,30}\$(?:50|75)\b|\$(?:50|75)\b[^.<]{0,30}travel', l, re.I):
                 print(f"   {f}:{i}  [travel fee dollar figure]"); B+=1
-    # Retired launch copy (CANON, LAUNCH DECISIONS): every file in the glob,
+    # Retired launch copy (CANON STANDING COPY RULES, RETIRED PHRASES): every file in the glob,
     # footer.html included, frozen records exempt. Self-tested first so the
     # sweep below cannot report green without having fired on a known hit.
     n_terms = _selftest_retired_copy()
@@ -3031,11 +3092,8 @@ def run():
             print(f"   {ASSISTANT_KNOWLEDGE}  [required wording missing: {phrase[:70]}…]"); B+=1
     for hit in assistant_internal_findings(md):
         print(f"   {ASSISTANT_KNOWLEDGE}  [internal content must not reach the assistant: {hit}]"); B+=1
-    prompt_sha = hashlib.sha256(assistant_prompt_text(open(ASSISTANT_PROMPT).read()).encode()).hexdigest()[:16]
-    if prompt_sha != ASSISTANT_PROMPT_SHA256:
-        print(f"   {ASSISTANT_PROMPT}  [system prompt changed: sha256 {prompt_sha}, owner-approved {ASSISTANT_PROMPT_SHA256}]"); B+=1
     print(f"   (assistant: {len(ASSISTANT_SURFACES)} surfaces swept for stale canon; knowledge prices vs CANON card, "
-          f"{len(ASSISTANT_REQUIRED)} required phrases, internal content: self-tested both ways; prompt sha256 {prompt_sha})")
+          f"{len(ASSISTANT_REQUIRED)} required phrases, internal content: self-tested both ways)")
     # Fascia Stretch Therapy: rates, $225 off an FST surface, "Fascial", brand
     # names and the title, the mark on the first mention, session length
     # (the 90-minute First Visit), the one booking link, the page's own
@@ -3087,23 +3145,31 @@ def run():
     for cat, what in fst_page_findings:
         if cat == 'c': print(f"   {FST_HEADER}  [{what}]"); C+=1
     print("   (FST page: nine-question FAQ, header FAQPage byte-identical to it, Service node and its three Offers: self-tested both ways)")
-    inv={}; notrun=[]
-    # The hashes CANON.md records, read once per run. A parse failure is
-    # recorded, never swallowed: with no recorded table the comparison below
-    # would pass vacuously on every invariant.
+    notrun=[]
+    # The price and credential sentences CANON.md writes out, read once per
+    # run (they replace the five recorded hashes; see CANON_SENTENCES). A
+    # sentence that cannot be read is recorded, never swallowed: with nothing
+    # to compare against, the comparison below would pass vacuously.
+    _selftest_canon_sentences()
     try:
-        canon_rec, canon_unparsed = canon_hashes()
+        canon_sent, canon_unread = canon_sentences()
     except CanonParseFailure as e:
-        # One loud line rather than five: it already says every invariant went
-        # uncompared, and the hash table below prints NOT RECORDED for each.
-        canon_rec, canon_unparsed = {}, []
-        notrun.append(f"CANON.md invariant hashes NOT READ - {e}; "
-                      f"no invariant was compared against its recorded value")
+        canon_sent, canon_unread = {}, []
+        notrun.append(f"CANON.md price and credential sentences NOT READ - {e}; "
+                      f"no carrier was compared against CANON")
+    for k in canon_unread:
+        notrun.append(f"CANON.md holds no readable '{k}' (label {CANON_SENTENCES[k]}, then the sentence "
+                      f"in double quotes, exactly once) - its carriers were not compared")
+    carriers_seen = {k: 0 for k in CANON_SENTENCES}
     for f in files:
         s=open(f).read()
         p=_P(); p.feed(s)
         if p.st or p.err:
             print(f"   {f}  [tag balance] unclosed={p.st} errors={p.err[:3]}"); C+=1
+        sent_found, sent_carried = canon_sentence_findings(s, '/headers/' in f, canon_sent)
+        for k in sent_carried: carriers_seen[k] += 1
+        for k, ctx in sent_found:
+            print(f"   {f}  [{k} does not match CANON ({CANON_SENTENCES[k]})]  {ctx}"); C+=1
         if '/headers/' in f:
             # EVERY ld+json block, not just the first. A header may carry its
             # nodes across several <script> blocks - desk-worker-posture-pain
@@ -3113,52 +3179,28 @@ def run():
             # broken. That was the checker not looking, reported as a defect in
             # the file it failed to read.
             blocks=re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>',s,re.S)
-            if not blocks: print(f"   {f}  [no ld+json block]"); C+=1; continue
-            graph=[]; graphed=False; bad=False
+            graph=[]; bad=False
             for i,b in enumerate(blocks,1):
                 try: doc=json.loads(b)
                 except Exception as e:
                     print(f"   {f}  [invalid JSON in ld+json block {i} of {len(blocks)}] {e}"); C+=1; bad=True; break
                 if isinstance(doc, dict) and "@graph" in doc:
-                    graph.extend(doc["@graph"]); graphed=True
+                    graph.extend(doc["@graph"])
                 else:
                     graph.append(doc)
             if bad: continue
-            # Not every header in the repo is a Batch-3-shaped @graph document
-            # (the homepage header IS the LocalBusiness definition, and several
-            # uploaded headers are a single bare node). A check that cannot be
-            # applied is recorded as NOT RUN, never silently skipped: the shape
-            # is outside what CANON specifies for page headers, so calling it a
-            # violation would be inventing a rule, and calling it a pass is how
-            # three earlier checks came to report success without looking.
-            n={x["@type"]:x for x in graph if isinstance(x, dict) and "@type" in x}
-            if not graphed:
-                notrun.append(f"{f}  ld+json is {len(blocks)} bare node(s), not an @graph document"
-                              f" - LocalBusiness/about checks not applicable")
-            else:
-                # Sept 20, 2026: the entity graph (Organization / Person /
-                # LocalBusiness / WebSite) is defined ONCE, in the site-wide
-                # header injection recorded as pages/headers/site-header.html.
-                # That file is the only header allowed to carry LocalBusiness;
-                # every other header (the homepage page-header included)
-                # references it by @id.
-                if "LocalBusiness" in n and not f.endswith("/site-header.html"):
-                    print(f"   {f}  [LocalBusiness redefined]"); C+=1
-                if f.endswith("/site-header.html"):
-                    if not n.get("LocalBusiness",{}).get("@id","").endswith("#localbusiness-of"):
-                        print(f"   {f}  [site-header LocalBusiness must carry @id #localbusiness-of]"); C+=1
-                    continue
-                pn = next((n[k] for k in PAGE_TYPES if k in n), None)
-                if pn is None:
-                    notrun.append(f"{f}  @graph has no WebPage node ({sorted(n)}) - "
-                                  f"about-references-homepage-LocalBusiness check could not run")
-                elif not pn.get("about",{}).get("@id","").endswith("#localbusiness-of"):
-                    print(f"   {f}  [about not referencing homepage LocalBusiness]"); C+=1
+            graph=[x for x in graph if isinstance(x, dict)]
+            # The shape of a header (one @graph document, a page node whose
+            # "about" references #localbusiness-of, LocalBusiness defined only
+            # in site-header.html) was a certification finding until the CANON
+            # slim-down (Nov 27 2026, owner decision): structure rules that do
+            # not keep the site from breaking left CANON and left this file.
+            # What stays is below: the FAQPage must mirror the page.
+            if f.endswith("/site-header.html"): continue    # site-wide; no page of its own
             slug=re.sub(r'-header\.html$','',f.split('/')[-1])
             # The homepage exists only as the home-0..7 fragments, so there is
-            # no pages/home.html. CANON (ORPHAN HEADERS, home-header.html) says
-            # its FAQPage mirrors pages/home-5.html; check it there rather than
-            # report "no matching page" for a header that is live and built.
+            # no pages/home.html. Its FAQPage mirrors pages/home-5.html; check it
+            # there rather than report "no matching page" for a live header.
             pg=HEADER_PAGE.get(slug, f"pages/{slug}.html")
             sq=[q["name"] for x in graph if x.get("@type")=="FAQPage" for q in x["mainEntity"]]
             sa=[q["acceptedAnswer"]["text"] for x in graph if x.get("@type")=="FAQPage"
@@ -3172,35 +3214,24 @@ def run():
                 notrun.append(f"{f}  FAQ mirror NOT VERIFIED - extractor failed on {pg}: {e}")
                 continue
             pq=[q for q,_ in pairs]; pa=[a for _,a in pairs]
-            if slug in NO_FAQ:
-                shaped = re.findall(FAQ_SHAPED, pagesrc, re.I) + re.findall(r'"FAQPage"', open(f).read())
-                if pq or sq or shaped:
-                    print(f"   {f}  [declared no-FAQ page carries FAQ markup] "
-                          f"page={len(pq)} schema={len(sq)} markers={sorted(set(shaped))[:4]}"); C+=1
-                continue
             if not pq and not sq:
-                notrun.append(f"{f}  no FAQ found on either side (page 0, schema 0) - "
-                              f"mirror check compared nothing")
+                # No FAQ on either side: nothing to mirror. But FAQ-shaped
+                # markup the extractor could not read is not "no FAQ"; say so
+                # rather than compare nothing and call it a pass.
+                shaped = re.findall(FAQ_SHAPED, pagesrc, re.I)
+                if shaped:
+                    notrun.append(f"{f}  FAQ-shaped markup on {pg} ({sorted(set(shaped))[:4]}) but no question was read "
+                                  f"and the header has no FAQPage - mirror NOT VERIFIED")
+                continue
             if pq!=sq:
                 print(f"   {f}  [FAQPage questions do not mirror page] page={len(pq)} schema={len(sq)}"); C+=1
-            # CANON (c) requires count, order AND text: answers are part of the mirror.
+            # The mirror is count, order AND text: answers are part of it.
             if len(pa)!=len(sa) or any(_norm(a)!=_norm(b) for a,b in zip(pa,sa)):
                 d=[i for i,(a,b) in enumerate(zip(pa,sa)) if _norm(a)!=_norm(b)]
                 print(f"   {f}  [FAQPage answers do not mirror page] differing index={d}"); C+=1
-            a=[x for x in sa if x.startswith("OmniFit Performance publishes its rates in full.")]
-            if a: inv.setdefault("header pricing",set()).add(hashlib.sha256(a[0].encode()).hexdigest()[:16])
             continue
-        for key,rx,grp in [
-            ("page pricing", r'-faq-(?:body"><p>|a">)(OmniFit Performance publishes its rates in full\..*?)(?:</p>|</div>)', 1),
-            ("credentials",  r'MEET YOUR TRAINER.*?<article class="[a-z]+-card">\s*<p>(.*?)</p>', 1)]:
-            m=re.search(rx,s,re.S)
-            if m: inv.setdefault(key,set()).add(hashlib.sha256(m.group(grp).encode()).hexdigest()[:16])
-        arch=re.findall(r'<article class="[a-z]+-card">\s*<h3>(?:The Desk-Bound Executive|The Post-Rehab Professional|The 50\+ Professional)</h3>\s*<p>(.*?)</p>',s,re.S)
-        if arch: inv.setdefault("archetypes",set()).add(hashlib.sha256("".join(arch).encode()).hexdigest()[:16])
-        sm=re.search(r'THE 9-POINT MOVEMENT SCREEN.*?<p>(.*?)</p>.*?<ul class="[a-z]+-card-features">(.*?)</ul>\s*<p>(.*?)</p>',s,re.S)
-        if sm: inv.setdefault("9-point",set()).add(hashlib.sha256((sm.group(1)+"".join(re.findall(r'<li>(.*?)</li>',sm.group(2)))+sm.group(3)).encode()).hexdigest()[:16])
-    # CARRIER LIST of the canonical pricing FAQ answer (CANON INVARIANTS). The
-    # hash says the carriers agree; this says WHICH files carry it, so a page
+    # CARRIER LIST of the canonical pricing FAQ answer. The comparison above
+    # says each carrier matches CANON; this says WHICH files carry it, so a page
     # dropping the block (or growing a copy) is a finding, not a silent change
     # of scope. The-30-minute-executive-reset left the list in the Audit
     # Reconciliation run (Oct 18 2026, owner-approved): its cost FAQ answers
@@ -3210,41 +3241,13 @@ def run():
     want = {s + h for s in PRICING_FAQ_CARRIERS for h in ('', ' (header)')}
     for x in sorted(carriers ^ want):
         print(f"   [pricing FAQ carrier list] {x} {'carries the block but is not a listed carrier' if x in carriers else 'is a listed carrier but no longer carries the block'}"); C+=1
-    for k,v in inv.items():
-        if len(v)!=1: print(f"   [invariant mismatch] {k}: {v}"); C+=1
-    # Two distinct failures, deliberately reported as two finding classes.
-    # [invariant mismatch]  - the files carrying an invariant disagree with
-    #                         EACH OTHER.
-    # [canon hash stale]    - the files agree, and what they agree on is not
-    #                         what CANON.md records. Files agreeing with one
-    #                         another proves only that an edit was applied
-    #                         consistently; until this run, a consistently
-    #                         edited invariant sailed past with a stale CANON
-    #                         value and nothing said a word. Same shape as the
-    #                         null overwrite: a comparison that never looked at
-    #                         the thing it claimed to check.
-    for k in ("page pricing","header pricing","credentials","archetypes","9-point"):
-        v=inv.get(k); rec=canon_rec.get(k)
-        if rec is None or not v: continue     # reported under CHECKS THAT COULD NOT RUN
-        if not any(canon_hash_matches(rec, c) for c in v):
-            got = ' '.join(sorted(v))
-            how = "files agree on" if len(v)==1 else "files disagree; none of"
-            print(f"   [canon hash stale] {k}: {how} {got}, CANON.md records {rec}"); C+=1
+    # A sentence CANON holds that no file carries any more has not been
+    # verified; it has had nothing to be compared with.
+    for k, n in carriers_seen.items():
+        if not n: notrun.append(f"'{k}' matched no file - its CANON sentence was not compared with anything")
+    print(f"   (price and credential sentences vs CANON, in plain text, self-tested both ways: "
+          + "; ".join(f"{k} on {n} file(s)" for k, n in carriers_seen.items()) + ")")
     print("   none" if not C else f"   {C} problem(s)")
-
-    print("\n### INVARIANT HASHES (computed, vs the value recorded in CANON.md)")
-    for k in ("page pricing","header pricing","credentials","archetypes","9-point"):
-        v=inv.get(k); rec=canon_rec.get(k)
-        got = 'MISSING - not found on any file' if not v else ' '.join(sorted(v))
-        if rec is None:   note = "CANON: NOT RECORDED - not compared"
-        elif not v:       note = f"CANON: {rec} - not compared"
-        elif any(canon_hash_matches(rec, c) for c in v): note = f"CANON: {rec}  ok"
-        else:             note = f"CANON: {rec}  STALE"
-        print(f"   {k:16} {got:24} {note}")
-        if not v: notrun.append(f"invariant '{k}' matched no file - hash not verified")
-        if k in canon_unparsed:
-            notrun.append(f"invariant '{k}' has no parseable hash in CANON.md - "
-                          f"computed value not compared against any recorded value")
 
     # NOT a fourth certification category: these are checks that could not be
     # applied, reported so a green result can never mean "nothing was looked at".

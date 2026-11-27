@@ -5,10 +5,11 @@
     python3 build.py --strict   # same, exit 1 if any check fails
     python3 build.py --check    # only run the checks against an existing public/
 
-The checks include keyword ownership (tools/ownership.py, reading the
-KEYWORD OWNERSHIP table in CANON.md): no owned phrase in the title, H1, H2s
-or meta description of a page other than its owner. Its pass/fail fixtures
-run first, so a broken check cannot report green. They also include the
+Keyword ownership (tools/ownership.py, reading the KEYWORD OWNERSHIP table in
+CANON.md) runs with the checks but is a GUIDELINE since Nov 27 2026 (owner):
+an owned phrase in the title, H1, H2s or meta description of a page other than
+its owner prints as a WARNING and never fails the check. Its fixtures run
+first, so a quiet result comes from a tool seen warning. The checks include the
 measurement rule (CANON MEASUREMENT): no retired tracking ID or dataLayer
 push anywhere in public/, the GA4 / Clarity / Meta Pixel IDs at most once per
 page, no Meta noscript image, no user data on the pixel's init, and a
@@ -255,7 +256,7 @@ def knowledge_js(md_text):
 SQSP_CDN_RE = re.compile(r"https?://[a-z0-9.-]*squarespace-cdn\.com/[^\s\"'<>)]+")
 
 # Cloudflare Pages _redirects: (source, target, status, origin); a None target
-# is a comment line. PRINCIPLE (owner, Oct 17 2026; CANON ARCHIVE > REDIRECTS):
+# is a comment line. PRINCIPLE (owner, Oct 17 2026; CANON SITE FACTS > REDIRECTS):
 # the Squarespace URL Mappings the owner pasted on Oct 17, 2026 are
 # authoritative. The only departures are (1) booking URLs -> Calendly (LAUNCH
 # DECISIONS item 1), (2) three exact-match pages that did not exist when the
@@ -867,7 +868,7 @@ def norm(path):
 
 
 def check_redirects(rules, built, known):
-    """The redirect rules (CANON ARCHIVE > REDIRECTS), as problem strings:
+    """The redirect rules (CANON SITE FACTS > REDIRECTS), as problem strings:
       unresolved  a known path that is neither a built page nor a rule source
       missing     a rule whose internal target is not a built page
       chain       a rule whose target is itself a rule source (a target must
@@ -1253,7 +1254,7 @@ def check():
         problems.append("assistant: functions/ must sit at the project root next to build.py, not inside public/")
     notes.append(f"assistant: knowledge.js in step with knowledge.md; widget assets and loader on {len(files)} pages; "
                  f"robots.txt names {len(ROBOTS_AGENTS)} crawlers and disallows /api/")
-    # Redirects (CANON ARCHIVE > REDIRECTS). Fixtures first, then the real set
+    # Redirects (CANON SITE FACTS > REDIRECTS). Fixtures first, then the real set
     # against every URL Google is known to have (tools/gsc-known-urls-*.txt).
     if not GSC_KNOWN.exists():
         problems.append(f"redirects: {GSC_KNOWN.relative_to(ROOT)} missing")
@@ -1285,20 +1286,23 @@ def check():
     notes.append(f"tracking: {len(tracked)} files scanned for {len(TRACKING_BANNED)} retired strings, "
                  f"the Meta noscript image and user data on fbq('init'); "
                  f"{', '.join(TRACKING_ONCE)} once on each of {n_pages} pages; fixtures OK")
-    # Keyword ownership (CANON KEYWORD OWNERSHIP). Fixtures first: if a fixture
-    # that must fail passes, the site result below means nothing.
+    # Keyword ownership (CANON KEYWORD OWNERSHIP): a GUIDELINE since Nov 27
+    # 2026 (owner decision). Every finding is a WARNING: nothing below is
+    # added to `problems`, so nothing below can fail the check or block a run.
+    # Fixtures first, so a quiet result comes from a tool that was seen
+    # warning; a fixture that misbehaves is a warning too.
+    warnings = []
     try:
         bad = ownership.selftest(verbose=False)
     except ownership.TableError as e:
         bad = [f"CANON table not read: {e}"]
-    problems += [f"ownership check fixture misbehaved: {b}" for b in bad]
-    own_problems, own_notes = ownership.check_site(PUBLIC)
-    problems += [f"keyword ownership: {p}" for p in own_problems]
+    warnings += [f"keyword ownership (guideline): fixture misbehaved, the warnings below are unreliable: {b}" for b in bad]
+    own_warnings, own_notes = ownership.check_site(PUBLIC)
+    warnings += [f"keyword ownership (guideline): {w}" for w in own_warnings]
     notes += [f"keyword ownership: {n}" for n in own_notes]
-    # Squarespace-hosted images (CANON "BEFORE CANCELLING SQUARESPACE"). A
-    # WARNING, never a problem: these URLs work today and break the day the
-    # Squarespace subscription ends. Listed per URL with the pages carrying it.
-    warnings = []
+    # Squarespace-hosted images. A WARNING, never a problem: these URLs work
+    # today and break the day the Squarespace subscription ends. Listed per
+    # URL with the pages carrying it.
     cdn = {}
     for rel, text in tracked.items():
         for url in set(SQSP_CDN_RE.findall(text)):
@@ -1326,13 +1330,15 @@ def main():
             items = ", ".join(f"{ch} x{n} -> {icons.ICONS[ch][0]}" for ch, n in sorted(emoji_report[url_path].items(), key=lambda kv: -kv[1]))
             print(f"  {url_path:45s} {items}")
     problems, notes, warnings = check()
-    print("\nCHECK: internal links, one H1 per page, social preview tags, JSON-LD parses, no emoji, 404/_headers, redirects, tracking, keyword ownership, Squarespace images (warning only)")
+    print("\nCHECK: internal links, one H1 per page, social preview tags, JSON-LD parses, no emoji, 404/_headers, redirects, tracking; keyword ownership and Squarespace images (warnings only)")
     for n in sorted(set(notes)):
         print("  note    ", n)
     for w in warnings:
         print("  WARNING ", w)
-    if not warnings:
+    if not any("squarespace-cdn.com" in w for w in warnings):
         print("  note     no squarespace-cdn.com references remain")
+    if not any(w.startswith("keyword ownership") for w in warnings):
+        print("  note     keyword ownership (guideline): no warnings")
     for p in problems:
         print("  PROBLEM ", p)
     print(f"RESULT: {'PASSED' if not problems else str(len(problems)) + ' problem(s)'}")
