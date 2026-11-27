@@ -1,38 +1,47 @@
-"""Keyword ownership check. Reads the KEYWORD OWNERSHIP table in CANON.md and
-fails when an owned phrase appears in the title, H1, H2s or meta description
-of any page other than its owner (or a page the table also permits).
+"""Keyword ownership: a GUIDELINE, not a gate (owner decision, Nov 27 2026).
 
-    python3 tools/ownership.py              # check public/ (run build.py first)
-    python3 tools/ownership.py --selftest   # run the pass/fail fixtures
+Reads the OWNERSHIP TABLE in CANON.md and prints a WARNING when an owned phrase
+appears in the title, H1, H2s or meta description of any page other than its
+owner (or a page the table also permits), when an owner page does not carry a
+"cover" variant, or when an X rule's term sits on its page. A warning never
+fails anything: this module exits 0 whatever it finds, and build.py --check
+prints its findings as WARNING lines and never counts them as problems. A run
+weighs each warning and says in REPORT.md what it did.
 
-build.py --check calls check_site() and selftest(), so a check run that cannot
-prove its own fixtures still fail is not a passing run.
+    python3 tools/ownership.py [public dir]  # warnings for public/ (run build.py first)
+    python3 tools/ownership.py --selftest    # run the fixtures
 
-Why here and not in certify.py: CANON's certification reports exactly three
-categories (compliance, stale canon, structure). Keyword ownership is none of
-them, and a page's title and meta description are only resolved at build time
-(header WebPage node, SEO comment or build.py META_FALLBACK), so the check
-reads the RENDERED page in public/, which is what a search engine reads.
+Until Nov 27 2026 every finding here was a PROBLEM that failed build.py
+--check, a missing "cover" variant included. The matching is unchanged; only
+the consequence is.
 
-Matching rules, recorded in CANON beside the table:
+It reads the RENDERED page in public/, which is what a search engine reads: a
+page's title and meta description are only resolved at build time (header
+WebPage node, SEO comment or build.py META_FALLBACK).
+
+Matching rules:
   - Case-insensitive, on tag-stripped text, comments/<style>/<script> removed.
   - Longest match wins: a match lying wholly inside another keyword's match is
     that other keyword's, so "In-Home Personal Trainer in San Diego" counts
     for the in-home keyword only, never for "personal trainer in san diego".
-  - Fails closed: the CANON table missing, empty, malformed, or naming an
-    owner page that was not built is a problem, never a skipped check.
-  - A keyword with a "cover" line must be CARRIED by its owner: the cover
-    regex has to match somewhere on the owner page (meta, any heading, FAQ
-    question or body copy in <main>), or it is a problem. Used for the
-    "in home personal trainer [town]" variants (Town Card run, Oct 2026).
-    Keywords without one keep the title/H1/H2/meta coverage note.
+  - The CANON table missing, empty, malformed, or naming an owner page that
+    was not built is itself a warning, never a silent skip: an unreadable
+    table would otherwise look like a site with nothing to say.
+  - A keyword with a "cover" line should be CARRIED by its owner: the cover
+    regex is looked for anywhere on the owner page (meta, any heading, FAQ
+    question or body copy in <main>). Used for the "in home personal trainer
+    [town]" variants. Keywords without one get a coverage note.
 
 Pages and keywords are registered in the CANON table, not here, so the table
-stays the single source. Most recent entries (FST Launch run, Nov 2026):
-K30 "fascia stretch therapy" and K31 "assisted stretching", both owned by
-/fascia-stretch-therapy-san-diego. Fixtures: fail/k30-fascia-stretch-therapy-
-on-rates-h2.html, fail/k31-assisted-stretching-in-services-title.html,
-pass/k30-k31-fst-owner.html, pass/k30-h3-and-body-are-not-owner-surfaces.html.
+stays the single source.
+
+Fixtures (tools/fixtures/ownership/): every page under warn/ must draw at
+least one warning and every page under pass/ none; selftest() also proves a
+warning leaves the exit code at 0. build.py --check runs it first, so a quiet
+ownership result always comes from a check seen warning. A fixture that
+misbehaves is reported as a warning too (the tool is then unreliable, the
+build is not broken); `--selftest` on its own exits 1 for it, because there it
+is the tool under test.
 """
 import html
 import json
@@ -187,7 +196,7 @@ def count(keywords, texts):
 
 
 def check_page(path, doc, keywords, exclusions):
-    """(problems, owned) for one page. owned = keyword ids this page carries
+    """(warnings, owned) for one page. owned = keyword ids this page carries
     on an owner surface, used for the owner-coverage note."""
     surf = surfaces(doc)
     problems, owned = [], set()
@@ -201,8 +210,9 @@ def check_page(path, doc, keywords, exclusions):
                     continue
                 problems.append(f"{path}: {k['id']} '{k['label']}' in {name}: \"{g}\" "
                                 f"(\"{_ctx(text, at, len(g))}\") - owner is {k['owner']}")
-    # Owner coverage that is a failure, not a note: the "cover" phrase must sit
-    # somewhere on the owner page (meta, headings, FAQ questions, body copy).
+    # Owner coverage that is a warning, not just a note: the "cover" phrase
+    # should sit somewhere on the owner page (meta, headings, FAQ questions,
+    # body copy). A failure until Nov 27 2026; a warning since.
     for k in keywords:
         if k["cover_rx"] is None or path != k["owner"]:
             continue
@@ -245,7 +255,8 @@ def _url_path(public, f):
 
 
 def check_site(public=ROOT / "public", canon=ROOT / "CANON.md"):
-    """(problems, notes) for every rendered page in public/."""
+    """(warnings, notes) for every rendered page in public/. Nothing returned
+    here is a failure: see report()."""
     try:
         keywords, exclusions = load_table(canon)
     except TableError as err:
@@ -287,8 +298,9 @@ BAD_TABLES = {
 
 
 def selftest(canon=ROOT / "CANON.md", verbose=True):
-    """Every fixture under fixtures/ownership/fail must produce a problem and
-    every one under pass must produce none. Returns a list of failures."""
+    """Every fixture under fixtures/ownership/warn must draw a warning and
+    every one under pass must draw none; and a site that draws warnings must
+    still report exit code 0. Returns the list of misbehaviours."""
     say = print if verbose else (lambda *a: None)
     bad = []
     for name, text in BAD_TABLES.items():
@@ -299,7 +311,7 @@ def selftest(canon=ROOT / "CANON.md", verbose=True):
         except TableError as err:
             say(f"  FIXTURE  table/{name:38s} TableError as expected: {err}")
     keywords, exclusions = load_table(canon)
-    for kind in ("fail", "pass"):
+    for kind in ("warn", "pass"):
         files = sorted((FIXTURES / kind).glob("*.html"))
         if not files:
             bad.append(f"no {kind} fixtures in {FIXTURES / kind}")
@@ -309,30 +321,60 @@ def selftest(canon=ROOT / "CANON.md", verbose=True):
             if not m:
                 bad.append(f"{f.name}: no fixture-path comment"); continue
             problems, _ = check_page(m.group(1), doc, keywords, exclusions)
-            ok = bool(problems) == (kind == "fail")
+            ok = bool(problems) == (kind == "warn")
             if not ok:
-                bad.append(f"{kind}/{f.name}: {'no problem reported' if kind == 'fail' else problems}")
-            say(f"  FIXTURE  {kind}/{f.name:38s} {'FAILS' if problems else 'passes'}"
+                bad.append(f"{kind}/{f.name}: {'no warning drawn' if kind == 'warn' else problems}")
+            say(f"  FIXTURE  {kind}/{f.name:38s} {'WARNS' if problems else 'quiet'}"
                 f"{'' if ok else '   MISBEHAVED'}")
             for p in problems:
                 say(f"             {p}")
+    # A warning is never a failure. Build a small site out of the warn/
+    # fixtures (so it is certain to draw warnings) and prove report() still
+    # hands back exit code 0, with every finding on a WARNING line. Then the
+    # same for a CANON whose table cannot be read.
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        for f in sorted((FIXTURES / "warn").glob("*.html")):
+            (tmp / f.name).write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
+        lines, code = report(tmp, canon)
+        n_warn = sum(1 for l in lines if l.startswith("  WARNING "))
+        say(f"  FIXTURE  a site of the warn/ fixtures: {n_warn} WARNING line(s), exit code {code}"
+            f"{'' if (n_warn and code == 0) else '   MISBEHAVED'}")
+        if not n_warn:
+            bad.append("a site built from the warn/ fixtures drew no warning")
+        if code != 0:
+            bad.append(f"warnings changed the exit code to {code}: a guideline must never fail a run")
+        if any(l.startswith("  PROBLEM") for l in lines):
+            bad.append("a finding was printed as a PROBLEM, not a WARNING")
+        broken = tmp / "CANON-without-table.md"
+        broken.write_text("no table here\n", encoding="utf-8")
+        lines, code = report(tmp, broken)
+        if code != 0 or not any(l.startswith("  WARNING ") and "table not read" in l for l in lines):
+            bad.append("an unreadable CANON table was not reported as a warning with exit code 0")
     return bad
 
 
+def report(public=ROOT / "public", canon=ROOT / "CANON.md"):
+    """(lines to print, exit code). The exit code is 0 whatever was found:
+    keyword ownership is a guideline, so its findings are warnings."""
+    warnings, notes = check_site(public, canon)
+    lines = [f"  note     {n}" for n in notes] + [f"  WARNING  {w}" for w in warnings]
+    lines.append("OWNERSHIP (guideline): " + (f"{len(warnings)} warning(s); nothing fails" if warnings else "no warnings"))
+    return lines, 0
+
+
 def main():
-    if "--selftest" in sys.argv[1:]:
+    args = sys.argv[1:]
+    if "--selftest" in args:
         bad = selftest()
-        print(f"SELFTEST: {'PASSED' if not bad else str(len(bad)) + ' fixture(s) misbehaved'}")
+        print(f"SELFTEST: {'PASSED' if not bad else str(len(bad)) + ' misbehaviour(s)'}")
         for b in bad:
             print("  ", b)
         sys.exit(1 if bad else 0)
-    problems, notes = check_site()
-    for n in notes:
-        print("  note    ", n)
-    for p in problems:
-        print("  PROBLEM ", p)
-    print(f"OWNERSHIP: {'PASSED' if not problems else str(len(problems)) + ' problem(s)'}")
-    sys.exit(1 if problems else 0)
+    lines, code = report(Path(args[0]) if args else ROOT / "public")
+    print("\n".join(lines))
+    sys.exit(code)
 
 
 if __name__ == "__main__":

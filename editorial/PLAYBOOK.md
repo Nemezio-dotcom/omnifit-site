@@ -9,7 +9,8 @@ until he replies "publish".
 1. Attach and clone the repo with push access (owner `Nemezio-dotcom`, repo
    `omnifit-site`), then `git fetch --depth=200 origin main` so git dates in
    the sitemap are right.
-2. Read `CANON.md` (compliance screen, KEYWORD OWNERSHIP, THE JOURNAL),
+2. Read `CANON.md` (COMPLIANCE SCREEN, LANGUAGE RULES, STANDING COPY RULES,
+   KEYWORD OWNERSHIP, and THE JOURNAL and SEARCH SAFETY under WORKFLOW),
    this file, and `editorial/CALENDAR.md`.
 3. Pending-draft check: list remote branches named `blog-NN`. If one exists
    that is not merged into `main`, a post is still waiting for approval. Do
@@ -36,7 +37,8 @@ voice, no bootcamp or challenge language.
 - 3 to 5 internal links to the owner pages in the calendar row, with
   descriptive anchor text in body copy. Never link with cost wording
   (CANON: no cost-anchor links until the cost page exists).
-- Use the H2 for the FAQ heading and keep every H2 free of owned keywords.
+- Use the H2 for the FAQ heading and keep every H2 free of owned keywords
+  (CANON KEYWORD OWNERSHIP, a guideline: `tools/ownership.py` warns).
 
 Hard rules (CANON compliance screen; certify.py enforces most of them):
 - No outcome guarantees and no "guarantee" outside the 30-Day Fit Guarantee.
@@ -66,9 +68,10 @@ Hard rules (CANON compliance screen; certify.py enforces most of them):
    `site/blog.py`. `published` and `updated` = today (Pacific time); they
    are reset on the publish day.
 3. Set the calendar row status to `draft (blog-NN)`.
-4. Run `python3 build.py --strict`, `python3 tools/certify.py` and
-   `python3 tools/ownership.py`. All three must pass. Fix the post, never
-   the checks.
+4. Run `python3 build.py --strict` and `python3 tools/certify.py`. Both
+   must pass. Fix the post, never the checks. `python3 tools/ownership.py`
+   prints keyword-ownership WARNINGS (a guideline since Nov 27 2026, never a
+   failure): weigh each one and say in the draft note what you did.
 5. Commit (post + calendar + rebuilt `public/`) and push the branch only.
    Preview: `https://blog-NN.omnifit-site.pages.dev/blog/<slug>` (Cloudflare
    needs a few minutes after the push; previews are noindexed).

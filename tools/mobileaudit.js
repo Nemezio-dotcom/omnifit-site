@@ -1,4 +1,4 @@
-// Mobile layout audit (CANON LAUNCH DECISIONS item 22), Playwright on the built site.
+// Mobile layout audit (owner decision, Oct 17 2026: every page at 390 and 412px), Playwright on the built site.
 //
 //   python3 build.py && NODE_PATH="$(npm root -g)" node tools/mobileaudit.js [path ...] [--shots DIR]
 //

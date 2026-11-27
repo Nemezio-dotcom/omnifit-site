@@ -8,8 +8,8 @@ two stay in step.
 python3 tools/certify.py     # the three-category certification
 python3 tools/mkheaders.py   # regenerate the Batch 3 page headers
 python3 tools/mkheaders.py --check   # writes nothing; FAILS if any of the 9 Batch 3 headers differs from what it would write
-python3 tools/ownership.py   # keyword ownership on public/ (also run by build.py --check)
-python3 tools/ownership.py --selftest   # its must-fail / must-pass fixtures
+python3 tools/ownership.py   # keyword ownership on public/: WARNINGS only, a guideline (also run by build.py --check)
+python3 tools/ownership.py --selftest   # its must-warn / must-pass fixtures
 node --test tests/assistant.test.mjs   # Ask OmniFit functions: mocked fetch, in-memory D1 from schema.sql, no network
 python3 build.py --check     # site checks incl. redirects vs tools/gsc-known-urls-*.txt and the tracking rule
 NODE_PATH="$(npm root -g)" node tools/tracktest.js   # measurement test on the built site (Playwright)
@@ -19,8 +19,8 @@ NODE_PATH="$(npm root -g)" node tools/widgettest.js   # Ask OmniFit widget: ever
 ```
 
 `certify.py` reports exactly three categories — (a) compliance strikes,
-(b) stale canon, (c) broken structure — then the five invariant hashes, then
-the checks that could not run, then `PASSED` / `FAILED` / `INCOMPLETE`.
+(b) stale canon, (c) broken structure — then the checks that could not run,
+then `PASSED` / `FAILED` / `INCOMPLETE`.
 Anything else is a judgment call for a human, not a certification finding.
 `INCOMPLETE` means no findings but at least one check was not applied; it is
 never reported as a pass.
@@ -68,15 +68,17 @@ a fixture proving a real violation in the same shape still flags.
 
 ## FAQ extraction (`faq.py`)
 
-**Pages with no FAQ (`NO_FAQ` in certify.py, CANON "PAGES WITH NO FAQ").** An
-empty mirror used to be recorded as "compared nothing" and kept certification
-at INCOMPLETE forever, because six pages simply have no FAQ. A declared page now
-passes only after a positive scan: no `<details>`, `<summary>`, `faq`/`accordion`
-class, `fq` button or "Frequently Asked Questions" in the page body, and no
-FAQPage in the header. Negative tests (Oct 16, 2026): adding a `<details>` FAQ to
-fit-check flags `[declared no-FAQ page carries FAQ markup]`; dropping fit-check
-from the list brings back the not-run entry. An undeclared page with no FAQ is
-still NOT RUN, never a silent pass.
+**Pages with no FAQ.** A page with no FAQ on either side (no question read
+from the page, no FAQPage in the header) has nothing to mirror and is not a
+finding. What is still caught: FAQ-shaped markup on the page (`<details>`,
+`<summary>`, a `faq`/`accordion` class, an `fq` button, "Frequently Asked
+Questions") that the extractor could not read while the header has no FAQPage
+is reported under CHECKS THAT COULD NOT RUN, so an unknown FAQ pattern cannot
+pass as "no FAQ"; and a page FAQ with no FAQPage, or the reverse, fails the
+mirror. Until the CANON slim-down (Nov 27 2026, owner decision) six pages were
+declared in a `NO_FAQ` list here and in CANON, and FAQ markup on a declared
+page was its own finding (`[declared no-FAQ page carries FAQ markup]`); the
+list, the CANON section and that finding are gone.
 
 **Page node subtypes (`PAGE_TYPES`).** AboutPage and ContactPage count as the
 page node for the `about` → #localbusiness-of check.
@@ -163,7 +165,7 @@ removing them changes nothing.
 
 ## Header mirroring
 
-CANON (c) requires the FAQPage to mirror the page FAQ in **count, order and
+The FAQPage must mirror the page FAQ in **count, order and
 text**. `certify.py` checks all three, answers included. Comparison normalises
 whitespace before punctuation, because stripping `<a>` tags leaves a space
 before the period — an extraction artifact, not a mirroring failure.
@@ -212,8 +214,8 @@ when editing this file.
 | 12 | travel-fee adjacency | (b) | unchanged — and still carries its known defect, below |
 | 13 | `$150`/`$175` context | (b) | unchanged |
 | 14 | tag balance · ld+json validity | (c) | unchanged |
-| 15 | LocalBusiness `@id` · `about` reference · FAQ mirror · orphan page | (c) | unchanged |
-| 16 | invariant mismatch · canon hash stale | (c) | unchanged |
+| 15 | FAQ mirror · orphan page | (c) | unchanged. The LocalBusiness `@id` and `about` reference checks were **removed** Nov 27 2026 (CANON slim-down: header shape is no longer a certification finding) |
+| 16 | price and credential sentences vs CANON | (c) | **replaces** `invariant mismatch` · `canon hash stale` since Nov 27 2026: plain text, no hashes (see "Price and credential sentences") |
 | 17 | `attributed_outcome_conditions` | T2-2a | **new** (Oct 17 2026) — the Outcome Claims Amendment's conditions 3, 4, 5 and the consent list; counted since the Oct 17 follow-up (`AMENDMENT_COUNTS = True`); page-scoped /outcomes short disclosure |
 | 18 | `data_backed_figures` | T2-2g | **new** (Oct 17 2026) — unattributed client figures must be on /outcomes; adherence % on sight; same reporting rule |
 | 19 | `positioning_line_verbatim` | (b) | **new** (Oct 17 2026) — the POSITIONING LINE verbatim, never in title/meta/H1 |
@@ -529,7 +531,7 @@ named figure; (3) the disclosure with one word changed ("typically improve")
 is not exempt.
 
 **Teqneeq on-site PT (`teqneeq_onsite_pt`, stale canon, Oct 17 2026).** Teqneeq
-has no on-site physical therapy clinic (CANON ENTITY BLOCK). A sentence naming
+has no on-site physical therapy clinic (CANON BUSINESS AND ENTITY). A sentence naming
 Teqneeq, or the sentence after it, that places a PT / physical therapy /
 rehab clinic on site or in-house is a finding; negations pass. Every file in
 the glob, frozen records included. Self-tested both ways
@@ -563,66 +565,43 @@ duplicate and no longer frozen; there is no byte-identical pair in `pages/`.
 `archive/` never enters the glob, and an assertion enforces that: retired pages
 keep their retired pricing, old address and unmirrored headers on purpose.
 
-## Invariants
+## Price and credential sentences (in place of the hash locks, Nov 27 2026)
 
-Five, all recomputed from the files each run and compared against the hashes
-recorded in CANON.md: page pricing, header pricing, credentials, archetypes,
-9-point screen. All five are now **printed every run**, not only on mismatch,
-and an invariant that matched no file at all is reported as not-verified rather
-than silently absent.
+Until the CANON slim-down five blocks were sha256-hashed and the hashes
+recorded in CANON's INVARIANTS block (page pricing, header pricing,
+credentials, archetypes, 9-point screen), with two finding classes,
+`[invariant mismatch]` and `[canon hash stale]`. The owner removed hash locks
+on wording (Nov 27 2026). Three of the five blocks held a published price or
+credential sentence that nothing else guarded, so each of those sentences is
+now written out in CANON.md in plain words and compared as text:
 
-### Two mismatch classes, both category (c)
+| CANON label | Carriers | Comparison |
+|---|---|---|
+| `CANONICAL PRICING FAQ ANSWER` | the page FAQ and header FAQPage of the twelve `PRICING_FAQ_CARRIERS` (24 files) | the answer must BE CANON's sentence |
+| `CREDENTIALS SENTENCE` | the "Meet Nemezio" block (`MEET YOUR TRAINER`) on eleven pages | the block must CONTAIN CANON's sentence |
+| `9-POINT SCREEN ASSESSMENT SENTENCE` | the intro of the 9-point screen section on eleven pages | the intro must CONTAIN CANON's sentence |
 
-Until Sept 2026 this section described a comparison that did not happen. The
-check only asserted that the files carrying an invariant agreed with **each
-other**; it never opened CANON.md. An invariant edited consistently across all
-its pages therefore passed in silence while CANON still recorded the old hash —
-the null overwrite again, a comparison reporting success without looking at the
-thing it claimed to check. The hashes are now parsed out of CANON's INVARIANTS
-block and compared, and the two failures are reported as two classes because
-they mean different things:
+Text is compared as a reader meets it (tags dropped, entities decoded,
+whitespace collapsed), so one changed figure or word is a finding:
+`[<name> does not match CANON (<LABEL>)]`, category (c), where the hash
+findings were. The archetype cards and the rest of the 9-point block were
+wording only and are no longer locked.
 
-| Finding | What is true |
-|---|---|
-| `[invariant mismatch]` | the files carrying the invariant disagree with **each other** |
-| `[canon hash stale]` | the files agree, and what they agree on is **not what CANON.md records** |
+`canon_sentences()` reads each label and the double-quoted sentence after it.
+It fails loudly, never open: a label that is absent, given twice, or not
+followed by a quoted sentence is listed under CHECKS THAT COULD NOT RUN (the
+result is then INCOMPLETE, never PASSED), an unreadable CANON.md raises
+`CanonParseFailure` and is recorded the same way, and a sentence that no file
+carries any more is reported as compared with nothing.
+`_selftest_canon_sentences()` runs every time, both ways: the canonical page
+and header pass; a wrong Program price, a dropped figure, "thirteen
+certifications", a dropped credential, a wrong assessment price and a changed
+credit term each fail on their own check.
 
-Files agreeing with one another proves only that an edit was applied
-consistently. The Device Swap run is the case in point: retiring the 1500 MDD
-rewrote the Body Composition `<li>` on every territory page at once, so the
-9-point hash moved from `bd73ea51bc9ec5eb` to `ba590a09107ffda0` with all pages
-still in perfect agreement. Under the old check that was indistinguishable from
-no change at all.
-
-The recorded hashes are **parsed, never hard-coded** — a copy in `certify.py`
-would be a second place to forget to update, and CANON being the single
-recorded source is the whole point. Each invariant's bullet anchor and hash
-pattern are matched inside **one `- ` bullet** of the INVARIANTS block. The
-first version searched the whole block with `.*?` under `re.S`, which let a
-blanked hash match forward into the *next* bullet and report a neighbouring
-invariant's value as its own — a parser failing open, in the exact shape the
-check exists to close. It was caught by negative-testing a blanked archetypes
-hash, which "parsed" as the 9-point value.
-
-Fails loudly, never open. An unreadable CANON.md, a missing INVARIANTS block,
-or a block where not one hash parses raises `certify.CanonParseFailure`;
-`run()` catches it and records the run under CHECKS THAT COULD NOT RUN, so an
-invariant that was never compared can never read as one that matched. A single
-unparseable hash is reported per-invariant the same way. Both paths are
-negative-tested, and so is the parse of a live CANON.md.
-
-Negative-tested in both directions, as every rule here must be: altering the
-recorded 9-point hash in CANON.md fires
-`[canon hash stale] 9-point: files agree on …, CANON.md records …` and moves
-the structure count; reverted, all five read `ok` and the count returns.
-
-The credentials block is 630 bytes across 10 pages. Editing it means editing all
-ten and updating the hash in CANON.md in the same commit. CANON recorded this
-one truncated to 8 hex while the others were 16, so comparison is on the
-**recorded prefix** — a shorter recorded value is a weaker check, not a
-mismatch. The entry was widened to the full `6492e3ca1545dc26` in the Device
-Swap merge, closing that weakness; the prefix rule stays, with an 8-hex floor,
-because nothing stops a future entry being written short again.
+The FST badge is the one sha256 left in `certify.py` (`fst_badge_file`): it
+pins an image file, not wording, and lives beside its test. The assistant
+system prompt's sha256 is no longer pinned; the prompt is still screened like
+every other assistant surface.
 
 ## CHECKS THAT COULD NOT RUN
 
@@ -631,14 +610,12 @@ lists checks that were **not applied**, so a green result can never mean
 "nothing was looked at". A run with zero findings but a non-empty block prints
 `RESULT: INCOMPLETE`, not `PASSED`.
 
-What lands here: a header whose ld+json is a single bare node rather than an
-`@graph` document (the homepage header *is* the LocalBusiness definition, and
-several uploaded headers are one bare node — that shape is outside what CANON
-specifies for page headers, so calling it a violation would be inventing a
-rule and calling it a pass is how three earlier checks came to report success
-without looking); an `@graph` with no `WebPage` node; a page whose FAQ the
-extractor could not read; a header/page pair where both sides have zero FAQ
-entries so the mirror compared nothing; an invariant that matched no file.
+What lands here: a page whose FAQ the extractor could not read; a page with
+FAQ-shaped markup, no readable question and no FAQPage in its header; a CANON
+price or credential sentence that could not be read, or that no file carries.
+(Until Nov 27 2026 a header that was a bare node rather than an `@graph`
+document, or an `@graph` with no `WebPage` node, also landed here; header shape
+is no longer checked.)
 
 Before Sept 2026 the first of these did not report anything at all — it raised
 `KeyError: 'WebPage'` and killed the run part-way through category (c), so no
@@ -648,13 +625,9 @@ had been aborting rather than certifying since the uploads that followed commit
 
 ## Scope
 
-`certify.py` skips `the-30-minute-executive-reset` and `footer` (see CANON
-REPO STATE). `training-rates-san-diego` entered scope in the Rates Page
-Correction run (Aug 2026) once its content certified; the naming fix (its
-header lacked the `-header.html` suffix) was applied *after* content passed,
-per CANON's naming-fix rule — doing it first would have hidden a real
-structural check behind a filename mismatch instead of a genuine pass.
-Everything else under `pages/` is in scope.
+`certify.py` keeps `footer.html` out of the per-page screen (`OUT_OF_SCOPE`;
+it is still swept by the stale-canon and FST rules). Everything else under
+`pages/` is in scope; headers are `pages/headers/<slug>-header.html`.
 There is an assertion that the glob matched a non-zero number of files — an
 earlier run passed vacuously because it was executed from the wrong directory
 and matched nothing.
@@ -667,34 +640,43 @@ python3 tools/mkterritory.py   # regenerate the eleven territory page headers
 mirrors the on-page FAQ verbatim (tags stripped) in page order, and asserts the
 pricing answer is byte-identical across all eleven before writing.
 
-## Keyword ownership (`ownership.py`, Oct 2026)
+## Keyword ownership (`ownership.py`): a guideline since Nov 27 2026
 
-Reads the OWNERSHIP TABLE in CANON's KEYWORD OWNERSHIP section and fails when
-an owned phrase sits in the title, H1, H2s or meta description of a page other
-than its owner (or an `also` page), plus the page-specific X rules (the
-in-home page's banned qualifiers, the homepage's "private"). It reads the
-**rendered** pages in `public/`, because title and meta are only resolved at
-build time, and it is run by `build.py --check`, not `certify.py`: CANON caps
-certification at three finding categories and this is none of them.
+Owner decision, Nov 27 2026: keyword ownership is a GUIDELINE. The tool reads
+the OWNERSHIP TABLE in CANON's KEYWORD OWNERSHIP section and prints a
+**WARNING** when an owned phrase sits in the title, H1, H2s or meta
+description of a page other than its owner (or an `also` page), when an owner
+page does not carry its `cover` variant, or when a page-specific X rule's term
+is on its page (the in-home page's qualifiers, the homepage's "private").
+Nothing it finds fails anything: `ownership.py` exits 0, and `build.py
+--check` prints the findings as `WARNING  keyword ownership (guideline): ...`
+without adding them to its problems. The matching is unchanged (case-
+insensitive, tag-stripped, longest match wins); only the consequence is. It
+reads the **rendered** pages in `public/`, because title and meta are only
+resolved at build time.
 
-It fails closed the same way the rest of this directory does: a missing,
-empty or malformed table, a regex that does not compile, or an owner page that
-was not built is a problem, never a skipped check. An unassigned keyword
-(owner `-`) is printed as NOT enforced rather than passing silently.
+A missing, empty or malformed table, a regex that does not compile, or an
+owner page that was not built is itself a warning, never a silent skip. An
+unassigned keyword (owner `-`) is printed as a note.
 
-Fixtures: `fixtures/ownership/fail/*.html` must each produce a problem,
-`fixtures/ownership/pass/*.html` must each produce none; each carries a
-`<!-- fixture-path: /slug -->` line saying which page it pretends to be.
-`build.py --check` runs them before checking the site. Negative-tested by
-mutation when written: disabling longest-match attribution breaks four pass
-fixtures, dropping comment stripping breaks one, and dropping H2 from the
-scanned surfaces lets five fail fixtures through.
+Fixtures: `fixtures/ownership/warn/*.html` (named `fail/` until Nov 27 2026)
+must each draw a warning, `fixtures/ownership/pass/*.html` must each draw
+none; each carries a `<!-- fixture-path: /slug -->` line saying which page it
+pretends to be. The self-test also builds a small site from the warn fixtures
+and proves that `report()` returns exit code 0 with every finding on a
+WARNING line, and the same for a CANON whose table cannot be read. `build.py
+--check` runs the self-test first; a fixture that misbehaves is printed as a
+warning (the tool is then unreliable; the build is not broken), and
+`ownership.py --selftest` exits 1 for it. Negative-tested by mutation when
+written: disabling longest-match attribution breaks four pass fixtures,
+dropping comment stripping breaks one, and dropping H2 from the scanned
+surfaces lets five warn fixtures through.
 
 ## Redirect check (`build.py --check`, Oct 17, 2026)
 
 Lives in `build.py` (`check_redirects`, `redirect_selftest`), not here, because
-it reads the built `public/`. CANON ARCHIVE > REDIRECTS has the principle and
-the rules. Every path in `tools/gsc-known-urls-2026-10-17.txt` must be a built
+it reads the built `public/`. CANON SITE FACTS > REDIRECTS has the principle;
+the rules are `build.py` REDIRECTS. Every path in `tools/gsc-known-urls-2026-10-17.txt` must be a built
 page or a `public/_redirects` source; every internal target must be a built
 page (so no chains); no source repeats; status 301 or 302. Fixtures mutate
 the real rule set (drop a rule whose source is a known URL, add a chain, a
@@ -794,7 +776,7 @@ into gtag and how, not what the GA4 property does with it afterwards.
 
 ## Mobile audit (`tools/mobileaudit.js`, Oct 17, 2026)
 
-CANON LAUNCH DECISIONS item 22, committed for the first time in the homepage
+Owner decision, Oct 17 2026 (every page at 390 and 412px), committed for the first time in the homepage
 rebuild run (the earlier run described its method in REPORT.md but did not
 commit the script). Serves `public/` locally and loads each built page (or the
 paths given) at 390×900 and 412×900, `isMobile`. Reports `scrollWidth` past the
@@ -835,8 +817,8 @@ block at both widths.
 
 ## Coaching tenure rule (Oct 18 2026)
 
-`coaching_tenure_claim` (stale canon) encodes the owner fact in CANON's ENTITY
-BLOCK: Nemezio started coaching in 2016, a hobby before it was his profession,
+`coaching_tenure_claim` (stale canon) encodes the owner fact in CANON's BUSINESS
+AND ENTITY block: Nemezio started coaching in 2016, a hobby before it was his profession,
 and copy never claims a number of professional years. It fires on "10+ years",
 "over / more than a decade" or "over / more than ten years" in a sentence that
 also carries a coaching / experience / helping / training word. Stat badges
@@ -921,8 +903,8 @@ $75 per session." line planted in pages/FAQs.html was reported.
 ### Pricing FAQ carrier list (broken structure, c)
 
 `PRICING_FAQ_CARRIERS` names the twelve page/header pairs that carry the
-canonical pricing FAQ answer (CANON INVARIANTS). The hash check proves the
-carriers agree; this proves WHICH files carry the block, so a page dropping
+canonical pricing FAQ answer (CANON, OCTOBER 2026 CARD). The plain-text comparison
+proves each carrier matches CANON; this proves WHICH files carry the block, so a page dropping
 it or growing a copy is a finding, not a silent change of scope. The
 Executive Reset left the list in the Audit Reconciliation run (owner-
 approved). Negative-tested both ways: a copy appended to pages/FAQs.html
@@ -932,8 +914,8 @@ carries the block") each reported exactly their own line.
 
 ### Retired launch copy, Audit Reconciliation additions
 
-Twenty phrases joined `RETIRED_LAUNCH_COPY` (listed in CANON, LAUNCH
-DECISIONS > RETIRED LAUNCH COPY), each the retired form of a CANONICAL FACT.
+Twenty phrases joined `RETIRED_LAUNCH_COPY` (listed in CANON, STANDING COPY
+RULES > RETIRED PHRASES), each the retired form of a CANONICAL FACT.
 "throughout San Diego County" is scoped to "training throughout" /
 "available throughout" so the 4S Ranch sentence about leaders "throughout
 San Diego County" (clients, not the in-home service area) passes. The clean
@@ -962,7 +944,8 @@ CANON's CANONICAL FACTS or OCTOBER 2026 CARD block; the required wording (the
 30-Day Fit Guarantee, the deposit line, "4.98 average across 190+ reviews",
 the travel-fee lines) must be present verbatim; no internal content (tooling,
 compliance notes, Stripe, legacy pricing, client names, "monthly") may appear;
-and the system prompt must match its owner-approved sha256.
+and (until Nov 27 2026) the system prompt had to match a pinned sha256; that
+hash lock is gone, the screening of the prompt is not.
 
 **The prompt's NEVER: list is not screened.** It names the banned framings in
 order to forbid them ("promise or guarantee results", "call the consultation
@@ -1166,8 +1149,8 @@ Self-tested both ways; negative tests on the real files are in REPORT.md.
 
 ## Founders hero and booking events (Nov 23 2026)
 
-Owner brief, Nov 23 2026. CANON: FOUNDERS LANDING PAGE > HERO and
-MEASUREMENT > EVENTS (INLINE CALENDLY BOOKING).
+Owner brief, Nov 23 2026. CANON: CANONICAL FACTS > FST > FOUNDERS LANDING PAGE
+(HERO COPY) and SITE FACTS > MEASUREMENT (KEY EVENTS).
 
 - **No new certify.py or build.py rule.** The hero copy (lead line, shorter
   sub, trust line, alt text) is read by the existing FST rules, since the
@@ -1213,8 +1196,8 @@ MEASUREMENT > EVENTS (INLINE CALENDLY BOOKING).
 
 ## Meta Pixel run (Nov 26 2026)
 
-Owner brief, Nov 25 2026. CANON: MEASUREMENT > META PIXEL, EVENTS (INLINE
-CALENDLY BOOKING, `booking_completed`) and COMPLETED BOOKINGS.
+Owner brief, Nov 25 2026. CANON: SITE FACTS > MEASUREMENT (the Meta Pixel, KEY
+EVENTS, `booking_completed`); the detail is in DEPLOY.md "Measurement".
 
 - **`build.py --check`, `check_tracking`.** `TRACKING_ONCE` gained the pixel
   ID (`META_PIXEL`), so a second copy on a page is `repeated`, and the

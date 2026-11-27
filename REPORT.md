@@ -9216,3 +9216,128 @@ The brief quotes 2,008 words for the Oct 17 rebuild; 2,098 is today's starting p
 4. **In-home and private pages: the sentence closes the first body paragraph after In Short.** For the private page, "the opening section" was read as the first body section, not the hero. WRONG IF the owner meant the hero subhead.
 5. **The eleven links carry each page's existing link style.** Those paragraphs had no link rule, so the anchor rendered in browser-default blue. In-home and private use the pages' own `.of-link` class; the town pages use an inline style with the same declarations as their FAQ links (gold, underlined). No stylesheet rule was added. WRONG IF the owner wants unstyled anchors.
 6. **No selector was added to the reveal layer.** The section is animated the same way the other `.omh` sections are, through the shared selectors. WRONG IF a section-specific effect was wanted.
+
+# CANON slim-down — CANON.md cut to facts, owner rules and workflow; the rest archived (owner brief Nov 27, 2026)
+
+Part B of the owner's brief of Nov 27, 2026. No page copy changed: `public/` is byte-identical to the build that shipped with the Homepage San Diego run.
+
+## Size
+
+| | Lines | Bytes |
+|---|---|---|
+| CANON.md before (as it stood after Part A; 3,051 before Part A's nine added lines) | 3,060 | 206,135 |
+| CANON.md now | 826 | 80,132 |
+| `archive/CANON-full-2026-11-27.md` (byte-identical copy of the "before" file, `cmp` clean) | 3,060 | 206,135 |
+
+634 of the 826 lines are byte-identical blocks of the archive (the six blocks listed under gate 6). **Read this before taking 826 at face value:** in the 192 lines that were rewritten, each fact or rule is one line, not hard-wrapped, and 99 of them are longer than 100 characters (the longest, the pricing FAQ answer, is 1,209). Wrapped at 100 columns the same file is 1,146 lines; at the old file's 78 columns, 1,276. The byte count is the honest measure of what a run now reads: 61% less.
+
+## What moved to the archive, by section
+
+| Section of the full brief | Lines | In the new CANON |
+|---|---|---|
+| CANONICAL FACTS, consultation to HSA / FSA | 64 | Kept, byte-identical (60 lines; the 4-line header rewritten) |
+| CANONICAL FACTS > FASCIA STRETCH THERAPY | 282 | Kept, byte-identical, except the founders landing page's layout notes (70 lines: hero image dimensions, crops, phone layout, sticky bar styling, share image build, Meta tracking narrative), cut to 11 lines of copy rules |
+| REPO STATE (certified list, not-yet-certified, ORPHAN HEADERS, DUPLICATE RULE) | 269 | Archived. Carried as single lines: the FST page facts, the badge rules, "the business is defined once in site-header.html", the homepage title and H1, "the partner section states no prices" |
+| ARCHIVE | 26 | One WORKFLOW line: archive/ is never certified, corrected or brought back |
+| REDIRECTS (principle, the check, the 74 rules) | 120 | One line under SITE FACTS: the list lives in `build.py` REDIRECTS |
+| MEASUREMENT | 208 | IDs, the production-only rule, what Meta receives, the key event names. Parameters and manual steps are in DEPLOY.md "Measurement" |
+| ASK OMNIFIT | 100 | The essentials: the knowledge file is the only source and must agree with CANON, the prompt is the owner's wording, the spend cap, the Pacific Beach not-served line verbatim |
+| WORKFLOW RULES | 39 | Rewritten as WORKFLOW, with the owner's new SEARCH SAFETY rule verbatim. The CONTRACT VALUE CHECK is one line under the card's TERMS |
+| CANONICAL TRUTH (brand, NAP, reviews, credentials) | 24 | BUSINESS AND ENTITY |
+| PRICING — OCTOBER 2026 CARD | 160 | Kept: every table row byte-identical, every locked sentence verbatim; run history removed. Two sentences added so the checks can read them (see "Hash locks") |
+| LEGACY PRICING | 33 | One paragraph: closed, existing clients only, never published, figures in the archive |
+| Case-study figures, DEVICE, Retired forever | 38 | Carried, one line each |
+| ACCOUNTABILITY DIAL | 45 | Names, order and locked sentences |
+| THE OMNIFIT METHOD (incl. the Travel Protocol) | 64 | Names, order and locked sentences |
+| ENTITY BLOCK | 104 | BUSINESS AND ENTITY: the description, founder bio, entity line and positioning line verbatim |
+| LANGUAGE RULES | 41 | Kept |
+| STRETCH TO WIN MARKETING RULES | 88 | Kept whole, byte-identical |
+| TIER CHANGES | 46 | Kept: the rules, the published copy verbatim, the worked example's figures |
+| LAUNCH DECISIONS (22 items, RETIRED LAUNCH COPY) | 206 | One line per decision that still governs copy (OTHER DECISIONS, the card, BUSINESS AND ENTITY); the retired phrases as one line under STANDING COPY RULES |
+| COMPLIANCE SCREEN, TIER 1 and TIER 2 | 186 | Kept whole, byte-identical |
+| CARRIED OVER, NOT RE-TIERED | 10 | One line |
+| EM-DASH RULES | 7 | One line under STANDING COPY RULES |
+| CERTIFICATION (a) (b) (c) rule descriptions | 238 | Archived (how the checker works; `tools/README.md` documents it). WORKFLOW keeps "exactly three categories" |
+| PAGE HEADER SHAPE | 8 | Archived; rule removed |
+| PAGES WITH NO FAQ | 22 | Archived; rule removed |
+| KEYWORD OWNERSHIP (rules, table, changelog) | 229 | A guideline: one paragraph, the X rules in one, and the table byte-identical |
+| INVARIANTS | 103 | Archived; hash locks removed |
+| BEFORE CANCELLING SQUARESPACE | 40 | Archived (DEPLOY.md keeps its manual step; `build.py --check` still warns per image) |
+| THE JOURNAL | 19 | One WORKFLOW line |
+| KNOWN DEFERRED / RESOLVED ITEMS, PRICING-CHANGE CHECKLIST | 89 | Archived |
+| NEXT RUNS | 72 | Archived. One fact carried: never add ratings through Product or ItemList markup |
+| CHANGE LOG | 78 | Archived |
+
+## Rules removed or downgraded (each with its reason)
+
+| Rule | Was | Now | Reason |
+|---|---|---|---|
+| Keyword ownership: owned phrase on a non-owner title, H1, H2 or meta; X01; X02; table unreadable; owner page not built | PROBLEM, failed `build.py --check` | WARNING, never fails | Owner decision: a guideline |
+| Keyword ownership "cover" (owner page must carry the in-home variant) | PROBLEM | WARNING | Same decision, named in the brief |
+| Ownership fixture misbehaving | PROBLEM | WARNING (`ownership.py --selftest` alone still exits 1) | A guideline's tool cannot block a run |
+| `[invariant mismatch]` and `[canon hash stale]` for the five hashes (page pricing, header pricing, credentials, archetypes, 9-point) | structure finding | removed | Owner decision: no hash locks on wording. Three plain checks replace the part that guarded prices and credentials (below) |
+| Archetype card bodies byte-identical on 11 pages | hash-locked | free | Wording only: no price, policy or credential in it |
+| 9-point screen items and closing line byte-identical on 11 pages | hash-locked | free | Wording only (its one price sentence is still checked) |
+| Meet Nemezio bio outside the credentials sentence | hash-locked | free | Wording only |
+| Assistant system prompt sha256 | stale-canon finding | removed | Named in the brief. The prompt carries no price; it is still screened for compliance, stale canon and the FST mark |
+| `[LocalBusiness redefined]`, `[site-header LocalBusiness must carry @id #localbusiness-of]`, `[about not referencing homepage LocalBusiness]` | structure finding | removed | PAGE HEADER SHAPE left CANON |
+| `[no ld+json block]` in a header | structure finding | removed as its own finding | Header shape. A page FAQ with no FAQPage still fails the mirror |
+| "bare node, not an @graph document" and "no WebPage node" | check-could-not-run (INCOMPLETE) | removed | Header shape |
+| `[declared no-FAQ page carries FAQ markup]` and the `NO_FAQ` list | structure finding | removed | PAGES WITH NO FAQ left CANON. A readable FAQ without a FAQPage still fails the mirror; FAQ-shaped markup that cannot be read still gives INCOMPLETE; a page with no FAQ on either side is no longer anything |
+
+**Not removed.** All 19 self-tests that ran before still run (one added). The compliance rule list is unchanged. Every TIER 1 and TIER 2 rule, every Stretch to Win rule, the FAQPage mirror (count, order, text), invalid JSON, tag balance, placeholder copy, the pricing FAQ carrier list, `[no matching page]`, and in `build.py --check` links, one H1, no nested `index.html`, redirects and tracking are as they were. The FST badge keeps its sha256: it pins an image file, not wording, and lives beside its test in `certify.py`.
+
+**Made stricter, once.** The negative test for gate 5 wrote "Clients rate us 5.0 stars." on a page and certify said nothing, before Part B as well as after: the retired phrases were "Rated 5.0", "5.0 rating" and "5.0 · 190+". `"5.0 star"` and `"5.0-star"` joined `RETIRED_LAUNCH_COPY` (48 phrases, each self-tested). No published page contains either.
+
+## Hash locks replaced by plain checks
+
+The hash was the only guard on three published price or credential sentences, so each is now written out in CANON.md and compared as text (tags dropped, entities decoded, whitespace collapsed):
+
+| CANON label | Replaces | Carriers | Check |
+|---|---|---|---|
+| CANONICAL PRICING FAQ ANSWER | page pricing and header pricing hashes | 24 files: the page FAQ and header FAQPage of the twelve carriers | the answer must be CANON's sentence |
+| CREDENTIALS SENTENCE ("He holds fourteen certifications ...") | credentials hash | 11 pages | the Meet Nemezio block must contain it |
+| 9-POINT SCREEN ASSESSMENT SENTENCE ("... the $150 Performance Assessment, credited toward your first cycle.") | 9-point hash | 11 pages | the section's intro must contain it |
+
+A label that is missing, doubled or unquoted in CANON gives RESULT: INCOMPLETE, never PASSED. Negative tests on a scratch copy, each restored afterwards: "fourteen" changed to "thirteen" on one page, the assessment price changed to $160 on one page, and a price changed in one header each failed on their own check; a renamed CANON label gave INCOMPLETE; a price changed in CANON itself failed all 24 carriers.
+
+## Parsers changed
+
+| Tool | What it reads from CANON | Change | Proof |
+|---|---|---|---|
+| `tools/certify.py` `_canon_card_numbers` (knowledge-file price check) | every figure in CANONICAL FACTS and the OCTOBER 2026 CARD | The first block now ends at STRETCH TO WIN MARKETING RULES (it ended at REPO STATE). The card block is found as before | `_selftest_assistant` passes ($640, $1,680 and $119 allowed; $475 and $1,050 refused). The set of allowed figures went from 93 to 72 and every one of the 72 was allowed before, so the check is no looser |
+| `tools/certify.py` `canon_hashes` | the INVARIANTS block | Removed. `canon_sentences` reads the three labelled sentences instead | `_selftest_canon_sentences`, both ways, every run |
+| `tools/ownership.py` | the OWNERSHIP TABLE | Table byte-identical, parser unchanged. Findings are warnings; exit code is 0. Fixture folder `fail/` renamed `warn/` | `--selftest`: 20 warn fixtures warn, 13 pass fixtures are quiet, a site built from the warn fixtures draws 66 WARNING lines with exit code 0, and an unreadable table is a warning with exit code 0 |
+| `build.py` | CANON through `ownership.py` only | Ownership findings go to the WARNING list, never to problems | A keyword phrase put on a non-owner H2 in a scratch build: `build.py --check` printed the WARNING, RESULT: PASSED, exit 0 with `--strict` |
+| `tools/choosertest.js` | the card tables and four figures by pattern | None needed: the rows and the lines it matches are byte-identical | RESULT: PASSED (30 checks, 16 combinations) |
+
+References to sections that no longer exist were re-pointed in `tools/certify.py`, `build.py`, `tools/ownership.py`, `tools/README.md` (its Invariants, no-FAQ, keyword ownership and not-run sections were rewritten to say what the tools do now), `DEPLOY.md`, `editorial/PLAYBOOK.md` and `tools/mobileaudit.js`. `assistant/knowledge.md` refers only to CANON.md and to checks that still exist, so it is unchanged. **Left as they are, on purpose:** the comment line "(LAUNCH DECISIONS item 1)" that `build.py` writes into `public/_redirects`, and the comments inside `pages/` and `site/` that name old sections. They are part of the built site, and Part B may not change `public/`.
+
+## Gates
+
+| # | Gate | Result |
+|---|---|---|
+| 1 | `public/` byte-identical to `public/` after Part A | PASS. `diff -r` against the snapshot taken after Part A: no difference. `git diff main -- public` is empty. `functions/_lib/knowledge.js` is unchanged too |
+| 2 | `build.py --check` exits clean; ownership prints warnings only | PASS. RESULT: PASSED, 0 problems; "keyword ownership (guideline): no warnings" on the real site |
+| 3 | `certify.py` runs to the end with zero findings and its self-tests pass | PASS. RESULT: PASSED (compliance 0, stale canon 0, structure 0, not-run 0, amendment 0). 20 self-tests ran, each asserting both directions |
+| 4 | Node tests | PASS. `tests/assistant.test.mjs`, `tools/widgettest.js` (4 hand-offs), `tools/choosertest.js` (30 checks, 16 combinations), `tools/tracktest.js` (89 assertions) |
+| 5 | Negative test, run then reverted | PASS, with the fix above. On a scratch copy of the La Jolla page: "5.0 stars" gave `[retired launch copy: 5.0 star]`; "Guaranteed results: you will lose 20 lbs." gave `[outcome guarantee (T1-1)]`; the Program price changed from $640 to $660 gave `[pricing FAQ answer does not match CANON]` and the mirror finding. RESULT: FAILED (1, 1, 2). The same test on `main` before Part B caught the guarantee and the price but not "5.0 stars" |
+| 6 | Every dollar figure and locked sentence of the old rate card and policies is in the new CANON | PASS. 17 of 17 dollar figures and 31 of 31 table figures. 80 of 88 quoted strings of 25 characters or more; the other 8 are retired wording or labels the old brief quoted in passing, listed below |
+| 7 | New CANON.md under 900 lines | PASS at 826 lines, on the format disclosed under "Size". No fact or owner rule was dropped to get there |
+
+The 8 quoted strings not carried, all deliberately: ", so you can compare the two yourself" (the cut tail of the founders sub); "Every client starts with a $150 Performance Assessment" (replaced Oct 18 2026); "Monthly Tune-Up: 199/250/295" (the August card); "No travel fee inside our in-home service area; a travel fee may apply outside it." (retired Oct 18 2026; its tail is on the retired phrases list); "a clinical-grade diagnostic session" (replaced); "fully refundable $30 deposit" (replaced; "fully refundable" is on the retired list); "Data-Driven Hybrid Coaching" and "The assessment is credited" (names of a card and a policy line, not rules).
+
+## Needs the owner
+
+1. **"ACE CES out of site copy."** The brief lists this among the standing copy rules to keep. CANON's rule is the opposite spelling: "ACE OES" and "Orthopedic Exercise" are banned, and the credential is published as "ACE CES" on 20 pages. The existing rule was carried unchanged and no page was touched. If "ACE CES" really should leave site copy, that is a page-copy change for its own run.
+2. **The line count.** If 78-column text was meant, the same content is about 1,276 lines and something on the keep list has to go: say which.
+
+## Judgment calls (each with the condition under which it is wrong)
+
+1. **One fact per line in the rewritten sections.** The brief asks three times for "one line"; the verbatim blocks keep their original wrapping. WRONG IF the owner wants wrapped text throughout (see "Needs the owner", 2).
+2. **Founders landing page layout notes cut from the FST facts** (image dimensions, crop positions, phone layout, sticky bar styling, how the share image is built). The brief says FST facts stay verbatim and also that per-page version notes leave. Every rule about the page's copy stayed: the hero copy, the alt text, "the image is AI-generated", the second "$99" beside "founders", no price or date on the share image. WRONG IF the owner counts the layout notes as FST facts; they are in the archive, lines 249 to 318.
+3. **STRETCH TO WIN MARKETING RULES kept whole**, including its description of what certify enforces, although descriptions of checkers leave everywhere else. The brief says verbatim for this section. WRONG IF the owner wants the ENFORCED list out (41 lines).
+4. **`[no ld+json block]` and `[no matching page]`.** The first was treated as header shape and removed; the second was kept, because a header that cannot find its page is a mirror that was never checked. WRONG IF the owner reads REPO STATE's orphan-header rule as retired too.
+5. **The pricing FAQ answer is written into CANON in full** (the hash was the only guard on about twenty figures in one sentence). A lighter check, each figure against the card, would have let a studio price sit in the in-home clause. WRONG IF the owner wants that sentence free to be reworded page by page.
+6. **The credentials sentence is checked, not the whole bio.** WRONG IF the owner wanted the Meet Nemezio block entirely free; then the credentials count on those eleven pages has no guard.
+7. **Two phrases added to the retired list** ("5.0 star", "5.0-star"). It is the one place Part B makes certify stricter. WRONG IF the owner wants no rule added in a run that removes rules; then gate 5 fails on "5.0 stars", as it would have before this run.
