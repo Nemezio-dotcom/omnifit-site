@@ -19,7 +19,7 @@
 // Exit 1 when any page has a scrollWidth overflow or a clipped element.
 // Narrow items are printed for review (2-up tiles and table cells are narrow
 // by design); the caller decides. Re-created in the homepage rebuild run
-// (Oct 17 2026) from the method recorded in REPORT.md, item 22.
+// (Oct 17 2026) from the method recorded in archive/REPORT-through-2026-11-26.md, item 22.
 const { chromium } = require('playwright');
 const http = require('http');
 const fs = require('fs');

@@ -482,7 +482,7 @@ with the figure absent, with no sample size, and with no date range, and
 passes when all three are there.
 
 **First live run (Oct 17 2026): 17 findings, all genuine, listed in
-REPORT.md.** The three false-positive classes the drafts produced and what
+archive/REPORT-through-2026-11-26.md.** The three false-positive classes the drafts produced and what
 closed them: sentence-start words read as names (case-sensitive shapes +
 `_NONPERSON`); the 1200-character window reaching from /outcomes' retention
 table into its profiles section (80-word window, nearest-preceding rule);
@@ -742,7 +742,7 @@ NODE_PATH="$(npm root -g)" node tools/tracktest.js
 ```
 
 What it proves (46 assertions on Oct 17, 2026; 89 since the Meta Pixel run,
-Nov 26, 2026, all passing; the tables are in REPORT.md):
+Nov 26, 2026, all passing; the tables are in archive/REPORT-through-2026-11-26.md):
 
 - The production branch runs on the real hostname: Chromium is launched with
   `--host-resolver-rules` mapping `www.omnifittraining.com` to the local
@@ -777,7 +777,7 @@ into gtag and how, not what the GA4 property does with it afterwards.
 ## Mobile audit (`tools/mobileaudit.js`, Oct 17, 2026)
 
 Owner decision, Oct 17 2026 (every page at 390 and 412px), committed for the first time in the homepage
-rebuild run (the earlier run described its method in REPORT.md but did not
+rebuild run (the earlier run described its method in archive/REPORT-through-2026-11-26.md but did not
 commit the script). Serves `public/` locally and loads each built page (or the
 paths given) at 390×900 and 412×900, `isMobile`. Reports `scrollWidth` past the
 viewport, grid items / card elements under 240px ("narrow", printed for
@@ -1059,7 +1059,7 @@ node, each missing required line, the distinction stated twice and the
 attribution line above the FAQ all fail.
 
 **Negative tests on the real files (Nov 2026; each mutation applied, certify
-run, file restored).** The table is in REPORT.md, FST Launch run. Two defects
+run, file restored).** The table is in archive/REPORT-through-2026-11-26.md, FST Launch run. Two defects
 they surfaced before the rules were trusted:
 
 | Shortcut | What broke | Caught by |
@@ -1116,7 +1116,7 @@ Self-tested with nine failing variants and the one passing nav.
 **"Stretch Practitioner" alone.** `_FST_TITLE` gained
 `(?<!Fascia )\bStretch\s+Practitioner\b`; the full title passes.
 
-**Negative tests on the real files** are in REPORT.md, FST Reach run.
+**Negative tests on the real files** are in archive/REPORT-through-2026-11-26.md, FST Reach run.
 
 ## The mark on every mention (Nov 21 2026)
 
@@ -1144,7 +1144,7 @@ receives has no unmarked mention. In that file the names are listed marked
 (`MARKED_NAMES`) and the patterns derived from them, because the file is
 itself a swept surface.
 
-Self-tested both ways; negative tests on the real files are in REPORT.md.
+Self-tested both ways; negative tests on the real files are in archive/REPORT-through-2026-11-26.md.
 
 
 ## Founders hero and booking events (Nov 23 2026)
@@ -1191,7 +1191,7 @@ Owner brief, Nov 23 2026. CANON: CANONICAL FACTS > FST > FOUNDERS LANDING PAGE
   v3 questions is its own task. (The "46 assertions" figure above dates from
   Oct 17 2026.)
 - **The hero at 360x640** is measured by hand with Playwright, not by a
-  committed tool: REPORT.md has the figures.
+  committed tool: archive/REPORT-through-2026-11-26.md has the figures.
 
 
 ## Meta Pixel run (Nov 26 2026)
@@ -1272,5 +1272,5 @@ EVENTS, `booking_completed`); the detail is in DEPLOY.md "Measurement".
   send a second `fit_check_start`). Nothing in `pages/fit-check.html`
   changed.
 - **Negative-tested on the built output** (each FAILED as listed, then
-  `public/` was restored from a copy): see REPORT.md, Meta Pixel run.
+  `public/` was restored from a copy): see archive/REPORT-through-2026-11-26.md, Meta Pixel run.
 

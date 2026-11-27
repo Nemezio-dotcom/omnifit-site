@@ -220,7 +220,8 @@ request to any of the three services on a non-production host, and a
 simulated completed booking sending `booking_completed` and `Schedule` exactly
 once. The local server sends the Content-Security-Policy from `public/_headers`,
 so a request the policy blocked would fail the run. Details in
-`tools/README.md`; the results table is in `REPORT.md`.
+`tools/README.md`; the results table is in `archive/REPORT-through-2026-11-26.md`
+(Meta Pixel run).
 
 ## Cloudflare Pages settings
 
