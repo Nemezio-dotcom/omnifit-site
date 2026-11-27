@@ -2005,7 +2005,8 @@ FOUNDERS_PRICE = "99"
 FST_FAQ_QUESTIONS = [
     "What is Fascia Stretch Therapy™?", "What happens at the First Visit?", "How much does it cost?",
     "Do I need to be a training client?", "Where do sessions take place and what do I need?",
-    "What should I wear?", "Is FST™ massage or medical treatment?", "What is the cancellation policy?"]
+    "What should I wear?", "Is FST™ massage or medical treatment?", "Is FST™ suitable for seniors?",
+    "What is the cancellation policy?"]   # nine since Nov 26 2026 (owner): the seniors question, eighth in order
 FST_MEDICAL_QUESTION = FST_FAQ_QUESTIONS[6]
 # First Visit 150 · single session 225 · 5-session pack 200 per session, 1,000.
 FST_PRICES = {"150", "225", "200", "1000"}
@@ -2356,7 +2357,7 @@ def fst_page_required(page, header):
         out.append(('b', f"FST page has no '{FST_BUTTON}' link to the First Visit booking page"))
     pairs = faq.qa(page)
     if [q for q, _ in pairs] != FST_FAQ_QUESTIONS:
-        out.append(('c', f"FST page FAQ is not the eight questions in order: {[q for q, _ in pairs]}"))
+        out.append(('c', f"FST page FAQ is not the nine questions in order: {[q for q, _ in pairs]}"))
     nodes = []
     for b in _FST_LD.findall(header):
         d = json.loads(b); nodes += d.get("@graph", [d]) if isinstance(d, dict) else d
@@ -3085,7 +3086,7 @@ def run():
         print(f"   [FST-BLOCK markers] {e}"); C+=1
     for cat, what in fst_page_findings:
         if cat == 'c': print(f"   {FST_HEADER}  [{what}]"); C+=1
-    print("   (FST page: eight-question FAQ, header FAQPage byte-identical to it, Service node and its three Offers: self-tested both ways)")
+    print("   (FST page: nine-question FAQ, header FAQPage byte-identical to it, Service node and its three Offers: self-tested both ways)")
     inv={}; notrun=[]
     # The hashes CANON.md records, read once per run. A parse failure is
     # recorded, never swallowed: with no recorded table the comparison below

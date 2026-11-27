@@ -9096,3 +9096,64 @@ Found while doing this: with the script-src policy the test crashed while printi
 | `node tools/widgettest.js` | RESULT: PASSED (4 hand-offs) |
 | `node tools/choosertest.js` | RESULT: PASSED (30 checks, 16 combinations) |
 | `node tools/mobileaudit.js` | RESULT: PASSED |
+
+---
+
+# Fascia + Seniors run — what fascia is, how the method works with it, senior adults (owner request Nov 26, 2026; approved and published Nov 27, 2026)
+
+**Branch:** `ccr-a8142b26-u0gvuv`. **Page:** `/fascia-stretch-therapy-san-diego` and its header.
+
+## Needs owner
+
+- **The five "how it works" points** (connected regions, movement instead of long holds, traction, breathing, adjusted as it goes) were written from general knowledge of the method. The owner is the certified practitioner: confirm they match the training and teach no stretch (Stretch to Win rule 3). Not machine-checked.
+- **Sources were confirmed by web search, not read from the source pages.** The build environment could not open pmc.ncbi.nlm.nih.gov, pubmed, hopkinsmedicine.org, clevelandclinic.org or nia.nih.gov. The study figures agreed across several search summaries. The Johns Hopkins sentence (too little movement and repetitive movement among the causes of thickening) is the least verified line on the page: click the link and confirm.
+- **No photo of a senior client.** The only photo added is the existing AI-generated in-home image, with its canonical alt text and no caption.
+
+## What changed
+
+| Where | Change |
+|---|---|
+| New section `#fs-fascia`, after the definition | "What Fascia Is, and Why It Shapes How You Move": three inline SVG diagrams (a muscle cross-section with the fascia in gold; a net pulled at one corner; supple against stiff layers), a "what changes fascia" callout, two source links |
+| New section `#fs-how` | "How Fascia Stretch Therapy™ Works With Fascia": five client-experience points beside the in-home photo, then a block stating it is not a promise of a result and pointing to the First Visit's two sets of measurements |
+| `#fs-who` | a fourth card, "Senior adults", linking to `#fs-seniors` |
+| New section `#fs-seniors`, after "who it suits" | "Assisted Stretching for Senior Adults": five reasons it suits them, a persona line, a physician line, two charts and a citation block |
+| FAQ | ninth question, "Is FST™ suitable for seniors?", eighth in order; header FAQPage mirror; `certify.py` `FST_FAQ_QUESTIONS`; CANON; tools/README |
+| Bands | rates, training, practitioner and FAQ swapped cream / white so the bands still alternate |
+
+Unchanged: title, meta description, H1, hero, the definition, the First Visit, rates, payment terms, the Service node and its Offers, the disclaimer, the attribution line, the booking link.
+
+## The figures on the charts
+
+| Chart | Figures | Source |
+|---|---|---|
+| Range of motion lost per decade, adults 55 to 86 | shoulder abduction 5° men, 6° women; hip flexion 6° men, 7° women; 436 adults (205 men, 231 women) | Stathokostas L, McDonald MW, Little RMD, Paterson DH. J Aging Res. 2013;2013:743843 |
+| Where fascia was thicker, by age group | lower back 40.0–76.7% thicker in the older group; lower leg, front of thigh and abdominal wall 12.3–25.8% thicker in the younger group; 35 healthy women (18 aged 22 ± 1, 17 aged 69 ± 4), ultrasound | Wilke J, Macchi V, De Caro R, Stecco C. J Anat. 2019;234(1):43–49 |
+
+Bar widths are proportional to the figures (first chart: 11% of the track per degree; second: a 0 to 80% axis). The chart colours `#33639f` and `#a8842c` passed the palette validator for colour-blind separation and 3:1 contrast on the cream surface.
+
+## Judgment calls (each with the condition under which it is wrong)
+
+- **"Senior adults", never "older adults", in headings.** "Older adults" is K07, owned by `/personal-trainer-over-50-san-diego`. WRONG IF the owner wants this page to compete for that phrase; then K07 needs an "also" line.
+- **The legend says "aged about 69", not "average age 69".** `aggregate_metric_conditions` reads any percentage near "average" as an OmniFit aggregate metric; these are published third-party figures. The rule is unchanged. WRONG IF the owner wants third-party percentages held to the T2-1 conditions.
+- **The citation block's closing sentence** follows the over-50 page's form: the sources are not studies of the service and no claim about outcomes is made.
+- **The in-home photo is reused** on this page. CANON restricts how it is described, not where it appears. WRONG IF the owner wants it on the founders page only.
+
+## Negative test
+
+The ninth question reworded on the page ("Is FST™ right for seniors?"): `certify.py` reported FAILED, structure 3 (not the nine questions in order; header FAQPage not byte-identical, differing index [7]). File restored: PASSED.
+
+## Checks
+
+| Check | Result |
+|---|---|
+| `python3 build.py --strict` | RESULT: PASSED |
+| `python3 build.py --check` | RESULT: PASSED |
+| `python3 tools/certify.py` | RESULT: PASSED (compliance 0 · stale canon 0 · structure 0 · not-run 0 · amendment 2a/2g 0); the five invariant hashes unchanged |
+| `python3 tools/mkheaders.py --check` | PASSED (9 headers reproduce byte-for-byte) |
+| `python3 tools/ownership.py` | PASSED |
+| `node --test tests/assistant.test.mjs` | 53 of 53 pass |
+| `node tools/tracktest.js` | RESULT: PASSED (89 assertions) |
+| `node tools/widgettest.js` | RESULT: PASSED (4 hand-offs) |
+| `node tools/choosertest.js` | RESULT: PASSED (30 checks, 16 combinations) |
+| `node tools/mobileaudit.js` | RESULT: PASSED (the FST page: no overflow at 390 or 412px) |
+| `node tools/bandcontrast.js public` | 0 low-contrast text nodes in light bands |

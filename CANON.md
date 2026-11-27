@@ -458,8 +458,28 @@ REPO STATE (reconciled with disk, Sept 2026)
       scoped to #omni-fst, class prefix fs-). One H1. Section order: hero
       with "Book Your First Visit"; quotable definition; what the First
       Visit includes; who it suits; rates table; how it fits alongside
-      training; practitioner block; eight-question FAQ; closing CTA;
-      trademark attribution line. Header carries WebPage / BreadcrumbList /
+      training; practitioner block; nine-question FAQ (eight until Nov 26
+      2026, when the owner added "Is FST™ suitable for seniors?" as the
+      eighth question, before the cancellation question); closing CTA;
+      trademark attribution line. FASCIA + SENIORS RUN (owner request Nov 26
+      2026; owner approved the draft and its publication Nov 27 2026):
+      three sections added - "What Fascia Is" (three inline SVG
+      diagrams) and "How Fascia Stretch Therapy™ Works With Fascia" (with
+      the in-home photo) after the definition, and "Assisted Stretching for
+      Senior Adults" (two charts of published research: Stathokostas et al.
+      2013, Wilke et al. 2019) after "who it suits", which gained a fourth
+      card. Headings say "senior adults", never "older adults" (K07).
+      Section order now: hero; definition; what fascia is; how it works
+      with fascia; First Visit; who it suits; senior adults; rates;
+      training; practitioner; FAQ; closing CTA; attribution. The research
+      figures are published third-party figures, cited on the page with
+      the note that they are not studies of the service and make no claim
+      about outcomes. HUMAN WARRANTIES (not machine-checked): the five
+      "how it works" points describe the client's experience and teach
+      no stretch (STRETCH TO WIN rule 3); the Johns Hopkins attribution
+      and both studies' figures were confirmed by web search, not read
+      from the source pages (blocked from the build environment).
+      Header carries WebPage / BreadcrumbList /
       Service / FAQPage; the business by @id only, no person node; the
       FAQPage is BYTE-IDENTICAL to the page FAQ in question and answer
       (certify.py compares with ==, not after normalising). Title "Fascia
@@ -1667,7 +1687,7 @@ Therapy. No run, and no owner override inside a run, relaxes one.)
         2026 also the payment, no-refund and expiry sentences and the
         disclaimer exactly once, and fst_terms_required holds Terms and
         Conditions to the same sentences so the two pages cannot drift.
-    (c) the FST page's eight FAQ questions in order, the header FAQPage
+    (c) the FST page's nine FAQ questions in order, the header FAQPage
         byte-identical to them, the Service node with provider
         #localbusiness-of and Offers 150 / 225 / 1000, no business or
         person node defined in the header, FST-BLOCK markers paired.

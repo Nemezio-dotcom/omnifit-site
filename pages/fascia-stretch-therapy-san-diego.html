@@ -442,7 +442,89 @@
   #omni-fst .fs-prac-text p + p { margin-top: 10px; }
   #omni-fst .fs-tm { text-align: center; font-size: 12px; color: var(--white-50); margin: 2rem auto 0; max-width: 760px; line-height: 1.6; }
 
+  /* ════════════════ FASCIA EXPLAINER · HOW IT WORKS · SENIOR ADULTS ════════════════
+     Added Nov 26 2026 (owner request; approved Nov 27 2026). Diagrams are inline SVG drawn for this
+     page; chart bars are HTML so the text stays readable on a phone. Chart
+     colours: #33639f / #a8842c (checked for colour-blind separation and 3:1
+     against the cream and white bands). */
+  #omni-fst { --fs-muscle: rgba(123,30,43,.09); --fs-muscle-2: rgba(123,30,43,.15); --fs-muscle-3: rgba(123,30,43,.40); --fs-accent: #33639f; --fs-fluid: rgba(51,99,159,.50); --fs-blue: #33639f; --fs-ochre: #a8842c; }
+  #omni-fst .fs-figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 26px; }
+  #omni-fst .fs-fig { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 20px 22px 24px; text-align: left; }
+  #omni-fst .fs-fig-svg { display: block; width: 100%; max-width: 340px; height: auto; margin: 0 auto 14px; }
+  #omni-fst .fs-fig p { font-size: 14px; color: var(--white-70); line-height: 1.65; }
+  #omni-fst .fs-fig-key { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 7px; }
+  #omni-fst .fs-fig-key li { font-size: 13px; color: var(--white-70); line-height: 1.5; padding-left: 28px; position: relative; }
+  #omni-fst .fs-fig-key li span { position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 11px; font-weight: 700; line-height: 20px; text-align: center; }
+  #omni-fst .fs-f-muscle { fill: var(--fs-muscle); }
+  #omni-fst .fs-f-wrap { fill: none; stroke: var(--gold); stroke-width: 5; }
+  #omni-fst .fs-f-bundle { fill: var(--fs-muscle-2); stroke: var(--gold); stroke-width: 2.6; }
+  #omni-fst .fs-f-fibre { fill: var(--fs-muscle-3); stroke: var(--gold); stroke-width: 1.1; }
+  #omni-fst .fs-f-leader { fill: none; stroke: var(--white-50); stroke-width: 1; }
+  #omni-fst .fs-f-dot { fill: var(--white-50); }
+  #omni-fst .fs-f-num { fill: var(--gold); }
+  #omni-fst .fs-f-numtxt { fill: #fff; font-size: 12px; font-weight: 700; }
+  #omni-fst .fs-f-net { fill: none; stroke: var(--gold); stroke-width: 1.3; }
+  #omni-fst .fs-f-pull { fill: var(--fs-accent); }
+  #omni-fst .fs-f-arrow { fill: none; stroke: var(--fs-accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  #omni-fst .fs-f-layer { fill: none; stroke: var(--gold); stroke-width: 7; stroke-linecap: round; }
+  #omni-fst .fs-f-layer--stiff { stroke-width: 10; }
+  #omni-fst .fs-f-fluid { fill: var(--fs-fluid); }
+  #omni-fst .fs-f-link { fill: none; stroke: var(--white-50); stroke-width: 1.4; stroke-linecap: round; }
+  #omni-fst .fs-f-cap { fill: var(--white); font-size: 13px; font-weight: 700; }
+  #omni-fst .fs-sources { text-align: center; font-size: 12.5px; color: var(--white-50); max-width: 820px; margin: 14px auto 0; line-height: 1.7; }
+
+  #omni-fst .fs-how { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 36px; align-items: center; max-width: 1000px; margin: 26px auto 0; }
+  #omni-fst .fs-how-media img { display: block; width: 100% !important; border-radius: var(--radius-lg); box-shadow: 0 12px 34px rgba(10,22,40,.16); }
+  #omni-fst .fs-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; text-align: left; }
+  #omni-fst .fs-points li { padding-left: 22px; position: relative; font-size: 14.5px; color: var(--white-70); line-height: 1.65; }
+  #omni-fst .fs-points li::before { content: ''; position: absolute; left: 0; top: .5em; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); }
+  #omni-fst .fs-points li strong { display: block; color: var(--white); font-size: 15px; }
+
+  #omni-fst .fs-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  #omni-fst .fs-card p:last-child { margin-bottom: 0; }
+
+  #omni-fst .fs-senior { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 26px; }
+  #omni-fst .fs-senior-why { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 26px 26px 24px; text-align: left; }
+  #omni-fst .fs-senior-why h3 { margin-bottom: 16px !important; }
+  #omni-fst .fs-senior-persona { font-size: 14.5px; color: var(--white-90); margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--white-10); }
+  #omni-fst .fs-senior-note { font-size: 13px; color: var(--white-50); margin-top: 12px; line-height: 1.65; }
+  #omni-fst .fs-charts { display: grid; gap: 20px; }
+  #omni-fst .fs-chart { background: var(--navy-light); border: 1px solid var(--white-10); border-radius: var(--radius-lg); padding: 22px 24px 18px; text-align: left; }
+  #omni-fst .fs-chart-title { font-family: 'Playfair Display', serif !important; font-size: 18px; font-weight: 600; color: var(--white); line-height: 1.3; }
+  #omni-fst .fs-chart-sub { font-size: 12.5px; color: var(--white-50); margin: 3px 0 12px; line-height: 1.5; }
+  #omni-fst .fs-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 12.5px; color: var(--white-70); margin-bottom: 6px; line-height: 1.5; }
+  #omni-fst .fs-legend span { display: inline-flex; align-items: center; gap: 7px; }
+  #omni-fst .fs-key { flex: 0 0 auto; width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  #omni-fst .fs-key--blue, #omni-fst .fs-bar--blue { background: var(--fs-blue); }
+  #omni-fst .fs-key--ochre, #omni-fst .fs-bar--ochre { background: var(--fs-ochre); }
+  #omni-fst .fs-bargroup { margin-top: 14px; }
+  #omni-fst .fs-bargroup-label { font-size: 13.5px; font-weight: 700; color: var(--white); line-height: 1.4; margin-bottom: 6px; }
+  #omni-fst .fs-bargroup-label span { font-weight: 500; color: var(--white-50); }
+  #omni-fst .fs-bar-row { display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center; gap: 8px; margin-top: 2px; }
+  #omni-fst .fs-bar-name { font-size: 12.5px; color: var(--white-70); }
+  #omni-fst .fs-bar-track { display: flex; align-items: center; gap: 8px; height: 22px; border-left: 1px solid var(--white-30); }
+  #omni-fst .fs-bar { display: block; height: 100%; border-radius: 0 4px 4px 0; }
+  #omni-fst .fs-bar-val { font-size: 13px; font-weight: 700; color: var(--white); white-space: nowrap; }
+  #omni-fst .fs-range-row { margin-top: 14px; }
+  #omni-fst .fs-range-label { font-size: 13.5px; font-weight: 700; color: var(--white); line-height: 1.4; }
+  #omni-fst .fs-range-val { font-size: 12.5px; color: var(--white-70); line-height: 1.5; margin-bottom: 6px; }
+  #omni-fst .fs-range-val strong { color: var(--white); }
+  #omni-fst .fs-range-track { position: relative; height: 22px; background-image: linear-gradient(to right, var(--white-30) 1px, transparent 1px), linear-gradient(to right, var(--white-10) 1px, transparent 1px); background-size: 100% 100%, 25% 100%; border-right: 1px solid var(--white-10); }
+  #omni-fst .fs-range-track .fs-bar { position: absolute; top: 0; border-radius: 4px; }
+  #omni-fst .fs-range-axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--white-50); margin-top: 5px; }
+  #omni-fst .fs-chart-note { font-size: 11.5px; color: var(--white-50); margin-top: 12px; line-height: 1.55; }
+  #omni-fst .fs-cite { max-width: 940px; margin: 26px auto 0; font-size: 13px; color: var(--white-70); line-height: 1.75; text-align: left; border-top: 1px solid var(--white-10); padding-top: 18px; }
+  #omni-fst .fs-cite strong { color: var(--white); }
+
   /* ════════════════ RESPONSIVE ════════════════ */
+  @media (max-width: 980px) {
+    #omni-fst .fs-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    #omni-fst .fs-figs { grid-template-columns: 1fr; max-width: 520px; margin-left: auto; margin-right: auto; }
+    #omni-fst .fs-how { grid-template-columns: 1fr; gap: 24px; max-width: 520px; }
+    #omni-fst .fs-senior { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; }
+  }
   @media (max-width: 768px) {
     #omni-fst .fs-hero { padding: 3rem 1.2rem 2rem; }
     #omni-fst .fs-bottom { padding: 32px 20px; margin-left: 8px; margin-right: 8px; }
@@ -506,6 +588,77 @@
   </div>
 
   <div class="omni-band omni-band--white">
+    <!-- ════════════ WHAT FASCIA IS (added Nov 26 2026; owner approved Nov 27 2026) ════════════ -->
+    <section class="fs-section" id="fs-fascia">
+      <div class="fs-section-head">
+        <span class="fs-label">The Tissue Behind the Name</span>
+        <hr class="fs-divider">
+        <h2>What Fascia Is, and Why It Shapes How You Move</h2>
+        <p>Fascia (say "FASH-uh") is the connective tissue that wraps and links everything in your body. Picture the membranes of an orange: one skin around the whole fruit, another around each segment, another around every tiny cell of juice. Your muscles are packaged the same way.</p>
+      </div>
+
+      <div class="fs-figs">
+        <figure class="fs-fig">
+          <svg class="fs-fig-svg" viewBox="0 0 360 300" role="img" aria-label="Cross-section of a muscle: fascia wraps the whole muscle, each bundle inside it and each fibre inside each bundle"><circle class="fs-f-muscle" cx="180" cy="150" r="112"/><circle class="fs-f-wrap fs-f-wrap--outer" cx="180" cy="150" r="112"/><circle class="fs-f-bundle" cx="180" cy="150" r="31"/><circle class="fs-f-fibre" cx="180" cy="150" r="6.2"/><circle class="fs-f-fibre" cx="198" cy="150" r="6.2"/><circle class="fs-f-fibre" cx="189" cy="165.6" r="6.2"/><circle class="fs-f-fibre" cx="171" cy="165.6" r="6.2"/><circle class="fs-f-fibre" cx="162" cy="150" r="6.2"/><circle class="fs-f-fibre" cx="171" cy="134.4" r="6.2"/><circle class="fs-f-fibre" cx="189" cy="134.4" r="6.2"/><circle class="fs-f-bundle" cx="180" cy="78" r="31"/><circle class="fs-f-fibre" cx="180" cy="78" r="6.2"/><circle class="fs-f-fibre" cx="198" cy="78" r="6.2"/><circle class="fs-f-fibre" cx="189" cy="93.6" r="6.2"/><circle class="fs-f-fibre" cx="171" cy="93.6" r="6.2"/><circle class="fs-f-fibre" cx="162" cy="78" r="6.2"/><circle class="fs-f-fibre" cx="171" cy="62.4" r="6.2"/><circle class="fs-f-fibre" cx="189" cy="62.4" r="6.2"/><circle class="fs-f-bundle" cx="242.4" cy="114" r="31"/><circle class="fs-f-fibre" cx="242.4" cy="114" r="6.2"/><circle class="fs-f-fibre" cx="260.4" cy="114" r="6.2"/><circle class="fs-f-fibre" cx="251.4" cy="129.6" r="6.2"/><circle class="fs-f-fibre" cx="233.4" cy="129.6" r="6.2"/><circle class="fs-f-fibre" cx="224.4" cy="114" r="6.2"/><circle class="fs-f-fibre" cx="233.4" cy="98.4" r="6.2"/><circle class="fs-f-fibre" cx="251.4" cy="98.4" r="6.2"/><circle class="fs-f-bundle" cx="242.4" cy="186" r="31"/><circle class="fs-f-fibre" cx="242.4" cy="186" r="6.2"/><circle class="fs-f-fibre" cx="260.4" cy="186" r="6.2"/><circle class="fs-f-fibre" cx="251.4" cy="201.6" r="6.2"/><circle class="fs-f-fibre" cx="233.4" cy="201.6" r="6.2"/><circle class="fs-f-fibre" cx="224.4" cy="186" r="6.2"/><circle class="fs-f-fibre" cx="233.4" cy="170.4" r="6.2"/><circle class="fs-f-fibre" cx="251.4" cy="170.4" r="6.2"/><circle class="fs-f-bundle" cx="180" cy="222" r="31"/><circle class="fs-f-fibre" cx="180" cy="222" r="6.2"/><circle class="fs-f-fibre" cx="198" cy="222" r="6.2"/><circle class="fs-f-fibre" cx="189" cy="237.6" r="6.2"/><circle class="fs-f-fibre" cx="171" cy="237.6" r="6.2"/><circle class="fs-f-fibre" cx="162" cy="222" r="6.2"/><circle class="fs-f-fibre" cx="171" cy="206.4" r="6.2"/><circle class="fs-f-fibre" cx="189" cy="206.4" r="6.2"/><circle class="fs-f-bundle" cx="117.6" cy="186" r="31"/><circle class="fs-f-fibre" cx="117.6" cy="186" r="6.2"/><circle class="fs-f-fibre" cx="135.6" cy="186" r="6.2"/><circle class="fs-f-fibre" cx="126.6" cy="201.6" r="6.2"/><circle class="fs-f-fibre" cx="108.6" cy="201.6" r="6.2"/><circle class="fs-f-fibre" cx="99.6" cy="186" r="6.2"/><circle class="fs-f-fibre" cx="108.6" cy="170.4" r="6.2"/><circle class="fs-f-fibre" cx="126.6" cy="170.4" r="6.2"/><circle class="fs-f-bundle" cx="117.6" cy="114" r="31"/><circle class="fs-f-fibre" cx="117.6" cy="114" r="6.2"/><circle class="fs-f-fibre" cx="135.6" cy="114" r="6.2"/><circle class="fs-f-fibre" cx="126.6" cy="129.6" r="6.2"/><circle class="fs-f-fibre" cx="108.6" cy="129.6" r="6.2"/><circle class="fs-f-fibre" cx="99.6" cy="114" r="6.2"/><circle class="fs-f-fibre" cx="108.6" cy="98.4" r="6.2"/><circle class="fs-f-fibre" cx="126.6" cy="98.4" r="6.2"/><path class="fs-f-leader" d="M28 52L83 94"/><circle class="fs-f-dot" cx="83" cy="94" r="2.6"/><circle class="fs-f-num" cx="28" cy="52" r="12"/><text class="fs-f-numtxt" x="28" y="56.3" text-anchor="middle">1</text><path class="fs-f-leader" d="M334 62L267.7 96.2"/><circle class="fs-f-dot" cx="267.7" cy="96.2" r="2.6"/><circle class="fs-f-num" cx="334" cy="62" r="12"/><text class="fs-f-numtxt" x="334" y="66.3" text-anchor="middle">2</text><path class="fs-f-leader" d="M334 262L202.7 226"/><circle class="fs-f-dot" cx="202.7" cy="226" r="2.6"/><circle class="fs-f-num" cx="334" cy="262" r="12"/><text class="fs-f-numtxt" x="334" y="266.3" text-anchor="middle">3</text></svg>
+          <h3>It wraps</h3>
+          <p>Fascia is a thin, strong sheet of tissue made mostly of collagen. It surrounds every muscle, bone, nerve, blood vessel and organ and holds each one in place. In this slice through a muscle, everything drawn in gold is fascia.</p>
+          <ol class="fs-fig-key">
+            <li><span>1</span>Around the whole muscle</li>
+            <li><span>2</span>Around each bundle of fibres inside it</li>
+            <li><span>3</span>Around every single fibre</li>
+          </ol>
+        </figure>
+        <figure class="fs-fig">
+          <svg class="fs-fig-svg" viewBox="0 0 360 300" role="img" aria-label="A net pulled at one corner: the lines shift well away from the point being pulled"><path class="fs-f-net" d="M30.9 34.7L40.2 34.9L49.5 35.1L58.9 35.3L68.3 35.6L77.8 35.9L87.3 36.2L96.8 36.6L106.5 37L116.1 37.5L125.8 38L135.6 38.5L145.3 39L155.1 39.6L164.9 40.2L174.7 40.7L184.5 41.3L194.2 41.8L203.9 42.3L213.5 42.7L223.1 43.1L232.5 43.4L241.9 43.6L251.1 43.7L260.2 43.8L269.3 43.7L278.2 43.6L287 43.4L295.6 43.1L304.2 42.7L312.8 42.3"/><path class="fs-f-net" d="M31.3 60L40.7 60.3L50.2 60.6L59.7 60.9L69.2 61.3L78.9 61.7L88.6 62.2L98.4 62.8L108.3 63.4L118.2 64.1L128.2 64.8L138.3 65.6L148.4 66.4L158.5 67.2L168.6 68L178.8 68.9L188.9 69.7L198.9 70.4L208.9 71.1L218.8 71.7L228.5 72.3L238.1 72.7L247.6 73L257 73.2L266.1 73.3L275.1 73.2L283.9 73.1L292.6 72.7L301.1 72.3L309.5 71.8L317.8 71.2"/><path class="fs-f-net" d="M31.8 85.4L41.3 85.7L50.9 86.1L60.6 86.6L70.3 87.1L80.2 87.7L90.1 88.4L100.2 89.2L110.4 90L120.6 91L131 92L141.4 93L151.9 94.1L162.4 95.2L172.9 96.3L183.4 97.5L193.9 98.6L204.3 99.6L214.6 100.5L224.8 101.4L234.8 102.1L244.6 102.7L254.3 103.2L263.7 103.4L272.9 103.5L281.8 103.5L290.6 103.2L299.1 102.8L307.4 102.2L315.5 101.5L323.5 100.6"/><path class="fs-f-net" d="M32.3 110.8L41.9 111.2L51.7 111.7L61.5 112.3L71.4 113L81.5 113.8L91.7 114.7L102 115.6L112.5 116.7L123.1 117.9L133.8 119.1L144.6 120.5L155.4 121.9L166.4 123.3L177.3 124.7L188.2 126.2L199.1 127.5L209.8 128.9L220.5 130.1L231 131.2L241.2 132.1L251.3 132.9L261.1 133.4L270.6 133.8L279.8 133.9L288.8 133.8L297.4 133.5L305.8 132.9L313.9 132.2L321.7 131.3L329.4 130.2"/><path class="fs-f-net" d="M32.8 136.1L42.5 136.6L52.3 137.2L62.3 137.9L72.4 138.7L82.7 139.7L93.1 140.7L103.7 141.9L114.4 143.2L125.3 144.6L136.3 146.1L147.4 147.6L158.6 149.3L169.8 151L181.1 152.7L192.4 154.4L203.6 156L214.7 157.6L225.6 159.1L236.4 160.4L246.9 161.5L257.1 162.4L267.1 163L276.7 163.5L285.9 163.6L294.8 163.5L303.4 163.1L311.6 162.4L319.5 161.6L327.2 160.5L334.6 159.2"/><path class="fs-f-net" d="M33.1 161.4L42.9 161.9L52.8 162.6L62.9 163.4L73.1 164.3L83.5 165.3L94 166.5L104.8 167.7L115.7 169.2L126.8 170.7L138 172.4L149.3 174.1L160.8 176L172.3 177.8L183.8 179.7L195.3 181.6L206.7 183.5L218 185.2L229.2 186.8L240.1 188.2L250.8 189.5L261.1 190.5L271.2 191.2L280.8 191.7L290.1 191.8L299 191.7L307.5 191.3L315.6 190.6L323.4 189.6L330.9 188.4L338.2 186.9"/><path class="fs-f-net" d="M33.2 186.4L43 187L52.9 187.7L63.1 188.5L73.3 189.5L83.8 190.5L94.4 191.7L105.2 193.1L116.2 194.5L127.3 196.1L138.6 197.8L150 199.7L161.5 201.6L173.1 203.5L184.7 205.5L196.3 207.4L207.8 209.3L219.2 211.1L230.5 212.8L241.5 214.3L252.2 215.6L262.6 216.6L272.6 217.4L282.3 217.8L291.6 218L300.5 217.9L309 217.4L317.1 216.7L324.8 215.7L332.3 214.4L339.4 212.9"/><path class="fs-f-net" d="M33.1 211.4L42.9 211.9L52.8 212.6L62.9 213.4L73.1 214.3L83.5 215.3L94 216.5L104.8 217.7L115.7 219.2L126.8 220.7L138 222.4L149.3 224.1L160.8 226L172.3 227.8L183.8 229.7L195.3 231.6L206.7 233.5L218 235.2L229.2 236.8L240.1 238.2L250.8 239.5L261.1 240.5L271.2 241.2L280.8 241.7L290.1 241.8L299 241.7L307.5 241.3L315.6 240.6L323.4 239.6L330.9 238.4L338.2 236.9"/><path class="fs-f-net" d="M32.8 236.1L42.5 236.6L52.3 237.2L62.3 237.9L72.4 238.7L82.7 239.7L93.1 240.7L103.7 241.9L114.4 243.2L125.3 244.6L136.3 246.1L147.4 247.6L158.6 249.3L169.8 251L181.1 252.7L192.4 254.4L203.6 256L214.7 257.6L225.6 259.1L236.4 260.4L246.9 261.5L257.1 262.4L267.1 263L276.7 263.5L285.9 263.6L294.8 263.5L303.4 263.1L311.6 262.4L319.5 261.6L327.2 260.5L334.6 259.2"/><path class="fs-f-net" d="M30.9 34.7L31 43.1L31.2 51.6L31.3 60L31.5 68.5L31.7 76.9L31.8 85.4L32 93.9L32.2 102.3L32.3 110.8L32.5 119.2L32.6 127.7L32.8 136.1L32.9 144.6L33 153L33.1 161.4L33.1 169.7L33.2 178.1L33.2 186.4L33.2 194.8L33.1 203.1L33.1 211.4L33 219.6L32.9 227.9L32.8 236.1"/><path class="fs-f-net" d="M58.9 35.3L59.1 43.8L59.4 52.4L59.7 60.9L60 69.5L60.3 78L60.6 86.6L60.9 95.2L61.2 103.7L61.5 112.3L61.8 120.9L62 129.4L62.3 137.9L62.5 146.4L62.7 154.9L62.9 163.4L63 171.8L63 180.2L63.1 188.5L63 196.8L63 205.1L62.9 213.4L62.7 221.6L62.5 229.8L62.3 237.9"/><path class="fs-f-net" d="M87.3 36.2L87.7 44.9L88.1 53.5L88.6 62.2L89.1 71L89.6 79.7L90.1 88.4L90.7 97.2L91.2 105.9L91.7 114.7L92.2 123.4L92.7 132.1L93.1 140.7L93.5 149.3L93.8 157.9L94 166.5L94.2 174.9L94.3 183.4L94.4 191.7L94.3 200L94.2 208.3L94 216.5L93.8 224.6L93.5 232.7L93.1 240.7"/><path class="fs-f-net" d="M116.1 37.5L116.8 46.3L117.5 55.2L118.2 64.1L119 73L119.8 82L120.6 91L121.5 99.9L122.3 108.9L123.1 117.9L123.9 126.8L124.6 135.7L125.3 144.6L125.9 153.4L126.4 162.1L126.8 170.7L127.1 179.3L127.2 187.7L127.3 196.1L127.2 204.4L127.1 212.6L126.8 220.7L126.4 228.7L125.9 236.7L125.3 244.6"/><path class="fs-f-net" d="M145.3 39L146.3 48.1L147.3 57.2L148.4 66.4L149.5 75.6L150.7 84.8L151.9 94.1L153.1 103.4L154.3 112.6L155.4 121.9L156.6 131.1L157.6 140.2L158.6 149.3L159.4 158.3L160.2 167.2L160.8 176L161.2 184.6L161.4 193.2L161.5 201.6L161.4 209.8L161.2 218L160.8 226L160.2 233.8L159.4 241.6L158.6 249.3"/><path class="fs-f-net" d="M174.7 40.7L176 50L177.3 59.4L178.8 68.9L180.3 78.4L181.8 87.9L183.4 97.5L185 107L186.6 116.6L188.2 126.2L189.7 135.6L191.1 145.1L192.4 154.4L193.5 163.6L194.5 172.7L195.3 181.6L195.9 190.4L196.2 199L196.3 207.4L196.2 215.7L195.9 223.7L195.3 231.6L194.5 239.4L193.5 246.9L192.4 254.4"/><path class="fs-f-net" d="M203.9 42.3L205.5 51.8L207.1 61.4L208.9 71.1L210.7 80.9L212.6 90.7L214.6 100.5L216.6 110.4L218.6 120.3L220.5 130.1L222.3 139.8L224.1 149.5L225.6 159.1L227 168.5L228.2 177.7L229.2 186.8L229.9 195.7L230.3 204.3L230.5 212.8L230.3 221L229.9 229L229.2 236.8L228.2 244.4L227 251.8L225.6 259.1"/><path class="fs-f-net" d="M232.5 43.4L234.3 53.1L236.2 62.8L238.1 72.7L240.2 82.7L242.4 92.7L244.6 102.7L246.9 112.8L249.1 122.9L251.3 132.9L253.4 142.8L255.3 152.7L257.1 162.4L258.7 171.9L260.1 181.3L261.1 190.5L261.9 199.4L262.4 208.1L262.6 216.6L262.4 224.8L261.9 232.8L261.1 240.5L260.1 248L258.7 255.3L257.1 262.4"/><path class="fs-f-net" d="M260.2 43.8L262.1 53.5L264 63.4L266.1 73.3L268.3 83.3L270.6 93.4L272.9 103.5L275.2 113.7L277.5 123.8L279.8 133.9L282 143.9L284 153.8L285.9 163.6L287.6 173.2L289 182.6L290.1 191.8L290.9 200.8L291.4 209.5L291.6 218L291.4 226.2L290.9 234.1L290.1 241.8L289 249.3L287.6 256.5L285.9 263.6"/><path class="fs-f-net" d="M287 43.4L288.7 53.1L290.6 62.9L292.6 72.7L294.7 82.7L296.9 92.7L299.1 102.8L301.3 112.8L303.6 122.9L305.8 132.9L307.9 142.9L309.8 152.7L311.6 162.4L313.2 172L314.6 181.4L315.6 190.6L316.4 199.5L316.9 208.2L317.1 216.7L316.9 224.9L316.4 232.8L315.6 240.6L314.6 248.1L313.2 255.3L311.6 262.4"/><path class="fs-f-net" d="M312.8 42.3L314.3 51.8L316 61.5L317.8 71.2L319.6 80.9L321.5 90.8L323.5 100.6L325.5 110.5L327.5 120.4L329.4 130.2L331.3 139.9L333 149.6L334.6 159.2L336 168.6L337.2 177.9L338.2 186.9L338.9 195.8L339.3 204.5L339.4 212.9L339.3 221.2L338.9 229.2L338.2 236.9L337.2 244.5L336 251.9L334.6 259.2"/><circle class="fs-f-pull" cx="291.6" cy="218" r="7"/><path class="fs-f-arrow" d="M300.6 225L321.6 241"/><path class="fs-f-arrow" d="M310.6 239.5L321.6 241L318.6 230.5"/></svg>
+          <h3>It connects</h3>
+          <p>Fascia does not stop where a muscle ends. The wrapping of one muscle runs on into its tendon and into the wrapping of the next, so the tissue forms one continuous web from head to foot. Pull a net at one corner and the lines shift a long way from your hand. That is why stiffness in one area can change how another area moves.</p>
+        </figure>
+        <figure class="fs-fig">
+          <svg class="fs-fig-svg" viewBox="0 0 360 300" role="img" aria-label="Two states of fascia: supple layers with fluid between them glide past each other; stiff layers sit close together and drag"><text class="fs-f-cap" x="40" y="30">Supple: the layers glide</text><path class="fs-f-layer" d="M40 62L45 63.2L50 64.4L55 65.4L60 66.2L65 66.7L70 67L75 66.9L80 66.6L85 66L90 65.1L95 64.1L100 62.9L105 61.7L110 60.5L115 59.3L120 58.4L125 57.7L130 57.2L135 57L140 57.1L145 57.5L150 58.2L155 59.2L160 60.2L165 61.4L170 62.7L175 63.9L180 64.9L185 65.8L190 66.5L195 66.9L200 67L205 66.8L210 66.3L215 65.5L220 64.6L225 63.4L230 62.2L235 61L240 59.8L245 58.8L250 58L255 57.4L260 57L265 57L270 57.3L275 57.9L280 58.7L285 59.7L290 60.9L295 62.1L300 63.3L305 64.5L310 65.5L315 66.2L320 66.8"/><path class="fs-f-layer" d="M40 94.4L45 95.4L50 96.2L55 96.7L60 97L65 96.9L70 96.6L75 96L80 95.1L85 94L90 92.9L95 91.6L100 90.4L105 89.3L110 88.4L115 87.6L120 87.2L125 87L130 87.1L135 87.6L140 88.3L145 89.2L150 90.3L155 91.5L160 92.7L165 93.9L170 95L175 95.9L180 96.5L185 96.9L190 97L195 96.8L200 96.3L205 95.5L210 94.5L215 93.4L220 92.2L225 91L230 89.8L235 88.8L240 87.9L245 87.3L250 87L255 87L260 87.3L265 87.9L270 88.7L275 89.8L280 90.9L285 92.1L290 93.4L295 94.5L300 95.5L305 96.3L310 96.8L315 97L320 96.9"/><path class="fs-f-layer" d="M40 126.2L45 126.7L50 127L55 126.9L60 126.6L65 125.9L70 125.1L75 124L80 122.8L85 121.6L90 120.4L95 119.3L100 118.3L105 117.6L110 117.2L115 117L120 117.1L125 117.6L130 118.3L135 119.2L140 120.3L145 121.5L150 122.7L155 123.9L160 125L165 125.9L170 126.5L175 126.9L180 127L185 126.8L190 126.3L195 125.5L200 124.5L205 123.4L210 122.2L215 120.9L220 119.8L225 118.7L230 117.9L235 117.3L240 117L245 117L250 117.3L255 117.9L260 118.8L265 119.8L270 120.9L275 122.2L280 123.4L285 124.5L290 125.5L295 126.3L300 126.8L305 127L310 126.9L315 126.5L320 125.9"/><circle class="fs-f-fluid" cx="58" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="89" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="120" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="151" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="182" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="213" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="244" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="275" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="306" cy="77" r="3.6"/><circle class="fs-f-fluid" cx="66" cy="107" r="3.6"/><circle class="fs-f-fluid" cx="97" cy="107" r="3.6"/><circle class="fs-f-fluid" cx="128" cy="107" r="3.6"/><circle class="fs-f-fluid" cx="159" cy="107" r="3.6"/><circle class="fs-f-fluid" cx="190" cy="107" r="3.6"/><circle class="fs-f-fluid" cx="221" cy="107" r="3.6"/><circle class="fs-f-fluid" cx="252" cy="107" r="3.6"/><circle class="fs-f-fluid" cx="283" cy="107" r="3.6"/><circle class="fs-f-fluid" cx="314" cy="107" r="3.6"/><path class="fs-f-arrow" d="M214 44L318 44"/><path class="fs-f-arrow" d="M309 38L318 44L309 50"/><path class="fs-f-arrow" d="M146 140L42 140"/><path class="fs-f-arrow" d="M51 134L42 140L51 146"/><text class="fs-f-cap" x="40" y="186">Stiff: the layers drag</text><path class="fs-f-layer fs-f-layer--stiff" d="M40 214L45 214.5L50 214.9L55 215.3L60 215.7L65 215.9L70 216L75 216L80 215.8L85 215.6L90 215.2L95 214.8L100 214.4L105 213.9L110 213.4L115 212.9L120 212.6L125 212.3L130 212.1L135 212L140 212.1L145 212.2L150 212.5L155 212.9L160 213.3L165 213.8L170 214.3L175 214.7L180 215.2L185 215.5L190 215.8L195 216L200 216L205 215.9L210 215.7L215 215.4L220 215L225 214.6L230 214.1L235 213.6L240 213.1L245 212.7L250 212.4L255 212.1L260 212L265 212L270 212.1L275 212.4L280 212.7L285 213.1L290 213.6L295 214L300 214.5L305 215L310 215.4L315 215.7L320 215.9"/><path class="fs-f-layer fs-f-layer--stiff" d="M40 233L45 233.4L50 233.7L55 233.9L60 234L65 234L70 233.8L75 233.6L80 233.2L85 232.8L90 232.3L95 231.9L100 231.4L105 230.9L110 230.5L115 230.3L120 230.1L125 230L130 230.1L135 230.2L140 230.5L145 230.9L150 231.3L155 231.8L160 232.3L165 232.8L170 233.2L175 233.5L180 233.8L185 234L190 234L195 233.9L200 233.7L205 233.4L210 233L215 232.6L220 232.1L225 231.6L230 231.1L235 230.7L240 230.4L245 230.1L250 230L255 230L260 230.1L265 230.4L270 230.7L275 231.1L280 231.6L285 232.1L290 232.5L295 233L300 233.4L305 233.7L310 233.9L315 234L320 234"/><path class="fs-f-layer fs-f-layer--stiff" d="M40 251.7L45 251.9L50 252L55 252L60 251.8L65 251.6L70 251.2L75 250.8L80 250.3L85 249.8L90 249.4L95 248.9L100 248.5L105 248.2L110 248.1L115 248L120 248.1L125 248.2L130 248.5L135 248.9L140 249.3L145 249.8L150 250.3L155 250.8L160 251.2L165 251.6L170 251.8L175 252L180 252L185 251.9L190 251.7L195 251.4L200 251L205 250.6L210 250.1L215 249.6L220 249.1L225 248.7L230 248.4L235 248.1L240 248L245 248L250 248.1L255 248.4L260 248.7L265 249.1L270 249.6L275 250.1L280 250.6L285 251L290 251.4L295 251.7L300 251.9L305 252L310 252L315 251.8L320 251.5"/><path class="fs-f-link" d="M46 216L50 230"/><path class="fs-f-link" d="M55 216L62 230"/><path class="fs-f-link" d="M68 216L61 230"/><path class="fs-f-link" d="M77 216L70 230"/><path class="fs-f-link" d="M88 216L81 230"/><path class="fs-f-link" d="M101 216L97 230"/><path class="fs-f-link" d="M110 216L103 230"/><path class="fs-f-link" d="M121 216L128 230"/><path class="fs-f-link" d="M130 216L126 230"/><path class="fs-f-link" d="M139 216L146 230"/><path class="fs-f-link" d="M148 216L141 230"/><path class="fs-f-link" d="M157 216L150 230"/><path class="fs-f-link" d="M170 216L177 230"/><path class="fs-f-link" d="M179 216L175 230"/><path class="fs-f-link" d="M188 216L184 230"/><path class="fs-f-link" d="M199 216L206 230"/><path class="fs-f-link" d="M208 216L201 230"/><path class="fs-f-link" d="M221 216L225 230"/><path class="fs-f-link" d="M234 216L230 230"/><path class="fs-f-link" d="M243 216L239 230"/><path class="fs-f-link" d="M254 216L247 230"/><path class="fs-f-link" d="M267 216L260 230"/><path class="fs-f-link" d="M280 216L273 230"/><path class="fs-f-link" d="M293 216L289 230"/><path class="fs-f-link" d="M304 216L311 230"/><path class="fs-f-link" d="M46 234L53 248"/><path class="fs-f-link" d="M59 234L66 248"/><path class="fs-f-link" d="M70 234L74 248"/><path class="fs-f-link" d="M79 234L75 248"/><path class="fs-f-link" d="M92 234L88 248"/><path class="fs-f-link" d="M101 234L105 248"/><path class="fs-f-link" d="M114 234L121 248"/><path class="fs-f-link" d="M125 234L132 248"/><path class="fs-f-link" d="M136 234L129 248"/><path class="fs-f-link" d="M145 234L152 248"/><path class="fs-f-link" d="M154 234L158 248"/><path class="fs-f-link" d="M163 234L170 248"/><path class="fs-f-link" d="M174 234L167 248"/><path class="fs-f-link" d="M187 234L180 248"/><path class="fs-f-link" d="M200 234L204 248"/><path class="fs-f-link" d="M211 234L215 248"/><path class="fs-f-link" d="M224 234L231 248"/><path class="fs-f-link" d="M237 234L244 248"/><path class="fs-f-link" d="M246 234L239 248"/><path class="fs-f-link" d="M257 234L264 248"/><path class="fs-f-link" d="M270 234L263 248"/><path class="fs-f-link" d="M279 234L283 248"/><path class="fs-f-link" d="M292 234L299 248"/><path class="fs-f-link" d="M303 234L310 248"/><path class="fs-f-arrow fs-f-arrow--short" d="M268 198L318 198"/><path class="fs-f-arrow fs-f-arrow--short" d="M309 192L318 198L309 204"/><path class="fs-f-arrow fs-f-arrow--short" d="M92 268L42 268"/><path class="fs-f-arrow fs-f-arrow--short" d="M51 262L42 268L51 274"/></svg>
+          <h3>It glides</h3>
+          <p>Fascia is built in layers, with a slippery fluid called hyaluronan between them, so one layer slides over the next as you move. When the tissue thickens and that fluid dries up, the layers drag instead of glide, and the area feels stiff.</p>
+        </figure>
+      </div>
+
+      <div class="fs-callout">
+        <strong>What changes fascia.</strong> Fascia responds to how it is used. Johns Hopkins Medicine describes it as designed to stretch as you move, and names too little movement day after day, and repetitive movement that overworks one part of the body, among the things that make it thicken and become sticky. It also changes with age: see <a href="#fs-seniors">the section for senior adults</a>.
+      </div>
+      <p class="fs-sources">Sources for this section: Cleveland Clinic, <a href="https://my.clevelandclinic.org/health/body/23251-fascia" target="_blank" rel="noopener">Fascia</a>, and <a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/muscle-pain-it-may-actually-be-your-fascia" target="_blank" rel="noopener">Johns Hopkins Medicine on fascia</a>. General anatomy, written for a general reader.</p>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--cream">
+    <!-- ════════════ HOW FST WORKS WITH FASCIA (added Nov 26 2026; owner approved Nov 27 2026) ════════════
+         Describes what the client experiences on the table, never how a
+         stretch is performed (STRETCH TO WIN MARKETING RULES, rule 3). The
+         photo is the AI-generated in-home image: never captioned as Nemezio,
+         a client or a real visit. -->
+    <section class="fs-section" id="fs-how">
+      <div class="fs-section-head">
+        <span class="fs-label">How It Works</span>
+        <hr class="fs-divider">
+        <h2>How Fascia Stretch Therapy™ Works With Fascia</h2>
+        <p>Most stretching picks one muscle and holds it. FST™ starts from the fascia instead. Because the tissue is one connected web, the stretching follows it across joints and through whole regions of the body, with a practitioner doing the moving for you.</p>
+      </div>
+
+      <div class="fs-how">
+        <div class="fs-how-media"><img src="/assets/img/fst-in-home-hero.jpg" alt="Assisted stretching on a portable table in a living room" width="1199" height="1312" loading="lazy" decoding="async"></div>
+        <ul class="fs-points">
+          <li><strong>Connected regions, not single muscles</strong>A stretch takes in a whole line of tissue, such as the hip, the leg and the lower back together, instead of isolating one muscle.</li>
+          <li><strong>Movement instead of long holds</strong>You are moved smoothly into and out of each stretch, and through several angles, so the tissue is worked in the directions it runs.</li>
+          <li><strong>Room in the joint</strong>Gentle traction is part of the stretch, so the capsule of fascia around the joint is included, not only the muscle that crosses it.</li>
+          <li><strong>Paced by your breathing</strong>The stretching follows your breath and stays inside a range that feels comfortable. You stay relaxed and nothing is forced.</li>
+          <li><strong>Adjusted as it goes</strong>Nemezio reads how your body responds and adapts each stretch to you, visit by visit.</li>
+        </ul>
+      </div>
+
+      <div class="gq-block">
+        This is how the method approaches the body. It is not a promise of a result. At your First Visit your range of motion is measured before the session and again after it, so what you go on is your own two sets of measurements.
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--white">
     <!-- ════════════ THE FIRST VISIT ════════════ -->
     <section class="fs-section" id="fs-first-visit">
       <div class="fs-section-head">
@@ -555,7 +708,7 @@
         <p>It is open to anyone. A few examples of who it suits:</p>
       </div>
 
-      <div class="fs-grid">
+      <div class="fs-grid fs-grid--4">
         <article class="fs-card">
           <span class="fs-card-icon"><svg class="omni-icon omni-icon--chair" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6"/><path d="M5 11h14v3H5z"/><path d="M7 14v6M17 14v6"/></svg></span>
           <h3>Desk-bound professionals</h3>
@@ -571,11 +724,87 @@
           <h3>People who feel stiff after travel</h3>
           <p>Flights and long drives are part of your routine, and you want a visit at home once you are back.</p>
         </article>
+        <article class="fs-card">
+          <span class="fs-card-icon"><svg class="omni-icon omni-icon--home-garden" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l7-6 7 6"/><path d="M5 10v10h10V10"/><path d="M8 20v-5h4v5"/><path d="M19 20v-4"/><circle cx="19" cy="13" r="2.5"/></svg></span>
+          <h3>Senior adults</h3>
+          <p>You want to keep moving well for the things you enjoy, and you would rather lie on a table at home than get down on the floor. <a href="#fs-seniors">Why it suits senior adults</a></p>
+        </article>
       </div>
     </section>
   </div>
 
   <div class="omni-band omni-band--white">
+    <!-- ════════════ SENIOR ADULTS (added Nov 26 2026; owner approved Nov 27 2026) ════════════
+         "Senior adults", never "older adults" in a heading: that phrase is
+         K07, owned by /personal-trainer-over-50-san-diego. Chart figures:
+         Stathokostas et al. 2013 and Wilke et al. 2019, as published. -->
+    <section class="fs-section" id="fs-seniors">
+      <div class="fs-section-head">
+        <span class="fs-label">Senior Adults</span>
+        <hr class="fs-divider">
+        <h2>Assisted Stretching for Senior Adults</h2>
+        <p>Fascia Stretch Therapy™ is a great fit for senior adults. Flexibility is one of the things that changes most with age, and this is a way to work on it that asks very little of you: you lie on a table at home and the practitioner does the stretching.</p>
+      </div>
+
+      <div class="fs-senior">
+        <div class="fs-senior-why">
+          <h3>Why it suits senior adults</h3>
+          <ul class="fs-points">
+            <li><strong>You lie on a table</strong>There is no getting down to the floor and back up, and no position to hold on your own.</li>
+            <li><strong>The practitioner does the work</strong>You stay relaxed while Nemezio moves you. There is no routine to learn or remember.</li>
+            <li><strong>It comes to you</strong>No drive, no parking and no waiting room. The table is set up in your own home.</li>
+            <li><strong>It goes at your pace</strong>It is designed to be comfortable, and every stretch is adjusted to how you move that day.</li>
+            <li><strong>You see your own measurements</strong>Your range of motion is measured at the start and at the end of the First Visit.</li>
+          </ul>
+          <p class="fs-senior-persona">It suits people who want to keep reaching the top shelf, turning to look over a shoulder in the car, getting down to the garden, or walking eighteen holes.</p>
+          <p class="fs-senior-note">If you have a joint replacement or a medical condition, check with your physician before you book. The note at the foot of this page applies to every client.</p>
+        </div>
+
+        <div class="fs-charts">
+          <figure class="fs-chart" aria-label="Chart: range of motion lost per decade in adults aged 55 to 86. Shoulder: men 5 degrees, women 6 degrees. Hip: men 6 degrees, women 7 degrees.">
+            <div class="fs-chart-title">Range of motion lost per decade</div>
+            <div class="fs-chart-sub">Adults aged 55 to 86, in degrees per ten years of age</div>
+            <div class="fs-legend"><span><i class="fs-key fs-key--blue"></i>Men</span><span><i class="fs-key fs-key--ochre"></i>Women</span></div>
+            <div class="fs-bargroup">
+              <div class="fs-bargroup-label">Shoulder <span>· lifting the arm out to the side</span></div>
+              <div class="fs-bar-row"><span class="fs-bar-name">Men</span><div class="fs-bar-track"><span class="fs-bar fs-bar--blue" style="width:55%" title="Shoulder, men: 5 degrees per decade"></span><span class="fs-bar-val">5°</span></div></div>
+              <div class="fs-bar-row"><span class="fs-bar-name">Women</span><div class="fs-bar-track"><span class="fs-bar fs-bar--ochre" style="width:66%" title="Shoulder, women: 6 degrees per decade"></span><span class="fs-bar-val">6°</span></div></div>
+            </div>
+            <div class="fs-bargroup">
+              <div class="fs-bargroup-label">Hip <span>· bringing the knee toward the chest</span></div>
+              <div class="fs-bar-row"><span class="fs-bar-name">Men</span><div class="fs-bar-track"><span class="fs-bar fs-bar--blue" style="width:66%" title="Hip, men: 6 degrees per decade"></span><span class="fs-bar-val">6°</span></div></div>
+              <div class="fs-bar-row"><span class="fs-bar-name">Women</span><div class="fs-bar-track"><span class="fs-bar fs-bar--ochre" style="width:77%" title="Hip, women: 7 degrees per decade"></span><span class="fs-bar-val">7°</span></div></div>
+            </div>
+            <p class="fs-chart-note">436 adults measured once each. Stathokostas et al., 2013.</p>
+          </figure>
+
+          <figure class="fs-chart" aria-label="Chart: where fascia was thicker, by age group, in 35 healthy women. Lower back: 40.0 to 76.7 percent thicker in the older group. Lower leg, front of thigh and abdominal wall: 12.3 to 25.8 percent thicker in the younger group.">
+            <div class="fs-chart-title">Fascia itself changes with age</div>
+            <div class="fs-chart-sub">Where fascia was thicker, by age group. Ultrasound measurements in 35 healthy women.</div>
+            <div class="fs-legend"><span><i class="fs-key fs-key--ochre"></i>Thicker in the older group (aged about 69)</span><span><i class="fs-key fs-key--blue"></i>Thicker in the younger group (aged about 22)</span></div>
+            <div class="fs-range-row">
+              <div class="fs-range-label">Lower back</div>
+              <div class="fs-range-val"><strong>40.0 to 76.7%</strong> thicker in the older group</div>
+              <div class="fs-range-track"><span class="fs-bar fs-bar--ochre" style="left:50%;width:45.9%" title="Lower back: 40.0 to 76.7 percent thicker in the older group"></span></div>
+            </div>
+            <div class="fs-range-row">
+              <div class="fs-range-label">Lower leg, front of thigh, abdominal wall</div>
+              <div class="fs-range-val"><strong>12.3 to 25.8%</strong> thicker in the younger group</div>
+              <div class="fs-range-track"><span class="fs-bar fs-bar--blue" style="left:15.4%;width:16.9%" title="Lower leg, front of thigh and abdominal wall: 12.3 to 25.8 percent thicker in the younger group"></span></div>
+            </div>
+            <div class="fs-range-axis"><span>0</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span></div>
+            <p class="fs-chart-note">Each bar spans the range across the sites measured. Wilke et al., 2019.</p>
+          </figure>
+        </div>
+      </div>
+
+      <div class="fs-cite">
+        <strong>The research behind the charts.</strong> Stathokostas and colleagues measured shoulder and hip range of motion in 436 adults aged 55 to 86 (205 men and 231 women). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3703899/" target="_blank" rel="noopener">Stathokostas L, McDonald MW, Little RMD, Paterson DH. Flexibility of older adults aged 55–86 years and the influence of physical activity. J Aging Res. 2013;2013:743843.</a> Wilke and colleagues used ultrasound to measure the thickness of the deep fascia in 35 healthy women, 18 aged about 22 and 17 aged about 69, and found that fascia thickness and flexibility were related. <a href="https://pubmed.ncbi.nlm.nih.gov/30417344/" target="_blank" rel="noopener">Wilke J, Macchi V, De Caro R, Stecco C. Fascia thickness, aging and flexibility: is there an association? J Anat. 2019;234(1):43–49.</a> The National Institute on Aging names flexibility as one of four types of exercise that matter as people age, with endurance, strength and balance (<a href="https://www.nia.nih.gov/health/exercise-and-physical-activity/four-types-exercise-can-improve-your-health-and-physical-ability" target="_blank" rel="noopener">National Institute on Aging</a>). These sources describe how flexibility and fascia change with age in general. They are not studies of Fascia Stretch Therapy™, and OmniFit Performance cites them to explain the tissue, not to make any claim about outcomes.
+      </div>
+    </section>
+  </div>
+
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ RATES ════════════ -->
     <section class="fs-section" id="fs-rates">
       <div class="fs-section-head">
@@ -616,7 +845,7 @@
     </section>
   </div>
 
-  <div class="omni-band omni-band--cream">
+  <div class="omni-band omni-band--white">
     <!-- ════════════ HOW IT FITS ALONGSIDE TRAINING ════════════ -->
     <section class="fs-section" id="fs-training">
       <div class="fs-section-head">
@@ -644,7 +873,7 @@
     </section>
   </div>
 
-  <div class="omni-band omni-band--white">
+  <div class="omni-band omni-band--cream">
     <!-- ════════════ PRACTITIONER ════════════ -->
     <section class="fs-section" id="fs-practitioner">
       <div class="fs-section-head">
@@ -668,7 +897,7 @@
     </section>
   </div>
 
-  <div class="omni-band omni-band--cream">
+  <div class="omni-band omni-band--white">
     <!-- ════════════ FAQ ════════════ -->
     <section class="fs-section" id="fs-faq">
       <div class="fs-section-head">
@@ -705,6 +934,10 @@
         <div class="fs-faq-item">
           <div class="fs-faq-q">Is FST™ massage or medical treatment?</div>
           <div class="fs-faq-a">No. Fascia Stretch Therapy™ is assisted stretching for mobility and recovery. It is not medical treatment, not physical therapy and not massage.</div>
+        </div>
+        <div class="fs-faq-item">
+          <div class="fs-faq-q">Is FST™ suitable for seniors?</div>
+          <div class="fs-faq-a">Yes. Fascia Stretch Therapy™ is open to anyone, and it suits senior adults well: you lie on a table in your own home, the practitioner does the stretching, and every stretch is adjusted to you. It is designed to be comfortable. If you have a joint replacement or a medical condition, check with your physician before you book.</div>
         </div>
         <div class="fs-faq-item">
           <div class="fs-faq-q">What is the cancellation policy?</div>
